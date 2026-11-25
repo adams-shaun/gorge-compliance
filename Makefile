@@ -720,7 +720,20 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
 # RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
 # Fork branch fix/xp-forge-driver-setup-offered.
-FORGE_ORACLE_REF ?= d6e26fd04306b7800a532f38cbd2f16a8e715a6a
+# b0ddb8556a = d6e26fd04306 plus the empty Optional$ ChangeTargets confirm (xproof cluster xpt-bf9a34cd: Redirect on Reach
+# Through Mists, a targetless spell, still makes Forge ask "Do you want to change targets?" while gorge's effChangeTargets
+# skips a declaration with no old targets and logs no decision, CR 115.7): ScriptedController.emptyChangeTargetsConfirm
+# answers no, noted as "empty change targets confirm", only when no yes/no is queued and no subject spell or subability holds
+# a target; a targeted subject still takes the queued answer and keeps the strict miss when none was logged.
+# 019d50429f = b0ddb8556a plus the targeted ChangeTargets retarget pick (CR 115.7): a subject that DOES hold a target logs a
+# gorge choose_n marked retarget, so DecisionQueue.Decision reads the marker, ScriptedController.retargetConfirm answers the
+# optional confirm from it (an empty pick declines and is consumed; picks answer yes and stay for the new-target ask), and
+# StepMachine.retargetTargets applies the pick to the declaration. This is the second half of the Redirect case: the targeted
+# spell must consume gorge's answer instead of strict-missing. ChangeTargetsConfirmTest (fixtures/changetargets: the find,
+# the real targeted replay, and the same replay with a picked new target) fails before it with the exact miss;
+# scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-change-targets.
+FORGE_ORACLE_REF ?= 019d50429f00a5ed2910b6b84aa06df7cb3f333d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
