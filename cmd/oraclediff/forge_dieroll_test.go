@@ -122,7 +122,11 @@ func TestForgeRolledDie(t *testing.T) {
 // afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
 // cf742d0aefc = afe18881c6e plus the forced remove-counter amount (ScriptedController.chooseNumber's RemoveCounter branch
 // only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "cf742d0aefc6d0105f131ad9bb298ce24bf2a8ce"
+// 66671165f3 = afe18881c6 plus the up-to remove-any-type Done pick (StepMachine.peekCounterKind and
+// ScriptedController.chooseCounterType only); die-roll code unchanged, ForcedDieRollTest re-run green in the full driver suite.
+// 279c6098be0 = the merge of cf742d0aefc and 66671165f31 (both driver fixes; UnmappedAskTest keeps both cases),
+// die-roll code unchanged, ForcedDieRollTest re-run green on it.
+const forgeOracleDieRollRef = "279c6098be065405e984f69ff2286491d20f6ad0"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

@@ -520,7 +520,21 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # counter-remove-forced-amount.jsonl) fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-mixed-kinds.sh
 # (make forge-driver-tests) runs UnmappedAskTest. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= cf742d0aefc6d0105f131ad9bb298ce24bf2a8ce
+# 66671165f31 = afe18881c6e plus the up-to remove-any-type Done pick (fork branch fix/xp-forge-driver-counter-any-done-v2):
+# when the controller stops an UpTo removal early gorge logs remove_counter_done ("Done"), which names no Forge CounterType
+# and which CountersRemoveEffect.removeAnyType has no option for, so the kind ask strict-missed and left it queued. For a
+# RemoveCounter ask StepMachine.peekCounterKind (26b4658101's peek design) now also matches the Done by its pick kind,
+# consumes it and answers the first offered type; that type's chooseNumber finds no counter pick and answers 0 (min is 0 under
+# UpTo), which is how removeAnyType stops. The kind ask peeks before the lone-option shortcut so a single-kind up-to removal
+# consumes its Done too. Test UnmappedAskTest.removeAnyTypeDoneStopsTheUpToRemoval (fixtures/unmapped/counter-remove-any-done.jsonl)
+# fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
+# Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
+# one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# 279c6098be0 = the merge of cf742d0aefc and 66671165f31 (both driver fixes; the UnmappedAskTest add/add conflict keeps both
+# cases), so one pin carries the forced amount and the Done pick. Die-roll code unchanged; ForcedDieRollTest re-run green on it,
+# and both scripts/forge-oracle-test-counter-any-*.sh run in make forge-driver-tests. Fork branch
+# fix/xp-forge-driver-remove-counter-forced-amount.
+FORGE_ORACLE_REF ?= 279c6098be065405e984f69ff2286491d20f6ad0
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

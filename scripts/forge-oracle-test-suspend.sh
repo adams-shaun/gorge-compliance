@@ -24,7 +24,7 @@ rows=$out/rows.jsonl
 
 fail() { echo "forge-oracle-test-suspend: FAIL: $*" >&2; exit 1; }
 
-printf '%s\n' '{"id":"xs:XP:lotus-bloom:cast:s1","item":{"id":"xs:XP:lotus-bloom:cast:s1","card":"","template":"xproof-start","name":"xproof start Lotus Bloom cast seed 1","turn":1,"cr":[],"why":"A gorge game from a scripted start, played on by explore bots and a focus seat, replayed from turn 1'"'"'s first main phase.","setup":{"p0":{"hand":["Lotus Bloom"],"life":20},"p1":{"life":20}},"steps":[{"op":"cast","seat":0,"card":"p0:Lotus Bloom","cast_mode":"suspend"},{"op":"pass","seat":0},{"op":"pass","seat":1}]},"gorge_decisions":[],"abilities":{}}' > "$req"
+printf '%s\n' '{"id":"xs:XP:lotus-bloom:cast:s1","scenario_sha":"7fe585f18388404b07431eee14fd4f3aab8f775fb85eafc3e70bef60a173a890","item":{"id":"xs:XP:lotus-bloom:cast:s1","card":"","template":"xproof-start","name":"xproof start Lotus Bloom cast seed 1","turn":1,"cr":[],"why":"A gorge game from a scripted start, played on by explore bots and a focus seat, replayed from turn 1'"'"'s first main phase.","setup":{"p0":{"hand":["Lotus Bloom"],"life":20},"p1":{"life":20}},"steps":[{"op":"cast","seat":0,"card":"p0:Lotus Bloom","cast_mode":"suspend"},{"op":"pass","seat":0},{"op":"pass","seat":1}]},"gorge_decisions":[],"abilities":{}}' > "$req"
 
 "$here/scripts/forge-oracle-run.sh" "$req" "$rows" || fail "forge-oracle-run.sh failed (is the Forge build at FORGE_ORACLE_REF present? make forge-oracle-setup)"
 
