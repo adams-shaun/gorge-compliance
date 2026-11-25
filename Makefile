@@ -515,6 +515,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # it now picks the AlternativeCost.Evoke spell. scripts/forge-oracle-test-evoked-cast-mode.sh fails before it. Fork branch
 # fix/xp-driver-evoked-cast-mode.
 # afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
+# 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger when the token amount is below 1 (Mobilize X
+# with X = 0 on Avenger of the Fallen, and the Firecat Blitz / Valduk / Lightning Coils X = 0 class): CR 702.181a's "Sacrifice them at
+# the beginning of the next end step" is unconditional, so CR 603.7a creates the delayed trigger at resolution and it does nothing
+# (CR 603.7c); the early `return` before makeTokenTable skipped the only registration point. A script with AtEOTNeedsCard$ True
+# (Myriad, CR 702.116a) is still dropped by registerDelayedTrigger over the empty set. xproof clusters
+# gorge-suspect:avenger-of-the-fallen:f0t0:stack and :combat0.attack:stack (triage xpt-09b99e96, xpt-c1665aee).
+# MobilizeZeroTokensStillSchedulesSacrificeTest fails on afe18881c6 ("expected [true] but found [false]") and passes after;
+# MyriadNoTokensCreatesNoDelayedTriggerTest and MordorOnTheMarchNothingExiledTest stay green. Driver, cardsfolder and tokenscripts
+# unchanged. Fork branch fix/xp-mobilize-zero-delayed-trigger.
 # cf742d0aefc = afe18881c6e plus a forced remove-counter amount with no counter pick (fork branch
 # fix/xp-forge-driver-remove-counter-forced-amount): Ferropede's combat-damage trigger removes "a counter" of any type and
 # Wall of Stone has one +1/+1 counter, so a lone kind and the card's fixed CounterNum$ 1 leave no choice and gorge logs no
@@ -534,11 +543,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
 # Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
 # one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
-# 279c6098be0 = the merge of cf742d0aefc and 66671165f31 (both driver fixes; the UnmappedAskTest add/add conflict keeps both
-# cases), so one pin carries the forced amount and the Done pick. Die-roll code unchanged; ForcedDieRollTest re-run green on it,
-# and both scripts/forge-oracle-test-counter-any-*.sh run in make forge-driver-tests. Fork branch
+# f1e3e00905c = the merge of 149a03bbbec4 (develop's pin: Done pick 66671165f31 + Mobilize X=0 3bb8f906e3) with cf742d0aefc
+# (the forced remove-counter amount); the only conflict was UnmappedAskTest.java, which keeps removeAnyTypeDoneStopsTheUpToRemoval
+# and removeAnyTypeForcedAmountRemovesTheLoneCounter. One pin carries all three driver fixes: ancestors 66671165f31, 3bb8f906e3
+# and cf742d0aefc. Die-roll code unchanged; ForcedDieRollTest, MobilizeZeroTokensStillSchedulesSacrificeTest and every
+# UnmappedAskTest case green on it (make forge-driver-tests runs the UnmappedAskTest cases). Fork branch
 # fix/xp-forge-driver-remove-counter-forced-amount.
-FORGE_ORACLE_REF ?= 279c6098be065405e984f69ff2286491d20f6ad0
+FORGE_ORACLE_REF ?= f1e3e00905ccad97af9c566144c83f81c8400b41
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

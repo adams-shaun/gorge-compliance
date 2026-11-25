@@ -122,13 +122,18 @@ func TestForgeRolledDie(t *testing.T) {
 // a6227e70a3 = 7d506c5192 plus cast_mode "evoked" (StepMachine.spellForMode picks the AlternativeCost.Evoke spell,
 // CR 702.74a); afe18881c6 = oracle/fpin-1125: a6227e70a3 joined with 3e6bd830a6 (the discard_may election,
 // ScriptedController.chooseCardsToDiscardFrom only); die-roll code unchanged.
-// cf742d0aefc = afe18881c6e plus the forced remove-counter amount (ScriptedController.chooseNumber's RemoveCounter branch
-// only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
+// 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger on a zero token amount (forge-game only);
+// driver and die-roll code unchanged.
 // 66671165f3 = afe18881c6 plus the up-to remove-any-type Done pick (StepMachine.peekCounterKind and
 // ScriptedController.chooseCounterType only); die-roll code unchanged, ForcedDieRollTest re-run green in the full driver suite.
-// 279c6098be0 = the merge of cf742d0aefc and 66671165f31 (both driver fixes; UnmappedAskTest keeps both cases),
-// die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "279c6098be065405e984f69ff2286491d20f6ad0"
+// 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (disjoint files: forge-oracle driver vs forge-game TokenEffect);
+// driver and die-roll code unchanged from 66671165f31.
+// cf742d0aefc = afe18881c6e plus the forced remove-counter amount (ScriptedController.chooseNumber's RemoveCounter branch
+// only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// f1e3e00905c = the merge of 149a03bbbec4 and cf742d0aefc (UnmappedAskTest keeps both cases): one pin carries the Done
+// pick, the Mobilize X=0 fix and the forced remove-counter amount; die-roll code unchanged, ForcedDieRollTest re-run green on it.
+const forgeOracleDieRollRef = "f1e3e00905ccad97af9c566144c83f81c8400b41"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
