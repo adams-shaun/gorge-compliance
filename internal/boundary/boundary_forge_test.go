@@ -325,9 +325,13 @@ func TestForgeBoundaryAllowsXMagePatch(t *testing.T) {
 
 // TestOracleBuildDirIsIgnored holds the exception the output guards make for
 // .oracle-build/ (cmd/oraclediff refuseRepoPath, classify.RefuseRepoPath): Forge
-// output lands there, so the directory must stay gitignored.
+// output lands there, so the directory must stay gitignored. The probe path sits
+// directly under .oracle-build/: a worktree wires .oracle-build/forge and
+// .oracle-build/xmage as symlinks to the out-of-tree builds, and git refuses a
+// pathspec "beyond a symbolic link", so a probe through them would fail there
+// for a reason unrelated to the ignore rule.
 func TestOracleBuildDirIsIgnored(t *testing.T) {
-	out, err := exec.Command("git", "check-ignore", "../../.oracle-build/forge/x.jsonl").CombinedOutput()
+	out, err := exec.Command("git", "check-ignore", "../../.oracle-build/x.jsonl").CombinedOutput()
 	if err != nil {
 		t.Fatalf(".oracle-build/ is not gitignored: %v: %s", err, out)
 	}

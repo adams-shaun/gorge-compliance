@@ -813,12 +813,28 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (make forge-driver-tests) runs it. Driver tests only (test class + fixture); cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-new-targets-resolve.
 # NOTE (merge): ChangeTargetsMandatoryTest lives only on fork commit 61f44264a28 (= e45e911953c + the test), which lacks the
-# pending-declaration offered rule (a4380dd47f). The ref below is the join11 pin that keeps that driver fix, so
-# scripts/forge-oracle-test-change-targets-mandatory.sh needs a fork join of 61f44264a28 into join11 before make
+# pending-declaration offered rule (a4380dd47f). The ref below (join12) keeps that driver fix, so
+# scripts/forge-oracle-test-change-targets-mandatory.sh needs a fork join of 61f44264a28 into join12 before make
 # forge-driver-tests passes it; bump FORGE_ORACLE_REF to that join once it is pushed.
+# 8b89eabc655 = e45e911953c (above) with the PINNED half of the transit graveyard order (xproof cluster xpt-18625cef,
+# Thassa's Rebuff): Seed of Hope's mill moves Island and Forest together, Island returns to the hand within the step, so
+# forge_order.go's checkpoint delta pins only [Forest, Seed of Hope] while Forge's "order to Graveyard" ask offers the
+# milled pair, and StepMachine.orderByNames strict-missed whenever an offered card was not named by the pin. forge-export
+# now writes graveyard_ends ("<step>:<seat>" to the names in that seat's graveyard at the step's end) and
+# StepMachine.orderGraveyardPin orders the named cards by the pin and keeps Forge's offered order after them for an
+# unnamed card whose name is absent from the end graveyard (its position is not observable at the next checkpoint, so no
+# gorge answer can exist), with a note; a name the end graveyard DOES contain is an arrival the checkpoints see, so an
+# unnamed one still misses, and an absent end list still misses too. OrderCardsTest's
+# pinnedGraveyardOrderKeepsATransitOfferedCard (red on e45e911953c), pinnedGraveyardOrderStillMissesAnUnnamedCardTheCheckpointsSee
+# and pinnedGraveyardOrderWithoutEndNamesStillMisses cover both halves; scripts/forge-oracle-test-graveyard-transit-order.sh
+# (make forge-driver-tests) pins the 17-test count. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch driver-transit-pin.
 # 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (the pending-declaration offered rule; above) merged with e45e911953c (the
 # below-min target decline; above), no textual conflicts; driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 2ac6012982ea099449b492f6ede41890d7036820
+# 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard
+# order, above), no textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as
+# FORGE_REF ff076d4432). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
+FORGE_ORACLE_REF ?= 6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
