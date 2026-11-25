@@ -845,7 +845,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
 # the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
 # runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
-FORGE_ORACLE_REF ?= ad4cd3ba0f8a7fcb5eeccc8c579cf00bf0784858
+# a2954de67aa = ad4cd3ba0f8 (join14) + the no-legal-new-target answer (xproof cluster xpt-5b82851f, Deflection, Shunt and Swerve): Forge's
+# mandatory ChangeTargets effect asks chooseNewTargetsFor even when no new target is legal, and gorge poses no decision then (the target
+# stays, CR 115.7a), so the ask was a strict miss ("Missing new targets answer at step 15") once Aerial Volley's only creature with flying
+# left the battlefield. ScriptedController.chooseNewTargetsFor now counts the candidates Forge's TargetSelection would offer (the ability's
+# target restrictions plus the effect's filter, targets cleared and restored as Forge does) and, with fewer than the declaration's targets,
+# keeps them with a note; a legal candidate and no gorge decision is still the miss. ChangeTargetsNoCandidateTest (fixtures/changetargets/
+# deflection-aerial-volley-no-candidate.jsonl, the exported xs:XP:deflection:cast:s1 request) fails without the change with the exact miss;
+# scripts/forge-oracle-test-change-targets-no-candidate.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-change-targets-no-candidate.
+FORGE_ORACLE_REF ?= a2954de67aacaa4fcdcb6384f57f737218dbf882
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
