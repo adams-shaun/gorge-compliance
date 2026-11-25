@@ -467,6 +467,62 @@ func TestStartRefusesUnofferedFocus(t *testing.T) {
 	}
 }
 
+// TestStartRoomDoor: a Room placed by setup enters with neither unlocked
+// designation (CR 709.5d), so it has no name and no door's rules text is live
+// (CR 709.5). A start that places a Room and focuses its front-door static
+// would exercise nothing: the CR 709.5e unlock special action is not a step
+// the three runners replay. play refuses it by name instead of writing an
+// item that credits a static that never applied. Both a front-face spelling
+// (Greenhouse) and a joined one (Solitary Study // Endless Corridor) are
+// covered, so the check is on the card's Room type, not its spelling.
+func TestStartRoomDoor(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Greenhouse", "static#0.0"},                         // front-door static, Room placed by setup
+		{"Solitary Study // Endless Corridor", "static#0.0"}, // a second Room shape, by its joined name
+	} {
+		t.Run(c.card+"-"+c.key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			in, out := t.TempDir(), t.TempDir()
+			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			items, locked := 0, 0
+			if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+				t.Fatal(err)
+			}
+			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+				var r lowerRow
+				if err := json.Unmarshal(b, &r); err != nil {
+					return err
+				}
+				if r.Status == statusRefused && len(r.Reasons) == 1 && strings.HasPrefix(r.Reasons[0], reasonStartRoomLocked+":") {
+					locked++
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+			if items != 0 || locked != 2 {
+				t.Errorf("items %d %s %d, want no item and 2 refusals %q (start %s)", items, reasonStartRoomLocked, locked, reasonStartRoomLocked, raw)
+			}
+		})
+	}
+}
+
 // TestStartTransformingDFC: a start scen yields for a transforming double-faced
 // card loads in play. scen lists the card on a battlefield, tapped or as a
 // counter bearer by its joined name "A // B" while startDeck deals its front
