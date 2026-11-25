@@ -1,6 +1,7 @@
 package lower
 
 import (
+	"encoding/json"
 	"reflect"
 	"strings"
 	"testing"
@@ -47,8 +48,45 @@ func TestLowerCoinFlipResult(t *testing.T) {
 	if !reflect.DeepEqual(l.Item.CoinFlips, want) {
 		t.Fatalf("coin flips %+v, want %+v (steps %+v)", l.Item.CoinFlips, want, ops(l))
 	}
-	if raw := string(l.Item.Raw()); strings.Contains(raw, "coin_flips") {
-		t.Fatalf("Raw sends the follower side field to gorge's runner: %s", raw)
+	// Raw sends the flips in gorge's runner shape: no Forced field (the runner
+	// decodes with DisallowUnknownFields), an absent draws for the ordinary
+	// one-draw flip, 0 for the forced flip its hook never asks about, and 2
+	// for the doubler.
+	raw := l.Item.Raw()
+	if strings.Contains(string(raw), `"forced"`) {
+		t.Fatalf("Raw sends the follower side Forced field to gorge's runner: %s", raw)
+	}
+	var runner struct {
+		CoinFlips []struct {
+			Step  int  `json:"step"`
+			Seat  int  `json:"seat"`
+			Win   bool `json:"win"`
+			Draws *int `json:"draws"`
+		} `json:"coin_flips"`
+	}
+	if err := json.Unmarshal(raw, &runner); err != nil {
+		t.Fatalf("Raw is not the runner's coin_flips shape: %v (%s)", err, raw)
+	}
+	if len(runner.CoinFlips) != len(want) {
+		t.Fatalf("Raw coin flips %+v, want %d records (%s)", runner.CoinFlips, len(want), raw)
+	}
+	zero, two := 0, 2
+	draws := []*int{nil, nil, &zero, &two}
+	for i, got := range runner.CoinFlips {
+		if got.Step != want[i].Step || got.Seat != want[i].Seat || got.Win != want[i].Win {
+			t.Fatalf("Raw coin flip %d = %+v, want %+v", i, got, want[i])
+		}
+		switch {
+		case draws[i] == nil && got.Draws != nil:
+			t.Fatalf("Raw coin flip %d draws %d, want absent (%s)", i, *got.Draws, raw)
+		case draws[i] != nil && (got.Draws == nil || *got.Draws != *draws[i]):
+			t.Fatalf("Raw coin flip %d draws %v, want %d (%s)", i, got.Draws, *draws[i], raw)
+		}
+	}
+	// The setup-only probe has no steps, so it must leave the gameplay flips
+	// out the way it leaves the die rolls out.
+	if probe := string(setupProbeRaw(l.Item)); strings.Contains(probe, `"coin_flips"`) {
+		t.Fatalf("setup probe sends gameplay coin flips to gorge's runner: %s", probe)
 	}
 	cut := l.Item
 	cut.CutSteps(1)
