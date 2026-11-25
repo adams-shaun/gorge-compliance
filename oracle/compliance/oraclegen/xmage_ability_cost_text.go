@@ -38,6 +38,17 @@
 //     Clocktower) or sits in a CompositeCost keeps the Oracle's " and ..."
 //     spelling, because CostsImpl drops the comma before an "and" text, so the
 //     rewrite is per card, never a general " and exile it" rule.
+//   - "Remove N counters from this ... and sacrifice it" -> "Remove N counters
+//     from {this}, Sacrifice {this}" for the cards in
+//     xmageSeparateSacrificeItCards: they add SacrificeSourceCost as its own
+//     cost after RemoveCountersSourceCost, so CostsImpl.getText joins
+//     "remove ... from {this}" and SacrificeSourceCost's "sacrifice {this}" with
+//     ", " and capitalises the latter (HellionCrucible.java:41-42,
+//     GoblinBomb.java:40-42). The other cards of this Oracle shape put both
+//     halves in one CompositeCost with an explicit "and sacrifice it" text
+//     (e.g. KhalniHeartExpedition.java:33-37,
+//     QuestForTheGemblades.java:38-42), which CostsImpl renders verbatim, so
+//     this too is per card, never a general " and sacrifice it" rule.
 //   - "another card named {this}" / "other cards named {this}" keeps the
 //     card's printed name: the cost's text is the target filter's message,
 //     built from a literal name (GrandeurAbility's "another card named " +
@@ -66,6 +77,14 @@ var xmageSeparateExileItCards = map[string]bool{
 	"Hourglass of the Lost": true,
 }
 
+// xmageSeparateSacrificeItCards are the cards whose printed "... and sacrifice
+// it" cost XMage renders as two comma-joined costs, "..., Sacrifice {this}"
+// (see the header). The rest of the Oracle shape keeps its CompositeCost text.
+var xmageSeparateSacrificeItCards = map[string]bool{
+	"Hellion Crucible": true,
+	"Goblin Bomb":      true,
+}
+
 var (
 	sacrificeThisRE   = regexp.MustCompile(`^Sacrifice this [A-Za-z]+$`)
 	exileThisRE       = regexp.MustCompile(`^Exile this ([A-Za-z]+)$`)
@@ -87,6 +106,9 @@ func xmageCostText(cost, sourceName string) string {
 	rest = tightCommaRE.ReplaceAllString(rest, "$1, $2")
 	if xmageSeparateExileItCards[sourceName] {
 		rest = strings.Replace(rest, " and exile it", ", Exile it", 1)
+	}
+	if xmageSeparateSacrificeItCards[sourceName] {
+		rest = strings.Replace(rest, " and sacrifice it", ", Sacrifice {this}", 1)
 	}
 	parts := strings.Split(rest, ", ")
 	for i, part := range parts {
