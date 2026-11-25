@@ -36,6 +36,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -890,12 +891,74 @@ func forgeSnapshotAbilityFace(reg *cards.Registry, it oraclegen.Item, st oracleg
 	if !ok || len(c.Faces) == 0 {
 		return nil
 	}
+	var own *cards.Face
 	for _, f := range c.Faces {
 		if f.Name == perm.Name {
-			return has(f)
+			if h := has(f); h != nil {
+				return h
+			}
+			own = f
+			break
 		}
 	}
-	return nil
+	if own == nil {
+		return nil
+	}
+	return forgeCopiedAbilityFace(reg, own, perm, st, g, i, has)
+}
+
+// forgeCopiedAbilityFace resolves an ability a copy effect gave the permanent
+// (CR 707.2: a copy has the copiable values of the donor, so the donor's
+// printed abilities). The snapshot records no copy source, but it does record
+// the copy's live types and keywords, and a donor is a card whose printed
+// types and keywords are inside them while covering everything the copy has
+// beyond its own printed face (Absorbing Man's "except ... he's a legendary
+// creature in addition to his other types" adds only what it names). The
+// donors are the permanents of every snapshot up to the step (the donor may
+// have left since it was copied), minus the copy itself. The step resolves
+// only when the donors that carry the ability agree on one script line;
+// a tie is left out rather than guessed, like forgeTokenCard's.
+func forgeCopiedAbilityFace(reg *cards.Registry, own *cards.Face, perm rules.OracleSnapPerm, st oraclegen.Step, g rules.OracleResult, i int, has func(*cards.Face) *cards.Face) *cards.Face {
+	covers := func(live, printed, donor []string) bool {
+		for _, w := range live {
+			if !slices.Contains(printed, w) && !slices.Contains(donor, w) {
+				return false
+			}
+		}
+		return true
+	}
+	var found *cards.Face
+	var line string
+	seen := map[string]bool{}
+	for j := 0; j <= i && j < len(g.Snapshots); j++ {
+		for _, p := range g.Snapshots[j].Permanents {
+			if p.Ref == st.Card || p.Token || seen[p.Name] {
+				continue
+			}
+			seen[p.Name] = true
+			c, ok := reg.Lookup(p.Name)
+			if !ok {
+				continue
+			}
+			for _, f := range c.Faces {
+				if f == nil || f.Name != p.Name || !stringSetSubset(f.Types, perm.Types) ||
+					!stringSetSubset(f.Keywords, perm.Keywords) ||
+					!covers(perm.Types, own.Types, f.Types) || !covers(perm.Keywords, own.Keywords, f.Keywords) {
+					continue
+				}
+				if h := has(f); h != nil {
+					l, _ := abilityLine(h, *st.AbilityIndex)
+					if found != nil && l != line {
+						return nil
+					}
+					if found == nil {
+						found, line = h, l
+					}
+				}
+			}
+		}
+	}
+	return found
 }
 
 // forgeTokenCard finds the token script behind a "pN:token:Name" ref: the
