@@ -6303,15 +6303,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * the ref ranked before it was drawn) -- is moved onto the new permanent,
      * so a later tap, target or pick of the ref resolves through
      * scenarioObjectId instead of the by-name fallback, which would take a
-     * setup land of the same name (CR 305.1, 605.3a). A ref already bound to
-     * a live permanent is left alone.
+     * setup land of the same name (CR 305.1, 605.3a). A ref bound to the
+     * permanent this play created is left alone.
+     *
+     * A ref whose alias names a permanent that was ALREADY on the battlefield
+     * before the play is stale: a land cannot be played from the battlefield,
+     * so the ref's card is the one the play entered. XMage answers an effect's
+     * by-name pick ("put a land card from your hand onto the battlefield":
+     * Embrace the Paradox; "return target land": Slinza's bounce) with any
+     * same-named card, so it can move the sibling of the card gorge moved.
+     * The two refs then trade objects: the played ref takes the entered
+     * permanent and the ref that named it takes the permanent the played ref
+     * stood on, so every same-named ref still names one distinct object and
+     * a later tap of the played ref reaches the untapped land.
      */
     private void bindEnteredLand(TestPlayer p, String playRef, java.util.Set<UUID> before) {
         String front = xmageSpelling(refName(playRef));
         String live = battlefieldName(playRef);
         runCode("bind entered " + playRef, turn, phase, p, (info, pl, g) -> {
             UUID current = scenarioObjectId(g, p, playRef);
-            if (current != null && g.getPermanent(current) != null) {
+            if (current != null && g.getPermanent(current) != null && !before.contains(current)) {
                 return;
             }
             Permanent entered = null;
@@ -6333,8 +6344,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (entered == null) {
                 return;
             }
+            // The refs that named the entered permanent (the sibling a
+            // mis-picked effect moved) take the object the played ref leaves.
+            List<String> siblings = new ArrayList<>();
+            if (current != null && !current.equals(entered.getId())) {
+                for (java.util.Map.Entry<String, UUID> a : p.getAliases().entrySet()) {
+                    if (entered.getId().equals(a.getValue()) && !a.getKey().equals(playRef)
+                            && isScenarioRef(a.getKey())) {
+                        siblings.add(a.getKey());
+                    }
+                }
+            }
             for (int j = 0; j < seats; j++) {
                 seat(j).getAliases().put(playRef, entered.getId());
+                for (String sibling : siblings) {
+                    seat(j).getAliases().put(sibling, current);
+                }
             }
         });
     }
