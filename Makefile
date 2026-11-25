@@ -719,7 +719,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # planeswalker and seven Forests, and the ask strict-missed with an empty leftover. OrderCardsTest.unpinnedHandOrderKeepsForgeOrder,
 # run by scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
 # unchanged. Fork branch fix/xp-forge-driver-hand-order.
-FORGE_ORACLE_REF ?= 846c4191e6bc61caa9ccf6ad83dfbd8d216891c1
+# d6e26fd04306 = 793a015fcf + the checkpoint snapshot's "offered" (xproof cluster xpt-a64b83f5: every compare:[offered] item diverged at setup
+# because the driver wrote no offered field): SnapshotWriter writes the priority holder's playable abilities, from the listing the bridge
+# answers priority from plus mana abilities as activations, when the item's compare names offered; sources by RefTable.refOf (gorge's objRef).
+# scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
+# RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
+# Fork branch fix/xp-forge-driver-setup-offered.
+# 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= 098e9c802e0613d9076a4c8e12b6a4e4876d5c54
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
