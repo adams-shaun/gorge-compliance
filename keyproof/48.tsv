@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 482bd55a-ba73-4722-8643-94fa12818515	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contagion-engine:f0t0:s1,f:xs:XP:contagion-engine:f0t0:s1	-	-	-	d864b561c9cb	-	37ec5f3b8373	-	-	2026-11-24	xproof
 482bd55a-ba73-4722-8643-94fa12818515	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 482bd55a-ba73-4722-8643-94fa12818515	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:contagion-engine:f0t0:s1,f:xs:XP:contagion-engine:f0t0:s1	-	-	-	d864b561c9cb	-	37ec5f3b8373	-	-	2026-11-24	xproof
-4834e6f2-1544-4e58-9092-ecc136cc0dee	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+4834e6f2-1544-4e58-9092-ecc136cc0dee	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 48390b8d-db41-48a5-9bac-316660ab7252	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 483a0caa-e912-41e9-aaa3-bcea9369ec06	cast	cast-resolve	agreed	-	X	scen	1	0	Malamet Battle Glyph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 483c747a-b602-4747-95bc-72c2c17ed509	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-aetherspark:cast:s1,f:xs:XP:the-aetherspark:cast:s1	-	-	-	23c4009444b0	-	9c2dcdb9fb0c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Assimilation Assessor"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Assimilation Assessor"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4885354f-0b77-47b6-b8f7-00753804436f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4885354f-0b77-47b6-b8f7-00753804436f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4885354f-0b77-47b6-b8f7-00753804436f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:goblinslide:f0t0:s1,f:xs:XP:goblinslide:f0t0:s1	-	-	-	fb9d3088f0bf	-	e206f9bbe78d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 488591d4-3dfb-4e1e-b0c4-1950ff92b848	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 488696c2-b0c7-49be-a5a1-e833b6fd8751	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-knowledge:cast:s1,f:xs:XP:cartouche-of-knowledge:cast:s1	-	-	-	d864b561c9cb	-	ab663ee6ac07	-	-	2026-11-24	xproof
 488696c2-b0c7-49be-a5a1-e833b6fd8751	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-knowledge:cast:s1,f:xs:XP:cartouche-of-knowledge:cast:s1	-	-	-	d864b561c9cb	-	ab663ee6ac07	-	-	2026-11-24	xproof

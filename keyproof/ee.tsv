@@ -112,12 +112,12 @@ ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	combat#0.attack	combat.attack	agreed	-	FX	s
 ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sultai-devotee:combat0.block:s1,f:xs:XP:sultai-devotee:combat0.block:s1	-	-	-	23c4009444b0	-	d73b1fef8f14	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ee7b3fc0-6128-4bf6-b3e7-7371e6f93c4b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sultai Devotee/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee7dc820-10ee-429a-a1ef-ecd6a11f5608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee7dc820-10ee-429a-a1ef-ecd6a11f5608	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ee7dc820-10ee-429a-a1ef-ecd6a11f5608	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 ee7ebbc1-2f9e-4867-a522-424869b6d772	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee7ebbc1-2f9e-4867-a522-424869b6d772	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee811356-ef6a-4972-b827-32c2d329b3c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee86cce6-c7c1-40a6-896b-cde9b86bb532	cast	cast-resolve	agreed	-	X	scen	1	0	Nasty Little Rabbit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ee86cce6-c7c1-40a6-896b-cde9b86bb532	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nasty Little Rabbit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ee86cce6-c7c1-40a6-896b-cde9b86bb532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nasty-little-rabbit:cast:s1,f:xs:XP:nasty-little-rabbit:cast:s1	-	-	-	fb9d3088f0bf	-	75ca336a64eb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+ee86cce6-c7c1-40a6-896b-cde9b86bb532	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nasty-little-rabbit:f0t0:s1,f:xs:XP:nasty-little-rabbit:f0t0:s1	-	-	-	fb9d3088f0bf	-	75ca336a64eb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 ee89c719-5ae8-4316-bfd0-cfe3684b5859	cast	cast-resolve	agreed	-	FX	scen	2	0	Samut, the Driving Force/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee89c719-5ae8-4316-bfd0-cfe3684b5859	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:samut-the-driving-force:combat0.attack:s1	-	-	-	23c4009444b0	-	ee1a8682c5eb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ee89c719-5ae8-4316-bfd0-cfe3684b5859	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:samut-the-driving-force:combat0.block:s1	-	-	-	23c4009444b0	-	ee1a8682c5eb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

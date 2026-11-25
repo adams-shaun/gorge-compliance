@@ -203,11 +203,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45d652c4-188e-4f00-acdd-1be014922cbc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:attercop:combat0.block:s1,f:xs:XP:attercop:combat0.block:s1	-	-	-	23c4009444b0	-	a402c82e7405	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 45d652c4-188e-4f00-acdd-1be014922cbc	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Attercop/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45d939d1-e9ca-4b4b-a0a9-59b936210a5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45d939d1-e9ca-4b4b-a0a9-59b936210a5b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+45d939d1-e9ca-4b4b-a0a9-59b936210a5b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 45ddfa35-7b3c-4916-b231-dc721b7b56d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Bold Biochemist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45ddfa35-7b3c-4916-b231-dc721b7b56d9	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bold Biochemist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45de1caf-46c2-4acc-8be2-08e1840a3b98	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sidisi-s-faithful:cast:s1,f:xs:XP:sidisi-s-faithful:cast:s1	-	-	-	d864b561c9cb	-	ba643f0f17cb	-	-	2026-11-24	xproof
-45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:sidisi-s-faithful:cast:s1,f:xs:XP:sidisi-s-faithful:cast:s1	-	-	-	d864b561c9cb	-	ba643f0f17cb	-	-	2026-11-24	xproof
 45dfb358-cd16-468e-bc89-ff17c6e244c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-report:cast:s1,f:xs:XP:war-report:cast:s1	-	-	-	d864b561c9cb	-	ca0c55a8bfc8	-	-	2026-11-24	xproof
 45e5135b-274c-46b4-8249-7e05e37aaff7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:heroes-for-hire:cast:s1,f:xs:XP:heroes-for-hire:cast:s1	-	-	-	8c0bd19283bb	-	3de12a8fa35e	-	-	2026-11-24	xproof
@@ -226,6 +226,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45fa04ee-3b5c-45b3-8c09-bda08cca3630	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:excavation-elephant:f0t0:s1,f:xs:XP:excavation-elephant:f0t0:s1	-	-	-	d864b561c9cb	-	91d98768c74d	-	-	2026-11-24	xproof
 45fa04ee-3b5c-45b3-8c09-bda08cca3630	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:excavation-elephant:f0t0:s1,f:xs:XP:excavation-elephant:f0t0:s1	-	-	-	d864b561c9cb	-	91d98768c74d	-	-	2026-11-24	xproof
 45fd14b9-d66a-452d-add4-36f512fff9c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45fd14b9-d66a-452d-add4-36f512fff9c2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+45fd14b9-d66a-452d-add4-36f512fff9c2	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:raiders-spoils:f0t0:s1,f:xs:XP:raiders-spoils:f0t0:s1	-	-	-	fb9d3088f0bf	-	5ea7f26eef0f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 45fe016e-1a09-410c-bbe3-4663ba06c5b7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:spire-garden:f0a0:s1,f:xs:XP:spire-garden:f0a0:s1	-	-	-	8c0bd19283bb	-	eb2b9b5c4fbf	-	-	2026-11-24	xproof
 45fe016e-1a09-410c-bbe3-4663ba06c5b7	land	land	agreed	-	FX	start	2	0	x:xs:XP:spire-garden:land:s1,f:xs:XP:spire-garden:land:s1	-	-	-	8c0bd19283bb	-	eb2b9b5c4fbf	-	-	2026-11-24	xproof

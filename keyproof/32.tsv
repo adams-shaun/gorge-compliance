@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 320ed2ec-ef06-41fb-ac8a-72579f11544c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wurmwall-sweeper:cast:s1,f:xs:XP:wurmwall-sweeper:cast:s1	-	-	-	23c4009444b0	-	83018d3f704b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 320ed2ec-ef06-41fb-ac8a-72579f11544c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wurmwall-sweeper:cast:s1,f:xs:XP:wurmwall-sweeper:cast:s1	-	-	-	23c4009444b0	-	83018d3f704b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 320ed2ec-ef06-41fb-ac8a-72579f11544c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:wurmwall-sweeper:static0.0:s1,f:xs:XP:wurmwall-sweeper:static0.0:s1	-	-	-	23c4009444b0	-	83018d3f704b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-32116127-cf96-4a1b-8896-a1ebc087b597	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+32116127-cf96-4a1b-8896-a1ebc087b597	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	land	land	agreed	-	FX	start	2	0	x:xs:XP:llanowar-wastes:land:s1,f:xs:XP:llanowar-wastes:land:s1	-	-	-	25696bf19d5b	-	dd6dbde74348	-	-	2026-11-24	xproof
 3212e47a-5492-4c50-9d4a-6ea562f1a6e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,11 +128,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32a8ca5f-0170-4f5d-97cd-63e2b74fd653	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+32a8ca5f-0170-4f5d-97cd-63e2b74fd653	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32a9dac0-247e-42d5-bfd3-465043515e12	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hag-of-syphoned-breath:f0t0:s1	-	-	-	23c4009444b0	-	907fc2dac6c3	-	-	2026-11-25	xproof
 32a9dac0-247e-42d5-bfd3-465043515e12	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:hag-of-syphoned-breath:f0t0:s1	-	-	-	23c4009444b0	-	907fc2dac6c3	-	-	2026-11-25	xproof
 32aa920c-0d91-4bc9-803c-d13857688d10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32ad5b3e-92c0-45be-b2e4-6f1794552f36	cast	cast-resolve	agreed	-	X	scen	1	0	The Mountain-king's Return/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+32ad5b3e-92c0-45be-b2e4-6f1794552f36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-mountain-king-s-return:cast:s1,f:xs:XP:the-mountain-king-s-return:cast:s1	-	-	-	fb9d3088f0bf	-	22a603b16ade	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32ad99a9-b5ed-41a1-8060-22265f7c5da1	cast	cast-resolve	agreed	-	FX	scen	2	0	Deadly Embrace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32aee76a-e738-4898-985a-801d1cce15ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-vision:cast:s1,f:xs:XP:the-vision:cast:s1	-	-	-	23c4009444b0	-	358333722a84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32aee76a-e738-4898-985a-801d1cce15ea	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-vision:combat0.attack:s1,f:xs:XP:the-vision:combat0.attack:s1	-	-	-	23c4009444b0	-	358333722a84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

@@ -33,12 +33,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 102bbedf-9f84-433a-bd01-e1a4c05fbedb	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 102d73bc-94ed-4a57-9872-6f7b9bf282f9	cast	cast	agreed	-	X	start	2	0	x:xs:XP:hunting-moa:f0t2:s1	-	-	-	23c4009444b0	-	bb3193201901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:hunting-moa:f0t2:s1	-	-	-	23c4009444b0	-	bb3193201901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t2	Phase/Echo	agreed	-	X	start	2	0	x:xs:XP:hunting-moa:f0t2:s1	-	-	-	23c4009444b0	-	bb3193201901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10330a79-a416-40da-bf5a-8b7cbd9a0498	cast	cast-resolve	agreed	-	X	scen	1	0	Wicked Visitor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10330a79-a416-40da-bf5a-8b7cbd9a0498	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wicked Visitor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1033a0cb-1a00-46c4-83d5-68a6eac85feb	cast	cast-resolve	agreed	-	X	scen	1	0	Beckett Mariner, Impetuous Ensign/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1033a0cb-1a00-46c4-83d5-68a6eac85feb	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1033a0cb-1a00-46c4-83d5-68a6eac85feb	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 10389ff7-2ea4-4413-90cc-0e3ca268c64d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10389ff7-2ea4-4413-90cc-0e3ca268c64d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10391bcb-0932-49a0-8d47-e06e3c10dd68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 105aea98-8eb9-4fb2-a0cb-7c7513317c5b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Twining Twins/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 105aea98-8eb9-4fb2-a0cb-7c7513317c5b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Twining Twins/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 105cea6e-18e9-4dec-a533-0dca4d41320b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1065eceb-9150-4ea4-bd6d-acaabda14e00	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10ab3102-43a3-4c60-8641-2c5a7c1e29c2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 10ae611f-e56d-47c5-8b6e-d38d95208bba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10ae611f-e56d-47c5-8b6e-d38d95208bba	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:indigo-faerie:f0a0:s1,f:xs:XP:indigo-faerie:f0a0:s1	-	-	-	8a1b1a193ec0	-	c130352d133d	-	-	2026-11-24	xproof
-10af9cd9-1700-48f9-97e1-61e239536fef	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Brad Boimler, Eager Ensign"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-10af9cd9-1700-48f9-97e1-61e239536fef	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+10af9cd9-1700-48f9-97e1-61e239536fef	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Brad Boimler, Eager Ensign"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+10af9cd9-1700-48f9-97e1-61e239536fef	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 10b0b60f-9976-41f9-855b-1786b6f86f55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-soultiller:cast:s1,f:xs:XP:elvish-soultiller:cast:s1	-	-	-	fc71ca68c5ac	-	e2858d293f1e	-	-	2026-11-24	xproof
 10b0b60f-9976-41f9-855b-1786b6f86f55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-soultiller:f0t0:s1,f:xs:XP:elvish-soultiller:f0t0:s1	-	-	-	fc71ca68c5ac	-	e2858d293f1e	-	-	2026-11-24	xproof
 10b8d4c7-7553-4d76-b643-d98b80701e13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gingerbrute:cast:s1,f:xs:XP:gingerbrute:cast:s1	-	-	-	23b491658465	-	ec8915ada1ff	-	-	2026-11-24	xproof

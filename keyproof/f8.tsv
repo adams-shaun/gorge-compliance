@@ -96,7 +96,7 @@ f86bcdde-8b1f-4efa-a01d-39e09dc826d0	f0/t0	NULL	owed	refused:no-generator:trigge
 f87aaed9-7f78-4f8b-8af5-44d4be1d6f30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f87aaed9-7f78-4f8b-8af5-44d4be1d6f30	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 f87dfde4-8c57-4543-826c-6b3cf9c11b90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f87dfde4-8c57-4543-826c-6b3cf9c11b90	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f87dfde4-8c57-4543-826c-6b3cf9c11b90	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:quiet-contemplation:f0t0:s1,f:xs:XP:quiet-contemplation:f0t0:s1	-	-	-	fb9d3088f0bf	-	5fc58022e642	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 f881378b-b539-4ea8-981d-e01ee82af105	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidebinder-mage:f0t0:s1,f:xs:XP:tidebinder-mage:f0t0:s1	-	-	-	d864b561c9cb	-	21a7f04da876	-	-	2026-11-24	xproof
 f881378b-b539-4ea8-981d-e01ee82af105	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tidebinder-mage:f0t0:s1,f:xs:XP:tidebinder-mage:f0t0:s1	-	-	-	d864b561c9cb	-	21a7f04da876	-	-	2026-11-24	xproof
 f8848065-7075-41d8-82f6-67ace390625a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,9 +110,9 @@ f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t1:s1,f:xs:XP:oracle-of-tragedy:f0t1:s1	-	-	-	3aa6ded33acb	-	287bc5bccf6d	-	-	2026-11-25	xproof
 f88e7647-49dc-4d55-99f6-2f153854e5c0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 f88eeb04-4b8e-4c76-a8c6-90887b94d518	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f890d51a-dc90-4179-8423-4738a72a527c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-f890d51a-dc90-4179-8423-4738a72a527c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-f890d51a-dc90-4179-8423-4738a72a527c	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f890d51a-dc90-4179-8423-4738a72a527c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+f890d51a-dc90-4179-8423-4738a72a527c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+f890d51a-dc90-4179-8423-4738a72a527c	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 f893d3d6-efef-4394-8e15-e01deed72b4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sterling-keykeeper:cast:s1,f:xs:XP:sterling-keykeeper:cast:s1	-	-	-	3aa6ded33acb	-	710c7970c9dd	-	-	2026-11-25	xproof
 f893d3d6-efef-4394-8e15-e01deed72b4f	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:sterling-keykeeper:f0a0:s1,f:xs:XP:sterling-keykeeper:f0a0:s1	-	-	-	3aa6ded33acb	-	710c7970c9dd	-	-	2026-11-25	xproof
 f895ec2e-7481-4280-a5c0-38b58c440faf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frostwielder:cast:s1,f:xs:XP:frostwielder:cast:s1	-	-	-	25696bf19d5b	-	dae68290c92c	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ f89f7c7d-6eb3-4335-b9df-0ccaa9c50558	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f89f7c7d-6eb3-4335-b9df-0ccaa9c50558	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f89f7c7d-6eb3-4335-b9df-0ccaa9c50558	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f8a06210-de30-4e87-835e-80a6df5716ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:auriok-windwalker:cast:s1,f:xs:XP:auriok-windwalker:cast:s1	-	-	-	25696bf19d5b	-	ed0da6e6e3cd	-	-	2026-11-24	xproof
-f8a06210-de30-4e87-835e-80a6df5716ca	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f8a06210-de30-4e87-835e-80a6df5716ca	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 f8a5e009-45b7-4e62-a494-1579f5fc0ba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-lotus-tile:cast:s1,f:xs:XP:white-lotus-tile:cast:s1	-	-	-	23c4009444b0	-	90ac90a44e6f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f8a5e009-45b7-4e62-a494-1579f5fc0ba6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	White Lotus Tile/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f8a88521-80e5-419b-ab4e-f4b3aba8afa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wispweaver-angel:f0t0:s1,f:xs:XP:wispweaver-angel:f0t0:s1	-	-	-	d864b561c9cb	-	4ca7e023dfc6	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ f8aa1893-60e5-439e-9316-872a9f6b6c94	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 f8ad2f88-72ae-4e47-beb5-25a6dacc709b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8b07b1a-f9fb-427d-a5c8-b65a01f7b079	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quarantine-field:f0t0:s1,f:xs:XP:quarantine-field:f0t0:s1	-	-	-	d864b561c9cb	-	dfb1585c053f	-	-	2026-11-24	xproof
 f8b07b1a-f9fb-427d-a5c8-b65a01f7b079	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quarantine-field:f0t0:s1,f:xs:XP:quarantine-field:f0t0:s1	-	-	-	d864b561c9cb	-	dfb1585c053f	-	-	2026-11-24	xproof
-f8b17b89-26ce-4208-874a-9e1d66514640	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	c0c08318523f	-	-	2026-11-24	xproof
+f8b17b89-26ce-4208-874a-9e1d66514640	cast	cast	agreed	-	F	start	2	0	f:xs:XP:dig-through-time:cast:s1	-	-	-	fb9d3088f0bf	-	c0c08318523f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 f8b1ac76-2f9b-454e-a20a-1cb79c23f414	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marshmist-titan:cast:s1,f:xs:XP:marshmist-titan:cast:s1	-	-	-	d864b561c9cb	-	006a942f6b11	-	-	2026-11-24	xproof
 f8b9dd54-0837-47f4-ad14-7a0322d46d5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:birthing-pod:cast:s1,f:xs:XP:birthing-pod:cast:s1	-	-	-	8c0bd19283bb	-	e8323e8d5cc4	-	-	2026-11-24	xproof
 f8b9dd54-0837-47f4-ad14-7a0322d46d5f	f0/a0	NULL	owed	refused:steps-needed:cost:GP	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

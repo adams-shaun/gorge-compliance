@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c378f72-917c-49d4-ba68-51ebaf18d976	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c38f4c7-1b3f-42b4-a175-edab7acd6cc6	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2c38f4c7-1b3f-42b4-a175-edab7acd6cc6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c3a1313-a66e-4317-9732-e4ff9288b0db	cast	cast-resolve	agreed	-	X	scen	1	0	Germinate Recruits/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c3a1313-a66e-4317-9732-e4ff9288b0db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:germinate-recruits:cast:s1,f:xs:XP:germinate-recruits:cast:s1	-	-	-	fb9d3088f0bf	-	461e6c30111e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2c3ed6b9-1a2b-42ad-baa9-ee2a0ad505a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c3ed6b9-1a2b-42ad-baa9-ee2a0ad505a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c431df9-095a-44f1-993e-74eb215d75fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:needletooth-raptor:cast:s1,f:xs:XP:needletooth-raptor:cast:s1	-	-	-	d864b561c9cb	-	946d04caab2a	-	-	2026-11-24	xproof
@@ -151,10 +151,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:combat0.attack:s1,f:xs:XP:quandrix-the-proof:combat0.attack:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:combat0.block:s1,f:xs:XP:quandrix-the-proof:combat0.block:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2cbccc46-bdef-4dfb-90a4-0278c5c8488a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Quandrix, the Proof/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hexhaven Dueling Arena/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hexhaven-dueling-arena:land:s1,f:xs:XP:hexhaven-dueling-arena:land:s1	-	-	-	fb9d3088f0bf	-	2dfcc6a2bf36	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hexhaven Dueling Arena/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Hexhaven Dueling Arena/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cc075da-f79b-4050-84eb-2c1b9a30260c	land	play-land	agreed	-	X	scen	1	0	Hexhaven Dueling Arena/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a2	AlterAttribute	agreed	-	FX	start	2	0	x:xs:XP:hexhaven-dueling-arena:f0a2:s1,f:xs:XP:hexhaven-dueling-arena:f0a2:s1	-	-	-	fb9d3088f0bf	-	2dfcc6a2bf36	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2cc075da-f79b-4050-84eb-2c1b9a30260c	land	land	agreed	-	FX	start	2	0	x:xs:XP:hexhaven-dueling-arena:land:s1,f:xs:XP:hexhaven-dueling-arena:land:s1	-	-	-	fb9d3088f0bf	-	2dfcc6a2bf36	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2cc439e8-d112-44e6-bc5a-6e99333c519a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cc63297-7eb9-422e-838c-a9260756d689	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ccdc60a-49a9-44b9-a7af-0ebf18b26785	cast	cast-resolve	agreed	-	FX	scen	2	0	Sword of Fire and Ice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -175,8 +175,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:starforged-sword:f0t0:s1,f:xs:XP:starforged-sword:f0t0:s1	-	-	-	23c4009444b0	-	95f0fa42370f	-	-	2026-11-25	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starforged Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdcf65c-03d2-416f-8a3f-0322f75e8595	cast	cast-resolve	agreed	-	FX	scen	2	0	Heartstring Puller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cdcf65c-03d2-416f-8a3f-0322f75e8595	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Heartstring Puller/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cdcf65c-03d2-416f-8a3f-0322f75e8595	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Heartstring Puller/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2cdcf65c-03d2-416f-8a3f-0322f75e8595	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:heartstring-puller:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	283a3d112eef	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2cdcf65c-03d2-416f-8a3f-0322f75e8595	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:heartstring-puller:combat0.block:s1,f:xs:XP:heartstring-puller:combat0.block:s1	-	-	-	fb9d3088f0bf	-	283a3d112eef	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2cdcf65c-03d2-416f-8a3f-0322f75e8595	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cdd85c8-fa60-44ca-bc96-d38f029d2184	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cde1ca7-d126-4d3a-82a6-0acfd7c85cdb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:karfell-kennel-master:cast:s1,f:xs:XP:karfell-kennel-master:cast:s1	-	-	-	d864b561c9cb	-	09ee5fa0ac72	-	-	2026-11-24	xproof

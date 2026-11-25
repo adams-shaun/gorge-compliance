@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a0	PumpAll	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s2,f:xs:XP:sorin-solemn-visitor:cast:s2	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
-1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fb5c014-9366-4f9e-9728-303ff766002b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:extractor-demon:f0t0:s1,f:xs:XP:extractor-demon:f0t0:s1	-	-	-	23c4009444b0	-	6fe4f1b5093f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-1fb736bf-c9bd-45ab-86ce-7f138f1724b2	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1fb736bf-c9bd-45ab-86ce-7f138f1724b2	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:gaseous-anomaly:f0a1:s1,f:xs:XP:gaseous-anomaly:f0a1:s1	-	-	-	23c4009444b0	-	cb9182438f4f	-	-	2026-11-25	xproof
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	land	play-land	agreed	-	X	scen	1	0	Gaseous Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fba543c-bd22-4f7b-9ff4-0631af8ee814	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

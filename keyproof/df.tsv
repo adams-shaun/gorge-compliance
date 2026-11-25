@@ -68,7 +68,7 @@ df5e4100-8c83-42d6-af96-1a1ec84a9210	cast	cast-resolve	agreed	-	X	scen	1	0	Spell
 df5e4100-8c83-42d6-af96-1a1ec84a9210	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spellbook Seeker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df5e4100-8c83-42d6-af96-1a1ec84a9210	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spellbook Seeker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df621822-c811-40fa-99c1-ea9920bcd2e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df621822-c811-40fa-99c1-ea9920bcd2e2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+df621822-c811-40fa-99c1-ea9920bcd2e2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 df63e124-1542-48d6-b255-cf45855f1e93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df63e124-1542-48d6-b255-cf45855f1e93	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 df67597f-42a8-4fa7-b426-d7db8b384445	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-motivator:cast:s1,f:xs:XP:goblin-motivator:cast:s1	-	-	-	d864b561c9cb	-	ff56219fd4c3	-	-	2026-11-24	xproof
@@ -100,8 +100,8 @@ df7e296d-96de-4280-a4d8-49189544b9e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 df7e296d-96de-4280-a4d8-49189544b9e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7f697e-6886-4897-a024-61ae225c1b34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df82b67f-f685-4278-a108-f3689a3a121b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df8a0737-5841-4c17-b567-e9296541c3c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-df8a0737-5841-4c17-b567-e9296541c3c9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+df8a0737-5841-4c17-b567-e9296541c3c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+df8a0737-5841-4c17-b567-e9296541c3c9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 df8fe368-00eb-42fa-89d6-794fc61f8f8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df8fe368-00eb-42fa-89d6-794fc61f8f8c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 df9409e6-bd6d-4b5b-b807-fcf347ee940a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glarb-calamity-s-augur:cast:s1,f:xs:XP:glarb-calamity-s-augur:cast:s1	-	-	-	23b491658465	-	99a44163f73f	-	-	2026-11-24	xproof
@@ -147,8 +147,8 @@ dfb5f660-fd8b-4b7b-934c-6a71cd182f15	f0/a2	NULL	owed	refused:start-not-exercised
 dfbd3afc-9905-4cff-a4f4-df08a4d0a7fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:restoration-angel:f0t0:s1,f:xs:XP:restoration-angel:f0t0:s1	-	-	-	d864b561c9cb	-	f8c53e73a08a	-	-	2026-11-24	xproof
 dfbd3afc-9905-4cff-a4f4-df08a4d0a7fa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:restoration-angel:f0t0:s1,f:xs:XP:restoration-angel:f0t0:s1	-	-	-	d864b561c9cb	-	f8c53e73a08a	-	-	2026-11-24	xproof
 dfbd5ad1-0f68-4219-95c4-98f674f321be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dfbd5ad1-0f68-4219-95c4-98f674f321be	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-dfbd5ad1-0f68-4219-95c4-98f674f321be	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+dfbd5ad1-0f68-4219-95c4-98f674f321be	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:jeskai-elder:f0t0:s1,f:xs:XP:jeskai-elder:f0t0:s1	-	-	-	fb9d3088f0bf	-	b4b322b7dbda	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+dfbd5ad1-0f68-4219-95c4-98f674f321be	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:jeskai-elder:f0t1:s1,f:xs:XP:jeskai-elder:f0t1:s1	-	-	-	fb9d3088f0bf	-	b4b322b7dbda	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 dfc08963-132f-4ebf-9384-15d17d1098f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bestial-fury:f0t0:s1,f:xs:XP:bestial-fury:f0t0:s1	-	-	-	ea3140b6974b	-	fc92b04ddd85	-	-	2026-11-24	xproof
 dfc08963-132f-4ebf-9384-15d17d1098f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bestial-fury:f0t0:s1,f:xs:XP:bestial-fury:f0t0:s1	-	-	-	ea3140b6974b	-	fc92b04ddd85	-	-	2026-11-24	xproof
 dfc08963-132f-4ebf-9384-15d17d1098f7	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

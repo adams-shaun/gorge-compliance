@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fa38462-57b6-4f2f-a73c-f14a66f56946	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9fb4aa2d-6414-4176-9070-e5230e100c6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9fb80575-9c8e-4745-9a8f-d48cdcbbb868	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:karn-s-bastion:f0a0:s2,f:xs:XP:karn-s-bastion:f0a0:s2	-	-	-	d864b561c9cb	-	bd403ffd4529	-	-	2026-11-24	xproof
 9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a1	Proliferate	agreed	-	FX	start	2	0	x:xs:XP:karn-s-bastion:f0a1:s1,f:xs:XP:karn-s-bastion:f0a1:s1	-	-	-	d864b561c9cb	-	bd403ffd4529	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fc49a69-f80c-478f-b237-66f155c0c09a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:cybernetic-specialist:f0a0:s1,f:xs:XP:cybernetic-specialist:f0a0:s1	-	-	-	23c4009444b0	-	8b1221a0310c	-	-	2026-11-25	xproof
 9fc49a69-f80c-478f-b237-66f155c0c09a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cybernetic-specialist:f0t0:s1,f:xs:XP:cybernetic-specialist:f0t0:s1	-	-	-	25696bf19d5b	-	8b1221a0310c	-	-	2026-11-24	xproof
 9fc6e1db-cf09-4b8c-be4f-bb02ffe7a188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fc6e1db-cf09-4b8c-be4f-bb02ffe7a188	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9fc6e1db-cf09-4b8c-be4f-bb02ffe7a188	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dragonscale-general:f0t0:s1,f:xs:XP:dragonscale-general:f0t0:s1	-	-	-	fb9d3088f0bf	-	099fa10c8fde	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9fc74fc9-bb02-4d9e-bb8e-f44f219d8946	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fc74fc9-bb02-4d9e-bb8e-f44f219d8946	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hurloon-shaman:f0t0:s1,f:xs:XP:hurloon-shaman:f0t0:s1	-	-	-	8c0bd19283bb	-	3bd0eb34216c	-	-	2026-11-24	xproof
 9fceca3c-fc10-4e46-a727-122aafcef349	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9feb7600-f844-4573-bcb7-d6b34473517b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9feb7600-f844-4573-bcb7-d6b34473517b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9febdfa8-8af2-4aba-b2e6-cb2baad7e02b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-hills-blacksmith:f0t0:s1,f:xs:XP:iron-hills-blacksmith:f0t0:s1	-	-	-	25696bf19d5b	-	4e0cd1a76411	-	-	2026-11-24	xproof
-9febdfa8-8af2-4aba-b2e6-cb2baad7e02b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron Hills Blacksmith/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9febdfa8-8af2-4aba-b2e6-cb2baad7e02b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iron Hills Blacksmith/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9febdfa8-8af2-4aba-b2e6-cb2baad7e02b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:iron-hills-blacksmith:combat0.attack:s1,f:xs:XP:iron-hills-blacksmith:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	4e0cd1a76411	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+9febdfa8-8af2-4aba-b2e6-cb2baad7e02b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:iron-hills-blacksmith:combat0.block:s1,f:xs:XP:iron-hills-blacksmith:combat0.block:s1	-	-	-	fb9d3088f0bf	-	4e0cd1a76411	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9febdfa8-8af2-4aba-b2e6-cb2baad7e02b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iron-hills-blacksmith:f0t0:s1,f:xs:XP:iron-hills-blacksmith:f0t0:s1	-	-	-	25696bf19d5b	-	4e0cd1a76411	-	-	2026-11-24	xproof
 9fee2572-8864-475c-bade-a64e36ef69c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rot-curse-rakshasa:cast:s1,f:xs:XP:rot-curse-rakshasa:cast:s1	-	-	-	23c4009444b0	-	e0f095a9aff5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9fee2572-8864-475c-bade-a64e36ef69c4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rot-curse-rakshasa:combat0.attack:s1,f:xs:XP:rot-curse-rakshasa:combat0.attack:s1	-	-	-	23c4009444b0	-	e0f095a9aff5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

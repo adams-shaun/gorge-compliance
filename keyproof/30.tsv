@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3055381a-fb6b-47a3-8e77-a44768808e27	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:eater-of-hope:f0a1:s1,f:xs:XP:eater-of-hope:f0a1:s1	-	-	-	23c4009444b0	-	1f672ba1fd5d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-30597aff-ebb6-4927-b350-fe559fb92c8f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dominion Infiltration"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+30597aff-ebb6-4927-b350-fe559fb92c8f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dominion Infiltration"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 306002e6-d68d-47ad-879b-e6060efebeff	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Temporal Conqueror"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 306002e6-d68d-47ad-879b-e6060efebeff	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Temporal Conqueror"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 306549ad-84c7-4983-840b-9663799e9f40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rousing-read:f0t0:s1,f:xs:XP:rousing-read:f0t0:s1	-	-	-	3aa6ded33acb	-	da7713f3c8c9	-	-	2026-11-25	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3088ee75-3b51-4cbc-8987-76cb93f416b1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 308d7868-49f9-47a3-a7b1-4b0332d610f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 308d7868-49f9-47a3-a7b1-4b0332d610f1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-308d7868-49f9-47a3-a7b1-4b0332d610f1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+308d7868-49f9-47a3-a7b1-4b0332d610f1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 308e551a-6d60-4a28-9e22-1181995ca068	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30929713-47dc-40f0-883c-4bd41aa399d5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nimble-innovator:cast:s1,f:xs:XP:nimble-innovator:cast:s1	-	-	-	d864b561c9cb	-	0996f97340a7	-	-	2026-11-24	xproof
 30929713-47dc-40f0-883c-4bd41aa399d5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nimble-innovator:cast:s1,f:xs:XP:nimble-innovator:cast:s1	-	-	-	d864b561c9cb	-	0996f97340a7	-	-	2026-11-24	xproof
@@ -143,9 +143,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30bb01c1-9253-4251-80e7-fb8236b3d858	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Chandra, Spark Hunter/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30bb01c1-9253-4251-80e7-fb8236b3d858	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Chandra, Spark Hunter/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30bb01c1-9253-4251-80e7-fb8236b3d858	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Chandra, Spark Hunter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30c3c700-46f4-4a77-8c45-5c7e3a21bd62	cast	cast-resolve	agreed	-	X	scen	1	0	Wizard's Staff/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30c3c700-46f4-4a77-8c45-5c7e3a21bd62	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Wizard's Staff/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30c3c700-46f4-4a77-8c45-5c7e3a21bd62	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Wizard's Staff/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+30c3c700-46f4-4a77-8c45-5c7e3a21bd62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wizard-s-staff:cast:s1,f:xs:XP:wizard-s-staff:cast:s1	-	-	-	fb9d3088f0bf	-	e93d508cfded	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+30c3c700-46f4-4a77-8c45-5c7e3a21bd62	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:wizard-s-staff:f0a0:s1,f:xs:XP:wizard-s-staff:f0a0:s1	-	-	-	fb9d3088f0bf	-	e93d508cfded	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+30c3c700-46f4-4a77-8c45-5c7e3a21bd62	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:wizard-s-staff:f0a1:s1,f:xs:XP:wizard-s-staff:f0a1:s1	-	-	-	fb9d3088f0bf	-	e93d508cfded	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 30c3c700-46f4-4a77-8c45-5c7e3a21bd62	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wizard's Staff/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30c3f88f-11d3-4b5f-8936-bab1c65bd693	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c3f88f-11d3-4b5f-8936-bab1c65bd693	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

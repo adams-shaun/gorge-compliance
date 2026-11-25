@@ -64,9 +64,9 @@ cc5e3a21-4911-49f8-8e3c-ab23812c4004	f0/t0	NULL	owed	refused:no-generator:trigge
 cc5ffb09-3d08-4a52-a880-50c94df30c15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc5ffb09-3d08-4a52-a880-50c94df30c15	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc60181a-5eeb-4d66-9876-3194bac1e7a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc65821a-1893-4087-b461-35cf9fd26c71	cast	cast-resolve	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc65821a-1893-4087-b461-35cf9fd26c71	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc65821a-1893-4087-b461-35cf9fd26c71	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc65821a-1893-4087-b461-35cf9fd26c71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orcrist-goblin-cleaver:cast:s1,f:xs:XP:orcrist-goblin-cleaver:cast:s1	-	-	-	fb9d3088f0bf	-	903865412c51	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+cc65821a-1893-4087-b461-35cf9fd26c71	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:orcrist-goblin-cleaver:f0a0:s1,f:xs:XP:orcrist-goblin-cleaver:f0a0:s1	-	-	-	fb9d3088f0bf	-	903865412c51	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+cc65821a-1893-4087-b461-35cf9fd26c71	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:orcrist-goblin-cleaver:f0a0:s1,f:xs:XP:orcrist-goblin-cleaver:f0a0:s1	-	-	-	fb9d3088f0bf	-	903865412c51	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cc65821a-1893-4087-b461-35cf9fd26c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc65a99f-ac7f-4ded-bb00-a5daf51e4bcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heal-the-scars:cast:s1,f:xs:XP:heal-the-scars:cast:s1	-	-	-	3aa6ded33acb	-	5bd1c08e44e7	-	-	2026-11-25	xproof
 cc65ac73-5bef-4ecb-ad8e-39199084c027	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,9 +156,9 @@ ccc4f21f-cf8c-40bb-a6d6-1f624320c5b2	f0/t0	NULL	owed	refused:no-generator:trigge
 ccc7de36-aafc-4d87-80f7-fc2effc976eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogmyr-enforcer:cast:s1,f:xs:XP:frogmyr-enforcer:cast:s1	-	-	-	ae86f6029288	-	5016be56b097	-	-	2026-11-24	xproof
 cccc9664-0e3d-44c4-959c-abeaba25bbab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cccc9664-0e3d-44c4-959c-abeaba25bbab	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-ccd0e613-17c1-4a97-b519-de0376d596f0	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-ccd0e613-17c1-4a97-b519-de0376d596f0	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-ccd0e613-17c1-4a97-b519-de0376d596f0	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ccd0e613-17c1-4a97-b519-de0376d596f0	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+ccd0e613-17c1-4a97-b519-de0376d596f0	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+ccd0e613-17c1-4a97-b519-de0376d596f0	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 ccd248ec-1029-47cd-b6b4-876505efd9dd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ghastly-death-tyrant:f0t0:s1	-	-	-	23c4009444b0	-	4d24810ab907	-	-	2026-11-25	xproof
 ccd248ec-1029-47cd-b6b4-876505efd9dd	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:ghastly-death-tyrant:f0t0:s1	-	-	-	23c4009444b0	-	4d24810ab907	-	-	2026-11-25	xproof
 ccdd6376-9b74-4d13-9f80-87d0bd3d4a2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disease-carriers:cast:s1,f:xs:XP:disease-carriers:cast:s1	-	-	-	5f2128bf97e4	-	f61779607ffd	-	-	2026-11-24	xproof

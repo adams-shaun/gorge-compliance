@@ -52,10 +52,10 @@ d23ca3d2-0731-4df4-a3c6-69ddf0c58601	cast	cast-resolve	agreed	-	X	scen	1	0	Deadl
 d2497a5e-ff2b-4024-9b14-634304d583fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d24ee48a-86a9-4a72-9311-79b6ea3f41f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wei-night-raiders:cast:s1,f:xs:XP:wei-night-raiders:cast:s1	-	-	-	5f2128bf97e4	-	fe5cb987324e	-	-	2026-11-24	xproof
 d24ee48a-86a9-4a72-9311-79b6ea3f41f2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	cast	cast	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	23c4009444b0	-	fd7842eaae45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Craftwork Crusher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Craftwork Crusher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	f0/t0	ChangesZone	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	23c4009444b0	-	fd7842eaae45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	cast	cast	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	fb9d3088f0bf	-	fd7842eaae45	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:craftwork-crusher:combat0.attack:s1,f:xs:XP:craftwork-crusher:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	fd7842eaae45	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:craftwork-crusher:combat0.block:s1,f:xs:XP:craftwork-crusher:combat0.block:s1	-	-	-	fb9d3088f0bf	-	fd7842eaae45	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	f0/t0	ChangesZone	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	fb9d3088f0bf	-	fd7842eaae45	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d254514b-0688-4f05-9473-3090a2ce7ced	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-butcher:cast:s1,f:xs:XP:dreadhorde-butcher:cast:s1	-	-	-	d864b561c9cb	-	b2d6dec96051	-	-	2026-11-24	xproof
 d254514b-0688-4f05-9473-3090a2ce7ced	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-butcher:cast:s1,f:xs:XP:dreadhorde-butcher:cast:s1	-	-	-	d864b561c9cb	-	b2d6dec96051	-	-	2026-11-24	xproof
 d254514b-0688-4f05-9473-3090a2ce7ced	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-butcher:f0t1:s1,f:xs:XP:dreadhorde-butcher:f0t1:s1	-	-	-	d864b561c9cb	-	b2d6dec96051	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ d2c7d10e-86d9-4e2d-a0da-2e39c172aae2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d2c7d10e-86d9-4e2d-a0da-2e39c172aae2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d2cbd71a-841b-4ff2-a794-247a030e0233	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2cbdbf9-9b08-419e-bb3e-482972d58e74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2cbdbf9-9b08-419e-bb3e-482972d58e74	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d2cbdbf9-9b08-419e-bb3e-482972d58e74	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d2ce3832-a12d-4c7a-9bc2-51dc92764994	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2ce3832-a12d-4c7a-9bc2-51dc92764994	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2d41f12-18d8-473b-9308-3f02d7d791f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:humble:cast:s1,f:xs:XP:humble:cast:s1	-	-	-	5f2128bf97e4	-	5da87ebd0640	-	-	2026-11-24	xproof

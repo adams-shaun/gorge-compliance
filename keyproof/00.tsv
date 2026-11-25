@@ -105,9 +105,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0089acfe-da66-4dd7-b1e5-4d7407f58257	cast	cast	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	25696bf19d5b	-	9f6c95825b13	-	-	2026-11-24	xproof
 0089acfe-da66-4dd7-b1e5-4d7407f58257	f0/a0	DelayedTrigger	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	25696bf19d5b	-	9f6c95825b13	-	-	2026-11-24	xproof
 0089acfe-da66-4dd7-b1e5-4d7407f58257	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	25696bf19d5b	-	9f6c95825b13	-	-	2026-11-24	xproof
-008a11c1-d283-49fe-abd7-ff4fe8b1fe79	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Rhovanion Rampager"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Rhovanion Rampager"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Rhovanion Rampager"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+008a11c1-d283-49fe-abd7-ff4fe8b1fe79	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Rhovanion Rampager"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Rhovanion Rampager"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Rhovanion Rampager"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 008ac258-763c-4379-bfcd-b9cc4d7296dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 008c92bc-3022-4d34-aa04-584576ff8f8e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deem-worthy:cast:s1,f:xs:XP:deem-worthy:cast:s1	-	-	-	3aa6ded33acb	-	6951f11fdd99	-	-	2026-11-25	xproof
 008c92bc-3022-4d34-aa04-584576ff8f8e	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:deem-worthy:cast:s1,f:xs:XP:deem-worthy:cast:s1	-	-	-	23b491658465	-	6951f11fdd99	-	-	2026-11-25	xproof
@@ -216,8 +216,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00fdcc19-88ed-46c3-91f0-095806228105	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-00fdcc19-88ed-46c3-91f0-095806228105	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-00fdcc19-88ed-46c3-91f0-095806228105	f0/t2	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+00fdcc19-88ed-46c3-91f0-095806228105	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+00fdcc19-88ed-46c3-91f0-095806228105	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+00fdcc19-88ed-46c3-91f0-095806228105	f0/t2	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unscrupulous-contractor:cast:s2,f:xs:XP:unscrupulous-contractor:cast:s2	-	-	-	5437c1394672	-	47b40185b834	-	-	2026-11-24	xproof
 00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unscrupulous-contractor:cast:s2,f:xs:XP:unscrupulous-contractor:cast:s2	-	-	-	5437c1394672	-	47b40185b834	-	-	2026-11-24	xproof

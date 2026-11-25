@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d08cc9b-2b26-49de-80aa-962a358bfc1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blood-sport-champion:f0t0:s1,f:xs:XP:blood-sport-champion:f0t0:s1	-	-	-	8c0bd19283bb	-	8825cc3bd705	-	-	2026-11-24	xproof
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:cast:s1,f:xs:XP:swarmborn-giant:cast:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:f0a0:s1,f:xs:XP:swarmborn-giant:f0a0:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
-9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d2bfbb2-84df-4d7c-9989-7f5577f90d97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d2bfbb2-84df-4d7c-9989-7f5577f90d97	f0/t0	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:loxodon-partisan:f0t0:s1,f:xs:XP:loxodon-partisan:f0t0:s1	-	-	-	d864b561c9cb	-	e8873c9a2d55	-	-	2026-11-24	xproof
 9d2d6479-531c-4ce1-b52b-00e36fa63b64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rancor:cast:s1,f:xs:XP:rancor:cast:s1	-	-	-	25696bf19d5b	-	d69b898a5767	-	-	2026-11-24	xproof
-9d2d6479-531c-4ce1-b52b-00e36fa63b64	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9d2d6479-531c-4ce1-b52b-00e36fa63b64	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9d2dd032-bcef-4d04-8836-1eaff1c56b98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niall-silvain:cast:s1,f:xs:XP:niall-silvain:cast:s1	-	-	-	fc71ca68c5ac	-	ea28522e4329	-	-	2026-11-24	xproof
 9d2dd032-bcef-4d04-8836-1eaff1c56b98	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:niall-silvain:f0a0:s1,f:xs:XP:niall-silvain:f0a0:s1	-	-	-	fc71ca68c5ac	-	ea28522e4329	-	-	2026-11-24	xproof
 9d2e7099-dcd5-428f-a732-2a82b8d1dd1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,14 +150,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9db71b76-eda7-49dd-af5a-3de18acb8ccb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sultai Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9db71b76-eda7-49dd-af5a-3de18acb8ccb	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sultai-monument:f0t0:s2,f:xs:XP:sultai-monument:f0t0:s2	-	-	-	267e485f6204	-	bdb9846f21f9	-	-	2026-11-24	xproof
 9db7d8f0-0712-4e32-825c-1339e7a8d768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9db7d8f0-0712-4e32-825c-1339e7a8d768	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9db7d8f0-0712-4e32-825c-1339e7a8d768	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9dbc2fc8-ed42-4534-9676-bf0695cd518c	cast	cast-resolve	agreed	-	FX	scen	2	0	You're Not Alone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9dbc3530-b278-4c8d-b2cc-a09dfac9d5e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reassembling-skeleton:cast:s1,f:xs:XP:reassembling-skeleton:cast:s1	-	-	-	23b491658465	-	a2f7c5cddc37	-	-	2026-11-24	xproof
 9dbc3530-b278-4c8d-b2cc-a09dfac9d5e5	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:reassembling-skeleton:f0a0:s1,f:xs:XP:reassembling-skeleton:f0a0:s1	-	-	-	3aa6ded33acb	-	a2f7c5cddc37	-	-	2026-11-25	xproof
 9dbfa01b-ce7e-4dd1-9257-0c89b831f477	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:knights-of-the-black-rose:cast:s1,f:xs:XP:knights-of-the-black-rose:cast:s1	-	-	-	8c0bd19283bb	-	03acd4f9ca2f	-	-	2026-11-24	xproof
 9dbfa01b-ce7e-4dd1-9257-0c89b831f477	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:knights-of-the-black-rose:cast:s1,f:xs:XP:knights-of-the-black-rose:cast:s1	-	-	-	8c0bd19283bb	-	03acd4f9ca2f	-	-	2026-11-24	xproof
 9dbfa01b-ce7e-4dd1-9257-0c89b831f477	f0/t1	NULL	owed	refused:no-generator:trigger:BecomeMonarch	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9dbfa026-e364-4111-a03a-e9b1693bc7b7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9dbfa026-e364-4111-a03a-e9b1693bc7b7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9dc4b172-da33-40c0-ab29-d68807dbe93f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:castaway-s-despair:f0t0:s1,f:xs:XP:castaway-s-despair:f0t0:s1	-	-	-	d864b561c9cb	-	fd4c230768c3	-	-	2026-11-24	xproof
 9dc4b172-da33-40c0-ab29-d68807dbe93f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:castaway-s-despair:f0t0:s1,f:xs:XP:castaway-s-despair:f0t0:s1	-	-	-	d864b561c9cb	-	fd4c230768c3	-	-	2026-11-24	xproof
 9dc61ef6-da22-42a8-b348-dfd5722deadf	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:town-greeter:f0t0:s2,f:xs:XP:town-greeter:f0t0:s2	-	-	-	267e485f6204	-	69dc2f831644	-	-	2026-11-24	xproof

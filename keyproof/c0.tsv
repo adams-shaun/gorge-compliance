@@ -25,7 +25,7 @@ c00f082b-787f-4f96-8356-c10d35713bc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coa
 c00f082b-787f-4f96-8356-c10d35713bc4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c010d833-1873-4132-b4ff-8d78b3d7c2d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c01411e0-77b2-4e65-a369-5dbe13745769	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kheru-spellsnatcher:cast:s1,f:xs:XP:kheru-spellsnatcher:cast:s1	-	-	-	d864b561c9cb	-	002a8812666e	-	-	2026-11-24	xproof
-c01411e0-77b2-4e65-a369-5dbe13745769	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c01411e0-77b2-4e65-a369-5dbe13745769	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 c01516e0-eec3-4370-b935-7674982e8850	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c01516e0-eec3-4370-b935-7674982e8850	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c0162a6c-12d9-4b84-811a-ee6e39401863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -35,8 +35,8 @@ c017f8ae-9103-4965-a07a-f259f44a157d	static#0.0	static#0.0	agreed	-	X	scen	1	0	T
 c01a090a-11e4-469e-aded-74203c06fef4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:salvage:cast:s1,f:xs:XP:salvage:cast:s1	-	-	-	5f2128bf97e4	-	e829ff8e5e49	-	-	2026-11-24	xproof
 c01aafb8-3da5-4eb1-8731-2a223e747d63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c01aafb8-3da5-4eb1-8731-2a223e747d63	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c01aeaa5-1d3b-4493-9575-30175dcd780d	cast	cast-resolve	agreed	-	X	scen	1	0	Gleaming Splendor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c01aeaa5-1d3b-4493-9575-30175dcd780d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gleaming Splendor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c01aeaa5-1d3b-4493-9575-30175dcd780d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleaming-splendor:cast:s1,f:xs:XP:gleaming-splendor:cast:s1	-	-	-	fb9d3088f0bf	-	1873087aa176	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+c01aeaa5-1d3b-4493-9575-30175dcd780d	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:gleaming-splendor:f0a0:s1,f:xs:XP:gleaming-splendor:f0a0:s1	-	-	-	fb9d3088f0bf	-	1873087aa176	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 c01aeaa5-1d3b-4493-9575-30175dcd780d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gleaming Splendor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c01b221f-3993-43ab-8cde-b42fb344e2a7	cast	cast-resolve	agreed	-	FX	scen	2	0	Sunderflock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c01b221f-3993-43ab-8cde-b42fb344e2a7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sunderflock:combat0.attack:s1,f:xs:XP:sunderflock:combat0.attack:s1	-	-	-	23c4009444b0	-	56108e676162	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -132,7 +132,7 @@ c0a4f47c-c7f9-4b95-aa1b-30580e4cf030	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c0abbed2-d213-47ef-8d6c-4a21efb9a55f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c0abbed2-d213-47ef-8d6c-4a21efb9a55f	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c0adbddc-b070-4c5f-afe0-0474c72a9251	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c0adbddc-b070-4c5f-afe0-0474c72a9251	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c0adbddc-b070-4c5f-afe0-0474c72a9251	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 c0b1fba1-4338-4671-934b-098689ad2085	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fynn-the-fangbearer:cast:s1,f:xs:XP:fynn-the-fangbearer:cast:s1	-	-	-	23b491658465	-	fc3f1d6264d0	-	-	2026-11-24	xproof
 c0b1fba1-4338-4671-934b-098689ad2085	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fynn-the-fangbearer:combat0.attack:s1,f:xs:XP:fynn-the-fangbearer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	fc3f1d6264d0	-	-	2026-11-25	xproof
 c0b1fba1-4338-4671-934b-098689ad2085	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fynn-the-fangbearer:combat0.block:s1,f:xs:XP:fynn-the-fangbearer:combat0.block:s1	-	-	-	3aa6ded33acb	-	fc3f1d6264d0	-	-	2026-11-25	xproof

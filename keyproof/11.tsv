@@ -99,9 +99,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 118cf682-a532-42e9-8d91-6ce6f0d31ace	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 118f2cb6-2af9-4acc-b386-a8e8dded5793	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 118f2cb6-2af9-4acc-b386-a8e8dded5793	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-11932191-4b19-49b1-bfe4-abb7b83b2e59	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Silvan Reveler"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Silvan Reveler"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+11932191-4b19-49b1-bfe4-abb7b83b2e59	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Silvan Reveler"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Silvan Reveler"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1195de01-f0ee-42c1-8e9e-a4bb90dd4932	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1197a595-3afc-4f18-b868-bbb096771922	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1197a595-3afc-4f18-b868-bbb096771922	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:leyline-of-abundance:f0a0:s1,f:xs:XP:leyline-of-abundance:f0a0:s1	-	-	-	d864b561c9cb	-	1e2941dab5c7	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 119d9671-61ba-4629-89b1-f94bdec5cb74	cast	cast-resolve	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 119d9671-61ba-4629-89b1-f94bdec5cb74	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11a163cc-ade3-4b55-b50e-3b3bf7e1962c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11a163cc-ade3-4b55-b50e-3b3bf7e1962c	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+11a163cc-ade3-4b55-b50e-3b3bf7e1962c	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 11a20648-fdb6-4f52-8fda-c66985e0c044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11a28f60-2456-4ed5-b1cc-03c395f55e59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11a28f60-2456-4ed5-b1cc-03c395f55e59	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

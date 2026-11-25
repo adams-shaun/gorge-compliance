@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2494101a-2c6b-45d8-95fe-e62bf9a25130	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2494101a-2c6b-45d8-95fe-e62bf9a25130	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:imskir-iron-eater:cast:s1,f:xs:XP:imskir-iron-eater:cast:s1	-	-	-	ae86f6029288	-	ddf67b96adee	-	-	2026-11-24	xproof
 2496424b-2312-40d9-acbf-e22272d90bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2496424b-2312-40d9-acbf-e22272d90bad	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2496424b-2312-40d9-acbf-e22272d90bad	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2497926c-b253-4400-b540-776ee2cd807c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2497926c-b253-4400-b540-776ee2cd807c	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 2497cfe2-a85c-47ea-af7a-9a745d84f8b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,8 +190,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24ee57b5-a505-4264-97ca-8b8dfb12298e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mardu-devotee:cast:s2,f:xs:XP:mardu-devotee:cast:s2	-	-	-	5437c1394672	-	82cdab1030a3	-	-	2026-11-24	xproof
 24ee57b5-a505-4264-97ca-8b8dfb12298e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mardu Devotee/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24ee57b5-a505-4264-97ca-8b8dfb12298e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mardu-devotee:cast:s2,f:xs:XP:mardu-devotee:cast:s2	-	-	-	5437c1394672	-	82cdab1030a3	-	-	2026-11-24	xproof
-24f1445c-16c9-45c0-be56-0266e6c78cdb	cast	cast-resolve	agreed	-	X	scen	1	0	Guiding Hydra/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-24f1445c-16c9-45c0-be56-0266e6c78cdb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Guiding Hydra/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+24f1445c-16c9-45c0-be56-0266e6c78cdb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guiding-hydra:cast:s1,f:xs:XP:guiding-hydra:cast:s1	-	-	-	fb9d3088f0bf	-	5e24261cc4d8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+24f1445c-16c9-45c0-be56-0266e6c78cdb	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:guiding-hydra:f0t0:s1,f:xs:XP:guiding-hydra:f0t0:s1	-	-	-	fb9d3088f0bf	-	5e24261cc4d8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 24f1f0e9-8c9b-4f32-95ec-7af883bbeef4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24f1f0e9-8c9b-4f32-95ec-7af883bbeef4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24f1f0e9-8c9b-4f32-95ec-7af883bbeef4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

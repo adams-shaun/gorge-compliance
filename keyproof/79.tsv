@@ -13,8 +13,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79090b00-d920-4134-a838-fb434cf3ee4d	static#0.0	static#0.0	owed	refused:no-generator:static:ReduceCost	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 790d3ee2-8b93-464c-9b16-afe62db0048c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 790e3c9e-7d94-43f7-bc14-d83c7d4c889e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-79134f5e-94db-4a40-ba75-2569b839cf35	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-79134f5e-94db-4a40-ba75-2569b839cf35	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+79134f5e-94db-4a40-ba75-2569b839cf35	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+79134f5e-94db-4a40-ba75-2569b839cf35	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 79134f5e-94db-4a40-ba75-2569b839cf35	land	play-land	agreed	-	X	scen	1	0	Andoria/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79189464-9645-4411-8886-68fd40a588ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 791b8ac8-8db8-44b4-8c85-fcc9017c17ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-sarcophagus:cast:s1,f:xs:XP:walking-sarcophagus:cast:s1	-	-	-	23c4009444b0	-	9d21d82c1eb0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -56,8 +56,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 793f29ac-8a5d-49bf-91e8-a32f771268f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 793fe31a-2b11-49f8-9851-719469ad1726	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794255b1-d94d-4de4-ac0a-87ef743f9102	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mistfire-adept:cast:s1,f:xs:XP:mistfire-adept:cast:s1	-	-	-	d864b561c9cb	-	da95c3f967e8	-	-	2026-11-24	xproof
-794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t0	SpellCast	agreed	-	FX	start	4	0	x:xs:XP:mistfire-adept:f0t0:s1,f:xs:XP:mistfire-adept:f0t0:s1	-	-	-	fb9d3088f0bf	-	da95c3f967e8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+794255b1-d94d-4de4-ac0a-87ef743f9102	f0/t1	SpellCast/Prowess	agreed	-	FX	start	4	0	x:xs:XP:mistfire-adept:f0t0:s1,f:xs:XP:mistfire-adept:f0t0:s1	-	-	-	fb9d3088f0bf	-	da95c3f967e8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7947a210-32d0-4c99-82b4-4b5969447832	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794aaf8a-6d8e-41fb-acbe-a2b73d65d9d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 794aaf8a-6d8e-41fb-acbe-a2b73d65d9d9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:martyr-of-dusk:f0t0:s1,f:xs:XP:martyr-of-dusk:f0t0:s1	-	-	-	d864b561c9cb	-	551f3a48d8f2	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 799664fc-279c-40c1-8e40-44a68c38801b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:hazard-of-the-dunes:f0a0:s1,f:xs:XP:hazard-of-the-dunes:f0a0:s1	-	-	-	23c4009444b0	-	0b059a90824e	-	-	2026-11-25	xproof
 799f31fc-3b6f-419a-8e70-b41c8e97f000	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:quicksilver-behemoth:f0t0:s1,f:xs:XP:quicksilver-behemoth:f0t0:s1	-	-	-	d864b561c9cb	-	ad39b0b0f03c	-	-	2026-11-24	xproof
-799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d6641e7-4d14-4a06-b588-0c752af529bd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shatterwing Pegasus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d6641e7-4d14-4a06-b588-0c752af529bd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Shatterwing Pegasus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d66f67d-3148-4636-ac5a-2cf8a51d5e50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7d66f67d-3148-4636-ac5a-2cf8a51d5e50	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7d66f67d-3148-4636-ac5a-2cf8a51d5e50	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7d679591-f8ea-4c4c-ab98-7b9e3438cf57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primaris-eliminator:f0t0:s1,f:xs:XP:primaris-eliminator:f0t0:s1	-	-	-	23c4009444b0	-	79509be28fa2	-	-	2026-11-25	xproof
 7d679591-f8ea-4c4c-ab98-7b9e3438cf57	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:primaris-eliminator:f0t0:s1,f:xs:XP:primaris-eliminator:f0t0:s1	-	-	-	23c4009444b0	-	79509be28fa2	-	-	2026-11-25	xproof
 7d6c4290-d46d-4b98-805c-3f537462c4c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,14 +99,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d765055-da62-43f7-9580-98e9d164753b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Truck Toss/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d78155c-c63f-48a3-86e5-12b80400d8de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-bully:f0t0:s1,f:xs:XP:iron-bully:f0t0:s1	-	-	-	d864b561c9cb	-	7cdb62c0958c	-	-	2026-11-24	xproof
 7d78155c-c63f-48a3-86e5-12b80400d8de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iron-bully:f0t0:s1,f:xs:XP:iron-bully:f0t0:s1	-	-	-	d864b561c9cb	-	7cdb62c0958c	-	-	2026-11-24	xproof
-7d7e232f-e4f9-41db-a2d9-cfe88721b7a9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Ensign Pavel Chekov"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7d7e232f-e4f9-41db-a2d9-cfe88721b7a9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Ensign Pavel Chekov"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7d7e232f-e4f9-41db-a2d9-cfe88721b7a9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Ensign Pavel Chekov"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7d7e232f-e4f9-41db-a2d9-cfe88721b7a9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Ensign Pavel Chekov"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7d80f016-5a4a-4843-9aec-0fe64f7f7ae8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d80f016-5a4a-4843-9aec-0fe64f7f7ae8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d84873a-c079-4a0f-8878-c62e4bade20a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:intrepid-provisioner:cast:s1,f:xs:XP:intrepid-provisioner:cast:s1	-	-	-	d864b561c9cb	-	fe7466480d25	-	-	2026-11-24	xproof
 7d84873a-c079-4a0f-8878-c62e4bade20a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:intrepid-provisioner:cast:s1,f:xs:XP:intrepid-provisioner:cast:s1	-	-	-	d864b561c9cb	-	fe7466480d25	-	-	2026-11-24	xproof
 7d881c57-0bd9-4c57-aa4a-b10808b86143	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dimir-signet:cast:s1,f:xs:XP:dimir-signet:cast:s1	-	-	-	64a08ba7d913	-	828c36d4e35c	-	-	2026-11-24	xproof
-7d881c57-0bd9-4c57-aa4a-b10808b86143	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7d881c57-0bd9-4c57-aa4a-b10808b86143	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7d892d61-5a69-4500-9fb2-7cf50728aedd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d892d61-5a69-4500-9fb2-7cf50728aedd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d8b53f4-bdb5-4ba1-b6c0-f4846d8d3565	cast	cast-resolve	agreed	-	FX	scen	2	0	Emissary Escort/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -147,13 +147,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7dc5d729-0553-46fb-aff7-2f0d9573837b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7dc7d90d-5979-4c4a-9183-392e0e0b878a	cast	cast-resolve	agreed	-	FX	scen	2	0	Hell to Pay/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7dcb95a9-c114-4333-8b45-4380f92d9695	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7dcb95a9-c114-4333-8b45-4380f92d9695	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7dcb95a9-c114-4333-8b45-4380f92d9695	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7dce1e8c-5cfd-4626-9f23-7bb3f1b10c1e	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 7dd189f8-a23f-4b43-b0ef-fb174a9664ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7dd189f8-a23f-4b43-b0ef-fb174a9664ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7dd518f9-1ddd-4950-add3-fc21f675f4dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7dd68fd9-f5a7-49ee-aa36-93d646254335	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ddbf891-7f80-44e9-b94c-70c1da0b91ed	cast	cast-resolve	agreed	-	X	scen	1	0	Getaway Barrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7ddbf891-7f80-44e9-b94c-70c1da0b91ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:getaway-barrel:cast:s1,f:xs:XP:getaway-barrel:cast:s1	-	-	-	fb9d3088f0bf	-	630c6e419d67	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7ddbf891-7f80-44e9-b94c-70c1da0b91ed	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Getaway Barrel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ddd84d2-1a6d-43f5-a42d-3c66eee5f7e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ddd84d2-1a6d-43f5-a42d-3c66eee5f7e5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

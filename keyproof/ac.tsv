@@ -11,14 +11,14 @@ ac1003b4-1f7c-4801-9dd3-5cb7d9881af8	f0/t0	ChangesZone/Modular	agreed	-	FX	start
 ac10d218-f9a6-4058-9cda-a15ca1b0b7b5	cast	cast-resolve	agreed	-	X	scen	1	0	Assassin's Trophy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac141679-6ada-49a8-b225-d1a20c3838db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac141679-6ada-49a8-b225-d1a20c3838db	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-ac141fe0-328a-4d9b-8048-b0c47f399587	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+ac141fe0-328a-4d9b-8048-b0c47f399587	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 ac143b8e-f993-4989-8833-e26dc9faffa4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac143b8e-f993-4989-8833-e26dc9faffa4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac161100-46b7-4f0f-a72b-84aaa45980ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac161100-46b7-4f0f-a72b-84aaa45980ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac161100-46b7-4f0f-a72b-84aaa45980ad	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ac193909-7e81-4082-ad02-2a60d142a0ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-host:cast:s1,f:xs:XP:blood-host:cast:s1	-	-	-	d864b561c9cb	-	2b04841f79be	-	-	2026-11-24	xproof
-ac193909-7e81-4082-ad02-2a60d142a0ab	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ac193909-7e81-4082-ad02-2a60d142a0ab	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:blood-host:f0a0:s1,f:xs:XP:blood-host:f0a0:s1	-	-	-	fb9d3088f0bf	-	2b04841f79be	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-america-super-soldier:cast:s1,f:xs:XP:captain-america-super-soldier:cast:s1	-	-	-	23c4009444b0	-	6f5908e270a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:captain-america-super-soldier:combat0.attack:s1	-	-	-	23c4009444b0	-	6f5908e270a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:captain-america-super-soldier:combat0.block:s1	-	-	-	23c4009444b0	-	6f5908e270a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -125,13 +125,13 @@ ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.block	combat.block	agreed	-	FX	sta
 ac950d10-e373-42d3-907b-ee56e45a2084	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crossbones-malicious-mercenary:f0t0:s1,f:xs:XP:crossbones-malicious-mercenary:f0t0:s1	-	-	-	23c4009444b0	-	c691c06e0295	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ac96d27c-dbae-4094-9209-3ef143f64713	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac96d27c-dbae-4094-9209-3ef143f64713	f0/a0	DealDamage	agreed	-	X	start	2	0	x:xs:XP:soul-of-shandalar:f0a0:s1	-	-	-	d864b561c9cb	-	0004438016b9	-	-	2026-11-24	xproof
-ac96d27c-dbae-4094-9209-3ef143f64713	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ac96d27c-dbae-4094-9209-3ef143f64713	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:soul-of-shandalar:f0a1:s1,f:xs:XP:soul-of-shandalar:f0a1:s1	-	-	-	fb9d3088f0bf	-	0004438016b9	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 ac9ec838-fbad-4f01-846b-3084e1d37a44	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9de46aee845a	-	-	2026-11-25	xproof
 ac9ec838-fbad-4f01-846b-3084e1d37a44	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9de46aee845a	-	-	2026-11-25	xproof
 aca7c0a7-b365-421e-aeb0-49d3a9873e4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:improvised-armor:cast:s1,f:xs:XP:improvised-armor:cast:s1	-	-	-	3aa6ded33acb	-	d542900dc18d	-	-	2026-11-25	xproof
 aca7c0a7-b365-421e-aeb0-49d3a9873e4f	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:improvised-armor:cast:s1,f:xs:XP:improvised-armor:cast:s1	-	-	-	8c0bd19283bb	-	d542900dc18d	-	-	2026-11-24	xproof
 aca9df28-2df6-477c-b5b8-8e1863c84356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aca9df28-2df6-477c-b5b8-8e1863c84356	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+aca9df28-2df6-477c-b5b8-8e1863c84356	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 acaab3fe-8b12-4f11-9714-7ca278674975	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:righteous-war:cast:s1,f:xs:XP:righteous-war:cast:s1	-	-	-	8c0bd19283bb	-	728e47059ce2	-	-	2026-11-24	xproof
 acaae632-3203-4867-ad03-32619c3fcfe6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acac15c8-877d-49d4-9b42-90181c05a684	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chitin-gravestalker:cast:s1,f:xs:XP:chitin-gravestalker:cast:s1	-	-	-	23c4009444b0	-	ddd2a2437794	-	-	2026-11-25	xproof
@@ -201,7 +201,7 @@ acfc3e07-757f-4ccf-a65e-bee07ce87f40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 acfc3e07-757f-4ccf-a65e-bee07ce87f40	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 acfc3e07-757f-4ccf-a65e-bee07ce87f40	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 acfc3e07-757f-4ccf-a65e-bee07ce87f40	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-acfe54b3-10e3-4fdb-b874-d39fde96c40a	cast	cast-resolve	agreed	-	X	scen	1	0	Through the Forest Gate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+acfe54b3-10e3-4fdb-b874-d39fde96c40a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:through-the-forest-gate:cast:s1,f:xs:XP:through-the-forest-gate:cast:s1	-	-	-	fb9d3088f0bf	-	9f7037f1144d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 acfe7ec0-0606-4d5e-b1fa-25f0c7aeec47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acfe7ec0-0606-4d5e-b1fa-25f0c7aeec47	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acff2573-cf8a-4aee-96a3-28721a4128f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

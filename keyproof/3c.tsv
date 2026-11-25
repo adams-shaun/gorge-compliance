@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:soulstone-sanctuary:f0a1:s1,f:xs:XP:soulstone-sanctuary:f0a1:s1	-	-	-	23c4009444b0	-	f0f1bd04a59e	-	-	2026-11-25	xproof
 3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:soulstone-sanctuary:f0a1:s1,f:xs:XP:soulstone-sanctuary:f0a1:s1	-	-	-	23c4009444b0	-	f0f1bd04a59e	-	-	2026-11-25	xproof
 3c0f99b8-0222-4fac-932a-eb5d77826564	land	land	agreed	-	FX	start	2	0	x:xs:XP:soulstone-sanctuary:land:s1,f:xs:XP:soulstone-sanctuary:land:s1	-	-	-	23c4009444b0	-	f0f1bd04a59e	-	-	2026-11-25	xproof
-3c0fe71c-bee1-41d3-aeb5-1723028eedde	cast	cast-resolve	agreed	-	X	scen	1	0	Face Yourself/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3c0fe71c-bee1-41d3-aeb5-1723028eedde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:face-yourself:cast:s1,f:xs:XP:face-yourself:cast:s1	-	-	-	fb9d3088f0bf	-	82647a79cac7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3c1619bd-db5e-4df6-a196-0a9d62374f6d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hare-apparent:f0t0:s2,f:xs:XP:hare-apparent:f0t0:s2	-	-	-	e07cf3a05ba5	-	5df2ef1f57e0	-	-	2026-11-24	xproof
 3c1619bd-db5e-4df6-a196-0a9d62374f6d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hare-apparent:f0t0:s2,f:xs:XP:hare-apparent:f0t0:s2	-	-	-	e07cf3a05ba5	-	5df2ef1f57e0	-	-	2026-11-24	xproof
 3c1b95bd-a2fc-47cd-8940-e4af03bd3ce2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c4a6b34-a9bb-426d-908c-7ae0011591df	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c4d5392-27cf-492e-9ae1-dee330b82223	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c4d5392-27cf-492e-9ae1-dee330b82223	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moldgraf-monstrosity:f0t0:s1,f:xs:XP:moldgraf-monstrosity:f0t0:s1	-	-	-	d864b561c9cb	-	b43e41d4e2c1	-	-	2026-11-24	xproof
-3c4da169-1e50-4790-abdc-214e7b8a2ad5	cast	cast-resolve	agreed	-	X	scen	1	0	Thorin's Last Stand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3c4da169-1e50-4790-abdc-214e7b8a2ad5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thorin-s-last-stand:cast:s1,f:xs:XP:thorin-s-last-stand:cast:s1	-	-	-	fb9d3088f0bf	-	b306f6cac4d7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3c516327-00a3-4d03-87a3-73b4a90719d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trelane-squire-of-gothos:cast:s1,f:xs:XP:trelane-squire-of-gothos:cast:s1	-	-	-	8c0bd19283bb	-	872f2f635514	-	-	2026-11-24	xproof
 3c516327-00a3-4d03-87a3-73b4a90719d3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3c59ab03-8744-4148-be06-eb1b0147f2cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3cc02a23-93b7-445a-9c3e-0e4942ef927b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cc02a23-93b7-445a-9c3e-0e4942ef927b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cc333a1-c854-4b7c-8002-910e48222371	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0t0:s1,f:xs:XP:well-worn-spatula:f0t0:s1	-	-	-	25696bf19d5b	-	b6b874ecb5d5	-	-	2026-11-24	xproof
-3cc333a1-c854-4b7c-8002-910e48222371	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Well-Worn Spatula/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3cc333a1-c854-4b7c-8002-910e48222371	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0a0:s1,f:xs:XP:well-worn-spatula:f0a0:s1	-	-	-	fb9d3088f0bf	-	b6b874ecb5d5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3cc333a1-c854-4b7c-8002-910e48222371	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0t0:s1,f:xs:XP:well-worn-spatula:f0t0:s1	-	-	-	25696bf19d5b	-	b6b874ecb5d5	-	-	2026-11-24	xproof
 3cc333a1-c854-4b7c-8002-910e48222371	static#0.0	static#0.0	agreed	-	X	scen	1	0	Well-Worn Spatula/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cc48835-3ac0-4774-b380-f9b21d2dc974	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3cd15225-e9b6-4998-b545-76536c72e948	cast	cast-resolve	agreed	-	FX	scen	2	0	Claim the Kingdom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cd15225-e9b6-4998-b545-76536c72e948	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Claim the Kingdom/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cd15225-e9b6-4998-b545-76536c72e948	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Claim the Kingdom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Roads Go Ever, Ever On"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Roads Go Ever, Ever On"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3cd72848-7b99-4d46-96f5-53f297c9d2a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cd7ef87-4cb4-42ff-842f-e9a465dab165	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roil-cartographer:cast:s1,f:xs:XP:roil-cartographer:cast:s1	-	-	-	ae86f6029288	-	cb18adb64026	-	-	2026-11-24	xproof
 3cd7ef87-4cb4-42ff-842f-e9a465dab165	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25143290-2dd5-4def-a857-a1db6d3ed2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast-resolve	agreed	-	X	scen	1	0	Eardrum Rattler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:cast:s1,f:xs:XP:eardrum-rattler:cast:s1	-	-	-	fb9d3088f0bf	-	bf3b5139ebd8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eardrum Rattler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2516949d-75bb-4aea-a41d-0298bb129471	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slip-through-space:cast:s1,f:xs:XP:slip-through-space:cast:s1	-	-	-	d864b561c9cb	-	44a5c0e15e85	-	-	2026-11-24	xproof
 2519ccc0-c206-41fb-aa15-2ef88025ff96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prehistoric-pet:cast:s1,f:xs:XP:prehistoric-pet:cast:s1	-	-	-	23c4009444b0	-	eeabd18140dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -39,11 +39,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:heart-piercer-manticore:f0t0:s1,f:xs:XP:heart-piercer-manticore:f0t0:s1	-	-	-	d864b561c9cb	-	f9cd44fd56ec	-	-	2026-11-24	xproof
 253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s1,f:xs:XP:apex-witchstalker:f0t0:s1	-	-	-	25696bf19d5b	-	51ccea254215	-	-	2026-11-24	xproof
-253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Apex Witchstalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Apex Witchstalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:apex-witchstalker:combat0.attack:s1,f:xs:XP:apex-witchstalker:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	51ccea254215	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:apex-witchstalker:combat0.block:s1,f:xs:XP:apex-witchstalker:combat0.block:s1	-	-	-	fb9d3088f0bf	-	51ccea254215	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s2,f:xs:XP:apex-witchstalker:f0t0:s2	-	-	-	25696bf19d5b	-	51ccea254215	-	-	2026-11-24	xproof
 253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s1,f:xs:XP:apex-witchstalker:f0t0:s1	-	-	-	25696bf19d5b	-	51ccea254215	-	-	2026-11-24	xproof
-253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Apex Witchstalker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:apex-witchstalker:f0t1:s1,f:xs:XP:apex-witchstalker:f0t1:s1	-	-	-	fb9d3088f0bf	-	51ccea254215	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 25432a3a-bcfd-4c43-b662-07676e9b3fdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25432a3a-bcfd-4c43-b662-07676e9b3fdd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:eel-hounds:f0t0:s1,f:xs:XP:eel-hounds:f0t0:s1	-	-	-	8c0bd19283bb	-	e60a0e08d6b1	-	-	2026-11-24	xproof
 25434ea3-bcfa-4dae-a16e-10ab87ce32af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mishra-s-command:cast:s1,f:xs:XP:mishra-s-command:cast:s1	-	-	-	ae86f6029288	-	80dcd81f2662	-	-	2026-11-24	xproof

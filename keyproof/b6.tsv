@@ -107,9 +107,9 @@ b6b2d63f-5b8c-47ee-8712-58596e0e9e94	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dre
 b6b2d63f-5b8c-47ee-8712-58596e0e9e94	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dreamdew-entrancer:combat0.attack:s1,f:xs:XP:dreamdew-entrancer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a9df4c711b5e	-	-	2026-11-25	xproof
 b6b2d63f-5b8c-47ee-8712-58596e0e9e94	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dreamdew-entrancer:combat0.block:s1,f:xs:XP:dreamdew-entrancer:combat0.block:s1	-	-	-	3aa6ded33acb	-	a9df4c711b5e	-	-	2026-11-25	xproof
 b6b2d63f-5b8c-47ee-8712-58596e0e9e94	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dreamdew-entrancer:f0t0:s2,f:xs:XP:dreamdew-entrancer:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9df4c711b5e	-	-	2026-11-24	xproof
-b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa	cast	cast-resolve	agreed	-	X	scen	1	0	Greenhouse Propagator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greenhouse-propagator:cast:s1,f:xs:XP:greenhouse-propagator:cast:s1	-	-	-	fb9d3088f0bf	-	8c38da858db4	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Greenhouse Propagator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Greenhouse Propagator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b6b77cb9-49a5-4d1a-ae2d-02ae176dc1fa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greenhouse-propagator:f0t0:s1,f:xs:XP:greenhouse-propagator:f0t0:s1	-	-	-	fb9d3088f0bf	-	8c38da858db4	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 b6bde4eb-15f0-4e6e-9d25-459a2f75ccf2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sheltering-boughs:f0t0:s1,f:xs:XP:sheltering-boughs:f0t0:s1	-	-	-	d864b561c9cb	-	67e05c1f9e82	-	-	2026-11-24	xproof
 b6bde4eb-15f0-4e6e-9d25-459a2f75ccf2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sheltering-boughs:f0t0:s1,f:xs:XP:sheltering-boughs:f0t0:s1	-	-	-	d864b561c9cb	-	67e05c1f9e82	-	-	2026-11-24	xproof
 b6be94dc-7162-4887-b959-3bda709724eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ b6e82d4f-4fbf-495c-bebd-982d2a855ad0	combat#0.attack	combat#0.attack	agreed	-	X	
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tiger-Dillo/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tiger-Dillo/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	static#0.1	static#0.1	agreed	-	X	scen	1	0	Tiger-Dillo/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b6e87f78-d4dd-44b2-bf70-92436ce583c9	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+b6e87f78-d4dd-44b2-bf70-92436ce583c9	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 b6e972ae-cc2d-4c7e-9f49-c0616dc82064	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6e972ae-cc2d-4c7e-9f49-c0616dc82064	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mardu-shadowspear:f0t0:s1,f:xs:XP:mardu-shadowspear:f0t0:s1	-	-	-	d864b561c9cb	-	92048ab161cf	-	-	2026-11-24	xproof
 b6ea0c70-022a-43e4-aa40-3dc6a8b3b21e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
