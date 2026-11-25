@@ -222,10 +222,16 @@ func TestForgeRolledDie(t *testing.T) {
 // ForcedCoinFlipTest re-run green on the pin (run-unit-tests.sh, 18 tests).
 // 686e3f82713 = oracle/fpin-1125-join17: join15 (9124c696744, join14 plus the altaddcost tap ability choice) merged with
 // 6095b085edc (above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on the pin.
+// 9b233511947 = 686e3f82713 (above) plus the forced Hand->Library put-back placement order (StepMachine.seedHandLibraryPlacement,
+// DecisionQueue.isLibraryPlacementOrder, ScriptedController zone-change asks); die-roll code unchanged.
 // 0ca7a220bd0 = oracle/fpin-1125-join18 tip: join17 (above) merged with join16 (852c41880dd, the Speedball optional
 // ChangeTargets confirm regression test) and a2954de67aa / 0ca7a220bd0 (the no-legal-new-target guard and its review r1
 // retarget-count fix, ChangeTargetsNoCandidateTest), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
 // re-run green on the pin (run-unit-tests.sh).
+// 47dd7358b32 = oracle/fpin-1125-join19: c72762cfadea (join18 tip: 0ca7a220bd0 above plus 53635f189c, the unbound optional-untap
+// election answer) merged with 9b233511947 (the forced Hand->Library put-back, above), no textual conflicts (StepMachine/
+// DecisionQueue vs ScriptedController ChangeTargets touch different areas; merge tree 5d6202a0c7cb); die-roll code unchanged,
+// ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
 // 495ed200e9f = 0ca7a220bd0 (join18, above) plus setup player_counters (SetupBuilder.placePlayerCounters, PlayerCountersSetupTest);
 // die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
 // 19c49ba7117 = 0ca7a220bd0 plus the "pN:ability:Name" stack-ability target ref (xpt-1d873918); die-roll code unchanged.
@@ -239,7 +245,12 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
 // 18e28a7af59 = oracle/fpin-1125-join-setup-life: d38946a0fd9 merged with af167fe93c3, no textual conflicts; die-roll code unchanged.
 // 64be1e6a7fe = oracle/fpin-1125-join-setup-life-untap: 18e28a7af59 merged with f3065a4da86 (untap election); die-roll code unchanged.
-const forgeOracleDieRollRef = "64be1e6a7fe9e89c230cd66c6480f45b8091c9f5"
+// 8765c682b2f = oracle/fpin-1125-join22: d38946a0fd9 (above) merged with a8da5c69719 (join20 f3065a4da86 = 495ed200e9f plus the
+// optional-untap election answer, merged with 9b233511947), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
+// re-run green on the pin (run-unit-tests.sh).
+// 30cbb3854d2 = oracle/fpin-1125-join-setup-life-handlib: 8765c682b2f merged with af167fe93c3 (setup life written before any permanent
+// exists), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "30cbb3854d2f9433e13216cd61c52869ab686373"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
