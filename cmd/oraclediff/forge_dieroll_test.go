@@ -206,7 +206,15 @@ func TestForgeRolledDie(t *testing.T) {
 // 8b89eabc655 = e45e911953c plus the PINNED transit graveyard order (forge-oracle only: Request.java parses
 // graveyard_ends, StepMachine.orderGraveyardPin, OrderCardsTest's three pinned-transit tests); die-roll code unchanged,
 // ForcedDieRollTest re-run green on it (forge-oracle/run-unit-tests.sh, 7 tests).
-const forgeOracleDieRollRef = "8b89eabc655b78acf86ee9321a87adbebde283d3"
+// 99e8228cba = 53059b9bbf2 plus the pending-declaration offered rule (SnapshotWriter only); die-roll code unchanged,
+// ForcedDieRollTest re-run green on it (make forge-driver-tests).
+// a4380dd47f = 99e8228cba with the pending-declaration rule narrowed to a pass entering the step (SnapshotWriter/StepMachine
+// offered only); die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
+// 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (above) merged with e45e911953c (53059b9bbf2 plus the below-min target decline,
+// StepMachine.targets only); die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
+// 1656bcb2a73 = join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard order, above),
+// no textual conflicts; die-roll code unchanged, ForcedDieRollTest not re-run here (Java build is the operator's).
+const forgeOracleDieRollRef = "1656bcb2a73cd86dd8b25f33c84920fda3aaf422"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

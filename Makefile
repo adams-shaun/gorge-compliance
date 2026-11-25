@@ -777,6 +777,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
 # 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
 # fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+# 99e8228cba = 53059b9bbf2 plus the pending-declaration offered rule (xproof cluster setup:offered, a-realm-reborn, muldrotha, icetill-explorer,
+# mm-menon-the-right-hand): SnapshotWriter.offered is empty at the declare-attackers/declare-blockers step before anything is declared while the
+# active player has a legal attacker / the defender a legal blocker (CR 508.1, 509.1, 117.3a: the turn-based declaration precedes priority, and gorge's
+# checkpoint is that pending decision). Forge hands the seat priority once its callback returns without a declaration and used to list the seat's mana
+# abilities. scripts/forge-oracle-test-declare-attackers-offered.sh (make forge-driver-tests) fails on 53059b9bbf2 and passes here. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-offered-declaration.
+# a4380dd47f = 99e8228cba, narrowed: only a pass that ENTERS the declaration step offers nothing (StepMachine passes enteredStep to
+# SnapshotWriter.offered); an explicit empty attack/block is answered, so the priority after it still offers the holder's options.
+# The test script gains empty-attack/empty-block rows (red on 99e8228cba). Driver-only, die-roll code unchanged.
 # e45e911953c = 53059b9bbf2 plus the below-min target decline (xproof cluster xpt-6e2fff25, Kitsune, Dragon's Daughter
 # with p1's lone Grizzly Bears): the trigger's "exchange control of two other target creatures controlled by different
 # players" needs exactly two targets (TargetMin$ 2 | TargetMax$ 2 | TargetsWithDifferentControllers) and only one other
@@ -804,7 +813,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # and pinnedGraveyardOrderWithoutEndNamesStillMisses cover both halves; scripts/forge-oracle-test-graveyard-transit-order.sh
 # (make forge-driver-tests) pins the 17-test count. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch driver-transit-pin.
-FORGE_ORACLE_REF ?= 8b89eabc655b78acf86ee9321a87adbebde283d3
+# 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (the pending-declaration offered rule; above) merged with e45e911953c (the
+# below-min target decline; above), no textual conflicts; driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+# 1656bcb2a73 = join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard order, above), no
+# textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 1656bcb2a73cd86dd8b25f33c84920fda3aaf422
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

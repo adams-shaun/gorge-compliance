@@ -5630,6 +5630,27 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return true;
     }
 
+    /** Whether every target object of the ability is a card in a graveyard
+     * (Reclaim, Regrowth): none of them can name a spell on the stack, so a
+     * ref whose name an earlier step cast is that spell's card in the
+     * graveyard (countered or fizzled), never a stack object. False for a
+     * null or targetless ability. */
+    static boolean targetsOnlyGraveyardCards(Ability ability) {
+        if (ability == null) {
+            return false;
+        }
+        List<mage.target.Target> objects = ability.getAllSelectedTargets();
+        if (objects.isEmpty()) {
+            return false;
+        }
+        for (mage.target.Target t : objects) {
+            if (!(t instanceof TargetCard) || ((TargetCard) t).getZone() != Zone.GRAVEYARD) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /** Whether an ability has a divided-amount target (TargetAmount). */
     static boolean targetsDivided(Ability ability) {
         if (ability == null) {
@@ -7750,14 +7771,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * active, which only hands priority on, is virtual: its checkpoint rides
      * that seat's own queue and consumes nothing. XMage then drains the rest
      * of the queue at that one priority, so a later action of the same seat in
-     * the same step instance fires before the active seat has resolved the
-     * stack's top object and passed again (Helix Pinnacle, Saproling Burst:
-     * p0 activates twice, passes, p1 resolves and passes, p0 activates a
-     * third time with the first ability still on the stack, and the
-     * checkpoints of p1's two passes ran after p0's third activation). The
-     * opponent's pass that follows is what resolves the object, so the pass
-     * is real exactly when the opponent passes next and the seat has an
-     * action still queued in this step instance. */
+     * the same step instance fires before the other seat has had its say
+     * (Helix Pinnacle, Saproling Burst: p0 activates twice, passes, p1
+     * resolves and passes, p0 activates a third time with the first ability
+     * still on the stack, and the checkpoints of p1's two passes ran after
+     * p0's third activation; No More Lies: p1 casts Reach Through Mists and
+     * passes, p0 answers with a counterspell, and p1's later Consider fired
+     * before p0's response). The pass is real exactly when the step that
+     * follows belongs to another seat -- its pass resolves the top object, or
+     * its cast, activation or land play answers the pass (CR 117.3c/117.3d:
+     * after the seat passes, the other seat holds priority and may act) --
+     * and the seat has an action still queued in this step instance. */
     static boolean passHandsOffBeforeLaterAction(JsonArray steps, int index, int activeSeat, int seats) {
         if (!isPassRun(steps, index)) {
             return false;
@@ -7768,7 +7792,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || passEntersNewStep(steps, index, seats)) {
             return false;
         }
-        if (!isOp(steps, index + 1, "pass") || seatOfStep(steps, index + 1) == seat) {
+        if (index + 1 >= steps.size() || seatOfStep(steps, index + 1) == seat) {
             return false;
         }
         for (int j = index + 1; j < steps.size(); j++) {
@@ -8612,12 +8636,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     cast.add(cardName);
                     return;
                 } else if (tg.size() == 1 && cast.contains(castSpelling(refName(tg.get(0))))) {
-                    // Targeting a spell cast by an earlier step: wait for it
-                    // on the stack. cast holds cast-command names and the
-                    // target is a scenario ref; the setup alias names the
-                    // card in hand, not the spell, so target by name.
+                    // Targeting a spell cast by an earlier step. cast holds
+                    // cast-command names and the target is a scenario ref;
+                    // the setup alias names the card in hand, not the spell,
+                    // so a stack target is named, not aliased.
                     String spell = castSpelling(refName(tg.get(0)));
-                    castSpell(turn, phase, p, castObject, spell, spell);
+                    if (targetsOnlyGraveyardCards(castAbility)) {
+                        // A spell that can only target a graveyard card
+                        // (Reclaim) names the card of a spell that has left
+                        // the stack (countered, say), which cast cannot see
+                        // (dropLastCast forgets only the stack's top). The
+                        // card is in the graveyard once the spell is gone, so
+                        // hold the cast until then: at the priority before
+                        // that XMage has no legal target and would fail the
+                        // command ("Can't find ability to activate").
+                        castSpell(turn, phase, p, castObject, targetName(tg.get(0)), spell,
+                                StackClause.WHILE_NOT_ON_STACK);
+                    } else {
+                        // Wait for it on the stack.
+                        castSpell(turn, phase, p, castObject, spell, spell);
+                    }
                 } else if (tg.size() == 1 && loneTargetNeedsQueue(castAbility)) {
                     // One card or permanent target (a lone player ref and a
                     // spell on the stack took their own routes above) for a
@@ -10267,7 +10305,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (pr == null) {
             return out;
         }
-        for (Ability a : pr.getPlayable(g, true)) {
+        List<? extends Ability> playable = playableKeepingDuplicates(pr, g);
+        for (Ability a : playable) {
             mage.MageObject src = g.getObject(a.getSourceId());
             if (src == null) {
                 continue;
@@ -10285,6 +10324,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
             out.add(o);
         }
         return out;
+    }
+
+    /**
+     * What {@code pr} may play, with identical abilities kept. The public
+     * {@code getPlayable(g, true)} hides an ability whose rule text an earlier
+     * object already listed ("first instance only", an AI convenience), so
+     * identical mana abilities on different sources -- four Plains beside
+     * Adagia's own "{T}: Add {W}" -- would list one source and drop the rest.
+     * Each source's ability is its own offer (CR 605.3a), so go to the
+     * PlayerImpl behind the TestPlayer wrapper and ask for duplicates kept.
+     */
+    static List<? extends Ability> playableKeepingDuplicates(Player pr, Game g) {
+        Player impl = pr instanceof TestPlayer ? ((TestPlayer) pr).getComputerPlayer() : pr;
+        if (impl instanceof mage.players.PlayerImpl) {
+            return ((mage.players.PlayerImpl) impl).getPlayable(g, true, mage.constants.Zone.ALL, false);
+        }
+        return pr.getPlayable(g, true);
     }
 
     /** The scenario ref of an offered ability's source: the setup alias of
