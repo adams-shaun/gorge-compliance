@@ -171,13 +171,67 @@ func counterCostAmountWord(w string) bool {
 	return true
 }
 
+// removeCounterCostPick reports one decision that is a unit of an activate
+// step's any-counter source-removal cost. The engine's wildcard SubCounter arm
+// (cast_subcounter.go wildcardCounterAsk) poses one KChoose per removed unit
+// with option kind "subcounter", no ResumeKind, and the label
+// "<source> (<kind> counter)"; its filtered "from among" twin shares the
+// option kind but prints a bare permanent name, so the label's parenthesised
+// kind is what selects the source-anchored cost. The picked kind and, when
+// recorded, the object ref must name the ask's own source: a second
+// SubCounter cost in the same step must stay on the generic route. This is
+// deliberately NOT removeCounterKindDecision: the effect fold's
+// "counter_kind" resume role is never what a cost pick carries.
+func removeCounterCostPick(d rules.OracleDecision, c removeCounterCostAsk, kinds []string) bool {
+	if d.Kind != "choose_n" || len(d.PickKinds) != 1 || d.PickKinds[0] != "subcounter" {
+		return false
+	}
+	if len(d.Picks) != 1 {
+		return false
+	}
+	kind, ok := counterKindFromPickLabel(d.Picks[0])
+	if !ok || !containsCounterKind(kinds, canonicalCounterKind(kind)) {
+		return false
+	}
+	if len(d.PickRefs) > 0 && d.PickRefs[0] != "" && d.PickRefs[0] != c.Ref {
+		return false
+	}
+	return true
+}
+
+// counterKindFromPickLabel extracts the engine counter kind from a SubCounter
+// option label ("<permanent name> (<kind> counter)", cast_subcounter.go's
+// wildcardCounterAsk and its mana-cost twin). The parenthesised kind is the
+// only place the option carries it: the label is what the generic choice route
+// would otherwise script verbatim, which is why the cost's pick has to route
+// here instead.
+func counterKindFromPickLabel(s string) (string, bool) {
+	s = strings.TrimSpace(s)
+	const suffix = " counter)"
+	if !strings.HasSuffix(s, suffix) {
+		return "", false
+	}
+	open := strings.LastIndex(s, " (")
+	if open < 0 {
+		return "", false
+	}
+	kind := strings.TrimSpace(s[open+2 : len(s)-len(suffix)])
+	if kind == "" {
+		return "", false
+	}
+	return kind, true
+}
+
 // foldRemoveCounterCostAnswers returns, per activate step, the amount answers
 // XMage's RemoveCountersSourceCost multi-amount reads, and the set of
-// counter-kind decision indices it owns. The amounts are the source's counter
+// subcounter decision indices it owns. The amounts are the source's counter
 // delta across the step (a kind left at zero still gets its explicit X=0); the
 // message order is XMage's HashMap order (counterKindMessageOrder), using the
 // step's counter-kind picks to recover the engine's counter order for
-// same-bucket ties.
+// same-bucket ties. A lone counter kind poses no engine decision, so its
+// answers are emitted by the caller's step-order fallback; a multi-kind source
+// does pose picks, which this owns so the raw label never reaches XMage's
+// choice queue.
 func foldRemoveCounterCostAnswers(ds []rules.OracleDecision, snaps []rules.OracleSnapshot, costs []removeCounterCostAsk) (map[int][]XAnswer, map[int]bool) {
 	answers := map[int][]XAnswer{}
 	owned := map[int]bool{}
@@ -211,7 +265,7 @@ func foldRemoveCounterCostAnswers(ds []rules.OracleDecision, snaps []rules.Oracl
 		var run []rules.OracleDecision
 		var picked []int
 		for i, d := range ds {
-			if d.Step == c.Step && d.Seat == c.Seat && removeCounterKindDecision(d) {
+			if d.Step == c.Step && d.Seat == c.Seat && removeCounterCostPick(d, c, before) {
 				run = append(run, d)
 				picked = append(picked, i)
 			}
@@ -322,8 +376,14 @@ func foldRemoveCounterKindAnswers(ds []rules.OracleDecision, snaps []rules.Oracl
 }
 
 // canonicalCounterKind normalizes a gorge counter kind the way the runner's
-// normCounter does, so a pick label and a snapshot key compare.
+// normCounter does, so a pick label and a snapshot key compare. A SubCounter
+// option label ("<permanent> (<kind> counter)") carries its kind in
+// parentheses; unwrap it first so a cost pick and an effect pick compare the
+// same way.
 func canonicalCounterKind(s string) string {
+	if kind, ok := counterKindFromPickLabel(s); ok {
+		s = kind
+	}
 	t := strings.ToUpper(strings.ReplaceAll(strings.TrimSpace(s), " ", ""))
 	switch t {
 	case "+1/+1", "P1P1":
