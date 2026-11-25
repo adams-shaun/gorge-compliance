@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9a708f82-a4a1-47f9-8ff3-65608269eebd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:elvish-hydromancer:cast:s1,f:xs:XP:elvish-hydromancer:cast:s1	-	-	-	d864b561c9cb	-	717623292100	-	-	2026-11-24	xproof
 9a708f82-a4a1-47f9-8ff3-65608269eebd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-hydromancer:f0t0:s1,f:xs:XP:elvish-hydromancer:f0t0:s1	-	-	-	d864b561c9cb	-	717623292100	-	-	2026-11-24	xproof
 9a71aa6c-2d5f-468d-b588-252fae37ccbb	cast	cast-resolve	agreed	-	X	scen	1	0	Captain Michael Burnham/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9a71aa6c-2d5f-468d-b588-252fae37ccbb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+9a71aa6c-2d5f-468d-b588-252fae37ccbb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:captain-michael-burnham:f0t0:s1,f:xs:XP:captain-michael-burnham:f0t0:s1	-	-	-	23c4009444b0	-	8c3d5b7212a1	-	-	2026-11-25	xproof
 9a74a1dd-c36f-4900-b835-fc39dd725bde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a9664d7-2299-43dc-89b6-d74fe69e0e4a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:custody-battle:cast:s1,f:xs:XP:custody-battle:cast:s1	-	-	-	fc71ca68c5ac	-	2ee90a6cb725	-	-	2026-11-24	xproof
 9a983666-376b-48a8-9f82-8d041d32ae93	cast	cast-resolve	agreed	-	FX	scen	2	0	Fire Nation Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:the-shire:f0a0:s1,f:xs:XP:the-shire:f0a0:s1	-	-	-	ae86f6029288	-	6dddc8f9a387	-	-	2026-11-24	xproof
 9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9abf9a0e-8e7d-406b-a01d-d4870b30134e	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-shire:land:s1,f:xs:XP:the-shire:land:s1	-	-	-	ae86f6029288	-	6dddc8f9a387	-	-	2026-11-24	xproof
-9ac20f38-adc4-40a9-95c9-bbdc689b928b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+9ac20f38-adc4-40a9-95c9-bbdc689b928b	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Brazen Bluff"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nettle-guard:cast:s1,f:xs:XP:nettle-guard:cast:s1	-	-	-	3aa6ded33acb	-	aae6aad9945e	-	-	2026-11-25	xproof
 9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:nettle-guard:f0a0:s1,f:xs:XP:nettle-guard:f0a0:s1	-	-	-	3aa6ded33acb	-	aae6aad9945e	-	-	2026-11-25	xproof
 9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:nettle-guard:f0t0:s1,f:xs:XP:nettle-guard:f0t0:s1	-	-	-	3aa6ded33acb	-	aae6aad9945e	-	-	2026-11-25	xproof
@@ -133,9 +133,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ad12c75-e97d-404a-bfa9-26ff1d0bb506	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:icewind-stalwart:f0t0:s1,f:xs:XP:icewind-stalwart:f0t0:s1	-	-	-	8c0bd19283bb	-	d40fe098365e	-	-	2026-11-24	xproof
 9ad4f730-a18e-4a7c-a468-a926c718c741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ad4f730-a18e-4a7c-a468-a926c718c741	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ad730b5-8950-4215-9319-387e2970dd22	cast	cast-resolve	agreed	-	X	scen	1	0	Exemplar of Light/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ad730b5-8950-4215-9319-387e2970dd22	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Exemplar of Light/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ad730b5-8950-4215-9319-387e2970dd22	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exemplar of Light/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9ad730b5-8950-4215-9319-387e2970dd22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exemplar-of-light:cast:s1,f:xs:XP:exemplar-of-light:cast:s1	-	-	-	23c4009444b0	-	47b28b697ca9	-	-	2026-11-25	xproof
+9ad730b5-8950-4215-9319-387e2970dd22	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:exemplar-of-light:combat0.attack:s1,f:xs:XP:exemplar-of-light:combat0.attack:s1	-	-	-	23c4009444b0	-	47b28b697ca9	-	-	2026-11-25	xproof
+9ad730b5-8950-4215-9319-387e2970dd22	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:exemplar-of-light:combat0.block:s1,f:xs:XP:exemplar-of-light:combat0.block:s1	-	-	-	23c4009444b0	-	47b28b697ca9	-	-	2026-11-25	xproof
 9ad730b5-8950-4215-9319-387e2970dd22	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Exemplar of Light/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad730b5-8950-4215-9319-387e2970dd22	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Exemplar of Light/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad903c5-1528-44d6-b4b6-f05a2399d91f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:quickbeam-upstart-ent:cast:s1,f:xs:XP:quickbeam-upstart-ent:cast:s1	-	-	-	ae86f6029288	-	625f22947e04	-	-	2026-11-24	xproof

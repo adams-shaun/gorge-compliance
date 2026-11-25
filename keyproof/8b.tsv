@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b2367b3-3a8d-442f-8d58-6e4c03fa5a46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b2367b3-3a8d-442f-8d58-6e4c03fa5a46	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b239262-c392-4ec6-9ae1-8b4a076e4bf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Erica Ortegas, Plucky Pilot	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 8b25f353-0798-4a03-a928-6a701a919468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b25f353-0798-4a03-a928-6a701a919468	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:will-o-the-wisp:f0a0:s1,f:xs:XP:will-o-the-wisp:f0a0:s1	-	-	-	ae86f6029288	-	00ac92194ba9	-	-	2026-11-24	xproof
 8b641cd3-bb08-4f2e-9dad-24f58a9c32e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b69da01-3ba5-4a61-9e26-e879b6d8b63e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b6d37a7-a88e-45dd-b45e-642a44caaf05	cast	cast-resolve	agreed	-	X	scen	1	0	Resurrected Cultist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8b6d37a7-a88e-45dd-b45e-642a44caaf05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:resurrected-cultist:cast:s1,f:xs:XP:resurrected-cultist:cast:s1	-	-	-	23c4009444b0	-	f3180dd80826	-	-	2026-11-25	xproof
 8b6d37a7-a88e-45dd-b45e-642a44caaf05	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Resurrected Cultist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b6e2feb-9e8f-4912-ada0-1614502d9813	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b6e2feb-9e8f-4912-ada0-1614502d9813	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:makeshift-battalion:f0t0:s1,f:xs:XP:makeshift-battalion:f0t0:s1	-	-	-	3aa6ded33acb	-	c2231b28145f	-	-	2026-11-25	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:izzet-keyrune:f0a1:s1,f:xs:XP:izzet-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:izzet-keyrune:f0a1:s1,f:xs:XP:izzet-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof
 8b8d4ae0-0d18-4f06-a883-0edff494d06b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orcish-settlers:cast:s1,f:xs:XP:orcish-settlers:cast:s1	-	-	-	8c0bd19283bb	-	84734566d43a	-	-	2026-11-24	xproof
-8b8d4ae0-0d18-4f06-a883-0edff494d06b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b8d4ae0-0d18-4f06-a883-0edff494d06b	f0/a0	Destroy	agreed	-	F	start	1	0	f:xs:XP:orcish-settlers:f0a0:s2	-	-	-	23c4009444b0	-	84734566d43a	-	-	2026-11-25	xproof
 8b9043d3-a1c6-4f49-9c49-ef78bbfbd4ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b9043d3-a1c6-4f49-9c49-ef78bbfbd4ac	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b9119b0-9948-497f-aa92-2879d07bed1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

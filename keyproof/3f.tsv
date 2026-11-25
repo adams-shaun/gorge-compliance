@@ -1,9 +1,9 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-3f008b57-6471-4785-9571-3b90193da7e2	cast	cast-resolve	agreed	-	X	scen	1	0	Ashroot Animist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f008b57-6471-4785-9571-3b90193da7e2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ashroot Animist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f008b57-6471-4785-9571-3b90193da7e2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ashroot Animist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f008b57-6471-4785-9571-3b90193da7e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ashroot Animist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3f008b57-6471-4785-9571-3b90193da7e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashroot-animist:cast:s1,f:xs:XP:ashroot-animist:cast:s1	-	-	-	23c4009444b0	-	0d358bbbdea8	-	-	2026-11-25	xproof
+3f008b57-6471-4785-9571-3b90193da7e2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ashroot-animist:combat0.attack:s1,f:xs:XP:ashroot-animist:combat0.attack:s1	-	-	-	23c4009444b0	-	0d358bbbdea8	-	-	2026-11-25	xproof
+3f008b57-6471-4785-9571-3b90193da7e2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ashroot-animist:combat0.block:s1,f:xs:XP:ashroot-animist:combat0.block:s1	-	-	-	23c4009444b0	-	0d358bbbdea8	-	-	2026-11-25	xproof
+3f008b57-6471-4785-9571-3b90193da7e2	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:ashroot-animist:combat0.attack:s1,f:xs:XP:ashroot-animist:combat0.attack:s1	-	-	-	23c4009444b0	-	0d358bbbdea8	-	-	2026-11-25	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	cast	cast-resolve	agreed	-	FX	scen	2	0	Tangled Colony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tangled-colony:combat0.attack:s1,f:xs:XP:tangled-colony:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8dd1e15e383d	-	-	2026-11-25	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tangled Colony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,8 +157,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fb9f0d9-6514-4005-b65a-7929f7c4df06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scour-all-possibilities:cast:s1,f:xs:XP:scour-all-possibilities:cast:s1	-	-	-	d864b561c9cb	-	757a5d41f28a	-	-	2026-11-24	xproof
 3fbe46fa-88da-439a-994e-c8f1791332a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undergrowth-recon:f0t0:s1,f:xs:XP:undergrowth-recon:f0t0:s1	-	-	-	3aa6ded33acb	-	40d400ecfea2	-	-	2026-11-25	xproof
 3fbe46fa-88da-439a-994e-c8f1791332a8	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:undergrowth-recon:f0t0:s1,f:xs:XP:undergrowth-recon:f0t0:s1	-	-	-	3aa6ded33acb	-	40d400ecfea2	-	-	2026-11-25	xproof
-3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f	cast	cast-resolve	agreed	-	X	scen	1	0	Razorkin Hordecaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Razorkin Hordecaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razorkin-hordecaller:cast:s1,f:xs:XP:razorkin-hordecaller:cast:s1	-	-	-	23c4009444b0	-	a35d7b4bf68b	-	-	2026-11-25	xproof
+3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f	f0/t0	AttackersDeclared	agreed	-	FX	start	4	0	x:xs:XP:razorkin-hordecaller:cast:s1,f:xs:XP:razorkin-hordecaller:cast:s1	-	-	-	23c4009444b0	-	a35d7b4bf68b	-	-	2026-11-25	xproof
 3fc640dd-6292-4d36-82fb-bd366bc00bd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fcd1432-66d0-40e1-85ef-b57a6fa94b7c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	North Pole Gates/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fcd1432-66d0-40e1-85ef-b57a6fa94b7c	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	North Pole Gates/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -169,8 +169,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fd23519-ef40-4c84-9407-2626d0c0d792	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3fd25479-b65c-48f7-bb74-95d49af65ac1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fd2651d-89fb-4bd1-af4a-f7eae7ef9fd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3fdba8ee-6dfe-480d-b84a-43922229d9b4	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-3fdba8ee-6dfe-480d-b84a-43922229d9b4	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3fdba8ee-6dfe-480d-b84a-43922229d9b4	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Exploratory Mission"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+3fdba8ee-6dfe-480d-b84a-43922229d9b4	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Exploratory Mission"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 3fdbe867-63cd-42c5-9843-46b0992b9628	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:commander-mustard:cast:s1,f:xs:XP:commander-mustard:cast:s1	-	-	-	8c0bd19283bb	-	55616e784b32	-	-	2026-11-24	xproof
 3fdbe867-63cd-42c5-9843-46b0992b9628	f0/a0	AnimateAll	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	55616e784b32	-	-	2026-11-24	xproof
 3fdc082b-1abf-4715-9d66-105981c1f989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

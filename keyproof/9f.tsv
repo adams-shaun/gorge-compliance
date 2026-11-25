@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9f679093-86a0-4211-8491-de1f6d81c483	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flight-spellbomb:f0t0:s1,f:xs:XP:flight-spellbomb:f0t0:s1	-	-	-	d864b561c9cb	-	c01456f0ac74	-	-	2026-11-24	xproof
 9f693483-f4df-497a-a6c7-fc269fc60ea8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unexplained-vision:cast:s1,f:xs:XP:unexplained-vision:cast:s1	-	-	-	ae86f6029288	-	778ca1253607	-	-	2026-11-24	xproof
 9f6d6e90-7462-46e5-bf2f-725b4badc394	cast	cast-resolve	agreed	-	X	scen	1	0	Gathering Stone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9f6d6e90-7462-46e5-bf2f-725b4badc394	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
+9f6d6e90-7462-46e5-bf2f-725b4badc394	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 9f6d6e90-7462-46e5-bf2f-725b4badc394	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gathering Stone/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9f6d6e90-7462-46e5-bf2f-725b4badc394	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gathering Stone/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9f6ea9fe-eee5-4dca-a34e-c66d3e218716	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fbab5bc-c651-46dc-89b6-0bcfeadb3891	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fbcae6e-5523-47a3-b0ff-ab7a8bb72822	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	84f13d30cf5b	-	-	2026-11-24	xproof
 9fc49a69-f80c-478f-b237-66f155c0c09a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cybernetic-specialist:f0t0:s1,f:xs:XP:cybernetic-specialist:f0t0:s1	-	-	-	25696bf19d5b	-	8b1221a0310c	-	-	2026-11-24	xproof
-9fc49a69-f80c-478f-b237-66f155c0c09a	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+9fc49a69-f80c-478f-b237-66f155c0c09a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:cybernetic-specialist:f0a0:s1,f:xs:XP:cybernetic-specialist:f0a0:s1	-	-	-	23c4009444b0	-	8b1221a0310c	-	-	2026-11-25	xproof
 9fc49a69-f80c-478f-b237-66f155c0c09a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cybernetic-specialist:f0t0:s1,f:xs:XP:cybernetic-specialist:f0t0:s1	-	-	-	25696bf19d5b	-	8b1221a0310c	-	-	2026-11-24	xproof
 9fc6e1db-cf09-4b8c-be4f-bb02ffe7a188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fc6e1db-cf09-4b8c-be4f-bb02ffe7a188	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

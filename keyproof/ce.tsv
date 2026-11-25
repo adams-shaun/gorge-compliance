@@ -1,9 +1,9 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-ce000c0b-db42-4569-855f-f4eae0431c09	cast	cast-resolve	agreed	-	X	scen	1	0	Ripchain Razorkin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ce000c0b-db42-4569-855f-f4eae0431c09	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ripchain Razorkin/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ce000c0b-db42-4569-855f-f4eae0431c09	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ripchain Razorkin/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ce000c0b-db42-4569-855f-f4eae0431c09	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ripchain Razorkin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ce000c0b-db42-4569-855f-f4eae0431c09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ripchain-razorkin:cast:s1,f:xs:XP:ripchain-razorkin:cast:s1	-	-	-	23c4009444b0	-	946b95b230c0	-	-	2026-11-25	xproof
+ce000c0b-db42-4569-855f-f4eae0431c09	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ripchain-razorkin:combat0.attack:s1,f:xs:XP:ripchain-razorkin:combat0.attack:s1	-	-	-	23c4009444b0	-	946b95b230c0	-	-	2026-11-25	xproof
+ce000c0b-db42-4569-855f-f4eae0431c09	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ripchain-razorkin:combat0.block:s1,f:xs:XP:ripchain-razorkin:combat0.block:s1	-	-	-	23c4009444b0	-	946b95b230c0	-	-	2026-11-25	xproof
+ce000c0b-db42-4569-855f-f4eae0431c09	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:ripchain-razorkin:f0a0:s1,f:xs:XP:ripchain-razorkin:f0a0:s1	-	-	-	23c4009444b0	-	946b95b230c0	-	-	2026-11-25	xproof
 ce009bd4-5ffb-46a4-a9dd-b9c060926467	cast	cast-resolve	agreed	-	FX	scen	2	0	Moonlit Lamenter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ce009bd4-5ffb-46a4-a9dd-b9c060926467	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Moonlit Lamenter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ce00e0d0-c6f4-4fe8-97c3-7279b06d8fdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -48,8 +48,8 @@ ce36a450-68a6-4519-a9f0-0e3b772054eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ce4570eb-f637-45d1-afbc-f11357c09bf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce4570eb-f637-45d1-afbc-f11357c09bf9	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PJ21.json	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 ce45d6bd-74e3-401b-983d-028d3fb942da	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:billowing-shriekmass:f0t0:s2,f:xs:XP:billowing-shriekmass:f0t0:s2	-	-	-	e07cf3a05ba5	-	454b22330431	-	-	2026-11-24	xproof
-ce45d6bd-74e3-401b-983d-028d3fb942da	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Billowing Shriekmass/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ce45d6bd-74e3-401b-983d-028d3fb942da	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Billowing Shriekmass/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ce45d6bd-74e3-401b-983d-028d3fb942da	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:billowing-shriekmass:combat0.attack:s1,f:xs:XP:billowing-shriekmass:combat0.attack:s1	-	-	-	23c4009444b0	-	454b22330431	-	-	2026-11-25	xproof
+ce45d6bd-74e3-401b-983d-028d3fb942da	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:billowing-shriekmass:combat0.block:s1,f:xs:XP:billowing-shriekmass:combat0.block:s1	-	-	-	23c4009444b0	-	454b22330431	-	-	2026-11-25	xproof
 ce45d6bd-74e3-401b-983d-028d3fb942da	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:billowing-shriekmass:f0t0:s2,f:xs:XP:billowing-shriekmass:f0t0:s2	-	-	-	e07cf3a05ba5	-	454b22330431	-	-	2026-11-24	xproof
 ce45d6bd-74e3-401b-983d-028d3fb942da	static#0.0	static#0.0	agreed	-	X	scen	1	0	Billowing Shriekmass/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ce4d714c-c22b-47be-a372-a3139c4e5b1c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:endless-wurm:f0t0:s1	-	-	-	3aa6ded33acb	-	41b54209dda6	-	-	2026-11-25	xproof

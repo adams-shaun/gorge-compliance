@@ -96,8 +96,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a75ef46-c5ae-4b1a-a681-d439b01f6731	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a782bf9-4051-4613-8852-33b0d85a0edd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a782bf9-4051-4613-8852-33b0d85a0edd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:famished-paladin:cast:s1,f:xs:XP:famished-paladin:cast:s1	-	-	-	d864b561c9cb	-	1cb1c1fd8b1f	-	-	2026-11-24	xproof
-4a7a55a3-568c-4c31-9460-5b94dc0121d8	cast	cast-resolve	agreed	-	X	scen	1	0	Hungry Ghoul/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a7a55a3-568c-4c31-9460-5b94dc0121d8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hungry Ghoul/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4a7a55a3-568c-4c31-9460-5b94dc0121d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hungry-ghoul:cast:s1,f:xs:XP:hungry-ghoul:cast:s1	-	-	-	23c4009444b0	-	0e8b9e0c5620	-	-	2026-11-25	xproof
+4a7a55a3-568c-4c31-9460-5b94dc0121d8	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:hungry-ghoul:f0a0:s1,f:xs:XP:hungry-ghoul:f0a0:s1	-	-	-	23c4009444b0	-	0e8b9e0c5620	-	-	2026-11-25	xproof
 4a7a5ea9-b633-459f-bcd4-40de53afce0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swarm-intelligence:cast:s1,f:xs:XP:swarm-intelligence:cast:s1	-	-	-	d864b561c9cb	-	1eca4fc545a5	-	-	2026-11-24	xproof
 4a7a5ea9-b633-459f-bcd4-40de53afce0e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4a7c7ecc-df72-4da0-af35-dd0af58ec02c	cast	cast-resolve	agreed	-	X	scen	1	0	Mister Hyde, Monster Within/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

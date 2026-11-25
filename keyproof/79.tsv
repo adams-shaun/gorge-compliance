@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79085dea-8daa-41c0-a975-61e3e6da2e26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79085dea-8daa-41c0-a975-61e3e6da2e26	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 79090b00-d920-4134-a838-fb434cf3ee4d	cast	cast-resolve	agreed	-	X	scen	1	0	Swat Away/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-79090b00-d920-4134-a838-fb434cf3ee4d	static#0.0	static#0.0	owed	refused:no-generator:static	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
+79090b00-d920-4134-a838-fb434cf3ee4d	static#0.0	static#0.0	owed	refused:no-generator:static:ReduceCost	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 790d3ee2-8b93-464c-9b16-afe62db0048c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 790e3c9e-7d94-43f7-bc14-d83c7d4c889e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79134f5e-94db-4a40-ba75-2569b839cf35	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79bfef02-3586-424a-aff9-a6ec0d4f1135	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 79c90a68-1c31-4e16-be53-1304132da80f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigiled-sentinel:f0t0:s1,f:xs:XP:sigiled-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7c49f7385265	-	-	2026-11-24	xproof
 79c90a68-1c31-4e16-be53-1304132da80f	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:sigiled-sentinel:f0t0:s1,f:xs:XP:sigiled-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	7c49f7385265	-	-	2026-11-24	xproof
-79cd09e8-d738-47c0-9473-b6281bec6935	cast	cast-resolve	agreed	-	X	scen	1	0	Goblin Surprise/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+79cd09e8-d738-47c0-9473-b6281bec6935	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-surprise:cast:s1,f:xs:XP:goblin-surprise:cast:s1	-	-	-	23c4009444b0	-	5ac685db9a70	-	-	2026-11-25	xproof
 79cf9c52-56e0-4237-a595-ec07824e5eed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79cf9c52-56e0-4237-a595-ec07824e5eed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79cf9c52-56e0-4237-a595-ec07824e5eed	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

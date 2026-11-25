@@ -108,10 +108,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c95b7cf-be4d-4961-9073-3e39487492c8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:plagon-lord-of-the-beach:cast:s2,f:xs:XP:plagon-lord-of-the-beach:cast:s2	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
-1c995c80-3301-409b-822b-9297aa260823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ureni-the-song-unending:f0t0:s1,f:xs:XP:ureni-the-song-unending:f0t0:s1	-	-	-	23b491658465	-	508042ff7e60	-	-	2026-11-24	xproof
+1c995c80-3301-409b-822b-9297aa260823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ureni-the-song-unending:f0t0:s1,f:xs:XP:ureni-the-song-unending:f0t0:s1	-	-	-	23c4009444b0	-	508042ff7e60	-	-	2026-11-25	xproof
 1c995c80-3301-409b-822b-9297aa260823	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ureni, the Song Unending/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c995c80-3301-409b-822b-9297aa260823	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ureni, the Song Unending/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1c995c80-3301-409b-822b-9297aa260823	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+1c995c80-3301-409b-822b-9297aa260823	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ureni-the-song-unending:f0t0:s1,f:xs:XP:ureni-the-song-unending:f0t0:s1	-	-	-	23c4009444b0	-	508042ff7e60	-	-	2026-11-25	xproof
 1c99a5cc-d974-4a4b-a03b-a78bfe738ed7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c99a5cc-d974-4a4b-a03b-a78bfe738ed7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:charging-griffin:f0t0:s1,f:xs:XP:charging-griffin:f0t0:s1	-	-	-	d864b561c9cb	-	a096ed154d93	-	-	2026-11-24	xproof
 1c99c9d9-3ea8-43bc-96d7-4dea12770b5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,10 +126,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1caa7fa2-a881-4a65-a87e-12a974520c83	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grim-servant:cast:s1,f:xs:XP:grim-servant:cast:s1	-	-	-	ae86f6029288	-	f10251fdcf30	-	-	2026-11-24	xproof
 1caa8c8a-ff45-4eee-a834-6e5e1fb54721	cast	cast-resolve	agreed	-	FX	scen	2	0	Sugar Coat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1caa8c8a-ff45-4eee-a834-6e5e1fb54721	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sugar Coat/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	cast	cast-resolve	agreed	-	X	scen	1	0	Firespitter Whelp/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Firespitter Whelp/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Firespitter Whelp/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Firespitter Whelp/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firespitter-whelp:cast:s1,f:xs:XP:firespitter-whelp:cast:s1	-	-	-	23c4009444b0	-	d4af2bc714d9	-	-	2026-11-25	xproof
+1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:firespitter-whelp:combat0.attack:s1,f:xs:XP:firespitter-whelp:combat0.attack:s1	-	-	-	23c4009444b0	-	d4af2bc714d9	-	-	2026-11-25	xproof
+1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:firespitter-whelp:combat0.block:s1,f:xs:XP:firespitter-whelp:combat0.block:s1	-	-	-	23c4009444b0	-	d4af2bc714d9	-	-	2026-11-25	xproof
+1cad92ce-55c8-4b78-8d8c-56645ef8e6ee	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:firespitter-whelp:f0t0:s1,f:xs:XP:firespitter-whelp:f0t0:s1	-	-	-	23c4009444b0	-	d4af2bc714d9	-	-	2026-11-25	xproof
 1cadb1e1-19b6-4ce5-8eb5-7851cec7dfa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cadb1e1-19b6-4ce5-8eb5-7851cec7dfa3	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1cae5752-b4af-4a8f-8c8c-2493e163083b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

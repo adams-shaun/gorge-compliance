@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e0d40a6-e0a4-4fb2-be72-314f7d66b7eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e0d40a6-e0a4-4fb2-be72-314f7d66b7eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:highland-game:f0t0:s1,f:xs:XP:highland-game:f0t0:s1	-	-	-	d864b561c9cb	-	75970a551e4e	-	-	2026-11-24	xproof
 0e0e15d9-bd29-495a-9975-d1bd2ebb4bff	cast	cast-resolve	agreed	-	X	scen	1	0	Battle-Scarred Survivalist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e0e15d9-bd29-495a-9975-d1bd2ebb4bff	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+0e0e15d9-bd29-495a-9975-d1bd2ebb4bff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:battle-scarred-survivalist:f0t0:s1,f:xs:XP:battle-scarred-survivalist:f0t0:s1	-	-	-	23c4009444b0	-	7cd6826c59d7	-	-	2026-11-25	xproof
 0e11792b-7fe5-4208-aa0b-e5d09b2b65fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e1267d4-0155-4503-829a-03264c8d14a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e1267d4-0155-4503-829a-03264c8d14a0	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -58,8 +58,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e564f52-94fb-4c44-926f-0eebedc7d4c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cached-defenses:cast:s1,f:xs:XP:cached-defenses:cast:s1	-	-	-	d864b561c9cb	-	36dd31abef04	-	-	2026-11-24	xproof
 0e5a5cee-d068-42cf-bf58-8e1360720be0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:cast:s1,f:xs:XP:fireslinger:cast:s1	-	-	-	8c0bd19283bb	-	91f685ad30e3	-	-	2026-11-24	xproof
 0e5a5cee-d068-42cf-bf58-8e1360720be0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:f0a0:s1,f:xs:XP:fireslinger:f0a0:s1	-	-	-	8c0bd19283bb	-	91f685ad30e3	-	-	2026-11-24	xproof
-0e5b40dc-debf-48a1-8398-5ea00b5a5166	cast	cast-resolve	agreed	-	X	scen	1	0	Sazh Katzroy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+0e5b40dc-debf-48a1-8398-5ea00b5a5166	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t0:s1,f:xs:XP:sazh-katzroy:f0t0:s1	-	-	-	23c4009444b0	-	b1c03af8493d	-	-	2026-11-25	xproof
+0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t0:s1,f:xs:XP:sazh-katzroy:f0t0:s1	-	-	-	23c4009444b0	-	b1c03af8493d	-	-	2026-11-25	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sazh Katzroy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	cast	cast-resolve	agreed	-	X	scen	1	0	Futurist Forge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Futurist Forge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -153,8 +153,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ec88e35-191b-411b-9eb0-2dfef7ae4174	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:belonging:f0t0:s1,f:xs:XP:belonging:f0t0:s1	-	-	-	8c0bd19283bb	-	ed1bd2f3916d	-	-	2026-11-24	xproof
 0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:belonging:f0t0:s1,f:xs:XP:belonging:f0t0:s1	-	-	-	8c0bd19283bb	-	ed1bd2f3916d	-	-	2026-11-24	xproof
-0ecb35b3-5bd1-4467-a4a3-ce468023ced2	cast	cast-resolve	agreed	-	X	scen	1	0	Blossombind/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-0ecb35b3-5bd1-4467-a4a3-ce468023ced2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+0ecb35b3-5bd1-4467-a4a3-ce468023ced2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blossombind:f0t0:s1,f:xs:XP:blossombind:f0t0:s1	-	-	-	23c4009444b0	-	73b4b878164f	-	-	2026-11-25	xproof
+0ecb35b3-5bd1-4467-a4a3-ce468023ced2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blossombind:f0t0:s1,f:xs:XP:blossombind:f0t0:s1	-	-	-	23c4009444b0	-	73b4b878164f	-	-	2026-11-25	xproof
 0ecb35b3-5bd1-4467-a4a3-ce468023ced2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Blossombind/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0ecd4493-dfb4-4d56-a90e-08b74b474f39	cast	cast-resolve	agreed	-	X	scen	1	0	Tenured Concocter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ecd4493-dfb4-4d56-a90e-08b74b474f39	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tenured Concocter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

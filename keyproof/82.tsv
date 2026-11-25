@@ -19,8 +19,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 821ce349-5379-4415-89e2-224e21dda24b	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-fiend:f0a1:s1,f:xs:XP:phantasmal-fiend:f0a1:s1	-	-	-	ea3140b6974b	-	1a7123231bfc	-	-	2026-11-24	xproof
 821e8648-222c-4b33-a8bd-e8bfff7dcd9e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:quistis-trepe:f0t0:s2,f:xs:XP:quistis-trepe:f0t0:s2	-	-	-	267e485f6204	-	9f9f5d67205f	-	-	2026-11-24	xproof
 821e8648-222c-4b33-a8bd-e8bfff7dcd9e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:quistis-trepe:f0t0:s2,f:xs:XP:quistis-trepe:f0t0:s2	-	-	-	267e485f6204	-	9f9f5d67205f	-	-	2026-11-24	xproof
-821f4ff3-ebc7-4f47-ac35-d00093b6d35b	cast	cast-resolve	agreed	-	X	scen	1	0	Possessed Goat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-821f4ff3-ebc7-4f47-ac35-d00093b6d35b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Possessed Goat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+821f4ff3-ebc7-4f47-ac35-d00093b6d35b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:possessed-goat:cast:s1,f:xs:XP:possessed-goat:cast:s1	-	-	-	23c4009444b0	-	0eb50ba00b0e	-	-	2026-11-25	xproof
+821f4ff3-ebc7-4f47-ac35-d00093b6d35b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:possessed-goat:f0a0:s1,f:xs:XP:possessed-goat:f0a0:s1	-	-	-	23c4009444b0	-	0eb50ba00b0e	-	-	2026-11-25	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:stensia-bloodhall:f0a0:s2,f:xs:XP:stensia-bloodhall:f0a0:s2	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:f0a1:s1,f:xs:XP:stensia-bloodhall:f0a1:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	land	land	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:land:s1,f:xs:XP:stensia-bloodhall:land:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82e03151-3990-451c-99cc-c7d386872df2	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 82e36ba9-9652-4594-8660-86c766b47709	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:morality-shift:cast:s1,f:xs:XP:morality-shift:cast:s1	-	-	-	fc71ca68c5ac	-	948338335616	-	-	2026-11-24	xproof
 82e52a09-ce6f-417d-8460-8806df63f0bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82ea519f-0e14-43d3-bf46-a1c5352e9600	cast	cast-resolve	agreed	-	X	scen	1	0	The Jolly Balloon Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+82ea519f-0e14-43d3-bf46-a1c5352e9600	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-jolly-balloon-man:cast:s1,f:xs:XP:the-jolly-balloon-man:cast:s1	-	-	-	23c4009444b0	-	b86e7a4ae1c2	-	-	2026-11-25	xproof
 82ea519f-0e14-43d3-bf46-a1c5352e9600	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Jolly Balloon Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82ebd4fa-9db1-4723-8305-8b8a9ce958e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82ebd4fa-9db1-4723-8305-8b8a9ce958e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Formation Breaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Formation Breaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	static#0.1	static#0.1	agreed	-	X	scen	1	0	Formation Breaker/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-82fa14d8-5019-4e1b-a86c-923d9292b87a	cast	cast-resolve	agreed	-	X	scen	1	0	Frozen in Ice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-82fa14d8-5019-4e1b-a86c-923d9292b87a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+82fa14d8-5019-4e1b-a86c-923d9292b87a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frozen-in-ice:f0t0:s1,f:xs:XP:frozen-in-ice:f0t0:s1	-	-	-	23c4009444b0	-	af32ec132774	-	-	2026-11-25	xproof
+82fa14d8-5019-4e1b-a86c-923d9292b87a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frozen-in-ice:f0t0:s1,f:xs:XP:frozen-in-ice:f0t0:s1	-	-	-	23c4009444b0	-	af32ec132774	-	-	2026-11-25	xproof
 82fa14d8-5019-4e1b-a86c-923d9292b87a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Frozen in Ice/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82fb9834-de65-41a5-b908-f49668dee3ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82fb9834-de65-41a5-b908-f49668dee3ec	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

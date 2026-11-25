@@ -85,8 +85,8 @@ d071d5ca-64a4-47bc-aeb1-dd2dbc46a6a3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 d071d5ca-64a4-47bc-aeb1-dd2dbc46a6a3	f0/a0	RollDice	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	6579e7ec700e	-	-	2026-11-24	xproof
 d071e2fc-3be8-4168-afa9-ba34edad18b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myr-propagator:cast:s1,f:xs:XP:myr-propagator:cast:s1	-	-	-	d864b561c9cb	-	06edb9fbfed2	-	-	2026-11-24	xproof
 d071e2fc-3be8-4168-afa9-ba34edad18b9	f0/a0	CopyPermanent	agreed	-	FX	start	2	0	x:xs:XP:myr-propagator:f0a0:s1,f:xs:XP:myr-propagator:f0a0:s1	-	-	-	d864b561c9cb	-	06edb9fbfed2	-	-	2026-11-24	xproof
-d0732ebf-91ad-4e3c-a09a-f410d20587fc	cast	cast-resolve	agreed	-	X	scen	1	0	Ragged Playmate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d0732ebf-91ad-4e3c-a09a-f410d20587fc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ragged Playmate/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d0732ebf-91ad-4e3c-a09a-f410d20587fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ragged-playmate:cast:s1,f:xs:XP:ragged-playmate:cast:s1	-	-	-	23c4009444b0	-	44db3621d468	-	-	2026-11-25	xproof
+d0732ebf-91ad-4e3c-a09a-f410d20587fc	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:ragged-playmate:f0a0:s1,f:xs:XP:ragged-playmate:f0a0:s1	-	-	-	23c4009444b0	-	44db3621d468	-	-	2026-11-25	xproof
 d0741810-0772-47f3-a709-4739fbf85576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d07707ef-fa4e-423f-8a1f-095d19100321	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heavy-infantry:f0t0:s1,f:xs:XP:heavy-infantry:f0t0:s1	-	-	-	d864b561c9cb	-	64dedc440a0a	-	-	2026-11-24	xproof
 d07707ef-fa4e-423f-8a1f-095d19100321	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:heavy-infantry:f0t0:s1,f:xs:XP:heavy-infantry:f0t0:s1	-	-	-	d864b561c9cb	-	64dedc440a0a	-	-	2026-11-24	xproof
@@ -172,8 +172,8 @@ d0c78ee6-babb-410d-9d3a-0c1395596e56	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 d0c78ee6-babb-410d-9d3a-0c1395596e56	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:sentry-bot:cast:s1,f:xs:XP:sentry-bot:cast:s1	-	-	-	8c0bd19283bb	-	76278626aaac	-	-	2026-11-24	xproof
 d0cd3edd-d908-47c5-bff1-2089c22ab41c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0cd3edd-d908-47c5-bff1-2089c22ab41c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:namora-the-sea-queen:f0a0:s1,f:xs:XP:namora-the-sea-queen:f0a0:s1	-	-	-	8c0bd19283bb	-	22b8bcb6146f	-	-	2026-11-24	xproof
-d0ce03fa-2284-4217-85b2-4db6b8a88c94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:divining-duelist:f0t0:s1,f:xs:XP:divining-duelist:f0t0:s1	-	-	-	23b491658465	-	b2b41c969bb4	-	-	2026-11-24	xproof
-d0ce03fa-2284-4217-85b2-4db6b8a88c94	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+d0ce03fa-2284-4217-85b2-4db6b8a88c94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:divining-duelist:f0t0:s1,f:xs:XP:divining-duelist:f0t0:s1	-	-	-	23c4009444b0	-	b2b41c969bb4	-	-	2026-11-25	xproof
+d0ce03fa-2284-4217-85b2-4db6b8a88c94	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:divining-duelist:f0t0:s1,f:xs:XP:divining-duelist:f0t0:s1	-	-	-	23c4009444b0	-	b2b41c969bb4	-	-	2026-11-25	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	cast	cast-resolve	agreed	-	X	scen	1	0	Thornfist Striker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thornfist Striker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thornfist Striker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

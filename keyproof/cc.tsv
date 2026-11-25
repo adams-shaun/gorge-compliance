@@ -56,8 +56,8 @@ cc545c68-829f-4c57-94d2-cd1edf2667a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cc545c68-829f-4c57-94d2-cd1edf2667a7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cc59e28a-eda3-468c-a31b-73e4b615f953	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-colossus:cast:s1,f:xs:XP:bloodfire-colossus:cast:s1	-	-	-	25696bf19d5b	-	0439a28ac57c	-	-	2026-11-24	xproof
 cc59e28a-eda3-468c-a31b-73e4b615f953	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-colossus:f0a0:s1,f:xs:XP:bloodfire-colossus:f0a0:s1	-	-	-	d864b561c9cb	-	0439a28ac57c	-	-	2026-11-24	xproof
-cc5b1276-d13e-4392-988d-1315bc90a9b1	cast	cast-resolve	agreed	-	X	scen	1	0	Veteran Survivor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc5b1276-d13e-4392-988d-1315bc90a9b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Veteran Survivor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc5b1276-d13e-4392-988d-1315bc90a9b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veteran-survivor:cast:s1,f:xs:XP:veteran-survivor:cast:s1	-	-	-	23c4009444b0	-	e79a145a074a	-	-	2026-11-25	xproof
+cc5b1276-d13e-4392-988d-1315bc90a9b1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:veteran-survivor:f0t0:s1,f:xs:XP:veteran-survivor:f0t0:s1	-	-	-	23c4009444b0	-	e79a145a074a	-	-	2026-11-25	xproof
 cc5b1276-d13e-4392-988d-1315bc90a9b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Veteran Survivor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc5e3a21-4911-49f8-8e3c-ab23812c4004	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vulpine-harvester:cast:s1,f:xs:XP:vulpine-harvester:cast:s1	-	-	-	8c0bd19283bb	-	ed28fa38ec02	-	-	2026-11-24	xproof
 cc5e3a21-4911-49f8-8e3c-ab23812c4004	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -156,9 +156,9 @@ ccc4f21f-cf8c-40bb-a6d6-1f624320c5b2	f0/t0	NULL	owed	refused:no-generator:trigge
 ccc7de36-aafc-4d87-80f7-fc2effc976eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogmyr-enforcer:cast:s1,f:xs:XP:frogmyr-enforcer:cast:s1	-	-	-	ae86f6029288	-	5016be56b097	-	-	2026-11-24	xproof
 cccc9664-0e3d-44c4-959c-abeaba25bbab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cccc9664-0e3d-44c4-959c-abeaba25bbab	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-ccd0e613-17c1-4a97-b519-de0376d596f0	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-ccd0e613-17c1-4a97-b519-de0376d596f0	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-ccd0e613-17c1-4a97-b519-de0376d596f0	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+ccd0e613-17c1-4a97-b519-de0376d596f0	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+ccd0e613-17c1-4a97-b519-de0376d596f0	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+ccd0e613-17c1-4a97-b519-de0376d596f0	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Combadge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 ccd248ec-1029-47cd-b6b4-876505efd9dd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ghastly-death-tyrant:f0t0:s1	-	-	-	3aa6ded33acb	-	4d24810ab907	-	-	2026-11-25	xproof
 ccd248ec-1029-47cd-b6b4-876505efd9dd	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:ghastly-death-tyrant:f0t0:s1	-	-	-	3aa6ded33acb	-	4d24810ab907	-	-	2026-11-25	xproof
 ccdd6376-9b74-4d13-9f80-87d0bd3d4a2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disease-carriers:cast:s1,f:xs:XP:disease-carriers:cast:s1	-	-	-	5f2128bf97e4	-	f61779607ffd	-	-	2026-11-24	xproof

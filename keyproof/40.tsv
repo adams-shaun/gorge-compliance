@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 403cf6ae-48a9-4ea9-894e-7135cfca4e1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 403e554b-72a5-48b3-acea-0b4062ffb913	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4042ab14-c579-4d82-a642-576b88508ec7	cast	cast-resolve	agreed	-	X	scen	1	0	Collation Trimatrix/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4042ab14-c579-4d82-a642-576b88508ec7	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+4042ab14-c579-4d82-a642-576b88508ec7	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:collation-trimatrix:f0a0:s1,f:xs:XP:collation-trimatrix:f0a0:s1	-	-	-	23c4009444b0	-	1327d8af3962	-	-	2026-11-25	xproof
 4045c24e-098f-4582-8c50-576a94c7b705	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ambassador-oak:f0t0:s1,f:xs:XP:ambassador-oak:f0t0:s1	-	-	-	d864b561c9cb	-	918d8e6ba82e	-	-	2026-11-24	xproof
 4045c24e-098f-4582-8c50-576a94c7b705	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ambassador-oak:f0t0:s1,f:xs:XP:ambassador-oak:f0t0:s1	-	-	-	d864b561c9cb	-	918d8e6ba82e	-	-	2026-11-24	xproof
 404e958b-ead9-4ec7-b786-7b3d65e29967	cast	cast-resolve	agreed	-	FX	scen	2	0	Mouser Foundry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -60,10 +60,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4061572b-b7ff-4d06-9f71-9e66e064593d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4061572b-b7ff-4d06-9f71-9e66e064593d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4061572b-b7ff-4d06-9f71-9e66e064593d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-40616029-e1a8-4e7c-bc7b-e381779c57cc	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-406247ee-2b86-4068-b5fa-65cdc83a82f4	cast	cast-resolve	agreed	-	X	scen	1	0	Shardmage's Rescue/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+40616029-e1a8-4e7c-bc7b-e381779c57cc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gowron-eager-for-battle:cast:s1	-	-	-	23c4009444b0	-	27c9ebd032f3	-	-	2026-11-25	xproof
+40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:gowron-eager-for-battle:f0a0:s1	-	-	-	23c4009444b0	-	27c9ebd032f3	-	-	2026-11-25	xproof
+40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:gowron-eager-for-battle:f0a0:s1	-	-	-	23c4009444b0	-	27c9ebd032f3	-	-	2026-11-25	xproof
+406247ee-2b86-4068-b5fa-65cdc83a82f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shardmage-s-rescue:cast:s1,f:xs:XP:shardmage-s-rescue:cast:s1	-	-	-	23c4009444b0	-	1c5a87de11b0	-	-	2026-11-25	xproof
 406247ee-2b86-4068-b5fa-65cdc83a82f4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Shardmage's Rescue/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 406247ee-2b86-4068-b5fa-65cdc83a82f4	static#0.1	static#0.1	agreed	-	X	scen	1	0	Shardmage's Rescue/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4066d4df-d98f-44cd-bf25-ebb5e9d9ddeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,9 +95,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 407d9d09-3db6-49b0-9e80-4e1538156e44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 407d9d09-3db6-49b0-9e80-4e1538156e44	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 407d9d09-3db6-49b0-9e80-4e1538156e44	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-4080f7e3-06d3-4d3d-9929-4e826cb66713	cast	cast-resolve	agreed	-	X	scen	1	0	Herald of Eternal Dawn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4080f7e3-06d3-4d3d-9929-4e826cb66713	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Herald of Eternal Dawn/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4080f7e3-06d3-4d3d-9929-4e826cb66713	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Herald of Eternal Dawn/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4080f7e3-06d3-4d3d-9929-4e826cb66713	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-eternal-dawn:cast:s1,f:xs:XP:herald-of-eternal-dawn:cast:s1	-	-	-	23c4009444b0	-	5a72481e8d79	-	-	2026-11-25	xproof
+4080f7e3-06d3-4d3d-9929-4e826cb66713	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:herald-of-eternal-dawn:combat0.attack:s1,f:xs:XP:herald-of-eternal-dawn:combat0.attack:s1	-	-	-	23c4009444b0	-	5a72481e8d79	-	-	2026-11-25	xproof
+4080f7e3-06d3-4d3d-9929-4e826cb66713	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:herald-of-eternal-dawn:combat0.block:s1,f:xs:XP:herald-of-eternal-dawn:combat0.block:s1	-	-	-	23c4009444b0	-	5a72481e8d79	-	-	2026-11-25	xproof
 40832734-fa83-4c02-9fbf-4614ce2919b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 408512c7-5016-4df4-b708-b7467bcdf0ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 408966d2-08c0-4531-a3b4-e666840ee95c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-flame-s-fury:cast:s1,f:xs:XP:chandra-flame-s-fury:cast:s1	-	-	-	d864b561c9cb	-	c3859f6455b0	-	-	2026-11-24	xproof

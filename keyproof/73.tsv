@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73a63c92-6dce-4804-bcd4-3fcc942cf270	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quandrix-cultivator:f0t0:s1,f:xs:XP:quandrix-cultivator:f0t0:s1	-	-	-	d864b561c9cb	-	e09f369a2f70	-	-	2026-11-24	xproof
 73a9122c-60d2-4fdc-bc7b-3576bcbca241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:utopia-tree:cast:s1,f:xs:XP:utopia-tree:cast:s1	-	-	-	25696bf19d5b	-	d6677f73d5c5	-	-	2026-11-24	xproof
 73a9122c-60d2-4fdc-bc7b-3576bcbca241	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:utopia-tree:f0a0:s1,f:xs:XP:utopia-tree:f0a0:s1	-	-	-	d864b561c9cb	-	d6677f73d5c5	-	-	2026-11-24	xproof
-73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf	cast	cast-resolve	agreed	-	X	scen	1	0	Count on Luck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Count on Luck/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:count-on-luck:cast:s1,f:xs:XP:count-on-luck:cast:s1	-	-	-	23c4009444b0	-	fdee49ac286e	-	-	2026-11-25	xproof
+73ad7bcd-4ffc-442c-b6b5-d935b9ccaaaf	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:count-on-luck:f0t0:s1,f:xs:XP:count-on-luck:f0t0:s1	-	-	-	23c4009444b0	-	fdee49ac286e	-	-	2026-11-25	xproof
 73af8406-4447-41b2-9cec-1b471759f09c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutwrencher-oni:cast:s1,f:xs:XP:gutwrencher-oni:cast:s1	-	-	-	25696bf19d5b	-	6002676362a6	-	-	2026-11-24	xproof
 73af8406-4447-41b2-9cec-1b471759f09c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 73b26f12-78eb-4d01-9dd6-ee643c7a80a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e0f93d7-7208-4902-bd92-e7bf66d35fef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e11d1f7-fa98-4cd2-9912-081e9c9e37ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:neurok-familiar:f0t0:s1,f:xs:XP:neurok-familiar:f0t0:s1	-	-	-	25696bf19d5b	-	19f6b122a285	-	-	2026-11-24	xproof
 8e11d1f7-fa98-4cd2-9912-081e9c9e37ee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:neurok-familiar:f0t0:s1,f:xs:XP:neurok-familiar:f0t0:s1	-	-	-	25696bf19d5b	-	19f6b122a285	-	-	2026-11-24	xproof
-8e121178-e9e3-43a5-a174-ecbe47d759f9	cast	cast-resolve	agreed	-	X	scen	1	0	Under the Skin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8e121178-e9e3-43a5-a174-ecbe47d759f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:under-the-skin:cast:s1,f:xs:XP:under-the-skin:cast:s1	-	-	-	23c4009444b0	-	e03bacb576c7	-	-	2026-11-25	xproof
 8e1d261d-b8d3-4fb1-922d-47789854b5b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e1d261d-b8d3-4fb1-922d-47789854b5b3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e1d3722-9bd1-4ab7-b4a5-9265fca3aba9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-hydra:f0t0:s1,f:xs:XP:ancient-hydra:f0t0:s1	-	-	-	3aa6ded33acb	-	9f70498e3c33	-	-	2026-11-25	xproof
@@ -145,10 +145,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ebc4198-7317-4ffb-b8b8-14733c2077ff	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:colossus-hammer:f0a0:s1,f:xs:XP:colossus-hammer:f0a0:s1	-	-	-	3aa6ded33acb	-	9a1dc4176861	-	-	2026-11-25	xproof
-8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	cast	cast-resolve	agreed	-	X	scen	1	0	Stalked Researcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stalked-researcher:cast:s1,f:xs:XP:stalked-researcher:cast:s1	-	-	-	23c4009444b0	-	46d153b29458	-	-	2026-11-25	xproof
 8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stalked Researcher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stalked Researcher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stalked Researcher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stalked-researcher:combat0.block:s1,f:xs:XP:stalked-researcher:combat0.block:s1	-	-	-	23c4009444b0	-	46d153b29458	-	-	2026-11-25	xproof
+8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stalked-researcher:f0t0:s1,f:xs:XP:stalked-researcher:f0t0:s1	-	-	-	23c4009444b0	-	46d153b29458	-	-	2026-11-25	xproof
 8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Stalked Researcher/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ec56e2a-380f-4de7-9fb7-52de803008fc	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Transformative Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ec56e2a-380f-4de7-9fb7-52de803008fc	land	play-land	agreed	-	FX	scen	2	0	Transformative Commons/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

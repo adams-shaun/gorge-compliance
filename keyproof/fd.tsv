@@ -13,7 +13,7 @@ fd09875f-71a1-41c2-b404-ff58f4d4cb6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tri
 fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:f0a0:s1,f:xs:XP:triad-of-fates:f0a0:s1	-	-	-	3aa6ded33acb	-	02931237aedd	-	-	2026-11-25	xproof
 fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:f0a0:s1,f:xs:XP:triad-of-fates:f0a0:s1	-	-	-	23b491658465	-	02931237aedd	-	-	2026-11-25	xproof
 fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a2	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:f0a2:s1,f:xs:XP:triad-of-fates:f0a2:s1	-	-	-	d864b561c9cb	-	02931237aedd	-	-	2026-11-24	xproof
-fd0a27a9-7d7e-4a16-9dd0-0715e6c97b36	cast	cast-resolve	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Restoration Seminar"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
+fd0a27a9-7d7e-4a16-9dd0-0715e6c97b36	cast	cast-resolve	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Restoration Seminar"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 fd0f8fdc-4065-41f4-b8fb-ecb8f185774d	cast	cast-resolve	agreed	-	X	scen	1	0	Royal Treatment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd15a4b0-abd7-4bae-8331-81b85c94fce8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fd15a4b0-abd7-4bae-8331-81b85c94fce8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -54,10 +54,10 @@ fd45063f-c83c-431c-9104-f139c497ec0d	land	land	agreed	-	FX	start	2	0	x:xs:XP:sil
 fd4d83fa-070c-46bf-a620-041f69acdea9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentry-of-the-underworld:cast:s1,f:xs:XP:sentry-of-the-underworld:cast:s1	-	-	-	d864b561c9cb	-	e725cc39e517	-	-	2026-11-24	xproof
 fd4d83fa-070c-46bf-a620-041f69acdea9	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:sentry-of-the-underworld:f0a0:s1,f:xs:XP:sentry-of-the-underworld:f0a0:s1	-	-	-	d864b561c9cb	-	e725cc39e517	-	-	2026-11-24	xproof
 fd4f0315-567a-4cc5-bc7e-88a9d2cee910	cast	cast	agreed	-	F	start	2	0	f:xs:XP:improvisation-capstone:cast:s1	-	-	-	23b491658465	-	d2f2d7f8e8e6	-	-	2026-11-24	xproof
-fd505c02-c59e-476d-8e88-35da862ddc23	cast	cast-resolve	agreed	-	X	scen	1	0	Bloodthirsty Conqueror/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fd505c02-c59e-476d-8e88-35da862ddc23	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bloodthirsty Conqueror/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fd505c02-c59e-476d-8e88-35da862ddc23	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bloodthirsty Conqueror/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fd505c02-c59e-476d-8e88-35da862ddc23	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bloodthirsty Conqueror/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fd505c02-c59e-476d-8e88-35da862ddc23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodthirsty-conqueror:cast:s1,f:xs:XP:bloodthirsty-conqueror:cast:s1	-	-	-	23c4009444b0	-	1a14cad86d44	-	-	2026-11-25	xproof
+fd505c02-c59e-476d-8e88-35da862ddc23	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:bloodthirsty-conqueror:combat0.attack:s1,f:xs:XP:bloodthirsty-conqueror:combat0.attack:s1	-	-	-	23c4009444b0	-	1a14cad86d44	-	-	2026-11-25	xproof
+fd505c02-c59e-476d-8e88-35da862ddc23	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bloodthirsty-conqueror:combat0.block:s1,f:xs:XP:bloodthirsty-conqueror:combat0.block:s1	-	-	-	23c4009444b0	-	1a14cad86d44	-	-	2026-11-25	xproof
+fd505c02-c59e-476d-8e88-35da862ddc23	f0/t0	LifeLost	agreed	-	FX	start	2	0	x:xs:XP:bloodthirsty-conqueror:combat0.attack:s1,f:xs:XP:bloodthirsty-conqueror:combat0.attack:s1	-	-	-	23c4009444b0	-	1a14cad86d44	-	-	2026-11-25	xproof
 fd51dce2-8e8a-4686-910e-1bbc2825d190	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fd541139-de13-4b32-93ba-070ecf711d33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fd541139-de13-4b32-93ba-070ecf711d33	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:slimefoot-the-stowaway:f0a0:s1,f:xs:XP:slimefoot-the-stowaway:f0a0:s1	-	-	-	d864b561c9cb	-	8442985ac2d4	-	-	2026-11-24	xproof

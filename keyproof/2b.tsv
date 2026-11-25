@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bb2eda7-3b38-4c56-870f-c3218a1056f5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:snapcaster-mage:f0t0:s1,f:xs:XP:snapcaster-mage:f0t0:s1	-	-	-	d864b561c9cb	-	baeaa65d543e	-	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	cast	cast-resolve	agreed	-	X	scen	1	0	Koh, the Face Stealer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Koh, the Face Stealer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
+2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Koh, the Face Stealer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Koh, the Face Stealer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bc38f14-0314-4351-8138-e2b8bf041404	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:memorial-to-folly:f0a1:s2,f:xs:XP:memorial-to-folly:f0a1:s2	-	-	-	23b491658465	-	1b996de290a5	-	-	2026-11-25	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2be9c1e6-0226-497a-b548-21bf1cfbc286	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2be9c1e6-0226-497a-b548-21bf1cfbc286	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2bee2508-cd5d-4c62-a205-12d8bbb3143d	cast	cast-resolve	agreed	-	FX	scen	2	0	Felidar Savior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2bee2508-cd5d-4c62-a205-12d8bbb3143d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Felidar Savior/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2bee2508-cd5d-4c62-a205-12d8bbb3143d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Felidar Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2bee2508-cd5d-4c62-a205-12d8bbb3143d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:felidar-savior:combat0.attack:s1,f:xs:XP:felidar-savior:combat0.attack:s1	-	-	-	23c4009444b0	-	19f4ba9952cd	-	-	2026-11-25	xproof
+2bee2508-cd5d-4c62-a205-12d8bbb3143d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:felidar-savior:combat0.block:s1,f:xs:XP:felidar-savior:combat0.block:s1	-	-	-	23c4009444b0	-	19f4ba9952cd	-	-	2026-11-25	xproof
 2bee2508-cd5d-4c62-a205-12d8bbb3143d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bf4811f-3462-4542-acb0-101e772bfec9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:give-in-to-violence:cast:s1,f:xs:XP:give-in-to-violence:cast:s1	-	-	-	3aa6ded33acb	-	f2c5d2e21338	-	-	2026-11-25	xproof
 2bf65e7d-6d31-4ad6-93cd-623612d3175d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

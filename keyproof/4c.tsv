@@ -37,9 +37,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c2196e5-6ed7-4cd2-b8e7-f01aff236569	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c2196e5-6ed7-4cd2-b8e7-f01aff236569	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c22257e-8a00-40b7-a29b-55fcec7ddbd4	cast	cast-resolve	agreed	-	FX	scen	2	0	Crypt Feaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c22257e-8a00-40b7-a29b-55fcec7ddbd4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Crypt Feaster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c22257e-8a00-40b7-a29b-55fcec7ddbd4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Crypt Feaster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c22257e-8a00-40b7-a29b-55fcec7ddbd4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crypt Feaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4c22257e-8a00-40b7-a29b-55fcec7ddbd4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:crypt-feaster:combat0.attack:s1,f:xs:XP:crypt-feaster:combat0.attack:s1	-	-	-	23c4009444b0	-	ef366c6f6dae	-	-	2026-11-25	xproof
+4c22257e-8a00-40b7-a29b-55fcec7ddbd4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:crypt-feaster:combat0.block:s1,f:xs:XP:crypt-feaster:combat0.block:s1	-	-	-	23c4009444b0	-	ef366c6f6dae	-	-	2026-11-25	xproof
+4c22257e-8a00-40b7-a29b-55fcec7ddbd4	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:crypt-feaster:f0t0:s1,f:xs:XP:crypt-feaster:f0t0:s1	-	-	-	23c4009444b0	-	ef366c6f6dae	-	-	2026-11-25	xproof
 4c23ae3a-108f-4a09-b89f-8c43c33dd144	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c23ae3a-108f-4a09-b89f-8c43c33dd144	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c26c796-26ec-41f7-b9ca-58f4eb935c47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c67292a-7fcc-4646-8a06-99a7b4b3e005	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c67292a-7fcc-4646-8a06-99a7b4b3e005	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 4c67359d-5590-4eb0-827e-b411967ee238	cast	cast	agreed	-	F	start	2	0	f:xs:XP:uncover-the-moon-letters:cast:s1	-	-	-	23b491658465	-	fa77190f2541	-	-	2026-11-24	xproof
-4c67359d-5590-4eb0-827e-b411967ee238	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
+4c67359d-5590-4eb0-827e-b411967ee238	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:uncover-the-moon-letters:f0t0:s1	-	-	-	23c4009444b0	-	fa77190f2541	-	-	2026-11-25	xproof
 4c6870f3-4b70-4050-bf22-b1f348f89360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c6870f3-4b70-4050-bf22-b1f348f89360	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c71074b-b8bf-47f4-87e4-67c275abdbc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

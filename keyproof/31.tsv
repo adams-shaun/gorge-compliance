@@ -31,10 +31,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 311f38a6-f68f-4d30-bc4e-62339f1e0d88	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 311f38a6-f68f-4d30-bc4e-62339f1e0d88	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3121eecd-5f8a-408f-8b2d-75e13aa8a1ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:f0t0:s1,f:xs:XP:gutless-plunderer:f0t0:s1	-	-	-	23b491658465	-	6ed8d1b476d6	-	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gutless Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-31265357-5ecb-4d83-80ff-1795b1dfdecb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:f0t0:s1,f:xs:XP:gutless-plunderer:f0t0:s1	-	-	-	23c4009444b0	-	6ed8d1b476d6	-	-	2026-11-25	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:combat0.attack:s1,f:xs:XP:gutless-plunderer:combat0.attack:s1	-	-	-	23c4009444b0	-	6ed8d1b476d6	-	-	2026-11-25	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:combat0.block:s1,f:xs:XP:gutless-plunderer:combat0.block:s1	-	-	-	23c4009444b0	-	6ed8d1b476d6	-	-	2026-11-25	xproof
+31265357-5ecb-4d83-80ff-1795b1dfdecb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gutless-plunderer:f0t0:s1,f:xs:XP:gutless-plunderer:f0t0:s1	-	-	-	23c4009444b0	-	6ed8d1b476d6	-	-	2026-11-25	xproof
 31279757-499a-4d52-aa81-76b6f1983b53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t0:s1,f:xs:XP:garruk-s-uprising:f0t0:s1	-	-	-	3aa6ded33acb	-	c4ae9db808ee	-	-	2026-11-25	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t0:s1,f:xs:XP:garruk-s-uprising:f0t0:s1	-	-	-	3aa6ded33acb	-	c4ae9db808ee	-	-	2026-11-25	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31895957-5fa8-46dc-a76e-37bbdc6072ad	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 318f7f70-e374-40ef-8afb-3389c10461d8	cast	counter-spell	agreed	-	FX	scen	2	0	Syncopate/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3191c6ca-4d25-4ba3-bfe1-4aeab1295573	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31932df4-0be8-45c4-8b22-84119d9c20ba	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-31932df4-0be8-45c4-8b22-84119d9c20ba	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+31932df4-0be8-45c4-8b22-84119d9c20ba	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Georgiou, Terran Emperor"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+31932df4-0be8-45c4-8b22-84119d9c20ba	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Georgiou, Terran Emperor"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 3194fe3d-57d3-4dab-ab39-3778b75150fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3194fe3d-57d3-4dab-ab39-3778b75150fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3196e1f4-7f94-4eb6-ae2b-ed11ba392552	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:last-rites:cast:s1,f:xs:XP:last-rites:cast:s1	-	-	-	fc71ca68c5ac	-	dfe32bfc3f44	-	-	2026-11-24	xproof

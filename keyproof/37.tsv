@@ -21,9 +21,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37108cd4-bbab-4ce3-9ed6-f60e8422e703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37108cd4-bbab-4ce3-9ed6-f60e8422e703	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 37165859-87bc-4d44-95a2-39051ab20a14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-371762f6-e07b-4c0e-a4ee-6c35a3809eb6	cast	cast-resolve	agreed	-	X	scen	1	0	Spectral Snatcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-371762f6-e07b-4c0e-a4ee-6c35a3809eb6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectral Snatcher/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-371762f6-e07b-4c0e-a4ee-6c35a3809eb6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spectral Snatcher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+371762f6-e07b-4c0e-a4ee-6c35a3809eb6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectral-snatcher:cast:s1,f:xs:XP:spectral-snatcher:cast:s1	-	-	-	23c4009444b0	-	12340c0d7ea4	-	-	2026-11-25	xproof
+371762f6-e07b-4c0e-a4ee-6c35a3809eb6	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:spectral-snatcher:f0a0:s1	-	-	-	23c4009444b0	-	12340c0d7ea4	-	-	2026-11-25	xproof
+371762f6-e07b-4c0e-a4ee-6c35a3809eb6	f0/t0	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:spectral-snatcher:f0t0:s1	-	-	-	23c4009444b0	-	12340c0d7ea4	-	-	2026-11-25	xproof
 371a7bbf-5890-46d8-ae57-f020c103b465	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eye-of-vecna:f0t1:s1,f:xs:XP:eye-of-vecna:f0t1:s1	-	-	-	3aa6ded33acb	-	6956b57af6ca	-	-	2026-11-25	xproof
 371a7bbf-5890-46d8-ae57-f020c103b465	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eye-of-vecna:f0t1:s1,f:xs:XP:eye-of-vecna:f0t1:s1	-	-	-	3aa6ded33acb	-	6956b57af6ca	-	-	2026-11-25	xproof
 371a7bbf-5890-46d8-ae57-f020c103b465	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:eye-of-vecna:f0t1:s1,f:xs:XP:eye-of-vecna:f0t1:s1	-	-	-	3aa6ded33acb	-	6956b57af6ca	-	-	2026-11-25	xproof
@@ -80,8 +80,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3752277a-5b3c-4902-90a1-63acdac66dc9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3754dce0-3e97-406f-8807-a4942a222c41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 375932e6-1b3e-48dc-8154-9b664c3add34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3759f1de-eda1-4f09-b12b-ea5f5fc731d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:federation-field-medic:f0t0:s1,f:xs:XP:federation-field-medic:f0t0:s1	-	-	-	25696bf19d5b	-	7da1fe425ce2	-	-	2026-11-24	xproof
-3759f1de-eda1-4f09-b12b-ea5f5fc731d7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3759f1de-eda1-4f09-b12b-ea5f5fc731d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:federation-field-medic:f0t0:s1,f:xs:XP:federation-field-medic:f0t0:s1	-	-	-	23c4009444b0	-	7da1fe425ce2	-	-	2026-11-25	xproof
+3759f1de-eda1-4f09-b12b-ea5f5fc731d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:federation-field-medic:f0t0:s1,f:xs:XP:federation-field-medic:f0t0:s1	-	-	-	23c4009444b0	-	7da1fe425ce2	-	-	2026-11-25	xproof
 375ea10b-da68-4c66-b3eb-f5113c09ea4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 376271a6-80f0-47a6-990a-5ec5517aae42	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3763de30-28e1-4689-a71c-07d2fea3a466	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:zoetic-cavern:land:s1,f:xs:XP:zoetic-cavern:land:s1	-	-	-	77494c1ce129	-	6c3bc1607541	-	-	2026-11-24	xproof

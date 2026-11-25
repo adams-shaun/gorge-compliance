@@ -32,8 +32,8 @@ bb33abbe-b43c-4a74-b2db-cce949f0edf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bb33abbe-b43c-4a74-b2db-cce949f0edf2	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:legion-guildmage:f0a0:s1,f:xs:XP:legion-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	a9b87d02f269	-	-	2026-11-24	xproof
 bb33abbe-b43c-4a74-b2db-cce949f0edf2	f0/a1	Tap	agreed	-	FX	start	2	0	x:xs:XP:legion-guildmage:f0a1:s1,f:xs:XP:legion-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	a9b87d02f269	-	-	2026-11-24	xproof
 bb377cf8-29ee-489e-86a9-93f4dc2ae02e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:field-research:cast:s1,f:xs:XP:field-research:cast:s1	-	-	-	ae86f6029288	-	0037d9cc7dd6	-	-	2026-11-24	xproof
-bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fateshaper-aspirant:f0t0:s1,f:xs:XP:fateshaper-aspirant:f0t0:s1	-	-	-	9ee19e8250ce	-	e92bb92d6abb	-	-	2026-11-24	xproof
-bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fateshaper-aspirant:f0t0:s1,f:xs:XP:fateshaper-aspirant:f0t0:s1	-	-	-	23c4009444b0	-	e92bb92d6abb	-	-	2026-11-25	xproof
+bb3996b6-b68d-4ea1-b3dd-1600f8da2f1c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fateshaper-aspirant:f0t0:s1,f:xs:XP:fateshaper-aspirant:f0t0:s1	-	-	-	23c4009444b0	-	e92bb92d6abb	-	-	2026-11-25	xproof
 bb4507c1-1e5d-48b5-8fc0-1d26bd1c9e72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb482f90-5624-4e2c-9916-85fb09a3639a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb4be6b2-507c-4d7c-bea4-010670dce3da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,9 +75,9 @@ bb813ffa-2615-4177-a7fb-6e0dfb819fc2	f0/a0	NULL	owed	refused:steps-needed:cost:E
 bb81aa50-49db-4743-85fc-6b4d9ed29bc6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb81aa50-49db-4743-85fc-6b4d9ed29bc6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 bb81aa50-49db-4743-85fc-6b4d9ed29bc6	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-bb86849c-fdec-4ca5-a8c0-ed682d921759	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+bb86849c-fdec-4ca5-a8c0-ed682d921759	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Genesis Device"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Genesis Device"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Genesis Device"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 bb87917f-33fb-4024-9317-0992c2f8f55e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb87ec08-bb1b-43d8-8809-92904cbba685	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 bb87ec08-bb1b-43d8-8809-92904cbba685	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -185,10 +185,10 @@ bbfc5011-a9b7-442d-a443-974a5a64de46	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 bbfc5011-a9b7-442d-a443-974a5a64de46	f0/t1	Sacrificed	agreed	-	F	start	2	0	f:xs:XP:heaped-harvest:f0a0:s1	-	-	-	3aa6ded33acb	-	d79df6b5c2d7	-	-	2026-11-25	xproof
 bbfced8f-0f83-4cc9-9143-aa2473828b48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbfd0de0-3558-4833-bae4-8efae44b7fff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dreadwing-scavenger:f0t0:s2,f:xs:XP:dreadwing-scavenger:f0t0:s2	-	-	-	e07cf3a05ba5	-	e3531ca15b1e	-	-	2026-11-24	xproof
-bbfd0de0-3558-4833-bae4-8efae44b7fff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dreadwing Scavenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bbfd0de0-3558-4833-bae4-8efae44b7fff	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dreadwing Scavenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bbfd0de0-3558-4833-bae4-8efae44b7fff	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dreadwing-scavenger:combat0.attack:s1,f:xs:XP:dreadwing-scavenger:combat0.attack:s1	-	-	-	23c4009444b0	-	e3531ca15b1e	-	-	2026-11-25	xproof
+bbfd0de0-3558-4833-bae4-8efae44b7fff	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dreadwing-scavenger:combat0.block:s1,f:xs:XP:dreadwing-scavenger:combat0.block:s1	-	-	-	23c4009444b0	-	e3531ca15b1e	-	-	2026-11-25	xproof
 bbfd0de0-3558-4833-bae4-8efae44b7fff	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dreadwing-scavenger:f0t0:s2,f:xs:XP:dreadwing-scavenger:f0t0:s2	-	-	-	e07cf3a05ba5	-	e3531ca15b1e	-	-	2026-11-24	xproof
-bbfd0de0-3558-4833-bae4-8efae44b7fff	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dreadwing Scavenger/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bbfd0de0-3558-4833-bae4-8efae44b7fff	f0/t1	Attacks	agreed	-	FX	start	4	0	x:xs:XP:dreadwing-scavenger:combat0.attack:s1,f:xs:XP:dreadwing-scavenger:combat0.attack:s1	-	-	-	23c4009444b0	-	e3531ca15b1e	-	-	2026-11-25	xproof
 bbfd0de0-3558-4833-bae4-8efae44b7fff	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dreadwing Scavenger/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbfdb5eb-2140-4d50-a667-1b4ac75d03a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbfee53c-30a6-4ed0-beef-5c254be75fc5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jewel-eyed-cobra:cast:s1,f:xs:XP:jewel-eyed-cobra:cast:s1	-	-	-	d864b561c9cb	-	4953c3442239	-	-	2026-11-24	xproof

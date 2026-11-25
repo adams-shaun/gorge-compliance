@@ -129,8 +129,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1aaddaeb-baab-42b6-a442-d97339da54db	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:leech-gauntlet:f0a1:s1	-	-	-	23b491658465	-	ad775360de55	-	-	2026-11-25	xproof
 1aaddaeb-baab-42b6-a442-d97339da54db	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aae80a5-079c-48f3-aad1-563931e1a031	cast	cast-resolve	agreed	-	FX	scen	2	0	Vile Mutilator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1aae80a5-079c-48f3-aad1-563931e1a031	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vile Mutilator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1aae80a5-079c-48f3-aad1-563931e1a031	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vile Mutilator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1aae80a5-079c-48f3-aad1-563931e1a031	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vile-mutilator:combat0.attack:s1,f:xs:XP:vile-mutilator:combat0.attack:s1	-	-	-	23c4009444b0	-	53d418fa2698	-	-	2026-11-25	xproof
+1aae80a5-079c-48f3-aad1-563931e1a031	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vile-mutilator:combat0.block:s1,f:xs:XP:vile-mutilator:combat0.block:s1	-	-	-	23c4009444b0	-	53d418fa2698	-	-	2026-11-25	xproof
 1aae80a5-079c-48f3-aad1-563931e1a031	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ab0a315-0d0d-4247-9bb9-107b35b353d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scale-of-chiss-goria:cast:s1,f:xs:XP:scale-of-chiss-goria:cast:s1	-	-	-	25696bf19d5b	-	053074d6bb2d	-	-	2026-11-24	xproof
 1ab0a315-0d0d-4247-9bb9-107b35b353d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,4 +186,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1af63a5e-2bec-4f8d-a373-d9ce43a7d242	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1afa006b-1190-4047-a9fe-4215f20df8f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1afa006b-1190-4047-a9fe-4215f20df8f2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1afb9ce6-658e-40e4-a4a2-9a68182a1e73	cast	cast-resolve	agreed	-	X	scen	1	0	Vengeful Possession/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1afb9ce6-658e-40e4-a4a2-9a68182a1e73	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vengeful-possession:cast:s1	-	-	-	23c4009444b0	-	065c57646e7d	-	-	2026-11-25	xproof

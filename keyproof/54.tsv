@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54022a10-c9f0-458d-a0ed-228843cd9a40	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5404c6a5-399d-4237-b03c-41b6a1b79050	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 540693f3-985c-4a4a-945c-c957c5aad395	cast	cast-resolve	agreed	-	FX	scen	2	0	Arbiter of Woe/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-540693f3-985c-4a4a-945c-c957c5aad395	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Arbiter of Woe/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-540693f3-985c-4a4a-945c-c957c5aad395	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Arbiter of Woe/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+540693f3-985c-4a4a-945c-c957c5aad395	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:arbiter-of-woe:combat0.attack:s1,f:xs:XP:arbiter-of-woe:combat0.attack:s1	-	-	-	23c4009444b0	-	ad9da44b49ef	-	-	2026-11-25	xproof
+540693f3-985c-4a4a-945c-c957c5aad395	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:arbiter-of-woe:combat0.block:s1,f:xs:XP:arbiter-of-woe:combat0.block:s1	-	-	-	23c4009444b0	-	ad9da44b49ef	-	-	2026-11-25	xproof
 540693f3-985c-4a4a-945c-c957c5aad395	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 540d1878-7afe-48a5-8b40-3dd1b06a024a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 540d1878-7afe-48a5-8b40-3dd1b06a024a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof

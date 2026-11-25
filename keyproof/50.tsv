@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5001bf21-9dbb-4229-aeef-25805e71b832	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:icewind-elemental:f0t0:s2,f:xs:XP:icewind-elemental:f0t0:s2	-	-	-	e07cf3a05ba5	-	ef6e869938d4	-	-	2026-11-24	xproof
-5001bf21-9dbb-4229-aeef-25805e71b832	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Icewind Elemental/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5001bf21-9dbb-4229-aeef-25805e71b832	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Icewind Elemental/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5001bf21-9dbb-4229-aeef-25805e71b832	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:icewind-elemental:combat0.attack:s1,f:xs:XP:icewind-elemental:combat0.attack:s1	-	-	-	23c4009444b0	-	ef6e869938d4	-	-	2026-11-25	xproof
+5001bf21-9dbb-4229-aeef-25805e71b832	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:icewind-elemental:combat0.block:s1,f:xs:XP:icewind-elemental:combat0.block:s1	-	-	-	23c4009444b0	-	ef6e869938d4	-	-	2026-11-25	xproof
 5001bf21-9dbb-4229-aeef-25805e71b832	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:icewind-elemental:f0t0:s2,f:xs:XP:icewind-elemental:f0t0:s2	-	-	-	e07cf3a05ba5	-	ef6e869938d4	-	-	2026-11-24	xproof
 5004b84a-33b7-4f6f-b2c2-7086b9087535	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5004b84a-33b7-4f6f-b2c2-7086b9087535	f0/a1	NULL	owed	refused:steps-needed:cost:BR	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 500a17a0-8332-414c-9c3a-7157a7800887	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
-500ccb61-83b0-4b1f-ada6-65850ed5a825	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:qutrub-forayer:f0t0:s1,f:xs:XP:qutrub-forayer:f0t0:s1	-	-	-	23b491658465	-	dbfb1e0dd088	-	-	2026-11-24	xproof
-500ccb61-83b0-4b1f-ada6-65850ed5a825	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+500ccb61-83b0-4b1f-ada6-65850ed5a825	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:qutrub-forayer:f0t0:s1,f:xs:XP:qutrub-forayer:f0t0:s1	-	-	-	23c4009444b0	-	dbfb1e0dd088	-	-	2026-11-25	xproof
+500ccb61-83b0-4b1f-ada6-65850ed5a825	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:qutrub-forayer:f0t0:s1,f:xs:XP:qutrub-forayer:f0t0:s1	-	-	-	23c4009444b0	-	dbfb1e0dd088	-	-	2026-11-25	xproof
 501109bb-3406-41d8-9433-a100e494f938	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 501109bb-3406-41d8-9433-a100e494f938	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:soltari-trooper:f0t0:s1,f:xs:XP:soltari-trooper:f0t0:s1	-	-	-	ea3140b6974b	-	fd9858799603	-	-	2026-11-24	xproof
 50120e90-2fdf-43c1-93e2-2230ee4e63fc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-swarmweaver:f0t0:s2,f:xs:XP:the-swarmweaver:f0t0:s2	-	-	-	e07cf3a05ba5	-	db658a9a1faf	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50c477c1-8457-40f6-bba9-1a4ba0862178	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50c477c1-8457-40f6-bba9-1a4ba0862178	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 50c52320-9f84-4655-a91a-e09b71f9025c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50c7b13d-f217-45de-837c-49f934840368	cast	cast-resolve	agreed	-	X	scen	1	0	Wildfire Wickerfolk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+50c7b13d-f217-45de-837c-49f934840368	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildfire-wickerfolk:cast:s1,f:xs:XP:wildfire-wickerfolk:cast:s1	-	-	-	23c4009444b0	-	5d31e055a9bc	-	-	2026-11-25	xproof
 50c7b13d-f217-45de-837c-49f934840368	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wildfire Wickerfolk/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50c8c7e2-1b45-44b2-a50b-3b514d4c4c42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolarian-entrancer:cast:s1,f:xs:XP:tolarian-entrancer:cast:s1	-	-	-	ea3140b6974b	-	b3856d5bb46c	-	-	2026-11-24	xproof
 50c8c7e2-1b45-44b2-a50b-3b514d4c4c42	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

@@ -10,10 +10,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5802aa98-a9b7-4b0d-9d7c-c3938701870d	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:jem-lightfoote-sky-explorer:combat0.attack:s1,f:xs:XP:jem-lightfoote-sky-explorer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d0f2709ba2bc	-	-	2026-11-25	xproof
 580996d4-db9a-4b57-a0e1-a2dbb524121a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razorlash-transmogrant:cast:s1,f:xs:XP:razorlash-transmogrant:cast:s1	-	-	-	ae86f6029288	-	c7404f1b13d0	-	-	2026-11-24	xproof
 580996d4-db9a-4b57-a0e1-a2dbb524121a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:razorlash-transmogrant:f0a0:s1,f:xs:XP:razorlash-transmogrant:f0a0:s1	-	-	-	3aa6ded33acb	-	c7404f1b13d0	-	-	2026-11-25	xproof
-580de511-863c-4b7a-9d2e-fcdf6e12d54b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-cutting-glare:f0t0:s1,f:xs:XP:vraska-the-cutting-glare:f0t0:s1	-	-	-	9ee19e8250ce	-	9bfabc993d8e	-	-	2026-11-24	xproof
+580de511-863c-4b7a-9d2e-fcdf6e12d54b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-cutting-glare:f0t0:s1,f:xs:XP:vraska-the-cutting-glare:f0t0:s1	-	-	-	23c4009444b0	-	9bfabc993d8e	-	-	2026-11-25	xproof
 580de511-863c-4b7a-9d2e-fcdf6e12d54b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vraska, the Cutting Glare/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 580de511-863c-4b7a-9d2e-fcdf6e12d54b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vraska, the Cutting Glare/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-580de511-863c-4b7a-9d2e-fcdf6e12d54b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+580de511-863c-4b7a-9d2e-fcdf6e12d54b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-cutting-glare:f0t0:s1,f:xs:XP:vraska-the-cutting-glare:f0t0:s1	-	-	-	23c4009444b0	-	9bfabc993d8e	-	-	2026-11-25	xproof
 5810c1e2-5a36-4a87-be4e-890ba1627b46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5810c1e2-5a36-4a87-be4e-890ba1627b46	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lead-golem:f0t0:s1,f:xs:XP:lead-golem:f0t0:s1	-	-	-	8c0bd19283bb	-	964d74d0de30	-	-	2026-11-24	xproof
 5811d905-cae5-4f92-a78e-abb43f8864a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cauldron-of-souls:cast:s1,f:xs:XP:cauldron-of-souls:cast:s1	-	-	-	8a1b1a193ec0	-	bebde721439f	-	-	2026-11-24	xproof
@@ -208,8 +208,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58d5d563-cb60-4977-86cd-f32cd811aa77	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58d5d563-cb60-4977-86cd-f32cd811aa77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phantom-blade:f0t0:s1,f:xs:XP:phantom-blade:f0t0:s1	-	-	-	ae86f6029288	-	bf7bdc481304	-	-	2026-11-24	xproof
 58d7b8b3-ac47-4805-8259-4ba8e70d7dc3	cast	cast-resolve	agreed	-	FX	scen	2	0	Primal Might/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58d87cfe-7402-43c3-81ce-13de8cd04005	cast	cast-resolve	agreed	-	X	scen	1	0	Piranha Fly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58d87cfe-7402-43c3-81ce-13de8cd04005	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Piranha Fly/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+58d87cfe-7402-43c3-81ce-13de8cd04005	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:piranha-fly:cast:s1,f:xs:XP:piranha-fly:cast:s1	-	-	-	23c4009444b0	-	6795bedd21f2	-	-	2026-11-25	xproof
+58d87cfe-7402-43c3-81ce-13de8cd04005	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:piranha-fly:combat0.attack:s1,f:xs:XP:piranha-fly:combat0.attack:s1	-	-	-	23c4009444b0	-	6795bedd21f2	-	-	2026-11-25	xproof
 58d87cfe-7402-43c3-81ce-13de8cd04005	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Piranha Fly/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58dde1b0-bb01-4f72-9408-21c0404c1cfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58dee718-6820-495a-8c03-5cc130b84167	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-spider-clone:f0t0:s1,f:xs:XP:twisted-spider-clone:f0t0:s1	-	-	-	8c0bd19283bb	-	f32882edc9f6	-	-	2026-11-24	xproof

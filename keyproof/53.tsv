@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53599f89-1598-4d3d-8aa7-75b397b258eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spindrift-drake:f0t0:s1,f:xs:XP:spindrift-drake:f0t0:s1	-	-	-	3aa6ded33acb	-	2f8d1f4c91a4	-	-	2026-11-25	xproof
 53599f89-1598-4d3d-8aa7-75b397b258eb	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:spindrift-drake:f0t0:s1,f:xs:XP:spindrift-drake:f0t0:s1	-	-	-	3aa6ded33acb	-	2f8d1f4c91a4	-	-	2026-11-25	xproof
 535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	cast	cast-resolve	agreed	-	X	scen	1	0	Anthropological Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:anthropological-mission:f0t0:s1,f:xs:XP:anthropological-mission:f0t0:s1	-	-	-	23c4009444b0	-	b5e28577cb53	-	-	2026-11-25	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-ifnir:cast:s1,f:xs:XP:archfiend-of-ifnir:cast:s1	-	-	-	d864b561c9cb	-	cecf08843bd3	-	-	2026-11-24	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	cast	cast-resolve	agreed	-	FX	scen	2	0	Breaching Dragonstorm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5370ee80-0354-454f-a16e-ec133e432ecb	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Breaching Dragonstorm/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5370ee80-0354-454f-a16e-ec133e432ecb	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:breaching-dragonstorm:f0t1:s1,f:xs:XP:breaching-dragonstorm:f0t1:s1	-	-	-	23c4009444b0	-	40e5756ba354	-	-	2026-11-25	xproof
 53716e0b-4d4e-40b0-8370-38e11f73d195	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53716e0b-4d4e-40b0-8370-38e11f73d195	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5372445b-5f67-435e-a736-61c6cb4f9c6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,8 +147,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53a1faa1-ca67-4027-bee8-0f7c4584d62b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a40369-0e62-4ad2-a6bd-65a5ff0da65e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-returned:cast:s1,f:xs:XP:march-of-the-returned:cast:s1	-	-	-	d864b561c9cb	-	73046b5f9bdc	-	-	2026-11-24	xproof
 53a4d9ee-6dfa-4a8b-a1e4-7f671a666188	cast	cast-resolve	agreed	-	X	scen	1	0	Auron's Inspiration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-53a59ba9-f4e9-460b-928a-ce6d7ae883f7	cast	cast-resolve	agreed	-	X	scen	1	0	Silken Strength/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+53a59ba9-f4e9-460b-928a-ce6d7ae883f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silken-strength:f0t0:s1,f:xs:XP:silken-strength:f0t0:s1	-	-	-	23c4009444b0	-	ccf34accbce0	-	-	2026-11-25	xproof
+53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silken-strength:f0t0:s1,f:xs:XP:silken-strength:f0t0:s1	-	-	-	23c4009444b0	-	ccf34accbce0	-	-	2026-11-25	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Silken Strength/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53aaa919-d08f-4b76-8583-bc2d4635f991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saavik-stoic-student:f0t0:s1,f:xs:XP:saavik-stoic-student:f0t0:s1	-	-	-	25696bf19d5b	-	1a605cd5a348	-	-	2026-11-24	xproof
 53aaa919-d08f-4b76-8583-bc2d4635f991	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:saavik-stoic-student:f0t0:s1,f:xs:XP:saavik-stoic-student:f0t0:s1	-	-	-	25696bf19d5b	-	1a605cd5a348	-	-	2026-11-24	xproof
