@@ -40,10 +40,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 372a01f7-6e58-4424-9405-0ee4acbb9346	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 372a01f7-6e58-4424-9405-0ee4acbb9346	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 372a01f7-6e58-4424-9405-0ee4acbb9346	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-372d7086-b7dc-4b6d-bdf6-e9ed9c995456	cast	cast-resolve	agreed	-	X	scen	1	0	Chief Warg's Company/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+372d7086-b7dc-4b6d-bdf6-e9ed9c995456	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:chief-warg-s-company:cast:s1,f:xs:XP:chief-warg-s-company:cast:s1	-	-	-	baa6f696107c	-	83e164fdab6c	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 372d7086-b7dc-4b6d-bdf6-e9ed9c995456	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Chief Warg's Company/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 372d7086-b7dc-4b6d-bdf6-e9ed9c995456	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Chief Warg's Company/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-372d7086-b7dc-4b6d-bdf6-e9ed9c995456	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Chief Warg's Company/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+372d7086-b7dc-4b6d-bdf6-e9ed9c995456	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:chief-warg-s-company:f0t0:s1,f:xs:XP:chief-warg-s-company:f0t0:s1	-	-	-	baa6f696107c	-	83e164fdab6c	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 372d7086-b7dc-4b6d-bdf6-e9ed9c995456	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chief Warg's Company/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 372e2d6e-427c-4152-b936-27dcf536ca84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 372f2534-25dc-4ff3-9891-31ee42b33345	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kobold-taskmaster:cast:s1,f:xs:XP:kobold-taskmaster:cast:s1	-	-	-	25696bf19d5b	-	dc4450a393b6	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3741206f-8ef5-4b8f-ae4c-df3ab0a17683	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toph-greatest-earthbender:f0t0:s1,f:xs:XP:toph-greatest-earthbender:f0t0:s1	-	-	-	8c0bd19283bb	-	b7db4e7e70f9	-	-	2026-11-24	xproof
 3741206f-8ef5-4b8f-ae4c-df3ab0a17683	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toph-greatest-earthbender:f0t0:s1,f:xs:XP:toph-greatest-earthbender:f0t0:s1	-	-	-	8c0bd19283bb	-	b7db4e7e70f9	-	-	2026-11-24	xproof
 37420ccd-c6c6-4f15-a696-d8986934afb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37420ccd-c6c6-4f15-a696-d8986934afb5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+37420ccd-c6c6-4f15-a696-d8986934afb5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 37429f88-e29b-4b1b-90fd-23a04d703c0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hail-of-arrows:cast:s1,f:xs:XP:hail-of-arrows:cast:s1	-	-	-	64a08ba7d913	-	b78dd8bfed0e	-	-	2026-11-24	xproof
 37445e06-88a1-4e2e-a432-383736c9b977	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37445e06-88a1-4e2e-a432-383736c9b977	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

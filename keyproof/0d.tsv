@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d1c6a82-943a-46bd-97ed-6055226ef2ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malcator-purity-overseer:f0t0:s1,f:xs:XP:malcator-purity-overseer:f0t0:s1	-	-	-	ae86f6029288	-	1729b384687c	-	-	2026-11-24	xproof
 0d1c6a82-943a-46bd-97ed-6055226ef2ab	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:malcator-purity-overseer:f0t1:s1,f:xs:XP:malcator-purity-overseer:f0t1:s1	-	-	-	054d9f516953	-	1729b384687c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0d208c1e-c273-437f-9aea-136400e450e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d208c1e-c273-437f-9aea-136400e450e1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+0d208c1e-c273-437f-9aea-136400e450e1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0d292575-c4ff-427a-953a-abc89e40caa6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d292575-c4ff-427a-953a-abc89e40caa6	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:citanul-druid:f0t0:s1,f:xs:XP:citanul-druid:f0t0:s1	-	-	-	9087eefec3ee	-	92df6dd27bba	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 0d2bbce0-8c27-4b82-ab62-51a0c3cfc9b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d2bbce0-8c27-4b82-ab62-51a0c3cfc9b0	f0/a2	Token	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-unseen:f0a2:s1,f:xs:XP:vraska-the-unseen:f0a2:s1	-	-	-	fb9d3088f0bf	-	1755cb03c661	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 0d2cdcc6-da65-4f66-ba38-111efad44919	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadly-alliance:cast:s1,f:xs:XP:deadly-alliance:cast:s1	-	-	-	ae86f6029288	-	653bf28ddde6	-	-	2026-11-24	xproof
 0d3617c3-1526-40e6-bc90-6139b5d3e1f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d3617c3-1526-40e6-bc90-6139b5d3e1f1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+0d3617c3-1526-40e6-bc90-6139b5d3e1f1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:opal-champion:f0t0:s1,f:xs:XP:opal-champion:f0t0:s1	-	-	-	baa6f696107c	-	96b7af99424c	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0d3a38ff-4b75-4e97-9d8f-c54f441f8208	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:conduit-goblin:cast:s1,f:xs:XP:conduit-goblin:cast:s1	-	-	-	ae86f6029288	-	57cd8b020965	-	-	2026-11-24	xproof
 0d3a38ff-4b75-4e97-9d8f-c54f441f8208	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:conduit-goblin:cast:s1,f:xs:XP:conduit-goblin:cast:s1	-	-	-	ae86f6029288	-	57cd8b020965	-	-	2026-11-24	xproof
 0d3a38ff-4b75-4e97-9d8f-c54f441f8208	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:conduit-goblin:cast:s1,f:xs:XP:conduit-goblin:cast:s1	-	-	-	ae86f6029288	-	57cd8b020965	-	-	2026-11-24	xproof
