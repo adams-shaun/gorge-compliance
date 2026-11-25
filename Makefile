@@ -534,7 +534,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # files (forge-oracle's up-to remove-any-type Done pick vs forge-game's TokenEffect), so the pin keeps both and the merge adds
 # no code of its own. Driver and die-roll code unchanged from 66671165f31; cardsfolder/tokenscripts unchanged (same as FORGE_REF
 # ff076d4432). Fork branch oracle/fpin-1125-mobilize-zero.
-FORGE_ORACLE_REF ?= 149a03bbbec4be2949cd05fedffaacb83674f249
+# bfdb3a8051 = oracle/fpin-1125: 149a03bbbec4 (above) merged with 46203751a5 (fork branch fix/xp-forge-driver-foretell-riot):
+# cast_mode "foretell" takes the K:Foretell special action (StepMachine.spellForMode; checkActed accepts it with no stack once
+# the card is exiled foretold, CR 702.143a/116.2h; Sozin's Comet, xpt-42b07d82), and Riot's UnlessCost$ AddCounter<1/P1P1>
+# reads gorge's choose_n[riot] pick (ScriptedController.payCostToPreventEffect: the counter pick pays, "Gain haste" declines,
+# CR 702.136a; Spider-Punk, xpt-cbd8207b). ForetellSpecialActionTest and RiotChoiceTest fail before it;
+# scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= bfdb3a8051988cdc077c38d9a9044c7cd40107e5
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

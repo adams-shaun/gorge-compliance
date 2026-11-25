@@ -126,7 +126,9 @@ func TestForgeRolledDie(t *testing.T) {
 // ScriptedController.chooseCounterType only); die-roll code unchanged, ForcedDieRollTest re-run green in the full driver suite.
 // 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (disjoint files: forge-oracle driver vs forge-game TokenEffect);
 // driver and die-roll code unchanged from 66671165f31.
-const forgeOracleDieRollRef = "149a03bbbec4be2949cd05fedffaacb83674f249"
+// bfdb3a8051 = 149a03bbbec4 merged with 46203751a5 (foretell cast mode, Riot choice; StepMachine/ScriptedController only);
+// die-roll code unchanged.
+const forgeOracleDieRollRef = "bfdb3a8051988cdc077c38d9a9044c7cd40107e5"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
