@@ -123,6 +123,31 @@ type StartFocus struct {
 	// is the active seat when the bait is no instant (a creature spell is cast
 	// on its controller's main phase).
 	Bait string `json:"bait,omitempty"`
+	// BaitSelf, for a play that targets a spell only the focus seat itself
+	// could have cast ("target creature spell you control"), names the spell
+	// the focus seat casts and holds priority on (CR 117.3a) before its play,
+	// so its own spell is the play's target. The start places it in the focus
+	// seat's hand with the lands its cost takes; the focus seat is already the
+	// active seat, so a creature spell bait is cast in its own main phase.
+	BaitSelf string `json:"baitSelf,omitempty"`
+	// BaitAbility, for a play that targets an activated ability, names the
+	// permanent (placed on the bait seat's battlefield with the lands its
+	// ability cost takes) whose ability the bait seat activates at turn 1's
+	// first main-phase priority before the focus play, so the play's target
+	// is on the stack (CR 115.1a). A cast bait cannot serve it: nothing is
+	// cast, the opponent has to activate.
+	BaitAbility string `json:"baitAbility,omitempty"`
+	// BaitAbilitySelf is whether the BaitAbility permanent sits on the focus
+	// seat's battlefield and the focus seat itself activates it (its copy- or
+	// counter-ability play targets only an ability it controls:
+	// "Activated.YouCtrl", Lithoform Engine).
+	BaitAbilitySelf bool `json:"baitAbilitySelf,omitempty"`
+	// BaitTarget names the permanent the bait spell targets at its cast, when
+	// the bait spell itself has a target (a Spell.singleTarget focus play:
+	// "target spell with a single target" is met only by a targeted bait).
+	// The start places it on the bait seat's battlefield, and the bait seat
+	// names it as the bait spell's target.
+	BaitTarget string `json:"baitTarget,omitempty"`
 	// Attack and Block are the scripted combat the focus play waits for: the
 	// active seat attacks with exactly Attack, the defending seat blocks it
 	// with exactly Block (no blocks when "" while Attack is set), and only

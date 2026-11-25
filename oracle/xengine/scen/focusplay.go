@@ -62,9 +62,14 @@ var permTypes = map[string]bool{
 // stackTgt is one target of a play that is a spell or ability on the stack: its
 // kind (the spell/activated/triggered alternative TargetType names), the
 // alternatives of the ValidTgts filter it must meet as written (raw), the
-// TargetType's own restrictions on the object (tt, e.g. Spell.singleTarget,
-// Spell.Colorless), and whether the play may decline it (TargetMin 0, Optional
-// or MayChooseTarget).
+// TargetType's own restrictions on the object (tt, e.g. Spell.Colorless),
+// whether the play may decline it (TargetMin 0, Optional or MayChooseTarget),
+// whether it needs a target of its own, single whether the TargetType
+// restriction Spell.singleTarget asks the spell to have exactly one target of
+// its own (a no-target bait spell never meets it; a targeted bait does), and
+// actSelf whether the TargetType restriction Activated.YouCtrl or
+// Triggered.YouCtrl asks the ability's controller to be the focus seat, so
+// only the focus seat's own activation of the bait serves it.
 //
 // needsTarget is the target's TargetValidTargeting$ restriction: the spell
 // being targeted must itself target a permanent/player (Keep Safe, Outwit,
@@ -82,6 +87,8 @@ type stackTgt struct {
 	tt          []filterAlt
 	optional    bool
 	needsTarget bool
+	single      bool
+	actSelf     bool
 }
 
 // stackTargetType reads a Forge TargetType value: a comma list of Spell,
@@ -89,8 +96,10 @@ type stackTgt struct {
 // (Spell.singleTarget, Spell.Colorless) or a further comma list
 // (Spell.Instant,Spell.Sorcery). A spell alternative is the one a bait can
 // serve; the restrictions become a filter on the bait's face, so a bait no
-// carrier meets (singleTarget, numTargets) is no bait rather than a wrong one.
-func stackTargetType(tt string) (kind string, alts []filterAlt) {
+// carrier meets (numTargets) is no bait rather than a wrong one.
+// Spell.singleTarget is different: it says the bait spell must itself have a
+// target, which the bait search reads as its single flag.
+func stackTargetType(tt string) (kind string, alts []filterAlt, single, actSelf bool) {
 	var spell, activated, triggered bool
 	for _, tok := range strings.Split(tt, ",") {
 		tok = strings.TrimSpace(tok)
@@ -98,26 +107,36 @@ func stackTargetType(tt string) (kind string, alts []filterAlt) {
 		switch head {
 		case "Spell", "SpellAbility":
 			spell = true
-			filter := "Spell"
-			if hasProp {
-				filter += "." + rest
+			switch {
+			case !hasProp:
+			case rest == "singleTarget":
+				single = true
+			default:
+				alts = append(alts, parseFilter("Spell."+rest)...)
 			}
-			alts = append(alts, parseFilter(filter)...)
-		case "Activated":
-			activated = true
-		case "Triggered":
-			triggered = true
+		case "Activated", "Triggered":
+			if head == "Activated" {
+				activated = true
+			} else {
+				triggered = true
+			}
+			// the restriction is on the ability's controller: YouCtrl means
+			// only an ability the focus seat itself took can be the target
+			// (Lithoform Engine), so the bait activation is its own
+			if hasProp && (rest == "YouCtrl" || rest == "YouOwn") {
+				actSelf = true
+			}
 		}
 	}
 	switch {
 	case spell:
-		return "spell", alts
+		return "spell", alts, single, actSelf
 	case activated:
-		return "activated", alts
+		return "activated", alts, single, actSelf
 	case triggered:
-		return "triggered", alts
+		return "triggered", alts, single, actSelf
 	}
-	return "", alts
+	return "", alts, single, actSelf
 }
 
 // chainReqs is the targets of the ability chain starting at line params (a
@@ -130,7 +149,7 @@ func stackTargetType(tt string) (kind string, alts []filterAlt) {
 func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, depth int) (reqs []tgtReq, stacks []stackTgt) {
 	for ; depth < 8 && p != nil; depth++ {
 		var stack stackTgt
-		stack.kind, stack.tt = stackTargetType(p["TargetType"])
+		stack.kind, stack.tt, stack.single, stack.actSelf = stackTargetType(p["TargetType"])
 		if stack.kind != "" {
 			if v := p["ValidTgts"]; v != "" {
 				for _, r := range strings.Split(v, ",") {
@@ -430,7 +449,7 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 			if !castableWithBait(face) {
 				return reasonNeedsStackTarget, nil
 			}
-			if _, _, ok := stackBait(reg, b, card, sts); !ok {
+			if _, ok := stackBait(reg, b, card, sts, fc.Kind); !ok {
 				return reasonNeedsStackTarget, nil
 			}
 		}
@@ -441,13 +460,14 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 		if ci < len(stacks) {
 			sts = stacks[ci]
 		}
-		bait, nonInstant := "", false
+		var plan stackBaitPlan
+		bait := false
 		if len(sts) > 0 {
 			required := false
 			for _, st := range sts {
 				required = required || !st.optional
 			}
-			name, ni, ok := stackBait(reg, b, card, sts)
+			p, ok := stackBait(reg, b, card, sts, fc.Kind)
 			switch {
 			case !ok:
 				// another choice may not target the stack
@@ -464,13 +484,13 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 					continue
 				}
 			default:
-				bait, nonInstant = name, ni
+				plan, bait = p, true
 			}
 		}
 		for try := 0; ; try++ {
 			bad, why := unmet(reg, f, seat, reqs)
 			if bad == nil {
-				if bait != "" {
+				if bait {
 					// an alternate additional cost ("behold a Jace or pay
 					// {1}") is paid in addition to the mana cost; place its
 					// mana fallback so the focus cast is affordable with the
@@ -481,7 +501,9 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 						return reasonNeedsStackTarget, nil
 					}
 					focusSeat(f, seat).Battlefield = append(focusSeat(f, seat).Battlefield, lands...)
-					placeBait(reg, f, seat, bait, nonInstant)
+					if !placeStackBait(reg, f, seat, plan) {
+						return reasonNeedsStackTarget, nil
+					}
 				}
 				return "", nil // a choice every target of which is met
 			}
@@ -506,20 +528,143 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 	return reason, nil
 }
 
-// stackBait is the most inert spell the stack targets accept: the first
-// instant of the carrier pool that meets every target's filter, so the focus
-// seat stays active and no bait land is tapped for a sorcery speed; else the
-// first matching permanent or sorcery (nonInstant). A filter no carrier meets
-// ("Card.cmcEQX", "Card.wasCastFromGraveyard"), a target only the focus seat
-// could control, a target whose TargetValidTargeting$ needs the bait itself to
-// have a target (an inert bait never does), and an ability target (a bait
-// would have to be activated, not cast) have no bait and keep the refusal.
-func stackBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt) (name string, nonInstant, ok bool) {
+// stackBaitPlan is the bait a stack target takes, exactly one of whose three
+// forms is set. cast is the spell the focus seat's opponent casts (the
+// original form); self is the spell the focus seat itself casts and holds
+// priority on (CR 117.3a), for a target only the focus seat could control
+// ("target creature spell you control"); ability is the permanent whose
+// ability the bait seat activates, for a target that is an activated ability
+// (abilitySelf moves that activation to the focus seat, its own battlefield,
+// when the target is one only it controls: "Activated.YouCtrl").
+// target is the permanent the cast bait spell itself targets (a
+// Spell.singleTarget focus play needs a targeted bait); nonInstant marks a
+// cast bait that must be cast on its controller's main phase.
+type stackBaitPlan struct {
+	cast, self, ability, target string
+	nonInstant                  bool
+	// abilitySelf is whether the ability bait is activated by the focus seat
+	// itself (the carrier sits on its battlefield), for a target only an
+	// ability the focus seat controls can be ("Activated.YouCtrl").
+	abilitySelf bool
+}
+
+// stackBait is the most inert thing the stack targets accept. For spell
+// targets: the first instant of the carrier pool that meets every target's
+// filter, so the focus seat stays active and no bait land is tapped for a
+// sorcery speed; else the first matching permanent or sorcery (nonInstant) --
+// except a Spell.singleTarget target, which no inert no-target carrier meets
+// and only a targeted cast bait (targetedCastBait) serves. A target whose
+// every alternative only the focus seat could control (YouCtrl) has no
+// opponent-cast bait: the focus seat casts its own instead (selfCastBait). An
+// activated-ability target has no cast bait at all: the bait seat activates
+// one of the activation carriers (activationBait). A target whose
+// TargetValidTargeting$ needs the bait itself to have a target (an inert bait
+// never does) and a target no form can serve have no bait and keep the
+// refusal.
+// kind is the focus play's kind ("cast" or "ability"): a self-cast bait works
+// only for a cast focus, whose play follows the held self cast on the stack
+// (CR 117.3a); an ability focus's activation after its own spell cast cannot
+// be lowered (the item's step is the activation, so the replay cannot credit
+// the cast it waits behind), and keeps the refusal.
+func stackBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt, kind string) (stackBaitPlan, bool) {
+	var plan stackBaitPlan
 	for _, st := range sts {
 		if st.needsTarget {
-			return "", false, false // an inert carrier is never a spell with a target
+			return plan, false // an inert carrier is never a spell with a target
 		}
 	}
+	ability, spell := true, true
+	single := false
+	for _, st := range sts {
+		ability = ability && st.kind == "activated"
+		spell = spell && st.kind == "spell"
+		single = single || st.single
+	}
+	if ability {
+		name := activationBait(reg, b, card, sts)
+		if name == "" {
+			return plan, false
+		}
+		plan.ability = name
+		for _, st := range sts {
+			if st.actSelf {
+				plan.abilitySelf = true
+			}
+		}
+		return plan, true
+	}
+	if !spell {
+		return plan, false // a triggered or mixed target: no bait form serves it
+	}
+	if single {
+		// a no-target carrier is never "a spell with a single target": the
+		// bait must itself have one target the start can place
+		name, tgt := targetedCastBait(reg, b, card, sts)
+		if name == "" {
+			return plan, false
+		}
+		plan.cast, plan.target = name, tgt
+		return plan, true
+	}
+	name, nonInstant := castBait(reg, b, card, sts)
+	if name != "" {
+		plan.cast, plan.nonInstant = name, nonInstant
+		return plan, true
+	}
+	name, nonInstant, self := selfCastBait(reg, b, card, sts, kind)
+	if self {
+		plan.self, plan.nonInstant = name, nonInstant
+		return plan, true
+	}
+	return plan, false
+}
+
+// activationBait is the most inert permanent whose activated ability the
+// stack targets accept: a card of the activation pool that every target's
+// ValidTgts filter (which for an ability target filters the ability's source)
+// takes as its source.
+func activationBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt) string {
+	for _, f := range baitPoolOf(reg, b).activation {
+		if f.Name == card {
+			continue
+		}
+		if sourceMeets(f, sts) {
+			return f.Name
+		}
+	}
+	return ""
+}
+
+// targetedCastBait is the most inert instant the stack targets accept whose
+// one ability has a target the start can place: a card of the targeted pool
+// that meets every target's filter, with the permanent its target names.
+func targetedCastBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt) (name, tgt string) {
+	for _, f := range baitPoolOf(reg, b).targeted {
+		if f.Name == card {
+			continue
+		}
+		met := true
+		for _, st := range sts {
+			if !stackSpell(f, st) {
+				met = false
+				break
+			}
+		}
+		if !met {
+			continue
+		}
+		if t, _ := baitTgtFor(reg, b, card, f.Abilities[0]); t != "" {
+			return f.Name, t
+		}
+	}
+	return "", ""
+}
+
+// castBait is the most inert spell the spell targets accept: the first instant
+// of the carrier pool that meets every target's filter, so the focus seat
+// stays active and no bait land is tapped for a sorcery speed; else the first
+// matching permanent or sorcery (nonInstant).
+func castBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt) (name string, nonInstant bool) {
 	pool := carrierPool(reg, b)
 	meets := func(f *cards.Face) bool {
 		for _, st := range sts {
@@ -532,6 +677,35 @@ func stackBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stac
 	for _, instant := range []bool{true, false} {
 		for _, f := range pool {
 			if f.Name == card || f.IsLand() || f.IsInstant() != instant || !meets(f) {
+				continue
+			}
+			return f.Name, !instant
+		}
+	}
+	return "", false
+}
+
+// selfCastBait is the most inert spell of the carrier pool the spell targets
+// accept when cast by the focus seat itself: every alternative the target
+// reads is one its own spell meets ("Creature.YouCtrl", a plain "Spell"), and
+// one no opponent-cast bait meets (YouCtrl) is met by the focus seat's own
+// cast. An instant first (the focus seat casts it at any priority), else a
+// permanent or sorcery (nonInstant). A Spell.singleTarget target has no self
+// bait: a targeted self bait would need its own placed target and the
+// focus-seat cast forms in the corpus are plain spells.
+func selfCastBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt, kind string) (name string, nonInstant, ok bool) {
+	if kind != "cast" {
+		return "", false, false // an ability focus cannot hold its own cast
+	}
+	for _, st := range sts {
+		if st.single {
+			return "", false, false
+		}
+	}
+	pool := carrierPool(reg, b)
+	for _, instant := range []bool{true, false} {
+		for _, f := range pool {
+			if f.Name == card || f.IsLand() || f.IsInstant() != instant || !selfSpellMeets(f, sts) {
 				continue
 			}
 			return f.Name, !instant, true
@@ -590,6 +764,71 @@ func castableWithBait(face *cards.Face) bool {
 	return face.IsInstant() || face.HasKeyword("Flash")
 }
 
+// selfSpellMeets is stackSpell for a bait the focus seat casts itself: an
+// alternative a controller only the opponent could have is not one its own
+// spell meets, and one only the focus seat could control (YouCtrl) is.
+func selfSpellMeets(f *cards.Face, sts []stackTgt) bool {
+	for _, st := range sts {
+		ok := false
+		for _, raw := range st.raw {
+			if selfSpellAlt(raw, f) {
+				ok = true
+				break
+			}
+		}
+		if !ok {
+			return false
+		}
+		for _, a := range st.tt {
+			if !a.known || a.self || a.ctrl == ctrlOpp {
+				continue
+			}
+			if a.test(f) {
+				return true
+			}
+		}
+		if len(st.tt) != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+// selfSpellAlt is spellAlt read from the focus seat's side: an alternative the
+// opponent of the focus seat alone could control (OppCtrl, YouDontCtrl) is not
+// one its own cast meets, and YouCtrl is.
+func selfSpellAlt(raw string, f *cards.Face) bool {
+	for _, a := range parseFilter(raw) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		if a.test(f) {
+			return true
+		}
+	}
+	return false
+}
+
+// sourceMeets reports whether a permanent face f can be the source of the
+// activated ability the stack target takes: an alternative of its ValidTgts
+// filter (which for an ability target filters the ability's source permanent),
+// read as the focus play reads it (spellAlt).
+func sourceMeets(f *cards.Face, sts []stackTgt) bool {
+	for _, st := range sts {
+		ok := false
+		for _, raw := range st.raw {
+			if spellAlt(raw, f) {
+				ok = true
+				break
+			}
+		}
+		if !ok {
+			return false
+		}
+	}
+	return true
+}
+
 // baitCostLands is the mana a cast focus pays beyond its ManaCost through an
 // AlternateAdditionalCost$ that has a pure-mana alternative ("Behold<1/Jace>:1",
 // "tapXType<1/Artifact>:1", "Sac<...>:3 B"). ok is false when no alternative is
@@ -632,15 +871,67 @@ func focusSeat(f *StartFile, seat int) *StartSeat {
 // lands its cost takes, and on a non-instant bait makes that seat active so it
 // can cast it at turn 1's first main phase.
 func placeBait(reg *cards.Registry, f *StartFile, seat int, name string, nonInstant bool) {
-	s := &f.Setup.P1
-	if seat == 1 {
-		s = &f.Setup.P0
-	}
-	castCarrier(reg, s, name)
+	baitSeatOf(f, seat)
+	castCarrier(reg, baitSeatOf(f, seat), name)
 	f.Focus.Bait = name
 	if nonInstant {
 		f.Active = 1 - seat
 	}
+}
+
+// placeStackBait writes the plan's bait into the start: an opponent-cast bait
+// through placeBait, with its own target on the bait seat's battlefield when
+// the bait spell has one; a focus-seat self-cast bait in the focus seat's hand
+// with the lands its cost takes; an ability bait on the bait seat's
+// battlefield with the lands its ability cost takes.
+func placeStackBait(reg *cards.Registry, f *StartFile, seat int, plan stackBaitPlan) bool {
+	switch {
+	case plan.cast != "":
+		placeBait(reg, f, seat, plan.cast, plan.nonInstant)
+		if plan.target != "" {
+			s := baitSeatOf(f, seat)
+			s.Battlefield = append(s.Battlefield, plan.target)
+			f.Focus.BaitTarget = plan.target
+		}
+	case plan.self != "":
+		castCarrier(reg, focusSeat(f, seat), plan.self)
+		f.Focus.BaitSelf = plan.self
+	case plan.ability != "":
+		c, found := reg.Lookup(plan.ability)
+		if !found || len(c.Faces) == 0 {
+			return false
+		}
+		sa := baitAbilityOf(c.Faces[0])
+		if sa == nil {
+			return false
+		}
+		cost := sa.Params["Cost"]
+		mana, why := costTokens(cost)
+		if why != "" {
+			return false
+		}
+		// an ability target the focus seat itself controls ("Activated.YouCtrl")
+		// is met by its own activation: the carrier sits on its battlefield
+		s := baitSeatOf(f, seat)
+		if plan.abilitySelf {
+			s = focusSeat(f, seat)
+		}
+		s.Battlefield = append(s.Battlefield, plan.ability)
+		s.Battlefield = append(s.Battlefield, landsFor(mana, basicFor(cost))...)
+		f.Focus.BaitAbility = plan.ability
+		f.Focus.BaitAbilitySelf = plan.abilitySelf
+	}
+	return true
+}
+
+// baitSeatOf is the start seat that casts the bait: the seat the focus does
+// not take its play from.
+func baitSeatOf(f *StartFile, seat int) *StartSeat {
+	s := &f.Setup.P1
+	if seat == 1 {
+		s = &f.Setup.P0
+	}
+	return s
 }
 
 // tapsSelf reports whether the focus play is an ability whose cost taps the

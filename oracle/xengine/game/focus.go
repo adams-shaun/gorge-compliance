@@ -3,6 +3,8 @@ package game
 import (
 	"context"
 	"errors"
+	"fmt"
+	"os"
 	"slices"
 
 	"github.com/adams-shaun/gorge/bots/botpolicy"
@@ -33,6 +35,30 @@ type Focus struct {
 	// start places the card in the opponent's hand with the lands its cost
 	// takes, and the opponent is the active seat when the bait is no instant.
 	Bait string
+	// BaitSelf, for a play that targets a spell only the focus seat itself
+	// could have cast ("target creature spell you control"), names the spell
+	// the focus seat casts and holds priority on (CR 117.3a) before its play,
+	// so its own spell is the play's target. The start places it in the focus
+	// seat's hand with the lands its cost takes.
+	BaitSelf string
+	// BaitAbility, for a play that targets an activated ability, names the
+	// permanent (on the bait seat's battlefield, with the lands its ability
+	// cost takes) whose ability the bait seat activates at turn 1's first
+	// main-phase priority before the focus play, so the play's target is on
+	// the stack. A cast bait cannot serve it: nothing is cast, the opponent
+	// has to activate.
+	BaitAbility string
+	// BaitAbilitySelf is whether the focus seat itself activates the
+	// BaitAbility permanent (which sits on its own battlefield), for a play
+	// whose target is only an ability the focus seat controls
+	// ("Activated.YouCtrl", Lithoform Engine's copy). The activation is the
+	// same bait turn-1 main-phase script, taken by the focus seat before its
+	// play.
+	BaitAbilitySelf bool
+	// BaitTarget names the permanent the bait spell targets at its cast, when
+	// the bait spell itself has a target (a Spell.singleTarget focus play).
+	// The start places it on the bait seat's battlefield.
+	BaitTarget string
 	// Targets are the permanents the focus play must target, in the order the
 	// play asks for them. A forced start names them because another placed
 	// card can be a legal alternative the bot would pick instead (an Aura's
@@ -64,11 +90,24 @@ type focusState struct {
 	attacked, blocked     bool
 	done                  bool
 	n                     int // actions taken
-	// baitObjs are the objects of the opponent's hand whose front face is the
-	// bait card; baitCast is whether the opponent has cast it. Both are only
-	// read when f.Bait is set.
+	// baitObjs are the objects of the bait card in the hand of the seat that
+	// casts it: the opponent's for f.Bait, the focus seat's own for f.BaitSelf.
+	// baitCast is whether that cast has been taken. Both are only read when a
+	// cast bait is set.
 	baitObjs map[state.ObjID]bool
 	baitCast bool
+	// baitActObjs are the battlefield objects of the bait seat whose face is
+	// the BaitAbility card; baitActDone whether its ability activation has
+	// been taken. Both only read when f.BaitAbility is set.
+	baitActObjs map[state.ObjID]bool
+	baitActDone bool
+	// baitTgtObjs are the battlefield objects of the BaitTarget card, the
+	// permanent the bait spell names at its cast; only read when f.BaitTarget
+	// is set.
+	baitTgtObjs map[state.ObjID]bool
+	// baitSelfCast is whether the focus seat has cast its own bait spell
+	// (f.BaitSelf), and so takes its focus play against it.
+	baitSelfCast bool
 	// tapsFocus is whether the focus ability's own cost taps or untaps its
 	// source ({T}, {Q}): a land focus such as Vitu-Ghazi, the City-Tree must
 	// stay untapped to pay that part, so it is never tapped for mana first.
@@ -114,6 +153,7 @@ func (s *focusState) read(e *rules.Engine) {
 	s.e = e
 	s.objs = map[state.ObjID]bool{}
 	s.baitObjs = map[state.ObjID]bool{}
+	s.baitActObjs, s.baitTgtObjs = map[state.ObjID]bool{}, map[state.ObjID]bool{}
 	s.attackObjs, s.blockObjs = map[state.ObjID]bool{}, map[state.ObjID]bool{}
 	for _, l := range []struct {
 		name string
@@ -152,15 +192,56 @@ func (s *focusState) read(e *rules.Engine) {
 			s.tapsFocus = c.Tap || c.Untap
 		}
 	}
-	if s.f.Bait == "" || len(e.G.Players) != 2 {
+	// the bait is cast from the hand of the seat that casts it (the focus
+	// seat's opponent for f.Bait, the focus seat itself for f.BaitSelf), so
+	// only that hand's copies are the bait (the deck filler never names it).
+	// The bait's own target (f.BaitTarget) and the ability bait's source
+	// (f.BaitAbility) sit on the battlefields, of any seat for the target and
+	// the bait seat's for the source.
+	var baitHand state.Zone
+	var wantBait string
+	switch {
+	case s.f.Bait != "":
+		baitHand, wantBait = state.ZHand, cards.NormalizeName(s.f.Bait)
+	case s.f.BaitSelf != "":
+		baitHand, wantBait = state.ZHand, cards.NormalizeName(s.f.BaitSelf)
+	case s.f.BaitAbility != "":
+		baitHand = state.ZHand // no cast bait: only the activation below
+	default:
 		return
 	}
-	// the bait is cast from the focus seat's opponent's hand, so only that
-	// hand's copies are the bait (the deck filler never names it)
-	bait := cards.NormalizeName(s.f.Bait)
-	for _, id := range e.G.Zone(state.ZHand, state.PlayerID(1-s.f.Seat)) {
-		if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == bait {
+	if len(e.G.Players) != 2 {
+		return
+	}
+	caster := 1 - s.f.Seat
+	if s.f.BaitSelf != "" {
+		caster = s.f.Seat
+	}
+	for _, id := range e.G.Zone(baitHand, state.PlayerID(caster)) {
+		if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == wantBait {
 			s.baitObjs[id] = true
+		}
+	}
+	if s.f.BaitTarget != "" {
+		tgt := cards.NormalizeName(s.f.BaitTarget)
+		for p := range e.G.Players {
+			for _, id := range e.G.Zone(state.ZBattlefield, state.PlayerID(p)) {
+				if isNamed(e.G.Obj(id), tgt) {
+					s.baitTgtObjs[id] = true
+				}
+			}
+		}
+	}
+	if s.f.BaitAbility != "" {
+		act := cards.NormalizeName(s.f.BaitAbility)
+		seat := state.PlayerID(1 - s.f.Seat)
+		if s.f.BaitAbilitySelf {
+			seat = state.PlayerID(s.f.Seat)
+		}
+		for _, id := range e.G.Zone(state.ZBattlefield, seat) {
+			if isNamed(e.G.Obj(id), act) {
+				s.baitActObjs[id] = true
+			}
 		}
 	}
 }
@@ -261,32 +342,35 @@ func (s *focusState) landTap(d decision.Decision) int {
 	return -1
 }
 
-// bait is the opponent's scripted cast and both seats' pass before it: at
-// turn 1's first main priority the opponent casts the bait spell (Focus.Bait),
-// and the focus seat holds its priority until the bait is on the stack, so a
-// focus play that targets a spell has a legal target (CR 115.1a). ok is false
-// for any other decision, for a start with no bait, and once the focus has
-// acted.
+// bait is the scripted bait and both seats' passes before it. For a cast bait
+// (f.Bait, f.BaitSelf) the caster casts the bait spell at turn 1's first main
+// priority; for an ability bait (f.BaitAbility) the bait seat activates the
+// placed permanent's ability there. The focus seat holds its priority until
+// the bait is done, so a focus play that targets a spell or an ability has a
+// legal target on the stack (CR 115.1a). A bait spell that itself has a target
+// (f.BaitTarget) is answered the named permanent. ok is false for any other
+// decision, for a start with no bait, and once the focus has acted.
 func (s *focusState) bait(d decision.Decision, in decision.Intent) (decision.Intent, bool) {
-	if s.f.Bait == "" || s.e == nil || s.done || d.Kind != decision.KPriority || len(s.e.G.Players) != 2 {
-		return in, false
+	if s.f.Bait == "" && s.f.BaitSelf == "" && s.f.BaitAbility == "" {
+		return s.baitTarget(d, in) // no bait form: the focus acts as before
+	}
+	if s.e == nil || s.done || d.Kind != decision.KPriority || len(s.e.G.Players) != 2 {
+		return s.baitTarget(d, in)
 	}
 	seat := s.f.Seat
 	baitSeat := 1 - seat
 	switch {
-	case int(d.Player) == seat:
-		if !s.baitCast {
-			return pass(d, in), true
+	case s.f.BaitSelf != "" && int(d.Player) == seat:
+		if s.baitSelfCast {
+			return in, false // the self-bait is on the stack: take the focus play
 		}
-	case int(d.Player) == baitSeat:
-		if !s.open() || s.baitCast {
-			// before main 1 the bait would be cut from the span; once it is on
-			// the stack the bait seat takes no other action before the focus
+		if !s.open() {
+			// before main 1 the bait would be cut from the span
 			return pass(d, in), true
 		}
 		for i, o := range d.Options {
 			if o.Kind == "cast" && s.baitObjs[o.Obj] {
-				s.baitCast = true
+				s.baitSelfCast = true
 				return answer(in, i), true
 			}
 		}
@@ -294,8 +378,93 @@ func (s *focusState) bait(d decision.Decision, in decision.Intent) (decision.Int
 			return answer(in, i), true
 		}
 		return pass(d, in), true
+	case int(d.Player) == seat:
+		if s.f.BaitAbilitySelf && !s.baitActDone {
+			// the focus seat's own activation is the bait (its play targets
+			// only an ability it controls): take it at main 1 before the play
+			if s.open() {
+				for i, o := range d.Options {
+					if o.Kind == "ability" && s.baitActObjs[o.Obj] {
+						s.baitActDone = true
+						return answer(in, i), true
+					}
+				}
+			}
+			return pass(d, in), true
+		}
+		if !s.baitDone() {
+			return pass(d, in), true
+		}
+	case int(d.Player) == baitSeat:
+		if s.f.BaitAbility != "" {
+			if !s.open() || s.baitActDone {
+				// before main 1 the bait would be cut from the span; once the
+				// ability is on the stack the bait seat takes no other action
+				// before the focus
+				return pass(d, in), true
+			}
+			for i, o := range d.Options {
+				if o.Kind == "ability" && s.baitActObjs[o.Obj] {
+					s.baitActDone = true
+					return answer(in, i), true
+				}
+			}
+			if i := s.landTap(d); i >= 0 {
+				return answer(in, i), true
+			}
+			return pass(d, in), true
+		}
+		if s.f.Bait != "" {
+			if !s.open() || s.baitCast {
+				// before main 1 the bait would be cut from the span; once it is on
+				// the stack the bait seat takes no other action before the focus
+				return pass(d, in), true
+			}
+			for i, o := range d.Options {
+				if o.Kind == "cast" && s.baitObjs[o.Obj] {
+					s.baitCast = true
+					return answer(in, i), true
+				}
+			}
+			if i := s.landTap(d); i >= 0 {
+				return answer(in, i), true
+			}
+			return pass(d, in), true
+		}
 	}
 	return in, false
+}
+
+// baitTarget answers the target ask of a bait spell that itself has one
+// (f.BaitTarget): the ask whose source is the bait object is answered with the
+// named permanent, so the bait is a spell with a single target and the start
+// knows which one (a Spell.singleTarget focus play). ok is false for any other
+// ask, which the bot answers as before.
+func (s *focusState) baitTarget(d decision.Decision, in decision.Intent) (decision.Intent, bool) {
+	if s.f.BaitTarget == "" || d.Kind != decision.KTarget || s.e == nil || !s.baitObjs[d.Source] {
+		return in, false
+	}
+	most := max(d.Max, 1)
+	var picks []int
+	for i, o := range d.Options {
+		if len(picks) >= most || !s.baitTgtObjs[o.Obj] {
+			continue
+		}
+		picks = append(picks, i)
+	}
+	if len(picks) < d.Min || len(picks) == 0 {
+		return in, false
+	}
+	return answer(in, picks...), true
+}
+
+// baitDone reports whether the seat's scripted bait (a cast or an ability
+// activation) has been taken, so the focus seat may act.
+func (s *focusState) baitDone() bool {
+	if s.f.BaitAbility != "" {
+		return s.baitActDone
+	}
+	return s.baitCast
 }
 
 // manaFor is, for a cast or ability focus, the focus seat's first activation of
@@ -474,6 +643,9 @@ func (s *focusState) line(d decision.Decision, in decision.Intent) (decision.Int
 // before main 1 and leave the forced line unaffordable.
 func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decision.Intent, error) {
 	st := b.st
+	if os.Getenv("FOCUS_DEBUG") != "" {
+		os.Stderr.WriteString(fmt.Sprintf("ACT kind=%s player=%d done=%v\n", d.Kind, d.Player, st.done))
+	}
 	if err != nil {
 		return in, err
 	}

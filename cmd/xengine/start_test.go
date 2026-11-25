@@ -837,13 +837,20 @@ func TestStartStackTargetCostIsExercised(t *testing.T) {
 // (TargetValidTargeting: the first bait was an inert Reach Through Mists no
 // such spell can be cast against), Ring of Immortals (an ability that targets a
 // spell), Admiral's Order and Aerial Assault (the brief's needs-target
-// refusals), and the alternate-additional-cost cards.
+// refusals), the alternate-additional-cost cards, and the residual bait forms:
+// an activated-ability target (Bind, Squelch, Interdict), a
+// Spell.singleTarget target (Divert, Deflection, Misdirection), and a
+// you-control stack target the focus seat meets with its own held pre-cast
+// (Double Major, Increasing Vengeance).
 var stackTargetHardCards = []string{
 	"Remove Soul", "Meddle", "Admiral's Order", "Aerial Assault",
 	"Keep Safe", "Outwit", "Intervene", "Avoid Fate", "Hindering Light", "Confound",
 	"Psychic Rebuttal", "Turn Aside", "Rebuff the Wicked", "Not of This World",
 	"Teferi's Response", "Ring of Immortals",
 	"Countersculpt", "Disruption Protocol", "Louisoix's Sacrifice", "Wild Unraveling",
+	"Bind", "Squelch", "Interdict",
+	"Divert", "Deflection", "Misdirection",
+	"Double Major", "Increasing Vengeance",
 }
 
 // stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
@@ -910,8 +917,9 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 				refused++
 				continue
 			}
-			if res.Start.Focus == nil || res.Start.Focus.Bait == "" {
-				noBait++ // a start with no bait (an ability target, or no stack target)
+			if res.Start.Focus == nil || (res.Start.Focus.Bait == "" && res.Start.Focus.BaitSelf == "" &&
+				res.Start.Focus.BaitAbility == "" && res.Start.Focus.BaitTarget == "") {
+				noBait++ // a start with no bait at all (a non-stack key, or no stack target)
 				continue
 			}
 			wrote++

@@ -1367,7 +1367,12 @@ func TestStartFocusIsOffered(t *testing.T) {
 // start:needs-stack-target (Absorb, Bone to Ash, ...). The start now scripts
 // the opponent's bait cast (Focus.Bait): the most inert spell of the kind the
 // target filter takes, in the opponent's hand with its lands, so the focus play
-// has a legal target (CR 115.1a).
+// has a legal target (CR 115.1a). The residual classes have their own bait
+// forms: an activated-ability target is met by the bait seat's activation of a
+// placed permanent (Focus.BaitAbility, Bind), a Spell.singleTarget target by a
+// targeted bait cast with its own placed target (Focus.BaitTarget, Divert), and
+// a target only the focus seat could control by the focus seat's own held
+// pre-cast (Focus.BaitSelf, Double Major).
 func TestStartstacktarget(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, c := range []struct {
@@ -1375,15 +1380,38 @@ func TestStartstacktarget(t *testing.T) {
 		// creature is whether the key's target must be a creature spell
 		// (Bone to Ash's "Counter target creature spell").
 		creature bool
+		// baitForm is the bait class the card's stack target takes: "cast"
+		// (the opponent's plain-spell cast), "ability", "abilitySelf",
+		// "targeted" or "self".
+		baitForm string
+		// key is the cast key by default; an ability bait form may take the
+		// key of the targeting ability instead
+		key string
 	}{
 		{card: "Absorb"},                      // Counter target spell
 		{card: "Admiral's Order"},             // Counter target spell
 		{card: "Assert Authority"},            // Counter target spell, exile instead
 		{card: "Condescend"},                  // Counter target spell unless its controller pays {X}
 		{card: "Bone to Ash", creature: true}, // Counter target creature spell
+		{card: "Bind", baitForm: "ability"},   // Counter target activated ability
+		{card: "Squelch", baitForm: "ability"},
+		{card: "Interdict", baitForm: "ability"}, // from an artifact, creature, enchantment, or land
+		{card: "Divert", baitForm: "targeted"},   // target spell with a single target
+		{card: "Deflection", baitForm: "targeted"},
+		{card: "Misdirection", baitForm: "targeted"},
+		{card: "Double Major", baitForm: "self", creature: true}, // target creature spell you control
+		{card: "Increasing Vengeance", baitForm: "self"},         // target instant or sorcery spell you control
+		// an ability target only the focus seat controls: the focus seat
+		// itself activates the placed carrier (its copy-ability play targets
+		// only an ability it controls, "Activated.YouCtrl")
+		{card: "Lithoform Engine", baitForm: "abilitySelf", key: "f0/a0"},
 	} {
 		t.Run(c.card, func(t *testing.T) {
-			res, err := Generate(reg, b, c.card, "cast", Options{Prefer: "start"})
+			key := c.key
+			if key == "" {
+				key = "cast"
+			}
+			res, err := Generate(reg, b, c.card, key, Options{Prefer: "start"})
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -1391,30 +1419,113 @@ func TestStartstacktarget(t *testing.T) {
 				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
 			}
 			f := res.Start
-			if f.Focus == nil || f.Focus.Bait == "" {
-				t.Fatalf("focus %+v, want a scripted bait cast", f.Focus)
+			if f.Focus == nil {
+				t.Fatalf("no focus, want a scripted bait")
 			}
-			if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
-				t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
-			}
-			bc, ok := reg.Lookup(f.Focus.Bait)
-			if !ok || len(bc.Faces) == 0 {
-				t.Fatalf("bait %q is not a card", f.Focus.Bait)
-			}
-			bait := bc.Faces[0]
-			if bait.IsLand() {
-				t.Errorf("bait %q is a land, which is not a spell", f.Focus.Bait)
-			}
-			if c.creature && !bait.IsCreature() {
-				t.Errorf("bait %q is not a creature spell for a creature-spell target", f.Focus.Bait)
-			}
-			if c.creature && f.Active != 1 {
-				// a creature spell can only be cast on its controller's main
-				// phase, so the bait seat is the active one
-				t.Errorf("active %d, want the bait seat 1", f.Active)
-			}
-			if col := firstColour(bait.ManaCost); col != "" && !slices.Contains(f.Setup.P1.Battlefield, basicOf[col]) {
-				t.Errorf("p1 battlefield %v has no %s to pay the bait", f.Setup.P1.Battlefield, basicOf[col])
+			switch c.baitForm {
+			case "", "cast":
+				if f.Focus.Bait == "" || f.Focus.BaitSelf != "" || f.Focus.BaitAbility != "" || f.Focus.BaitTarget != "" {
+					t.Fatalf("focus %+v, want a scripted opponent bait cast", f.Focus)
+				}
+				if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
+					t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
+				}
+				bc, ok := reg.Lookup(f.Focus.Bait)
+				if !ok || len(bc.Faces) == 0 {
+					t.Fatalf("bait %q is not a card", f.Focus.Bait)
+				}
+				bait := bc.Faces[0]
+				if bait.IsLand() {
+					t.Errorf("bait %q is a land, which is not a spell", f.Focus.Bait)
+				}
+				if c.creature && !bait.IsCreature() {
+					t.Errorf("bait %q is not a creature spell for a creature-spell target", f.Focus.Bait)
+				}
+				if c.creature && f.Active != 1 {
+					// a creature spell can only be cast on its controller's main
+					// phase, so the bait seat is the active one
+					t.Errorf("active %d, want the bait seat 1", f.Active)
+				}
+				if col := firstColour(bait.ManaCost); col != "" && !slices.Contains(f.Setup.P1.Battlefield, basicOf[col]) {
+					t.Errorf("p1 battlefield %v has no %s to pay the bait", f.Setup.P1.Battlefield, basicOf[col])
+				}
+			case "ability", "abilitySelf":
+				if f.Focus.BaitAbility == "" || f.Focus.Bait != "" || f.Focus.BaitSelf != "" {
+					t.Fatalf("focus %+v, want a scripted bait ability activation", f.Focus)
+				}
+				if (c.baitForm == "abilitySelf") != f.Focus.BaitAbilitySelf {
+					t.Fatalf("focus %+v, want baitAbilitySelf %v", f.Focus, c.baitForm == "abilitySelf")
+				}
+				ac, ok := reg.Lookup(f.Focus.BaitAbility)
+				if !ok || len(ac.Faces) == 0 {
+					t.Fatalf("bait ability %q is not a card", f.Focus.BaitAbility)
+				}
+				act := ac.Faces[0]
+				if !act.IsPermanent() || act.IsLand() {
+					t.Errorf("bait ability %q is not a nonland permanent", f.Focus.BaitAbility)
+				}
+				sa := baitAbilityOf(act)
+				if sa == nil {
+					t.Fatalf("%q has no activated ability", f.Focus.BaitAbility)
+				}
+				mana, why := costTokens(sa.Params["Cost"])
+				if why != "" {
+					t.Fatalf("%q ability cost %q is not placeable: %s", f.Focus.BaitAbility, sa.Params["Cost"], why)
+				}
+				bf := f.Setup.P1.Battlefield
+				if f.Focus.BaitAbilitySelf {
+					bf = f.Setup.P0.Battlefield
+				}
+				if !slices.Contains(bf, f.Focus.BaitAbility) {
+					t.Errorf("battlefield %v does not list the bait ability %q (self %v)", bf, f.Focus.BaitAbility, f.Focus.BaitAbilitySelf)
+				}
+				for _, l := range landsFor(mana, basicFor(sa.Params["Cost"])) {
+					if !slices.Contains(bf, l) {
+						t.Errorf("bait battlefield %v has no %s to pay the ability cost", bf, l)
+					}
+				}
+			case "targeted":
+				if f.Focus.Bait == "" || f.Focus.BaitTarget == "" || f.Focus.BaitSelf != "" || f.Focus.BaitAbility != "" {
+					t.Fatalf("focus %+v, want a targeted bait cast with its own target", f.Focus)
+				}
+				bc, ok := reg.Lookup(f.Focus.Bait)
+				if !ok || len(bc.Faces) == 0 {
+					t.Fatalf("bait %q is not a card", f.Focus.Bait)
+				}
+				bait := bc.Faces[0]
+				if !bait.IsInstant() {
+					t.Errorf("bait %q is not an instant, which the bait seat could not cast at main 1", f.Focus.Bait)
+				}
+				if len(bait.Abilities) != 1 || bait.Abilities[0].Params["ValidTgts"] == "" {
+					t.Fatalf("bait %q has no one targeted ability", f.Focus.Bait)
+				}
+				if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
+					t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
+				}
+				if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.BaitTarget) {
+					t.Errorf("p1 battlefield %v does not list the bait's target %q", f.Setup.P1.Battlefield, f.Focus.BaitTarget)
+				}
+			case "self":
+				if f.Focus.BaitSelf == "" || f.Focus.Bait != "" || f.Focus.BaitAbility != "" || f.Focus.BaitTarget != "" {
+					t.Fatalf("focus %+v, want a focus-seat self bait cast", f.Focus)
+				}
+				if !slices.Contains(f.Setup.P0.Hand, f.Focus.BaitSelf) {
+					t.Errorf("p0 hand %v does not list the self bait %q", f.Setup.P0.Hand, f.Focus.BaitSelf)
+				}
+				sc, ok := reg.Lookup(f.Focus.BaitSelf)
+				if !ok || len(sc.Faces) == 0 {
+					t.Fatalf("self bait %q is not a card", f.Focus.BaitSelf)
+				}
+				self := sc.Faces[0]
+				if c.creature && !self.IsCreature() {
+					t.Errorf("self bait %q is not a creature spell for a creature-spell-you-control target", f.Focus.BaitSelf)
+				}
+				if !c.creature && !self.IsInstant() && !self.IsSorcery() {
+					t.Errorf("self bait %q is not an instant or sorcery spell", f.Focus.BaitSelf)
+				}
+				if col := firstColour(self.ManaCost); col != "" && !slices.Contains(f.Setup.P0.Battlefield, basicOf[col]) {
+					t.Errorf("p0 battlefield %v has no %s to pay the self bait", f.Setup.P0.Battlefield, basicOf[col])
+				}
 			}
 		})
 	}
