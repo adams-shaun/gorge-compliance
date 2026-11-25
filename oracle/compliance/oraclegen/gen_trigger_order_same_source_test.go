@@ -31,6 +31,32 @@ func TestTriggerOrderSameSourceScriptsXMageRuleText(t *testing.T) {
 	}
 }
 
+// TestTriggerOrderDuplicatedSourceUsesNames: Harmonic Prodigy's Prowess and
+// two Soul-Scar Mage Prowess triggers (Prodigy doubles another Wizard's
+// trigger) name Soul-Scar twice, but both picks are the SAME ability of the
+// SAME object, so their mutual order is unobservable (CR 603.3b). The distinct
+// sources still order by name; the second Soul-Scar pick is the one XMage
+// auto-pushes. Before the fix the all-"Prowess" text form keyed every pick
+// "Prowess", XMage matched Soul-Scar's ability first and ordered the stack
+// itself.
+func TestTriggerOrderDuplicatedSourceUsesNames(t *testing.T) {
+	d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Options: 3, Min: 3, Max: 3, PickIdx: []int{0, 1, 2}, PickKinds: []string{"trigger", "trigger", "trigger"},
+		Picks:    []string{"Harmonic Prodigy: Prowess", "Soul-Scar Mage: Prowess", "Soul-Scar Mage: Prowess"},
+		PickRefs: []string{"p0:Harmonic Prodigy", "p0:Soul-Scar Mage", "p0:Soul-Scar Mage"}}
+	if !triggerOrderNamesDistinct(d) {
+		t.Fatalf("precondition: %v collapses to distinct source names", d.PickRefs)
+	}
+	got := XAnswers([]rules.OracleDecision{d}, 2, nil)
+	want := [][]XAnswer{
+		nil,
+		{{0, "choice", "Harmonic Prodigy"}, {0, "choice", "Soul-Scar Mage"}},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v (order the distinct sources by name)", got, want)
+	}
+}
+
 // TestTriggerOrderDistinctSourceNamesSource is the sibling precondition: the
 // same decision with DISTINCT sources still names each source (the Adrenaline
 // Jockey fix). The two decisions differ only in PickRefs, so a regression that

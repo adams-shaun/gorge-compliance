@@ -603,7 +603,10 @@ func TestSkipEarlyCasts(t *testing.T) {
 // TestClassifyXMageSameNameTriggerOrder: XMage's driver orders triggers by
 // rule text or source name, so a trigger order over two same-named objects is
 // one it cannot follow. A difference at or after it is the driver's; Forge
-// follows the order by source, and a distinct-name order is followed too.
+// follows the order by source, and a distinct-name order is followed too. A
+// repeated source whose picks are one ability (same ref and same rule text) is
+// interchangeable (CR 603.3b), so the distinct sources around it are still
+// compared rather than excused.
 func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
 	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
 		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "cast", Card: "p0:Shock", Answers: []oraclegen.Answer{
@@ -631,6 +634,25 @@ func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
 	item.Item.Steps[1].Answers[0].Pick = []string{"p0:Grizzly Bears", "p0:token:Otter Token"}
 	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassDiverge {
 		t.Errorf("distinct names: %+v", f)
+	}
+
+	// Harmonic Prodigy + two Soul-Scar Mage Prowess triggers: Soul-Scar is
+	// named twice, but both picks are the same ability of the same object, so
+	// their mutual order is unobservable. The rule text comes from gorge's
+	// recorded decision; without it the repeat stays ambiguous.
+	interchangeable := []string{"p0:Harmonic Prodigy", "p0:Soul-Scar Mage", "p0:Soul-Scar Mage"}
+	item.Item.Steps[1].Answers[0].Pick = interchangeable
+	g.Decisions = []rules.OracleDecision{{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Picks:    []string{"Harmonic Prodigy: Prowess", "Soul-Scar Mage: Prowess", "Soul-Scar Mage: Prowess"},
+		PickRefs: interchangeable}}
+	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassDiverge {
+		t.Errorf("an interchangeable repeated source is not the driver's gap: %+v", f)
+	}
+	// Same ref, DIFFERENT text is a real ambiguity: the pick cannot say which
+	// of the source's two abilities goes first.
+	g.Decisions[0].Picks[2] = "Soul-Scar Mage: Whenever a spell is cast, put a +1/+1 counter on this creature."
+	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassHarness || !strings.Contains(f.Msg, "Soul-Scar Mage") {
+		t.Errorf("a repeated ref with different abilities is still harness: %+v", f)
 	}
 }
 

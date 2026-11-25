@@ -3395,20 +3395,51 @@ func triggerOrderChoice(d rules.OracleDecision, k int) string {
 	return ""
 }
 
-// triggerOrderNamesDistinct reports whether the picks' source object NAMES are
-// unique. XMage's chooseTriggeredAbility matches a choice against the source's
-// name, so two simultaneous triggers off one source (Thundertrap Trainer's ETB
-// and Offspring, both "p0:Thundertrap Trainer") would both answer with the same
-// name and cannot be ordered by it; the rule text is the only distinguishing
-// answer there. A pick with no scenario ref falls back to text anyway, so it is
-// skipped here (it cannot collide).
+// triggerOrderNamesDistinct reports whether XMage can order the picks by their
+// source object NAMES. XMage's chooseTriggeredAbility matches a choice against
+// the source's name, and its ask loop auto-pushes the last remaining ability,
+// so a source named more than once is only a problem when its picks are
+// DIFFERENT abilities: two triggers of the same ability of the same object are
+// interchangeable (CR 603.3b, their mutual order is unobservable). Collapse
+// each (ref, rule text) pair -- one interchangeable ability -- and require at
+// least two such groups whose source names are unique. The Harmonic Prodigy
+// case is one group for Harmonic Prodigy's Prowess and one for Soul-Scar
+// Mage's two Prowess triggers: the names order Prodigy against Soul-Scar, and
+// the second Soul-Scar is the auto-pushed last pick. Thundertrap Trainer's ETB
+// and Offspring share a ref but not a text, so they stay two groups with one
+// name and take the rule-text form. A pick with no scenario ref falls back to
+// text anyway, so it is skipped here (it cannot collide); an order with fewer
+// than two scenario refs keeps that old text fallback. One pick is never
+// ambiguous.
 func triggerOrderNamesDistinct(d rules.OracleDecision) bool {
-	seen := map[string]bool{}
+	if len(d.Picks) < 2 {
+		return true
+	}
+	groups := map[string]bool{}
+	var refs []string
+	allRefs := true
 	for k := range d.Picks {
 		if k >= len(d.PickRefs) || !isScenarioRefShaped(d.PickRefs[k]) {
+			allRefs = false
 			continue
 		}
-		name := oraclediffRefName(d.PickRefs[k])
+		ref := d.PickRefs[k]
+		key := ref + "\x00" + strings.TrimSpace(triggerRule(d.Picks[k]))
+		if groups[key] {
+			continue
+		}
+		groups[key] = true
+		refs = append(refs, ref)
+	}
+	if len(refs) < 2 {
+		// One named source is ambiguous only when every pick is a scenario ref
+		// (two triggers of one object). A non-ref pick falls back to text, the
+		// pre-name behaviour.
+		return !allRefs
+	}
+	seen := map[string]bool{}
+	for _, ref := range refs {
+		name := oraclediffRefName(ref)
 		if name == "" {
 			continue
 		}
