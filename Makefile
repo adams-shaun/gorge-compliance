@@ -834,7 +834,18 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard
 # order, above), no textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as
 # FORGE_REF ff076d4432). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
-FORGE_ORACLE_REF ?= 6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef
+# 0aee1572747 = oracle/fpin-1125-join14 (ad4cd3ba0f8: join12 above merged with 61f44264a28, the mandatory ChangeTargets test, and
+# 892f8bd63b6, the paylife X pick) plus the Speedball regression test (xproof cluster xpt-c5e9f646, Speedball, New Warrior /
+# Ranger's Guile, gorge~forge): p0's Ranger's Guile targets Speedball, whose SpellCast trigger resolves "You may choose new
+# targets for that spell" through an Optional$ ChangeTargets (Defined$ TriggeredSpellAbility) and gorge logs the retarget ask as a
+# choose_n over Speedball itself with a blank pick. The retarget confirm of the 019d50429f path already answers it (the find
+# replays clean at 6d6b2d485ab; it missed only at the older 793a015fcf6, which has no ChangeTargets confirm rule), so this pin
+# adds no driver code: only ChangeTargetsConfirmTest.speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick and its fixture
+# (fork fixtures/changetargets/speedball-ranger-guile.jsonl). The test fails with the exact "Missing yesno answer at step 3:
+# confirm null: Do you want to change targets of Ranger's Guile (3)?" miss when retargetConfirm is neutralized;
+# scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) now pins six tests. Driver tests only; cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-change-targets-confirm.
+FORGE_ORACLE_REF ?= 0aee1572747b3bc0492c80da26e3a61e5bee0d46
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
