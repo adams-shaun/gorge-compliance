@@ -58,6 +58,7 @@ func startTapeUses(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card,
 // records: a discard, a crime, a draw, a sacrifice, an attack tap, an untap
 // and a target each put the card's trigger on the stack.
 func TestStartEventKeyFires(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key, mode string }{
 		{"Abyssal Nocturnus", "f0/t0", "Discarded"},

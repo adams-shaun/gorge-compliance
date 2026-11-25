@@ -59,15 +59,93 @@ var permTypes = map[string]bool{
 	"land": true, "planeswalker": true, "battle": true,
 }
 
-// chainReqs is the targets of the ability chain starting at line params (a
-// Params map), following SubAbility$ by name in svars up to a depth. needsStack
-// is true when the chain targets a spell or ability on the stack.
-func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, depth int) (reqs []tgtReq, needsStack bool) {
-	for ; depth < 8 && p != nil; depth++ {
-		if p["TargetType"] == "Spell" || p["TargetType"] == "Activated" || strings.EqualFold(p["TargetType"], "Triggered") {
-			needsStack = true
+// stackTgt is one target of a play that is a spell or ability on the stack: its
+// kind (the spell/activated/triggered alternative TargetType names), the
+// alternatives of the ValidTgts filter it must meet as written (raw), the
+// TargetType's own restrictions on the object (tt, e.g. Spell.singleTarget,
+// Spell.Colorless), and whether the play may decline it (TargetMin 0, Optional
+// or MayChooseTarget).
+//
+// needsTarget is the target's TargetValidTargeting$ restriction: the spell
+// being targeted must itself target a permanent/player (Keep Safe, Outwit,
+// Intervene, ...). It is not a filter on the bait's face but on what the bait
+// does, and an inert bait (carrierPool: a no-target instant/sorcery, a vanilla
+// permanent) never has a target, so no bait can meet it. A required such
+// target therefore keeps reasonNeedsStackTarget rather than writing a start
+// whose focus play is never offered. ConditionTargetValidTargeting$ and
+// TargetRestriction$ are deliberately not read here: they gate the focus
+// play's effect, not which spells are legal targets (Meddle is exercised with a
+// no-target bait).
+type stackTgt struct {
+	kind        string
+	raw         []string
+	tt          []filterAlt
+	optional    bool
+	needsTarget bool
+}
+
+// stackTargetType reads a Forge TargetType value: a comma list of Spell,
+// SpellAbility, Activated and Triggered, each with an optional ".restriction"
+// (Spell.singleTarget, Spell.Colorless) or a further comma list
+// (Spell.Instant,Spell.Sorcery). A spell alternative is the one a bait can
+// serve; the restrictions become a filter on the bait's face, so a bait no
+// carrier meets (singleTarget, numTargets) is no bait rather than a wrong one.
+func stackTargetType(tt string) (kind string, alts []filterAlt) {
+	var spell, activated, triggered bool
+	for _, tok := range strings.Split(tt, ",") {
+		tok = strings.TrimSpace(tok)
+		head, rest, hasProp := strings.Cut(tok, ".")
+		switch head {
+		case "Spell", "SpellAbility":
+			spell = true
+			filter := "Spell"
+			if hasProp {
+				filter += "." + rest
+			}
+			alts = append(alts, parseFilter(filter)...)
+		case "Activated":
+			activated = true
+		case "Triggered":
+			triggered = true
 		}
-		if v := p["ValidTgts"]; v != "" && p["TargetMin"] != "0" && p["Optional"] == "" {
+	}
+	switch {
+	case spell:
+		return "spell", alts
+	case activated:
+		return "activated", alts
+	case triggered:
+		return "triggered", alts
+	}
+	return "", alts
+}
+
+// chainReqs is the targets of the ability chain starting at line params (a
+// Params map), following SubAbility$ by name in svars up to a depth. A target
+// whose TargetType is Spell, Activated or Triggered is a stack target
+// (stacks): it never needs a battlefield permanent, and a play that needs one
+// is served by a bait cast instead (stackBait). An optional stack target still
+// gets a bait when one fits, so the play's effect is exercised, but it is no
+// refusal when none does.
+func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, depth int) (reqs []tgtReq, stacks []stackTgt) {
+	for ; depth < 8 && p != nil; depth++ {
+		var stack stackTgt
+		stack.kind, stack.tt = stackTargetType(p["TargetType"])
+		if stack.kind != "" {
+			if v := p["ValidTgts"]; v != "" {
+				for _, r := range strings.Split(v, ",") {
+					if r = strings.TrimSpace(r); r != "" {
+						stack.raw = append(stack.raw, r)
+					}
+				}
+			}
+			if len(stack.raw) == 0 {
+				stack.raw = []string{"Card"}
+			}
+			stack.optional = p["TargetMin"] == "0" || p["Optional"] != "" || p["MayChooseTarget"] != ""
+			stack.needsTarget = strings.TrimSpace(p["TargetValidTargeting"]) != ""
+			stacks = append(stacks, stack)
+		} else if v := p["ValidTgts"]; v != "" && p["TargetMin"] != "0" && p["Optional"] == "" {
 			zone := strings.ToLower(p["TgtZone"])
 			if zone == "" && strings.Contains(strings.ToLower(p["Origin"]), "graveyard") {
 				// a ChangeZone from a graveyard targets a card there: the
@@ -100,7 +178,7 @@ func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, dept
 			p = nil
 		}
 	}
-	return reqs, needsStack
+	return reqs, stacks
 }
 
 // parseSVar reads "DB$ DealDamage | ValidTgts$ ..." as a parameter map.
@@ -119,19 +197,17 @@ func parseSVar(line string) map[string]string {
 
 // playChoices is the alternative target sets of a play: one set for an
 // ordinary ability, one per Charm choice (any one choice may be the one cast).
-// needsStack is whether every choice targets the stack.
-func playChoices(face *cards.Face, sa *cards.SA) (choices [][]tgtReq, needsStack bool) {
+// stacks is the parallel stack targets of each choice.
+func playChoices(face *cards.Face, sa *cards.SA) (choices [][]tgtReq, stacks [][]stackTgt) {
 	if sa.API == "Charm" {
-		allStack := true
 		for _, name := range strings.Split(sa.Params["Choices"], ",") {
 			reqs, st := chainReqs(parseSVar(face.SVars[strings.TrimSpace(name)]), face.SVars, nil, 0)
-			choices = append(choices, reqs)
-			allStack = allStack && st
+			choices, stacks = append(choices, reqs), append(stacks, st)
 		}
-		return choices, allStack && len(choices) > 0
+		return choices, stacks
 	}
 	reqs, st := chainReqs(sa.Params, face.SVars, sa.Sub, 0)
-	return [][]tgtReq{reqs}, st
+	return [][]tgtReq{reqs}, [][]stackTgt{st}
 }
 
 // enchantReq is the target an Aura's Enchant keyword names ("Enchant:Creature.
@@ -288,6 +364,11 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq,
 // target on the opponent's side certdeck's needs did not derive (Aether
 // Tradewinds' "permanent you don't control") is placed here, from certdeck's
 // opposing-target picks, so only a play no placement can serve is refused.
+// A play that targets a spell is served by a scripted bait cast (stackBait):
+// the start cannot hold a spell on the stack at main 1, but the opponent can
+// cast one before the focus play. An ability target, a sorcery-speed cast
+// focus, and a spell one no inert bait meets (TargetValidTargeting$), keep the
+// refusal.
 func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face, sa *cards.SA, card string, f *StartFile) (string, error) {
 	fc := f.Focus
 	if fc == nil || fc.Seat == nil || (fc.Kind != "cast" && fc.Kind != "ability") {
@@ -302,27 +383,23 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 		face = own // the key's own face: a back-face key's ability is not the front's
 	}
 	var choices [][]tgtReq
+	var stacks [][]stackTgt
+	castModes := 0
 	switch {
 	case fc.Kind == "ability" && fc.Card == card && sa != nil:
-		var st bool
-		if choices, st = playChoices(face, sa); st {
-			return reasonNeedsStackTarget, nil
-		}
+		choices, stacks = playChoices(face, sa)
 	case fc.Kind == "cast":
-		stackOnly := false
 		for _, a := range face.Abilities {
 			if a.Kind != "SP" {
 				continue
 			}
+			castModes++
 			ch, st := playChoices(face, a)
-			choices, stackOnly = append(choices, ch...), stackOnly || st
-		}
-		if stackOnly {
-			return reasonNeedsStackTarget, nil
+			choices, stacks = append(choices, ch...), append(stacks, st...)
 		}
 		if r, ok := enchantReq(face); ok {
 			if len(choices) == 0 {
-				choices = [][]tgtReq{nil}
+				choices, stacks = [][]tgtReq{nil}, [][]stackTgt{nil}
 			}
 			for i := range choices {
 				choices[i] = append(choices[i], r)
@@ -333,11 +410,79 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 		return "", nil
 	}
 	seat := *fc.Seat
+	// A cast the engine may take by any of its cast modes (more than one SP
+	// ability): a bait (and the focus's own cast) must be possible for every
+	// mode that requires a stack target, because the start does not script
+	// which mode the bot picks. Wash Away's default mode targets a spell "that
+	// wasn't cast from its owner's hand", which a bait cast from the hand can
+	// never be; its cleave mode can be baited, but the bot takes the default
+	// mode. A Charm's choices are not cast modes (they are chosen on
+	// resolution), so one unbaited Charm choice does not refuse the cast.
+	if fc.Kind == "cast" && castModes > 1 {
+		for _, sts := range stacks {
+			required := false
+			for _, st := range sts {
+				required = required || !st.optional
+			}
+			if !required {
+				continue
+			}
+			if !castableWithBait(face) {
+				return reasonNeedsStackTarget, nil
+			}
+			if _, _, ok := stackBait(reg, b, card, sts); !ok {
+				return reasonNeedsStackTarget, nil
+			}
+		}
+	}
 	reason := ""
-	for _, reqs := range choices {
+	for ci, reqs := range choices {
+		var sts []stackTgt
+		if ci < len(stacks) {
+			sts = stacks[ci]
+		}
+		bait, nonInstant := "", false
+		if len(sts) > 0 {
+			required := false
+			for _, st := range sts {
+				required = required || !st.optional
+			}
+			name, ni, ok := stackBait(reg, b, card, sts)
+			switch {
+			case !ok:
+				// another choice may not target the stack
+				if required {
+					reason = reasonNeedsStackTarget
+					continue
+				}
+			case fc.Kind == "cast" && !castableWithBait(face):
+				// a sorcery-speed focus spell cannot be cast while the bait is
+				// on the stack (CR 117.1a), whoever is the active seat: only an
+				// instant or a flash card follows the bait.
+				if required {
+					reason = reasonNeedsStackTarget
+					continue
+				}
+			default:
+				bait, nonInstant = name, ni
+			}
+		}
 		for try := 0; ; try++ {
 			bad, why := unmet(reg, f, seat, reqs)
 			if bad == nil {
+				if bait != "" {
+					// an alternate additional cost ("behold a Jace or pay
+					// {1}") is paid in addition to the mana cost; place its
+					// mana fallback so the focus cast is affordable with the
+					// bait on the stack. No mana fallback: the cast cannot be
+					// guaranteed, so keep the refusal.
+					lands, ok := baitCostLands(face, basicFor(face.ManaCost))
+					if !ok {
+						return reasonNeedsStackTarget, nil
+					}
+					focusSeat(f, seat).Battlefield = append(focusSeat(f, seat).Battlefield, lands...)
+					placeBait(reg, f, seat, bait, nonInstant)
+				}
 				return "", nil // a choice every target of which is met
 			}
 			reason = why
@@ -359,6 +504,143 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 		}
 	}
 	return reason, nil
+}
+
+// stackBait is the most inert spell the stack targets accept: the first
+// instant of the carrier pool that meets every target's filter, so the focus
+// seat stays active and no bait land is tapped for a sorcery speed; else the
+// first matching permanent or sorcery (nonInstant). A filter no carrier meets
+// ("Card.cmcEQX", "Card.wasCastFromGraveyard"), a target only the focus seat
+// could control, a target whose TargetValidTargeting$ needs the bait itself to
+// have a target (an inert bait never does), and an ability target (a bait
+// would have to be activated, not cast) have no bait and keep the refusal.
+func stackBait(reg *cards.Registry, b *certdeck.Builder, card string, sts []stackTgt) (name string, nonInstant, ok bool) {
+	for _, st := range sts {
+		if st.needsTarget {
+			return "", false, false // an inert carrier is never a spell with a target
+		}
+	}
+	pool := carrierPool(reg, b)
+	meets := func(f *cards.Face) bool {
+		for _, st := range sts {
+			if st.kind != "spell" || !stackSpell(f, st) {
+				return false
+			}
+		}
+		return true
+	}
+	for _, instant := range []bool{true, false} {
+		for _, f := range pool {
+			if f.Name == card || f.IsLand() || f.IsInstant() != instant || !meets(f) {
+				continue
+			}
+			return f.Name, !instant, true
+		}
+	}
+	return "", false, false
+}
+
+// stackSpell reports whether f is a spell the stack target takes: an
+// alternative of its ValidTgts filter, and one of its TargetType's own
+// restrictions when it has any (Card for a target with none).
+func stackSpell(f *cards.Face, st stackTgt) bool {
+	ok := false
+	for _, raw := range st.raw {
+		if spellAlt(raw, f) {
+			ok = true
+			break
+		}
+	}
+	if !ok {
+		return false
+	}
+	for _, a := range st.tt {
+		if !a.known || a.self || a.ctrl == ctrlYou {
+			continue
+		}
+		if a.test(f) {
+			return true
+		}
+	}
+	return len(st.tt) == 0
+}
+
+// spellAlt reports whether the stack object's face f meets the filter
+// alternative raw, as the focus play reads it: an alternative with a property
+// parseFilter does not know, the card itself, or a controller only the focus
+// seat can have is not one a bait can meet, and an instant or sorcery is never
+// a permanent's type.
+func spellAlt(raw string, f *cards.Face) bool {
+	for _, a := range parseFilter(raw) {
+		if !a.known || a.self || a.ctrl == ctrlYou {
+			continue
+		}
+		if a.test(f) {
+			return true
+		}
+	}
+	return false
+}
+
+// castableWithBait reports whether a cast focus can be cast while the bait is
+// on the stack. CR 117.1a lets a sorcery-speed spell be cast only at a moment
+// the stack is empty, so a non-instant, non-flash focus cannot follow any
+// bait; an instant or a flash card can.
+func castableWithBait(face *cards.Face) bool {
+	return face.IsInstant() || face.HasKeyword("Flash")
+}
+
+// baitCostLands is the mana a cast focus pays beyond its ManaCost through an
+// AlternateAdditionalCost$ that has a pure-mana alternative ("Behold<1/Jace>:1",
+// "tapXType<1/Artifact>:1", "Sac<...>:3 B"). ok is false when no alternative is
+// pure mana (only a sacrifice, discard, ...), which a generated start cannot
+// guarantee; the caller then keeps the refusal instead of writing a start
+// whose focus cast is never offered.
+func baitCostLands(face *cards.Face, generic string) ([]string, bool) {
+	v, ok := face.KeywordParam("AlternateAdditionalCost")
+	if !ok {
+		return nil, true
+	}
+	for _, alt := range strings.Split(v, ":") {
+		toks := splitCost(alt)
+		if len(toks) == 0 {
+			continue
+		}
+		mana := true
+		for _, tok := range toks {
+			if !manaTokenRE.MatchString(tok) || tok == "X" || tok == "S" || tok == "C" {
+				mana = false
+				break
+			}
+		}
+		if mana {
+			return landsFor(toks, generic), true
+		}
+	}
+	return nil, false
+}
+
+// focusSeat is the setup seat that takes the focus play.
+func focusSeat(f *StartFile, seat int) *StartSeat {
+	if seat == 1 {
+		return &f.Setup.P1
+	}
+	return &f.Setup.P0
+}
+
+// placeBait puts the bait spell in the focus seat opponent's hand with the
+// lands its cost takes, and on a non-instant bait makes that seat active so it
+// can cast it at turn 1's first main phase.
+func placeBait(reg *cards.Registry, f *StartFile, seat int, name string, nonInstant bool) {
+	s := &f.Setup.P1
+	if seat == 1 {
+		s = &f.Setup.P0
+	}
+	castCarrier(reg, s, name)
+	f.Focus.Bait = name
+	if nonInstant {
+		f.Active = 1 - seat
+	}
 }
 
 // tapsSelf reports whether the focus play is an ability whose cost taps the
