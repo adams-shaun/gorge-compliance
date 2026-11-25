@@ -43,14 +43,18 @@ type StartSetup struct {
 
 // StartSeat is one seat's placements, card names; a repeat is a separate copy.
 type StartSeat struct {
-	Hand        []string       `json:"hand,omitempty"`
-	Battlefield []string       `json:"battlefield,omitempty"`
-	Graveyard   []string       `json:"graveyard,omitempty"`
-	Exile       []string       `json:"exile,omitempty"`
-	Library     []string       `json:"library,omitempty"`
-	Tapped      []string       `json:"tapped,omitempty"`
-	Counters    []StartCounter `json:"counters,omitempty"`
-	Life        *int32         `json:"life,omitempty"`
+	Hand        []string `json:"hand,omitempty"`
+	Battlefield []string `json:"battlefield,omitempty"`
+	Graveyard   []string `json:"graveyard,omitempty"`
+	Exile       []string `json:"exile,omitempty"`
+	Library     []string `json:"library,omitempty"`
+	Tapped      []string `json:"tapped,omitempty"`
+	// BackFace names battlefield cards that enter on their back face (a
+	// double-faced card's transformed side), as rules.StartSeat.BackFace.
+	BackFace []string       `json:"back_face,omitempty"`
+	Counters []StartCounter `json:"counters,omitempty"`
+	Tokens   []StartToken   `json:"tokens,omitempty"`
+	Life     *int32         `json:"life,omitempty"`
 }
 
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
@@ -59,6 +63,15 @@ type StartCounter struct {
 	Card string `json:"card"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
+}
+
+// StartToken is a token a start mints onto the seat's battlefield: the
+// Config.Tokens script key (the token definitions corpus), entering tapped
+// when Tapped. A token is not a deck card, so unlike the placements above it
+// names no card.
+type StartToken struct {
+	Script string `json:"script"`
+	Tapped bool   `json:"tapped,omitempty"`
 }
 
 // StartFocus names the seat and action that exercises the key.

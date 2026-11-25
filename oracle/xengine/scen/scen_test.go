@@ -5,10 +5,12 @@ import (
 	"encoding/json"
 	"reflect"
 	"slices"
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
@@ -634,6 +636,252 @@ func TestStartSpellCastTriggers(t *testing.T) {
 	}
 }
 
+// TestStartspellcasttriggers: the SpellCast:filter refusal class. A cast
+// trigger with no ValidCard and TargetsValid$ Card.Self (heroic) is the card
+// on the battlefield and a carrier spell that targets it, cast by its
+// controller; a filter property the resolver knows (Card.Historic) is a
+// carrier the property takes. These cards refused "no-generator:trigger:
+// SpellCast:filter" at current develop.
+func TestStartspellcasttriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		// heroic: the card on the battlefield, Ranger's Guile cast at it
+		{card: "Akroan Crusader", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Akroan Crusader", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Akroan Line Breaker", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Akroan Line Breaker", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Akroan Skyguard", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Akroan Skyguard", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Anax and Cymede", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Anax and Cymede", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Artisan of Forms", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Artisan of Forms", "Forest"}, p1BF: []string{"Phyrexian Walker"},
+			focusCard: "Ranger's Guile", focusKind: "cast"},
+		// heroic plus IsSingleTarget: Ranger's Guile names one target
+		{card: "Zada, Hedron Grinder", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Zada, Hedron Grinder", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		// an Aura filter: Rancor is the Aura that targets the card
+		{card: "Druid of Horns", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Rancor", "Web"},
+			p0BF: []string{"Druid of Horns", "Forest", "Forest", "Wall of Stone"}, focusCard: "Rancor", focusKind: "cast"},
+		// a filter property the resolver knows: Memnite is historic
+		{card: "Artificer's Assistant", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"},
+			p0BF: []string{"Artificer's Assistant"}, focusCard: "Memnite", focusKind: "cast"},
+		// no ValidCard at all (Extort's "whenever you cast a spell"): any
+		// carrier is a spell, so the first one casts
+		{card: "Basilica Guards", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"},
+			p0BF: []string{"Basilica Guards"}, focusCard: "Memnite", focusKind: "cast"},
+		// a second cast gate: the bare carrier does not meet it, so the
+		// start refuses rather than writing an event the trigger rejects.
+		// ValidCard$ Card.Party: the pin does not evaluate Party (fails closed), so no start can fire it
+		{card: "Angel of Unity", key: "f0/t1", reason: "no-generator:trigger:SpellCast:filter"},
+		{card: "Riku of Many Paths", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},         // ValidSA$ Spell.Modal
+		{card: "Voracious Bibliophile", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},      // ValidSA$ Spell.numTargets GE1
+		{card: "Verazol, the Split Current", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"}, // ValidSA$ Spell.Kicked
+		{card: "Virtual Assistant", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},          // ValidSA$ Spell.Teamwork
+		{card: "Dragonlord Kolaghan", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},        // ValidSAonCard$
+		{card: "Erayo, Soratami Ascendant", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},  // CheckSVar/SVarCompare
+		{card: "Ivy, Gleeful Spellthief", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},    // IsSingleTarget + non-Self TargetsValid
+		{card: "Ambitious Augmenter", key: "f0/t1", reason: "no-generator:trigger:SpellCast:filter"},        // Increment$
+	})
+	// A non-Self TargetsValid ("a spell that targets a creature you
+	// control") and a self-target shape the heroic arm cannot meet
+	// (Beamsplitter Mage's CanTargetOtherCondition) are the other lane's
+	// start-not-exercised class, not this ticket's. The heroic arm must
+	// leave those keys alone: they generated a start at develop and still
+	// must, rather than becoming a new :filter refusal.
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Feather, the Redeemed", "Leyline of Resonance", "Orvar, the All-Form", "Beamsplitter Mage"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil {
+			t.Errorf("%s: %v", card, err)
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Errorf("%s: path %q reason %q, want the pre-existing start", card, res.Path, res.Reason)
+		}
+	}
+}
+
+// TestBareCastGateWhitelist: the no-filter carrier is safe only when the
+// trigger asks nothing more of the cast. A param outside the accounted set
+// -- a known gate or a future one -- refuses, and the self-target arm keeps
+// the one target shape it meets.
+func TestBareCastGateWhitelist(t *testing.T) {
+	trig := func(params map[string]string) *cards.Trigger {
+		return &cards.Trigger{Mode: "SpellCast", Params: params}
+	}
+	base := map[string]string{"Mode": "SpellCast", "TriggerZones": "Battlefield",
+		"Execute": "X", "TriggerDescription": "x"}
+	if !bareCast(trig(base), false) {
+		t.Error("a bare SpellCast trigger was refused")
+	}
+	for _, tc := range []struct {
+		name   string
+		params map[string]string
+		self   bool
+	}{
+		{"ValidSA", map[string]string{"Mode": "SpellCast", "ValidSA": "Spell.Modal"}, false},
+		{"Increment", map[string]string{"Mode": "SpellCast", "Increment": "True"}, false},
+		{"CheckSVar", map[string]string{"Mode": "SpellCast", "CheckSVar": "NumCast", "SVarCompare": "EQ4"}, false},
+		{"unknown gate", map[string]string{"Mode": "SpellCast", "FutureGate": "True"}, false},
+		{"non-Self TargetsValid", map[string]string{"Mode": "SpellCast", "TargetsValid": "Creature.YouCtrl"}, false},
+		{"self-target in the no-filter arm", map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self"}, false},
+		{"IsSingleTarget in the no-filter arm", map[string]string{"Mode": "SpellCast", "IsSingleTarget": "True"}, false},
+		{"CanTargetOtherCondition", map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self", "CanTargetOtherCondition": "Creature.YouCtrl"}, true},
+	} {
+		if bareCast(trig(tc.params), tc.self) {
+			t.Errorf("%s accepted, want refused", tc.name)
+		}
+	}
+	self := map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self", "Execute": "X"}
+	if !bareCast(trig(self), true) {
+		t.Error("a heroic self-target trigger was refused")
+	}
+	if bareCast(trig(self), false) {
+		t.Error("a self-target trigger was accepted by the no-filter arm")
+	}
+	single := map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self",
+		"IsSingleTarget": "True", "ValidCard": "Instant,Sorcery", "Execute": "X"}
+	if !bareCast(trig(single), true) {
+		t.Error("a heroic single-target trigger was refused")
+	}
+	if bareCast(trig(single), false) {
+		t.Error("a single-target trigger was accepted by the no-filter arm")
+	}
+}
+
+// TestFilterProps: the named-property table parseFilter reads, including its
+// "non" form, and the conservative default for a property it does not know.
+func TestFilterProps(t *testing.T) {
+	reg, _ := testBuilder(t)
+	face := func(name string) *cards.Face {
+		t.Helper()
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+	takes := func(filter, name string) bool {
+		t.Helper()
+		alts := parseFilter(filter)
+		if len(alts) != 1 {
+			t.Fatalf("%s: %d alternatives, want 1", filter, len(alts))
+		}
+		return alts[0].test(face(name))
+	}
+	for _, tc := range []struct {
+		filter, card string
+		want         bool
+	}{
+		{"Card.Historic", "Memnite", true},              // artifact
+		{"Card.Historic", "Anax and Cymede", true},      // legendary
+		{"Card.Historic", "Reach Through Mists", false}, // neither
+		{"Card.MultiColor", "Anax and Cymede", true},
+		{"Card.MultiColor", "Memnite", false},
+		{"Card.Outlaw", "Ragavan, Nimble Pilferer", true}, // Pirate (CR 700.12)
+		{"Card.Outlaw", "Anax and Cymede", false},
+		{"Card.nonOutlaw", "Anax and Cymede", true},
+		{"Card.nonOutlaw", "Ragavan, Nimble Pilferer", false},
+		{"Card.nonColorless", "Anax and Cymede", true},
+		{"Card.nonColorless", "Memnite", false},
+		{"Card.Colorless", "Memnite", true},
+		{"Card.Colorless", "Anax and Cymede", false},
+	} {
+		if got := takes(tc.filter, tc.card); got != tc.want {
+			t.Errorf("%s on %s = %v, want %v", tc.filter, tc.card, got, tc.want)
+		}
+	}
+	// The pin fails an unrecognised predicate closed, so a start built on one
+	// could never fire: each stays an unknown alternative (a refusal) until the
+	// pin learns it. This is the known-unsupported set at the current pin; a
+	// bump that learns one fails here and the entry is deleted.
+	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric"}
+	for p := range filterProps {
+		for _, q := range []string{p, "non" + p} {
+			if supported, listed := pinMatches(q), slices.Contains(unsupported, q); supported == listed {
+				t.Errorf("Card.%s: pin evaluates it = %v, but known-unsupported = %v", q, supported, listed)
+			}
+		}
+	}
+	for _, q := range unsupported {
+		if alts := parseFilter("Card." + q); len(alts) != 1 || alts[0].known {
+			t.Errorf("Card.%s: %+v, want one unknown alternative", q, alts)
+		}
+	}
+	if alts := parseFilter("Card.!wasCastFromYourHand"); len(alts) != 1 || alts[0].known {
+		t.Errorf("Card.!wasCastFromYourHand: %+v, want one unknown alternative", alts)
+	}
+}
+
+// TestStartmisctriggers: the event modes (eventStart, eventFixtures): the
+// start causes the event the trigger reads with one fixture play on the seat
+// that makes it. A discard is Coercion cast at the seat whose hand is exactly
+// the card the filter takes (Abyssal Nocturnus: the opponent's Swamp,
+// Aclazotz: a land; Ajani's Last Stand: the card itself, discarded by the
+// opponent's Coercion, with the Plains its IsPresent reads); Coercion's only
+// target is an opponent, so the bot has no other target to choose; a draw is
+// Reach Through Mists cast as often as the trigger's Number says (Zimone and
+// Dina's second card) by the seat the filter names (Sheoldred: the opponent);
+// a sacrifice is a carrier sacrificing itself; a tap is the card's own {T}
+// ability or its attack (Zhur-Taa Druid taps itself for mana, Zar Ojanen
+// attacks); a crime is Coercion cast at the opponent (Vadmir); an
+// untap is the card placed tapped through the other seat's turn 1 to its own
+// untap step; a target is the opponent's Murder, Disenchant (an enchantment)
+// or the card's controller's trick. A turned-face-up trigger is refused by
+// name: a face-down permanent cannot be placed and turning it up is a second
+// play. A trigger whose condition the start does not model is refused by name.
+func TestStartmisctriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Abyssal Nocturnus", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Coercion"},
+			p0BF: cat([]string{"Abyssal Nocturnus"}, rep("Swamp", 3)), p1Hand: rep("Swamp", 1),
+			focusCard: "Coercion", focusKind: "cast"},
+		{card: "Ajani's Last Stand", key: "f0/t1", active: 1, maxTurns: 1, p0Hand: []string{"Ajani's Last Stand"},
+			p0BF: rep("Plains", 2), p1Hand: []string{"Coercion"}, p1BF: rep("Swamp", 3),
+			focusSeat: 1, focusCard: "Coercion", focusKind: "cast"},
+		{card: "Zimone and Dina", key: "f0/t0", maxTurns: 1, p0Hand: rep("Reach Through Mists", 2),
+			p0BF: cat([]string{"Zimone and Dina"}, rep("Island", 2)), focusCard: "Reach Through Mists", focusKind: "cast", focusTime: 2},
+		{card: "Sheoldred, the Apocalypse", key: "f0/t1", active: 1, maxTurns: 1, p0BF: []string{"Sheoldred, the Apocalypse"},
+			p1Hand: []string{"Reach Through Mists"}, p1BF: []string{"Island"}, focusSeat: 1, focusCard: "Reach Through Mists", focusKind: "cast"},
+		{card: "Zodiark, Umbral God", key: "f0/t1", maxTurns: 1, p0BF: []string{"Zodiark, Umbral God", "Kami of False Hope"},
+			focusCard: "Kami of False Hope", focusKind: "ability"},
+		{card: "Zar Ojanen, Scion of Efrava", key: "f0/t0", maxTurns: 1, p0BF: []string{"Zar Ojanen, Scion of Efrava"},
+			focusCard: "Zar Ojanen, Scion of Efrava", focusKind: "attack"},
+		{card: "Zhur-Taa Druid", key: "f0/t0", maxTurns: 1, p0BF: []string{"Zhur-Taa Druid"},
+			focusCard: "Zhur-Taa Druid", focusKind: "ability"},
+		{card: "Vadmir, New Blood", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Coercion"},
+			p0BF:      cat([]string{"Vadmir, New Blood"}, rep("Swamp", 3)),
+			focusCard: "Coercion", focusKind: "cast"},
+		{card: "Wild Defiance", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Wild Defiance", "Memnite"},
+			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
+		{card: "Treacherous Blessing", key: "f0/t2", active: 1, maxTurns: 1, p0BF: []string{"Treacherous Blessing"},
+			p1Hand: []string{"Disenchant"}, p1BF: rep("Plains", 2), focusSeat: 1, focusCard: "Disenchant", focusKind: "cast"},
+		{card: "Acid-Spewer Dragon", key: "f0/t0", reason: "no-generator:trigger:TurnFaceUp:face-down"},
+		{card: "Ainok Survivalist", key: "f0/t0", reason: "no-generator:trigger:TurnFaceUp:face-down"},
+		{card: "Xyris, the Writhing Storm", key: "f0/t0", reason: "no-generator:trigger:Drawn:condition"},
+	})
+	reg, b := testBuilder(t)
+	// the discard and crime fixtures take no target but an opponent: the bot
+	// has no other target to choose, so the focus play is the forced line
+	for _, name := range []string{eventFixtures.Discard, eventFixtures.Crime} {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces[0].Abilities) == 0 || c.Faces[0].Abilities[0].Params["ValidTgts"] != "Opponent" {
+			t.Errorf("fixture %s: want a spell whose one target is an opponent", name)
+		}
+	}
+	// an untap: the card placed tapped, the game run to its own untap step
+	// (the other seat's turn 1, then turn 2), with no focus play
+	res, err := Generate(reg, b, "Aerie Worshippers", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Aerie Worshippers: %+v %v", res, err)
+	}
+	f := res.Start
+	if !slices.Equal(f.Setup.P0.Battlefield, []string{"Aerie Worshippers"}) || !slices.Equal(f.Setup.P0.Tapped, []string{"Aerie Worshippers"}) ||
+		f.Active != 1 || f.MaxTurns != 2 || f.Focus != nil {
+		t.Errorf("Aerie Worshippers: battlefield %v tapped %v active %d max_turns %d focus %+v, want it placed tapped, seat 1 active, 2 turns, no focus",
+			f.Setup.P0.Battlefield, f.Setup.P0.Tapped, f.Active, f.MaxTurns, f.Focus)
+	}
+}
+
 // TestStartCosts: an activated ability's non-mana cost is met by start
 // state (planCost), never by a play: Memnite to sacrifice for "another
 // creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
@@ -729,7 +977,9 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 	for _, r := range [][3]string{
 		{"Karn, Argent Defender", "static#0.0", "no-generator:static:DisableTriggers"},
 		{"Academy Wall", "combat#0.attack", "no-generator:combat:defender"},
-		{"Holy Strength", "static#0.0", "no-generator:static:attached"},
+		{"Aether Syphon", "static#0.0", "no-generator:static:unobserved"}, // a granted trigger is not seen
+		{"Armory Mice", "static#0.0", "no-generator:static:conditional"},  // a this-turn count
+		{"Aettir and Priwen", "static#0.0", "no-generator:static:computed"},
 		// the attack/block is not offered, or the effect is not seen
 		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
 		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
@@ -981,6 +1231,56 @@ func TestStartstacktarget(t *testing.T) {
 	}
 }
 
+// TestStarttokensteps is the xproof repro for the steps-needed:token class: a
+// card whose needs include a token used to refuse in placeNeeds, so Forge,
+// XMage and gorge never played the key. The start places the token itself
+// (rules.StartSeat.Tokens), so every example builds a start file.
+func TestStarttokensteps(t *testing.T) {
+	reg, b := testBuilder(t)
+	examples := []struct{ card, key string }{
+		{"Abyssal Harvester", "cast"},
+		{"Academy Instructor", "f0/t0"},
+		{"Agent Venom", "cast"},
+		{"Anafenza, Unyielding Lineage", "cast"},
+		{"Audience with Trostani", "cast"},
+		{"Baron Bertram Graywater", "cast"},
+	}
+	for _, tc := range examples {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path == PathRefused {
+				t.Fatalf("%s %s refused %q, want a start file", tc.card, tc.key, res.Reason)
+			}
+			if res.Start == nil {
+				t.Fatalf("%s %s path %q with no start file", tc.card, tc.key, res.Path)
+			}
+			tokens := res.Start.Setup.P0.Tokens
+			if len(tokens) == 0 {
+				t.Fatalf("%s %s start places no token", tc.card, tc.key)
+			}
+			for _, tok := range tokens {
+				if _, ok := reg.Token(tok.Script); !ok {
+					t.Errorf("%s %s places unknown token script %q", tc.card, tc.key, tok.Script)
+				}
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			back, err := DecodeStartFile(raw)
+			if err != nil {
+				t.Fatalf("%s %s: the token start does not decode: %v\n%s", tc.card, tc.key, err, raw)
+			}
+			if !reflect.DeepEqual(back, res.Start) {
+				t.Errorf("%s %s: token start round trip differs:\n%+v\n%+v", tc.card, tc.key, back, res.Start)
+			}
+		})
+	}
+}
+
 // TestStartStackTargetTargetingRefused: a stack target with a
 // TargetValidTargeting$ restriction (Keep Safe's "target spell that targets a
 // permanent you control") is not met by any inert bait, because an inert bait
@@ -1060,6 +1360,80 @@ func TestStackBaitTiming(t *testing.T) {
 	}
 }
 
+// TestTokenStartRefusesUnmappedKind: a token kind XMage's setup token table
+// cannot place is refused at generation with the clean steps-needed:token
+// refusal, not written as a start that lowers to token_unmapped under -xmage.
+// Bloodtithe Harvester reads a Blood token; Abyssal Harvester's generic token
+// is placed (TestStarttokensteps).
+func TestTokenStartRefusesUnmappedKind(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Bloodtithe Harvester", "cast", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathRefused || res.Reason != "steps-needed:token" {
+		t.Errorf("Bloodtithe Harvester: path %q reason %q, want %q", res.Path, res.Reason, "steps-needed:token")
+	}
+}
+
+// TestTokenScriptKinds: a Token need arg maps to the canonical token
+// definition ("<kind> Token") only when the XMage setup token table maps that
+// script too. A start names a token both followers must replay, so a kind only
+// Forge could place keeps the clean steps-needed:token refusal instead of
+// writing a start that refuses at lowering time. A generic token need is an
+// artifact creature token the table maps.
+func TestTokenScriptKinds(t *testing.T) {
+	reg, _ := testBuilder(t)
+	for _, tc := range []struct {
+		kind string
+		want bool
+	}{
+		{"treasure", true},
+		{"food", true},
+		{"clue", true},
+		{"blood", false},
+		{"powerstone", false},
+		{"map", false},
+		{"junk", false},
+	} {
+		script, ok := tokenScript(reg, tc.kind)
+		if ok != tc.want {
+			t.Errorf("tokenScript(%q) ok = %v, want %v (script %q)", tc.kind, ok, tc.want, script)
+			continue
+		}
+		if !ok {
+			continue
+		}
+		if !lower.SetupTokenScript(script) {
+			t.Errorf("tokenScript(%q) = %q, which XMage's setup token table cannot place", tc.kind, script)
+		}
+		c, _ := reg.Token(script)
+		if c == nil || len(c.Faces) == 0 {
+			t.Errorf("tokenScript(%q) = %q, not a token definition", tc.kind, script)
+			continue
+		}
+		if !strings.EqualFold(c.Faces[0].Name, tc.kind+" Token") {
+			t.Errorf("tokenScript(%q) = %q (%q), want the %s Token", tc.kind, script, c.Faces[0].Name, tc.kind)
+		}
+	}
+	script, ok := tokenScript(reg, "")
+	if !ok {
+		t.Fatal("tokenScript(generic) found no definition")
+	}
+	if !lower.SetupTokenScript(script) {
+		t.Errorf("tokenScript(generic) = %q, which XMage's setup token table cannot place", script)
+	}
+	if c, _ := reg.Token(script); c == nil || len(c.Faces) == 0 || !c.Faces[0].IsCreature() || !c.Faces[0].IsArtifact() {
+		t.Errorf("tokenScript(generic) = %q, want an artifact creature token", script)
+	}
+	if _, ok := reg.Token(genericToken); ok && script != genericToken {
+		t.Errorf("tokenScript(generic) = %q, want the corpus's %s", script, genericToken)
+	}
+	if _, ok := tokenScript(reg, "no-such-token-kind"); ok {
+		t.Error("tokenScript(no-such-token-kind) found a definition")
+	}
+}
+
 // TestLandsForSlashlessHybrid: Forge writes hybrid, two-generic hybrid and
 // Phyrexian symbols without a slash; each still takes one basic of its first
 // colour, as the slashed form does.
@@ -1082,5 +1456,356 @@ func TestLandsForSlashlessHybrid(t *testing.T) {
 	}
 	if !hasShard("2 WB WB", 'B') || hasShard("2 WB WB", 'U') {
 		t.Error("hasShard misreads a slashless hybrid")
+	}
+}
+
+// TestStartstaticattached: a static whose effect reads the bearer of an Aura or
+// Equipment, or a condition the start can place, is a start and not a refusal:
+// the Aura is cast on a bearer, the Equipment is equipped to one, and a life
+// total or counted permanents meet the condition.
+func TestStartstaticattached(t *testing.T) {
+	t.Run("start", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			{card: "Airtight Alibi", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Airtight Alibi"},
+				p0BF: []string{"Forest", "Forest", "Forest", "Wall of Stone"}, focusCard: "Airtight Alibi", focusKind: "cast"},
+			{card: "Alien Symbiosis", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Alien Symbiosis"},
+				p0BF: []string{"Swamp", "Swamp", "Wall of Stone"}, focusCard: "Alien Symbiosis", focusKind: "cast"},
+			{card: "Holy Strength", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Holy Strength"},
+				p0BF: []string{"Plains", "Wall of Stone"}, focusCard: "Holy Strength", focusKind: "cast"},
+			// an Equipment is on the battlefield with its bearer and the lands of its equip cost
+			{card: "Bonesplitter", key: "static#0.0", maxTurns: 1,
+				p0BF: []string{"Bonesplitter", "Plains", "Wall of Stone"}, focusCard: "Bonesplitter", focusKind: "ability"},
+			// the bearer is the permanent the condition counts: no second legal target
+			{card: "Temur Runemark", key: "static#0.1", maxTurns: 1, p0Hand: []string{"Temur Runemark"},
+				p0BF: []string{"Forest", "Forest", "Forest", "Wall of Stone"}, focusCard: "Temur Runemark", focusKind: "cast"},
+			// a life-total condition is the placed life; no action is forced
+			{card: "Angel of Vitality", key: "static#0.0", maxTurns: 1, p0BF: []string{"Angel of Vitality"}},
+			// an effect that changes the bearer shows on it: a control Aura's bearer is the
+			// other seat's, as the caster's own is theirs already
+			{card: "Control Magic", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Control Magic"},
+				p0BF: rep("Island", 4), p1BF: []string{"Wall of Stone"}, focusCard: "Control Magic", focusKind: "cast"},
+			{card: "Mind Control", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Mind Control"},
+				p0BF: rep("Island", 5), p1BF: []string{"Wall of Stone"}, focusCard: "Mind Control", focusKind: "cast"},
+			// a land Aura whose cost lands are also what it can enchant: they show the effect too
+			{card: "Consecrate Land", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Consecrate Land"},
+				p0BF: rep("Plains", 2), focusCard: "Consecrate Land", focusKind: "cast"},
+		})
+	})
+	// an effect that does not show on the bearer, or that the cast could put
+	// on a permanent it does not show on, is refused and not credited unplayed
+	t.Run("unseen", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			// the land types are set to Island/Swamp: the cost lands already are those
+			{card: "Spreading Seas", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Lingering Mirage", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Evil Presence", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Contaminated Ground", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// control of a land: the cost lands are the caster's own already
+			{card: "Annex", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Conquer", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// the card types are replaced: a cost land that is a Land already shows nothing
+			{card: "Song of the Dryads", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Imprisoned in the Moon", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// the IsPresent permanent is a second creature the cast could target
+			{card: "Abzan Runemark", key: "static#0.1", reason: "no-generator:static:bearer"},
+			{card: "Multiclass Baldric", key: "static#0.0", reason: "no-generator:static:bearer"},
+		})
+	})
+	// counted permanents are copies of one carrier, which the legend rule would
+	// thin out if it were legendary: no seat has two of one legendary name
+	t.Run("no legendary copies", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct{ card, key, reason string }{
+			// three legendary creatures, and no carrier that is not legendary
+			{"Kolvori, God of Kinship", "static#0.0", "no-generator:static:conditional"},
+			{"Temur Runemark", "static#0.1", ""},
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if r.reason != "" {
+				if err != nil || res.Start != nil || res.Reason != r.reason {
+					t.Errorf("%s: %v path %q reason %q, want refused %q", r.card, err, res.Path, res.Reason, r.reason)
+				}
+				continue
+			}
+			if err != nil || res.Start == nil {
+				t.Fatalf("%s: %v path %q reason %q, want a start", r.card, err, res.Path, res.Reason)
+			}
+			for _, bf := range [][]string{res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield} {
+				seen := map[string]bool{}
+				for _, n := range bf {
+					c, ok := reg.Lookup(n)
+					if ok && c.Faces[0].IsLegendary() && n != r.card && seen[n] {
+						t.Errorf("%s: %s is placed twice on one battlefield %v", r.card, n, bf)
+					}
+					seen[n] = true
+				}
+			}
+		}
+	})
+	// the same for an unattached static: the carrier it affects shows the effect
+	t.Run("carrier shows", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			// "each land is a Swamp" is set on a Plains, not on a Swamp; a creature
+			// that loses a keyword has it
+			{card: "Blanket of Night", key: "static#0.0", maxTurns: 1, p0BF: []string{"Blanket of Night", "Plains"}},
+			{card: "Archetype of Courage", key: "static#0.1", maxTurns: 1,
+				p0BF: []string{"Archetype of Courage"}, p1BF: []string{"Boros Recruit"}},
+		})
+	})
+	// the bearer meets the static's Affected filter, not only what the Aura
+	// enchants or the equip targets; a static no bearer can meet, or whose
+	// attachment is negated or qualified, is refused and never a false start
+	t.Run("affected", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct {
+			card, key, bearerType string
+		}{
+			{"Equestrian Skill", "static#0.1", "Human"},
+			{"Bladed Bracers", "static#0.1", ""},
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Start == nil {
+				t.Fatalf("%s: %v path %q reason %q", r.card, err, res.Path, res.Reason)
+			}
+			var bearer string
+			for _, n := range append(res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield...) {
+				if c, ok := reg.Lookup(n); ok && n != r.card && c.Faces[0].IsCreature() {
+					bearer = n
+				}
+			}
+			c, _ := reg.Lookup(bearer)
+			if bearer == "" || r.bearerType == "" && !(c.Faces[0].HasTypeWord("Human") || c.Faces[0].HasTypeWord("Angel")) ||
+				r.bearerType != "" && !c.Faces[0].HasTypeWord(r.bearerType) {
+				t.Errorf("%s: bearer %q does not meet the static's Affected filter (%v)", r.card, bearer, res.Start.Setup)
+			}
+		}
+	})
+	t.Run("refused", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct{ card, key string }{
+			{"Vampirism", "static#0.1"},        // Creature.YouCtrl+!EnchantedBy: the bearer is excluded
+			{"Face of Divinity", "static#0.1"}, // Creature.EnchantedBy Aura.Other: one Aura only
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != PathRefused {
+				t.Errorf("%s %s: path %q reason %q, want a refusal", r.card, r.key, res.Path, res.Reason)
+			}
+		}
+	})
+	t.Run("life", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		res, err := Generate(reg, b, "Angel of Vitality", "static#0.0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%v path %q reason %q", err, res.Path, res.Reason)
+		}
+		if l := res.Start.Setup.P0.Life; l == nil || *l != 25 {
+			t.Errorf("p0 life %v, want 25", l)
+		}
+	})
+}
+
+// TestStartfacestarts: a key of a double-faced or modal card's back face is
+// started from the card on the battlefield on its back face (BackFace), the
+// focus play the back face's own; a face gorge cannot place there (flip, meld,
+// specialize, split) is refused by the layout, not by the old catch-all
+// "no-generator:face".
+func TestStartfacestarts(t *testing.T) {
+	reg, b := testBuilder(t)
+	const (
+		aclazotz = "Aclazotz, Deepest Betrayal // Temple of the Dead"
+		arlinn   = "Arlinn Kord // Arlinn, Embraced by the Moon"
+		wolfkin  = "Wolfkin Outcast // Wedding Crasher"
+	)
+	for _, tc := range []struct {
+		card, key, kind string
+		ability         int
+	}{
+		{aclazotz, "f1/a0", "ability", 0}, // a modal back face (a land)
+		{arlinn, "f1/a1", "ability", 1},   // a transformed planeswalker's loyalty ability
+		{wolfkin, "f1/t0", "", 0},         // a transformed back face's trigger
+	} {
+		if _, ok := reg.Lookup(tc.card); !ok {
+			t.Fatalf("%s is not in the corpus", tc.card)
+		}
+		res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", tc.card, tc.key, err)
+		}
+		if res.Start == nil {
+			t.Errorf("%s %s: %s %q, want a start", tc.card, tc.key, res.Path, res.Reason)
+			continue
+		}
+		f := res.Start
+		seats := [2]StartSeat{f.Setup.P0, f.Setup.P1}
+		backed := 0
+		for _, sd := range seats {
+			for _, n := range sd.BackFace {
+				backed++
+				if n != tc.card || !slices.Contains(sd.Battlefield, n) {
+					t.Errorf("%s %s: back_face %q is not a battlefield card of its seat %v", tc.card, tc.key, n, sd.Battlefield)
+				}
+			}
+		}
+		if backed != 1 {
+			t.Errorf("%s %s: %d back_face placements, want 1", tc.card, tc.key, backed)
+		}
+		if tc.kind != "" {
+			if f.Focus == nil || f.Focus.Card != tc.card || f.Focus.Kind != tc.kind || f.Focus.Ability != tc.ability {
+				t.Errorf("%s %s: focus %+v, want %s ability %d on the card", tc.card, tc.key, f.Focus, tc.kind, tc.ability)
+			}
+		}
+	}
+	for _, tc := range []struct{ card, key, reason string }{
+		{"Wyll, Pact-Bound Duelist", "f1/t0", "no-generator:face:specialize"},
+		{"Walk-In Closet // Forgotten Cellar", "f1/t0", "no-generator:face:split"},
+		{"Orochi Eggwatcher // Shidako, Broodmistress", "f1/a0", "no-generator:face:flip"},
+		{"Titania, Voice of Gaea // Titania, Gaea Incarnate", "f1/a0", "no-generator:face:meld"},
+	} {
+		res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", tc.card, tc.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != tc.reason {
+			t.Errorf("%s %s: %s %q, want refused %q", tc.card, tc.key, res.Path, res.Reason, tc.reason)
+		}
+	}
+}
+
+// TestStartcombattriggers: a combat trigger (blocks, becomes blocked, combat
+// damage dealt or taken) is one scripted combat with no forced play: the active
+// seat attacks with exactly Attack, the other blocks with exactly Block (or not
+// at all), the card beside them. A trigger on an Aura's or Equipment's bearer
+// has no start file to attach with, and stays refused.
+func TestStartcombattriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key     string
+		active        int
+		p0BF, p1BF    []string
+		attack, block string
+	}{
+		// the card attacks and is blocked by the fixture
+		{card: "Acolyte of the Inferno", key: "f0/t0", p0BF: []string{"Acolyte of the Inferno"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Acolyte of the Inferno", block: "Grizzly Bears"},
+		{card: "Ammit Eternal", key: "f0/t2", p0BF: []string{"Ammit Eternal"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Ammit Eternal", block: "Grizzly Bears"},
+		// the card blocks the fixture's attack
+		{card: "Aether Membrane", key: "f0/t0", active: 1, p0BF: []string{"Aether Membrane"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Grizzly Bears", block: "Aether Membrane"},
+		// the card connects: nothing blocks
+		{card: "Akki Lavarunner // Tok-Tok, Volcano Born", key: "f0/t0", p0BF: []string{"Akki Lavarunner // Tok-Tok, Volcano Born"},
+			attack: "Akki Lavarunner // Tok-Tok, Volcano Born"},
+		// the card is dealt the damage
+		{card: "Pious Warrior", key: "f0/t0", active: 1, p0BF: []string{"Pious Warrior"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Grizzly Bears", block: "Pious Warrior"},
+	}
+	for _, r := range rows {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active {
+				t.Errorf("active %d, want %d", f.Active, r.active)
+			}
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			fo := f.Focus
+			if fo == nil || fo.Kind != "" || fo.Attack != r.attack || fo.Block != r.block {
+				t.Errorf("focus %+v, want kind \"\" attack %q block %q", fo, r.attack, r.block)
+			}
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+	res, err := Generate(reg, b, "Aqueous Form", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Path != PathRefused || res.Reason != "no-generator:trigger:Attacks:filter" {
+		t.Errorf("Aqueous Form: %+v %v, want refused no-generator:trigger:Attacks:filter", res, err)
+	}
+}
+
+// TestStartcombattriggersRefused: a combat start that cannot make its trigger
+// fire is a refusal, not a start the census credits: a damage source with no
+// power deals no damage (CR 120.8), a trigger condition (a monarch, an empty
+// hand, a damage amount) is a state the start does not place, an attacker with
+// menace is not blocked by the one blocker the line scripts (CR 702.111b), and a
+// card certdeck cannot build keeps a named refusal.
+func TestStartcombattriggersRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key, reason string }{
+		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // a 0-power card deals the damage
+		{"Tamiyo, Upriser Crowned", "f0/t1", "no-generator:trigger:DamageDoneOnce:condition"},   // CheckDefinedPlayer: monarch
+		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // CheckSVar: hand size
+		{"Euru, Acorn Scrounger", "f0/t1", "no-generator:trigger:DamageDoneOnce:unsupported"},   // certdeck: MakeCard
+		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // the only carrier has menace
+	} {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("path %q reason %q, want refused %s", res.Path, res.Reason, r.reason)
+			}
+		})
+	}
+}
+
+// TestStartcombattriggersDealer: the creature that deals the damage has power:
+// Vulture, Feathered Fiend ("creatures you control with flying deal combat
+// damage") once got Ornithopter (0/2) as the flier. No carrier or fixture the
+// shape picks for a damage source may have no power or menace.
+func TestStartcombattriggersDealer(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key string }{
+		{"Vulture, Feathered Fiend", "f0/t0"},
+		{"Kastral, the Windcrested", "f0/t0"},
+		{"Mu Yanling, Wind Rider", "f0/t1"},
+		{"Heroes in a Half Shell", "f0/t0"},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil || res.Start.Focus == nil || res.Start.Focus.Attack == "" {
+				t.Fatalf("path %q reason %q, want a combat start", res.Path, res.Reason)
+			}
+			c, ok := reg.Lookup(res.Start.Focus.Attack)
+			if !ok {
+				t.Fatalf("attacker %q not in the corpus", res.Start.Focus.Attack)
+			}
+			if f := c.Faces[0]; f.Power() <= 0 || f.HasKeyword("Menace") {
+				t.Errorf("attacker %s has power %d (menace %v)", f.Name, f.Power(), f.HasKeyword("Menace"))
+			}
+		})
+	}
+}
+
+// TestCombatTrigStartSeatRequired: a seat the mode requires is kept: a card that
+// deals the damage to "You" (its controller) is on the other seat's side, which
+// the card cannot be on, so the start is refused and not seated on seat 0.
+func TestCombatTrigStartSeatRequired(t *testing.T) {
+	reg, b := testBuilder(t)
+	c, ok := reg.Lookup("Grizzly Bears")
+	if !ok {
+		t.Fatal("Grizzly Bears is not in the corpus")
+	}
+	trig := &cards.Trigger{Mode: "DamageDone", Params: map[string]string{"ValidSource": "Card.Self", "ValidTarget": "You", "CombatDamage": "True"}}
+	f := &StartFile{}
+	if why := combatTrigStart(reg, b, c.Faces[0], "Grizzly Bears", trig, f); why == "" || f.Focus != nil {
+		t.Errorf("combatTrigStart = %q focus %+v, want a refusal", why, f.Focus)
 	}
 }

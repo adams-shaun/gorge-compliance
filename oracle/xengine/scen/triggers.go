@@ -67,10 +67,7 @@ func phaseStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		if !face.IsPermanent() {
 			return "no-generator:trigger:Phase"
 		}
-		p0.Hand = []string{card}
-		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
-		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "cast"}
-		return ""
+		return castStart(reg, b, face, card, generic, f)
 	}
 	switch {
 	case late && tapped:
@@ -331,20 +328,114 @@ func sacLands(reg *cards.Registry, name string) []string {
 	return landsFor(mana, basicFor(f.ManaCost))
 }
 
+// targetCarriers are the safe spells a "whenever you cast a spell that
+// targets this" (heroic) start casts: the first inert own-targeters, then an
+// Aura for a filter that names one. They all target a creature its
+// controller controls, so the card itself is a legal target.
+var targetCarriers = append(slices.Clone(ownTargeters), "Rancor")
+
+// targetSelf reports whether the trigger's TargetsValid names the card itself
+// ("whenever you cast a spell that targets this": heroic).
+func targetSelf(t *cards.Trigger) bool {
+	for _, a := range parseFilter(t.Params["TargetsValid"]) {
+		if a.known && a.self {
+			return true
+		}
+	}
+	return false
+}
+
+// filterTakes reports whether an understood, non-Self alternative of filter
+// takes f, and whether any alternative was understood at all.
+func filterTakes(filter string, f *cards.Face) (takes, known bool) {
+	for _, a := range parseFilter(filter) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		known = true
+		if a.test(f) {
+			takes = true
+		}
+	}
+	return takes, known
+}
+
+// targetCarrier is the first targetCarrier keep accepts and the ValidCard
+// filter takes, or "".
+func targetCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string, keep func(*cards.Face) bool) string {
+	for _, name := range targetCarriers {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			continue
+		}
+		cf := c.Faces[0]
+		if cf.Name == card || !b.Playable(c) || !keep(cf) {
+			continue
+		}
+		if filter != "" {
+			if takes, known := filterTakes(filter, cf); !known || !takes {
+				continue
+			}
+		}
+		return name
+	}
+	return ""
+}
+
+// bareCastParams are the SpellCast trigger params a start accounts for
+// directly: presentation, when the cast happens (spellStart reads
+// TriggerZones, ValidActivatingPlayer, OpponentTurn and
+// ActivatorThisTurnCast), or the target shapes the heroic arm reads
+// (TargetsValid, IsSingleTarget). Every other param narrows the cast, its
+// target or a fire-time condition -- ValidSA/ValidSAonCard/Increment,
+// CheckSVar/SVarCompare, IsPresent/PresentCompare, a spend gate -- and the
+// inert carrier (Memnite) does not meet it. This is deliberately a whitelist:
+// a gate param added to the corpus (or a new keyword expansion's marker) is
+// refused by default instead of writing a start whose trigger can never fire.
+var bareCastParams = map[string]bool{
+	"Mode": true, "TriggerDescription": true, "Execute": true,
+	"TriggerZones": true, "ValidCard": true,
+	"ValidActivatingPlayer": true, "ActivatorThisTurnCast": true,
+	"OpponentTurn": true, "TargetsValid": true, "IsSingleTarget": true,
+	"OptionalDecider": true, "ActivationLimit": true, "ResolvedLimit": true,
+	"GameActivationLimit": true, "OrderDuplicates": true,
+	"Secondary": true, "Static": true, "NoResolvingCheck": true,
+	// Keyword expansion provenance (addKeywordTrigger): the expansion's
+	// marker is the param that gates it (Increment, not in this map).
+	"Keyword": true, "KeywordLine": true,
+}
+
+// bareCast reports whether a SpellCast trigger asks nothing more of the cast
+// than that it is a spell. selfTarget allows the two target-shape params the
+// heroic arm meets with targetCarrier -- TargetsValid$ Card.Self and
+// IsSingleTarget$, every targetCarrier naming exactly one target -- while the
+// no-filter arm (an arbitrary inert carrier) refuses both. Any other param
+// outside bareCastParams is a gate neither arm satisfies.
+func bareCast(t *cards.Trigger, selfTarget bool) bool {
+	for p := range t.Params {
+		if (p == "TargetsValid" || p == "IsSingleTarget") && !selfTarget {
+			return false
+		}
+		if !bareCastParams[p] {
+			return false
+		}
+	}
+	return true
+}
+
 // spellStart is a SpellCast (or SpellCastOrCopy) trigger. "When you cast
 // this spell" (Card.Self, TriggerZones Stack or none) is the card cast from
 // hand. Otherwise the card is on the battlefield and the seat that
 // ValidActivatingPlayer names casts a carrier (carrierPool) that ValidCard
 // takes, with exactly its mana: on its own turn, or, for a NonActive caster,
-// an instant on the other seat's turn.
+// an instant on the other seat's turn. A trigger with no ValidCard and no
+// other cast gate takes any spell; one whose TargetsValid is the card itself
+// (heroic) casts a carrier that targets it (targetCarrier).
 func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:" + trig.Mode
 	p0 := &f.Setup.P0
 	if selfCard(trig) {
-		p0.Hand = []string{card}
-		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
-		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "cast"}
-		return ""
+		return castStart(reg, b, face, card, generic, f)
 	}
 	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
 		return none
@@ -390,7 +481,30 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		// every cast takes its own lands: a free carrier keeps them few
 		keep = func(cf *cards.Face) bool { return (!offTurn || cf.IsInstant()) && cf.Cmc() == 0 }
 	}
-	name, _ := filterCarrier(reg, b, card, trig.Params["ValidCard"], keep)
+	filter := trig.Params["ValidCard"]
+	var name string
+	switch {
+	case targetSelf(trig) && bareCast(trig, true):
+		// "whenever you cast a spell that targets this": the caster's own
+		// targeter is the carrier and the card is its target.
+		if caster != 0 || !face.IsCreature() {
+			return none + ":filter"
+		}
+		name = targetCarrier(reg, b, card, filter, keep)
+	case strings.TrimSpace(filter) == "":
+		// No ValidCard: any spell satisfies the cast, but only a trigger
+		// with no other gate does. A trigger that narrows the spell
+		// (ValidSA, Increment, a target shape, a condition) refuses here
+		// instead of being handed a carrier its own matcher rejects.
+		if !bareCast(trig, false) {
+			return none + ":filter"
+		}
+		name = pickCarrier(reg, b, card, keep)
+	default:
+		// A ValidCard filter, including the non-Self TargetsValid shapes
+		// (the start-not-exercised lane): keep the established carrier path.
+		name, _ = filterCarrier(reg, b, card, filter, keep)
+	}
 	if name == "" {
 		return none + ":filter"
 	}
@@ -478,48 +592,144 @@ func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 	return ""
 }
 
-// Targeting carriers: Murder ({1}{B}{B} instant, destroy target creature) is
-// the opponent's spell that targets the card, and the first of ownTargeters
-// the corpus plays its controller's: "target creature you control", so a
-// creature a need placed for the opponent is never the target.
-const oppTargeter = "Murder"
-
+// Targeting carriers: the opponent's spell that targets the card is the first
+// of eventFixtures.Targeters that takes the target's type (Murder for a
+// creature, Disenchant for an artifact or enchantment, ...), and the first of
+// ownTargeters the corpus plays is its controller's: "target creature you
+// control", so a creature a need placed for the opponent is never the target.
 var ownTargeters = []string{"Ranger's Guile", "Blossoming Defense"}
 
-// targetStart is "whenever this becomes the target of a spell or ability"
-// (BecomesTarget on Card.Self): ward (Ward True) and an OppCtrl source are
-// the opponent casting Murder at the card on its turn, valiant and a YouCtrl
-// source the card's controller casting Ranger's Guile (target creature you
-// control) at it. The card is a creature on the battlefield, its seat's only
-// one unless a need places another.
+// sourceCaster is the seat that casts the spell a "becomes the target of"
+// trigger's ValidSource names, or -1 when the source is not a spell a start
+// can cast (an ability, an Aura spell). An unqualified source, a Ward
+// trigger and an OppCtrl source are the opponent's; a YouCtrl one the
+// card's controller's. accepts reports whether the targeter spell is a
+// source the filter takes ("Instant,Sorcery").
+func sourceCaster(trig *cards.Trigger) (caster int, accepts func(*cards.Face) bool) {
+	src := trig.Params["ValidSource"]
+	if src == "" || trig.Params["Ward"] == "True" {
+		return 1, func(*cards.Face) bool { return true }
+	}
+	caster = -1
+	var tests []func(*cards.Face) bool
+	for _, raw := range strings.Split(src, ",") {
+		raw = strings.TrimSpace(raw)
+		head, props, _ := strings.Cut(raw, ".")
+		switch head {
+		case "SpellAbility", "Spell":
+			raw = "Card"
+			if props != "" {
+				raw += "." + props
+			}
+		case "Card", "Instant", "Sorcery", "Creature", "Permanent":
+		default:
+			continue // "Ability.Backup" and the like: not a spell
+		}
+		for _, a := range parseFilter(raw) {
+			if !a.known || strings.Contains(props, "Aura") {
+				continue
+			}
+			c := 1
+			if a.ctrl == ctrlYou {
+				c = 0
+			}
+			if caster >= 0 && caster != c {
+				continue
+			}
+			caster = c
+			a := a
+			tests = append(tests, func(f *cards.Face) bool { return a.test(f) })
+		}
+	}
+	if caster < 0 {
+		return -1, nil
+	}
+	return caster, func(f *cards.Face) bool {
+		for _, t := range tests {
+			if t(f) {
+				return true
+			}
+		}
+		return false
+	}
+}
+
+// targetStart is "whenever <a permanent> becomes the target of a spell or
+// ability" (BecomesTarget): the target is the card itself (Card.Self), or the
+// permanent the ValidTarget filter takes (the card when it takes the card, else
+// an inert carrier on the seat the filter names), on the battlefield. The
+// spell that targets it (sourceCaster, eventFixtures.Targeters) is cast by
+// the opponent on its turn, or by the card's controller (Ranger's Guile:
+// target creature you control). A permanent that could be another spell's
+// target (a creature beside the card that the filter does not take) is
+// refused when the target is another permanent. When the target is the card
+// itself, a permanent that placeNeeds adds beside it later can also be a legal
+// target and is not checked here (the start-not-exercised lane reads it).
 func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:BecomesTarget"
-	if trig.Params["ValidTarget"] != "Card.Self" || !face.IsCreature() {
-		return none
+	if why := eventParamsOK(trig, "BecomesTarget", "ValidTarget", "ValidSource", "Ward", "Keyword", "KeywordLine", "FirstTime", "Valiant"); why != "" {
+		return why
 	}
-	caster, spells := 1, []string{oppTargeter}
-	switch src := trig.Params["ValidSource"]; {
-	case trig.Params["Ward"] == "True" || src == "SpellAbility.OppCtrl" || src == "Card.OppCtrl":
-	case src == "SpellAbility.YouCtrl" || src == "Card.YouCtrl":
-		caster, spells = 0, ownTargeters
-	default:
+	caster, accepts := sourceCaster(trig)
+	if caster < 0 {
 		return none + ":source"
 	}
-	spell := ""
-	for _, n := range spells {
-		if c, ok := reg.Lookup(n); ok && b.Playable(c) {
-			spell = n
+	// the target: the card when the filter takes it, else a carrier
+	filter := inZone.Replace(trig.Params["ValidTarget"])
+	target, tseat, targetFace := "", 0, face
+	for _, a := range parseFilter(filter) {
+		if a.known && (a.self || a.test(face) && a.ctrl != ctrlOpp && !a.other) {
+			target = card
 			break
 		}
 	}
-	if spell == "" {
+	if target == "" {
+		name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
+		if name == "" {
+			return none + ":target"
+		}
+		c, _ := reg.Lookup(name)
+		target, tseat, targetFace = name, s, c.Faces[0]
+	}
+	if target == card && deadOnArrival(face) {
+		return none + ":dead" // an X creature placed without its X dies at once
+	}
+	// the spell: the first the target is a legal target of and the source
+	// filter takes; never one the card could also be the target of, when the
+	// target is another permanent
+	spells := slices.Clone(eventFixtures.Targeters)
+	if caster == 0 {
+		spells = append(slices.Clone(ownTargeterSpells), spells...)
+	}
+	spellName, ambiguous := "", false
+	for _, t := range spells {
+		if t.own && tseat != caster || !t.takes(targetFace) || !spell(reg, b, t.name) {
+			continue
+		}
+		if c, _ := reg.Lookup(t.name); c == nil || !accepts(c.Faces[0]) {
+			continue
+		}
+		if target != card && t.takes(face) && !(t.own && tseat != 0) {
+			ambiguous = true
+			continue
+		}
+		spellName = t.name
+		break
+	}
+	if spellName == "" {
+		if ambiguous {
+			return none + ":filter"
+		}
 		return none + ":source"
 	}
+	seats := seatsOf(f)
 	f.Setup.P0.Battlefield = []string{card}
-	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
-	castCarrier(reg, seats[caster], spell)
+	if target != card {
+		seats[tseat].Battlefield = append(seats[tseat].Battlefield, target)
+	}
+	castCarrier(reg, seats[caster], spellName)
 	f.Active = caster
-	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spell, Kind: "cast"}
+	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spellName, Kind: "cast"}
 	return ""
 }
 

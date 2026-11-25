@@ -78,6 +78,17 @@ func (s *focusState) took() {
 	}
 }
 
+// exercised is how many focus actions the game took: the seat's plays, and for
+// a focus with no play (Kind "") the scripted combat it declared (the attack,
+// and the block when the line has one) as the one action. A line whose attack
+// was never offered leaves the key unplayed, the same as a play never offered.
+func (s *focusState) exercised() int {
+	if s.f.Kind == "" && s.hasLine() && s.lineDone() {
+		return max(s.n, 1)
+	}
+	return s.n
+}
+
 // focusSeen, when set (by a test), is handed each Play's focusState as it is
 // made, so the test can read what the Setup hook found and whether the focus
 // acted. It is nil outside tests.
@@ -105,7 +116,7 @@ func (s *focusState) read(e *rules.Engine) {
 		want := cards.NormalizeName(l.name)
 		for p := range e.G.Players {
 			for _, id := range e.G.Zone(state.ZBattlefield, state.PlayerID(p)) {
-				if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == want {
+				if isNamed(e.G.Obj(id), want) {
 					l.objs[id] = true
 				}
 			}
@@ -118,7 +129,7 @@ func (s *focusState) read(e *rules.Engine) {
 	want := cards.NormalizeName(s.f.Card)
 	for _, z := range []state.Zone{state.ZHand, state.ZBattlefield, state.ZLibrary, state.ZGraveyard, state.ZExile} {
 		for _, id := range e.G.Zone(z, p) {
-			if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == want {
+			if isNamed(e.G.Obj(id), want) {
 				s.objs[id] = true
 			}
 		}
@@ -134,6 +145,19 @@ func (s *focusState) read(e *rules.Engine) {
 			s.baitObjs[id] = true
 		}
 	}
+}
+
+// isNamed reports whether o is the card want (a cards.NormalizeName) names:
+// its current face, or its front face, which a transformed permanent (a start's
+// BackFace placement) no longer shows.
+func isNamed(o *state.Object, want string) bool {
+	if o == nil || o.Face() == nil {
+		return false
+	}
+	if cards.NormalizeName(o.Face().Name) == want {
+		return true
+	}
+	return o.Card != nil && len(o.Card.Faces) > 0 && cards.NormalizeName(o.Card.Faces[0].Name) == want
 }
 
 // Kind "block": the focus seat is the defender. Its first block declaration
@@ -410,6 +434,9 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 	if st.done || st.f.Kind == "" {
 		return in, err
 	}
+	if i := st.declineOpening(d); i >= 0 {
+		return answer(in, i), nil
+	}
 	if st.f.Kind == "block" {
 		return st.block(d, in), nil
 	}
@@ -464,6 +491,24 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 		}
 	}
 	return in, nil
+}
+
+// declineOpening is the "No" option of an opening-hand action (a Leyline's
+// "begin the game with it on the battlefield", Gemstone Caverns) on a focus
+// object of the focus seat whose focus is to cast or play that card, else -1.
+// The opening round runs after a scripted start is dealt, so a yes put the
+// card on the battlefield before main 1 and its cast was never offered: play
+// refused every such start as start-not-exercised.
+func (s *focusState) declineOpening(d decision.Decision) int {
+	if d.Kind != decision.KChoose || int(d.Player) != s.f.Seat || s.f.Kind != "cast" && s.f.Kind != "land" {
+		return -1
+	}
+	for i, o := range d.Options {
+		if o.Kind == "opening_no" && s.objs[o.Obj] {
+			return i
+		}
+	}
+	return -1
 }
 
 // block is act for a "block" focus: the defending focus seat blocks with the

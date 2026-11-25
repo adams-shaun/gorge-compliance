@@ -363,7 +363,7 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq,
 // cast one before the focus play. An ability target, a sorcery-speed cast
 // focus, and a spell one no inert bait meets (TargetValidTargeting$), keep the
 // refusal.
-func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, card string, f *StartFile) (string, error) {
+func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face, sa *cards.SA, card string, f *StartFile) (string, error) {
 	fc := f.Focus
 	if fc == nil || fc.Seat == nil || (fc.Kind != "cast" && fc.Kind != "ability") {
 		return "", nil
@@ -373,6 +373,9 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 		return "", nil
 	}
 	face := c.Faces[0]
+	if fc.Card == card && own != nil {
+		face = own // the key's own face: a back-face key's ability is not the front's
+	}
 	var choices [][]tgtReq
 	var stacks [][]stackTgt
 	castModes := 0
