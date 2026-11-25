@@ -945,6 +945,16 @@ func TestStartstaticother(t *testing.T) {
 		}
 		return c.Faces[0]
 	}
+	refused := func(t *testing.T, card, key, reason string) {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathRefused || res.Reason != reason {
+			t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, reason)
+		}
+	}
 
 	// A gated self grant: the STATION counters make the granted ability live,
 	// the mana and target make it offered, and the offered comparison reads it.
@@ -1090,6 +1100,72 @@ func TestStartstaticother(t *testing.T) {
 		}
 		if res.Path != PathRefused || res.Reason != "no-generator:static:unobserved" {
 			t.Errorf("path %q reason %q, want refused no-generator:static:unobserved", res.Path, res.Reason)
+		}
+	})
+
+	// A battlefield count whose only matching object is an Aura: an unattached
+	// Aura cannot be listed on the battlefield (the whole start file would be
+	// refused at replay), so the count stays zero and the key keeps its refusal.
+	t.Run("Aura Gnarlid", func(t *testing.T) {
+		refused(t, "Aura Gnarlid", "static#0.1", "no-generator:static:computed")
+	})
+
+	// A reduction on an activated ability (Forge writes it as Type$ Ability or
+	// ValidSpell$ Activated.*): a plain spell cast is not discounted, so a spell
+	// start would be unaffordable and never exercised.
+	t.Run("Boom Scholar", func(t *testing.T) {
+		refused(t, "Boom Scholar", "static#0.0", "no-generator:static:ReduceCost")
+	})
+	t.Run("Dragonkin Berserker", func(t *testing.T) {
+		refused(t, "Dragonkin Berserker", "static#0.0", "no-generator:static:ReduceCost")
+	})
+
+	// A self reduction gated on the spell's target or on another seat casting
+	// it: a start's plain cast has no target and is by the focus seat, so the
+	// reduction does not apply.
+	t.Run("Bitter Downfall", func(t *testing.T) {
+		refused(t, "Bitter Downfall", "static#0.0", "no-generator:static:ReduceCost")
+	})
+	t.Run("Accursed Witch", func(t *testing.T) {
+		refused(t, "Accursed Witch", "static#0.0", "no-generator:static:ReduceCost")
+	})
+
+	// A grant whose activation cost removes loyalty: the carrier gets the
+	// counters the [-10] needs, so the ability is offered (and the key is
+	// exercised) instead of credited unexercised.
+	t.Run("Avatar of Burgeoning Echoes", func(t *testing.T) {
+		f := gen(t, "Avatar of Burgeoning Echoes", "static#0.0")
+		spent := int32(0)
+		for _, c := range f.Setup.P0.Counters {
+			if c.Card != "Avatar of Burgeoning Echoes" && c.Kind == "LOYALTY" {
+				spent = c.N
+			}
+		}
+		if spent < 1 {
+			t.Errorf("p0 counters %+v, want loyalty counters on the granted planeswalker", f.Setup.P0.Counters)
+		}
+	})
+
+	// A grant whose activation cost removes spore counters: the carrier gets
+	// them, so the ability can be paid.
+	t.Run("Sporoloth Ancient", func(t *testing.T) {
+		f := gen(t, "Sporoloth Ancient", "static#0.0")
+		found := false
+		for _, c := range f.Setup.P0.Counters {
+			if c.Card != "Sporoloth Ancient" && c.Kind == "SPORE" && c.N >= 2 {
+				found = true
+			}
+		}
+		if !found {
+			t.Errorf("p0 counters %+v, want two SPORE counters on the granted carrier", f.Setup.P0.Counters)
+		}
+	})
+
+	// A grant whose activation cost discards a card: the start holds fodder.
+	t.Run("Hollowhead Sliver", func(t *testing.T) {
+		f := gen(t, "Hollowhead Sliver", "static#0.0")
+		if len(f.Setup.P0.Hand) == 0 {
+			t.Errorf("p0 hand %v, want a card to discard for the granted ability", f.Setup.P0.Hand)
 		}
 	})
 }

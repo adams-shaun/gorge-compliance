@@ -222,7 +222,7 @@ func cantBlockByAttackerStart(reg *cards.Registry, b *certdeck.Builder, face *ca
 
 // filterNamesSelf reports whether some alternative of filter reads Self.
 func filterNamesSelf(filter string) bool {
-	for _, a := range parseFilterWithCounters(filter) {
+	for _, a := range parseFilterStatic(filter) {
 		if a.self {
 			return true
 		}
@@ -328,7 +328,7 @@ func continuousStaticKeyStart(reg *cards.Registry, b *certdeck.Builder, face *ca
 		return attackingStaticStart(reg, b, card, attackAff, self, plan, f)
 	}
 	if self {
-		if why := grantedAbilityFixtures(reg, b, face, st, card, f); why != "" {
+		if why := grantedAbilityFixtures(reg, b, face, st, card, card, 0, f); why != "" {
 			return why
 		}
 		f.Compare = plan.compare
@@ -353,7 +353,7 @@ func continuousStaticKeyStart(reg *cards.Registry, b *certdeck.Builder, face *ca
 			f.Setup.P0.Counters = append(f.Setup.P0.Counters, gates...)
 		}
 	}
-	if why := grantedAbilityFixtures(reg, b, face, st, card, f); why != "" {
+	if why := grantedAbilityFixtures(reg, b, face, st, card, name, s, f); why != "" {
 		return why
 	}
 	f.Compare = plan.compare
@@ -460,9 +460,14 @@ func placeOnSeat(f *StartFile, s int, name string) {
 }
 
 // grantedAbilityFixtures places what a granted ability needs to be offered: the
-// mana for its activation cost and a permanent the ability can target. The
-// offered comparison then differs from a board without the grant.
-func grantedAbilityFixtures(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, st *cards.Static, card string, f *StartFile) string {
+// state its activation cost reads (mana lands, discard or sacrifice fodder, the
+// counters a SubCounter removes) and a permanent the ability can target. The
+// offered comparison then differs from a board without the grant. carrier is
+// the permanent the ability is granted to (the source itself for a Self static)
+// and seat is its controller. A cost planCost cannot meet, or one that would
+// put the carrier outside the battlefield, refuses the key: CompareOffered
+// without the prerequisites would credit a key the engines never exercise.
+func grantedAbilityFixtures(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, st *cards.Static, card, carrier string, carrierSeat int, f *StartFile) string {
 	ab := strings.TrimSpace(st.Params["AddAbility"])
 	if ab == "" {
 		return ""
@@ -471,13 +476,22 @@ func grantedAbilityFixtures(reg *cards.Registry, b *certdeck.Builder, face *card
 	if sa == nil {
 		return "no-generator:static:unobserved"
 	}
-	var mana []string
-	for _, tok := range splitCost(sa.Params["Cost"]) {
-		if manaTokenRE.MatchString(tok) {
-			mana = append(mana, tok)
-		}
+	// The granted ability is on the carrier, so its cost's self references
+	// (SubCounter on the carrier, its loyalty) are the carrier's. A carrier on
+	// the other seat activates it there, which a seat-0 focus does not observe.
+	if carrierSeat != 0 {
+		return "no-generator:static:unobserved"
 	}
-	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, landsFor(mana, basicFor(face.ManaCost))...)
+	cc, ok := reg.Lookup(carrier)
+	if !ok || len(cc.Faces) == 0 {
+		return "no-generator:static:unobserved"
+	}
+	cf := cc.Faces[0]
+	plan, why := planCost(reg, b, cf, carrier, sa.Params["Cost"], basicFor(cf.ManaCost))
+	if why != "" || plan.zone != zoneBattlefield {
+		return "no-generator:static:unobserved"
+	}
+	applyCostSupport(plan, basicFor(cf.ManaCost), f)
 	vt := strings.TrimSpace(sa.Params["ValidTgts"])
 	if vt == "" {
 		return ""
@@ -566,7 +580,7 @@ var (
 // offered options differ from a board without the permission.
 func permissionPlayStart(reg *cards.Registry, b *certdeck.Builder, card string, st *cards.Static, aff, zone string, plan staticObserve, f *StartFile) string {
 	mayFree := strings.EqualFold(strings.TrimSpace(st.Params["MayPlayWithoutManaCost"]), "True")
-	name, s := fixtureCarrier(reg, b, card, aff, func(f *cards.Face) bool {
+	name, s := zoneFixtureCarrier(reg, b, card, aff, func(f *cards.Face) bool {
 		if f.IsLand() {
 			return true
 		}
@@ -629,9 +643,12 @@ func placeInZone(f *StartFile, s int, zone, name string) {
 // cast from hand; any other reduction leaves the source on the battlefield and
 // casts a cheap spell the ValidCard filter accepts.
 func reduceCostKeyStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, st *cards.Static, f *StartFile) string {
-	if strings.EqualFold(st.Params["Type"], "Ability") {
-		// the reduction is on an activated ability, not a spell: a start would
-		// need an activation fixture whose cost it can size; not built.
+	if !reduceCostPlainSpell(st) {
+		// The reduction is on an activated ability (Type$ Ability,
+		// ValidSpell$ Activated/Static), a gated cast (ValidSpell$ Spell.Bargain,
+		// Spell.Kicked, ...), another seat's spell (Activator) or a spell that
+		// must target something (ValidTarget). A start would need to script that
+		// event; a plain cast does not make the reduction apply.
 		return "no-generator:static:ReduceCost"
 	}
 	plan, why := reduceCostPlan(face, st)
@@ -679,6 +696,73 @@ func reduceCostKeyStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Fa
 		f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, combatFixture)
 	}
 	return ""
+}
+
+// reduceCostPlainSpell reports whether a ReduceCost static applies to the plain
+// cast a start can script: a spell from hand with no target and the focus seat
+// as activator. Type$ Ability, a ValidSpell that names an activated or static
+// ability or a modified cast (kicked, bargain, flashback, ...), an Activator
+// that is not the focus seat, and a ValidTarget that the cast must meet are all
+// events a plain cast does not produce, so the reduction would not apply and
+// the key keeps its refusal.
+func reduceCostPlainSpell(st *cards.Static) bool {
+	switch t := strings.TrimSpace(st.Params["Type"]); {
+	case t == "", strings.EqualFold(t, "Spell"):
+	default:
+		return false
+	}
+	if vs := strings.TrimSpace(st.Params["ValidSpell"]); vs != "" {
+		for _, raw := range strings.Split(vs, ",") {
+			head, props, _ := strings.Cut(strings.TrimSpace(raw), ".")
+			if !strings.EqualFold(strings.TrimSpace(head), "Spell") {
+				return false
+			}
+			for _, p := range strings.Split(props, "+") {
+				if p != "" && !plainSpellProperty(p) {
+					return false
+				}
+			}
+		}
+	}
+	if a := strings.TrimSpace(st.Params["Activator"]); a != "" && !activatorFocusSeat(a) {
+		return false
+	}
+	return strings.TrimSpace(st.Params["ValidTarget"]) == ""
+}
+
+// plainSpellProperties are the ValidSpell properties a plain cast still meets:
+// the spell's card types and colours. Anything else gates the reduction on a
+// cast mode or an event the start does not script.
+var plainSpellProperties = map[string]bool{
+	"Card": true, "Spell": true, "Permanent": true,
+	"Artifact": true, "Battle": true, "Creature": true, "Enchantment": true,
+	"Instant": true, "Kindred": true, "Land": true, "Planeswalker": true,
+	"Tribal": true, "Sorcery": true,
+}
+
+func plainSpellProperty(p string) bool {
+	if plainSpellProperties[p] || colourWord[p] != 0 {
+		return true
+	}
+	if w, ok := strings.CutPrefix(p, "non"); ok {
+		return plainSpellProperties[w] || colourWord[w] != 0
+	}
+	return false
+}
+
+// activatorFocusSeat reports whether every Activator alternative is the focus
+// seat: an unqualified You or Player (the caster), or the active player (the
+// focus cast's seat is active). A named other player or a remembered player is
+// not.
+func activatorFocusSeat(a string) bool {
+	for _, alt := range strings.Split(a, ",") {
+		switch strings.TrimSpace(alt) {
+		case "You", "Player", "You.Active", "Player.Active":
+		default:
+			return false
+		}
+	}
+	return true
 }
 
 // reducePlan is a ReduceCost static's reduction: a fixed amount, or one per
@@ -736,7 +820,7 @@ func reduceCostSpell(reg *cards.Registry, b *certdeck.Builder, card string, st *
 		}
 		return f.Name, f, ""
 	}
-	name := pickFixture(reg, b, card, func(f *cards.Face) bool { return usable(f) && filterAccepts(valid, f) }, nil, true)
+	name := pickZoneFixture(reg, b, card, func(f *cards.Face) bool { return usable(f) && filterAccepts(valid, f) }, nil, true)
 	if name == "" {
 		return "", nil, "no-generator:static:ReduceCost"
 	}
@@ -746,7 +830,7 @@ func reduceCostSpell(reg *cards.Registry, b *certdeck.Builder, card string, st *
 
 // filterAccepts reports whether some non-Self alternative of filter matches f.
 func filterAccepts(filter string, f *cards.Face) bool {
-	for _, a := range parseFilterWithCounters(filter) {
+	for _, a := range parseFilterStatic(filter) {
 		if a.known && !a.self && a.test(f) {
 			return true
 		}
@@ -822,13 +906,13 @@ func addCount(c []countNeed, need countNeed) []countNeed {
 // name, or "" when no fixture matches. The amount then reads one instead of
 // zero, which is all the start needs for the effect to show.
 func placeCount(reg *cards.Registry, b *certdeck.Builder, card string, need countNeed, f *StartFile) string {
-	name, s := countFixture(reg, b, card, need.filter)
-	if name == "" {
-		return ""
-	}
 	zone := need.zone
 	if zone == "" {
 		zone = "Battlefield"
+	}
+	name, s := countFixture(reg, b, card, need.filter, zone)
+	if name == "" {
+		return ""
 	}
 	placeInZone(f, s, zone, name)
 	return name
