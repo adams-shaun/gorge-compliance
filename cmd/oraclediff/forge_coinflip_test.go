@@ -52,3 +52,55 @@ func TestForgeFlippedCoin(t *testing.T) {
 		t.Fatalf("request JSON lost the forced flips:\n%s", b)
 	}
 }
+
+// TestForgeFlippedCoinAfterManaActivations: a trigger's flip resolves on the
+// pass that lets it resolve, after the mana activations spent in the same
+// priority window (xproof rng xs:XP:goblin-kaboomist:f0t0:s2: Goblin
+// Kaboomist's upkeep FlipCoin | LoseSubAbility$ DmgSelf, activations at steps
+// 34-35, the passes at 36-37, the lost flip on step 37). The request must keep
+// the flip on that last pass, at the same index the step list has it, and the
+// rewrites around activations must not move it: the driver arms the flip by
+// that step index, and a flip armed on any other step is Forge's own
+// (Kaboomist survives a flip gorge lost).
+func TestForgeFlippedCoinAfterManaActivations(t *testing.T) {
+	flips := []oraclegen.CoinFlip{{Step: 4, Seat: 0, Win: false, Draws: 1}}
+	it := oraclegen.Item{
+		ID:        "xs:XP:goblin-kaboomist:coin",
+		Template:  lower.Template,
+		CoinFlips: flips,
+		Scenario: oraclegen.Scenario{Steps: []oraclegen.Step{
+			{Op: "pass", Seat: 1},
+			{Op: "activate", Seat: 0, Card: "p0:Mountain"},
+			{Op: "activate", Seat: 0, Card: "p0:Mountain#2"},
+			{Op: "pass", Seat: 0},
+			{Op: "pass", Seat: 1},
+		}},
+	}
+	rq := forgeBuildRequest(nil, it, rules.OracleResult{}, nil, true)
+	if !reflect.DeepEqual(rq.Item.CoinFlips, flips) {
+		t.Fatalf("request coin flips %+v, want %+v", rq.Item.CoinFlips, flips)
+	}
+	f := rq.Item.CoinFlips[0]
+	if f.Step < 0 || f.Step >= len(rq.Item.Steps) {
+		t.Fatalf("flip names step %d of %d", f.Step, len(rq.Item.Steps))
+	}
+	if st := rq.Item.Steps[f.Step]; st.Op != "pass" || st.Seat != 1 {
+		t.Fatalf("flip step %d is %+v, want the resolving seat-1 pass after the activations", f.Step, st)
+	}
+	for i, want := range []string{"pass", "activate", "activate", "pass", "pass"} {
+		if got := rq.Item.Steps[i].Op; got != want {
+			t.Fatalf("step %d is %q after the rewrites, want %q: the driver arms the flip by index", i, got, want)
+		}
+	}
+	if len(rq.GorgeDecisions) != 0 {
+		t.Fatalf("coin flip exported as a gorge decision: %+v", rq.GorgeDecisions)
+	}
+	b, err := json.Marshal(rq)
+	if err != nil {
+		t.Fatal(err)
+	}
+	const want = `"coin_flips":[{"step":4,"seat":0,"win":false,"draws":1}]`
+	if !bytes.Contains(b, []byte(want)) {
+		t.Fatalf("request JSON lost the lost flip:\n%s", b)
+	}
+}

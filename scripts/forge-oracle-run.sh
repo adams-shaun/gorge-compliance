@@ -247,8 +247,9 @@ if [ ! -f "$mymy" ] || ! grep -qF 'delegate.nextInt(bound)' "$mymy"; then
 fi
 
 # item.coin_flips is only honoured when the driver reads it and arms it on the
-# step that flips (ForcedDieRandom.nextBoolean, with the unbounded nextInt a
-# next(bits)-routing wrapper lands on), MyRandom forwards the boolean draw,
+# step that flips (ForcedDieRandom.nextBoolean only: an unbounded nextInt() is
+# not a flip, Aggregates.random draws it per item of a Set and would spend the
+# armed result first), MyRandom forwards the boolean draw,
 # and the scripted controller calls the flip heads (the forced result is the
 # outcome itself). A driver with any half missing silently flips from its own
 # stream: Mana Clash deals 1 damage per tails it rolled itself and loops a

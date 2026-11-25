@@ -396,7 +396,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+# 9b17c1fc83 = d0f16bee2e0 plus the coin force no longer spent by an unrelated unbounded draw: ForcedDieRandom.nextInt() polled the armed
+# flips for a next(bits)-routing MyRandom, which the pin's MyRandom (nextBoolean forwarded) made dead for the flip and live for every
+# other unbounded draw. Aggregates.random over a Set draws nextInt() per item and Goblin Kaboomist's Land Mine token art pick does, on
+# the resolution that holds its flip, so the recorded lost flip was spent first and Forge flipped from its seeded stream (xproof rng
+# xs:XP:goblin-kaboomist:f0t0:s2, step 37, xpt-825fefd2). The override is gone; the fork's ForcedCoinFlipTest pins the Set pick leaving
+# the flip armed and replays the find as a win/lose pair (fixtures/coin; one row fails on any build that does not force the flip).
+# Driver-only: forge-game, cardsfolder and tokenscripts unchanged from d0f16bee2e0. Fork branch fix/xp-forge-driver-kaboomist-coinflip-step.
+FORGE_ORACLE_REF ?= 9b17c1fc83642808ce8c3e5306bafc245e1a2e67
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
