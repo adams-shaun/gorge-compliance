@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 652bfa31-b2eb-4cba-850f-1db02a83bb35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652d282d-6dec-4043-a531-480f12ba471e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652d282d-6dec-4043-a531-480f12ba471e	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-652d282d-6dec-4043-a531-480f12ba471e	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+652d282d-6dec-4043-a531-480f12ba471e	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 652e71a9-e46f-41b3-8695-76b3606b1955	cast	cast	agreed	-	F	start	2	0	f:xs:XP:court-of-ambition:f0t1:s1	-	-	-	23c4009444b0	-	a355bccc0151	-	-	2026-11-25	xproof
 652e71a9-e46f-41b3-8695-76b3606b1955	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:court-of-ambition:f0t1:s1	-	-	-	23c4009444b0	-	a355bccc0151	-	-	2026-11-25	xproof
 652e71a9-e46f-41b3-8695-76b3606b1955	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:court-of-ambition:f0t1:s1	-	-	-	23c4009444b0	-	a355bccc0151	-	-	2026-11-25	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65424bea-fd53-4f85-9757-0b91a6d40ba4	land	land	agreed	-	FX	start	2	0	x:xs:XP:cabaretti-courtyard:f0t0:s1,f:xs:XP:cabaretti-courtyard:f0t0:s1	-	-	-	d864b561c9cb	-	fa26c3cb7dc7	-	-	2026-11-24	xproof
 65428247-b386-410c-91b7-81dd278c0927	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6543b60c-12b0-4e69-9074-6a2b468c5234	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zhur-taa-ancient:cast:s1,f:xs:XP:zhur-taa-ancient:cast:s1	-	-	-	d864b561c9cb	-	5de41506eaed	-	-	2026-11-24	xproof
-6543b60c-12b0-4e69-9074-6a2b468c5234	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6543b60c-12b0-4e69-9074-6a2b468c5234	f0/t0	TapsForMana	agreed	-	FX	start	2	0	x:xs:XP:zhur-taa-ancient:f0t0:s1,f:xs:XP:zhur-taa-ancient:f0t0:s1	-	-	-	4b8018a80bf0	-	5de41506eaed	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 654ce8c5-b329-4046-9728-7fa276bc8695	cast	cast-resolve	agreed	-	X	scen	1	0	Grand Nagus Zek/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 654ce8c5-b329-4046-9728-7fa276bc8695	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 654d84bb-f801-4d03-898c-78952f1c5a73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:desmond-miles:cast:s1,f:xs:XP:desmond-miles:cast:s1	-	-	-	ae86f6029288	-	fbe579aaa22e	-	-	2026-11-24	xproof
