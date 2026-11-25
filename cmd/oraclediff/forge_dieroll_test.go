@@ -107,7 +107,10 @@ func TestForgeRolledDie(t *testing.T) {
 // EchoCumulativeUpkeepTest, ForcedCoinFlipTest and FatesealDigOrderTest) re-run green on it.
 // 528c55d25b4 = the clean merge of 8f537eddcbb (cast_mode "alternative", StepMachine.spellForMode only) and 304ae5ffe0e
 // (the elected unless payment's whole-cost card pick, ScriptedController.chooseCardsForCost only); die-roll code unchanged.
-const forgeOracleDieRollRef = "528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c"
+// 244c5908482 = 528c55d25b4 plus cast_mode "mayplay" (StepMachine.spellForMode/spellFor only); die-roll code unchanged,
+// ForcedDieRollTest and ForcedCoinFlipTest (18 tests) re-run green on it, and scripts/forge-oracle-test-mayplay-cast.sh
+// replays the xproof Hurl Through Hell request.
+const forgeOracleDieRollRef = "244c590848288b35a4b6a0a2dd0da122a1f5dca9"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
