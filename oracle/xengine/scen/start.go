@@ -53,8 +53,32 @@ type StartSeat struct {
 	// double-faced card's transformed side), as rules.StartSeat.BackFace.
 	BackFace []string       `json:"back_face,omitempty"`
 	Counters []StartCounter `json:"counters,omitempty"`
-	Tokens   []StartToken   `json:"tokens,omitempty"`
-	Life     *int32         `json:"life,omitempty"`
+	// Attach binds a battlefield Aura of this seat to a bearer of the same
+	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;
+	// placeAttach makes it enter attached, which a start placing a bare Aura
+	// cannot do (FieldBlock aura-unattached).
+	Attach []StartAttach `json:"attach,omitempty"`
+	Tokens []StartToken  `json:"tokens,omitempty"`
+	Life   *int32        `json:"life,omitempty"`
+}
+
+// StartAttach is one attachment: the Aura Card, also in Battlefield, enters
+// attached to To (also in Battlefield).
+type StartAttach struct {
+	Card string `json:"card"`
+	To   string `json:"to"`
+	// Opp: the bearer is on the other seat's battlefield, not this seat's.
+	Opp bool `json:"opp,omitempty"`
+}
+
+// Attached reports whether name is an Aura the seat lists in Attach.
+func (s *StartSeat) Attached(name string) bool {
+	for _, a := range s.Attach {
+		if a.Card == name {
+			return true
+		}
+	}
+	return false
 }
 
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
@@ -83,6 +107,12 @@ type StartFocus struct {
 	// Mode, for a cast focus, is the cast option's payment kind ("kicked"):
 	// a key reading "if it was kicked" is reached by the kicked cast itself.
 	Mode string `json:"mode,omitempty"`
+	// Targets are the permanents the focus play must target, in the order the
+	// play asks for them (a removal spell's one target, Magnetic Theft's
+	// Equipment then creature). A forced start names them because its other
+	// placed cards can be legal alternatives, and the bot's own pick would
+	// then aim the destruction at an enabler instead of the key object.
+	Targets []string `json:"targets,omitempty"`
 	// Times is how many times the focus takes its action (0 or absent: once):
 	// "whenever you cast your second spell each turn" is two casts.
 	Times int `json:"times,omitempty"`

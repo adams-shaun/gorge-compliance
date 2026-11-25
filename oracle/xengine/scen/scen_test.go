@@ -253,7 +253,12 @@ func TestScenDeterministic(t *testing.T) {
 		}
 		return raw
 	}
-	for _, k := range append([][2]string{{"Thornvault Forager", "f0/a1"}, {"Banner of Kinship", "static#0.0"}}, fixtureKeys...) {
+	for _, k := range append([][2]string{
+		{"Thornvault Forager", "f0/a1"}, {"Banner of Kinship", "static#0.0"},
+		{"Adagia, Windswept Bastion", "static#0.0"}, {"Adelbert Steiner", "static#0.0"},
+		{"Alien Symbiosis", "static#0.1"}, {"Archmage of Runes", "static#0.0"},
+		{"Omniscience", "static#0.0"}, {"Enigma Drake", "static#0.0"},
+	}, fixtureKeys...) {
 		for _, prefer := range []string{"auto", "start"} {
 			if a, c := gen(k[0], k[1], prefer), gen(k[0], k[1], prefer); !bytes.Equal(a, c) {
 				t.Errorf("%v %s differs between calls", k, prefer)
@@ -610,7 +615,194 @@ func TestStartZoneTriggers(t *testing.T) {
 	}
 }
 
+// TestStartzonetriggers is the dispatch's repro spelling. It covers the
+// ChangesZone/ChangesZoneAll causes the plain carrier recipes missed: a token
+// entering (Anointer Priest, Advent of the Wurm cast), an Aura attached and
+// destroyed (Aspect of Mongoose, Banewasp Affliction), a creature damaged by
+// the card and then dying (Abattoir Ghoul), a card leaving a graveyard
+// (Attuned Hunter, Regrowth), and an Equipment attached then losing its bearer
+// (Avarice Amulet, Magnetic Theft and Ball Lightning's end-step sacrifice).
+// The destruction focuses name their target: the key Aura or creature, its
+// bearer, or (Magnetic Theft) the Equipment and the sacrificial bearer.
+func TestStartzonetriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key string
+		check     func(*testing.T, *StartFile)
+	}{
+		{"Abattoir Ghoul", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Attack != "Abattoir Ghoul" || f.Focus.Block == "" || f.Active != 0 {
+				t.Fatalf("focus %+v active %d, want the Ghoul attacking into a blocker", f.Focus, f.Active)
+			}
+			if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.Block) {
+				t.Errorf("p1 battlefield %v does not hold the blocker %q", f.Setup.P1.Battlefield, f.Focus.Block)
+			}
+		}},
+		{"Anointer Priest", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Kind != "cast" || len(f.Setup.P0.Hand) != 1 || f.Focus.Card != f.Setup.P0.Hand[0] {
+				t.Fatalf("focus %+v hand %v, want a token-maker cast", f.Focus, f.Setup.P0.Hand)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != "Anointer Priest" {
+				t.Errorf("p0 battlefield %v, want Anointer Priest first", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Attuned Hunter", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Kind != "cast" || f.Focus.Card != "Regrowth" {
+				t.Fatalf("focus %+v, want Regrowth cast", f.Focus)
+			}
+			if len(f.Setup.P0.Graveyard) == 0 {
+				t.Error("p0 graveyard is empty, so nothing can leave it")
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != "Attuned Hunter" {
+				t.Errorf("p0 battlefield %v, want Attuned Hunter first", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Aspect of Mongoose", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 1, "Naturalize", "cast", 0)
+			attached(t, f, "Aspect of Mongoose")
+			if !slices.Equal(f.Focus.Targets, []string{"Aspect of Mongoose"}) {
+				t.Errorf("focus targets %v, want the Aura itself", f.Focus.Targets)
+			}
+		}},
+		{"Avarice Amulet", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Magnetic Theft", "cast", 0)
+			if !slices.Contains(f.Setup.P0.Battlefield, "Avarice Amulet") ||
+				!slices.Contains(f.Setup.P0.Battlefield, "Ball Lightning") {
+				t.Errorf("p0 battlefield %v, want Avarice Amulet and Ball Lightning", f.Setup.P0.Battlefield)
+			}
+			if !slices.Equal(f.Focus.Targets, []string{"Avarice Amulet", "Ball Lightning"}) {
+				t.Errorf("focus targets %v, want the Equipment then Ball Lightning", f.Focus.Targets)
+			}
+		}},
+		{"Banewasp Affliction", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 1, "Murder", "cast", 0)
+			attached(t, f, "Banewasp Affliction")
+			if want := attachBearerOf(t, f, "Banewasp Affliction"); !slices.Equal(f.Focus.Targets, []string{want}) {
+				t.Errorf("focus targets %v, want the attached bearer %q", f.Focus.Targets, want)
+			}
+		}},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Fatalf("start file does not decode: %v\n%s", err, raw)
+			}
+			r.check(t, res.Start)
+		})
+	}
+}
+
+// attached asserts the file places card attached to a bearer on the same seat.
+func attached(t *testing.T, f *StartFile, card string) {
+	t.Helper()
+	for _, a := range f.Setup.P0.Attach {
+		bearers := f.Setup.P0.Battlefield
+		if a.Opp {
+			bearers = f.Setup.P1.Battlefield
+		}
+		if a.Card == card && a.To != "" && slices.Contains(bearers, a.To) {
+			return
+		}
+	}
+	t.Errorf("p0 attach %+v battlefield %v, want %q attached to a placed bearer", f.Setup.P0.Attach, f.Setup.P0.Battlefield, card)
+}
+
+// attachBearerOf is the bearer card is attached to, or "".
+func attachBearerOf(t *testing.T, f *StartFile, card string) string {
+	t.Helper()
+	for _, a := range f.Setup.P0.Attach {
+		if a.Card == card {
+			return a.To
+		}
+	}
+	return ""
+}
+
+// TestStartAttachedBearerSeat: an Aura whose Enchant keyword is "creature an
+// opponent controls" (Dead Man's Chest) is attached to a bearer on the
+// opponent's seat, which the start's attach marks Opp; and a self-dies trigger
+// with its own target (Keiga, Vengeant Vampire) still has a creature on the
+// opposing side for it to take besides the lands and the removal spell.
+func TestStartAttachedBearerSeat(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Dead Man's Chest", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Dead Man's Chest: %+v %v", res, err)
+	}
+	f := res.Start
+	if len(f.Setup.P0.Attach) != 1 || !f.Setup.P0.Attach[0].Opp {
+		t.Fatalf("p0 attach %+v, want the Aura attached to an opposing bearer", f.Setup.P0.Attach)
+	}
+	attached(t, f, "Dead Man's Chest")
+	bearer := f.Setup.P0.Attach[0].To
+	if slices.Contains(f.Setup.P0.Battlefield, bearer) {
+		t.Errorf("p0 battlefield %v holds the bearer %q of an opponent-only Enchant", f.Setup.P0.Battlefield, bearer)
+	}
+	if !slices.Equal(f.Focus.Targets, []string{bearer}) {
+		t.Errorf("focus targets %v, want the bearer %q", f.Focus.Targets, bearer)
+	}
+	for _, card := range []string{"Keiga, the Tide Star", "Vengeant Vampire"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: %+v %v", card, res, err)
+		}
+		creature := false
+		for _, n := range res.Start.Setup.P1.Battlefield {
+			if c, ok := reg.Lookup(n); ok && len(c.Faces) > 0 && c.Faces[0].IsCreature() {
+				creature = true
+			}
+		}
+		if !creature {
+			t.Errorf("%s: p1 battlefield %v holds no creature for the trigger's target", card, res.Start.Setup.P1.Battlefield)
+		}
+	}
+}
+
+// TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or
+// exiles a card from the graveyard still needs its own target placed. The
+// focus play (Murder) names no graveyard target, so an override that read only
+// the focus card dropped Myr Retriever's artifact and the other self-dies
+// triggers' targets; placeGraveTargets now places both the key's and the
+// focus play's.
+func TestStartSelfDiesKeepsGraveTarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Myr Retriever", "Vesperlark", "Junk Diver", "Workshop Assistant"} {
+		t.Run(card, func(t *testing.T) {
+			res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Card != "Murder" || !slices.Equal(f.Focus.Targets, []string{card}) {
+				t.Fatalf("focus %+v, want Murder targeting %s", f.Focus, card)
+			}
+			for _, n := range f.Setup.P0.Graveyard {
+				c, ok := reg.Lookup(n)
+				if ok && len(c.Faces) > 0 && !c.Faces[0].IsBasic() {
+					return
+				}
+			}
+			t.Errorf("p0 graveyard %v holds only basics, want the trigger's nonbasic target", f.Setup.P0.Graveyard)
+		})
+	}
+}
+
 // TestStartSpellCastTriggers: a cast trigger is a carrier spell the filter
+
 // takes, cast by the seat ValidActivatingPlayer names: Reach Through Mists
 // ({U} instant, draw a card) for a noncreature spell, on the opponent's turn
 // for "whenever you cast a spell during an opponent's turn" (Brineborn
@@ -984,9 +1176,6 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
 		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
 		{"Blazing Archon", "combat#0.block", "no-generator:combat:restricted"},
-		{"Yavimaya Enchantress", "static#0.0", "no-generator:static:computed"},
-		{"Relentless Rats", "static#0.0", "no-generator:static:computed"},
-		{"Riftstone Portal", "static#0.0", "no-generator:static:zone"},
 	} {
 		res, err := Generate(reg, b, r[0], r[1], Options{Prefer: "start"})
 		if err != nil {
@@ -1166,6 +1355,294 @@ func TestStartFocusIsOffered(t *testing.T) {
 			r.check(t, res.Start)
 		})
 	}
+}
+
+// TestStartstaticother: statics whose effect is observed through a cost
+// reduction, a computed board count, an offered grant, or a zone other than
+// the battlefield get a start that exercises them, instead of a
+// no-generator refusal.
+func TestStartstaticother(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(t *testing.T, card, key string) *StartFile {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+		}
+		return res.Start
+	}
+	face := func(t *testing.T, name string) *cards.Face {
+		t.Helper()
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%q is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+	refused := func(t *testing.T, card, key, reason string) {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathRefused || res.Reason != reason {
+			t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, reason)
+		}
+	}
+
+	// A gated self grant: the STATION counters make the granted ability live,
+	// the mana and target make it offered, and the offered comparison reads it.
+	t.Run("Adagia, Windswept Bastion", func(t *testing.T) {
+		f := gen(t, "Adagia, Windswept Bastion", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield,
+			[]string{"Adagia, Windswept Bastion", "Plains", "Plains", "Plains", "Plains", "Memnite"})
+		want := []StartCounter{{Card: "Adagia, Windswept Bastion", Kind: "CHARGE", N: 12}}
+		if !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+			t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
+		}
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A computed pump: Count$Valid Equipment.YouCtrl is made non-zero by one
+	// Equipment, so the printed P/T is off its base without extra compare.
+	t.Run("Adelbert Steiner", func(t *testing.T) {
+		f := gen(t, "Adelbert Steiner", "static#0.0")
+		if len(f.Setup.P0.Battlefield) != 2 {
+			t.Fatalf("p0 battlefield %v, want the card and one Equipment", f.Setup.P0.Battlefield)
+		}
+		if !face(t, f.Setup.P0.Battlefield[1]).HasTypeWord("Equipment") {
+			t.Errorf("%q is not an Equipment, so the computed amount stays zero", f.Setup.P0.Battlefield[1])
+		}
+		listIs(t, "compare", f.Compare, nil)
+	})
+
+	// A play permission from the graveyard: the card is placed there and the
+	// focus casts it, with the extra card the Discard RaiseCost needs.
+	t.Run("Alien Symbiosis", func(t *testing.T) {
+		f := gen(t, "Alien Symbiosis", "static#0.1")
+		listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, []string{"Alien Symbiosis"})
+		focusIs(t, f, 0, "Alien Symbiosis", "cast", 0)
+		listIs(t, "compare", f.Compare, []string{"offered"})
+		if len(f.Setup.P0.Hand) != 1 {
+			t.Errorf("p0 hand %v, want one card to discard for RaiseCost", f.Setup.P0.Hand)
+		}
+	})
+
+	// A cost reduction: the focus spell's printed cost is one generic more than
+	// the one land placed, so only the reduction makes it affordable.
+	t.Run("Archmage of Runes", func(t *testing.T) {
+		f := gen(t, "Archmage of Runes", "static#0.0")
+		if len(f.Setup.P0.Hand) != 1 {
+			t.Fatalf("p0 hand %v, want one focus spell", f.Setup.P0.Hand)
+		}
+		spell := f.Setup.P0.Hand[0]
+		sf := face(t, spell)
+		if !sf.IsInstant() && !sf.IsSorcery() {
+			t.Errorf("focus spell %q is not an instant or sorcery", spell)
+		}
+		if genericCount(sf.ManaCost) != 1 || len(f.Setup.P0.Battlefield) != 2 {
+			t.Errorf("focus spell %q cost %q, battlefield %v: want one generic and one land",
+				spell, sf.ManaCost, f.Setup.P0.Battlefield)
+		}
+		focusIs(t, f, 0, spell, "cast", 0)
+		if f.Setup.P0.Battlefield[0] != "Archmage of Runes" {
+			t.Errorf("p0 battlefield %v, want the source first", f.Setup.P0.Battlefield)
+		}
+	})
+
+	// A granted mana ability on another permanent: the carrier's offered
+	// activate option is the effect.
+	t.Run("A Realm Reborn", func(t *testing.T) {
+		f := gen(t, "A Realm Reborn", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"A Realm Reborn", "Memnite"})
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A zone static with a granted ability: the source sits in the graveyard,
+	// a land it grants the ability to is on the battlefield.
+	t.Run("Riftstone Portal", func(t *testing.T) {
+		f := gen(t, "Riftstone Portal", "static#0.0")
+		listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, []string{"Riftstone Portal"})
+		if len(f.Setup.P0.Battlefield) != 1 || !face(t, f.Setup.P0.Battlefield[0]).IsLand() {
+			t.Errorf("p0 battlefield %v, want a land the grant applies to", f.Setup.P0.Battlefield)
+		}
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A computed pump over a card class: one enchantment makes X one.
+	t.Run("Yavimaya Enchantress", func(t *testing.T) {
+		f := gen(t, "Yavimaya Enchantress", "static#0.0")
+		if len(f.Setup.P0.Battlefield) != 2 || !face(t, f.Setup.P0.Battlefield[1]).IsEnchantment() {
+			t.Errorf("p0 battlefield %v, want the card and one enchantment", f.Setup.P0.Battlefield)
+		}
+	})
+
+	// A computed pump over the card's own name: a second copy makes X one.
+	t.Run("Relentless Rats", func(t *testing.T) {
+		f := gen(t, "Relentless Rats", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Relentless Rats", "Relentless Rats"})
+	})
+
+	// A play permission whose affected cards are in hand: one card is placed
+	// there and the focus casts it, with no mana because the permission also
+	// waives the cost.
+	t.Run("Omniscience", func(t *testing.T) {
+		f := gen(t, "Omniscience", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Omniscience"})
+		if len(f.Setup.P0.Hand) != 1 {
+			t.Fatalf("p0 hand %v, want one card the permission plays", f.Setup.P0.Hand)
+		}
+		focusIs(t, f, 0, f.Setup.P0.Hand[0], "cast", 0)
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A computed amount over a graveyard count: one instant or sorcery in the
+	// graveyard makes the characteristic-defining power non-zero.
+	t.Run("Enigma Drake", func(t *testing.T) {
+		f := gen(t, "Enigma Drake", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Enigma Drake"})
+		if len(f.Setup.P0.Graveyard) != 1 {
+			t.Fatalf("p0 graveyard %v, want one instant or sorcery", f.Setup.P0.Graveyard)
+		}
+		gf := face(t, f.Setup.P0.Graveyard[0])
+		if !gf.IsInstant() && !gf.IsSorcery() {
+			t.Errorf("%q in the graveyard is not an instant or sorcery", gf.Name)
+		}
+	})
+
+	// A CantBlockBy static whose card is the attacker it names: the card
+	// attacks and a blocker the static forbids waits on the other seat.
+	t.Run("Amrou Kithkin", func(t *testing.T) {
+		f := gen(t, "Amrou Kithkin", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Amrou Kithkin"})
+		if len(f.Setup.P1.Battlefield) != 1 {
+			t.Fatalf("p1 battlefield %v, want one blocker", f.Setup.P1.Battlefield)
+		}
+		blocker := face(t, f.Setup.P1.Battlefield[0])
+		if blocker.Power() < 3 {
+			t.Errorf("blocker %q power %d, want one the static forbids (power 3+)", blocker.Name, blocker.Power())
+		}
+		focusIs(t, f, 0, "Amrou Kithkin", "attack", 0)
+	})
+
+	// A grant whose abilities come from cards exiled with the source is a
+	// linkage a start cannot place: the key keeps its named refusal.
+	t.Run("Agatha's Soul Cauldron", func(t *testing.T) {
+		res, err := Generate(reg, b, "Agatha's Soul Cauldron", "static#0.1", Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathRefused || res.Reason != "no-generator:static:unobserved" {
+			t.Errorf("path %q reason %q, want refused no-generator:static:unobserved", res.Path, res.Reason)
+		}
+	})
+
+	// A battlefield count whose only matching object is an Aura: an unattached
+	// Aura cannot be listed on the battlefield (the whole start file would be
+	// refused at replay), so the count stays zero and the key keeps its refusal.
+	t.Run("Aura Gnarlid", func(t *testing.T) {
+		refused(t, "Aura Gnarlid", "static#0.1", "no-generator:static:computed")
+	})
+
+	// A reduction on an activated ability (Forge writes it as Type$ Ability or
+	// ValidSpell$ Activated.*): a plain spell cast is not discounted, so a spell
+	// start would be unaffordable and never exercised.
+	t.Run("Boom Scholar", func(t *testing.T) {
+		refused(t, "Boom Scholar", "static#0.0", "no-generator:static:ReduceCost")
+	})
+	t.Run("Dragonkin Berserker", func(t *testing.T) {
+		refused(t, "Dragonkin Berserker", "static#0.0", "no-generator:static:ReduceCost")
+	})
+
+	// A self reduction gated on the spell's target or on another seat casting
+	// it: a start's plain cast has no target and is by the focus seat, so the
+	// reduction does not apply.
+	t.Run("Bitter Downfall", func(t *testing.T) {
+		refused(t, "Bitter Downfall", "static#0.0", "no-generator:static:ReduceCost")
+	})
+	t.Run("Accursed Witch", func(t *testing.T) {
+		refused(t, "Accursed Witch", "static#0.0", "no-generator:static:ReduceCost")
+	})
+
+	// A grant whose activation cost removes loyalty: the carrier gets the
+	// counters the [-10] needs, so the ability is offered (and the key is
+	// exercised) instead of credited unexercised.
+	t.Run("Avatar of Burgeoning Echoes", func(t *testing.T) {
+		f := gen(t, "Avatar of Burgeoning Echoes", "static#0.0")
+		spent := int32(0)
+		for _, c := range f.Setup.P0.Counters {
+			if c.Card != "Avatar of Burgeoning Echoes" && c.Kind == "LOYALTY" {
+				spent = c.N
+			}
+		}
+		if spent < 1 {
+			t.Errorf("p0 counters %+v, want loyalty counters on the granted planeswalker", f.Setup.P0.Counters)
+		}
+	})
+
+	// A grant whose source has its own upkeep trigger: the lowering refuses a
+	// battlefield card whose upkeep trigger fires at the cut (playing the start
+	// gave exercised=0), so the key keeps a named refusal rather than a start
+	// that is never exercised.
+	t.Run("Sporoloth Ancient", func(t *testing.T) {
+		refused(t, "Sporoloth Ancient", "static#0.0", "no-generator:static:upkeep-card")
+	})
+
+	// A computed amount over the source's own counters reads one counter kind
+	// once: two fields (AddPower, AddToughness) naming the same count place one
+	// counter row, since a start binds each row to a distinct copy.
+	t.Run("Boon of the Spirit Realm", func(t *testing.T) {
+		f := gen(t, "Boon of the Spirit Realm", "static#0.0")
+		seen := map[string]int{}
+		for _, c := range f.Setup.P0.Counters {
+			seen[c.Card+"/"+c.Kind]++
+		}
+		for k, n := range seen {
+			if n > 1 {
+				t.Errorf("counter row %s appears %d times in %+v", k, n, f.Setup.P0.Counters)
+			}
+		}
+		if len(seen) == 0 {
+			t.Errorf("p0 counters empty, want a counter on the source")
+		}
+	})
+
+	// A wildcard counter kind is no counter a start can place.
+	t.Run("Hancock, Ghoulish Mayor", func(t *testing.T) {
+		refused(t, "Hancock, Ghoulish Mayor", "static#0.0", "no-generator:static:computed")
+	})
+
+	// A counted filter that carries a counter gate gets the counters on its
+	// fixture: without them the count reads zero and the cost is not reduced.
+	for _, c := range []struct{ card, key, kind string }{
+		{"Cinderslash Ravager", "static#0.0", "OIL"},
+		{"Hamza, Guardian of Arashin", "static#0.0", "P1P1"},
+		{"Eluge, the Shoreless Sea", "static#0.1", "FLOOD"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			f := gen(t, c.card, c.key)
+			found := false
+			for _, k := range f.Setup.P0.Counters {
+				if k.Card != c.card && k.Kind == c.kind && k.N >= 1 {
+					found = true
+				}
+			}
+			if !found {
+				t.Errorf("p0 counters %+v, want a %s counter on the counted fixture", f.Setup.P0.Counters, c.kind)
+			}
+		})
+	}
+
+	// A grant whose activation cost discards a card: the start holds fodder.
+	t.Run("Hollowhead Sliver", func(t *testing.T) {
+		f := gen(t, "Hollowhead Sliver", "static#0.0")
+		if len(f.Setup.P0.Hand) == 0 {
+			t.Errorf("p0 hand %v, want a card to discard for the granted ability", f.Setup.P0.Hand)
+		}
+	})
 }
 
 // TestStarttokensteps is the xproof repro for the steps-needed:token class: a
