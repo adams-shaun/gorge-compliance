@@ -24,7 +24,7 @@ c8131fb3-3146-4434-9e4b-ac88ab3cbe37	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 c8187c8d-23fa-436f-9efa-ea4cb80cdc08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8195fcd-1858-4f23-aa73-b654d25035aa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c819ebc8-feb5-48fa-81d2-a4f5aaa4fdbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c819ebc8-feb5-48fa-81d2-a4f5aaa4fdbb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c819ebc8-feb5-48fa-81d2-a4f5aaa4fdbb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c81ca8ff-92f3-481e-82f7-0673b6c74ea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c81d1890-e741-49ec-a6ce-86c27fd4d502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c81d1890-e741-49ec-a6ce-86c27fd4d502	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -176,8 +176,8 @@ c8d479b8-b96c-4382-97d3-68d85cf371ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c8d479b8-b96c-4382-97d3-68d85cf371ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8d74a25-78a9-46ad-ab24-97f6221fd8dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:she-hulk-wallbreaker:cast:s1,f:xs:XP:she-hulk-wallbreaker:cast:s1	-	-	-	8c0bd19283bb	-	e377377ac9f2	-	-	2026-11-24	xproof
 c8d74a25-78a9-46ad-ab24-97f6221fd8dd	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-c8d95ca8-7d12-4072-aeaf-e20f248c7e39	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c8d95ca8-7d12-4072-aeaf-e20f248c7e39	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c8d95ca8-7d12-4072-aeaf-e20f248c7e39	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c8d95ca8-7d12-4072-aeaf-e20f248c7e39	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c8d95ca8-7d12-4072-aeaf-e20f248c7e39	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8da3262-826d-4ea8-bb22-06374bebefe5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mister-negative:f0t0:s2,f:xs:XP:mister-negative:f0t0:s2	-	-	-	267e485f6204	-	2168ab1eae5c	-	-	2026-11-24	xproof
 c8da3262-826d-4ea8-bb22-06374bebefe5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mister Negative/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

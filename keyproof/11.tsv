@@ -44,8 +44,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 114725ef-ac81-4d13-9153-0a303c3ce9c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:innocuous-rat:f0t0:s1,f:xs:XP:innocuous-rat:f0t0:s1	-	-	-	23c4009444b0	-	eaa9f051d859	-	-	2026-11-25	xproof
 1149e5ac-554a-41b1-84ae-bac42579c1aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:cast:s1,f:xs:XP:thrun-the-last-troll:cast:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
 1149e5ac-554a-41b1-84ae-bac42579c1aa	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:f0a0:s1,f:xs:XP:thrun-the-last-troll:f0a0:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
-114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-fen:land:s1,f:xs:XP:turbulent-fen:land:s1	-	-	-	8c0bd19283bb	-	588eb9b5d525	-	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:maralen-fae-ascendant:f0t0:s1,f:xs:XP:maralen-fae-ascendant:f0t0:s1	-	-	-	267e485f6204	-	3fffc42d0f03	-	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1175d482-d8a2-467f-bc50-2f4b241966bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arashin Sunshield/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1175d482-d8a2-467f-bc50-2f4b241966bb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	cast	cast-resolve	agreed	-	FX	scen	2	0	Roxanne, Starfall Savant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Roxanne, Starfall Savant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Roxanne, Starfall Savant/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11776f73-f504-4f19-b5b6-2f58279f8b15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sibsig-host:f0t0:s1,f:xs:XP:sibsig-host:f0t0:s1	-	-	-	d864b561c9cb	-	4bb379754090	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11b529f0-e365-4500-b54a-44e2ac6e709f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maw-of-kozilek:cast:s1,f:xs:XP:maw-of-kozilek:cast:s1	-	-	-	d864b561c9cb	-	6a9416c0da9b	-	-	2026-11-24	xproof
 11b529f0-e365-4500-b54a-44e2ac6e709f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:maw-of-kozilek:f0a0:s1,f:xs:XP:maw-of-kozilek:f0a0:s1	-	-	-	d864b561c9cb	-	6a9416c0da9b	-	-	2026-11-24	xproof
 11b5308d-5bc0-4782-875f-a28be36e665d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastmaster-ascension:cast:s1,f:xs:XP:beastmaster-ascension:cast:s1	-	-	-	8a1b1a193ec0	-	46d86e35364a	-	-	2026-11-24	xproof
-11b5308d-5bc0-4782-875f-a28be36e665d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11b5308d-5bc0-4782-875f-a28be36e665d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 11b7ee78-fca6-4b34-93e4-e60492583d50	cast	cast-resolve	agreed	-	FX	scen	2	0	Agrus Kos, Spirit of Justice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11b7ee78-fca6-4b34-93e4-e60492583d50	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:agrus-kos-spirit-of-justice:combat0.attack:s1,f:xs:XP:agrus-kos-spirit-of-justice:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f9385bb19fa7	-	-	2026-11-25	xproof
 11b7ee78-fca6-4b34-93e4-e60492583d50	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Agrus Kos, Spirit of Justice/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

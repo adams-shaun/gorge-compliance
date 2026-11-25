@@ -15,7 +15,7 @@ f207ce73-e4cd-4dfc-b3b9-5704f5148959	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Zell
 f207ce73-e4cd-4dfc-b3b9-5704f5148959	static#0.0	static#0.0	agreed	-	X	scen	1	0	Zell Dincht/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f207ce73-e4cd-4dfc-b3b9-5704f5148959	static#0.1	static#0.1	agreed	-	X	scen	1	0	Zell Dincht/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f20aa69a-e2eb-4103-9684-12390ef07c6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f20aa69a-e2eb-4103-9684-12390ef07c6c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f20aa69a-e2eb-4103-9684-12390ef07c6c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f20d96cc-3949-4888-a909-c7d67c4d31c7	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f20d96cc-3949-4888-a909-c7d67c4d31c7	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f20ec8e2-d6e4-4707-9b86-107dbc09ac63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -53,7 +53,7 @@ f24efc60-fdac-4a5d-bcbc-784ec5ae6d96	combat#0.attack	combat#0.attack	agreed	-	X	
 f24efc60-fdac-4a5d-bcbc-784ec5ae6d96	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aerial Doombot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f24efc60-fdac-4a5d-bcbc-784ec5ae6d96	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aerial Doombot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f25351e3-539b-4bbc-b92d-6480acf4d722	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f25351e3-539b-4bbc-b92d-6480acf4d722	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+f25351e3-539b-4bbc-b92d-6480acf4d722	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f25351e3-539b-4bbc-b92d-6480acf4d722	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f255492e-4e12-48b4-9c19-8a2a2780a1b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sneaky-snacker:cast:s1,f:xs:XP:sneaky-snacker:cast:s1	-	-	-	ae86f6029288	-	b9aa357c4737	-	-	2026-11-24	xproof
 f255492e-4e12-48b4-9c19-8a2a2780a1b7	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ f2cedb38-12b0-4489-a62b-9b6a3776d695	f0/t0	Phase/Cumulative upkeep	owed	harness	
 f2cf087a-d89a-4145-9394-945ce41c8cca	cast	cast-resolve	agreed	-	X	scen	1	0	Archway Angel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2cf087a-d89a-4145-9394-945ce41c8cca	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:archway-angel:combat0.attack:s1,f:xs:XP:archway-angel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	04ddf878ae51	-	-	2026-11-25	xproof
 f2cf087a-d89a-4145-9394-945ce41c8cca	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archway-angel:combat0.block:s1,f:xs:XP:archway-angel:combat0.block:s1	-	-	-	3aa6ded33acb	-	04ddf878ae51	-	-	2026-11-25	xproof
-f2cf087a-d89a-4145-9394-945ce41c8cca	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f2cf087a-d89a-4145-9394-945ce41c8cca	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f2d1e991-e13a-43c7-85aa-d53dd14822e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wake-thrasher:cast:s1,f:xs:XP:wake-thrasher:cast:s1	-	-	-	8a1b1a193ec0	-	63f48593da7c	-	-	2026-11-24	xproof
 f2d1e991-e13a-43c7-85aa-d53dd14822e6	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f2d5949b-3cdc-4efd-9841-7d450e12dbbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-tactician:f0t0:s1,f:xs:XP:aven-tactician:f0t0:s1	-	-	-	d864b561c9cb	-	d2da79dfa106	-	-	2026-11-24	xproof

@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a060788-a601-4c01-8341-73398b497a85	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5a0c215a-2164-4cb8-89ff-2558b6b42dca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trench-stalker:cast:s1,f:xs:XP:trench-stalker:cast:s1	-	-	-	ae86f6029288	-	e697a331d66f	-	-	2026-11-24	xproof
 5a0eb270-b142-45da-87a2-2f1c4e25db17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a0eb270-b142-45da-87a2-2f1c4e25db17	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+5a0eb270-b142-45da-87a2-2f1c4e25db17	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a10c3a5-6724-4e5a-ae4f-b27dde12735a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a10c3a5-6724-4e5a-ae4f-b27dde12735a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a131407-c217-48fc-aa15-9e3392445768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -25,8 +25,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a1bebe9-c940-4fac-8572-0833808eaa55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:conclave-phalanx:f0t0:s1,f:xs:XP:conclave-phalanx:f0t0:s1	-	-	-	64a08ba7d913	-	a03b8dfc0cea	-	-	2026-11-24	xproof
 5a1d5b0d-335f-4ae4-94d8-60494fedb570	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:festering-march:cast:s1,f:xs:XP:festering-march:cast:s1	-	-	-	d864b561c9cb	-	1178f7fbbc72	-	-	2026-11-24	xproof
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a20113c-7ea8-4edf-af9f-148ccd326a88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nyx-fleece-ram:f0t0:s1,f:xs:XP:nyx-fleece-ram:f0t0:s1	-	-	-	3aa6ded33acb	-	89d93e665e97	-	-	2026-11-25	xproof
 5a20113c-7ea8-4edf-af9f-148ccd326a88	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nyx-fleece-ram:f0t0:s1,f:xs:XP:nyx-fleece-ram:f0t0:s1	-	-	-	3aa6ded33acb	-	89d93e665e97	-	-	2026-11-25	xproof
@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a2fa420-c27f-4c14-b285-e0bb2828e053	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cyan-vengeful-samurai:cast:s1,f:xs:XP:cyan-vengeful-samurai:cast:s1	-	-	-	8c0bd19283bb	-	aaacbc6c2499	-	-	2026-11-24	xproof
 5a2fa420-c27f-4c14-b285-e0bb2828e053	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5a343a5f-3f9b-43c3-8532-8391de7a5443	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jacked-rabbit:f0t1:s1,f:xs:XP:jacked-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	3b916b9acbad	-	-	2026-11-25	xproof
-5a343a5f-3f9b-43c3-8532-8391de7a5443	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a343a5f-3f9b-43c3-8532-8391de7a5443	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a343a5f-3f9b-43c3-8532-8391de7a5443	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:jacked-rabbit:f0t1:s1,f:xs:XP:jacked-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	3b916b9acbad	-	-	2026-11-25	xproof
 5a367c9c-9a7f-4587-aa05-c0fba46ed838	cast	cast-resolve	agreed	-	X	scen	1	0	Scout for Survivors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a399467-abb7-4f33-962d-8bef5aa9ebf3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aligned-hedron-network:f0t0:s1,f:xs:XP:aligned-hedron-network:f0t0:s1	-	-	-	d864b561c9cb	-	9ac820b01d95	-	-	2026-11-24	xproof
@@ -129,9 +129,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a8977fc-0732-4807-b876-01819aedd70b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pym Technologies/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a8977fc-0732-4807-b876-01819aedd70b	land	play-land	agreed	-	X	scen	1	0	Pym Technologies/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a898412-5b1e-4217-ac78-5b4099ed8e16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a8ae1c0-1935-4d03-aa94-9e9088650821	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Nog, Ambitious Cadet"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Nog, Ambitious Cadet"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Nog, Ambitious Cadet"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+5a8ae1c0-1935-4d03-aa94-9e9088650821	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Nog, Ambitious Cadet"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Nog, Ambitious Cadet"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Nog, Ambitious Cadet"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a8bd4a4-8b10-4eef-8341-28be2afa2c00	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sleep-paralysis:cast:s1,f:xs:XP:sleep-paralysis:cast:s1	-	-	-	d864b561c9cb	-	db0f77152e21	-	-	2026-11-24	xproof
 5a8bd4a4-8b10-4eef-8341-28be2afa2c00	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sleep-paralysis:cast:s1,f:xs:XP:sleep-paralysis:cast:s1	-	-	-	d864b561c9cb	-	db0f77152e21	-	-	2026-11-24	xproof
 5a8dd1b7-b63e-4997-9fe8-5e8816bc051b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempt-with-glory:cast:s1,f:xs:XP:tempt-with-glory:cast:s1	-	-	-	8c0bd19283bb	-	90e344e9644d	-	-	2026-11-24	xproof

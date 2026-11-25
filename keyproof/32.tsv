@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 320ed2ec-ef06-41fb-ac8a-72579f11544c	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 320ed2ec-ef06-41fb-ac8a-72579f11544c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wurmwall Sweeper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32116127-cf96-4a1b-8896-a1ebc087b597	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32116127-cf96-4a1b-8896-a1ebc087b597	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	land	land	agreed	-	FX	start	2	0	x:xs:XP:llanowar-wastes:land:s1,f:xs:XP:llanowar-wastes:land:s1	-	-	-	25696bf19d5b	-	dd6dbde74348	-	-	2026-11-24	xproof
 3212e47a-5492-4c50-9d4a-6ea562f1a6e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3212e47a-5492-4c50-9d4a-6ea562f1a6e1	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:millstone:f0a0:s1,f:xs:XP:millstone:f0a0:s1	-	-	-	23c4009444b0	-	637e173db8fe	-	-	2026-11-25	xproof
@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 321c4586-d27e-45ae-ba1f-3efea334a697	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ancestral-vengeance:f0t0:s1,f:xs:XP:ancestral-vengeance:f0t0:s1	-	-	-	d864b561c9cb	-	a6465c9914b8	-	-	2026-11-24	xproof
 321e101c-a426-4d18-be0b-c26c5348b70d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 321e101c-a426-4d18-be0b-c26c5348b70d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-321fd970-a259-448d-bd98-e85e386174f9	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+321fd970-a259-448d-bd98-e85e386174f9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32249228-e300-4865-b977-5e1f285d02f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32263baa-d3f0-463f-92b3-4e9938476add	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hedron-archive:cast:s1,f:xs:XP:hedron-archive:cast:s1	-	-	-	23b491658465	-	3b9db8eca4be	-	-	2026-11-24	xproof
 32263baa-d3f0-463f-92b3-4e9938476add	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:hedron-archive:cast:s2,f:xs:XP:hedron-archive:cast:s2	-	-	-	23b491658465	-	3b9db8eca4be	-	-	2026-11-24	xproof
@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3241a3f5-7ae5-4497-9dd2-a55f3370a055	cast	cast-resolve	agreed	-	FX	scen	2	0	Solve for Disappointment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
-3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 32438050-5ae7-4c19-bcaf-5a07a673e0e0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Reef Roads/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:harbinger-of-the-hunt:f0a0:s1,f:xs:XP:harbinger-of-the-hunt:f0a0:s1	-	-	-	d864b561c9cb	-	82441c99f9f1	-	-	2026-11-24	xproof
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	f0/a1	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:harbinger-of-the-hunt:f0a1:s1,f:xs:XP:harbinger-of-the-hunt:f0a1:s1	-	-	-	d864b561c9cb	-	82441c99f9f1	-	-	2026-11-24	xproof
 32599d7c-243b-447b-9d5d-e8e29830ac61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32599d7c-243b-447b-9d5d-e8e29830ac61	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+32599d7c-243b-447b-9d5d-e8e29830ac61	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	cast	cast-resolve	agreed	-	X	scen	1	0	Iron Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron Giant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iron Giant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 32654ffa-b869-4f8b-a153-4242e8f9d92e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32654ffa-b869-4f8b-a153-4242e8f9d92e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32654ffa-b869-4f8b-a153-4242e8f9d92e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32aee76a-e738-4898-985a-801d1cce15ea	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Vision/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32aee76a-e738-4898-985a-801d1cce15ea	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Vision/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	cast	cast-resolve	agreed	-	FX	scen	2	0	Thousand Moons Smithy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-32af5f7b-a970-484a-9aff-226749551d32	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	cast	cast-resolve	agreed	-	X	scen	1	0	Gruff Triplets/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gruff-triplets:combat0.attack:s1,f:xs:XP:gruff-triplets:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ed99d7e5ca8e	-	-	2026-11-25	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gruff-triplets:combat0.block:s1,f:xs:XP:gruff-triplets:combat0.block:s1	-	-	-	3aa6ded33acb	-	ed99d7e5ca8e	-	-	2026-11-25	xproof
-32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gruff Triplets/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32e4de02-8437-4ffc-acc9-a3736652d282	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chief-of-the-scale:cast:s1,f:xs:XP:chief-of-the-scale:cast:s1	-	-	-	d864b561c9cb	-	de0e3d34ab2a	-	-	2026-11-24	xproof
 32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

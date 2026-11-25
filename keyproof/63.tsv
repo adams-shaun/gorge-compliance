@@ -34,11 +34,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 633a0919-9ac3-4645-8f0b-3f00c198db79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hellfire-mongrel:f0t0:s1,f:xs:XP:hellfire-mongrel:f0t0:s1	-	-	-	3aa6ded33acb	-	4a6a4281de5c	-	-	2026-11-25	xproof
 633a0919-9ac3-4645-8f0b-3f00c198db79	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:hellfire-mongrel:f0t0:s1,f:xs:XP:hellfire-mongrel:f0t0:s1	-	-	-	3aa6ded33acb	-	4a6a4281de5c	-	-	2026-11-25	xproof
 633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633a41f0-3889-49a0-b2fc-9baf59f4ddc2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633ad9e2-9f55-4a1c-9248-661ad4b0e1dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-633ad9e2-9f55-4a1c-9248-661ad4b0e1dc	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+633ad9e2-9f55-4a1c-9248-661ad4b0e1dc	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 633b541b-e37f-451a-be73-3398e61e0f75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633b8f22-0384-4f60-ba78-b52c2d82dfde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633e91ea-84d4-42ca-a8eb-603db340ebe7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-skyward-eye:cast:s1,f:xs:XP:knight-of-the-skyward-eye:cast:s1	-	-	-	8a1b1a193ec0	-	e2463d027c31	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 637c5583-4683-4ae4-8b4e-f5da42a772c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 637c5583-4683-4ae4-8b4e-f5da42a772c7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 637ddd65-112d-40f7-9bab-a61724d9165c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-637ddd65-112d-40f7-9bab-a61724d9165c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+637ddd65-112d-40f7-9bab-a61724d9165c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6385fd0d-256d-4400-9319-afa8170024db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 638ecc20-a275-4810-9669-89a0730c5362	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cyclops-electromancer:cast:s1,f:xs:XP:cyclops-electromancer:cast:s1	-	-	-	d864b561c9cb	-	4d9aed68438f	-	-	2026-11-24	xproof
 638ecc20-a275-4810-9669-89a0730c5362	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cyclops-electromancer:cast:s1,f:xs:XP:cyclops-electromancer:cast:s1	-	-	-	d864b561c9cb	-	4d9aed68438f	-	-	2026-11-24	xproof

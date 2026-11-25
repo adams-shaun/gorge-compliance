@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b1f68a2-b606-4c64-bd44-a9714808316d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1fee86-360d-41d8-9238-eff216376732	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b1fee86-360d-41d8-9238-eff216376732	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:expunge:cast:s1,f:xs:XP:expunge:cast:s1	-	-	-	23b491658465	-	8e0274795401	-	-	2026-11-24	xproof
-4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	land	land	agreed	-	FX	start	2	0	x:xs:XP:underground-sea:land:s1,f:xs:XP:underground-sea:land:s1	-	-	-	ae86f6029288	-	721bbec86101	-	-	2026-11-24	xproof
 4b2831f5-70e3-4f4f-8393-4cd141c9da34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b2831f5-70e3-4f4f-8393-4cd141c9da34	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,14 +67,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b505a4c-ccc3-4461-bbc4-ad5d39f9b879	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a1	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:altanak-the-thrice-called:cast:s1,f:xs:XP:altanak-the-thrice-called:cast:s1	-	-	-	23c4009444b0	-	6d7bd5ebdc23	-	-	2026-11-25	xproof
-4b508087-99da-4eb1-8b12-29162f2ec85d	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b508087-99da-4eb1-8b12-29162f2ec85d	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-ballista:cast:s1,f:xs:XP:walking-ballista:cast:s1	-	-	-	d864b561c9cb	-	16260c3ec56a	-	-	2026-11-24	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
 4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	cast	cast-resolve	agreed	-	X	scen	1	0	Shuttle Ace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	cast	cast-resolve	agreed	-	X	scen	1	0	Danitha, Spear of Agony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Danitha, Spear of Agony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Danitha, Spear of Agony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -94,8 +94,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b6aa5e2-b539-46cd-804b-cd9e996a9456	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b6dd710-f7f2-4fc8-9b66-b48c7737b135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b706959-ea38-4808-870a-7c35d83f7ab2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b706959-ea38-4808-870a-7c35d83f7ab2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b706959-ea38-4808-870a-7c35d83f7ab2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b706959-ea38-4808-870a-7c35d83f7ab2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4b706959-ea38-4808-870a-7c35d83f7ab2	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b707ef4-2c17-41e7-8dac-583791a98055	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:haazda-vigilante:f0t0:s2,f:xs:XP:haazda-vigilante:f0t0:s2	-	-	-	e07cf3a05ba5	-	675779ab08ee	-	-	2026-11-24	xproof
 4b707ef4-2c17-41e7-8dac-583791a98055	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:haazda-vigilante:f0t0:s2,f:xs:XP:haazda-vigilante:f0t0:s2	-	-	-	e07cf3a05ba5	-	675779ab08ee	-	-	2026-11-24	xproof
 4b707ef4-2c17-41e7-8dac-583791a98055	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:haazda-vigilante:f0t1:s1,f:xs:XP:haazda-vigilante:f0t1:s1	-	-	-	8c0bd19283bb	-	675779ab08ee	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bb1863e-50f3-4e08-884e-1f58ee55817f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4bb1863e-50f3-4e08-884e-1f58ee55817f	f0/a1	RollDice	agreed	-	FX	start	2	0	x:xs:XP:component-pouch:cast:s1,f:xs:XP:component-pouch:cast:s1	-	-	-	8c0bd19283bb	-	e897bd3393e9	-	-	2026-11-24	xproof
 4bb4844c-2678-45c7-8f5e-9cf185fd484b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swamp-mosquito:cast:s1,f:xs:XP:swamp-mosquito:cast:s1	-	-	-	25696bf19d5b	-	92b163dc2cbc	-	-	2026-11-24	xproof
-4bb4844c-2678-45c7-8f5e-9cf185fd484b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+4bb4844c-2678-45c7-8f5e-9cf185fd484b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4bb75182-6dd4-42f7-9541-d484d0b57897	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bba3663-7f3c-4589-88aa-cf0bfe36b171	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bbc5df9-60d7-46c1-8856-91c9c74abf18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caelorna-coral-tyrant:cast:s1,f:xs:XP:caelorna-coral-tyrant:cast:s1	-	-	-	23c4009444b0	-	d4cf9f15649d	-	-	2026-11-25	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bc34109-2050-4736-8247-ba06f0a9114a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4bc34109-2050-4736-8247-ba06f0a9114a	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4bc79fb3-81bb-42ed-9bbb-93f8cede3094	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4bc79fb3-81bb-42ed-9bbb-93f8cede3094	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bc79fb3-81bb-42ed-9bbb-93f8cede3094	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4bc91d7d-37aa-475c-8fe9-763975d51add	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cff3a3bdd333	-	-	2026-11-25	xproof
 4bc91d7d-37aa-475c-8fe9-763975d51add	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cff3a3bdd333	-	-	2026-11-25	xproof
 4bc91d7d-37aa-475c-8fe9-763975d51add	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bccfa67-0c6f-42a1-b8d4-0842a8230d1e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rick Jones, Destined Sidekick/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	cast	cast-resolve	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4bcf4f12-470e-4f73-a19a-643a20084e16	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+4bcf4f12-470e-4f73-a19a-643a20084e16	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	static#0.0	static#0.0	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bd1d079-314e-4fb5-9b43-c9c83e5528bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alisaie-leveilleur:f0t0:s1,f:xs:XP:alisaie-leveilleur:f0t0:s1	-	-	-	23c4009444b0	-	aff61219a46b	-	-	2026-11-25	xproof
 4bd1d079-314e-4fb5-9b43-c9c83e5528bc	f0/t0	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:alisaie-leveilleur:f0t0:s1,f:xs:XP:alisaie-leveilleur:f0t0:s1	-	-	-	23c4009444b0	-	aff61219a46b	-	-	2026-11-25	xproof

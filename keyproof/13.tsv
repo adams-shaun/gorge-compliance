@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1374498c-58fd-40b9-b63b-f87fedc42e58	f0/t0	NULL	owed	refused:no-generator:trigger:Transformed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1374498c-58fd-40b9-b63b-f87fedc42e58	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1374ac18-01bd-452f-af72-a5f96285ed69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1374ac18-01bd-452f-af72-a5f96285ed69	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+1374ac18-01bd-452f-af72-a5f96285ed69	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 137594f7-2422-461b-a3ae-7ce3c135e0c7	cast	cast-resolve	agreed	-	X	scen	1	0	Hill Gigas/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 137594f7-2422-461b-a3ae-7ce3c135e0c7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hill Gigas/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 137594f7-2422-461b-a3ae-7ce3c135e0c7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hill Gigas/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1389c9fa-fec2-4212-a7aa-6dfb318dc202	cast	cast-resolve	agreed	-	X	scen	1	0	Bagel and Schmear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1389c9fa-fec2-4212-a7aa-6dfb318dc202	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bagel and Schmear/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1389c9fa-fec2-4212-a7aa-6dfb318dc202	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bagel and Schmear/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-138f9daa-19d4-4290-94a7-09e00dbcebb0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+138f9daa-19d4-4290-94a7-09e00dbcebb0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13958d6f-25f9-4a6c-a16c-e7a20e1b9117	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1396e7f1-ac91-4778-9f71-493c7a44bd51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1396e7f1-ac91-4778-9f71-493c7a44bd51	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13db0230-b57e-47fd-9025-580d06cc88ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13dbfe3f-1e04-4c4f-953c-7c949dba9d33	cast	cast-resolve	agreed	-	FX	scen	2	0	U.S.S. Discovery, at Black Alert/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13dbfe3f-1e04-4c4f-953c-7c949dba9d33	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13dbfe3f-1e04-4c4f-953c-7c949dba9d33	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+13dbfe3f-1e04-4c4f-953c-7c949dba9d33	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13e8d063-eece-4f38-83f6-02403130defa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brazen-freebooter:f0t0:s1,f:xs:XP:brazen-freebooter:f0t0:s1	-	-	-	d864b561c9cb	-	609dc72c4270	-	-	2026-11-24	xproof
 13e8d063-eece-4f38-83f6-02403130defa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brazen-freebooter:f0t0:s1,f:xs:XP:brazen-freebooter:f0t0:s1	-	-	-	d864b561c9cb	-	609dc72c4270	-	-	2026-11-24	xproof
 13e94530-defb-4c9b-9ec7-bb7789ec2630	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -211,6 +211,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13fd7ca6-c278-409f-a9c4-57f16051ffce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starling, Aerial Ally/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13fd7ca6-c278-409f-a9c4-57f16051ffce	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:starling-aerial-ally:f0t0:s2,f:xs:XP:starling-aerial-ally:f0t0:s2	-	-	-	267e485f6204	-	e1bcd026b2d7	-	-	2026-11-24	xproof
 13fe5e46-77a6-45d8-ac0b-c3d740eccf86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13ff3222-91cb-4796-a34e-899ed817694c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13ff3222-91cb-4796-a34e-899ed817694c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13ff3222-91cb-4796-a34e-899ed817694c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ff3222-91cb-4796-a34e-899ed817694c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

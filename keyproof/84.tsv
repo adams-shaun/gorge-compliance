@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84dc0aae-029b-48dc-b8d0-e93c227e32e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lotus-path-djinn:cast:s1,f:xs:XP:lotus-path-djinn:cast:s1	-	-	-	d864b561c9cb	-	d31175286a69	-	-	2026-11-24	xproof
 84dc0aae-029b-48dc-b8d0-e93c227e32e5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 84dc18f0-8225-4b40-a165-b10321e41769	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:nykthos-shrine-to-nyx:f0a1:s1,f:xs:XP:nykthos-shrine-to-nyx:f0a1:s1	-	-	-	8c0bd19283bb	-	bf691be9abdc	-	-	2026-11-25	xproof
-84dc18f0-8225-4b40-a165-b10321e41769	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+84dc18f0-8225-4b40-a165-b10321e41769	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 84dc18f0-8225-4b40-a165-b10321e41769	land	land	agreed	-	FX	start	2	0	x:xs:XP:nykthos-shrine-to-nyx:land:s1,f:xs:XP:nykthos-shrine-to-nyx:land:s1	-	-	-	d864b561c9cb	-	bf691be9abdc	-	-	2026-11-24	xproof
 84dc94b2-95fb-4d53-aaa2-191cb645639f	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 84de4fec-2f38-4293-93d3-b3882c5aac14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84e56125-3fbb-4229-8aa0-8f8acff27038	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84e7be36-b8cd-4111-a91b-3628f421d5d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84e7be36-b8cd-4111-a91b-3628f421d5d5	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-84e89aac-439c-4e09-b7d9-2ee047c224c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+84e89aac-439c-4e09-b7d9-2ee047c224c5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 84e8ca5e-730e-468b-943c-7c6358ade95c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ill-gotten-inheritance:f0t0:s1,f:xs:XP:ill-gotten-inheritance:f0t0:s1	-	-	-	3aa6ded33acb	-	4029330c9fbd	-	-	2026-11-25	xproof
 84e8ca5e-730e-468b-943c-7c6358ade95c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84e8ca5e-730e-468b-943c-7c6358ade95c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ill-gotten-inheritance:f0t0:s1,f:xs:XP:ill-gotten-inheritance:f0t0:s1	-	-	-	3aa6ded33acb	-	4029330c9fbd	-	-	2026-11-25	xproof

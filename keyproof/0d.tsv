@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d60c095-4c6c-4618-8ef3-508f3d454efa	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Ajani Resolute/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d60c095-4c6c-4618-8ef3-508f3d454efa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ajani Resolute/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d60cfb1-dd77-4013-b862-41e95fdb53ae	cast	cast-resolve	agreed	-	X	scen	1	0	MACO Strike Team/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0d60cfb1-dd77-4013-b862-41e95fdb53ae	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+0d60cfb1-dd77-4013-b862-41e95fdb53ae	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0d60ffba-9904-442e-8d4a-a6b1b50a38eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prismari-apprentice:cast:s1,f:xs:XP:prismari-apprentice:cast:s1	-	-	-	d864b561c9cb	-	35472fccf812	-	-	2026-11-24	xproof
 0d60ffba-9904-442e-8d4a-a6b1b50a38eb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0d61239f-28e4-4adb-8f6e-b56e9c8699af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cursed-land:cast:s1,f:xs:XP:cursed-land:cast:s1	-	-	-	ae86f6029288	-	a53096bc0592	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d6d5509-41e5-4099-98a0-18ae7531df7d	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:radha-s-firebrand:f0a0:s1,f:xs:XP:radha-s-firebrand:f0a0:s1	-	-	-	ae86f6029288	-	de611e197b51	-	-	2026-11-24	xproof
 0d6dc95d-55ce-4ef8-b065-d7203f5bf642	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:resolute-archangel:f0t0:s1,f:xs:XP:resolute-archangel:f0t0:s1	-	-	-	d864b561c9cb	-	9bb9547d5e08	-	-	2026-11-24	xproof
 0d6dc95d-55ce-4ef8-b065-d7203f5bf642	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:resolute-archangel:f0t0:s1,f:xs:XP:resolute-archangel:f0t0:s1	-	-	-	d864b561c9cb	-	9bb9547d5e08	-	-	2026-11-24	xproof
-0d6fccd5-ec14-4da6-972e-b2f5502818a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d6fccd5-ec14-4da6-972e-b2f5502818a4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0d6fccd5-ec14-4da6-972e-b2f5502818a4	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:trapjaw-kelpie:f0t0:s1,f:xs:XP:trapjaw-kelpie:f0t0:s1	-	-	-	3aa6ded33acb	-	e463b806df2f	-	-	2026-11-25	xproof
 0d71b157-09a0-4fd4-beb9-103117a784ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:farmstead:cast:s1,f:xs:XP:farmstead:cast:s1	-	-	-	ae86f6029288	-	4887d4a1f040	-	-	2026-11-24	xproof
 0d78ba2c-4de0-47d9-b1b9-13dc9de8844b	cast	cast	agreed	-	F	start	4	0	f:xs:XP:faerie-impostor:cast:s1	-	-	-	d864b561c9cb	-	7d179c24dc18	-	-	2026-11-24	xproof
@@ -204,7 +204,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0de18ba2-84a7-4e07-84b2-771761d77aaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fireforger-s-puzzleknot:f0t0:s1,f:xs:XP:fireforger-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	d7087ed2ce0a	-	-	2026-11-24	xproof
 0de18ba2-84a7-4e07-84b2-771761d77aaf	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fireforger-s-puzzleknot:f0a0:s1,f:xs:XP:fireforger-s-puzzleknot:f0a0:s1	-	-	-	d864b561c9cb	-	d7087ed2ce0a	-	-	2026-11-24	xproof
 0de18ba2-84a7-4e07-84b2-771761d77aaf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fireforger-s-puzzleknot:f0t0:s1,f:xs:XP:fireforger-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	d7087ed2ce0a	-	-	2026-11-24	xproof
-0de3aad2-5f4c-4437-b0b3-4b867309528d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Inner Light"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+0de3aad2-5f4c-4437-b0b3-4b867309528d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Inner Light"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0de4171e-5908-408e-9852-25f148d0fb47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectral-adversary:f0t0:s1,f:xs:XP:spectral-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	ff6b2c9e60fa	-	-	2026-11-24	xproof
 0de4171e-5908-408e-9852-25f148d0fb47	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spectral-adversary:f0t0:s1,f:xs:XP:spectral-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	ff6b2c9e60fa	-	-	2026-11-24	xproof
 0df0503b-25e7-499b-a703-a867f2da790c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15260fa6-6062-423a-a248-81292ea46178	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hellspur Posse Boss/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 15276d3b-a117-44bf-87c3-c17e032e4a26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thunderclap-wyvern:cast:s1,f:xs:XP:thunderclap-wyvern:cast:s1	-	-	-	d864b561c9cb	-	4791f67ccb36	-	-	2026-11-24	xproof
 152b621e-4c18-438c-9999-77e2685fda79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:craw-giant:cast:s1,f:xs:XP:craw-giant:cast:s1	-	-	-	25696bf19d5b	-	2db46dc8bc02	-	-	2026-11-24	xproof
-152b621e-4c18-438c-9999-77e2685fda79	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+152b621e-4c18-438c-9999-77e2685fda79	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 152b91c9-cc07-4ca8-944f-9bc2242a2283	cast	cast-resolve	agreed	-	FX	scen	2	0	Whir of Invention/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 152bbb62-195b-4de1-90c6-10dd953f8c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 152e7e91-4eda-4e72-a9fb-bd5cb2e68239	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:shefet-monitor:cast:s1,f:xs:XP:shefet-monitor:cast:s1	-	-	-	d864b561c9cb	-	afb4015e9f8e	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1551cd95-1e68-404f-be1d-cc9c7f447210	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilacorn:cast:s1,f:xs:XP:gilacorn:cast:s1	-	-	-	8c0bd19283bb	-	ccadd54218c9	-	-	2026-11-24	xproof
 1552c6d1-f20a-4303-acf2-2fdd432a98e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 155422a0-a0cd-4399-8ed9-fa68ac2c80a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-155422a0-a0cd-4399-8ed9-fa68ac2c80a6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+155422a0-a0cd-4399-8ed9-fa68ac2c80a6	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 155e01a1-5809-4be9-ad38-c11553a4a723	cast	cast-resolve	agreed	-	X	scen	1	0	Dual-Sun Adepts/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 155e01a1-5809-4be9-ad38-c11553a4a723	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dual-Sun Adepts/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 155e01a1-5809-4be9-ad38-c11553a4a723	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dual-Sun Adepts/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15f89b06-5025-4c9f-bf51-e25bc5c2dd6b	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:saiba-cryptomancer:f0t0:s1,f:xs:XP:saiba-cryptomancer:f0t0:s1	-	-	-	ae86f6029288	-	2bef88601997	-	-	2026-11-24	xproof
 15fb3a7a-a6c3-4bef-9f72-1d04b623063e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:molten-tail-masticore:f0t0:s1	-	-	-	3aa6ded33acb	-	792be6b48a69	-	-	2026-11-25	xproof
 15fb3a7a-a6c3-4bef-9f72-1d04b623063e	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-15fb3a7a-a6c3-4bef-9f72-1d04b623063e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15fb3a7a-a6c3-4bef-9f72-1d04b623063e	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 15fb3a7a-a6c3-4bef-9f72-1d04b623063e	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:molten-tail-masticore:f0t0:s1	-	-	-	3aa6ded33acb	-	792be6b48a69	-	-	2026-11-25	xproof
 15fbb7b1-c62d-4f82-9f35-2c10299779f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15fbb7b1-c62d-4f82-9f35-2c10299779f4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof

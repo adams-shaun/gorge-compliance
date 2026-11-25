@@ -27,8 +27,8 @@ df23a4a5-eddd-4b0e-9f7e-a3733ce49c0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 df23a4a5-eddd-4b0e-9f7e-a3733ce49c0d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:riddlekeeper:f0t0:s1,f:xs:XP:riddlekeeper:f0t0:s1	-	-	-	3aa6ded33acb	-	a574a5a19054	-	-	2026-11-25	xproof
 df2738fe-9cd1-4347-8808-105fcfde1190	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circle-of-protection-red:cast:s1,f:xs:XP:circle-of-protection-red:cast:s1	-	-	-	ae86f6029288	-	89d0b5b79da5	-	-	2026-11-24	xproof
 df2738fe-9cd1-4347-8808-105fcfde1190	f0/a0	ChooseSource	agreed	-	FX	start	2	0	x:xs:XP:circle-of-protection-red:f0a0:s1,f:xs:XP:circle-of-protection-red:f0a0:s1	-	-	-	ae86f6029288	-	89d0b5b79da5	-	-	2026-11-24	xproof
-df2cc4ba-70b8-4875-8f84-9c268ab8d5f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df2cc4ba-70b8-4875-8f84-9c268ab8d5f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+df2cc4ba-70b8-4875-8f84-9c268ab8d5f6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+df2cc4ba-70b8-4875-8f84-9c268ab8d5f6	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 df317532-7d36-40fd-938f-e972749c8792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df317532-7d36-40fd-938f-e972749c8792	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df35bf19-4cbf-4624-925d-ceca6bff596e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ dfa95c0e-393d-4b22-9de3-45a7efc0ba14	combat#0.attack	combat#0.attack	agreed	-	X	
 dfa95c0e-393d-4b22-9de3-45a7efc0ba14	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Saheeli, Consul of Oversight/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dfa95c0e-393d-4b22-9de3-45a7efc0ba14	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Saheeli, Consul of Oversight/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dfa95c0e-393d-4b22-9de3-45a7efc0ba14	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Saheeli, Consul of Oversight/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 dfac0258-e148-4d7d-8ded-fc2466d9caa6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfac0258-e148-4d7d-8ded-fc2466d9caa6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -216,5 +216,5 @@ dffd5f0f-3a7b-47ed-864e-06c752bdcefc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dffd5f0f-3a7b-47ed-864e-06c752bdcefc	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 dffd5f0f-3a7b-47ed-864e-06c752bdcefc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spellbinding-soprano:f0t0:s1,f:xs:XP:spellbinding-soprano:f0t0:s1	-	-	-	8c0bd19283bb	-	d2b1d482e6ef	-	-	2026-11-24	xproof
 dffde884-15bc-4985-90e2-a0888ef4cb48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dfff6f8f-b038-4619-8190-7a6918afab1e	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Worf, Intelligence Contract	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-dfff6f8f-b038-4619-8190-7a6918afab1e	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Worf, Intelligence Contract	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+dfff6f8f-b038-4619-8190-7a6918afab1e	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Worf, Intelligence Contract	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+dfff6f8f-b038-4619-8190-7a6918afab1e	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Worf, Intelligence Contract	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

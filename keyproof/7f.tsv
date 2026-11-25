@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f31aa43-cf75-4488-b47f-e16e923a2d01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f31aa43-cf75-4488-b47f-e16e923a2d01	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7f32c581-4d4a-4873-8e4b-b95e13790481	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-dragon:cast:s1,f:xs:XP:phantasmal-dragon:cast:s1	-	-	-	25696bf19d5b	-	a41217d86ab8	-	-	2026-11-24	xproof
-7f32c581-4d4a-4873-8e4b-b95e13790481	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+7f32c581-4d4a-4873-8e4b-b95e13790481	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f34f6b4-18ef-40d7-a599-5c29ba468b89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f34f6b4-18ef-40d7-a599-5c29ba468b89	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7f3f7fb0-da18-467b-bf57-2ded458fda4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f5bebfd-faf3-485f-b906-aa96d621d499	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7f5e5aa8-3f15-45c9-bfc8-1f4b98d2be38	cast	cast-resolve	agreed	-	X	scen	1	0	Scorpion's Sting/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f60549f-7a0a-4009-a51a-d3f51214be11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f60549f-7a0a-4009-a51a-d3f51214be11	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f60549f-7a0a-4009-a51a-d3f51214be11	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f61a2a6-2fe2-48ec-8e2e-74d147be0a0a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:risk-factor:cast:s1	-	-	-	d864b561c9cb	-	fab0f5ef1658	-	-	2026-11-24	xproof
 7f6505a1-ab8b-468b-a5de-33451598b464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-nihil-stone:f0t1:s1,f:xs:XP:quest-for-the-nihil-stone:f0t1:s1	-	-	-	3aa6ded33acb	-	e66c31b5fef3	-	-	2026-11-25	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fa5237e-dd79-4646-b935-cb8c6ee803ab	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mister Fantastic, Reed Richards/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fa5237e-dd79-4646-b935-cb8c6ee803ab	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mister Fantastic, Reed Richards/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fab8d65-af51-47d3-8f10-2676bf6e8ba3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fab8d65-af51-47d3-8f10-2676bf6e8ba3	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fab8d65-af51-47d3-8f10-2676bf6e8ba3	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7fab8d65-af51-47d3-8f10-2676bf6e8ba3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fb6f960-38f6-45fa-bfec-d43fc174daa7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:font-of-fertility:cast:s1,f:xs:XP:font-of-fertility:cast:s1	-	-	-	d864b561c9cb	-	52d748c5d77b	-	-	2026-11-24	xproof
 7fb6f960-38f6-45fa-bfec-d43fc174daa7	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:font-of-fertility:f0a0:s1,f:xs:XP:font-of-fertility:f0a0:s1	-	-	-	d864b561c9cb	-	52d748c5d77b	-	-	2026-11-24	xproof

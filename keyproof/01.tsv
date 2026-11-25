@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 011b2243-b8be-471f-9d8f-824a40e599df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 011bb6cc-f1a1-4790-befc-373acabf63b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 011bb6cc-f1a1-4790-befc-373acabf63b8	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-011d4f47-c6fd-434b-98f2-2f558fbff40b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+011d4f47-c6fd-434b-98f2-2f558fbff40b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 011da9c5-aa8a-4fa0-b1f2-62b9f3760476	cast	cast-resolve	agreed	-	X	scen	1	0	Belladonna Took/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 011da9c5-aa8a-4fa0-b1f2-62b9f3760476	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Belladonna Took/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 011ff7a5-6bce-4784-a19b-e74f7b49b8f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:cast:s1,f:xs:XP:summoning-station:cast:s1	-	-	-	25696bf19d5b	-	14a6385eb4f9	-	-	2026-11-24	xproof
 01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 01bc8bfa-2e46-4324-a848-cc68bc9330d0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:doomsday-confluence:cast:s1	-	-	-	8c0bd19283bb	-	a6c92a9c7346	-	-	2026-11-24	xproof
-01becf76-aa53-4fd5-94c1-665c64674219	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01becf76-aa53-4fd5-94c1-665c64674219	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 01becf76-aa53-4fd5-94c1-665c64674219	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01becf76-aa53-4fd5-94c1-665c64674219	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01c179aa-533e-47e1-b6e5-c35587a39680	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

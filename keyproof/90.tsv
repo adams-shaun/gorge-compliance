@@ -69,10 +69,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 905889fb-a123-4f7a-afc6-b4c6ccac9105	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feast-of-worms:cast:s1,f:xs:XP:feast-of-worms:cast:s1	-	-	-	25696bf19d5b	-	7b0c48a5371e	-	-	2026-11-24	xproof
 905925ed-2faa-4423-a273-e59edcd98b92	f0/a0	Mana	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	b52583ce1c86	-	-	2026-11-24	xproof
 905925ed-2faa-4423-a273-e59edcd98b92	land	land	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	b52583ce1c86	-	-	2026-11-24	xproof
-905e4bd1-f5f2-4691-b13f-ce2628d26a38	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+905e4bd1-f5f2-4691-b13f-ce2628d26a38	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9061e2ae-7385-494a-a511-0b6531d1fe0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9061e2ae-7385-494a-a511-0b6531d1fe0e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 906cba93-3dac-4720-a482-987cf1b4e786	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90d936b9-6da8-4c99-9133-f7b27839ee24	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Stinging Scorpion"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 90e1bcef-53af-4c08-b713-bf10dfcbd577	cast	cast-resolve	agreed	-	X	scen	1	0	Clay-Fired Bricks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90e1bcef-53af-4c08-b713-bf10dfcbd577	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Clay-Fired Bricks/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-90e1bcef-53af-4c08-b713-bf10dfcbd577	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90e1bcef-53af-4c08-b713-bf10dfcbd577	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 90e1bcef-53af-4c08-b713-bf10dfcbd577	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Clay-Fired Bricks/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90e1bcef-53af-4c08-b713-bf10dfcbd577	static#1.0	static#1.0	agreed	-	X	scen	1	0	Clay-Fired Bricks/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90e46d04-9d53-4a24-aff0-f8c61e1db97d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

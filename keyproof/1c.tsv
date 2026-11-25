@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c6a0d19-c7dd-4353-95ad-dfdef2d5d2d9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1c6da9a9-6395-460b-8150-ea46d7299dc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c6f95fd-f8d0-4d22-aa21-29e5c70b2f85	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-1c747fe2-289e-492a-a846-aa77707e2dc3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c747fe2-289e-492a-a846-aa77707e2dc3	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1c751201-24ba-4e5c-bf44-71c3e4693a92	cast	cast-resolve	agreed	-	FX	scen	2	0	Conceited Witch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c751201-24ba-4e5c-bf44-71c3e4693a92	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Conceited Witch/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c751201-24ba-4e5c-bf44-71c3e4693a92	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Conceited Witch/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cf4e16b-2273-41c7-9bcd-0cdc78e12198	cast	cast-resolve	agreed	-	FX	scen	2	0	Unassuming Sage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1cf4e16b-2273-41c7-9bcd-0cdc78e12198	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cf51f50-24e4-48d0-95b3-1dad3ffa4bf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cf51f50-24e4-48d0-95b3-1dad3ffa4bf5	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1cf51f50-24e4-48d0-95b3-1dad3ffa4bf5	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1cf7e5a0-cc8f-4bf7-9767-2f3bcae26339	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1cf7e5a0-cc8f-4bf7-9767-2f3bcae26339	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1cfa9f7d-ef1f-4907-aeb1-15c0df33fccc	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:baleful-ammit:cast:s1,f:xs:XP:baleful-ammit:cast:s1	-	-	-	d864b561c9cb	-	f24b9cbbf70c	-	-	2026-11-24	xproof

@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2786f210-ec64-46ea-9a7f-b03759fb1dae	f0/t2	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d5e09b254228	-	-	2026-11-25	xproof
 27882623-b5ad-49f2-b5ab-f0bdb93268a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278b237e-9699-43eb-a03e-0b68eccc08b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-278b237e-9699-43eb-a03e-0b68eccc08b3	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+278b237e-9699-43eb-a03e-0b68eccc08b3	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 278e51fe-3cd9-4c82-bd81-2164771f8611	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alms-collector:cast:s1,f:xs:XP:alms-collector:cast:s1	-	-	-	8c0bd19283bb	-	f876e9c86e44	-	-	2026-11-24	xproof
 278ea996-3094-4a76-b6e1-db1d002e5502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 278ea996-3094-4a76-b6e1-db1d002e5502	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27c2b8ce-17b9-4f6c-8444-3bdc636dd413	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-night:f0t0:s1,f:xs:XP:cavalier-of-night:f0t0:s1	-	-	-	d864b561c9cb	-	12e6692f382f	-	-	2026-11-24	xproof
 27c2b8ce-17b9-4f6c-8444-3bdc636dd413	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-night:f0t0:s1,f:xs:XP:cavalier-of-night:f0t0:s1	-	-	-	d864b561c9cb	-	12e6692f382f	-	-	2026-11-24	xproof
 27c2b8ce-17b9-4f6c-8444-3bdc636dd413	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-night:f0t1:s1,f:xs:XP:cavalier-of-night:f0t1:s1	-	-	-	d864b561c9cb	-	12e6692f382f	-	-	2026-11-24	xproof
-27c366cf-00d7-47d4-9577-736bfc4a3b81	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27c366cf-00d7-47d4-9577-736bfc4a3b81	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 27c366cf-00d7-47d4-9577-736bfc4a3b81	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 27c37a8d-777a-400d-b096-bde195228ea8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrivener:f0t0:s1,f:xs:XP:scrivener:f0t0:s1	-	-	-	5f2128bf97e4	-	6e9f6bfdc3f4	-	-	2026-11-24	xproof
 27c37a8d-777a-400d-b096-bde195228ea8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scrivener:f0t0:s1,f:xs:XP:scrivener:f0t0:s1	-	-	-	5f2128bf97e4	-	6e9f6bfdc3f4	-	-	2026-11-24	xproof
@@ -161,11 +161,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27d6b1fb-ce53-45d6-a601-9f5b9ee7ab2f	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 27d6b1fb-ce53-45d6-a601-9f5b9ee7ab2f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:guardian-of-cloverdell:cast:s1,f:xs:XP:guardian-of-cloverdell:cast:s1	-	-	-	d864b561c9cb	-	d09de3b0a6c2	-	-	2026-11-24	xproof
 27d7f737-59a4-4948-9b2e-599ae848e054	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27d7f737-59a4-4948-9b2e-599ae848e054	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27d7f737-59a4-4948-9b2e-599ae848e054	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 27d80a75-688e-4f68-9622-54484dd3bd91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27d80a75-688e-4f68-9622-54484dd3bd91	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 27d98b94-a8a1-442b-8940-4ffab51b5164	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-27da0af7-85d3-42aa-9426-b86c5e464f81	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27da0af7-85d3-42aa-9426-b86c5e464f81	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 27e04c41-f42c-4d60-8a71-ec2d7c326f64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27e04c41-f42c-4d60-8a71-ec2d7c326f64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27e04c41-f42c-4d60-8a71-ec2d7c326f64	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:azorius-cluestone:f0a1:s1,f:xs:XP:azorius-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	726a96d53a66	-	-	2026-11-24	xproof

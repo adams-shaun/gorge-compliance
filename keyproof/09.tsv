@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0972d46e-423b-454e-87c7-a2d40fb6fb6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Katara, the Fearless/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09763d9a-056f-49db-a72b-1c7325075789	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09763d9a-056f-49db-a72b-1c7325075789	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-09763d9a-056f-49db-a72b-1c7325075789	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09763d9a-056f-49db-a72b-1c7325075789	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 097bce84-22b1-4d7b-b566-e7c23eb626b9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mad-dog:cast:s1	-	-	-	fc71ca68c5ac	-	bc462cf3683b	-	-	2026-11-24	xproof
 097bce84-22b1-4d7b-b566-e7c23eb626b9	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:mad-dog:cast:s1	-	-	-	fc71ca68c5ac	-	bc462cf3683b	-	-	2026-11-24	xproof
 098cc111-493b-470b-929c-67deb981240c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09b71c95-7b5d-4cee-a505-e0dda72715b7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gran Pulse Ochu/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09b71c95-7b5d-4cee-a505-e0dda72715b7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gran Pulse Ochu/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09b71c95-7b5d-4cee-a505-e0dda72715b7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gran Pulse Ochu/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-09b7ea91-2620-4c45-af3c-60bbeab89966	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09b7ea91-2620-4c45-af3c-60bbeab89966	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09b7ea91-2620-4c45-af3c-60bbeab89966	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 09bd4e1c-9861-481f-80dc-4de955c8d3af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudkin-seer:f0t0:s1,f:xs:XP:cloudkin-seer:f0t0:s1	-	-	-	d864b561c9cb	-	7a7b24bf7954	-	-	2026-11-24	xproof
 09bd4e1c-9861-481f-80dc-4de955c8d3af	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloudkin-seer:f0t0:s1,f:xs:XP:cloudkin-seer:f0t0:s1	-	-	-	d864b561c9cb	-	7a7b24bf7954	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09c275bd-8323-485e-81f6-aff1f99d0d03	f0/a0	SetState	agreed	-	FX	start	2	0	x:xs:XP:hauntwoods-shrieker:f0a0:s1,f:xs:XP:hauntwoods-shrieker:f0a0:s1	-	-	-	23c4009444b0	-	a851a90fb715	-	-	2026-11-25	xproof
 09c275bd-8323-485e-81f6-aff1f99d0d03	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:hauntwoods-shrieker:f0a0:s1,f:xs:XP:hauntwoods-shrieker:f0a0:s1	-	-	-	23c4009444b0	-	a851a90fb715	-	-	2026-11-25	xproof
 09c2d504-f2e1-4799-b948-c7b9502d5088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09c2d504-f2e1-4799-b948-c7b9502d5088	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09c2d504-f2e1-4799-b948-c7b9502d5088	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09c2d504-f2e1-4799-b948-c7b9502d5088	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+09c2d504-f2e1-4799-b948-c7b9502d5088	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09c68fb5-2000-4bb8-b03b-94b093e50bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09c68fb5-2000-4bb8-b03b-94b093e50bca	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 09c96077-3804-4f12-a613-5bebc5e0413f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -22,8 +22,8 @@ c2153f2b-4a9f-40b6-8862-0e4143686c8c	f0/t0	BecomeMonstrous	agreed	-	FX	start	2	0
 c2157f2c-a3a4-47aa-b33e-b2c65e11c2e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c216b924-88ac-4853-9e95-0c345c09eeb6	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	6cd0700d6289	-	-	2026-11-24	xproof
 c21b5c5b-9191-4748-b111-a51631e0bc5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c21d3360-8be0-477e-a592-7e64a76570d3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c21d3360-8be0-477e-a592-7e64a76570d3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c21d3360-8be0-477e-a592-7e64a76570d3	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c21d3360-8be0-477e-a592-7e64a76570d3	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c21fafaf-4510-4752-a501-606ae68e6699	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-witchstalker:f0t0:s1,f:xs:XP:primal-witchstalker:f0t0:s1	-	-	-	25696bf19d5b	-	a271e6a81681	-	-	2026-11-24	xproof
 c21fafaf-4510-4752-a501-606ae68e6699	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Primal Witchstalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c21fafaf-4510-4752-a501-606ae68e6699	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Primal Witchstalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -75,7 +75,7 @@ c247382f-821e-4f3c-9d34-450794ce74c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c247382f-821e-4f3c-9d34-450794ce74c3	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c24b0c7d-1a4b-4eca-8d83-9e81ed3b3b27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viridian-revel:cast:s1,f:xs:XP:viridian-revel:cast:s1	-	-	-	d864b561c9cb	-	f3ef323d407b	-	-	2026-11-24	xproof
 c24b0c7d-1a4b-4eca-8d83-9e81ed3b3b27	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c24b3135-5f23-461c-9e57-de747ca8978a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c24b3135-5f23-461c-9e57-de747ca8978a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c24b3135-5f23-461c-9e57-de747ca8978a	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 c24da532-311b-4b83-82d2-7dc80409ba12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c24e34e7-0ac6-451a-b73b-31c7f96d123f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gruesome-realization:cast:s1,f:xs:XP:gruesome-realization:cast:s1	-	-	-	ae86f6029288	-	e111d222a457	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ c2b5d847-f52a-43e3-a5d2-d53cae3d8936	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c2b659ef-68f6-452c-94b5-2872f4e7b069	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:earth-origin-yak:f0t0:s1,f:xs:XP:earth-origin-yak:f0t0:s1	-	-	-	8c0bd19283bb	-	174fdae7aa15	-	-	2026-11-24	xproof
 c2b659ef-68f6-452c-94b5-2872f4e7b069	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:earth-origin-yak:f0t0:s1,f:xs:XP:earth-origin-yak:f0t0:s1	-	-	-	8c0bd19283bb	-	174fdae7aa15	-	-	2026-11-24	xproof
 c2ba1c3b-08c7-4835-81f4-2f98843fb7b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2ba1c3b-08c7-4835-81f4-2f98843fb7b8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c2ba1c3b-08c7-4835-81f4-2f98843fb7b8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c2bd0c24-3973-48bc-a591-3779e3640c5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battle-angels-of-tyr:cast:s1,f:xs:XP:battle-angels-of-tyr:cast:s1	-	-	-	23c4009444b0	-	2259665a6e1f	-	-	2026-11-25	xproof
 c2bd0c24-3973-48bc-a591-3779e3640c5d	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:battle-angels-of-tyr:f0t1:s1,f:xs:XP:battle-angels-of-tyr:f0t1:s1	-	-	-	23c4009444b0	-	2259665a6e1f	-	-	2026-11-25	xproof
 c2bd0c24-3973-48bc-a591-3779e3640c5d	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:battle-angels-of-tyr:f0t1:s1,f:xs:XP:battle-angels-of-tyr:f0t1:s1	-	-	-	23c4009444b0	-	2259665a6e1f	-	-	2026-11-25	xproof

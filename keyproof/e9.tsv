@@ -27,7 +27,7 @@ e9117015-1050-44dd-a46b-e7ffe2085fae	combat#0.block	combat#0.block	agreed	-	X	sc
 e9117015-1050-44dd-a46b-e7ffe2085fae	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ledger Shredder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e91240bc-4a13-4131-9379-5ddac6555f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e91240bc-4a13-4131-9379-5ddac6555f4a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e91240bc-4a13-4131-9379-5ddac6555f4a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e91240bc-4a13-4131-9379-5ddac6555f4a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e9162478-0b10-422a-a11c-7b39b00f026e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-vatmother:f0t0:s1,f:xs:XP:phyrexian-vatmother:f0t0:s1	-	-	-	3aa6ded33acb	-	d3c55ec06732	-	-	2026-11-25	xproof
 e9162478-0b10-422a-a11c-7b39b00f026e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-vatmother:f0t0:s1,f:xs:XP:phyrexian-vatmother:f0t0:s1	-	-	-	3aa6ded33acb	-	d3c55ec06732	-	-	2026-11-25	xproof
 e917ad3d-df8e-442b-918c-3aa7a10f3cc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golgari-cluestone:cast:s1,f:xs:XP:golgari-cluestone:cast:s1	-	-	-	d864b561c9cb	-	d9069965d7f7	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Quin
 e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Quintessential Katana/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Quintessential Katana/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e96a9f9a-9326-4f0b-98ad-23210c97299f	cast	cast-resolve	agreed	-	X	scen	1	0	Savvy Profiteer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e96a9f9a-9326-4f0b-98ad-23210c97299f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+e96a9f9a-9326-4f0b-98ad-23210c97299f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e96a9f9a-9326-4f0b-98ad-23210c97299f	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:savvy-profiteer:f0a1:s1,f:xs:XP:savvy-profiteer:f0a1:s1	-	-	-	23c4009444b0	-	07de48e24516	-	-	2026-11-25	xproof
 e970f2df-90cb-45b8-8ae5-71b762908925	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e970f2df-90cb-45b8-8ae5-71b762908925	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

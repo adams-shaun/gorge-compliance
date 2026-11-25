@@ -30,7 +30,7 @@ e01fe9e9-a76c-4909-924c-a0cba403f975	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 e01fe9e9-a76c-4909-924c-a0cba403f975	f0/a0	Tap	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	82b75486c429	-	-	2026-11-25	xproof
 e01fe9e9-a76c-4909-924c-a0cba403f975	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	82b75486c429	-	-	2026-11-25	xproof
 e0206af2-8034-4351-a797-a1d996f080b5	cast	cast-resolve	agreed	-	X	scen	1	0	Stop Cold/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e0206af2-8034-4351-a797-a1d996f080b5	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+e0206af2-8034-4351-a797-a1d996f080b5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e0206af2-8034-4351-a797-a1d996f080b5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stop Cold/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0209690-71f1-41f3-860a-a0737edaf1f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcloud-djinn:cast:s1,f:xs:XP:stormcloud-djinn:cast:s1	-	-	-	9ee19e8250ce	-	769102fa48f5	-	-	2026-11-24	xproof
 e0209690-71f1-41f3-860a-a0737edaf1f9	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stormcloud-djinn:f0a0:s1,f:xs:XP:stormcloud-djinn:f0a0:s1	-	-	-	d864b561c9cb	-	769102fa48f5	-	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ e0420f2c-d578-421e-ae75-e7dc5f70661a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e0420f2c-d578-421e-ae75-e7dc5f70661a	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e0445c80-fa53-4c3e-881e-940e9fce7f57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:braids-arisen-nightmare:cast:s1,f:xs:XP:braids-arisen-nightmare:cast:s1	-	-	-	ae86f6029288	-	c87ca9a532e1	-	-	2026-11-24	xproof
 e0445c80-fa53-4c3e-881e-940e9fce7f57	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:braids-arisen-nightmare:cast:s1,f:xs:XP:braids-arisen-nightmare:cast:s1	-	-	-	ae86f6029288	-	c87ca9a532e1	-	-	2026-11-24	xproof
-e04552f4-41c1-40f3-996e-de796c9967e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e04552f4-41c1-40f3-996e-de796c9967e4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:likeness-looter:cast:s1,f:xs:XP:likeness-looter:cast:s1	-	-	-	23b491658465	-	a3c1300178b1	-	-	2026-11-24	xproof
 e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Likeness Looter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Likeness Looter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ e0a95a8e-5867-481b-9e85-e2d5386362b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e0a95a8e-5867-481b-9e85-e2d5386362b8	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e0a9a7a2-c996-4e3e-817d-9283be690c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0a9a7a2-c996-4e3e-817d-9283be690c39	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0a9a7a2-c996-4e3e-817d-9283be690c39	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e0a9a7a2-c996-4e3e-817d-9283be690c39	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e0aa5e3d-17c0-4ac7-9d76-9ce579d1eb2b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:avenging-hunter:cast:s1,f:xs:XP:avenging-hunter:cast:s1	-	-	-	8c0bd19283bb	-	e67fd2a0378f	-	-	2026-11-24	xproof
 e0aa5e3d-17c0-4ac7-9d76-9ce579d1eb2b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:avenging-hunter:cast:s1,f:xs:XP:avenging-hunter:cast:s1	-	-	-	8c0bd19283bb	-	e67fd2a0378f	-	-	2026-11-24	xproof
 e0aa6ce0-ca31-433b-ac6c-32b8675cdb71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ e0df8e2a-96d2-4e4d-b065-aa2e162abbfe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e0df8e2a-96d2-4e4d-b065-aa2e162abbfe	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0df8e2a-96d2-4e4d-b065-aa2e162abbfe	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e0e3feb8-2add-41c9-839c-587af6ca8f93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0e3feb8-2add-41c9-839c-587af6ca8f93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e0e3feb8-2add-41c9-839c-587af6ca8f93	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e0eaa43f-1c46-4299-9ecd-5f4a32d292cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0edb2fc-2533-407c-85e5-4337f4233f05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -9,8 +9,8 @@ a912834b-e4bc-4ccc-ae13-915ebe5acd00	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a91a3266-cadd-47a0-9b20-160307f14c07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archaeomancer:f0t0:s1,f:xs:XP:archaeomancer:f0t0:s1	-	-	-	d864b561c9cb	-	c9d45ec75f29	-	-	2026-11-24	xproof
 a91a3266-cadd-47a0-9b20-160307f14c07	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archaeomancer:f0t0:s1,f:xs:XP:archaeomancer:f0t0:s1	-	-	-	d864b561c9cb	-	c9d45ec75f29	-	-	2026-11-24	xproof
 a91b8eb4-d4f7-4e24-ae49-1f51e610c7ca	cast	cast-resolve	agreed	-	X	scen	1	0	Replicator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a91b8eb4-d4f7-4e24-ae49-1f51e610c7ca	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-a91b8eb4-d4f7-4e24-ae49-1f51e610c7ca	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+a91b8eb4-d4f7-4e24-ae49-1f51e610c7ca	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a91b8eb4-d4f7-4e24-ae49-1f51e610c7ca	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a91e0154-14a9-4681-8236-04db231592a4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Elvenking's Halls/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a91e0154-14a9-4681-8236-04db231592a4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Elvenking's Halls/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a91e0154-14a9-4681-8236-04db231592a4	land	play-land	agreed	-	X	scen	1	0	Elvenking's Halls/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -154,8 +154,8 @@ a9d72f78-2ab5-4e2e-ab7b-ef875e0a0609	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lost 
 a9d8ab76-70a4-475e-b87e-4737c090553a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9d8ab76-70a4-475e-b87e-4737c090553a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sprite-dragon:f0t0:s1,f:xs:XP:sprite-dragon:f0t0:s1	-	-	-	23c4009444b0	-	bcb4b1be9e0e	-	-	2026-11-25	xproof
 a9df60bf-f327-4d50-ab4d-99324fc2dcfe	cast	cast-resolve	agreed	-	X	scen	1	0	Xenobotanist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a9df60bf-f327-4d50-ab4d-99324fc2dcfe	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-a9e28134-382b-45e5-8fd0-cc0e7d56fd0c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a9df60bf-f327-4d50-ab4d-99324fc2dcfe	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a9e28134-382b-45e5-8fd0-cc0e7d56fd0c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a9e28134-382b-45e5-8fd0-cc0e7d56fd0c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 a9e28134-382b-45e5-8fd0-cc0e7d56fd0c	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 a9e33138-e1c0-4b69-b868-1ce8493c073d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fumarole:cast:s1,f:xs:XP:fumarole:cast:s1	-	-	-	3aa6ded33acb	-	5872fd1dedbc	-	-	2026-11-25	xproof
@@ -171,7 +171,7 @@ a9edb891-1a38-4b8a-8539-c459e8a52315	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gru
 a9f111aa-5d34-4317-9a03-35cd94a888c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9f111aa-5d34-4317-9a03-35cd94a888c7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:estwald-shieldbasher:f0t0:s1,f:xs:XP:estwald-shieldbasher:f0t0:s1	-	-	-	d864b561c9cb	-	c9f75aac8db0	-	-	2026-11-24	xproof
 a9f1802b-f2a0-4902-acc2-e21c14960e4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a9f1802b-f2a0-4902-acc2-e21c14960e4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a9f1802b-f2a0-4902-acc2-e21c14960e4c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a9f279a5-c35f-4703-a583-050f2dffb28e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9f279a5-c35f-4703-a583-050f2dffb28e	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 a9f8344c-1705-4254-81d6-aa05e0c69c29	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:sunhome-fortress-of-the-legion:land:s1,f:xs:XP:sunhome-fortress-of-the-legion:land:s1	-	-	-	77494c1ce129	-	382875260ba6	-	-	2026-11-24	xproof

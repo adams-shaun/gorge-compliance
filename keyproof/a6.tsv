@@ -13,7 +13,7 @@ a6081d17-599b-4fd2-bd68-55eca939213a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a610c77c-fe31-4465-a1c1-392db4ce4ed1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a61267d2-2cc7-4208-a365-581d56b92e1c	cast	cast-resolve	agreed	-	FX	scen	2	0	Badlands Revival/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a61277d6-a27d-45d1-ba2a-7afe1b8f5ce1	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a61277d6-a27d-45d1-ba2a-7afe1b8f5ce1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a61277d6-a27d-45d1-ba2a-7afe1b8f5ce1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a612bd38-069f-4bdc-9aa6-c172435e3841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a612bd38-069f-4bdc-9aa6-c172435e3841	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a612bd38-069f-4bdc-9aa6-c172435e3841	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ a6a7af21-e52c-4f7f-a57f-bd365d075966	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Super
 a6a7bf77-0560-4572-a826-3bc9df1f78d1	cast	cast-resolve	agreed	-	X	scen	1	0	Y'shtola Rhul/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a6a7bf77-0560-4572-a826-3bc9df1f78d1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Y'shtola Rhul/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a6a8861c-b6fe-45a6-86e4-9160c36362ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6a8861c-b6fe-45a6-86e4-9160c36362ff	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-a6a8861c-b6fe-45a6-86e4-9160c36362ff	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+a6a8861c-b6fe-45a6-86e4-9160c36362ff	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a6a8861c-b6fe-45a6-86e4-9160c36362ff	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a6a9776b-87f4-4a08-8074-d49fbbe417ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6aa204a-0be9-4a38-b54c-82538adfe7f1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vulcan-mind-meld:cast:s1	-	-	-	23c4009444b0	-	926a8d78da1e	-	-	2026-11-25	xproof
 a6aa245c-b620-486c-864b-0ea4e9bc4048	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ a6c28bde-10d9-471b-acd0-32a1c6195805	combat#0.block	combat#0.block	agreed	-	X	sc
 a6c28bde-10d9-471b-acd0-32a1c6195805	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Swarm Culler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a6c3aa17-8338-4daa-889e-d36dc715e546	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rolling-hamsphere:cast:s1,f:xs:XP:rolling-hamsphere:cast:s1	-	-	-	8c0bd19283bb	-	60e0adb1e5b5	-	-	2026-11-24	xproof
 a6c3aa17-8338-4daa-889e-d36dc715e546	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-a6c3aa17-8338-4daa-889e-d36dc715e546	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a6c3aa17-8338-4daa-889e-d36dc715e546	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a6c5c5ea-0bd0-4d5a-bd3f-6217f14c9939	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6c5c5ea-0bd0-4d5a-bd3f-6217f14c9939	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6c5c5ea-0bd0-4d5a-bd3f-6217f14c9939	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

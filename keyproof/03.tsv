@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03048844-32bb-45a2-a754-73f75eaa4566	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 030b5408-f216-43e4-8593-f78d22821876	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wail-of-the-forgotten:cast:s1,f:xs:XP:wail-of-the-forgotten:cast:s1	-	-	-	23b491658465	-	980f5362a612	-	-	2026-11-25	xproof
-030e9e3e-ce78-4c3b-bd83-969c07c70459	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+030e9e3e-ce78-4c3b-bd83-969c07c70459	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0315f5e7-2867-428e-8e43-66dda0db57a0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0315f5e7-2867-428e-8e43-66dda0db57a0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 03160a74-8b83-4e07-b702-977a91a6311f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:combat0.attack:s1,f:xs:XP:barkform-harvester:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:combat0.block:s1,f:xs:XP:barkform-harvester:combat0.block:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:f0a0:s1,f:xs:XP:barkform-harvester:f0a0:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
-0339d25b-9591-49c0-bf31-4ba749ebd0b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0339d25b-9591-49c0-bf31-4ba749ebd0b0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0342b085-be20-475a-bc38-59b9cb6012e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-chainwhirler:f0t0:s1,f:xs:XP:goblin-chainwhirler:f0t0:s1	-	-	-	d864b561c9cb	-	2eb293a48240	-	-	2026-11-24	xproof
 0342b085-be20-475a-bc38-59b9cb6012e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-chainwhirler:f0t0:s1,f:xs:XP:goblin-chainwhirler:f0t0:s1	-	-	-	d864b561c9cb	-	2eb293a48240	-	-	2026-11-24	xproof
 03436524-197a-4941-a2a1-c7c4b71c4709	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

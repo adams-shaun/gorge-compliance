@@ -23,10 +23,10 @@ b5187725-9a39-433c-ae09-eccd6111574c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spe
 b5187725-9a39-433c-ae09-eccd6111574c	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:spectral-lynx:f0a0:s1,f:xs:XP:spectral-lynx:f0a0:s1	-	-	-	fc71ca68c5ac	-	b5e820d7b09c	-	-	2026-11-24	xproof
 b51a852c-ccde-4d23-a3f3-a002f7eacdab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eccentric-farmer:f0t0:s1,f:xs:XP:eccentric-farmer:f0t0:s1	-	-	-	d864b561c9cb	-	fcb9d2e775b2	-	-	2026-11-24	xproof
 b51a852c-ccde-4d23-a3f3-a002f7eacdab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eccentric-farmer:f0t0:s1,f:xs:XP:eccentric-farmer:f0t0:s1	-	-	-	d864b561c9cb	-	fcb9d2e775b2	-	-	2026-11-24	xproof
-b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b51c8659-ec4f-4213-beb1-49a7acd7366c	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-wetlands:land:s1,f:xs:XP:turbulent-wetlands:land:s1	-	-	-	8c0bd19283bb	-	1bbdf94a9601	-	-	2026-11-24	xproof
-b51d2c70-204b-4321-a589-f00a3e49fab4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b51d2c70-204b-4321-a589-f00a3e49fab4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b51d2c70-204b-4321-a589-f00a3e49fab4	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	cast	cast-resolve	agreed	-	X	scen	1	0	Dwarven Castle Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dwarven Castle Guard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ b563a578-86ce-41a5-a83e-c70c6a4960e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	cast	cast-resolve	agreed	-	FX	scen	2	0	Kraul Whipcracker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kraul-whipcracker:combat0.attack:s1,f:xs:XP:kraul-whipcracker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2b38b07f4e08	-	-	2026-11-25	xproof
 b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kraul-whipcracker:combat0.block:s1,f:xs:XP:kraul-whipcracker:combat0.block:s1	-	-	-	3aa6ded33acb	-	2b38b07f4e08	-	-	2026-11-25	xproof
-b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b5641fcf-135e-43e7-a547-344fac61e279	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5641fcf-135e-43e7-a547-344fac61e279	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5642460-883c-4e38-8552-9bea4e50d8e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

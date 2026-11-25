@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 942216f7-6803-4ab3-9239-463002590f6f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:infused-arrows:cast:s1,f:xs:XP:infused-arrows:cast:s1	-	-	-	25696bf19d5b	-	c40082d97121	-	-	2026-11-24	xproof
 942407bf-862a-4a0b-b19d-b9f8ee833026	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 942a461a-49aa-4eeb-b399-a2afba41ade9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-942a461a-49aa-4eeb-b399-a2afba41ade9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+942a461a-49aa-4eeb-b399-a2afba41ade9	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 942ac2ac-7528-4768-8398-8520a8ee15e5	cast	cast-resolve	agreed	-	X	scen	1	0	Captain America, Wings of Freedom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 942ac2ac-7528-4768-8398-8520a8ee15e5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Captain America, Wings of Freedom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 942ac2ac-7528-4768-8398-8520a8ee15e5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Captain America, Wings of Freedom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94b1e7ed-87f3-44e6-bf34-186dd9a1a0d1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mage-s-attendant:cast:s1,f:xs:XP:mage-s-attendant:cast:s1	-	-	-	d864b561c9cb	-	d3adebe61f5f	-	-	2026-11-24	xproof
 94b1e7ed-87f3-44e6-bf34-186dd9a1a0d1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mage-s-attendant:cast:s1,f:xs:XP:mage-s-attendant:cast:s1	-	-	-	d864b561c9cb	-	d3adebe61f5f	-	-	2026-11-24	xproof
 94b2a7a6-9e9a-437f-9cde-111b1b02a68e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94b2a7a6-9e9a-437f-9cde-111b1b02a68e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+94b2a7a6-9e9a-437f-9cde-111b1b02a68e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94b703c4-5584-4913-8365-7e9f2f535c2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94b86278-bfa6-4be4-8114-09b6c6c85724	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94bc796d-8c04-4835-8a99-7e5dce9540ee	cast	cast-resolve	agreed	-	X	scen	1	0	Iron Man, Master of Machines/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -169,12 +169,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94cce37a-a752-4cde-a5b5-e8a15f8af52c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 94d3de8c-c8a2-4775-9096-d518f227f09a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94d5c904-6504-4df2-b242-daf88a988475	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-pandorica:cast:s1	-	-	-	8c0bd19283bb	-	b04eddf49005	-	-	2026-11-24	xproof
-94d5c904-6504-4df2-b242-daf88a988475	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+94d5c904-6504-4df2-b242-daf88a988475	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94daa0c2-4790-4193-aaa8-ba492e8c8fe7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94daa0c2-4790-4193-aaa8-ba492e8c8fe7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94dcbcc0-6941-4e8c-8741-4b47ae231eba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94df7ab5-bc30-4825-b4bc-ea757cdc08f7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94df7ab5-bc30-4825-b4bc-ea757cdc08f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+94df7ab5-bc30-4825-b4bc-ea757cdc08f7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+94df7ab5-bc30-4825-b4bc-ea757cdc08f7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94e71162-7c9d-46f4-90e8-413a1b08a198	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mental-journey:cast:s1,f:xs:XP:mental-journey:cast:s1	-	-	-	ae86f6029288	-	2de77598d77a	-	-	2026-11-24	xproof
 94e71162-7c9d-46f4-90e8-413a1b08a198	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:mental-journey:cast:s1,f:xs:XP:mental-journey:cast:s1	-	-	-	d864b561c9cb	-	2de77598d77a	-	-	2026-11-24	xproof
 94e8791b-e72f-4aed-b761-826779337168	cast	cast-resolve	agreed	-	X	scen	1	0	Station Monitor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

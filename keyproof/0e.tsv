@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e2575be-c596-4c8c-bf07-7941ca065721	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:dreamstone-hedron:f0a0:s2,f:xs:XP:dreamstone-hedron:f0a0:s2	-	-	-	d864b561c9cb	-	a4dd30951aac	-	-	2026-11-24	xproof
 0e2575be-c596-4c8c-bf07-7941ca065721	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:dreamstone-hedron:f0a1:s1,f:xs:XP:dreamstone-hedron:f0a1:s1	-	-	-	d864b561c9cb	-	a4dd30951aac	-	-	2026-11-24	xproof
 0e25faa2-efb0-4ca5-b280-18c38faa860c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e25faa2-efb0-4ca5-b280-18c38faa860c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e25faa2-efb0-4ca5-b280-18c38faa860c	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e25faa2-efb0-4ca5-b280-18c38faa860c	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e25faa2-efb0-4ca5-b280-18c38faa860c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e2c11b2-d95f-4402-9a4a-afd3f7ffb8be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eureka-moment:cast:s1,f:xs:XP:eureka-moment:cast:s1	-	-	-	d864b561c9cb	-	ebf3067269fc	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fear-of-isolation:combat0.attack:s1,f:xs:XP:fear-of-isolation:combat0.attack:s1	-	-	-	23c4009444b0	-	f613b4604b44	-	-	2026-11-25	xproof
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fear-of-isolation:combat0.block:s1,f:xs:XP:fear-of-isolation:combat0.block:s1	-	-	-	23c4009444b0	-	f613b4604b44	-	-	2026-11-25	xproof
 0ee41ef9-0b39-4d00-a68e-7914839a7175	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bone-devourer:cast:s1,f:xs:XP:bone-devourer:cast:s1	-	-	-	8c0bd19283bb	-	7d06056786f8	-	-	2026-11-24	xproof
-0ee41ef9-0b39-4d00-a68e-7914839a7175	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ee41ef9-0b39-4d00-a68e-7914839a7175	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0eeab568-9186-4813-87e7-9c1e6a7c76e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fated-return:cast:s1,f:xs:XP:fated-return:cast:s1	-	-	-	d864b561c9cb	-	7585306642bd	-	-	2026-11-24	xproof
 0eec9984-cd11-4a52-9234-469c6a5fb9aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Abandoned Campground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eec9984-cd11-4a52-9234-469c6a5fb9aa	land	land	agreed	-	FX	start	2	0	x:xs:XP:abandoned-campground:land:s1,f:xs:XP:abandoned-campground:land:s1	-	-	-	23c4009444b0	-	8828b753ef5e	-	-	2026-11-25	xproof
