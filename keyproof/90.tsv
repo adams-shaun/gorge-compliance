@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 904b3db5-70bc-4d49-9887-f504aff8666f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emerald-charm:cast:s1,f:xs:XP:emerald-charm:cast:s1	-	-	-	ea3140b6974b	-	290ff1d59820	-	-	2026-11-24	xproof
 904b9056-ad76-4805-b14f-c426e4a57bae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 904b9056-ad76-4805-b14f-c426e4a57bae	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:thunder-wall:f0a0:s1,f:xs:XP:thunder-wall:f0a0:s1	-	-	-	8c0bd19283bb	-	f941d1520261	-	-	2026-11-24	xproof
-904f9e0c-cb7f-4611-8bf7-2e408e8ab237	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+904f9e0c-cb7f-4611-8bf7-2e408e8ab237	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 904f9e0c-cb7f-4611-8bf7-2e408e8ab237	f0/a1	ChangeZone/Transmute	agreed	-	FX	start	2	0	x:xs:XP:perplex:cast:s1,f:xs:XP:perplex:cast:s1	-	-	-	23b491658465	-	3b9b103123bc	-	-	2026-11-25	xproof
 90514aa5-84b6-4be7-b6d0-b05529c97140	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hellcarver-demon:cast:s1,f:xs:XP:hellcarver-demon:cast:s1	-	-	-	d864b561c9cb	-	339843fa611b	-	-	2026-11-24	xproof
 90514aa5-84b6-4be7-b6d0-b05529c97140	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:hellcarver-demon:f0t0:s1	-	-	-	23c4009444b0	-	339843fa611b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90d375fa-0487-4990-9a98-260f9ee28d2a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 90d8020c-a3e4-4dee-9abf-25d80406b8ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90d8020c-a3e4-4dee-9abf-25d80406b8ab	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90d8020c-a3e4-4dee-9abf-25d80406b8ab	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+90d8020c-a3e4-4dee-9abf-25d80406b8ab	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 90d936b9-6da8-4c99-9133-f7b27839ee24	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Stinging Scorpion"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 90d936b9-6da8-4c99-9133-f7b27839ee24	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Stinging Scorpion"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 90e1bcef-53af-4c08-b713-bf10dfcbd577	cast	cast-resolve	agreed	-	X	scen	1	0	Clay-Fired Bricks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -88,9 +88,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c87e2fa-77f1-4978-b25f-f14d227301d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c87e2fa-77f1-4978-b25f-f14d227301d1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c902588-b16e-4679-b89e-7b11c928061f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c90b951-826e-4595-aacc-958904f3f794	cast	cast-resolve	agreed	-	X	scen	1	0	Trostani, Three Whispers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5c90b951-826e-4595-aacc-958904f3f794	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trostani-three-whispers:cast:s1,f:xs:XP:trostani-three-whispers:cast:s1	-	-	-	cfde1dc26c40	-	33114ae04c04	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 5c90b951-826e-4595-aacc-958904f3f794	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Trostani, Three Whispers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5c90b951-826e-4595-aacc-958904f3f794	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Trostani, Three Whispers/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5c90b951-826e-4595-aacc-958904f3f794	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:trostani-three-whispers:f0a1:s1,f:xs:XP:trostani-three-whispers:f0a1:s1	-	-	-	cfde1dc26c40	-	33114ae04c04	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 5c90b951-826e-4595-aacc-958904f3f794	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Trostani, Three Whispers/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c924f9f-84e2-4051-ae18-0c2cc57cf464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c924f9f-84e2-4051-ae18-0c2cc57cf464	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
