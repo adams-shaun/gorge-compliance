@@ -1572,6 +1572,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * alternative, then "Cast with no alternative cost"). */
         @Override
         public boolean choose(Outcome outcome, mage.choices.Choice choice, Game game) {
+            if (choice.isKeyChoice() && PERMITTING_OBJECT_ASK.equals(choice.getMessage())) {
+                java.util.Set<String> grantingObjects = new java.util.HashSet<>();
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                    grantingObjects.add(permanent.getIdName());
+                }
+                java.util.Set<String> regularCasts = new java.util.HashSet<>();
+                for (Card card : getHand().getCards(game)) {
+                    regularCasts.add(card.getIdName());
+                }
+                permittingObjectKey(choice, getChoices(), owner.alternativeCostCast,
+                        grantingObjects, regularCasts);
+            }
             if (owner.alternativeCostCast && choice.isKeyChoice()) {
                 alternativeCostKey(choice.getMessage(), getChoices());
             }
@@ -1612,6 +1624,115 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             choices.set(0, number);
             return true;
+        }
+
+        /** PlayerImpl.chooseApprovingObject's menu title. XMage asks it when a
+         * spell in its owner's hand has both the regular-cast ApprovingObject
+         * SpellAbility.canActivate adds and one or more AsThough play-from-hand
+         * grants (Zaffai and the Tempests, One with the Multiverse, ...). */
+        static final String PERMITTING_OBJECT_ASK = "Choose the permitting object";
+
+        /** The suffix PlayerImpl.chooseApprovingObject uses for an approver
+         * whose rule text is empty. It is only a fallback marker here: a plain
+         * cast of a spell with rules text shows that text instead (the find's
+         * menu offered "Reach Through Mists [d91]: draw a card."), so the entry
+         * cannot be identified by this suffix alone. */
+        static final String CAST_NORMALLY = "Cast normally";
+
+        /**
+         * Answers PlayerImpl.chooseApprovingObject's key menu. The entries are
+         * a HashMap, so the key numbers are not stable; the driver picks by the
+         * entry's role, not by key. Each value names its approving ability's
+         * source: the regular-cast approver's source is the spell card (still
+         * in the caster's hand at this ask), while a hand-zone grant's source
+         * is the permanent granting it. The caller passes those two id-name
+         * sets; an "alternative" cast (gorge elected the permission) takes the
+         * granting entry, every other cast takes the regular one so a paid cast
+         * is not silently made free. When only one side matches -- e.g. an
+         * Adventure half whose source is not the hand's parent card -- the
+         * other entry is the answer. The CAST_NORMALLY suffix is the last
+         * resort for a menu whose sources are in neither zone. Returns whether
+         * it queued a key.
+         */
+        static boolean permittingObjectKey(mage.choices.Choice choice, List<String> choices,
+                boolean grantCast, java.util.Set<String> grantingObjects,
+                java.util.Set<String> regularCasts) {
+            if (!choice.isKeyChoice() || choice.getMessage() == null
+                    || !PERMITTING_OBJECT_ASK.equals(choice.getMessage())) {
+                return false;
+            }
+            String grantKey = null;
+            String regularKey = null;
+            int grantMatches = 0;
+            int regularMatches = 0;
+            for (java.util.Map.Entry<String, String> e : choice.getKeyChoices().entrySet()) {
+                String text = e.getValue() == null ? ""
+                        : e.getValue().replaceAll("<[^<>]*>", "");
+                if (containsAny(text, grantingObjects)) {
+                    grantKey = e.getKey();
+                    grantMatches++;
+                }
+                if (containsAny(text, regularCasts)) {
+                    regularKey = e.getKey();
+                    regularMatches++;
+                }
+            }
+            String key = null;
+            if (grantCast && grantMatches == 1) {
+                key = grantKey;
+            } else if (!grantCast && regularMatches == 1) {
+                key = regularKey;
+            } else if (grantCast && regularMatches == 1) {
+                key = keyOtherThan(choice, regularKey);
+            } else if (!grantCast && grantMatches == 1) {
+                key = keyOtherThan(choice, grantKey);
+            }
+            if (key == null) {
+                for (java.util.Map.Entry<String, String> e : choice.getKeyChoices().entrySet()) {
+                    String text = e.getValue() == null ? ""
+                            : e.getValue().replaceAll("<[^<>]*>", "");
+                    if (text.endsWith(CAST_NORMALLY) == !grantCast) {
+                        key = e.getKey();
+                        break;
+                    }
+                }
+            }
+            if (key == null) {
+                return false;
+            }
+            queueKeyAhead(choices, key);
+            return true;
+        }
+
+        private static boolean containsAny(String text, java.util.Set<String> markers) {
+            for (String marker : markers) {
+                if (marker != null && !marker.isEmpty() && text.contains(marker)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /** The other key of a two-entry menu, or null for any other shape. */
+        private static String keyOtherThan(mage.choices.Choice choice, String excluded) {
+            if (choice.getKeyChoices().size() != 2) {
+                return null;
+            }
+            for (String key : choice.getKeyChoices().keySet()) {
+                if (!key.equals(excluded)) {
+                    return key;
+                }
+            }
+            return null;
+        }
+
+        /** Queues a key election at the head of the scripted answers without
+         * overwriting a real answer already there (a later ask on the same
+         * cast). A head that already names the key is left to TestPlayer. */
+        private static void queueKeyAhead(List<String> choices, String key) {
+            if (choices.isEmpty() || !choices.get(0).equals(key)) {
+                choices.add(0, key);
+            }
         }
 
         /** Elects the first alternative cost (gorge's AltCostIndex-1 choice)
