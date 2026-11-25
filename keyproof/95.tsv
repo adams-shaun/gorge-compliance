@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	703eaea90aaa	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 9545f126-062f-4410-a362-e16255a128d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
-9545f126-062f-4410-a362-e16255a128d6	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+9545f126-062f-4410-a362-e16255a128d6	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 954836f8-c225-450a-bb51-f2adb6923ef5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 954b30b2-b88c-4558-b06c-4518b49d7b20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 954b30b2-b88c-4558-b06c-4518b49d7b20	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95e1c368-b58a-4e69-9583-587560ad558d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Eagle's Rescue/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95e1c368-b58a-4e69-9583-587560ad558d	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:eagle-s-rescue:static0.0:s1,f:xs:XP:eagle-s-rescue:static0.0:s1	-	-	-	21b2cceac526	-	5cf6681f3d1f	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 95e66851-7aff-4559-91b4-6b8a95c6e1f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vega-the-watcher:cast:s1,f:xs:XP:vega-the-watcher:cast:s1	-	-	-	d864b561c9cb	-	2346a00ce205	-	-	2026-11-24	xproof
-95e66851-7aff-4559-91b4-6b8a95c6e1f8	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+95e66851-7aff-4559-91b4-6b8a95c6e1f8	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 95e8e6bb-d83b-46fd-bfdf-fc042d8edd4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95e94dea-5ac0-4d6f-adec-ca147aee861f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-pridemate:cast:s1,f:xs:XP:ajani-s-pridemate:cast:s1	-	-	-	cb99a158debc	-	c14cd8eed24f	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 95e94dea-5ac0-4d6f-adec-ca147aee861f	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-pridemate:cast:s1,f:xs:XP:ajani-s-pridemate:cast:s1	-	-	-	cb99a158debc	-	c14cd8eed24f	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof

@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36282c29-a44b-4156-9441-03aa4bf386a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36282c29-a44b-4156-9441-03aa4bf386a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 362b7838-3b70-4a00-8c26-1c8b8a3b6acf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawn-s-reflection:cast:s1,f:xs:XP:dawn-s-reflection:cast:s1	-	-	-	25696bf19d5b	-	1b89bbcc4875	-	-	2026-11-24	xproof
-362b7838-3b70-4a00-8c26-1c8b8a3b6acf	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana:filter	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+362b7838-3b70-4a00-8c26-1c8b8a3b6acf	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana:filter	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 362fc643-ab76-4160-a73e-73397464db40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deliberate:cast:s1,f:xs:XP:deliberate:cast:s1	-	-	-	ae86f6029288	-	50a7ef775b5f	-	-	2026-11-24	xproof
 36330947-5ef9-4bff-b541-bfbddd9715a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Murdock's Crusade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 363b0504-27bf-40df-96ec-9e3cb1e47588	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36af3c2c-49d7-46ea-ab02-c254b332448e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Eirdu, Carrier of Dawn/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 36af3c2c-49d7-46ea-ab02-c254b332448e	static#1.0	static#1.0	agreed	-	X	scen	1	0	Eirdu, Carrier of Dawn/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 36b19ec0-d581-4213-bfae-1d7808a2f60d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36b19ec0-d581-4213-bfae-1d7808a2f60d	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+36b19ec0-d581-4213-bfae-1d7808a2f60d	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 36b19ec0-d581-4213-bfae-1d7808a2f60d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36b4c44a-7682-4876-ae2a-35112cb55ec0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-survivalist:f0t0:s1,f:xs:XP:oran-rief-survivalist:f0t0:s1	-	-	-	8a1b1a193ec0	-	bdc45f892bd4	-	-	2026-11-24	xproof
 36b4c44a-7682-4876-ae2a-35112cb55ec0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:graypelt-hunter:f0t0:s1,f:xs:XP:graypelt-hunter:f0t0:s1	-	-	-	8a1b1a193ec0	-	bdc45f892bd4	-	-	2026-11-24	xproof
@@ -206,9 +206,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36f5f161-b25e-48e4-b8f9-e6c36dfefe5b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sorin-s-guide:cast:s1,f:xs:XP:sorin-s-guide:cast:s1	-	-	-	d864b561c9cb	-	69461baa859b	-	-	2026-11-24	xproof
 36f68aa3-9955-46f1-bc87-497f16ef5222	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:cast:s1,f:xs:XP:wizard-class:cast:s1	-	-	-	d864b561c9cb	-	5d8bd5c5746e	-	-	2026-11-24	xproof
 36f68aa3-9955-46f1-bc87-497f16ef5222	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:f0a1:s1,f:xs:XP:wizard-class:f0a1:s1	-	-	-	23b491658465	-	5d8bd5c5746e	-	-	2026-11-25	xproof
-36f68aa3-9955-46f1-bc87-497f16ef5222	f0/a1	NULL	owed	refused:start:present-count	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+36f68aa3-9955-46f1-bc87-497f16ef5222	f0/a1	NULL	owed	refused:start:present-count	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 36f68aa3-9955-46f1-bc87-497f16ef5222	f0/t0	ClassLevelGained/Class	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:f0a1:s1,f:xs:XP:wizard-class:f0a1:s1	-	-	-	23b491658465	-	5d8bd5c5746e	-	-	2026-11-25	xproof
-36f68aa3-9955-46f1-bc87-497f16ef5222	f0/t1	NULL	owed	refused:steps-needed:class-level	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+36f68aa3-9955-46f1-bc87-497f16ef5222	f0/t1	NULL	owed	refused:steps-needed:class-level	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 36f71d49-0f64-4b5d-b1ee-bb0af5e9db9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36f71d49-0f64-4b5d-b1ee-bb0af5e9db9a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36fbc8ba-bb4c-4e5e-9031-78c36e376851	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:wild-roads:f0a0:s1,f:xs:XP:wild-roads:f0a0:s1	-	-	-	336eab778104	-	e68547528935	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
