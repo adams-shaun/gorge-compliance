@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10bca1b1-4f92-40e8-b9c0-d08c534903e1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cyclops-superconductor:cast:s1,f:xs:XP:cyclops-superconductor:cast:s1	-	-	-	ae86f6029288	-	1c8fcbf2a051	-	-	2026-11-24	xproof
 10bca1b1-4f92-40e8-b9c0-d08c534903e1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cyclops-superconductor:cast:s1,f:xs:XP:cyclops-superconductor:cast:s1	-	-	-	ae86f6029288	-	1c8fcbf2a051	-	-	2026-11-24	xproof
 10bca1b1-4f92-40e8-b9c0-d08c534903e1	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cyclops-superconductor:f0t1:s1,f:xs:XP:cyclops-superconductor:f0t1:s1	-	-	-	ae86f6029288	-	1c8fcbf2a051	-	-	2026-11-24	xproof
-10bca1b1-4f92-40e8-b9c0-d08c534903e1	f0/t2	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+10bca1b1-4f92-40e8-b9c0-d08c534903e1	f0/t2	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:cyclops-superconductor:f0t2:s1,f:xs:XP:cyclops-superconductor:f0t2:s1	-	-	-	054d9f516953	-	1c8fcbf2a051	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 10be1b27-bc9f-4c6e-ac85-f1fa8b2a34d6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 10c0f705-4c23-4761-afa9-4a29cf90e8ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10c0f814-e302-49ff-aded-1b8d8424fd60	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
