@@ -72,7 +72,7 @@ func combatTest(rest string) (func(*cards.Face) bool, int) {
 	if strings.Contains(strings.ToLower(rest), "youdontctrl") {
 		ctrl = ctrlOpp
 	}
-	return func(f *cards.Face) bool { return f.IsCreature() && a.test(f) }, ctrl
+	return func(f *cards.Face) bool { return f.IsCreature() && a.matches(f, false) }, ctrl
 }
 
 // lineMet is the permanent of the start's scripted combat that meets a

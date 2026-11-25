@@ -98,19 +98,56 @@ func focusGraveTgts(face *cards.Face, fam string, sa *cards.SA, trig *cards.Trig
 	return out
 }
 
-// placeGraveTargets meets each graveyard target of the focus play: a card
-// already in the graveyard the filter names counts, else the most inert
-// carrier (carrierPool) that meets the filter goes there, the opponent's for
-// an OppOwn/OppCtrl filter and the card's controller's (seat 0) otherwise. A
-// filter no carrier meets places nothing, and play refuses the start as
-// before.
+// placeGraveTargets meets each graveyard target of the focus play and of the
+// key's own trigger effect: a card already in the graveyard the filter names
+// counts, else the most inert carrier (carrierPool) that meets the filter goes
+// there, the opponent's for an OppOwn/OppCtrl filter and the card's
+// controller's (seat 0) otherwise. A filter no carrier meets places nothing,
+// and play refuses the start as before.
 func placeGraveTargets(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, fam string, sa *cards.SA, trig *cards.Trigger, f *StartFile) {
+	// Both lists, not one instead of the other: a carrier focus (Regrowth for
+	// a ChangesZoneAll leaves-your-graveyard trigger) names a graveyard
+	// target, and a dies trigger whose effect returns a card from the
+	// graveyard (Myr Retriever) names its own. Overriding the key's with the
+	// focus's dropped the artifact Myr Retriever must return.
+	targets := focusGraveTgts(face, fam, sa, trig)
+	targets = append(targets, focusPlayGraveTgts(reg, card, f)...)
+	seen := map[graveTgt]bool{}
 	used := map[[2]int]bool{} // graveyard cards already counted for a target: {seat, index}
-	for _, t := range focusGraveTgts(face, fam, sa, trig) {
+	for _, t := range targets {
+		if seen[t] {
+			continue
+		}
+		seen[t] = true
 		for i := 0; i < t.n; i++ {
 			placeGraveTarget(reg, b, card, t.filter, used, f)
 		}
 	}
+}
+
+// focusPlayGraveTgts is the graveyard targets of the focus play when it is a
+// card other than the key's own (a carrier spell such as Reanimate cast for a
+// ChangesZoneAll leaves-your-graveyard trigger), or nil when the focus is the
+// key card and its targets are already read from the trigger.
+func focusPlayGraveTgts(reg *cards.Registry, card string, f *StartFile) []graveTgt {
+	fc := f.Focus
+	if fc == nil || fc.Card == "" || fc.Card == card || fc.Seat == nil {
+		return nil
+	}
+	c, ok := reg.Lookup(fc.Card)
+	if !ok || len(c.Faces) == 0 {
+		return nil
+	}
+	ff := c.Faces[0]
+	switch fc.Kind {
+	case "cast":
+		return focusGraveTgts(ff, "cast", nil, nil)
+	case "ability":
+		if fc.Ability >= 0 && fc.Ability < len(ff.Abilities) {
+			return focusGraveTgts(ff, "", ff.Abilities[fc.Ability], nil)
+		}
+	}
+	return nil
 }
 
 func placeGraveTarget(reg *cards.Registry, b *certdeck.Builder, card, filter string, used map[[2]int]bool, f *StartFile) {
@@ -128,7 +165,7 @@ func placeGraveTarget(reg *cards.Registry, b *certdeck.Builder, card, filter str
 				if used[[2]int{s, i}] || name == card {
 					continue
 				}
-				if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && a.test(c.Faces[0]) {
+				if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && a.matches(c.Faces[0], false) {
 					used[[2]int{s, i}] = true
 					return
 				}
