@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97159138-c34b-416e-b079-5c952383a243	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97159138-c34b-416e-b079-5c952383a243	f0/t0	TapsForMana	agreed	-	FX	start	2	0	x:xs:XP:mana-flare:f0t0:s1,f:xs:XP:mana-flare:f0t0:s1	-	-	-	9087eefec3ee	-	bd2833a63527	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 971b30a8-4ab4-4e96-9d50-597da4d52994	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-new-benalia-s-light:cast:s1,f:xs:XP:danitha-new-benalia-s-light:cast:s1	-	-	-	ae86f6029288	-	2d9988612680	-	-	2026-11-24	xproof
-971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sage-s-nouliths:static0.0:s1,f:xs:XP:sage-s-nouliths:static0.0:s1	-	-	-	6f84be0f34c0	-	83d7e70d4ba0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:territorial-witchstalker:f0t0:s1,f:xs:XP:territorial-witchstalker:f0t0:s1	-	-	-	3aa6ded33acb	-	c9c851a93b2f	-	-	2026-11-25	xproof
 97bb1589-2941-4a75-a5f6-916871e51e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:alandra-sky-dreamer:f0t0:s1,f:xs:XP:alandra-sky-dreamer:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn:history	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn:history	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 97bb382b-16b2-44db-a2bd-de09ca90bfcc	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:myr-kinsmith:cast:s1,f:xs:XP:myr-kinsmith:cast:s1	-	-	-	ae86f6029288	-	303dd6874636	-	-	2026-11-24	xproof
 97bb382b-16b2-44db-a2bd-de09ca90bfcc	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:myr-kinsmith:cast:s1,f:xs:XP:myr-kinsmith:cast:s1	-	-	-	ae86f6029288	-	303dd6874636	-	-	2026-11-24	xproof
 97bdfbe0-7048-4157-8a58-5b17410750ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
