@@ -2002,6 +2002,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// the pool without asking.
 				continue
 			}
+			if staged, ok := stagedManaAllocationAnswers(d); ok {
+				// A cost-staged "any combination of colors" allocation
+				// (Conversion Apparatus's "Pay 3 energy: Add three mana in
+				// any combination of colors"): the cost stage poses the ask
+				// as a plain choose (no "mana_color" resume), so the
+				// allocation arms above never see it, and the pick labels
+				// carry the cost prefix. XMage's AddManaInAnyCombinationEffect
+				// poses the same "Distribute mana among colors" multi-amount
+				// for it as for a bare-resume allocation, and its AI answer
+				// distributes wherever it likes (xproof 11251811: gorge WWU,
+				// xmage WUB) -- so it takes the same WUBRG amount answers,
+				// zeroes included.
+				as = staged
+				break
+			}
 			if n := colourPickCount(d); n > 1 && n == len(d.Picks) {
 				// A multi-unit "any combination of colors" mana ability
 				// (Baxter Building's "Add four mana in any combination of
