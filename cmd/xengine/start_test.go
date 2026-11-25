@@ -774,3 +774,62 @@ func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
 		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/a0", true) })
 	}
 }
+
+// TestStartAdditionalCostIsExercised: a cast start placed only the lands for
+// the card's mana cost, never what the spell's Cost$ spends beyond it (a
+// creature to sacrifice, creature cards to exile from the graveyard, creatures
+// to tap, "behold or pay {2}", "waterbend {5}"), an {S} cost placed no snow
+// source, and a land's enters trigger was a cast focus a land never offers: the play was never affordable and play refused the start as
+// start-not-exercised (xproof 11250823: 27 of 45 such keys replayed at
+// bc885e54e2).
+func TestStartAdditionalCostIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Costly Plunder", "cast"},           // Sac<1/Artifact;Creature>
+		{"Skaab Goliath", "cast"},            // ExileFromGrave<2/Creature>
+		{"Shared Discovery", "cast"},         // tapXType<4/Creature>
+		{"Silvergill Mentor", "f0/t0"},       // AlternateAdditionalCost: behold a Merfolk or {2}
+		{"Benevolent River Spirit", "f0/t0"}, // RaiseCost Waterbend<5>
+		{"Chilling Shade", "f0/a0"},          // Cost$ S
+		{"Aetherflux Reservoir", "f0/a0"},    // PayLife<50>
+		{"Idyllic Grange", "f0/t0"},          // a land: played, with three other Plains so it enters untapped
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartOpeningHandFocusIsCast: a Leyline's opening-hand "yes" put it on
+// the battlefield before main 1, so its cast was never offered and play
+// refused the start as start-not-exercised. The focus seat now declines it;
+// the lowering then refuses the game for its own reason (opening_hand_effect:
+// a follower's setup would answer that ask too), not as an unexercised start.
+func TestStartOpeningHandFocusIsCast(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	res, err := scen.Generate(reg, b, "Leyline of Vitality", "cast", scen.Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("scen: %v %q", err, res.Reason)
+	}
+	raw, err := res.Start.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	in, out := t.TempDir(), t.TempDir()
+	if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		if slices.Contains(r.Reasons, reasonStartNotExercised) {
+			t.Errorf("%s: %s", r.ID, reasonStartNotExercised)
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+}
