@@ -362,6 +362,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
+# a1bcd1166a = d0f16bee2e0 plus the cost-choice census (xproof cluster xpt-5b85ea4e): every card-choosing cost that fell
+# to ScriptedCostDecision.choice()'s strict miss (CostReturn on Quirion Ranger, CostUntapType, CostReveal, CostPutCardToLib,
+# CostGainControl, CostExiledMoveToGrave, CostBehold/BeholdExile, CostCollectEvidence, CostExert, CostEnlist,
+# CostPromiseGift, CostExile's All/FromTopGrave/total-mana-value forms, CostRemoveAnyCounter per-counter picks) now takes
+# gorge's logged pick, forced when exact; CostChooseColor/CreatureType/RevealChosen keep the parent's answer. Only
+# RemoveAnyCounter of any kind over several permanents stays on choice(). Test CostReturnPickTest (2 tests,
+# fixtures/costreturn); full driver suite 185 tests. Driver-only. Fork branch fix/xp-forge-driver-cost-choice-census.
 # d0f16bee2e0 = the merge of a4fa8d45a56 and fef74c5308f, carrying all three fixes (the OddsOrEvens binary,
 # the repeated-mode/NICKNAME/zero-option driver work and the Myriad-only AtEOT guard).
 # a4fa8d45a56 = the merge of 65c6664d90 and a445a858b2, carrying both fixes.
@@ -396,7 +403,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+# f7b730149a = oracle/pin-1125: the merge of the two fixes below (both built on d0f16bee2e).
+# 752947823d = d0f16bee2e plus the fork's second-combat-damage-step priority fix b16a076d04 (cherry-picked as 67df148f93):
+# PhaseHandler.onPhaseBegin COMBAT_DAMAGE no longer clears givePriorityToPlayer when assignCombatDamage(false) assigns nothing,
+# so a lone first striker's regular damage step gives priority (CR 510.3, 510.4; xproof cluster forge_skips_damage_step,
+# triage xpt-c647818a: Akroma, Angel of Wrath and Goblin Striker). SecondCombatDamageStepPriorityTest fails on d0f16bee2e and
+# passes after. Driver and die-roll code unchanged; cardsfolder/tokenscripts unchanged. Fork branch
+# fix/xp-forge-oracle-damage-step-priority.
+FORGE_ORACLE_REF ?= f7b730149a5b24faedd221ede64bdc8367c7f88d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
