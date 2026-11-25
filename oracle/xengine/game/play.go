@@ -195,9 +195,9 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		if opt.plainSeats {
 			bot = hb
 		}
-		// a block focus, and a scripted combat, also steer the other seats: their
-		// attack (and block) is forced
-		if fst != nil && (opt.Focus.Seat == i || opt.Focus.Kind == "block" || opt.Focus.Attack != "" || opt.Focus.Block != "") {
+		// a block focus, a scripted combat and a scripted bait cast also steer
+		// the other seats: their attack, block or bait cast is forced
+		if fst != nil && (opt.Focus.Seat == i || opt.Focus.Kind == "block" || opt.Focus.Attack != "" || opt.Focus.Block != "" || opt.Focus.Bait != "") {
 			bot = focusBot{bot: bot, st: fst}
 		}
 		seats[i] = bot

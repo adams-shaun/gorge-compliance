@@ -542,6 +542,40 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetIsExercised: a focus play that targets a spell was
+// refused as start:needs-stack-target, because a start holds at main 1 with an
+// empty stack. The start now scripts the opponent's bait cast (Focus.Bait): the
+// opponent casts it at main 1, then the focus seat casts its counterspell with
+// the bait as its target.
+func TestStartStackTargetIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Absorb", "cast"},           // Counter target spell
+		{"Bone to Ash", "cast"},      // Counter target creature spell
+		{"Assert Authority", "cast"}, // Counter target spell, exile instead
+		{"Condescend", "cast"},       // Counter target spell unless its controller pays {X}
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			items := startIsExercised(t, reg, b, c.card, c.key)
+			for _, it := range items {
+				var casts []string
+				for _, s := range it.Steps {
+					if s.Op == "cast" {
+						casts = append(casts, s.Card)
+					}
+				}
+				// the bait is cast first, then the focus card (the lowered
+				// item relabels the active seat p0, so the seat prefix says
+				// which is which only after the swap)
+				if len(casts) < 2 || !strings.HasSuffix(casts[1], ":"+c.card) ||
+					casts[0] == casts[1] {
+					t.Errorf("%s: casts %v, want the opponent's bait then %s", it.ID, casts, c.card)
+				}
+			}
+		})
+	}
+}
+
 // TestStartMultiFacedFocusIsExercised: a start names a multi-faced card as its
 // card file does ("Akoum Warrior // Akoum Teeth") while the game object's face
 // carries the front name alone, and the focus seat compared the two as

@@ -793,10 +793,10 @@ func TestStartStaticObserved(t *testing.T) {
 // refused by name. A 0/0 creature with an enters-with-counters replacement (Endless
 // One, Ugin's Conjurant, Phyrexian Marauder) dies to SBA when a start places it, so
 // it is never an enabler or a bearer: Branching Bolt and Cloak of Confusion get a
-// creature that lives. Bone to Ash targets a spell on the stack, which a start
-// cannot have at main 1; Burning Oil's attacking or blocking creature is a
-// scripted attack (StartFocus.Attack), and Maze of Shadows' attacking creature
-// with shadow one no carrier meets.
+// creature that lives. Bone to Ash targets a creature spell, so it gets a scripted
+// bait cast (StartFocus.Bait, TestStartstacktarget); Burning Oil's attacking or
+// blocking creature is a scripted attack (StartFocus.Attack), and Maze of Shadows'
+// attacking creature with shadow one no carrier meets.
 func TestStartFocusIsOffered(t *testing.T) {
 	reg, b := testBuilder(t)
 	creature := func(names []string) bool {
@@ -817,7 +817,11 @@ func TestStartFocusIsOffered(t *testing.T) {
 				t.Error("p1 has no permanent for the you-don't-control target")
 			}
 		}},
-		{card: "Bone to Ash", key: "cast", reason: "start:needs-stack-target"},
+		{card: "Bone to Ash", key: "cast", check: func(t *testing.T, f *StartFile) {
+			if f.Focus.Bait == "" || !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
+				t.Errorf("focus %+v p1 hand %v, want a bait spell the opponent casts", f.Focus, f.Setup.P1.Hand)
+			}
+		}},
 		{card: "Burning Oil", key: "cast", check: func(t *testing.T, f *StartFile) {
 			// the attacking target is a carrier of p0's that attacks first
 			if f.Focus.Attack == "" || f.Focus.Block != "" || f.Active != 0 || !slices.Contains(f.Setup.P0.Battlefield, f.Focus.Attack) {
@@ -875,6 +879,65 @@ func TestStartFocusIsOffered(t *testing.T) {
 				}
 			}
 			r.check(t, res.Start)
+		})
+	}
+}
+
+// TestStartstacktarget: a focus play that targets a plain spell needs a spell
+// on the stack, and a start holds at main 1 with an empty one, so the 304
+// corpus cast keys whose ability has an exact TargetType$ Spell were refused as
+// start:needs-stack-target (Absorb, Bone to Ash, ...). The start now scripts
+// the opponent's bait cast (Focus.Bait): the most inert spell of the kind the
+// target filter takes, in the opponent's hand with its lands, so the focus play
+// has a legal target (CR 115.1a).
+func TestStartstacktarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct {
+		card string
+		// creature is whether the key's target must be a creature spell
+		// (Bone to Ash's "Counter target creature spell").
+		creature bool
+	}{
+		{card: "Absorb"},                      // Counter target spell
+		{card: "Admiral's Order"},             // Counter target spell
+		{card: "Assert Authority"},            // Counter target spell, exile instead
+		{card: "Condescend"},                  // Counter target spell unless its controller pays {X}
+		{card: "Bone to Ash", creature: true}, // Counter target creature spell
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, "cast", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Bait == "" {
+				t.Fatalf("focus %+v, want a scripted bait cast", f.Focus)
+			}
+			if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
+				t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
+			}
+			bc, ok := reg.Lookup(f.Focus.Bait)
+			if !ok || len(bc.Faces) == 0 {
+				t.Fatalf("bait %q is not a card", f.Focus.Bait)
+			}
+			bait := bc.Faces[0]
+			if bait.IsLand() {
+				t.Errorf("bait %q is a land, which is not a spell", f.Focus.Bait)
+			}
+			if c.creature && !bait.IsCreature() {
+				t.Errorf("bait %q is not a creature spell for a creature-spell target", f.Focus.Bait)
+			}
+			if c.creature && f.Active != 1 {
+				// a creature spell can only be cast on its controller's main
+				// phase, so the bait seat is the active one
+				t.Errorf("active %d, want the bait seat 1", f.Active)
+			}
+			if col := firstColour(bait.ManaCost); col != "" && !slices.Contains(f.Setup.P1.Battlefield, basicOf[col]) {
+				t.Errorf("p1 battlefield %v has no %s to pay the bait", f.Setup.P1.Battlefield, basicOf[col])
+			}
 		})
 	}
 }
