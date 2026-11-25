@@ -65,10 +65,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e6dad31-6192-4675-81df-09689906c12b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3e6e70eb-6638-4aa6-997b-90f5810e12a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-cavalry:cast:s1,f:xs:XP:llanowar-cavalry:cast:s1	-	-	-	5f2128bf97e4	-	20c255a4da7b	-	-	2026-11-24	xproof
 3e6e70eb-6638-4aa6-997b-90f5810e12a0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:llanowar-cavalry:f0a0:s1,f:xs:XP:llanowar-cavalry:f0a0:s1	-	-	-	5f2128bf97e4	-	20c255a4da7b	-	-	2026-11-24	xproof
-3e715032-0d21-441b-b2d4-c91084728718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-lad-diverging-destiny:cast:s1,f:xs:XP:iron-lad-diverging-destiny:cast:s1	-	-	-	23c4009444b0	-	f803829047a2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e715032-0d21-441b-b2d4-c91084728718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-lad-diverging-destiny:cast:s1,f:xs:XP:iron-lad-diverging-destiny:cast:s1	-	-	-	fb9d3088f0bf	-	f803829047a2	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3e715032-0d21-441b-b2d4-c91084728718	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron Lad, Diverging Destiny/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e715032-0d21-441b-b2d4-c91084728718	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iron Lad, Diverging Destiny/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3e715032-0d21-441b-b2d4-c91084728718	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:iron-lad-diverging-destiny:f0a0:s1,f:xs:XP:iron-lad-diverging-destiny:f0a0:s1	-	-	-	23c4009444b0	-	f803829047a2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e715032-0d21-441b-b2d4-c91084728718	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:iron-lad-diverging-destiny:f0a0:s1,f:xs:XP:iron-lad-diverging-destiny:f0a0:s1	-	-	-	fb9d3088f0bf	-	f803829047a2	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3e715032-0d21-441b-b2d4-c91084728718	static#0.0	static#0.0	agreed	-	X	scen	1	0	Iron Lad, Diverging Destiny/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e72ec1f-9941-42e6-b832-58b79b44066b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e72ec1f-9941-42e6-b832-58b79b44066b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3e84d719-bb76-43a4-b61a-fee30c3aac68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:star-whale:cast:s1,f:xs:XP:star-whale:cast:s1	-	-	-	8c0bd19283bb	-	9c925222b15e	-	-	2026-11-24	xproof
 3e8abec7-1e18-460a-9d88-30969755ebd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e8abec7-1e18-460a-9d88-30969755ebd2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e8abec7-1e18-460a-9d88-30969755ebd2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3e8bcb44-b875-4fe4-b96f-97a20cbfec93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cooped-up:cast:s1,f:xs:XP:cooped-up:cast:s1	-	-	-	23b491658465	-	19c0529dc9bc	-	-	2026-11-24	xproof
 3e8bcb44-b875-4fe4-b96f-97a20cbfec93	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cooped Up/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3e8bcb44-b875-4fe4-b96f-97a20cbfec93	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cooped Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cruel-celebrant:f0t0:s1,f:xs:XP:cruel-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	d32cfffcd12e	-	-	2026-11-24	xproof
 3eec0ca6-e461-4583-9989-e4f6b15a53f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eec0ca6-e461-4583-9989-e4f6b15a53f8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-3eeeb159-aa45-4a9b-9618-8542604b9830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-kingpin-of-crime:cast:s1,f:xs:XP:the-kingpin-of-crime:cast:s1	-	-	-	23c4009444b0	-	be7d8a943cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:the-kingpin-of-crime:f0t0:s1,f:xs:XP:the-kingpin-of-crime:f0t0:s1	-	-	-	23c4009444b0	-	be7d8a943cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3eeeb159-aa45-4a9b-9618-8542604b9830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-kingpin-of-crime:cast:s1,f:xs:XP:the-kingpin-of-crime:cast:s1	-	-	-	fb9d3088f0bf	-	be7d8a943cf8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:the-kingpin-of-crime:f0t0:s1,f:xs:XP:the-kingpin-of-crime:f0t0:s1	-	-	-	fb9d3088f0bf	-	be7d8a943cf8	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Kingpin of Crime/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ef02f2b-b611-40c3-a1d5-8b34989643cf	cast	cast-resolve	agreed	-	FX	scen	2	0	Pollen-Shield Hare/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ef02f2b-b611-40c3-a1d5-8b34989643cf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pollen-Shield Hare/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

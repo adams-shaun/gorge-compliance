@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d00fb28-ea6c-49a9-b4af-ffb38860a9a7	cast	counter-spell	agreed	-	X	scen	1	0	Cancel/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d011e22-335b-465f-9111-e95a72ebffe9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d012731-f921-47bf-a2da-ce494650cd4f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7d070a95-49ea-4aea-b512-dbb0006a00ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvenking-s-harper:cast:s1,f:xs:XP:elvenking-s-harper:cast:s1	-	-	-	23c4009444b0	-	7e31b6cb8240	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7d070a95-49ea-4aea-b512-dbb0006a00ee	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:elvenking-s-harper:f0a0:s1,f:xs:XP:elvenking-s-harper:f0a0:s1	-	-	-	23c4009444b0	-	7e31b6cb8240	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7d070a95-49ea-4aea-b512-dbb0006a00ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvenking-s-harper:cast:s1,f:xs:XP:elvenking-s-harper:cast:s1	-	-	-	fb9d3088f0bf	-	7e31b6cb8240	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7d070a95-49ea-4aea-b512-dbb0006a00ee	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:elvenking-s-harper:f0a0:s1,f:xs:XP:elvenking-s-harper:f0a0:s1	-	-	-	fb9d3088f0bf	-	7e31b6cb8240	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7d07821e-d34b-4441-a137-836ffce7127b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:samut-s-sprint:cast:s1,f:xs:XP:samut-s-sprint:cast:s1	-	-	-	d864b561c9cb	-	ee19d4051fde	-	-	2026-11-24	xproof
 7d084fe0-4896-4a1d-839c-81f55591c18a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d086ae5-738c-4685-80ae-66bd9379d8f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oraxid:cast:s1,f:xs:XP:oraxid:cast:s1	-	-	-	5f2128bf97e4	-	5db364a78106	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d70a2f4-92cb-40c3-9e5a-f6c57d4a64c2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virulent Silencer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d71a78d-fda8-424d-b343-b901a0df3acf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d71a78d-fda8-424d-b343-b901a0df3acf	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7d765055-da62-43f7-9580-98e9d164753b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:truck-toss:cast:s1,f:xs:XP:truck-toss:cast:s1	-	-	-	23c4009444b0	-	f8cd5729d288	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7d765055-da62-43f7-9580-98e9d164753b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:truck-toss:cast:s1,f:xs:XP:truck-toss:cast:s1	-	-	-	fb9d3088f0bf	-	f8cd5729d288	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7d765055-da62-43f7-9580-98e9d164753b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Truck Toss/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d78155c-c63f-48a3-86e5-12b80400d8de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-bully:f0t0:s1,f:xs:XP:iron-bully:f0t0:s1	-	-	-	d864b561c9cb	-	7cdb62c0958c	-	-	2026-11-24	xproof
 7d78155c-c63f-48a3-86e5-12b80400d8de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iron-bully:f0t0:s1,f:xs:XP:iron-bully:f0t0:s1	-	-	-	d864b561c9cb	-	7cdb62c0958c	-	-	2026-11-24	xproof

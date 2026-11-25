@@ -24,8 +24,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 051333e4-a826-46e8-a46e-1571078112fc	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hag of Inner Weakness"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 0517f736-e6eb-4fdb-8288-e0c8a9a44379	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 051ff7e0-dd00-4467-8796-a5d1c21934ed	cast	cast-resolve	agreed	-	X	scen	1	0	Bejeweled Warg/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-051ff7e0-dd00-4467-8796-a5d1c21934ed	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:bejeweled-warg:combat0.attack:s1,f:xs:XP:bejeweled-warg:combat0.attack:s1	-	-	-	23c4009444b0	-	1dc8de1e578c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-051ff7e0-dd00-4467-8796-a5d1c21934ed	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bejeweled-warg:combat0.block:s1,f:xs:XP:bejeweled-warg:combat0.block:s1	-	-	-	23c4009444b0	-	1dc8de1e578c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+051ff7e0-dd00-4467-8796-a5d1c21934ed	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:bejeweled-warg:combat0.attack:s1,f:xs:XP:bejeweled-warg:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	1dc8de1e578c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+051ff7e0-dd00-4467-8796-a5d1c21934ed	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bejeweled-warg:combat0.block:s1,f:xs:XP:bejeweled-warg:combat0.block:s1	-	-	-	fb9d3088f0bf	-	1dc8de1e578c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 051ff7e0-dd00-4467-8796-a5d1c21934ed	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bejeweled Warg/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05221ba6-53fd-4f45-b8b4-493724f75963	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0523e271-5e0b-4e4b-9eac-86f915d18952	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:head-of-the-hunt:cast:s1,f:xs:XP:head-of-the-hunt:cast:s1	-	-	-	fb9d3088f0bf	-	d946ac93f8dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 059ed13a-857c-420a-a127-5f720010b9fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 059ed13a-857c-420a-a127-5f720010b9fd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a039ad-1689-4d13-b393-6c1219583b5d	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sleight-of-hand:cast:s1	-	-	-	23b491658465	-	de41243b6963	-	-	2026-11-24	xproof
-05a1575c-8d08-4845-8ae0-85e0aba55637	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+05a1575c-8d08-4845-8ae0-85e0aba55637	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 05a1e1ee-67f0-4158-a012-01612bc9cc70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a1e1ee-67f0-4158-a012-01612bc9cc70	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a4acfd-3bf3-4ec2-a28a-bc43ba7c6fbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05e6b243-48a6-4a42-bc5f-413441de9c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:elspeth-sun-s-champion:f0a2:s1,f:xs:XP:elspeth-sun-s-champion:f0a2:s1	-	-	-	23c4009444b0	-	648a00383a7d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:elspeth-sun-s-champion:f0a2:s1,f:xs:XP:elspeth-sun-s-champion:f0a2:s1	-	-	-	fb9d3088f0bf	-	648a00383a7d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:roost-of-drakes:cast:s1,f:xs:XP:roost-of-drakes:cast:s1	-	-	-	ae86f6029288	-	eec522b70a90	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roost-of-drakes:f0t0:s1,f:xs:XP:roost-of-drakes:f0t0:s1	-	-	-	ae86f6029288	-	eec522b70a90	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

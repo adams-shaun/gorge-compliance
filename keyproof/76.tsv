@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76372327-41ec-4516-abff-3b612e073629	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kona-rescue-beastie:cast:s1,f:xs:XP:kona-rescue-beastie:cast:s1	-	-	-	23b491658465	-	8931b47f47b3	-	-	2026-11-24	xproof
 76372327-41ec-4516-abff-3b612e073629	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kona-rescue-beastie:f0t0:s1,f:xs:XP:kona-rescue-beastie:f0t0:s1	-	-	-	3aa6ded33acb	-	8931b47f47b3	-	-	2026-11-25	xproof
 763882f9-a7ad-4fb1-bdf4-c9a158d4b68e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-763a2d27-52a8-43d9-b649-0f6c0cf87a07	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+763a2d27-52a8-43d9-b649-0f6c0cf87a07	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 763d60ea-a0ad-4f13-b8a7-aa1515283266	cast	cast-resolve	agreed	-	FX	scen	2	0	Shifting Grift/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76407853-7103-4010-b198-33a04ece7b23	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	390aaf2454b3	-	-	2026-11-24	xproof
 76407853-7103-4010-b198-33a04ece7b23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 765863c8-1be0-4bb1-9e9c-db7701cffde3	land	land	agreed	-	FX	start	2	0	x:xs:XP:lonely-sandbar:land:s1,f:xs:XP:lonely-sandbar:land:s1	-	-	-	25696bf19d5b	-	84fc937d1c19	-	-	2026-11-24	xproof
 76587fa5-29eb-480f-a865-480cd39b1da7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765a12fc-9b66-4bb7-88f6-6e7bd2d2f8c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gobbling-ooze:cast:s1,f:xs:XP:gobbling-ooze:cast:s1	-	-	-	d864b561c9cb	-	170a8dd4fb2a	-	-	2026-11-24	xproof
-765a12fc-9b66-4bb7-88f6-6e7bd2d2f8c7	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gobbling-ooze:f0a0:s1,f:xs:XP:gobbling-ooze:f0a0:s1	-	-	-	23c4009444b0	-	170a8dd4fb2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+765a12fc-9b66-4bb7-88f6-6e7bd2d2f8c7	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gobbling-ooze:f0a0:s1,f:xs:XP:gobbling-ooze:f0a0:s1	-	-	-	fb9d3088f0bf	-	170a8dd4fb2a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7661484b-1faa-4ed7-b77b-fc1e625d23e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7661484b-1faa-4ed7-b77b-fc1e625d23e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7661dda6-4e7b-42d0-8374-0a1fe65b83e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kyren-sniper:f0t0:s1,f:xs:XP:kyren-sniper:f0t0:s1	-	-	-	3aa6ded33acb	-	96bc2b6c440f	-	-	2026-11-25	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 766e277c-983e-488c-a885-c03c3c0d3357	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-firstblade:f0t0:s1,f:xs:XP:viashino-firstblade:f0t0:s1	-	-	-	d864b561c9cb	-	cf92a7b9b48c	-	-	2026-11-24	xproof
 766e277c-983e-488c-a885-c03c3c0d3357	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viashino-firstblade:f0t0:s1,f:xs:XP:viashino-firstblade:f0t0:s1	-	-	-	d864b561c9cb	-	cf92a7b9b48c	-	-	2026-11-24	xproof
 76703951-f42f-4e1d-af51-e1e06a89bd5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76703951-f42f-4e1d-af51-e1e06a89bd5e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+76703951-f42f-4e1d-af51-e1e06a89bd5e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:cast:s1,f:xs:XP:intruding-soulrager:cast:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:combat0.attack:s1,f:xs:XP:intruding-soulrager:combat0.attack:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:combat0.block:s1,f:xs:XP:intruding-soulrager:combat0.block:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof

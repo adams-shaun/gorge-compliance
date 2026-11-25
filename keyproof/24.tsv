@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24038629-7c12-45ef-8ec4-0d2bb3e2265c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ethereal-investigator:f0t0:s1,f:xs:XP:ethereal-investigator:f0t0:s1	-	-	-	8c0bd19283bb	-	c91455fd717f	-	-	2026-11-24	xproof
 24038629-7c12-45ef-8ec4-0d2bb3e2265c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ethereal-investigator:f0t0:s1,f:xs:XP:ethereal-investigator:f0t0:s1	-	-	-	8c0bd19283bb	-	c91455fd717f	-	-	2026-11-24	xproof
 24038629-7c12-45ef-8ec4-0d2bb3e2265c	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-240410a0-3288-4336-b1ad-34936e64ccf2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vision-quest:cast:s1,f:xs:XP:vision-quest:cast:s1	-	-	-	23c4009444b0	-	46dba70f28cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+240410a0-3288-4336-b1ad-34936e64ccf2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vision-quest:cast:s1,f:xs:XP:vision-quest:cast:s1	-	-	-	fb9d3088f0bf	-	46dba70f28cb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 24059283-edbd-4817-9f35-4be02f07b8f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24059283-edbd-4817-9f35-4be02f07b8f8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:astonishing-spider-man:f0t0:s1,f:xs:XP:astonishing-spider-man:f0t0:s1	-	-	-	8c0bd19283bb	-	1a374b29f92d	-	-	2026-11-24	xproof
 240746f5-caab-46b9-914f-c2c7ecce6ca9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 247cc471-fed5-41e3-8b6a-a10bbc129b36	cast	cast-resolve	agreed	-	X	scen	1	0	Paradox Surveyor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 247cc471-fed5-41e3-8b6a-a10bbc129b36	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:paradox-surveyor:combat0.attack:s1,f:xs:XP:paradox-surveyor:combat0.attack:s1	-	-	-	23c4009444b0	-	f6f5fd414181	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 247cc471-fed5-41e3-8b6a-a10bbc129b36	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:paradox-surveyor:combat0.block:s1,f:xs:XP:paradox-surveyor:combat0.block:s1	-	-	-	23c4009444b0	-	f6f5fd414181	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-247cc471-fed5-41e3-8b6a-a10bbc129b36	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+247cc471-fed5-41e3-8b6a-a10bbc129b36	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2480e56e-365c-4656-9364-25408e896ac4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2480e56e-365c-4656-9364-25408e896ac4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 24882fa2-3fe9-4c1b-aa3d-0e6488b9db27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24d22bcb-8a77-4c47-a508-6f4bc093c1d0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 24d2cbf6-6268-4da3-8413-6c76679576fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24d2e266-2dcb-40f1-a465-cfc63e9aa6ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24d2e266-2dcb-40f1-a465-cfc63e9aa6ae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+24d2e266-2dcb-40f1-a465-cfc63e9aa6ae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 24d373cd-245a-4051-b187-ba8cc83b0c48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bladed-bracers:cast:s1,f:xs:XP:bladed-bracers:cast:s1	-	-	-	d864b561c9cb	-	056b11d66b2f	-	-	2026-11-24	xproof
 24d373cd-245a-4051-b187-ba8cc83b0c48	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:bladed-bracers:f0a0:s1,f:xs:XP:bladed-bracers:f0a0:s1	-	-	-	d864b561c9cb	-	056b11d66b2f	-	-	2026-11-24	xproof
 24d52cf1-d4f1-4b4c-a50b-87d3ba0aeebb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

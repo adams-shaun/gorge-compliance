@@ -116,13 +116,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 698c9882-4117-4919-8a19-b1cbffc16692	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:hunted-wumpus:cast:s1	-	-	-	25696bf19d5b	-	2eb63dfe1c95	-	-	2026-11-24	xproof
 698e79ec-c2bc-4973-a095-f3c57b50e39c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69909846-94f9-4b2c-918f-274ba2aa4279	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	4165c0077f08	-	-	2026-11-24	xproof
-6990ac82-49d4-412d-9c3d-1e7fb5479313	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6990ac82-49d4-412d-9c3d-1e7fb5479313	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	cast	cast-resolve	agreed	-	X	scen	1	0	Finneas, Ace Archer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.attack:s1,f:xs:XP:finneas-ace-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.block:s1,f:xs:XP:finneas-ace-archer:combat0.block:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.attack:s1,f:xs:XP:finneas-ace-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
 699380f9-a032-4838-baf1-1575f37eb642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-699610c9-c991-4faf-b712-d015ef0799ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doc-samson-super-psychiatrist:cast:s1,f:xs:XP:doc-samson-super-psychiatrist:cast:s1	-	-	-	23c4009444b0	-	ec9159be716e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+699610c9-c991-4faf-b712-d015ef0799ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doc-samson-super-psychiatrist:cast:s1,f:xs:XP:doc-samson-super-psychiatrist:cast:s1	-	-	-	fb9d3088f0bf	-	ec9159be716e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 699610c9-c991-4faf-b712-d015ef0799ad	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Doc Samson, Super Psychiatrist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6996c354-d3fa-40c3-8534-27d2f5b74756	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6996c354-d3fa-40c3-8534-27d2f5b74756	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69b5af09-b3e6-4abf-b62e-9199c4f43ba7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bravado:cast:s1,f:xs:XP:bravado:cast:s1	-	-	-	5f2128bf97e4	-	7850abc70003	-	-	2026-11-24	xproof
 69b96fe5-9733-4b43-bd66-075742e142d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-calculations:cast:s1,f:xs:XP:cruel-calculations:cast:s1	-	-	-	fb9d3088f0bf	-	72dda90ed6dd	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 69b9fa68-b409-4de1-9a40-5262386a0180	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:healer-of-the-pride:cast:s1,f:xs:XP:healer-of-the-pride:cast:s1	-	-	-	d864b561c9cb	-	84fa2690a45a	-	-	2026-11-24	xproof
-69b9fa68-b409-4de1-9a40-5262386a0180	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:healer-of-the-pride:f0t0:s1,f:xs:XP:healer-of-the-pride:f0t0:s1	-	-	-	23c4009444b0	-	84fa2690a45a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+69b9fa68-b409-4de1-9a40-5262386a0180	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:healer-of-the-pride:f0t0:s1,f:xs:XP:healer-of-the-pride:f0t0:s1	-	-	-	fb9d3088f0bf	-	84fa2690a45a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 69ba7864-0d09-4517-ad1a-7efaf437ded0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 69bcdb42-c170-4848-b95b-f4621867d084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arashin-cleric:f0t0:s1,f:xs:XP:arashin-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0b9c856dbf50	-	-	2026-11-24	xproof
 69bcdb42-c170-4848-b95b-f4621867d084	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arashin-cleric:f0t0:s1,f:xs:XP:arashin-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0b9c856dbf50	-	-	2026-11-24	xproof
@@ -200,7 +200,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69e2df4e-c7f3-4c3a-be5b-1c4afb29cead	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69e4e5bf-f0e2-4ed1-8b17-c8c7a9381551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69e5df2f-be1f-4608-a90f-3e2f51e2fea4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thassa-god-of-the-sea:f0t0:s1,f:xs:XP:thassa-god-of-the-sea:f0t0:s1	-	-	-	3aa6ded33acb	-	0ff40c305135	-	-	2026-11-25	xproof
-69e5df2f-be1f-4608-a90f-3e2f51e2fea4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+69e5df2f-be1f-4608-a90f-3e2f51e2fea4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 69e5df2f-be1f-4608-a90f-3e2f51e2fea4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thassa-god-of-the-sea:f0t0:s1,f:xs:XP:thassa-god-of-the-sea:f0t0:s1	-	-	-	3aa6ded33acb	-	0ff40c305135	-	-	2026-11-25	xproof
 69e8333a-bddf-49e2-9c39-3dc46fec81e0	cast	cast-resolve	agreed	-	FX	scen	2	0	Remnant Elemental/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69e8333a-bddf-49e2-9c39-3dc46fec81e0	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:remnant-elemental:combat0.attack:s1	-	-	-	23c4009444b0	-	7aa6ca39633e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

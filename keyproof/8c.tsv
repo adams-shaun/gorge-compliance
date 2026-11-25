@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c45bf9d-a017-43bf-9e32-67810a8a217b	land	land	agreed	-	F	start	2	0	f:xs:XP:talon-gates-of-madara:f0t0:s1	-	-	-	8c0bd19283bb	-	86b7cf485cbb	-	-	2026-11-24	xproof
 8c4aba38-7fbd-463e-8454-21037090c71e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furyborn-hellkite:cast:s1,f:xs:XP:furyborn-hellkite:cast:s1	-	-	-	d864b561c9cb	-	411c2c8ccf31	-	-	2026-11-24	xproof
 8c4b1ab2-01d9-486a-a9db-ac7c72500d30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c4da760-8913-46ca-b00c-bba6d877d482	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:world-war-hulk:cast:s1,f:xs:XP:world-war-hulk:cast:s1	-	-	-	23c4009444b0	-	0160d15b0fec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8c4da760-8913-46ca-b00c-bba6d877d482	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:world-war-hulk:cast:s1,f:xs:XP:world-war-hulk:cast:s1	-	-	-	fb9d3088f0bf	-	0160d15b0fec	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 8c5264d2-8544-4e83-8ebc-7261dde80f01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c52bd39-0586-48ca-b263-17210cf9feb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Craterhoof Behemoth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c52bd39-0586-48ca-b263-17210cf9feb6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c81f7b6-38e7-482b-afff-727074a23888	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spinewoods-armadillo:combat0.block:s1,f:xs:XP:spinewoods-armadillo:combat0.block:s1	-	-	-	3aa6ded33acb	-	7e344dc3e71b	-	-	2026-11-25	xproof
 8c81f7b6-38e7-482b-afff-727074a23888	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:spinewoods-armadillo:f0a0:s1	-	-	-	3aa6ded33acb	-	7e344dc3e71b	-	-	2026-11-25	xproof
 8c81f7b6-38e7-482b-afff-727074a23888	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:spinewoods-armadillo:f0t0:s1,f:xs:XP:spinewoods-armadillo:f0t0:s1	-	-	-	3aa6ded33acb	-	7e344dc3e71b	-	-	2026-11-25	xproof
-8c83d21a-6138-409f-8e00-75dcd14388e2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8c83d21a-6138-409f-8e00-75dcd14388e2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 8c846841-1b44-4bc5-b803-76baaa217548	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c846841-1b44-4bc5-b803-76baaa217548	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c85887d-5935-46ec-a075-dc9f5133bb96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ce63f60-0211-46c7-8fb6-c5484ebfa029	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cut-of-the-profits:cast:s1,f:xs:XP:cut-of-the-profits:cast:s1	-	-	-	d864b561c9cb	-	6034afe85f7c	-	-	2026-11-24	xproof
 8ce7f05c-6352-49e8-95b3-8ab87106b75e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:draining-whelk:cast:s1,f:xs:XP:draining-whelk:cast:s1	-	-	-	9ee19e8250ce	-	acc53a31f190	-	-	2026-11-24	xproof
 8ce7f05c-6352-49e8-95b3-8ab87106b75e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:draining-whelk:cast:s1,f:xs:XP:draining-whelk:cast:s1	-	-	-	9ee19e8250ce	-	acc53a31f190	-	-	2026-11-24	xproof
-8ceb1acf-5ff3-4f1a-af04-9f07ad454526	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ronin-shadow-stalker:cast:s1,f:xs:XP:ronin-shadow-stalker:cast:s1	-	-	-	23c4009444b0	-	6f1c97c2cb14	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8ceb1acf-5ff3-4f1a-af04-9f07ad454526	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ronin-shadow-stalker:cast:s1,f:xs:XP:ronin-shadow-stalker:cast:s1	-	-	-	fb9d3088f0bf	-	6f1c97c2cb14	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf38025-5821-45a0-9483-266353b7e82d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
