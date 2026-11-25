@@ -352,6 +352,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 		case "DamageDone", "AttackersDeclared":
 			if why := combatStart(reg, b, face, card, trig, f); why != "" {
+				if trig.Mode == "AttackersDeclared" {
+					return refuse(why)
+				}
+				// a combat-damage shape combatStart's one attack does not read
+				if why = combatTrigStart(reg, b, face, card, trig, f); why != "" {
+					return refuse(why)
+				}
+			}
+		case "Blocks", "AttackerBlocked", "AttackerBlockedByCreature", "DamageDoneOnce", "DamageDealtOnce":
+			if why := combatTrigStart(reg, b, face, card, trig, f); why != "" {
 				return refuse(why)
 			}
 		case "BecomesTarget":
@@ -421,7 +431,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		switch {
 		case trig == nil:
 			return false
-		case trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce":
+		case combatTrigModes[trig.Mode]:
 			return n.Class == certdeck.OppBlockers
 		case trig.Mode == "LifeGained":
 			return n.Class == certdeck.Life && n.Arg == "gain"
@@ -434,6 +444,12 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if fam != "static" && fam != "combat" {
 		if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
 			if err != nil {
+				if trig != nil && combatTrigModes[trig.Mode] {
+					// a card certdeck cannot build (an unsupported script, a
+					// name XMage spells differently): the combat key keeps the
+					// named refusal it had before it had a start
+					return refuse("no-generator:trigger:" + trig.Mode + ":unsupported")
+				}
 				return Result{}, err
 			}
 			return refuse(why)
