@@ -311,3 +311,24 @@ func stripKeyword(t *testing.T, snaps []rules.OracleSnapshot, kw string) []rules
 	}
 	return out
 }
+
+// TestPlayStartCountedStatics lowers the starts of statics whose amount counts
+// a board or the source's own counters, and holds each to its key: the batch
+// plays (no duplicate counter row aborts it), the key is exercised, and a
+// ReduceCost key is only castable with the reduction.
+func TestPlayStartCountedStatics(t *testing.T) {
+	keys := [][2]string{
+		{"Boon of the Spirit Realm", "static#0.0"},
+		{"Cinderslash Ravager", "static#0.0"},
+		{"Hamza, Guardian of Arashin", "static#0.0"},
+		{"Eluge, the Shoreless Sea", "static#0.1"},
+		{"Call for Unity", "static#0.0"},
+	}
+	ks := lowerKeyStarts(t, keys)
+	led := readExercised(t, ks.play)
+	for _, k := range keys {
+		if n := led.Get(k[0], k[1]).Exercised; n == 0 {
+			t.Errorf("%s %s: exercised 0, want > 0", k[0], k[1])
+		}
+	}
+}

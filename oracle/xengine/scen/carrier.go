@@ -162,7 +162,43 @@ type filterAlt struct {
 	self  bool
 	other bool
 	known bool
-	test  func(f *cards.Face) bool
+	// counters are the counters every object the alternative matches must
+	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
+	counters []counterGate
+	test     func(f *cards.Face) bool
+}
+
+// counterGate is a "counters_<OP><N>_<KIND>" filter property: the object must
+// carry at least N counters of KIND.
+type counterGate struct {
+	kind string
+	n    int32
+}
+
+// parseCounterGate reads "GE1_P1P1" (the part after "counters_") into a gate.
+// A comparison a counter placement cannot meet (LE/LT) is not understood.
+func parseCounterGate(s string) (counterGate, bool) {
+	op, rest, ok := strings.Cut(s, "_")
+	if !ok || rest == "" {
+		return counterGate{}, false
+	}
+	letters := 0
+	for letters < len(op) && (op[letters] < '0' || op[letters] > '9') {
+		letters++
+	}
+	n, err := strconv.Atoi(op[letters:])
+	if err != nil || n < 0 {
+		return counterGate{}, false
+	}
+	switch op[:letters] {
+	case "GE":
+	case "GT":
+		n++
+	case "EQ":
+	default:
+		return counterGate{}, false
+	}
+	return counterGate{kind: rest, n: int32(n)}, true
 }
 
 var colourWord = map[string]byte{"White": 'W', "Blue": 'U', "Black": 'B', "Red": 'R', "Green": 'G'}
@@ -231,6 +267,19 @@ func typeWord(w string) bool {
 	return true
 }
 
+// parseFilter reads a ValidCard filter into its alternatives. A counter gate
+// ("counters_GE1_P1P1") and a library-top marker ("TopLibrary") are not
+// understood here: a caller that places no counters and no card on top of the
+// library would pick a carrier that does not meet the filter, so the
+// alternative stays unknown. The static start, which does both, reads the
+// filter with parseFilterStatic.
+func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false) }
+
+// parseFilterStatic is parseFilter for the static start: it places counters and
+// may put the affected card on top of the library, so both markers are
+// understood.
+func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true) }
+
 // typeWordAny is a filter test any of the given type words (or creature
 // types) satisfies.
 func typeWordAny(words ...string) func(*cards.Face) bool {
@@ -273,8 +322,7 @@ func pinMatches(p string) bool {
 	return len(effects.UnknownPredicates("Card."+p)) == 0
 }
 
-// parseFilter reads a ValidCard filter into its alternatives.
-func parseFilter(s string) []filterAlt {
+func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 	var out []filterAlt
 	for _, raw := range strings.Split(s, ",") {
 		raw = strings.TrimSpace(raw)
@@ -310,6 +358,14 @@ func parseFilter(s string) []filterAlt {
 				case "Other":
 					a.other = true
 					continue
+				case "inZoneBattlefield":
+					continue // a placed carrier is on the battlefield
+				case "TopLibrary":
+					// only the static start places the affected card there
+					if !topLibraryOK {
+						a.known = false
+					}
+					continue
 				case "!token", "nonToken":
 					continue // every carrier is a card
 				}
@@ -318,6 +374,19 @@ func parseFilter(s string) []filterAlt {
 						a.known = false // never read a named property as a type word
 					}
 					tests = append(tests, test)
+					continue
+				}
+				if c, ok := strings.CutPrefix(p, "counters_"); ok {
+					g, good := parseCounterGate(c)
+					if !good || !countersOK {
+						a.known = false
+						continue
+					}
+					a.counters = append(a.counters, g)
+					continue
+				}
+				if name, ok := strings.CutPrefix(p, "named"); ok && name != "" {
+					tests = append(tests, func(f *cards.Face) bool { return f.Name == name })
 					continue
 				}
 				if kw, ok := strings.CutPrefix(p, "with"); ok && evergreenKeywords[kw] {
@@ -434,6 +503,233 @@ func landCarrier(reg *cards.Registry, filter, generic string) (name string, seat
 		}
 	}
 	return "", 0
+}
+
+// fixtureCarrier is filterCarrier for a static's placements on the battlefield:
+// when no inert carrier meets the filter, the simplest playable card that does
+// stands in. The inert pool keeps a start's decision tree small, but a static's
+// Affected filter often names a permanent class no vanilla card has (Equipment,
+// an Aura-bearing host, a counter-gated creature), and refusing it left the key
+// unserved. The fallback is still deterministic: fewest abilities, then
+// keywords, mana value, legendary last, then name.
+func fixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool) (name string, seat int) {
+	return fixtureCarrierIn(reg, b, card, filter, extra, true)
+}
+
+// zoneFixtureCarrier is fixtureCarrier for a card placed in a zone other than
+// the battlefield (a play permission's hand, library, graveyard or exile): an
+// Aura or a spell is a legal choice there, so only the battlefield refuses a
+// FieldBlock card.
+func zoneFixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool) (name string, seat int) {
+	return fixtureCarrierIn(reg, b, card, filter, extra, false)
+}
+
+func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
+	// Both passes refuse a FieldBlock card on the battlefield: the inert
+	// carrier pool is not filtered for it, and an unattached Aura or a
+	// non-permanent listed there aborts the whole start file.
+	first := func(f *cards.Face) bool {
+		return (!onBattlefield || FieldBlock(f) == "") && (extra == nil || extra(f))
+	}
+	if n, s := filterCarrier(reg, b, card, filter, first); n != "" {
+		return n, s
+	}
+	for _, a := range parseFilterStatic(filter) {
+		if !a.known || a.self {
+			continue
+		}
+		var n string
+		if onBattlefield {
+			n = pickFixture(reg, b, card, a.test, extra, true)
+		} else {
+			n = pickZoneFixture(reg, b, card, a.test, extra, true)
+		}
+		if n != "" {
+			if a.ctrl == ctrlOpp {
+				return n, 1
+			}
+			return n, 0
+		}
+	}
+	return "", 0
+}
+
+// countFixture is the object a computed amount counts ("Count$Valid
+// Equipment.YouCtrl"): the same fixture scan, but another copy of the card
+// itself is allowed, because a count may name it ("other creatures named
+// Relentless Rats"). The amount only has to be non-zero for the effect to
+// show, so one fixture is placed. zone is where the counted object will be
+// placed; a battlefield count may not choose a FieldBlock card (an unattached
+// Aura would make the whole start file unplayable).
+//
+// gates are the counters the chosen alternative requires ("counters_GE1_OIL"):
+// the fixture must carry them for the count to read it.
+func countFixture(reg *cards.Registry, b *certdeck.Builder, card, filter, zone string) (name string, seat int, gates []counterGate) {
+	onBattlefield := zone == "" || zone == "Battlefield"
+	for _, a := range parseFilterStatic(filter) {
+		if !a.known || a.self {
+			continue
+		}
+		var n string
+		if onBattlefield {
+			n = pickFixture(reg, b, card, a.test, nil, false)
+		} else {
+			n = pickZoneFixture(reg, b, card, a.test, nil, false)
+		}
+		if n != "" {
+			if a.ctrl == ctrlOpp {
+				return n, 1, a.counters
+			}
+			return n, 0, a.counters
+		}
+	}
+	if n, g := landFixtureGated(reg, b, filter); n != "" {
+		return n, 0, g
+	}
+	return "", 0, nil
+}
+
+// landFixture is a land some non-Self, non-opponent alternative of filter
+// matches, preferring a basic (the mana base already holds every basic) and
+// falling back to the least busy nonbasic land for a subtype a basic does not
+// have (a Gate, a Desert).
+func landFixture(reg *cards.Registry, b *certdeck.Builder, filter string) string {
+	n, _ := landFixtureGated(reg, b, filter)
+	return n
+}
+
+// landFixtureGated is landFixture and the counters the matching alternative
+// requires of the land.
+func landFixtureGated(reg *cards.Registry, b *certdeck.Builder, filter string) (string, []counterGate) {
+	for _, a := range parseFilterStatic(filter) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		for _, basic := range []string{"Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes"} {
+			c, ok := reg.Lookup(basic)
+			if !ok || len(c.Faces) == 0 || !a.test(c.Faces[0]) {
+				continue
+			}
+			return basic, a.counters
+		}
+		if n := pickLandFixture(reg, b, a.test); n != "" {
+			return n, a.counters
+		}
+	}
+	return "", nil
+}
+
+// pickLandFixture is the least busy playable nonbasic land keep accepts. The
+// mana base is built from basics, so this is only for a subtype a basic does
+// not have and a count or a land permission names.
+func pickLandFixture(reg *cards.Registry, b *certdeck.Builder, keep func(*cards.Face) bool) string {
+	var best *cards.Face
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) != 1 {
+			continue
+		}
+		f := c.Faces[0]
+		if !f.IsLand() || f.IsBasic() || !b.Playable(c) || !keep(f) || deadOnArrival(f) {
+			continue
+		}
+		if best == nil || fixtureLess(f, best) {
+			best = f
+		}
+	}
+	if best == nil {
+		return ""
+	}
+	return best.Name
+}
+
+// pickFixture is the least busy playable non-land card that keep and extra
+// accept, for a placement on the battlefield. Only single-faced cards are
+// considered (a start deck binds a front face); lands are landFixture's job.
+// A FieldBlock card is never chosen: an unattached Aura (or a non-permanent)
+// on the battlefield makes the whole start file unplayable, not just this
+// fixture, so a filter only such cards meet keeps its refusal.
+func pickFixture(reg *cards.Registry, b *certdeck.Builder, card string, keep, extra func(*cards.Face) bool, skipCard bool) string {
+	return pickFixtureIn(reg, b, card, keep, extra, skipCard, true)
+}
+
+// pickZoneFixture is pickFixture for a card placed in another zone (a spell
+// being cast, or a play permission's hand/library/graveyard card): a FieldBlock
+// card is legal there.
+func pickZoneFixture(reg *cards.Registry, b *certdeck.Builder, card string, keep, extra func(*cards.Face) bool, skipCard bool) string {
+	return pickFixtureIn(reg, b, card, keep, extra, skipCard, false)
+}
+
+func pickFixtureIn(reg *cards.Registry, b *certdeck.Builder, card string, keep, extra func(*cards.Face) bool, skipCard, onBattlefield bool) string {
+	var best *cards.Face
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) != 1 {
+			continue
+		}
+		f := c.Faces[0]
+		if skipCard && f.Name == card || f.IsLand() || !b.Playable(c) {
+			continue
+		}
+		if onBattlefield && FieldBlock(f) != "" {
+			continue
+		}
+		if !keep(f) || extra != nil && !extra(f) || deadOnArrival(f) {
+			continue
+		}
+		if best == nil || fixtureLess(f, best) {
+			best = f
+		}
+	}
+	if best == nil {
+		return ""
+	}
+	return best.Name
+}
+
+// fixtureLess ranks fixtures: fewest events or choices (triggers and
+// replacements), then fewest options (abilities and statics), then fewest
+// keywords, then mana value, nonlegendary first, then name. Every field is a
+// face's own, so the order is deterministic.
+func fixtureLess(a, c *cards.Face) bool {
+	// An event or a choice (a trigger, a replacement) changes what a game asks;
+	// a static or an activated ability only adds an option, so it ranks behind.
+	events := func(f *cards.Face) int { return len(f.Triggers) + len(f.Repls) }
+	surface := func(f *cards.Face) int { return len(f.Abilities) + len(f.Statics) }
+	if x, y := events(a), events(c); x != y {
+		return x < y
+	}
+	if x, y := surface(a), surface(c); x != y {
+		return x < y
+	}
+	if x, y := len(a.Keywords), len(c.Keywords); x != y {
+		return x < y
+	}
+	if a.Cmc() != c.Cmc() {
+		return a.Cmc() < c.Cmc()
+	}
+	if a.IsLegendary() != c.IsLegendary() {
+		return !a.IsLegendary()
+	}
+	return a.Name < c.Name
+}
+
+// filterGateCounters is the counters the first alternative of filter that
+// applies to face requires: the Self alternative when self, else a non-Self
+// one that face matches.
+func filterGateCounters(filter string, face *cards.Face, self bool) []StartCounter {
+	for _, a := range parseFilterStatic(filter) {
+		if a.self != self || !a.known || len(a.counters) == 0 {
+			continue
+		}
+		if !self && !a.test(face) {
+			continue
+		}
+		out := make([]StartCounter, 0, len(a.counters))
+		for _, g := range a.counters {
+			out = append(out, StartCounter{Card: face.Name, Kind: g.kind, N: g.n})
+		}
+		return out
+	}
+	return nil
 }
 
 // castCarrier puts a carrier in seat s's hand with exactly the basics its
