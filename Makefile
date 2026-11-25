@@ -413,6 +413,7 @@ help:
 	@echo "  make cards [GORGE_ROOT=../gorge] — link a gorge checkout's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
 	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
+	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
@@ -459,6 +460,12 @@ test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
 	@RUN='$(value RUN)' SKIP='$(value SKIP)' bash scripts/test-targets.sh one
+
+# test-select: BASE=ref [HEAD=ref] — the touched-package gate's package list
+# (scripts/test-select.sh, internal/testselect; the last stdout line is a package).
+.PHONY: test-select
+test-select:
+	@bash scripts/test-select.sh '$(BASE)' '$(HEAD)'
 
 follower-proto-test:
 	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
@@ -528,6 +535,7 @@ smoke:
 	bash ops/scripts/tests/follower_check_smoke.sh
 	bash ops/scripts/tests/follower_sweep_smoke_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
+	bash ops/scripts/tests/test_select_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
 # (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts
