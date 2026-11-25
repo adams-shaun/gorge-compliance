@@ -118,7 +118,12 @@ GO_TEST_FLAGS ?= -p=2
 # before (countered spell last) and passes after, and the driver replay of xs:XP:thought-collapse:cast:s1/s2 now
 # matches gorge and Forge. Fork branch fix/thought-collapse-counter-first (5566c5c1f4 cherry-picked onto
 # 11940683b90, so the Wild Shape fix stays in the pin).
-XMAGE_REF  ?= 5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8
+# bec665044ec = 5cc61aaba0b (above) + Madame Web, Clairvoyant and Lila, Hospitality Hostess use FilterNonlandCard: their
+# "cast ..." filters matched a land on top of the library (noncreature, common), so PlayFromTopOfLibraryEffect offered
+# to play it; lands are played, not cast (CR 305.1, 601.1). MadameWebClairvoyantTest fails before (the Forest on top is
+# playable) and passes after; the driver replay of xs:XP:madame-web-clairvoyant:static0.1:s1 no longer offers
+# p0:Island|play| at step 4. Fork branch fix/madame-web-clairvoyant-nonland, based directly on 5cc61aaba0b.
+XMAGE_REF  ?= bec665044ecd9134639047e1156af2c70c1da7e5
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
