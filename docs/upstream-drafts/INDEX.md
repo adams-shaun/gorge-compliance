@@ -30,6 +30,7 @@ Forge drafts carry no Forge source or script text (GPL boundary): file:line, the
 | Forge | Settle the Wreckage (combat damage step priority) | 1 | already reported: Card-Forge/forge#12590 and PR #12722, both open; still reproduces at `9a91120cac` | none | none |
 | Forge | Homesickness | 1 | fixed upstream at `1c9b258b93` (#12725); already in FORGE_REF `ff076d4432` | none | none |
 | XMage | Chandra, Acolyte of Flame (also Firecat Blitz: same per-token delayed trigger, unfixed) | 0 (fixed on the oracle pin; it explained 4 xproof items) | not yet re-verified against upstream HEAD; fixed on our fork pin | [xmage-chandra-acolyte-one-delayed.md](xmage-chandra-acolyte-one-delayed.md) | `adams-shaun/mage:fix/chandra-acolyte-one-delayed` (fork branch, not an upstream-HEAD mirror) |
+| XMage | Extraordinary Journey (X = 0) | 4 xproof items | not yet re-verified against upstream HEAD; fixed on our fork pin | [xmage-extraordinary-journey-x-zero.md](xmage-extraordinary-journey-x-zero.md) | `adams-shaun/mage:fix/extraordinary-journey-x-zero` (fork branch, not an upstream-HEAD mirror) |
 | Forge | Vivien Reid (also Sigarda, Champion of Light; Sarkhan's Dragonfire); cardc ledger | cardc | still-open | [forge-vivien-reid.md](forge-vivien-reid.md) | `adams-shaun/forge:upstream/dig-rest-random-order` (push pending) |
 
 "Push pending": the Forge mirror branches are committed in `~/projects/forge-oracle` but not on GitHub. Upstream
