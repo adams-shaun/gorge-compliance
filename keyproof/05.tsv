@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05074b68-6b31-4f9f-b3ec-bffe3e7eab47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05074b68-6b31-4f9f-b3ec-bffe3e7eab47	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:akoum-hellhound:f0t0:s1,f:xs:XP:akoum-hellhound:f0t0:s1	-	-	-	6f84be0f34c0	-	0e58e6ef4961	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 05075332-6856-4147-a22d-3a5bd1e96b7b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:phyrexian-warhorse:cast:s1,f:xs:XP:phyrexian-warhorse:cast:s1	-	-	-	d864b561c9cb	-	6d38b620f92f	-	-	2026-11-24	xproof
-05075332-6856-4147-a22d-3a5bd1e96b7b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-warhorse:f0a0:s1,f:xs:XP:phyrexian-warhorse:f0a0:s1	-	-	-	6f84be0f34c0	-	6d38b620f92f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+05075332-6856-4147-a22d-3a5bd1e96b7b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-warhorse:f0a0:s1,f:xs:XP:phyrexian-warhorse:f0a0:s1	-	-	-	054d9f516953	-	6d38b620f92f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 05075332-6856-4147-a22d-3a5bd1e96b7b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-warhorse:f0t0:s1,f:xs:XP:phyrexian-warhorse:f0t0:s1	-	-	-	d864b561c9cb	-	6d38b620f92f	-	-	2026-11-24	xproof
 05079479-86a6-4041-a395-83d325b6ddb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05079cee-b190-42d7-b59f-130cb545cab7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:outbreak:cast:s1	-	-	-	5f2128bf97e4	-	54cc2547276a	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:elspeth-sun-s-champion:f0a2:s1,f:xs:XP:elspeth-sun-s-champion:f0a2:s1	-	-	-	fb9d3088f0bf	-	648a00383a7d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:roost-of-drakes:cast:s1,f:xs:XP:roost-of-drakes:cast:s1	-	-	-	ae86f6029288	-	eec522b70a90	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roost-of-drakes:f0t0:s1,f:xs:XP:roost-of-drakes:f0t0:s1	-	-	-	ae86f6029288	-	eec522b70a90	-	-	2026-11-24	xproof
-05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 05e910aa-cf84-468c-8a48-256588cbbf08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rampaging-war-mammoth:cast:s1,f:xs:XP:rampaging-war-mammoth:cast:s1	-	-	-	8c0bd19283bb	-	aa74909341e6	-	-	2026-11-24	xproof
 05e910aa-cf84-468c-8a48-256588cbbf08	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 05e910aa-cf84-468c-8a48-256588cbbf08	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

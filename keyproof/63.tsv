@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 63018d1c-f7fb-44c8-bcd2-292e74ab5b54	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hexgold-hoverwings:cast:s1,f:xs:XP:hexgold-hoverwings:cast:s1	-	-	-	ae86f6029288	-	9970aba19a34	-	-	2026-11-24	xproof
-63018d1c-f7fb-44c8-bcd2-292e74ab5b54	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:hexgold-hoverwings:f0a0:s1,f:xs:XP:hexgold-hoverwings:f0a0:s1	-	-	-	6f84be0f34c0	-	9970aba19a34	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+63018d1c-f7fb-44c8-bcd2-292e74ab5b54	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:hexgold-hoverwings:f0a0:s1,f:xs:XP:hexgold-hoverwings:f0a0:s1	-	-	-	054d9f516953	-	9970aba19a34	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 63018d1c-f7fb-44c8-bcd2-292e74ab5b54	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	4	0	x:xs:XP:hexgold-hoverwings:cast:s1,f:xs:XP:hexgold-hoverwings:cast:s1	-	-	-	ae86f6029288	-	9970aba19a34	-	-	2026-11-24	xproof
 630b1685-d0c9-4d94-97dc-70058fb52e5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 630b1685-d0c9-4d94-97dc-70058fb52e5d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6385fd0d-256d-4400-9319-afa8170024db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 638ecc20-a275-4810-9669-89a0730c5362	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cyclops-electromancer:cast:s1,f:xs:XP:cyclops-electromancer:cast:s1	-	-	-	d864b561c9cb	-	4d9aed68438f	-	-	2026-11-24	xproof
 638ecc20-a275-4810-9669-89a0730c5362	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cyclops-electromancer:cast:s1,f:xs:XP:cyclops-electromancer:cast:s1	-	-	-	d864b561c9cb	-	4d9aed68438f	-	-	2026-11-24	xproof
-638ff242-63d5-457d-a7a6-40ad51052e2e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Paradox Gardens/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+638ff242-63d5-457d-a7a6-40ad51052e2e	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:paradox-gardens:f0a0:s1,f:xs:XP:paradox-gardens:f0a0:s1	-	-	-	054d9f516953	-	7dc95c60cd32	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 638ff242-63d5-457d-a7a6-40ad51052e2e	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:paradox-gardens:f0a1:s1,f:xs:XP:paradox-gardens:f0a1:s1	-	-	-	23c4009444b0	-	7dc95c60cd32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 638ff242-63d5-457d-a7a6-40ad51052e2e	land	land	agreed	-	FX	start	2	0	x:xs:XP:paradox-gardens:land:s1,f:xs:XP:paradox-gardens:land:s1	-	-	-	23c4009444b0	-	7dc95c60cd32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 63908256-a8a4-494f-b5b1-4b92c064af1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,9 +117,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 639a8804-8513-4ba4-8683-ea1e2e5a9530	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 63a0f0a2-bafc-4cd0-a4ed-42ce58cd3e9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63a0f0a2-bafc-4cd0-a4ed-42ce58cd3e9b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sowing-mycospawn:cast:s1,f:xs:XP:sowing-mycospawn:cast:s1	-	-	-	ae86f6029288	-	650db50d193b	-	-	2026-11-24	xproof
-63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sowing-mycospawn:cast:s1,f:xs:XP:sowing-mycospawn:cast:s1	-	-	-	ae86f6029288	-	650db50d193b	-	-	2026-11-24	xproof
-63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sowing-mycospawn:f0t1:s1	-	-	-	054d9f516953	-	650db50d193b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:sowing-mycospawn:f0t1:s1	-	-	-	054d9f516953	-	650db50d193b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	f0/t1	SpellCast	agreed	-	F	start	2	0	f:xs:XP:sowing-mycospawn:f0t1:s1	-	-	-	054d9f516953	-	650db50d193b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 63a509ea-cedc-40e9-b4e8-0ff4fc356485	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-seven:cast:s1,f:xs:XP:wrenn-and-seven:cast:s1	-	-	-	d864b561c9cb	-	13e245fc3043	-	-	2026-11-24	xproof
 63a509ea-cedc-40e9-b4e8-0ff4fc356485	f0/a0	Dig	agreed	-	FX	start	1	0	x:xs:XP:wrenn-and-seven:cast:s2,f:xs:XP:wrenn-and-seven:cast:s2	-	-	-	d864b561c9cb	-	13e245fc3043	-	-	2026-11-24	xproof
 63a509ea-cedc-40e9-b4e8-0ff4fc356485	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:wrenn-and-seven:cast:s1,f:xs:XP:wrenn-and-seven:cast:s1	-	-	-	d864b561c9cb	-	13e245fc3043	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63e8ac70-0ec3-4bef-832f-e3f4c8a692ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63e8ac70-0ec3-4bef-832f-e3f4c8a692ad	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tuya-bearclaw:f0t0:s1,f:xs:XP:tuya-bearclaw:f0t0:s1	-	-	-	8c0bd19283bb	-	a1df1961f9bf	-	-	2026-11-24	xproof
 63e8d282-d038-4a8c-a0cb-f51ddf87d8ea	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:the-monumental-facade:f0a0:s1,f:xs:XP:the-monumental-facade:f0a0:s1	-	-	-	ae86f6029288	-	78144a38dbb4	-	-	2026-11-24	xproof
-63e8d282-d038-4a8c-a0cb-f51ddf87d8ea	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+63e8d282-d038-4a8c-a0cb-f51ddf87d8ea	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:the-monumental-facade:f0a1:s1,f:xs:XP:the-monumental-facade:f0a1:s1	-	-	-	054d9f516953	-	78144a38dbb4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 63e8d282-d038-4a8c-a0cb-f51ddf87d8ea	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-monumental-facade:land:s1,f:xs:XP:the-monumental-facade:land:s1	-	-	-	ae86f6029288	-	78144a38dbb4	-	-	2026-11-24	xproof
 63ec5617-0da6-4534-b502-34304b1ea02b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63ec5617-0da6-4534-b502-34304b1ea02b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

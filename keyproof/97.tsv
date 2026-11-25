@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97159138-c34b-416e-b079-5c952383a243	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97159138-c34b-416e-b079-5c952383a243	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 971b30a8-4ab4-4e96-9d50-597da4d52994	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-new-benalia-s-light:cast:s1,f:xs:XP:danitha-new-benalia-s-light:cast:s1	-	-	-	ae86f6029288	-	2d9988612680	-	-	2026-11-24	xproof
-971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sage-s-nouliths:static0.0:s1,f:xs:XP:sage-s-nouliths:static0.0:s1	-	-	-	6f84be0f34c0	-	83d7e70d4ba0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97e088a3-65eb-42f5-85b8-6aeb770a3f56	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:relief-captain:f0t0:s1,f:xs:XP:relief-captain:f0t0:s1	-	-	-	d864b561c9cb	-	106489c2f9ea	-	-	2026-11-24	xproof
 97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	cast	cast-resolve	agreed	-	X	scen	1	0	Ennis, Debate Moderator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ennis, Debate Moderator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:ennis-debate-moderator:f0t1:s1,f:xs:XP:ennis-debate-moderator:f0t1:s1	-	-	-	054d9f516953	-	bc77289160cd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97e260c9-3e78-402b-8d97-af4b515b278b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hammers-of-moradin:cast:s1,f:xs:XP:hammers-of-moradin:cast:s1	-	-	-	8c0bd19283bb	-	f8eda5143493	-	-	2026-11-24	xproof
 97e260c9-3e78-402b-8d97-af4b515b278b	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:hammers-of-moradin:f0t0:s1,f:xs:XP:hammers-of-moradin:f0t0:s1	-	-	-	8c0bd19283bb	-	f8eda5143493	-	-	2026-11-24	xproof
 97e260c9-3e78-402b-8d97-af4b515b278b	f0/t1	Attacks/Myriad	agreed	-	FX	start	4	0	x:xs:XP:hammers-of-moradin:f0t0:s1,f:xs:XP:hammers-of-moradin:f0t0:s1	-	-	-	8c0bd19283bb	-	f8eda5143493	-	-	2026-11-24	xproof

@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f166376-2739-411c-8f42-96f2ef28ef86	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:april-o-neil-kunoichi-trainee:combat0.attack:s1,f:xs:XP:april-o-neil-kunoichi-trainee:combat0.attack:s1	-	-	-	23c4009444b0	-	6e578efbab3d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3f166376-2739-411c-8f42-96f2ef28ef86	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	April O'Neil, Kunoichi Trainee/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f166376-2739-411c-8f42-96f2ef28ef86	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f166376-2739-411c-8f42-96f2ef28ef86	static#0.0	static.cant-block-by-blocker-filter	agreed	-	FX	start	2	0	x:xs:XP:april-o-neil-kunoichi-trainee:static0.0:s1,f:xs:XP:april-o-neil-kunoichi-trainee:static0.0:s1	-	-	-	6f84be0f34c0	-	6e578efbab3d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3f166376-2739-411c-8f42-96f2ef28ef86	static#0.0	static.cant-block-by-blocker-filter	agreed	-	FX	start	2	0	x:xs:XP:april-o-neil-kunoichi-trainee:static0.0:s1,f:xs:XP:april-o-neil-kunoichi-trainee:static0.0:s1	-	-	-	054d9f516953	-	6e578efbab3d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3f16dc14-3d3f-4ffa-90bc-9abc67db75cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f17c60e-923a-4392-9da8-87d9ded009b7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:inspiring-vantage:land:s1,f:xs:XP:inspiring-vantage:land:s1	-	-	-	3aa6ded33acb	-	b65f5012ec1f	-	-	2026-11-25	xproof
 3f17c60e-923a-4392-9da8-87d9ded009b7	land	land	agreed	-	FX	start	2	0	x:xs:XP:inspiring-vantage:land:s1,f:xs:XP:inspiring-vantage:land:s1	-	-	-	3aa6ded33acb	-	b65f5012ec1f	-	-	2026-11-25	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f3b2c10-21f8-4e13-be83-4ef3fa36e123	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f404fe4-4335-4dcc-ba90-78246c4b880b	cast	cast-resolve	agreed	-	FX	scen	2	0	Elspeth's Smite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f4521b4-1efd-4592-a50d-5ee9918df177	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f4521b4-1efd-4592-a50d-5ee9918df177	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3f4521b4-1efd-4592-a50d-5ee9918df177	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3f453aca-e14f-4460-9334-f0c3f4256a0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f487c8e-a923-4031-b0a7-04f778544fe0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rescind:cast:s1,f:xs:XP:rescind:cast:s1	-	-	-	5f2128bf97e4	-	bcdb2b644934	-	-	2026-11-24	xproof
 3f487c8e-a923-4031-b0a7-04f778544fe0	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:rescind:cast:s2,f:xs:XP:rescind:cast:s2	-	-	-	5f2128bf97e4	-	bcdb2b644934	-	-	2026-11-24	xproof
@@ -136,10 +136,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	f0/t0	Phase	agreed	-	FX	start	6	0	x:xs:XP:alacrian-armory:cast:s1,f:xs:XP:alacrian-armory:cast:s1	-	-	-	23c4009444b0	-	0b5d6f1bd552	-	-	2026-11-25	xproof
 3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:alacrian-armory:static0.0:s1,f:xs:XP:alacrian-armory:static0.0:s1	-	-	-	23c4009444b0	-	0b5d6f1bd552	-	-	2026-11-25	xproof
 3fa5e109-4a67-4523-8183-90e48a906400	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-3fa5e109-4a67-4523-8183-90e48a906400	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3fa5e109-4a67-4523-8183-90e48a906400	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3fa67c92-6328-4d0a-95e3-656d447ab20e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zealots-en-dal:f0t0:s1,f:xs:XP:zealots-en-dal:f0t0:s1	-	-	-	3aa6ded33acb	-	fd4a014de3fe	-	-	2026-11-25	xproof
 3fa67c92-6328-4d0a-95e3-656d447ab20e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:zealots-en-dal:f0t0:s1,f:xs:XP:zealots-en-dal:f0t0:s1	-	-	-	3aa6ded33acb	-	fd4a014de3fe	-	-	2026-11-25	xproof
-3fa71348-fa4d-4f39-a451-cf1570591991	cast	cast-resolve	agreed	-	X	scen	1	0	Imperious Perfect/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3fa71348-fa4d-4f39-a451-cf1570591991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imperious-perfect:cast:s1,f:xs:XP:imperious-perfect:cast:s1	-	-	-	054d9f516953	-	8b3ec265211c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:imperious-perfect:f0a0:s1,f:xs:XP:imperious-perfect:f0a0:s1	-	-	-	054d9f516953	-	8b3ec265211c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:imperious-perfect:static0.0:s1,f:xs:XP:imperious-perfect:static0.0:s1	-	-	-	3aa6ded33acb	-	8b3ec265211c	-	-	2026-11-25	xproof
 3faab84f-7055-4554-b948-181928d8d4e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kindly-customer:f0t0:s1,f:xs:XP:kindly-customer:f0t0:s1	-	-	-	8c0bd19283bb	-	87834a4d7bda	-	-	2026-11-24	xproof
