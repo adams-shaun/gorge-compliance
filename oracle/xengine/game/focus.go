@@ -147,6 +147,16 @@ func (b focusBot) DecideBoard(ctx context.Context, brd botpolicy.Board, d decisi
 	return b.act(d, in, err)
 }
 
+// answer is in with its choice replaced by picks and every other form of
+// answer dropped: the bot's payment, announce and arrange order belong to the
+// action the bot chose, not the one the focus substitutes, and a leftover one
+// makes the recorded priority a second pick (the bot's cast on top of the
+// focus's pass).
+func answer(in decision.Intent, picks ...int) decision.Intent {
+	in.Choices, in.Rest, in.Payment, in.Announce = picks, nil, nil, nil
+	return in
+}
+
 // holdPass is the focus seat's answer to a priority decision before the focus
 // opens: pass, whatever the bot chose. Any other seat or decision keeps the
 // bot's answer.
@@ -156,8 +166,7 @@ func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.
 	}
 	for i, o := range d.Options {
 		if o.Kind == "pass" {
-			in.Choices = []int{i}
-			return in
+			return answer(in, i)
 		}
 	}
 	return in
@@ -268,14 +277,14 @@ func (s *focusState) line(d decision.Decision, in decision.Intent) (decision.Int
 		for i, o := range d.Options {
 			if s.attackObjs[o.Obj] {
 				s.attacked = true
-				in.Choices, in.Payment = []int{i}, nil
+				in = answer(in, i)
 				return in, true
 			}
 		}
 	case d.Kind == decision.KBlockers && s.attacked && !s.blocked:
 		if s.f.Block == "" {
 			s.blocked = true
-			in.Choices, in.Payment = nil, nil
+			in = answer(in)
 			return in, true
 		}
 		pick := -1 // the first option blocking an Attack object, else the first of a Block object
@@ -293,7 +302,7 @@ func (s *focusState) line(d decision.Decision, in decision.Intent) (decision.Int
 		}
 		if pick >= 0 {
 			s.blocked = true
-			in.Choices, in.Payment = []int{pick}, nil
+			in = answer(in, pick)
 			return in, true
 		}
 	}
@@ -312,7 +321,7 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 	if ma := st.manaPick; ma != nil {
 		st.manaPick = nil
 		if i := st.manaChoice(d, ma); i >= 0 {
-			in.Choices, in.Payment = []int{i}, nil
+			in = answer(in, i)
 			return in, nil
 		}
 	}
@@ -354,13 +363,11 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 			}
 			if ok {
 				st.took()
-				in.Choices = []int{i}
-				in.Payment = nil
-				return in, nil
+				return answer(in, i), nil
 			}
 		}
 		if i := st.manaFor(d); i >= 0 {
-			in.Choices, in.Payment = []int{i}, nil
+			in = answer(in, i)
 			return in, nil
 		}
 	case decision.KAttackers:
