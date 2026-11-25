@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6208534d-e7c7-43ef-b8b2-fea1d82459e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6208534d-e7c7-43ef-b8b2-fea1d82459e8	f0/t0	DamageDealtOnce	agreed	-	FX	start	2	0	x:xs:XP:drinker-of-sorrow:f0t0:s1,f:xs:XP:drinker-of-sorrow:f0t0:s1	-	-	-	5b42d43d5d80	-	a44614922376	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 620a2037-8bf5-48e0-af94-f4f7d3650c60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-620a2037-8bf5-48e0-af94-f4f7d3650c60	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+620a2037-8bf5-48e0-af94-f4f7d3650c60	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 620b13cf-b8ea-48b7-8300-3c48390e32e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:last-caress:cast:s1,f:xs:XP:last-caress:cast:s1	-	-	-	fc71ca68c5ac	-	93fde7a5c483	-	-	2026-11-24	xproof
 620d7146-b5b3-487c-a24b-f36b10f48df4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angler-drake:f0t0:s1,f:xs:XP:angler-drake:f0t0:s1	-	-	-	d864b561c9cb	-	2fef8dae01d0	-	-	2026-11-24	xproof
 620d7146-b5b3-487c-a24b-f36b10f48df4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:angler-drake:f0t0:s1,f:xs:XP:angler-drake:f0t0:s1	-	-	-	d864b561c9cb	-	2fef8dae01d0	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6284ef01-d17d-4584-aecb-1b841ae638e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Deafening Silence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 62855d00-4a6b-45a5-a1c0-2e7699e821cb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:herald-of-the-forgotten:cast:s1,f:xs:XP:herald-of-the-forgotten:cast:s1	-	-	-	8c0bd19283bb	-	162d48f6ee7a	-	-	2026-11-24	xproof
 62855d00-4a6b-45a5-a1c0-2e7699e821cb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:herald-of-the-forgotten:cast:s1,f:xs:XP:herald-of-the-forgotten:cast:s1	-	-	-	8c0bd19283bb	-	162d48f6ee7a	-	-	2026-11-24	xproof
-62879f3d-ed6d-4004-8196-f3fd7f614695	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+62879f3d-ed6d-4004-8196-f3fd7f614695	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 6288865d-7f64-411f-a044-ca350cf6fb8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragon-tyrant:f0t0:s1,f:xs:XP:dragon-tyrant:f0t0:s1	-	-	-	3aa6ded33acb	-	cd51bc38f562	-	-	2026-11-25	xproof
 6288865d-7f64-411f-a044-ca350cf6fb8d	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:dragon-tyrant:f0t0:s2,f:xs:XP:dragon-tyrant:f0t0:s2	-	-	-	3aa6ded33acb	-	cd51bc38f562	-	-	2026-11-25	xproof
 6288865d-7f64-411f-a044-ca350cf6fb8d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dragon-tyrant:f0t0:s1,f:xs:XP:dragon-tyrant:f0t0:s1	-	-	-	3aa6ded33acb	-	cd51bc38f562	-	-	2026-11-25	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 62f09a5b-d7fb-44f4-9fab-719185b735ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:reputable-merchant:cast:s1,f:xs:XP:reputable-merchant:cast:s1	-	-	-	cfde1dc26c40	-	0e6baec3d867	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 62f09a5b-d7fb-44f4-9fab-719185b735ab	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:reputable-merchant:f0t1:s1,f:xs:XP:reputable-merchant:f0t1:s1	-	-	-	23c4009444b0	-	0e6baec3d867	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 62f6baba-da3b-45b8-a3c1-efb75763cca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-62f6baba-da3b-45b8-a3c1-efb75763cca8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+62f6baba-da3b-45b8-a3c1-efb75763cca8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 62f834c7-4765-4b6f-812c-7ce14e13ea0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62f834c7-4765-4b6f-812c-7ce14e13ea0d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dimir-cluestone:f0a0:s1,f:xs:XP:dimir-cluestone:f0a0:s1	-	-	-	d864b561c9cb	-	4bde9806ece2	-	-	2026-11-24	xproof
 62f834c7-4765-4b6f-812c-7ce14e13ea0d	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:dimir-cluestone:f0a1:s1,f:xs:XP:dimir-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	4bde9806ece2	-	-	2026-11-24	xproof

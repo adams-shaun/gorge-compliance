@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 250f8642-9754-48fd-8f09-70ed13d7a42c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:preemptive-strike:cast:s1,f:xs:XP:preemptive-strike:cast:s1	-	-	-	21b2cceac526	-	03a4a9955ea2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:cast:s1,f:xs:XP:eardrum-rattler:cast:s1	-	-	-	fb9d3088f0bf	-	bf3b5139ebd8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:f0a0:s1,f:xs:XP:eardrum-rattler:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2516949d-75bb-4aea-a41d-0298bb129471	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slip-through-space:cast:s1,f:xs:XP:slip-through-space:cast:s1	-	-	-	d864b561c9cb	-	44a5c0e15e85	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25794033-bd17-4056-b116-68d3acf52569	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25794033-bd17-4056-b116-68d3acf52569	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:myr-sire:f0t0:s1,f:xs:XP:myr-sire:f0t0:s1	-	-	-	d864b561c9cb	-	7d856d29eeca	-	-	2026-11-24	xproof
 2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a0:s1,f:xs:XP:house-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a1:s1,f:xs:XP:house-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
