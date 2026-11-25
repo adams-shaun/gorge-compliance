@@ -1685,3 +1685,29 @@ func TestPrepareModalTriggerChooseTwo(t *testing.T) {
 	}
 	t.Logf("last step answers: %+v", as)
 }
+
+// TestKeepTargetSkipsFollowsRetarget: the lowering's skip plan names positions
+// in a step's flat target list, so Prepare keeps a step's plan only while the
+// retarget leaves that step's targets as they were.
+func TestKeepTargetSkipsFollowsRetarget(t *testing.T) {
+	plan := [][]oraclegen.XTargetSkip{nil, {{At: 0, Slot: 0}, {At: 1, Slot: 2}}, {{At: 1, Slot: 1}}}
+	before := []oraclegen.Step{{Op: "pass"}, {Op: "cast", Targets: []string{"p0:Forest#7"}}, {Op: "cast", Targets: []string{"p1:A"}}}
+	same := slices.Clone(before)
+	got := keepTargetSkips(plan, before, same)
+	if len(got) != 3 || len(got[1]) != 2 || len(got[2]) != 1 {
+		t.Fatalf("unchanged targets lost the plan: %v", got)
+	}
+	moved := slices.Clone(before)
+	moved[2] = oraclegen.Step{Op: "cast", Targets: []string{"p1:B"}}
+	got = keepTargetSkips(plan, before, moved)
+	if len(got) != 3 || len(got[1]) != 2 || got[2] != nil {
+		t.Fatalf("a retargeted step kept its plan (or an untouched one lost it): %v", got)
+	}
+	moved[1] = oraclegen.Step{Op: "cast", Targets: []string{"p0:Forest#8"}}
+	if got := keepTargetSkips(plan, before, moved); got != nil {
+		t.Fatalf("every plan invalidated, still got %v", got)
+	}
+	if got := keepTargetSkips(nil, before, same); got != nil {
+		t.Fatalf("no plan produced %v", got)
+	}
+}

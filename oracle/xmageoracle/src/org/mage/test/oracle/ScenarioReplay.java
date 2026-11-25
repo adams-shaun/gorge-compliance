@@ -4944,6 +4944,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return false;
     }
 
+    /** Whether a lone cast target cannot take the inline "$target=" form: the
+     * spell has two or more independent target objects and every one is an
+     * "up to" object (minimum 0), so the one target may belong to any of them
+     * and the string form (which sets it on the first object) would reject a
+     * ref only a later object accepts. A spell with a required object, a
+     * divided object or a target adjuster keeps its own routes. */
+    static boolean loneTargetNeedsQueue(Ability ability) {
+        if (ability == null || hasTargetAdjuster(ability) || targetsDivided(ability)) {
+            return false;
+        }
+        List<mage.target.Target> objects = ability.getAllSelectedTargets();
+        if (objects.size() < 2) {
+            return false;
+        }
+        for (mage.target.Target t : objects) {
+            if (t.getMinNumberOfTargets() != 0 || t.getMaxNumberOfTargets() < 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /** Whether an ability has a divided-amount target (TargetAmount). */
     static boolean targetsDivided(Ability ability) {
         if (ability == null) {
@@ -7683,6 +7705,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // card in hand, not the spell, so target by name.
                     String spell = castSpelling(refName(tg.get(0)));
                     castSpell(turn, phase, p, castObject, spell, spell);
+                } else if (tg.size() == 1 && loneTargetNeedsQueue(castAbility)) {
+                    // One target for a spell with several independent "up to"
+                    // objects (Relive the Past's artifact, land and non-Aura
+                    // enchantment): the inline string form sets the ref on the
+                    // FIRST object, which rejects a ref only a later object
+                    // accepts ("Can't find ability to activate command").
+                    // Queue it instead; an object with no candidate is
+                    // declined at ask time (unscriptableEmptyAsk) and one that
+                    // is posed again is closed by closeCastAskedAgain.
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 } else if (tg.size() == 1) {
                     // A single target goes through XMage's own string form. A
                     // divided target whose inline form XMage cannot read
