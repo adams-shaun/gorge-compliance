@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a21ea22-3cd7-4c11-8895-5943c0d93a0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:verdant-force:f0t0:s1,f:xs:XP:verdant-force:f0t0:s1	-	-	-	23c4009444b0	-	d8aca2ce72b7	-	-	2026-11-25	xproof
 7a21ea22-3cd7-4c11-8895-5943c0d93a0d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:verdant-force:f0t0:s1,f:xs:XP:verdant-force:f0t0:s1	-	-	-	23c4009444b0	-	d8aca2ce72b7	-	-	2026-11-25	xproof
 7a22389a-34e7-4726-a551-f6fbc225cefe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:illuminated-wings:cast:s1,f:xs:XP:illuminated-wings:cast:s1	-	-	-	5f2128bf97e4	-	36c04b83dca2	-	-	2026-11-24	xproof
-7a22389a-34e7-4726-a551-f6fbc225cefe	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+7a22389a-34e7-4726-a551-f6fbc225cefe	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 7a22d694-29d1-4e7b-8fca-d7008aede489	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a22d694-29d1-4e7b-8fca-d7008aede489	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brood-of-cockroaches:f0t0:s1,f:xs:XP:brood-of-cockroaches:f0t0:s1	-	-	-	8c0bd19283bb	-	97c2fc43587b	-	-	2026-11-24	xproof
 7a2336ff-c8ed-4daa-b182-403c21bc8133	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a5a8414-4da4-4dd0-93ae-210d50f4d6f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circle-of-protection-black:cast:s1,f:xs:XP:circle-of-protection-black:cast:s1	-	-	-	ae86f6029288	-	0e47eebda5a2	-	-	2026-11-24	xproof
 7a5a8414-4da4-4dd0-93ae-210d50f4d6f6	f0/a0	ChooseSource	agreed	-	FX	start	2	0	x:xs:XP:circle-of-protection-black:f0a0:s1,f:xs:XP:circle-of-protection-black:f0a0:s1	-	-	-	ae86f6029288	-	0e47eebda5a2	-	-	2026-11-24	xproof
 7a5dae5f-29ab-4996-b236-c754de8769bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a5dae5f-29ab-4996-b236-c754de8769bc	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+7a5dae5f-29ab-4996-b236-c754de8769bc	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 7a5ff4d4-27b7-47d4-ba88-970c63c4e3fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a67cb39-6b53-4f2b-a52c-3861119eba12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a67cb39-6b53-4f2b-a52c-3861119eba12	f0/t0	Attacks/Dethrone	agreed	-	FX	start	2	0	x:xs:XP:marchesa-s-emissary:f0t0:s1,f:xs:XP:marchesa-s-emissary:f0t0:s1	-	-	-	8c0bd19283bb	-	ef8f7fcf09f4	-	-	2026-11-24	xproof
@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a7789e5-f2ac-49b2-943e-7d49e4727fb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:gift-of-strands:cast:s1,f:xs:XP:gift-of-strands:cast:s1	-	-	-	ae86f6029288	-	65881b9a8718	-	-	2026-11-24	xproof
 7a7d9887-3cc4-4fb9-9109-1315903ace45	cast	cast-resolve	agreed	-	FX	scen	2	0	Confusticate and Bebother/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7a7f37a3-9e99-4d3d-b705-b074fb3e9b3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a82c183-1561-4276-9a75-6bbb9c2bee2e	f0/a0	Mana	owed	harness	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	0561abe9b733	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
-7a82c183-1561-4276-9a75-6bbb9c2bee2e	land	land	owed	harness	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	0561abe9b733	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+7a82c183-1561-4276-9a75-6bbb9c2bee2e	f0/a0	Mana	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	0561abe9b733	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+7a82c183-1561-4276-9a75-6bbb9c2bee2e	land	land	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	0561abe9b733	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 7a838374-fc40-4fb6-9d38-a96f01e7038a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a838374-fc40-4fb6-9d38-a96f01e7038a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wirewood-herald:f0t0:s1,f:xs:XP:wirewood-herald:f0t0:s1	-	-	-	fc71ca68c5ac	-	8efab85fa5b0	-	-	2026-11-24	xproof
 7a8405f5-ef37-460e-8e0b-55378f3b407b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ac09735-f05c-4e28-83d6-262cddc9eeb3	f0/t2	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:firemaw-kavu:f0t2:s1,f:xs:XP:firemaw-kavu:f0t2:s1	-	-	-	23c4009444b0	-	2b7011591a98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 7ac433a7-c107-46de-b36b-d7419c9ec565	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ac433a7-c107-46de-b36b-d7419c9ec565	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:hana-kami:f0a0:s1,f:xs:XP:hana-kami:f0a0:s1	-	-	-	336eab778104	-	f25ab7475f8f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 7ac49129-7da2-4729-b48c-b6da279c212e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chilling-trap:cast:s1,f:xs:XP:chilling-trap:cast:s1	-	-	-	ae86f6029288	-	d42dc82a1e75	-	-	2026-11-24	xproof
