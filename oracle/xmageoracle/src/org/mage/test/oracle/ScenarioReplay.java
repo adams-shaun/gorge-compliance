@@ -9145,7 +9145,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         s.add("players", players);
         JsonArray perms = new JsonArray();
-        for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+        // CR 702.26b: a phased-out permanent is treated as though it does not
+        // exist. XMage keeps it on the battlefield so phasing can return it,
+        // and getAllPermanents() lists it; the snapshot must walk the active
+        // list, as gorge's oracle snapshot and Forge's battlefield do. Every
+        // perms field -- counters, attached_to and the rest -- is written from
+        // this one loop, so none of a phased-out permanent reaches the
+        // snapshot.
+        for (Permanent perm : g.getBattlefield().getAllActivePermanents()) {
             JsonObject o = new JsonObject();
             o.addProperty("name", perm.getName());
             o.addProperty("controller", seatIndex(g, perm.getControllerId()));
