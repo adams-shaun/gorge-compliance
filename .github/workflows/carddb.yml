@@ -229,6 +229,7 @@ jobs:
         run: |
           set -euo pipefail
           for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
+                   cmd/carddb/py/carddb/dirac.py oracle/compliance/dirac-gaps.tsv GORGE_PIN go.mod \
                    cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
                    carddb/schema/v1/_meta/size.tsv \
                    oracle/compliance/manifests Makefile; do
@@ -307,6 +308,19 @@ jobs:
           set -euo pipefail
           python3 -I cmd/carddb/main.py compliance --repo "$GITHUB_WORKSPACE/tool" \
             --source ci --measured "$MEASURED" --version "$TOOL_REV"
+      # dirac's per-card support from the pinned gorge module's dirac/support lists
+      # and the committed lowering snapshot (go run ./cmd/diracsupport); runs after compliance.
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: tool/go.mod
+          cache: false
+      - name: Dirac support and evidence writer
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          CARDDB_GORGE_DIR=$(go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge) \
+            python3 -I cmd/carddb/main.py dirac --repo "$GITHUB_WORKSPACE/tool" \
+            --source dirac --measured "$MEASURED" --version "$TOOL_REV"
       - name: Report the packed size into _meta/size
         working-directory: tool
         run: |
