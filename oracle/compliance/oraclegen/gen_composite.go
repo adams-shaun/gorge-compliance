@@ -206,6 +206,12 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			crafts[i] = true
 		}
 	}
+	optionalTriggerSearch := map[int]bool{}
+	for i, d := range ds {
+		if optionalTriggerSearchDecline(reg, sc, res, d) {
+			optionalTriggerSearch[i] = true
+		}
+	}
 	sources := map[int][]string{}
 	for _, d := range ds {
 		if _, done := sources[d.Step]; !done {
@@ -224,7 +230,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	// bottom asks a follow-up card order XMage poses and gorge does not
 	// (choose_dialog_order.go, Petals of Insight).
 	chooseUseOrders := chooseUseBottomOrders(reg, sc, res.Snapshots, ds)
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, allPlayerUnless: allPlayerUnless, seats: seats, chooseUseOrders: chooseUseOrders, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), removeCounterCosts: removeCounterCostAsks(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, ownGraveyardExile: ownGraveyardExile, tapThenUntap: tapFirst, bolster: bolsters, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, allPlayerUnless: allPlayerUnless, seats: seats, chooseUseOrders: chooseUseOrders, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), removeCounterCosts: removeCounterCostAsks(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, ownGraveyardExile: ownGraveyardExile, tapThenUntap: tapFirst, bolster: bolsters, optionalTriggerSearch: optionalTriggerSearch, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
