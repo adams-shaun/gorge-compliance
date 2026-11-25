@@ -173,6 +173,18 @@ type forgeRequest struct {
 	// GorgeDecisions is the answer source: what gorge's deterministic
 	// runner answered, so both engines answer alike.
 	GorgeDecisions []rules.OracleDecision `json:"gorge_decisions"`
+	// GraveyardEnds is keyed "<step>:<seat>", one key per graveyard_order
+	// pin's step and seat, and names every card in that seat's graveyard at
+	// the END of the step. A pinned ask can offer a card the pin does not
+	// name (Seed of Hope mills two cards, one returns to the hand within the
+	// step): the driver orders the named cards by the pin and keeps Forge's
+	// offered order after them for an unnamed card whose name is absent from
+	// the end graveyard, because its position is not observable at the next
+	// checkpoint (forge_order.go). A name the end graveyard does contain is
+	// an arrival the checkpoints see, so an unnamed one is still a strict
+	// miss. Only forge-export writes it; a follower request carries no pin
+	// and no ends.
+	GraveyardEnds map[string][]string `json:"graveyard_ends,omitempty"`
 	// Abilities maps a step index to the raw script line of the ability
 	// that step's ability_index names, the key the driver matches on.
 	Abilities map[string]string `json:"abilities"`
@@ -313,11 +325,12 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	decisions = forgeExploreAsYesNo(decisions)
 	decisions = forgeUntapNoOps(g, decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
+	var graveyardEnds map[string][]string
 	if forgeDriver {
 		decisions = forgeLibraryTopOrder(decisions, g.Snapshots)
 		decisions = forgeTokenLooks(g, decisions)
 		decisions = forgeSoulbondPairSource(reg, g, decisions)
-		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
+		decisions, graveyardEnds = forgeGraveyardOrderDecisions(it, g, decisions)
 	} else {
 		decisions = forgeDropGraveyardOrderDecisions(decisions)
 	}
@@ -325,7 +338,8 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	sha := gate.ItemSHA(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,
-		GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it, g),
+		GorgeDecisions: decisions, GraveyardEnds: graveyardEnds,
+		Abilities: forgeAbilityLines(reg, it, g),
 	}
 }
 
