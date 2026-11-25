@@ -56,6 +56,7 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.turn.Step;
 import mage.game.PutToBattlefieldInfo;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -4014,12 +4015,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
                 // The pass into a declaration step is a non-priority pending
-                // decision (CR 508.1, 509.1, 117.3a): nobody may act, so
-                // offered is empty. Covers both the checkpoint moved before
-                // the declaration (reportAs) and one taken in the step when
-                // the scenario never declares (the mm-menon/icetill shape).
-                final boolean declarationPending = reportAs != null
-                        || declarationCheckpoint(steps, i, seats) != null;
+                // decision (CR 508.1, 509.1, 117.3a) only when the declaration
+                // has a legal option. With none, gorge records the forced empty
+                // declaration inside the step transition and its checkpoint is
+                // the live priority that follows, which does offer the holder's
+                // options. Covers both the checkpoint moved before the
+                // declaration (reportAs: a recorded declaration proves at least
+                // one option) and one taken in the step when the scenario never
+                // declares (the mm-menon/icetill shape, decided from the game
+                // state at that checkpoint).
+                final PhaseStep declaration = reportAs != null
+                        ? reportAs : declarationCheckpoint(steps, i, seats);
                 // A forced resolution queued during this step (waitStackResolved
                 // override) must settle before the snapshot. Capture the flag
                 // now: the whole action queue is built before execute(), so the
@@ -4038,6 +4044,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         g.checkStateAndTriggered();
                     }
                     applyDeclarationStepEnd(reportAs, g);
+                    final boolean declarationPending = declaration != null
+                            && (reportAs != null || declarationHadOptions(declaration, g));
                     JsonObject snap = snapshot(info, g,
                             handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null, declarationPending);
                     if (reportAs != null) {
@@ -7375,6 +7383,48 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return null;
         }
         return declarationStep(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"));
+    }
+
+    /** Whether the declaration phase a pass checkpoint stands at had at least
+     * one legal option, so gorge stopped there with a pending non-priority
+     * declaration (CR 508.1, 509.1, 117.3a). The checkpoint is taken at the
+     * step's first priority, after XMage has already declared or skipped: an
+     * attacker or blocker in combat is evidence of a legal option, as is one
+     * still available. No option means gorge recorded the forced empty
+     * declaration inside the step transition and the checkpoint is the live
+     * priority that follows, whose offered set is not empty by rule. */
+    static boolean declarationHadOptions(PhaseStep declaration, Game g) {
+        switch (declaration) {
+            case DECLARE_ATTACKERS: {
+                if (!g.getCombat().getAttackers().isEmpty()) {
+                    return true;
+                }
+                Player active = g.getPlayer(g.getActivePlayerId());
+                return active != null && !active.getAvailableAttackers(g).isEmpty();
+            }
+            case DECLARE_BLOCKERS: {
+                if (!g.getCombat().getBlockers().isEmpty()) {
+                    return true;
+                }
+                if (g.getCombat().getAttackers().isEmpty()) {
+                    return false;
+                }
+                for (CombatGroup group : g.getCombat().getGroups()) {
+                    Player defender = g.getPlayer(group.getDefendingPlayerId());
+                    if (defender == null) {
+                        continue;
+                    }
+                    for (Permanent blocker : defender.getAvailableBlockers(g)) {
+                        if (group.canBlock(blocker, g)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            default:
+                return false;
+        }
     }
 
     /** The declaration step a pass position names, or null for another step. */
