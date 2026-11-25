@@ -105,9 +105,9 @@ func TestForgeRolledDie(t *testing.T) {
 // a3c422f79a6 = the clean merge of 9d7baedf34 and 70b77c0ff08 (echo/cumulative upkeep, coin force and fateseal Dig order;
 // disjoint driver files), die-roll code unchanged, the full driver suite (192 tests, including ForcedDieRollTest,
 // EchoCumulativeUpkeepTest, ForcedCoinFlipTest and FatesealDigOrderTest) re-run green on it.
-// 304ae5ffe0e = a3c422f79a6 plus the whole-cost card pick of an elected unless payment (ScriptedController.chooseCardsForCost only),
-// die-roll code unchanged, the full driver suite (195 tests, including ForcedDieRollTest and UnlessCostForcedPickTest) re-run green on it.
-const forgeOracleDieRollRef = "304ae5ffe0e0d1a12c76ef25ea80e3e892432bbc"
+// 528c55d25b4 = the clean merge of 8f537eddcbb (cast_mode "alternative", StepMachine.spellForMode only) and 304ae5ffe0e
+// (the elected unless payment's whole-cost card pick, ScriptedController.chooseCardsForCost only); die-roll code unchanged.
+const forgeOracleDieRollRef = "528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

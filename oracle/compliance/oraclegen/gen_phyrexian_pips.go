@@ -55,6 +55,9 @@ type xanswersExtra struct {
 	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// ownGraveyardExile marks the steps that pose a proven own-graveyard
+	// exile's mandatory hidden pick (own_graveyard_exile_source.go).
+	ownGraveyardExile map[int]bool
 	// tapThenUntap marks the steps whose TapOrUntap election is a
 	// tap-then-untap face's (tapThenUntapStep).
 	tapThenUntap map[int]bool

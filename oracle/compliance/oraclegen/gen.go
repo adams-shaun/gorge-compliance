@@ -1334,6 +1334,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var ownGraveyardExile map[int]bool
 	var tapThenUntap map[int]bool
 	var bolster map[int]bool
 	var craft map[int]bool
@@ -1360,6 +1361,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if ownGraveyardExile == nil {
+			ownGraveyardExile = ex.ownGraveyardExile
 		}
 		if tapThenUntap == nil {
 			tapThenUntap = ex.tapThenUntap
@@ -1442,6 +1446,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	routing := newAnswerRouting(ds, digSources)
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
+	}
+	if ownGraveyardExile != nil {
+		routing.ownGraveyardExile = ownGraveyardExile
 	}
 	routing.tapThenUntap = tapThenUntap
 	if searchZones != nil {
