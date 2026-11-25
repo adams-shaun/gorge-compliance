@@ -19,6 +19,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -36,6 +37,16 @@ const reasonStartNotExercised = "start-not-exercised"
 // the recorded span (an upkeep "transform this"), so the tape plays the front
 // face and must not credit the back-face key.
 const reasonStartFaceLost = "start-face-lost"
+
+// reasonStartPlayerCountersPin is the refusal of a start whose seat holds
+// player counters on a pin whose rules.StartSeat has no PlayerCounters field.
+// The file is refused per id (its other starts in the directory still play);
+// it clears when the gorge pin bump lands.
+const reasonStartPlayerCountersPin = "start-player-counters-pin"
+
+// errPlayerCountersPin marks the start that needs a field the pinned gorge
+// does not have, so playStart can refuse its ids instead of aborting the batch.
+var errPlayerCountersPin = errors.New("player counters need rules.StartSeat.PlayerCounters, which the pinned gorge does not have yet (blocked on the gorge pin bump)")
 
 // reasonStartRoomLocked is the refusal of a start that places a Room on the
 // battlefield and focuses a door's ability: a Room that enters without being
@@ -85,9 +96,15 @@ type startSeat struct {
 	// BackFace names battlefield cards that enter on their back face.
 	BackFace []string       `json:"back_face"`
 	Counters []startCounter `json:"counters"`
-	Attach   []startAttach  `json:"attach"`
-	Tokens   []startToken   `json:"tokens"`
-	Life     *int32         `json:"life"`
+	// PlayerCounters seed counters on the seat itself, not a permanent
+	// (startCounter.Card empty): the energy a PayEnergy<N> cost spends. They
+	// ride rules.StartSeat.PlayerCounters when the pinned gorge has that field;
+	// a pin without it rejects a start that names them (there is no fallback
+	// seed).
+	PlayerCounters []startCounter `json:"player_counters"`
+	Attach         []startAttach  `json:"attach"`
+	Tokens         []startToken   `json:"tokens"`
+	Life           *int32         `json:"life"`
 }
 
 type startAttach struct {
@@ -99,7 +116,9 @@ type startAttach struct {
 }
 
 type startCounter struct {
-	Card string `json:"card"`
+	// Card names the battlefield card. Empty means the seat itself
+	// (PlayerCounters), so that JSON omits the field.
+	Card string `json:"card,omitempty"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
 }
@@ -203,6 +222,19 @@ func readStartFile(path string) (*startFile, error) {
 		return nil, fmt.Errorf("%s: seeds %d, want >= 1", path, f.Seeds)
 	case f.Filler != "basics":
 		return nil, fmt.Errorf("%s: filler %q, want \"basics\"", path, f.Filler)
+	}
+	for _, s := range []startSeat{f.Setup.P0, f.Setup.P1} {
+		for _, c := range s.PlayerCounters {
+			if c.Card != "" {
+				return nil, fmt.Errorf("%s: player counter %q names card %q; a player counter goes on the seat", path, c.Kind, c.Card)
+			}
+			if err := playerCounterKindError(c.Kind); err != nil {
+				return nil, fmt.Errorf("%s: %w", path, err)
+			}
+			if c.N < 1 {
+				return nil, fmt.Errorf("%s: player counter %q n %d, want >= 1", path, c.Kind, c.N)
+			}
+		}
 	}
 	if err := oraclediff.ValidateCompare(f.Compare); err != nil {
 		return nil, fmt.Errorf("%s: compare: %w", path, err)
@@ -435,6 +467,17 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 		ss.Tokens = append(ss.Tokens, rules.StartToken{Script: t.Script, Tapped: t.Tapped})
 	}
 	ss.Life = s.Life
+	// Player counters ride rules.StartSeat.PlayerCounters. A pin without the
+	// field is an explicit error, not a silent drop: the focus ability would
+	// otherwise run unaffordable and be refused as start-not-exercised far from
+	// the cause.
+	cs, err := playerCountersOf(s.PlayerCounters)
+	if err != nil {
+		return d, ss, fmt.Errorf("start %s: %w", name, err)
+	}
+	if err := applyStartPlayerCounters(&ss, cs); err != nil {
+		return d, ss, fmt.Errorf("start %s: %w", name, err)
+	}
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
 	// one basic each round robin; Plains when there is no coloured symbol.
 	var colours string
@@ -465,6 +508,68 @@ func startCounterKindError(kind string) error {
 	switch strings.ToLower(strings.TrimSpace(kind)) {
 	case "", "all", "any", "eachfromsource", "existingcounter":
 		return fmt.Errorf("counter kind %q is not a counter kind", kind)
+	}
+	return nil
+}
+
+// playerCounterKindError is why kind is not a player counter this repo seeds,
+// or nil. Only the kinds the engines track ride the field: ENERGY (CR 107.14),
+// POISON and EXPERIENCE. A cost can only spend the first today, but a start
+// that needs the other two is still expressible instead of silently dropped.
+func playerCounterKindError(kind string) error {
+	switch strings.ToUpper(strings.TrimSpace(kind)) {
+	case "ENERGY", "POISON", "EXPERIENCE":
+		return nil
+	}
+	return fmt.Errorf("player counter kind %q is not ENERGY, POISON or EXPERIENCE", kind)
+}
+
+// playerCountersOf validates a seat's player counters and folds them into the
+// shared, sorted pincap form. A player counter names no card: an entry with a
+// card would place the counters on a permanent that a PayEnergy cost never
+// reads.
+func playerCountersOf(cs []startCounter) ([]pincap.Counter, error) {
+	out := make([]pincap.Counter, 0, len(cs))
+	for _, c := range cs {
+		if c.Card != "" {
+			return nil, fmt.Errorf("player counter %q names card %q; a player counter goes on the seat", c.Kind, c.Card)
+		}
+		if err := playerCounterKindError(c.Kind); err != nil {
+			return nil, err
+		}
+		if c.N < 1 {
+			return nil, fmt.Errorf("player counter %q n %d, want >= 1", c.Kind, c.N)
+		}
+		out = append(out, pincap.Counter{Kind: strings.ToUpper(strings.TrimSpace(c.Kind)), N: c.N})
+	}
+	sort.SliceStable(out, func(i, j int) bool { return out[i].Kind < out[j].Kind })
+	// Fold a repeat of one kind, so the cost's total is one entry and every
+	// follower applies it once.
+	folded := out[:0]
+	for _, c := range out {
+		if n := len(folded); n > 0 && folded[n-1].Kind == c.Kind {
+			folded[n-1].N += c.N
+			continue
+		}
+		folded = append(folded, c)
+	}
+	return folded, nil
+}
+
+// setStartPlayerCounters is pincap.SetStartPlayerCounters, a var so a test can
+// prove a start's counters reach the pinned field even while the pin has none.
+var setStartPlayerCounters = pincap.SetStartPlayerCounters
+
+// applyStartPlayerCounters writes cs into ss.PlayerCounters through the pin
+// capability. A start that names counters on a pin without the field is an
+// explicit error: the alternative is a game with no energy, refused much later
+// as start-not-exercised, which hides the missing gorge feature.
+func applyStartPlayerCounters(ss *rules.StartSeat, cs []pincap.Counter) error {
+	if len(cs) == 0 {
+		return nil
+	}
+	if !setStartPlayerCounters(ss, cs) {
+		return errPlayerCountersPin
 	}
 	return nil
 }
@@ -564,10 +669,25 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			return fmt.Errorf("%s: %w", path, err)
 		}
 		d0, s0, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1)
-		if err != nil {
-			return fmt.Errorf("%s: %w", path, err)
+		var d1 decks.Deck
+		var s1 rules.StartSeat
+		if err == nil {
+			d1, s1, err = startDeckAt(reg, "start-p1", 1, f.Setup.P1, f.Setup.P0)
 		}
-		d1, s1, err := startDeckAt(reg, "start-p1", 1, f.Setup.P1, f.Setup.P0)
+		if errors.Is(err, errPlayerCountersPin) {
+			// One start the pin cannot hold must not lose the rest of the
+			// directory: refuse each of its ids and play on.
+			for s := 1; s <= f.Seeds; s++ {
+				games++
+				b, jerr := jsonl(lowerRow{ID: scen.StartID(set, f.Card, f.Key, s), Status: statusRefused, Step: -1, Reasons: []string{reasonStartPlayerCountersPin}})
+				if jerr != nil {
+					return jerr
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+			}
+			continue
+		}
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
