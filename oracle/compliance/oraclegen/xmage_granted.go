@@ -53,7 +53,7 @@ func XMageGrantedAbilityPrefix(sa *cards.SA, sourceName string, recipient *cards
 		return p, true
 	}
 	desc := strings.TrimSpace(sa.ParamStr(cards.PKSpellDescription))
-	if desc == "" || strings.Contains(desc, "CARDNAME") || namesShortName(desc, sourceName) ||
+	if desc == "" || strings.Contains(desc, "CARDNAME") || namesShortName(desc, titleShortName(sourceName)) ||
 		(sourceName != "" && strings.Contains(strings.ToLower(desc), strings.ToLower(sourceName))) {
 		return "", false
 	}
@@ -81,8 +81,9 @@ func prefixCollides(prefix string, others []string) bool {
 // injected basic-land mana abilities (CR 305.6) and its keyword abilities.
 func xmageRecipientTexts(f *cards.Face) []string {
 	var out []string
+	short, _ := faceShortName(f)
 	for _, line := range removeKeywordAbilityLines(f, abilityLines(f.Oracle)) {
-		out = append(out, xmageRuleLine(line, f.Name))
+		out = append(out, xmageRuleLine(line, f.Name, short))
 	}
 	for _, sa := range f.Abilities {
 		if !sa.IsActivated() {

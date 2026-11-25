@@ -53,6 +53,14 @@ type StartSeat struct {
 	// double-faced card's transformed side), as rules.StartSeat.BackFace.
 	BackFace []string       `json:"back_face,omitempty"`
 	Counters []StartCounter `json:"counters,omitempty"`
+	// PlayerCounters seeds counters on the seat itself, not on a permanent: a
+	// StartCounter with an empty Card. It is the non-mana cost a start spends
+	// before the focus play (PayEnergy<N> and the energy the start holds), in
+	// a sorted slice so the output never depends on a map walk. The pinned
+	// gorge rules.StartSeat gains the same field in the commit xproof's
+	// PayEnergy starts need; cmd/xengine maps it through pincap and refuses the
+	// start until that pin carries the field.
+	PlayerCounters []StartCounter `json:"player_counters,omitempty"`
 	// Attach binds a battlefield Aura of this seat to a bearer of the same
 	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;
 	// placeAttach makes it enter attached, which a start placing a bare Aura
@@ -81,10 +89,30 @@ func (s *StartSeat) Attached(name string) bool {
 	return false
 }
 
+// TappedCopies reports, for each Battlefield entry in order, whether that copy
+// is tapped. Tapped names bind to the first copy of the name not bound yet, as
+// the start file's lowering does (cmd/xengine's startDeck): a repeated name
+// (four Mountains, one tapped to sacrifice) marks one copy, not all of them.
+// A name with no battlefield copy is ignored here; the lowering refuses it.
+func (s *StartSeat) TappedCopies() []bool {
+	flags := make([]bool, len(s.Battlefield))
+	used := make([]bool, len(s.Battlefield))
+	for _, name := range s.Tapped {
+		for i, card := range s.Battlefield {
+			if !used[i] && card == name {
+				used[i], flags[i] = true, true
+				break
+			}
+		}
+	}
+	return flags
+}
+
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
-// not yet bound.
+// not yet bound. Card is empty for PlayerCounters, which puts them on the
+// seat itself, so the field is omitted from that JSON.
 type StartCounter struct {
-	Card string `json:"card"`
+	Card string `json:"card,omitempty"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
 }

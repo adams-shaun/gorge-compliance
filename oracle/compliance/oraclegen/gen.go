@@ -93,6 +93,20 @@ type Seat struct {
 	// activation gated on "at least N life" (Ayli's CheckSVar$ X |
 	// SVarCompare$ GEY over Count$YourLifeTotal) rides it.
 	Life *int32 `json:"life,omitempty"`
+	// PlayerCounters is the seat's complete counter set at setup (the runner's
+	// and the XMage driver's setup "player_counters"): ENERGY for a PayEnergy
+	// cost, POISON and EXPERIENCE for a card that reads them. A sorted slice,
+	// never a map walk, so the item bytes are deterministic. The pinned gorge
+	// rules.oracleSeat gains the field in the commit the PayEnergy starts need;
+	// the lower gate keeps refusing Player.Counters until pincap sees it.
+	PlayerCounters []SetupPlayerCounter `json:"player_counters,omitempty"`
+}
+
+// SetupPlayerCounter is one player counter a seat's setup holds: gorge's
+// counter kind and amount. It is ordered by kind in PlayerCounters.
+type SetupPlayerCounter struct {
+	Kind string `json:"kind"`
+	N    int32  `json:"n"`
 }
 
 // SetupAttach is one Aura a seat's setup places attached. Card is a

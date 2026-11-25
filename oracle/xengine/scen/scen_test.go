@@ -445,6 +445,50 @@ func TestStartPlayerCounters(t *testing.T) {
 	}
 }
 
+// TestStartPlayerCounterCost: a PayEnergy<N> cost is paid from the seat's
+// player counters (CR 107.14, 122.1), so a start seeds ENERGY on the seat
+// itself instead of refusing the ability. Aethersquall Ancient's {8} ability
+// is the class's first card; the start output stays a sorted slice with no
+// card name, and a malformed amount keeps the old refusal.
+func TestStartPlayerCounterCost(t *testing.T) {
+	reg, b := testBuilder(t)
+	const card = "Aethersquall Ancient"
+	res, err := Generate(reg, b, card, "f0/a0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	focusIs(t, f, 0, card, "ability", 0)
+	if want := []StartCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
+	}
+	if len(f.Setup.P1.PlayerCounters) != 0 {
+		t.Errorf("p1 player counters %+v, want none", f.Setup.P1.PlayerCounters)
+	}
+	raw, err := f.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Contains(raw, []byte(`"player_counters"`)) || !bytes.Contains(raw, []byte(`"kind": "ENERGY"`)) {
+		t.Errorf("start bytes do not name the player counters:\n%s", raw)
+	}
+	if bytes.Contains(raw, []byte(`"card": ""`)) {
+		t.Errorf("a seat player counter serialised an empty card:\n%s", raw)
+	}
+	c, ok := reg.Lookup(card)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("%s is not in the corpus", card)
+	}
+	for _, cost := range []string{"PayEnergy<0>", "PayEnergy<x>"} {
+		if _, why := planCost(reg, b, c.Faces[0], card, cost, "U"); why != "steps-needed:cost:PayEnergy" {
+			t.Errorf("cost %q: reason %q, want steps-needed:cost:PayEnergy", cost, why)
+		}
+	}
+}
+
 // TestScenUnlistedByXMageIsGenerated: a card no XMage manifest lists is still
 // generated, not refused not-sent. Forge is the reference oracle (operator
 // 11-24): the XMage leg marks the item not_sent and keyproof credits a Forge
@@ -2419,5 +2463,61 @@ func TestStartTransformedTrigger(t *testing.T) {
 		if !slices.Contains(f.Setup.P0.Battlefield, tc.card) {
 			t.Errorf("%s %s: p0 battlefield %v, want the card front-up", tc.card, tc.key, f.Setup.P0.Battlefield)
 		}
+	}
+}
+
+// TestStarttappedtarget: a target whose filter names a battlefield state, not
+// a face property ("target tapped creature", Aerial Assault's
+// ValidTgts$ Creature.tapped), was read as unknown: the start refused as
+// start:needs-target. Placing the carrier without recording its state would
+// write a file whose focus play the game never offers (start-not-exercised),
+// so the placed target must also be listed in the seat's Tapped. The untapped
+// form of the same filter (Asphyxiate) must place an untapped target.
+func TestStarttappedtarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card   string
+		tapped bool
+	}{
+		{"Aerial Assault", true}, // ValidTgts$ Creature.tapped
+		{"Vengeance", true},      // ValidTgts$ Creature.tapped
+		{"Asphyxiate", false},    // ValidTgts$ Creature.untapped
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, "cast", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			var creatures []string
+			for _, name := range f.Setup.P1.Battlefield {
+				c, ok := reg.Lookup(name)
+				if ok && len(c.Faces) > 0 && c.Faces[0].IsCreature() {
+					creatures = append(creatures, name)
+				}
+			}
+			if len(creatures) == 0 {
+				t.Fatalf("p1 battlefield %v holds no target creature", f.Setup.P1.Battlefield)
+			}
+			if tc.tapped {
+				if len(f.Setup.P1.Tapped) == 0 {
+					t.Errorf("p1 tapped %v is empty, want a tapped target (%v)", f.Setup.P1.Tapped, creatures)
+				}
+				for _, name := range f.Setup.P1.Tapped {
+					if !slices.Contains(creatures, name) {
+						t.Errorf("p1 tapped %v names %q, not a target creature (%v)", f.Setup.P1.Tapped, name, creatures)
+					}
+				}
+			} else {
+				for _, name := range creatures {
+					if slices.Contains(f.Setup.P1.Tapped, name) {
+						t.Errorf("%s is tapped, want an untapped target", name)
+					}
+				}
+			}
+		})
 	}
 }

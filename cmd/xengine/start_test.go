@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"sort"
 	"strings"
@@ -14,6 +15,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -268,6 +270,109 @@ func TestStartTokenIsExercised(t *testing.T) {
 				return nil
 			}); err != nil {
 				t.Fatal(err)
+			}
+		})
+	}
+}
+
+// TestStartPlayerCounter: a start file's player_counters are read strictly
+// (no card, only a counter kind the engines track, n >= 1), folded into a
+// sorted slice, and mapped to rules.StartSeat.PlayerCounters through the pin
+// capability. The current pin has no such field; the seam proves the mapping
+// path, and a start on a pin without the field is refused loudly instead of
+// silently playing with no energy.
+func TestStartPlayerCounter(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "start.json")
+	body := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":1}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []startCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
+	}
+	cs, err := playerCountersOf(f.Setup.P0.PlayerCounters)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(cs, want) {
+		t.Fatalf("seat 0 player counters %+v, want %+v", cs, want)
+	}
+	// A repeat of one kind is folded and the slice is sorted by kind, never a
+	// map walk: the same JSON always produces the same item bytes.
+	folded := filepath.Join(dir, "folded.json")
+	foldedBody := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`,
+		`[{"kind":"POISON","n":2},{"kind":"ENERGY","n":3},{"kind":"ENERGY","n":5}]`, 1)
+	if err := os.WriteFile(folded, []byte(foldedBody), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ff, err := readStartFile(folded)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, err := playerCountersOf(ff.Setup.P0.PlayerCounters)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}, {Kind: "POISON", N: 2}}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("folded player counters %+v, want %+v", got, want)
+	}
+	// The native mapping: swap the pincap setter for a recorder, so this test
+	// covers startDeckAt -> rules.StartSeat.PlayerCounters even while the pin
+	// has no such field. Removing the mapping makes this fail.
+	reg := testutil.CorpusRegistry(t)
+	prior := setStartPlayerCounters
+	var mapped []pincap.Counter
+	setStartPlayerCounters = func(ss *rules.StartSeat, cs []pincap.Counter) bool {
+		mapped = append([]pincap.Counter(nil), cs...)
+		return true
+	}
+	t.Cleanup(func() { setStartPlayerCounters = prior })
+	if _, _, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1); err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(mapped, want) {
+		t.Fatalf("mapped player counters %+v, want %+v", mapped, want)
+	}
+	// A seat with none does not call the setter at all.
+	mapped = nil
+	if _, _, err := startDeckAt(reg, "start-p0", 0, startSeat{Battlefield: []string{"Plains"}}, startSeat{}); err != nil {
+		t.Fatal(err)
+	}
+	if mapped != nil {
+		t.Errorf("seat with no player counters called the setter with %+v", mapped)
+	}
+	// At a pin without the native field, a start that names counters is an
+	// error, not a silently unaffordable focus play written as
+	// start-not-exercised far from the cause.
+	setStartPlayerCounters = prior
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; the pre-pin refusal no longer applies")
+	}
+	if _, _, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1); err == nil ||
+		!strings.Contains(err.Error(), "rules.StartSeat.PlayerCounters") {
+		t.Fatalf("pre-pin start with counters: err %v, want a rules.StartSeat.PlayerCounters refusal", err)
+	}
+	// A card name, an untracked kind and a non-positive amount are refused.
+	for _, tc := range []struct{ name, counters, want string }{
+		{"card", `[{"card":"Aethersquall Ancient","kind":"ENERGY","n":8}]`, "goes on the seat"},
+		{"kind", `[{"kind":"CHARGE","n":1}]`, "not ENERGY, POISON or EXPERIENCE"},
+		{"zero", `[{"kind":"ENERGY","n":0}]`, "want >= 1"},
+	} {
+		t.Run("refuse/"+tc.name, func(t *testing.T) {
+			bad := filepath.Join(dir, tc.name+".json")
+			b := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`, tc.counters, 1)
+			if err := os.WriteFile(bad, []byte(b), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := readStartFile(bad); err == nil || !strings.Contains(err.Error(), tc.want) {
+				t.Errorf("player counters %s: err %v, want %q", tc.counters, err, tc.want)
 			}
 		})
 	}
@@ -579,8 +684,8 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 }
 
 // startIsExercised generates the start file for card's key, plays it, and
-// fails when play refuses it as start-not-exercised or writes no item; it
-// returns the items written.
+// fails when play refuses it as start-not-exercised or writes fewer items than
+// the start's seeds; it returns the items written.
 func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card, key string) []oraclegen.Item {
 	t.Helper()
 	res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
@@ -601,8 +706,10 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 			refused = append(refused, string(b))
 		}
 	}
-	if len(items) == 0 {
-		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	// One item per seed is the generator's contract: a seed that lowers to no
+	// item leaves the key unproven there even when the other seed writes one.
+	if len(items) != res.Start.Seeds {
+		t.Errorf("%d item(s), want %d (one per seed): lowering %v (start %s)", len(items), res.Start.Seeds, refused, raw)
 	}
 	return items
 }
@@ -868,6 +975,24 @@ func TestStartStackTargetIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetIncidentalUpkeepIsExercised: a bait start still lowers
+// when the only beginning-of-upkeep trigger is incidental to the focus play.
+// Wizard's Retort needs a Wizard, and certdeck's first pick (Drifter il-Dal)
+// has an upkeep trigger, so the generator must skip it for the battlefield;
+// Lilting Refrain is the focus card itself, and the scenario replay walks the
+// same turn-1 upkeep the live start did, so its optional trigger does not
+// refuse the span.
+func TestStartStackTargetIncidentalUpkeepIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Wizard's Retort", "cast"},
+		{"Lilting Refrain", "f0/a0"},
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
 // TestStartStackTargetCostIsExercised: an alternate additional cost
 // ("behold a Jace or pay {1}", "tap an artifact or pay {1}") is paid in
 // addition to the mana cost, and the generated start placed only the printed
@@ -900,12 +1025,15 @@ var stackTargetHardCards = []string{
 	"Psychic Rebuttal", "Turn Aside", "Rebuff the Wicked", "Not of This World",
 	"Teferi's Response", "Ring of Immortals",
 	"Countersculpt", "Disruption Protocol", "Louisoix's Sacrifice", "Wild Unraveling",
+	"Wizard's Retort", "Lilting Refrain", // incidental upkeep triggers on a placed enabler / the focus card
 }
 
-// stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
-// item: an unscripted upkeep trigger refuses the start after its focus play was
-// offered, so they are exempt from the "wrote an item" check below only.
-var stackTargetUpkeepCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
+// stackTargetWatchedCards are the stack-target cards whose incidental upkeep
+// trigger once made every bait start lower to no item (Wizard's Retort's
+// certdeck Wizard was Drifter il-Dal, and Lilting Refrain is the focus card).
+// They are no longer exempt: the census requires an item from every bait start
+// and logs each of these keys, so a regression names the card and key.
+var stackTargetWatchedCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
 
 // stackTargetCards is every playable card with a face whose script declares a
 // stack target, sorted.
@@ -939,8 +1067,8 @@ func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
 
 // stackTargetCensus generates every key of each card and plays each start that
 // carries a bait: the focus play must be offered on both seeds (no
-// start-not-exercised row), and a bait start must lower to at least one item
-// unless the card is a known upkeep refusal. This is the guard for the class of
+// start-not-exercised row), and a bait start must lower to at least one item.
+// This is the guard for the class of
 // regression where the bait was accepted for a spell the focus play could never
 // target (TargetValidTargeting, a bait cast from the hand against "wasn't cast
 // from hand", a sorcery-speed focus behind the bait): xengine play refused
@@ -979,12 +1107,15 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
 				}
 			}
-			if len(items) == 0 && !stackTargetUpkeepCards[card] {
+			if len(items) != res.Start.Seeds {
 				bad = true
-				t.Errorf("%s %s: a bait start lowered to no item (start %s)", card, key, raw)
+				t.Errorf("%s %s: a bait start wrote %d item(s), want %d (one per seed) (start %s)", card, key, len(items), res.Start.Seeds, raw)
 			}
 			if !bad {
 				exercised++
+				if stackTargetWatchedCards[card] {
+					t.Logf("stack-target census: %s %s exercised (%d item(s))", card, key, len(items))
+				}
 			}
 		}
 	}
@@ -1213,6 +1344,8 @@ func TestStartFocusTargetIsPlaced(t *testing.T) {
 		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
 		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
 		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
+		{"Aerial Assault", "cast"},                // Creature.tapped: the target must be placed tapped
+		{"Asphyxiate", "cast"},                    // Creature.untapped: the target must be placed untapped
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
@@ -1499,5 +1632,53 @@ func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
 	}
 	if !refused {
 		t.Errorf("a start whose attacker never attacks was not refused as %s", reasonStartNotExercised)
+	}
+}
+
+// TestPlayStartPlayerCountersPinRefusesPerID: at a pin without
+// rules.StartSeat.PlayerCounters, the start that names energy is refused per
+// id in the lowering log and the other starts of the directory still play.
+func TestPlayStartPlayerCountersPinRefusesPerID(t *testing.T) {
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; there is nothing to refuse")
+	}
+	reg := testutil.CorpusRegistry(t)
+	dir := t.TempDir()
+	good, err := os.ReadFile("testdata/start/thornvault-forager-f0a2.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "b-good.json"), good, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	energy := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":2}`
+	// Sorts first, so a hard error here would lose b-good.json.
+	if err := os.WriteFile(filepath.Join(dir, "a-energy.json"), []byte(energy), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	if err := playStart(reg, []string{dir}, "XP", out, false); err != nil {
+		t.Fatalf("one pre-pin start aborted the batch: %v", err)
+	}
+	refused := 0
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		if bytes.Contains(b, []byte(reasonStartPlayerCountersPin)) {
+			refused++
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if refused != 2 {
+		t.Errorf("%d refused rows with %q, want 2 (one per seed)", refused, reasonStartPlayerCountersPin)
+	}
+	items := 0
+	if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+		t.Fatal(err)
+	}
+	if items == 0 {
+		t.Error("the other start of the directory wrote no item")
 	}
 }
