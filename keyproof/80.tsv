@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8003ca2d-0c1d-47c1-bcd1-4609615c7a82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 800c258a-cfc4-4a54-a667-065ea8dea69e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightning-helix:cast:s1,f:xs:XP:lightning-helix:cast:s1	-	-	-	23b491658465	-	3d0aea6d28c9	-	-	2026-11-24	xproof
 800cfd70-6a97-40eb-8dc0-40b762e4db76	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-800d0f33-31c9-43da-a649-8860646eca1f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-800d0f33-31c9-43da-a649-8860646eca1f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+800d0f33-31c9-43da-a649-8860646eca1f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+800d0f33-31c9-43da-a649-8860646eca1f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 800d0f33-31c9-43da-a649-8860646eca1f	land	land	agreed	-	FX	start	2	0	x:xs:XP:quark-s-bar:f0t0:s1,f:xs:XP:quark-s-bar:f0t0:s1	-	-	-	25696bf19d5b	-	beea51c8fb2a	-	-	2026-11-24	xproof
 800fb917-8898-4eba-9f94-aec6e9d75236	cast	cast-resolve	agreed	-	FX	scen	2	0	Mazemind Tome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 800fb917-8898-4eba-9f94-aec6e9d75236	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Mazemind Tome/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 80240b6b-d20d-4dfb-a2c5-c272c3b43a70	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8025313d-048d-4a43-bc01-22398939a7e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 802b9333-c256-410a-a635-a22bfeda679f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-802ff367-e52e-4f79-aa0f-96c45fe477a0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+802ff367-e52e-4f79-aa0f-96c45fe477a0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8031285b-2add-42da-aa97-03c3f2fff226	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vessel-of-endless-rest:f0t0:s1,f:xs:XP:vessel-of-endless-rest:f0t0:s1	-	-	-	d864b561c9cb	-	18c8188a5fb1	-	-	2026-11-24	xproof
 8031285b-2add-42da-aa97-03c3f2fff226	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8031285b-2add-42da-aa97-03c3f2fff226	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vessel-of-endless-rest:f0t0:s1,f:xs:XP:vessel-of-endless-rest:f0t0:s1	-	-	-	d864b561c9cb	-	18c8188a5fb1	-	-	2026-11-24	xproof
@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 80312910-5d53-44f1-9982-e46dc7532abb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	The Unbeatable Squirrel Girl/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 80312910-5d53-44f1-9982-e46dc7532abb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 80312910-5d53-44f1-9982-e46dc7532abb	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:the-unbeatable-squirrel-girl:f0t1:s1,f:xs:XP:the-unbeatable-squirrel-girl:f0t1:s1	-	-	-	fb9d3088f0bf	-	28c23bf6548f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-8038337b-aff9-49aa-800c-0e12d2688765	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8038337b-aff9-49aa-800c-0e12d2688765	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 803971e6-67f3-4fda-aeb6-69ef8ea4b54e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:turtles-in-time:cast:s1,f:xs:XP:turtles-in-time:cast:s1	-	-	-	23c4009444b0	-	398609994a6d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8039df5c-b26b-4277-8226-4c08a5a69fbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8039df5c-b26b-4277-8226-4c08a5a69fbb	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:gelectrode:f0t0:s1,f:xs:XP:gelectrode:f0t0:s1	-	-	-	23c4009444b0	-	9e9c3e0be140	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

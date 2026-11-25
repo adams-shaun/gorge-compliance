@@ -13,9 +13,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3b04f5b9-40d9-49aa-a38d-0f946401263c	cast	cast-resolve	agreed	-	FX	scen	2	0	The Doctor, EMH/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b04f5b9-40d9-49aa-a38d-0f946401263c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3b04f5b9-40d9-49aa-a38d-0f946401263c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3b0694ff-aa92-4a2e-a366-69fdf5a57c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b0694ff-aa92-4a2e-a366-69fdf5a57c4b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3b0694ff-aa92-4a2e-a366-69fdf5a57c4b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3b06b242-caed-4c8f-b5ab-30e86061286e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:divine-smite:cast:s1	-	-	-	ea3140b6974b	-	9e15870e09ae	-	-	2026-11-24	xproof
 3b0a97e2-e125-4f91-8581-307e3fa6b048	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gatebreaker-ram:cast:s1,f:xs:XP:gatebreaker-ram:cast:s1	-	-	-	d864b561c9cb	-	732ed7ba1e59	-	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	cast	cast-resolve	agreed	-	FX	scen	2	0	Emet-Selch, Unsundered/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b46800b-711b-4cbb-b296-26115b4f6839	cast	cast-resolve	agreed	-	FX	scen	2	0	Visions of Villainy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b46800b-711b-4cbb-b296-26115b4f6839	static#0.0	static#0.0	agreed	-	X	scen	1	0	Visions of Villainy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b4b6af2-f929-4082-a5ae-61a4e074bf14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silhana-starfletcher:cast:s1,f:xs:XP:silhana-starfletcher:cast:s1	-	-	-	77494c1ce129	-	03bc2fc0924b	-	-	2026-11-24	xproof
-3b4b6af2-f929-4082-a5ae-61a4e074bf14	f0/a0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3b4b6af2-f929-4082-a5ae-61a4e074bf14	f0/a0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:littjara-mirrorlake:f0a1:s2,f:xs:XP:littjara-mirrorlake:f0a1:s2	-	-	-	23b491658465	-	327b80782d82	-	-	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	land	land	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:land:s1,f:xs:XP:littjara-mirrorlake:land:s1	-	-	-	d864b561c9cb	-	327b80782d82	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a1	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:seismic-monstrosaur:f0a1:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:cast:s1,f:xs:XP:caller-of-the-pack:cast:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:f0t0:s1,f:xs:XP:caller-of-the-pack:f0t0:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
-3b6d773b-e2f7-4e74-9e77-f2e0d369a31e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3b6d773b-e2f7-4e74-9e77-f2e0d369a31e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3b6ef144-bb98-4686-9718-204f1c3cf020	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:worldsoul-s-rage:cast:s1,f:xs:XP:worldsoul-s-rage:cast:s1	-	-	-	8c0bd19283bb	-	57f0203cdd3a	-	-	2026-11-25	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b943c3e-1f18-4997-b6d0-28ef75aed88e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodthirsty-adversary:f0t0:s1,f:xs:XP:bloodthirsty-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	6a97c1da5e87	-	-	2026-11-24	xproof
 3b954d5f-3a93-4dd9-9d60-6097594d449c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b96b8c3-b9c8-4712-a3b1-243a67cc013a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meloku-the-clouded-mirror:cast:s1,f:xs:XP:meloku-the-clouded-mirror:cast:s1	-	-	-	64a08ba7d913	-	ef6e8a89f75b	-	-	2026-11-24	xproof
-3b96b8c3-b9c8-4712-a3b1-243a67cc013a	f0/a0	Token	owed	harness	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	ef6e8a89f75b	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3b96b8c3-b9c8-4712-a3b1-243a67cc013a	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:meloku-the-clouded-mirror:f0a0:s1,f:xs:XP:meloku-the-clouded-mirror:f0a0:s1	-	-	-	fb9d3088f0bf	-	ef6e8a89f75b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3b97794a-3aaa-45a6-9cad-f1b768615b6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b97794a-3aaa-45a6-9cad-f1b768615b6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b97bf8e-d5c4-4eae-a453-73456e0461a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -173,7 +173,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:page-loose-leaf:cast:s1,f:xs:XP:page-loose-leaf:cast:s1	-	-	-	23c4009444b0	-	ea5e4f255301	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Page, Loose Leaf/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Page, Loose Leaf/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3bbfceba-9f3a-4988-a009-13c9472138b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3bbfceba-9f3a-4988-a009-13c9472138b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3bc0479f-0f45-4b36-9963-f8eb5973cf47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc0bd36-70be-4180-9fb3-b10ce054107b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc12623-3852-42f0-b458-5c67fe1b7a07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fork-in-the-road:cast:s1,f:xs:XP:fork-in-the-road:cast:s1	-	-	-	d864b561c9cb	-	3b640f6e8294	-	-	2026-11-24	xproof

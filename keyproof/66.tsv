@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66847507-f8bb-4266-bd6e-a91c0baf0000	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66847507-f8bb-4266-bd6e-a91c0baf0000	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+66847507-f8bb-4266-bd6e-a91c0baf0000	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 6686b897-64a9-4482-9563-57c88bc83d71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voidwielder:f0t0:s1,f:xs:XP:voidwielder:f0t0:s1	-	-	-	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	xproof
 6686b897-64a9-4482-9563-57c88bc83d71	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voidwielder:f0t0:s1,f:xs:XP:voidwielder:f0t0:s1	-	-	-	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	xproof
 668a6a9d-80fc-437b-99b8-6807e92eabca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agent-of-horizons:cast:s1,f:xs:XP:agent-of-horizons:cast:s1	-	-	-	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66ae2562-68e9-4c77-ba0a-57f8ff37f656	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66ae3349-ad37-47da-8ccc-3e1cdddb32a9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arctic-nishoba:f0t1:s1	-	-	-	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t1	Phase/Cumulative upkeep	agreed	-	F	start	2	0	f:xs:XP:arctic-nishoba:f0t1:s1	-	-	-	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66b46257-b64c-4672-bf47-12bf0bcd6f8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66bd5999-742a-43e0-827c-ecb8ec7db242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-warden:cast:s1,f:xs:XP:ghost-warden:cast:s1	-	-	-	77494c1ce129	-	1e158ef92b5a	-	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
 66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
 66fa2326-1b5d-41fb-b919-83bf9f383577	land	land	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
-66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-goblin:f0t0:s1,f:xs:XP:festering-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	190d5cb46db5	-	-	2026-11-24	xproof
 66fc64db-7dc4-43fa-8087-281a72286c35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporous-djinn:f0t0:s1,f:xs:XP:vaporous-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	xproof

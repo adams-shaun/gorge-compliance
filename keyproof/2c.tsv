@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c22af49-c6ef-4de6-bb84-6b3e99879148	cast	cast-resolve	agreed	-	X	scen	1	0	Steer Clear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:embereth-veteran:cast:s1,f:xs:XP:embereth-veteran:cast:s1	-	-	-	23b491658465	-	007a01468d54	-	-	2026-11-24	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:embereth-veteran:f0a0:s1,f:xs:XP:embereth-veteran:f0a0:s1	-	-	-	3aa6ded33acb	-	007a01468d54	-	-	2026-11-25	xproof
-2c24b7c3-7c90-4109-a4aa-d9cae6febf34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orb-of-dreams:cast:s1,f:xs:XP:orb-of-dreams:cast:s1	-	-	-	fb9d3088f0bf	-	11a4a29c55c4	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2c24b7c3-7c90-4109-a4aa-d9cae6febf34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orb-of-dreams:cast:s1,f:xs:XP:orb-of-dreams:cast:s1	-	-	-	fb9d3088f0bf	-	11a4a29c55c4	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2c275a85-5a15-46cd-a6e7-add63f9b853d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sterling-grove:cast:s1,f:xs:XP:sterling-grove:cast:s1	-	-	-	25696bf19d5b	-	662dd5e90f27	-	-	2026-11-24	xproof
 2c275a85-5a15-46cd-a6e7-add63f9b853d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sterling-grove:f0a0:s1,f:xs:XP:sterling-grove:f0a0:s1	-	-	-	d864b561c9cb	-	662dd5e90f27	-	-	2026-11-24	xproof
 2c2ef1ed-2f93-48c5-bf86-e46318599aeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mechan-assembler:cast:s1,f:xs:XP:mechan-assembler:cast:s1	-	-	-	23c4009444b0	-	c7ae9a16ecb9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c90b7fa-d5bf-4c46-92d5-3014ea1bec50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c91c236-34d7-4454-a55a-784db7f68bde	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2c91c236-34d7-4454-a55a-784db7f68bde	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2c964157-d414-4d4e-822b-12ce61e882ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:capital-city:land:s1,f:xs:XP:capital-city:land:s1	-	-	-	23c4009444b0	-	157edffe2825	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Capital City/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -204,4 +204,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cf79dd0-c9db-403e-969d-6c09e7aaa575	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-naked-time:cast:s1	-	-	-	fb9d3088f0bf	-	11754bd2d455	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2cfd5c18-47d0-4549-aacc-2428db21df2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cff1f9e-11a6-460c-8f5f-4c02424357e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cff1f9e-11a6-460c-8f5f-4c02424357e3	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2cff1f9e-11a6-460c-8f5f-4c02424357e3	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

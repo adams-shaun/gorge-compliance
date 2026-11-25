@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70492e32-ba4d-4314-b016-892fb15f7a23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70492e32-ba4d-4314-b016-892fb15f7a23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 70528ca9-195c-49a5-9d83-d51df3b0591f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7052fbd6-94df-41a9-a382-641701086804	cast	cast	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	fb9d3088f0bf	-	780fb83dfe25	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7052fbd6-94df-41a9-a382-641701086804	cast	cast	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	fb9d3088f0bf	-	780fb83dfe25	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 70538676-2ffb-4cad-827e-b55e81088678	cast	cast-resolve	agreed	-	FX	scen	2	0	Dwarven Mauler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70538676-2ffb-4cad-827e-b55e81088678	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dwarven Mauler/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7054c42b-48dd-4887-b878-69c005259d27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thistledown-players:cast:s1,f:xs:XP:thistledown-players:cast:s1	-	-	-	23c4009444b0	-	4b47cd54e655	-	-	2026-11-25	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70773879-b773-4e81-99ca-8f4bba478962	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70773879-b773-4e81-99ca-8f4bba478962	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70787d8b-0a40-43ea-837a-9617dc13e7e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vigor:cast:s1,f:xs:XP:vigor:cast:s1	-	-	-	d864b561c9cb	-	85950dc4444c	-	-	2026-11-24	xproof
-70787d8b-0a40-43ea-837a-9617dc13e7e5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+70787d8b-0a40-43ea-837a-9617dc13e7e5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7085d5c6-da96-465e-90cf-8469fcacb474	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7085d5c6-da96-465e-90cf-8469fcacb474	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70868667-a843-4954-863f-990854188c53	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:biomathematician:cast:s1,f:xs:XP:biomathematician:cast:s1	-	-	-	d864b561c9cb	-	7bc6e741cec0	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70bb2690-653b-4787-bdd1-d1739a8ae545	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:quirion-sentinel:cast:s1,f:xs:XP:quirion-sentinel:cast:s1	-	-	-	fc71ca68c5ac	-	ace031ec8b71	-	-	2026-11-24	xproof
 70bb2690-653b-4787-bdd1-d1739a8ae545	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:quirion-sentinel:cast:s1,f:xs:XP:quirion-sentinel:cast:s1	-	-	-	fc71ca68c5ac	-	ace031ec8b71	-	-	2026-11-24	xproof
 70bcec56-1485-4e4e-8fff-940d7b133c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70bcec56-1485-4e4e-8fff-940d7b133c5d	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+70bcec56-1485-4e4e-8fff-940d7b133c5d	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marauding-sphinx:cast:s1,f:xs:XP:marauding-sphinx:cast:s1	-	-	-	23b491658465	-	9eaad6ab04bc	-	-	2026-11-25	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:marauding-sphinx:combat0.attack:s1,f:xs:XP:marauding-sphinx:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9eaad6ab04bc	-	-	2026-11-25	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:marauding-sphinx:combat0.block:s1,f:xs:XP:marauding-sphinx:combat0.block:s1	-	-	-	3aa6ded33acb	-	9eaad6ab04bc	-	-	2026-11-25	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	land	land	agreed	-	FX	start	2	0	x:xs:XP:adagia-windswept-bastion:land:s1,f:xs:XP:adagia-windswept-bastion:land:s1	-	-	-	23c4009444b0	-	0622c30bb188	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Adagia, Windswept Bastion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70d39ca3-1bbd-47ec-8723-2abe35b6dc51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70d39ca3-1bbd-47ec-8723-2abe35b6dc51	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+70d39ca3-1bbd-47ec-8723-2abe35b6dc51	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 70d52457-1867-482c-ba7a-1f7dacc4514f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-princess-takes-flight:cast:s1,f:xs:XP:the-princess-takes-flight:cast:s1	-	-	-	23b491658465	-	7fc915926472	-	-	2026-11-24	xproof
 70d6cd9c-6311-4d8e-b74a-8edc11d1c05e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:into-the-wilds:f0t0:s1,f:xs:XP:into-the-wilds:f0t0:s1	-	-	-	3aa6ded33acb	-	49743cc68adb	-	-	2026-11-25	xproof
 70d6cd9c-6311-4d8e-b74a-8edc11d1c05e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:into-the-wilds:f0t0:s1,f:xs:XP:into-the-wilds:f0t0:s1	-	-	-	3aa6ded33acb	-	49743cc68adb	-	-	2026-11-25	xproof
