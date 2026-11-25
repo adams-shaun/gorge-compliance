@@ -161,6 +161,109 @@ func TestStartDeckRefusesFieldBlocked(t *testing.T) {
 	}
 }
 
+// TestStartToken: a start file's token scripts map to gorge's scripted tokens
+// (rules.StartSeat.Tokens), and an unknown script is refused rather than
+// starting without the token the key needs.
+func TestStartToken(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	const script = "c_a_treasure_sac"
+	_, ss, err := startDeck(reg, "start-p0", startSeat{Tokens: []startToken{{Script: script, Tapped: true}}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ss.Tokens) != 1 || ss.Tokens[0].Script != script || !ss.Tokens[0].Tapped {
+		t.Errorf("start tokens %+v, want one tapped %s", ss.Tokens, script)
+	}
+	for _, tok := range []startToken{{}, {Script: "no_such_token_script"}} {
+		if _, _, err := startDeck(reg, "start-p0", startSeat{Tokens: []startToken{tok}}); err == nil {
+			t.Errorf("start token %+v: no error, want a refusal", tok)
+		}
+	}
+}
+
+// TestStartTokenIsExercised: a scen start that places a token (the
+// steps-needed:token class) plays, lowers and writes its items for both a cast
+// and a triggered key, and each lowered item's setup carries the token: the
+// token is a real scripted battlefield object, not only a field in the file.
+func TestStartTokenIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Abyssal Harvester", "cast"},
+		{"Academy Instructor", "f0/t0"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, tc.card, tc.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			if len(res.Start.Setup.P0.Tokens) == 0 {
+				t.Fatalf("start places no token: %+v", res.Start.Setup.P0)
+			}
+			raw, err := json.Marshal(res.Start)
+			if err != nil {
+				t.Fatal(err)
+			}
+			dir := t.TempDir()
+			if err := os.WriteFile(filepath.Join(dir, "x.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			out := t.TempDir()
+			// xmage: the generic token must be one XMage's setup token table
+			// maps, or its leg refuses the start while Forge's would not.
+			if err := playStart(reg, []string{dir}, "XP", out, true); err != nil {
+				t.Fatalf("play -start: %v", err)
+			}
+			// The emitted item's setup must carry the start's token, not only
+			// the start file's field: startDeck's token loop is what mints it
+			// for gorge, and a token missing there is a permanent the key reads
+			// that both followers never placed.
+			want := res.Start.Setup.P0.Tokens
+			items := 0
+			if err := readLines(filepath.Join(out, "items.jsonl"), func(b []byte) error {
+				var it oraclegen.Item
+				if err := json.Unmarshal(b, &it); err != nil {
+					return err
+				}
+				items++
+				for _, tok := range want {
+					kept := false
+					for _, seat := range it.Setup {
+						for _, et := range seat.Tokens {
+							if et.Script == tok.Script {
+								kept = true
+							}
+						}
+					}
+					if !kept {
+						t.Errorf("item %s setup has no token %q: the played setup dropped the start's token", it.ID, tok.Script)
+					}
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+			if items != res.Start.Seeds {
+				t.Errorf("items %d, want %d", items, res.Start.Seeds)
+			}
+			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+				var r lowerRow
+				if err := json.Unmarshal(b, &r); err != nil {
+					return err
+				}
+				if r.Status != "lower_ok" {
+					t.Errorf("%s: status %s %v, want lower_ok", r.ID, r.Status, r.Reasons)
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+		})
+	}
+}
+
 // TestStartSeedBase: seed_base moves where a start file's seed search
 // starts, so a retried key plays new games; absent, the games are those of
 // seed_base 1, as before the field.
@@ -831,5 +934,66 @@ func TestStartOpeningHandFocusIsCast(t *testing.T) {
 		return nil
 	}); err != nil {
 		t.Fatal(err)
+	}
+}
+
+// TestStartCombatTriggerIsExercised: a combat trigger (blocks, becomes blocked,
+// combat damage) had no start (no-generator:trigger:<Mode>), so no engine ever
+// played the key. The start now scripts the combat (StartFocus.Attack, Block):
+// every item has the attack step, and the block step when the trigger reads one.
+func TestStartCombatTriggerIsExercised(t *testing.T) {
+	for _, c := range []struct {
+		card, key string
+		block     bool
+	}{
+		{"Acolyte of the Inferno", "f0/t0", true},                    // AttackerBlockedByCreature, the card attacks
+		{"Ammit Eternal", "f0/t2", true},                             // AttackerBlocked (afflict), the card attacks
+		{"Aether Membrane", "f0/t0", true},                           // AttackerBlocked, the card blocks
+		{"Pious Warrior", "f0/t0", true},                             // DamageDoneOnce, the card is dealt damage
+		{"Akki Lavarunner // Tok-Tok, Volcano Born", "f0/t0", false}, // DamageDone, unblocked
+		{"Vulture, Feathered Fiend", "f0/t0", false},                 // DamageDoneOnce: a flier with power deals it
+		{"Mu Yanling, Wind Rider", "f0/t1", false},                   // DamageDoneOnce, a flier beside the card
+	} {
+		t.Run(c.card, func(t *testing.T) { startCombatIsExercised(t, c.card, c.key, c.block) })
+	}
+}
+
+// TestStartCombatLineNeverDeclaredIsRefused: a combat start has no focus play
+// (kind ""), so its scripted combat is the focus action: a line whose attacker
+// is never offered (a defender cannot attack, CR 702.3b) exercises nothing of
+// the key and is refused as start-not-exercised, not written.
+func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	res, err := scen.Generate(reg, b, "Acolyte of the Inferno", "f0/t0", scen.Options{Prefer: "start"})
+	if err != nil || res.Start == nil || res.Start.Focus == nil {
+		t.Fatalf("scen: %v %q", err, res.Reason)
+	}
+	f := res.Start
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, "Wall of Stone")
+	f.Focus.Attack = "Wall of Stone"
+	raw, err := f.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	in, out := t.TempDir(), t.TempDir()
+	if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	refused := false
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		refused = refused || slices.Contains(r.Reasons, reasonStartNotExercised)
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if !refused {
+		t.Errorf("a start whose attacker never attacks was not refused as %s", reasonStartNotExercised)
 	}
 }
