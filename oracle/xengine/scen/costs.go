@@ -328,7 +328,11 @@ func castStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card,
 			!strings.HasPrefix(st.Params["Description"], "As an additional cost") {
 			continue
 		}
-		plan, why := planCost(reg, b, face, card, strings.TrimSpace(st.Params["Cost"]), generic)
+		cost := strings.TrimSpace(st.Params["Cost"])
+		if !raiseCostModelled(cost) {
+			continue // an optional or X cost (waterbend {X}, a "you may" exile): the bot may decline it
+		}
+		plan, why := planCost(reg, b, face, card, cost, generic)
 		if why != "" {
 			return why
 		}
@@ -336,4 +340,30 @@ func castStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card,
 		plan.applyExtras(p0)
 	}
 	return ""
+}
+
+// raiseCostModelled reports whether an additional-cost RaiseCost is one
+// planCost's mandatory arms plan: every non-mana token is a Waterbend of a
+// literal N or a Behold/BeholdExile. Any other token (an X cost, a "you may"
+// exile or discard, a tap or sacrifice) is left to the cast the way it was
+// before additional costs were planned, not refused.
+func raiseCostModelled(cost string) bool {
+	modelled := false
+	for _, tok := range splitCost(cost) {
+		if manaTokenRE.MatchString(tok) {
+			continue
+		}
+		head, args := costArgs(tok)
+		switch {
+		case head == "Waterbend" && len(args) == 1:
+			if _, err := strconv.Atoi(args[0]); err != nil {
+				return false
+			}
+		case (head == "Behold" || head == "BeholdExile") && len(args) >= 2:
+		default:
+			return false
+		}
+		modelled = true
+	}
+	return modelled
 }

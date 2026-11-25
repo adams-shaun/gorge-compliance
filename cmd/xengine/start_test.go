@@ -1543,16 +1543,37 @@ func TestStartActivationConditionIsMetOrRefused(t *testing.T) {
 		{"Kindly Stranger // Demon-Possessed Witch", "f0/a0"}, // Activation$ Delirium
 		{"Bloodline Keeper // Lord of Lineage", "f0/a1"},      // IsPresent$ GE5
 		{"Urza's Ruinous Blast", "cast"},                      // legendary sorcery
+		{"Companion of the Trials", "f0/a0"},                  // IsPresent$ Planeswalker.Gideon+YouCtrl, no PresentCompare$
+		{"Tectonic Edge", "f0/a1"},                            // PlayerCountOpponents$HighestValid Land.YouCtrl GE4
+		{"Shadows of the Past", "f0/a0"},                      // four creature cards in the graveyard
+		{"Champions of the Shoal", "cast"},                    // BeholdExile<1/Merfolk>
+		// optional and X additional costs the bot may decline: still starts
+		{"Crashing Wave", "cast"},
+		{"March of Wretched Sorrow", "cast"},
+		{"Explosive Singularity", "cast"},
+		{"Aether Tide", "cast"},
 	} {
 		t.Run(c.card, func(t *testing.T) { startExercisesKey(t, reg, b, c.card, c.key) })
 	}
-	t.Run("Aven Augur", func(t *testing.T) {
-		res, err := scen.Generate(reg, b, "Aven Augur", "f0/a0", scen.Options{Prefer: "start"})
-		if err != nil {
-			t.Fatal(err)
-		}
-		if res.Start != nil || res.Path != scen.PathRefused || res.Reason != "start:upkeep-only" {
-			t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, "start:upkeep-only")
-		}
-	})
+	// a gate no placed state can satisfy at turn 1's main refuses by name
+	for _, c := range []struct{ card, key, reason string }{
+		{"Aven Augur", "f0/a0", "start:upkeep-only"},
+		{"Hell's Caretaker", "f0/a0", "start:upkeep-only"},
+		{"Bloodsoaked Champion", "f0/a0", "start:attackers-declared"}, // Raid: Count$AttackersDeclared
+		{"Vengeful Devil", "f0/a0", "start:morbid"},                   // Count$Morbid.1.0
+		{"Serra Avenger", "cast", "start:cantbecast"},                 // a vanilla creature spell with a CantBeCast static
+		{"Ogre Siegebreaker", "f0/a0", "start:target-condition:was-dealt-damage-this-turn"},
+		{"Witch's Mist", "f0/a0", "start:target-condition:was-dealt-damage-this-turn"},
+		{"Sword of the Paruns", "f0/a0", "start:present-count"}, // IsPresent$ Card.EquippedBy, no PresentCompare$
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
+			}
+		})
+	}
 }

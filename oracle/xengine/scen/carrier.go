@@ -165,6 +165,10 @@ type filterAlt struct {
 	// non-token card (a carrier is a card), 0 when it does not say.
 	token int
 	known bool
+	// history is the first game-history property ("wasDealtDamageThisTurn")
+	// the alternative carries: the engine reads it, and nothing has happened
+	// yet at the start's step, so no placed object can meet it.
+	history string
 	// counters are the counters every object the alternative matches must
 	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
 	counters []counterGate
@@ -261,6 +265,13 @@ func compare(prop string) (stat string, test func(int) bool, ok bool) {
 	}
 	return "", nil, false
 }
+
+// historyProp reports whether a filter property words a this-turn event
+// ("wasDealtDamageThisTurn", "dealtDamageToYouThisTurn", "blockedThisTurn"):
+// the start's step is turn 1's precombat main with nothing yet happened, so
+// the engine's reading of it is false for every object. ThisTurnEntered, a
+// prefix, is different (a placed permanent may count) and is not one.
+func historyProp(p string) bool { return strings.HasSuffix(p, "ThisTurn") }
 
 // typeWord reports whether w reads as a type word (Creature, Dragon, Legendary):
 // capitalised letters and hyphens only.
@@ -451,6 +462,9 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 					continue
 				}
 				a.known = false
+				if a.history == "" && historyProp(p) {
+					a.history = p
+				}
 			}
 		}
 		a.test = func(f *cards.Face) bool {

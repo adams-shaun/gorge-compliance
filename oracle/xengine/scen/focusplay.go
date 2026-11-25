@@ -313,6 +313,9 @@ func altMet(n altNeed, a filterAlt, f *cards.Face, mine bool, source string) boo
 	if n.other && f.Name == source {
 		return false
 	}
+	if a.history != "" {
+		return false // a this-turn event: no placed permanent has undergone it
+	}
 	if a.test != nil && !a.matches(f, false) {
 		return false
 	}
@@ -425,10 +428,6 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 			}
 		}
 	}
-	if len(choices) == 0 {
-		return "", nil
-	}
-	seat := *fc.Seat
 	// The activation gates the engine reads at offer time (the phase window,
 	// the Activation$ condition, the IsPresent$/CheckSVar$ family, a
 	// legendary spell's lock, the card's own CantBeCast statics): a gate they
@@ -442,6 +441,10 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 	if why := focusGateRefusal(reg, b, face, sa, card, f, baitable); why != "" {
 		return why, nil
 	}
+	if len(choices) == 0 {
+		return "", nil // no target to place: a cast with no SP ability (a creature spell) too
+	}
+	seat := *fc.Seat
 	// source is the permanent whose ability the focus play activates: a .Other
 	// target must not count it (Adarkar Valkyrie's "target creature other than
 	// CARDNAME"). A cast focus's card is on the stack, not the battlefield, so
@@ -762,7 +765,13 @@ func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card, source strin
 		if n.side == 1 || n.combat || !permanentTarget(reg, alt) {
 			continue // only the focus seat's own: not placeable on the other side
 		}
-		if filter, ok := r.altFilter(k); ok && filter.known {
+		if filter, ok := r.altFilter(k); ok && filter.history != "" {
+			// a this-turn event no placed object has undergone
+			if unknown == "" {
+				unknown = condKind(filter.history)
+			}
+			continue
+		} else if ok && filter.known {
 			continue // read above: placed, or no card meets it
 		}
 		if preds := effects.UnknownPredicates(r.raw[k]); len(preds) > 0 {

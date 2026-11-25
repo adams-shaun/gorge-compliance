@@ -156,8 +156,8 @@ func focusGateRefusal(reg *cards.Registry, b *certdeck.Builder, face *cards.Face
 				first = why
 			}
 		}
-		if !met {
-			return first
+		if !met && first != "" {
+			return first // every SP mode's gates fail; a face with no SP ability has none to fail
 		}
 		if face.IsLegendary() && (face.IsInstant() || face.IsSorcery()) && !legendaryKindOn(reg, f, seat) {
 			name := pickFixture(reg, b, card, func(g *cards.Face) bool {
@@ -429,12 +429,15 @@ func presentCount(reg *cards.Registry, f *StartFile, seat int, zones []string, a
 // names. It returns how many it placed.
 func placePresent(reg *cards.Registry, b *certdeck.Builder, card string, f *StartFile, alts []filterAlt, raws []string, zones []string, seat, count int) int {
 	placed := 0
-	zone := "battlefield"
+	zone := ""
 	for _, z := range zones {
 		if zonePlaceable(z) {
 			zone = z
 			break
 		}
+	}
+	if zone == "" {
+		return 0 // no zone the start places to: the gate counts what it cannot see
 	}
 	for placed < count {
 		done := false
@@ -494,7 +497,7 @@ func presentGateRefusal(reg *cards.Registry, b *certdeck.Builder, card string, p
 		return reasonPresentZone
 	}
 	alts, raws := specAlts(spec)
-	op, n, lit := cmpParse(strings.TrimSpace(params["PresentCompare"]))
+	op, n, lit := cmpParse(presentCompareOf(params))
 	my := presentCount(reg, f, seat, zones, alts, card, source)
 	if !lit {
 		// engine n >= mine: an upper bound mine already breaks is decided;
@@ -507,24 +510,31 @@ func presentGateRefusal(reg *cards.Registry, b *certdeck.Builder, card string, p
 	if cmpHolds(my, op, n) {
 		return ""
 	}
+	need := 0
 	switch op {
-	case "GE", "GT":
-		need := n
-		if op == "GT" {
-			need = n + 1
-		}
-		if need-my > 8 {
-			return reasonPresentCount
-		}
-		if placed := placePresent(reg, b, card, f, alts, raws, zones, seat, need-my); placed < need-my {
-			return reasonPresentCount
-		}
-		return ""
+	case "GE", "EQ":
+		// EQ: the engine's count is mine or more, so a count short of the
+		// bound is placed up to it (above it, the gate is decided: unmet)
+		need = n
+	case "GT":
+		need = n + 1
+	case "NE":
+		need = my + 1 // mine equals the bound: one more steps off it
 	default:
-		// LE/LT/EQ: engine n >= mine, so mine above the bound refuses for
-		// the engine too; mine under it stays undecided.
+		// LE/LT: the engine's count is mine or more, and mine already breaks
+		// the bound
 		return reasonPresentCount
 	}
+	if need <= my {
+		return reasonPresentCount // EQ with mine above the bound
+	}
+	if need-my > 8 {
+		return reasonPresentCount
+	}
+	if placed := placePresent(reg, b, card, f, alts, raws, zones, seat, need-my); placed < need-my {
+		return reasonPresentCount
+	}
+	return ""
 }
 
 // litOK reports whether op is one cmpParse can produce.
@@ -781,19 +791,35 @@ func countBodyValue(reg *cards.Registry, f *StartFile, seat int, card string, so
 // either way), and an unread zone word or a spec-less property keeps the
 // head unresolvable, as the engine does.
 func playerCountOpponentsValue(reg *cards.Registry, f *StartFile, seat int, card string, source bool, prop string) (int, bool) {
+	zones, spec, ok := oppExtremeParts(prop)
+	if !ok {
+		return 0, false
+	}
+	n, ok := playerCountOpponentsSpecValue(reg, f, 1-seat, card, zones, spec)
+	if !ok {
+		return 0, false
+	}
+	return n, true // one opponent seat: the extreme is its count, highest or lowest alike
+}
+
+// oppExtremeParts splits a PlayerCountOpponents$ property
+// ("HighestValid Land.YouCtrl", "LowestValidGraveyard Creature") into the
+// zones it counts and its member-side spec; ok is false for a property this
+// pin does not read.
+func oppExtremeParts(prop string) (zones []string, spec string, ok bool) {
 	prop = strings.TrimSpace(prop)
 	rest, ok := strings.CutPrefix(prop, "Highest")
 	if !ok {
 		if rest, ok = strings.CutPrefix(prop, "Lowest"); !ok {
-			return 0, false
+			return nil, "", false
 		}
 	}
 	rest = strings.TrimPrefix(rest, "Valid")
-	zonePart, spec := rest, ""
+	zonePart := rest
 	if i := strings.IndexAny(rest, " $\t"); i >= 0 {
 		zonePart, spec = rest[:i], strings.TrimSpace(rest[i+1:])
 	}
-	zones := []string{"battlefield"}
+	zones = []string{"battlefield"}
 	if zonePart != "" {
 		zones = nil
 		for _, tok := range strings.Split(zonePart, ",") {
@@ -802,18 +828,14 @@ func playerCountOpponentsValue(reg *cards.Registry, f *StartFile, seat int, card
 			case "battlefield", "hand", "graveyard", "library", "exile", "stack", "command":
 				zones = append(zones, w)
 			default:
-				return 0, false
+				return nil, "", false
 			}
 		}
 	}
 	if strings.TrimSpace(spec) == "" {
-		return 0, false // the engine keeps a spec-less extreme unresolvable
+		return nil, "", false // the engine keeps a spec-less extreme unresolvable
 	}
-	n, ok := playerCountOpponentsSpecValue(reg, f, 1-seat, card, zones, spec)
-	if !ok {
-		return 0, false
-	}
-	return n, true // one opponent seat: the extreme is its count, highest or lowest alike
+	return zones, spec, true
 }
 
 // playerCountOpponentsSpecValue is the per-member count of the zone-count
@@ -834,7 +856,9 @@ func playerCountOpponentsSpecValue(reg *cards.Registry, f *StartFile, oppSeat in
 				if !a.known || a.self {
 					continue
 				}
-				if !ctrlOK(a.ctrl, false) || !a.matches(fa, false) {
+				// the member's own cards: a YouCtrl qualifier names the member
+				// (the opponent here), so its cards are "mine" to the spec
+				if !ctrlOK(a.ctrl, true) || !a.matches(fa, false) {
 					continue
 				}
 				n++
@@ -880,6 +904,10 @@ func sVarGateRefusal(reg *cards.Registry, b *certdeck.Builder, card string, face
 	if !ok {
 		body = check
 	}
+	body = strings.TrimSpace(body)
+	if rest, ok := strings.CutPrefix(body, "Count$"); ok {
+		body = strings.TrimSpace(rest) // the heads below name the bare body
+	}
 	val, evaluated := countBodyValue(reg, f, seat, card, true, body)
 	if !evaluated {
 		return ""
@@ -905,7 +933,8 @@ func sVarGateRefusal(reg *cards.Registry, b *certdeck.Builder, card string, face
 		return reasonAttackers
 	case body == "YourTurns":
 		return reasonYourTurns
-	case body == "PlayerCountPlayers" || body == "PlayerCountOpponents":
+	case body == "PlayerCountPlayers" || body == "PlayerCountOpponents" ||
+		strings.HasPrefix(body, "PlayerCountOpponents$"):
 		return reasonCountUnmet
 	}
 	return "" // a zone count the placement could not reach: undecided
@@ -921,6 +950,40 @@ func hasAnyPrefix(s string, prefixes ...string) bool {
 	return false
 }
 
+// placeOppExtreme places the opponent-side cards a failed
+// PlayerCountOpponents$Highest/Lowest comparison needs: the opponent is the
+// one member, so its count is the extreme either way, and the spec is read
+// from its side (a YouCtrl qualifier names the opponent). It returns the
+// value added and whether the property is one it reads.
+func placeOppExtreme(reg *cards.Registry, b *certdeck.Builder, card string, f *StartFile, seat int, prop, op string, n, val int) (int, bool) {
+	zones, spec, ok := oppExtremeParts(prop)
+	if !ok {
+		return 0, false
+	}
+	need := n
+	if op == "GT" {
+		need = n + 1
+	}
+	deficit := need - val
+	if deficit <= 0 || deficit > 8 {
+		return 0, true
+	}
+	alts, raws := specAlts(spec)
+	for i := range alts {
+		alts[i].ctrl = ctrlAny // the member's own cards: the seat is forced below
+	}
+	return placePresent(reg, b, card, f, alts, raws, zones, 1-seat, deficit), true
+}
+
+// presentCompareOf is a gate's PresentCompare$ literal, "GE1" (at least one,
+// the engine's and Forge's default) when absent.
+func presentCompareOf(params map[string]string) string {
+	if cmp := strings.TrimSpace(params["PresentCompare"]); cmp != "" {
+		return cmp
+	}
+	return "GE1"
+}
+
 // placeCountBody places the state a failed CheckSVar$ comparison needs. It
 // returns the value added and whether the body is a zone count it read
 // (dotted and scalar heads place nothing).
@@ -934,8 +997,8 @@ func placeCountBody(reg *cards.Registry, b *certdeck.Builder, card string, f *St
 		body == "PlayerCountPlayers" || body == "PlayerCountOpponents" {
 		return 0, false
 	}
-	if strings.HasPrefix(body, "PlayerCountOpponents$") {
-		return 0, false // a player extreme the start does not place to
+	if rest, ok := strings.CutPrefix(body, "PlayerCountOpponents$"); ok {
+		return placeOppExtreme(reg, b, card, f, seat, strings.TrimSpace(rest), op, n, val)
 	}
 	head, arg, _ := strings.Cut(body, " ")
 	arg = strings.TrimSpace(arg)
@@ -1111,7 +1174,7 @@ func presentGateRead(reg *cards.Registry, f *StartFile, seat int, params map[str
 		return false, true
 	}
 	alts, _ := specAlts(spec)
-	op, n, lit := cmpParse(strings.TrimSpace(params["PresentCompare"]))
+	op, n, lit := cmpParse(presentCompareOf(params))
 	my := presentCount(reg, f, seat, zones, alts, card, source)
 	if !lit {
 		if litOK(op) && breaksUpper(my, op, n) {
