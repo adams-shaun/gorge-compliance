@@ -141,6 +141,16 @@ type startFocus struct {
 	// Bait is the spell the focus seat's opponent casts before the focus play
 	// (game.Focus.Bait).
 	Bait string `json:"bait"`
+	// BaitSelf is the spell the focus seat itself casts (and holds priority
+	// on) before its play (game.Focus.BaitSelf); BaitAbility the permanent
+	// whose ability the bait seat activates (game.Focus.BaitAbility);
+	// BaitTarget the permanent the bait spell targets (game.Focus.BaitTarget).
+	BaitSelf    string `json:"baitSelf"`
+	BaitAbility string `json:"baitAbility"`
+	// BaitAbilitySelf is whether the focus seat itself activates the
+	// BaitAbility permanent (it sits on its own battlefield).
+	BaitAbilitySelf bool   `json:"baitAbilitySelf,omitempty"`
+	BaitTarget      string `json:"baitTarget"`
 	// Targets are the permanents the focus play must target, in the order the
 	// play asks for them (game.Focus.Targets).
 	Targets []string `json:"targets"`
@@ -296,7 +306,9 @@ func (f *startFile) focusOf() (game.Focus, error) {
 			out.Kind, out.Ability, out.Mode, out.Times = o.Kind, o.Ability, o.Mode, o.Times
 		}
 		out.Attack, out.Block = o.Attack, o.Block
-		out.Bait = o.Bait
+		out.Bait, out.BaitSelf, out.BaitAbility, out.BaitTarget =
+			o.Bait, o.BaitSelf, o.BaitAbility, o.BaitTarget
+		out.BaitAbilitySelf = o.BaitAbilitySelf
 		out.Targets = o.Targets
 	}
 	if out.Seat < 0 || out.Seat > 1 {
