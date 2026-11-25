@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a4b42b3-6a95-41e1-9741-b35723d8da73	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:giant-beaver:f0a0:s1,f:xs:XP:giant-beaver:f0a0:s1	-	-	-	3aa6ded33acb	-	c9521d22849c	-	-	2026-11-25	xproof
 2a56fe0b-f8a9-499c-bce1-cec6cb3b66f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a56fe0b-f8a9-499c-bce1-cec6cb3b66f0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a56fe0b-f8a9-499c-bce1-cec6cb3b66f0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+2a56fe0b-f8a9-499c-bce1-cec6cb3b66f0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2a62b226-d317-4212-9781-9c1d72056f11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a62b226-d317-4212-9781-9c1d72056f11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blisterpod:f0t0:s1,f:xs:XP:blisterpod:f0t0:s1	-	-	-	d864b561c9cb	-	952a90bf5762	-	-	2026-11-24	xproof
 2a64cee5-04e2-4cbf-8fa9-d55c854f9500	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:genestealer-locus:cast:s1,f:xs:XP:genestealer-locus:cast:s1	-	-	-	8c0bd19283bb	-	2a036d0d4dd4	-	-	2026-11-24	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ac0d584-997b-4d11-aecf-f1494eebc94c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ac0d584-997b-4d11-aecf-f1494eebc94c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ac1c95c-2a9d-40bc-9cad-9cadfa3f19f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ac1c95c-2a9d-40bc-9cad-9cadfa3f19f7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
-2ac1c95c-2a9d-40bc-9cad-9cadfa3f19f7	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+2ac1c95c-2a9d-40bc-9cad-9cadfa3f19f7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+2ac1c95c-2a9d-40bc-9cad-9cadfa3f19f7	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2ac2b815-2d72-48e6-b43a-18884a74bf95	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:skycoach-waypoint:land:s1,f:xs:XP:skycoach-waypoint:land:s1	-	-	-	23c4009444b0	-	72e45c281397	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2ac2b815-2d72-48e6-b43a-18884a74bf95	f0/a1	AlterAttribute	agreed	-	FX	start	2	0	x:xs:XP:skycoach-waypoint:f0a1:s1,f:xs:XP:skycoach-waypoint:f0a1:s1	-	-	-	23c4009444b0	-	72e45c281397	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2ac2b815-2d72-48e6-b43a-18884a74bf95	land	land	agreed	-	FX	start	2	0	x:xs:XP:skycoach-waypoint:land:s1,f:xs:XP:skycoach-waypoint:land:s1	-	-	-	23c4009444b0	-	72e45c281397	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
