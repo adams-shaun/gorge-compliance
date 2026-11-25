@@ -791,7 +791,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # TargetsBelowMinTest (fork fixtures targets-below-min/) fails on 53059b9bbf2 with the exact miss and passes here;
 # scripts/forge-oracle-test-targets-below-min.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-targets-below-min.
-FORGE_ORACLE_REF ?= e45e911953c94991e63335d3ea14d0c881ba283a
+# 61f44264a28 = e45e911953c plus the mandatory ChangeTargets retarget regression test (xproof cluster xpt-6b85f89a,
+# Revolutionary Rebuff / Redirect Lightning, gorge~forge): p0's Rebuff targets Reach Through Mists, p1 casts Redirect
+# Lightning (additional cost 5 life) targeting the Rebuff, and as Redirect resolves gorge's effChangeTargets retargets
+# the Rebuff to Redirect Lightning (still a nonartifact spell on the stack, CR 608.2) through a one-candidate choose ask
+# (CR 115.7a: a mandatory change cannot keep the old target, so the Mists is not offered) whose pick travels in
+# pick_refs alone (no option label), marked retarget. The 019d50429f retarget pick path already consumes it at Forge's
+# chooseNewTargetsFor, so the find replays clean at e45e911953c and this pin adds no driver code: only the test class
+# ChangeTargetsMandatoryTest and its fixture (fork fixtures/changetargets/redirect-lightning-rebuff.jsonl). The test
+# fails on b0ddb8556a (before the 019d50429f targeted retarget) with the exact "Missing new targets answer at step 11:
+# Counter target nonartifact spell unless its controller pays {2}" miss; scripts/forge-oracle-test-change-targets-mandatory.sh
+# (make forge-driver-tests) runs it. Driver tests only (test class + fixture); cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-new-targets-resolve.
+FORGE_ORACLE_REF ?= 61f44264a288b160584935c40c0d49505f26808d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
