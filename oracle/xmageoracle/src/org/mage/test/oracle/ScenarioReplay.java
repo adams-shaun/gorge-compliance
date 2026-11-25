@@ -56,6 +56,7 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.turn.Step;
 import mage.game.PutToBattlefieldInfo;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -4013,6 +4014,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String cp = "step " + i + " (" + op + ")";
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
+                // The pass into a declaration step is a non-priority pending
+                // decision (CR 508.1, 509.1, 117.3a) only when the declaration
+                // has a legal option. With none, gorge records the forced empty
+                // declaration inside the step transition and its checkpoint is
+                // the live priority that follows, which does offer the holder's
+                // options. Covers both the checkpoint moved before the
+                // declaration (reportAs: a recorded declaration proves at least
+                // one option) and one taken in the step when the scenario never
+                // declares (the mm-menon/icetill shape, decided from the game
+                // state at that checkpoint).
+                final PhaseStep declaration = reportAs != null
+                        ? reportAs : declarationCheckpoint(steps, i, seats);
                 // A forced resolution queued during this step (waitStackResolved
                 // override) must settle before the snapshot. Capture the flag
                 // now: the whole action queue is built before execute(), so the
@@ -4031,8 +4044,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         g.checkStateAndTriggered();
                     }
                     applyDeclarationStepEnd(reportAs, g);
+                    final boolean declarationPending = declaration != null
+                            && (reportAs != null || declarationHadOptions(declaration, g));
                     JsonObject snap = snapshot(info, g,
-                            handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null);
+                            handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null, declarationPending);
                     if (reportAs != null) {
                         snap.addProperty("step", reportAs.name());
                     }
@@ -7342,17 +7357,86 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return null;
         }
         JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        PhaseStep at = declarationStep(pos);
+        if (at == PhaseStep.DECLARE_ATTACKERS && declares(steps, index + 1, "attack", "attackers")) {
+            return at;
+        }
+        if (at == PhaseStep.DECLARE_BLOCKERS && declares(steps, index + 1, "block", "blocks")) {
+            return at;
+        }
+        return null;
+    }
+
+    /** The declaration step a recorded pass checkpoint stands at: the pass
+     * entered declare-attackers (or declare-blockers), so the step's
+     * declaration is the pending turn-based action and nobody holds priority
+     * (CR 508.1, 509.1, 117.3a). This holds whether or not the scenario then
+     * records the declaration: declarationAhead moves that checkpoint before
+     * the step, while a scenario that never declares (the xproof mm-menon /
+     * icetill shape) checkpoints in the step itself. Null for any other pass. */
+    static PhaseStep declarationCheckpoint(JsonArray steps, int index) {
+        return declarationCheckpoint(steps, index, seatCount(steps));
+    }
+
+    static PhaseStep declarationCheckpoint(JsonArray steps, int index, int seats) {
+        if (!passEntersNewStep(steps, index, seats)) {
+            return null;
+        }
+        return declarationStep(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"));
+    }
+
+    /** Whether the declaration phase a pass checkpoint stands at had at least
+     * one legal option, so gorge stopped there with a pending non-priority
+     * declaration (CR 508.1, 509.1, 117.3a). The checkpoint is taken at the
+     * step's first priority, after XMage has already declared or skipped: an
+     * attacker or blocker in combat is evidence of a legal option, as is one
+     * still available. No option means gorge recorded the forced empty
+     * declaration inside the step transition and the checkpoint is the live
+     * priority that follows, whose offered set is not empty by rule. */
+    static boolean declarationHadOptions(PhaseStep declaration, Game g) {
+        switch (declaration) {
+            case DECLARE_ATTACKERS: {
+                if (!g.getCombat().getAttackers().isEmpty()) {
+                    return true;
+                }
+                Player active = g.getPlayer(g.getActivePlayerId());
+                return active != null && !active.getAvailableAttackers(g).isEmpty();
+            }
+            case DECLARE_BLOCKERS: {
+                if (!g.getCombat().getBlockers().isEmpty()) {
+                    return true;
+                }
+                if (g.getCombat().getAttackers().isEmpty()) {
+                    return false;
+                }
+                for (CombatGroup group : g.getCombat().getGroups()) {
+                    Player defender = g.getPlayer(group.getDefendingPlayerId());
+                    if (defender == null) {
+                        continue;
+                    }
+                    for (Permanent blocker : defender.getAvailableBlockers(g)) {
+                        if (group.canBlock(blocker, g)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            default:
+                return false;
+        }
+    }
+
+    /** The declaration step a pass position names, or null for another step. */
+    private static PhaseStep declarationStep(JsonObject pos) {
         if (!pos.has("step")) {
             return null;
         }
-        String at = pos.get("step").getAsString();
-        if (at.equals("declare-attackers") && declares(steps, index + 1, "attack", "attackers")) {
-            return PhaseStep.DECLARE_ATTACKERS;
+        switch (pos.get("step").getAsString()) {
+            case "declare-attackers": return PhaseStep.DECLARE_ATTACKERS;
+            case "declare-blockers": return PhaseStep.DECLARE_BLOCKERS;
+            default: return null;
         }
-        if (at.equals("declare-blockers") && declares(steps, index + 1, "block", "blocks")) {
-            return PhaseStep.DECLARE_BLOCKERS;
-        }
-        return null;
     }
 
     /** Whether step {@code index} is the op with a non-empty declaration list. */
@@ -9768,15 +9852,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     private JsonObject snapshot(String checkpoint, Game g) {
-        return snapshot(checkpoint, g, null);
+        return snapshot(checkpoint, g, null, false);
     }
 
     /** The checkpoint's snapshot. {@code holderAfterStep}, when a pass
      * checkpoint is captured before XMage moves the priority, names the seat
      * that receives it (CR 117.3d); every other snapshot reads the game's
      * current holder. Both fields that report the holder -- priority and
-     * offered -- read this one value, so they cannot disagree. */
-    private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep) {
+     * offered -- read this one value, so they cannot disagree unless the
+     * checkpoint is a pending declaration: {@code declarationPending} marks
+     * the pass into declare-attackers/declare-blockers, where the declaration
+     * is a turn-based action before anyone has priority (CR 508.1, 509.1,
+     * 117.3a). gorge's snapshot offers nothing for a non-priority pending
+     * decision, so this checkpoint does too even though XMage still names the
+     * active player. */
+    private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep, boolean declarationPending) {
         lastCheckpointStack = stackNames(g);
         UUID holder = holderAfterStep != null && !g.hasEnded() ? holderAfterStep : g.getPriorityPlayerId();
         JsonObject s = new JsonObject();
@@ -9915,7 +10005,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         s.add("stack", stack);
         if (wantsOffered()) {
-            s.add("offered", offered(g, holder));
+            s.add("offered", declarationPending ? new JsonArray() : offered(g, holder));
         }
         return (JsonObject) gorgeSpellings(s);
     }
