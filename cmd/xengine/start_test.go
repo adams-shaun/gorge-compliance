@@ -1635,6 +1635,56 @@ func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
 	}
 }
 
+// TestStartActivationConditionIsMetOrRefused: the activation gates the engine
+// reads when it offers the focus play must either be satisfied by placed
+// state or refuse the start by name. Crater Elemental's Formidable count,
+// Kindly Stranger's Delirium condition, Bloodline Keeper's five-Vampire
+// present gate and the legendary lock on Urza's Ruinous Blast are placed to
+// and the keys fire; Aven Augur's upkeep-only window is refused, never
+// written as a start the play would refuse as start-not-exercised.
+func TestStartActivationConditionIsMetOrRefused(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Crater Elemental", "f0/a1"},                         // CheckSVar$ FormidableTest GE8
+		{"Kindly Stranger // Demon-Possessed Witch", "f0/a0"}, // Activation$ Delirium
+		{"Bloodline Keeper // Lord of Lineage", "f0/a1"},      // IsPresent$ GE5
+		{"Urza's Ruinous Blast", "cast"},                      // legendary sorcery
+		{"Companion of the Trials", "f0/a0"},                  // IsPresent$ Planeswalker.Gideon+YouCtrl, no PresentCompare$
+		{"Tectonic Edge", "f0/a1"},                            // PlayerCountOpponents$HighestValid Land.YouCtrl GE4
+		{"Shadows of the Past", "f0/a0"},                      // four creature cards in the graveyard
+		{"Champions of the Shoal", "cast"},                    // BeholdExile<1/Merfolk>
+		// optional and X additional costs the bot may decline: still starts
+		{"Crashing Wave", "cast"},
+		{"March of Wretched Sorrow", "cast"},
+		{"Explosive Singularity", "cast"},
+		{"Aether Tide", "cast"},
+	} {
+		t.Run(c.card, func(t *testing.T) { startExercisesKey(t, reg, b, c.card, c.key) })
+	}
+	// a gate no placed state can satisfy at turn 1's main refuses by name
+	for _, c := range []struct{ card, key, reason string }{
+		{"Aven Augur", "f0/a0", "start:upkeep-only"},
+		{"Hell's Caretaker", "f0/a0", "start:upkeep-only"},
+		{"Bloodsoaked Champion", "f0/a0", "start:attackers-declared"}, // Raid: Count$AttackersDeclared
+		{"Vengeful Devil", "f0/a0", "start:morbid"},                   // Count$Morbid.1.0
+		{"Serra Avenger", "cast", "start:cantbecast"},                 // a vanilla creature spell with a CantBeCast static
+		{"Ogre Siegebreaker", "f0/a0", "start:target-condition:was-dealt-damage-this-turn"},
+		{"Witch's Mist", "f0/a0", "start:target-condition:was-dealt-damage-this-turn"},
+		{"Sword of the Paruns", "f0/a0", "start:present-count"}, // IsPresent$ Card.EquippedBy, no PresentCompare$
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
+			}
+		})
+	}
+}
+
 // TestPlayStartPlayerCountersPinRefusesPerID: at a pin without
 // rules.StartSeat.PlayerCounters, the start that names energy is refused per
 // id in the lowering log and the other starts of the directory still play.
