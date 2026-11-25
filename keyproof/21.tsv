@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2145329d-49df-4f4a-b7d7-3cc2f64639d3	f0/t0	SpellCast/Storm	agreed	-	FX	start	2	0	x:xs:XP:volcanic-awakening:f0t0:s1,f:xs:XP:volcanic-awakening:f0t0:s1	-	-	-	23c4009444b0	-	5021f598b8a8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 214562b1-fdf0-4d5d-93f0-594b31b80bb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 214562b1-fdf0-4d5d-93f0-594b31b80bb3	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:shadow-stinger:f0a0:s1,f:xs:XP:shadow-stinger:f0a0:s1	-	-	-	44e3ec152eea	-	228185206228	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-214562b1-fdf0-4d5d-93f0-594b31b80bb3	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:shadow-stinger:f0a0:s1,f:xs:XP:shadow-stinger:f0a0:s1	-	-	-	44e3ec152eea	-	228185206228	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+214562b1-fdf0-4d5d-93f0-594b31b80bb3	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:shadow-stinger:f0t0:s1,f:xs:XP:shadow-stinger:f0t0:s1	-	-	-	44e3ec152eea	-	228185206228	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 21465dcd-c93a-4a2c-ae10-e22ebd5cae2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21474195-5d91-466d-8874-4818c900dea7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21486218-70ec-4c60-9844-8f7c80912333	cast	cast-resolve	agreed	-	FX	scen	2	0	Splashy Spellcaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-2160aed4-5a7a-4eca-96b5-707204fa73bb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2160aed4-5a7a-4eca-96b5-707204fa73bb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:cast:s1,f:xs:XP:storm-god-s-oracle:cast:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0a0:s1,f:xs:XP:storm-god-s-oracle:f0a0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0t0:s1,f:xs:XP:storm-god-s-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof

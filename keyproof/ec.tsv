@@ -12,7 +12,7 @@ ec136f6f-015b-4200-97b6-a2c1bf39e135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ec136f6f-015b-4200-97b6-a2c1bf39e135	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ec16008f-18d6-4461-b99c-0a504f211618	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sheriff-of-safe-passage:cast:s1,f:xs:XP:sheriff-of-safe-passage:cast:s1	-	-	-	3aa6ded33acb	-	3fb15b46cda7	-	-	2026-11-25	xproof
 ec17b9db-dd80-4b46-a1b5-215f26bf6498	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec17b9db-dd80-4b46-a1b5-215f26bf6498	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+ec17b9db-dd80-4b46-a1b5-215f26bf6498	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ec187304-4c05-44da-8ad5-7c56f6b05212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec187304-4c05-44da-8ad5-7c56f6b05212	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec19a9bc-6fc1-4150-976b-37a47b165016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandstorm-salvager:cast:s1,f:xs:XP:sandstorm-salvager:cast:s1	-	-	-	6f84be0f34c0	-	7079a105e931	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -49,8 +49,8 @@ ec484fd1-aa9a-4056-becf-1d8c710272fd	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:syn
 ec484fd1-aa9a-4056-becf-1d8c710272fd	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:syndicate-guildmage:f0a1:s1,f:xs:XP:syndicate-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	7d75ddd5146a	-	-	2026-11-24	xproof
 ec49dfcf-d16d-4621-af4b-4a6f09043221	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runeclaw-bear:cast:s1,f:xs:XP:runeclaw-bear:cast:s1	-	-	-	8a1b1a193ec0	-	a95ea501edde	-	-	2026-11-24	xproof
 ec528198-a38a-4ef7-9804-78a25c94ecc1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:web-shooters:cast:s1,f:xs:XP:web-shooters:cast:s1	-	-	-	23c4009444b0	-	8b19c60cc4c2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-ec528198-a38a-4ef7-9804-78a25c94ecc1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:web-shooters:f0a0:s1,f:xs:XP:web-shooters:f0a0:s1	-	-	-	23c4009444b0	-	8b19c60cc4c2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-ec528198-a38a-4ef7-9804-78a25c94ecc1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Web-Shooters/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ec528198-a38a-4ef7-9804-78a25c94ecc1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:web-shooters:static0.0:s1,f:xs:XP:web-shooters:static0.0:s1	-	-	-	44e3ec152eea	-	8b19c60cc4c2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+ec528198-a38a-4ef7-9804-78a25c94ecc1	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:web-shooters:static0.0:s1,f:xs:XP:web-shooters:static0.0:s1	-	-	-	44e3ec152eea	-	8b19c60cc4c2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ec57dcb8-127f-4922-a9f9-5227db1751a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec57dcb8-127f-4922-a9f9-5227db1751a9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec57dcb8-127f-4922-a9f9-5227db1751a9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ ecd49d85-9c8c-4cc9-9a83-072ecd433677	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fla
 ecd567aa-cbf0-4fc2-872c-a5c08ba60f52	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Voracious Vacuum"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 ecd567aa-cbf0-4fc2-872c-a5c08ba60f52	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Voracious Vacuum"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 ecd6587c-3548-4bc1-89e4-9f7fbbc2d2ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ecd6587c-3548-4bc1-89e4-9f7fbbc2d2ad	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+ecd6587c-3548-4bc1-89e4-9f7fbbc2d2ad	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ecd8d7f4-7b11-4097-afc0-ef3c81edd90c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serra-paragon:cast:s1,f:xs:XP:serra-paragon:cast:s1	-	-	-	ae86f6029288	-	7409856c4295	-	-	2026-11-24	xproof
 ecd8d7f4-7b11-4097-afc0-ef3c81edd90c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ecd8d7f4-7b11-4097-afc0-ef3c81edd90c	f0/t1	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

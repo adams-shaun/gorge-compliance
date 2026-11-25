@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d8aa053-289d-40d9-baa7-9bd1c5b8e957	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:greenbelt-guardian:f0a1:s1,f:xs:XP:greenbelt-guardian:f0a1:s1	-	-	-	23c4009444b0	-	b08db8ba9f0e	-	-	2026-11-25	xproof
 2d8e1054-654f-42e8-8c29-12c3cf13a3eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d8eba16-cfca-4a38-bde0-6ee36c67231a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2d8eba16-cfca-4a38-bde0-6ee36c67231a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-2d8eba16-cfca-4a38-bde0-6ee36c67231a	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2d8eba16-cfca-4a38-bde0-6ee36c67231a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2d8eba16-cfca-4a38-bde0-6ee36c67231a	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2d91cf05-fc39-4d76-8c95-62738b57e0a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d91cf05-fc39-4d76-8c95-62738b57e0a0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:griffin-protector:f0t0:s1,f:xs:XP:griffin-protector:f0t0:s1	-	-	-	fb9d3088f0bf	-	3a6ad4ea4aeb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2d92a035-dd7a-4426-a8c0-f04e0b836dad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2db8dda3-8136-4cf2-ba2d-ecc344a36725	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2db8fc61-13af-4227-83f9-9f426ab978d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2dbe384b-71c4-43f9-be35-ba2894021b85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2dbe384b-71c4-43f9-be35-ba2894021b85	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+2dbe384b-71c4-43f9-be35-ba2894021b85	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-harbinger:f0t0:s1,f:xs:XP:garruk-s-harbinger:f0t0:s1	-	-	-	44e3ec152eea	-	d87545ee5e05	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2dbe8aaa-2e34-4552-8da7-cf8ecbbaa7b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:biomass-mutation:cast:s1,f:xs:XP:biomass-mutation:cast:s1	-	-	-	cfde1dc26c40	-	5b19ba8f630e	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 2dc59566-10cb-468a-b6a2-17d6c0186e6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:capture-sphere:f0t0:s1,f:xs:XP:capture-sphere:f0t0:s1	-	-	-	d864b561c9cb	-	5c544c63ade4	-	-	2026-11-24	xproof
 2dc59566-10cb-468a-b6a2-17d6c0186e6d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:capture-sphere:f0t0:s1,f:xs:XP:capture-sphere:f0t0:s1	-	-	-	d864b561c9cb	-	5c544c63ade4	-	-	2026-11-24	xproof

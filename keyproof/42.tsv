@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 425d755b-7a15-423d-9640-494debc79dd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:norin-swift-survivalist:cast:s1,f:xs:XP:norin-swift-survivalist:cast:s1	-	-	-	23c4009444b0	-	5a408ea7f968	-	-	2026-11-25	xproof
 425d755b-7a15-423d-9640-494debc79dd9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:norin-swift-survivalist:combat0.attack:s1,f:xs:XP:norin-swift-survivalist:combat0.attack:s1	-	-	-	23c4009444b0	-	5a408ea7f968	-	-	2026-11-25	xproof
 425d755b-7a15-423d-9640-494debc79dd9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Norin, Swift Survivalist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-425d755b-7a15-423d-9640-494debc79dd9	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:norin-swift-survivalist:f0t0:s1,f:xs:XP:norin-swift-survivalist:f0t0:s1	-	-	-	44e3ec152eea	-	5a408ea7f968	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+425d755b-7a15-423d-9640-494debc79dd9	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:runaway-carriage:f0t1:s1,f:xs:XP:runaway-carriage:f0t1:s1	-	-	-	44e3ec152eea	-	5a408ea7f968	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 425d755b-7a15-423d-9640-494debc79dd9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Norin, Swift Survivalist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 425fea06-76ec-4cd9-bd3b-750504fd7fd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 425fea06-76ec-4cd9-bd3b-750504fd7fd2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42bbef66-967b-4922-8b2e-e57d1b8244bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bbef66-967b-4922-8b2e-e57d1b8244bb	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 42bc33dd-3bba-462d-b272-2e8bd58c649e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42bc33dd-3bba-462d-b272-2e8bd58c649e	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+42bc33dd-3bba-462d-b272-2e8bd58c649e	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:fetid-heath:f0a1:s1,f:xs:XP:fetid-heath:f0a1:s1	-	-	-	336eab778104	-	c1699497e30c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:fetid-heath:f0a1:s1,f:xs:XP:fetid-heath:f0a1:s1	-	-	-	336eab778104	-	c1699497e30c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -29,11 +29,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:webspinner-cuff:f0a0:s1	-	-	-	3aa6ded33acb	-	7c016df776d7	-	-	2026-11-25	xproof
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 782c47c5-b108-415c-9b70-a033ac52956f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-782c47c5-b108-415c-9b70-a033ac52956f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+782c47c5-b108-415c-9b70-a033ac52956f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:stonework-packbeast:f0a0:s1,f:xs:XP:stonework-packbeast:f0a0:s1	-	-	-	44e3ec152eea	-	cb40b8b67bd7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 782dcbc4-5a11-42f5-b8d9-4572e36d45b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 782e8499-0714-4cee-869e-8ebd7dad0242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drakewing-krasis:cast:s1,f:xs:XP:drakewing-krasis:cast:s1	-	-	-	d864b561c9cb	-	86d536bc6916	-	-	2026-11-24	xproof
 78301998-fd9b-4cd5-afad-dbcb43cac2a7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-78301998-fd9b-4cd5-afad-dbcb43cac2a7	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+78301998-fd9b-4cd5-afad-dbcb43cac2a7	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 78304a06-4c9a-4cdf-b67f-067d88762381	cast	cast-resolve	agreed	-	X	scen	1	0	Clash of Elements/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7830f600-c7c7-48f8-8020-3493c5745eed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7830f600-c7c7-48f8-8020-3493c5745eed	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78b6dd40-c182-4037-a4d3-9fd012b2c584	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herd-heirloom:cast:s1,f:xs:XP:herd-heirloom:cast:s1	-	-	-	23c4009444b0	-	085cd5d3e09c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78b6dd40-c182-4037-a4d3-9fd012b2c584	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:herd-heirloom:cast:s1,f:xs:XP:herd-heirloom:cast:s1	-	-	-	23c4009444b0	-	085cd5d3e09c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78b6dd40-c182-4037-a4d3-9fd012b2c584	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:herd-heirloom:f0a1:s1,f:xs:XP:herd-heirloom:f0a1:s1	-	-	-	336eab778104	-	085cd5d3e09c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-78b86f23-650b-4347-917c-3ee8c6007e4e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-78b86f23-650b-4347-917c-3ee8c6007e4e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+78b86f23-650b-4347-917c-3ee8c6007e4e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+78b86f23-650b-4347-917c-3ee8c6007e4e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 78b86f23-650b-4347-917c-3ee8c6007e4e	f1/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 78bac92f-333f-4c43-bccf-03c3772ee99b	cast	cast-resolve	agreed	-	FX	scen	2	0	Corpses of the Lost/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 78bac92f-333f-4c43-bccf-03c3772ee99b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
