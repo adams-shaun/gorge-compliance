@@ -986,7 +986,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # trigger and "The monarch: that creature's controller becomes the monarch" to its DamageDone trigger by role (beside the Evoke label binding).
 # TriggerOrderMonarchLabelTest (run-unit-tests.sh) fails on 52ddaba3075 and passes here. Driver-only; die-roll code, cardsfolder and tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-monarch-trigger-label.
-FORGE_ORACLE_REF ?= efd75d00b34da0fe9d0079dd5c9986f3525d6f67
+# 71fd77c15c0 = efd75d00b34 plus StepMachine.pickObjects/pickFrom checking a gorge object pick against min(min, options), as Forge's
+# InputSelectEntitiesFromList clamps both bounds to the option count (xproof cluster xpt-8184f8d0, Foreboding Steamboat's "each player
+# chooses two nontoken, non-Vehicle creatures they control" over one creature: gorge records the one pick it can make, CR 609.3, and the
+# driver strict-missed "gorge picked 1, Forge wants 2..2"). ChooseFewerThanMinTest (run-unit-tests.sh) fails on efd75d00b34 and passes here;
+# one pick over two candidates where two are required still misses. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-fewer-than-min.
+FORGE_ORACLE_REF ?= 71fd77c15c0e42d9357a53896dbac05812480ff5
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
