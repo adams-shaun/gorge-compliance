@@ -67,7 +67,14 @@ GO_TEST_FLAGS ?= -p=2
 # creatures investigates" counts a player with no creatures as zero, so with nobody controlling a creature every player is
 # tied for the most and each investigates, CR 608.2; the effect returned early on an empty creature map so nobody did).
 # NoWitnessesTest. Card behaviour change only for that card, so the manifests are unchanged.
-XMAGE_REF  ?= fdbae29b12162fce8204b80f4bb7d56ceb253b41
+# 30c62e641b = fdbae29b12 + fork branch fix/leaves-graveyard-self-enter (CardsLeaveGraveyardTriggeredAbility.checkTrigger returns
+# false when the batch holds the source's own non-battlefield-to-battlefield move, CR 603.10a: a leaves-the-graveyard
+# ability looks back to the state before the event, where Skeleton Crew / Rot Farm Mortipede sat in the graveyard and
+# their battlefield-only trigger did not function, so returning themselves from it triggered nothing; XMage checked the
+# batch after the move and stacked the trigger). RotFarmMortipedeTest and SkeletonCrewTest.test_ReturnItself_NoTrigger
+# (the fork carried it @Ignore'd). Card behaviour change only for the CardsLeaveGraveyardTriggeredAbility cards, so the
+# manifests are unchanged.
+XMAGE_REF  ?= 30c62e641b379a0a888f04412ffa59b8ebe0a618
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
