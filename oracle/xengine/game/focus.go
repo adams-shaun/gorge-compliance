@@ -333,6 +333,9 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 	if st.done || st.f.Kind == "" {
 		return in, err
 	}
+	if i := st.declineOpening(d); i >= 0 {
+		return answer(in, i), nil
+	}
 	if st.f.Kind == "block" {
 		return st.block(d, in), nil
 	}
@@ -387,6 +390,24 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 		}
 	}
 	return in, nil
+}
+
+// declineOpening is the "No" option of an opening-hand action (a Leyline's
+// "begin the game with it on the battlefield", Gemstone Caverns) on a focus
+// object of the focus seat whose focus is to cast or play that card, else -1.
+// The opening round runs after a scripted start is dealt, so a yes put the
+// card on the battlefield before main 1 and its cast was never offered: play
+// refused every such start as start-not-exercised.
+func (s *focusState) declineOpening(d decision.Decision) int {
+	if d.Kind != decision.KChoose || int(d.Player) != s.f.Seat || s.f.Kind != "cast" && s.f.Kind != "land" {
+		return -1
+	}
+	for i, o := range d.Options {
+		if o.Kind == "opening_no" && s.objs[o.Obj] {
+			return i
+		}
+	}
+	return -1
 }
 
 // block is act for a "block" focus: the defending focus seat blocks with the
