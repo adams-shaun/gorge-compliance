@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:redshift-rocketeer-chief:combat0.attack:s1,f:xs:XP:redshift-rocketeer-chief:combat0.attack:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
 582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:redshift-rocketeer-chief:f0a1:s1,f:xs:XP:redshift-rocketeer-chief:f0a1:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
 582c8030-1d41-4c63-8ed6-06aad398a96c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-582c8030-1d41-4c63-8ed6-06aad398a96c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+582c8030-1d41-4c63-8ed6-06aad398a96c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:goblin-legionnaire:f0a0:s1,f:xs:XP:goblin-legionnaire:f0a0:s1	-	-	-	fc71ca68c5ac	-	a091737f6130	-	-	2026-11-24	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5843bf12-27db-4e7d-81ee-98874bea72c7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5843bf12-27db-4e7d-81ee-98874bea72c7	f0/a2	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:gideon-champion-of-justice:f0a2:s1,f:xs:XP:gideon-champion-of-justice:f0a2:s1	-	-	-	fb9d3088f0bf	-	86919cff3ebb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 5846718c-7d31-4d2c-80a2-b1534e2aebc1	cast	cast-resolve	agreed	-	FX	scen	2	0	Summon: Shiva/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-584b15f2-6ae9-413a-8b8d-9244dbea4878	f0/a0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
-584b15f2-6ae9-413a-8b8d-9244dbea4878	f0/a1	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+584b15f2-6ae9-413a-8b8d-9244dbea4878	f0/a0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+584b15f2-6ae9-413a-8b8d-9244dbea4878	f0/a1	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 584b15f2-6ae9-413a-8b8d-9244dbea4878	land	land	agreed	-	FX	start	2	0	x:xs:XP:unclaimed-territory:land:s1,f:xs:XP:unclaimed-territory:land:s1	-	-	-	d864b561c9cb	-	dc4ab58c977e	-	-	2026-11-24	xproof
 584cee10-f18c-4633-95cc-f2e7a11841ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rograkh-son-of-rohgahh:cast:s1,f:xs:XP:rograkh-son-of-rohgahh:cast:s1	-	-	-	8c0bd19283bb	-	2f63eebf9714	-	-	2026-11-24	xproof
 584cf0fd-112a-4ca6-9c0e-1f3228a7d325	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reckless-impulse:cast:s1,f:xs:XP:reckless-impulse:cast:s1	-	-	-	23b491658465	-	2f17ca0ff876	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 589abb40-04b4-4dbe-9c2a-446b6c3075d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warchief-giant:cast:s1,f:xs:XP:warchief-giant:cast:s1	-	-	-	8c0bd19283bb	-	9c4698f0a6f0	-	-	2026-11-24	xproof
 589abb40-04b4-4dbe-9c2a-446b6c3075d1	f0/t0	Attacks/Myriad	agreed	-	FX	start	4	0	x:xs:XP:warchief-giant:cast:s1,f:xs:XP:warchief-giant:cast:s1	-	-	-	8c0bd19283bb	-	9c4698f0a6f0	-	-	2026-11-24	xproof
 589b742c-fee5-413a-a56c-4d4ffaf0f73d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-589b742c-fee5-413a-a56c-4d4ffaf0f73d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+589b742c-fee5-413a-a56c-4d4ffaf0f73d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 589d1c6e-5808-424c-a6e4-dadef90d119e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 589d6b67-17ad-4ca7-9b0c-1b919bf03a27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 589ea35b-c64e-4cf6-81c5-806e9463e992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundering-chariot:cast:s1,f:xs:XP:thundering-chariot:cast:s1	-	-	-	ae86f6029288	-	aec42c9cd9e3	-	-	2026-11-24	xproof

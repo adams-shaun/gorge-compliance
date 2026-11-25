@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1663d54f-4f39-4a03-aac2-e2923cbb7de8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frost-trickster:f0t0:s1,f:xs:XP:frost-trickster:f0t0:s1	-	-	-	d864b561c9cb	-	4c42e2739bfc	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
-1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	23c4009444b0	-	0d7032989aba	-	-	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t0:s1,f:xs:XP:blaring-captain:f0t0:s1	-	-	-	8c0bd19283bb	-	0d7032989aba	-	-	2026-11-24	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	23c4009444b0	-	0d7032989aba	-	-	2026-11-25	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169a4a77-12ff-4997-9550-bdcd456aa2f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-eagles-are-coming:cast:s1,f:xs:XP:the-eagles-are-coming:cast:s1	-	-	-	65d07beecc37	-	1804596e431b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 169c468e-0e17-450b-8954-df47d78ad8f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169c468e-0e17-450b-8954-df47d78ad8f8	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skyfire-kirin:f0t0:s1,f:xs:XP:skyfire-kirin:f0t0:s1	-	-	-	23c4009444b0	-	e04bfe1cd95f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-169cf74a-07bf-4841-83f3-904df8a0a39b	cast	cast	diverged	-	-	start	0	2	-	894184f25c3d	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+169cf74a-07bf-4841-83f3-904df8a0a39b	cast	cast	diverged	-	-	start	0	2	-	894184f25c3d	-	-	720af1749791	-	a862efcd5d6b	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lion-vulture:f0t0:s1,f:xs:XP:lion-vulture:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 169e415a-9ff6-43bb-bb68-fc49e69f95a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporkin:cast:s1,f:xs:XP:vaporkin:cast:s1	-	-	-	d864b561c9cb	-	fd570a8ead52	-	-	2026-11-24	xproof
