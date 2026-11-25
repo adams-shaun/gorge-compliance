@@ -381,3 +381,60 @@ func TestStartTransformingDFC(t *testing.T) {
 		})
 	}
 }
+
+// TestStartHybridCostIsExercised: a card script writes a hybrid, two-generic
+// hybrid or Phyrexian mana symbol without a slash (ManaCost:2 WB WB, 2W, UP).
+// scen read only the slashed form, so it placed no land for those symbols (and
+// a Plains for a cost whose only colours were hybrid): the cast was never
+// affordable and play refused every such start as start-not-exercised (xproof
+// 11250507: 234 of the 1661 start-not-exercised keys had a hybrid cost).
+func TestStartHybridCostIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, card := range []string{
+		"Lydia Frye",          // 2 UB: three lands, one an Island or a Swamp
+		"Syndicate Heavy",     // 2 WB WB
+		"Kitchen Finks",       // 1 GW GW
+		"Spectral Procession", // 2W 2W 2W
+	} {
+		t.Run(card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, card, "cast", scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			in := t.TempDir()
+			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			out := t.TempDir()
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			items := 0
+			if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+				t.Fatal(err)
+			}
+			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+				var r lowerRow
+				if err := json.Unmarshal(b, &r); err != nil {
+					return err
+				}
+				if slices.Contains(r.Reasons, reasonStartNotExercised) {
+					t.Errorf("%s: %s (p0 battlefield %v)", r.ID, reasonStartNotExercised, res.Start.Setup.P0.Battlefield)
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+			if items == 0 {
+				t.Errorf("no item written (p0 battlefield %v)", res.Start.Setup.P0.Battlefield)
+			}
+		})
+	}
+}

@@ -870,3 +870,28 @@ func TestStartFocusIsOffered(t *testing.T) {
 		})
 	}
 }
+
+// TestLandsForSlashlessHybrid: Forge writes hybrid, two-generic hybrid and
+// Phyrexian symbols without a slash; each still takes one basic of its first
+// colour, as the slashed form does.
+func TestLandsForSlashlessHybrid(t *testing.T) {
+	for _, c := range []struct {
+		cost string
+		want []string
+	}{
+		{"2 UB", []string{"Island", "Island", "Island"}},
+		{"2 U/B", []string{"Island", "Island", "Island"}},
+		{"1 GW GW", []string{"Forest", "Forest", "Forest"}},
+		{"2W 2W 2W", []string{"Plains", "Plains", "Plains"}},
+		{"UP", []string{"Island"}},
+		{"1 RWP", []string{"Mountain", "Mountain"}},
+		{"3 R", []string{"Mountain", "Mountain", "Mountain", "Mountain"}},
+	} {
+		if got := landsFor(splitCost(c.cost), basicFor(c.cost)); !slices.Equal(got, c.want) {
+			t.Errorf("landsFor(%q) = %v, want %v", c.cost, got, c.want)
+		}
+	}
+	if !hasShard("2 WB WB", 'B') || hasShard("2 WB WB", 'U') {
+		t.Error("hasShard misreads a slashless hybrid")
+	}
+}
