@@ -793,8 +793,10 @@ func TestStartStaticObserved(t *testing.T) {
 // refused by name. A 0/0 creature with an enters-with-counters replacement (Endless
 // One, Ugin's Conjurant, Phyrexian Marauder) dies to SBA when a start places it, so
 // it is never an enabler or a bearer: Branching Bolt and Cloak of Confusion get a
-// creature that lives. Bone to Ash targets a spell on the stack and Burning Oil an
-// attacking or blocking creature, neither of which a start can have at main 1.
+// creature that lives. Bone to Ash targets a spell on the stack, which a start
+// cannot have at main 1; Burning Oil's attacking or blocking creature is a
+// scripted attack (StartFocus.Attack), and Maze of Shadows' attacking creature
+// with shadow one no carrier meets.
 func TestStartFocusIsOffered(t *testing.T) {
 	reg, b := testBuilder(t)
 	creature := func(names []string) bool {
@@ -816,7 +818,13 @@ func TestStartFocusIsOffered(t *testing.T) {
 			}
 		}},
 		{card: "Bone to Ash", key: "cast", reason: "start:needs-stack-target"},
-		{card: "Burning Oil", key: "cast", reason: "start:needs-combat"},
+		{card: "Burning Oil", key: "cast", check: func(t *testing.T, f *StartFile) {
+			// the attacking target is a carrier of p0's that attacks first
+			if f.Focus.Attack == "" || f.Focus.Block != "" || f.Active != 0 || !slices.Contains(f.Setup.P0.Battlefield, f.Focus.Attack) {
+				t.Errorf("focus %+v active %d p0 battlefield %v, want p0 attacking with a creature of its own", *f.Focus, f.Active, f.Setup.P0.Battlefield)
+			}
+		}},
+		{card: "Maze of Shadows", key: "f0/a1", reason: "start:needs-combat"},
 		{card: "Branching Bolt", key: "cast", check: func(t *testing.T, f *StartFile) {
 			if !creature(f.Setup.P1.Battlefield) {
 				t.Errorf("p1 battlefield %v has no creature that survives", f.Setup.P1.Battlefield)

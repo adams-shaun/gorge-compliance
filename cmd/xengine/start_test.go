@@ -566,3 +566,112 @@ func TestStartTwoTargetsIsExercised(t *testing.T) {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
 }
+
+// combatSteps is the attackers and blocks the items' attack and block steps
+// declare, as "attack:<card>" and "block:<blocker>><attacker>".
+func combatSteps(items []oraclegen.Item) []string {
+	var out []string
+	for _, it := range items {
+		for _, st := range it.Steps {
+			switch st.Op {
+			case "attack":
+				for _, a := range st.Attackers {
+					out = append(out, "attack:"+a)
+				}
+			case "block":
+				for _, b := range st.Blocks {
+					out = append(out, "block:"+b[0]+">"+b[1])
+				}
+			}
+		}
+	}
+	return out
+}
+
+// startCombatIsExercised is startIsExercised for a key whose line declares a
+// combat: every item has an attack step (and a block step when block), each
+// declaring one creature.
+func startCombatIsExercised(t *testing.T, card, key string, block bool) {
+	t.Helper()
+	reg, b := certdeckBuilder(t)
+	for _, it := range startIsExercised(t, reg, b, card, key) {
+		var attacks, blocks int
+		for _, s := range combatSteps([]oraclegen.Item{it}) {
+			if strings.HasPrefix(s, "attack:") {
+				attacks++
+			} else {
+				blocks++
+			}
+		}
+		if attacks != 1 || block && blocks != 1 || !block && blocks != 0 {
+			t.Errorf("%s: combat %v, want one attacker and %v one blocker", it.ID, combatSteps([]oraclegen.Item{it}), block)
+		}
+	}
+}
+
+// TestStartAttackTriggerIsExercised: "whenever a creature you control with
+// power 2 or less attacks" (Attacks, ValidCard a filter, not Card.Self) was
+// met by the card itself attacking: an enchantment never can, so the attack
+// was never offered and play refused the start as start-not-exercised. The
+// attacker is now the most inert carrier creature the filter takes, the
+// opponent's for "whenever a creature attacks you".
+func TestStartAttackTriggerIsExercised(t *testing.T) {
+	for _, card := range []string{
+		"Raid Bombardment",      // Creature.powerLE2+YouCtrl
+		"Righteous Cause",       // Creature
+		"Cavalcade of Calamity", // Creature.powerLE1+YouCtrl
+		"Lost in the Woods",     // Creature, Attacked$ You: the opponent attacks
+	} {
+		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/t0", false) })
+	}
+}
+
+// TestStartAttackingTargetIsExercised: a play that targets an attacking
+// creature ("target attacking creature", Creature.attacking) is offered only
+// in combat, and the focus seat took its play at the first main-phase
+// priority: scen refused the start as start:needs-combat. The start now
+// scripts the attack (StartFocus.Attack): a carrier the filter takes, on the
+// battlefield since the turn began, attacks, and the play waits for it.
+func TestStartAttackingTargetIsExercised(t *testing.T) {
+	for _, c := range []struct{ card, key string }{
+		{"Gravel Slinger", "f0/a0"},   // T: attacking or blocking creature; the Slinger stays home
+		{"Rubblehulk", "f0/a0"},       // bloodrush from hand
+		{"Unraveling Mummy", "f0/a0"}, // Zombie.attacking: a subtype head
+		{"Pitfall Trap", "cast"},      // Creature.attacking+withoutFlying
+	} {
+		t.Run(c.card, func(t *testing.T) { startCombatIsExercised(t, c.card, c.key, false) })
+	}
+}
+
+// TestStartBlockingTargetIsExercised: "target blocking creature" needs a
+// block, which only the defending seat declares (CR 509.1a): the start now
+// makes the focus seat the defender, the opponent attacking with Grizzly
+// Bears and the focus seat blocking it with a carrier (StartFocus.Block).
+func TestStartBlockingTargetIsExercised(t *testing.T) {
+	for _, c := range []struct{ card, key string }{
+		{"Kithkin Shielddare", "f0/a0"}, // W, T: target blocking creature gets +2/+2
+		{"Rabid Rats", "f0/a0"},         // T: target blocking creature gets -1/-1
+		{"Elven Fortress", "f0/a0"},     // 1 G: target blocking creature gets +0/+1
+		{"Evasive Maneuvers", "cast"},   // an instant
+	} {
+		t.Run(c.card, func(t *testing.T) { startCombatIsExercised(t, c.card, c.key, true) })
+	}
+}
+
+// TestStartFocusCombatantTargetIsExercised: a target in combat with the focus
+// card ("creature blocking Knight of Dusk", Creature.blockingSource; "creature
+// Wall of Corpses is blocking", blockedBySource) was read as any creature, so
+// the start planted one out of combat and play refused it as
+// start-not-exercised. The focus card now attacks or blocks in the scripted
+// combat, and the target is its opposite number; a {T} play (Steadfast
+// Armasaur) takes the blocking side, as an attack would tap it.
+func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
+	for _, card := range []string{
+		"Knight of Dusk",      // Creature.blockingSource: the Knight attacks
+		"Wall of Corpses",     // Creature.blockedBySourceLKI: the Wall blocks
+		"Steadfast Armasaur",  // 1 W, T: blockingSource or blockedBySource
+		"Benalish Missionary", // Creature.blocked: an attacker that was blocked
+	} {
+		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/a0", true) })
+	}
+}

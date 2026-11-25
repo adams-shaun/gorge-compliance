@@ -85,6 +85,10 @@ type startFocus struct {
 	Ability int    `json:"ability"`
 	Mode    string `json:"mode"`
 	Times   int    `json:"times"`
+	// Attack and Block are the scripted combat the focus play waits for
+	// (game.Focus.Attack, Block).
+	Attack string `json:"attack"`
+	Block  string `json:"block"`
 }
 
 // startFlagErr is the error of -start given with a flag it does not combine
@@ -219,6 +223,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 		if o.Kind != "" {
 			out.Kind, out.Ability, out.Mode, out.Times = o.Kind, o.Ability, o.Mode, o.Times
 		}
+		out.Attack, out.Block = o.Attack, o.Block
 	}
 	if out.Seat < 0 || out.Seat > 1 {
 		return out, fmt.Errorf("focus seat %d: no seat lists %q", out.Seat, f.Card)
