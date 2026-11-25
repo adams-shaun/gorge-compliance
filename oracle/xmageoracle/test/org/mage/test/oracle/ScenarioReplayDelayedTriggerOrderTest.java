@@ -68,6 +68,25 @@ public final class ScenarioReplayDelayedTriggerOrderTest {
         equal(-1, ScenarioReplay.triggerKeyMatch("Soul Warden", pridemate, "Soul Warden"));
         // The driver's by-name flag disables containment outright.
         equal(-1, ScenarioReplay.triggerKeyMatch("Draw a card.", rules, arcane, false));
+
+        // Smokestack: Forge's key omits the "of their choice" XMage inserts
+        // mid-sentence (xproof find xs:XP:smokestack:f0t0:s1); the fold lets
+        // the prefix pass pick the one sacrifice rule.
+        String smoke = "Smokestack";
+        String smokeKey = "At the beginning of each player's upkeep, that player sacrifices a permanent "
+                + "for each soot counter on {this}.";
+        String putRule = "At the beginning of your upkeep, you may put a soot counter on {this}.";
+        String sacRule = "At the beginning of each player's upkeep, that player sacrifices a permanent "
+                + "of their choice for each soot counter on {this}.";
+        equal(false, sacRule.startsWith(smokeKey));
+        equal(1, ScenarioReplay.triggerKeyMatch(smokeKey, List.of(putRule, sacRule), smoke));
+        equal(1, ScenarioReplay.triggerKeyMatch(smokeKey, List.of(putRule, sacRule), smoke, false));
+        // Two rules that normalise identically under the fold: fail closed.
+        equal(-1, ScenarioReplay.triggerKeyMatch(smokeKey, List.of(sacRule, sacRule), smoke));
+        // An unrelated key stays unmatched.
+        equal(-1, ScenarioReplay.triggerKeyMatch(
+                "At the beginning of each player's upkeep, that player discards a card.",
+                List.of(putRule, sacRule), smoke));
         System.out.println("ScenarioReplayDelayedTriggerOrderTest ok");
     }
 }
