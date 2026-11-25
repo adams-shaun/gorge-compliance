@@ -221,7 +221,12 @@ func DigestOfGame(e *rules.Engine) Digest {
 		}
 		switch {
 		case o.AttachedTo != 0:
-			pd.AttachedTo = faceName(g.Obj(o.AttachedTo))
+			// Name the host the way its own field entry is named, not by
+			// its printed face: a copied or renamed permanent's current
+			// name is what the snapshot's Name carries. Reading faceName
+			// here would keep the printed name and disagree with
+			// DigestOfSnapshot on a host whose name changed (CR 707.2).
+			pd.AttachedTo = fieldName(g.Obj(o.AttachedTo))
 		case o.HasAttachedPlayer:
 			pd.AttachedTo = fmt.Sprintf("p%d", o.AttachedPlayer)
 		}
@@ -304,10 +309,32 @@ func DigestOfSnapshot(s rules.OracleSnapshot) Digest {
 			LibraryCount: p.LibraryCount, LibraryTop: top, Pool: p.Pool,
 		})
 	}
+	// A snapshot's AttachedTo is the host's scenario ref (gorge's
+	// oracle_snapshot.go sets it from objRef), not its name: a ref is
+	// identity. A setup-bound ref keeps the name the host had at setup, so
+	// reading a name out of its spelling reports "Ornithopter" for a
+	// permanent that has since copied Memnite (CR 707.2) while the host's
+	// own field entry says "Memnite". Resolve the ref through the snapshot
+	// permanent that carries it, the way DigestOfGame names the host from
+	// the live object; only a ref no permanent carries (a player, or a host
+	// left out of the snapshot) falls back to its spelling.
+	byRef := make(map[string]string, len(s.Permanents))
+	for _, p := range s.Permanents {
+		byRef[p.Ref] = p.Name
+	}
+	attachedName := func(ref string) string {
+		if ref == "" {
+			return ""
+		}
+		if name, ok := byRef[ref]; ok {
+			return name
+		}
+		return refName(ref)
+	}
 	for _, p := range s.Permanents {
 		d.Field = append(d.Field, PermDigest{
 			Name: p.Name, Controller: p.Controller, Owner: p.Owner, Token: p.Token, Tapped: p.Tapped,
-			PT: p.PT, Damage: p.Damage, Counters: normCounters(p.Counters), AttachedTo: refName(p.AttachedTo),
+			PT: p.PT, Damage: p.Damage, Counters: normCounters(p.Counters), AttachedTo: attachedName(p.AttachedTo),
 		})
 	}
 	sortField(d.Field)

@@ -416,7 +416,32 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # at the same step, seat not compared. Test FatesealDigOrderTest (fixtures/unmapped/fateseal-dig-order.jsonl), run by
 # scripts/forge-oracle-test-fateseal-dig-order.sh. Driver-only (ScriptedController/StepMachine), die-roll code unchanged;
 # cardsfolder/tokenscripts unchanged. Fork branch fix/xp-forge-driver-fateseal-dig-order.
-FORGE_ORACLE_REF ?= 70b77c0ff083dad4a4ebf669840baffb33bed996
+# 9d7baedf34 = d0f16bee2e plus the echo and cumulative upkeep pay-or-sacrifice answer: Forge builds both keywords as an
+# upkeep trigger whose DB$ Sacrifice asks payCostToPreventEffect for Echo$/CumulativeUpkeep$, but the driver only took an
+# unless_pay decision there, so gorge's one-pick election became a strict miss plus a leftover. payCostToPreventEffect
+# now also takes that decision by pick kind: echo_pay/echo_pay_manual/cumulative_pay/cumulative_pay_manual pay through
+# payCostDuringAbilityResolve with payingUnlessCost set, and echo_sac/cumulative_sac decline (Forge sacrifices the source).
+# The payment's own cost choose consumes the follow-up echo_action_pick / cumulative_action_sac / discard pick through
+# ScriptedCostDecision and the sacrifice/discard overrides. EchoCumulativeUpkeepTest (5 tests: echo pay, echo sacrifice,
+# cumulative pay, cumulative pay with a creature sacrifice, a non-mana echo cost) and the full driver suite (188 tests)
+# are green on it. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
+# a3c422f79a6 = the clean merge of 9d7baedf34 (the echo/cumulative-upkeep answer above) and 70b77c0ff08 (the coin-force and
+# Dig order-to-Library driver above): the echo election touches ScriptedController.payCostToPreventEffect while the coin force
+# touches ForcedDieRandom and the Dig path ScriptedController.orderMoveToZoneList/StepMachine, disjoint enough to merge cleanly,
+# so the pinned driver keeps all three fixes. The merge adds no code of its own; the full driver suite (192 tests, including
+# EchoCumulativeUpkeepTest, ForcedCoinFlipTest, FatesealDigOrderTest and ForcedDieRollTest) is green on it; cardsfolder and
+# tokenscripts unchanged. Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
+# 304ae5ffe0e = a3c422f79a6 plus the whole-cost card pick of an elected unless payment (xproof cluster xpt-4561863a, Ill-Timed Explosion's
+# UnlessCost$ Discard<2/Card> and Ghostly Dancers + Rent Is Due's tap-two): ScriptedController.chooseCardsForCost asked pickObjects for
+# 0..amount whenever Forge passed isOptional, which every UnlessCost$ payment does, so an option list of exactly the amount (the 2-card
+# hand, the 2 untapped creatures) strict-missed "cost card" although gorge logs no pick for a forced one. gorge's unless_pay answer has
+# already elected the payment (payingUnlessCost), and an elected payment pays the whole cost (CR 118.12, 601.2h), so the ask is now
+# amount..amount there: the exact-size list is forced and a logged pick is still consumed first; outside an elected unless payment the
+# 0..amount ask is unchanged. UnlessCostForcedPickTest (3 tests: both finds replayed, plus a 3-card hand that consumes gorge's logged
+# discard pick) fails without the change; the full driver suite (195 tests) is green on it. Driver-only: cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-cost-cards-forced.
+FORGE_ORACLE_REF ?= 304ae5ffe0e0d1a12c76ef25ea80e3e892432bbc
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
