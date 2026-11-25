@@ -1181,15 +1181,24 @@ func TestColourPicksManaReflected(t *testing.T) {
 		Picks: []game.Pick{{Kind: "mana", Obj: 8, Ability: 1, Label: "Add "}}}
 	pitCol := game.Entry{Kind: "choose",
 		Picks: []game.Pick{{Kind: "mana", Obj: 8, Label: "Add R"}}}
-	// The priority form is still refused by the pre-existing ability-wheel guard
-	// (one activate step cannot answer both the wheel and the colour); what this
-	// case pins is that the colour answer is still *derived* for the tap, not
-	// suppressed by the wheel pick. The cast form can carry it.
+	// The cast form can carry the colour answer on the tap.
 	castAsked := game.Entry{Kind: "priority",
 		Picks: []game.Pick{{Kind: "cast", Obj: 9, Ref: "p0:Thorin Oakenshield"}}}
 	steps, _, _, answers, why = lowerGroup(reg, seatMap{}, []game.Entry{castAsked, wheelAsked, pitCol})
 	if why != nil || len(steps) != 2 || !reflect.DeepEqual(steps[0].Answers, want) || len(answers) != 0 {
 		t.Fatalf("asked multi-ability reflection in a cast = %+v, answers %+v, %v; want the tap's choose answer", steps, answers, why)
+	}
+	// The priority "activate for mana" form lowers too. Its wheel option is
+	// labelled "Add " (a ManaReflected ability names no colour), which the
+	// runner's substring match cannot tell from the plain ability's "Add C",
+	// so the trace must not queue a "choose" for the wheel: that would spend
+	// the colour answer on the wheel. The step's ability index selects the
+	// wheel instead, and the colour answer is the runner's wildcard kind.
+	steps, _, _, answers, why = lowerGroup(reg, seatMap{}, []game.Entry{pitAct, wheelAsked, pitCol})
+	gotAny := []oraclegen.Answer{{Kind: "any", Pick: []string{"R"}}}
+	if why != nil || len(steps) != 1 || steps[0].AbilityIndex == nil || *steps[0].AbilityIndex != 1 ||
+		!reflect.DeepEqual(steps[0].Answers, gotAny) || len(answers) != 0 {
+		t.Fatalf("asked multi-ability reflection at priority = %+v, answers %+v, %v; want the tap's wildcard colour answer", steps, answers, why)
 	}
 }
 
