@@ -60,8 +60,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3cb6fe-24ef-4c09-8ff8-f303fc472a8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-blood-priest:f0t0:s1,f:xs:XP:malakir-blood-priest:f0t0:s1	-	-	-	ae86f6029288	-	2f2a737648da	-	-	2026-11-24	xproof
 3a3cb6fe-24ef-4c09-8ff8-f303fc472a8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malakir-blood-priest:f0t0:s1,f:xs:XP:malakir-blood-priest:f0t0:s1	-	-	-	ae86f6029288	-	2f2a737648da	-	-	2026-11-24	xproof
-3a3e8c9b-e458-4661-980d-0a84a4c2452b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
-3a3e8c9b-e458-4661-980d-0a84a4c2452b	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+3a3e8c9b-e458-4661-980d-0a84a4c2452b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glasswing-grace-age-graced-chapel:cast:s1,f:xs:XP:glasswing-grace-age-graced-chapel:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+3a3e8c9b-e458-4661-980d-0a84a4c2452b	f1/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:glasswing-grace-age-graced-chapel:f1a0:s1,f:xs:XP:glasswing-grace-age-graced-chapel:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 3a3f0bf4-7a02-4a57-8a18-ff22f012e0ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3f0bf4-7a02-4a57-8a18-ff22f012e0ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3fd911-b71c-49eb-aadb-cfa80b9e3a3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a940dfa-a026-4969-8981-ef90cdfbe9ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a96782b-e9c8-4bc5-845d-45f6bf7b8dc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lavastep-raider:cast:s1,f:xs:XP:lavastep-raider:cast:s1	-	-	-	d864b561c9cb	-	36c205c953c5	-	-	2026-11-24	xproof
 3a96782b-e9c8-4bc5-845d-45f6bf7b8dc4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lavastep-raider:f0a0:s1,f:xs:XP:lavastep-raider:f0a0:s1	-	-	-	d864b561c9cb	-	36c205c953c5	-	-	2026-11-24	xproof
-3a97bc8d-bd81-468e-9277-eba4fac11ee0	cast	cast-resolve	agreed	-	X	scen	1	0	Vastlands Scavenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3a97bc8d-bd81-468e-9277-eba4fac11ee0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vastlands-scavenger-bind-to-life:cast:s1,f:xs:XP:vastlands-scavenger-bind-to-life:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 3a97bc8d-bd81-468e-9277-eba4fac11ee0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vastlands Scavenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a97bc8d-bd81-468e-9277-eba4fac11ee0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vastlands Scavenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a9b9fe0-1846-41fc-b7c3-ed9abef27a6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

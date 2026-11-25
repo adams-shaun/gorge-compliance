@@ -91,9 +91,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3966c94b-e597-4b3f-a4f5-001d52fff9fe	cast	cast-resolve	agreed	-	FX	scen	2	0	Quake, Agent of S.H.I.E.L.D./cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3966c94b-e597-4b3f-a4f5-001d52fff9fe	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Quake, Agent of S.H.I.E.L.D./trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39694a3f-536e-41e0-adf6-d49de721aabd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-396b088d-f9af-4ee1-843f-dbe1633f9cc8	cast	cast-resolve	agreed	-	X	scen	1	0	Obyra's Attendants/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+396b088d-f9af-4ee1-843f-dbe1633f9cc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obyra-s-attendants-desperate-parry:cast:s1,f:xs:XP:obyra-s-attendants-desperate-parry:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 396b088d-f9af-4ee1-843f-dbe1633f9cc8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Obyra's Attendants/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-396b088d-f9af-4ee1-843f-dbe1633f9cc8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Obyra's Attendants/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+396b088d-f9af-4ee1-843f-dbe1633f9cc8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:obyra-s-attendants-desperate-parry:combat0.block:s1,f:xs:XP:obyra-s-attendants-desperate-parry:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 396cc8ce-9efa-4fc7-90a6-b439b2b021db	cast	cast-resolve	agreed	-	FX	scen	2	0	Battlesong Berserker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 396cc8ce-9efa-4fc7-90a6-b439b2b021db	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Battlesong Berserker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 396efb56-7a54-4d91-b2ce-7f3c62c3238b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 397964db-465a-407d-9dc7-d0a4944473ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enhanced-awareness:cast:s1,f:xs:XP:enhanced-awareness:cast:s1	-	-	-	d864b561c9cb	-	554af2f9d78f	-	-	2026-11-24	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elder-gargaroth:cast:s1,f:xs:XP:elder-gargaroth:cast:s1	-	-	-	cb99a158debc	-	9b29ebfb9341	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:elder-gargaroth:f0t0:s1,f:xs:XP:elder-gargaroth:f0t0:s1	-	-	-	21b2cceac526	-	9b29ebfb9341	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 397df813-c759-4246-8def-122c7ff82d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:charging-cinderhorn:f0t0:s1,f:xs:XP:charging-cinderhorn:f0t0:s1	-	-	-	65d07beecc37	-	63337e6ce608	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof

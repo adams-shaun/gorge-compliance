@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31a331a0-3065-4ecb-9e6a-ab11e241833b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:false-mourning:cast:s1,f:xs:XP:false-mourning:cast:s1	-	-	-	5f2128bf97e4	-	ffd28f8ac72a	-	-	2026-11-24	xproof
 31a49fb9-1081-46c3-a352-0444869afdc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:essence-fracture:cast:s1,f:xs:XP:essence-fracture:cast:s1	-	-	-	5b42d43d5d80	-	30e40e702ab6	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 31a49fb9-1081-46c3-a352-0444869afdc9	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:essence-fracture:cast:s1,f:xs:XP:essence-fracture:cast:s1	-	-	-	8c0bd19283bb	-	30e40e702ab6	-	-	2026-11-24	xproof
-31af78dd-e962-4d9a-b696-f3048be03486	cast	cast-resolve	agreed	-	X	scen	1	0	Virtue of Strength/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+31af78dd-e962-4d9a-b696-f3048be03486	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:virtue-of-strength-garenbrig-growth:cast:s1,f:xs:XP:virtue-of-strength-garenbrig-growth:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 31b18e10-c74d-4384-a0e2-def0b3ec4799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31b18e10-c74d-4384-a0e2-def0b3ec4799	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:lunar-force:f0t0:s1,f:xs:XP:lunar-force:f0t0:s1	-	-	-	fb9d3088f0bf	-	28ac795970e1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 31b27775-196b-4022-bff5-25b34290ff7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:from-beyond:f0t0:s1,f:xs:XP:from-beyond:f0t0:s1	-	-	-	3aa6ded33acb	-	de78ec312b34	-	-	2026-11-25	xproof
@@ -183,10 +183,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ambitious-aetherborn:f0t0:s1,f:xs:XP:ambitious-aetherborn:f0t0:s1	-	-	-	3aa6ded33acb	-	96365d4085ff	-	-	2026-11-25	xproof
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:ambitious-aetherborn:f0t0:s1,f:xs:XP:ambitious-aetherborn:f0t0:s1	-	-	-	3aa6ded33acb	-	96365d4085ff	-	-	2026-11-25	xproof
 31f8dd0d-2495-4c37-a103-96f21164bda8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:wish-good-luck:cast:s1	-	-	-	23b491658465	-	bfc6b162048a	-	-	2026-11-24	xproof
-31fc5d8b-94bc-4688-8a84-f15800e717a8	cast	cast-resolve	agreed	-	X	scen	1	0	Ashling, Rekindled/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+31fc5d8b-94bc-4688-8a84-f15800e717a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashling-rekindled-ashling-rimebound:f0t2:s1,f:xs:XP:ashling-rekindled-ashling-rimebound:f0t2:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ashling-rekindled-ashling-rimebound:f0t2:s1,f:xs:XP:ashling-rekindled-ashling-rimebound:f0t2:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t2	Phase	agreed	-	FX	start	2	0	x:xs:XP:ashling-rekindled-ashling-rimebound:f0t2:s1,f:xs:XP:ashling-rekindled-ashling-rimebound:f0t2:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f1/t2	trigger#1.2	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#1.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

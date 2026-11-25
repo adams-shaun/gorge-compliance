@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f0d797e-d897-453d-92b6-a90e1a548dc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0d797e-d897-453d-92b6-a90e1a548dc5	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
-2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merfolk-cave-diver:cast:s1,f:xs:XP:merfolk-cave-diver:cast:s1	-	-	-	23b491658465	-	72a0303270cc	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Merfolk Cave-Diver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f24637d-8d8e-49de-b229-4cdb97595ed7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:beatrix-loyal-general:combat0.block:s1,f:xs:XP:beatrix-loyal-general:combat0.block:s1	-	-	-	23c4009444b0	-	64ac439d81d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f24637d-8d8e-49de-b229-4cdb97595ed7	f0/t0	Phase	agreed	-	F	start	6	0	f:xs:XP:beatrix-loyal-general:cast:s1	-	-	-	23c4009444b0	-	64ac439d81d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f26f270-26d9-46d3-957f-19f52d51eb03	cast	cast-resolve	agreed	-	X	scen	1	0	The Legend of Roku/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f26f270-26d9-46d3-957f-19f52d51eb03	f1/a0	activate#1.0	agreed	-	X	scen	1	0	The Legend of Roku/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f26f270-26d9-46d3-957f-19f52d51eb03	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Legend of Roku/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2f26f270-26d9-46d3-957f-19f52d51eb03	f1/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:the-legend-of-roku-avatar-roku:f1a0:s1,f:xs:XP:the-legend-of-roku-avatar-roku:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+2f26f270-26d9-46d3-957f-19f52d51eb03	f1/t0	Attacks/Firebending	agreed	-	FX	start	2	0	x:xs:XP:the-legend-of-roku-avatar-roku:f1a0:s1,f:xs:XP:the-legend-of-roku-avatar-roku:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f292253-64d3-4cf2-881f-a3eea4fda388	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magma-jet:cast:s1,f:xs:XP:magma-jet:cast:s1	-	-	-	25696bf19d5b	-	b30e050483e5	-	-	2026-11-24	xproof
 2f299e69-d82b-48c9-b7f5-cf07cd9dced2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f299e69-d82b-48c9-b7f5-cf07cd9dced2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jungle-delver:f0a0:s1,f:xs:XP:jungle-delver:f0a0:s1	-	-	-	d864b561c9cb	-	4dfeb21eb98c	-	-	2026-11-24	xproof
@@ -71,8 +71,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f4360f6-9ac7-499f-b0a5-769550ea15ba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2f4374f6-c695-4a5d-a6d6-0e41eaa587ca	cast	cast-resolve	agreed	-	FX	scen	2	0	Dowsing Device/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f4374f6-c695-4a5d-a6d6-0e41eaa587ca	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f4374f6-c695-4a5d-a6d6-0e41eaa587ca	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Dowsing Device/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f4374f6-c695-4a5d-a6d6-0e41eaa587ca	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Dowsing Device/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2f4374f6-c695-4a5d-a6d6-0e41eaa587ca	f1/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dowsing-device-geode-grotto:f1a0:s1,f:xs:XP:dowsing-device-geode-grotto:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+2f4374f6-c695-4a5d-a6d6-0e41eaa587ca	f1/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:dowsing-device-geode-grotto:f1a1:s1,f:xs:XP:dowsing-device-geode-grotto:f1a1:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f47661e-a107-4d98-8773-0a068a63df49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-mantra:f0t0:s1,f:xs:XP:ajani-s-mantra:f0t0:s1	-	-	-	3aa6ded33acb	-	3968e8a7490e	-	-	2026-11-25	xproof
 2f47661e-a107-4d98-8773-0a068a63df49	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-mantra:f0t0:s1,f:xs:XP:ajani-s-mantra:f0t0:s1	-	-	-	3aa6ded33acb	-	3968e8a7490e	-	-	2026-11-25	xproof
 2f497352-c812-48c4-a922-cc311bcdcdc6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arboreal-alliance:f0t0:s1,f:xs:XP:arboreal-alliance:f0t0:s1	-	-	-	8c0bd19283bb	-	240595054bda	-	-	2026-11-24	xproof
@@ -242,7 +242,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fdeb920-2e48-4308-9517-743eec219c04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fe0ebf5-52ed-4e92-9b93-81e9ae564439	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	cast	cast-resolve	agreed	-	FX	scen	2	0	Doctor Octopus, Master Planner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:doctor-octopus-master-planner:f0t0:s1,f:xs:XP:doctor-octopus-master-planner:f0t0:s1	-	-	-	23c4009444b0	-	e30bd8d1f3b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:doctor-octopus-master-planner:static0.0:s1,f:xs:XP:doctor-octopus-master-planner:static0.0:s1	-	-	-	23c4009444b0	-	e30bd8d1f3b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

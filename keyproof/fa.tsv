@@ -20,9 +20,9 @@ fa1be67e-a07e-42ce-88be-446acd643dc6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fa1cc78f-26bc-4d5d-973b-7cb7d7490973	cast	cast-resolve	agreed	-	X	scen	1	0	Twinned Vision/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa1dc21d-f7f6-425f-a4ae-2b0f143091e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa1dc21d-f7f6-425f-a4ae-2b0f143091e3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	cast	cast-resolve	agreed	-	X	scen	1	0	Spring-Loaded Sawblades/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spring-loaded-sawblades-bladewheel-chariot:f0t0:s1,f:xs:XP:spring-loaded-sawblades-bladewheel-chariot:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spring-Loaded Sawblades/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spring-loaded-sawblades-bladewheel-chariot:f0t0:s1,f:xs:XP:spring-loaded-sawblades-bladewheel-chariot:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Spring-Loaded Sawblades/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Spring-Loaded Sawblades/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa2154fb-6756-4cf8-85a6-68264fb7a0b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weaponize-the-monsters:cast:s1,f:xs:XP:weaponize-the-monsters:cast:s1	-	-	-	ae86f6029288	-	269c98859a20	-	-	2026-11-24	xproof
@@ -139,12 +139,12 @@ fa8b3557-b35a-4a68-ab85-cf09683f3bc5	f0/t0	AttackersDeclaredOneTarget	agreed	-	F
 fa8ddc13-5108-4fe9-b3aa-dc28df476f7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa8ddc13-5108-4fe9-b3aa-dc28df476f7b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sticky-fingers:f0t0:s1,f:xs:XP:sticky-fingers:f0t0:s1	-	-	-	6f84be0f34c0	-	08e55cf78fb5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 fa8e5291-1a50-4c05-820c-8ae756364d33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savageborn-hydra:cast:s1,f:xs:XP:savageborn-hydra:cast:s1	-	-	-	d864b561c9cb	-	089373761cc1	-	-	2026-11-24	xproof
-fa8e5291-1a50-4c05-820c-8ae756364d33	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+fa8e5291-1a50-4c05-820c-8ae756364d33	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 fa8f3827-8cd9-4896-ab0c-26fecacceb40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa8f3827-8cd9-4896-ab0c-26fecacceb40	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa944633-e078-41bb-9c7d-4f6b669c27a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-tyrant:cast:s1,f:xs:XP:death-tyrant:cast:s1	-	-	-	8c0bd19283bb	-	9dff628679eb	-	-	2026-11-24	xproof
 fa944633-e078-41bb-9c7d-4f6b669c27a5	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:death-tyrant:f0a0:s1,f:xs:XP:death-tyrant:f0a0:s1	-	-	-	23c4009444b0	-	9dff628679eb	-	-	2026-11-25	xproof
-fa944633-e078-41bb-9c7d-4f6b669c27a5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+fa944633-e078-41bb-9c7d-4f6b669c27a5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 fa9677d2-1535-4c57-baa8-c0408e15da47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veteran-explorer:cast:s1,f:xs:XP:veteran-explorer:cast:s1	-	-	-	8c0bd19283bb	-	959c6c03be84	-	-	2026-11-24	xproof
 fa9677d2-1535-4c57-baa8-c0408e15da47	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:veteran-explorer:f0t0:s1,f:xs:XP:veteran-explorer:f0t0:s1	-	-	-	8c0bd19283bb	-	959c6c03be84	-	-	2026-11-24	xproof
 fa98c367-0312-49c6-abef-72e5ead4cc7d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:gingerbread-cabin:f0t0:s1,f:xs:XP:gingerbread-cabin:f0t0:s1	-	-	-	4b8018a80bf0	-	68c661cbc282	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

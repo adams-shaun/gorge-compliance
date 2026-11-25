@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4863e1cf-3ef2-4c2d-a0ea-b73ca60c660d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fetid-horror:cast:s1,f:xs:XP:fetid-horror:cast:s1	-	-	-	8c0bd19283bb	-	e03850c47fc7	-	-	2026-11-24	xproof
 4863e1cf-3ef2-4c2d-a0ea-b73ca60c660d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:fetid-horror:f0a0:s1,f:xs:XP:fetid-horror:f0a0:s1	-	-	-	8c0bd19283bb	-	e03850c47fc7	-	-	2026-11-24	xproof
 4864cc98-4fde-4010-81e9-ea4944347e7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4864cc98-4fde-4010-81e9-ea4944347e7e	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+4864cc98-4fde-4010-81e9-ea4944347e7e	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 4867cc47-de84-4958-b1de-4a0a5050210e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4869a530-757f-4364-8d8e-4dc8001f433c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4869a530-757f-4364-8d8e-4dc8001f433c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48a909b6-e6ee-4148-8b50-b35f11bc065f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mizzium-meddler:f0t0:s1,f:xs:XP:mizzium-meddler:f0t0:s1	-	-	-	d864b561c9cb	-	ff7a88e18315	-	-	2026-11-24	xproof
 48a99dce-0aa9-4aac-81df-cec5f94c639d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a99dce-0aa9-4aac-81df-cec5f94c639d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archon-of-sun-s-grace:f0t0:s1,f:xs:XP:archon-of-sun-s-grace:f0t0:s1	-	-	-	b48d0082b7c4	-	2b049948c2ea	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-48ab8ba0-0e85-4656-a798-ceb961fb02ce	cast	cast-resolve	agreed	-	X	scen	1	0	Galvanic Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-48ab8ba0-0e85-4656-a798-ceb961fb02ce	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Galvanic Giant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+48ab8ba0-0e85-4656-a798-ceb961fb02ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galvanic-giant-storm-reading:cast:s1,f:xs:XP:galvanic-giant-storm-reading:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+48ab8ba0-0e85-4656-a798-ceb961fb02ce	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:galvanic-giant-storm-reading:f0t0:s1,f:xs:XP:galvanic-giant-storm-reading:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 48ae84e7-125d-4018-afc1-cd78448d1a13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winter-eladrin:f0t0:s1,f:xs:XP:winter-eladrin:f0t0:s1	-	-	-	8c0bd19283bb	-	b916ca56b53f	-	-	2026-11-24	xproof
 48ae84e7-125d-4018-afc1-cd78448d1a13	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:winter-eladrin:f0t0:s1,f:xs:XP:winter-eladrin:f0t0:s1	-	-	-	8c0bd19283bb	-	b916ca56b53f	-	-	2026-11-24	xproof
 48b1ac27-430f-4fd9-a71b-6ad125c57fe3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sphinx-s-approach:cast:s1	-	-	-	fb9d3088f0bf	-	5190d4163a66	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chittering-witch:f0t0:s1,f:xs:XP:chittering-witch:f0t0:s1	-	-	-	ae86f6029288	-	c8dfc474ca91	-	-	2026-11-24	xproof
 8b1e6b7c-892d-4058-b183-9121cdd623f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 8b1fc306-0d8f-4edb-b197-2e99f10c599e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boing:cast:s1,f:xs:XP:boing:cast:s1	-	-	-	23c4009444b0	-	a1e44c444b8d	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	cast	cast	agreed	-	F	start	2	0	f:xs:XP:erica-ortegas-plucky-pilot:cast:s1	-	-	-	4b8018a80bf0	-	51231b336f39	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	f0/t0	Taps	agreed	-	F	start	4	0	f:xs:XP:erica-ortegas-plucky-pilot:cast:s1	-	-	-	4b8018a80bf0	-	51231b336f39	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8b25f353-0798-4a03-a928-6a701a919468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b25f353-0798-4a03-a928-6a701a919468	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+8b25f353-0798-4a03-a928-6a701a919468	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:shadowspear:f0a1:s1,f:xs:XP:shadowspear:f0a1:s1	-	-	-	ae86f6029288	-	e6b4e648fff4	-	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b5659bd-a272-44cd-811f-9feec7d9825f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b566757-e5e4-4d47-b5ef-80ed7d853679	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b566757-e5e4-4d47-b5ef-80ed7d853679	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:warkite-marauder:f0t0:s1,f:xs:XP:warkite-marauder:f0t0:s1	-	-	-	d864b561c9cb	-	c06461abd5d7	-	-	2026-11-24	xproof
-8b5add91-2e82-4430-bfc5-f4a6366dbbdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b5add91-2e82-4430-bfc5-f4a6366dbbdb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+8b5add91-2e82-4430-bfc5-f4a6366dbbdb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-xerex-vertex-paladin:f0t0:s1,f:xs:XP:invasion-of-xerex-vertex-paladin:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+8b5add91-2e82-4430-bfc5-f4a6366dbbdb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-xerex-vertex-paladin:f0t0:s1,f:xs:XP:invasion-of-xerex-vertex-paladin:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 8b5cffd5-5db3-4151-9275-d91387554412	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:will-o-the-wisp:cast:s1,f:xs:XP:will-o-the-wisp:cast:s1	-	-	-	ae86f6029288	-	00ac92194ba9	-	-	2026-11-24	xproof
 8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:will-o-the-wisp:f0a0:s1,f:xs:XP:will-o-the-wisp:f0a0:s1	-	-	-	ae86f6029288	-	00ac92194ba9	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b9918c3-1135-4c63-991f-f0a38340a33b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ascendant-acolyte:f0t0:s1,f:xs:XP:ascendant-acolyte:f0t0:s1	-	-	-	23c4009444b0	-	af12ea7340e1	-	-	2026-11-25	xproof
 8b9918c3-1135-4c63-991f-f0a38340a33b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ascendant-acolyte:f0t0:s1,f:xs:XP:ascendant-acolyte:f0t0:s1	-	-	-	23c4009444b0	-	af12ea7340e1	-	-	2026-11-25	xproof
 8ba0e831-054a-4e01-92ed-2845bd2fa12f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ba0e831-054a-4e01-92ed-2845bd2fa12f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+8ba0e831-054a-4e01-92ed-2845bd2fa12f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:saruman-the-white:f0t0:s1,f:xs:XP:saruman-the-white:f0t0:s1	-	-	-	9087eefec3ee	-	0037d0f8d073	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:saruman-the-white:f0t1:s1,f:xs:XP:saruman-the-white:f0t1:s1	-	-	-	9087eefec3ee	-	0037d0f8d073	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof

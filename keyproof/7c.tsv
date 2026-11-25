@@ -27,9 +27,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c27136a-bf9d-4f42-9c37-abe347fad1bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weaponcraft-enthusiast:f0t0:s1,f:xs:XP:weaponcraft-enthusiast:f0t0:s1	-	-	-	3aa6ded33acb	-	f114b38e7185	-	-	2026-11-25	xproof
 7c27136a-bf9d-4f42-9c37-abe347fad1bb	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:weaponcraft-enthusiast:f0t0:s1,f:xs:XP:weaponcraft-enthusiast:f0t0:s1	-	-	-	3aa6ded33acb	-	f114b38e7185	-	-	2026-11-25	xproof
 7c2f1915-8d91-47c6-bab4-be325348673a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c304547-a4b1-46c9-baed-16d2bfbe16eb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+7c304547-a4b1-46c9-baed-16d2bfbe16eb	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:branchloft-pathway-boulderloft-pathway:f0a0:s1,f:xs:XP:branchloft-pathway-boulderloft-pathway:f0a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7c304547-a4b1-46c9-baed-16d2bfbe16eb	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-7c304547-a4b1-46c9-baed-16d2bfbe16eb	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+7c304547-a4b1-46c9-baed-16d2bfbe16eb	land	land	agreed	-	FX	start	2	0	x:xs:XP:branchloft-pathway-boulderloft-pathway:land:s1,f:xs:XP:branchloft-pathway-boulderloft-pathway:land:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7c309759-e607-4bad-b615-f7c673e508ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rofellos-s-gift:cast:s1,f:xs:XP:rofellos-s-gift:cast:s1	-	-	-	5f2128bf97e4	-	3331a896a5b7	-	-	2026-11-24	xproof
 7c3171da-7a95-4f8e-ba30-c31af21c1828	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3171da-7a95-4f8e-ba30-c31af21c1828	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,11 +125,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ca9ef3e-e5b2-4eb5-87b3-0d97637428a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cab62dc-a256-4da8-a3ea-b3903ec37077	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cab62dc-a256-4da8-a3ea-b3903ec37077	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:griffin-aerie:f0t0:s1,f:xs:XP:griffin-aerie:f0t0:s1	-	-	-	6f84be0f34c0	-	b0435b7f469c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-7cad43df-31c9-47b5-bc05-4a0f6544b396	cast	cast-resolve	agreed	-	X	scen	1	0	Visage of Dread/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7cad43df-31c9-47b5-bc05-4a0f6544b396	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:visage-of-dread-dread-osseosaur:f0t0:s1,f:xs:XP:visage-of-dread-dread-osseosaur:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7cad43df-31c9-47b5-bc05-4a0f6544b396	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Visage of Dread/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7cad43df-31c9-47b5-bc05-4a0f6544b396	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Visage of Dread/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7cad43df-31c9-47b5-bc05-4a0f6544b396	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Visage of Dread/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7cad43df-31c9-47b5-bc05-4a0f6544b396	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+7cad43df-31c9-47b5-bc05-4a0f6544b396	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:visage-of-dread-dread-osseosaur:f0t0:s1,f:xs:XP:visage-of-dread-dread-osseosaur:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7cad43df-31c9-47b5-bc05-4a0f6544b396	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Visage of Dread/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7cad43df-31c9-47b5-bc05-4a0f6544b396	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Visage of Dread/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7cafc972-a6f5-4cac-a3d3-8a3ae36ffb1e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:upheaval:cast:s1,f:xs:XP:upheaval:cast:s1	-	-	-	25696bf19d5b	-	4ef2217d7e0d	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7cd0bd74-2463-4e9d-9802-69ac4ef6d543	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:unflinching-hortimancer:f0t1:s1,f:xs:XP:unflinching-hortimancer:f0t1:s1	-	-	-	fb9d3088f0bf	-	ce6e42b3db97	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7cd7102d-6413-4f46-9434-9130aefa2f88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cd8b017-8d59-4b55-bb9a-8d8e492ef1ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7cd8b017-8d59-4b55-bb9a-8d8e492ef1ac	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+7cd8b017-8d59-4b55-bb9a-8d8e492ef1ac	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7cd8b017-8d59-4b55-bb9a-8d8e492ef1ac	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:moon-circuit-hacker:f0t0:s1,f:xs:XP:moon-circuit-hacker:f0t0:s1	-	-	-	6f84be0f34c0	-	966b1af39767	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7cdbc115-cb15-4ada-8229-d40f0b22dd27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:balshan-collaborator:cast:s1,f:xs:XP:balshan-collaborator:cast:s1	-	-	-	fc71ca68c5ac	-	3b2d98958248	-	-	2026-11-24	xproof
 7cdbc115-cb15-4ada-8229-d40f0b22dd27	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:balshan-collaborator:f0a0:s1,f:xs:XP:balshan-collaborator:f0a0:s1	-	-	-	fc71ca68c5ac	-	3b2d98958248	-	-	2026-11-24	xproof
