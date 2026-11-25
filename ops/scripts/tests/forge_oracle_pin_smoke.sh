@@ -319,5 +319,28 @@ check "run refuses a driver that never arms the coin force (exit 2)" \
 	$([ "$rc" = 2 ] && has "$out" "does not wire the coin force" && echo 0 || echo 1) "rc=$rc $out"
 reached; check "  ...before javac, java or scope" $((! $? ))
 
+# 9. a driver whose ForcedDieRandom still overrides the unbounded nextInt() has
+# every coin marker above yet lets an unrelated draw (Aggregates.random over a
+# Set) spend the armed flip, so it is refused before any build; the bounded
+# nextInt(int bound) the die force uses is not that override.
+UNB=$TMP/unbounded
+mkdir -p "$UNB/forge-gui/res" "$UNB/forge-oracle/src/main/java/forge/oracle" "$UNB/forge-core/src/main/java/forge/util"
+for f in forge-oracle/src/main/java/forge/oracle/ForgeEngine.java forge-oracle/src/main/java/forge/oracle/StepMachine.java \
+	forge-oracle/src/main/java/forge/oracle/Request.java forge-oracle/src/main/java/forge/oracle/ScriptedController.java \
+	forge-core/src/main/java/forge/util/MyRandom.java; do
+	cp "$TMP/cand/$f" "$UNB/$f"
+done
+echo 'class F {}' > "$UNB/forge-oracle/src/main/java/forge/oracle/F.java"
+echo 'class ForcedDieRandom { public int nextInt() { return armedFlips.poll() ? 1 : 0; } int nextInt(int bound) { return 0; } void arm(int step) { req.coinFlips(step); } }' > "$UNB/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+: > "$LOG"
+out=$(FORGE_ORACLE_SRC=$UNB/forge-oracle FORGE_ORACLE_CLASSES=$TMP/unb-classes FORGE_ORACLE_TMP=$TMP/unb-tmp STUB_TOP=$UNB STUB_HEAD=$CREF "$RUN" --compile 2>&1); rc=$?
+check "run refuses a ForcedDieRandom that overrides the unbounded nextInt() (exit 2)" \
+	$([ "$rc" = 2 ] && has "$out" "overrides the unbounded nextInt()" && echo 0 || echo 1) "rc=$rc $out"
+reached; check "  ...before javac, java or scope" $((! $? ))
+# The same tree with the override gone (only the bounded nextInt) proceeds.
+echo 'class ForcedDieRandom { boolean nextBoolean() { return armedFlips.poll(); } int nextInt(int bound) { return 0; } void arm(int step) { req.coinFlips(step); } }' > "$UNB/forge-oracle/src/main/java/forge/oracle/ForcedDieRandom.java"
+out=$(FORGE_ORACLE_SRC=$UNB/forge-oracle FORGE_ORACLE_CLASSES=$TMP/unb-classes FORGE_ORACLE_TMP=$TMP/unb-tmp STUB_TOP=$UNB STUB_HEAD=$CREF "$RUN" --compile 2>&1); rc=$?
+check "  ...and the same tree without the override compiles (exit 0)" $((rc == 0 ? 0 : 1)) "rc=$rc $out"
+
 [ "$fails" = 0 ] && echo "forge_oracle_pin_smoke: all passed" || echo "forge_oracle_pin_smoke: $fails FAILED"
 exit $((fails != 0))
