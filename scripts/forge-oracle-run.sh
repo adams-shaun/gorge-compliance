@@ -247,8 +247,9 @@ if [ ! -f "$mymy" ] || ! grep -qF 'delegate.nextInt(bound)' "$mymy"; then
 fi
 
 # item.coin_flips is only honoured when the driver reads it and arms it on the
-# step that flips (ForcedDieRandom.nextBoolean, with the unbounded nextInt a
-# next(bits)-routing wrapper lands on), MyRandom forwards the boolean draw,
+# step that flips (ForcedDieRandom.nextBoolean only: an unbounded nextInt() is
+# not a flip, Aggregates.random draws it per item of a Set and would spend the
+# armed result first), MyRandom forwards the boolean draw,
 # and the scripted controller calls the flip heads (the forced result is the
 # outcome itself). A driver with any half missing silently flips from its own
 # stream: Mana Clash deals 1 damage per tails it rolled itself and loops a
@@ -266,6 +267,17 @@ for f in "$src/src/main/java/forge/oracle/ForcedDieRandom.java:req.coinFlips(ste
     die "$ref does not wire the coin force ($file lacks \"$want\"); FORGE_ORACLE_REF predates item.coin_flips"
   fi
 done
+
+# The negative half: the flip is armed on the step and taken by nextBoolean
+# alone. A no-argument nextInt() override on ForcedDieRandom (the old
+# next(bits)-routing fallback) lets any unbounded draw that runs first spend the
+# armed result: Aggregates.random over a Set draws it per item, so Goblin
+# Kaboomist's token art pick took the recorded lost flip before FlipCoinEffect
+# asked and Forge flipped (and won) from its own stream. That driver still has
+# every marker above, so refuse it by what it must not declare.
+if grep -Eq 'int[[:space:]]+nextInt[[:space:]]*\([[:space:]]*\)' "$fdr"; then
+  die "$ref's ForcedDieRandom overrides the unbounded nextInt() ($fdr): an unrelated draw spends the armed coin flip; FORGE_ORACLE_REF predates the nextBoolean-only coin force"
+fi
 
 [ -s "$root/cp.txt" ] || die "no $root/cp.txt; run make forge-oracle-setup"
 [ -x "$jdk/bin/javac" ] || die "no JDK at $jdk"
