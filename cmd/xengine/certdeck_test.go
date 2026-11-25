@@ -101,6 +101,10 @@ func sortedProvidedKeys(d certdeck.Deck) []string {
 // The need classes a card's script and Oracle text imply decide what its two
 // decks hold, and the same corpus and target give byte-identical files.
 func TestCertdeckNeeds(t *testing.T) {
+	// The other long test: every Build is a full certdeck widen. It overlaps
+	// with TestScenCensusFDN (see there); apart from the read-only corpus
+	// registry its builders and temp dirs are its own.
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	face := func(name string) *cards.Face {
 		c, ok := reg.Lookup(name)
