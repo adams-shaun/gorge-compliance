@@ -9,7 +9,11 @@ import (
 // xmageTriggerOrderKeys answers a SAME-SOURCE trigger-order decision in
 // XMage's rule-text form: one choice per pick but the last (XMage pushes the
 // last remaining ability without an ask), each a prefix of the pick's rule
-// text as XMage's no-argument getRule() prints it.
+// text as XMage's no-argument getRule() prints it -- or, for a delayed
+// trigger whose XMage rule text puts the subject first and the timing last
+// (Arcane Denial's caster draw: "You draw a card at the beginning of the
+// next turn's upkeep." against Forge's "Draw a card."), a containment
+// fragment the driver's fallback folds into it.
 //
 // XMage's chooseTriggeredAbility matches a scripted choice with
 // ability.toString().startsWith(choice) (toString is getRule()) or against the
@@ -33,7 +37,9 @@ import (
 // strict_miss -- so the driver's ScriptedChoicePlayer.chooseTriggeredAbility
 // folds that wording (leading when/whenever, case, {this}, trailing period)
 // before it matches
-// the key, and takes the ability only when exactly one fits. ok is false when
+// the key, and takes the ability only when exactly one fits; a key no rule
+// starts with is also accepted when exactly one rule's normalised text
+// contains it (the delayed-trigger shape above). ok is false when
 // the picks cannot be keyed apart: a key that is also a prefix of another,
 // different pick (a different source ref or a different text), including two
 // different sources with identical text, which the same key would both match.

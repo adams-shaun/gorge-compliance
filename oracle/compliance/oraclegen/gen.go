@@ -3583,7 +3583,8 @@ func triggerOrderTextAnswers(d rules.OracleDecision) []XAnswer {
 // to on a step that scripts other asks too: XMage's rule-text keys
 // (xmageTriggerOrderKeys) when the picks key apart, else the inert text form.
 // A key is consumed only by the trigger ask it steers (TestPlayer's
-// chooseTriggeredAbility matches getRule() by prefix) and names no object, so
+// chooseTriggeredAbility matches getRule() by prefix, or by containment for
+// a delayed trigger's timing-last rule text) and names no object, so
 // no other makeChoose takes it, which is the reason names are demoted at all.
 // The verbatim text form is not inert in strict mode: the order ask finds no
 // match and stops the replay at "Missing CHOICE def ... Triggered list"
