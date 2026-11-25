@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-840119bf-e60f-4ff7-9c9b-d420d09df545	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:underground-mortuary:f0a0:s1	-	-	-	c2272f704fde	-	8e9dbeddc26d	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-840119bf-e60f-4ff7-9c9b-d420d09df545	f0/a1	Mana	agreed	-	X	start	2	0	x:xs:XP:underground-mortuary:f0a1:s1	-	-	-	c2272f704fde	-	8e9dbeddc26d	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+840119bf-e60f-4ff7-9c9b-d420d09df545	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:underground-mortuary:f0a0:s1	-	-	-	ce0c2b5e5b13	-	8e9dbeddc26d	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+840119bf-e60f-4ff7-9c9b-d420d09df545	f0/a1	Mana	agreed	-	X	start	2	0	x:xs:XP:underground-mortuary:f0a1:s1	-	-	-	ce0c2b5e5b13	-	8e9dbeddc26d	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 840119bf-e60f-4ff7-9c9b-d420d09df545	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:underground-mortuary:land:s1,f:xs:XP:underground-mortuary:land:s1	-	-	-	8c0bd19283bb	-	8e9dbeddc26d	-	-	2026-11-24	xproof
 840119bf-e60f-4ff7-9c9b-d420d09df545	land	land	agreed	-	FX	start	2	0	x:xs:XP:underground-mortuary:land:s1,f:xs:XP:underground-mortuary:land:s1	-	-	-	8c0bd19283bb	-	8e9dbeddc26d	-	-	2026-11-24	xproof
 8403ea46-e6ac-458c-9c17-4c8a81f21659	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moonlit-scavengers:f0t0:s1,f:xs:XP:moonlit-scavengers:f0t0:s1	-	-	-	ae86f6029288	-	f9dbbabdf5f5	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84487586-4f71-457a-b983-4f1f7a71deef	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:bishop-s-soldier:combat0.attack:s1,f:xs:XP:bishop-s-soldier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c49172f2dfde	-	-	2026-11-25	xproof
 84487586-4f71-457a-b983-4f1f7a71deef	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bishop-s-soldier:combat0.block:s1,f:xs:XP:bishop-s-soldier:combat0.block:s1	-	-	-	3aa6ded33acb	-	c49172f2dfde	-	-	2026-11-25	xproof
 84528204-faf2-45cb-bce0-365b8adf5339	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84528204-faf2-45cb-bce0-365b8adf5339	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+84528204-faf2-45cb-bce0-365b8adf5339	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 84534792-7834-4a3c-9940-c1eccbe6e9cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84534792-7834-4a3c-9940-c1eccbe6e9cf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 84544d35-7acf-4643-965d-66af90fae51b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8491de1e-dc37-4a89-b4f7-56a2c668f0fc	f0/t1	Phase/Vanishing	agreed	-	F	start	2	0	f:xs:XP:out-of-time:f0t1:s1	-	-	-	3aa6ded33acb	-	fd07baa7240a	-	-	2026-11-25	xproof
 8491de1e-dc37-4a89-b4f7-56a2c668f0fc	f0/t2	CounterRemoved/Vanishing	agreed	-	F	start	2	0	f:xs:XP:out-of-time:f0t1:s1	-	-	-	3aa6ded33acb	-	fd07baa7240a	-	-	2026-11-25	xproof
 849741a3-9e64-41a9-a4f4-d146a7d42389	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-849741a3-9e64-41a9-a4f4-d146a7d42389	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+849741a3-9e64-41a9-a4f4-d146a7d42389	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 849a7ae8-2b4e-4fa5-9607-2bfc961fee40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 849c97e4-df15-4ecb-bdf8-283bb497d90c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:guadosalam-farplane-gateway:f0a0:s1,f:xs:XP:guadosalam-farplane-gateway:f0a0:s1	-	-	-	c2272f704fde	-	77af579cef07	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 849c97e4-df15-4ecb-bdf8-283bb497d90c	land	land	agreed	-	FX	start	2	0	x:xs:XP:guadosalam-farplane-gateway:land:s1,f:xs:XP:guadosalam-farplane-gateway:land:s1	-	-	-	23c4009444b0	-	77af579cef07	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

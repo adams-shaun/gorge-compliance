@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-empire:cast:s1,f:xs:XP:forerunner-of-the-empire:cast:s1	-	-	-	d864b561c9cb	-	9d5b3cc5c8a6	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-empire:cast:s1,f:xs:XP:forerunner-of-the-empire:cast:s1	-	-	-	d864b561c9cb	-	9d5b3cc5c8a6	-	-	2026-11-24	xproof
-113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-empire:f0t1:s1,f:xs:XP:forerunner-of-the-empire:f0t1:s1	-	-	-	ce0c2b5e5b13	-	9d5b3cc5c8a6	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:f0a0:s1,f:xs:XP:nissa-revane:f0a0:s1	-	-	-	23c4009444b0	-	7cf95a8161a4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 119d9671-61ba-4629-89b1-f94bdec5cb74	cast	cast-resolve	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 119d9671-61ba-4629-89b1-f94bdec5cb74	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11a163cc-ade3-4b55-b50e-3b3bf7e1962c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11a163cc-ade3-4b55-b50e-3b3bf7e1962c	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+11a163cc-ade3-4b55-b50e-3b3bf7e1962c	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 11a20648-fdb6-4f52-8fda-c66985e0c044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11a28f60-2456-4ed5-b1cc-03c395f55e59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11a28f60-2456-4ed5-b1cc-03c395f55e59	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof

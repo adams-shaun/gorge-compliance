@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 420d09b5-aced-4f71-914c-90d19f7476dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420d09b5-aced-4f71-914c-90d19f7476dc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 42176320-ee7f-44c9-916e-5ee4a6108be3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 421c661a-24d9-4797-b538-2a4243825628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42208fea-8c24-451f-861d-6d70c0a7a502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42226b87-0746-4ebf-9fd0-108d508462af	cast	cast	agreed	-	F	start	2	0	f:xs:XP:clone:cast:s1	-	-	-	25696bf19d5b	-	9473363c4d09	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42798e2b-9a5c-4f93-8f77-b7bb7a916d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42798e2b-9a5c-4f93-8f77-b7bb7a916d07	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 427bf4eb-3dfd-4747-be92-4a4a3d96a228	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-427bf4eb-3dfd-4747-be92-4a4a3d96a228	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+427bf4eb-3dfd-4747-be92-4a4a3d96a228	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:marauding-looter:f0t0:s1,f:xs:XP:marauding-looter:f0t0:s1	-	-	-	ce0c2b5e5b13	-	5d72786f1c90	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 427f8ef9-12b3-4fa0-b303-28153566b6dc	cast	cast-resolve	agreed	-	X	scen	1	0	Sokka, Lateral Strategist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 427f8ef9-12b3-4fa0-b303-28153566b6dc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sokka-lateral-strategist:combat0.attack:s1,f:xs:XP:sokka-lateral-strategist:combat0.attack:s1	-	-	-	23c4009444b0	-	979d02835f50	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 427f8ef9-12b3-4fa0-b303-28153566b6dc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sokka-lateral-strategist:combat0.block:s1,f:xs:XP:sokka-lateral-strategist:combat0.block:s1	-	-	-	23c4009444b0	-	979d02835f50	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

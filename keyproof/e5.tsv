@@ -89,7 +89,7 @@ e5aa32b6-2eaf-4b48-81cc-cd3db976513d	combat#0.block	combat.block	agreed	-	FX	sta
 e5aa32b6-2eaf-4b48-81cc-cd3db976513d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mineshaft-spider:f0t0:s2,f:xs:XP:mineshaft-spider:f0t0:s2	-	-	-	e07cf3a05ba5	-	40cc4a721d88	-	-	2026-11-24	xproof
 e5afa88a-8bde-47fe-a890-3759f807360f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5afa88a-8bde-47fe-a890-3759f807360f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e5afa88a-8bde-47fe-a890-3759f807360f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e5afa88a-8bde-47fe-a890-3759f807360f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:noncreature	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 e5b11e43-fc7c-4cea-a44a-8af3f124e29e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5b35b54-77d9-4cb0-86a1-efc8e49aea09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5b35b54-77d9-4cb0-86a1-efc8e49aea09	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,5 +153,5 @@ e5fcc5d7-6a60-4a5b-9d02-6c30041a95b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tal
 e5fcc5d7-6a60-4a5b-9d02-6c30041a95b9	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-unity:f0a0:s1,f:xs:XP:talisman-of-unity:f0a0:s1	-	-	-	c2272f704fde	-	37f4372899ef	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 e5fcc5d7-6a60-4a5b-9d02-6c30041a95b9	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 e5fdd6fd-6492-47ec-8b74-9ff22ff9849a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e5fdd6fd-6492-47ec-8b74-9ff22ff9849a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e5fdd6fd-6492-47ec-8b74-9ff22ff9849a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 e5fe1fc3-d9fe-4b1b-85d3-7d8ecb84a829	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

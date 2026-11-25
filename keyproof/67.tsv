@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 675ed28e-4328-4638-aaad-3f47e5c7895f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67601399-089b-44fe-82db-c319729c75bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67601399-089b-44fe-82db-c319729c75bf	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-67601646-f906-4824-9269-3cf89766d25f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Jadzia Dax, Living Legacy"	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+67601646-f906-4824-9269-3cf89766d25f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Jadzia Dax, Living Legacy"	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 67601646-f906-4824-9269-3cf89766d25f	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Jadzia Dax, Living Legacy"	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 67601646-f906-4824-9269-3cf89766d25f	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Jadzia Dax, Living Legacy"	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 6760d7d1-098e-4131-8824-53e5427d047b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gandalf-shadow-s-foe:f0t0:s1,f:xs:XP:gandalf-shadow-s-foe:f0t0:s1	-	-	-	8c0bd19283bb	-	59e665acdf37	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 677c3616-295f-493a-8b60-1e22b0224cfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 677c3616-295f-493a-8b60-1e22b0224cfa	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ring-of-three-wishes:f0a0:s1,f:xs:XP:ring-of-three-wishes:f0a0:s1	-	-	-	fb9d3088f0bf	-	283966561b0d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 678095cc-ec8f-471a-b675-e59905d65c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-678095cc-ec8f-471a-b675-e59905d65c33	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+678095cc-ec8f-471a-b675-e59905d65c33	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:river-sneak:f0t0:s1,f:xs:XP:river-sneak:f0t0:s1	-	-	-	ce0c2b5e5b13	-	11c9a765ea52	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6781166b-f6ab-4076-8e97-0cd9342f1b41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmed-stray:f0t0:s1,f:xs:XP:charmed-stray:f0t0:s1	-	-	-	d864b561c9cb	-	b142a4c1506e	-	-	2026-11-24	xproof
 6781166b-f6ab-4076-8e97-0cd9342f1b41	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:charmed-stray:f0t0:s1,f:xs:XP:charmed-stray:f0t0:s1	-	-	-	d864b561c9cb	-	b142a4c1506e	-	-	2026-11-24	xproof
 6781f8ae-2a86-4e3d-bc43-48809c9d6c26	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gatekeeper-of-malakir:f0t0:s1	-	-	-	25696bf19d5b	-	a8f2c5c8d1c3	-	-	2026-11-24	xproof
