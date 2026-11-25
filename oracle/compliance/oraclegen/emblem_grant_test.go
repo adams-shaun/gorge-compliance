@@ -73,9 +73,64 @@ func TestResolveActivatedAbilityPumpKeywordGrant(t *testing.T) {
 		t.Errorf("KeywordLine = %q", sa.Params["KeywordLine"])
 	}
 
-	// No earlier use of the Pump source: nothing granted the keyword.
+	// A Pump source still in hand has resolved nothing: the keyword was not
+	// granted.
+	it.Setup = map[string]Seat{"p0": {Hand: []string{"Cursecloth Wrappings"}, Graveyard: []string{"Memnite"}}}
 	it.Steps = it.Steps[1:]
+	g.Snapshots = []rules.OracleSnapshot{{}}
 	if _, kind := ResolveActivatedAbility(reg, it, 0, it.Steps[0], g); kind != ActivatedGrantedUnresolved {
-		t.Errorf("unused source kind = %v, want ActivatedGrantedUnresolved", kind)
+		t.Errorf("hand-only source kind = %v, want ActivatedGrantedUnresolved", kind)
+	}
+}
+
+// TestResolveActivatedAbilityTriggerKeywordGrant: Highway Reaver's attack
+// trigger (a Pump KW$ Unearth:CardManaCost) resolves with no activate/cast
+// step of its own; the later Unearth pick on the graveyard Grizzly Bears still
+// resolves to the granted keyword ability.
+func TestResolveActivatedAbilityTriggerKeywordGrant(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	const label = "Grizzly Bears: Unearth CardManaCost"
+	k := -1
+	it := Item{Scenario: Scenario{
+		Setup: map[string]Seat{"p0": {Battlefield: []string{"Highway Reaver"}, Graveyard: []string{"Grizzly Bears"}}},
+		Steps: []Step{
+			{Op: "attack", Card: "p0:Highway Reaver"},
+			{Op: "pass"},
+			{Op: "activate", Card: "p0:Grizzly Bears", AbilityIndex: &k, Ability: label},
+		},
+	}}
+	snap := rules.OracleSnapshot{Permanents: []rules.OracleSnapPerm{{Ref: "p0:Highway Reaver", Name: "Highway Reaver", Controller: 0, Owner: 0, Types: []string{"Creature"}}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{snap, snap, snap}}
+	sa, kind := ResolveActivatedAbility(reg, it, 2, it.Steps[2], g)
+	if kind != ActivatedGranted || sa == nil {
+		t.Fatalf("kind = %v, sa = %v; want ActivatedGranted", kind, sa)
+	}
+	if got := GrantedAbilityLabel("Grizzly Bears", sa); got != label {
+		t.Errorf("label = %q, want %q", got, label)
+	}
+}
+
+// TestResolveActivatedAbilitySelfAnimateKeywordGrant: Domesticated
+// Watercourse's Animate grants Equip:2 to itself (Defined$ Self); the source
+// is the recipient, and the granted Equip must still resolve.
+func TestResolveActivatedAbilitySelfAnimateKeywordGrant(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	const label = "Domesticated Watercourse: Equip 2"
+	k0, k1 := 0, -1
+	it := Item{Scenario: Scenario{
+		Setup: map[string]Seat{"p0": {Battlefield: []string{"Domesticated Watercourse"}}},
+		Steps: []Step{
+			{Op: "activate", Card: "p0:Domesticated Watercourse", AbilityIndex: &k0},
+			{Op: "activate", Card: "p0:Domesticated Watercourse", AbilityIndex: &k1, Ability: label},
+		},
+	}}
+	snap := rules.OracleSnapshot{Permanents: []rules.OracleSnapPerm{{Ref: "p0:Domesticated Watercourse", Name: "Domesticated Watercourse", Controller: 0, Owner: 0, Types: []string{"Land"}}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{snap, snap}}
+	sa, kind := ResolveActivatedAbility(reg, it, 1, it.Steps[1], g)
+	if kind != ActivatedGranted || sa == nil {
+		t.Fatalf("kind = %v, sa = %v; want ActivatedGranted", kind, sa)
+	}
+	if got := GrantedAbilityLabel("Domesticated Watercourse", sa); got != label {
+		t.Errorf("label = %q, want %q", got, label)
 	}
 }

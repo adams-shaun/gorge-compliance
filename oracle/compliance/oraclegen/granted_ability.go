@@ -214,17 +214,19 @@ func grantedCandidates(reg *cards.Registry, it Item, i int, st Step, g rules.Ora
 			})
 		}
 	}
-	// A keyword a RESOLVED effect of another card granted earlier in the
-	// item (Cursecloth Wrappings' Pump KW$ Embalm:CardManaCost) is not on the
-	// recipient's own faces or any static. The source must have been used by
-	// an earlier step, so an unused same-text card in the setup is no
-	// candidate.
+	// A keyword a RESOLVED Pump/Animate effect granted (Cursecloth Wrappings'
+	// activated Pump KW$ Embalm:CardManaCost, Highway Reaver's trigger, a
+	// permanent animating itself with Equip:2) is on no face of the recipient
+	// and in no static. The source may be the recipient itself and may have
+	// resolved from a trigger, so no step history gates it; the exact engine
+	// label already pins the keyword line plus the recipient's mana cost, and
+	// a source still in hand or library cannot have resolved anything.
 	recMana := ""
 	if rec.card != nil && len(rec.card.Faces) > 0 && rec.card.Faces[0] != nil {
 		recMana = rec.card.Faces[0].ManaCost
 	}
 	for _, pc := range pool {
-		if pc.card == rec.card || !usedBeforeStep(it, i, pc.card) {
+		if pc.zone == state.ZHand || pc.zone == state.ZLibrary {
 			continue
 		}
 		for _, f := range pc.card.Faces {
@@ -966,25 +968,9 @@ func staticAddAbilityNames(st cards.Static) []string {
 // grants.
 func staticAddKeywordLines(st cards.Static) []string {
 	var out []string
-	out = append(out, splitParamList(st.ParamStr(cards.PKAddKeyword))...)
-	out = append(out, splitParamList(st.ParamStr(cards.PKAddKeywords))...)
+	out = append(out, cards.SplitKeywordList(st.ParamStr(cards.PKAddKeyword))...)
+	out = append(out, cards.SplitKeywordList(st.ParamStr(cards.PKAddKeywords))...)
 	return out
-}
-
-// usedBeforeStep reports whether a step before step i activated or cast c
-// (matched by front-face name), i.e. its effect may have resolved already.
-func usedBeforeStep(it Item, i int, c *cards.Card) bool {
-	name := cardKey(c)
-	if name == "" {
-		return false
-	}
-	for j := 0; j < i && j < len(it.Steps); j++ {
-		st := it.Steps[j]
-		if (st.Op == "activate" || st.Op == "cast") && st.Card != "" && oraclediffRefName(st.Card) == name {
-			return true
-		}
-	}
-	return false
 }
 
 // effectKeywordLines lists the keyword lines the face's Pump/PumpAll/Animate
@@ -1001,9 +987,9 @@ func effectKeywordLines(f *cards.Face) []string {
 		seen[sa] = true
 		switch sa.API {
 		case "Pump", "PumpAll":
-			out = append(out, splitParamList(sa.ParamStr(cards.PKKW))...)
+			out = append(out, cards.SplitKeywordList(sa.ParamStr(cards.PKKW))...)
 		case "Animate", "AnimateAll":
-			out = append(out, splitParamList(sa.ParamStr(cards.PKKeywords))...)
+			out = append(out, cards.SplitKeywordList(sa.ParamStr(cards.PKKeywords))...)
 		}
 		walk(sa.Sub)
 	}
