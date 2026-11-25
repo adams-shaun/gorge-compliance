@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 123bfa86-4265-448f-97cd-2c0614212862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-spirit:cast:s1,f:xs:XP:flame-spirit:cast:s1	-	-	-	ea3140b6974b	-	7565b291d7aa	-	-	2026-11-24	xproof
 123bfa86-4265-448f-97cd-2c0614212862	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flame-spirit:f0a0:s1,f:xs:XP:flame-spirit:f0a0:s1	-	-	-	8c0bd19283bb	-	7565b291d7aa	-	-	2026-11-24	xproof
 123d2b6e-114e-4767-860d-50790382ca4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1244902e-1a4e-4d3c-9a55-9be4602e3d2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colossal-dreadmask:f0t0:s1,f:xs:XP:colossal-dreadmask:f0t0:s1	-	-	-	ae86f6029288	-	34cf271b3422	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 129b41cf-8327-42f0-b186-1111b42c08ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artifist-acumen:cast:s1,f:xs:XP:artifist-acumen:cast:s1	-	-	-	fb9d3088f0bf	-	e7ed8473b021	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 129ec223-e76d-491d-b299-07ac91168d31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 129ee7d6-e3df-40ef-9502-7aad10183031	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-129ee7d6-e3df-40ef-9502-7aad10183031	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+129ee7d6-e3df-40ef-9502-7aad10183031	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	cast	cast-resolve	agreed	-	FX	scen	2	0	Starseer Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:starseer-mentor:combat0.attack:s1,f:xs:XP:starseer-mentor:combat0.attack:s1	-	-	-	23c4009444b0	-	3440dff36a7c	-	-	2026-11-25	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:starseer-mentor:combat0.block:s1,f:xs:XP:starseer-mentor:combat0.block:s1	-	-	-	23c4009444b0	-	3440dff36a7c	-	-	2026-11-25	xproof
