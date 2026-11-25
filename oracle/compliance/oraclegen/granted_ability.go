@@ -178,10 +178,7 @@ func grantedCandidates(reg *cards.Registry, it Item, i int, st Step, g rules.Ora
 					add(cards.ResolveSVar(f.SVars, name))
 				}
 			}
-			for _, s := range f.Statics {
-				if !staticActiveInZone(s, pc.zone) || !staticAffectsRecipient(s, pc, rec) {
-					continue
-				}
+			grant := func(s cards.Static) {
 				for _, name := range staticAddAbilityNames(s) {
 					add(cards.ResolveSVar(f.SVars, name))
 				}
@@ -197,6 +194,24 @@ func grantedCandidates(reg *cards.Registry, it Item, i int, st Step, g rules.Ora
 					gains = append(gains, gainsGrant{src: pc, spec: spec, valid: valid, defined: true})
 				}
 			}
+			for _, s := range f.Statics {
+				if !staticActiveInZone(s, pc.zone) || !staticAffectsRecipient(s, pc, rec) {
+					continue
+				}
+				grant(s)
+			}
+			// An Effect's StaticAbilities$ SVar is the static of the emblem
+			// (or effect object) the Effect creates, which lives in the
+			// command zone, not on the source card's face: it is not in
+			// f.Statics. The source may have left the battlefield since
+			// (a planeswalker's emblem outlives it), so the source's zone is
+			// not consulted; the Affected$ filter still scopes the grant to
+			// the recipient, with "You" read as the source's controller.
+			f.EachRawEffectChild(func(ch cards.EffectChild) {
+				if ch.Static != nil && staticAffectsRecipient(*ch.Static, pc, rec) {
+					grant(*ch.Static)
+				}
+			})
 		}
 	}
 	for _, gg := range gains {

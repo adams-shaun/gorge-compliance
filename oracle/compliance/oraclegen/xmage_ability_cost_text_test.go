@@ -66,6 +66,37 @@ func TestXMageAbilityCostSpelling(t *testing.T) {
 		// Trenzalore's setText("and exile it") drops the comma, so the
 		// Oracle spelling is already XMage's.
 		{"Trenzalore Clocktower", map[int]string{0: "{T}", 1: "{1}{U}, {T}, Remove twelve time counters from {this} and exile it"}},
+		// "... and sacrifice it": when the sacrifice is its own
+		// SacrificeSourceCost it is a separate ", Sacrifice {this}" part
+		// (HellionCrucible.java:41-42, GoblinBomb.java:40-42).
+		{"Hellion Crucible", map[int]string{
+			0: "{T}",
+			1: "{1}{R}, {T}:",
+			2: "{1}{R}, {T}, Remove two pressure counters from {this}, Sacrifice {this}",
+		}},
+		{"Goblin Bomb", map[int]string{0: "Remove five fuse counters from {this}, Sacrifice {this}"}},
+		// The same Oracle shape with both halves in one CompositeCost whose
+		// explicit text ends "and sacrifice it" keeps the Oracle spelling:
+		// GrimoireOfTheDead.java:50-53, KhalniHeartExpedition.java:33-37,
+		// ZektarShrineExpedition.java:35-39, IorRuinExpedition.java:31-35,
+		// SunspringExpedition.java:29-32, SoulStairExpedition.java:34-38,
+		// QuestForTheGemblades.java:38-42, QuestForPureFlame.java:38-42,
+		// QuestForTheGravelord.java:33-37, QuestForAncientSecrets.java:39-43,
+		// QuestForTheHolyRelic.java:48-52.
+		{"Grimoire of the Dead", map[int]string{
+			0: "{1}, {T}, Discard a card",
+			1: "{T}, Remove three study counters from {this} and sacrifice it",
+		}},
+		{"Khalni Heart Expedition", map[int]string{0: "Remove three quest counters from {this} and sacrifice it"}},
+		{"Zektar Shrine Expedition", map[int]string{0: "Remove three quest counters from {this} and sacrifice it"}},
+		{"Ior Ruin Expedition", map[int]string{0: "Remove three quest counters from {this} and sacrifice it"}},
+		{"Sunspring Expedition", map[int]string{0: "Remove three quest counters from {this} and sacrifice it"}},
+		{"Soul Stair Expedition", map[int]string{0: "Remove three quest counters from {this} and sacrifice it"}},
+		{"Quest for the Gemblades", map[int]string{0: "Remove a quest counter from {this} and sacrifice it"}},
+		{"Quest for Pure Flame", map[int]string{0: "Remove four quest counters from {this} and sacrifice it"}},
+		{"Quest for the Gravelord", map[int]string{0: "Remove three quest counters from {this} and sacrifice it"}},
+		{"Quest for Ancient Secrets", map[int]string{0: "Remove five quest counters from {this} and sacrifice it"}},
+		{"Quest for the Holy Relic", map[int]string{0: "Remove five quest counters from {this} and sacrifice it"}},
 		{"Say Its Name", map[int]string{1: "Exile this card and two other cards named Say Its Name from your graveyard"}},
 	} {
 		c, ok := reg.Lookup(tc.card)

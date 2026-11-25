@@ -148,8 +148,9 @@ func TestForgeExportDropsNamedManaAbilityChoice(t *testing.T) {
 // block step reaches the Forge driver as a pass_to decision "priority" (which
 // the driver completes without consuming a priority), the pass before a
 // stated attack or block becomes a pass_to of that decision (which completes
-// inside Forge's declaration callback), the scenario SHA still names the
-// unrewritten item, and a non-xengine item and the other steps are left alone.
+// inside Forge's declaration callback), the scenario SHA names the rewritten
+// item the request writes, and a non-xengine item and the other steps are left
+// alone.
 func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 	steps := []oraclegen.Step{
 		{Op: "pass_to", Step: "main1"},
@@ -222,8 +223,8 @@ func TestXengineForgeExportEmptyDeclaration(t *testing.T) {
 	if rq.Item.Steps[1].Op != "pass_to" || rq.Item.Steps[1].Decision != "priority" || rq.Item.Steps[5].Decision != "blockers" {
 		t.Errorf("exported steps %+v", rq.Item.Steps)
 	}
-	if rq.ScenarioSHA != gate.ItemSHA(it) {
-		t.Errorf("scenario_sha %s, want the unrewritten item's %s", rq.ScenarioSHA, gate.ItemSHA(it))
+	if rq.ScenarioSHA != gate.ItemSHA(rq.Item) {
+		t.Errorf("scenario_sha %s, want the exported item's %s", rq.ScenarioSHA, gate.ItemSHA(rq.Item))
 	}
 }
 

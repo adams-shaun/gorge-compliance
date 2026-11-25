@@ -10,6 +10,11 @@
 # and no unconsumed gorge decision. chooseCounterType used to take the first
 # LOYALTY pick, so the amount ask counted one loyalty and Ajani survived.
 #
+# The same UnmappedAskTest run also covers the forced amount: Ferropede on
+# Wall of Stone's one +1/+1 counter has a lone kind and a fixed CounterNum$,
+# so gorge logs no counter pick and Forge's chooseNumber(1, 1) must answer
+# without a miss (removeAnyTypeForcedAmountRemovesTheLoneCounter).
+#
 # Needs the out-of-tree build at FORGE_ORACLE_REF (make forge-oracle-setup).
 # Usage: forge-oracle-test-counter-any-mixed-kinds.sh [OUTDIR]
 set -euo pipefail
