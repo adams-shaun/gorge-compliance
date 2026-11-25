@@ -339,6 +339,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // generator queued no answer (the cost is on the card, not a gorge
     // decision); an older "Yes" shape is rewritten to the same key.
     private boolean alternativeCostCast = false;
+    /** The step's cast_mode is "evoked": the cast elects EvokeAbility's
+     * alternative cost (CR 702.74a) from XMage's alternative-cost key menu. */
+    private boolean evokedCast = false;
     // A cast step with cast_mode "conspired" or "casualty": gorge elected the
     // spell's (often granted) copy cost -- Raiding Schemes' conspire,
     // Silverquill's casualty 1. XMage poses each as its own
@@ -1425,6 +1428,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (owner.alternativeCostCast && choice.isKeyChoice()) {
                 alternativeCostKey(choice.getMessage(), getChoices());
             }
+            if (owner.evokedCast && choice.isKeyChoice()) {
+                evokeCostKey(choice, getChoices());
+            }
             if (convokeColour != null && choice.getMessage() != null
                     && choice.getMessage().startsWith("Choose mana color to reduce from ")) {
                 getChoices().add(0, convokeColour);
@@ -1468,12 +1474,39 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * itself, e.g. Land Grant); a generator that queued "Yes" gets the
          * same key. Returns whether the menu was this one. */
         static boolean alternativeCostKey(String message, List<String> choices) {
+            return electAlternativeKey(message, choices, "1");
+        }
+
+        /** AlternativeSourceCostsImpl.getAlternativeCostText's prefix for
+         * EvokeAbility: "Cast with " + name + " alternative cost: ...". */
+        static final String EVOKE_COST_TEXT = "Cast with Evoke alternative cost";
+
+        /** Elects the Evoke alternative cost (CR 702.74a) on XMage's
+         * alternative-cost key menu: the key whose text begins
+         * EVOKE_COST_TEXT (EvokeAbility's getAlternativeCostText), not key 1,
+         * so a card that offers another alternative first still elects evoke. A menu with no
+         * Evoke entry is left to the strict-choose failure. Returns whether it
+         * queued the election. */
+        static boolean evokeCostKey(mage.choices.Choice choice, List<String> choices) {
+            if (!choice.isKeyChoice()) {
+                return false;
+            }
+            for (java.util.Map.Entry<String, String> e : choice.getKeyChoices().entrySet()) {
+                String text = e.getValue() == null ? "" : e.getValue().replaceAll("<[^<>]*>", "");
+                if (text.startsWith(EVOKE_COST_TEXT)) {
+                    return electAlternativeKey(choice.getMessage(), choices, e.getKey());
+                }
+            }
+            return false;
+        }
+
+        private static boolean electAlternativeKey(String message, List<String> choices, String key) {
             if (message == null || !message.toLowerCase(java.util.Locale.ROOT)
                     .endsWith("choose an alternative cost")) {
                 return false;
             }
             if (choices.isEmpty()) {
-                choices.add("1");
+                choices.add(key);
             } else {
                 // Replace only the election itself: a scripted "Yes", or the
                 // plain cast's "Cast with no alternative cost" decline queued
@@ -1482,9 +1515,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // it left that answer to be consumed by the cost's target ask.
                 String head = choices.get(0);
                 if (head.equals("Yes") || head.equals("Cast with no alternative cost")) {
-                    choices.set(0, "1");
+                    choices.set(0, key);
                 } else {
-                    choices.add(0, "1");
+                    choices.add(0, key);
                 }
             }
             return true;
@@ -3631,6 +3664,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             optionalCostCast = false;
             kickedCast = false;
             alternativeCostCast = false;
+            evokedCast = false;
             copyCostCast = null;
             giftPromisedCast = false;
             followedPassPosition = false;
@@ -5166,6 +5200,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // mode is the election, so ScriptedChoicePlayer queues key 1
                 // there and the step is otherwise a plain cast.
                 || mode.equals("alternative")
+                // "evoked": Evoke (CR 702.74a) is an alternative cost, XMage's
+                // EvokeAbility. The mode is the election: the cast picks the
+                // Evoke entry of the alternative-cost key menu.
+                || mode.equals("evoked")
                 || mode.equals("prepared_copy")
                 // "adventure_alt" / "omen_alt": the cast of an Adventure or
                 // Omen half. The farm's step names the parent card (the
@@ -7577,6 +7615,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 kickedCast = "kicked".equals(castMode);
                 kickerAsks = 0;
                 alternativeCostCast = "alternative".equals(castMode);
+                evokedCast = "evoked".equals(castMode);
                 copyCostCast = copyCostKeyword(castMode);
                 // "plot" is XMage's Plot special action (PlotAbility is a
                 // SpecialAction: no stack, not a cast), activated from the
@@ -7708,7 +7747,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     faceDownRefs.add(str(st, "card"));
                 }
                 List<String> tg = targets(st);
-                if (!warpedCast && !alternativeCostCast && hasAlternativeSourceCost(cardName)) {
+                if (!warpedCast && !alternativeCostCast && !evokedCast && hasAlternativeSourceCost(cardName)) {
                     // A plain cast step: gorge paid the mana cost, so decline
                     // the alternative cost (evoke, impending, dash, ...)
                     // XMage offers through its "Cast with no alternative
