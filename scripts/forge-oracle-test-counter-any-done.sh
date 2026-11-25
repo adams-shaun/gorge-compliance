@@ -12,10 +12,11 @@
 # then chooseNumber (the amount), and it offers no Done type. The driver used
 # to match only picks naming an offered CounterType, so the Done pick
 # strict-missed "counter type" and stayed queued: the amount ask answered for
-# the next present kind and Forge removed it. StepMachine.takeCounterKind now
-# reads the Done pick by its pick kind, consumes it and answers with a legal
-# offered type; that type's chooseNumber then finds no counter pick and answers
-# 0 (min is 0 under UpTo), which is how removeAnyType stops early.
+# the next present kind and Forge removed it. For a RemoveCounter ask,
+# StepMachine.peekCounterKind now also reads the Done pick by its pick kind,
+# consumes it and answers with a legal offered type; that type's chooseNumber
+# then finds no counter pick and answers 0 (min is 0 under UpTo), which is how
+# removeAnyType stops early.
 #
 # This replays the exported xproof request xs:XP:mabel-bitter-recluse:cast:s1
 # (the setup scripts/forge-oracle-test-counter-any-mixed-kinds.sh uses) with

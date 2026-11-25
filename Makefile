@@ -74,7 +74,17 @@ GO_TEST_FLAGS ?= -p=2
 # batch after the move and stacked the trigger). RotFarmMortipedeTest and SkeletonCrewTest.test_ReturnItself_NoTrigger
 # (the fork carried it @Ignore'd). Card behaviour change only for the CardsLeaveGraveyardTriggeredAbility cards, so the
 # manifests are unchanged.
-XMAGE_REF  ?= 30c62e641b379a0a888f04412ffa59b8ebe0a618
+# 63c40e5be5 = 30c62e641b merged with fork commit 0777660 (adams-shaun/mage#1, branch fix/ghost-of-illyria-delayed-trigger):
+# ExileReturnBattlefieldNextEndStepTargetEffect creates the "return it at the beginning of the next end step" delayed
+# ability even when nothing was exiled (CR 603.7a), so Skyskipper Duo, Ghost of Illyria, Ennis, Debate Moderator,
+# S.H.I.E.L.D. Flying Car and Eerie Interlude with zero targets stack it at the end step as gorge and Forge do; it
+# returned before adding the delayed ability. SkyskipperDuoTest (zero targets fails before, passes after; one target).
+# 43e83011cb = 63c40e5be5 plus the CR 205.1a type-setting fix: Fowl Play and Reprobation set the card type
+# (LoseType.ALL_BUT_COLOR, so an artifact creature stops being an artifact and loses its other subtypes), and Swift
+# Reconfiguration removes the creature subtypes with the creature type, keeping artifact subtypes. FowlPlayTest,
+# ReprobationTest, SwiftReconfigurationTest. Card behaviour change only for those cards and the
+# ExileReturnBattlefieldNextEndStepTargetEffect users, so the manifests are unchanged. Pin line oracle/xpin-1125.
+XMAGE_REF  ?= 43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -369,6 +379,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
+# a1bcd1166a = d0f16bee2e0 plus the cost-choice census (xproof cluster xpt-5b85ea4e): every card-choosing cost that fell
+# to ScriptedCostDecision.choice()'s strict miss (CostReturn on Quirion Ranger, CostUntapType, CostReveal, CostPutCardToLib,
+# CostGainControl, CostExiledMoveToGrave, CostBehold/BeholdExile, CostCollectEvidence, CostExert, CostEnlist,
+# CostPromiseGift, CostExile's All/FromTopGrave/total-mana-value forms, CostRemoveAnyCounter per-counter picks) now takes
+# gorge's logged pick, forced when exact; CostChooseColor/CreatureType/RevealChosen keep the parent's answer. Only
+# RemoveAnyCounter of any kind over several permanents stays on choice(). Test CostReturnPickTest (2 tests,
+# fixtures/costreturn); full driver suite 185 tests. Driver-only. Fork branch fix/xp-forge-driver-cost-choice-census.
 # d0f16bee2e0 = the merge of a4fa8d45a56 and fef74c5308f, carrying all three fixes (the OddsOrEvens binary,
 # the repeated-mode/NICKNAME/zero-option driver work and the Myriad-only AtEOT guard).
 # a4fa8d45a56 = the merge of 65c6664d90 and a445a858b2, carrying both fixes.
@@ -403,6 +420,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
+# f7b730149a = oracle/pin-1125: the merge of the two fixes below (both built on d0f16bee2e).
+# 752947823d = d0f16bee2e plus the fork's second-combat-damage-step priority fix b16a076d04 (cherry-picked as 67df148f93):
+# PhaseHandler.onPhaseBegin COMBAT_DAMAGE no longer clears givePriorityToPlayer when assignCombatDamage(false) assigns nothing,
+# so a lone first striker's regular damage step gives priority (CR 510.3, 510.4; xproof cluster forge_skips_damage_step,
+# triage xpt-c647818a: Akroma, Angel of Wrath and Goblin Striker). SecondCombatDamageStepPriorityTest fails on d0f16bee2e and
+# passes after. Driver and die-roll code unchanged; cardsfolder/tokenscripts unchanged. Fork branch
+# fix/xp-forge-oracle-damage-step-priority.
 # 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin force no longer spent by an unrelated unbounded draw) and 24a3344b81
 # (the Dig order-to-Library answer for Spin into Myth's fateseal): they touch disjoint files (ForcedDieRandom vs
 # ScriptedController/StepMachine), so the pin keeps both; die-roll code unchanged.
@@ -469,23 +493,6 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # xs:XP:hurl-through-hell:cast:s1 request and requires p1's Shield Sphere on the stack (controller p0) at step 7 with no
 # harness row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-mayplay-cast.
-# 9a35b501bbb = 244c5908482 + the remove-any-type kind pick left for the amount run: CountersRemoveEffect.removeAnyType
-# asks chooseCounterType and then chooseNumber per type, and gorge logs one counter-kind pick per counter removed (Mabel,
-# Bitter Recluse's "remove up to three counters" from Ajani Resolute carrying two loyalty and one +1/+1). takeCounterKind
-# took the first kind pick, so takeCounterPicks counted one fewer of that type and Forge removed one counter too few,
-# leaving Ajani at 1 loyalty where gorge puts it in the graveyard (CR 122.1, 704.5i). A RemoveCounter ask now peeks the
-# kind pick and the chooseNumber run consumes it; a put or move counter-kind ask still takes its single pick.
-# scripts/forge-oracle-test-counter-any-mixed-kinds.sh (make forge-driver-tests) replays the exported
-# xs:XP:mabel-bitter-recluse:cast:s1 request and requires p1.graveyard [Ajani Resolute] at step 3 with no harness or
-# strict-miss row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
-# fix/xp-forge-driver-counter-kind-peek.
-# 6bcd573a9d6 = 9a35b501bbb + the up-to remove-any-type Done pick: when the controller stops early gorge logs a counter
-# answer of Done (pick kind remove_counter_done), which names no Forge CounterType. Forge's removeAnyType has no Done type,
-# so the kind ask now consumes the Done and answers a legal offered type; that type's chooseNumber then finds no counter
-# pick and answers 0 (min is 0 under UpTo), which is how removeAnyType stops. scripts/forge-oracle-test-counter-any-done.sh
-# (make forge-driver-tests) replays the Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute
-# still on p1's battlefield at 1 loyalty and one +1/+1, with no harness or strict-miss row. Driver-only;
-# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-counter-any-done.
 # 3e6bd830a6f = 244c5908482 + gorge's discard_may election (xproof cluster xpt-e4d29b48, Evie Frye and Glacial Dragonhunt's
 # DB$ Discard | Mode$ TgtChoose | Optional$ True | NumCards$ 1): Forge asks chooseCardsToDiscardFrom for 0..1, gorge poses a yes/no
 # election (effDiscardTgtChoose, resume discard_may) and then the card pick, skipped when forced. ScriptedController.chooseCardsToDiscardFrom
@@ -495,13 +502,26 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # card, no, yes then gorge's card pick) fails without the change and the full driver suite (198 tests) is green on it;
 # scripts/forge-oracle-test-discard-may-election.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-discard-may-election.
-# 7fd5e0ca01f = the clean merge of 6bcd573a9d6 (the up-to remove-any-type Done pick, fork branch
-# fix/xp-forge-driver-counter-any-done) and 3e6bd830a6f (the discard_may election, fork branch
-# fix/xp-forge-driver-discard-may-election), both children of 244c5908482 and touching disjoint code (the counter-kind ask in
-# StepMachine/ScriptedController.chooseCounterType vs ScriptedController.chooseCardsToDiscardFrom); the merge adds no code of its own.
-# make forge-driver-tests runs both scripts/forge-oracle-test-counter-any-done.sh and scripts/forge-oracle-test-discard-may-election.sh
-# on it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 7fd5e0ca01fcfa9ea97d1fc64ae4936d42ca188b
+# 7d506c5192 = oracle/fpin-1125: the merge of 26b4658101 into f7b730149a (d0f25fff70), then 244c590848 (the mayplay pin
+# above). 26b4658101 = f7b730149a plus remove-any-type's counter-kind pick left for the amount ask: CountersRemoveEffect
+# .removeAnyType asks chooseCounterType then chooseNumber, and gorge logs one counter-kind pick per counter removed, so with two
+# kinds offered chooseCounterType took the first pick and the amount came up one short (Mabel, Bitter Recluse removed one loyalty
+# from Ajani Resolute instead of two; CR 122.1, 704.5i). For a RemoveCounter ask chooseCounterType now peeks the kind pick
+# (StepMachine.peekCounterKind); other asks and the remove-any-counter cost still consume theirs. UnmappedAskTest's mixed-kinds
+# fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
+# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
+# 66671165f31 = afe18881c6e plus the up-to remove-any-type Done pick (fork branch fix/xp-forge-driver-counter-any-done-v2):
+# when the controller stops an UpTo removal early gorge logs remove_counter_done ("Done"), which names no Forge CounterType
+# and which CountersRemoveEffect.removeAnyType has no option for, so the kind ask strict-missed and left it queued. For a
+# RemoveCounter ask StepMachine.peekCounterKind (26b4658101's peek design) now also matches the Done by its pick kind,
+# consumes it and answers the first offered type; that type's chooseNumber finds no counter pick and answers 0 (min is 0 under
+# UpTo), which is how removeAnyType stops. The kind ask peeks before the lone-option shortcut so a single-kind up-to removal
+# consumes its Done too. Test UnmappedAskTest.removeAnyTypeDoneStopsTheUpToRemoval (fixtures/unmapped/counter-remove-any-done.jsonl)
+# fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
+# Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
+# one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 66671165f315fd9166baa92751ec18cf2ec89319
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
