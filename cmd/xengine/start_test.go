@@ -498,6 +498,32 @@ func TestStartManaAbilityIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartManaWheelColourIsExercised: a mana-ability focus that is the second
+// of its source's mana abilities and asks a colour (pain lands, Talismans,
+// Grove of the Burnwillows: f0/a1, "{T}: Add {U} or {B}") records its tap on the
+// engine's choice among the source's mana abilities, and the lowering refused
+// it as unsupported_kind:activate. That choice offers an explicit combo's
+// colours as options of their own, so the step's colour answer picks it.
+func TestStartManaWheelColourIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, card := range []string{"Caves of Koilos", "Talisman of Progress", "Grove of the Burnwillows"} {
+		t.Run(card, func(t *testing.T) {
+			for _, it := range startIsExercised(t, reg, b, card, "f0/a1") {
+				found := false
+				for _, st := range it.Steps {
+					if st.Op == "activate" && strings.Contains(st.Card, card) && st.AbilityIndex != nil && *st.AbilityIndex == 1 &&
+						len(st.Answers) == 1 && st.Answers[0].Kind == "choose" {
+						found = true
+					}
+				}
+				if !found {
+					t.Errorf("%s: no activate step of %s ability 1 with its colour answer: %+v", it.ID, card, it.Steps)
+				}
+			}
+		})
+	}
+}
+
 // TestStartTargetRestrictionIsExercised: the focus play's target check read
 // only a target's card type and side, never the rest of its ValidTgts filter
 // (Permanent.nonLand, a colour, withFlying, cmcLE3), so a start met "target
