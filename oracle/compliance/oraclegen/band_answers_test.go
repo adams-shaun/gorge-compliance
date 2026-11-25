@@ -101,3 +101,36 @@ func TestBandAnswersSameNameAmbiguousKeepsAlias(t *testing.T) {
 		t.Fatalf("ambiguous same-name band answer = %#v, want %#v", got, want)
 	}
 }
+
+// TestBandAnswersTransformedMemberUsesLiveName is the Kessig Prowler //
+// Sinuous Predator shape from xpt-e4827a43: the member ref keeps the setup
+// front face, but it transformed mid-scenario (CR 712.8) and XMage's band
+// target offers only the live back face. The pick label carries the live name
+// ("Band Sinuous Predator with Timber Wolves"), so the scripted choice must
+// name that, or the target selects nothing ("Found wrong choice command ...
+// Kessig Prowler ... selected 0, more possible 2").
+func TestBandAnswersTransformedMemberUsesLiveName(t *testing.T) {
+	transformed := rules.OracleDecision{
+		Step: 63, Seat: 0, Kind: "choose_n", Options: 3, GorgeKind: "choose", Via: "answer",
+		Picks: []string{"Band Sinuous Predator with Timber Wolves"}, PickIdx: []int{1},
+		PickRefs: []string{"p0:Kessig Prowler"}, PickRefsInexact: []bool{false},
+		OptionRefs:  []string{"p0:Kessig Prowler", "p0:Timber Wolves", "p0:Hollowhenge Overlord"},
+		First:       "No more creatures in Timber Wolves's band",
+		ObjectPicks: []string{"p0:Kessig Prowler"},
+		PickKinds:   []string{"band"}, Min: 1, Max: 1,
+	}
+	got := routed(t, []rules.OracleDecision{transformed}, 64)
+	want := []XAnswer{
+		{Seat: 0, Kind: "choice", Value: "yes"},
+		{Seat: 0, Kind: "choice", Value: "Sinuous Predator"},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("transformed band answer = %#v, want %#v (live back-face name)", got, want)
+	}
+	// The label alone still names the member when First is absent (a
+	// synthetic decision); the leader is the text after the last " with ".
+	transformed.First = ""
+	if got := routed(t, []rules.OracleDecision{transformed}, 64); !reflect.DeepEqual(got, want) {
+		t.Fatalf("transformed band answer without First = %#v, want %#v", got, want)
+	}
+}

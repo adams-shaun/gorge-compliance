@@ -3140,13 +3140,61 @@ func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
 			ref = d.PickRefs[k]
 		}
 		if isScenarioRefShaped(ref) {
-			member := disambiguatedObjectChoice(d, k, oraclediffRefName(ref))
+			memberName := bandMemberLiveName(d, k)
+			if memberName == "" {
+				memberName = oraclediffRefName(ref)
+			}
+			member := disambiguatedObjectChoice(d, k, memberName)
 			as = append(as, XAnswer{d.Seat, "choice", "yes"}, XAnswer{d.Seat, "choice", member})
 			continue
 		}
 		as = append(as, XAnswer{d.Seat, "choice", "no"})
 	}
 	return as, true
+}
+
+// bandMemberLiveName returns the accepted member's LIVE name from pick k's
+// label "Band <member> with <leader>", or "" when the label has another shape.
+// The pick's ref keeps the object's setup identity -- a transform DFC's front
+// face -- while the label is built from the object's current face
+// (rules/banding.go askNextBand, CR 712.8). Answering the ref's front name
+// selects nothing once the DFC has transformed (Kessig Prowler // Sinuous
+// Predator: "Band Sinuous Predator with Timber Wolves" over ref
+// p0:Kessig Prowler). The leader's live name comes from option 0's decline
+// label ("No more creatures in <leader>'s band"), so a " with " inside either
+// card name cannot split the member wrongly; the last-separator fallback only
+// covers a synthetic decision without First.
+func bandMemberLiveName(d rules.OracleDecision, k int) string {
+	if k < 0 || k >= len(d.Picks) {
+		return ""
+	}
+	member, ok := strings.CutPrefix(d.Picks[k], "Band ")
+	if !ok || member == "" {
+		return ""
+	}
+	if leader := bandLeaderLiveName(d.First); leader != "" {
+		if name, ok := strings.CutSuffix(member, " with "+leader); ok && name != "" {
+			return name
+		}
+	}
+	if i := strings.LastIndex(member, " with "); i > 0 {
+		return member[:i]
+	}
+	return ""
+}
+
+// bandLeaderLiveName extracts <leader> from a band ask's decline label.
+func bandLeaderLiveName(decline string) string {
+	const prefix, suffix = "No more creatures in ", "'s band"
+	leader, ok := strings.CutPrefix(decline, prefix)
+	if !ok {
+		return ""
+	}
+	leader, ok = strings.CutSuffix(leader, suffix)
+	if !ok {
+		return ""
+	}
+	return leader
 }
 
 // loneTriggerCostDecline is a triggered-cost ask offered with only its
