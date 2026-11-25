@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	703eaea90aaa	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-9545f126-062f-4410-a362-e16255a128d6	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9545f126-062f-4410-a362-e16255a128d6	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 954836f8-c225-450a-bb51-f2adb6923ef5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 954b30b2-b88c-4558-b06c-4518b49d7b20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 954b30b2-b88c-4558-b06c-4518b49d7b20	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95f20067-4471-4bfa-952d-dbbfbb2c2178	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rearing-embermare:combat0.attack:s1,f:xs:XP:rearing-embermare:combat0.attack:s1	-	-	-	23c4009444b0	-	2f8a705dc133	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 95f20067-4471-4bfa-952d-dbbfbb2c2178	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rearing-embermare:combat0.block:s1,f:xs:XP:rearing-embermare:combat0.block:s1	-	-	-	23c4009444b0	-	2f8a705dc133	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 95f47e9b-0290-4ec4-a1ba-bc5a432ffab2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95f47e9b-0290-4ec4-a1ba-bc5a432ffab2	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+95f47e9b-0290-4ec4-a1ba-bc5a432ffab2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:candlegrove-witch:f0t0:s1,f:xs:XP:candlegrove-witch:f0t0:s1	-	-	-	6f84be0f34c0	-	57b16ed2a108	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 95f5c0ac-8835-4b31-863b-84f5273aac50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifesmith:cast:s1,f:xs:XP:lifesmith:cast:s1	-	-	-	d864b561c9cb	-	621b2c00db42	-	-	2026-11-24	xproof
 95f5c0ac-8835-4b31-863b-84f5273aac50	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:lifesmith:f0t0:s1	-	-	-	23c4009444b0	-	621b2c00db42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 95f5ddb6-e3e5-4b35-88ac-eae192783eda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fretwork-colony:f0t0:s1,f:xs:XP:fretwork-colony:f0t0:s1	-	-	-	3aa6ded33acb	-	e9de274f9962	-	-	2026-11-25	xproof

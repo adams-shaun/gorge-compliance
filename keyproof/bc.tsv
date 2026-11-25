@@ -18,11 +18,11 @@ bc1ea0ba-46bf-49b6-af95-51eaf1ab915e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bc243497-d95a-44e0-b7e3-c56b4ff7cd69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc2bf46f-2c9b-4f85-b8d6-d13a3b64436d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc2d0702-b140-4b78-8a8f-3a6d19073b59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bc2d0702-b140-4b78-8a8f-3a6d19073b59	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-bc2d0702-b140-4b78-8a8f-3a6d19073b59	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-bc2d0702-b140-4b78-8a8f-3a6d19073b59	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+bc2d0702-b140-4b78-8a8f-3a6d19073b59	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+bc2d0702-b140-4b78-8a8f-3a6d19073b59	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+bc2d0702-b140-4b78-8a8f-3a6d19073b59	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 bc328acc-8521-4581-88c3-99a7cb2c1cdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bc328acc-8521-4581-88c3-99a7cb2c1cdb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+bc328acc-8521-4581-88c3-99a7cb2c1cdb	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:flumph:f0t0:s1,f:xs:XP:flumph:f0t0:s1	-	-	-	6f84be0f34c0	-	81111d1e90fd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 bc32c24f-2f2a-4125-917c-60d425166640	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flames-of-the-firebrand:cast:s1,f:xs:XP:flames-of-the-firebrand:cast:s1	-	-	-	d864b561c9cb	-	66ff7bea1fb0	-	-	2026-11-24	xproof
 bc3576fb-3c08-456e-b3b6-9eb01b2366d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc3576fb-3c08-456e-b3b6-9eb01b2366d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ bc730e60-b9c2-4c49-b97b-2878be105b04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bc781549-7b2b-440b-93ae-69677acdfdad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc79eb3c-33e2-4820-a59c-92a6271fd725	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleeting-spirit:cast:s1,f:xs:XP:fleeting-spirit:cast:s1	-	-	-	d864b561c9cb	-	a6cc6d75d9d9	-	-	2026-11-24	xproof
 bc79eb3c-33e2-4820-a59c-92a6271fd725	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-bc79eb3c-33e2-4820-a59c-92a6271fd725	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+bc79eb3c-33e2-4820-a59c-92a6271fd725	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:fleeting-spirit:f0a1:s1,f:xs:XP:fleeting-spirit:f0a1:s1	-	-	-	6f84be0f34c0	-	a6cc6d75d9d9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 bc7b6508-6522-4772-93b0-3985e7e75048	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc7b6508-6522-4772-93b0-3985e7e75048	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc7b90b1-3517-4e5d-9bd8-68b4d8a259fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

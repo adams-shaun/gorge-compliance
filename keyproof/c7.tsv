@@ -37,9 +37,9 @@ c7371040-160c-4502-b7f9-77b7f54cc020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c737d27b-db14-4bd4-8f16-bcbd4401c47b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c737d27b-db14-4bd4-8f16-bcbd4401c47b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c737d27b-db14-4bd4-8f16-bcbd4401c47b	land	land	agreed	-	FX	start	2	0	x:xs:XP:caldera-lake:land:s1,f:xs:XP:caldera-lake:land:s1	-	-	-	ea3140b6974b	-	755f0092282c	-	-	2026-11-24	xproof
-c73839bf-7500-4fd4-aa2b-e2e2e157784d	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c73839bf-7500-4fd4-aa2b-e2e2e157784d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skull-skaab:f0t1:s1,f:xs:XP:skull-skaab:f0t1:s1	-	-	-	6f84be0f34c0	-	947355b41fa8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	2	0	x:xs:XP:skull-skaab:f0t1:s1,f:xs:XP:skull-skaab:f0t1:s1	-	-	-	6f84be0f34c0	-	947355b41fa8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 c739e180-2f14-41ed-8e7e-50b7df985f35	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c739e180-2f14-41ed-8e7e-50b7df985f35	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:rabbit-battery:f0a1:s1	-	-	-	23b491658465	-	2734be67fd0c	-	-	2026-11-25	xproof
 c739e180-2f14-41ed-8e7e-50b7df985f35	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -105,7 +105,7 @@ c77f8fee-8d2d-4cec-948f-2ca3e5b64070	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c77ff526-c0a8-45c7-9730-2e306a0d01b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c77ff526-c0a8-45c7-9730-2e306a0d01b8	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 c786a0aa-d86f-42c3-a7ea-5cb6ab72b5ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c786a0aa-d86f-42c3-a7ea-5cb6ab72b5ec	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c786a0aa-d86f-42c3-a7ea-5cb6ab72b5ec	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:teleportation-circle:f0t0:s1,f:xs:XP:teleportation-circle:f0t0:s1	-	-	-	6f84be0f34c0	-	a0463da8b450	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 c78783e5-868d-4a8b-a4f8-95a92853cf0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c78783e5-868d-4a8b-a4f8-95a92853cf0a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c78c8f7d-45fd-46c0-9ed4-4d0e85aada2e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fell-the-pheasant:cast:s1,f:xs:XP:fell-the-pheasant:cast:s1	-	-	-	ae86f6029288	-	0964c448514d	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ c7ee1b21-d02e-49ef-95d6-d6dbf2f886ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eld
 c7ee1b21-d02e-49ef-95d6-d6dbf2f886ae	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:eldrazi-monument:f0t0:s1,f:xs:XP:eldrazi-monument:f0t0:s1	-	-	-	3aa6ded33acb	-	be6e66cecb3c	-	-	2026-11-25	xproof
 c7ee79c3-a273-45b4-b3a4-548d9b2b883c	cast	cast-resolve	agreed	-	FX	scen	2	0	Leyline of Hope/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c7ee79c3-a273-45b4-b3a4-548d9b2b883c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Leyline of Hope/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c7efe6c6-3da1-47a6-a8ad-30c36502a7ab	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c7efe6c6-3da1-47a6-a8ad-30c36502a7ab	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mercurial-transformation:cast:s1	-	-	-	6f84be0f34c0	-	98c0724ae15b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 c7f20899-2625-4b3a-8bd8-0bcee07ed86e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c7f20899-2625-4b3a-8bd8-0bcee07ed86e	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:rust-tick:f0a0:s1,f:xs:XP:rust-tick:f0a0:s1	-	-	-	d864b561c9cb	-	f28e72214557	-	-	2026-11-24	xproof
 c7f2c629-0d3a-4556-951e-6bc5d74fd7bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

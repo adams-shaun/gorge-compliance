@@ -78,10 +78,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7875c063-19c3-4e6e-81d8-1a378a4e16e5	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:combat0.attack:s1,f:xs:XP:dragonback-lancer:combat0.attack:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7875c063-19c3-4e6e-81d8-1a378a4e16e5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:combat0.block:s1,f:xs:XP:dragonback-lancer:combat0.block:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7875c063-19c3-4e6e-81d8-1a378a4e16e5	f0/t0	Attacks/Mobilize	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:f0t0:s1,f:xs:XP:dragonback-lancer:f0t0:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-78780f37-f215-4ae1-adce-6255b0146873	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+78780f37-f215-4ae1-adce-6255b0146873	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 78780f37-f215-4ae1-adce-6255b0146873	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78780f37-f215-4ae1-adce-6255b0146873	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-78780f37-f215-4ae1-adce-6255b0146873	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+78780f37-f215-4ae1-adce-6255b0146873	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 787935ab-26a6-4b4a-9c14-e106160e951d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 787b494b-731b-4e99-8e46-157bc86f6eea	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 7880576b-8ad9-4382-97c5-7a631106a35e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravos-soultender:f0t0:s1,f:xs:XP:ravos-soultender:f0t0:s1	-	-	-	23c4009444b0	-	f6f366b1446c	-	-	2026-11-25	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:horned-stoneseeker:f0t0:s1,f:xs:XP:horned-stoneseeker:f0t0:s1	-	-	-	ae86f6029288	-	b6524698de71	-	-	2026-11-24	xproof
 78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 78d9faff-2ad9-4cf9-a239-27c50435d007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d9faff-2ad9-4cf9-a239-27c50435d007	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+78d9faff-2ad9-4cf9-a239-27c50435d007	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:futurist-sentinel:f0a0:s1,f:xs:XP:futurist-sentinel:f0a0:s1	-	-	-	6f84be0f34c0	-	b8a129725c23	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 78dbbc15-9304-4178-b9b2-1db6c64ca11a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wishing-well:cast:s1,f:xs:XP:wishing-well:cast:s1	-	-	-	23c4009444b0	-	236c3a3275a5	-	-	2026-11-25	xproof

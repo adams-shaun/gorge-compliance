@@ -81,8 +81,8 @@ ff6b52b7-ae3c-465b-b10e-901160e5230e	f0/t0	NULL	owed	refused:no-generator:trigge
 ff6bc9f5-5a83-42d9-b1a4-f0979aed28ad	cast	cast	agreed	-	F	start	2	0	f:xs:XP:live-long-and-prosper:cast:s1	-	-	-	44e3ec152eea	-	600426c6423b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ff6e4346-463c-445d-8f72-11cb35dd99ee	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:red-dragon:cast:s1,f:xs:XP:red-dragon:cast:s1	-	-	-	d864b561c9cb	-	08adb116e6a1	-	-	2026-11-24	xproof
 ff6e4346-463c-445d-8f72-11cb35dd99ee	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:red-dragon:cast:s1,f:xs:XP:red-dragon:cast:s1	-	-	-	d864b561c9cb	-	08adb116e6a1	-	-	2026-11-24	xproof
-ff72b900-ce3c-4cc4-a50e-e501e17631ca	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-ff72b900-ce3c-4cc4-a50e-e501e17631ca	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ff72b900-ce3c-4cc4-a50e-e501e17631ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silverquill-pledgemage:cast:s1,f:xs:XP:silverquill-pledgemage:cast:s1	-	-	-	6f84be0f34c0	-	f03c70479182	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+ff72b900-ce3c-4cc4-a50e-e501e17631ca	f0/t0	SpellCastOrCopy	agreed	-	FX	start	2	0	x:xs:XP:silverquill-pledgemage:f0t0:s1,f:xs:XP:silverquill-pledgemage:f0t0:s1	-	-	-	6f84be0f34c0	-	f03c70479182	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ff768016-67f8-409e-8359-9ed05bcb46d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff77074f-48ef-4c01-8ede-4e9be3e483f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff77074f-48ef-4c01-8ede-4e9be3e483f4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:sandals-of-abdallah:f0a0:s1,f:xs:XP:sandals-of-abdallah:f0a0:s1	-	-	-	3aa6ded33acb	-	e8b7d84eb727	-	-	2026-11-25	xproof
@@ -96,10 +96,10 @@ ff812a78-3fe7-47bc-9984-1c2380cff5b1	combat#0.attack	combat#0.attack	agreed	-	X	
 ff812a78-3fe7-47bc-9984-1c2380cff5b1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Twinmaw Stormbrood/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ff812a78-3fe7-47bc-9984-1c2380cff5b1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ff86f385-dc3e-4bfe-83e7-9229afab4aa9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ff86f385-dc3e-4bfe-83e7-9229afab4aa9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ff86f385-dc3e-4bfe-83e7-9229afab4aa9	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:arcbound-tracker:f0t0:s1,f:xs:XP:arcbound-tracker:f0t0:s1	-	-	-	6f84be0f34c0	-	bd94daa8c9cc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ff86f385-dc3e-4bfe-83e7-9229afab4aa9	f0/t1	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-tracker:f0t1:s1,f:xs:XP:arcbound-tracker:f0t1:s1	-	-	-	d864b561c9cb	-	bd94daa8c9cc	-	-	2026-11-24	xproof
 ff8cf669-a38a-44ae-baff-420f59492371	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ff8cf669-a38a-44ae-baff-420f59492371	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ff8cf669-a38a-44ae-baff-420f59492371	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:go-shintai-of-hidden-cruelty:f0t0:s1,f:xs:XP:go-shintai-of-hidden-cruelty:f0t0:s1	-	-	-	6f84be0f34c0	-	6d00f2881af6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ff8d3532-bf4f-4209-ac01-351ddc9b9423	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff8d3532-bf4f-4209-ac01-351ddc9b9423	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:intrepid-outlander:f0t0:s1,f:xs:XP:intrepid-outlander:f0t0:s1	-	-	-	3aa6ded33acb	-	944df0390cd5	-	-	2026-11-25	xproof
 ff8f5a4b-112a-425e-b489-7ee26d1d9fb3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voracious-hydra:f0t0:s1,f:xs:XP:voracious-hydra:f0t0:s1	-	-	-	3aa6ded33acb	-	9c3ab167902c	-	-	2026-11-25	xproof

@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 352844c5-2160-4787-97f1-9cd0fed060eb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mardu-blazebringer:f0t0:s1,f:xs:XP:mardu-blazebringer:f0t0:s1	-	-	-	d864b561c9cb	-	b29a9165b0ed	-	-	2026-11-24	xproof
 352844c5-2160-4787-97f1-9cd0fed060eb	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:mardu-blazebringer:f0t1:s1,f:xs:XP:mardu-blazebringer:f0t1:s1	-	-	-	6f84be0f34c0	-	b29a9165b0ed	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 352b64d2-2ae5-44ee-a64f-94932ef545d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-353db389-b829-4e66-85d5-6018bc87c3e0	cast	cast-resolve	agreed	-	X	scen	1	0	Mirrormind Crown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+353db389-b829-4e66-85d5-6018bc87c3e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirrormind-crown:cast:s1,f:xs:XP:mirrormind-crown:cast:s1	-	-	-	6f84be0f34c0	-	5c446b882f48	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 353db389-b829-4e66-85d5-6018bc87c3e0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mirrormind Crown/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 353dd446-2ea6-41c9-a10f-5a03e4de19b4	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 35426427-4268-4c8f-9fe1-270f2ce43d97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35506b6b-6476-4830-9baa-4051c18322f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3552eea9-aee9-4555-b3cb-8e4fc5b728cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35553c2a-0150-49e4-81da-f356c6a17253	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35553c2a-0150-49e4-81da-f356c6a17253	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-35553c2a-0150-49e4-81da-f356c6a17253	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+35553c2a-0150-49e4-81da-f356c6a17253	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+35553c2a-0150-49e4-81da-f356c6a17253	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:era-of-innovation:cast:s1,f:xs:XP:era-of-innovation:cast:s1	-	-	-	d864b561c9cb	-	83fb970077de	-	-	2026-11-24	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:era-of-innovation:f0t0:s1,f:xs:XP:era-of-innovation:f0t0:s1	-	-	-	fb9d3088f0bf	-	83fb970077de	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof

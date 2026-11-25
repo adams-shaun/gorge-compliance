@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 0604ed6c-a85f-41da-a163-0c414e57d133	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0604ed6c-a85f-41da-a163-0c414e57d133	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0604ed6c-a85f-41da-a163-0c414e57d133	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dawnhart-wardens:f0t0:s1,f:xs:XP:dawnhart-wardens:f0t0:s1	-	-	-	6f84be0f34c0	-	1c6b46935359	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0607b289-74a6-4f3a-b15c-a639244873b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:awaken-the-sky-tyrant:cast:s1,f:xs:XP:awaken-the-sky-tyrant:cast:s1	-	-	-	8c0bd19283bb	-	aff2c0c8efb1	-	-	2026-11-24	xproof
 0607b289-74a6-4f3a-b15c-a639244873b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 060a7d77-61a8-4964-8fb6-35bd9a999517	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weatherlight-compleated:cast:s1,f:xs:XP:weatherlight-compleated:cast:s1	-	-	-	ae86f6029288	-	1a2afcf07efe	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 068b370f-a358-4244-8050-6c81680c55c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-068b9586-53e3-4791-a26c-a6b38d038f66	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+068b9586-53e3-4791-a26c-a6b38d038f66	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:dreadlight-monstrosity:f0t0:s1,f:xs:XP:dreadlight-monstrosity:f0t0:s1	-	-	-	6f84be0f34c0	-	783b5adab2d0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 068cbbe3-43c3-425e-80ec-d1ce5c02ea9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06905dfb-b2df-4849-8848-fd3c964aa8c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malamet-brawler:cast:s1,f:xs:XP:malamet-brawler:cast:s1	-	-	-	23b491658465	-	f5de13864b46	-	-	2026-11-24	xproof
 06905dfb-b2df-4849-8848-fd3c964aa8c9	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:malamet-brawler:f0t0:s1,f:xs:XP:malamet-brawler:f0t0:s1	-	-	-	23b491658465	-	f5de13864b46	-	-	2026-11-24	xproof

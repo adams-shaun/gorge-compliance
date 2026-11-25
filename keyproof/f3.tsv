@@ -120,7 +120,7 @@ f38fe1e9-8997-4b63-9109-7513034bac88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f394d2bf-89aa-44c1-b473-8c7a8874a9a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3988b96-9e00-445c-b3e1-6b2df9b13dac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ingenious-smith:f0t0:s1,f:xs:XP:ingenious-smith:f0t0:s1	-	-	-	d864b561c9cb	-	7be7fe9b4496	-	-	2026-11-24	xproof
 f3988b96-9e00-445c-b3e1-6b2df9b13dac	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ingenious-smith:f0t0:s1,f:xs:XP:ingenious-smith:f0t0:s1	-	-	-	d864b561c9cb	-	7be7fe9b4496	-	-	2026-11-24	xproof
-f3988b96-9e00-445c-b3e1-6b2df9b13dac	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f3988b96-9e00-445c-b3e1-6b2df9b13dac	f0/t1	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:ingenious-smith:f0t1:s1,f:xs:XP:ingenious-smith:f0t1:s1	-	-	-	6f84be0f34c0	-	7be7fe9b4496	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 f398a742-22c1-4da9-9d49-fdce2eb93d01	cast	cast-resolve	agreed	-	FX	scen	2	0	Doom Reigns Supreme/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f398a742-22c1-4da9-9d49-fdce2eb93d01	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Doom Reigns Supreme/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f398a742-22c1-4da9-9d49-fdce2eb93d01	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Doom Reigns Supreme/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ f3bf22cf-0a6f-4fb6-ba82-63ce290308d6	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:sp
 f3bf22cf-0a6f-4fb6-ba82-63ce290308d6	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:spawning-pool:f0a1:s1,f:xs:XP:spawning-pool:f0a1:s1	-	-	-	d864b561c9cb	-	330be56b8388	-	-	2026-11-24	xproof
 f3bf22cf-0a6f-4fb6-ba82-63ce290308d6	land	land	agreed	-	FX	start	2	0	x:xs:XP:spawning-pool:land:s1,f:xs:XP:spawning-pool:land:s1	-	-	-	25696bf19d5b	-	330be56b8388	-	-	2026-11-24	xproof
 f3c104e2-470b-429f-a047-a21edc2adb3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f3c104e2-470b-429f-a047-a21edc2adb3b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f3c104e2-470b-429f-a047-a21edc2adb3b	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 f3c104e2-470b-429f-a047-a21edc2adb3b	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f3c40943-1d7c-4ea2-b34f-8df8b6775701	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3c40943-1d7c-4ea2-b34f-8df8b6775701	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

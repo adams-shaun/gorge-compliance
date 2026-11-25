@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d8569c1-0b10-40a7-9a87-38571a782dd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d8569c1-0b10-40a7-9a87-38571a782dd9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d8569c1-0b10-40a7-9a87-38571a782dd9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d85eec2-80db-466c-bd48-d2a12866e8bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d85eec2-80db-466c-bd48-d2a12866e8bd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1d85eec2-80db-466c-bd48-d2a12866e8bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:old-stickfingers:f0t0:s1,f:xs:XP:old-stickfingers:f0t0:s1	-	-	-	6f84be0f34c0	-	8ea297860b92	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1d85eec2-80db-466c-bd48-d2a12866e8bd	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:old-stickfingers:f0t0:s1,f:xs:XP:old-stickfingers:f0t0:s1	-	-	-	6f84be0f34c0	-	8ea297860b92	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1d88014b-8189-4a88-bee3-c2310d36f6e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:miriam-herd-whisperer:cast:s1,f:xs:XP:miriam-herd-whisperer:cast:s1	-	-	-	23b491658465	-	00a2d9c6784c	-	-	2026-11-25	xproof
 1d88014b-8189-4a88-bee3-c2310d36f6e8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:miriam-herd-whisperer:static0.0:s1,f:xs:XP:miriam-herd-whisperer:static0.0:s1	-	-	-	6f84be0f34c0	-	00a2d9c6784c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1d88014b-8189-4a88-bee3-c2310d36f6e8	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:miriam-herd-whisperer:static0.0:s1,f:xs:XP:miriam-herd-whisperer:static0.0:s1	-	-	-	6f84be0f34c0	-	00a2d9c6784c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1db76752-31ed-4a16-986a-d0852ba7d812	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1db76752-31ed-4a16-986a-d0852ba7d812	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1db76752-31ed-4a16-986a-d0852ba7d812	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:drider:f0t0:s1,f:xs:XP:drider:f0t0:s1	-	-	-	6f84be0f34c0	-	1394b8e8c4e1	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1dbadf75-28cd-4525-8f51-9c53049b9b54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dbadf75-28cd-4525-8f51-9c53049b9b54	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kitsune-ace:f0t0:s1,f:xs:XP:kitsune-ace:f0t0:s1	-	-	-	3aa6ded33acb	-	896fb75dfefd	-	-	2026-11-25	xproof
 1dbe4eb4-8313-459a-89ce-982442cd0cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
