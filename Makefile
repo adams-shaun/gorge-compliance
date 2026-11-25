@@ -673,7 +673,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # it fails at 1da9dc5c96c and 65d8060f39ba with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
 # 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
-FORGE_ORACLE_REF ?= 34f0585c97b5ea0e9bde19c20b6122473c24deee
+# 7cae17380d = 34f0585c97 plus cast_mode "room_alt" (xproof clusters xpt-34d42446, xpt-ea3ecf04 and xpt-eab5898f: Central
+# Elevator // Promising Stairs and Dazzling Theater // Prop Room). A Room is a split card cast as one of its doors (CR 709.3,
+# 709.3a); gorge pays three mana for the second door (Promising Stairs {2}{U}, Prop Room {2}{W}), whose front door ({3}{U},
+# {3}{W}) is unaffordable. StepMachine.spellForMode had no case for the mode, so spellFor returned the first (front) spell and
+# Forge refused the cast ("was not put on the stack"). It now selects the spell whose CardStateName is RightSplit.
+# scripts/forge-oracle-test-room-alt-cast-mode.sh (make forge-driver-tests) replays the Dazzling Theater find; it fails before
+# with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF
+# ff076d4432). Fork branch fix/xp-forge-driver-room-alt-cast-mode.
+FORGE_ORACLE_REF ?= 7cae17380da0425f8a62943d3858c076ce625e0d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
