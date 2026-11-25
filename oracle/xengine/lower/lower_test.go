@@ -336,7 +336,7 @@ func TestTruncationReasons(t *testing.T) {
 	}
 	// An object with no ref is never given an invented one.
 	noRef := game.Entry{Kind: "priority", Picks: []game.Pick{{Kind: "play_land"}}}
-	if _, why := lowerPriority(nil, m, noRef, nil); why == nil || why.reason != ReasonUnbindableRef {
+	if _, why := lowerPriority(nil, m, noRef, nil, nil); why == nil || why.reason != ReasonUnbindableRef {
 		t.Errorf("land with no ref: %v", why)
 	}
 	// An ask after a pass is only answerable when the pass left a resolution
@@ -1099,6 +1099,54 @@ func TestColourPicksSubAbilityMana(t *testing.T) {
 		if got := colourPicks(reg, game.ManaRec{Name: c.name, Ability: 0, Produced: c.produced}); !reflect.DeepEqual(got, c.want) {
 			t.Errorf("colourPicks(%s, %q) = %v, want %v", c.name, c.produced, got, c.want)
 		}
+	}
+}
+
+// TestColourPicksManaReflected: a ManaReflected ability has no Produced$, so
+// its colour is the live activation's recorded mana. Covers the corpus
+// carriers (Mox Amber, Reflecting Pool, Exotic Orchard, Fellwar Stone,
+// Incubation Druid) and the answer gate: a reflection whose live game posed
+// the colour ask carries the pick, a single-colour reflection stays
+// answer-free or the runner reports an unconsumed answer.
+func TestColourPicksManaReflected(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, c := range []struct {
+		name     string
+		ability  int
+		produced string
+		want     []string
+	}{
+		{"Mox Amber", 0, "R", []string{"R"}},
+		{"Mox Amber", 0, "", nil}, // live colour unknown
+		{"Reflecting Pool", 0, "G", []string{"G"}},
+		{"Exotic Orchard", 0, "U", []string{"U"}},
+		{"Fellwar Stone", 0, "B", []string{"B"}},
+		{"Incubation Druid", 1, "GGG", []string{"G"}},
+		{"Incubation Druid", 0, "G", nil}, // the Adapt ability asks no colour
+	} {
+		if got := colourPicks(reg, game.ManaRec{Name: c.name, Ability: c.ability, Produced: c.produced}); !reflect.DeepEqual(got, c.want) {
+			t.Errorf("colourPicks(%s ability %d, %q) = %v, want %v", c.name, c.ability, c.produced, got, c.want)
+		}
+	}
+	rec := game.ManaRec{Obj: 7, Name: "Mox Amber", Ability: 0, Ref: "p0:Mox Amber", Produced: "R"}
+	single, why := manaTaps(reg, seatMap{}, []game.ManaRec{rec}, nil)
+	if why != nil || len(single) != 1 || len(single[0].Answers) != 0 {
+		t.Fatalf("single-colour reflection = %+v, %v, want an answer-free tap", single, why)
+	}
+	asked, why := manaTaps(reg, seatMap{}, []game.ManaRec{rec}, map[state.ObjID]bool{7: true})
+	want := []oraclegen.Answer{{Kind: "choose", Pick: []string{"R"}}}
+	if why != nil || len(asked) != 1 || !reflect.DeepEqual(asked[0].Answers, want) {
+		t.Fatalf("asked reflection = %+v, %v, want answer %+v", asked, why, want)
+	}
+	// The ask the live game posed is a "mana" pick on the entry after the
+	// activation; it lowers onto the activation's own tap step, never a later
+	// step's answer queue.
+	act := game.Entry{Kind: "priority", Mana: []game.ManaRec{rec},
+		Picks: []game.Pick{{Kind: "activate", Obj: 7, Ref: "p0:Mox Amber"}}}
+	col := game.Entry{Kind: "choose", Picks: []game.Pick{{Kind: "mana", Obj: 7, Label: "Add R"}}}
+	steps, _, _, answers, why := lowerGroup(reg, seatMap{}, []game.Entry{act, col})
+	if why != nil || len(steps) != 1 || !reflect.DeepEqual(steps[0].Answers, want) || len(answers) != 0 {
+		t.Fatalf("lowerGroup = %+v, answers %+v, %v; want the tap's choose answer", steps, answers, why)
 	}
 }
 
