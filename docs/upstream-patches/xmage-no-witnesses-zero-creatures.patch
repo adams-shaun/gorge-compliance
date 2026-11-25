@@ -1,0 +1,126 @@
+diff --git a/Mage.Sets/src/mage/cards/n/NoWitnesses.java b/Mage.Sets/src/mage/cards/n/NoWitnesses.java
+index 35da3f0aba7..39ef0ae798a 100644
+--- a/Mage.Sets/src/mage/cards/n/NoWitnesses.java
++++ b/Mage.Sets/src/mage/cards/n/NoWitnesses.java
+@@ -12,11 +12,10 @@ import mage.filter.StaticFilters;
+ import mage.game.Controllable;
+ import mage.game.Game;
+ 
++import java.util.HashMap;
+ import java.util.Map;
+ import java.util.Objects;
+ import java.util.UUID;
+-import java.util.function.Function;
+-import java.util.stream.Collectors;
+ 
+ /**
+  * @author TheElk801
+@@ -59,7 +58,13 @@ class NoWitnessesEffect extends OneShotEffect {
+ 
+     @Override
+     public boolean apply(Game game, Ability source) {
+-        Map<UUID, Integer> map = game
++        // CR 608.2: a player who controls no creatures still counts, with zero, so when every
++        // player is at zero they are all tied for the most and each of them investigates.
++        Map<UUID, Integer> map = new HashMap<>();
++        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
++            map.put(playerId, 0);
++        }
++        game
+                 .getBattlefield()
+                 .getActivePermanents(
+                         StaticFilters.FILTER_PERMANENT_CREATURE,
+@@ -68,10 +73,7 @@ class NoWitnessesEffect extends OneShotEffect {
+                 .stream()
+                 .filter(Objects::nonNull)
+                 .map(Controllable::getControllerId)
+-                .collect(Collectors.toMap(Function.identity(), x -> 1, Integer::sum));
+-        if (map.isEmpty()) {
+-            return false;
+-        }
++                .forEach(playerId -> map.computeIfPresent(playerId, (id, count) -> count + 1));
+         int maxValue = map
+                 .values()
+                 .stream()
+@@ -79,7 +81,7 @@ class NoWitnessesEffect extends OneShotEffect {
+                 .max()
+                 .orElse(0);
+         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+-            if (map.getOrDefault(playerId, -1) >= maxValue) {
++            if (map.getOrDefault(playerId, 0) >= maxValue) {
+                 InvestigateEffect.doInvestigate(playerId, 1, game, source);
+             }
+         }
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/mkm/NoWitnessesTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/mkm/NoWitnessesTest.java
+new file mode 100644
+index 00000000000..0187dcc5eba
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/mkm/NoWitnessesTest.java
+@@ -0,0 +1,67 @@
++package org.mage.test.cards.single.mkm;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * {@link mage.cards.n.NoWitnesses No Witnesses}
++ * {2}{W}{W}
++ * Sorcery
++ * Each player who controls the most creatures investigates. Then destroy all creatures.
++ */
++public class NoWitnessesTest extends CardTestPlayerBase {
++
++    private static final String witnesses = "No Witnesses";
++    private static final String bears = "Grizzly Bears"; // 2/2
++    private static final String clue = "Clue Token";
++
++    private void castWitnesses() {
++        addCard(Zone.HAND, playerA, witnesses);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, witnesses);
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++        assertGraveyardCount(playerA, witnesses, 1);
++    }
++
++    /**
++     * Nobody controls a creature, so every player is tied for the most (zero) and each investigates.
++     */
++    @Test
++    public void testNoCreaturesEachPlayerInvestigates() {
++        castWitnesses();
++
++        assertPermanentCount(playerA, clue, 1);
++        assertPermanentCount(playerB, clue, 1);
++    }
++
++    /**
++     * A tie above zero: both players investigate.
++     */
++    @Test
++    public void testTieAtTwoBothInvestigate() {
++        addCard(Zone.BATTLEFIELD, playerA, bears, 2);
++        addCard(Zone.BATTLEFIELD, playerB, bears, 2);
++        castWitnesses();
++
++        assertPermanentCount(playerA, clue, 1);
++        assertPermanentCount(playerB, clue, 1);
++        assertPermanentCount(playerA, bears, 0);
++        assertPermanentCount(playerB, bears, 0);
++    }
++
++    /**
++     * Only the player with the most creatures investigates; a zero-creature player does not.
++     */
++    @Test
++    public void testOnlyMostInvestigates() {
++        addCard(Zone.BATTLEFIELD, playerB, bears, 1);
++        castWitnesses();
++
++        assertPermanentCount(playerA, clue, 0);
++        assertPermanentCount(playerB, clue, 1);
++    }
++}

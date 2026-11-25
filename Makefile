@@ -63,7 +63,11 @@ GO_TEST_FLAGS ?= -p=2
 # own stack object from canTarget / possibleTargets, CR 115.5: Katara's Reversal's "up to four target spells and/or
 # abilities" offered the Reversal itself as its one candidate on an empty stack, so the group could not be skipped
 # and the lone-candidate rule countered the spell itself). One target class, no set data: the manifests are unchanged.
-XMAGE_REF  ?= dc6da81e813c3cb42460f2cd386429d6aa6ed18d
+# fdbae29b12 = dc6da81e81 + fork branch fix/no-witnesses-zero-creatures (No Witnesses: "each player who controls the most
+# creatures investigates" counts a player with no creatures as zero, so with nobody controlling a creature every player is
+# tied for the most and each investigates, CR 608.2; the effect returned early on an empty creature map so nobody did).
+# NoWitnessesTest. Card behaviour change only for that card, so the manifests are unchanged.
+XMAGE_REF  ?= fdbae29b12162fce8204b80f4bb7d56ceb253b41
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
