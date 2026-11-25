@@ -367,7 +367,50 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS foretellFromHandExilesFaceDown: Struggle for Skemfar is in exile foretold, stack empty");
     }
 
+    /** CR 702.74a: Evoke is an alternative cost. gorge records the cast as
+     * cast_mode "evoked" (xs:XP:emptiness:f0t0:s1: two Plains tapped, Emptiness
+     * evoked for {W/B}{W/B} through two "Pay W" picks); the driver used to throw
+     * "cast_mode evoked unsupported". The cast must elect XMage's EvokeAbility
+     * entry of the alternative-cost menu, leaving Emptiness on the stack with
+     * the two untapped Plains alone untouched and no harness row. */
+    private static void evokedCastPaysEvokeCost() throws Exception {
+        equal("true", castModeSupported("evoked"), "evoked cast_mode");
+        JsonObject sc = JsonParser.parseString("{id:'xs:XP:emptiness:f0t0:s1',name:'Emptiness',card:'Emptiness',"
+                + "setup:{p0:{battlefield:['Plains','Plains','Plains','Plains'],hand:['Emptiness'],"
+                + "library_top:['Plains','Plains','Plains','Plains']},p1:{battlefield:['Phyrexian Walker']}},"
+                + "steps:[{op:'activate',seat:0,card:'p0:Plains',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Plains#2',ability_index:0},"
+                + "{op:'cast',seat:0,card:'p0:Emptiness',cast_mode:'evoked',"
+                + "answers:[{kind:'choose',pick:['Pay W']},{kind:'choose',pick:['Pay W']}]}],"
+                + "xmage_ability:['{T}: Add {W}.','{T}: Add {W}.',''],xmage_answers:[[],[],[]],"
+                + "xmage_pos:[null,null,{turn:1,step:'main1',active:0}]}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("evoked Emptiness replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        boolean onStack = false;
+        for (JsonElement e : last.getAsJsonArray("stack")) {
+            onStack |= "Emptiness".equals(e.getAsJsonObject().get("source").getAsString());
+        }
+        if (!onStack) {
+            throw new AssertionError("evoked Emptiness is not on the stack: " + last);
+        }
+        int untapped = 0;
+        for (JsonElement e : last.getAsJsonArray("permanents")) {
+            JsonObject o = e.getAsJsonObject();
+            if (o.get("controller").getAsInt() == 0 && "Plains".equals(o.get("name").getAsString())
+                    && !(o.has("tapped") && o.get("tapped").getAsBoolean())) {
+                untapped++;
+            }
+        }
+        equal(2, untapped, "the evoke cost was paid from the two tapped Plains' mana, not the others: " + last);
+        System.out.println("PASS evokedCastPaysEvokeCost: Emptiness is on the stack for {W/B}{W/B}, two Plains untapped");
+    }
+
     public static void main(String[] args) throws Exception {
+        evokedCastPaysEvokeCost();
         foretellFromHandExilesFaceDown();
         suspendFromHandExilesWithTimeCounters();
         warpedCast();
