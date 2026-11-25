@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a6c5e17-6465-4a1f-9d63-8a3ce2edc522	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a6cdb3e-c850-4b3c-bf4b-c53dd4eaf56e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fearless-swashbuckler:cast:s1,f:xs:XP:fearless-swashbuckler:cast:s1	-	-	-	23c4009444b0	-	532b119c522c	-	-	2026-11-25	xproof
 6a6cdb3e-c850-4b3c-bf4b-c53dd4eaf56e	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:fearless-swashbuckler:f0t0:s1,f:xs:XP:fearless-swashbuckler:f0t0:s1	-	-	-	23c4009444b0	-	532b119c522c	-	-	2026-11-25	xproof
-6a6cdb3e-c850-4b3c-bf4b-c53dd4eaf56e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fearless Swashbuckler/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a6cdb3e-c850-4b3c-bf4b-c53dd4eaf56e	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:fearless-swashbuckler:static0.0:s1,f:xs:XP:fearless-swashbuckler:static0.0:s1	-	-	-	6f84be0f34c0	-	532b119c522c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6a6e0f0b-af11-40a5-b454-0aea2d1b99cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a70e571-6932-45d8-9f14-ede4a561cc49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a70e571-6932-45d8-9f14-ede4a561cc49	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kirk-enterprising-captain:f0t0:s1,f:xs:XP:kirk-enterprising-captain:f0t0:s1	-	-	-	3aa6ded33acb	-	836760fffc73	-	-	2026-11-25	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ad1d8d0-06c0-4804-af5f-60ffb358f371	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:boldwyr-intimidator:f0a1:s1,f:xs:XP:boldwyr-intimidator:f0a1:s1	-	-	-	d864b561c9cb	-	cf19e2c29ec2	-	-	2026-11-24	xproof
 6ad2cbb6-2291-420c-bfc8-ed3f079b59bf	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tombstone-career-criminal:f0t0:s2,f:xs:XP:tombstone-career-criminal:f0t0:s2	-	-	-	267e485f6204	-	75ee744ec94e	-	-	2026-11-24	xproof
 6ad2cbb6-2291-420c-bfc8-ed3f079b59bf	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:tombstone-career-criminal:f0t0:s2,f:xs:XP:tombstone-career-criminal:f0t0:s2	-	-	-	267e485f6204	-	75ee744ec94e	-	-	2026-11-24	xproof
-6ad2cbb6-2291-420c-bfc8-ed3f079b59bf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tombstone, Career Criminal/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6ad2cbb6-2291-420c-bfc8-ed3f079b59bf	static#0.0	static.cost	agreed	-	FX	start	2	0	x:xs:XP:tombstone-career-criminal:static0.0:s1,f:xs:XP:tombstone-career-criminal:static0.0:s1	-	-	-	6f84be0f34c0	-	75ee744ec94e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6ad61622-a70f-423c-99e3-b1ef6ead0b31	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:yotian-dissident:cast:s2,f:xs:XP:yotian-dissident:cast:s2	-	-	-	ae86f6029288	-	e21b4a0d7011	-	-	2026-11-24	xproof
 6ad61622-a70f-423c-99e3-b1ef6ead0b31	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 6ad8011d-3471-4369-9d68-b264cc027487	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sol-ring:cast:s1,f:xs:XP:sol-ring:cast:s1	-	-	-	ae86f6029288	-	c96e86daad13	-	-	2026-11-24	xproof
