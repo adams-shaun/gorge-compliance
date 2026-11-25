@@ -510,3 +510,59 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
 }
+
+// TestStartMultiFacedFocusIsExercised: a start names a multi-faced card as its
+// card file does ("Akoum Warrior // Akoum Teeth") while the game object's face
+// carries the front name alone, and the focus seat compared the two as
+// written: no object was ever a focus object, so the focus play of every
+// transforming, modal and adventure card went untaken and play refused the
+// start as start-not-exercised (259 of the 792 such keys at bf707e46b1).
+func TestStartMultiFacedFocusIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Akoum Warrior // Akoum Teeth", "cast"},                   // modal DFC
+		{"Bonded Herdbeast // Plated Kilnbeast", "cast"},           // transforming DFC
+		{"Curious Homunculus // Voracious Reader", "f0/t0"},        // a front-face trigger
+		{"Invasion of Theros // Ephara, Ever-Sheltering", "f0/t0"}, // a battle's enters trigger
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartGraveyardTargetIsExercised: a focus play that targets a card in a
+// graveyard (TgtZone$ Graveyard, or a ChangeZone from Origin$ Graveyard) was
+// read as met, so the start placed no such card (or only the basics a
+// graveyard need places), the play was never offered, and play refused the
+// start as start-not-exercised. The most inert card that meets the target now
+// goes to the graveyard the filter names.
+func TestStartGraveyardTargetIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Necromantic Summons", "cast"},    // target creature card in a graveyard
+		{"Relearn", "cast"},                // instant or sorcery card from your graveyard
+		{"Scribe of the Mindful", "f0/a0"}, // Instant.YouCtrl,Sorcery.YouCtrl
+		{"Protomatter Powder", "f0/a0"},    // Artifact.YouCtrl
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartTwoTargetsIsExercised: a play that names two targets was met by one
+// permanent (Switcheroo's "two target creatures", Peace and Quiet's two target
+// enchantments), and a target only the focus seat's own permanent meets (a
+// fight spell's "target creature you control") was never placed, so the play
+// was never offered: play refused the start as start-not-exercised, or scen as
+// start:needs-target. A target of n permanents now needs n distinct ones, and
+// the most inert carrier of an own-side target's type goes on the focus seat's
+// side.
+func TestStartTwoTargetsIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Switcheroo", "cast"},      // TargetMin$ 2
+		{"Peace and Quiet", "cast"}, // TargetMin$ 2
+		{"Hunt the Hunter", "cast"}, // Creature.Green+YouCtrl, then the opponent's
+		{"Ram Through", "cast"},     // Creature.YouCtrl, then Creature.YouDontCtrl
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}

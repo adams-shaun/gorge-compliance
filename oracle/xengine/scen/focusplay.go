@@ -42,8 +42,15 @@ func deadOnArrival(f *cards.Face) bool {
 
 // tgtReq is one target a play names: the alternatives of its filter (a Forge
 // ValidTgts split at commas), lower-cased, and the same alternatives as
-// written (raw, for parseFilter's restriction tests); any one meets it.
-type tgtReq struct{ alts, raw []string }
+// written (raw, for parseFilter's restriction tests); any one meets it. n is
+// how many distinct permanents it needs (TargetMin$, at least 1), and unique
+// whether they must differ from the permanents the play's earlier targets
+// take (TargetUnique$: Cone of Flame's three targets).
+type tgtReq struct {
+	alts, raw []string
+	n         int
+	unique    bool
+}
 
 // permTypes are the target types a placed permanent can meet; every other
 // type word (Player, Any, Card, ...) is taken as met.
@@ -72,7 +79,11 @@ func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, dept
 						alts, raw = append(alts, "any"), append(raw, "Any") // another zone: taken as met
 					}
 				}
-				reqs = append(reqs, tgtReq{alts: alts, raw: raw})
+				n, err := strconv.Atoi(p["TargetMin"])
+				if err != nil || n < 1 {
+					n = 1
+				}
+				reqs = append(reqs, tgtReq{alts: alts, raw: raw, n: n, unique: p["TargetUnique"] != ""})
 			}
 		}
 		switch {
@@ -207,14 +218,18 @@ func altMet(n altNeed, test func(*cards.Face) bool, f *cards.Face, mine bool) bo
 }
 
 // unmet is the first target of reqs the placed board cannot meet, with the
-// refusal its absence is when no permanent could be placed to meet it.
+// refusal its absence is when no permanent could be placed to meet it. A
+// target of n permanents (Switcheroo's "two target creatures") needs n
+// distinct ones, and a TargetUnique one permanents no earlier target took.
 func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq, string) {
 	mine, theirs := &f.Setup.P0, &f.Setup.P1
 	if seat == 1 {
 		mine, theirs = theirs, mine
 	}
+	taken := map[[2]int]bool{} // {side, index} of a permanent an earlier target took
 	for i := range reqs {
 		ok, combat := false, false
+		var took [][2]int
 		for k, alt := range reqs[i].alts {
 			n := parseAlt(alt)
 			if !permTypes[n.typ] {
@@ -223,13 +238,24 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq,
 			}
 			combat = combat || n.combat
 			test := reqs[i].restrictionOf(k)
+			var met [][2]int
 			for side, bf := range [][]string{mine.Battlefield, theirs.Battlefield} {
-				for _, name := range bf {
+				for j, name := range bf {
+					if reqs[i].unique && taken[[2]int{side, j}] {
+						continue
+					}
 					if c, found := reg.Lookup(name); found && len(c.Faces) > 0 && altMet(n, test, c.Faces[0], side == 0) {
-						ok = true
+						met = append(met, [2]int{side, j})
 					}
 				}
 			}
+			if len(met) >= max(reqs[i].n, 1) {
+				ok, took = true, met[:max(reqs[i].n, 1)]
+				break
+			}
+		}
+		for _, t := range took {
+			taken[t] = true
 		}
 		if !ok {
 			if combat {
@@ -298,7 +324,7 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 				return "", nil // a choice every target of which is met
 			}
 			reason = why
-			if why == reasonNeedsCombat || try >= 1 {
+			if why == reasonNeedsCombat || try >= maxTargetPlacements {
 				break
 			}
 			// an unmet permanent target: place one on the opponent's side, when
@@ -311,6 +337,10 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 	return reason, nil
 }
 
+// maxTargetPlacements bounds the permanents focusPlayRefusal places for one
+// choice's targets (Cone of Flame: three).
+const maxTargetPlacements = 4
+
 // restrictionOf is restriction of the k-th alternative, nil when r has no
 // raw form of it.
 func (r *tgtReq) restrictionOf(k int) func(*cards.Face) bool {
@@ -320,14 +350,17 @@ func (r *tgtReq) restrictionOf(k int) func(*cards.Face) bool {
 	return restriction(r.raw[k])
 }
 
-// placeOppTarget places a permanent for the unmet target on the seat the
-// focus does not own, and says whether one fit: for an alternative whose
-// restrictions parseFilter reads, the most inert carrier (carrierPool) that
-// meets them; otherwise certdeck's most inert opposing-target pick.
+// placeOppTarget places a permanent for the unmet target, and says whether
+// one fit: for an alternative whose restrictions parseFilter reads, the most
+// inert carrier (carrierPool) that meets them, on the seat the focus does not
+// own; for one only the focus seat's own permanent meets ("target creature
+// you control": a fight spell's first target), the most inert carrier of its
+// type on the focus seat's side; otherwise certdeck's most inert
+// opposing-target pick.
 func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card string, r *tgtReq, seat int, f *StartFile) bool {
-	s := &f.Setup.P1
+	s, own := &f.Setup.P1, &f.Setup.P0
 	if seat == 1 {
-		s = &f.Setup.P0
+		s, own = own, s
 	}
 	for k, alt := range r.alts {
 		n := parseAlt(alt)
@@ -340,6 +373,20 @@ func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card string, r *tg
 		})
 		if name != "" {
 			s.Battlefield = append(s.Battlefield, name)
+			return true
+		}
+	}
+	for k, alt := range r.alts {
+		n := parseAlt(alt)
+		if n.side != 1 || n.combat || !permTypes[n.typ] {
+			continue
+		}
+		test := r.restrictionOf(k)
+		name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
+			return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && altMet(n, test, c, true)
+		})
+		if name != "" {
+			own.Battlefield = append(own.Battlefield, name)
 			return true
 		}
 	}
