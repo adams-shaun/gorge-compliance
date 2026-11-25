@@ -1,8 +1,8 @@
 #carddb-schema support v1
 name	type	required	key	visibility	doc
 oracle_id	string	yes	yes	public	cards.oracle_id
-engine	string	yes	yes	public	Engine the row is about: xmage or forge
-status	string	yes	no	public	listed, unfinished or lacks_card; failing is the farm writer's override (CDB-14) and is preserved by a later compliance run
+engine	string	yes	yes	public	Engine the row is about: xmage, forge, dirac or gorge
+status	string	yes	no	public	listed, unfinished or lacks_card (xmage, forge); supported, refused, unverified or not_lowered (dirac); failing is the farm writer's override (CDB-14) and is preserved by a later compliance run
 pin	string	yes	no	public	Commit the status is measured at
 why	string	no	no	public	One-line reason for the status
 measured	date	yes	no	public	Date measured, YYYY-MM-DD
