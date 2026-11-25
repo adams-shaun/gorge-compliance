@@ -100,9 +100,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 546a217a-ac24-4fc0-97a8-424cfe1aafc0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 546f037b-aea8-4c7a-9b66-373f1be0bac6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 546f037b-aea8-4c7a-9b66-373f1be0bac6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54702a84-3125-41a7-a875-fe2ec870836d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:war-squeak:f0t0:s2,f:xs:XP:war-squeak:f0t0:s2	-	-	-	e07cf3a05ba5	-	79cd5b91fdff	-	-	2026-11-24	xproof
-54702a84-3125-41a7-a875-fe2ec870836d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:war-squeak:f0t0:s2,f:xs:XP:war-squeak:f0t0:s2	-	-	-	e07cf3a05ba5	-	79cd5b91fdff	-	-	2026-11-24	xproof
-54702a84-3125-41a7-a875-fe2ec870836d	static#0.0	static#0.0	agreed	-	X	scen	1	0	War Squeak/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+54702a84-3125-41a7-a875-fe2ec870836d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-squeak:static0.0:s1,f:xs:XP:war-squeak:static0.0:s1	-	-	-	4b8018a80bf0	-	79cd5b91fdff	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+54702a84-3125-41a7-a875-fe2ec870836d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:war-squeak:static0.0:s1,f:xs:XP:war-squeak:static0.0:s1	-	-	-	4b8018a80bf0	-	79cd5b91fdff	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+54702a84-3125-41a7-a875-fe2ec870836d	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:war-squeak:static0.0:s1,f:xs:XP:war-squeak:static0.0:s1	-	-	-	4b8018a80bf0	-	79cd5b91fdff	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5470dcfa-4eff-43da-abf7-19922841f719	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kitchen-finks:f0t0:s1,f:xs:XP:kitchen-finks:f0t0:s1	-	-	-	da6bc3fe8458	-	e2187fa2ba38	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5470dcfa-4eff-43da-abf7-19922841f719	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kitchen-finks:f0t0:s1,f:xs:XP:kitchen-finks:f0t0:s1	-	-	-	da6bc3fe8458	-	e2187fa2ba38	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5470dcfa-4eff-43da-abf7-19922841f719	f0/t1	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:kitchen-finks:f0t1:s1,f:xs:XP:kitchen-finks:f0t1:s1	-	-	-	3aa6ded33acb	-	e2187fa2ba38	-	-	2026-11-25	xproof

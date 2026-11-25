@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cae5752-b4af-4a8f-8c8c-2493e163083b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cae5752-b4af-4a8f-8c8c-2493e163083b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1cae5752-b4af-4a8f-8c8c-2493e163083b	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-1cb0610b-a731-42c2-b93f-0a29f63cebf4	cast	cast-resolve	agreed	-	X	scen	1	0	Thrill of Possibility/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1cb0610b-a731-42c2-b93f-0a29f63cebf4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrill-of-possibility:cast:s1,f:xs:XP:thrill-of-possibility:cast:s1	-	-	-	4b8018a80bf0	-	38e924350aec	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1cb3f27c-2670-43b8-9305-8adf2e7bd3ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cb3f27c-2670-43b8-9305-8adf2e7bd3ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enatu-golem:f0t0:s1,f:xs:XP:enatu-golem:f0t0:s1	-	-	-	d864b561c9cb	-	40250a1a3345	-	-	2026-11-24	xproof
 1cb419cc-d8e4-4676-987f-089cebccc374	cast	cast-resolve	agreed	-	X	scen	1	0	Masterful Flourish/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cb71772-592d-4dd1-91af-816933af760c	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	cd0c48f8b0f8	-	-	2026-11-24	xproof
 1cb71772-592d-4dd1-91af-816933af760c	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1cb9d94a-3039-4f2e-8fcc-6996f9a45f74	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cb9d94a-3039-4f2e-8fcc-6996f9a45f74	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-1cb9d94a-3039-4f2e-8fcc-6996f9a45f74	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1cb9d94a-3039-4f2e-8fcc-6996f9a45f74	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:izzet-boilerworks:f0t0:s1,f:xs:XP:izzet-boilerworks:f0t0:s1	-	-	-	4b8018a80bf0	-	921ecc7541c5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1cb9d94a-3039-4f2e-8fcc-6996f9a45f74	land	land	agreed	-	FX	start	2	0	x:xs:XP:izzet-boilerworks:f0t0:s1,f:xs:XP:izzet-boilerworks:f0t0:s1	-	-	-	4b8018a80bf0	-	921ecc7541c5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1cbcc073-1645-4d7f-98f4-7309d7b35692	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cbcc073-1645-4d7f-98f4-7309d7b35692	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cbfe1f2-776b-429d-9a60-8da32058a927	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sojourner-s-companion:cast:s1,f:xs:XP:sojourner-s-companion:cast:s1	-	-	-	ae86f6029288	-	4c89aa33d2b3	-	-	2026-11-24	xproof

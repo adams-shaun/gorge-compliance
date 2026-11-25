@@ -27,8 +27,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d199876-09f3-4e14-8598-79f0ec2afafa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d199876-09f3-4e14-8598-79f0ec2afafa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d19ab38-fb32-4f2b-b68c-28db4a6864c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d240726-5214-4493-8537-29bf65db1e4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unable-to-scream:cast:s1,f:xs:XP:unable-to-scream:cast:s1	-	-	-	23c4009444b0	-	6f284b4e0dc0	-	-	2026-11-25	xproof
-3d240726-5214-4493-8537-29bf65db1e4b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Unable to Scream/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3d240726-5214-4493-8537-29bf65db1e4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unable-to-scream:static0.0:s1,f:xs:XP:unable-to-scream:static0.0:s1	-	-	-	4b8018a80bf0	-	6f284b4e0dc0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3d240726-5214-4493-8537-29bf65db1e4b	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:unable-to-scream:static0.0:s1,f:xs:XP:unable-to-scream:static0.0:s1	-	-	-	4b8018a80bf0	-	6f284b4e0dc0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3d268e48-3004-4384-bf52-e63243fb5e02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d268e48-3004-4384-bf52-e63243fb5e02	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3d268e48-3004-4384-bf52-e63243fb5e02	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:magda-brazen-outlaw:f0t0:s1,f:xs:XP:magda-brazen-outlaw:f0t0:s1	-	-	-	4b8018a80bf0	-	f12ec726ee1f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -202,8 +202,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3decbc45-3e79-455f-9d62-878ee31b458d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ded0c0c-40ce-4d14-a9a6-b023bc19ee0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dee768a-612c-4960-bad2-2fe5b83a70c3	cast	cast-resolve	agreed	-	FX	scen	2	0	Yuna, Hope of Spira/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3dee768a-612c-4960-bad2-2fe5b83a70c3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Yuna, Hope of Spira/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3dee768a-612c-4960-bad2-2fe5b83a70c3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Yuna, Hope of Spira/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3dee768a-612c-4960-bad2-2fe5b83a70c3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:yuna-hope-of-spira:static0.0:s1,f:xs:XP:yuna-hope-of-spira:static0.0:s1	-	-	-	4b8018a80bf0	-	bdd0b41f44d1	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3dee768a-612c-4960-bad2-2fe5b83a70c3	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:yuna-hope-of-spira:static0.0:s1,f:xs:XP:yuna-hope-of-spira:static0.0:s1	-	-	-	4b8018a80bf0	-	bdd0b41f44d1	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

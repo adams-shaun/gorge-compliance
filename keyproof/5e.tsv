@@ -3,9 +3,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e038a3a-fbab-46c2-8773-1327d953da16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:windreader-sphinx:cast:s1,f:xs:XP:windreader-sphinx:cast:s1	-	-	-	d864b561c9cb	-	73db883e0467	-	-	2026-11-24	xproof
 5e038a3a-fbab-46c2-8773-1327d953da16	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:windreader-sphinx:f0t0:s1,f:xs:XP:windreader-sphinx:f0t0:s1	-	-	-	d864b561c9cb	-	73db883e0467	-	-	2026-11-24	xproof
 5e060d58-4d6e-425c-b7d4-727669fcce5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:buster-sword:cast:s1,f:xs:XP:buster-sword:cast:s1	-	-	-	23c4009444b0	-	4a1d2397f80c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-5e060d58-4d6e-425c-b7d4-727669fcce5b	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:buster-sword:f0a0:s1,f:xs:XP:buster-sword:f0a0:s1	-	-	-	23c4009444b0	-	4a1d2397f80c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5e060d58-4d6e-425c-b7d4-727669fcce5b	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:buster-sword:static0.0:s1,f:xs:XP:buster-sword:static0.0:s1	-	-	-	4b8018a80bf0	-	4a1d2397f80c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5e060d58-4d6e-425c-b7d4-727669fcce5b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Buster Sword/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5e060d58-4d6e-425c-b7d4-727669fcce5b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Buster Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5e060d58-4d6e-425c-b7d4-727669fcce5b	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:buster-sword:static0.0:s1,f:xs:XP:buster-sword:static0.0:s1	-	-	-	4b8018a80bf0	-	4a1d2397f80c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5e07d314-119f-4918-9105-77543ccae7e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e0bd136-e7e9-49f0-910b-a9fb0b9c481a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:lotleth-giant:cast:s1,f:xs:XP:lotleth-giant:cast:s1	-	-	-	d864b561c9cb	-	23e44dcef948	-	-	2026-11-24	xproof
 5e0bd136-e7e9-49f0-910b-a9fb0b9c481a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:lotleth-giant:cast:s1,f:xs:XP:lotleth-giant:cast:s1	-	-	-	d864b561c9cb	-	23e44dcef948	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5e7ef7fe-968b-4ada-9fe4-6fda0541aafc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-earth-crystal:cast:s1,f:xs:XP:the-earth-crystal:cast:s1	-	-	-	23c4009444b0	-	2fba595345fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e7ef7fe-968b-4ada-9fe4-6fda0541aafc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Earth Crystal/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
