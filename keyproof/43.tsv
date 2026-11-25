@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4304035c-c3e4-4a19-aa1f-92a83d8aed1f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:geist-of-saint-traft:f0t0:s1,f:xs:XP:geist-of-saint-traft:f0t0:s1	-	-	-	d864b561c9cb	-	5b2eab271070	-	-	2026-11-24	xproof
 43057d84-b424-489c-abec-3fb4cb823d80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43057d84-b424-489c-abec-3fb4cb823d80	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:basilica-skullbomb:f0a1:s1,f:xs:XP:basilica-skullbomb:f0a1:s1	-	-	-	23b491658465	-	2a5095dfb778	-	-	2026-11-25	xproof
-43057d84-b424-489c-abec-3fb4cb823d80	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+43057d84-b424-489c-abec-3fb4cb823d80	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:basilica-skullbomb:f0a1:s1,f:xs:XP:basilica-skullbomb:f0a1:s1	-	-	-	6f84be0f34c0	-	2a5095dfb778	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4306a9e5-6845-4fd4-96ad-8888147612aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4306a9e5-6845-4fd4-96ad-8888147612aa	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 430b3e61-09a5-4390-b377-89830cacf66e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caged-zombie:cast:s1,f:xs:XP:caged-zombie:cast:s1	-	-	-	ae86f6029288	-	6371a6565d12	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43abe1f3-7b92-411a-bf93-e158f949685c	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 43abfce5-b1dd-4784-bb91-d57b2c28f6a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43abfce5-b1dd-4784-bb91-d57b2c28f6a6	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-43abfce5-b1dd-4784-bb91-d57b2c28f6a6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+43abfce5-b1dd-4784-bb91-d57b2c28f6a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roaring-earth:f0t0:s1,f:xs:XP:roaring-earth:f0t0:s1	-	-	-	6f84be0f34c0	-	1ea692e4d53a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 43ace4d5-9006-4bad-bd17-3d368c20564d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aerie-bowmasters:cast:s1,f:xs:XP:aerie-bowmasters:cast:s1	-	-	-	d864b561c9cb	-	e51c3a39471d	-	-	2026-11-24	xproof
 43b339ec-4d7d-41ac-a5ab-96c6a6de00e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vindictive-warden:cast:s1,f:xs:XP:vindictive-warden:cast:s1	-	-	-	6f84be0f34c0	-	a4592ca65977	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 43b339ec-4d7d-41ac-a5ab-96c6a6de00e2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vindictive-warden:combat0.attack:s1,f:xs:XP:vindictive-warden:combat0.attack:s1	-	-	-	23c4009444b0	-	a4592ca65977	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
