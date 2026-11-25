@@ -154,6 +154,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07fdc0b0-7131-411d-b0a8-f667165a64b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07fdc0b0-7131-411d-b0a8-f667165a64b8	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:torch-gauntlet:f0a0:s1,f:xs:XP:torch-gauntlet:f0a0:s1	-	-	-	d864b561c9cb	-	9279f9a7dfd0	-	-	2026-11-24	xproof
 07fe0fb5-cf34-4ba4-a3f3-ac0cc919bf91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-of-ramirez-depietro:cast:s1,f:xs:XP:ghost-of-ramirez-depietro:cast:s1	-	-	-	8c0bd19283bb	-	a70d71a847aa	-	-	2026-11-24	xproof
-07fe0fb5-cf34-4ba4-a3f3-ac0cc919bf91	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+07fe0fb5-cf34-4ba4-a3f3-ac0cc919bf91	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:ghost-of-ramirez-depietro:f0t0:s1	-	-	-	d607930fa548	-	a70d71a847aa	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 07ff619a-21ee-44b6-b666-ceab4a78096a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07ff619a-21ee-44b6-b666-ceab4a78096a	f0/t0	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:desecrated-tomb:f0t0:s1,f:xs:XP:desecrated-tomb:f0t0:s1	-	-	-	6f84be0f34c0	-	aea7b4d9b00b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

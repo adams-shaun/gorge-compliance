@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 262a5d83-506c-4781-9bc9-1a2b5d83955c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:thallid-germinator:f0t0:s1	-	-	-	3aa6ded33acb	-	a150840d1833	-	-	2026-11-25	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
-262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:thallid-germinator:f0t0:s1	-	-	-	3aa6ded33acb	-	a150840d1833	-	-	2026-11-25	xproof
 262c5ac9-af41-42d1-a53a-8a671eedd5a6	cast	cast-resolve	agreed	-	FX	scen	2	0	Duel Tactics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 262dd956-d90d-4782-91b6-6d183ec08b6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burning-sands:cast:s1,f:xs:XP:burning-sands:cast:s1	-	-	-	fc71ca68c5ac	-	d079ca68fc88	-	-	2026-11-24	xproof
@@ -89,9 +89,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26957a44-6155-4688-a850-a3b49b011a9f	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:ghost-hounds:f0t0:s1,f:xs:XP:ghost-hounds:f0t0:s1	-	-	-	baa6f696107c	-	5b63220ff401	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 26957a44-6155-4688-a850-a3b49b011a9f	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:ghost-hounds:f0t1:s1,f:xs:XP:ghost-hounds:f0t1:s1	-	-	-	baa6f696107c	-	5b63220ff401	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 26966ecb-15d3-47e5-ab63-e38510c87ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2699005b-a471-429f-a9d8-fbf2077ee2fd	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+2699005b-a471-429f-a9d8-fbf2077ee2fd	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
-2699005b-a471-429f-a9d8-fbf2077ee2fd	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+2699005b-a471-429f-a9d8-fbf2077ee2fd	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 269a02ca-1425-4b32-81f3-440e1caadb17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goliath-paladin:f0t0:s1,f:xs:XP:goliath-paladin:f0t0:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
 269a02ca-1425-4b32-81f3-440e1caadb17	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goliath-paladin:f0t0:s1,f:xs:XP:goliath-paladin:f0t0:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
 269a2b53-52d7-4032-ba62-7b7742e7a159	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hypervolt-grasp:cast:s1,f:xs:XP:hypervolt-grasp:cast:s1	-	-	-	23c4009444b0	-	5f24a47b1357	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

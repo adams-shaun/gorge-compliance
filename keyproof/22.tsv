@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 223db021-979f-4312-8cb5-169ae4bf17bc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:fall-to-earth:cast:s1,f:xs:XP:fall-to-earth:cast:s1	-	-	-	8c0bd19283bb	-	7170f02ee4a6	-	-	2026-11-24	xproof
 223db021-979f-4312-8cb5-169ae4bf17bc	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:fall-to-earth:cast:s2,f:xs:XP:fall-to-earth:cast:s2	-	-	-	8c0bd19283bb	-	7170f02ee4a6	-	-	2026-11-24	xproof
 223fa044-d387-4884-bf4e-75f1b61c6a46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-223fa044-d387-4884-bf4e-75f1b61c6a46	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+223fa044-d387-4884-bf4e-75f1b61c6a46	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 223fefa3-64a7-457f-90a2-89973640f554	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2241ef7d-3e9d-44ee-88ac-e8ad6fb2444e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22446354-e5c3-4f19-9731-79a4562639d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22a189a9-e755-4cbb-b419-5ba2e5acbe1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22a189a9-e755-4cbb-b419-5ba2e5acbe1b	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:cabal-slaver:f0t0:s1,f:xs:XP:cabal-slaver:f0t0:s1	-	-	-	5b42d43d5d80	-	a405d09f18e3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 22a23706-a5fe-46f3-b845-6f58d558c723	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22a23706-a5fe-46f3-b845-6f58d558c723	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+22a23706-a5fe-46f3-b845-6f58d558c723	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 22a33139-a730-4792-9dd5-2c0f99f96855	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vitu-ghazi-inspector:f0t0:s1,f:xs:XP:vitu-ghazi-inspector:f0t0:s1	-	-	-	3aa6ded33acb	-	7352c314e2f7	-	-	2026-11-25	xproof
 22a33139-a730-4792-9dd5-2c0f99f96855	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vitu-ghazi-inspector:combat0.attack:s1,f:xs:XP:vitu-ghazi-inspector:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7352c314e2f7	-	-	2026-11-25	xproof
 22a33139-a730-4792-9dd5-2c0f99f96855	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vitu-ghazi-inspector:combat0.block:s1,f:xs:XP:vitu-ghazi-inspector:combat0.block:s1	-	-	-	3aa6ded33acb	-	7352c314e2f7	-	-	2026-11-25	xproof
