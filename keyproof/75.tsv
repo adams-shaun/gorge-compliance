@@ -99,8 +99,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7578a192-82e5-43ff-8dee-225f313c484a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:run-behind:cast:s1,f:xs:XP:run-behind:cast:s1	-	-	-	23c4009444b0	-	9126538f02d5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7578a192-82e5-43ff-8dee-225f313c484a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Run Behind/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7579e1a2-2747-4e37-9a7a-c13b62190195	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7579e1a2-2747-4e37-9a7a-c13b62190195	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-7579e1a2-2747-4e37-9a7a-c13b62190195	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+7579e1a2-2747-4e37-9a7a-c13b62190195	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+7579e1a2-2747-4e37-9a7a-c13b62190195	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dega-sanctuary:f0t0:s1,f:xs:XP:dega-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6601936f5ce9	-	-	2026-11-25	xproof
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dega-sanctuary:f0t0:s1,f:xs:XP:dega-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6601936f5ce9	-	-	2026-11-25	xproof
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75c81ce4-ca1d-464a-bb39-e568f8ebf71f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+75c81ce4-ca1d-464a-bb39-e568f8ebf71f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 75d38954-6148-4d95-bf4b-cb82efcbe8df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75d38954-6148-4d95-bf4b-cb82efcbe8df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-scythecat:f0t0:s1,f:xs:XP:territorial-scythecat:f0t0:s1	-	-	-	6f84be0f34c0	-	2abcd926688f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 75d4f61a-8276-43ad-99e6-0d756a597e4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
