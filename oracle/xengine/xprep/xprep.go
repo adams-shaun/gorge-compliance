@@ -341,7 +341,7 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 		if st.Op != "cast" && st.Op != "play" {
 			continue
 		}
-		c, face, ok := stepCard(reg, *it, st)
+		c, face, ok := stepCardIn(reg, *it, sc.Steps, i)
 		if !ok {
 			continue
 		}
@@ -1012,11 +1012,34 @@ func unlisted(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) []str
 	return out
 }
 
-// stepCard is the corpus card and face index a cast or activate step names;
-// ok is false for a token, an ability or a card the corpus does not know. A
+// stepCardIn is the corpus card and face index step i of steps names; ok is
+// false for a token, an ability or a card the corpus does not know. A
 // permanent the seat's setup places on its back face is face 1, as the Forge
-// export reads it.
-func stepCard(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step) (*cards.Card, int, bool) {
+// export reads it. A permanent the item cast back face up (cast_mode "modal_spell", CR 712.12) stays on its back face for
+// every later step naming the same ref (CR 712.8e), so the step reads the back
+// face's abilities, not the front face the ref's name spells. The latest
+// earlier cast of the ref decides; a later cast without modal_spell is the
+// front face again.
+func stepCardIn(reg *cards.Registry, it oraclegen.Item, steps []oraclegen.Step, i int) (*cards.Card, int, bool) {
+	st := steps[i]
+	c, face, ok := stepCardFace(reg, it, st)
+	if !ok || len(c.Faces) < 2 {
+		return c, face, ok
+	}
+	for j := i; j >= 0; j-- {
+		p := steps[j]
+		if p.Card != st.Card || (p.Op != "cast" && p.Op != "play") {
+			continue
+		}
+		if strings.EqualFold(p.CastMode, "modal_spell") {
+			face = 1
+		}
+		break
+	}
+	return c, face, ok
+}
+
+func stepCardFace(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step) (*cards.Card, int, bool) {
 	n, ok := refName(st.Card)
 	if !ok {
 		return nil, 0, false
@@ -1179,7 +1202,7 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 				out = make([]string, len(it.Steps))
 			}
 			out[i] = "Plot"
-			if c, face, ok := stepCard(reg, it, st); ok {
+			if c, face, ok := stepCardIn(reg, it, it.Steps, i); ok {
 				if cost, ok := c.Faces[face].KeywordCostParam("Plot"); ok && cost != "" {
 					out[i] = "Plot " + xmageManaText(cost)
 				}
@@ -1198,7 +1221,7 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 				out = make([]string, len(it.Steps))
 			}
 			out[i] = "Suspend"
-			if c, face, ok := stepCard(reg, it, st); ok {
+			if c, face, ok := stepCardIn(reg, it, it.Steps, i); ok {
 				if param, ok := c.Faces[face].KeywordParam("Suspend"); ok {
 					if n, _, _ := strings.Cut(param, ":"); strings.TrimSpace(n) != "" {
 						out[i] = "Suspend " + strings.TrimSpace(n)
@@ -1218,7 +1241,7 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 				out = make([]string, len(it.Steps))
 			}
 			out[i] = "Foretell"
-			if c, face, ok := stepCard(reg, it, st); ok {
+			if c, face, ok := stepCardIn(reg, it, it.Steps, i); ok {
 				if cost, ok := c.Faces[face].KeywordCostParam("Foretell"); ok && cost != "" {
 					out[i] = "Foretell " + xmageManaText(cost)
 				}
@@ -1233,7 +1256,7 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 			// The recipient's own texts decide whether the cost alone selects
 			// the granted ability: "{T}" also starts an Island's "{T}: Add {U}.".
 			var recipient *cards.Face
-			if c, face, ok := stepCard(reg, it, st); ok {
+			if c, face, ok := stepCardIn(reg, it, it.Steps, i); ok {
 				recipient = c.Faces[face]
 			} else if isTokenRef(st.Card) {
 				if tf, ok := oraclegen.TokenStepFace(reg, it, i, st, g); ok {
@@ -1259,7 +1282,7 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 			return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by label %q, which names no ability index", i, st.Card, st.Ability)
 		}
 		var f *cards.Face
-		if c, face, ok := stepCard(reg, it, st); ok {
+		if c, face, ok := stepCardIn(reg, it, it.Steps, i); ok {
 			f = c.Faces[face]
 		} else if isTokenRef(st.Card) {
 			// A token's activated ability is the one its creating effect's
