@@ -7,7 +7,7 @@ a503d302-6b12-4d82-9ba6-73efbcb1b1a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:per
 a50be01d-821f-4fdc-b12a-4a1a76432a21	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toils-of-night-and-day:cast:s1,f:xs:XP:toils-of-night-and-day:cast:s1	-	-	-	23c4009444b0	-	c5ca8a0fbe7b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mask-of-riddles:cast:s1,f:xs:XP:mask-of-riddles:cast:s1	-	-	-	8a1b1a193ec0	-	454b5c0da4d5	-	-	2026-11-24	xproof
 a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mask-of-riddles:f0a0:s1,f:xs:XP:mask-of-riddles:f0a0:s1	-	-	-	3aa6ded33acb	-	454b5c0da4d5	-	-	2026-11-25	xproof
-a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a50db36c-948b-4132-a5e5-84aab1f42612	cast	cast	agreed	-	F	start	2	0	f:xs:XP:skyskipper-duo:cast:s1	-	-	-	23c4009444b0	-	4083d33c19ef	-	-	2026-11-25	xproof
 a50db36c-948b-4132-a5e5-84aab1f42612	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skyskipper-duo:combat0.attack:s1,f:xs:XP:skyskipper-duo:combat0.attack:s1	-	-	-	23c4009444b0	-	4083d33c19ef	-	-	2026-11-25	xproof
 a50db36c-948b-4132-a5e5-84aab1f42612	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skyskipper-duo:combat0.block:s1,f:xs:XP:skyskipper-duo:combat0.block:s1	-	-	-	23c4009444b0	-	4083d33c19ef	-	-	2026-11-25	xproof
@@ -71,8 +71,8 @@ a5690dc9-f12e-4ecc-b528-f2f83c79c3c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 a5690dc9-f12e-4ecc-b528-f2f83c79c3c8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 a56b3434-7478-4704-b04b-92f32a1bc462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a56d13b5-a84d-4629-b9ec-4f407ee62596	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a56d13b5-a84d-4629-b9ec-4f407ee62596	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-a56d13b5-a84d-4629-b9ec-4f407ee62596	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+a56d13b5-a84d-4629-b9ec-4f407ee62596	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tattermunge-duo:f0t0:s1,f:xs:XP:tattermunge-duo:f0t0:s1	-	-	-	23c4009444b0	-	eab31a19c13e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a56d13b5-a84d-4629-b9ec-4f407ee62596	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tattermunge-duo:f0t1:s1,f:xs:XP:tattermunge-duo:f0t1:s1	-	-	-	23c4009444b0	-	eab31a19c13e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a56d301b-8f4c-4f12-8ee0-34c6b66faee0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5729f11-6cde-4830-b882-ab4c5251c1a9	cast	cast-resolve	agreed	-	FX	scen	2	0	Lorehold Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a57389ad-7f2a-47a6-8ae6-2821503cbb28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ a5ce3fb6-9c70-4433-a079-467c911bfd4d	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:dr
 a5ce8125-da02-48b0-83cd-871c934352b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5cfd1e4-cd14-454a-9734-b5f6952d6a50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5cfd1e4-cd14-454a-9734-b5f6952d6a50	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a5cfd1e4-cd14-454a-9734-b5f6952d6a50	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+a5cfd1e4-cd14-454a-9734-b5f6952d6a50	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:leering-emblem:f0t0:s1,f:xs:XP:leering-emblem:f0t0:s1	-	-	-	23c4009444b0	-	fa3b6f4a310b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a5d3af88-2ca6-4e3d-8b6e-67482136a5c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5d3af88-2ca6-4e3d-8b6e-67482136a5c9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a5da5ad6-4ed2-4041-a983-76a8c87fa109	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ a5dabc98-0db9-4b4f-b2d2-f74dbd022d22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a5dabc98-0db9-4b4f-b2d2-f74dbd022d22	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 a5dfa7ad-9637-4da8-9ed2-0ac863617d9a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-spot-living-portal:f0t0:s2,f:xs:XP:the-spot-living-portal:f0t0:s2	-	-	-	267e485f6204	-	b9b50d3e5ddb	-	-	2026-11-24	xproof
 a5dfa7ad-9637-4da8-9ed2-0ac863617d9a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:the-spot-living-portal:f0t0:s2,f:xs:XP:the-spot-living-portal:f0t0:s2	-	-	-	267e485f6204	-	b9b50d3e5ddb	-	-	2026-11-24	xproof
-a5dfa7ad-9637-4da8-9ed2-0ac863617d9a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Spot, Living Portal/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a5dfa7ad-9637-4da8-9ed2-0ac863617d9a	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-spot-living-portal:f0t1:s1,f:xs:XP:the-spot-living-portal:f0t1:s1	-	-	-	23c4009444b0	-	b9b50d3e5ddb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a5e28749-18ea-4a2b-b7d9-905cf2913d4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inscription-of-abundance:cast:s1,f:xs:XP:inscription-of-abundance:cast:s1	-	-	-	ae86f6029288	-	4ccc6ab80a58	-	-	2026-11-24	xproof
 a5e37c6e-ae42-4c98-ba20-840ea3c4a6ab	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:trench-gorger:cast:s1,f:xs:XP:trench-gorger:cast:s1	-	-	-	8c0bd19283bb	-	49e11935da6a	-	-	2026-11-24	xproof
 a5e37c6e-ae42-4c98-ba20-840ea3c4a6ab	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:trench-gorger:cast:s1,f:xs:XP:trench-gorger:cast:s1	-	-	-	8c0bd19283bb	-	49e11935da6a	-	-	2026-11-24	xproof

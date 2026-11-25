@@ -29,9 +29,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d4163d9-ca02-4f25-9f53-01f6d7cc4b70	f0/t1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d41aacf-e15d-4457-b12a-c71bcdb7b5de	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain's Tutelage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d41aacf-e15d-4457-b12a-c71bcdb7b5de	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d453331-6b8e-4d3d-b658-683eab2760da	cast	cast-resolve	agreed	-	X	scen	1	0	Hobgoblin, Mantled Marauder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d453331-6b8e-4d3d-b658-683eab2760da	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hobgoblin, Mantled Marauder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d453331-6b8e-4d3d-b658-683eab2760da	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hobgoblin, Mantled Marauder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1d453331-6b8e-4d3d-b658-683eab2760da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hobgoblin-mantled-marauder:cast:s1,f:xs:XP:hobgoblin-mantled-marauder:cast:s1	-	-	-	23c4009444b0	-	200366917f12	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1d453331-6b8e-4d3d-b658-683eab2760da	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hobgoblin-mantled-marauder:combat0.attack:s1,f:xs:XP:hobgoblin-mantled-marauder:combat0.attack:s1	-	-	-	23c4009444b0	-	200366917f12	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1d453331-6b8e-4d3d-b658-683eab2760da	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hobgoblin-mantled-marauder:combat0.block:s1,f:xs:XP:hobgoblin-mantled-marauder:combat0.block:s1	-	-	-	23c4009444b0	-	200366917f12	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1d453331-6b8e-4d3d-b658-683eab2760da	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hobgoblin, Mantled Marauder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d4605c0-47c5-4561-ab53-9cff677330aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d4b8a31-6500-4e3d-bcaf-f6f184d7743e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:certain-death:cast:s1,f:xs:XP:certain-death:cast:s1	-	-	-	3aa6ded33acb	-	4db29f061da7	-	-	2026-11-25	xproof
@@ -173,8 +173,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1de0b522-f12a-4597-9d5f-9a246443487e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1de0b522-f12a-4597-9d5f-9a246443487e	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	cast	cast-resolve	agreed	-	FX	scen	2	0	Earth Rumble Wrestlers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:earth-rumble-wrestlers:combat0.attack:s1,f:xs:XP:earth-rumble-wrestlers:combat0.attack:s1	-	-	-	23c4009444b0	-	77c8abce1933	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1de17747-27e8-40bb-b6f7-6d5402d4705c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:earth-rumble-wrestlers:combat0.block:s1,f:xs:XP:earth-rumble-wrestlers:combat0.block:s1	-	-	-	23c4009444b0	-	77c8abce1933	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1de17747-27e8-40bb-b6f7-6d5402d4705c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Earth Rumble Wrestlers/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1de1b591-a73f-4974-b507-8c63e07a0868	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thassa-s-oracle:f0t0:s1,f:xs:XP:thassa-s-oracle:f0t0:s1	-	-	-	ae86f6029288	-	060856a7325f	-	-	2026-11-24	xproof
 1de1b591-a73f-4974-b507-8c63e07a0868	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thassa-s-oracle:f0t0:s1,f:xs:XP:thassa-s-oracle:f0t0:s1	-	-	-	ae86f6029288	-	060856a7325f	-	-	2026-11-24	xproof

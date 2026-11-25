@@ -57,7 +57,7 @@ a853e48b-1e15-4492-a5b4-9924b1a4cf9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a853e48b-1e15-4492-a5b4-9924b1a4cf9a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a853e48b-1e15-4492-a5b4-9924b1a4cf9a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a85e893c-6027-42eb-8d05-14c745cc8c95	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-skeleton:cast:s1,f:xs:XP:viashino-skeleton:cast:s1	-	-	-	8a1b1a193ec0	-	0e2c2d1dbd54	-	-	2026-11-24	xproof
-a85e893c-6027-42eb-8d05-14c745cc8c95	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+a85e893c-6027-42eb-8d05-14c745cc8c95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:viashino-skeleton:f0a0:s1,f:xs:XP:viashino-skeleton:f0a0:s1	-	-	-	23c4009444b0	-	0e2c2d1dbd54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a85ee0cf-39ce-49f2-874a-f6f54ca1775f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a85ee0cf-39ce-49f2-874a-f6f54ca1775f	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 a86117c1-b83d-4350-9a10-a23b7e67e1bd	cast	cast-resolve	agreed	-	FX	scen	2	0	Mikey & Leo, Chaos & Order/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ a893bee3-ea5c-4619-a875-e4af6d4396fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a893bee3-ea5c-4619-a875-e4af6d4396fe	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 a893bee3-ea5c-4619-a875-e4af6d4396fe	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 a8966245-501c-47e4-8ce0-849dcb532eb2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:flopsie-bumi-s-buddy:f0t0:s2,f:xs:XP:flopsie-bumi-s-buddy:f0t0:s2	-	-	-	267e485f6204	-	1f48066c2938	-	-	2026-11-24	xproof
-a8966245-501c-47e4-8ce0-849dcb532eb2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Flopsie, Bumi's Buddy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a8966245-501c-47e4-8ce0-849dcb532eb2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:flopsie-bumi-s-buddy:combat0.attack:s1,f:xs:XP:flopsie-bumi-s-buddy:combat0.attack:s1	-	-	-	23c4009444b0	-	1f48066c2938	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a8966245-501c-47e4-8ce0-849dcb532eb2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flopsie, Bumi's Buddy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8966245-501c-47e4-8ce0-849dcb532eb2	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:flopsie-bumi-s-buddy:f0t0:s2,f:xs:XP:flopsie-bumi-s-buddy:f0t0:s2	-	-	-	267e485f6204	-	1f48066c2938	-	-	2026-11-24	xproof
 a8966245-501c-47e4-8ce0-849dcb532eb2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Flopsie, Bumi's Buddy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ a8acb0b0-7265-42f6-8143-62d0c02d5a28	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 a8af4d61-1aed-415d-8d8e-7384194ee3e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8af4d61-1aed-415d-8d8e-7384194ee3e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8af4d61-1aed-415d-8d8e-7384194ee3e2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:brackwater-elemental:f0t0:s1,f:xs:XP:brackwater-elemental:f0t0:s1	-	-	-	8a1b1a193ec0	-	7ed4e34f48c1	-	-	2026-11-24	xproof
-a8af4d61-1aed-415d-8d8e-7384194ee3e2	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+a8af4d61-1aed-415d-8d8e-7384194ee3e2	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a8b018a7-0350-4ee0-9582-8d391018bdee	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Azog, Moria's Ruin"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a8b018a7-0350-4ee0-9582-8d391018bdee	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Azog, Moria's Ruin"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a8b3a35e-0172-4f7b-b50f-571e59d7ca5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

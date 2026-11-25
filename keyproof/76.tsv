@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76164af1-275e-4d68-9df5-9801768512ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76164af1-275e-4d68-9df5-9801768512ef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:safehold-duo:f0t0:s1,f:xs:XP:safehold-duo:f0t0:s1	-	-	-	23c4009444b0	-	dcd101f89f90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:safehold-duo:f0t1:s1,f:xs:XP:safehold-duo:f0t1:s1	-	-	-	23c4009444b0	-	dcd101f89f90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7616dacf-44e2-4b03-b120-875cc2e50ea5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7616e834-4852-40c8-9de6-d89f96119f12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:cast:s1,f:xs:XP:vraska-regal-gorgon:cast:s1	-	-	-	d864b561c9cb	-	3335a89245ae	-	-	2026-11-24	xproof
 7616e834-4852-40c8-9de6-d89f96119f12	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:cast:s1,f:xs:XP:vraska-regal-gorgon:cast:s1	-	-	-	d864b561c9cb	-	3335a89245ae	-	-	2026-11-24	xproof
@@ -104,10 +104,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:combat0.attack:s1,f:xs:XP:intruding-soulrager:combat0.attack:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:combat0.block:s1,f:xs:XP:intruding-soulrager:combat0.block:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Intruding Soulrager/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76742bfc-ae99-4b06-b29d-e0e41d92ae14	cast	cast-resolve	agreed	-	X	scen	1	0	Prowler, Clawed Thief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76742bfc-ae99-4b06-b29d-e0e41d92ae14	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Prowler, Clawed Thief/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76742bfc-ae99-4b06-b29d-e0e41d92ae14	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Prowler, Clawed Thief/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76742bfc-ae99-4b06-b29d-e0e41d92ae14	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prowler, Clawed Thief/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+76742bfc-ae99-4b06-b29d-e0e41d92ae14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prowler-clawed-thief:cast:s1,f:xs:XP:prowler-clawed-thief:cast:s1	-	-	-	23c4009444b0	-	8e163241f866	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+76742bfc-ae99-4b06-b29d-e0e41d92ae14	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:prowler-clawed-thief:combat0.attack:s1,f:xs:XP:prowler-clawed-thief:combat0.attack:s1	-	-	-	23c4009444b0	-	8e163241f866	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+76742bfc-ae99-4b06-b29d-e0e41d92ae14	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:prowler-clawed-thief:combat0.block:s1,f:xs:XP:prowler-clawed-thief:combat0.block:s1	-	-	-	23c4009444b0	-	8e163241f866	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+76742bfc-ae99-4b06-b29d-e0e41d92ae14	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:prowler-clawed-thief:f0t0:s1,f:xs:XP:prowler-clawed-thief:f0t0:s1	-	-	-	23c4009444b0	-	8e163241f866	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 76771556-3eb7-4f87-aaeb-32ea81105aa2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trynn-champion-of-freedom:f0t1:s1,f:xs:XP:trynn-champion-of-freedom:f0t1:s1	-	-	-	23c4009444b0	-	78aaa2e6f67a	-	-	2026-11-25	xproof
 76771556-3eb7-4f87-aaeb-32ea81105aa2	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 76771556-3eb7-4f87-aaeb-32ea81105aa2	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:trynn-champion-of-freedom:f0t1:s1,f:xs:XP:trynn-champion-of-freedom:f0t1:s1	-	-	-	23c4009444b0	-	78aaa2e6f67a	-	-	2026-11-25	xproof

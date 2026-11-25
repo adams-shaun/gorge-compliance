@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fire Nation Palace/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Fire Nation Palace/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f2000fb8-39c6-4ad6-a020-5245faaa1eba	land	play-land	agreed	-	X	scen	1	0	Fire Nation Palace/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f2000fb8-39c6-4ad6-a020-5245faaa1eba	land	land	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-palace:land:s1,f:xs:XP:fire-nation-palace:land:s1	-	-	-	23c4009444b0	-	7e9ab0a3aa3e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f2025f2e-c931-48dd-af21-8f0a591befb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:escape-from-orthanc:cast:s1,f:xs:XP:escape-from-orthanc:cast:s1	-	-	-	ae86f6029288	-	901e72b81fb3	-	-	2026-11-24	xproof
 f202712d-7cd1-47aa-9664-526a884a1be2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrogant-outlaw:f0t0:s1,f:xs:XP:arrogant-outlaw:f0t0:s1	-	-	-	3aa6ded33acb	-	069490988825	-	-	2026-11-25	xproof
 f202712d-7cd1-47aa-9664-526a884a1be2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arrogant-outlaw:f0t0:s1,f:xs:XP:arrogant-outlaw:f0t0:s1	-	-	-	3aa6ded33acb	-	069490988825	-	-	2026-11-25	xproof
@@ -89,7 +89,7 @@ f27f51e1-b881-4639-9d36-47cdf2a61117	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f27fb53f-a983-410a-821b-e48cd8c01f2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f27fb53f-a983-410a-821b-e48cd8c01f2e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f281c47f-3587-4a3f-8726-ec59568fef94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f281c47f-3587-4a3f-8726-ec59568fef94	f0/a0	NULL	owed	refused:steps-needed:cost:UB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+f281c47f-3587-4a3f-8726-ec59568fef94	f0/a0	NULL	owed	refused:steps-needed:cost:UB	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f28a373b-4a8d-40a5-ace1-3bbd8489ad36	cast	counter-spell	agreed	-	X	scen	1	0	Don't Make a Sound/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f28b21a6-f7ce-437a-8c5b-0423cb55cefb	cast	cast-resolve	agreed	-	FX	scen	2	0	Banishing Light/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f28b21a6-f7ce-437a-8c5b-0423cb55cefb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:san
 f2a6dc8d-3c98-44ae-aff0-b838d7aee0b7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sandstalker-moloch:f0t0:s1,f:xs:XP:sandstalker-moloch:f0t0:s1	-	-	-	3aa6ded33acb	-	aae6d7158c31	-	-	2026-11-25	xproof
 f2b284cd-fa12-4ba1-b297-80105bb48fde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2b284cd-fa12-4ba1-b297-80105bb48fde	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f2b376d2-a2f4-4d23-a1fb-eb7b6ebd0b7a	cast	cast-resolve	agreed	-	X	scen	1	0	Sandman's Quicksand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f2b376d2-a2f4-4d23-a1fb-eb7b6ebd0b7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandman-s-quicksand:cast:s1,f:xs:XP:sandman-s-quicksand:cast:s1	-	-	-	23c4009444b0	-	2ed6d63fa868	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f2b4f37b-270b-4746-83b3-51ff88ee3491	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sulfurous-blast:cast:s1,f:xs:XP:sulfurous-blast:cast:s1	-	-	-	9ee19e8250ce	-	37c278810c9c	-	-	2026-11-24	xproof
 f2b88031-bfb7-46c4-abdd-3b6b5f5acfa4	cast	cast-resolve	agreed	-	FX	scen	2	0	The Final Days/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2bf5014-677a-4880-b926-d93457348bdc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:death-in-heaven:cast:s1	-	-	-	8c0bd19283bb	-	d19af770b8cd	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ f2cf087a-d89a-4145-9394-945ce41c8cca	combat#0.attack	combat.attack	agreed	-	FX	s
 f2cf087a-d89a-4145-9394-945ce41c8cca	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archway-angel:combat0.block:s1,f:xs:XP:archway-angel:combat0.block:s1	-	-	-	3aa6ded33acb	-	04ddf878ae51	-	-	2026-11-25	xproof
 f2cf087a-d89a-4145-9394-945ce41c8cca	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f2d1e991-e13a-43c7-85aa-d53dd14822e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wake-thrasher:cast:s1,f:xs:XP:wake-thrasher:cast:s1	-	-	-	8a1b1a193ec0	-	63f48593da7c	-	-	2026-11-24	xproof
-f2d1e991-e13a-43c7-85aa-d53dd14822e6	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+f2d1e991-e13a-43c7-85aa-d53dd14822e6	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f2d5949b-3cdc-4efd-9841-7d450e12dbbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-tactician:f0t0:s1,f:xs:XP:aven-tactician:f0t0:s1	-	-	-	d864b561c9cb	-	d2da79dfa106	-	-	2026-11-24	xproof
 f2d5949b-3cdc-4efd-9841-7d450e12dbbe	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-tactician:f0t0:s1,f:xs:XP:aven-tactician:f0t0:s1	-	-	-	d864b561c9cb	-	d2da79dfa106	-	-	2026-11-24	xproof
 f2df375c-3741-409f-91d1-21bf632b2e1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

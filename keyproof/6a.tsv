@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a47865c-8fa2-4cb2-aebf-8009c065395f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rakdos-joins-up:f0t0:s2,f:xs:XP:rakdos-joins-up:f0t0:s2	-	-	-	267e485f6204	-	63af6ea7ac08	-	-	2026-11-24	xproof
 6a47865c-8fa2-4cb2-aebf-8009c065395f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rakdos Joins Up/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a4ace6b-ef3a-4d11-89d7-958f98dcc445	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-6a4ace6b-ef3a-4d11-89d7-958f98dcc445	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+6a4ace6b-ef3a-4d11-89d7-958f98dcc445	f0/t0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a4e8d44-e6ee-40f7-8df4-52fa4cb346aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a4e8d44-e6ee-40f7-8df4-52fa4cb346aa	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:cave-people:f0a0:s1,f:xs:XP:cave-people:f0a0:s1	-	-	-	fc71ca68c5ac	-	2fc5302f4183	-	-	2026-11-24	xproof
 6a4e8d44-e6ee-40f7-8df4-52fa4cb346aa	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:cave-people:f0t0:s1,f:xs:XP:cave-people:f0t0:s1	-	-	-	fc71ca68c5ac	-	2fc5302f4183	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a69116b-3d2e-4eac-9d02-902373de3cb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a69116b-3d2e-4eac-9d02-902373de3cb7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a69116b-3d2e-4eac-9d02-902373de3cb7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a69d4b1-72dd-4599-a16d-32299de5b0b9	cast	cast-resolve	agreed	-	X	scen	1	0	Sold Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a69d4b1-72dd-4599-a16d-32299de5b0b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sold-out:cast:s1,f:xs:XP:sold-out:cast:s1	-	-	-	23c4009444b0	-	68394d09f188	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a6b19db-cdeb-4922-8642-5d872f90e7a1	cast	cast-resolve	agreed	-	FX	scen	2	0	Spectacular Skywhale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a6b19db-cdeb-4922-8642-5d872f90e7a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spectacular Skywhale/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a6b19db-cdeb-4922-8642-5d872f90e7a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spectacular Skywhale/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,11 +99,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a7229a8-1634-4278-ab50-0ec2b51edac1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Glister Bairn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a732900-6529-4d5c-ab94-52bd0048d483	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shepherd-of-heroes:f0t0:s1,f:xs:XP:shepherd-of-heroes:f0t0:s1	-	-	-	ae86f6029288	-	0f2abc327a88	-	-	2026-11-24	xproof
 6a732900-6529-4d5c-ab94-52bd0048d483	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shepherd-of-heroes:f0t0:s1,f:xs:XP:shepherd-of-heroes:f0t0:s1	-	-	-	ae86f6029288	-	0f2abc327a88	-	-	2026-11-24	xproof
-6a7f3e1f-6798-4644-b64c-7765f81f0938	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vibrant Cityscape/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a7f3e1f-6798-4644-b64c-7765f81f0938	land	play-land	agreed	-	X	scen	1	0	Vibrant Cityscape/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a7f3e1f-6798-4644-b64c-7765f81f0938	f0/a0	ChangeZone	agreed	-	F	start	4	0	f:xs:XP:vibrant-cityscape:f0a0:s1	-	-	-	23c4009444b0	-	441cdff436a6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6a7f3e1f-6798-4644-b64c-7765f81f0938	land	land	agreed	-	F	start	2	0	f:xs:XP:vibrant-cityscape:land:s1	-	-	-	23c4009444b0	-	441cdff436a6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a83768e-672e-4fec-8931-853f5e96d43d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stasis-snare:f0t0:s2,f:xs:XP:stasis-snare:f0t0:s2	-	-	-	e07cf3a05ba5	-	4e4cdf8b2367	-	-	2026-11-24	xproof
 6a83768e-672e-4fec-8931-853f5e96d43d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stasis-snare:f0t0:s2,f:xs:XP:stasis-snare:f0t0:s2	-	-	-	e07cf3a05ba5	-	4e4cdf8b2367	-	-	2026-11-24	xproof
-6a84a8a4-c8b0-45ce-af6f-605fcffc395b	cast	cast-resolve	agreed	-	X	scen	1	0	Diligent Zookeeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a84a8a4-c8b0-45ce-af6f-605fcffc395b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diligent-zookeeper:cast:s1,f:xs:XP:diligent-zookeeper:cast:s1	-	-	-	23c4009444b0	-	8e99818dcb1c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a84a8a4-c8b0-45ce-af6f-605fcffc395b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Diligent Zookeeper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a84eda1-7e72-4b5a-849f-b6e177565aeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirage-mirror:cast:s1,f:xs:XP:mirage-mirror:cast:s1	-	-	-	d864b561c9cb	-	0b3afe2c15c7	-	-	2026-11-24	xproof
 6a84eda1-7e72-4b5a-849f-b6e177565aeb	f0/a0	Clone	agreed	-	FX	start	2	0	x:xs:XP:mirage-mirror:f0a0:s1,f:xs:XP:mirage-mirror:f0a0:s1	-	-	-	d864b561c9cb	-	0b3afe2c15c7	-	-	2026-11-24	xproof

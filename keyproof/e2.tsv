@@ -16,7 +16,7 @@ e2117373-6f0a-41c8-ab6a-9014b9628e64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e2117373-6f0a-41c8-ab6a-9014b9628e64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2155e61-f389-4b1d-9598-9a79cbccaaa2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emissary-of-sunrise:f0t0:s1,f:xs:XP:emissary-of-sunrise:f0t0:s1	-	-	-	d864b561c9cb	-	ff2013f15c7c	-	-	2026-11-24	xproof
 e2155e61-f389-4b1d-9598-9a79cbccaaa2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:emissary-of-sunrise:f0t0:s1,f:xs:XP:emissary-of-sunrise:f0t0:s1	-	-	-	d864b561c9cb	-	ff2013f15c7c	-	-	2026-11-24	xproof
-e2171c48-a816-41b2-aa55-e0ba2503fd6a	cast	cast-resolve	agreed	-	X	scen	1	0	Otter-Penguin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e2171c48-a816-41b2-aa55-e0ba2503fd6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:otter-penguin:cast:s1,f:xs:XP:otter-penguin:cast:s1	-	-	-	23c4009444b0	-	dd757b49bb50	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e2171c48-a816-41b2-aa55-e0ba2503fd6a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Otter-Penguin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e21a1ad5-bf31-425f-92c2-7818bdb1cef8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e21ed0d0-26b1-4ffe-971a-babf37f4492c	cast	cast-resolve	agreed	-	FX	scen	2	0	Kinsbaile Cavalier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -121,10 +121,10 @@ e28a3f0e-40bd-4293-b5eb-ec9d185c1e1c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Esse
 e28a3f0e-40bd-4293-b5eb-ec9d185c1e1c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:essence-anchor:f0t0:s1,f:xs:XP:essence-anchor:f0t0:s1	-	-	-	23c4009444b0	-	0fec129644c1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e2928d3c-b64a-443e-a1c1-fd204bb098ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Unbury/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e294d85f-caf2-4939-99d3-7ca5bba2b8d1	cast	cast-resolve	agreed	-	X	scen	1	0	Hustle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e294d9d2-df91-4410-85d3-8ffb13fb2285	cast	cast-resolve	agreed	-	X	scen	1	0	Master Piandao/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e294d9d2-df91-4410-85d3-8ffb13fb2285	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Master Piandao/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e294d9d2-df91-4410-85d3-8ffb13fb2285	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Master Piandao/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e294d9d2-df91-4410-85d3-8ffb13fb2285	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Master Piandao/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e294d9d2-df91-4410-85d3-8ffb13fb2285	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-piandao:cast:s1,f:xs:XP:master-piandao:cast:s1	-	-	-	23c4009444b0	-	2e9faeb84fee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e294d9d2-df91-4410-85d3-8ffb13fb2285	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:master-piandao:combat0.attack:s1,f:xs:XP:master-piandao:combat0.attack:s1	-	-	-	23c4009444b0	-	2e9faeb84fee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e294d9d2-df91-4410-85d3-8ffb13fb2285	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:master-piandao:combat0.block:s1	-	-	-	23c4009444b0	-	2e9faeb84fee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e294d9d2-df91-4410-85d3-8ffb13fb2285	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:master-piandao:combat0.attack:s1,f:xs:XP:master-piandao:combat0.attack:s1	-	-	-	23c4009444b0	-	2e9faeb84fee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e295d207-128f-419a-866a-c9ac6248c199	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e295d207-128f-419a-866a-c9ac6248c199	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2962883-6daf-4a84-af73-917afc73092c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

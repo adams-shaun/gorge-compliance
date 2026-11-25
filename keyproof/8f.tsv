@@ -87,8 +87,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f6af612-a4a1-4165-ae4d-ff6353cbaf8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f709660-bb26-409f-9650-e5228ac8db7e	cast	cast-resolve	agreed	-	FX	scen	2	0	Hei Bai, Spirit of Balance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8f709660-bb26-409f-9650-e5228ac8db7e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-8f709660-bb26-409f-9650-e5228ac8db7e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Hei Bai, Spirit of Balance/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8f709660-bb26-409f-9650-e5228ac8db7e	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Hei Bai, Spirit of Balance/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8f709660-bb26-409f-9650-e5228ac8db7e	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hei-bai-spirit-of-balance:f0t1:s1,f:xs:XP:hei-bai-spirit-of-balance:f0t1:s1	-	-	-	23c4009444b0	-	73175e06739c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8f709660-bb26-409f-9650-e5228ac8db7e	f0/t2	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hei-bai-spirit-of-balance:f0t2:s1,f:xs:XP:hei-bai-spirit-of-balance:f0t2:s1	-	-	-	23c4009444b0	-	73175e06739c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8f7479e6-b2bd-46b1-96ad-34deb43565c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectacular-pileup:cast:s1,f:xs:XP:spectacular-pileup:cast:s1	-	-	-	23c4009444b0	-	a9c17358281b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8f7479e6-b2bd-46b1-96ad-34deb43565c1	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:spectacular-pileup:f0a1:s1,f:xs:XP:spectacular-pileup:f0a1:s1	-	-	-	23c4009444b0	-	a9c17358281b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8f761657-7127-4552-a200-532e063e2419	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ribskiff:f0t0:s1,f:xs:XP:ribskiff:f0t0:s1	-	-	-	ae86f6029288	-	b8bfa01ab117	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f933fae-6c0c-42d7-a817-14760d8285cd	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8f94754d-fb2a-4634-a1de-049c82fa6f30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f9535f2-f00c-40d3-9997-d1c0ece15f9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f9535f2-f00c-40d3-9997-d1c0ece15f9f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+8f9535f2-f00c-40d3-9997-d1c0ece15f9f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:stealer-of-secrets:f0t0:s1,f:xs:XP:stealer-of-secrets:f0t0:s1	-	-	-	23c4009444b0	-	36f550ee029e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8f968470-ce00-43a3-95f5-2e3fe987be19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fell:cast:s1,f:xs:XP:fell:cast:s1	-	-	-	23b491658465	-	492fe34644e3	-	-	2026-11-24	xproof
 8f976399-29a9-4eb7-844d-3d3f2fdf6ea7	cast	cast-resolve	agreed	-	X	scen	1	0	Glacial Dragonhunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8fa0fe02-2452-4386-8e0c-165757b0f0a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 701c8624-70d8-49df-84b1-d7b2a8e83552	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:child-of-the-volcano:combat0.block:s1,f:xs:XP:child-of-the-volcano:combat0.block:s1	-	-	-	3aa6ded33acb	-	4a88678b2f59	-	-	2026-11-25	xproof
 701c8624-70d8-49df-84b1-d7b2a8e83552	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Child of the Volcano/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7020dc51-8271-40a3-9c4c-ebd40c0b08b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7020dc51-8271-40a3-9c4c-ebd40c0b08b2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7020dc51-8271-40a3-9c4c-ebd40c0b08b2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:algae-gharial:f0t0:s1,f:xs:XP:algae-gharial:f0t0:s1	-	-	-	23c4009444b0	-	2ff2adb0beca	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7022ae9a-2589-493b-a050-a230fd02f80b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-of-souls:cast:s1,f:xs:XP:storm-of-souls:cast:s1	-	-	-	8c0bd19283bb	-	6b78e33b12c7	-	-	2026-11-24	xproof
 70235727-e330-46fa-b057-ddbb55cd1ac3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adventure-awaits:cast:s1,f:xs:XP:adventure-awaits:cast:s1	-	-	-	ae86f6029288	-	d4cd1f899a4e	-	-	2026-11-24	xproof
 7024532b-f99b-43a7-b0ed-5b3e7ec7592b	cast	cast-resolve	agreed	-	X	scen	1	0	Starfall Invocation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 703243f0-8cb3-420f-958f-5fd4bde30293	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 703243f0-8cb3-420f-958f-5fd4bde30293	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 703ab192-7e0a-4f02-8381-568ad2d999ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70401db7-edbc-402f-98ef-be74bd316273	cast	cast-resolve	agreed	-	X	scen	1	0	Rebellious Captives/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70401db7-edbc-402f-98ef-be74bd316273	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rebellious Captives/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+70401db7-edbc-402f-98ef-be74bd316273	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rebellious-captives:cast:s1,f:xs:XP:rebellious-captives:cast:s1	-	-	-	23c4009444b0	-	7d4a28f1b507	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+70401db7-edbc-402f-98ef-be74bd316273	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:rebellious-captives:f0a0:s1,f:xs:XP:rebellious-captives:f0a0:s1	-	-	-	23c4009444b0	-	7d4a28f1b507	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7041b3d5-c61a-4b94-811c-c5eb9f1ba664	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soul-channeling:cast:s1,f:xs:XP:soul-channeling:cast:s1	-	-	-	3aa6ded33acb	-	efb747454be7	-	-	2026-11-25	xproof
 7041b3d5-c61a-4b94-811c-c5eb9f1ba664	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:soul-channeling:cast:s1,f:xs:XP:soul-channeling:cast:s1	-	-	-	3aa6ded33acb	-	efb747454be7	-	-	2026-11-25	xproof
 704723f3-0490-4d96-930a-aacc6d19ba8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -58,8 +58,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 705509e9-a034-4a5a-9c65-66f58748b8a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 705531b3-77cc-4d1f-851b-45e03c029991	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70564c3a-858f-498e-8b92-acb3ca54ae7e	cast	cast-resolve	agreed	-	FX	scen	2	0	Aang, the Last Airbender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70564c3a-858f-498e-8b92-acb3ca54ae7e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aang, the Last Airbender/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70564c3a-858f-498e-8b92-acb3ca54ae7e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aang, the Last Airbender/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+70564c3a-858f-498e-8b92-acb3ca54ae7e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aang-the-last-airbender:combat0.attack:s1,f:xs:XP:aang-the-last-airbender:combat0.attack:s1	-	-	-	23c4009444b0	-	ba733eb74bd1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+70564c3a-858f-498e-8b92-acb3ca54ae7e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aang-the-last-airbender:combat0.block:s1,f:xs:XP:aang-the-last-airbender:combat0.block:s1	-	-	-	23c4009444b0	-	ba733eb74bd1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 70564c3a-858f-498e-8b92-acb3ca54ae7e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70564c3a-858f-498e-8b92-acb3ca54ae7e	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Aang, the Last Airbender/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70570170-be76-4c56-9151-c4b6e253f462	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vigilance:cast:s1,f:xs:XP:vigilance:cast:s1	-	-	-	64a08ba7d913	-	82b29f85fcb9	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 708b0321-7de9-4ffd-9d7a-9f4813dd542e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708b0321-7de9-4ffd-9d7a-9f4813dd542e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708b13ef-f297-4176-9d09-e633c4d600da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vedalken-ghoul:cast:s1,f:xs:XP:vedalken-ghoul:cast:s1	-	-	-	8a1b1a193ec0	-	e2cb0707f2aa	-	-	2026-11-24	xproof
-708b13ef-f297-4176-9d09-e633c4d600da	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+708b13ef-f297-4176-9d09-e633c4d600da	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 708bf989-dd8d-4066-a463-96cc5eadbb06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708bf989-dd8d-4066-a463-96cc5eadbb06	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 708d4567-a5a3-437f-bae4-ae10f1537aa9	cast	cast-resolve	agreed	-	X	scen	1	0	Tetsuko Umezawa, Pursuer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70e35385-6129-4bd1-861c-df04469566b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70e58068-90d2-4720-a11c-5d243046b4a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70e8eba9-a106-49c5-932e-b4390edb1c98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70ea1a9d-ec52-4c11-8c4d-0d957e5491ad	cast	cast-resolve	agreed	-	X	scen	1	0	Suki, Courageous Rescuer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70ea1a9d-ec52-4c11-8c4d-0d957e5491ad	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Suki, Courageous Rescuer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70ea1a9d-ec52-4c11-8c4d-0d957e5491ad	static#0.0	static#0.0	agreed	-	X	scen	1	0	Suki, Courageous Rescuer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+70ea1a9d-ec52-4c11-8c4d-0d957e5491ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suki-courageous-rescuer:cast:s1,f:xs:XP:suki-courageous-rescuer:cast:s1	-	-	-	23c4009444b0	-	14344bdf04ff	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+70ea1a9d-ec52-4c11-8c4d-0d957e5491ad	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suki-courageous-rescuer:f0t0:s1,f:xs:XP:suki-courageous-rescuer:f0t0:s1	-	-	-	23c4009444b0	-	14344bdf04ff	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+70ea1a9d-ec52-4c11-8c4d-0d957e5491ad	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:suki-courageous-rescuer:static0.0:s1,f:xs:XP:suki-courageous-rescuer:static0.0:s1	-	-	-	23c4009444b0	-	14344bdf04ff	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 70ebd18a-c878-4a93-b7c4-3f7a2aa65f5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70ebd18a-c878-4a93-b7c4-3f7a2aa65f5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70ecc25b-2004-4a3c-80c3-6d97bf0711eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

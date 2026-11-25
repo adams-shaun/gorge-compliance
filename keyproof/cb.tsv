@@ -148,8 +148,8 @@ cbbd507e-06da-4b47-befc-61db8c92539e	f0/a0	ChangeZone/TypeCycling	agreed	-	F	sta
 cbbd507e-06da-4b47-befc-61db8c92539e	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:marauding-brinefang:f0t0:s1,f:xs:XP:marauding-brinefang:f0t0:s1	-	-	-	3aa6ded33acb	-	587bf17233d4	-	-	2026-11-25	xproof
 cbbe535b-12d6-4e6c-8b26-9220f06a1604	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beseech-the-mirror:cast:s1,f:xs:XP:beseech-the-mirror:cast:s1	-	-	-	23b491658465	-	d7870072e9c4	-	-	2026-11-24	xproof
 cbbea4e2-4b36-4965-89b6-00d2a564f146	cast	cast-resolve	agreed	-	FX	scen	2	0	First-Time Flyer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cbbea4e2-4b36-4965-89b6-00d2a564f146	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	First-Time Flyer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cbbea4e2-4b36-4965-89b6-00d2a564f146	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	First-Time Flyer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cbbea4e2-4b36-4965-89b6-00d2a564f146	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:first-time-flyer:combat0.attack:s1,f:xs:XP:first-time-flyer:combat0.attack:s1	-	-	-	23c4009444b0	-	ad6db774e893	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cbbea4e2-4b36-4965-89b6-00d2a564f146	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:first-time-flyer:combat0.block:s1,f:xs:XP:first-time-flyer:combat0.block:s1	-	-	-	23c4009444b0	-	ad6db774e893	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbbea4e2-4b36-4965-89b6-00d2a564f146	static#0.0	static#0.0	agreed	-	X	scen	1	0	First-Time Flyer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbbf61b0-5dd2-4643-8857-b7a10ec76ec8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbbf61b0-5dd2-4643-8857-b7a10ec76ec8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:living-lies-of-loki:f0t0:s1,f:xs:XP:living-lies-of-loki:f0t0:s1	-	-	-	23c4009444b0	-	a8a41fc05f1b	-	-	2026-11-25	xproof
@@ -198,7 +198,7 @@ cbf09050-39d0-463b-96db-9e22011ae0d8	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Aang,
 cbf2b19e-32a3-489f-9979-ba2748c52845	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbf2b19e-32a3-489f-9979-ba2748c52845	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eerie-gravestone:f0t0:s2,f:xs:XP:eerie-gravestone:f0t0:s2	-	-	-	267e485f6204	-	b188e46d53b6	-	-	2026-11-24	xproof
-cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eerie Gravestone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:eerie-gravestone:f0a0:s1,f:xs:XP:eerie-gravestone:f0a0:s1	-	-	-	23c4009444b0	-	b188e46d53b6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:eerie-gravestone:f0t0:s2,f:xs:XP:eerie-gravestone:f0t0:s2	-	-	-	267e485f6204	-	b188e46d53b6	-	-	2026-11-24	xproof
 cbf68ddd-596f-4b2d-b93c-3b7976ba4d37	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fumble:cast:s1,f:xs:XP:fumble:cast:s1	-	-	-	8c0bd19283bb	-	3e5b0eeac8eb	-	-	2026-11-24	xproof
 cbf743a5-123f-4747-826d-7f8bb929a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

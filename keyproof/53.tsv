@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5334dc24-040e-4094-80f4-8d1b9de01230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 533767ca-7208-4c88-b160-375479b68285	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53390f91-a159-482f-9f64-f5adc812680b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pilgrim-of-the-fires:cast:s1,f:xs:XP:pilgrim-of-the-fires:cast:s1	-	-	-	d864b561c9cb	-	66a367ff28f7	-	-	2026-11-24	xproof
-533b107c-fd66-45ef-b74e-e6bd9b75ea8f	cast	cast-resolve	agreed	-	X	scen	1	0	Combustion Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-533b107c-fd66-45ef-b74e-e6bd9b75ea8f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Combustion Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+533b107c-fd66-45ef-b74e-e6bd9b75ea8f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:combustion-man:cast:s1,f:xs:XP:combustion-man:cast:s1	-	-	-	23c4009444b0	-	31c17f618d54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+533b107c-fd66-45ef-b74e-e6bd9b75ea8f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:combustion-man:f0t0:s1,f:xs:XP:combustion-man:f0t0:s1	-	-	-	23c4009444b0	-	31c17f618d54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 533c4956-87f8-4bae-8924-166fc2e9ec1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 533d5bf9-0912-451f-a3f4-3842b0a75b1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golbez-crystal-collector:cast:s1,f:xs:XP:golbez-crystal-collector:cast:s1	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:golbez-crystal-collector:f0t0:s1,f:xs:XP:golbez-crystal-collector:f0t0:s1	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 536c1112-694f-42f8-a7b1-604389e54a95	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 536c36d9-5ef4-441c-a6c8-5806644d805c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 536f7c92-2f1e-49e7-98de-47382a9488f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	cast	cast-resolve	agreed	-	FX	scen	2	0	Breaching Dragonstorm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:breaching-dragonstorm:f0t1:s1,f:xs:XP:breaching-dragonstorm:f0t1:s1	-	-	-	23c4009444b0	-	40e5756ba354	-	-	2026-11-25	xproof

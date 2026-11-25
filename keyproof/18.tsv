@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Assemble the Players/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.1	static#0.1	agreed	-	X	scen	1	0	Assemble the Players/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-180d9c48-6d6c-4d20-965a-0ee2ad57f99b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+180d9c48-6d6c-4d20-965a-0ee2ad57f99b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hedron-scrabbler:f0t0:s1,f:xs:XP:hedron-scrabbler:f0t0:s1	-	-	-	23c4009444b0	-	6c0b60e36c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 180e1a7e-890d-477c-80a5-da8a5f2857b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180e1a7e-890d-477c-80a5-da8a5f2857b3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 180eda7c-fca2-403b-85cd-8ffebaf9f408	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -37,9 +37,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1817acd5-5ed0-47b8-8e56-4715a488867e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sparktongue-dragon:f0t0:s1,f:xs:XP:sparktongue-dragon:f0t0:s1	-	-	-	d864b561c9cb	-	911c53c24250	-	-	2026-11-24	xproof
 1818b0b1-0104-4673-9be8-acfc773ef87d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1818b0b1-0104-4673-9be8-acfc773ef87d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-181965fb-e685-4b1f-9bd6-3a33bed933b2	cast	cast-resolve	agreed	-	X	scen	1	0	Meteor Sword/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-181965fb-e685-4b1f-9bd6-3a33bed933b2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meteor Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-181965fb-e685-4b1f-9bd6-3a33bed933b2	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+181965fb-e685-4b1f-9bd6-3a33bed933b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meteor-sword:cast:s1,f:xs:XP:meteor-sword:cast:s1	-	-	-	23c4009444b0	-	45fc02f58263	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+181965fb-e685-4b1f-9bd6-3a33bed933b2	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:meteor-sword:f0a0:s1,f:xs:XP:meteor-sword:f0a0:s1	-	-	-	23c4009444b0	-	45fc02f58263	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+181965fb-e685-4b1f-9bd6-3a33bed933b2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meteor-sword:cast:s1,f:xs:XP:meteor-sword:cast:s1	-	-	-	23c4009444b0	-	45fc02f58263	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 181965fb-e685-4b1f-9bd6-3a33bed933b2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Meteor Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 181da74b-53fb-4e46-afc0-e7c990fda128	cast	cast-resolve	agreed	-	FX	scen	2	0	Efflorescence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 181e6b3e-c33e-49e7-acb8-67473289a856	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18279733-5568-427c-b0a2-044bca28f688	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18290c4b-cff6-4ee5-a487-fe0d5706d3de	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Urban Retreat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18290c4b-cff6-4ee5-a487-fe0d5706d3de	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Urban Retreat/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-18290c4b-cff6-4ee5-a487-fe0d5706d3de	land	play-land	agreed	-	X	scen	1	0	Urban Retreat/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+18290c4b-cff6-4ee5-a487-fe0d5706d3de	land	land	agreed	-	FX	start	2	0	x:xs:XP:urban-retreat:land:s1,f:xs:XP:urban-retreat:land:s1	-	-	-	23c4009444b0	-	f57a77ade3a3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

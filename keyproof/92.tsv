@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92226fd2-ad93-4722-89a0-ca88ea03e1b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eumidian-terrabotanist:cast:s1,f:xs:XP:eumidian-terrabotanist:cast:s1	-	-	-	23c4009444b0	-	c1f240f62eaf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92226fd2-ad93-4722-89a0-ca88ea03e1b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eumidian-terrabotanist:f0t0:s1,f:xs:XP:eumidian-terrabotanist:f0t0:s1	-	-	-	23c4009444b0	-	c1f240f62eaf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9223488e-5206-4d43-90ef-387189dcee16	cast	cast-resolve	agreed	-	FX	scen	2	0	Suki, Kyoshi Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9223488e-5206-4d43-90ef-387189dcee16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Suki, Kyoshi Warrior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9223488e-5206-4d43-90ef-387189dcee16	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:suki-kyoshi-warrior:f0t0:s1,f:xs:XP:suki-kyoshi-warrior:f0t0:s1	-	-	-	23c4009444b0	-	516fcb555f18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9223488e-5206-4d43-90ef-387189dcee16	static#0.0	static#0.0	agreed	-	X	scen	1	0	Suki, Kyoshi Warrior/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92247856-35a4-4c1d-90bc-fa0d28524ecd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9228f04c-506f-4453-a335-e66876b8ce8d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:smile-at-death:cast:s1,f:xs:XP:smile-at-death:cast:s1	-	-	-	23c4009444b0	-	4fd7851386ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92512acd-bf1e-4133-93cd-6c6af5affb95	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bhaal-s-invoker:cast:s1,f:xs:XP:bhaal-s-invoker:cast:s1	-	-	-	8c0bd19283bb	-	2524fc68305a	-	-	2026-11-24	xproof
 92512acd-bf1e-4133-93cd-6c6af5affb95	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:bhaal-s-invoker:f0a0:s1,f:xs:XP:bhaal-s-invoker:f0a0:s1	-	-	-	8c0bd19283bb	-	2524fc68305a	-	-	2026-11-24	xproof
 925775c6-b6d2-4793-a363-bd5aca871aa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foxfire-oak:cast:s1,f:xs:XP:foxfire-oak:cast:s1	-	-	-	8a1b1a193ec0	-	0d8b43ffbcc1	-	-	2026-11-24	xproof
-925775c6-b6d2-4793-a363-bd5aca871aa8	f0/a0	NULL	owed	refused:steps-needed:cost:RG	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+925775c6-b6d2-4793-a363-bd5aca871aa8	f0/a0	NULL	owed	refused:steps-needed:cost:RG	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9259e918-ace5-4f13-9035-d8bc8c820d25	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:march-from-the-black-gate:cast:s1,f:xs:XP:march-from-the-black-gate:cast:s1	-	-	-	ae86f6029288	-	fb82c4144069	-	-	2026-11-24	xproof
 9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:march-from-the-black-gate:cast:s1,f:xs:XP:march-from-the-black-gate:cast:s1	-	-	-	ae86f6029288	-	fb82c4144069	-	-	2026-11-24	xproof
 9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -192,10 +192,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92cdcafc-ffeb-436d-b2bd-d6ad895d0e08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-raptor:f0t0:s1,f:xs:XP:pit-raptor:f0t0:s2	-	-	-	23c4009444b0	-	d0fad653bc53	-	-	2026-11-25	xproof
 92cdcafc-ffeb-436d-b2bd-d6ad895d0e08	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:pit-raptor:f0t0:s1,f:xs:XP:pit-raptor:f0t0:s2	-	-	-	23c4009444b0	-	d0fad653bc53	-	-	2026-11-25	xproof
 92ce3e30-dde3-43bb-a3d6-ccd91ff18bc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92cfba68-12f6-4f97-9187-0f6a39656a0f	cast	cast-resolve	agreed	-	X	scen	1	0	The Soul Stone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92cfba68-12f6-4f97-9187-0f6a39656a0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Soul Stone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+92cfba68-12f6-4f97-9187-0f6a39656a0f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:the-soul-stone:cast:s1,f:xs:XP:the-soul-stone:cast:s1	-	-	-	23c4009444b0	-	aae449a2a96e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+92cfba68-12f6-4f97-9187-0f6a39656a0f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:the-soul-stone:f0t0:s1,f:xs:XP:the-soul-stone:f0t0:s1	-	-	-	23c4009444b0	-	aae449a2a96e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92cfba68-12f6-4f97-9187-0f6a39656a0f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	The Soul Stone/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92cfba68-12f6-4f97-9187-0f6a39656a0f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Soul Stone/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+92cfba68-12f6-4f97-9187-0f6a39656a0f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:the-soul-stone:f0t0:s1,f:xs:XP:the-soul-stone:f0t0:s1	-	-	-	23c4009444b0	-	aae449a2a96e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92d17a26-bf73-4b62-b826-4cbe913d5c5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodcloaker:cast:s1,f:xs:XP:woodcloaker:cast:s1	-	-	-	8c0bd19283bb	-	b80380026514	-	-	2026-11-24	xproof
 92d17a26-bf73-4b62-b826-4cbe913d5c5e	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 92d24b75-419b-4068-89c1-db9945f74972	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furtive-courier:cast:s1,f:xs:XP:furtive-courier:cast:s1	-	-	-	3aa6ded33acb	-	712d53bc5890	-	-	2026-11-25	xproof

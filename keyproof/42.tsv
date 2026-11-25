@@ -80,9 +80,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 427bf4eb-3dfd-4747-be92-4a4a3d96a228	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 427bf4eb-3dfd-4747-be92-4a4a3d96a228	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 427f8ef9-12b3-4fa0-b303-28153566b6dc	cast	cast-resolve	agreed	-	X	scen	1	0	Sokka, Lateral Strategist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-427f8ef9-12b3-4fa0-b303-28153566b6dc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sokka, Lateral Strategist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-427f8ef9-12b3-4fa0-b303-28153566b6dc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sokka, Lateral Strategist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-427f8ef9-12b3-4fa0-b303-28153566b6dc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sokka, Lateral Strategist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+427f8ef9-12b3-4fa0-b303-28153566b6dc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sokka-lateral-strategist:combat0.attack:s1,f:xs:XP:sokka-lateral-strategist:combat0.attack:s1	-	-	-	23c4009444b0	-	979d02835f50	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+427f8ef9-12b3-4fa0-b303-28153566b6dc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sokka-lateral-strategist:combat0.block:s1,f:xs:XP:sokka-lateral-strategist:combat0.block:s1	-	-	-	23c4009444b0	-	979d02835f50	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+427f8ef9-12b3-4fa0-b303-28153566b6dc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sokka-lateral-strategist:f0t0:s1,f:xs:XP:sokka-lateral-strategist:f0t0:s1	-	-	-	23c4009444b0	-	979d02835f50	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4280191f-e2cb-4cee-a3b4-660b3efd62e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4281a153-665b-44cf-bcff-9cf88c14c2b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4284ff9f-4085-4874-abc7-95467cb759a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shore Lurker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:shore-lurker:f0t0:s2,f:xs:XP:shore-lurker:f0t0:s2	-	-	-	267e485f6204	-	8c1c7038c684	-	-	2026-11-24	xproof
 4289f2d4-3db2-4dd1-9c18-af3f78309844	cast	cast-resolve	agreed	-	X	scen	1	0	Earth Kingdom Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earth Kingdom Soldier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earth Kingdom Soldier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-soldier:combat0.attack:s1,f:xs:XP:earth-kingdom-soldier:combat0.attack:s1	-	-	-	23c4009444b0	-	6dd5c7225c32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-soldier:combat0.block:s1,f:xs:XP:earth-kingdom-soldier:combat0.block:s1	-	-	-	23c4009444b0	-	6dd5c7225c32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4289f2d4-3db2-4dd1-9c18-af3f78309844	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 428c18aa-b195-4cf2-a1a9-09723b26eb0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 428cc1cb-a491-4cc4-9436-28ee8acc37d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42bc33dd-3bba-462d-b272-2e8bd58c649e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bc33dd-3bba-462d-b272-2e8bd58c649e	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bf9435-02e6-428f-a93c-fe4652deb4fc	cast	cast-resolve	agreed	-	FX	scen	2	0	Equilibrium Adept/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 42bf9435-02e6-428f-a93c-fe4652deb4fc	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

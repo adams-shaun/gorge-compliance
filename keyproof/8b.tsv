@@ -32,10 +32,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b1fc306-0d8f-4edb-b197-2e99f10c599e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boing:cast:s1,f:xs:XP:boing:cast:s1	-	-	-	23c4009444b0	-	a1e44c444b8d	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
-8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	cast	cast-resolve	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandman-shifting-scoundrel:cast:s1,f:xs:XP:sandman-shifting-scoundrel:cast:s1	-	-	-	23c4009444b0	-	f4350bf766b0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sandman-shifting-scoundrel:f0a0:s1,f:xs:XP:sandman-shifting-scoundrel:f0a0:s1	-	-	-	23c4009444b0	-	f4350bf766b0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b205480-b1fb-490c-b1c9-cf5cc3c5acdb	static#0.1	static#0.1	agreed	-	X	scen	1	0	Sandman, Shifting Scoundrel/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b20d6f4-6322-4435-92d5-acaae74774f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:smelted-chargebug:f0t1:s1,f:xs:XP:smelted-chargebug:f0t1:s1	-	-	-	ae86f6029288	-	5dc4306dd496	-	-	2026-11-24	xproof
 8bc7c769-33e0-4482-95fc-b344b772e174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bca3213-d8e1-4915-bd9a-9a291cdec1cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bca3213-d8e1-4915-bd9a-9a291cdec1cd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+8bca3213-d8e1-4915-bd9a-9a291cdec1cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hagra-crocodile:f0t0:s1,f:xs:XP:hagra-crocodile:f0t0:s1	-	-	-	23c4009444b0	-	97b73d372455	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8bca5627-27c2-4d10-85c5-2451daa94c5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-sleuth:f0t0:s1,f:xs:XP:woodland-sleuth:f0t0:s1	-	-	-	3aa6ded33acb	-	9fbdcb89c2ad	-	-	2026-11-25	xproof
 8bca5627-27c2-4d10-85c5-2451daa94c5d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodland-sleuth:f0t0:s1,f:xs:XP:woodland-sleuth:f0t0:s1	-	-	-	3aa6ded33acb	-	9fbdcb89c2ad	-	-	2026-11-25	xproof
 8bcb0f45-902d-41d6-a10c-60bc27befd30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:putrid-cyclops:f0t0:s1,f:xs:XP:putrid-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	672b8e30c59c	-	-	2026-11-24	xproof

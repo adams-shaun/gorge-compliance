@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/a0	Pump	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	56e45d132dce	-	-	2026-11-25	xproof
 227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	56e45d132dce	-	-	2026-11-25	xproof
 227f95ba-65b1-4399-8b12-39f8b1327d62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-227f95ba-65b1-4399-8b12-39f8b1327d62	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+227f95ba-65b1-4399-8b12-39f8b1327d62	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:intimidator-initiate:f0t0:s1,f:xs:XP:intimidator-initiate:f0t0:s1	-	-	-	23c4009444b0	-	7afd58711d0a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 227fb13b-0a07-4937-9048-7cf02efbc8e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 227fb13b-0a07-4937-9048-7cf02efbc8e3	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2281ab3f-fad7-4b42-9621-5c35fec4c0f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,8 +143,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22d059fc-4e47-44b5-9e21-4a56f1dff6a7	cast	cast-resolve	agreed	-	FX	scen	2	0	Explosive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 22d059fc-4e47-44b5-9e21-4a56f1dff6a7	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22d0a848-2126-48f0-9050-38daaf93b1d0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Agna Qel'a/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-22d0a848-2126-48f0-9050-38daaf93b1d0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Agna Qel'a/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-22d0a848-2126-48f0-9050-38daaf93b1d0	land	play-land	agreed	-	X	scen	1	0	Agna Qel'a/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+22d0a848-2126-48f0-9050-38daaf93b1d0	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:agna-qel-a:f0a1:s1,f:xs:XP:agna-qel-a:f0a1:s1	-	-	-	23c4009444b0	-	f1395fe3431f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+22d0a848-2126-48f0-9050-38daaf93b1d0	land	land	agreed	-	FX	start	2	0	x:xs:XP:agna-qel-a:land:s1,f:xs:XP:agna-qel-a:land:s1	-	-	-	23c4009444b0	-	f1395fe3431f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 22d57bc8-e473-47c5-8e48-c0fb98e66948	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22d57bc8-e473-47c5-8e48-c0fb98e66948	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 22d7048e-d538-4fd3-9fb3-2e99e74875fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

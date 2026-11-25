@@ -92,9 +92,9 @@ ea734863-5793-49d6-b10e-109432aec0a3	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Arti
 ea734863-5793-49d6-b10e-109432aec0a3	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:artist-s-talent:f0t0:s1,f:xs:XP:artist-s-talent:f0t0:s1	-	-	-	3aa6ded33acb	-	ab89805dc2d6	-	-	2026-11-25	xproof
 ea734863-5793-49d6-b10e-109432aec0a3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Artist's Talent/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ea74940f-01de-4804-92ed-b273fddf6d62	cast	cast-resolve	agreed	-	FX	scen	2	0	Teo, Spirited Glider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ea74940f-01de-4804-92ed-b273fddf6d62	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Teo, Spirited Glider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ea74940f-01de-4804-92ed-b273fddf6d62	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Teo, Spirited Glider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ea74940f-01de-4804-92ed-b273fddf6d62	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Teo, Spirited Glider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ea74940f-01de-4804-92ed-b273fddf6d62	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:teo-spirited-glider:combat0.attack:s1,f:xs:XP:teo-spirited-glider:combat0.attack:s1	-	-	-	23c4009444b0	-	63688afbf5ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ea74940f-01de-4804-92ed-b273fddf6d62	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:teo-spirited-glider:combat0.block:s1,f:xs:XP:teo-spirited-glider:combat0.block:s1	-	-	-	23c4009444b0	-	63688afbf5ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ea74940f-01de-4804-92ed-b273fddf6d62	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:teo-spirited-glider:combat0.attack:s1,f:xs:XP:teo-spirited-glider:combat0.attack:s1	-	-	-	23c4009444b0	-	63688afbf5ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ea750169-1f6f-40c2-96e9-55719e103a63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:throne-of-the-god-pharaoh:cast:s1,f:xs:XP:throne-of-the-god-pharaoh:cast:s1	-	-	-	d864b561c9cb	-	7480a787301d	-	-	2026-11-24	xproof
 ea750169-1f6f-40c2-96e9-55719e103a63	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:throne-of-the-god-pharaoh:cast:s1,f:xs:XP:throne-of-the-god-pharaoh:cast:s1	-	-	-	d864b561c9cb	-	7480a787301d	-	-	2026-11-24	xproof
 ea79d4ee-c7b5-4687-9e33-22f98e46e8ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ ea86abfa-6cab-4ef0-8463-34136fc25b59	f0/t0	NULL	owed	refused:steps-needed:token	
 ea871b01-ebaf-4987-a2bf-949cdd367ad1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea871b01-ebaf-4987-a2bf-949cdd367ad1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea8acbd4-1ace-4634-9e88-7f91401d2b30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea8acbd4-1ace-4634-9e88-7f91401d2b30	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+ea8acbd4-1ace-4634-9e88-7f91401d2b30	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:needle-specter:f0t0:s1,f:xs:XP:needle-specter:f0t0:s1	-	-	-	23c4009444b0	-	72249308b85b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ea8c4a7d-f7fb-4620-b3a4-ae8280dd60d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magefire-wings:cast:s1,f:xs:XP:magefire-wings:cast:s1	-	-	-	8a1b1a193ec0	-	5b762bffbd78	-	-	2026-11-24	xproof
 ea9031de-6169-4b1c-9390-7fdaf876c7cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea9031de-6169-4b1c-9390-7fdaf876c7cd	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP:chaos-channeler:f0t0:s1,f:xs:XP:chaos-channeler:f0t0:s1	-	-	-	d864b561c9cb	-	5f56d14a900e	-	-	2026-11-24	xproof
@@ -167,14 +167,14 @@ eab096fd-a7e2-4b96-99ec-1039d3a552f3	f0/t0	NULL	owed	refused:no-generator:trigge
 eab0d8b9-c66f-402f-b259-f46f15cefd78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eab0d8b9-c66f-402f-b259-f46f15cefd78	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eab0d8b9-c66f-402f-b259-f46f15cefd78	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eab0d8b9-c66f-402f-b259-f46f15cefd78	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+eab0d8b9-c66f-402f-b259-f46f15cefd78	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:elspeth-knight-errant:f0a2:s1,f:xs:XP:elspeth-knight-errant:f0a2:s1	-	-	-	23c4009444b0	-	1fbff8c6908c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 eab27405-f590-40b7-ad7c-0e6c52410c0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilt-leaf-seer:cast:s1,f:xs:XP:gilt-leaf-seer:cast:s1	-	-	-	d864b561c9cb	-	f0ecca27f662	-	-	2026-11-24	xproof
 eab27405-f590-40b7-ad7c-0e6c52410c0a	f0/a0	RearrangeTopOfLibrary	agreed	-	FX	start	2	0	x:xs:XP:gilt-leaf-seer:f0a0:s1,f:xs:XP:gilt-leaf-seer:f0a0:s1	-	-	-	d864b561c9cb	-	f0ecca27f662	-	-	2026-11-24	xproof
 eab391d2-ccdd-401c-8f10-69aac4619213	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eab391d2-ccdd-401c-8f10-69aac4619213	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 eab5eb29-bed6-456b-8929-5b9b820aa5a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eab5eb29-bed6-456b-8929-5b9b820aa5a3	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-eab5eb29-bed6-456b-8929-5b9b820aa5a3	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+eab5eb29-bed6-456b-8929-5b9b820aa5a3	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:voracious-hatchling:f0t0:s1,f:xs:XP:voracious-hatchling:f0t0:s1	-	-	-	23c4009444b0	-	1910c4ed6188	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+eab5eb29-bed6-456b-8929-5b9b820aa5a3	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:voracious-hatchling:f0t1:s1,f:xs:XP:voracious-hatchling:f0t1:s1	-	-	-	23c4009444b0	-	1910c4ed6188	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 eab5eef8-d180-4b08-a770-6b3a1df03745	cast	cast-resolve	agreed	-	X	scen	1	0	Nibelheim Aflame/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eab70fff-6a9f-4f9f-89a2-b6910c199e46	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eab70fff-6a9f-4f9f-89a2-b6910c199e46	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -205,7 +205,7 @@ eacfe895-5106-437c-b8c1-2ff03c107744	static#0.0	static#0.0	agreed	-	X	scen	1	0	M
 ead0820e-fc6b-4ab2-9110-048d6d53985d	cast	cast-resolve	agreed	-	FX	scen	2	0	Panther Pounce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ead1accc-b90e-424a-a55f-2f4771726ce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-looter:f0t0:s1,f:xs:XP:shipwreck-looter:f0t0:s1	-	-	-	3aa6ded33acb	-	46d9a19c7f8b	-	-	2026-11-25	xproof
 ead1accc-b90e-424a-a55f-2f4771726ce1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-looter:f0t0:s1,f:xs:XP:shipwreck-looter:f0t0:s1	-	-	-	3aa6ded33acb	-	46d9a19c7f8b	-	-	2026-11-25	xproof
-ead1bcc4-6bf7-4ace-b705-e3095e6a716c	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cc17e60e97d1	-	-	2026-11-25	xproof
+ead1bcc4-6bf7-4ace-b705-e3095e6a716c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tectonic-fiend:cast:s1,f:xs:XP:tectonic-fiend:cast:s1	-	-	-	23c4009444b0	-	cc17e60e97d1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ead1bcc4-6bf7-4ace-b705-e3095e6a716c	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cc17e60e97d1	-	-	2026-11-25	xproof
 ead1ee6a-e0da-46d5-89e8-31e8c0270bc2	cast	counter-spell	agreed	-	X	scen	1	0	No More Lies/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ead2aee3-4f95-4ff1-8be9-ea9619e2386e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-trick-shot:f0t0:s1,f:xs:XP:hawkeye-trick-shot:f0t0:s1	-	-	-	8c0bd19283bb	-	f35428cbbef6	-	-	2026-11-24	xproof

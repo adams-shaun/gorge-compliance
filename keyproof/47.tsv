@@ -65,9 +65,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4770ad4a-a346-4108-8f61-a077155d4bd1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:squire-s-devotion:f0t0:s1,f:xs:XP:squire-s-devotion:f0t0:s1	-	-	-	3aa6ded33acb	-	1336d6c71a56	-	-	2026-11-25	xproof
 4770ad4a-a346-4108-8f61-a077155d4bd1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:squire-s-devotion:f0t0:s1,f:xs:XP:squire-s-devotion:f0t0:s1	-	-	-	3aa6ded33acb	-	1336d6c71a56	-	-	2026-11-25	xproof
 4770ec88-bc7b-457e-8f67-ae46e2cf4caa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4771a871-576e-4a14-92f0-b5b41c63d615	cast	cast-resolve	agreed	-	X	scen	1	0	Pirate Peddlers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4771a871-576e-4a14-92f0-b5b41c63d615	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pirate Peddlers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4771a871-576e-4a14-92f0-b5b41c63d615	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pirate Peddlers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4771a871-576e-4a14-92f0-b5b41c63d615	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pirate-peddlers:cast:s1,f:xs:XP:pirate-peddlers:cast:s1	-	-	-	23c4009444b0	-	6a5cddcb6431	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4771a871-576e-4a14-92f0-b5b41c63d615	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pirate-peddlers:combat0.attack:s1,f:xs:XP:pirate-peddlers:combat0.attack:s1	-	-	-	23c4009444b0	-	6a5cddcb6431	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4771a871-576e-4a14-92f0-b5b41c63d615	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pirate-peddlers:combat0.block:s1,f:xs:XP:pirate-peddlers:combat0.block:s1	-	-	-	23c4009444b0	-	6a5cddcb6431	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4771a871-576e-4a14-92f0-b5b41c63d615	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pirate Peddlers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4771f50c-0844-4d3a-90ea-406d65ebccfa	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cloudchaser-kestrel:cast:s1,f:xs:XP:cloudchaser-kestrel:cast:s1	-	-	-	0984227a67dd	-	a1f33dd65fa5	-	-	2026-11-24	xproof
 4771f50c-0844-4d3a-90ea-406d65ebccfa	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:cloudchaser-kestrel:f0a0:s1,f:xs:XP:cloudchaser-kestrel:f0a0:s1	-	-	-	d864b561c9cb	-	a1f33dd65fa5	-	-	2026-11-24	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47bce63e-8edb-43c1-b273-4b86da5c616b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lyse-hext:cast:s1,f:xs:XP:lyse-hext:cast:s1	-	-	-	8c0bd19283bb	-	166efa94c4db	-	-	2026-11-24	xproof
 47bce63e-8edb-43c1-b273-4b86da5c616b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:cast:s1,f:xs:XP:cinder-pyromancer:cast:s1	-	-	-	8a1b1a193ec0	-	5bb66f26b436	-	-	2026-11-24	xproof
-47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:f0a0:s1,f:xs:XP:cinder-pyromancer:f0a0:s1	-	-	-	8a1b1a193ec0	-	5bb66f26b436	-	-	2026-11-24	xproof
-47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:f0t0:s1,f:xs:XP:cinder-pyromancer:f0t0:s1	-	-	-	23c4009444b0	-	5bb66f26b436	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:f0t0:s1,f:xs:XP:cinder-pyromancer:f0t0:s1	-	-	-	23c4009444b0	-	5bb66f26b436	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 47c12d2f-b458-4848-9a01-0fc37ef3d942	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47c67df1-52f5-459f-b83e-6b971be9b294	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47c67df1-52f5-459f-b83e-6b971be9b294	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47d16c11-3033-44f3-9a12-2daf3453cc5b	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:grasping-dunes:f0a1:s1,f:xs:XP:grasping-dunes:f0a1:s1	-	-	-	3aa6ded33acb	-	c21f94428e3f	-	-	2026-11-25	xproof
 47d16c11-3033-44f3-9a12-2daf3453cc5b	land	land	agreed	-	FX	start	2	0	x:xs:XP:grasping-dunes:land:s1,f:xs:XP:grasping-dunes:land:s1	-	-	-	d864b561c9cb	-	c21f94428e3f	-	-	2026-11-24	xproof
 47d4da1e-b1a2-4a23-9b96-c85d5d20e3ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flameborn-hellion:cast:s1,f:xs:XP:flameborn-hellion:cast:s1	-	-	-	d864b561c9cb	-	145589488a8b	-	-	2026-11-24	xproof
-47d52cd7-d72f-455f-aad3-70f08d54691f	cast	cast-resolve	agreed	-	X	scen	1	0	Risky Research/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+47d52cd7-d72f-455f-aad3-70f08d54691f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:risky-research:cast:s1,f:xs:XP:risky-research:cast:s1	-	-	-	23c4009444b0	-	780ebd769874	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 47dd7ef4-7645-4878-ab91-261aa8fcf834	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47e191f7-6314-4875-b5ee-57e5daf089c4	cast	cast	agreed	-	F	start	2	0	f:xs:XP:dragon-s-approach:cast:s1	-	-	-	d864b561c9cb	-	b19bf8491f21	-	-	2026-11-24	xproof
 47e33aa1-2f54-471c-a484-de13bcd2dceb	cast	cast-resolve	agreed	-	X	scen	1	0	Screeching Soulbreaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47f71408-5509-4651-9121-fd0867adae00	f0/a1	Investigate	agreed	-	FX	start	2	0	x:xs:XP:kitchen:f0a1:s1,f:xs:XP:kitchen:f0a1:s1	-	-	-	8c0bd19283bb	-	a0d189f514a7	-	-	2026-11-24	xproof
 47f71408-5509-4651-9121-fd0867adae00	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47f75e25-8a52-4452-a3a8-bf1bd00942d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warren-instigator:cast:s1,f:xs:XP:warren-instigator:cast:s1	-	-	-	8a1b1a193ec0	-	4918eb63bed9	-	-	2026-11-24	xproof
-47f75e25-8a52-4452-a3a8-bf1bd00942d1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+47f75e25-8a52-4452-a3a8-bf1bd00942d1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-arts:f0t0:s1,f:xs:XP:patron-of-the-arts:f0t0:s1	-	-	-	8c0bd19283bb	-	b1ea2b193839	-	-	2026-11-24	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-arts:f0t0:s1,f:xs:XP:patron-of-the-arts:f0t0:s1	-	-	-	8c0bd19283bb	-	b1ea2b193839	-	-	2026-11-24	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-arts:f0t1:s1,f:xs:XP:patron-of-the-arts:f0t1:s1	-	-	-	8c0bd19283bb	-	b1ea2b193839	-	-	2026-11-24	xproof

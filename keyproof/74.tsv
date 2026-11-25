@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 741dc9c3-1998-4f4c-9c07-6f34fea2bae4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rulik-mons-warren-chief:cast:s1,f:xs:XP:rulik-mons-warren-chief:cast:s1	-	-	-	ae86f6029288	-	ca982358e672	-	-	2026-11-24	xproof
 741dc9c3-1998-4f4c-9c07-6f34fea2bae4	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:rulik-mons-warren-chief:f0t0:s1	-	-	-	ae86f6029288	-	ca982358e672	-	-	2026-11-24	xproof
 741e4f32-0587-40fa-a73d-5bcf66b52348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-741e4f32-0587-40fa-a73d-5bcf66b52348	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+741e4f32-0587-40fa-a73d-5bcf66b52348	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7421b711-81a4-4042-b024-f55bf9ff203f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74224cce-c2ce-4456-8a97-3abbbb199385	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rowdy-snowballers:f0t0:s2,f:xs:XP:rowdy-snowballers:f0t0:s2	-	-	-	267e485f6204	-	11962d9e2beb	-	-	2026-11-24	xproof
 74224cce-c2ce-4456-8a97-3abbbb199385	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rowdy-snowballers:f0t0:s2,f:xs:XP:rowdy-snowballers:f0t0:s2	-	-	-	267e485f6204	-	11962d9e2beb	-	-	2026-11-24	xproof
@@ -84,10 +84,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 746e494e-fdc4-415e-8a82-d35e11ebeccb	cast	cast-resolve	agreed	-	X	scen	1	0	Zero, Incorporeal Sensate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 746e494e-fdc4-415e-8a82-d35e11ebeccb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7471e445-4655-4336-9769-3debd197b77c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7472af8e-2e93-43b2-bc32-a3741f6d7502	cast	cast-resolve	agreed	-	X	scen	1	0	Ozai, the Phoenix King/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7472af8e-2e93-43b2-bc32-a3741f6d7502	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ozai, the Phoenix King/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7472af8e-2e93-43b2-bc32-a3741f6d7502	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ozai, the Phoenix King/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7472af8e-2e93-43b2-bc32-a3741f6d7502	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ozai, the Phoenix King/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7472af8e-2e93-43b2-bc32-a3741f6d7502	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ozai-the-phoenix-king:cast:s1,f:xs:XP:ozai-the-phoenix-king:cast:s1	-	-	-	23c4009444b0	-	ffd48069bda5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7472af8e-2e93-43b2-bc32-a3741f6d7502	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ozai-the-phoenix-king:combat0.attack:s1,f:xs:XP:ozai-the-phoenix-king:combat0.attack:s1	-	-	-	23c4009444b0	-	ffd48069bda5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7472af8e-2e93-43b2-bc32-a3741f6d7502	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ozai-the-phoenix-king:combat0.block:s1,f:xs:XP:ozai-the-phoenix-king:combat0.block:s1	-	-	-	23c4009444b0	-	ffd48069bda5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7472af8e-2e93-43b2-bc32-a3741f6d7502	f0/t0	Attacks/Firebending	agreed	-	FX	start	6	0	x:xs:XP:ozai-the-phoenix-king:cast:s1,f:xs:XP:ozai-the-phoenix-king:cast:s1	-	-	-	23c4009444b0	-	ffd48069bda5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7472af8e-2e93-43b2-bc32-a3741f6d7502	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ozai, the Phoenix King/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7476a14a-611e-4f81-b603-fd600e88568f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thornado:cast:s1,f:xs:XP:thornado:cast:s1	-	-	-	d864b561c9cb	-	e732fdb139e9	-	-	2026-11-24	xproof
 7476a14a-611e-4f81-b603-fd600e88568f	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:thornado:cast:s2,f:xs:XP:thornado:cast:s2	-	-	-	d864b561c9cb	-	e732fdb139e9	-	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 748729bf-bfa0-4cbf-b643-ed5d7d007081	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eddytrail-hawk:f0t0:s1,f:xs:XP:eddytrail-hawk:f0t0:s1	-	-	-	d864b561c9cb	-	28a423b4822d	-	-	2026-11-24	xproof
 748729bf-bfa0-4cbf-b643-ed5d7d007081	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eddytrail-hawk:f0t0:s1,f:xs:XP:eddytrail-hawk:f0t0:s1	-	-	-	d864b561c9cb	-	28a423b4822d	-	-	2026-11-24	xproof
 748729bf-bfa0-4cbf-b643-ed5d7d007081	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:eddytrail-hawk:f0t1:s1,f:xs:XP:eddytrail-hawk:f0t1:s1	-	-	-	d864b561c9cb	-	28a423b4822d	-	-	2026-11-24	xproof
-7488ce54-37c6-475c-b327-59f52f2b1424	cast	cast-resolve	agreed	-	X	scen	1	0	Haru, Hidden Talent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7488ce54-37c6-475c-b327-59f52f2b1424	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Haru, Hidden Talent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7488ce54-37c6-475c-b327-59f52f2b1424	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haru-hidden-talent:cast:s1,f:xs:XP:haru-hidden-talent:cast:s1	-	-	-	23c4009444b0	-	7ee5be785912	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7488ce54-37c6-475c-b327-59f52f2b1424	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:great-divide-guide:cast:s1,f:xs:XP:great-divide-guide:cast:s1	-	-	-	23c4009444b0	-	7ee5be785912	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 748c2723-dc59-4aa7-9667-d4679448c8b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 748c2723-dc59-4aa7-9667-d4679448c8b6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 748d5353-b66c-4d7a-8c55-0d28fefb1e2a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	e7b8e3fdd349	-	-	2026-11-25	xproof

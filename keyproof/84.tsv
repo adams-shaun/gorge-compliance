@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8408f99a-aa3c-40d0-9e26-dd527343e62b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torch-drake:cast:s1,f:xs:XP:torch-drake:cast:s1	-	-	-	77494c1ce129	-	c5441aab3038	-	-	2026-11-24	xproof
 8408f99a-aa3c-40d0-9e26-dd527343e62b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:torch-drake:f0a0:s1,f:xs:XP:torch-drake:f0a0:s1	-	-	-	23c4009444b0	-	c5441aab3038	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 840d1002-abf4-4d05-945a-05c3fe9a2ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geyser-glider:cast:s1,f:xs:XP:geyser-glider:cast:s1	-	-	-	8a1b1a193ec0	-	c635b62538e6	-	-	2026-11-24	xproof
-840d1002-abf4-4d05-945a-05c3fe9a2ebd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+840d1002-abf4-4d05-945a-05c3fe9a2ebd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:geyser-glider:f0t0:s1,f:xs:XP:geyser-glider:f0t0:s1	-	-	-	23c4009444b0	-	c635b62538e6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 840de40b-590e-4bf0-8d16-22b0eff61202	cast	cast-resolve	agreed	-	X	scen	1	0	Kíli the Resourceful/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 840de40b-590e-4bf0-8d16-22b0eff61202	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kíli the Resourceful/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 840de40b-590e-4bf0-8d16-22b0eff61202	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kíli the Resourceful/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 849c97e4-df15-4ecb-bdf8-283bb497d90c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guadosalam, Farplane Gateway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 849c97e4-df15-4ecb-bdf8-283bb497d90c	land	land	agreed	-	FX	start	2	0	x:xs:XP:guadosalam-farplane-gateway:land:s1,f:xs:XP:guadosalam-farplane-gateway:land:s1	-	-	-	23c4009444b0	-	77af579cef07	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 849e54f9-7662-4186-859c-e4f52afbccac	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kyoshi-battle-fan:f0t0:s2,f:xs:XP:kyoshi-battle-fan:f0t0:s2	-	-	-	267e485f6204	-	76512736fccb	-	-	2026-11-24	xproof
-849e54f9-7662-4186-859c-e4f52afbccac	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kyoshi Battle Fan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+849e54f9-7662-4186-859c-e4f52afbccac	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:kyoshi-battle-fan:f0a0:s1,f:xs:XP:kyoshi-battle-fan:f0a0:s1	-	-	-	23c4009444b0	-	76512736fccb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 849e54f9-7662-4186-859c-e4f52afbccac	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:kyoshi-battle-fan:f0t0:s2,f:xs:XP:kyoshi-battle-fan:f0t0:s2	-	-	-	267e485f6204	-	76512736fccb	-	-	2026-11-24	xproof
 849e54f9-7662-4186-859c-e4f52afbccac	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kyoshi Battle Fan/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84a18b1f-5f9f-4e2b-87cd-c437bdf4d278	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:barkhide-mauler:cast:s2,f:xs:XP:barkhide-mauler:cast:s2	-	-	-	fc71ca68c5ac	-	6c01a5c9e6a7	-	-	2026-11-24	xproof

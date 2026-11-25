@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e0fea29-0fd5-4535-b1df-cd66e50662cc	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 5e11386f-4667-47f7-b280-eabd927e4a46	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:waterspout-warden:cast:s1,f:xs:XP:waterspout-warden:cast:s1	-	-	-	23c4009444b0	-	947611b68d5a	-	-	2026-11-25	xproof
 5e11386f-4667-47f7-b280-eabd927e4a46	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:waterspout-warden:f0t0:s1,f:xs:XP:waterspout-warden:f0t0:s1	-	-	-	23c4009444b0	-	947611b68d5a	-	-	2026-11-25	xproof
-5e113f0f-4469-4276-82e1-0a804f3de444	cast	cast-resolve	agreed	-	X	scen	1	0	Earthbending Lesson/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5e113f0f-4469-4276-82e1-0a804f3de444	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:earthbending-lesson:cast:s1,f:xs:XP:earthbending-lesson:cast:s1	-	-	-	23c4009444b0	-	08825fc50d32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e166b42-252e-4f34-9610-dcddc04a62ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e166b42-252e-4f34-9610-dcddc04a62ff	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:auron-venerated-guardian:f0t0:s1,f:xs:XP:auron-venerated-guardian:f0t0:s1	-	-	-	8c0bd19283bb	-	bf8a3b2af1c3	-	-	2026-11-24	xproof
 5e186931-992b-491c-bffc-6877a613d5c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e674793-6586-44a4-b936-a71203c5850a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e674793-6586-44a4-b936-a71203c5850a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5e696f9a-425c-470a-870e-10d2ba3bb27d	cast	cast-resolve	agreed	-	X	scen	1	0	D-7 Battle Cruiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5e6faa98-cf55-430d-87ce-8085f68aa20a	cast	cast-resolve	agreed	-	X	scen	1	0	Price of Freedom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5e6faa98-cf55-430d-87ce-8085f68aa20a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:price-of-freedom:cast:s1,f:xs:XP:price-of-freedom:cast:s1	-	-	-	23c4009444b0	-	38c54c179c07	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e715875-28e0-44b4-af25-f6bb8ddec823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ral-s-outburst:cast:s1,f:xs:XP:ral-s-outburst:cast:s1	-	-	-	d864b561c9cb	-	dd3215427d3e	-	-	2026-11-24	xproof
 5e73c8d2-5cad-4201-b9ef-32be82797e3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e73c8d2-5cad-4201-b9ef-32be82797e3b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ebe8de1-aa3d-410d-b43d-1685259c7a97	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Chief Warg/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ebe8de1-aa3d-410d-b43d-1685259c7a97	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Chief Warg/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ebe8de1-aa3d-410d-b43d-1685259c7a97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Chief Warg/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ebfa3f5-f80a-4845-bba7-75c4ddb88682	cast	cast-resolve	agreed	-	X	scen	1	0	Fire Nation Cadets/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ebfa3f5-f80a-4845-bba7-75c4ddb88682	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fire Nation Cadets/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5ebfa3f5-f80a-4845-bba7-75c4ddb88682	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-cadets:cast:s1,f:xs:XP:fire-nation-cadets:cast:s1	-	-	-	23c4009444b0	-	9440b4509b4d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5ebfa3f5-f80a-4845-bba7-75c4ddb88682	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-cadets:f0a0:s1,f:xs:XP:fire-nation-cadets:f0a0:s1	-	-	-	23c4009444b0	-	9440b4509b4d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5ebfa3f5-f80a-4845-bba7-75c4ddb88682	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fire Nation Cadets/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ec0e58c-99b5-4ebf-8053-f59c30b86ef7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ec0e58c-99b5-4ebf-8053-f59c30b86ef7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,10 +191,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5eeb1495-4f0c-4920-8cd6-9c9257327e33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ef498fa-31d5-4eca-873d-6b2b1f7f9a3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tajuru-archer:f0t0:s1,f:xs:XP:tajuru-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	d0f973efd8b7	-	-	2026-11-24	xproof
 5ef498fa-31d5-4eca-873d-6b2b1f7f9a3c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tajuru-archer:f0t0:s1,f:xs:XP:tajuru-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	d0f973efd8b7	-	-	2026-11-24	xproof
-5ef8925c-5f43-49ca-83f0-e2ca8e655600	cast	cast-resolve	agreed	-	X	scen	1	0	Flying Octobot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ef8925c-5f43-49ca-83f0-e2ca8e655600	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Flying Octobot/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ef8925c-5f43-49ca-83f0-e2ca8e655600	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flying Octobot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ef8925c-5f43-49ca-83f0-e2ca8e655600	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flying Octobot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5ef8925c-5f43-49ca-83f0-e2ca8e655600	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flying-octobot:cast:s1,f:xs:XP:flying-octobot:cast:s1	-	-	-	23c4009444b0	-	2e7a1adfb4f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5ef8925c-5f43-49ca-83f0-e2ca8e655600	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:flying-octobot:combat0.attack:s1,f:xs:XP:flying-octobot:combat0.attack:s1	-	-	-	23c4009444b0	-	2e7a1adfb4f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5ef8925c-5f43-49ca-83f0-e2ca8e655600	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:flying-octobot:combat0.block:s1,f:xs:XP:flying-octobot:combat0.block:s1	-	-	-	23c4009444b0	-	2e7a1adfb4f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5ef8925c-5f43-49ca-83f0-e2ca8e655600	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flying-octobot:f0t0:s1,f:xs:XP:flying-octobot:f0t0:s1	-	-	-	23c4009444b0	-	2e7a1adfb4f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5efea57b-937d-46ac-999e-490316e0f820	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5efea57b-937d-46ac-999e-490316e0f820	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5eff8a06-e0d6-435a-a7c0-db9f9d98636a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

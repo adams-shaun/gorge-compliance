@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b97794a-3aaa-45a6-9cad-f1b768615b6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b97bf8e-d5c4-4eae-a453-73456e0461a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-the-empty-throne:f0t0:s1,f:xs:XP:sigil-of-the-empty-throne:f0t0:s1	-	-	-	23c4009444b0	-	fa94d6ee0778	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sita-varma-masked-racer:cast:s1,f:xs:XP:sita-varma-masked-racer:cast:s1	-	-	-	23c4009444b0	-	23efeae3f833	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sita Varma, Masked Racer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ba19659-461f-482c-b882-b4fca7d5d1f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bc0bd36-70be-4180-9fb3-b10ce054107b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc12623-3852-42f0-b458-5c67fe1b7a07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fork-in-the-road:cast:s1,f:xs:XP:fork-in-the-road:cast:s1	-	-	-	d864b561c9cb	-	3b640f6e8294	-	-	2026-11-24	xproof
 3bc13640-03f8-4b19-b0a4-7e7cb5271c0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34	cast	cast-resolve	agreed	-	X	scen	1	0	Bender's Waterskin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bender-s-waterskin:cast:s1,f:xs:XP:bender-s-waterskin:cast:s1	-	-	-	23c4009444b0	-	44755a14d9f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bender's Waterskin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bender's Waterskin/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bc47eae-cf6f-4b5e-96e1-94a4f307f474	cast	cast-resolve	agreed	-	FX	scen	2	0	Lost Days/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -235,7 +235,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3beed054-a099-4887-b1bd-39cf9e514e94	f0/t2	Attacks/Myriad	agreed	-	F	start	4	0	f:xs:XP:scurry-of-squirrels:f0t1:s1	-	-	-	8c0bd19283bb	-	4db3846875f9	-	-	2026-11-24	xproof
 3bf20e68-0e19-4242-bfba-a8a1bb244685	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghastly-conscription:cast:s1,f:xs:XP:ghastly-conscription:cast:s1	-	-	-	d864b561c9cb	-	3f6ffa2b0724	-	-	2026-11-24	xproof
 3bfa51dd-daed-473a-8377-7bb34a2c3371	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bfb3913-808d-444b-97c3-a90af3bc585b	cast	cast-resolve	agreed	-	X	scen	1	0	Earth Kingdom Protectors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3bfb3913-808d-444b-97c3-a90af3bc585b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earth Kingdom Protectors/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3bfb3913-808d-444b-97c3-a90af3bc585b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earth Kingdom Protectors/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3bfb3913-808d-444b-97c3-a90af3bc585b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Earth Kingdom Protectors/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3bfb3913-808d-444b-97c3-a90af3bc585b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-protectors:cast:s1,f:xs:XP:earth-kingdom-protectors:cast:s1	-	-	-	23c4009444b0	-	be95e2206f8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3bfb3913-808d-444b-97c3-a90af3bc585b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-protectors:combat0.attack:s1,f:xs:XP:earth-kingdom-protectors:combat0.attack:s1	-	-	-	23c4009444b0	-	be95e2206f8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3bfb3913-808d-444b-97c3-a90af3bc585b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-protectors:combat0.block:s1,f:xs:XP:earth-kingdom-protectors:combat0.block:s1	-	-	-	23c4009444b0	-	be95e2206f8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3bfb3913-808d-444b-97c3-a90af3bc585b	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:earth-kingdom-protectors:cast:s1,f:xs:XP:earth-kingdom-protectors:cast:s1	-	-	-	23c4009444b0	-	be95e2206f8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

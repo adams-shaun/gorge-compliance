@@ -197,9 +197,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ef8ebc9-4f95-42f8-86e6-85eff0b8f021	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2efb908f-d069-4041-930b-5c1ccec00db2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2efd6494-c5e1-41de-bc6e-8490ff046cd1	cast	cast-resolve	agreed	-	FX	scen	2	0	Spider-Man Noir/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2efd6494-c5e1-41de-bc6e-8490ff046cd1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Man Noir/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2efd6494-c5e1-41de-bc6e-8490ff046cd1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Man Noir/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2efd6494-c5e1-41de-bc6e-8490ff046cd1	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Spider-Man Noir/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2efd6494-c5e1-41de-bc6e-8490ff046cd1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spider-man-noir:combat0.attack:s1,f:xs:XP:spider-man-noir:combat0.attack:s1	-	-	-	23c4009444b0	-	3098501d9c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2efd6494-c5e1-41de-bc6e-8490ff046cd1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spider-man-noir:combat0.block:s1,f:xs:XP:spider-man-noir:combat0.block:s1	-	-	-	23c4009444b0	-	3098501d9c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2efd6494-c5e1-41de-bc6e-8490ff046cd1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spider-man-noir:combat0.attack:s1,f:xs:XP:spider-man-noir:combat0.attack:s1	-	-	-	23c4009444b0	-	3098501d9c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2efdfcae-c3ad-4c6b-8a60-45a203bd14c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2efdfcae-c3ad-4c6b-8a60-45a203bd14c6	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2efea460-c3e1-4578-a587-134e13bdf264	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runechanter-s-pike:cast:s1,f:xs:XP:runechanter-s-pike:cast:s1	-	-	-	d864b561c9cb	-	1f557059ae44	-	-	2026-11-24	xproof

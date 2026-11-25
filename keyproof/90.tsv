@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 90076bf5-aa9a-4a6e-9035-9aa97fd5561e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:luminarch-ascension:f0t0:s1,f:xs:XP:luminarch-ascension:f0t0:s1	-	-	-	23c4009444b0	-	6703bd1913b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 900ae045-0160-4e85-b283-e35399c2acec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bastion-inventor:cast:s1,f:xs:XP:bastion-inventor:cast:s1	-	-	-	d864b561c9cb	-	74e48665c8fb	-	-	2026-11-24	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magmakin-artillerist:cast:s1,f:xs:XP:magmakin-artillerist:cast:s1	-	-	-	23c4009444b0	-	cc1dc24bc20e	-	-	2026-11-25	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:magmakin-artillerist:f0a0:s1,f:xs:XP:magmakin-artillerist:f0a0:s1	-	-	-	23c4009444b0	-	cc1dc24bc20e	-	-	2026-11-25	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9061e2ae-7385-494a-a511-0b6531d1fe0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9061e2ae-7385-494a-a511-0b6531d1fe0e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+9061e2ae-7385-494a-a511-0b6531d1fe0e	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:manaplasm:f0t0:s1,f:xs:XP:manaplasm:f0t0:s1	-	-	-	23c4009444b0	-	6ce6ea144f81	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 906cba93-3dac-4720-a482-987cf1b4e786	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90767f52-fa6d-4ef3-ae54-d8e3881971c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foul-familiar:cast:s1,f:xs:XP:foul-familiar:cast:s1	-	-	-	ea3140b6974b	-	079fa235c78c	-	-	2026-11-24	xproof
 90767f52-fa6d-4ef3-ae54-d8e3881971c1	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:foul-familiar:f0a0:s1,f:xs:XP:foul-familiar:f0a0:s1	-	-	-	8c0bd19283bb	-	079fa235c78c	-	-	2026-11-24	xproof

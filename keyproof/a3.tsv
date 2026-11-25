@@ -6,7 +6,7 @@ a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Val
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Valor's Flagship/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Valor's Flagship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a30241b4-5e92-44cd-b19b-7d6d59e95ada	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a30241b4-5e92-44cd-b19b-7d6d59e95ada	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+a30241b4-5e92-44cd-b19b-7d6d59e95ada	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a30724f0-d174-408e-8baf-4bba3cbc45b5	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 a30724f0-d174-408e-8baf-4bba3cbc45b5	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:traumatic-visions:cast:s1,f:xs:XP:traumatic-visions:cast:s1	-	-	-	23b491658465	-	28bce9b67855	-	-	2026-11-25	xproof
 a30907c0-fbde-4fd3-a8c7-f304305fcea7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ a3925dfd-62b0-44ef-8545-7bee92cad5a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phy
 a3925dfd-62b0-44ef-8545-7bee92cad5a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-gargantua:f0t0:s1,f:xs:XP:phyrexian-gargantua:f0t0:s1	-	-	-	25696bf19d5b	-	bf95aa3befc2	-	-	2026-11-24	xproof
 a3947473-0f57-4937-bb1c-f20969144415	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:floodwater-dam:cast:s1,f:xs:XP:floodwater-dam:cast:s1	-	-	-	ea3140b6974b	-	3aff11bf6195	-	-	2026-11-24	xproof
 a3947473-0f57-4937-bb1c-f20969144415	f0/a0	Tap	agreed	-	F	start	1	0	f:xs:XP:floodwater-dam:f0a0:s2	-	-	-	ea3140b6974b	-	3aff11bf6195	-	-	2026-11-24	xproof
-a39c758d-82be-4d8c-bb3e-8ee8a6c6788b	cast	cast-resolve	agreed	-	X	scen	1	0	Pillar Launch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a39c758d-82be-4d8c-bb3e-8ee8a6c6788b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pillar-launch:cast:s1,f:xs:XP:pillar-launch:cast:s1	-	-	-	23c4009444b0	-	604717110798	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a39d541e-86c1-4595-a2e9-f107def5bbc6	cast	cast-resolve	agreed	-	X	scen	1	0	Funeral Room/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a39d541e-86c1-4595-a2e9-f107def5bbc6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Funeral Room/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a39d541e-86c1-4595-a2e9-f107def5bbc6	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Funeral Room/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -199,9 +199,9 @@ a3c1af66-63c8-41ec-a401-a3da1131dc67	f1/a0	NULL	owed	refused:no-generator:face	-
 a3c1af66-63c8-41ec-a401-a3da1131dc67	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 a3c35742-e306-49b6-b042-db4f685c6f86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3c35742-e306-49b6-b042-db4f685c6f86	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-a3c56e71-0de6-447a-a9b4-0971f56c2362	cast	cast-resolve	agreed	-	X	scen	1	0	Momo, Friendly Flier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a3c56e71-0de6-447a-a9b4-0971f56c2362	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Momo, Friendly Flier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a3c56e71-0de6-447a-a9b4-0971f56c2362	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Momo, Friendly Flier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a3c56e71-0de6-447a-a9b4-0971f56c2362	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:momo-friendly-flier:cast:s1,f:xs:XP:momo-friendly-flier:cast:s1	-	-	-	23c4009444b0	-	c1386bad8e35	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a3c56e71-0de6-447a-a9b4-0971f56c2362	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:momo-friendly-flier:combat0.attack:s1,f:xs:XP:momo-friendly-flier:combat0.attack:s1	-	-	-	23c4009444b0	-	c1386bad8e35	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a3c56e71-0de6-447a-a9b4-0971f56c2362	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:momo-friendly-flier:combat0.block:s1,f:xs:XP:momo-friendly-flier:combat0.block:s1	-	-	-	23c4009444b0	-	c1386bad8e35	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a3c56e71-0de6-447a-a9b4-0971f56c2362	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Momo, Friendly Flier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3c56e71-0de6-447a-a9b4-0971f56c2362	static#0.0	static#0.0	agreed	-	X	scen	1	0	Momo, Friendly Flier/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3c672b8-9c7d-47cc-877b-580904c6d72b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

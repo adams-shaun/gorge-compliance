@@ -29,8 +29,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 953a1a07-1bf2-480e-81a3-f2d5f19f6df5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 953a1a07-1bf2-480e-81a3-f2d5f19f6df5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 953a2bd3-5bca-41fc-8785-66b2d7fa381a	cast	cast-resolve	agreed	-	FX	scen	2	0	Mai, Scornful Striker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-953a2bd3-5bca-41fc-8785-66b2d7fa381a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mai, Scornful Striker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-953a2bd3-5bca-41fc-8785-66b2d7fa381a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mai, Scornful Striker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+953a2bd3-5bca-41fc-8785-66b2d7fa381a	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:mai-scornful-striker:combat0.attack:s1	-	-	-	23c4009444b0	-	3fd092e0b388	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+953a2bd3-5bca-41fc-8785-66b2d7fa381a	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:mai-scornful-striker:combat0.block:s1	-	-	-	23c4009444b0	-	3fd092e0b388	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 953a2bd3-5bca-41fc-8785-66b2d7fa381a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mai, Scornful Striker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 953bdefa-4639-4524-af5c-5055d1289f40	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 953bdefa-4639-4524-af5c-5055d1289f40	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 955e4c54-14c4-49bb-94e1-c6cc800c6d91	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 955ff3bf-4323-452e-a8b1-b7662034473d	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 956250da-532a-4457-8696-73915be56943	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-956250da-532a-4457-8696-73915be56943	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+956250da-532a-4457-8696-73915be56943	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:cradle-of-vitality:f0t0:s1,f:xs:XP:cradle-of-vitality:f0t0:s1	-	-	-	23c4009444b0	-	5b8fd48e6a3d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 95630a83-3699-4340-b3e5-17e81db1b82f	cast	cast-resolve	agreed	-	X	scen	1	0	Hydro-Channeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95630a83-3699-4340-b3e5-17e81db1b82f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hydro-Channeler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95630a83-3699-4340-b3e5-17e81db1b82f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hydro-Channeler/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -81,8 +81,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9573c85a-e574-4b4e-aae0-2165c45fd27e	cast	cast-resolve	agreed	-	X	scen	1	0	Worldwalker Helm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9573c85a-e574-4b4e-aae0-2165c45fd27e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Worldwalker Helm/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9575d7ce-f26d-4b90-87a3-6329e9799572	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Abandoned Air Temple/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9575d7ce-f26d-4b90-87a3-6329e9799572	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Abandoned Air Temple/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9575d7ce-f26d-4b90-87a3-6329e9799572	land	play-land	agreed	-	X	scen	1	0	Abandoned Air Temple/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9575d7ce-f26d-4b90-87a3-6329e9799572	f0/a1	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:abandoned-air-temple:f0a1:s1,f:xs:XP:abandoned-air-temple:f0a1:s1	-	-	-	23c4009444b0	-	81e0087944fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9575d7ce-f26d-4b90-87a3-6329e9799572	land	land	agreed	-	FX	start	2	0	x:xs:XP:abandoned-air-temple:land:s1,f:xs:XP:abandoned-air-temple:land:s1	-	-	-	23c4009444b0	-	81e0087944fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 957ba875-b8d4-48e2-bbd7-993694a936f3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	06a92d2f60a7	-	-	2026-11-24	xproof
 957ba875-b8d4-48e2-bbd7-993694a936f3	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	06a92d2f60a7	-	-	2026-11-24	xproof
 9584a8ae-2aba-42b8-8983-0467d6bd5698	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brilliant-restoration:cast:s1,f:xs:XP:brilliant-restoration:cast:s1	-	-	-	d864b561c9cb	-	2f7db5075469	-	-	2026-11-24	xproof

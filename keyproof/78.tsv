@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 780536da-2923-48e7-916a-61c701382d28	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tenured-inkcaster:f0t0:s1,f:xs:XP:tenured-inkcaster:f0t0:s1	-	-	-	d864b561c9cb	-	2f8074efec9b	-	-	2026-11-24	xproof
 780536da-2923-48e7-916a-61c701382d28	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tenured-inkcaster:f0t1:s1,f:xs:XP:tenured-inkcaster:f0t1:s1	-	-	-	d864b561c9cb	-	2f8074efec9b	-	-	2026-11-24	xproof
 78064301-f81e-4737-9cfe-b1e8757d0dd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78064301-f81e-4737-9cfe-b1e8757d0dd6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+78064301-f81e-4737-9cfe-b1e8757d0dd6	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:nurturer-initiate:f0t0:s1,f:xs:XP:nurturer-initiate:f0t0:s1	-	-	-	23c4009444b0	-	0fb51c8791f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 780c9cb2-9d98-4789-87e0-cb81db477204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 780da643-8d14-4f1a-a298-5b7454e9c4df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 780da643-8d14-4f1a-a298-5b7454e9c4df	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78a48f4e-ba4c-4d8d-938a-9ddb342a885b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78a48f4e-ba4c-4d8d-938a-9ddb342a885b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:junji-the-midnight-sky:f0t0:s1,f:xs:XP:junji-the-midnight-sky:f0t0:s1	-	-	-	3aa6ded33acb	-	9313604ada5c	-	-	2026-11-25	xproof
 78a7bb30-fc60-410c-b086-862b5521c1aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78a7bb30-fc60-410c-b086-862b5521c1aa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-78a7bb30-fc60-410c-b086-862b5521c1aa	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+78a7bb30-fc60-410c-b086-862b5521c1aa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:admonition-angel:f0t0:s1,f:xs:XP:admonition-angel:f0t0:s1	-	-	-	23c4009444b0	-	ed14be19e339	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+78a7bb30-fc60-410c-b086-862b5521c1aa	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:admonition-angel:f0t1:s1,f:xs:XP:admonition-angel:f0t1:s1	-	-	-	23c4009444b0	-	ed14be19e339	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78a9cb8d-52bb-4182-ad7d-e4f8f0bb9797	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78a9cb8d-52bb-4182-ad7d-e4f8f0bb9797	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 78ac1e6c-2704-4844-9e87-642324c23997	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roving-actuator:cast:s1,f:xs:XP:roving-actuator:cast:s1	-	-	-	23c4009444b0	-	5b0e803f8f55	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

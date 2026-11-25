@@ -49,7 +49,7 @@ f4310dfd-52eb-4c1f-b1ad-bfbc9b50fe7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f432998f-7737-4f41-86b5-a4372bc5db2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f432eb6a-f1bf-4ce7-b915-1488dccb4bb9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Oscorp Industries/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f432eb6a-f1bf-4ce7-b915-1488dccb4bb9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Oscorp Industries/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f432eb6a-f1bf-4ce7-b915-1488dccb4bb9	land	play-land	agreed	-	X	scen	1	0	Oscorp Industries/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f432eb6a-f1bf-4ce7-b915-1488dccb4bb9	land	land	agreed	-	FX	start	2	0	x:xs:XP:oscorp-industries:land:s1,f:xs:XP:oscorp-industries:land:s1	-	-	-	23c4009444b0	-	75c3231f931f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f434e266-d9d6-4058-96ff-a1bd4029d8dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imposter-mech:cast:s1,f:xs:XP:imposter-mech:cast:s1	-	-	-	8c0bd19283bb	-	f928915ddf35	-	-	2026-11-24	xproof
 f434e266-d9d6-4058-96ff-a1bd4029d8dc	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f4350c4e-7e53-4401-b889-14bed27bee9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ f4a64308-5f24-47c0-83f9-ee16a3b4f143	f0/a1	NULL	owed	refused:steps-needed:cost:S
 f4a73cde-58bf-4719-8eb0-e039fdde4f62	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 f4a8756d-94df-40bc-a363-2938ada0a808	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:in-oketra-s-name:cast:s1,f:xs:XP:in-oketra-s-name:cast:s1	-	-	-	d864b561c9cb	-	583e9e1005bc	-	-	2026-11-24	xproof
 f4a96881-586d-44ad-b427-5cdf8988f9a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memory-erosion:cast:s1,f:xs:XP:memory-erosion:cast:s1	-	-	-	8a1b1a193ec0	-	c59b53d96603	-	-	2026-11-24	xproof
-f4a96881-586d-44ad-b427-5cdf8988f9a1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+f4a96881-586d-44ad-b427-5cdf8988f9a1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f4aa0f64-d202-42a1-af62-0e53bbe87782	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4aa8391-34d5-4ad2-a981-9aa08f8229db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4aed3d2-04f5-49a4-a6be-d3cf097903f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bristling-boar:cast:s1,f:xs:XP:bristling-boar:cast:s1	-	-	-	d864b561c9cb	-	6e443dc27d6a	-	-	2026-11-24	xproof

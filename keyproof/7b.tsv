@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0d9139-b3ad-4065-9b55-aeeda8950bee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b0d9d79-2e86-4079-8db3-500483c8807e	cast	cast-resolve	agreed	-	X	scen	1	0	Avatar Enthusiasts/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7b0d9d79-2e86-4079-8db3-500483c8807e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Avatar Enthusiasts/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7b0d9d79-2e86-4079-8db3-500483c8807e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avatar-enthusiasts:cast:s1,f:xs:XP:avatar-enthusiasts:cast:s1	-	-	-	23c4009444b0	-	eede4a392047	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7b0d9d79-2e86-4079-8db3-500483c8807e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avatar-enthusiasts:f0t0:s1,f:xs:XP:avatar-enthusiasts:f0t0:s1	-	-	-	23c4009444b0	-	eede4a392047	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7b0f482d-35a3-47f1-8283-0fd47e30cc31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0fa80e-6b16-4a4a-9776-6a91f145fc63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b139231-dcd2-4b03-bcf2-fcb040617b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b3d364d-6581-43de-a80a-d5b07f5d21ed	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Venus, Torn Between Worlds/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b3e05e1-31b4-46af-b3d0-f2467f8551e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3e05e1-31b4-46af-b3d0-f2467f8551e9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b3e05e1-31b4-46af-b3d0-f2467f8551e9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7b3e05e1-31b4-46af-b3d0-f2467f8551e9	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:goblin-razerunners:f0t0:s1,f:xs:XP:goblin-razerunners:f0t0:s1	-	-	-	23c4009444b0	-	e1323011223e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7b3e354e-0fa3-4ae1-93b5-9ebc29e8b59e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-s-scorn:cast:s1,f:xs:XP:sarkhan-s-scorn:cast:s1	-	-	-	8c0bd19283bb	-	57cdec475b36	-	-	2026-11-24	xproof
 7b3e74ad-0179-480b-871c-9e3bc30a43ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aethersphere-harvester:f0t0:s1,f:xs:XP:aethersphere-harvester:f0t0:s1	-	-	-	d864b561c9cb	-	b4f08136b476	-	-	2026-11-24	xproof
 7b3e74ad-0179-480b-871c-9e3bc30a43ff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:aethersphere-harvester:f0t0:s1,f:xs:XP:aethersphere-harvester:f0t0:s1	-	-	-	d864b561c9cb	-	b4f08136b476	-	-	2026-11-24	xproof
@@ -172,8 +172,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7bd36106-04fe-481f-b16e-e076dcbb183b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bd36106-04fe-481f-b16e-e076dcbb183b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kalonian-hydra:f0t0:s1,f:xs:XP:kalonian-hydra:f0t0:s1	-	-	-	d864b561c9cb	-	0d5eaa8d8cc5	-	-	2026-11-24	xproof
 7bd4e504-541e-4b2c-9f1d-3c67957aef2e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t0	SpellCast	agreed	-	X	start	2	0	x:xs:XP:belligerent-hatchling:f0t0:s1	-	-	-	23c4009444b0	-	b57717b325cd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t1	SpellCast	agreed	-	X	start	2	0	x:xs:XP:belligerent-hatchling:f0t1:s1	-	-	-	23c4009444b0	-	b57717b325cd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7bdfe368-353c-4f8d-851f-05b7ea9f905d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jokulhaups:cast:s1,f:xs:XP:jokulhaups:cast:s1	-	-	-	ea3140b6974b	-	ec171ee7b115	-	-	2026-11-24	xproof
 7be2bc4e-3986-4f4f-bd5b-0a9f59b2f865	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7be47440-b627-411e-a28f-d5a92e5e2fb7	cast	cast-resolve	agreed	-	X	scen	1	0	Impostor Syndrome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -74,9 +74,9 @@ d06a8026-1657-4404-8dff-64e44f1a14f8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:ab
 d06a8026-1657-4404-8dff-64e44f1a14f8	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d06a8026-1657-4404-8dff-64e44f1a14f8	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d06a8026-1657-4404-8dff-64e44f1a14f8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d06be0a6-0d45-4e95-b132-88ce80dd7cb6	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e90e03b41822	-	-	2026-11-25	xproof
-d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e90e03b41822	-	-	2026-11-25	xproof
-d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+d06be0a6-0d45-4e95-b132-88ce80dd7cb6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:subterranean-shambler:cast:s1,f:xs:XP:subterranean-shambler:cast:s1	-	-	-	23c4009444b0	-	e90e03b41822	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:subterranean-shambler:cast:s1,f:xs:XP:subterranean-shambler:cast:s1	-	-	-	23c4009444b0	-	e90e03b41822	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t2	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e90e03b41822	-	-	2026-11-25	xproof
 d06d7065-27e5-4119-a226-6f6d990d72c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d06d7065-27e5-4119-a226-6f6d990d72c7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ d0a38e8c-c42c-4c99-8a44-d390ff2511ff	combat#0.block	combat#0.block	agreed	-	X	sc
 d0a38e8c-c42c-4c99-8a44-d390ff2511ff	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unwelcome Sprite/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d0a3b261-3daf-4082-8bc5-e66326a6c382	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:valley-rannet:cast:s1,f:xs:XP:valley-rannet:cast:s1	-	-	-	8a1b1a193ec0	-	8fbef63f9696	-	-	2026-11-24	xproof
 d0a3b261-3daf-4082-8bc5-e66326a6c382	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:valley-rannet:cast:s2,f:xs:XP:valley-rannet:cast:s2	-	-	-	8a1b1a193ec0	-	8fbef63f9696	-	-	2026-11-24	xproof
-d0a3b261-3daf-4082-8bc5-e66326a6c382	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+d0a3b261-3daf-4082-8bc5-e66326a6c382	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:valley-rannet:f0a1:s1,f:xs:XP:valley-rannet:f0a1:s1	-	-	-	23c4009444b0	-	8fbef63f9696	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0a4efc3-fa68-48f2-a6d0-2fff93e05c77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greenbelt-radical:cast:s1,f:xs:XP:greenbelt-radical:cast:s1	-	-	-	8c0bd19283bb	-	4f0ce51f9e9e	-	-	2026-11-24	xproof
 d0a4efc3-fa68-48f2-a6d0-2fff93e05c77	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Greenbelt Radical/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0a80814-c69c-457c-ba19-4e1ba3fbd485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

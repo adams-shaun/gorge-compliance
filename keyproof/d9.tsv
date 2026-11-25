@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 d902074a-2a2b-42b7-a1e5-750862c64fbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:cast:s1,f:xs:XP:sarkhan-vol:cast:s1	-	-	-	8a1b1a193ec0	-	c707684b644d	-	-	2026-11-24	xproof
 d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:cast:s1,f:xs:XP:sarkhan-vol:cast:s1	-	-	-	8a1b1a193ec0	-	c707684b644d	-	-	2026-11-24	xproof
-d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a1	GainControl	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:f0a1:s1,f:xs:XP:sarkhan-vol:f0a1:s1	-	-	-	23c4009444b0	-	c707684b644d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a2	Token	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:f0a2:s1,f:xs:XP:sarkhan-vol:f0a2:s1	-	-	-	23c4009444b0	-	c707684b644d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	cast	cast-resolve	agreed	-	FX	scen	2	0	Lyra, Tolarian Archangel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ d98edd47-c9de-46e9-a184-ba3bc0be42c4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:r
 d99197b9-143a-462f-ace4-f35228ba082e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99197b9-143a-462f-ace4-f35228ba082e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a1	NULL	owed	refused:steps-needed:cost:RG	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a1	NULL	owed	refused:steps-needed:cost:RG	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d99a1d9a-7721-4331-bf22-1c6ee0bd825a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99cd2d0-32b8-4edc-8089-557c48dd4be0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deepwood-ghoul:cast:s1,f:xs:XP:deepwood-ghoul:cast:s1	-	-	-	d864b561c9cb	-	be4dafa648f2	-	-	2026-11-24	xproof
 d99cd2d0-32b8-4edc-8089-557c48dd4be0	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:deepwood-ghoul:cast:s1,f:xs:XP:deepwood-ghoul:cast:s1	-	-	-	d864b561c9cb	-	be4dafa648f2	-	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ d9a10971-f32b-4978-952d-fed0a5bc9e36	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d9a10971-f32b-4978-952d-fed0a5bc9e36	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9a24444-289f-473f-9985-8df275257555	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Jasmine Dragon Tea Shop/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9a24444-289f-473f-9985-8df275257555	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Jasmine Dragon Tea Shop/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9a24444-289f-473f-9985-8df275257555	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Jasmine Dragon Tea Shop/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9a24444-289f-473f-9985-8df275257555	land	play-land	agreed	-	X	scen	1	0	Jasmine Dragon Tea Shop/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d9a24444-289f-473f-9985-8df275257555	f0/a2	Token	agreed	-	FX	start	2	0	x:xs:XP:jasmine-dragon-tea-shop:f0a2:s1,f:xs:XP:jasmine-dragon-tea-shop:f0a2:s1	-	-	-	23c4009444b0	-	ae40bb79e3a1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d9a24444-289f-473f-9985-8df275257555	land	land	agreed	-	FX	start	2	0	x:xs:XP:jasmine-dragon-tea-shop:land:s1,f:xs:XP:jasmine-dragon-tea-shop:land:s1	-	-	-	23c4009444b0	-	ae40bb79e3a1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d9a3207a-a330-4517-967e-f37c9a9f1355	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clinquant-skymage:cast:s1,f:xs:XP:clinquant-skymage:cast:s1	-	-	-	23b491658465	-	2ebbda26a890	-	-	2026-11-24	xproof
 d9a3207a-a330-4517-967e-f37c9a9f1355	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:clinquant-skymage:combat0.attack:s1,f:xs:XP:clinquant-skymage:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ebbda26a890	-	-	2026-11-25	xproof
 d9a3207a-a330-4517-967e-f37c9a9f1355	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:clinquant-skymage:combat0.block:s1,f:xs:XP:clinquant-skymage:combat0.block:s1	-	-	-	3aa6ded33acb	-	2ebbda26a890	-	-	2026-11-25	xproof

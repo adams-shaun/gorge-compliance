@@ -7,8 +7,8 @@ ba047b0b-d451-4566-8656-00b00611de8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eye
 ba047b0b-d451-4566-8656-00b00611de8c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eyeless-watcher:f0t0:s1,f:xs:XP:eyeless-watcher:f0t0:s1	-	-	-	d864b561c9cb	-	d7c143eb314b	-	-	2026-11-24	xproof
 ba069664-9f92-47c7-b556-9e5143a22579	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doomwake-giant:f0t0:s1,f:xs:XP:doomwake-giant:f0t0:s1	-	-	-	d864b561c9cb	-	ff1b95c9b4ce	-	-	2026-11-24	xproof
 ba069664-9f92-47c7-b556-9e5143a22579	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doomwake-giant:f0t0:s1,f:xs:XP:doomwake-giant:f0t0:s1	-	-	-	d864b561c9cb	-	ff1b95c9b4ce	-	-	2026-11-24	xproof
-ba08b4cf-9a13-40fd-8522-9504d2ff1a19	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Suit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ba08b4cf-9a13-40fd-8522-9504d2ff1a19	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spider-Suit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ba08b4cf-9a13-40fd-8522-9504d2ff1a19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spider-suit:cast:s1,f:xs:XP:spider-suit:cast:s1	-	-	-	23c4009444b0	-	04f7e8497361	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ba08b4cf-9a13-40fd-8522-9504d2ff1a19	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:spider-suit:f0a0:s1,f:xs:XP:spider-suit:f0a0:s1	-	-	-	23c4009444b0	-	04f7e8497361	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ba08b4cf-9a13-40fd-8522-9504d2ff1a19	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spider-Suit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ba0a815c-1dfe-47c1-890f-496c670124f3	cast	cast-resolve	agreed	-	X	scen	1	0	Celestial Reunion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ba0a815c-1dfe-47c1-890f-496c670124f3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Celestial Reunion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -90,9 +90,9 @@ ba64d3a9-08b4-4b12-b011-e41b00815277	f0/t0	NULL	owed	refused:no-generator:trigge
 ba682da8-50f5-478f-99cc-60a57d229a04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba682da8-50f5-478f-99cc-60a57d229a04	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	cast	cast-resolve	agreed	-	X	scen	1	0	Cat-Owl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cat-Owl/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cat-Owl/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cat-Owl/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cat-owl:combat0.attack:s1,f:xs:XP:cat-owl:combat0.attack:s1	-	-	-	23c4009444b0	-	9f8cb44aa3ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cat-owl:combat0.block:s1,f:xs:XP:cat-owl:combat0.block:s1	-	-	-	23c4009444b0	-	9f8cb44aa3ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ba6840a6-b6fd-4b91-ac1a-a61b7b15849a	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:cat-owl:combat0.attack:s1,f:xs:XP:cat-owl:combat0.attack:s1	-	-	-	23c4009444b0	-	9f8cb44aa3ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ba6c3c72-c014-45c6-a0b4-59eb9a65303e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba6c3c72-c014-45c6-a0b4-59eb9a65303e	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ba71eb8a-f9f8-4608-88d8-963a1770d8d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,8 +152,8 @@ babeeaf6-0fe4-491f-bbf5-63a0568b3d6e	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 bac52ae6-24ee-4c4f-a32c-3eb9859dc025	cast	cast-resolve	agreed	-	X	scen	1	0	Trip Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bac52ae6-24ee-4c4f-a32c-3eb9859dc025	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:trip-up:f0a1:s1,f:xs:XP:trip-up:f0a1:s1	-	-	-	23c4009444b0	-	6d8e2cd34a46	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bac94fc9-808b-4dc9-b405-408dd2aa6194	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:canyon-crawler:f0t0:s1,f:xs:XP:canyon-crawler:f0t0:s1	-	-	-	267e485f6204	-	2d9af87add91	-	-	2026-11-24	xproof
-bac94fc9-808b-4dc9-b405-408dd2aa6194	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Canyon Crawler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bac94fc9-808b-4dc9-b405-408dd2aa6194	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Canyon Crawler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bac94fc9-808b-4dc9-b405-408dd2aa6194	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:canyon-crawler:combat0.attack:s1,f:xs:XP:canyon-crawler:combat0.attack:s1	-	-	-	23c4009444b0	-	2d9af87add91	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bac94fc9-808b-4dc9-b405-408dd2aa6194	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:canyon-crawler:combat0.block:s1,f:xs:XP:canyon-crawler:combat0.block:s1	-	-	-	23c4009444b0	-	2d9af87add91	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bac94fc9-808b-4dc9-b405-408dd2aa6194	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:canyon-crawler:f0t0:s2,f:xs:XP:canyon-crawler:f0t0:s2	-	-	-	267e485f6204	-	2d9af87add91	-	-	2026-11-24	xproof
 bac94fc9-808b-4dc9-b405-408dd2aa6194	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:canyon-crawler:f0t0:s1,f:xs:XP:canyon-crawler:f0t0:s1	-	-	-	267e485f6204	-	2d9af87add91	-	-	2026-11-24	xproof
 bacb9d63-5950-4bcd-a056-40c02ecf4ce8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -20,8 +20,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55159adc-36f0-4088-8930-5d9b45f76365	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:still-life:f0a0:s1,f:xs:XP:still-life:f0a0:s1	-	-	-	fc71ca68c5ac	-	3c36825ecc86	-	-	2026-11-24	xproof
 55187899-c445-48e9-80b9-235eaf42f803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 551ac58e-3a27-4ee3-ac91-16873562c0bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-551e4356-5b1f-475c-a64b-9c50ea9b0368	cast	cast-resolve	agreed	-	X	scen	1	0	Boar-q-pine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-551e4356-5b1f-475c-a64b-9c50ea9b0368	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boar-q-pine/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+551e4356-5b1f-475c-a64b-9c50ea9b0368	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boar-q-pine:cast:s1,f:xs:XP:boar-q-pine:cast:s1	-	-	-	23c4009444b0	-	f9e887686dbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+551e4356-5b1f-475c-a64b-9c50ea9b0368	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:boar-q-pine:f0t0:s1,f:xs:XP:boar-q-pine:f0t0:s1	-	-	-	23c4009444b0	-	f9e887686dbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dross-harvester:f0t0:s1,f:xs:XP:dross-harvester:f0t0:s1	-	-	-	23c4009444b0	-	634e6524e117	-	-	2026-11-25	xproof
 5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:dross-harvester:f0t0:s1,f:xs:XP:dross-harvester:f0t0:s1	-	-	-	23c4009444b0	-	634e6524e117	-	-	2026-11-25	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 558568a6-5e22-482f-9096-e76682965c21	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 558568a6-5e22-482f-9096-e76682965c21	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 558fe476-edbd-4f18-86ee-6d7f61331789	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5591efbc-1b2c-489a-b4f3-935c9b6bd71a	cast	cast-resolve	agreed	-	X	scen	1	0	Dai Li Indoctrination/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5591efbc-1b2c-489a-b4f3-935c9b6bd71a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dai-li-indoctrination:cast:s1,f:xs:XP:dai-li-indoctrination:cast:s1	-	-	-	23c4009444b0	-	90f00d4b999c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 559463f8-396f-40e0-9515-a1be6397ca31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 559463f8-396f-40e0-9515-a1be6397ca31	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 559903cd-5cba-47a5-8b5b-7067e393e76a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hydra-s-growth:f0t0:s1,f:xs:XP:hydra-s-growth:f0t0:s1	-	-	-	ae86f6029288	-	14809210a6fb	-	-	2026-11-24	xproof

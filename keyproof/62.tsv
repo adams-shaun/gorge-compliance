@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 627c9546-85b0-4b4d-93c6-e2ca8c3adf4f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sleeper-agent:f0t0:s1,f:xs:XP:sleeper-agent:f0t0:s1	-	-	-	25696bf19d5b	-	9249ce988207	-	-	2026-11-24	xproof
 627c9546-85b0-4b4d-93c6-e2ca8c3adf4f	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:sleeper-agent:f0t0:s1,f:xs:XP:sleeper-agent:f0t0:s1	-	-	-	25696bf19d5b	-	9249ce988207	-	-	2026-11-24	xproof
 627de3d8-ad5e-4f9b-b83c-476cc98fea9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-627de3d8-ad5e-4f9b-b83c-476cc98fea9b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+627de3d8-ad5e-4f9b-b83c-476cc98fea9b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:paleoloth:f0t0:s1,f:xs:XP:paleoloth:f0t0:s1	-	-	-	23c4009444b0	-	b89dbc898a11	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 627e9668-5e1c-4ab6-83f4-612a42d0afce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 627e9668-5e1c-4ab6-83f4-612a42d0afce	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6283e5ca-9924-478b-89a5-36924accb9aa	cast	cast-resolve	agreed	-	X	scen	1	0	Duskwatch Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 62934aab-b6fa-41b2-ac05-d3fa0e3c5a79	land	land	agreed	-	FX	start	2	0	x:xs:XP:turntimber-grove:f0t0:s1,f:xs:XP:turntimber-grove:f0t0:s1	-	-	-	8a1b1a193ec0	-	74a11350e00e	-	-	2026-11-24	xproof
 6299d18e-a6a7-414c-85c0-d57a8e7d2627	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 629b3aee-b8fd-495a-a988-815a0aaf3e82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonscale-boon:cast:s1,f:xs:XP:dragonscale-boon:cast:s1	-	-	-	d864b561c9cb	-	352f4a2a744a	-	-	2026-11-24	xproof
-629f247c-1e64-4c32-8892-0716ed469d1c	cast	cast-resolve	agreed	-	X	scen	1	0	Bumi Bash/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+629f247c-1e64-4c32-8892-0716ed469d1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bumi-bash:cast:s1,f:xs:XP:bumi-bash:cast:s1	-	-	-	23c4009444b0	-	0382e2870fbe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 629fe1be-272d-465f-b9b1-2ce177410f13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 629fe1be-272d-465f-b9b1-2ce177410f13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62a3f892-11cf-4064-8186-381ae0f9aa23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serum-tank:f0t0:s1,f:xs:XP:serum-tank:f0t0:s1	-	-	-	25696bf19d5b	-	90e495bb7914	-	-	2026-11-24	xproof

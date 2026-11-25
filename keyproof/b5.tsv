@@ -6,9 +6,9 @@ b501128b-2797-401b-8aec-923050081cae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b501128b-2797-401b-8aec-923050081cae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b5027d79-83e9-437a-baae-03cc3a13a608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5027d79-83e9-437a-baae-03cc3a13a608	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:stormbound-geist:f0t0:s1,f:xs:XP:stormbound-geist:f0t0:s1	-	-	-	3aa6ded33acb	-	52c65a12223d	-	-	2026-11-25	xproof
-b5029f21-e0d6-4f22-9afd-79452de26490	cast	cast-resolve	agreed	-	X	scen	1	0	Mai, Jaded Edge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b5029f21-e0d6-4f22-9afd-79452de26490	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mai, Jaded Edge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b5029f21-e0d6-4f22-9afd-79452de26490	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mai, Jaded Edge/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b5029f21-e0d6-4f22-9afd-79452de26490	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mai-jaded-edge:cast:s1,f:xs:XP:mai-jaded-edge:cast:s1	-	-	-	23c4009444b0	-	e18fb233a3ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b5029f21-e0d6-4f22-9afd-79452de26490	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:mai-jaded-edge:f0a0:s1,f:xs:XP:mai-jaded-edge:f0a0:s1	-	-	-	23c4009444b0	-	e18fb233a3ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b5029f21-e0d6-4f22-9afd-79452de26490	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:mai-jaded-edge:f0t0:s1,f:xs:XP:mai-jaded-edge:f0t0:s1	-	-	-	23c4009444b0	-	e18fb233a3ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b5058b5c-0359-42ec-ba9e-ae1371bb9c22	cast	cast-resolve	agreed	-	FX	scen	2	0	Lys Alana Informant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b5058b5c-0359-42ec-ba9e-ae1371bb9c22	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5058b5c-0359-42ec-ba9e-ae1371bb9c22	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Lys Alana Informant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -27,7 +27,7 @@ b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a0	NULL	owed	refused:start-not-exercised
 b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b51c8659-ec4f-4213-beb1-49a7acd7366c	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-wetlands:land:s1,f:xs:XP:turbulent-wetlands:land:s1	-	-	-	8c0bd19283bb	-	1bbdf94a9601	-	-	2026-11-24	xproof
 b51d2c70-204b-4321-a589-f00a3e49fab4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-b51d2c70-204b-4321-a589-f00a3e49fab4	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+b51d2c70-204b-4321-a589-f00a3e49fab4	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-castle-guard:cast:s1,f:xs:XP:dwarven-castle-guard:cast:s1	-	-	-	23c4009444b0	-	226c844b52fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-castle-guard:f0t0:s1,f:xs:XP:dwarven-castle-guard:f0t0:s1	-	-	-	23c4009444b0	-	226c844b52fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b5208c2c-b839-42f6-8717-ee4bbaf1385b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:embermouth-sentinel:cast:s1	-	-	-	23c4009444b0	-	ae13b5e2c765	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

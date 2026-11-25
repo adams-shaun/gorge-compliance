@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c63a244-75d7-4372-baf4-7a3526f240c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c68853e-4fb8-465e-b262-e6dbaf972533	cast	cast-resolve	agreed	-	FX	scen	2	0	Self-Reflection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c6956ad-8031-4708-82ed-75491755d2a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rune-cervin-rider:cast:s1,f:xs:XP:rune-cervin-rider:cast:s1	-	-	-	8a1b1a193ec0	-	5e5a2d3d57f8	-	-	2026-11-24	xproof
-5c6956ad-8031-4708-82ed-75491755d2a4	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+5c6956ad-8031-4708-82ed-75491755d2a4	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	cast	cast	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t0	Exploited	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t1	ChangesZone/Exploit	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
@@ -97,9 +97,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c93ec85-f87f-4121-9fbf-61fd598d1e65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c946cc0-5d90-4970-acf8-b14eff177cbc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-caller:f0t0:s1,f:xs:XP:storm-caller:f0t0:s1	-	-	-	ae86f6029288	-	3fb894f2da4b	-	-	2026-11-24	xproof
 5c946cc0-5d90-4970-acf8-b14eff177cbc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:storm-caller:f0t0:s1,f:xs:XP:storm-caller:f0t0:s1	-	-	-	ae86f6029288	-	3fb894f2da4b	-	-	2026-11-24	xproof
-5c94b616-8edf-465c-b316-4599df95c52a	cast	cast-resolve	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5c94b616-8edf-465c-b316-4599df95c52a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5c94b616-8edf-465c-b316-4599df95c52a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5c94b616-8edf-465c-b316-4599df95c52a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stegron-the-dinosaur-man:cast:s1,f:xs:XP:stegron-the-dinosaur-man:cast:s1	-	-	-	23c4009444b0	-	3789e83e35c7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5c94b616-8edf-465c-b316-4599df95c52a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stegron-the-dinosaur-man:combat0.attack:s1,f:xs:XP:stegron-the-dinosaur-man:combat0.attack:s1	-	-	-	23c4009444b0	-	3789e83e35c7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5c94b616-8edf-465c-b316-4599df95c52a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stegron-the-dinosaur-man:combat0.block:s1,f:xs:XP:stegron-the-dinosaur-man:combat0.block:s1	-	-	-	23c4009444b0	-	3789e83e35c7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5c94b616-8edf-465c-b316-4599df95c52a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c975dbb-aabb-43fe-877c-c3950019a584	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c975dbb-aabb-43fe-877c-c3950019a584	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stingerback-terror:combat0.attack:s1,f:xs:XP:stingerback-terror:combat0.attack:s1	-	-	-	3aa6ded33acb	-	04405a20636e	-	-	2026-11-25	xproof
 5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stingerback-terror:combat0.block:s1,f:xs:XP:stingerback-terror:combat0.block:s1	-	-	-	3aa6ded33acb	-	04405a20636e	-	-	2026-11-25	xproof
 5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stingerback Terror/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5cca85e0-43e8-4b97-a43b-1b8f23f541d1	cast	cast-resolve	agreed	-	X	scen	1	0	Jet's Brainwashing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5cca85e0-43e8-4b97-a43b-1b8f23f541d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jet-s-brainwashing:cast:s1,f:xs:XP:jet-s-brainwashing:cast:s1	-	-	-	23c4009444b0	-	bde87d9188dd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5cca974b-1a6c-485f-adc0-81d2b7dca286	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cca974b-1a6c-485f-adc0-81d2b7dca286	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 5ccb57e1-ca94-4b5a-8e5f-b8b5e692cfb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

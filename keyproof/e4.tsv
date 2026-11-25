@@ -175,10 +175,10 @@ e4b51c2d-7e56-435b-89d6-85e33df65879	combat#0.block	combat#0.block	agreed	-	X	sc
 e4b51c2d-7e56-435b-89d6-85e33df65879	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Darklight Phoenix/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e4bacf1b-0a45-4c73-857d-dffadb7e6fa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e4bacf1b-0a45-4c73-857d-dffadb7e6fa5	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-e4bb33b2-adde-4176-9274-7598b559aa6a	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Bot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e4bb33b2-adde-4176-9274-7598b559aa6a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Bot/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e4bb33b2-adde-4176-9274-7598b559aa6a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Bot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e4bb33b2-adde-4176-9274-7598b559aa6a	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e4bb33b2-adde-4176-9274-7598b559aa6a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spider-bot:cast:s1	-	-	-	23c4009444b0	-	395fee6fdafc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e4bb33b2-adde-4176-9274-7598b559aa6a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spider-bot:combat0.attack:s1,f:xs:XP:spider-bot:combat0.attack:s1	-	-	-	23c4009444b0	-	395fee6fdafc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e4bb33b2-adde-4176-9274-7598b559aa6a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spider-bot:combat0.block:s1,f:xs:XP:spider-bot:combat0.block:s1	-	-	-	23c4009444b0	-	395fee6fdafc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e4bb33b2-adde-4176-9274-7598b559aa6a	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:spider-bot:cast:s1	-	-	-	23c4009444b0	-	395fee6fdafc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e4bcd4ea-e7cd-4471-8f3b-18bb51d3d70c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyroclasm:cast:s1,f:xs:XP:pyroclasm:cast:s1	-	-	-	23b491658465	-	70b7f6dad585	-	-	2026-11-24	xproof
 e4bd8910-770b-4220-8a26-2673491f4a3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-urabrask:f0t0:s1,f:xs:XP:priest-of-urabrask:f0t0:s1	-	-	-	77494c1ce129	-	f9f7a01c9755	-	-	2026-11-24	xproof
 e4bd8910-770b-4220-8a26-2673491f4a3e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:priest-of-urabrask:f0t0:s1,f:xs:XP:priest-of-urabrask:f0t0:s1	-	-	-	77494c1ce129	-	f9f7a01c9755	-	-	2026-11-24	xproof
@@ -208,7 +208,7 @@ e4ecfccd-b8b4-4b18-b989-30de79b4971e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 e4f0fa12-542b-485f-a792-3a8aba933522	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e4f0fa12-542b-485f-a792-3a8aba933522	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e4f1acd6-b883-470b-88c2-3989011869d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e4f1acd6-b883-470b-88c2-3989011869d7	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+e4f1acd6-b883-470b-88c2-3989011869d7	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e4f28144-71c8-4393-b383-047529fe8878	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ephemeron:cast:s1,f:xs:XP:ephemeron:cast:s1	-	-	-	5f2128bf97e4	-	faf39c5f9b3b	-	-	2026-11-24	xproof
 e4f28144-71c8-4393-b383-047529fe8878	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 e4fb15b6-02bb-4923-953a-69784ca780b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

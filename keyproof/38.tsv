@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38462d26-f252-4055-9f1a-59bc3ab2c75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:engineered-might:cast:s1,f:xs:XP:engineered-might:cast:s1	-	-	-	d864b561c9cb	-	9e94009c0f15	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:psychotrope-thallid:f0t0:s1,f:xs:XP:psychotrope-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	24d62835e5b2	-	-	2026-11-25	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:psychotrope-thallid:f0t0:s1,f:xs:XP:psychotrope-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	24d62835e5b2	-	-	2026-11-25	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	cast	cast-resolve	agreed	-	X	scen	1	0	An Unexpected Party/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	static#0.0	static#0.0	agreed	-	X	scen	1	0	An Unexpected Party/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -78,13 +78,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38561191-ecd1-4028-a0fd-4bca6a7eab58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troi-winging-it:cast:s1,f:xs:XP:troi-winging-it:cast:s1	-	-	-	8c0bd19283bb	-	9015cd3e1db0	-	-	2026-11-24	xproof
 38561191-ecd1-4028-a0fd-4bca6a7eab58	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3859873f-2a0f-463b-8ed9-7f2ab5ed393a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3859873f-2a0f-463b-8ed9-7f2ab5ed393a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+3859873f-2a0f-463b-8ed9-7f2ab5ed393a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 385c1208-bfea-44e2-b236-4f38bc90db9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gladecover-scout:cast:s1,f:xs:XP:gladecover-scout:cast:s1	-	-	-	d864b561c9cb	-	54948ebb65f2	-	-	2026-11-24	xproof
 385d70ed-07ab-4e01-a473-4408f4bcf6d0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oath-of-the-ancient-wood:cast:s1,f:xs:XP:oath-of-the-ancient-wood:cast:s1	-	-	-	d864b561c9cb	-	1b7a4a42057f	-	-	2026-11-24	xproof
 385d70ed-07ab-4e01-a473-4408f4bcf6d0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oath-of-the-ancient-wood:cast:s1,f:xs:XP:oath-of-the-ancient-wood:cast:s1	-	-	-	d864b561c9cb	-	1b7a4a42057f	-	-	2026-11-24	xproof
 3865d219-44b7-49ce-ab26-b833acb39765	cast	cast	agreed	-	F	start	2	0	f:xs:XP:seek-the-wilds:cast:s1	-	-	-	d864b561c9cb	-	87979c01d4bb	-	-	2026-11-24	xproof
-38684c31-e8c6-4825-8740-1a3d34b58b39	cast	cast-resolve	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+38684c31-e8c6-4825-8740-1a3d34b58b39	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wraith-vicious-vigilante:cast:s1,f:xs:XP:wraith-vicious-vigilante:cast:s1	-	-	-	23c4009444b0	-	2508422e2916	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:wraith-vicious-vigilante:combat0.attack:s1,f:xs:XP:wraith-vicious-vigilante:combat0.attack:s1	-	-	-	23c4009444b0	-	2508422e2916	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38684c31-e8c6-4825-8740-1a3d34b58b39	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wraith, Vicious Vigilante/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gate-colossus:cast:s1,f:xs:XP:gate-colossus:cast:s1	-	-	-	8c0bd19283bb	-	e37497feec00	-	-	2026-11-24	xproof

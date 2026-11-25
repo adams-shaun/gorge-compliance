@@ -46,9 +46,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51310af7-796d-4cf0-871e-5055765ffcdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51329e73-aebe-4f42-a4db-e092b1984a4b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:essence-of-orthodoxy:cast:s1,f:xs:XP:essence-of-orthodoxy:cast:s1	-	-	-	ae86f6029288	-	2d8013046870	-	-	2026-11-24	xproof
 51329e73-aebe-4f42-a4db-e092b1984a4b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:essence-of-orthodoxy:cast:s1,f:xs:XP:essence-of-orthodoxy:cast:s1	-	-	-	ae86f6029288	-	2d8013046870	-	-	2026-11-24	xproof
-513a2fca-fea4-434e-9b25-b0c0d7f322b2	cast	cast-resolve	agreed	-	X	scen	1	0	Sun Warriors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-513a2fca-fea4-434e-9b25-b0c0d7f322b2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sun Warriors/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-513a2fca-fea4-434e-9b25-b0c0d7f322b2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sun Warriors/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+513a2fca-fea4-434e-9b25-b0c0d7f322b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sun-warriors:cast:s1,f:xs:XP:sun-warriors:cast:s1	-	-	-	23c4009444b0	-	1996637a831f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+513a2fca-fea4-434e-9b25-b0c0d7f322b2	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:sun-warriors:f0a0:s1,f:xs:XP:sun-warriors:f0a0:s1	-	-	-	23c4009444b0	-	1996637a831f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+513a2fca-fea4-434e-9b25-b0c0d7f322b2	f0/t0	Attacks/Firebending	agreed	-	FX	start	4	0	x:xs:XP:sun-warriors:f0a0:s1,f:xs:XP:sun-warriors:f0a0:s1	-	-	-	23c4009444b0	-	1996637a831f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 513ad32a-2887-4825-adad-86a87cf1d2cb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	5f2128bf97e4	-	82ab05a343ac	-	-	2026-11-24	xproof
 513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:conductive-machete:f0t0:s2,f:xs:XP:conductive-machete:f0t0:s2	-	-	-	e07cf3a05ba5	-	6c380dd03895	-	-	2026-11-24	xproof
 513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conductive-machete:f0a0:s1,f:xs:XP:conductive-machete:f0a0:s1	-	-	-	23c4009444b0	-	6c380dd03895	-	-	2026-11-25	xproof
@@ -107,10 +107,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 518d0773-40fa-4b02-a89e-5711c19617cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51926430-b98a-424d-9347-c36938132825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51926430-b98a-424d-9347-c36938132825	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5193172c-9024-409e-bd9e-0387971d65fe	cast	cast-resolve	agreed	-	X	scen	1	0	Boiling Rock Rioter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5193172c-9024-409e-bd9e-0387971d65fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boiling-rock-rioter:cast:s1,f:xs:XP:boiling-rock-rioter:cast:s1	-	-	-	23c4009444b0	-	933b1b19c258	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5193172c-9024-409e-bd9e-0387971d65fe	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Boiling Rock Rioter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5193172c-9024-409e-bd9e-0387971d65fe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boiling Rock Rioter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5193172c-9024-409e-bd9e-0387971d65fe	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Boiling Rock Rioter/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5193172c-9024-409e-bd9e-0387971d65fe	f0/t0	Attacks	agreed	-	F	start	4	0	f:xs:XP:boiling-rock-rioter:f0t0:s1	-	-	-	23c4009444b0	-	933b1b19c258	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5193172c-9024-409e-bd9e-0387971d65fe	f0/t1	Attacks/Firebending	agreed	-	F	start	4	0	f:xs:XP:boiling-rock-rioter:f0t0:s1	-	-	-	23c4009444b0	-	933b1b19c258	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51991d28-137e-4690-a674-d852b904bd1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51a0d1c2-ff29-4ac9-84a2-ad4f566fee8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51a2671b-677e-434c-9f1a-d768fe1190c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Lt. Arex, Ever-Adapting"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51b47053-d169-4627-982f-f29b8630d75f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 51b55057-8b14-4277-894b-4813b4f7eb39	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tidehollow-sculler:cast:s1,f:xs:XP:tidehollow-sculler:cast:s1	-	-	-	8a1b1a193ec0	-	9ecdd7f130c3	-	-	2026-11-24	xproof
 51b55057-8b14-4277-894b-4813b4f7eb39	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tidehollow-sculler:cast:s1,f:xs:XP:tidehollow-sculler:cast:s1	-	-	-	8a1b1a193ec0	-	9ecdd7f130c3	-	-	2026-11-24	xproof
-51b55057-8b14-4277-894b-4813b4f7eb39	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+51b55057-8b14-4277-894b-4813b4f7eb39	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tidehollow-sculler:f0t1:s1,f:xs:XP:tidehollow-sculler:f0t1:s1	-	-	-	23c4009444b0	-	9ecdd7f130c3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51b9d8ea-b0df-4a57-804e-6d395e301242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-dreadlord:cast:s1,f:xs:XP:elvish-dreadlord:cast:s1	-	-	-	8c0bd19283bb	-	f496400376ad	-	-	2026-11-24	xproof
 51b9d8ea-b0df-4a57-804e-6d395e301242	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 51b9d8ea-b0df-4a57-804e-6d395e301242	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-dreadlord:f0t0:s1,f:xs:XP:elvish-dreadlord:f0t0:s1	-	-	-	8c0bd19283bb	-	f496400376ad	-	-	2026-11-24	xproof

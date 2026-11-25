@@ -100,8 +100,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98799336-a61e-4e35-ac30-51edb81301f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ovinize:cast:s1,f:xs:XP:ovinize:cast:s1	-	-	-	3aa6ded33acb	-	5004b932237d	-	-	2026-11-25	xproof
 987a0b61-2ce4-47bd-8f5e-1e7bf01d0869	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 987a0b61-2ce4-47bd-8f5e-1e7bf01d0869	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-987aab63-a889-400f-a3bd-feaef978b407	cast	cast-resolve	agreed	-	X	scen	1	0	Fire Nation Warship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-987aab63-a889-400f-a3bd-feaef978b407	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fire Nation Warship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+987aab63-a889-400f-a3bd-feaef978b407	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-warship:cast:s1,f:xs:XP:fire-nation-warship:cast:s1	-	-	-	23c4009444b0	-	d5d7ff827eea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+987aab63-a889-400f-a3bd-feaef978b407	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-warship:f0a0:s1,f:xs:XP:fire-nation-warship:f0a0:s1	-	-	-	23c4009444b0	-	d5d7ff827eea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 987aab63-a889-400f-a3bd-feaef978b407	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fire Nation Warship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 987aadac-d6a6-4e50-9468-9e8e53cc5529	cast	cast-resolve	agreed	-	X	scen	1	0	Stingerquill Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 987b74f4-02cb-4d47-94e5-d58a3c8e92e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flay:cast:s1,f:xs:XP:flay:cast:s1	-	-	-	5f2128bf97e4	-	28b3d36115d7	-	-	2026-11-24	xproof
@@ -194,12 +194,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98e042de-05f4-4e2e-b12f-375b905e6600	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:troll-horn-cameo:cast:s1,f:xs:XP:troll-horn-cameo:cast:s1	-	-	-	fc71ca68c5ac	-	a98988731e94	-	-	2026-11-24	xproof
 98e0b1a8-902d-4285-b13c-e63f2e1692f1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kinetic-augur:cast:s1,f:xs:XP:kinetic-augur:cast:s1	-	-	-	ae86f6029288	-	f29fd974fbed	-	-	2026-11-24	xproof
 98e0b1a8-902d-4285-b13c-e63f2e1692f1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kinetic-augur:cast:s1,f:xs:XP:kinetic-augur:cast:s1	-	-	-	ae86f6029288	-	f29fd974fbed	-	-	2026-11-24	xproof
-98e36c6e-a868-4679-a5b5-6f02097f560b	cast	cast-resolve	agreed	-	X	scen	1	0	Serpent of the Pass/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+98e36c6e-a868-4679-a5b5-6f02097f560b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serpent-of-the-pass:cast:s1,f:xs:XP:serpent-of-the-pass:cast:s1	-	-	-	23c4009444b0	-	74f0e3021cd9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 98e36c6e-a868-4679-a5b5-6f02097f560b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Serpent of the Pass/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98e36c6e-a868-4679-a5b5-6f02097f560b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Serpent of the Pass/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98e547de-b963-4ee4-9a08-67bae010734b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	University Campus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98e547de-b963-4ee4-9a08-67bae010734b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	University Campus/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98e547de-b963-4ee4-9a08-67bae010734b	land	play-land	agreed	-	X	scen	1	0	University Campus/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+98e547de-b963-4ee4-9a08-67bae010734b	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:university-campus:f0a1:s1,f:xs:XP:university-campus:f0a1:s1	-	-	-	23c4009444b0	-	b15dc565d8aa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+98e547de-b963-4ee4-9a08-67bae010734b	land	land	agreed	-	FX	start	2	0	x:xs:XP:university-campus:land:s1,f:xs:XP:university-campus:land:s1	-	-	-	23c4009444b0	-	b15dc565d8aa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 98e698ae-1a69-469c-9cfb-0e3fedeb71d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enduring-tenacity:cast:s1,f:xs:XP:enduring-tenacity:cast:s1	-	-	-	23c4009444b0	-	562161922b2f	-	-	2026-11-25	xproof
 98e698ae-1a69-469c-9cfb-0e3fedeb71d4	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:enduring-tenacity:f0t0:s1,f:xs:XP:enduring-tenacity:f0t0:s1	-	-	-	23c4009444b0	-	562161922b2f	-	-	2026-11-25	xproof
 98e698ae-1a69-469c-9cfb-0e3fedeb71d4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enduring-tenacity:f0t1:s1,f:xs:XP:enduring-tenacity:f0t1:s1	-	-	-	23c4009444b0	-	562161922b2f	-	-	2026-11-25	xproof

@@ -165,9 +165,9 @@ c6c4cc65-6ccb-437b-ae97-3201be95b6df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gob
 c6c4cc65-6ccb-437b-ae97-3201be95b6df	f0/a0	DigUntil	agreed	-	F	start	2	0	f:xs:XP:goblin-machinist:f0a0:s1	-	-	-	fc71ca68c5ac	-	f2622526b22a	-	-	2026-11-24	xproof
 c6ca1f21-3aaf-4a5e-938e-7daed67a9d6e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:longhorn-firebeast:cast:s1,f:xs:XP:longhorn-firebeast:cast:s1	-	-	-	fc71ca68c5ac	-	aba1cc27ca4f	-	-	2026-11-24	xproof
 c6ca1f21-3aaf-4a5e-938e-7daed67a9d6e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:longhorn-firebeast:cast:s1,f:xs:XP:longhorn-firebeast:cast:s1	-	-	-	fc71ca68c5ac	-	aba1cc27ca4f	-	-	2026-11-24	xproof
-c6cd520c-106b-4ee5-bc02-6c5fbdbc78dd	cast	cast-resolve	agreed	-	X	scen	1	0	Barrels of Blasting Jelly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c6cd520c-106b-4ee5-bc02-6c5fbdbc78dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barrels-of-blasting-jelly:cast:s1,f:xs:XP:barrels-of-blasting-jelly:cast:s1	-	-	-	23c4009444b0	-	0bdb9d4d0bea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6cd520c-106b-4ee5-bc02-6c5fbdbc78dd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Barrels of Blasting Jelly/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c6cd520c-106b-4ee5-bc02-6c5fbdbc78dd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Barrels of Blasting Jelly/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c6cd520c-106b-4ee5-bc02-6c5fbdbc78dd	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:barrels-of-blasting-jelly:f0a1:s1,f:xs:XP:barrels-of-blasting-jelly:f0a1:s1	-	-	-	23c4009444b0	-	0bdb9d4d0bea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6cd6934-b661-455a-8de5-ceb920664bbe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6cd6934-b661-455a-8de5-ceb920664bbe	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c6d0f1bc-b82a-4e64-a4bc-11ad3f54c71a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	a56270dcd399	-	-	2026-11-25	xproof
@@ -184,10 +184,10 @@ c6e0574c-3e2b-4c40-b17a-05bce3d49309	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Wast
 c6e0574c-3e2b-4c40-b17a-05bce3d49309	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Wastewood Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c6e0574c-3e2b-4c40-b17a-05bce3d49309	land	land	agreed	-	FX	start	2	0	x:xs:XP:wastewood-verge:land:s1,f:xs:XP:wastewood-verge:land:s1	-	-	-	23c4009444b0	-	33a8b03df2e6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:appa-loyal-sky-bison:f0t0:s1,f:xs:XP:appa-loyal-sky-bison:f0t0:s1	-	-	-	23c4009444b0	-	a52998ce0a33	-	-	2026-11-25	xproof
-c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Appa, Loyal Sky Bison/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Appa, Loyal Sky Bison/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:appa-loyal-sky-bison:combat0.attack:s1,f:xs:XP:appa-loyal-sky-bison:combat0.attack:s1	-	-	-	23c4009444b0	-	a52998ce0a33	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:appa-loyal-sky-bison:combat0.block:s1,f:xs:XP:appa-loyal-sky-bison:combat0.block:s1	-	-	-	23c4009444b0	-	a52998ce0a33	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:appa-loyal-sky-bison:f0t0:s1,f:xs:XP:appa-loyal-sky-bison:f0t0:s1	-	-	-	23c4009444b0	-	a52998ce0a33	-	-	2026-11-25	xproof
-c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Appa, Loyal Sky Bison/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c6e28cf0-81c7-4f52-a29b-988cc6fd31ee	f0/t1	Attacks	agreed	-	FX	start	4	0	x:xs:XP:appa-loyal-sky-bison:combat0.attack:s1,f:xs:XP:appa-loyal-sky-bison:combat0.attack:s1	-	-	-	23c4009444b0	-	a52998ce0a33	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6e87760-4cd0-4281-82d4-7a377ea960ad	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Roiling Canopy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c6e87760-4cd0-4281-82d4-7a377ea960ad	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Roiling Canopy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c6e87760-4cd0-4281-82d4-7a377ea960ad	land	play-land	agreed	-	X	scen	1	0	Roiling Canopy/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -214,6 +214,6 @@ c6fb6971-112b-4c82-a0a3-4acdde970b30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guu
 c6fb6971-112b-4c82-a0a3-4acdde970b30	f0/a0	PutCounter/Level up	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-assassin:f0a0:s1,f:xs:XP:guul-draz-assassin:f0a0:s1	-	-	-	d864b561c9cb	-	21d35b221674	-	-	2026-11-24	xproof
 c6fcf3c1-0626-4d53-92c0-caa22fa61e9a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:molten-man-inferno-incarnate:f0t0:s2,f:xs:XP:molten-man-inferno-incarnate:f0t0:s2	-	-	-	267e485f6204	-	c923fffb8d33	-	-	2026-11-24	xproof
 c6fcf3c1-0626-4d53-92c0-caa22fa61e9a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:molten-man-inferno-incarnate:f0t0:s2,f:xs:XP:molten-man-inferno-incarnate:f0t0:s2	-	-	-	267e485f6204	-	c923fffb8d33	-	-	2026-11-24	xproof
-c6fcf3c1-0626-4d53-92c0-caa22fa61e9a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Molten Man, Inferno Incarnate/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c6fcf3c1-0626-4d53-92c0-caa22fa61e9a	f0/t1	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:molten-man-inferno-incarnate:f0t1:s1	-	-	-	23c4009444b0	-	c923fffb8d33	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6fcf3c1-0626-4d53-92c0-caa22fa61e9a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Molten Man, Inferno Incarnate/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c6fead73-0473-4b57-899a-9f8c5b4f896d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wolf-s-quarry:cast:s1,f:xs:XP:wolf-s-quarry:cast:s1	-	-	-	ae86f6029288	-	3c49408497e2	-	-	2026-11-24	xproof

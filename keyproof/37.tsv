@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 376d90f6-2ceb-4d9e-a04d-3dd5bafd1e8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jagwasp-swarm:cast:s1,f:xs:XP:jagwasp-swarm:cast:s1	-	-	-	8a1b1a193ec0	-	a47a25d0b15c	-	-	2026-11-24	xproof
 376ee366-e082-402f-b4db-6592fcfcacd2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mox-emerald:cast:s1,f:xs:XP:mox-emerald:cast:s1	-	-	-	ae86f6029288	-	e0635469e16c	-	-	2026-11-24	xproof
 376ee366-e082-402f-b4db-6592fcfcacd2	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:mox-emerald:cast:s2,f:xs:XP:mox-emerald:cast:s2	-	-	-	ae86f6029288	-	e0635469e16c	-	-	2026-11-24	xproof
-376fa374-ead1-4728-ab8b-aca230b72031	cast	cast-resolve	agreed	-	X	scen	1	0	Hide on the Ceiling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+376fa374-ead1-4728-ab8b-aca230b72031	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hide-on-the-ceiling:cast:s1	-	-	-	23c4009444b0	-	7680955cb9e2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 377179d5-ac83-4d34-b5b1-f3d8caa60f79	cast	cast-resolve	agreed	-	X	scen	1	0	Subtlety/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 377179d5-ac83-4d34-b5b1-f3d8caa60f79	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Subtlety/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 377179d5-ac83-4d34-b5b1-f3d8caa60f79	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Subtlety/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -154,9 +154,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37aae6d1-1de0-47d1-85dd-d4a6d9635c05	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:psionic-entity:f0a0:s1,f:xs:XP:psionic-entity:f0a0:s1	-	-	-	fc71ca68c5ac	-	f214ee104037	-	-	2026-11-24	xproof
 37ad9318-6690-4a8d-bcea-9fcbca58769d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37b7f044-f57b-4d13-82be-46fd01f1dba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:witherscale-wurm:cast:s1,f:xs:XP:witherscale-wurm:cast:s1	-	-	-	8a1b1a193ec0	-	f68efd647c02	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t2	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t2	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 37bd9e54-c93e-4fec-9b21-6940da75ab7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Pull Through the Weft/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37c06f89-db36-4937-9404-2b07cd22e1a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawn-s-truce:cast:s1,f:xs:XP:dawn-s-truce:cast:s1	-	-	-	23b491658465	-	233b1d4fe3de	-	-	2026-11-24	xproof
 37c49483-bef6-47c6-9354-ead8560d48da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

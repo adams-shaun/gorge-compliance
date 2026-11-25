@@ -46,7 +46,7 @@ be2ab552-df82-49a0-8f0b-ee66de34e1a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 be2ae8dc-afae-4bcf-8a97-08a2764d1148	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marrow-shards:cast:s1,f:xs:XP:marrow-shards:cast:s1	-	-	-	d864b561c9cb	-	a89d3fb73a4e	-	-	2026-11-24	xproof
 be2b3954-e4d7-438c-a549-252bd7f4a9bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:return-the-past:cast:s1,f:xs:XP:return-the-past:cast:s1	-	-	-	8c0bd19283bb	-	a4a1b95da4d1	-	-	2026-11-24	xproof
 be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Woman, Stunning Savior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Woman, Stunning Savior/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spider-woman-stunning-savior:combat0.attack:s1,f:xs:XP:spider-woman-stunning-savior:combat0.attack:s1	-	-	-	23c4009444b0	-	72ddc112903c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be2b9c6d-4ecb-49ec-b276-4aa93c5dfc00	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Woman, Stunning Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3038ff-b39e-4d2e-97ee-85de074ccfd3	cast	cast-resolve	agreed	-	FX	scen	2	0	Sinister Cryologist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3038ff-b39e-4d2e-97ee-85de074ccfd3	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ be4f47e9-1bd2-4aa9-bc85-3f203ad21639	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:r
 be5138fd-3e92-42b9-93c5-311e66bd443f	cast	cast-resolve	agreed	-	FX	scen	2	0	Perennation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be56dfea-1ece-4f06-b1cc-d7425b5018b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merfolk-mistbinder:cast:s1,f:xs:XP:merfolk-mistbinder:cast:s1	-	-	-	d864b561c9cb	-	2b5014e81f62	-	-	2026-11-24	xproof
 be5a65fd-0d06-4771-bee7-0e42cc9871da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be5a65fd-0d06-4771-bee7-0e42cc9871da	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+be5a65fd-0d06-4771-bee7-0e42cc9871da	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:augury-adept:f0t0:s1,f:xs:XP:augury-adept:f0t0:s1	-	-	-	23c4009444b0	-	ec99fd768159	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be5c87d3-492c-4b73-9d79-067bd3c3e738	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be5c87d3-492c-4b73-9d79-067bd3c3e738	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 be5c87d3-492c-4b73-9d79-067bd3c3e738	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -88,8 +88,8 @@ be5f788a-8a2e-447c-9e65-f9fc197ddfc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ent
 be5f788a-8a2e-447c-9e65-f9fc197ddfc9	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:entropic-eidolon:f0a0:s1,f:xs:XP:entropic-eidolon:f0a0:s1	-	-	-	23c4009444b0	-	4147079aa766	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be5f788a-8a2e-447c-9e65-f9fc197ddfc9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be6155de-c5b2-415c-ad83-142f9926462a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be6155de-c5b2-415c-ad83-142f9926462a	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-be6155de-c5b2-415c-ad83-142f9926462a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+be6155de-c5b2-415c-ad83-142f9926462a	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:khalni-heart-expedition:f0a0:s1	-	-	-	23c4009444b0	-	999968c21be8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+be6155de-c5b2-415c-ad83-142f9926462a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:khalni-heart-expedition:f0t0:s1,f:xs:XP:khalni-heart-expedition:f0t0:s1	-	-	-	23c4009444b0	-	999968c21be8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be662217-41c2-4caa-89da-ae7f6f817c34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alesha-s-vanguard:cast:s1,f:xs:XP:alesha-s-vanguard:cast:s1	-	-	-	d864b561c9cb	-	d13174d31686	-	-	2026-11-24	xproof
 be668c2d-71ea-4346-8980-1fbf5e4cbed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be6cab52-b3ae-46a2-a581-2468a49bff25	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:architect-of-the-untamed:cast:s1,f:xs:XP:architect-of-the-untamed:cast:s1	-	-	-	d864b561c9cb	-	7dfa3f6f0359	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ be922360-ee9f-4cfb-bf10-d481c5de5cb1	cast	cast-resolve	agreed	-	X	scen	1	0	The U
 be922360-ee9f-4cfb-bf10-d481c5de5cb1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Unagi of Kyoshi Island/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be922360-ee9f-4cfb-bf10-d481c5de5cb1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Unagi of Kyoshi Island/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be951382-5173-4fb6-9dda-2c5f7fddc863	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-be951382-5173-4fb6-9dda-2c5f7fddc863	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+be951382-5173-4fb6-9dda-2c5f7fddc863	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 be96b9e1-10ef-4955-8d23-c39384def86d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be96b9e1-10ef-4955-8d23-c39384def86d	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be9bee08-ac04-42bc-93be-5a77482a7690	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

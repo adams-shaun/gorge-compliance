@@ -63,10 +63,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 993b92f4-4160-4171-9e67-90dc935030fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleansing-wildfire:cast:s1,f:xs:XP:cleansing-wildfire:cast:s1	-	-	-	ae86f6029288	-	686ecc4932c4	-	-	2026-11-24	xproof
 993e41e6-0643-4a1f-8ada-b7a4aae486d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 993e41e6-0643-4a1f-8ada-b7a4aae486d9	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-99419378-8a23-44f3-aebe-e62d6e20e877	cast	cast-resolve	agreed	-	X	scen	1	0	Mysterio's Phantasm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mysterio's Phantasm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mysterio's Phantasm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99419378-8a23-44f3-aebe-e62d6e20e877	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mysterio's Phantasm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+99419378-8a23-44f3-aebe-e62d6e20e877	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mysterio-s-phantasm:cast:s1,f:xs:XP:mysterio-s-phantasm:cast:s1	-	-	-	23c4009444b0	-	c1fc0fef6371	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mysterio-s-phantasm:combat0.attack:s1,f:xs:XP:mysterio-s-phantasm:combat0.attack:s1	-	-	-	23c4009444b0	-	c1fc0fef6371	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+99419378-8a23-44f3-aebe-e62d6e20e877	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mysterio-s-phantasm:combat0.block:s1,f:xs:XP:mysterio-s-phantasm:combat0.block:s1	-	-	-	23c4009444b0	-	c1fc0fef6371	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+99419378-8a23-44f3-aebe-e62d6e20e877	f0/t0	Attacks	agreed	-	FX	start	8	0	x:xs:XP:flying-octobot:cast:s1,f:xs:XP:flying-octobot:cast:s1	-	-	-	23c4009444b0	-	c1fc0fef6371	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 99422efb-3b44-4025-ad1b-388fc48a669a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lochmere-serpent:cast:s1,f:xs:XP:lochmere-serpent:cast:s1	-	-	-	ae86f6029288	-	f163e96b8cb9	-	-	2026-11-24	xproof
 99422efb-3b44-4025-ad1b-388fc48a669a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 99422efb-3b44-4025-ad1b-388fc48a669a	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:lochmere-serpent:f0a2:s1,f:xs:XP:lochmere-serpent:f0a2:s1	-	-	-	23b491658465	-	f163e96b8cb9	-	-	2026-11-25	xproof

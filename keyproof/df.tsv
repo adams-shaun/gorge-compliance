@@ -153,7 +153,7 @@ dfc08963-132f-4ebf-9384-15d17d1098f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bes
 dfc08963-132f-4ebf-9384-15d17d1098f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bestial-fury:f0t0:s1,f:xs:XP:bestial-fury:f0t0:s1	-	-	-	ea3140b6974b	-	fc92b04ddd85	-	-	2026-11-24	xproof
 dfc08963-132f-4ebf-9384-15d17d1098f7	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 dfc1dc36-0cc2-47cc-b0dd-1cc7c31057aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savor:cast:s1,f:xs:XP:savor:cast:s1	-	-	-	3aa6ded33acb	-	466f93a4d00d	-	-	2026-11-25	xproof
-dfc8b8de-be1d-4f7f-bb21-4761a0e7db4e	cast	cast-resolve	agreed	-	X	scen	1	0	Sandbenders' Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dfc8b8de-be1d-4f7f-bb21-4761a0e7db4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandbenders-storm:cast:s1,f:xs:XP:sandbenders-storm:cast:s1	-	-	-	23c4009444b0	-	c04a7ad5c103	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dfd12e3c-2b2a-4461-a08d-09d4e6c4626e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gandalf-the-grey:cast:s1,f:xs:XP:gandalf-the-grey:cast:s1	-	-	-	ae86f6029288	-	d171708b1294	-	-	2026-11-24	xproof
 dfd12e3c-2b2a-4461-a08d-09d4e6c4626e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 dfd260f2-90e6-464b-91e2-a66bb3877918	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plundering-predator:f0t0:s1,f:xs:XP:plundering-predator:f0t0:s1	-	-	-	8c0bd19283bb	-	8519ea2d3543	-	-	2026-11-24	xproof
@@ -175,8 +175,8 @@ dfd8e6c2-e425-41fa-af55-985271f771b3	f0/a0	NULL	owed	refused:steps-needed:cost:E
 dfdc0eab-309b-4441-a94c-930c6dde4c48	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:herd-migration:cast:s1,f:xs:XP:herd-migration:cast:s1	-	-	-	d864b561c9cb	-	5c89433b6c41	-	-	2026-11-24	xproof
 dfdc0eab-309b-4441-a94c-930c6dde4c48	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:herd-migration:cast:s2,f:xs:XP:herd-migration:cast:s2	-	-	-	d864b561c9cb	-	5c89433b6c41	-	-	2026-11-24	xproof
 dfdcb451-a597-46fe-893c-49e6dbda5f71	cast	cast-resolve	agreed	-	FX	scen	2	0	Geyser Leaper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dfdcb451-a597-46fe-893c-49e6dbda5f71	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Geyser Leaper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dfdcb451-a597-46fe-893c-49e6dbda5f71	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Geyser Leaper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dfdcb451-a597-46fe-893c-49e6dbda5f71	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:geyser-leaper:combat0.attack:s1,f:xs:XP:geyser-leaper:combat0.attack:s1	-	-	-	23c4009444b0	-	657f522d4e13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+dfdcb451-a597-46fe-893c-49e6dbda5f71	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:geyser-leaper:combat0.block:s1,f:xs:XP:geyser-leaper:combat0.block:s1	-	-	-	23c4009444b0	-	657f522d4e13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dfdcb451-a597-46fe-893c-49e6dbda5f71	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Geyser Leaper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dfe1a112-97aa-4e81-8431-81552ba2cdcf	f0/a0	Mana	agreed	-	FX	start	6	0	x:xs:XP:crawling-barrens:f0a0:s1,f:xs:XP:crawling-barrens:f0a0:s1	-	-	-	23b491658465	-	d4885f3b3cae	-	-	2026-11-24	xproof
 dfe1a112-97aa-4e81-8431-81552ba2cdcf	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:crawling-barrens:f0a1:s1,f:xs:XP:crawling-barrens:f0a1:s1	-	-	-	23b491658465	-	d4885f3b3cae	-	-	2026-11-24	xproof

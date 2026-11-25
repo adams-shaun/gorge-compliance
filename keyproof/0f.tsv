@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 0f019387-4684-493f-80c4-de6023096306	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f0282c6-aceb-4879-8ec8-482d0501204a	cast	cast-resolve	agreed	-	X	scen	1	0	The Clone Saga/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0f0282c6-aceb-4879-8ec8-482d0501204a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-clone-saga:cast:s1,f:xs:XP:the-clone-saga:cast:s1	-	-	-	23c4009444b0	-	a9e5f0d3aff6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0f052d9f-5a40-4eb9-9d8a-e01dec1db191	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f052d9f-5a40-4eb9-9d8a-e01dec1db191	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0f0959ff-4464-4738-9d79-5b06f368f144	cast	cast-resolve	agreed	-	X	scen	1	0	Inkling Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -186,9 +186,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brandywine-farmer:f0t0:s1,f:xs:XP:brandywine-farmer:f0t0:s1	-	-	-	ae86f6029288	-	c600dac78bb7	-	-	2026-11-24	xproof
 0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brandywine-farmer:f0t0:s1,f:xs:XP:brandywine-farmer:f0t0:s1	-	-	-	ae86f6029288	-	c600dac78bb7	-	-	2026-11-24	xproof
 0fea3406-e5c7-4d5c-9890-6f1bc04a7cb8	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-0feacc7c-b93e-4322-bc8b-b3c19006128e	cast	cast-resolve	agreed	-	X	scen	1	0	Sandbender Scavengers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0feacc7c-b93e-4322-bc8b-b3c19006128e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandbender-scavengers:cast:s1,f:xs:XP:sandbender-scavengers:cast:s1	-	-	-	23c4009444b0	-	ef97e648b5f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0feacc7c-b93e-4322-bc8b-b3c19006128e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sandbender Scavengers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0feacc7c-b93e-4322-bc8b-b3c19006128e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sandbender Scavengers/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0feacc7c-b93e-4322-bc8b-b3c19006128e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sandbender-scavengers:f0t1:s1,f:xs:XP:sandbender-scavengers:f0t1:s1	-	-	-	23c4009444b0	-	ef97e648b5f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0feeeb19-7c90-4009-9a71-226a443b5c3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fef3f4f-18b6-452c-a634-c870709abcf5	cast	cast	agreed	-	F	start	2	0	f:xs:XP:eye-spy:cast:s1	-	-	-	5f2128bf97e4	-	b1f87acea371	-	-	2026-11-24	xproof
 0fef6729-b044-4daf-834a-ac8c9711ad8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

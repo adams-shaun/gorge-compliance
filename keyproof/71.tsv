@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7121b877-d262-4627-acd8-a159f8a779b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rumbling-sentry:f0t0:s1,f:xs:XP:rumbling-sentry:f0t0:s1	-	-	-	ae86f6029288	-	ef007227827e	-	-	2026-11-24	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rumbling-sentry:f0t0:s1,f:xs:XP:rumbling-sentry:f0t0:s1	-	-	-	ae86f6029288	-	ef007227827e	-	-	2026-11-24	xproof
 7127fc35-600c-4397-8c01-5327d3c4944b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 717c6beb-81c6-43ed-aab0-aedfc1cbac33	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Lake-town/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 717c6beb-81c6-43ed-aab0-aedfc1cbac33	land	play-land	agreed	-	FX	scen	2	0	Lake-town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7182e6f4-6caf-474a-8759-13c56f391bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7182e6f4-6caf-474a-8759-13c56f391bef	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7182e6f4-6caf-474a-8759-13c56f391bef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sigil-captain:f0t0:s1,f:xs:XP:sigil-captain:f0t0:s1	-	-	-	23c4009444b0	-	54676a87efe8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:void-beckoner:cast:s1,f:xs:XP:void-beckoner:cast:s1	-	-	-	ae86f6029288	-	a923841d6b36	-	-	2026-11-24	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71920c05-7061-4ba5-8903-cffd3d2f85f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7192ff07-9a84-49ad-a40c-ce255ce21544	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7192ff07-9a84-49ad-a40c-ce255ce21544	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7194a262-5e7a-4c12-b271-2bc5e0799477	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7194a262-5e7a-4c12-b271-2bc5e0799477	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7194a262-5e7a-4c12-b271-2bc5e0799477	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:font-of-mythos:f0t0:s1,f:xs:XP:font-of-mythos:f0t0:s1	-	-	-	23c4009444b0	-	34eb1399c00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7194a262-5e7a-4c12-b271-2bc5e0799477	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:font-of-mythos:f0t0:s1,f:xs:XP:font-of-mythos:f0t0:s1	-	-	-	23c4009444b0	-	34eb1399c00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7194cf15-69fc-46f0-987a-2cea8b498f50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71982b17-1d9a-4f98-b8b5-d232e3a8cf1d	cast	cast-resolve	agreed	-	X	scen	1	0	Scrounge for Eternity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 719aeb50-c8cf-4cd8-b74c-d2cef408b52e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:airlift-chaplain:f0t0:s1,f:xs:XP:airlift-chaplain:f0t0:s1	-	-	-	ae86f6029288	-	8f73949d0586	-	-	2026-11-24	xproof

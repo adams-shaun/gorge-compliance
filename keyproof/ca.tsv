@@ -72,8 +72,8 @@ ca60623a-1a98-4153-a0ee-2f34981de5cb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lazav
 ca611c90-7753-43dd-af91-81694d004eeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca611c90-7753-43dd-af91-81694d004eeb	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:suspicious-bookcase:f0a0:s1,f:xs:XP:suspicious-bookcase:f0a0:s1	-	-	-	d864b561c9cb	-	dd2b92b86432	-	-	2026-11-24	xproof
 ca65b908-e6fe-4ca3-8ecd-247df957aa0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca68f436-2522-4007-87bf-2669c7743db0	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Slayer, Hatred Honed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ca68f436-2522-4007-87bf-2669c7743db0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spider-Slayer, Hatred Honed/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ca68f436-2522-4007-87bf-2669c7743db0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spider-slayer-hatred-honed:cast:s1,f:xs:XP:spider-slayer-hatred-honed:cast:s1	-	-	-	23c4009444b0	-	2a94d6411fab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ca68f436-2522-4007-87bf-2669c7743db0	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:spider-slayer-hatred-honed:f0a0:s1,f:xs:XP:spider-slayer-hatred-honed:f0a0:s1	-	-	-	23c4009444b0	-	2a94d6411fab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ca68f436-2522-4007-87bf-2669c7743db0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spider-Slayer, Hatred Honed/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ca6f43d8-1498-4a13-b1cc-2d135b24a8b6	cast	cast-resolve	agreed	-	FX	scen	2	0	Crystalline Entity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ca6f43d8-1498-4a13-b1cc-2d135b24a8b6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ caf626a8-7abc-496b-9d3a-23194ce70e01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 caf626a8-7abc-496b-9d3a-23194ce70e01	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 caf840e8-c1d3-4570-8542-432a765c09ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 caf89756-fb78-4e58-a730-001393ffa0a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-caf89756-fb78-4e58-a730-001393ffa0a8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-caf89756-fb78-4e58-a730-001393ffa0a8	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+caf89756-fb78-4e58-a730-001393ffa0a8	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:deathbringer-liege:f0t0:s1,f:xs:XP:deathbringer-liege:f0t0:s1	-	-	-	23c4009444b0	-	5094abaa2c15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+caf89756-fb78-4e58-a730-001393ffa0a8	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:deathbringer-liege:f0t1:s1,f:xs:XP:deathbringer-liege:f0t1:s1	-	-	-	23c4009444b0	-	5094abaa2c15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cafacba9-195c-44ea-ba80-3e489274759c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cafacba9-195c-44ea-ba80-3e489274759c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cafad9c8-9974-4596-92d4-b7fb615a0353	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

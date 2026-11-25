@@ -9,9 +9,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67158085-4807-4f0e-8599-c55ec7ec252e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:skyfisher-spider:cast:s1,f:xs:XP:skyfisher-spider:cast:s1	-	-	-	ae86f6029288	-	e6bf392a8400	-	-	2026-11-24	xproof
 67158085-4807-4f0e-8599-c55ec7ec252e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyfisher-spider:f0t1:s1,f:xs:XP:skyfisher-spider:f0t1:s1	-	-	-	ae86f6029288	-	e6bf392a8400	-	-	2026-11-24	xproof
 67175889-02f9-4ad8-a9ab-11db44328b67	cast	cast-resolve	agreed	-	FX	scen	2	0	Green Goblin, Revenant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-67175889-02f9-4ad8-a9ab-11db44328b67	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Green Goblin, Revenant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-67175889-02f9-4ad8-a9ab-11db44328b67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Green Goblin, Revenant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-67175889-02f9-4ad8-a9ab-11db44328b67	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Green Goblin, Revenant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+67175889-02f9-4ad8-a9ab-11db44328b67	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:green-goblin-revenant:combat0.attack:s1,f:xs:XP:green-goblin-revenant:combat0.attack:s1	-	-	-	23c4009444b0	-	3599952bd74e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+67175889-02f9-4ad8-a9ab-11db44328b67	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:green-goblin-revenant:combat0.block:s1,f:xs:XP:green-goblin-revenant:combat0.block:s1	-	-	-	23c4009444b0	-	3599952bd74e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+67175889-02f9-4ad8-a9ab-11db44328b67	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:green-goblin-revenant:combat0.attack:s1,f:xs:XP:green-goblin-revenant:combat0.attack:s1	-	-	-	23c4009444b0	-	3599952bd74e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 67183256-23cc-4af5-991e-d7148e942c63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bring-to-light:cast:s1,f:xs:XP:bring-to-light:cast:s1	-	-	-	d864b561c9cb	-	63d9cd57cbd2	-	-	2026-11-24	xproof
 671c4677-fe0a-4bda-9674-f4dcd9069bfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 671c4677-fe0a-4bda-9674-f4dcd9069bfd	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -21,10 +21,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6728064e-1d4e-4d4f-a0ab-127c23478f3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:presence-of-the-wise:cast:s1,f:xs:XP:presence-of-the-wise:cast:s1	-	-	-	64a08ba7d913	-	f56e3f969804	-	-	2026-11-24	xproof
 672e190d-8ea0-4a2e-b74f-5d35304631e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 672e190d-8ea0-4a2e-b74f-5d35304631e4	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6731d861-cc52-4a2e-8c33-154681fd50e4	cast	cast-resolve	agreed	-	X	scen	1	0	Venom, Evil Unleashed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6731d861-cc52-4a2e-8c33-154681fd50e4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Venom, Evil Unleashed/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6731d861-cc52-4a2e-8c33-154681fd50e4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Venom, Evil Unleashed/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6731d861-cc52-4a2e-8c33-154681fd50e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Venom, Evil Unleashed/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6731d861-cc52-4a2e-8c33-154681fd50e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-evil-unleashed:cast:s1,f:xs:XP:venom-evil-unleashed:cast:s1	-	-	-	23c4009444b0	-	f9921b1723ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6731d861-cc52-4a2e-8c33-154681fd50e4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:venom-evil-unleashed:combat0.attack:s1,f:xs:XP:venom-evil-unleashed:combat0.attack:s1	-	-	-	23c4009444b0	-	f9921b1723ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6731d861-cc52-4a2e-8c33-154681fd50e4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:venom-evil-unleashed:combat0.block:s1,f:xs:XP:venom-evil-unleashed:combat0.block:s1	-	-	-	23c4009444b0	-	f9921b1723ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6731d861-cc52-4a2e-8c33-154681fd50e4	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:venom-evil-unleashed:f0a0:s1,f:xs:XP:venom-evil-unleashed:f0a0:s1	-	-	-	23c4009444b0	-	f9921b1723ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 67330f45-d08c-4fe2-8ae3-8d18939c512a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gorging-vulture:f0t0:s1,f:xs:XP:gorging-vulture:f0t0:s1	-	-	-	d864b561c9cb	-	7561ae11469f	-	-	2026-11-24	xproof
 67330f45-d08c-4fe2-8ae3-8d18939c512a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gorging-vulture:f0t0:s1,f:xs:XP:gorging-vulture:f0t0:s1	-	-	-	d864b561c9cb	-	7561ae11469f	-	-	2026-11-24	xproof
 6734497c-16f0-4c4b-ba24-337333511fc6	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6760d7d1-098e-4131-8824-53e5427d047b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gandalf-shadow-s-foe:f0t0:s1,f:xs:XP:gandalf-shadow-s-foe:f0t0:s1	-	-	-	8c0bd19283bb	-	59e665acdf37	-	-	2026-11-24	xproof
 6760d7d1-098e-4131-8824-53e5427d047b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gandalf-shadow-s-foe:f0t0:s1,f:xs:XP:gandalf-shadow-s-foe:f0t0:s1	-	-	-	8c0bd19283bb	-	59e665acdf37	-	-	2026-11-24	xproof
 676141c3-a433-4aba-86fb-729628f96dfa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ominous Asylum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-676141c3-a433-4aba-86fb-729628f96dfa	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ominous Asylum/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-676141c3-a433-4aba-86fb-729628f96dfa	land	play-land	agreed	-	X	scen	1	0	Ominous Asylum/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+676141c3-a433-4aba-86fb-729628f96dfa	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:ominous-asylum:f0a1:s1,f:xs:XP:ominous-asylum:f0a1:s1	-	-	-	23c4009444b0	-	3d77bec06054	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+676141c3-a433-4aba-86fb-729628f96dfa	land	land	agreed	-	FX	start	2	0	x:xs:XP:ominous-asylum:land:s1,f:xs:XP:ominous-asylum:land:s1	-	-	-	23c4009444b0	-	3d77bec06054	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6761b077-7a89-42c9-93ab-675fe4231564	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6764d4d9-1fe5-4b42-830c-a3b4c3b37f1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roc-hatchling:f0t0:s1,f:xs:XP:roc-hatchling:f0t0:s1	-	-	-	3aa6ded33acb	-	5c09ef71ca8d	-	-	2026-11-25	xproof
 6764d4d9-1fe5-4b42-830c-a3b4c3b37f1f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:roc-hatchling:f0t0:s1,f:xs:XP:roc-hatchling:f0t0:s1	-	-	-	3aa6ded33acb	-	5c09ef71ca8d	-	-	2026-11-25	xproof
