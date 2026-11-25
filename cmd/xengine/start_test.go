@@ -459,6 +459,31 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 	return items
 }
 
+// TestStartChangesZoneTriggersAreExercised: the ChangesZone/ChangesZoneAll
+// recipes scen builds are focuses xengine can actually take: a token maker
+// (Anointer Priest), an Aura attached to a bearer then destroyed (Aspect of
+// Mongoose, Banewasp Affliction), a scripted combat (Abattoir Ghoul), a
+// graveyard return (Attuned Hunter), and Magnetic Theft plus an end-step
+// sacrifice (Avarice Amulet). A recipe that generates but is never offered
+// still owes the key (start-not-exercised).
+func TestStartChangesZoneTriggersAreExercised(t *testing.T) {
+	keys := [][2]string{
+		{"Abattoir Ghoul", "f0/t0"},
+		{"Anointer Priest", "f0/t0"},
+		{"Aspect of Mongoose", "f0/t0"},
+		{"Attuned Hunter", "f0/t0"},
+		{"Avarice Amulet", "f0/t0"},
+		{"Banewasp Affliction", "f0/t0"},
+	}
+	ks := lowerKeyStarts(t, keys)
+	led := readExercised(t, ks.play)
+	for _, k := range keys {
+		if n := led.Get(k[0], k[1]).Exercised; n == 0 {
+			t.Errorf("%s %s exercised 0, want > 0: the start was lowered but its trigger never fired", k[0], k[1])
+		}
+	}
+}
+
 // TestStartManaAbilityIsExercised: a focus that is a mana ability was never
 // taken. gorge offers a mana ability at priority as one "activate" option per
 // source, never as an "ability" option with the ability's index, so the focus

@@ -73,7 +73,7 @@ func restrictsCombat(st *cards.Static, card, fix *cards.Face, attack bool) bool 
 				return true
 			}
 			for _, w := range who {
-				if (!a.self || w == card) && a.test(w) {
+				if (!a.self || w == card) && a.matches(w, false) {
 					return true
 				}
 			}

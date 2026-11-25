@@ -69,6 +69,11 @@ func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, dept
 		}
 		if v := p["ValidTgts"]; v != "" && p["TargetMin"] != "0" && p["Optional"] == "" {
 			zone := strings.ToLower(p["TgtZone"])
+			if zone == "" && strings.Contains(strings.ToLower(p["Origin"]), "graveyard") {
+				// a ChangeZone from a graveyard targets a card there: the
+				// graveyard placement (placeGraveTargets) meets it, not the board
+				zone = "graveyard"
+			}
 			if zone == "" || zone == "battlefield" {
 				var alts, raw []string
 				for _, r := range strings.Split(v, ",") {
@@ -189,7 +194,7 @@ func restriction(raw string) func(*cards.Face) bool {
 	if len(alts) != 1 || !alts[0].known || alts[0].self {
 		return nil
 	}
-	return alts[0].test
+	return func(f *cards.Face) bool { return alts[0].matches(f, false) }
 }
 
 // altMet reports whether permanent f (on the focus seat's side when mine, else

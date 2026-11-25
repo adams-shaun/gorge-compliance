@@ -68,7 +68,13 @@ type startSeat struct {
 	Library     []string       `json:"library"`
 	Tapped      []string       `json:"tapped"`
 	Counters    []startCounter `json:"counters"`
+	Attach      []startAttach  `json:"attach"`
 	Life        *int32         `json:"life"`
+}
+
+type startAttach struct {
+	Card string `json:"card"`
+	To   string `json:"to"`
 }
 
 type startCounter struct {
@@ -246,11 +252,21 @@ func (s startSeat) lists(card string) bool {
 // startDeck is a seat's deck and its scripted position: the listed cards in
 // the order hand, battlefield, graveyard, exile, library, then basics to 40.
 func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules.StartSeat, error) {
+	return startDeckAt(reg, name, 0, s)
+}
+
+// startDeckAt is startDeck for one seat index: an Attach entry binds the Aura
+// to a bearer on this same seat (rules.StartAttach.ToSeat).
+func startDeckAt(reg *cards.Registry, name string, seat int, s startSeat) (decks.Deck, rules.StartSeat, error) {
 	var d decks.Deck
 	var ss rules.StartSeat
 	d.Name = name
 	var bf []int
 	var frontCost []string
+	attached := map[string]bool{}
+	for _, a := range s.Attach {
+		attached[a.Card] = true
+	}
 	add := func(names []string, into *[]int, bfZone bool) error {
 		for _, n := range names {
 			c, ok := reg.Lookup(n)
@@ -259,8 +275,10 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 			}
 			if bfZone {
 				// gorge and Forge place such a card differently (scen.FieldBlock),
-				// so the setup could never agree: refuse the file.
-				if why := scen.FieldBlock(c.Faces[0]); why != "" {
+				// so the setup could never agree: refuse the file. An attached Aura
+				// enters with its bearer, so it is the one exception.
+				if why := scen.FieldBlock(c.Faces[0]); why != "" &&
+					!(why == "aura-unattached" && attached[n]) {
 					return fmt.Errorf("start %s: %q cannot be listed on the battlefield (%s): list it in hand", name, n, why)
 				}
 			}
@@ -323,6 +341,21 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		x, y := ss.Counters[a], ss.Counters[b]
 		return x.Card < y.Card || x.Card == y.Card && x.Kind < y.Kind
 	})
+	auraCards, auraBearers := map[int]bool{}, map[int]bool{}
+	for _, a := range s.Attach {
+		if !slices.Contains(s.Battlefield, a.Card) || !slices.Contains(s.Battlefield, a.To) {
+			return d, ss, fmt.Errorf("start %s: attach %q to %q: both must be on the battlefield", name, a.Card, a.To)
+		}
+		card, err := bind(a.Card, auraCards)
+		if err != nil {
+			return d, ss, err
+		}
+		bearer, err := bind(a.To, auraBearers)
+		if err != nil {
+			return d, ss, err
+		}
+		ss.Attach = append(ss.Attach, rules.StartAttach{Card: card, ToSeat: seat, To: bearer})
+	}
 	ss.Life = s.Life
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
 	// one basic each round robin; Plains when there is no coloured symbol.
@@ -405,11 +438,11 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
-		d0, s0, err := startDeck(reg, "start-p0", f.Setup.P0)
+		d0, s0, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0)
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
-		d1, s1, err := startDeck(reg, "start-p1", f.Setup.P1)
+		d1, s1, err := startDeckAt(reg, "start-p1", 1, f.Setup.P1)
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}

@@ -569,7 +569,96 @@ func TestStartZoneTriggers(t *testing.T) {
 	}
 }
 
+// TestStartzonetriggers is the dispatch's repro spelling. It covers the
+// ChangesZone/ChangesZoneAll causes the plain carrier recipes missed: a token
+// entering (Anointer Priest, Sprout cast), an Aura attached and destroyed
+// (Aspect of Mongoose, Banewasp Affliction), a creature damaged by the card
+// and then dying (Abattoir Ghoul), a card leaving a graveyard (Attuned
+// Hunter, Regrowth), and an Equipment attached then losing its bearer
+// (Avarice Amulet, Magnetic Theft and Ball Lightning's end-step sacrifice).
+func TestStartzonetriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key string
+		check     func(*testing.T, *StartFile)
+	}{
+		{"Abattoir Ghoul", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Attack != "Abattoir Ghoul" || f.Focus.Block == "" || f.Active != 0 {
+				t.Fatalf("focus %+v active %d, want the Ghoul attacking into a blocker", f.Focus, f.Active)
+			}
+			if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.Block) {
+				t.Errorf("p1 battlefield %v does not hold the blocker %q", f.Setup.P1.Battlefield, f.Focus.Block)
+			}
+		}},
+		{"Anointer Priest", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Kind != "cast" || len(f.Setup.P0.Hand) != 1 || f.Focus.Card != f.Setup.P0.Hand[0] {
+				t.Fatalf("focus %+v hand %v, want a token-maker cast", f.Focus, f.Setup.P0.Hand)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != "Anointer Priest" {
+				t.Errorf("p0 battlefield %v, want Anointer Priest first", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Attuned Hunter", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Kind != "cast" || f.Focus.Card != "Regrowth" {
+				t.Fatalf("focus %+v, want Regrowth cast", f.Focus)
+			}
+			if len(f.Setup.P0.Graveyard) == 0 {
+				t.Error("p0 graveyard is empty, so nothing can leave it")
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != "Attuned Hunter" {
+				t.Errorf("p0 battlefield %v, want Attuned Hunter first", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Aspect of Mongoose", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 1, "Naturalize", "cast", 0)
+			attached(t, f, "Aspect of Mongoose")
+		}},
+		{"Avarice Amulet", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Magnetic Theft", "cast", 0)
+			if !slices.Contains(f.Setup.P0.Battlefield, "Avarice Amulet") ||
+				!slices.Contains(f.Setup.P0.Battlefield, "Ball Lightning") {
+				t.Errorf("p0 battlefield %v, want Avarice Amulet and Ball Lightning", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Banewasp Affliction", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 1, "Murder", "cast", 0)
+			attached(t, f, "Banewasp Affliction")
+		}},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Fatalf("start file does not decode: %v\n%s", err, raw)
+			}
+			r.check(t, res.Start)
+		})
+	}
+}
+
+// attached asserts the file places card attached to a bearer on the same seat.
+func attached(t *testing.T, f *StartFile, card string) {
+	t.Helper()
+	for _, a := range f.Setup.P0.Attach {
+		if a.Card == card && a.To != "" && slices.Contains(f.Setup.P0.Battlefield, a.To) {
+			return
+		}
+	}
+	t.Errorf("p0 attach %+v battlefield %v, want %q attached to a placed bearer", f.Setup.P0.Attach, f.Setup.P0.Battlefield, card)
+}
+
 // TestStartSpellCastTriggers: a cast trigger is a carrier spell the filter
+
 // takes, cast by the seat ValidActivatingPlayer names: Reach Through Mists
 // ({U} instant, draw a card) for a noncreature spell, on the opponent's turn
 // for "whenever you cast a spell during an opponent's turn" (Brineborn

@@ -105,12 +105,38 @@ func focusGraveTgts(face *cards.Face, fam string, sa *cards.SA, trig *cards.Trig
 // filter no carrier meets places nothing, and play refuses the start as
 // before.
 func placeGraveTargets(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, fam string, sa *cards.SA, trig *cards.Trigger, f *StartFile) {
+	face, fam, sa, trig = graveTargetSource(reg, face, card, fam, sa, trig, f)
 	used := map[[2]int]bool{} // graveyard cards already counted for a target: {seat, index}
 	for _, t := range focusGraveTgts(face, fam, sa, trig) {
 		for i := 0; i < t.n; i++ {
 			placeGraveTarget(reg, b, card, t.filter, used, f)
 		}
 	}
+}
+
+// graveTargetSource is the card whose targets the focus play names: the focus
+// card when it is not the key's card (a carrier spell such as Reanimate cast
+// for a ChangesZoneAll leaves-your-graveyard trigger), else the key card's
+// trigger effect as before.
+func graveTargetSource(reg *cards.Registry, face *cards.Face, card, fam string, sa *cards.SA, trig *cards.Trigger, f *StartFile) (*cards.Face, string, *cards.SA, *cards.Trigger) {
+	fc := f.Focus
+	if fc == nil || fc.Card == "" || fc.Card == card || fc.Seat == nil {
+		return face, fam, sa, trig
+	}
+	c, ok := reg.Lookup(fc.Card)
+	if !ok || len(c.Faces) == 0 {
+		return face, fam, sa, trig
+	}
+	ff := c.Faces[0]
+	switch fc.Kind {
+	case "cast":
+		return ff, "cast", nil, nil
+	case "ability":
+		if fc.Ability >= 0 && fc.Ability < len(ff.Abilities) {
+			return ff, "", ff.Abilities[fc.Ability], nil
+		}
+	}
+	return face, fam, sa, trig
 }
 
 func placeGraveTarget(reg *cards.Registry, b *certdeck.Builder, card, filter string, used map[[2]int]bool, f *StartFile) {
@@ -128,7 +154,7 @@ func placeGraveTarget(reg *cards.Registry, b *certdeck.Builder, card, filter str
 				if used[[2]int{s, i}] || name == card {
 					continue
 				}
-				if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && a.test(c.Faces[0]) {
+				if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && a.matches(c.Faces[0], false) {
 					used[[2]int{s, i}] = true
 					return
 				}

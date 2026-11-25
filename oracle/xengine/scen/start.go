@@ -50,7 +50,29 @@ type StartSeat struct {
 	Library     []string       `json:"library,omitempty"`
 	Tapped      []string       `json:"tapped,omitempty"`
 	Counters    []StartCounter `json:"counters,omitempty"`
-	Life        *int32         `json:"life,omitempty"`
+	// Attach binds a battlefield Aura of this seat to a bearer of the same
+	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;
+	// placeAttach makes it enter attached, which a start placing a bare Aura
+	// cannot do (FieldBlock aura-unattached).
+	Attach []StartAttach `json:"attach,omitempty"`
+	Life   *int32        `json:"life,omitempty"`
+}
+
+// StartAttach is one attachment: the Aura Card, also in Battlefield, enters
+// attached to To (also in Battlefield).
+type StartAttach struct {
+	Card string `json:"card"`
+	To   string `json:"to"`
+}
+
+// Attached reports whether name is an Aura the seat lists in Attach.
+func (s *StartSeat) Attached(name string) bool {
+	for _, a := range s.Attach {
+		if a.Card == name {
+			return true
+		}
+	}
+	return false
 }
 
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
