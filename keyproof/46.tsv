@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kitesail-skirmisher:f0t0:s1,f:xs:XP:kitesail-skirmisher:f0t0:s1	-	-	-	8c0bd19283bb	-	744a8b47ee10	-	-	2026-11-24	xproof
 46334ae3-e496-4f15-8033-0f42ee0ae375	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46334ae3-e496-4f15-8033-0f42ee0ae375	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bottle-golems:f0t0:s1,f:xs:XP:bottle-golems:f0t0:s1	-	-	-	d864b561c9cb	-	b5a174576baa	-	-	2026-11-24	xproof
-4636afb5-453a-4f27-8916-1cbc32459ba6	cast	cast-resolve	agreed	-	X	scen	1	0	Red Alert!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4636afb5-453a-4f27-8916-1cbc32459ba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:red-alert:cast:s1,f:xs:XP:red-alert:cast:s1	-	-	-	fb9d3088f0bf	-	b845fe9c5f35	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 46376bc5-a18c-4986-99d7-b3707c516c23	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	8e6d06fe9c8c	-	-	2026-11-24	xproof
 46376bc5-a18c-4986-99d7-b3707c516c23	f0/a0	Discard	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	8e6d06fe9c8c	-	-	2026-11-24	xproof
 463865bc-087e-477b-9e86-84e77f1ad931	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seedborn-muse:cast:s1,f:xs:XP:seedborn-muse:cast:s1	-	-	-	25696bf19d5b	-	782046ca2b57	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46b5f12e-9fe5-44f6-b895-ee8c33205521	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aberrant:f0t1:s1,f:xs:XP:aberrant:f0t1:s1	-	-	-	23c4009444b0	-	6a929ca8a986	-	-	2026-11-25	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:aberrant:f0t1:s1,f:xs:XP:aberrant:f0t1:s1	-	-	-	23c4009444b0	-	6a929ca8a986	-	-	2026-11-25	xproof
-46ba09a7-42e4-42cd-911c-71d0ade01180	cast	cast-resolve	agreed	-	X	scen	1	0	Locutus, the One Who Speaks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+46ba09a7-42e4-42cd-911c-71d0ade01180	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:locutus-the-one-who-speaks:cast:s1,f:xs:XP:locutus-the-one-who-speaks:cast:s1	-	-	-	fb9d3088f0bf	-	021a6220be67	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 46ba09a7-42e4-42cd-911c-71d0ade01180	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:locutus-the-one-who-speaks:f0a0:s1,f:xs:XP:locutus-the-one-who-speaks:f0a0:s1	-	-	-	23c4009444b0	-	021a6220be67	-	-	2026-11-25	xproof
 46c3a69a-4984-40b0-905f-4b0762c7ad72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -185,8 +185,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46ce3698-e4e6-44e9-8b99-2b12a703e91e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keen-eyed-curator:cast:s1,f:xs:XP:keen-eyed-curator:cast:s1	-	-	-	3aa6ded33acb	-	4419abd65dc5	-	-	2026-11-25	xproof
 46ce3698-e4e6-44e9-8b99-2b12a703e91e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Keen-Eyed Curator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46ce3698-e4e6-44e9-8b99-2b12a703e91e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Keen-Eyed Curator/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46ce40e9-b7fb-4f40-a7ab-f8a2234d1d63	cast	cast-resolve	agreed	-	X	scen	1	0	Plasma Cascade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46cf0e3e-3c3e-4eb8-a71a-4b4b87744ced	cast	cast-resolve	agreed	-	X	scen	1	0	Something Worth Saving/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+46ce40e9-b7fb-4f40-a7ab-f8a2234d1d63	cast	cast	agreed	-	F	start	2	0	f:xs:XP:plasma-cascade:cast:s1	-	-	-	fb9d3088f0bf	-	9f2f154fc4c1	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+46cf0e3e-3c3e-4eb8-a71a-4b4b87744ced	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:something-worth-saving:cast:s1,f:xs:XP:something-worth-saving:cast:s1	-	-	-	fb9d3088f0bf	-	0e43c89a307e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 46d6bc30-9a21-4476-947b-87951cd9c882	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46d6bc30-9a21-4476-947b-87951cd9c882	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46dad873-11f5-4269-8ec2-f126419fbd7d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof

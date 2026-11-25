@@ -13,7 +13,7 @@ cf0a15f5-5f41-4eea-81f7-02059b9586a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cf0a15f5-5f41-4eea-81f7-02059b9586a2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cf0d1859-699e-47d4-bc91-7c5ff61fabe9	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cf0d1859-699e-47d4-bc91-7c5ff61fabe9	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:temporal-anomaly:f0a1:s1,f:xs:XP:temporal-anomaly:f0a1:s1	-	-	-	23c4009444b0	-	07338c0a26b7	-	-	2026-11-25	xproof
-cf0d1859-699e-47d4-bc91-7c5ff61fabe9	land	play-land	agreed	-	X	scen	1	0	Temporal Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cf0d1859-699e-47d4-bc91-7c5ff61fabe9	land	land	agreed	-	FX	start	2	0	x:xs:XP:temporal-anomaly:land:s1,f:xs:XP:temporal-anomaly:land:s1	-	-	-	fb9d3088f0bf	-	07338c0a26b7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cf0dcb27-f02e-4065-81dc-75fbbb09ea3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oath-of-druids:f0t0:s1,f:xs:XP:oath-of-druids:f0t0:s1	-	-	-	3aa6ded33acb	-	39095cb6c2e1	-	-	2026-11-25	xproof
 cf0dcb27-f02e-4065-81dc-75fbbb09ea3f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:oath-of-druids:f0t0:s1,f:xs:XP:oath-of-druids:f0t0:s1	-	-	-	3aa6ded33acb	-	39095cb6c2e1	-	-	2026-11-25	xproof
 cf0f3aee-78b6-4a98-8e09-8861b73c2e74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ cf4ce0f2-101e-46ec-9368-7395872910b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ori
 cf4d8b19-fd11-4200-9871-896772019f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf4d8b19-fd11-4200-9871-896772019f4c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cf5103c1-2590-4aed-b3ae-8a570f797738	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf527bbd-e898-4aa9-909d-daec2f4b62ad	cast	cast-resolve	agreed	-	X	scen	1	0	Theorix Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cf527bbd-e898-4aa9-909d-daec2f4b62ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:theorix-charm:cast:s1,f:xs:XP:theorix-charm:cast:s1	-	-	-	fb9d3088f0bf	-	3259e6617ea9	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cf56a5b4-48fa-4d53-a4b9-14afe079c1d3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:orysa-tide-choreographer:f0t0:s2,f:xs:XP:orysa-tide-choreographer:f0t0:s2	-	-	-	5437c1394672	-	2e66ed4ff051	-	-	2026-11-24	xproof
 cf56a5b4-48fa-4d53-a4b9-14afe079c1d3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:orysa-tide-choreographer:f0t0:s2,f:xs:XP:orysa-tide-choreographer:f0t0:s2	-	-	-	5437c1394672	-	2e66ed4ff051	-	-	2026-11-24	xproof
 cf56a5b4-48fa-4d53-a4b9-14afe079c1d3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Orysa, Tide Choreographer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ cf590bb7-2ea4-446a-9ca2-1e0706c2c41e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 cf5b1cf9-dcd3-44d1-b8b2-338651ebb2a1	cast	cast-resolve	agreed	-	FX	scen	2	0	Blight Rot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 cf5b3249-619f-48f5-8885-00fd41d24825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf5b3249-619f-48f5-8885-00fd41d24825	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-cf612cbe-7af8-48fd-875e-a669e05cfb49	cast	cast-resolve	agreed	-	X	scen	1	0	Deanna Troi, Psychic Counsel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cf612cbe-7af8-48fd-875e-a669e05cfb49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deanna-troi-psychic-counsel:cast:s1,f:xs:XP:deanna-troi-psychic-counsel:cast:s1	-	-	-	fb9d3088f0bf	-	0492a98ccf53	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cf620c66-7db1-4db8-ae56-ee4bc2f77d74	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 cf620c66-7db1-4db8-ae56-ee4bc2f77d74	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:moonring-island:f0a0:s1,f:xs:XP:moonring-island:f0a0:s1	-	-	-	23b491658465	-	ce6c851ac8c3	-	-	2026-11-25	xproof
 cf620c66-7db1-4db8-ae56-ee4bc2f77d74	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

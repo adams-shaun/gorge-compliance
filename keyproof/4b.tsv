@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b2eba61-3937-4dc2-ad0a-e51fff8ecb80	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4b35b928-1088-457d-bd0d-3b14dc4ab230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b35b928-1088-457d-bd0d-3b14dc4ab230	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b36f8e2-ba7d-4bc7-890f-dd6ab73eef17	cast	cast-resolve	agreed	-	X	scen	1	0	Picard, Leading by Example/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4b36f8e2-ba7d-4bc7-890f-dd6ab73eef17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:picard-leading-by-example:cast:s1,f:xs:XP:picard-leading-by-example:cast:s1	-	-	-	fb9d3088f0bf	-	3cf4a5e09d28	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4b36f8e2-ba7d-4bc7-890f-dd6ab73eef17	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:picard-leading-by-example:f0a0:s1,f:xs:XP:picard-leading-by-example:f0a0:s1	-	-	-	23c4009444b0	-	3cf4a5e09d28	-	-	2026-11-25	xproof
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b515bb0-f275-4400-8032-3173b799ab40	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
-4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	cast	cast-resolve	agreed	-	X	scen	1	0	Shuttle Ace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shuttle-ace:cast:s1,f:xs:XP:shuttle-ace:cast:s1	-	-	-	fb9d3088f0bf	-	10e04817cd9f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-spear-of-agony:cast:s1,f:xs:XP:danitha-spear-of-agony:cast:s1	-	-	-	fb9d3088f0bf	-	b20d60fe4f14	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:danitha-spear-of-agony:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	b20d60fe4f14	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ba75d9e-e3f1-424a-95ca-37784b8d9479	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ba82d8e-1857-40a9-8b42-5d8348c68859	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honor-guard:cast:s1,f:xs:XP:honor-guard:cast:s1	-	-	-	25696bf19d5b	-	6a3beff3a659	-	-	2026-11-24	xproof
 4ba82d8e-1857-40a9-8b42-5d8348c68859	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:honor-guard:f0a0:s1,f:xs:XP:honor-guard:f0a0:s1	-	-	-	23c4009444b0	-	6a3beff3a659	-	-	2026-11-25	xproof
-4baa7847-dfcc-4aa3-aa64-2deeaa3f013b	cast	cast-resolve	agreed	-	X	scen	1	0	Murmuring Volume/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4baa7847-dfcc-4aa3-aa64-2deeaa3f013b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Murmuring Volume/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4baa7847-dfcc-4aa3-aa64-2deeaa3f013b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Murmuring Volume/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4baa7847-dfcc-4aa3-aa64-2deeaa3f013b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:murmuring-volume:cast:s1,f:xs:XP:murmuring-volume:cast:s1	-	-	-	fb9d3088f0bf	-	dffa11ccaffb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4baa7847-dfcc-4aa3-aa64-2deeaa3f013b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:murmuring-volume:cast:s1,f:xs:XP:murmuring-volume:cast:s1	-	-	-	fb9d3088f0bf	-	dffa11ccaffb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4baa7847-dfcc-4aa3-aa64-2deeaa3f013b	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:murmuring-volume:f0a1:s1,f:xs:XP:murmuring-volume:f0a1:s1	-	-	-	fb9d3088f0bf	-	dffa11ccaffb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4badd4e0-e5d7-4516-b220-cea2b02c79aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:insidious-dreams:cast:s1,f:xs:XP:insidious-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	d24a53a61bc0	-	-	2026-11-24	xproof
 4bae4e34-fcf4-4aee-8da2-5b3ee41a595a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4baf3db8-6f35-4101-9b21-15f4384c249a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:krovikan-whispers:f0t1:s1	-	-	-	23c4009444b0	-	09b5d1094bc5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

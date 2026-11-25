@@ -20,10 +20,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 510a6ac5-f098-4145-ac07-771b1b6f7cdf	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Riverpyre Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 510a6ac5-f098-4145-ac07-771b1b6f7cdf	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Riverpyre Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 510a6ac5-f098-4145-ac07-771b1b6f7cdf	land	play-land	agreed	-	FX	scen	2	0	Riverpyre Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-510bccb1-61cd-49f1-a54a-80352653d1e3	cast	cast-resolve	agreed	-	X	scen	1	0	Titanbones, Towering Heart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-510bccb1-61cd-49f1-a54a-80352653d1e3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Titanbones, Towering Heart/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-510bccb1-61cd-49f1-a54a-80352653d1e3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Titanbones, Towering Heart/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-510bccb1-61cd-49f1-a54a-80352653d1e3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Titanbones, Towering Heart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+510bccb1-61cd-49f1-a54a-80352653d1e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:titanbones-towering-heart:cast:s1,f:xs:XP:titanbones-towering-heart:cast:s1	-	-	-	fb9d3088f0bf	-	0d6f95874593	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+510bccb1-61cd-49f1-a54a-80352653d1e3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:titanbones-towering-heart:combat0.attack:s1,f:xs:XP:titanbones-towering-heart:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	0d6f95874593	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+510bccb1-61cd-49f1-a54a-80352653d1e3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:titanbones-towering-heart:combat0.block:s1,f:xs:XP:titanbones-towering-heart:combat0.block:s1	-	-	-	fb9d3088f0bf	-	0d6f95874593	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+510bccb1-61cd-49f1-a54a-80352653d1e3	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:titanbones-towering-heart:f0t0:s1,f:xs:XP:titanbones-towering-heart:f0t0:s1	-	-	-	fb9d3088f0bf	-	0d6f95874593	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 510bccb1-61cd-49f1-a54a-80352653d1e3	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Titanbones, Towering Heart/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5114f3e0-339d-46d6-9d44-97fa0afbd7c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quilled-slagwurm:cast:s1,f:xs:XP:quilled-slagwurm:cast:s1	-	-	-	d864b561c9cb	-	6985720ece5c	-	-	2026-11-24	xproof
 5115eb6b-efae-4561-912a-f7909cc75775	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51c1f21d-1512-4885-bfdc-58790cf77d51	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:ultron-drone:f0a0:s1,f:xs:XP:ultron-drone:f0a0:s1	-	-	-	23c4009444b0	-	6e33a89d013e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51c7beca-ca19-4a4d-9512-0255146a9cd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormrider-rig:cast:s1,f:xs:XP:stormrider-rig:cast:s1	-	-	-	d864b561c9cb	-	b06f43104ebe	-	-	2026-11-24	xproof
 51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:stormrider-rig:f0a0:s1,f:xs:XP:stormrider-rig:f0a0:s1	-	-	-	d864b561c9cb	-	b06f43104ebe	-	-	2026-11-24	xproof
-51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+51c7beca-ca19-4a4d-9512-0255146a9cd0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stormrider-rig:f0t0:s1,f:xs:XP:stormrider-rig:f0t0:s1	-	-	-	fb9d3088f0bf	-	b06f43104ebe	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dreadmobile:cast:s1,f:xs:XP:dreadmobile:cast:s1	-	-	-	ae86f6029288	-	9e3e87eb3180	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

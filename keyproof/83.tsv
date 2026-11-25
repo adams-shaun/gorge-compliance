@@ -86,8 +86,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 836d074a-8888-42a0-8dce-11ffce00d2f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 836fdd4b-98f8-4615-ae81-9bf63205c37d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eland-umbra:cast:s1,f:xs:XP:eland-umbra:cast:s1	-	-	-	3aa6ded33acb	-	387c296198ce	-	-	2026-11-25	xproof
 83705258-1f42-41db-a32e-de99ffd759eb	cast	cast-resolve	agreed	-	FX	scen	2	0	Saheeli, Jewel of Avishkar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83705258-1f42-41db-a32e-de99ffd759eb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Saheeli, Jewel of Avishkar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83705258-1f42-41db-a32e-de99ffd759eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saheeli, Jewel of Avishkar/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83705258-1f42-41db-a32e-de99ffd759eb	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:saheeli-jewel-of-avishkar:f0t0:s1,f:xs:XP:saheeli-jewel-of-avishkar:f0t0:s1	-	-	-	fb9d3088f0bf	-	4e27c51bd3de	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+83705258-1f42-41db-a32e-de99ffd759eb	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:saheeli-jewel-of-avishkar:static0.0:s1,f:xs:XP:saheeli-jewel-of-avishkar:static0.0:s1	-	-	-	fb9d3088f0bf	-	4e27c51bd3de	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 837182db-1bf3-4a2c-bd01-1af9d9873561	cast	cast-resolve	agreed	-	FX	scen	2	0	Unsummon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
 8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83c12f50-e5a1-479d-afab-edb0b40412f2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:desperate-futurescribe:combat0.attack:s1,f:xs:XP:desperate-futurescribe:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	215a44c4ad8c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 83c12f50-e5a1-479d-afab-edb0b40412f2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:desperate-futurescribe:combat0.block:s1,f:xs:XP:desperate-futurescribe:combat0.block:s1	-	-	-	fb9d3088f0bf	-	215a44c4ad8c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 83c12f50-e5a1-479d-afab-edb0b40412f2	f0/t0	Phase	agreed	-	FX	start	6	0	x:xs:XP:desperate-futurescribe:cast:s1,f:xs:XP:desperate-futurescribe:cast:s1	-	-	-	fb9d3088f0bf	-	215a44c4ad8c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-83c61083-b357-4775-a855-5a9013cc2bdf	cast	cast-resolve	agreed	-	X	scen	1	0	Verdant Kraken/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83c61083-b357-4775-a855-5a9013cc2bdf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Verdant Kraken/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83c61083-b357-4775-a855-5a9013cc2bdf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:verdant-kraken:cast:s1,f:xs:XP:verdant-kraken:cast:s1	-	-	-	fb9d3088f0bf	-	0a3cf674c16d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+83c61083-b357-4775-a855-5a9013cc2bdf	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:verdant-kraken:cast:s1,f:xs:XP:verdant-kraken:cast:s1	-	-	-	fb9d3088f0bf	-	0a3cf674c16d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 83c69c05-173d-4c1b-9541-1dde474fef5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bonehoard:f0t0:s1,f:xs:XP:bonehoard:f0t0:s1	-	-	-	d864b561c9cb	-	fe7cc9a16a03	-	-	2026-11-24	xproof
 83c69c05-173d-4c1b-9541-1dde474fef5f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83c69c05-173d-4c1b-9541-1dde474fef5f	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:bonehoard:f0t0:s1,f:xs:XP:bonehoard:f0t0:s1	-	-	-	d864b561c9cb	-	fe7cc9a16a03	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83cf4235-eb4e-4c55-839a-f2740d41ed5e	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:pestermite:cast:s1	-	-	-	d864b561c9cb	-	bf42271dfd4f	-	-	2026-11-24	xproof
 83d2ff7f-4d6e-4cc0-b8a9-3c5b3236eea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83d2ff7f-4d6e-4cc0-b8a9-3c5b3236eea0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83d8e98d-ab97-40b1-820a-2d193a5ed261	cast	cast-resolve	agreed	-	X	scen	1	0	Hemmer, Fixing What Is Broken/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83d8e98d-ab97-40b1-820a-2d193a5ed261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hemmer-fixing-what-is-broken:cast:s1,f:xs:XP:hemmer-fixing-what-is-broken:cast:s1	-	-	-	fb9d3088f0bf	-	6ffa17af1182	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 83d8e98d-ab97-40b1-820a-2d193a5ed261	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 83d8eda7-b8d2-479a-b1ec-de56833a3182	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:praetor-s-counsel:cast:s1,f:xs:XP:praetor-s-counsel:cast:s1	-	-	-	d864b561c9cb	-	c86cecc52409	-	-	2026-11-24	xproof
 83dcfac0-6efd-4e37-9402-15f9889e84e1	cast	cast-resolve	agreed	-	FX	scen	2	0	The Great Goblin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -213,7 +213,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83f2470e-2114-4cd9-ab1a-21b76e9cdf63	land	land	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:land:s1,f:xs:XP:rumble-arena:land:s1	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83f35293-39e9-4c78-9c9f-25a1fc905676	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f35293-39e9-4c78-9c9f-25a1fc905676	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83f426db-3b25-4407-afd0-0465e3900c24	cast	cast-resolve	agreed	-	X	scen	1	0	Year of Hell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83f426db-3b25-4407-afd0-0465e3900c24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:year-of-hell:cast:s1,f:xs:XP:year-of-hell:cast:s1	-	-	-	fb9d3088f0bf	-	abbc6b495b9c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 83f776d9-f3b6-40c2-8008-1ace4d110825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

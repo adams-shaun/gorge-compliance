@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 137e3974-74e1-4941-8597-10aeba6cac37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1380f0cc-e875-46ec-a802-c6684bf3965c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1385679f-bdcd-4d7e-8266-1df0e36cc2da	cast	cast-resolve	agreed	-	X	scen	1	0	Tricorder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1385679f-bdcd-4d7e-8266-1df0e36cc2da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tricorder:cast:s1,f:xs:XP:tricorder:cast:s1	-	-	-	fb9d3088f0bf	-	5513e13845f7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1385679f-bdcd-4d7e-8266-1df0e36cc2da	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:tricorder:f0a0:s1,f:xs:XP:tricorder:f0a0:s1	-	-	-	23c4009444b0	-	5513e13845f7	-	-	2026-11-25	xproof
 1385679f-bdcd-4d7e-8266-1df0e36cc2da	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tricorder:f0a0:s1,f:xs:XP:tricorder:f0a0:s1	-	-	-	23c4009444b0	-	5513e13845f7	-	-	2026-11-25	xproof
 1386d111-a2a7-4df1-91d7-947664126989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13958d6f-25f9-4a6c-a16c-e7a20e1b9117	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1396e7f1-ac91-4778-9f71-493c7a44bd51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1396e7f1-ac91-4778-9f71-493c7a44bd51	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1397e7d5-4aa4-4c8d-8957-845579b775f7	cast	cast-resolve	agreed	-	X	scen	1	0	Tactical Officer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1397e7d5-4aa4-4c8d-8957-845579b775f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tactical-officer:cast:s1,f:xs:XP:tactical-officer:cast:s1	-	-	-	fb9d3088f0bf	-	9f339f2677bf	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1397e7d5-4aa4-4c8d-8957-845579b775f7	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:tactical-officer:f0t0:s1,f:xs:XP:tactical-officer:f0t0:s1	-	-	-	23c4009444b0	-	9f339f2677bf	-	-	2026-11-25	xproof
 139a5f0b-6f76-4918-96e6-cdcf27253230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 139a5f0b-6f76-4918-96e6-cdcf27253230	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

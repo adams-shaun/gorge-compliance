@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 592689f2-f17c-40d6-b880-431f4b6a6b0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bristlebane-battler:f0t0:s1,f:xs:XP:bristlebane-battler:f0t0:s1	-	-	-	23c4009444b0	-	dd830568cb8e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 592689f2-f17c-40d6-b880-431f4b6a6b0c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Bristlebane Battler/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 592c91fc-6430-4c76-9460-65f047350f67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lyra-dawnbringer:cast:s1,f:xs:XP:lyra-dawnbringer:cast:s1	-	-	-	8c0bd19283bb	-	ff54f0c5a851	-	-	2026-11-24	xproof
-592c91fc-6430-4c76-9460-65f047350f67	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:lyra-dawnbringer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ff54f0c5a851	-	-	2026-11-25	xproof
-592c91fc-6430-4c76-9460-65f047350f67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lyra Dawnbringer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+592c91fc-6430-4c76-9460-65f047350f67	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:lyra-dawnbringer:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	ff54f0c5a851	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+592c91fc-6430-4c76-9460-65f047350f67	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:lyra-dawnbringer:combat0.block:s1	-	-	-	fb9d3088f0bf	-	ff54f0c5a851	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 592c91fc-6430-4c76-9460-65f047350f67	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:lyra-dawnbringer:static0.0:s1,f:xs:XP:lyra-dawnbringer:static0.0:s1	-	-	-	3aa6ded33acb	-	ff54f0c5a851	-	-	2026-11-25	xproof
 59322432-591a-4e8d-aff5-12ca1feb1028	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:magmatic-galleon:f0t0:s2,f:xs:XP:magmatic-galleon:f0t0:s2	-	-	-	e07cf3a05ba5	-	d3111a638556	-	-	2026-11-24	xproof
 59322432-591a-4e8d-aff5-12ca1feb1028	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:magmatic-galleon:f0a0:s1,f:xs:XP:magmatic-galleon:f0a0:s1	-	-	-	3aa6ded33acb	-	d3111a638556	-	-	2026-11-25	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59a10335-72df-44a5-a514-5bac392cd282	cast	cast-resolve	agreed	-	FX	scen	2	0	Professor Zei, Anthropologist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59a10335-72df-44a5-a514-5bac392cd282	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Professor Zei, Anthropologist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59a10335-72df-44a5-a514-5bac392cd282	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Professor Zei, Anthropologist/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-59a4c4cf-07b4-4009-bbea-7da7b31f09a1	cast	cast-resolve	agreed	-	X	scen	1	0	Support Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+59a4c4cf-07b4-4009-bbea-7da7b31f09a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:support-mission:cast:s1,f:xs:XP:support-mission:cast:s1	-	-	-	fb9d3088f0bf	-	362d2b267cb6	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 59a4c4cf-07b4-4009-bbea-7da7b31f09a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:support-mission:f0t0:s1,f:xs:XP:support-mission:f0t0:s1	-	-	-	23c4009444b0	-	362d2b267cb6	-	-	2026-11-25	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:horizon-of-progress:f0a1:s1,f:xs:XP:horizon-of-progress:f0a1:s1	-	-	-	8c0bd19283bb	-	b0c1dbc89683	-	-	2026-11-24	xproof

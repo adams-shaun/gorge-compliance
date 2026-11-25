@@ -5,10 +5,10 @@ d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP
 d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a1	GainControl	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:f0a1:s1,f:xs:XP:sarkhan-vol:f0a1:s1	-	-	-	23c4009444b0	-	c707684b644d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a2	Token	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:f0a2:s1,f:xs:XP:sarkhan-vol:f0a2:s1	-	-	-	23c4009444b0	-	c707684b644d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	cast	cast-resolve	agreed	-	FX	scen	2	0	Lyra, Tolarian Archangel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lyra-tolarian-archangel:combat0.attack:s1,f:xs:XP:lyra-tolarian-archangel:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	a809ac7c7a23	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lyra-tolarian-archangel:combat0.block:s1,f:xs:XP:lyra-tolarian-archangel:combat0.block:s1	-	-	-	fb9d3088f0bf	-	a809ac7c7a23	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Lyra, Tolarian Archangel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9060fff-0b65-4b3d-930d-6e36315b802c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d9060fff-0b65-4b3d-930d-6e36315b802c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lyra-tolarian-archangel:f0t0:s1,f:xs:XP:lyra-tolarian-archangel:f0t0:s1	-	-	-	fb9d3088f0bf	-	a809ac7c7a23	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d906965a-0f33-4d75-8abe-66f2cf4817b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashen-powder:cast:s1,f:xs:XP:ashen-powder:cast:s1	-	-	-	ea3140b6974b	-	a887bd217fa5	-	-	2026-11-24	xproof
 d90882ae-6572-4214-8d9c-0bdfb75f9be2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d90a5213-3363-4cd1-97d6-4fc057f78b2a	cast	cast-resolve	agreed	-	FX	scen	2	0	Thunderbolts Conspiracy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ d93d98ef-a5b6-4d6f-9828-fd5943471d0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d93d98ef-a5b6-4d6f-9828-fd5943471d0f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d93f82ce-0eed-45cc-a7b1-50fd4cbb6152	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-gix:f0t0:s1,f:xs:XP:priest-of-gix:f0t0:s1	-	-	-	5f2128bf97e4	-	e847ee6a1fe3	-	-	2026-11-24	xproof
 d93f82ce-0eed-45cc-a7b1-50fd4cbb6152	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:priest-of-gix:f0t0:s1,f:xs:XP:priest-of-gix:f0t0:s1	-	-	-	5f2128bf97e4	-	e847ee6a1fe3	-	-	2026-11-24	xproof
-d940611f-f84d-43fa-82d6-eecb4fb54164	cast	cast-resolve	agreed	-	X	scen	1	0	Multiply by Zero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d940611f-f84d-43fa-82d6-eecb4fb54164	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:multiply-by-zero:cast:s1,f:xs:XP:multiply-by-zero:cast:s1	-	-	-	fb9d3088f0bf	-	73b24c084dda	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d9410a82-1b7f-4f3a-a0fd-53099d7594ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d94144b0-8967-4904-bb6b-44b0022d1f19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d94144b0-8967-4904-bb6b-44b0022d1f19	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ d9517c5d-66d0-4178-96fb-a8c04f311ad8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d955a26a-d474-4dff-9eba-69fcfe92d8ae	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d95aeeb0-b722-4f70-85fc-6866be4854bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d95aeeb0-b722-4f70-85fc-6866be4854bd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-d95af032-3efd-40c7-8229-ade9d974934f	cast	cast-resolve	agreed	-	X	scen	1	0	U.S.S. Enterprise-D, Galaxy-Class/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d95af032-3efd-40c7-8229-ade9d974934f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:u-s-s-enterprise-d-galaxy-class:cast:s1,f:xs:XP:u-s-s-enterprise-d-galaxy-class:cast:s1	-	-	-	fb9d3088f0bf	-	4092bb076f0b	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d95af032-3efd-40c7-8229-ade9d974934f	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d95cd013-6f32-4a8b-9c46-a28695eea4f1	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d95cd013-6f32-4a8b-9c46-a28695eea4f1	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ d97a0e41-9dd7-4466-afb7-3d8bd6cd0eed	f0/t1	NULL	owed	refused:start-not-exercised
 d97c4bca-6433-4cb0-b63a-fdf8360fc29c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d97c4bca-6433-4cb0-b63a-fdf8360fc29c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d97de156-5a6d-4dc6-953e-d4bad63cbad2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-d9806ba7-8af4-4e8e-9238-7bc40c6bee0b	cast	cast-resolve	agreed	-	X	scen	1	0	Collective Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d9806ba7-8af4-4e8e-9238-7bc40c6bee0b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collective-drone:cast:s1,f:xs:XP:collective-drone:cast:s1	-	-	-	fb9d3088f0bf	-	14f9b91366a5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 d981977d-acfa-432a-b1d7-1808a89a5998	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rise-of-the-varmints:cast:s1,f:xs:XP:rise-of-the-varmints:cast:s1	-	-	-	3aa6ded33acb	-	0417539de8e3	-	-	2026-11-25	xproof
 d981d85c-e97b-4fe7-b415-6e73a3e7e35c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d981d85c-e97b-4fe7-b415-6e73a3e7e35c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

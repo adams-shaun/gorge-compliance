@@ -12,11 +12,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 680da572-6cd5-482a-b01d-32944566d8c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 680f5eca-b98e-4f73-a852-ab629d94297e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-cloud:cast:s1,f:xs:XP:death-cloud:cast:s1	-	-	-	23c4009444b0	-	961e7e67c2cd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6812e4d3-0034-4fc8-9ee9-520f76a0ea94	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Innovative Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6812e4d3-0034-4fc8-9ee9-520f76a0ea94	land	play-land	agreed	-	X	scen	1	0	Innovative Commons/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6812e4d3-0034-4fc8-9ee9-520f76a0ea94	land	land	agreed	-	FX	start	2	0	x:xs:XP:innovative-commons:land:s1,f:xs:XP:innovative-commons:land:s1	-	-	-	fb9d3088f0bf	-	0fb94e1f7f7f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 68175b49-f1e6-4b34-aad9-20d61a43d427	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drogskol-reaver:cast:s1,f:xs:XP:drogskol-reaver:cast:s1	-	-	-	8c0bd19283bb	-	79c6cf2e18ce	-	-	2026-11-24	xproof
 68175b49-f1e6-4b34-aad9-20d61a43d427	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:drogskol-reaver:combat0.attack:s1,f:xs:XP:drogskol-reaver:combat0.attack:s1	-	-	-	3aa6ded33acb	-	79c6cf2e18ce	-	-	2026-11-25	xproof
-68175b49-f1e6-4b34-aad9-20d61a43d427	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Drogskol Reaver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68175b49-f1e6-4b34-aad9-20d61a43d427	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:drogskol-reaver:combat0.attack:s1,f:xs:XP:drogskol-reaver:combat0.attack:s1	-	-	-	3aa6ded33acb	-	79c6cf2e18ce	-	-	2026-11-25	xproof
+68175b49-f1e6-4b34-aad9-20d61a43d427	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:drogskol-reaver:combat0.block:s1	-	-	-	fb9d3088f0bf	-	79c6cf2e18ce	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+68175b49-f1e6-4b34-aad9-20d61a43d427	f0/t0	LifeGained	agreed	-	X	start	2	0	x:xs:XP:drogskol-reaver:combat0.block:s1	-	-	-	fb9d3088f0bf	-	79c6cf2e18ce	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 681d07e6-234f-4544-a2ea-bfbefe6b0b36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 681d07e6-234f-4544-a2ea-bfbefe6b0b36	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:hateflayer:f0a0:s1,f:xs:XP:hateflayer:f0a0:s1	-	-	-	8a1b1a193ec0	-	197076a5626d	-	-	2026-11-24	xproof
 681fc668-cb26-4ba4-a915-48ddfa2b9520	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prized-statue:f0t0:s1,f:xs:XP:prized-statue:f0t0:s1	-	-	-	8c0bd19283bb	-	c1146f70ef95	-	-	2026-11-24	xproof

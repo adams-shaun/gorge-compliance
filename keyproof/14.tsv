@@ -149,8 +149,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14c3ff84-1e82-4606-a433-869fc52cc382	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 14c3ff84-1e82-4606-a433-869fc52cc382	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 14c4ad24-7f38-409b-8ef0-341f233982da	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-14c4ad24-7f38-409b-8ef0-341f233982da	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-14c4ad24-7f38-409b-8ef0-341f233982da	land	play-land	agreed	-	X	scen	1	0	Romulus/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+14c4ad24-7f38-409b-8ef0-341f233982da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:romulus:land:s1,f:xs:XP:romulus:land:s1	-	-	-	fb9d3088f0bf	-	6de22a9709a6	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+14c4ad24-7f38-409b-8ef0-341f233982da	land	land	agreed	-	FX	start	2	0	x:xs:XP:romulus:land:s1,f:xs:XP:romulus:land:s1	-	-	-	fb9d3088f0bf	-	6de22a9709a6	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 14c8a590-88ec-4982-ad7b-36a219ff6de7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tyvar-kell:cast:s1,f:xs:XP:tyvar-kell:cast:s1	-	-	-	d864b561c9cb	-	8bf8af7a721a	-	-	2026-11-24	xproof
 14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:tyvar-kell:cast:s2,f:xs:XP:tyvar-kell:cast:s2	-	-	-	d864b561c9cb	-	8bf8af7a721a	-	-	2026-11-24	xproof
 14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:tyvar-kell:cast:s1,f:xs:XP:tyvar-kell:cast:s1	-	-	-	d864b561c9cb	-	8bf8af7a721a	-	-	2026-11-24	xproof

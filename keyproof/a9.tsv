@@ -33,7 +33,7 @@ a931b609-1486-447b-9479-61a45d64f2ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a931b609-1486-447b-9479-61a45d64f2ef	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:merrow-commerce:f0t0:s1,f:xs:XP:merrow-commerce:f0t0:s1	-	-	-	23c4009444b0	-	d8b572a7b6ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a932e265-604a-4aed-b8a9-6234a3db16a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a932e265-604a-4aed-b8a9-6234a3db16a5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a9368972-4697-4a10-97e3-324149a26fba	cast	cast-resolve	agreed	-	X	scen	1	0	Make It So/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a9368972-4697-4a10-97e3-324149a26fba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:make-it-so:cast:s1,f:xs:XP:make-it-so:cast:s1	-	-	-	fb9d3088f0bf	-	3a254b1aafc0	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 a936b84c-c350-4a1f-b4a7-86316f11c67f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a93779c5-603e-4a91-aef8-a0cd8fd1b3e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a939f01b-afce-4d92-a897-1a6dc3d788c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ a98df6bd-e806-4ee1-a418-ad318d5d0425	f0/t0	NULL	owed	refused:no-generator:trigge
 a990e744-bfc4-435d-aef6-6256ac10f5a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a994de7b-0128-4f03-922f-c8cd80cb5852	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:funeral-longboat:cast:s1,f:xs:XP:funeral-longboat:cast:s1	-	-	-	d864b561c9cb	-	c320b261e39f	-	-	2026-11-24	xproof
 a994de7b-0128-4f03-922f-c8cd80cb5852	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-a99ce9db-9b7d-45a0-bee7-0875fc62ca48	cast	cast-resolve	agreed	-	X	scen	1	0	Loot, the Nexus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a99ce9db-9b7d-45a0-bee7-0875fc62ca48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loot-the-nexus:cast:s1,f:xs:XP:loot-the-nexus:cast:s1	-	-	-	fb9d3088f0bf	-	24b08aed7828	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 a99ce9db-9b7d-45a0-bee7-0875fc62ca48	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Loot, the Nexus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9a0088a-3c86-4baf-9754-79006f733ce1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9a1d92d-150b-48e1-b41b-dd746b7c1626	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:insolent-neonate:cast:s1,f:xs:XP:insolent-neonate:cast:s1	-	-	-	d864b561c9cb	-	4f1e92e23da4	-	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ a9c5b155-7c09-4100-9679-8fca2b5e9222	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a9c5b155-7c09-4100-9679-8fca2b5e9222	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a9cbf2ed-9896-41b5-b17f-e2fcb3cb82fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tether-technician:f0t0:s1,f:xs:XP:tether-technician:f0t0:s1	-	-	-	25696bf19d5b	-	ea50397698fc	-	-	2026-11-24	xproof
-a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tether Technician/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tether Technician/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tether-technician:combat0.attack:s1,f:xs:XP:tether-technician:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	ea50397698fc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tether-technician:combat0.block:s1,f:xs:XP:tether-technician:combat0.block:s1	-	-	-	fb9d3088f0bf	-	ea50397698fc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tether-technician:f0t0:s1,f:xs:XP:tether-technician:f0t0:s1	-	-	-	25696bf19d5b	-	ea50397698fc	-	-	2026-11-24	xproof
 a9d288b8-cdc1-4e55-a0c9-d6edfc95e65d	cast	cast-resolve	agreed	-	FX	scen	2	0	Shock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9d60d80-bcef-45e0-8ded-d70bd3c2780f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caradora-heart-of-alacria:f0t0:s1,f:xs:XP:caradora-heart-of-alacria:f0t0:s1	-	-	-	25696bf19d5b	-	9b226b363875	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ a9d72f78-2ab5-4e2e-ab7b-ef875e0a0609	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:
 a9d72f78-2ab5-4e2e-ab7b-ef875e0a0609	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lost Jitte/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a9d8ab76-70a4-475e-b87e-4737c090553a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9d8ab76-70a4-475e-b87e-4737c090553a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sprite-dragon:f0t0:s1,f:xs:XP:sprite-dragon:f0t0:s1	-	-	-	23c4009444b0	-	bcb4b1be9e0e	-	-	2026-11-25	xproof
-a9df60bf-f327-4d50-ab4d-99324fc2dcfe	cast	cast-resolve	agreed	-	X	scen	1	0	Xenobotanist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a9df60bf-f327-4d50-ab4d-99324fc2dcfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:xenobotanist:cast:s1,f:xs:XP:xenobotanist:cast:s1	-	-	-	fb9d3088f0bf	-	36065a7dad65	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 a9df60bf-f327-4d50-ab4d-99324fc2dcfe	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 a9e28134-382b-45e5-8fd0-cc0e7d56fd0c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 a9e28134-382b-45e5-8fd0-cc0e7d56fd0c	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:gravelgill-duo:f0t0:s1,f:xs:XP:gravelgill-duo:f0t0:s1	-	-	-	23c4009444b0	-	5135f7377d0d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
