@@ -69,6 +69,11 @@ var verdictProducerFiles = map[string]bool{
 	"scripts/forge-oracle-setup.sh": true,
 }
 
+// forgeDriverFixturePrefix names scripts/forge-oracle-test-*.sh, the Forge
+// driver regression fixtures. cmd/oraclediff's
+// TestForgeScriptFixturesCarryTheirItemSHA reads every one of them.
+const forgeDriverFixturePrefix = "scripts/forge-oracle-test-"
+
 // Packages returns the Go test packages for changed repo-relative paths.
 // fsys must be rooted at the module root. The result is sorted and unique;
 // it is []string{All} when a pin file changed, because that re-links every
@@ -88,6 +93,12 @@ func Packages(fsys fs.FS, changed []string) ([]string, error) {
 			// The hand-authored and XMage-port corpora are consumed by ./audit,
 			// whatever their own directory contains.
 			set["./audit"] = struct{}{}
+		}
+		if strings.HasPrefix(f, forgeDriverFixturePrefix) {
+			// The Forge driver fixtures hold hand-authored requests whose
+			// identity cmd/oraclediff checks; the script is no Go file, so
+			// the role selects the package.
+			set["./cmd/oraclediff"] = struct{}{}
 		}
 		if isVerdictProducer(f) {
 			producer = true
