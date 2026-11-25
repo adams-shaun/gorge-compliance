@@ -25,21 +25,343 @@ const (
 )
 
 // deadOnArrival reports whether a creature placed on the battlefield dies to
-// state-based actions at once (CR 704.5f): a printed toughness of 0 or less.
+// state-based actions at once (CR 704.5f): a toughness with no positive base.
 // An X creature that enters with counters (Endless One, Walking Ballista,
 // Ugin's Conjurant) is 0/0 until its replacement effect puts them, and a
 // start places it without its X, so it never survives as a bearer, an
-// enabler or a target.
+// enabler or a target. A characteristic-defining toughness is the same: the
+// start places no cards or counters for its CDA to count (Mortivore with an
+// empty graveyard, Soramaro with an empty hand, Scourge of the Skyclaves at
+// 20 life), so only a printed positive base (Mwonvuli Ooze's 1+*) proves it
+// lives.
 func deadOnArrival(f *cards.Face) bool {
 	if !f.IsCreature() {
 		return false
 	}
-	_, tough, ok := strings.Cut(f.PT, "/")
-	if !ok || strings.ContainsAny(tough, "*+-") {
-		return false // no PT, a characteristic-defining toughness, or a modifier
+	if numericToughnessDead(f) {
+		return true
 	}
-	n, err := strconv.Atoi(strings.TrimSpace(tough))
-	return err == nil && n <= 0
+	// A CDA has no numeric base: the placement did not put the zone contents
+	// or player life its count reads, so an enabler, target or bearer cannot
+	// be assumed to survive. The key's own face is checked with the start in
+	// hand (cdaToughnessZero), because a static start may place what its CDA
+	// counts (Eluge's Islands).
+	return cdaToughness(f)
+}
+
+// numericToughnessDead reports a creature whose printed toughness begins with
+// a number <= 0. A CDA ("*/*", "1+*") or an unparseable toughness is false:
+// the caller with the start state decides (cdaToughnessZero), while
+// deadOnArrival treats it as dead for a bare placement.
+func numericToughnessDead(f *cards.Face) bool {
+	if !f.IsCreature() {
+		return false
+	}
+	_, tough, ok := strings.Cut(f.PT, "/")
+	if !ok {
+		return false // no printed P/T
+	}
+	tough = strings.TrimSpace(tough)
+	base := 0
+	for base < len(tough) && tough[base] >= '0' && tough[base] <= '9' {
+		base++
+	}
+	if base == 0 {
+		return false
+	}
+	n, err := strconv.Atoi(tough[:base])
+	return err != nil || n <= 0
+}
+
+// cdaToughness reports whether the creature's toughness is not a plain
+// number: a characteristic-defining value (or a malformed/negative one) the
+// start did not place counters or zone contents for.
+func cdaToughness(f *cards.Face) bool {
+	if !f.IsCreature() {
+		return false
+	}
+	_, tough, ok := strings.Cut(f.PT, "/")
+	if !ok {
+		return false
+	}
+	tough = strings.TrimSpace(tough)
+	return tough == "" || tough[0] < '0' || tough[0] > '9'
+}
+
+// cdaToughnessZero reports whether the CDA that sets face's toughness counts
+// a resource the start leaves empty, so the placed creature dies at once. It
+// reads the corpus's common CDA forms and says false (not provably zero) for
+// one it does not understand, because a false refusal would lose a key whose
+// start does place the counted resource.
+func cdaToughnessZero(reg *cards.Registry, face *cards.Face, f *StartFile) bool {
+	for i := range face.Statics {
+		st := &face.Statics[i]
+		if !strings.EqualFold(st.Params["CharacteristicDefining"], "True") {
+			continue
+		}
+		expr := face.SVars[st.Params["SetToughness"]]
+		if expr == "" {
+			continue
+		}
+		if zero, known := cdaExprZero(reg, face, f, expr); known {
+			return zero
+		}
+	}
+	return false
+}
+
+// cdaExprZero is cdaToughnessZero's expression read. known is false for a
+// form it does not evaluate: the caller must not refuse on a guess.
+func cdaExprZero(reg *cards.Registry, face *cards.Face, f *StartFile, expr string) (zero, known bool) {
+	switch {
+	case strings.HasPrefix(expr, "Count$ValidGraveyard "):
+		filter := strings.TrimPrefix(expr, "Count$ValidGraveyard ")
+		n, ok := startZoneCount(reg, f, filter, "graveyard")
+		if n != 0 || !ok {
+			return n == 0, ok
+		}
+		// A count of the other seat's zone alone (Consuming Aberration's
+		// opponent's graveyard) is no zero the generator can vouch for: the
+		// start's needs fill their own controller's zone, and the other
+		// seat's the generator cannot place.
+		if crossSeatZoneFilter(filter) {
+			return false, false
+		}
+		return true, true
+	case strings.HasPrefix(expr, "Count$ValidHand "):
+		filter := strings.TrimPrefix(expr, "Count$ValidHand ")
+		n, ok := startZoneCount(reg, f, filter, "hand")
+		if n != 0 || !ok {
+			return n == 0, ok
+		}
+		if crossSeatZoneFilter(filter) {
+			return false, false
+		}
+		return true, true
+	case strings.HasPrefix(expr, "Count$Valid "):
+		filter := strings.TrimPrefix(expr, "Count$Valid ")
+		n, ok := startZoneCount(reg, f, filter, "battlefield")
+		if n != 0 || !ok {
+			return n == 0, ok
+		}
+		// The card itself may join the count: its printed types, or a type
+		// its own static adds (Ashaya makes its controller's nontoken
+		// creatures Forest lands, so it counts itself as a land;
+		// Swampbenders makes every land a Swamp). A zero over placed state
+		// alone is then no zero. A zone count cannot count the card (it is
+		// on the battlefield), so the check is the battlefield branch's.
+		return false, !faceCountsItself(face, filter)
+	case strings.HasPrefix(expr, "PlayerCountPlayers$HighestLifeTotal"):
+		return startHighestLife(f) >= 20, true
+	case strings.HasPrefix(expr, "SVar$"):
+		// "SVar$Y/NMinus.20": the highest player life total, subtracted from
+		// 20 (Scourge of the Skyclaves). Only that one reference is read.
+		ref, op, ok := strings.Cut(strings.TrimPrefix(expr, "SVar$"), "/")
+		if !ok || !strings.Contains(op, "NMinus") {
+			return false, false
+		}
+		if strings.HasPrefix(face.SVars[ref], "PlayerCountPlayers$HighestLifeTotal") {
+			return startHighestLife(f) >= 20, true
+		}
+	}
+	return false, false
+}
+
+// startZoneCount is how many cards in zone (both seats, filtered by the
+// filter's control clause relative to the key card's controller) the filter
+// matches. ok is false when the filter carries a property parseFilter does not
+// read: a count the generator cannot take is not a zero.
+func startZoneCount(reg *cards.Registry, f *StartFile, filter, zone string) (int, bool) {
+	alts := parseFilter(filter)
+	if len(alts) == 0 {
+		return 0, false
+	}
+	unknown := false
+	for _, a := range alts {
+		unknown = unknown || !a.known
+	}
+	seat := 0
+	if f.Focus != nil && f.Focus.Seat != nil {
+		seat = *f.Focus.Seat
+	}
+	n := 0
+	for s, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		var names []string
+		switch zone {
+		case "graveyard":
+			names = sd.Graveyard
+		case "hand":
+			names = sd.Hand
+		default:
+			names = sd.Battlefield
+		}
+		for _, name := range names {
+			c, ok := reg.Lookup(name)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			matched := false
+			for _, a := range alts {
+				if !a.known || a.self {
+					continue
+				}
+				if a.ctrl == ctrlYou && s != seat || a.ctrl == ctrlOpp && s == seat {
+					continue
+				}
+				if a.test(c.Faces[0]) {
+					matched = true
+					break
+				}
+			}
+			if matched {
+				n++
+			}
+		}
+	}
+	if n == 0 && unknown {
+		return 0, false // an unread alternative might match a card the count would see
+	}
+	return n, true
+}
+
+// crossSeatZoneFilter reports a zone filter that counts only the other
+// seat's cards (Card.OppOwn): the start's needs fill their own controller's
+// zone, so a zero over placed state is not the zero the game reads.
+func crossSeatZoneFilter(filter string) bool {
+	for _, a := range parseFilter(filter) {
+		if a.known && a.ctrl == ctrlOpp {
+			return true
+		}
+	}
+	return false
+}
+
+// faceCountsItself reports whether the battlefield filter counts the card
+// itself: a printed type of its, or a type its own static adds.
+func faceCountsItself(face *cards.Face, filter string) bool {
+	for _, raw := range strings.Split(filter, ",") {
+		raw = strings.TrimSpace(raw)
+		head, props, _ := strings.Cut(raw, ".")
+		oppos := false
+		for _, p := range strings.Split(props, "+") {
+			switch p {
+			case "OppCtrl", "OppOwn", "YouDontCtrl":
+				oppos = true
+			}
+		}
+		if oppos || head == "" || head != "Card" && head != "Permanent" && !typeWord(head) {
+			continue
+		}
+		if face.HasTypeWord(head) {
+			return true
+		}
+		for i := range face.Statics {
+			for _, p := range []string{"AddType", "SetTypes", "SetType"} {
+				for _, w := range strings.FieldsFunc(face.Statics[i].Params[p], func(r rune) bool {
+					return r == '&' || r == ',' || r == ' '
+				}) {
+					if strings.EqualFold(strings.TrimSpace(w), head) {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
+}
+
+// startHighestLife is the highest life total the start seats hold (20 when a
+// seat has no override), the value Scourge of the Skyclaves' CDA subtracts.
+func startHighestLife(f *StartFile) int32 {
+	hi := int32(20)
+	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		if sd.Life != nil && *sd.Life > hi {
+			hi = *sd.Life
+		}
+	}
+	return hi
+}
+
+// focusCardBlock is why the key's own face cannot be placed on the battlefield
+// for the start, or "": a creature whose printed toughness is 0 or less, or a
+// dynamic entry counter the start schema cannot restate. It reads only the
+// card; a CDA toughness depends on the finished start (cdaToughnessZero, run
+// by recipe after the needs are placed), and so does the card's turn-1 upkeep
+// (focusUpkeepBlock, also recipe): the start's placed lands and the focus
+// play's own mana decide whether the upkeep can be paid. The checks run for
+// every key whose card the start puts on the battlefield, not only an ability
+// or combat focus: a dies-trigger key whose card is a 0/0 X creature dies
+// before the focus play can target it (Hooded Hydra for Murder).
+func focusCardBlock(face *cards.Face) string {
+	switch {
+	case numericToughnessDead(face):
+		return "start:dead-on-arrival"
+	case entryCounterUnrestatable(face):
+		return "start:entry-counter"
+	}
+	return ""
+}
+
+// attackBlock is why the battlefields' scripted attack (Focus.Kind "attack")
+// cannot be declared at turn 1's combat, or "": the focus card is not a
+// creature, has Defender or a self attack restriction, or enters tapped and
+// its own "doesn't untap" replacement keeps it tapped at the first main
+// (Grimgrin, Corpse-Born). The start cannot exercise an attack key whose
+// attacker cannot attack, and the engine's refusal comes much later as
+// start-not-exercised, so the generator refuses it by name.
+func attackBlock(reg *cards.Registry, f *StartFile) string {
+	fc := f.Focus
+	if fc == nil || fc.Kind != "attack" || fc.Card == "" || fc.Seat == nil {
+		return ""
+	}
+	s := focusSeat(f, *fc.Seat)
+	if s == nil {
+		return ""
+	}
+	onField := false
+	for _, name := range s.Battlefield {
+		onField = onField || name == fc.Card
+	}
+	if !onField {
+		return ""
+	}
+	c, ok := reg.Lookup(fc.Card)
+	if !ok || len(c.Faces) == 0 {
+		return ""
+	}
+	face := c.Faces[0]
+	if !face.IsCreature() || face.HasKeyword("Defender") || restrictingStatic(face, face, true) != nil {
+		return "start:cannot-attack"
+	}
+	tapped := false
+	for _, name := range s.Tapped {
+		tapped = tapped || name == fc.Card
+	}
+	if !tapped {
+		for i := range face.Repls {
+			r := &face.Repls[i]
+			if r.Event == "Moved" && strings.Contains(r.Params["ValidCard"], "Card.Self") &&
+				r.Params["Destination"] == "Battlefield" && r.With != nil &&
+				r.With.API == "Tap" && strings.Contains(r.With.Params["Defined"], "Self") {
+				tapped = true // it enters tapped
+				break
+			}
+		}
+	}
+	if !tapped {
+		return ""
+	}
+	// The untap step of the focus seat's turn 1 comes before the first main:
+	// it untaps a permanent that entered tapped unless its own replacement
+	// keeps it from untapping.
+	for i := range face.Repls {
+		r := &face.Repls[i]
+		if r.Event == "Untap" && strings.Contains(r.Params["ValidCard"], "Card.Self") &&
+			strings.EqualFold(r.Params["Layer"], "CantHappen") {
+			return "start:cannot-attack"
+		}
+	}
+	return ""
 }
 
 // tgtReq is one target a play names: the alternatives of its filter (a Forge
