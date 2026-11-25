@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 831273d4-ced3-4659-b1f6-d5a0aeed3421	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83133f51-bfbd-4db5-9be0-f660e3b66435	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83134570-debe-4bc0-9656-2a16801a3592	cast	cast	agreed	-	F	start	2	0	f:xs:XP:turbulent-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	82d49b3e0ffd	-	-	2026-11-24	xproof
-831487cf-a377-4c9b-920d-c5bc68f17f24	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	421400546c4b	-	-	2026-11-25	xproof
-831487cf-a377-4c9b-920d-c5bc68f17f24	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	421400546c4b	-	-	2026-11-25	xproof
+831487cf-a377-4c9b-920d-c5bc68f17f24	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:citanul-centaurs:cast:s1,f:xs:XP:citanul-centaurs:cast:s1	-	-	-	baa6f696107c	-	421400546c4b	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+831487cf-a377-4c9b-920d-c5bc68f17f24	f0/t0	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:citanul-centaurs:f0t0:s1,f:xs:XP:citanul-centaurs:f0t0:s1	-	-	-	baa6f696107c	-	421400546c4b	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:raving-visionary:f0a1:s1,f:xs:XP:raving-visionary:f0a1:s1	-	-	-	23b491658465	-	e55bcefe3305	-	-	2026-11-25	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 838eeca8-02f9-44fa-8170-1426622adf30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 838eeca8-02f9-44fa-8170-1426622adf30	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 838eeca8-02f9-44fa-8170-1426622adf30	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83914a83-4de2-4d64-9770-f68a12014167	cast	cast	owed	harness	-	start	0	0	-	-	-	-	cb99a158debc	-	1ec11dfc11d9	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-83914a83-4de2-4d64-9770-f68a12014167	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	cb99a158debc	-	1ec11dfc11d9	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+83914a83-4de2-4d64-9770-f68a12014167	cast	cast	owed	harness	-	start	0	0	-	-	-	-	baa6f696107c	-	1ec11dfc11d9	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+83914a83-4de2-4d64-9770-f68a12014167	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	baa6f696107c	-	1ec11dfc11d9	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 83917116-d2d8-4701-a79f-af17486706ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83959c3d-053c-4d95-a1b0-fe92f2b906db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83959c3d-053c-4d95-a1b0-fe92f2b906db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

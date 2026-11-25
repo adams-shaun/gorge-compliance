@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e3099ca-ac2b-4163-bef7-e62a84567744	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:order-of-the-sacred-bell:cast:s1,f:xs:XP:order-of-the-sacred-bell:cast:s1	-	-	-	64a08ba7d913	-	1c277bf730c6	-	-	2026-11-24	xproof
 0e3246ef-e0b4-49bc-a715-b69c4b6be461	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e3246ef-e0b4-49bc-a715-b69c4b6be461	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e3246ef-e0b4-49bc-a715-b69c4b6be461	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+0e3246ef-e0b4-49bc-a715-b69c4b6be461	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0e381b7e-2d32-4a9a-a327-e9dd1236dc1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-free-riders:f0t0:s1,f:xs:XP:eiganjo-free-riders:f0t0:s1	-	-	-	23c4009444b0	-	fea0f9d2e7a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e381b7e-2d32-4a9a-a327-e9dd1236dc1b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-free-riders:f0t0:s1,f:xs:XP:eiganjo-free-riders:f0t0:s1	-	-	-	23c4009444b0	-	fea0f9d2e7a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e3a11f4-c880-4932-bc7e-7aea8a9472bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e8adf34-0834-4027-9cda-18df69239e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e8adf34-0834-4027-9cda-18df69239e2b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:embodiment-of-fury:f0t0:s1,f:xs:XP:embodiment-of-fury:f0t0:s1	-	-	-	fb9d3088f0bf	-	b53e4caa7da6	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0e8ae1f7-8926-414a-8434-db0b0f877505	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e8ae1f7-8926-414a-8434-db0b0f877505	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+0e8ae1f7-8926-414a-8434-db0b0f877505	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:strands-of-night:f0a0:s1,f:xs:XP:strands-of-night:f0a0:s1	-	-	-	baa6f696107c	-	d76356af3663	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0e91a873-a680-4ca2-b073-26aa39376d77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e91a873-a680-4ca2-b073-26aa39376d77	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e969a27-1609-4ab4-b0db-46b1af8066a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unflinching-courage:static0.0:s1,f:xs:XP:unflinching-courage:static0.0:s1	-	-	-	44e3ec152eea	-	31d5a1fe1e20	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4619de7e-3d6e-4c6b-8e6e-e24db324839d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Nomad Outpost/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4619de7e-3d6e-4c6b-8e6e-e24db324839d	land	play-land	agreed	-	FX	scen	2	0	Nomad Outpost/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-461b3f2f-fcee-4160-abfa-061f8b6a784f	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+461b3f2f-fcee-4160-abfa-061f8b6a784f	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 461c0c37-7213-4ece-91f7-934e6a1a8d64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 461c0c37-7213-4ece-91f7-934e6a1a8d64	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46779609-4fa7-4fd2-b5b4-7d4d749339e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:courser-of-kruphix:f0t0:s1,f:xs:XP:courser-of-kruphix:f0t0:s1	-	-	-	fb9d3088f0bf	-	f87293cadb8a	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 467c526a-02a7-405d-98de-c632ea83519b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:you-find-some-prisoners:cast:s1,f:xs:XP:you-find-some-prisoners:cast:s1	-	-	-	ae86f6029288	-	1ce1e92c934f	-	-	2026-11-24	xproof
 467c9fe6-d1d3-4242-bc0c-e522b4f21d56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-467c9fe6-d1d3-4242-bc0c-e522b4f21d56	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+467c9fe6-d1d3-4242-bc0c-e522b4f21d56	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 467d6acb-9a3c-433f-836d-54e0e670b7d0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:head-of-the-homestead:cast:s1,f:xs:XP:head-of-the-homestead:cast:s1	-	-	-	c2272f704fde	-	b34e8e7203a3	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 467d6acb-9a3c-433f-836d-54e0e670b7d0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:head-of-the-homestead:cast:s1,f:xs:XP:head-of-the-homestead:cast:s1	-	-	-	c2272f704fde	-	b34e8e7203a3	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 467e22c3-6107-40ff-afc7-5960710c970b	cast	cast-resolve	agreed	-	FX	scen	2	0	Adamant Will/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

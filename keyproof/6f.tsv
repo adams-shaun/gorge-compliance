@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:cast:s1,f:xs:XP:pygmy-troll:cast:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:f0a0:s1,f:xs:XP:pygmy-troll:f0a0:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
-6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:f0t0:s1,f:xs:XP:pygmy-troll:f0t0:s1	-	-	-	baa6f696107c	-	d15b20672323	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f1bfe50-b61a-4fdd-963c-40d59117bdf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f1e5571-ddda-4cea-84ef-36a571d8fd51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashiok-s-reaper:cast:s1,f:xs:XP:ashiok-s-reaper:cast:s1	-	-	-	cb99a158debc	-	799633e9b295	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f1e5571-ddda-4cea-84ef-36a571d8fd51	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ashiok-s-reaper:f0t0:s1,f:xs:XP:ashiok-s-reaper:f0t0:s1	-	-	-	cb99a158debc	-	799633e9b295	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -30,10 +30,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f214a42-e38f-4923-8afc-832efdde7975	f0/a0	ChooseSource	agreed	-	FX	start	2	0	x:xs:XP:rune-of-protection-white:f0a0:s1,f:xs:XP:rune-of-protection-white:f0a0:s1	-	-	-	5f2128bf97e4	-	8fb729940da8	-	-	2026-11-24	xproof
 6f214a42-e38f-4923-8afc-832efdde7975	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:rune-of-protection-white:cast:s2,f:xs:XP:rune-of-protection-white:cast:s2	-	-	-	5f2128bf97e4	-	8fb729940da8	-	-	2026-11-24	xproof
 6f246109-8c8b-4909-9888-561bc46ad776	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f2ba142-5e7c-4709-ae03-e028cb2a9872	cast	cast-resolve	agreed	-	X	scen	1	0	Super-Soldier Serum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f2ba142-5e7c-4709-ae03-e028cb2a9872	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:super-soldier-serum:cast:s1,f:xs:XP:super-soldier-serum:cast:s1	-	-	-	baa6f696107c	-	5c1ab335ff2a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f2ba142-5e7c-4709-ae03-e028cb2a9872	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Super-Soldier Serum/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f2ba142-5e7c-4709-ae03-e028cb2a9872	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Super-Soldier Serum/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6f2ba142-5e7c-4709-ae03-e028cb2a9872	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super-Soldier Serum/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f2ba142-5e7c-4709-ae03-e028cb2a9872	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:super-soldier-serum:static0.0:s1,f:xs:XP:super-soldier-serum:static0.0:s1	-	-	-	baa6f696107c	-	5c1ab335ff2a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f2e4607-bece-42ba-a2a3-5dc50f246793	cast	cast-resolve	agreed	-	FX	scen	2	0	Mammoth Bellow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f2e8083-29af-4cdb-a2cb-216b2f3f5616	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tea-earl-grey-hot:f0t0:s1,f:xs:XP:tea-earl-grey-hot:f0t0:s1	-	-	-	25696bf19d5b	-	a7eb629e4cda	-	-	2026-11-24	xproof
 6f2e8083-29af-4cdb-a2cb-216b2f3f5616	f0/a0	Charm	agreed	-	FX	start	2	0	x:xs:XP:tea-earl-grey-hot:f0a0:s1,f:xs:XP:tea-earl-grey-hot:f0a0:s1	-	-	-	23c4009444b0	-	a7eb629e4cda	-	-	2026-11-25	xproof
@@ -59,10 +59,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f498ff7-38c9-44ea-9cb5-994a003825ee	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ingenious-prodigy:f0t0:s1,f:xs:XP:ingenious-prodigy:f0t0:s1	-	-	-	3aa6ded33acb	-	e33c0cf95db2	-	-	2026-11-25	xproof
 6f4ac4a4-53ec-4bc9-8f5c-d4b801d867b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4ac4a4-53ec-4bc9-8f5c-d4b801d867b2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grave-pact:f0t0:s1,f:xs:XP:grave-pact:f0t0:s1	-	-	-	23c4009444b0	-	93995dadbbce	-	-	2026-11-25	xproof
-6f4c94b6-f829-4646-a574-083997b78dfb	cast	cast-resolve	agreed	-	X	scen	1	0	Winter Soldier, Icy Assassin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f4c94b6-f829-4646-a574-083997b78dfb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winter-soldier-icy-assassin:cast:s1,f:xs:XP:winter-soldier-icy-assassin:cast:s1	-	-	-	baa6f696107c	-	248cdf51fa0a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f4c94b6-f829-4646-a574-083997b78dfb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:winter-soldier-icy-assassin:combat0.attack:s1,f:xs:XP:winter-soldier-icy-assassin:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	248cdf51fa0a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 6f4c94b6-f829-4646-a574-083997b78dfb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:winter-soldier-icy-assassin:combat0.block:s1,f:xs:XP:winter-soldier-icy-assassin:combat0.block:s1	-	-	-	fb9d3088f0bf	-	248cdf51fa0a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-6f4c94b6-f829-4646-a574-083997b78dfb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Winter Soldier, Icy Assassin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f4c94b6-f829-4646-a574-083997b78dfb	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:winter-soldier-icy-assassin:f0a0:s1	-	-	-	baa6f696107c	-	248cdf51fa0a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6f4c94b6-f829-4646-a574-083997b78dfb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Winter Soldier, Icy Assassin/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f4cfd69-c739-4398-93a5-e6238b7cd83b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f525ccd-4776-492c-a1f9-8bce5740fb28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-opportunist:cast:s1,f:xs:XP:vampire-opportunist:cast:s1	-	-	-	d864b561c9cb	-	54731af21770	-	-	2026-11-24	xproof

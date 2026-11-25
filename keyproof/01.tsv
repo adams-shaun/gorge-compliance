@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 011bb6cc-f1a1-4790-befc-373acabf63b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 011bb6cc-f1a1-4790-befc-373acabf63b8	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 011d4f47-c6fd-434b-98f2-2f558fbff40b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fracturing-gust:cast:s1,f:xs:XP:fracturing-gust:cast:s1	-	-	-	da6bc3fe8458	-	eaef08469727	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-011da9c5-aa8a-4fa0-b1f2-62b9f3760476	cast	cast-resolve	agreed	-	X	scen	1	0	Belladonna Took/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-011da9c5-aa8a-4fa0-b1f2-62b9f3760476	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Belladonna Took/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+011da9c5-aa8a-4fa0-b1f2-62b9f3760476	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:belladonna-took:cast:s1,f:xs:XP:belladonna-took:cast:s1	-	-	-	baa6f696107c	-	8af57b60d850	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+011da9c5-aa8a-4fa0-b1f2-62b9f3760476	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:belladonna-took:f0t0:s1,f:xs:XP:belladonna-took:f0t0:s1	-	-	-	baa6f696107c	-	8af57b60d850	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 011ff7a5-6bce-4784-a19b-e74f7b49b8f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 011ff7a5-6bce-4784-a19b-e74f7b49b8f1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 011ff7a5-6bce-4784-a19b-e74f7b49b8f1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 018327d1-a3ba-4912-9c88-f0f0c54a1750	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Fear of Infinity/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 018327d1-a3ba-4912-9c88-f0f0c54a1750	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fear of Infinity/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0184d74b-e9aa-4b5a-8db0-b15cecbc17fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0184d74b-e9aa-4b5a-8db0-b15cecbc17fb	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+0184d74b-e9aa-4b5a-8db0-b15cecbc17fb	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:vampire-hounds:f0a0:s1,f:xs:XP:vampire-hounds:f0a0:s1	-	-	-	baa6f696107c	-	8fe480b00ad3	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 018985f5-6a67-4f2f-855c-efa7254ad3f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mindclaw-shaman:f0t0:s1,f:xs:XP:mindclaw-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	4e9d1661c2fe	-	-	2026-11-24	xproof
 018985f5-6a67-4f2f-855c-efa7254ad3f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mindclaw-shaman:f0t0:s1,f:xs:XP:mindclaw-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	4e9d1661c2fe	-	-	2026-11-24	xproof
 01906aae-fc53-40b0-a386-dae43e4f437f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

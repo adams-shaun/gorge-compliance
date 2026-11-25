@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
-1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:f0a0:s1,f:xs:XP:the-millennium-calendar:f0a0:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	8f782e884184	-	-	2026-11-25	xproof
 1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	8f782e884184	-	-	2026-11-25	xproof
 1f3fb367-60b5-4b36-9604-3064afdac0d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3fb367-60b5-4b36-9604-3064afdac0d9	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+1f3fb367-60b5-4b36-9604-3064afdac0d9	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:avenging-druid:f0t0:s1,f:xs:XP:avenging-druid:f0t0:s1	-	-	-	baa6f696107c	-	739b5a5bf71f	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 1f438b8f-fe23-4f3b-ab2e-f6c33676c462	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opposition-agent:cast:s1,f:xs:XP:opposition-agent:cast:s1	-	-	-	8c0bd19283bb	-	d99b9635dd10	-	-	2026-11-24	xproof
 1f4738db-be2e-4d02-ad0c-1b74dd6bbfdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f4738db-be2e-4d02-ad0c-1b74dd6bbfdc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:living-lightning:f0t0:s1,f:xs:XP:living-lightning:f0t0:s1	-	-	-	8c0bd19283bb	-	9ec26e48bd9f	-	-	2026-11-24	xproof

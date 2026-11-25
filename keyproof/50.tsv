@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 501580b9-692c-4804-be34-012a25ba8adf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Way of the Wildspeaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5017c07d-8ad5-4ee2-91d3-974811cdff75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fortitude:cast:s1,f:xs:XP:fortitude:cast:s1	-	-	-	5f2128bf97e4	-	e48c954ace21	-	-	2026-11-24	xproof
 5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:fortitude:cast:s1,f:xs:XP:fortitude:cast:s1	-	-	-	5f2128bf97e4	-	e48c954ace21	-	-	2026-11-24	xproof
-5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fortitude:f0t0:s1,f:xs:XP:fortitude:f0t0:s1	-	-	-	baa6f696107c	-	e48c954ace21	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 5020628c-5e47-4a83-89c3-7bf5726e69ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruinous-rampage:cast:s1,f:xs:XP:ruinous-rampage:cast:s1	-	-	-	23c4009444b0	-	2f7ab304266d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:momentum-rumbler:f0t1:s1	-	-	-	3aa6ded33acb	-	df07b40545e6	-	-	2026-11-25	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 508248d1-09a4-4e41-a4c9-286618e5061e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50863075-a30b-4238-8e31-5af32a39d886	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chevill-bane-of-monsters:f0t0:s1,f:xs:XP:chevill-bane-of-monsters:f0t0:s1	-	-	-	3aa6ded33acb	-	7b9ad8c70bdd	-	-	2026-11-25	xproof
 50863075-a30b-4238-8e31-5af32a39d886	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:chevill-bane-of-monsters:f0t0:s1,f:xs:XP:chevill-bane-of-monsters:f0t0:s1	-	-	-	3aa6ded33acb	-	7b9ad8c70bdd	-	-	2026-11-25	xproof
-50863075-a30b-4238-8e31-5af32a39d886	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+50863075-a30b-4238-8e31-5af32a39d886	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 5089cd0f-1338-4ecd-bb1b-664d7e72f8fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relentless-skaabs:cast:s1,f:xs:XP:relentless-skaabs:cast:s1	-	-	-	44e3ec152eea	-	bd5668fe9a53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5089cd0f-1338-4ecd-bb1b-664d7e72f8fc	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:relentless-skaabs:f0t0:s1,f:xs:XP:relentless-skaabs:f0t0:s1	-	-	-	3aa6ded33acb	-	bd5668fe9a53	-	-	2026-11-25	xproof
 5089ec1a-f881-4d55-af14-5d996171203b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50c7b13d-f217-45de-837c-49f934840368	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildfire-wickerfolk:cast:s1,f:xs:XP:wildfire-wickerfolk:cast:s1	-	-	-	23c4009444b0	-	5d31e055a9bc	-	-	2026-11-25	xproof
 50c7b13d-f217-45de-837c-49f934840368	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wildfire Wickerfolk/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50c8c7e2-1b45-44b2-a50b-3b514d4c4c42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolarian-entrancer:cast:s1,f:xs:XP:tolarian-entrancer:cast:s1	-	-	-	ea3140b6974b	-	b3856d5bb46c	-	-	2026-11-24	xproof
-50c8c7e2-1b45-44b2-a50b-3b514d4c4c42	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+50c8c7e2-1b45-44b2-a50b-3b514d4c4c42	f0/t0	AttackerBlockedByCreature	agreed	-	F	start	2	0	f:xs:XP:tolarian-entrancer:f0t0:s1	-	-	-	baa6f696107c	-	b3856d5bb46c	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 50c97054-77c9-4446-9a41-e4f8877b887d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forum-necroscribe:cast:s1,f:xs:XP:forum-necroscribe:cast:s1	-	-	-	23c4009444b0	-	d75adedbe329	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 50c97054-77c9-4446-9a41-e4f8877b887d	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:forum-necroscribe:f0t0:s1,f:xs:XP:forum-necroscribe:f0t0:s1	-	-	-	23c4009444b0	-	d75adedbe329	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 50c97054-77c9-4446-9a41-e4f8877b887d	f0/t1	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:forum-necroscribe:f0t1:s1	-	-	-	23c4009444b0	-	d75adedbe329	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -213,7 +213,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50f644d6-2597-4ad6-8ea8-6b09056f90c0	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:knight-of-sorrows:f0t0:s1,f:xs:XP:knight-of-sorrows:f0t0:s1	-	-	-	d864b561c9cb	-	43dbe82cae5b	-	-	2026-11-24	xproof
 50fa6a63-e031-47cb-8fd5-a6c235203722	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50fcb431-626c-4db5-aa2c-445f3b81e7fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50fcb431-626c-4db5-aa2c-445f3b81e7fa	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+50fcb431-626c-4db5-aa2c-445f3b81e7fa	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 50fd4cf3-c347-4eb9-ab15-a9b0c5ea8b0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50ffa9f0-fb3b-4de4-b463-6d7ee8b5e93a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50ffa9f0-fb3b-4de4-b463-6d7ee8b5e93a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:false-demise:f0t0:s1,f:xs:XP:false-demise:f0t0:s1	-	-	-	baa6f696107c	-	64065d78dac9	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof

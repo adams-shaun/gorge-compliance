@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4734b73e-104c-4b25-ab52-0145f361c9d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 473c9f27-2091-4d87-b279-64b3662c9af8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 473c9f27-2091-4d87-b279-64b3662c9af8	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:sawtooth-ogre:f0t0:s1,f:xs:XP:sawtooth-ogre:f0t0:s1	-	-	-	cb99a158debc	-	061c45511766	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-473c9f27-2091-4d87-b279-64b3662c9af8	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+473c9f27-2091-4d87-b279-64b3662c9af8	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:sawtooth-ogre:f0t1:s1,f:xs:XP:sawtooth-ogre:f0t1:s1	-	-	-	baa6f696107c	-	061c45511766	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 473da1b6-232b-4428-a66d-30262246b47a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emeria-shepherd:cast:s1,f:xs:XP:emeria-shepherd:cast:s1	-	-	-	d864b561c9cb	-	0c8605c3f753	-	-	2026-11-24	xproof
 473da1b6-232b-4428-a66d-30262246b47a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:emeria-shepherd:f0t0:s1,f:xs:XP:emeria-shepherd:f0t0:s1	-	-	-	fb9d3088f0bf	-	0c8605c3f753	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 4741d842-12e6-4a8c-96b1-9e68c7074874	cast	cast	diverged	-	-	start	0	2	-	6fefd2839139	-	-	23c4009444b0	-	42773e06e1e8	-	-	2026-11-25	xproof

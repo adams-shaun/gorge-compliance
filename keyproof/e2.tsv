@@ -42,8 +42,8 @@ e2375f13-fd45-4087-abd1-c884acc6c736	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cre
 e2376660-20f2-4474-b6fd-d270e0e6a31e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:filigree-fracture:cast:s1,f:xs:XP:filigree-fracture:cast:s1	-	-	-	8a1b1a193ec0	-	aec9fa62b1dc	-	-	2026-11-24	xproof
 e23bf5fe-e494-473e-8502-606106ee1820	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shared-fate:cast:s1,f:xs:XP:shared-fate:cast:s1	-	-	-	25696bf19d5b	-	4057877458ab	-	-	2026-11-24	xproof
 e23bf6bd-bc97-425d-902a-c6b606e82b65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e23bf6bd-bc97-425d-902a-c6b606e82b65	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-e23bf6bd-bc97-425d-902a-c6b606e82b65	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:cold-storage:f0a0:s1,f:xs:XP:cold-storage:f0a0:s1	-	-	-	8c0bd19283bb	-	9ceed17e676a	-	-	2026-11-24	xproof
+e23bf6bd-bc97-425d-902a-c6b606e82b65	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:cold-storage:f0a0:s1,f:xs:XP:cold-storage:f0a0:s1	-	-	-	baa6f696107c	-	9ceed17e676a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+e23bf6bd-bc97-425d-902a-c6b606e82b65	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:cold-storage:f0a0:s1,f:xs:XP:cold-storage:f0a0:s1	-	-	-	baa6f696107c	-	9ceed17e676a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 e23cd06d-1360-4e5d-aecc-adf902bede69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anax-hardened-in-the-forge:cast:s1,f:xs:XP:anax-hardened-in-the-forge:cast:s1	-	-	-	6f84be0f34c0	-	3acc88c368fa	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e23cd06d-1360-4e5d-aecc-adf902bede69	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anax-hardened-in-the-forge:f0t0:s1,f:xs:XP:anax-hardened-in-the-forge:f0t0:s1	-	-	-	6f84be0f34c0	-	3acc88c368fa	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e23d6f3b-0e18-423b-943b-15db7837255b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fires-of-yavimaya:cast:s1,f:xs:XP:fires-of-yavimaya:cast:s1	-	-	-	5f2128bf97e4	-	168a320be1c0	-	-	2026-11-24	xproof
@@ -97,11 +97,11 @@ e2725411-a600-4ff3-94fb-5d52f5eda414	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e2725411-a600-4ff3-94fb-5d52f5eda414	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e275cbfb-3d25-4189-84f0-3162eadc7d65	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:diabolic-servitude:cast:s1,f:xs:XP:diabolic-servitude:cast:s1	-	-	-	5f2128bf97e4	-	306f3f050eeb	-	-	2026-11-24	xproof
 e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:diabolic-servitude:cast:s1,f:xs:XP:diabolic-servitude:cast:s1	-	-	-	5f2128bf97e4	-	306f3f050eeb	-	-	2026-11-24	xproof
-e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t3	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t4	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t5	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t2	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:diabolic-servitude:f0t2:s1,f:xs:XP:diabolic-servitude:f0t2:s1	-	-	-	baa6f696107c	-	306f3f050eeb	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t3	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t4	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+e275cbfb-3d25-4189-84f0-3162eadc7d65	f0/t5	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 e277ed07-2113-4465-a45c-a64490814c1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impossible-choice:cast:s1,f:xs:XP:impossible-choice:cast:s1	-	-	-	fb9d3088f0bf	-	b66e743909ef	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 e27d1993-8d83-449d-8a64-8b66086db995	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e27feb69-3120-4e8d-8ee6-0f87b58e2ae3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:layla-hassan:f0t0:s1,f:xs:XP:layla-hassan:f0t0:s1	-	-	-	ae86f6029288	-	e9bfb03a6ef5	-	-	2026-11-24	xproof

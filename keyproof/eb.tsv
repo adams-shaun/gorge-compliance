@@ -39,7 +39,7 @@ eb16f188-fe12-4a13-9947-d43cd6ce270c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 eb1ab332-5549-4ff4-8afa-b385a236fb9b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cleaving-skyrider:cast:s1,f:xs:XP:cleaving-skyrider:cast:s1	-	-	-	d864b561c9cb	-	9ad990172288	-	-	2026-11-24	xproof
 eb1ab332-5549-4ff4-8afa-b385a236fb9b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cleaving-skyrider:f0t0:s1,f:xs:XP:cleaving-skyrider:f0t0:s1	-	-	-	d864b561c9cb	-	9ad990172288	-	-	2026-11-24	xproof
 eb1baf72-4ef6-4967-8a22-2022c633f3d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:segmented-wurm:cast:s1,f:xs:XP:segmented-wurm:cast:s1	-	-	-	ea3140b6974b	-	c552acf28706	-	-	2026-11-24	xproof
-eb1baf72-4ef6-4967-8a22-2022c633f3d3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+eb1baf72-4ef6-4967-8a22-2022c633f3d3	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:segmented-wurm:f0t0:s1,f:xs:XP:segmented-wurm:f0t0:s1	-	-	-	baa6f696107c	-	c552acf28706	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 eb1dfa29-7371-4cb6-bfa2-16f7820b69be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:refute:cast:s1,f:xs:XP:refute:cast:s1	-	-	-	9087eefec3ee	-	e142a7f57c9d	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 eb2094cf-b4be-4f52-8615-e179ef7c741d	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:mobilized-district:f0a0:s2,f:xs:XP:mobilized-district:f0a0:s2	-	-	-	d864b561c9cb	-	38d6d5c2796c	-	-	2026-11-24	xproof
 eb2094cf-b4be-4f52-8615-e179ef7c741d	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:mobilized-district:f0a1:s1,f:xs:XP:mobilized-district:f0a1:s1	-	-	-	d864b561c9cb	-	38d6d5c2796c	-	-	2026-11-24	xproof
@@ -99,8 +99,8 @@ eb77f7dc-e9e4-44ef-8616-9f4e737e8ca5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Breec
 eb7a1f21-a66d-415b-8520-710b44890bb6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:simulacrum-synthesizer:cast:s2,f:xs:XP:simulacrum-synthesizer:cast:s2	-	-	-	5437c1394672	-	ce0e78518824	-	-	2026-11-24	xproof
 eb7a1f21-a66d-415b-8520-710b44890bb6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:simulacrum-synthesizer:cast:s2,f:xs:XP:simulacrum-synthesizer:cast:s2	-	-	-	5437c1394672	-	ce0e78518824	-	-	2026-11-24	xproof
 eb7a1f21-a66d-415b-8520-710b44890bb6	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:simulacrum-synthesizer:f0t1:s1,f:xs:XP:simulacrum-synthesizer:f0t1:s1	-	-	-	3aa6ded33acb	-	ce0e78518824	-	-	2026-11-25	xproof
-eb7b1284-0b2c-4b6a-a389-b2b932838083	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-eb7b1284-0b2c-4b6a-a389-b2b932838083	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+eb7b1284-0b2c-4b6a-a389-b2b932838083	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+eb7b1284-0b2c-4b6a-a389-b2b932838083	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 eb80f233-76b5-4c72-8a4a-f22e56314690	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb80f233-76b5-4c72-8a4a-f22e56314690	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 eb810d5c-903e-4ab4-874c-e49a686ca367	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puppet-strings:cast:s1,f:xs:XP:puppet-strings:cast:s1	-	-	-	ea3140b6974b	-	593c4525b7d2	-	-	2026-11-24	xproof

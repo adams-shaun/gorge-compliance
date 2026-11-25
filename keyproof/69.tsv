@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 694f7e51-7b8b-4f00-bd77-a52eded4aaa1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69501650-ed48-4ebf-9287-b0338c5bc5d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-herd:cast:s1,f:xs:XP:trumpeting-herd:cast:s1	-	-	-	d864b561c9cb	-	40500a3e6a1c	-	-	2026-11-24	xproof
 69556f6c-c05b-4902-bac7-012f0ed81b75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 69565f6e-2e23-4cd8-bd21-1283e06729a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69565f6e-2e23-4cd8-bd21-1283e06729a3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 695661ac-6f50-4a0e-9831-a0e285bab4bf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wild-celebrants:cast:s1,f:xs:XP:wild-celebrants:cast:s1	-	-	-	d864b561c9cb	-	d4fe84f3eafd	-	-	2026-11-24	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 698098b8-b8e4-4e88-b13a-6b039579d192	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Ray Fillet, Man Ray/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 698098b8-b8e4-4e88-b13a-6b039579d192	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69812cd2-9885-45ed-9d79-658597bfeb8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-bombers:cast:s1,f:xs:XP:mogg-bombers:cast:s1	-	-	-	5f2128bf97e4	-	46e2db2ebaea	-	-	2026-11-24	xproof
-69812cd2-9885-45ed-9d79-658597bfeb8b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+69812cd2-9885-45ed-9d79-658597bfeb8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mogg-bombers:f0t0:s1,f:xs:XP:mogg-bombers:f0t0:s1	-	-	-	baa6f696107c	-	46e2db2ebaea	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 69826a0d-3ec9-47e7-b129-2fc13b41a07e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torch-song:f0t0:s1,f:xs:XP:torch-song:f0t0:s1	-	-	-	3aa6ded33acb	-	ad81db1f047c	-	-	2026-11-25	xproof
 69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:torch-song:f0t0:s1,f:xs:XP:torch-song:f0t0:s1	-	-	-	3aa6ded33acb	-	ad81db1f047c	-	-	2026-11-25	xproof
 69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:torch-song:f0t0:s1,f:xs:XP:torch-song:f0t0:s1	-	-	-	3aa6ded33acb	-	ad81db1f047c	-	-	2026-11-25	xproof

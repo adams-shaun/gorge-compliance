@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e34a49d-f031-48ac-a458-97b79124b76c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Midgar, City of Mako/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4e34a49d-f031-48ac-a458-97b79124b76c	land	play-land	agreed	-	X	scen	1	0	Midgar, City of Mako/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4e389b61-7b31-42ba-a19b-2502f63fd34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e389b61-7b31-42ba-a19b-2502f63fd34a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4e389b61-7b31-42ba-a19b-2502f63fd34a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:servant-of-volrath:f0t0:s1,f:xs:XP:servant-of-volrath:f0t0:s1	-	-	-	baa6f696107c	-	753ea5a52fac	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 4e3c3bdc-667d-42ec-b960-159a39c53cb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e3f89e2-2be6-4b96-b81c-007b6840af82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e3f89e2-2be6-4b96-b81c-007b6840af82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof

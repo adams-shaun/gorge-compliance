@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f0d797e-d897-453d-92b6-a90e1a548dc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0d797e-d897-453d-92b6-a90e1a548dc5	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
-2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merfolk-cave-diver:cast:s1,f:xs:XP:merfolk-cave-diver:cast:s1	-	-	-	23b491658465	-	72a0303270cc	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Merfolk Cave-Diver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -226,8 +226,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fd61c9f-44d2-48d7-a271-8e4208407cca	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fd7018e-1c36-4d7f-8f72-22f2f7f60c60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fd7018e-1c36-4d7f-8f72-22f2f7f60c60	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:eidolon-of-the-great-revel:f0t0:s1,f:xs:XP:eidolon-of-the-great-revel:f0t0:s1	-	-	-	fb9d3088f0bf	-	56f79d0084a2	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-2fd9a37f-151a-4501-9d8e-bc67cc902592	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	bfc2f0e18a74	-	-	2026-11-25	xproof
-2fd9a37f-151a-4501-9d8e-bc67cc902592	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	bfc2f0e18a74	-	-	2026-11-25	xproof
+2fd9a37f-151a-4501-9d8e-bc67cc902592	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:uktabi-efreet:cast:s1,f:xs:XP:uktabi-efreet:cast:s1	-	-	-	baa6f696107c	-	bfc2f0e18a74	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+2fd9a37f-151a-4501-9d8e-bc67cc902592	f0/t0	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:uktabi-efreet:f0t0:s1,f:xs:XP:uktabi-efreet:f0t0:s1	-	-	-	baa6f696107c	-	bfc2f0e18a74	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 2fda4fe7-8b0c-489c-a000-6d358e614e34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fda4fe7-8b0c-489c-a000-6d358e614e34	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fdbbca7-d1d0-4834-84df-2c2d9953f83a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -242,7 +242,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fdeb920-2e48-4308-9517-743eec219c04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fe0ebf5-52ed-4e92-9b93-81e9ae564439	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+2feca0cd-6bd3-4e19-8cfd-81d7bd1118ee	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	cast	cast-resolve	agreed	-	FX	scen	2	0	Doctor Octopus, Master Planner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:doctor-octopus-master-planner:f0t0:s1,f:xs:XP:doctor-octopus-master-planner:f0t0:s1	-	-	-	23c4009444b0	-	e30bd8d1f3b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:doctor-octopus-master-planner:static0.0:s1,f:xs:XP:doctor-octopus-master-planner:static0.0:s1	-	-	-	23c4009444b0	-	e30bd8d1f3b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
