@@ -128,10 +128,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7abbbe18-a2e5-47ce-9c65-8008e5153a4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7abbd5af-a04b-476d-aee5-2b2f5114b019	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thief-of-existence:cast:s1,f:xs:XP:thief-of-existence:cast:s1	-	-	-	ae86f6029288	-	80263deeca05	-	-	2026-11-24	xproof
 7abbd5af-a04b-476d-aee5-2b2f5114b019	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:thief-of-existence:cast:s1,f:xs:XP:thief-of-existence:cast:s1	-	-	-	ae86f6029288	-	80263deeca05	-	-	2026-11-24	xproof
-7ac09735-f05c-4e28-83d6-262cddc9eeb3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:firemaw-kavu:cast:s1,f:xs:XP:firemaw-kavu:cast:s1	-	-	-	23c4009444b0	-	2b7011591a98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7ac09735-f05c-4e28-83d6-262cddc9eeb3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:firemaw-kavu:cast:s1,f:xs:XP:firemaw-kavu:cast:s1	-	-	-	23c4009444b0	-	2b7011591a98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7ac09735-f05c-4e28-83d6-262cddc9eeb3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firemaw-kavu:f0t2:s1,f:xs:XP:firemaw-kavu:f0t2:s1	-	-	-	23c4009444b0	-	2b7011591a98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7ac09735-f05c-4e28-83d6-262cddc9eeb3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:firemaw-kavu:f0t2:s1,f:xs:XP:firemaw-kavu:f0t2:s1	-	-	-	23c4009444b0	-	2b7011591a98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ac09735-f05c-4e28-83d6-262cddc9eeb3	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:firemaw-kavu:f0t0:s1,f:xs:XP:firemaw-kavu:f0t0:s1	-	-	-	9ee19e8250ce	-	2b7011591a98	-	-	2026-11-24	xproof
-7ac09735-f05c-4e28-83d6-262cddc9eeb3	f0/t2	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2b7011591a98	-	-	2026-11-25	xproof
+7ac09735-f05c-4e28-83d6-262cddc9eeb3	f0/t2	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:firemaw-kavu:f0t2:s1,f:xs:XP:firemaw-kavu:f0t2:s1	-	-	-	23c4009444b0	-	2b7011591a98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ac1aab0-9d2d-4fb7-b0bb-0af3e6d665db	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

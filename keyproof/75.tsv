@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75269a31-3819-4410-8bb7-10de16810a5e	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7528f47d-c758-42bc-bdfe-5aca805c4126	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gideon-s-battle-cry:cast:s1,f:xs:XP:gideon-s-battle-cry:cast:s1	-	-	-	d864b561c9cb	-	deb8205b0f7b	-	-	2026-11-24	xproof
 752b5a97-e2f7-43c0-b8c8-2c1efbbfbd2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-752b5a97-e2f7-43c0-b8c8-2c1efbbfbd2a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+752b5a97-e2f7-43c0-b8c8-2c1efbbfbd2a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 752ebcba-97fb-43a3-8811-d244164b3e16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 752ebcba-97fb-43a3-8811-d244164b3e16	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 75325029-e6f1-44af-88b2-53cc2b7233c0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:supreme-will:cast:s1	-	-	-	d864b561c9cb	-	824cd21f10e0	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 759af941-f6a3-4726-91f2-9b1e4e55ea71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759af941-f6a3-4726-91f2-9b1e4e55ea71	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 759e454e-ee8c-4b0e-9503-26e4c0a2a8f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-759e454e-ee8c-4b0e-9503-26e4c0a2a8f9	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+759e454e-ee8c-4b0e-9503-26e4c0a2a8f9	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:scarred-vinebreeder:f0a0:s1,f:xs:XP:scarred-vinebreeder:f0a0:s1	-	-	-	23c4009444b0	-	6a8946198c6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 759e7e44-a082-419f-abd3-aabc45c47334	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	23c4009444b0	-	e34cbc59c49b	-	-	2026-11-25	xproof
 759e7e44-a082-419f-abd3-aabc45c47334	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	23c4009444b0	-	e34cbc59c49b	-	-	2026-11-25	xproof
 759e7e44-a082-419f-abd3-aabc45c47334	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	23c4009444b0	-	e34cbc59c49b	-	-	2026-11-25	xproof

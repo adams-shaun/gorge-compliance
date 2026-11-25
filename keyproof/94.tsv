@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 942ac2ac-7528-4768-8398-8520a8ee15e5	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Captain America, Wings of Freedom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 942d550d-4823-4db8-8197-cbf15045f4f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uncovered-clues:cast:s1,f:xs:XP:uncovered-clues:cast:s1	-	-	-	d864b561c9cb	-	2990f57f9ebe	-	-	2026-11-24	xproof
 942eefa3-6775-428b-84aa-48c3bd78d3b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thorntooth-witch:cast:s1,f:xs:XP:thorntooth-witch:cast:s1	-	-	-	d864b561c9cb	-	ad0f7ca1c012	-	-	2026-11-24	xproof
-942eefa3-6775-428b-84aa-48c3bd78d3b8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+942eefa3-6775-428b-84aa-48c3bd78d3b8	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:thorntooth-witch:f0t0:s1,f:xs:XP:thorntooth-witch:f0t0:s1	-	-	-	23c4009444b0	-	ad0f7ca1c012	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 942f3f06-1df0-40b4-8537-71cbec111852	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:makeshift-binding:f0t0:s2,f:xs:XP:makeshift-binding:f0t0:s2	-	-	-	e07cf3a05ba5	-	69f87bb7674d	-	-	2026-11-24	xproof
 942f3f06-1df0-40b4-8537-71cbec111852	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:makeshift-binding:f0t0:s2,f:xs:XP:makeshift-binding:f0t0:s2	-	-	-	e07cf3a05ba5	-	69f87bb7674d	-	-	2026-11-24	xproof
 94357494-4ccc-43d4-b2d4-351581cbf9b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:auton-soldier:cast:s1,f:xs:XP:auton-soldier:cast:s1	-	-	-	8c0bd19283bb	-	844ac582dda8	-	-	2026-11-24	xproof

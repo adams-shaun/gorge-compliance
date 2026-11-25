@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 731821b1-89fd-4166-94b8-35a1364e4d9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 731898d3-465b-4ecb-a346-b91881714ebc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7319eec8-48ba-4238-bce1-450abcae73a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7319eec8-48ba-4238-bce1-450abcae73a6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7319eec8-48ba-4238-bce1-450abcae73a6	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:bloodcrazed-neonate:f0t0:s1,f:xs:XP:bloodcrazed-neonate:f0t0:s1	-	-	-	23c4009444b0	-	4d4cacaf3608	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 731a70e8-40d6-47b9-b2b3-b16c818e1935	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-the-scions:cast:s1,f:xs:XP:call-the-scions:cast:s1	-	-	-	d864b561c9cb	-	01caa99fe374	-	-	2026-11-24	xproof
 7324abaa-48da-439d-9339-b0ea5eea612e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unnatural-growth:cast:s1,f:xs:XP:unnatural-growth:cast:s1	-	-	-	ae86f6029288	-	08355aaf3cbd	-	-	2026-11-24	xproof
 7324abaa-48da-439d-9339-b0ea5eea612e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:unnatural-growth:cast:s1,f:xs:XP:unnatural-growth:cast:s1	-	-	-	ae86f6029288	-	08355aaf3cbd	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73c7fdb3-4742-4d08-8658-daa4435c49b1	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 73ca14bb-0586-4716-8d4c-738a93950ed5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73ca14bb-0586-4716-8d4c-738a93950ed5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73ca14bb-0586-4716-8d4c-738a93950ed5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+73ca14bb-0586-4716-8d4c-738a93950ed5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloak-and-dagger:f0t0:s1,f:xs:XP:cloak-and-dagger:f0t0:s1	-	-	-	23c4009444b0	-	bacb6eda97ae	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 73ca3132-d849-4cf9-beba-75ba09789332	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deserter-s-disciple:cast:s1,f:xs:XP:deserter-s-disciple:cast:s1	-	-	-	23c4009444b0	-	d078139f44bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 73ca3132-d849-4cf9-beba-75ba09789332	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Deserter's Disciple/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73cbb4f0-90d6-4228-9341-791e3e9c4b48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

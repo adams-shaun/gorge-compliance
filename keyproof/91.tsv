@@ -104,14 +104,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91760bdf-a82a-4f3d-b925-3bc81ffbd41f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	23b491658465	-	9ad6fedef5b2	-	-	2026-11-25	xproof
 9178253e-0d89-450d-a93b-ed4765e945db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917aef2b-0e6d-460e-8745-8da8423d1592	cast	cast-resolve	agreed	-	X	scen	1	0	Riverwheel Sweep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:skyknight-vanguard:f0t0:s1,f:xs:XP:skyknight-vanguard:f0t0:s1	-	-	-	d864b561c9cb	-	0c4b93110edf	-	-	2026-11-24	xproof
 91818ad0-b22a-423c-bed6-a285f2f8c9d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91818ad0-b22a-423c-bed6-a285f2f8c9d4	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+91818ad0-b22a-423c-bed6-a285f2f8c9d4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-channeler:f0a0:s1,f:xs:XP:flowstone-channeler:f0a0:s1	-	-	-	23c4009444b0	-	1094c8c4d531	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-the-dross:f0t0:s1,f:xs:XP:archfiend-of-the-dross:f0t0:s1	-	-	-	3aa6ded33acb	-	a252585d8aab	-	-	2026-11-25	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-the-dross:f0t0:s1,f:xs:XP:archfiend-of-the-dross:f0t0:s1	-	-	-	3aa6ded33acb	-	a252585d8aab	-	-	2026-11-25	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -139,9 +139,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91b2520e-85b6-4e1f-88cf-a585feeb8e65	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Krenko, Baron of Tin Street/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91b46b22-8062-434b-8432-5ed1062ccaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91b46b22-8062-434b-8432-5ed1062ccaf9	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-91b5688d-4dd6-477b-998f-bdc7612de37a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:henchfiend-of-ukor:cast:s1,f:xs:XP:henchfiend-of-ukor:cast:s1	-	-	-	23c4009444b0	-	7adddb8df868	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-91b5688d-4dd6-477b-998f-bdc7612de37a	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:henchfiend-of-ukor:cast:s1,f:xs:XP:henchfiend-of-ukor:cast:s1	-	-	-	23c4009444b0	-	7adddb8df868	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-91b5688d-4dd6-477b-998f-bdc7612de37a	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7adddb8df868	-	-	2026-11-25	xproof
+91b5688d-4dd6-477b-998f-bdc7612de37a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:henchfiend-of-ukor:f0t0:s1,f:xs:XP:henchfiend-of-ukor:f0t0:s1	-	-	-	23c4009444b0	-	7adddb8df868	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+91b5688d-4dd6-477b-998f-bdc7612de37a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:henchfiend-of-ukor:f0t0:s1,f:xs:XP:henchfiend-of-ukor:f0t0:s1	-	-	-	23c4009444b0	-	7adddb8df868	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+91b5688d-4dd6-477b-998f-bdc7612de37a	f0/t0	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:henchfiend-of-ukor:f0t0:s1,f:xs:XP:henchfiend-of-ukor:f0t0:s1	-	-	-	23c4009444b0	-	7adddb8df868	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 91b89c21-5f35-4aa5-925b-c756ec6969b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91b8c0bc-2599-4423-a23f-5dc95b23cf25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91babc5f-ebeb-4894-8c35-b0f60249cb80	cast	cast-resolve	agreed	-	FX	scen	2	0	Quintorius Kand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:generous-plunderer:f0t0:s1	-	-	-	3aa6ded33acb	-	75fc42421daa	-	-	2026-11-25	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:caustic-crawler:f0t0:s1,f:xs:XP:caustic-crawler:f0t0:s1	-	-	-	23c4009444b0	-	f8885859e8c1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niambi-esteemed-speaker:f0t0:s1,f:xs:XP:niambi-esteemed-speaker:f0t0:s1	-	-	-	ae86f6029288	-	2519df10a46f	-	-	2026-11-24	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:niambi-esteemed-speaker:f0t0:s1,f:xs:XP:niambi-esteemed-speaker:f0t0:s1	-	-	-	ae86f6029288	-	2519df10a46f	-	-	2026-11-24	xproof

@@ -182,8 +182,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Goblin-town/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	land	play-land	agreed	-	X	scen	1	0	Goblin-town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:battlewand-oak:f0t0:s1,f:xs:XP:battlewand-oak:f0t0:s1	-	-	-	23c4009444b0	-	de31960f4a9e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:battlewand-oak:f0t1:s1,f:xs:XP:battlewand-oak:f0t1:s1	-	-	-	23c4009444b0	-	de31960f4a9e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 98d68954-bffe-460e-ab83-6a4bbb59cc13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiku-night-s-flower:cast:s1,f:xs:XP:kiku-night-s-flower:cast:s1	-	-	-	25696bf19d5b	-	15335c28c181	-	-	2026-11-24	xproof
 98d68954-bffe-460e-ab83-6a4bbb59cc13	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:kiku-night-s-flower:f0a0:s1,f:xs:XP:kiku-night-s-flower:f0a0:s1	-	-	-	23c4009444b0	-	15335c28c181	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 98dd8231-5679-404a-b976-0bbfa6a8493c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

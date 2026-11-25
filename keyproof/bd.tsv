@@ -142,7 +142,7 @@ bd9b3009-f389-4831-b250-80c4bb8f25e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pet
 bd9b3009-f389-4831-b250-80c4bb8f25e5	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:petrifying-meddler:cast:s1,f:xs:XP:petrifying-meddler:cast:s1	-	-	-	ae86f6029288	-	3bc9f0b3f686	-	-	2026-11-24	xproof
 bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oblivion-ring:cast:s1,f:xs:XP:oblivion-ring:cast:s1	-	-	-	d864b561c9cb	-	10edb9ae1050	-	-	2026-11-24	xproof
 bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oblivion-ring:cast:s1,f:xs:XP:oblivion-ring:cast:s1	-	-	-	d864b561c9cb	-	10edb9ae1050	-	-	2026-11-24	xproof
-bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bd9c5b53-9666-45ee-8f9d-ee1ae74111b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9d3a70-faed-4bc6-97d8-1601b36cdb21	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bd9d3a70-faed-4bc6-97d8-1601b36cdb21	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quill-Blade Laureate/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ bda83ef4-e345-495d-878c-4da171f997ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bda83ef4-e345-495d-878c-4da171f997ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bda83ef4-e345-495d-878c-4da171f997ba	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bda87ca2-91d0-48fa-bb82-a3396f0438ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bda87ca2-91d0-48fa-bb82-a3396f0438ac	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bda87ca2-91d0-48fa-bb82-a3396f0438ac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+bda87ca2-91d0-48fa-bb82-a3396f0438ac	f0/a0	TapOrUntap	agreed	-	FX	start	2	0	x:xs:XP:tideforce-elemental:f0t0:s1,f:xs:XP:tideforce-elemental:f0t0:s1	-	-	-	23c4009444b0	-	297a1231912b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bda87ca2-91d0-48fa-bb82-a3396f0438ac	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tideforce-elemental:f0t0:s1,f:xs:XP:tideforce-elemental:f0t0:s1	-	-	-	23c4009444b0	-	297a1231912b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bdb319a6-a1cd-44f5-999d-af1bb55b2fc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdb319a6-a1cd-44f5-999d-af1bb55b2fc4	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bdb3ca68-ec1f-4e16-81cc-d23f8f52c728	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:naturalize:cast:s1,f:xs:XP:naturalize:cast:s1	-	-	-	3aa6ded33acb	-	2dcadf53e5b9	-	-	2026-11-25	xproof

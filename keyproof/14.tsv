@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 141a2757-8f20-4e10-9866-bb5d612ed62d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:loxodon-eavesdropper:f0t0:s2,f:xs:XP:loxodon-eavesdropper:f0t0:s2	-	-	-	e07cf3a05ba5	-	05574815f61b	-	-	2026-11-24	xproof
 141a2757-8f20-4e10-9866-bb5d612ed62d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Loxodon Eavesdropper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 141c33be-7a25-4981-b62c-efee8e8ec91d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-141d9b88-5326-4e3d-8f16-5293246fab88	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+141d9b88-5326-4e3d-8f16-5293246fab88	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 141f952b-9e9f-48c5-9c88-b1504dfa73bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 141f952b-9e9f-48c5-9c88-b1504dfa73bc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1420b7db-859b-4ad5-9844-10413cc70478	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14bc2a2e-a445-4785-9c88-b9ad169c39bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:regenesis:cast:s1,f:xs:XP:regenesis:cast:s1	-	-	-	d864b561c9cb	-	2c9f48b92e80	-	-	2026-11-24	xproof
 14bc9e20-a6ad-4eca-8c5c-5459ce078d9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigardian-savior:f0t0:s1,f:xs:XP:sigardian-savior:f0t0:s1	-	-	-	d864b561c9cb	-	d64711bd2c73	-	-	2026-11-24	xproof
 14bc9e20-a6ad-4eca-8c5c-5459ce078d9a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sigardian-savior:f0t0:s1,f:xs:XP:sigardian-savior:f0t0:s1	-	-	-	d864b561c9cb	-	d64711bd2c73	-	-	2026-11-24	xproof
-14bee98b-6dd8-48f3-8043-06f03cc93aa7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	94857cfacb2a	-	-	2026-11-24	xproof
-14bee98b-6dd8-48f3-8043-06f03cc93aa7	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	94857cfacb2a	-	-	2026-11-24	xproof
+14bee98b-6dd8-48f3-8043-06f03cc93aa7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dewdrop-spy:cast:s1,f:xs:XP:dewdrop-spy:cast:s1	-	-	-	23c4009444b0	-	94857cfacb2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+14bee98b-6dd8-48f3-8043-06f03cc93aa7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dewdrop-spy:cast:s1,f:xs:XP:dewdrop-spy:cast:s1	-	-	-	23c4009444b0	-	94857cfacb2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 14bf3049-faa3-4c1f-a613-603e977a50a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stitcher-s-apprentice:cast:s1,f:xs:XP:stitcher-s-apprentice:cast:s1	-	-	-	d864b561c9cb	-	3013b74030cf	-	-	2026-11-24	xproof
 14bf3049-faa3-4c1f-a613-603e977a50a4	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:stitcher-s-apprentice:f0a0:s1,f:xs:XP:stitcher-s-apprentice:f0a0:s1	-	-	-	d864b561c9cb	-	3013b74030cf	-	-	2026-11-24	xproof
 14c1adf8-950b-4f64-9c84-956a623448f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malicious-advice:cast:s1,f:xs:XP:malicious-advice:cast:s1	-	-	-	fc71ca68c5ac	-	ff5d2e7b102b	-	-	2026-11-24	xproof

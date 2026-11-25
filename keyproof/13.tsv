@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 132786bb-157c-4e2c-8f82-13df6a667448	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132786bb-157c-4e2c-8f82-13df6a667448	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dross-scorpion:f0t0:s1,f:xs:XP:dross-scorpion:f0t0:s1	-	-	-	d864b561c9cb	-	5709e7175b67	-	-	2026-11-24	xproof
 13279222-422d-4447-9451-2463b0c714c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13279222-422d-4447-9451-2463b0c714c6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+13279222-422d-4447-9451-2463b0c714c6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-packleader:f0t0:s1,f:xs:XP:garruk-s-packleader:f0t0:s1	-	-	-	23c4009444b0	-	e94853824862	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 135cc078-1c45-465e-b0b9-7168c89f56f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 135cc078-1c45-465e-b0b9-7168c89f56f4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 135e6545-4ec5-4136-9019-3fda92052b7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-135e6545-4ec5-4136-9019-3fda92052b7a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+135e6545-4ec5-4136-9019-3fda92052b7a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:lys-alana-bowmaster:f0t0:s1,f:xs:XP:lys-alana-bowmaster:f0t0:s1	-	-	-	23c4009444b0	-	10382267cd92	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 135eb851-3f2d-45c5-bfb9-49d1e6c98344	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:folk-medicine:cast:s1,f:xs:XP:folk-medicine:cast:s1	-	-	-	fc71ca68c5ac	-	ba146b767f3e	-	-	2026-11-24	xproof
 13613f6e-a6e4-4493-b029-8ec11610c29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13ca49a2-8a78-4be4-976a-b684086864bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shadow-mysterious-assassin:cast:s1,f:xs:XP:shadow-mysterious-assassin:cast:s1	-	-	-	8c0bd19283bb	-	178bb462779c	-	-	2026-11-24	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13cb7d87-ff12-4742-8f54-f3175536db40	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

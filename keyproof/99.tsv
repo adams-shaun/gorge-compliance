@@ -42,10 +42,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9928773d-3f35-4b0e-965d-4233e04398fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hermitic Herbalist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9928773d-3f35-4b0e-965d-4233e04398fb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hermitic Herbalist/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9929d7ba-cdc5-4099-a0ee-3a15073336f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9929d7ba-cdc5-4099-a0ee-3a15073336f3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+9929d7ba-cdc5-4099-a0ee-3a15073336f3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seer-s-sundial:f0t0:s1,f:xs:XP:seer-s-sundial:f0t0:s1	-	-	-	23c4009444b0	-	4deceb1255d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 992d9a72-d34d-47d7-96fb-37f0efb515ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hymn-to-tourach:cast:s1,f:xs:XP:hymn-to-tourach:cast:s1	-	-	-	fc71ca68c5ac	-	fc7296326399	-	-	2026-11-24	xproof
 9931a999-ee1b-465b-a912-9f4697a01014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9931a999-ee1b-465b-a912-9f4697a01014	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9931a999-ee1b-465b-a912-9f4697a01014	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-swath:f0t0:s1,f:xs:XP:pyromancer-s-swath:f0t0:s1	-	-	-	23c4009444b0	-	f51059bc3e74	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 99348e1d-e95e-4911-aae0-8fd1a7345a82	cast	cast-resolve	agreed	-	X	scen	1	0	Skullsnap Nuisance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99348e1d-e95e-4911-aae0-8fd1a7345a82	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skullsnap-nuisance:combat0.attack:s1,f:xs:XP:skullsnap-nuisance:combat0.attack:s1	-	-	-	23c4009444b0	-	44c9f1b2ed31	-	-	2026-11-25	xproof
 99348e1d-e95e-4911-aae0-8fd1a7345a82	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skullsnap-nuisance:combat0.block:s1,f:xs:XP:skullsnap-nuisance:combat0.block:s1	-	-	-	23c4009444b0	-	44c9f1b2ed31	-	-	2026-11-25	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 997bdec5-f67b-4822-a3ba-c636e2685e8a	cast	cast-resolve	agreed	-	FX	scen	2	0	Cruel Somnophage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 997bdec5-f67b-4822-a3ba-c636e2685e8a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cruel Somnophage/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 997d2f38-5a50-451e-bd48-e36dcb24d967	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-997d2f38-5a50-451e-bd48-e36dcb24d967	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+997d2f38-5a50-451e-bd48-e36dcb24d967	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 997f5a5a-9ee1-4b66-9ffc-d1a2e996e615	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 998484cc-fefc-4da5-9987-5d6e89599c34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9984d950-29dc-4d6b-8750-8d1bf86ea98f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:red-ghost-intangible-genius:cast:s1,f:xs:XP:red-ghost-intangible-genius:cast:s1	-	-	-	8c0bd19283bb	-	d90dd877806a	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99cc909d-3cb2-499c-8231-41418745cd71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99cc909d-3cb2-499c-8231-41418745cd71	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 99d0876f-174b-4cfe-aa52-f3d5434f6cba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:root-kin-ally:cast:s1,f:xs:XP:root-kin-ally:cast:s1	-	-	-	77494c1ce129	-	15e28856fa13	-	-	2026-11-24	xproof
-99d0876f-174b-4cfe-aa52-f3d5434f6cba	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+99d0876f-174b-4cfe-aa52-f3d5434f6cba	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:root-kin-ally:f0a0:s1,f:xs:XP:root-kin-ally:f0a0:s1	-	-	-	23c4009444b0	-	15e28856fa13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 99d42ae8-8cee-449b-812b-98a81a593077	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 99d42ae8-8cee-449b-812b-98a81a593077	f0/a1	NULL	owed	refused:battlefield:not-a-permanent	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 99d42ae8-8cee-449b-812b-98a81a593077	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 b6021700-992a-4faa-8f83-a9af03dc7296	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6021700-992a-4faa-8f83-a9af03dc7296	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b6021700-992a-4faa-8f83-a9af03dc7296	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b6021700-992a-4faa-8f83-a9af03dc7296	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b6021700-992a-4faa-8f83-a9af03dc7296	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:baru-fist-of-krosa:f0t0:s1,f:xs:XP:baru-fist-of-krosa:f0t0:s1	-	-	-	23c4009444b0	-	7ceac74003c9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b608288e-1755-4738-b828-9df6998bae8d	cast	cast-resolve	agreed	-	X	scen	1	0	Illusion Spinners/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b608288e-1755-4738-b828-9df6998bae8d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Illusion Spinners/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b608288e-1755-4738-b828-9df6998bae8d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Illusion Spinners/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ b6c8ac69-daa7-4e2e-a1d9-439731a81870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b6c8ac69-daa7-4e2e-a1d9-439731a81870	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6c8f2fe-b097-49af-ab59-16590dedaf32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:phyrexia-s-core:f0a1:s1,f:xs:XP:phyrexia-s-core:f0a1:s1	-	-	-	23c4009444b0	-	4d3e772bdaaa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b6cc062c-eb39-46ee-bd6d-17f1db0ac50d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6cc351e-6afd-4427-998d-e06e430cd0e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circle-of-the-land-druid:f0t0:s1,f:xs:XP:circle-of-the-land-druid:f0t0:s1	-	-	-	8c0bd19283bb	-	14bf53a6190b	-	-	2026-11-24	xproof
 b6cc351e-6afd-4427-998d-e06e430cd0e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circle-of-the-land-druid:f0t0:s1,f:xs:XP:circle-of-the-land-druid:f0t0:s1	-	-	-	8c0bd19283bb	-	14bf53a6190b	-	-	2026-11-24	xproof
@@ -159,8 +159,8 @@ b6d65fa3-26a9-44b2-a93d-a295bd080729	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs
 b6db81e5-b7ca-45dc-a72d-1ff12935a3e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scent-of-ivy:cast:s1,f:xs:XP:scent-of-ivy:cast:s1	-	-	-	5f2128bf97e4	-	8ec816977d2a	-	-	2026-11-24	xproof
 b6ddb093-1fff-4648-b7a1-141a3875599c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6ddb093-1fff-4648-b7a1-141a3875599c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6e36e77-0cea-4b7a-b968-774b1e74a992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-soulgorger:cast:s1,f:xs:XP:phyrexian-soulgorger:cast:s1	-	-	-	23c4009444b0	-	66c2e0e77947	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-b6e36e77-0cea-4b7a-b968-774b1e74a992	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	66c2e0e77947	-	-	2026-11-25	xproof
+b6e36e77-0cea-4b7a-b968-774b1e74a992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-soulgorger:f0t0:s1,f:xs:XP:phyrexian-soulgorger:f0t0:s1	-	-	-	23c4009444b0	-	66c2e0e77947	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b6e36e77-0cea-4b7a-b968-774b1e74a992	f0/t0	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-soulgorger:f0t0:s1,f:xs:XP:phyrexian-soulgorger:f0t0:s1	-	-	-	23c4009444b0	-	66c2e0e77947	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	cast	cast-resolve	agreed	-	X	scen	1	0	Tiger-Dillo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tiger-Dillo/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tiger-Dillo/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

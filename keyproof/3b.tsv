@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b00f415-2496-4333-be89-601fd837fe7c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b02dfca-bcaa-4e22-b143-401ed250d016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:titan-forge:cast:s1,f:xs:XP:titan-forge:cast:s1	-	-	-	d864b561c9cb	-	e9441810f0ee	-	-	2026-11-24	xproof
 3b02dfca-bcaa-4e22-b143-401ed250d016	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:titan-forge:f0a0:s1,f:xs:XP:titan-forge:f0a0:s1	-	-	-	d864b561c9cb	-	e9441810f0ee	-	-	2026-11-24	xproof
-3b02dfca-bcaa-4e22-b143-401ed250d016	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3b02dfca-bcaa-4e22-b143-401ed250d016	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:titan-forge:f0a1:s1,f:xs:XP:titan-forge:f0a1:s1	-	-	-	23c4009444b0	-	e9441810f0ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b1647d1-9aec-454f-a215-e28633cb7a2d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b172be8-1bac-441e-98cc-f5af8da6005b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b172be8-1bac-441e-98cc-f5af8da6005b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-rage:f0a0:s1,f:xs:XP:trigon-of-rage:f0a0:s1	-	-	-	d864b561c9cb	-	a9c5b7842bad	-	-	2026-11-24	xproof
-3b172be8-1bac-441e-98cc-f5af8da6005b	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3b172be8-1bac-441e-98cc-f5af8da6005b	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-rage:f0a1:s1,f:xs:XP:trigon-of-rage:f0a1:s1	-	-	-	23c4009444b0	-	a9c5b7842bad	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b17da84-ae4d-4fc1-a327-85e54e6156c6	cast	cast-resolve	agreed	-	X	scen	1	0	Koth, the Geomancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b17da84-ae4d-4fc1-a327-85e54e6156c6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Koth, the Geomancer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b17da84-ae4d-4fc1-a327-85e54e6156c6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Koth, the Geomancer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a1	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:seismic-monstrosaur:f0a1:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:cast:s1,f:xs:XP:caller-of-the-pack:cast:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:f0t0:s1,f:xs:XP:caller-of-the-pack:f0t0:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
-3b6d773b-e2f7-4e74-9e77-f2e0d369a31e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+3b6d773b-e2f7-4e74-9e77-f2e0d369a31e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b6ef144-bb98-4686-9718-204f1c3cf020	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:worldsoul-s-rage:cast:s1,f:xs:XP:worldsoul-s-rage:cast:s1	-	-	-	8c0bd19283bb	-	57f0203cdd3a	-	-	2026-11-25	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

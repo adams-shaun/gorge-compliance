@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bb82829-05e8-4cdd-91e4-b837a620bfc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bb8c54b-1228-4b7c-8651-52cb5b0f6e72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:arc-runner:f0t0:s1,f:xs:XP:arc-runner:f0t0:s1	-	-	-	23c4009444b0	-	a3e648a5f89f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	f0/a0	NULL	owed	refused:steps-needed:cost:GU	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9bc458ac-5566-4978-aeaa-73b600d4ec29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bc9f027-8a2a-4447-8458-66ed40cb5b0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myrkul-s-invoker:cast:s1,f:xs:XP:myrkul-s-invoker:cast:s1	-	-	-	8c0bd19283bb	-	a0f917e566f1	-	-	2026-11-24	xproof
 9bc9f027-8a2a-4447-8458-66ed40cb5b0d	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:myrkul-s-invoker:f0a0:s1,f:xs:XP:myrkul-s-invoker:f0a0:s1	-	-	-	8c0bd19283bb	-	a0f917e566f1	-	-	2026-11-24	xproof
 9bcaf141-1f1f-491f-aced-13dc093b9e2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bcaf141-1f1f-491f-aced-13dc093b9e2c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9bcaf141-1f1f-491f-aced-13dc093b9e2c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9bcf66d0-8a4d-4c57-b4de-4cc35399465e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bcf66d0-8a4d-4c57-b4de-4cc35399465e	f0/a0	Reveal	agreed	-	FX	start	2	0	x:xs:XP:nightshade-seer:f0a0:s1,f:xs:XP:nightshade-seer:f0a0:s1	-	-	-	5f2128bf97e4	-	27d5f9b00f18	-	-	2026-11-24	xproof
 9bd013df-ad75-4099-940b-1765c58faf26	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Castle Doom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

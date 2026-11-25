@@ -122,9 +122,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 186b2256-4af3-48cb-96b0-b0e80a7ee6dc	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:oliphaunt:cast:s1,f:xs:XP:oliphaunt:cast:s1	-	-	-	ae86f6029288	-	cdef2d369262	-	-	2026-11-24	xproof
 186b2256-4af3-48cb-96b0-b0e80a7ee6dc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:oliphaunt:f0t0:s1,f:xs:XP:oliphaunt:f0t0:s1	-	-	-	ae86f6029288	-	cdef2d369262	-	-	2026-11-24	xproof
 186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a2	PumpAll	agreed	-	FX	start	1	0	x:xs:XP:garruk-wildspeaker:f0a2:s1,f:xs:XP:garruk-wildspeaker:f0a2:s1	-	-	-	23c4009444b0	-	ec6c75b357b2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 186bfdac-ce9c-476f-89b6-ef467487fca5	cast	cast-resolve	agreed	-	FX	scen	2	0	Pitiless Carnage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 186efd85-83d4-40cc-b617-76f32dbe99ce	cast	cast-resolve	agreed	-	FX	scen	2	0	Radiant Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18710b5e-5403-48cd-9541-8154ba0a0b30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

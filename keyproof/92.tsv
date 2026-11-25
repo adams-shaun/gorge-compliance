@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92042cad-09f5-464f-85ad-baad27e6d1eb	cast	cast	agreed	-	F	start	4	0	f:xs:XP:prowling-pangolin:cast:s1	-	-	-	fc71ca68c5ac	-	e0cd91b2cf5e	-	-	2026-11-24	xproof
 92042cad-09f5-464f-85ad-baad27e6d1eb	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:prowling-pangolin:cast:s1	-	-	-	fc71ca68c5ac	-	e0cd91b2cf5e	-	-	2026-11-24	xproof
 920445ab-0ac2-4de7-bc1c-f5e58eb4424c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sangromancer:cast:s1,f:xs:XP:sangromancer:cast:s1	-	-	-	d864b561c9cb	-	31e074f577fc	-	-	2026-11-24	xproof
-920445ab-0ac2-4de7-bc1c-f5e58eb4424c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-920445ab-0ac2-4de7-bc1c-f5e58eb4424c	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+920445ab-0ac2-4de7-bc1c-f5e58eb4424c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sangromancer:f0t0:s1,f:xs:XP:sangromancer:f0t0:s1	-	-	-	23c4009444b0	-	31e074f577fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+920445ab-0ac2-4de7-bc1c-f5e58eb4424c	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92045f6c-9ec2-4bf0-826c-e21ef253011c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92045f6c-9ec2-4bf0-826c-e21ef253011c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:aethergeode-miner:f0t0:s1,f:xs:XP:aethergeode-miner:f0t0:s1	-	-	-	d864b561c9cb	-	f76cf360b3da	-	-	2026-11-24	xproof
 92045f6c-9ec2-4bf0-826c-e21ef253011c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aethergeode-miner:f0t0:s1,f:xs:XP:aethergeode-miner:f0t0:s1	-	-	-	d864b561c9cb	-	f76cf360b3da	-	-	2026-11-24	xproof
@@ -25,8 +25,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9207facd-fbf9-4faa-ac44-6c0bcac81551	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Goliath Daydreamer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 920c1dd4-c3f6-4020-a6f0-2e8acad2c212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920c4df3-9517-44cd-8304-28b1ef69d60e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:colfenor-s-urn:f0t1:s1,f:xs:XP:colfenor-s-urn:f0t1:s1	-	-	-	23c4009444b0	-	8706a1deb754	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 920cc1a7-ac6b-44c0-ade7-347f05bba0f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920e21c4-0116-416e-a375-bb887cb7b44a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920e21c4-0116-416e-a375-bb887cb7b44a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,8 +160,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92a5e50d-8477-4654-9c1b-219e4fe3c5ab	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92abb79d-3c60-48f7-87a0-13c25a5e1128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92abb79d-3c60-48f7-87a0-13c25a5e1128	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-92acb789-0e42-465c-ac16-40fefec48805	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92acb789-0e42-465c-ac16-40fefec48805	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+92acb789-0e42-465c-ac16-40fefec48805	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:llanowar-reborn:f0t0:s1,f:xs:XP:llanowar-reborn:f0t0:s1	-	-	-	23c4009444b0	-	67f122511f80	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+92acb789-0e42-465c-ac16-40fefec48805	f0/t0	ChangesZone/Graft	agreed	-	FX	start	2	0	x:xs:XP:llanowar-reborn:f0t0:s1,f:xs:XP:llanowar-reborn:f0t0:s1	-	-	-	23c4009444b0	-	67f122511f80	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92acb789-0e42-465c-ac16-40fefec48805	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92b617f9-6e6b-42a0-9c45-6ff5f6193051	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 92b91910-9b65-4421-8eef-a33793161089	cast	cast-resolve	agreed	-	X	scen	1	0	Molten Duplication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

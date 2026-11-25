@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f2ba562-8d5e-4915-967e-54916c3c5876	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:eager-trufflesnout:f0t0:s1,f:xs:XP:eager-trufflesnout:combat0.attack:s1	-	-	-	23c4009444b0	-	f30171120da6	-	-	2026-11-25	xproof
 7f3095fb-ffc0-48ed-8792-4157897a9ce7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f31aa43-cf75-4488-b47f-e16e923a2d01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f31aa43-cf75-4488-b47f-e16e923a2d01	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7f31aa43-cf75-4488-b47f-e16e923a2d01	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f32c581-4d4a-4873-8e4b-b95e13790481	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-dragon:cast:s1,f:xs:XP:phantasmal-dragon:cast:s1	-	-	-	25696bf19d5b	-	a41217d86ab8	-	-	2026-11-24	xproof
 7f32c581-4d4a-4873-8e4b-b95e13790481	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f34f6b4-18ef-40d7-a599-5c29ba468b89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f51aede-fb86-4b7e-9027-2ba8be62b567	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uthros-psionicist:cast:s1,f:xs:XP:uthros-psionicist:cast:s1	-	-	-	23c4009444b0	-	7b135b0e1e0f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f51aede-fb86-4b7e-9027-2ba8be62b567	static#0.0	static#0.0	agreed	-	X	scen	1	0	Uthros Psionicist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f52993c-a20a-48fe-b463-2a33873b489a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnathosaur:cast:s1,f:xs:XP:gnathosaur:cast:s1	-	-	-	d864b561c9cb	-	de07ceb8fa3c	-	-	2026-11-24	xproof
-7f52993c-a20a-48fe-b463-2a33873b489a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7f52993c-a20a-48fe-b463-2a33873b489a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gnathosaur:f0a0:s1,f:xs:XP:gnathosaur:f0a0:s1	-	-	-	23c4009444b0	-	de07ceb8fa3c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f577b46-c69d-4c75-9db5-7e10206b6b59	cast	cast-resolve	agreed	-	X	scen	1	0	Geometer's Arthropod/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f577b46-c69d-4c75-9db5-7e10206b6b59	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Geometer's Arthropod/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f591bfb-a241-4980-9cb3-fb5af3355f6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f61a2a6-2fe2-48ec-8e2e-74d147be0a0a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:risk-factor:cast:s1	-	-	-	d864b561c9cb	-	fab0f5ef1658	-	-	2026-11-24	xproof
 7f6505a1-ab8b-468b-a5de-33451598b464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-nihil-stone:f0t1:s1,f:xs:XP:quest-for-the-nihil-stone:f0t1:s1	-	-	-	3aa6ded33acb	-	e66c31b5fef3	-	-	2026-11-25	xproof
-7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-nihil-stone:f0t1:s1,f:xs:XP:quest-for-the-nihil-stone:f0t1:s1	-	-	-	3aa6ded33acb	-	e66c31b5fef3	-	-	2026-11-25	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fbf6afc-8a16-447b-bdef-b7d0b640f76c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wing-splicer:f0t0:s1,f:xs:XP:wing-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	a8f8276282cc	-	-	2026-11-24	xproof
 7fbf6afc-8a16-447b-bdef-b7d0b640f76c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wing-splicer:f0t0:s1,f:xs:XP:wing-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	a8f8276282cc	-	-	2026-11-24	xproof
 7fc3798a-3907-4f50-98a1-25b8e1977197	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fc3798a-3907-4f50-98a1-25b8e1977197	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7fc3798a-3907-4f50-98a1-25b8e1977197	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:myrsmith:f0t0:s1	-	-	-	23c4009444b0	-	8ff667ef0169	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7fc3c2a5-2754-4237-8a37-cb3166c20c3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-armodon:cast:s1,f:xs:XP:trumpeting-armodon:cast:s1	-	-	-	5f2128bf97e4	-	96c495b7dfb0	-	-	2026-11-24	xproof
 7fc3c2a5-2754-4237-8a37-cb3166c20c3c	f0/a0	MustBlock	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-armodon:f0a0:s1,f:xs:XP:trumpeting-armodon:f0a0:s1	-	-	-	5f2128bf97e4	-	96c495b7dfb0	-	-	2026-11-24	xproof
 7fc6a5c1-f0da-42f6-93d0-6d94467e2ac0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

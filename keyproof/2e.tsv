@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e18ee5b-cda3-428b-be91-939c410256ac	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cold-case-cracker:combat0.block:s1,f:xs:XP:cold-case-cracker:combat0.block:s1	-	-	-	3aa6ded33acb	-	5176dc502a84	-	-	2026-11-25	xproof
 2e18ee5b-cda3-428b-be91-939c410256ac	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cold-case-cracker:f0t0:s1,f:xs:XP:cold-case-cracker:f0t0:s1	-	-	-	23b491658465	-	5176dc502a84	-	-	2026-11-24	xproof
 2e19baba-2d66-4e3a-b2bf-cb27dce89f44	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-goblin-lord:cast:s1,f:xs:XP:quest-for-the-goblin-lord:cast:s1	-	-	-	8a1b1a193ec0	-	8ecb80d7778c	-	-	2026-11-24	xproof
-2e19baba-2d66-4e3a-b2bf-cb27dce89f44	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+2e19baba-2d66-4e3a-b2bf-cb27dce89f44	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-goblin-lord:f0t0:s1,f:xs:XP:quest-for-the-goblin-lord:f0t0:s1	-	-	-	23c4009444b0	-	8ecb80d7778c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2e1b5ae6-a29d-4f37-a380-eebee6cdcbd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e1d5873-50e6-432a-b7a9-9f8d2632a0b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e1d5873-50e6-432a-b7a9-9f8d2632a0b9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2efd6494-c5e1-41de-bc6e-8490ff046cd1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spider-man-noir:combat0.block:s1,f:xs:XP:spider-man-noir:combat0.block:s1	-	-	-	23c4009444b0	-	3098501d9c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2efd6494-c5e1-41de-bc6e-8490ff046cd1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spider-man-noir:combat0.attack:s1,f:xs:XP:spider-man-noir:combat0.attack:s1	-	-	-	23c4009444b0	-	3098501d9c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2efdfcae-c3ad-4c6b-8a60-45a203bd14c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2efdfcae-c3ad-4c6b-8a60-45a203bd14c6	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+2efdfcae-c3ad-4c6b-8a60-45a203bd14c6	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2efea460-c3e1-4578-a587-134e13bdf264	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runechanter-s-pike:cast:s1,f:xs:XP:runechanter-s-pike:cast:s1	-	-	-	d864b561c9cb	-	1f557059ae44	-	-	2026-11-24	xproof
 2efea460-c3e1-4578-a587-134e13bdf264	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:runechanter-s-pike:f0a0:s1	-	-	-	d864b561c9cb	-	1f557059ae44	-	-	2026-11-24	xproof
 2effcd1c-5833-4e0e-bb67-2d2ffb22a014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -39,7 +39,7 @@ bb482f90-5624-4e2c-9916-85fb09a3639a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bb4be6b2-507c-4d7c-bea4-010670dce3da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb4d9770-f230-4413-a7a4-bb1f1303661a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb4e1340-da63-46b8-a5e3-79dfedec3e78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snapping-creeper:cast:s1,f:xs:XP:snapping-creeper:cast:s1	-	-	-	8a1b1a193ec0	-	c3ad047f6ec2	-	-	2026-11-24	xproof
-bb4e1340-da63-46b8-a5e3-79dfedec3e78	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+bb4e1340-da63-46b8-a5e3-79dfedec3e78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:snapping-creeper:f0t0:s1,f:xs:XP:snapping-creeper:f0t0:s1	-	-	-	23c4009444b0	-	c3ad047f6ec2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb504fb1-1d19-4d0b-958f-e8f2433e0575	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frondland-felidar:cast:s1,f:xs:XP:frondland-felidar:cast:s1	-	-	-	ae86f6029288	-	c43ea70a3095	-	-	2026-11-24	xproof
 bb50b4f4-f0da-4283-821b-6d74bd20752f	cast	cast-resolve	agreed	-	FX	scen	2	0	Jeskai Shrinekeeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bb50b4f4-f0da-4283-821b-6d74bd20752f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:jeskai-shrinekeeper:combat0.attack:s1,f:xs:XP:jeskai-shrinekeeper:combat0.attack:s1	-	-	-	23c4009444b0	-	28e2126aef2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -65,7 +65,7 @@ bb7638ce-3802-4198-89d2-6f5b647bd8fb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 bb77b63f-e679-463c-b983-4f2a4ef7bafe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb77b63f-e679-463c-b983-4f2a4ef7bafe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb7c069b-8d3f-4ba2-874b-8ec575fd6dd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb7c069b-8d3f-4ba2-874b-8ec575fd6dd4	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+bb7c069b-8d3f-4ba2-874b-8ec575fd6dd4	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb7cebb7-a979-4879-b834-deab13f2a22c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glimmer-lens:f0t1:s1,f:xs:XP:glimmer-lens:f0t1:s1	-	-	-	8c0bd19283bb	-	c4c3b82b0a83	-	-	2026-11-24	xproof
 bb7cebb7-a979-4879-b834-deab13f2a22c	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 bb7cebb7-a979-4879-b834-deab13f2a22c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -112,7 +112,7 @@ bbb16f23-fdb1-444b-bef8-ce3e177c2678	f0/t0	NULL	owed	refused:steps-needed:token	
 bbb16f23-fdb1-444b-bef8-ce3e177c2678	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbb4643a-4bc6-4860-95e5-6f69cd1aebbe	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Where We're Going . . ."	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 bbb50cf5-cd07-4ae8-bfa8-d747e44fb1ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magnetic-mine:cast:s1,f:xs:XP:magnetic-mine:cast:s1	-	-	-	d864b561c9cb	-	fedb8ab246ec	-	-	2026-11-24	xproof
-bbb50cf5-cd07-4ae8-bfa8-d747e44fb1ef	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+bbb50cf5-cd07-4ae8-bfa8-d747e44fb1ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:magnetic-mine:f0t0:s1,f:xs:XP:magnetic-mine:f0t0:s1	-	-	-	23c4009444b0	-	fedb8ab246ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbb6867f-7186-41de-9828-21be469178c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Frolicking Familiar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbb6867f-7186-41de-9828-21be469178c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Frolicking Familiar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbb6867f-7186-41de-9828-21be469178c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Frolicking Familiar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ bbd84035-3efd-4301-9778-913898efd57a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 bbdb731d-c533-48ef-b82a-cf1a8ba36208	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-sibsig-ceremony:cast:s1,f:xs:XP:the-sibsig-ceremony:cast:s1	-	-	-	23c4009444b0	-	9ac3737246f0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbdb731d-c533-48ef-b82a-cf1a8ba36208	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Sibsig Ceremony/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbdb731d-c533-48ef-b82a-cf1a8ba36208	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Sibsig Ceremony/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bbe370ba-412b-4052-89d9-2d0ae4928118	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+bbe370ba-412b-4052-89d9-2d0ae4928118	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbe3726b-e14d-48d1-8bbf-40d48f1ef8c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:start-your-engines:cast:s1,f:xs:XP:start-your-engines:cast:s1	-	-	-	d864b561c9cb	-	dabbc5eef751	-	-	2026-11-24	xproof
 bbe41a21-f8ad-4e5c-88d8-2a41dfd32d13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbe41a21-f8ad-4e5c-88d8-2a41dfd32d13	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

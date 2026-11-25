@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46abaabe-7015-4d82-a5aa-2706b1f51bed	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thallid:f0t0:s1,f:xs:XP:thallid:f0t0:s1	-	-	-	23c4009444b0	-	4945dcd03a9b	-	-	2026-11-25	xproof
 46af64c9-2ab5-4e63-98db-cfb885a96109	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46af64c9-2ab5-4e63-98db-cfb885a96109	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-46af64c9-2ab5-4e63-98db-cfb885a96109	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+46af64c9-2ab5-4e63-98db-cfb885a96109	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:conversion-chamber:f0a1:s1,f:xs:XP:conversion-chamber:f0a1:s1	-	-	-	23c4009444b0	-	cd5e44003fae	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 46b01055-4839-4b95-aa53-b954e9669e03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46b01055-4839-4b95-aa53-b954e9669e03	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 46b1a169-bc32-47bf-b379-fa0c3d13878f	cast	cast-resolve	agreed	-	X	scen	1	0	Cori-Steel Cutter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46e8bec0-1a09-4e6e-b78a-7ba161686ca9	cast	cast-resolve	agreed	-	FX	scen	2	0	Cindering Cutthroat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46e8bec0-1a09-4e6e-b78a-7ba161686ca9	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Cindering Cutthroat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46eefc72-2d9e-4389-8ae1-26d9ee472b5c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46eefc72-2d9e-4389-8ae1-26d9ee472b5c	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+46eefc72-2d9e-4389-8ae1-26d9ee472b5c	f0/a1	ChangeZone/Transmute	agreed	-	F	start	2	0	f:xs:XP:tolaria-west:f0a1:s1	-	-	-	23c4009444b0	-	cbf472d71414	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 46eefc72-2d9e-4389-8ae1-26d9ee472b5c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46f01d1c-7ab6-4a58-97ce-57a4eb99843c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wary-okapi:cast:s1,f:xs:XP:wary-okapi:cast:s1	-	-	-	d864b561c9cb	-	28d33c1612be	-	-	2026-11-24	xproof
 46f1618d-9c95-4a4b-9a20-7c378b811849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

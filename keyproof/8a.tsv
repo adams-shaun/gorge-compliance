@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a15841a-dcb6-454a-b865-43a067f42b4e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trufflesnout:f0t0:s1,f:xs:XP:trufflesnout:f0t0:s1	-	-	-	3aa6ded33acb	-	81166557a325	-	-	2026-11-25	xproof
 8a179d68-c9e6-4f46-99bf-11b2a2708990	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-thought:cast:s1,f:xs:XP:trigon-of-thought:cast:s1	-	-	-	d864b561c9cb	-	896e0a5d1954	-	-	2026-11-24	xproof
 8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-thought:f0a0:s1,f:xs:XP:trigon-of-thought:f0a0:s1	-	-	-	d864b561c9cb	-	896e0a5d1954	-	-	2026-11-24	xproof
-8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8a179d68-c9e6-4f46-99bf-11b2a2708990	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-thought:f0a1:s1,f:xs:XP:trigon-of-thought:f0a1:s1	-	-	-	23c4009444b0	-	896e0a5d1954	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tough-cookie:f0t0:s2,f:xs:XP:tough-cookie:f0t0:s2	-	-	-	e07cf3a05ba5	-	807a3ff05f3f	-	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tough Cookie/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a1a5862-c027-4c15-99a7-1795d0da96da	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:tough-cookie:f0a0:s1,f:xs:XP:tough-cookie:f0a0:s1	-	-	-	23b491658465	-	807a3ff05f3f	-	-	2026-11-25	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ad91015-db7f-43ea-97c9-bf2bf5656858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad91015-db7f-43ea-97c9-bf2bf5656858	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:yuan-shao-s-infantry:f0t0:s1,f:xs:XP:yuan-shao-s-infantry:f0t0:s1	-	-	-	5f2128bf97e4	-	73b6985ae887	-	-	2026-11-24	xproof
 8ad91f64-ccab-4edc-bd54-b2ee9267d614	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ad91f64-ccab-4edc-bd54-b2ee9267d614	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8ad91f64-ccab-4edc-bd54-b2ee9267d614	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lotus-cobra:f0t0:s1,f:xs:XP:lotus-cobra:f0t0:s1	-	-	-	23c4009444b0	-	bedfe81e580d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a1	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:f0a0:s1,f:xs:XP:elephant-graveyard:f0a0:s1	-	-	-	23b491658465	-	67206cc88b12	-	-	2026-11-25	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	land	land	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:land:s1,f:xs:XP:elephant-graveyard:land:s1	-	-	-	ae86f6029288	-	67206cc88b12	-	-	2026-11-24	xproof
@@ -215,5 +215,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruin-crab:cast:s1,f:xs:XP:ruin-crab:cast:s1	-	-	-	25696bf19d5b	-	035948a252f3	-	-	2026-11-24	xproof
 8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ruin-crab:f0t0:s1,f:xs:XP:ruin-crab:f0t0:s1	-	-	-	23c4009444b0	-	035948a252f3	-	-	2026-11-25	xproof
 8afc6147-80b4-4296-a5aa-ce892cefb1a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orchard-warden:cast:s1,f:xs:XP:orchard-warden:cast:s1	-	-	-	d864b561c9cb	-	e2c75338ff88	-	-	2026-11-24	xproof
-8afc6147-80b4-4296-a5aa-ce892cefb1a7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8afc6147-80b4-4296-a5aa-ce892cefb1a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:orchard-warden:f0t0:s1,f:xs:XP:orchard-warden:f0t0:s1	-	-	-	23c4009444b0	-	e2c75338ff88	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8afe3d28-be3e-416c-9457-8a2af85b2eec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ritual-of-hope:cast:s1,f:xs:XP:ritual-of-hope:cast:s1	-	-	-	d864b561c9cb	-	d62a9bd196d3	-	-	2026-11-24	xproof
