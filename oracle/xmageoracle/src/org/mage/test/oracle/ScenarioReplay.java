@@ -3843,6 +3843,25 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     return true;
                 }
             }
+            if (isActivatedAbilityTarget(orig)
+                    && !getTargets().isEmpty()
+                    && !TestPlayer.TARGET_SKIP.equals(getTargets().get(0))) {
+                // The base TestPlayer has no arm for TargetActivatedAbility
+                // (it extends TargetObject, not TargetStackObject, so its
+                // stack branch never runs and it asserts "Targets list was
+                // setup by addTarget ... but not used"): Azorius Guildmage's
+                // "counter target activated ability". Match the queued answer (the "@" alias a bound
+                // ability ref carries, or a rule-text prefix) against the stack
+                // objects in the target's own legal set, as the base does for a
+                // spell.
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                StackObject match = findStackAbilityTarget(target, abilityControllerId, source, game, getTargets().get(0));
+                if (match != null) {
+                    target.addTarget(match.getId(), source, game);
+                    getTargets().remove(0);
+                    return true;
+                }
+            }
             if (isCraftMaterialsAsk(target)) {
                 // CraftCost.pay calls chooseTarget exactly ONCE while
                 // TestPlayer.chooseTarget consumes one queued definition per
@@ -3890,6 +3909,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return super.chooseTarget(outcome, target, source, game);
         }
 
+        /** The stack object in the target's own legal set that a queued
+         * answer names: "^"-separated alternatives, like the base's stack
+         * branch, each an alias or a rule-text prefix. */
+        private StackObject findStackAbilityTarget(mage.target.Target target, UUID abilityControllerId,
+                Ability source, Game game, String definition) {
+            java.util.Collection<UUID> possible = target.possibleTargets(abilityControllerId, source, game);
+            for (String name : definition.split("\\^")) {
+                for (StackObject so : game.getStack()) {
+                    if (possible.contains(so.getId()) && !target.contains(so.getId())
+                            && hasObjectTargetNameOrAlias(so, name)) {
+                        return so;
+                    }
+                }
+            }
+            return null;
+        }
+
         /** The battlefield permanent in the target's own legal set that the
          * queued name or alias names, or null when the answer is not a
          * permanent (a spell on the stack, which the base handles). */
@@ -3905,6 +3941,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             return null;
         }
+    }
+
+    /** Whether a target object is XMage's "target activated ability" class,
+     * which the base TestPlayer's stack branch (TargetSpell,
+     * TargetSpellOrPermanent, TargetStackObject) does not cover:
+     * TargetActivatedAbility extends TargetObject, not TargetStackObject.
+     * TargetActivatedOrTriggeredAbility does extend TargetStackObject, so the
+     * base already answers it. */
+    static boolean isActivatedAbilityTarget(mage.target.Target target) {
+        return target instanceof mage.target.common.TargetActivatedAbility;
     }
 
     /** Whether the scripted attach step is already satisfied: the bearer

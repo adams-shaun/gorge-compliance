@@ -232,7 +232,14 @@ func TestForgeRolledDie(t *testing.T) {
 // election answer) merged with 9b233511947 (the forced Hand->Library put-back, above), no textual conflicts (StepMachine/
 // DecisionQueue vs ScriptedController ChangeTargets touch different areas; merge tree 5d6202a0c7cb); die-roll code unchanged,
 // ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "47dd7358b326fbf557acc84dd0ac1bc23df7be99"
+// 495ed200e9f = 0ca7a220bd0 (join18, above) plus setup player_counters (SetupBuilder.placePlayerCounters, PlayerCountersSetupTest);
+// 19c49ba7117 = 0ca7a220bd0 plus the "pN:ability:Name" stack-ability target ref (xpt-1d873918); die-roll code unchanged.
+// d38946a0fd9 = 19c49ba7117 merged with 495ed200e9f, no textual conflicts (the two sides touch disjoint files); die-roll
+// code unchanged.
+// 8765c682b2f = oracle/fpin-1125-join22: d38946a0fd9 (above) merged with a8da5c69719 (join20 f3065a4da86 = 495ed200e9f plus the
+// optional-untap election answer, merged with 9b233511947), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
+// re-run green on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "8765c682b2f8086fe9d5612aff7187ff193e6a66"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
