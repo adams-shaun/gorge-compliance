@@ -572,6 +572,62 @@ func TestStartRefusesUnofferedFocus(t *testing.T) {
 	}
 }
 
+// TestStartRoomDoor: a Room placed by setup enters with neither unlocked
+// designation (CR 709.5d), so it has no name and no door's rules text is live
+// (CR 709.5). A start that places a Room and focuses its front-door static
+// would exercise nothing: the CR 709.5e unlock special action is not a step
+// the three runners replay. play refuses it by name instead of writing an
+// item that credits a static that never applied. Both a front-face spelling
+// (Greenhouse) and a joined one (Solitary Study // Endless Corridor) are
+// covered, so the check is on the card's Room type, not its spelling.
+func TestStartRoomDoor(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Greenhouse", "static#0.0"},                         // front-door static, Room placed by setup
+		{"Solitary Study // Endless Corridor", "static#0.0"}, // a second Room shape, by its joined name
+	} {
+		t.Run(c.card+"-"+c.key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			in, out := t.TempDir(), t.TempDir()
+			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			items, locked := 0, 0
+			if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+				t.Fatal(err)
+			}
+			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+				var r lowerRow
+				if err := json.Unmarshal(b, &r); err != nil {
+					return err
+				}
+				if r.Status == statusRefused && len(r.Reasons) == 1 && strings.HasPrefix(r.Reasons[0], reasonStartRoomLocked+":") {
+					locked++
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+			if items != 0 || locked != 2 {
+				t.Errorf("items %d %s %d, want no item and 2 refusals %q (start %s)", items, reasonStartRoomLocked, locked, reasonStartRoomLocked, raw)
+			}
+		})
+	}
+}
+
 // TestStartTransformingDFC: a start scen yields for a transforming double-faced
 // card loads in play. scen lists the card on a battlefield, tapped or as a
 // counter bearer by its joined name "A // B" while startDeck deals its front
@@ -628,8 +684,8 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 }
 
 // startIsExercised generates the start file for card's key, plays it, and
-// fails when play refuses it as start-not-exercised or writes no item; it
-// returns the items written.
+// fails when play refuses it as start-not-exercised or writes fewer items than
+// the start's seeds; it returns the items written.
 func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card, key string) []oraclegen.Item {
 	t.Helper()
 	res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
@@ -650,8 +706,10 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 			refused = append(refused, string(b))
 		}
 	}
-	if len(items) == 0 {
-		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	// One item per seed is the generator's contract: a seed that lowers to no
+	// item leaves the key unproven there even when the other seed writes one.
+	if len(items) != res.Start.Seeds {
+		t.Errorf("%d item(s), want %d (one per seed): lowering %v (start %s)", len(items), res.Start.Seeds, refused, raw)
 	}
 	return items
 }
@@ -917,6 +975,24 @@ func TestStartStackTargetIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetIncidentalUpkeepIsExercised: a bait start still lowers
+// when the only beginning-of-upkeep trigger is incidental to the focus play.
+// Wizard's Retort needs a Wizard, and certdeck's first pick (Drifter il-Dal)
+// has an upkeep trigger, so the generator must skip it for the battlefield;
+// Lilting Refrain is the focus card itself, and the scenario replay walks the
+// same turn-1 upkeep the live start did, so its optional trigger does not
+// refuse the span.
+func TestStartStackTargetIncidentalUpkeepIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Wizard's Retort", "cast"},
+		{"Lilting Refrain", "f0/a0"},
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
 // TestStartStackTargetCostIsExercised: an alternate additional cost
 // ("behold a Jace or pay {1}", "tap an artifact or pay {1}") is paid in
 // addition to the mana cost, and the generated start placed only the printed
@@ -949,12 +1025,15 @@ var stackTargetHardCards = []string{
 	"Psychic Rebuttal", "Turn Aside", "Rebuff the Wicked", "Not of This World",
 	"Teferi's Response", "Ring of Immortals",
 	"Countersculpt", "Disruption Protocol", "Louisoix's Sacrifice", "Wild Unraveling",
+	"Wizard's Retort", "Lilting Refrain", // incidental upkeep triggers on a placed enabler / the focus card
 }
 
-// stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
-// item: an unscripted upkeep trigger refuses the start after its focus play was
-// offered, so they are exempt from the "wrote an item" check below only.
-var stackTargetUpkeepCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
+// stackTargetWatchedCards are the stack-target cards whose incidental upkeep
+// trigger once made every bait start lower to no item (Wizard's Retort's
+// certdeck Wizard was Drifter il-Dal, and Lilting Refrain is the focus card).
+// They are no longer exempt: the census requires an item from every bait start
+// and logs each of these keys, so a regression names the card and key.
+var stackTargetWatchedCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
 
 // stackTargetCards is every playable card with a face whose script declares a
 // stack target, sorted.
@@ -988,8 +1067,8 @@ func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
 
 // stackTargetCensus generates every key of each card and plays each start that
 // carries a bait: the focus play must be offered on both seeds (no
-// start-not-exercised row), and a bait start must lower to at least one item
-// unless the card is a known upkeep refusal. This is the guard for the class of
+// start-not-exercised row), and a bait start must lower to at least one item.
+// This is the guard for the class of
 // regression where the bait was accepted for a spell the focus play could never
 // target (TargetValidTargeting, a bait cast from the hand against "wasn't cast
 // from hand", a sorcery-speed focus behind the bait): xengine play refused
@@ -1028,12 +1107,15 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
 				}
 			}
-			if len(items) == 0 && !stackTargetUpkeepCards[card] {
+			if len(items) != res.Start.Seeds {
 				bad = true
-				t.Errorf("%s %s: a bait start lowered to no item (start %s)", card, key, raw)
+				t.Errorf("%s %s: a bait start wrote %d item(s), want %d (one per seed) (start %s)", card, key, len(items), res.Start.Seeds, raw)
 			}
 			if !bad {
 				exercised++
+				if stackTargetWatchedCards[card] {
+					t.Logf("stack-target census: %s %s exercised (%d item(s))", card, key, len(items))
+				}
 			}
 		}
 	}
@@ -1262,6 +1344,8 @@ func TestStartFocusTargetIsPlaced(t *testing.T) {
 		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
 		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
 		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
+		{"Aerial Assault", "cast"},                // Creature.tapped: the target must be placed tapped
+		{"Asphyxiate", "cast"},                    // Creature.untapped: the target must be placed untapped
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}

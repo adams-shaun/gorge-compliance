@@ -2465,3 +2465,59 @@ func TestStartTransformedTrigger(t *testing.T) {
 		}
 	}
 }
+
+// TestStarttappedtarget: a target whose filter names a battlefield state, not
+// a face property ("target tapped creature", Aerial Assault's
+// ValidTgts$ Creature.tapped), was read as unknown: the start refused as
+// start:needs-target. Placing the carrier without recording its state would
+// write a file whose focus play the game never offers (start-not-exercised),
+// so the placed target must also be listed in the seat's Tapped. The untapped
+// form of the same filter (Asphyxiate) must place an untapped target.
+func TestStarttappedtarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card   string
+		tapped bool
+	}{
+		{"Aerial Assault", true}, // ValidTgts$ Creature.tapped
+		{"Vengeance", true},      // ValidTgts$ Creature.tapped
+		{"Asphyxiate", false},    // ValidTgts$ Creature.untapped
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, "cast", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			var creatures []string
+			for _, name := range f.Setup.P1.Battlefield {
+				c, ok := reg.Lookup(name)
+				if ok && len(c.Faces) > 0 && c.Faces[0].IsCreature() {
+					creatures = append(creatures, name)
+				}
+			}
+			if len(creatures) == 0 {
+				t.Fatalf("p1 battlefield %v holds no target creature", f.Setup.P1.Battlefield)
+			}
+			if tc.tapped {
+				if len(f.Setup.P1.Tapped) == 0 {
+					t.Errorf("p1 tapped %v is empty, want a tapped target (%v)", f.Setup.P1.Tapped, creatures)
+				}
+				for _, name := range f.Setup.P1.Tapped {
+					if !slices.Contains(creatures, name) {
+						t.Errorf("p1 tapped %v names %q, not a target creature (%v)", f.Setup.P1.Tapped, name, creatures)
+					}
+				}
+			} else {
+				for _, name := range creatures {
+					if slices.Contains(f.Setup.P1.Tapped, name) {
+						t.Errorf("%s is tapped, want an untapped target", name)
+					}
+				}
+			}
+		})
+	}
+}

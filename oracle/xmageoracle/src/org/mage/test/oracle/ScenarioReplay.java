@@ -12,8 +12,12 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.PlayLandAbility;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -36,6 +40,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
 import mage.cards.ModalDoubleFacedCard;
+import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -1203,6 +1208,84 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return opponentNames.get(0);
         }
 
+        /** The per-zone pick may an attach effect poses before every card it
+         * takes from a zone ("Attach an Aura from the battlefield?", "... from
+         * your hand?", "... from your graveyard?"): the zone is the message's
+         * last words, so a new card with the same loop is covered by the role.
+         * The "Attach an " prefix keeps other per-zone mays (a cast or put ask
+         * with its own scripted boolean) out of it. */
+        static boolean zonePickAsk(String message) {
+            return zoneOfPickAsk(message) != null;
+        }
+
+        /** The zone a per-zone pick ask names: HAND, GRAVEYARD or BATTLEFIELD,
+         * else null. */
+        static Zone zoneOfPickAsk(String message) {
+            if (message == null || !message.startsWith("Attach an ") || !message.endsWith("?")) {
+                return null;
+            }
+            if (message.endsWith(" from your hand?")) {
+                return Zone.HAND;
+            }
+            if (message.endsWith(" from your graveyard?")) {
+                return Zone.GRAVEYARD;
+            }
+            if (message.endsWith(" from the battlefield?")) {
+                return Zone.BATTLEFIELD;
+            }
+            return null;
+        }
+
+        private boolean zonePickQueued(String message, Game game) {
+            Zone zone = zoneOfPickAsk(message);
+            if (zone == null) {
+                return false;
+            }
+            return zonePickQueued(zone, getChoices(), getTargets(), (askedZone, answer) -> {
+                if (askedZone == Zone.BATTLEFIELD) {
+                    for (mage.game.permanent.Permanent p : game.getBattlefield().getAllActivePermanents()) {
+                        if (answerNamesCandidate(game, p.getId(), answer)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                Cards cards = askedZone == Zone.HAND ? getHand() : getGraveyard();
+                for (UUID id : cards) {
+                    if (answerNamesCandidate(game, id, answer)) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+
+        /** Whether a per-zone pick may is scripted to go ahead: either queue's
+         * head may name a candidate of the ask's zone. choose(Cards,
+         * TargetCard) reads the CHOICE queue, while the generator may have
+         * scripted the pick on the TARGET queue, which handOffCardPick moves
+         * to the choice queue only when the Cards ask comes, so both are
+         * consulted and neither queue is consumed. A head that is a skip or
+         * a scripted Yes/No is no pick. */
+        static boolean zonePickQueued(Zone zone, List<String> choices, List<String> targets,
+                BiPredicate<Zone, String> namesCandidateInZone) {
+            return zonePickHeadQueued(zone, choices, namesCandidateInZone)
+                    || zonePickHeadQueued(zone, targets, namesCandidateInZone);
+        }
+
+        private static boolean zonePickHeadQueued(Zone zone, List<String> queue,
+                BiPredicate<Zone, String> namesCandidateInZone) {
+            if (queue.isEmpty()) {
+                return false;
+            }
+            String head = queue.get(0);
+            if (head.equals("Yes") || head.equals("No")
+                    || TestPlayer.CHOICE_SKIP.equals(head) || TestPlayer.TARGET_SKIP.equals(head)) {
+                return false;
+            }
+            return namesCandidateInZone.test(zone, head);
+        }
+
         private boolean scriptedYesNoNext() {
             return !getChoices().isEmpty() && (getChoices().get(0).equals("Yes") || getChoices().get(0).equals("No"));
         }
@@ -1425,6 +1508,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // placement below, exactly as oracleRun.build's post-placement
                 // LifeChange does.
                 return true;
+            }
+            if (zonePickAsk(message) && !scriptedYesNoNext()) {
+                // A per-zone "Attach an Aura from your hand?" (Bruna, Light of
+                // Alabaster) asks a may per pick; gorge recorded ONE yes for the
+                // whole effect and the pick itself. Yes when a queued pick lies
+                // in the named zone -- the choice queue when the generator
+                // scripted it there (choose(Cards, TargetCard) reads it), the
+                // target queue when handOffCardPick has still to move it --
+                // else no, without consuming either queue.
+                return zonePickQueued(message, game);
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
                     && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
@@ -2227,12 +2320,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return shares;
         }
 
+        /** A bespoke non-targeting card pick (Bruna's per-zone Aura attach) is
+         * posed through choose(Cards, TargetCard), which reads the CHOICE
+         * queue, while the generator scripted it for the chooseTarget twin on
+         * the TARGET queue. Move it before forcedChooseCards, which would
+         * otherwise take a lone candidate and strand the scripted target. */
+        private void handOffCardPick(Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            if (target.getMinNumberOfTargets() > 0 && !getTargets().isEmpty()
+                    && (source == null || !source.getTargets().contains(target))
+                    && (source == null || !source.getTargets().contains(target.getOriginalTarget()))) {
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                List<UUID> candidates = new ArrayList<>();
+                for (UUID id : target.possibleTargets(abilityControllerId, source, game, cards)) {
+                    if (!target.contains(id)) {
+                        candidates.add(id);
+                    }
+                }
+                movePickToChoices(getChoices(), getTargets(), !candidates.isEmpty(), answer -> {
+                    for (UUID id : candidates) {
+                        if (answerNamesCandidate(game, id, answer)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+        }
+
         @Override
         public boolean choose(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
             Game previous = choiceGame;
             choiceGame = game;
             boolean declined = declinePairToChoiceSkip(target.getMinNumberOfTargets(), getChoices(), getTargets());
             try {
+                handOffCardPick(cards, target, source, game);
                 if (forcedChooseCards(cards, target, source, game)) {
                     return true;
                 }
@@ -8053,6 +8174,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // both set SpellAbilityCastMode.MORPH, so both suffix " using
                 // Morph" (MorphAbility.java:79-88; MegamorphTest.java:24).
                 String mode = castMode;
+                if ("mayplay".equals(mode)) {
+                    // A card cast from exile under a permanent's static
+                    // permission is only in TestPlayer's playable set if that
+                    // permission applies. XMage registers static abilities
+                    // before the permanent exists (zcc 0), so a permission
+                    // that keys its exile zone on the source's zcc misses the
+                    // zone the entering trigger used (Azula, Cunning
+                    // Usurper). Re-derive those counters at this cast's own
+                    // priority, before the activate command queues.
+                    runCode("repair static permission source zcc", turn, phase, p,
+                            (info, pl, g) -> repairStaticSourceZCC(g));
+                }
                 if (!sc0.has("xmage_answers")) {
                     answers(st, p);
                 }
@@ -8613,6 +8746,63 @@ public class ScenarioReplay extends CardTestPlayerBase {
             activateAbility(turn, phase, p, "Cast " + castObject, target);
         } else {
             castSpell(turn, phase, p, castObject, target);
+        }
+    }
+
+    /**
+     * Re-derive the source zone-change counter of every continuous effect's
+     * static ability from the permanent that currently supplies it.
+     *
+     * XMage registers a card's static abilities with GameState at load time
+     * (GameState.addAbility -> addEffect), before the card is a permanent, so
+     * getStackMomentSourceZCC() stays 0 -- the warning on
+     * CardUtil.getExileZoneId names exactly this. A static effect that keys
+     * instance state on that counter, as the play-from-exile permissions do
+     * (CardUtil.getExileZoneId(game, source)), then reads the zone of the
+     * pre-game placeholder instead of the settled permanent. Azula, Cunning
+     * Usurper is one: AzulaCunningUsurperExileEffect runs with the entering
+     * trigger's zcc while AzulaCunningUsurperCastEffect asks for the zcc-0
+     * zone, so TestPlayer.getPlayable never lists the exiled card's cast
+     * ("Can't find ability to activate command: Cast @p1:Shield Sphere").
+     *
+     * The permanent's counter is the authority. Only a registered static
+     * ability still at 0 is touched, and only when its source is a battlefield
+     * permanent, so an ability the engine already initialized is left alone.
+     * Sweeping every layered and as-thought effect covers the next static
+     * permission that keys on its own zcc without naming the card.
+     */
+    static void repairStaticSourceZCC(Game game) {
+        java.util.Map<java.util.UUID, Integer> permanentZCC = new java.util.HashMap<>();
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            permanentZCC.put(permanent.getId(), permanent.getZoneChangeCounter(game));
+        }
+        if (permanentZCC.isEmpty()) {
+            return;
+        }
+        java.util.Set<java.util.UUID> repaired = new java.util.HashSet<>();
+        java.util.function.Consumer<Ability> repair = ability -> {
+            if (!(ability instanceof StaticAbility)
+                    || ability.getStackMomentSourceZCC() != 0
+                    || !repaired.add(ability.getId())) {
+                return;
+            }
+            Integer zcc = permanentZCC.get(ability.getSourceId());
+            if (zcc != null && zcc > 0) {
+                ability.setSourceObjectZoneChangeCounter(zcc);
+            }
+        };
+        ContinuousEffects effects = game.getState().getContinuousEffects();
+        for (ContinuousEffect effect : effects.getLayeredEffects(game)) {
+            for (Ability ability : effects.getLayeredEffectAbilities(effect)) {
+                repair.accept(ability);
+            }
+        }
+        for (AsThoughEffectType type : AsThoughEffectType.values()) {
+            for (AsThoughEffect effect : effects.getApplicableAsThoughEffects(type, game)) {
+                for (Ability ability : effects.getAsThoughEffectsAbility(effect)) {
+                    repair.accept(ability);
+                }
+            }
         }
     }
 
