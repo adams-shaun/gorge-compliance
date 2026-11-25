@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c53a913-8a99-4a15-9c47-e79af026dc05	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skybeast-tracker:combat0.block:s1,f:xs:XP:skybeast-tracker:combat0.block:s1	-	-	-	3aa6ded33acb	-	942ea201c242	-	-	2026-11-25	xproof
 2c53a913-8a99-4a15-9c47-e79af026dc05	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skybeast-tracker:f0t0:s1,f:xs:XP:skybeast-tracker:f0t0:s1	-	-	-	3aa6ded33acb	-	942ea201c242	-	-	2026-11-25	xproof
 2c57c4e9-0a46-45d6-92db-9203fb722b60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c57c4e9-0a46-45d6-92db-9203fb722b60	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-2c57c4e9-0a46-45d6-92db-9203fb722b60	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+2c57c4e9-0a46-45d6-92db-9203fb722b60	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:abomination:f0t0:s1,f:xs:XP:abomination:f0t0:s1	-	-	-	9087eefec3ee	-	098e807835f9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2c57c4e9-0a46-45d6-92db-9203fb722b60	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:abomination:f0t1:s1,f:xs:XP:abomination:f0t1:s1	-	-	-	9087eefec3ee	-	098e807835f9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2c5aa155-646c-47f6-ba5c-6e1b41fd4bb2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:shepherd-of-the-cosmos:cast:s1,f:xs:XP:shepherd-of-the-cosmos:cast:s1	-	-	-	d864b561c9cb	-	2be3c8357696	-	-	2026-11-24	xproof
 2c5aa155-646c-47f6-ba5c-6e1b41fd4bb2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:shepherd-of-the-cosmos:cast:s1,f:xs:XP:shepherd-of-the-cosmos:cast:s1	-	-	-	d864b561c9cb	-	2be3c8357696	-	-	2026-11-24	xproof
 2c5c8250-1860-42a1-a335-071f54830d37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -199,8 +199,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cf04076-adc4-4831-a3b8-9120d516f204	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2cf04076-adc4-4831-a3b8-9120d516f204	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0t0:s1,f:xs:XP:jubilation:f0t0:s1	-	-	-	8c0bd19283bb	-	d2d4ad167d5c	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:cast:s1,f:xs:XP:infernal-medusa:cast:s1	-	-	-	fc71ca68c5ac	-	d8779b806975	-	-	2026-11-24	xproof
-2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:f0t0:s1,f:xs:XP:infernal-medusa:f0t0:s1	-	-	-	9087eefec3ee	-	d8779b806975	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:f0t1:s1,f:xs:XP:infernal-medusa:f0t1:s1	-	-	-	9087eefec3ee	-	d8779b806975	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2cf79dd0-c9db-403e-969d-6c09e7aaa575	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-naked-time:cast:s1	-	-	-	fb9d3088f0bf	-	11754bd2d455	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2cfd5c18-47d0-4549-aacc-2428db21df2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cff1f9e-11a6-460c-8f5f-4c02424357e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
