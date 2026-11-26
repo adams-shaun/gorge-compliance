@@ -115,10 +115,48 @@ func (b bandBot) DecideBoard(ctx context.Context, brd botpolicy.Board, d decisio
 	return b.band(d, in, err)
 }
 
-// band replaces the bot's answer to a band ask, and only to a band ask.
+// blightDecline is the index of the decline of a triggered ask "you may blight
+// N. If you do, ...", or -1 when d is not that ask: a choose that offers a
+// trigger_cost_pay labelled "Blight N" beside a trigger_cost_decline.
+//
+// The followers cannot answer a paid blight. Forge's driver scripts no
+// CostBlight (ScriptedCostDecision.visit(CostBlight) misses "Missing cost
+// CostBlight answer"), and XMage asks the creature to put the counters on
+// where gorge, with one candidate, logs no pick. Every item that paid one
+// ended owed (xpg-h-costblight: 9 keys, 4 cards). A decline reaches neither
+// cost walk, so the seat declines, and a paid blight stays unplayed until the
+// Forge driver scripts the cost.
+func blightDecline(d decision.Decision) int {
+	if d.Kind != decision.KChoose {
+		return -1
+	}
+	pay, decline := false, -1
+	for i, o := range d.Options {
+		switch {
+		case o.Kind == "trigger_cost_pay" && strings.HasPrefix(o.Label, "Blight "):
+			pay = true
+		case o.Kind == "trigger_cost_decline":
+			decline = i
+		}
+	}
+	if !pay {
+		return -1
+	}
+	return decline
+}
+
+// band replaces the bot's answer to a band ask, and only to a band ask; it
+// also declines a triggered optional blight (blightDecline).
 func (b bandBot) band(d decision.Decision, in decision.Intent, err error) (decision.Intent, error) {
-	if err != nil || !bandAsk(d) {
+	if err != nil {
 		return in, err
+	}
+	if i := blightDecline(d); i >= 0 {
+		in.Choices = []int{i}
+		return in, nil
+	}
+	if !bandAsk(d) {
+		return in, nil
 	}
 	// splitmix64 of seed, seat and decision: no ambient randomness.
 	x := b.seed ^ uint64(b.seat+1)*0x9e3779b97f4a7c15 ^ d.Seq*0xbf58476d1ce4e5b9
