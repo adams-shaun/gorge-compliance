@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a1	NULL	owed	refused:as-enters:land	-	start	0	0	-	-	-	-	18f6c5727729	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a1	NULL	owed	refused:as-enters:land	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 dd01ef1f-f6be-498f-82e0-dc04833e685f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd0412ee-6c14-4cfc-95d8-942a2392111a	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 dd0412ee-6c14-4cfc-95d8-942a2392111a	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
@@ -41,7 +41,7 @@ dd2c0046-dc31-44f7-8601-7ec77515b926	f0/t0	BecomeMonstrous	agreed	-	FX	start	2	0
 dd2f698c-b3b4-4dc8-9950-9be03ca7dc9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tinder-wall:cast:s1,f:xs:XP:tinder-wall:cast:s1	-	-	-	ea3140b6974b	-	63f769304c51	-	-	2026-11-24	xproof
 dd2f698c-b3b4-4dc8-9950-9be03ca7dc9e	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:tinder-wall:f0a0:s1,f:xs:XP:tinder-wall:f0a0:s1	-	-	-	baa6f696107c	-	63f769304c51	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 dd2f698c-b3b4-4dc8-9950-9be03ca7dc9e	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:tinder-wall:f0a1:s1,f:xs:XP:tinder-wall:f0a1:s1	-	-	-	baa6f696107c	-	63f769304c51	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-dd310fa1-02e0-4c39-a1ae-7bb0ed42bc1e	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	18f6c5727729	-	003bb38a3332	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+dd310fa1-02e0-4c39-a1ae-7bb0ed42bc1e	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	003bb38a3332	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 dd33af3e-ab8c-486c-baae-a37cc857f180	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd33af3e-ab8c-486c-baae-a37cc857f180	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:see-red:f0t0:s1,f:xs:XP:see-red:f0t0:s1	-	-	-	17bda798c09c	-	286ad7a81956	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd35a377-0865-4b25-bd0f-aaead29a9f0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doran-besieged-by-time:cast:s1,f:xs:XP:doran-besieged-by-time:cast:s1	-	-	-	23c4009444b0	-	aaf93df6e8aa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
