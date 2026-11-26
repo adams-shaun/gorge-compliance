@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 142d2063-d692-42a6-b828-42d998914589	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14319020-faf2-49c4-a808-c39650203383	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1432db6a-9466-48f6-9011-60728c437608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1432db6a-9466-48f6-9011-60728c437608	f0/a0	NULL	owed	refused:start:target-condition:was-dealt-damage-this-turn	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+1432db6a-9466-48f6-9011-60728c437608	f0/a0	NULL	owed	refused:start:target-condition:was-dealt-damage-this-turn	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 14363df6-ac0f-476a-bbd8-ce351de0babf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1436dd81-496e-42a5-b210-fb5b9cdf073f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1436dd81-496e-42a5-b210-fb5b9cdf073f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,9 +145,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14c3e48b-4c4e-4787-8c50-0e3aee19aa23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aerith-rescue-mission:cast:s1,f:xs:XP:aerith-rescue-mission:cast:s1	-	-	-	23c4009444b0	-	45de17592ccc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 14c3ff84-1e82-4606-a433-869fc52cc382	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14c3ff84-1e82-4606-a433-869fc52cc382	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14c3ff84-1e82-4606-a433-869fc52cc382	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+14c3ff84-1e82-4606-a433-869fc52cc382	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 14c3ff84-1e82-4606-a433-869fc52cc382	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:syr-konrad-the-grim:f0t1:s1,f:xs:XP:syr-konrad-the-grim:f0t1:s1	-	-	-	b6db453064e8	-	a2a08e46bcb7	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
-14c3ff84-1e82-4606-a433-869fc52cc382	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+14c3ff84-1e82-4606-a433-869fc52cc382	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 14c4ad24-7f38-409b-8ef0-341f233982da	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:romulus:f0a0:s1,f:xs:XP:romulus:f0a0:s1	-	-	-	c2272f704fde	-	6de22a9709a6	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 14c4ad24-7f38-409b-8ef0-341f233982da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:romulus:f0t0:s1,f:xs:XP:romulus:f0t0:s1	-	-	-	6f84be0f34c0	-	6de22a9709a6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14c4ad24-7f38-409b-8ef0-341f233982da	land	land	agreed	-	FX	start	2	0	x:xs:XP:romulus:f0t0:s1,f:xs:XP:romulus:f0t0:s1	-	-	-	6f84be0f34c0	-	6de22a9709a6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:tyvar-kell:f0a2:s1,f:xs:XP:tyvar-kell:f0a2:s1	-	-	-	6f84be0f34c0	-	8bf8af7a721a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14c8f55d-d177-4c25-a931-ebeb9e6062a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d14ded-8831-47ad-ad90-f6f242cccf03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14d14ded-8831-47ad-ad90-f6f242cccf03	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+14d14ded-8831-47ad-ad90-f6f242cccf03	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 14d2979d-5728-42d7-a027-0eb1f754655d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d2979d-5728-42d7-a027-0eb1f754655d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d2979d-5728-42d7-a027-0eb1f754655d	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14d5fdb3-14a3-461d-8515-a520c2c9e666	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:fleshtaker:f0a0:s1,f:xs:XP:fleshtaker:f0a0:s1	-	-	-	6f84be0f34c0	-	dec47fdcb45c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:duskworker:f0t0:s1,f:xs:XP:duskworker:f0t0:s1	-	-	-	6f84be0f34c0	-	cd3ae7c0a192	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14df239a-c7cc-492a-94f5-2971f6efe17b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:vampirism:cast:s1	-	-	-	8c0bd19283bb	-	6aa6e5f87578	-	-	2026-11-24	xproof
 14ef5aa4-5f61-4fbd-9a8d-35920c40ec25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14ef5aa4-5f61-4fbd-9a8d-35920c40ec25	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14ef5aa4-5f61-4fbd-9a8d-35920c40ec25	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+14ef5aa4-5f61-4fbd-9a8d-35920c40ec25	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 14f081bb-dd7a-4419-af9b-f75d91e1a6d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shefet-monitor:cast:s1,f:xs:XP:shefet-monitor:cast:s1	-	-	-	d864b561c9cb	-	acc29b4fc4ef	-	-	2026-11-24	xproof
 14f081bb-dd7a-4419-af9b-f75d91e1a6d0	f0/a0	Draw/Cycling	agreed	-	F	start	2	0	f:xs:XP:shefet-monitor:f0a0:s1	-	-	-	da6bc3fe8458	-	acc29b4fc4ef	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 14f081bb-dd7a-4419-af9b-f75d91e1a6d0	f0/t0	Cycled	agreed	-	F	start	2	0	f:xs:XP:shefet-monitor:f0a0:s1	-	-	-	da6bc3fe8458	-	acc29b4fc4ef	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
