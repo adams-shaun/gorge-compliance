@@ -1002,7 +1002,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # Valiant Endeavor "strict_miss: Missing number answer"). UnmappedAskTest's three Valiant Endeavor cases (forced rolls 3 and 6: pick 3 six
 # Knights, pick 6 three, unoffered 4 still misses) fail on 71fd77c15c0 and pass here. Driver-only; die-roll forcing, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-number-values.
-FORGE_ORACLE_REF ?= bdad3bd38b1c0f5c85ffaae2a15f09548e4dfea7
+# 4385467a9eb = 483fcd27c71 (bdad3bd38b1 above, merged into fix/xp-forge-driver-choose-fewer-than-min) merged with gorge's FORGE_REF
+# 5bc5851a54 (gorge-cond-fixes-20261125: Laboratory Drudge, Barrowin of Clan Undurr, Park Heights Pegasus check their conditions on
+# resolution). gorge main moved FORGE_REF there on 11-25 and the pin invariant failed every xproof cycle; the merge was clean, and the
+# cardsfolder/tokenscripts trees now equal FORGE_REF 5bc5851a54's. Driver code unchanged from bdad3bd38b1. Fork branch
+# oracle/forge-pinfix-5bc5851a54. scripts/check-forge-ref-in-driver.sh now holds this in CI.
+FORGE_ORACLE_REF ?= 4385467a9eb5f1953a34498e07be47e24ae4b66c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
@@ -1178,6 +1183,7 @@ smoke:
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/check_fork_pins_smoke.sh
+	bash ops/scripts/tests/check_forge_ref_in_driver_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
