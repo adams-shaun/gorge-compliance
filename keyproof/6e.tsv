@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e0b3317-394d-42cc-a350-cb5ce051787a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e0b3317-394d-42cc-a350-cb5ce051787a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e0b3317-394d-42cc-a350-cb5ce051787a	f0/t0	NULL	owed	refused:start:day-night	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-6e0b3317-394d-42cc-a350-cb5ce051787a	f1/a0	NULL	owed	refused:start:day-night	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-6e0b3317-394d-42cc-a350-cb5ce051787a	f1/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:target	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6e0b3317-394d-42cc-a350-cb5ce051787a	f1/a0	NULL	owed	refused:start:day-night	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6e0b3317-394d-42cc-a350-cb5ce051787a	f1/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:target	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 6e0deb42-f876-4fb8-9536-6d9a42bd6e5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e0deb42-f876-4fb8-9536-6d9a42bd6e5e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shrouded-serpent:f0t0:s1,f:xs:XP:shrouded-serpent:f0t0:s1	-	-	-	5f2128bf97e4	-	9ef34dd29f4b	-	-	2026-11-24	xproof
 6e111622-c7cc-49cf-83e8-3555e06518c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e5f908a-f4f1-4718-ac39-34176e401756	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e5fd8b4-d81a-4ed6-b389-21445351bb43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e61ae7b-f2e8-421c-870b-a48c08d07503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elaborate-firecannon:f0t0:s1,f:xs:XP:elaborate-firecannon:f0t0:s1	-	-	-	3aa6ded33acb	-	9a0c4fb919e8	-	-	2026-11-25	xproof
-6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:elaborate-firecannon:f0t0:s1,f:xs:XP:elaborate-firecannon:f0t0:s1	-	-	-	3aa6ded33acb	-	9a0c4fb919e8	-	-	2026-11-25	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:cast:s1,f:xs:XP:steel-hellkite:cast:s1	-	-	-	23b491658465	-	7847c536d169	-	-	2026-11-24	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:combat0.attack:s1,f:xs:XP:steel-hellkite:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7847c536d169	-	-	2026-11-25	xproof

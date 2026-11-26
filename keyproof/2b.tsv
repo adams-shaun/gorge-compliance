@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b6fa8b6-4865-4eb6-974b-00f6b16b6f0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:u-s-agent-john-walker:f0t0:s1,f:xs:XP:u-s-agent-john-walker:f0t0:s1	-	-	-	cfde1dc26c40	-	8ca597a36a89	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 2b6fa8b6-4865-4eb6-974b-00f6b16b6f0f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:u-s-agent-john-walker:f0t0:s1,f:xs:XP:u-s-agent-john-walker:f0t0:s1	-	-	-	cfde1dc26c40	-	8ca597a36a89	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 2b719057-1bc0-4c3a-97c3-8377844570dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b719057-1bc0-4c3a-97c3-8377844570dd	f0/t0	NULL	owed	refused:no-generator:trigger:DiscardedAll	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+2b719057-1bc0-4c3a-97c3-8377844570dd	f0/t0	NULL	owed	refused:no-generator:trigger:DiscardedAll	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:molder-beast:f0t0:s1,f:xs:XP:molder-beast:f0t0:s1	-	-	-	23c4009444b0	-	1dd946054a6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2b7362a9-3518-4071-ab1b-40689a50e12a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:old-growth-educator:f0t0:s2,f:xs:XP:old-growth-educator:f0t0:s2	-	-	-	5437c1394672	-	6c6ad3194691	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b75759a-c3cc-432d-9609-4f8fa2456870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b75759a-c3cc-432d-9609-4f8fa2456870	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b757d32-09a3-49cd-ada4-84b5335178ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b757d32-09a3-49cd-ada4-84b5335178ce	f0/t0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+2b757d32-09a3-49cd-ada4-84b5335178ce	f0/t0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:thorn-lieutenant:f0a0:s1,f:xs:XP:thorn-lieutenant:f0a0:s1	-	-	-	d864b561c9cb	-	c9de4f43b56f	-	-	2026-11-24	xproof
 2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:thorn-lieutenant:f0t0:s1,f:xs:XP:thorn-lieutenant:f0t0:s1	-	-	-	336eab778104	-	c9de4f43b56f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
