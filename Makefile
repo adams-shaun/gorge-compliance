@@ -118,7 +118,12 @@ GO_TEST_FLAGS ?= -p=2
 # before (countered spell last) and passes after, and the driver replay of xs:XP:thought-collapse:cast:s1/s2 now
 # matches gorge and Forge. Fork branch fix/thought-collapse-counter-first (5566c5c1f4 cherry-picked onto
 # 11940683b90, so the Wild Shape fix stays in the pin).
-XMAGE_REF  ?= 5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8
+# bec665044ec = 5cc61aaba0b (above) + Madame Web, Clairvoyant and Lila, Hospitality Hostess use FilterNonlandCard: their
+# "cast ..." filters matched a land on top of the library (noncreature, common), so PlayFromTopOfLibraryEffect offered
+# to play it; lands are played, not cast (CR 305.1, 601.1). MadameWebClairvoyantTest fails before (the Forest on top is
+# playable) and passes after; the driver replay of xs:XP:madame-web-clairvoyant:static0.1:s1 no longer offers
+# p0:Island|play| at step 4. Fork branch fix/madame-web-clairvoyant-nonland, based directly on 5cc61aaba0b.
+XMAGE_REF  ?= bec665044ecd9134639047e1156af2c70c1da7e5
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -992,7 +997,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver strict-missed "gorge picked 1, Forge wants 2..2"). ChooseFewerThanMinTest (run-unit-tests.sh) fails on efd75d00b34 and passes here;
 # one pick over two candidates where two are required still misses. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-fewer-than-min.
-FORGE_ORACLE_REF ?= 71fd77c15c0e42d9357a53896dbac05812480ff5
+# bdad3bd38b1 = 71fd77c15c0 plus the values-list chooseNumber (RollDiceEffect ChosenSVar$, CR 706.2) answered from gorge's numeric choose_n
+# when the pick is an offered value (StepMachine.chooseNumberFrom); it missed unconditionally (xproof clusters xpt-8a6bce20, xpt-c9c0e640,
+# Valiant Endeavor "strict_miss: Missing number answer"). UnmappedAskTest's three Valiant Endeavor cases (forced rolls 3 and 6: pick 3 six
+# Knights, pick 6 three, unoffered 4 still misses) fail on 71fd77c15c0 and pass here. Driver-only; die-roll forcing, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-number-values.
+FORGE_ORACLE_REF ?= bdad3bd38b1c0f5c85ffaae2a15f09548e4dfea7
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
@@ -1007,6 +1017,12 @@ CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
 PHASE_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/phase
 
+# The gorge pin (docs/PINNING.md): move GORGE_PIN and go.mod to REV (default gorge main).
+# .github/workflows/gorge-pin-follow.yml runs the same script every 15 minutes.
+.PHONY: gorge-pin-bump
+gorge-pin-bump:
+	scripts/gorge-pin.sh bump $(or $(REV),main)
+
 .PHONY: help
 help:
 	@echo "gorge-compliance targets:"
@@ -1018,6 +1034,7 @@ help:
 	@echo "  make precheck       — an alias for test-smart"
 	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
+	@echo "  make gorge-pin-bump [REV=main] — move GORGE_PIN and go.mod to a pushed gorge commit (docs/PINNING.md)"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"

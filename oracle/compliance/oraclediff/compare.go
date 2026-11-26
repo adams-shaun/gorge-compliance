@@ -190,7 +190,7 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 		field{"stack", stackKeysOf(s.Stack, s.Permanents)},
 	)
 	if wantsCompare(compare, CompareOffered) {
-		out = append(out, field{"offered", offeredKeys(s.Offered)})
+		out = append(out, field{"offered", offeredKeys(s.Offered, s.Permanents)})
 	}
 	return out
 }
@@ -560,12 +560,14 @@ func symDiff(a, b []string) (onlyA, onlyB []string) {
 
 // sourcelessTriggerNames are Forge's and XMage's names for the inherent
 // triggered abilities that have no source object: the CR 702.179 speed
-// trigger ("Start Your Engines!", "Speed") and the CR 725.2 monarch trigger,
-// which the engines name after the designation. gorge reports all of them
-// with an empty source, so stackKeys renders every spelling the same.
+// trigger ("Start Your Engines!", "Speed"), the CR 725.2 monarch trigger and
+// the CR 726.2 initiative trigger ("The Initiative"), which the engines name
+// after the designation. gorge reports all of them with an empty source, so
+// stackKeys renders every spelling the same.
 var sourcelessTriggerNames = map[string]bool{
 	"Start Your Engines!": true, "Speed": true,
-	"The Monarch": true,
+	"The Monarch":    true,
+	"The Initiative": true,
 }
 
 // SourcelessTriggerNames returns the engine names for stack abilities that
@@ -649,11 +651,43 @@ func pairedStackKeys(g, x rules.OracleSnapshot) (gv, xv string) {
 	return stackKeysLabelled(g.Stack, g.Permanents, left), stackKeysLabelled(x.Stack, x.Permanents, left)
 }
 
-func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm, left map[int]bool) string {
+// currentPermNames maps a non-token permanent's scenario ref to its current
+// name: a copy or a permanent whose name was changed shows its new name. Both
+// stackKeysLabelled and offeredKeys label a ref that names a permanent in the
+// same snapshot by that map.
+func currentPermNames(perms []rules.OracleSnapPerm) map[string]string {
 	current := map[string]string{}
 	for _, p := range perms {
 		if p.Ref != "" && p.Name != "" && !p.Token {
 			current[p.Ref] = p.Name
+		}
+	}
+	return current
+}
+
+// refPrefix keeps a scenario ref's controller prefix ("p1:Wall of Stone" ->
+// "p1:"); refs without one name an object directly and relabel to the name
+// alone.
+func refPrefix(ref string) string {
+	if name, ok := strings.CutPrefix(ref, "p"); ok {
+		if i := strings.IndexByte(name, ':'); i >= 0 {
+			return ref[:len(ref)-len(name)+i+1]
+		}
+	}
+	return ""
+}
+
+func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm, left map[int]bool) string {
+	current := currentPermNames(perms)
+	cardNames, tokenNames := map[string]bool{}, map[string]bool{}
+	for _, p := range perms {
+		if p.Name == "" {
+			continue
+		}
+		if p.Token {
+			tokenNames[p.Name] = true
+		} else {
+			cardNames[p.Name] = true
 		}
 	}
 	parts := make([]string, 0, len(st))
@@ -663,6 +697,12 @@ func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm,
 			src = n
 		}
 		src = effectIDLabel.ReplaceAllString(src, "")
+		// A token's name is its engine's spelling (Forge "Jace Token", XMage "Jace",
+		// CR 111.4); a source that names a token and no card on the battlefield is a
+		// token source, which fieldEqual compares by kind.
+		if s.Kind == "ability" && tokenNames[src] && !cardNames[src] {
+			src = "Token"
+		}
 		if s.Kind == "ability" && sourcelessTriggerNames[src] {
 			src = ""
 		}

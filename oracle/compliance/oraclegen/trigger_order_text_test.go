@@ -70,6 +70,14 @@ func TestXMageTriggerOrderKeysTable(t *testing.T) {
 			refs:  []string{"p0:token:Otter Token#2", "p0:token:Otter Token"},
 		},
 		{
+			name: "Arcane Denial: two delayed upkeep triggers key by Forge's draw wording; XMage's delayed rule text puts the timing last, so the driver folds the key by containment (measured xs:XP:arcane-denial:cast:s1)",
+			picks: []string{
+				"Arcane Denial: Draw a card.",
+				"Arcane Denial: Draw up to two cards.",
+			},
+			want: []string{"Draw a card."},
+		},
+		{
 			name:  "a whole text that prefixes another pick's different text cannot key",
 			picks: []string{"Source: When this enters, draw a card", "Source: When this enters, draw a card and gain 1 life."},
 		},

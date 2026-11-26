@@ -1,6 +1,7 @@
 package templates
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -26,11 +27,13 @@ import (
 
 // TestActivateMultiUnitColourManaScriptsNoColour pins Baxter Building's
 // four-unit colour allocation: gauge offers 4 picks of ONE colour each, XMage
-// asks a distribution, so no joined colour answer may be scripted. The
-// precondition (pool non-empty, a multi-pick allocation) proves the empty
-// answer is the multi-unit rule firing, not the zero-mana rule. Thornvault
-// Forager ("Add two mana in any combination of colors", Amount$ 2) is the
-// sibling the same rule must cover.
+// asks a multi-amount distribution, so no joined colour answer may be
+// scripted -- the multi-amount is scripted instead, one "amount" per WUBRG
+// colour carrying gorge's own allocation (the row used to leave the
+// distribution to XMage's AI and agreed only when the two happened to
+// coincide; xproof 11251811's Conversion Apparatus diverged, gorge WWU vs
+// xmage WUB). Thornvault Forager ("Add two mana in any combination of
+// colors", Amount$ 2) is the sibling the same rule must cover.
 func TestActivateMultiUnitColourManaScriptsNoColour(t *testing.T) {
 	reg := loadGenRegistry(t)
 	for _, c := range []struct {
@@ -63,6 +66,28 @@ func TestActivateMultiUnitColourManaScriptsNoColour(t *testing.T) {
 		}
 		if got := colourAnswers(it); len(got) != 0 {
 			t.Errorf("%s %s: colour answers = %v, want none (XMage asks a multi-amount distribution, not one colour dialog)", c.card, req.Key, got)
+		}
+		// The multi-amount itself is scripted: one "amount" answer per WUBRG
+		// colour, gorge's allocation and zeroes included.
+		want := map[byte]int{'W': 0, 'U': 0, 'B': 0, 'R': 0, 'G': 0}
+		for i := range pool {
+			if _, ok := want[pool[i]]; !ok {
+				t.Fatalf("%s: precondition: pool %q holds a non-WUBRG unit", c.card, pool)
+			}
+			want[pool[i]]++
+		}
+		var amounts []string
+		for _, a := range it.XAnswers[0] {
+			if a.Kind == "amount" {
+				amounts = append(amounts, a.Value)
+			}
+		}
+		var wantVals []string
+		for _, code := range []byte("WUBRG") {
+			wantVals = append(wantVals, fmt.Sprint(want[code]))
+		}
+		if strings.Join(amounts, ",") != strings.Join(wantVals, ",") {
+			t.Errorf("%s %s: multi-amount answers = %v, want %v (gorge's pool %q)", c.card, req.Key, amounts, wantVals, pool)
 		}
 	}
 }

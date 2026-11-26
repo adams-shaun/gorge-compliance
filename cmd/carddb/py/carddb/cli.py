@@ -5,6 +5,7 @@
   ingest status --status-a FILE --meta FILE [--status-b FILE]
                                         oraclediff status output -> cert_sets status columns (docs site data)
   docs-status --db FILE --out DIR         built SQLite -> status-A.jsonl, status-B.jsonl, meta.json for the docs build
+  docs-sets --db FILE --out DIR           built SQLite -> sets.json, writers.json, sets-carddb.md (per-set xproof snippet)
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
@@ -13,6 +14,8 @@
   init [--private]                        clone the data branch, or create it
   compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
+  dirac [--repo DIR] [--gorge-dir DIR] [--source ID] [--version V] [--measured DATE]
+                                        gorge's dirac support lists + the gaps snapshot -> support, evidence rows
   size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
   release [--dry-run]                     upload carddb-latest, the weekly dated release, prune
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
@@ -35,6 +38,7 @@ import sys
 from . import build as build_mod
 from . import catalogue as catalogue_mod
 from . import compliance as compliance_mod
+from . import dirac as dirac_mod
 from . import docsstatus as docsstatus_mod
 from . import fetch as fetch_mod
 from . import merge as merge_mod
@@ -71,6 +75,9 @@ def _parser():
     p = sub.add_parser("docs-status")
     p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
     p.add_argument("--out", required=True, metavar="DIR", help="directory for status-A.jsonl, status-B.jsonl, meta.json")
+    p = sub.add_parser("docs-sets")
+    p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
+    p.add_argument("--out", required=True, metavar="DIR", help="directory for sets.json, writers.json, sets-carddb.md")
     p = sub.add_parser("publish")
     p.add_argument("--bulk", action="store_true", help="allow more than 50000 changed lines")
     p.add_argument("--private", action="store_true")
@@ -95,6 +102,14 @@ def _parser():
     p.add_argument("--measured", metavar="YYYY-MM-DD",
                    help="the support rows' measured date (default $CARDDB_NOW, else today UTC);"
                         " pass it (or CARDDB_NOW) in CI so reruns stay byte-identical")
+    p = sub.add_parser("dirac")
+    p.add_argument("--repo", help="gorge-compliance checkout holding GORGE_PIN and oracle/compliance/dirac-gaps.tsv"
+                                 " (default: the checkout)")
+    p.add_argument("--gorge-dir", help="the pinned gorge module (default $CARDDB_GORGE_DIR, else `go list -m`)")
+    p.add_argument("--source", help="writer id recorded in _meta/writers (default ci)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="the support rows' measured date (default $CARDDB_NOW, else today UTC)")
     p = sub.add_parser("size")
     p.add_argument("--source", default="ci", help="writer id recorded in _meta/writers (default ci)")
     p.add_argument("--version", help="writer version recorded in _meta/writers")
@@ -232,6 +247,10 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             na, nb = docsstatus_mod.export(args.db, args.out)
             print("carddb docs-status: %d Level A set(s), %d Level B set(s) -> %s" % (na, nb, args.out), file=stdout)
             return 0
+        if args.verb == "docs-sets":
+            n = docsstatus_mod.export_sets(args.db, args.out)
+            print("carddb docs-sets: %d set(s) with xproof rows -> %s" % (n, args.out), file=stdout)
+            return 0
         if args.verb == "ingest" and args.source == "status":
             if not args.status_a or not args.meta:
                 raise StoreError("ingest status needs --status-a and --meta")
@@ -285,6 +304,21 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                                                  version=args.version, ran=args.measured)
             parts = " ".join("%s:%s=%d" % (e, s, n) for (e, s), n in sorted(counts.items()))
             print("carddb compliance: %d rows changed; %s" % (changed, parts), file=stdout)
+            return 0
+        if args.verb == "dirac":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            try:
+                changed, counts, nev = dirac_mod.run(pub, repo=args.repo, gorge=args.gorge_dir,
+                                                     writer=args.source or "ci", version=args.version,
+                                                     ran=args.measured)
+            except dirac_mod.Unavailable as e:
+                print("::warning::carddb dirac skipped, the last dirac rows are kept: %s" % e, file=stderr)
+                print("carddb dirac: skipped (%s); dirac rows unchanged" % type(e).__name__, file=stdout)
+                return 0
+            parts = " ".join("%s=%d" % kv for kv in sorted(counts.items()))
+            print("carddb dirac: %d rows changed; %s; %d evidence rows" % (changed, parts, nev), file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)

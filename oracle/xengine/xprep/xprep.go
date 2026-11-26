@@ -144,6 +144,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	it.Scenario = sc
 	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
 	g.Decisions = append(g.Decisions, pendingResolutionDecisions(reg, it, sc, g)...)
+	g.Decisions = lower.DropTiedDieResultChoices(g.Decisions, it.DieRolls)
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
