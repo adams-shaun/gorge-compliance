@@ -1007,6 +1007,9 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		// A ValidCard filter, including the non-Self TargetsValid shapes
 		// (the start-not-exercised lane): keep the established carrier path.
 		name, _ = filterCarrier(reg, b, card, filter, keep)
+		if name == "" && bareCast(trig, false) {
+			name = permanentSpellCarrier(reg, b, face, card, filter, caster, keep)
+		}
 	}
 	if name == "" {
 		return none + ":filter"
@@ -1025,6 +1028,55 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		f.Focus.Times = times
 	}
 	return ""
+}
+
+// permanentSpellCarrier is the spell a ValidCard filter that names Equipment
+// or Aura needs, which the inert pool (carrierPool) never holds: an Equipment
+// spell is the simplest non-creature Equipment the filter takes (cast, it
+// needs no target); an Aura spell is an Aura that targets the card itself
+// (targetCarrier), so the card, a creature the caster controls, is the
+// Aura's one bearer. "" when the filter names neither (a stat or kicker
+// property stays refused), or no such carrier exists for this caster.
+func permanentSpellCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, filter string, caster int, keep func(*cards.Face) bool) string {
+	var equipment, aura bool
+	for _, alt := range strings.Split(filter, ",") {
+		switch strings.TrimSpace(alt) {
+		case "Equipment", "Equipment.YouCtrl":
+			equipment = true
+		case "Aura", "Aura.YouCtrl":
+			aura = true
+		}
+	}
+	if equipment {
+		takes := func(f *cards.Face) bool {
+			if !f.HasTypeWord("Equipment") || f.IsCreature() || FieldBlock(f) != "" || !keep(f) || !plainCost(f) {
+				return false
+			}
+			t, known := filterTakes(filter, f)
+			return known && t
+		}
+		if n := pickZoneFixture(reg, b, card, takes, nil, true); n != "" {
+			return n
+		}
+	}
+	if aura && caster == 0 && face.IsCreature() {
+		return targetCarrier(reg, b, card, filter, func(f *cards.Face) bool { return keep(f) && plainCost(f) })
+	}
+	return ""
+}
+
+// plainCost reports whether a card's mana cost is one basic land per symbol
+// (no X, snow, colourless-only or Phyrexian symbol), castCarrier's lands.
+func plainCost(f *cards.Face) bool {
+	if f.ManaCost == "" || f.ManaCost == "no cost" {
+		return false
+	}
+	for _, tok := range splitCost(f.ManaCost) {
+		if !manaTokenRE.MatchString(tok) || tok == "X" || tok == "S" || tok == "C" {
+			return false
+		}
+	}
+	return true
 }
 
 // attackCarrier is the creature that attacks for the card: the card itself

@@ -1033,6 +1033,47 @@ func TestStartspellcasttriggers(t *testing.T) {
 	}
 }
 
+// TestStartSpellCastPermanentFilters: a ValidCard filter that names Equipment
+// or an Aura is a spell the inert carrier pool never holds. "Aura,Equipment"
+// (Armory Paladin, Mister Gutsy) casts the simplest Equipment the filter takes
+// (no target to pick); an Aura-only filter casts Rancor at the card, its one
+// bearer. The other ValidCard shapes of the SpellCast:filter class (a kicked
+// spell, a stat property, hasXCost) have no carrier and keep their refusal.
+func TestStartSpellCastPermanentFilters(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Armory Paladin", "Mister Gutsy"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: path %q reason %q %v, want a start", card, res.Path, res.Reason, err)
+		}
+		f := res.Start
+		if f.Focus == nil || f.Focus.Kind != "cast" || f.Active != 0 || !slices.Contains(f.Setup.P0.Hand, f.Focus.Card) || f.Setup.P0.Battlefield[0] != card {
+			t.Errorf("%s: focus %+v hand %v battlefield %v, want the card on the battlefield and an Equipment cast from hand", card, f.Focus, f.Setup.P0.Hand, f.Setup.P0.Battlefield)
+			continue
+		}
+		c, _ := reg.Lookup(f.Focus.Card)
+		if !c.Faces[0].HasTypeWord("Equipment") || c.Faces[0].IsCreature() || !plainCost(c.Faces[0]) {
+			t.Errorf("%s: focus %s is not a plain-cost non-creature Equipment", card, f.Focus.Card)
+		}
+	}
+	c, _ := reg.Lookup("Armory Paladin")
+	if got := permanentSpellCarrier(reg, b, c.Faces[0], "Armory Paladin", "Aura.YouCtrl", 0, func(*cards.Face) bool { return true }); got != "Rancor" {
+		t.Errorf("an Aura filter's carrier = %q, want Rancor (its bearer is the creature card)", got)
+	}
+	if got := permanentSpellCarrier(reg, b, c.Faces[0], "Armory Paladin", "Aura", 1, func(*cards.Face) bool { return true }); got != "" {
+		t.Errorf("an opponent-cast Aura filter's carrier = %q, want none", got)
+	}
+	const refused = "no-generator:trigger:SpellCast:filter"
+	checkStartRows(t, []startRow{
+		{card: "Saproling Infestation", key: "f0/t0", reason: refused},    // Card.YouCtrl+kicked
+		{card: "Pollywog Prodigy", key: "f0/t0", reason: refused},         // Card.nonCreature+cmcLTX, an opponent's cast
+		{card: "Lattice Library", key: "f0/t1", reason: refused},          // Card.hasXCost
+		{card: "Nev, the Practical Dean", key: "f0/t0", reason: refused},  // Card.hasXCost
+		{card: "Owlin Spiralmancer", key: "f0/t0", reason: refused},       // Card.hasXCost
+		{card: "Zimone, Infinite Analyst", key: "f0/t0", reason: refused}, // Card.hasXCost
+	})
+}
+
 // TestBareCastGateWhitelist: the no-filter carrier is safe only when the
 // trigger asks nothing more of the cast. A param outside the accounted set
 // -- a known gate or a future one -- refuses, and the self-target arm keeps
