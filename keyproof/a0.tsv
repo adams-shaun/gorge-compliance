@@ -13,10 +13,10 @@ a019e34d-00c4-4687-9d41-fe550bf1dbdc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tal
 a019e34d-00c4-4687-9d41-fe550bf1dbdc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Talion, the Kindly Lord/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a019e34d-00c4-4687-9d41-fe550bf1dbdc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Talion, the Kindly Lord/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a019e34d-00c4-4687-9d41-fe550bf1dbdc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Talion, the Kindly Lord/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a01c3894-92de-4318-9ceb-34361d56f7de	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	257af086124e	-	96904d6b6f1c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-a01c3894-92de-4318-9ceb-34361d56f7de	f0/a0	Token	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	257af086124e	-	96904d6b6f1c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-a01c3894-92de-4318-9ceb-34361d56f7de	f0/a1	PumpAll	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-a01c3894-92de-4318-9ceb-34361d56f7de	f0/t0	ChangesZone	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+a01c3894-92de-4318-9ceb-34361d56f7de	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	96904d6b6f1c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+a01c3894-92de-4318-9ceb-34361d56f7de	f0/a0	Token	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	96904d6b6f1c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+a01c3894-92de-4318-9ceb-34361d56f7de	f0/a1	PumpAll	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	96904d6b6f1c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+a01c3894-92de-4318-9ceb-34361d56f7de	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	96904d6b6f1c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 a0218a14-8301-4484-aed5-90334349620e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a023deaa-c393-44f9-9c9c-6bb9aae05c1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0292e0b-7bb3-46d3-a29f-b54bce5b20f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hunter-s-blowgun:cast:s1,f:xs:XP:hunter-s-blowgun:cast:s1	-	-	-	23b491658465	-	9528bb3d80cc	-	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ a0802918-e18a-4716-befb-96ae6667f2f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a0802918-e18a-4716-befb-96ae6667f2f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0802918-e18a-4716-befb-96ae6667f2f3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a08189f2-1643-496a-8a91-74864528b4db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a08189f2-1643-496a-8a91-74864528b4db	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	257af086124e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+a08189f2-1643-496a-8a91-74864528b4db	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 a08189f2-1643-496a-8a91-74864528b4db	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 a08475a6-1fac-4a3f-b343-aed16a61bc16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jhoira-s-toolbox:cast:s1,f:xs:XP:jhoira-s-toolbox:cast:s1	-	-	-	5f2128bf97e4	-	35e30688c176	-	-	2026-11-24	xproof
 a08475a6-1fac-4a3f-b343-aed16a61bc16	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:jhoira-s-toolbox:f0a0:s1,f:xs:XP:jhoira-s-toolbox:f0a0:s1	-	-	-	5f2128bf97e4	-	35e30688c176	-	-	2026-11-24	xproof
