@@ -1007,6 +1007,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # resolution). gorge main moved FORGE_REF there on 11-25 and the pin invariant failed every xproof cycle; the merge was clean, and the
 # cardsfolder/tokenscripts trees now equal FORGE_REF 5bc5851a54's. Driver code unchanged from bdad3bd38b1. Fork branch
 # oracle/forge-pinfix-5bc5851a54. scripts/check-forge-ref-in-driver.sh now holds this in CI.
+# 7b6ff5656c8 = 4385467a9eb plus the cost-shape fallback in StepMachine.abilityFor (xproof cluster xpt-d77c0bf0, Yuriko, the Tiger's Shadow):
+# gorge's commander ninjutsu line costs `U B Return<1/Creature.YouCtrl+attacking+unblocked>`, Forge's two Ninjutsu SAs (hand and
+# command zone, CR 702.49d, 903.8) cost `U B Return<1/Creature.attacking+unblocked/unblocked attacker>`; Cost.toSimpleString renders the
+# Return part from its description text, so the keyword tier's cost filter dropped every hit and the api+cost tier stopped "ability
+# identity at step 9: api+cost 0". The tiers now fall back, when no SA's rendering is equal, to the mana part plus the cost-part
+# classes, and identity()'s param scoring (Origin$/ActivationZone$ Hand) picks the hand SA over the command-zone one.
+# scripts/forge-oracle-test-ninjutsu-commander-identity.sh (make forge-driver-tests) replays the find
+# (cmd/oraclediff/testdata/forge/ninjutsu-commander-identity.jsonl) and requires `identity: keyword` with no harness row; it fails on
+# 4385467a9eb. Driver-only (StepMachine); die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF 5bc5851a54).
+# Fork branch fix/xp-forge-driver-ninjutsu-commander-identity.
 # 1dea7b45ce0 = 4385467a9eb plus the unpinned order-to-Exile ask kept (StepMachine.UNOBSERVABLE_ORDER_ZONES gains Exile, beside
 # Graveyard/Battlefield/Hand; both snapshots sort an exile's names, so forge_order.go can never derive a pin and Flickerform's
 # exile-the-bearer-and-itself resolution strict-missed, xproof cluster xpt-1d42dce4 xs:XP:flickerform:f0a0:s1). The library and
@@ -1020,7 +1030,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # it), so this is latent; OrderCardsTest.unpinnedCommandOrderKeepsForgeOrder (run-unit-tests.sh) is red on 1dea7b45ce0 and green
 # here, and the library and every other zone still strict-miss. Driver-only; die-roll forcing, cardsfolder and tokenscripts
 # unchanged. Fork branch oracle-driver.
-FORGE_ORACLE_REF ?= 3526a90f7194f8ae3d76d0bbe05723458371a2a6
+# 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 above (siblings on 4385467a9eb, textually clean, no conflicts): carries both the
+# commander-ninjutsu cost-shape fallback and the unpinned order-to-Exile ask. Fork branch fix/xp-forge-driver-ninjutsu-commander-identity.
+# NOTE (merge): develop's 3526a90f719 (order-to-Command ask kept, sibling of 5ceed32d687 on 1dea7b45ce0) is NOT carried by the pin below;
+# no fork commit holds both yet, so the Command-order driver test (forge-oracle-test-command-order-unpinned.sh) needs a follow-up pin merge.
+FORGE_ORACLE_REF ?= 5ceed32d687df24f60318030685b4dd0370a2218
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
