@@ -1,6 +1,7 @@
 package oraclegen
 
 import (
+	"regexp"
 	"sort"
 	"strings"
 
@@ -333,4 +334,67 @@ func pumpKWChoiceLabels(f *cards.Face) []string {
 // Reach, Shadow, Trample, Vigilance), and the census pins every routed one.
 func xmageKeywordRuleText(label string) string {
 	return strings.ToLower(strings.ReplaceAll(strings.TrimSpace(label), ":", " "))
+}
+
+// xmageGenericChoiceBespokeFaces names the faces whose plain GenericChoice
+// XMage poses as ONE bespoke Choice dialog whose labels are NOT the Forge
+// option labels (xmageChoiceDialogFaces needs them verbatim), read from the
+// CHOICE queue by XMage's label. The value maps each Forge Choices$ SVar name
+// to the XMage label, read from the card classes at XMAGE_REF bec665044e:
+//
+//	PemminsAura          ChoiceImpl message "Select how to boost", choices
+//	                     CHOICE_1 "+1/-1", CHOICE_2 "-1/+1"
+//	ShorecrasherElemental the same message and the same two choices
+//
+// Both Forge scripts are `Choices$ PumpAtt,PumpDef` (PumpAtt NumAtt$ +1
+// NumDef$ -1, PumpDef the reverse), so the SVar name fixes the label.
+// TestGenericChoiceBespokeFacesCensus pins every routed label against these
+// values, so a new entry is a deliberate, source-proven edit.
+var xmageGenericChoiceBespokeFaces = map[string]map[string]string{
+	"pemmin's aura":          {"PumpAtt": "+1/-1", "PumpDef": "-1/+1"},
+	"shorecrasher elemental": {"PumpAtt": "+1/-1", "PumpDef": "-1/+1"},
+}
+
+// genericChoiceBespokeLabels maps each GenericChoice option label of a face in
+// xmageGenericChoiceBespokeFaces, as gorge's mode decision shows it
+// (effects.CharmModeLabel), to XMage's label; nil for any other face.
+func genericChoiceBespokeLabels(f *cards.Face) map[string]string {
+	if f == nil {
+		return nil
+	}
+	table := xmageGenericChoiceBespokeFaces[strings.ToLower(f.Name)]
+	if table == nil {
+		return nil
+	}
+	out := map[string]string{}
+	for _, sa := range f.Abilities {
+		if sa.API != "GenericChoice" {
+			continue
+		}
+		for _, name := range strings.Split(sa.Params["Choices"], ",") {
+			name = strings.TrimSpace(name)
+			if want, ok := table[name]; ok {
+				label := effects.CharmModeLabel(cards.ResolveSVar(f.SVars, name), name)
+				out[label] = want
+				// A SpellDescription$ naming CARDNAME reaches the decision
+				// with the card's own name substituted (Shorecrasher
+				// Elemental), so both spellings are routed.
+				out[strings.ReplaceAll(label, "CARDNAME", f.Name)] = want
+			}
+		}
+	}
+	return out
+}
+
+var powerToughnessMod = regexp.MustCompile(`[+-]\d+/[+-]\d+`)
+
+// xmageGenericBespokeChoiceLabel is the label XMage's "Select how to boost"
+// dialog shows for a gorge pick ("Enchanted creature gets +1/-1 until end of
+// turn." -> "+1/-1"): the decision carries only the label, so the mapping is
+// by shape (the P/T modifier in it); the census pins it to the table.
+func xmageGenericBespokeChoiceLabel(label string) string {
+	if m := powerToughnessMod.FindString(label); m != "" {
+		return m
+	}
+	return strings.TrimSpace(label)
 }
