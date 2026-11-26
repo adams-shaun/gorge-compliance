@@ -630,7 +630,7 @@ impl Machine<'_> {
                 _ => false,
             })
             .collect();
-        let phase_index = self.mana_ability_index(id, ability)?;
+        let phase_index = self.mana_ability_index(id, ability);
         // A nonland mana ability is a plain activation at priority. Its colour is either fixed by
         // the ability or asked in phase's own `ChooseManaColor` prompt, so never consume gorge's
         // colour decision here.
@@ -668,7 +668,10 @@ impl Machine<'_> {
                 GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
                     selection.source.object_id == id
                         && selection.source.incarnation == inc
-                        && (intrinsic || selection.ability_index == phase_index)
+                        // With no phase index (a granted ability has none in the export), the
+                        // production/colour below is the only identity; do not reject every row
+                        // because its own ability index is Some.
+                        && (intrinsic || phase_index.is_none() || selection.ability_index == phase_index)
                 }
                 _ => false,
             })
@@ -709,19 +712,20 @@ impl Machine<'_> {
     }
 
     /// The index of the neutral ability's `ordinal`-th activated mana ability among phase's
-    /// abilities. `None` is the subtype-granted land ability (`intrinsic_mana`), which is matched
-    /// by production instead: phase may list it synthetically without a stable index.
-    fn mana_ability_index(&self, id: ObjectId, ability: &NeutralAbility) -> Result<Option<usize>, Stop> {
-        let i = self.step;
+    /// abilities, or `None` when the neutral side has no face-relative ordinal.
+    ///
+    /// `follower-export` deliberately omits the ordinal for a granted/gained ability (it is not on
+    /// the recipient's face) and phase may merge several printed abilities into one, so a missing
+    /// or out-of-range ordinal is not an error: it means "no phase index", and [`Self::mana_source`]
+    /// identifies the activation by its production/colour instead. The subtype-granted land ability
+    /// (`intrinsic_mana`) is the same case.
+    fn mana_ability_index(&self, id: ObjectId, ability: &NeutralAbility) -> Option<usize> {
         if ability.class == "intrinsic_mana" {
-            return Ok(None);
+            return None;
         }
-        let ordinal = ability
-            .ordinal
-            .and_then(|o| usize::try_from(o).ok())
-            .ok_or_else(|| unmatched(i, "mana ability has no ordinal"))?;
-        let obj = &self.state().objects[&id];
-        obj.abilities
+        let ordinal = ability.ordinal.and_then(|o| usize::try_from(o).ok())?;
+        self.state().objects[&id]
+            .abilities
             .iter()
             .enumerate()
             .filter(|(_, a)| {
@@ -729,8 +733,7 @@ impl Machine<'_> {
                     && engine::types::ability::is_mana_ability(a)
             })
             .nth(ordinal)
-            .map(|(index, _)| Some(index))
-            .ok_or_else(|| unmatched(i, format!("{} has no mana ability #{ordinal}", obj.name)))
+            .map(|(index, _)| index)
     }
 
     /// CR 702.29a / CR 702.29e: the hand-zone cycling ability of `id` (`typed` = a typecycling one,
@@ -1238,6 +1241,24 @@ mod tests {
         assert_eq!(s.checkpoint, "step 0 (activate)");
         assert_eq!(s.players[0].pool, "GG");
         assert!(s.permanents.iter().find(|p| p.name == "The Alright Henge").unwrap().tapped);
+    }
+
+    /// A granted mana ability on a land has no face-relative ordinal in the neutral export; the
+    /// activation is still matched by the colour it produces (Chromatic Lantern grants the Forest
+    /// "{T}: Add one mana of any color", which phase exposes as a land-tap selection).
+    #[test]
+    fn mana_source_granted_ability_without_ordinal_falls_back_to_production() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Forest","Chromatic Lantern"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Forest","ability_index":1,
+                      "ability":"Forest: Add one mana of any color."}]},
+            "neutral":{"ability":{"0":{"class":"mana","granted":true,"cost":"{T}",
+                                       "text":"Add one mana of any color.","produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","picks":["Add W"],"pick_kinds":["color"]}]}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "W", "the producer's colour decision picks the granted ability's output");
+        assert!(s.permanents.iter().find(|p| p.name == "Forest").unwrap().tapped);
+        assert!(!s.permanents.iter().find(|p| p.name == "Chromatic Lantern").unwrap().tapped);
     }
 
     /// The row of a hand-written request that must stop, as its error text.
