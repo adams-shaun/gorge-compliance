@@ -146,7 +146,10 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 		n := 0
 		if len(args) >= 2 {
 			var err error
-			if n, err = strconv.Atoi(args[0]); err != nil || n < 0 {
+			// the budget of four placements holds for every head but SubCounter
+			// (a loyalty or counter total) and a Sac or Return, whose arm
+			// caps its own count (tokens beyond four, cards at four)
+			if n, err = strconv.Atoi(args[0]); err != nil || n < 0 || n > 4 && head != "SubCounter" && head != "Sac" && head != "Return" {
 				if !(head == "tapXType" && args[0] == "Any") {
 					return p, refusal
 				}
@@ -171,14 +174,12 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 		case head == "ExileFromGrave" && self && n == 1:
 			p.zone = zoneGraveyard
 		case (head == "Sac" || head == "Return") && len(args) >= 2 && !self:
-			if script, ok := tokenFodder(reg, args[1]); ok {
+			if _, ok := tokenFodder(reg, args[1]); ok {
 				// a token kind ("Treasure", "Prism.token", "Permanent.token"):
-				// no card is one, so the cost mints its tokens instead
-				if script == "" {
+				// the cost mints its tokens, a vanilla permanent no card
+				// is (a Food card is busier than the Food token)
+				if !p.mintSac(reg, args[1], n) {
 					return p, refusal
-				}
-				for range n {
-					p.tokens = append(p.tokens, StartToken{Script: script})
 				}
 				continue
 			}
@@ -329,23 +330,44 @@ func sacFodder(reg *cards.Registry, b *certdeck.Builder, card, typ, generic stri
 			return n, a.tapped > 0
 		}
 		if n := pickLandFixture(reg, b, a.test); n != "" {
-			return n, a.tapped > 0
+			// tapped unless the filter wants it untapped: a land adds no
+			// mana to the start (the focus plays stay the only affordable ones)
+			return n, a.tapped >= 0
 		}
 	}
 	return "", false
 }
 
+// maxSacTokens is the most tokens one Sac cost mints (Kellogg, Dangerous Mind
+// sacrifices five Treasures); a card count keeps the budget of four.
+const maxSacTokens = 8
+
+// mintSac adds the n tokens a Sac or Return spec of a token kind spends to the
+// plan. False when the spec names no token the start can mint (a kind the XMage
+// setup table lacks, no token kind at all, more than maxSacTokens).
+func (p *costPlan) mintSac(reg *cards.Registry, typ string, n int) bool {
+	script, ok := tokenFodder(reg, typ)
+	if !ok || script == "" || n > maxSacTokens {
+		return false
+	}
+	for range n {
+		p.tokens = append(p.tokens, StartToken{Script: script})
+	}
+	return true
+}
+
 // tokenFodder is the token script a Sac or Return spec of a token kind mints,
 // and whether the spec names tokens at all: ok false when the spec may name a
-// card and the card scan runs first; ok true with "" when it names a token
-// kind no start can mint (the token script the XMage setup table lacks), so
-// the refusal stands; the script when it does.
+// card and the card scan runs; ok true with ""
+// when it names a token kind no start can mint (the token script the XMage
+// setup table lacks), so the refusal stands; the script when it does.
 //
 //   - "<Kind>.token" is a token of Kind ("Prism.token"); "Permanent.token",
 //     "Card.token" and a bare ".token" are any token, the corpus's Servo.
 //   - a bare kind ("Treasure", "Food", "Goblin") names a token only when the
-//     corpus mints one: the card scan already found nothing, so a kind with
-//     neither a card nor a token definition keeps the refusal. A kind that is
+//     corpus mints one (that token, not a card of the kind, is the vanilla
+//     permanent), so a kind with no token definition falls to the card scan
+//     and, with no card either, keeps the refusal. A kind that is
 //     not a single type word ("Creature.Other", a dotted spec) is no token
 //     kind.
 func tokenFodder(reg *cards.Registry, typ string) (string, bool) {
@@ -355,6 +377,13 @@ func tokenFodder(reg *cards.Registry, typ string) (string, bool) {
 			kind = ""
 		}
 		script, _ := tokenScript(reg, kind)
+		// the script must be a token of the named kind: tokenScript also
+		// matches a key that merely contains it ("Rat" in "pirate")
+		if script != "" && kind != "" {
+			if c := reg.Tokens[script]; c == nil || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord(kind) {
+				script = ""
+			}
+		}
 		return script, true
 	}
 	switch typ {

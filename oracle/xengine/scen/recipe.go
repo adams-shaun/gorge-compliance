@@ -138,6 +138,19 @@ func costTokens(cost string) (mana []string, refusal string) {
 	return mana, ""
 }
 
+// baitCostTokens is costTokens for a cost a bait seat pays from placed lands
+// alone: mana, T, Q, Sac<1/CARDNAME> and PayLife, exactly what costTokens took
+// before planCost learned the other Sac shapes. A bait's other sacrifice has no
+// permanent placed for it, so it keeps the refusal (the bait pool is unchanged).
+func baitCostTokens(cost string) (mana []string, refusal string) {
+	for _, tok := range splitCost(cost) {
+		if sacCostShape(tok) && tok != "Sac<1/CARDNAME>" {
+			return nil, "steps-needed:cost:Sac"
+		}
+	}
+	return costTokens(cost)
+}
+
 // sacCostShape reports whether tok is a Sac token costArgs reads: Sac<N/Spec>
 // with a whole N of 0 or more. The spec itself is planCost's work.
 func sacCostShape(tok string) bool {

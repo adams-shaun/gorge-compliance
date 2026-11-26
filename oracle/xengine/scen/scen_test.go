@@ -1492,7 +1492,36 @@ func TestStartSacCosts(t *testing.T) {
 		// Shadowborn Apostle f0/a0: six creatures named it is beyond the
 		// four-copy budget a start's placements hold.
 		{card: "Shadowborn Apostle", key: "f0/a0", reason: "steps-needed:cost:Sac"},
+		// Phyrexian Scrapyard f0/a2: three Phyrexian Scrapyards (a named land
+		// the card itself is) are within the budget but no placeable card.
+		{card: "Phyrexian Scrapyard", key: "f0/a2", reason: "steps-needed:cost:Sac"},
 	})
+	// the filtered land fodder adds no mana: it is placed tapped
+	if f := gen("Glacial Crevasses", "f0/a0"); !slices.Contains(f.Setup.P0.Tapped, "Alpine Meadow") {
+		t.Errorf("p0 tapped %v, want the Alpine Meadow the cost sacrifices", f.Setup.P0.Tapped)
+	}
+}
+
+// TestBaitPoolActivation pins the bait pool a stack-target start draws its
+// bait activation from: a cost beyond mana, tap and Sac<1/CARDNAME> (a bait
+// has no placed permanent for another sacrifice) is not in it, so a change to
+// planCost's Sac shapes leaves every bait start's pick alone.
+func TestBaitPoolActivation(t *testing.T) {
+	reg, b := testBuilder(t)
+	pool := baitPoolOf(reg, b)
+	if len(pool.activation) == 0 {
+		t.Fatal("empty activation bait pool")
+	}
+	if got := pool.activation[0].Name; got != "Dark Sphere" {
+		t.Errorf("top activation bait %q, want Dark Sphere (T, Sac<1/CARDNAME>)", got)
+	}
+	for _, f := range pool.activation {
+		if sa := baitAbilityOf(f); sa != nil {
+			if _, why := baitCostTokens(sa.Params["Cost"]); why != "" {
+				t.Errorf("%s: bait cost %q in the pool: %s", f.Name, sa.Params["Cost"], why)
+			}
+		}
+	}
 }
 
 // TestStartCombat: an attack trigger is the card (or Memnite, for a
@@ -1837,12 +1866,10 @@ func TestStartstacktarget(t *testing.T) {
 				if sa == nil {
 					t.Fatalf("%q has no activated ability", f.Focus.BaitAbility)
 				}
-				for _, tok := range splitCost(sa.Params["Cost"]) {
-					if tok != "T" && tok != "Q" && !manaTokenRE.MatchString(tok) {
-						t.Errorf("%q ability cost %q holds %q, not payable from placed lands alone", f.Focus.BaitAbility, sa.Params["Cost"], tok)
-					}
+				mana, why := baitCostTokens(sa.Params["Cost"])
+				if why != "" {
+					t.Fatalf("%q ability cost %q is not placeable: %s", f.Focus.BaitAbility, sa.Params["Cost"], why)
 				}
-				mana, _ := costTokens(sa.Params["Cost"])
 				bf := f.Setup.P1.Battlefield
 				if f.Focus.BaitAbilitySelf {
 					bf = f.Setup.P0.Battlefield
