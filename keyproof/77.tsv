@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 770894c0-01e7-4c1e-bcfb-989eee221dd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 770894c0-01e7-4c1e-bcfb-989eee221dd2	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7708e07d-21eb-4d90-910a-7cc1d4889b88	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	3748e8e7b876	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-7708e07d-21eb-4d90-910a-7cc1d4889b88	f0/t0	SpellCast/Storm	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	3748e8e7b876	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+7708e07d-21eb-4d90-910a-7cc1d4889b88	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	5ae52fb881a0	-	4e8626c9e988	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+7708e07d-21eb-4d90-910a-7cc1d4889b88	f0/t0	SpellCast/Storm	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	5ae52fb881a0	-	4e8626c9e988	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 770b2097-5178-42d2-be6c-393b4bfe3727	cast	cast-resolve	agreed	-	FX	scen	2	0	Steelswarm Operator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 770b2097-5178-42d2-be6c-393b4bfe3727	combat#0.attack	combat.attack	agreed	-	FX	start	1	0	x:xs:XP:steelswarm-operator:combat0.attack:s2,f:xs:XP:steelswarm-operator:combat0.attack:s2	-	-	-	23c4009444b0	-	5f4f09d197c3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 770b2097-5178-42d2-be6c-393b4bfe3727	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:steelswarm-operator:combat0.block:s1,f:xs:XP:steelswarm-operator:combat0.block:s1	-	-	-	23c4009444b0	-	5f4f09d197c3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77216636-f76d-4c5e-b1ac-ab1844753f05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77216636-f76d-4c5e-b1ac-ab1844753f05	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:excava-the-risen-past:f0t0:s1,f:xs:XP:excava-the-risen-past:f0t0:s1	-	-	-	23c4009444b0	-	247b53298cae	-	-	2026-11-25	xproof
 77216efa-4f34-4534-9df3-918f0b888ce1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:silumgar-butcher:cast:s1,f:xs:XP:silumgar-butcher:cast:s1	-	-	-	d864b561c9cb	-	666c783a1860	-	-	2026-11-24	xproof
-77216efa-4f34-4534-9df3-918f0b888ce1	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	3748e8e7b876	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+77216efa-4f34-4534-9df3-918f0b888ce1	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	5ae52fb881a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 77216efa-4f34-4534-9df3-918f0b888ce1	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:silumgar-butcher:cast:s1,f:xs:XP:silumgar-butcher:cast:s1	-	-	-	d864b561c9cb	-	666c783a1860	-	-	2026-11-24	xproof
 77217a66-4ba8-443f-b915-178cfcc233e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chaos-spewer:f0t0:s1,f:xs:XP:chaos-spewer:f0t0:s1	-	-	-	cfde1dc26c40	-	7e01243c012d	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 77217a66-4ba8-443f-b915-178cfcc233e1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chaos-spewer:f0t0:s1,f:xs:XP:chaos-spewer:f0t0:s1	-	-	-	cfde1dc26c40	-	7e01243c012d	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
