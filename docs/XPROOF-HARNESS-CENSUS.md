@@ -43,3 +43,13 @@ to produce its table; every signature of 5 or more keys gets a ticket `xpg-h-<sl
 Every row is a `decision_shape` finding: a follower was asked a decision the scripted tape holds no
 answer for (blight and forage costs, yes/no prompts, a discard-unless-type choice, an entity chooser).
 That is a lowering/tape gap (an answer the tape should script), not twelve unrelated bugs.
+
+## Resolved signatures
+
+- `x=decision_shape~missing-choice-def-for-turn-step+f=decision_shape~missing-cost-costblight-answer-at-step`
+  (9 keys, 4 cards): the follower cannot answer a PAID blight. Forge's driver scripts no `CostBlight`
+  (`ScriptedCostDecision.visit(CostBlight)` is the unscripted `choice` miss), and XMage asks the
+  creature to blight where gorge, with one candidate, logs no pick. The xengine play seats now decline
+  a triggered "you may blight N" (`blightDecline`, `oracle/xengine/game/play.go`), so no new item
+  reaches the signature; the row above stays as the count the cycle measured. The paid arm is
+  uncovered until the driver scripts the cost (ticket `xpg-forge-driver-costblight`).
