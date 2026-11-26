@@ -774,6 +774,75 @@ func TestStartzonetriggers(t *testing.T) {
 	}
 }
 
+// TestStartattackstriggers is the dispatch's repro spelling (xpg-attacks-
+// filter): an Attacks trigger whose ValidCard names the key card's attached
+// creature (Card.AttachedBy, Card.EnchantedBy, Creature.EnchantedBy). The
+// unattached Aura is placed attached (StartAttach) to the most inert
+// attackable creature its Enchant keyword takes that the filter's stripped
+// alternative takes (Card.AttachedBy+powerLE2 on Writ of Passage keeps the
+// power gate), and that bearer is the focus attack. An Equipment cannot enter
+// attached from a start (gorge's StartAttach is the Aura entry), and
+// attaching it before the attack needs a Magnetic Theft cast plus a second
+// turn the one focus play cannot take, so its keys stay refused :equipped. A
+// non-Aura's bearer filter (Kitsune Ace, no attackable Vehicle) and the
+// unplaced attack target keep narrower refusals.
+func TestStartattackstriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Seismic Tutelage", "f0/t1"},
+		{"Contaminated Bond", "f0/t0"},
+		{"Coercive Impetus", "f0/t0"},
+		{"Primetime Suspect", "f0/t0"},
+		{"Writ of Passage", "f0/t0"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != 0 {
+				t.Errorf("active %d, want 0", f.Active)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != c.card {
+				t.Errorf("p0 battlefield %v, want %q first", f.Setup.P0.Battlefield, c.card)
+			}
+			attached(t, f, c.card)
+			bearer := attachBearerOf(t, f, c.card)
+			if bearer == c.card || !slices.Contains(f.Setup.P0.Battlefield, bearer) {
+				t.Fatalf("bearer %q is not a placed creature of the Aura's own", bearer)
+			}
+			focusIs(t, f, 0, bearer, "attack", 0)
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		{"Spiked Ripsaw", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		{"Pip-Boy 3000", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		{"Adaptive Omnitool", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		{"Strength-Testing Hammer", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		// unrelated refusals, unchanged: the card is not a creature the
+		// filter's bearer shape takes, and the attack target is not placed
+		{"Kitsune Ace", "f0/t0", "no-generator:trigger:Attacks:filter"}, // no attackable Vehicle
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("%s: %+v %v, want refused %q", r.card, res, err, r.reason)
+			}
+		})
+	}
+}
+
 // attached asserts the file places card attached to a bearer on the same seat.
 func attached(t *testing.T, f *StartFile, card string) {
 	t.Helper()
@@ -962,6 +1031,47 @@ func TestStartspellcasttriggers(t *testing.T) {
 			t.Errorf("%s: path %q reason %q, want the pre-existing start", card, res.Path, res.Reason)
 		}
 	}
+}
+
+// TestStartSpellCastPermanentFilters: a ValidCard filter that names Equipment
+// or an Aura is a spell the inert carrier pool never holds. "Aura,Equipment"
+// (Armory Paladin, Mister Gutsy) casts the simplest Equipment the filter takes
+// (no target to pick); an Aura-only filter casts Rancor at the card, its one
+// bearer. The other ValidCard shapes of the SpellCast:filter class (a kicked
+// spell, a stat property, hasXCost) have no carrier and keep their refusal.
+func TestStartSpellCastPermanentFilters(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Armory Paladin", "Mister Gutsy"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: path %q reason %q %v, want a start", card, res.Path, res.Reason, err)
+		}
+		f := res.Start
+		if f.Focus == nil || f.Focus.Kind != "cast" || f.Active != 0 || !slices.Contains(f.Setup.P0.Hand, f.Focus.Card) || f.Setup.P0.Battlefield[0] != card {
+			t.Errorf("%s: focus %+v hand %v battlefield %v, want the card on the battlefield and an Equipment cast from hand", card, f.Focus, f.Setup.P0.Hand, f.Setup.P0.Battlefield)
+			continue
+		}
+		c, _ := reg.Lookup(f.Focus.Card)
+		if !c.Faces[0].HasTypeWord("Equipment") || c.Faces[0].IsCreature() || !plainCost(c.Faces[0]) {
+			t.Errorf("%s: focus %s is not a plain-cost non-creature Equipment", card, f.Focus.Card)
+		}
+	}
+	c, _ := reg.Lookup("Armory Paladin")
+	if got := permanentSpellCarrier(reg, b, c.Faces[0], "Armory Paladin", "Aura.YouCtrl", 0, func(*cards.Face) bool { return true }); got != "Rancor" {
+		t.Errorf("an Aura filter's carrier = %q, want Rancor (its bearer is the creature card)", got)
+	}
+	if got := permanentSpellCarrier(reg, b, c.Faces[0], "Armory Paladin", "Aura", 1, func(*cards.Face) bool { return true }); got != "" {
+		t.Errorf("an opponent-cast Aura filter's carrier = %q, want none", got)
+	}
+	const refused = "no-generator:trigger:SpellCast:filter"
+	checkStartRows(t, []startRow{
+		{card: "Saproling Infestation", key: "f0/t0", reason: refused},    // Card.YouCtrl+kicked
+		{card: "Pollywog Prodigy", key: "f0/t0", reason: refused},         // Card.nonCreature+cmcLTX, an opponent's cast
+		{card: "Lattice Library", key: "f0/t1", reason: refused},          // Card.hasXCost
+		{card: "Nev, the Practical Dean", key: "f0/t0", reason: refused},  // Card.hasXCost
+		{card: "Owlin Spiralmancer", key: "f0/t0", reason: refused},       // Card.hasXCost
+		{card: "Zimone, Infinite Analyst", key: "f0/t0", reason: refused}, // Card.hasXCost
+	})
 }
 
 // TestBareCastGateWhitelist: the no-filter carrier is safe only when the
@@ -2495,8 +2605,9 @@ func TestStartfacestarts(t *testing.T) {
 // TestStartcombattriggers: a combat trigger (blocks, becomes blocked, combat
 // damage dealt or taken) is one scripted combat with no forced play: the active
 // seat attacks with exactly Attack, the other blocks with exactly Block (or not
-// at all), the card beside them. A trigger on an Aura's or Equipment's bearer
-// has no start file to attach with, and stays refused.
+// at all), the card beside them. A trigger on an Equipment's bearer has no
+// start file to attach with, and stays refused; an Aura's bearer is
+// attacksStart's bearer shape (TestStartattackstriggers).
 func TestStartcombattriggers(t *testing.T) {
 	reg, b := testBuilder(t)
 	rows := []struct {
@@ -2548,9 +2659,12 @@ func TestStartcombattriggers(t *testing.T) {
 			}
 		})
 	}
+	// Aqueous Form's Attacks trigger reads the Aura's bearer (Card.AttachedBy),
+	// which attacksStart now serves with its bearer shape: see
+	// TestStartattackstriggers.
 	res, err := Generate(reg, b, "Aqueous Form", "f0/t0", Options{Prefer: "start"})
-	if err != nil || res.Path != PathRefused || res.Reason != "no-generator:trigger:Attacks:filter" {
-		t.Errorf("Aqueous Form: %+v %v, want refused no-generator:trigger:Attacks:filter", res, err)
+	if err != nil || res.Start == nil || res.Start.Focus == nil || res.Start.Focus.Kind != "attack" {
+		t.Errorf("Aqueous Form: %+v %v, want a bearer-attack start", res, err)
 	}
 }
 
@@ -2645,7 +2759,6 @@ func TestStartDamageDoneFilter(t *testing.T) {
 		{"Sword of Fire and Ice", "f0/t0", "no-generator:trigger:DamageDone:filter"},            // EquippedBy
 		{"Sword of War and Peace", "f0/t0", "no-generator:trigger:DamageDone:filter"},           // EquippedBy
 		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // unrelated: a 0-power card
-		{"Aqueous Form", "f0/t0", "no-generator:trigger:Attacks:filter"},                        // unrelated: another mode
 		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // unrelated: the only carrier has menace
 		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // unrelated: hand size
 	} {
