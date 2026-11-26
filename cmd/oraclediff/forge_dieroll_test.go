@@ -264,7 +264,10 @@ func TestForgeRolledDie(t *testing.T) {
 // OrderCardsTest gains unpinnedExileOrderKeepsForgeOrder and loses Exile from unpinnedOtherZoneStillLooseMisses); StepMachine's
 // order gate is not on the die-roll path, so the forcing is unchanged, and ForcedDieRollTest was re-run green on the pin
 // (run-unit-tests.sh).
-const forgeOracleDieRollRef = "1dea7b45ce06a7d0ab55a7946fb30aeff37e781e"
+// 3526a90f719 = 1dea7b45ce0 plus the unpinned order-to-Command ask kept (UNOBSERVABLE_ORDER_ZONES gains Command,
+// OrderCardsTest gains unpinnedCommandOrderKeepsForgeOrder); the order gate is still not on the die-roll path, so the forcing
+// is unchanged, and ForcedDieRollTest was re-run green on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "3526a90f7194f8ae3d76d0bbe05723458371a2a6"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

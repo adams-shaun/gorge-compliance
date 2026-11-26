@@ -1013,7 +1013,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # every other zone still strict-miss. OrderCardsTest.unpinnedExileOrderKeepsForgeOrder (run-unit-tests.sh) is red on 4385467a9eb
 # and green here; unpinnedOtherZoneStillLooseMisses now asserts Library instead of Exile. Driver-only; die-roll forcing,
 # cardsfolder and tokenscripts unchanged. Fork branch oracle-driver.
-FORGE_ORACLE_REF ?= 1dea7b45ce06a7d0ab55a7946fb30aeff37e781e
+# 3526a90f719 = 1dea7b45ce0 plus the unpinned order-to-Command ask kept (UNOBSERVABLE_ORDER_ZONES gains Command; both snapshots
+# sort a command zone's names -- Forge's SnapshotWriter.commandZone Collections.sort, gorge's digest "sorted; Commander games" --
+# so forge_order.go can never derive a pin there either, and ScriptedController builds the "order to " + destinationZone ask for
+# every destination zone). No scripted card is known to order to Command yet (corpus check: no xproof cluster or scenario names
+# it), so this is latent; OrderCardsTest.unpinnedCommandOrderKeepsForgeOrder (run-unit-tests.sh) is red on 1dea7b45ce0 and green
+# here, and the library and every other zone still strict-miss. Driver-only; die-roll forcing, cardsfolder and tokenscripts
+# unchanged. Fork branch oracle-driver.
+FORGE_ORACLE_REF ?= 3526a90f7194f8ae3d76d0bbe05723458371a2a6
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
