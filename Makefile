@@ -1007,7 +1007,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # resolution). gorge main moved FORGE_REF there on 11-25 and the pin invariant failed every xproof cycle; the merge was clean, and the
 # cardsfolder/tokenscripts trees now equal FORGE_REF 5bc5851a54's. Driver code unchanged from bdad3bd38b1. Fork branch
 # oracle/forge-pinfix-5bc5851a54. scripts/check-forge-ref-in-driver.sh now holds this in CI.
-FORGE_ORACLE_REF ?= 4385467a9eb5f1953a34498e07be47e24ae4b66c
+# 7b6ff5656c8 = 4385467a9eb plus the cost-shape fallback in StepMachine.abilityFor (xproof cluster xpt-d77c0bf0, Yuriko, the Tiger's Shadow):
+# gorge's commander ninjutsu line costs `U B Return<1/Creature.YouCtrl+attacking+unblocked>`, Forge's two Ninjutsu SAs (hand and
+# command zone, CR 702.49d, 903.8) cost `U B Return<1/Creature.attacking+unblocked/unblocked attacker>`; Cost.toSimpleString renders the
+# Return part from its description text, so the keyword tier's cost filter dropped every hit and the api+cost tier stopped "ability
+# identity at step 9: api+cost 0". The tiers now fall back, when no SA's rendering is equal, to the mana part plus the cost-part
+# classes, and identity()'s param scoring (Origin$/ActivationZone$ Hand) picks the hand SA over the command-zone one.
+# scripts/forge-oracle-test-ninjutsu-commander-identity.sh (make forge-driver-tests) replays the find
+# (cmd/oraclediff/testdata/forge/ninjutsu-commander-identity.jsonl) and requires `identity: keyword` with no harness row; it fails on
+# 4385467a9eb. Driver-only (StepMachine); die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF 5bc5851a54).
+# Fork branch fix/xp-forge-driver-ninjutsu-commander-identity.
+FORGE_ORACLE_REF ?= 7b6ff5656c8cb843ed2cc74a37ec93daaca382a6
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
