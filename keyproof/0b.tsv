@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b19082c-8f80-448b-9e1b-0f324a159409	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:builder-s-talent:f0t0:s2,f:xs:XP:builder-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	2c01b84c889f	-	-	2026-11-24	xproof
 0b19082c-8f80-448b-9e1b-0f324a159409	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Builder's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0b19082c-8f80-448b-9e1b-0f324a159409	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Builder's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0b1fc8da-5fff-40a1-924e-5875c7b948a1	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0b36a6dc4937	-	3c5f8fe099b2	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+0b1fc8da-5fff-40a1-924e-5875c7b948a1	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	777d1ac759f1	-	3c5f8fe099b2	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 0b1fc8da-5fff-40a1-924e-5875c7b948a1	f0/t0	DamageDone	owed	harness:x=decision_shape~leftover-choices-of-playera-count-are+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0b36a6dc4937	-	3c5f8fe099b2	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 0b21ab85-2405-4410-9624-fb3c7d11ba56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b21ab85-2405-4410-9624-fb3c7d11ba56	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b5d49ce-7e02-4de6-8a65-bfc88ac0cf72	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:merfolk-observer:cast:s1,f:xs:XP:merfolk-observer:cast:s1	-	-	-	23c4009444b0	-	07dccfca2016	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b5d49ce-7e02-4de6-8a65-bfc88ac0cf72	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:merfolk-observer:cast:s1,f:xs:XP:merfolk-observer:cast:s1	-	-	-	23c4009444b0	-	07dccfca2016	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b5f7a1b-fbb9-4659-8fcb-7822dc0263bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b5f7a1b-fbb9-4659-8fcb-7822dc0263bc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+0b5f7a1b-fbb9-4659-8fcb-7822dc0263bc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 0b620775-70a5-4423-8453-e403a5b79554	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kamber-the-plunderer:f0t1:s1,f:xs:XP:kamber-the-plunderer:f0t1:s1	-	-	-	23c4009444b0	-	e3769a375b33	-	-	2026-11-25	xproof
 0b620775-70a5-4423-8453-e403a5b79554	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kamber-the-plunderer:f0t0:s1,f:xs:XP:kamber-the-plunderer:f0t0:s1	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 0b620775-70a5-4423-8453-e403a5b79554	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:kamber-the-plunderer:f0t1:s1,f:xs:XP:kamber-the-plunderer:f0t1:s1	-	-	-	23c4009444b0	-	e3769a375b33	-	-	2026-11-25	xproof
@@ -162,8 +162,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bbab99f-2ff6-4d48-b7c1-1ab0500c9422	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bbcb563-09b3-499d-a9cc-3a6d7501dd81	cast	cast-resolve	agreed	-	X	scen	1	0	Collected Company/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0bbceb51-1fb8-44d7-8afc-b4746d292262	cast	cast	agreed	-	F	start	2	0	f:xs:XP:political-triumph:cast:s1	-	-	-	4b8018a80bf0	-	f92f412580a9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 0bbd5a04-c281-4afb-98a1-657b4eca102c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:subterranean-hangar:f0a0:s1,f:xs:XP:subterranean-hangar:f0a0:s1	-	-	-	5f2128bf97e4	-	4d5d48b13d0a	-	-	2026-11-24	xproof
 0bbd5a04-c281-4afb-98a1-657b4eca102c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 0bbd5a04-c281-4afb-98a1-657b4eca102c	land	land	agreed	-	FX	start	2	0	x:xs:XP:subterranean-hangar:land:s1,f:xs:XP:subterranean-hangar:land:s1	-	-	-	5f2128bf97e4	-	4d5d48b13d0a	-	-	2026-11-24	xproof
