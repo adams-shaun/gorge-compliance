@@ -1007,7 +1007,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # resolution). gorge main moved FORGE_REF there on 11-25 and the pin invariant failed every xproof cycle; the merge was clean, and the
 # cardsfolder/tokenscripts trees now equal FORGE_REF 5bc5851a54's. Driver code unchanged from bdad3bd38b1. Fork branch
 # oracle/forge-pinfix-5bc5851a54. scripts/check-forge-ref-in-driver.sh now holds this in CI.
-FORGE_ORACLE_REF ?= 4385467a9eb5f1953a34498e07be47e24ae4b66c
+# 1dea7b45ce0 = 4385467a9eb plus the unpinned order-to-Exile ask kept (StepMachine.UNOBSERVABLE_ORDER_ZONES gains Exile, beside
+# Graveyard/Battlefield/Hand; both snapshots sort an exile's names, so forge_order.go can never derive a pin and Flickerform's
+# exile-the-bearer-and-itself resolution strict-missed, xproof cluster xpt-1d42dce4 xs:XP:flickerform:f0a0:s1). The library and
+# every other zone still strict-miss. OrderCardsTest.unpinnedExileOrderKeepsForgeOrder (run-unit-tests.sh) is red on 4385467a9eb
+# and green here; unpinnedOtherZoneStillLooseMisses now asserts Library instead of Exile. Driver-only; die-roll forcing,
+# cardsfolder and tokenscripts unchanged. Fork branch oracle-driver.
+FORGE_ORACLE_REF ?= 1dea7b45ce06a7d0ab55a7946fb30aeff37e781e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

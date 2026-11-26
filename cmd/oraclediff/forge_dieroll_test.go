@@ -260,7 +260,11 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll forcing unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh, 278 tests).
 // 4385467a9eb = bdad3bd38b1 merged with gorge's FORGE_REF 5bc5851a54 (three card scripts); `git diff bdad3bd38b1 4385467a9eb`
 // touches only forge-gui/res/cardsfolder, so the driver and die-roll code are byte-identical to bdad3bd38b1.
-const forgeOracleDieRollRef = "4385467a9eb5f1953a34498e07be47e24ae4b66c"
+// 1dea7b45ce0 = 4385467a9eb plus the unpinned order-to-Exile ask kept (StepMachine.UNOBSERVABLE_ORDER_ZONES gains Exile,
+// OrderCardsTest gains unpinnedExileOrderKeepsForgeOrder and loses Exile from unpinnedOtherZoneStillLooseMisses); StepMachine's
+// order gate is not on the die-roll path, so the forcing is unchanged, and ForcedDieRollTest was re-run green on the pin
+// (run-unit-tests.sh).
+const forgeOracleDieRollRef = "1dea7b45ce06a7d0ab55a7946fb30aeff37e781e"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
