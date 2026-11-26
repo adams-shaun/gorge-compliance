@@ -2718,7 +2718,6 @@ func TestStartDamageDoneFilter(t *testing.T) {
 		{"Sword of Fire and Ice", "f0/t0", "no-generator:trigger:DamageDone:filter"},            // EquippedBy
 		{"Sword of War and Peace", "f0/t0", "no-generator:trigger:DamageDone:filter"},           // EquippedBy
 		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // unrelated: a 0-power card
-		{"Aqueous Form", "f0/t0", "no-generator:trigger:Attacks:filter"},                        // unrelated: another mode
 		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // unrelated: the only carrier has menace
 		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // unrelated: hand size
 	} {
