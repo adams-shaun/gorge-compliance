@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35922a30-6b84-44dd-a2f0-306554a1ae90	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359332d6-c42a-4dfa-b148-3296d7e74661	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-falcon-sam-wilson:f0t0:s1,f:xs:XP:the-falcon-sam-wilson:f0t0:s1	-	-	-	8c0bd19283bb	-	aff79a3a0a0e	-	-	2026-11-24	xproof
 359332d6-c42a-4dfa-b148-3296d7e74661	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-falcon-sam-wilson:f0t0:s1,f:xs:XP:the-falcon-sam-wilson:f0t0:s1	-	-	-	8c0bd19283bb	-	aff79a3a0a0e	-	-	2026-11-24	xproof
-3593754d-df62-4ee0-80df-0c3fb057816a	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	18f6c5727729	-	e1bf0853e016	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-3593754d-df62-4ee0-80df-0c3fb057816a	f0/t0	Phase	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	18f6c5727729	-	e1bf0853e016	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3593754d-df62-4ee0-80df-0c3fb057816a	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	e1bf0853e016	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3593754d-df62-4ee0-80df-0c3fb057816a	f0/t0	Phase	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	e1bf0853e016	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 359a570e-92a7-4954-9a05-89cc75df57e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359a570e-92a7-4954-9a05-89cc75df57e7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359c6272-fcb5-4d3f-a4b5-4209e354a044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35b8fa77-4e85-418b-b335-cd1af127075c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35b8fa77-4e85-418b-b335-cd1af127075c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35b9f327-d1f6-47d1-aefa-6f70f407b4bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relic-bind:cast:s1,f:xs:XP:relic-bind:cast:s1	-	-	-	fc71ca68c5ac	-	7626b4fcf78a	-	-	2026-11-24	xproof
-35b9f327-d1f6-47d1-aefa-6f70f407b4bc	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	18f6c5727729	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+35b9f327-d1f6-47d1-aefa-6f70f407b4bc	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 35ba0e70-da7c-4ed9-b8ec-7dd5c5ce110e	cast	cast-resolve	agreed	-	FX	scen	2	0	Eerie Interference/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 35bba442-1aec-4d33-b502-4c580d61644b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35bef4d3-4473-4265-86b0-f1393c82fd1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
