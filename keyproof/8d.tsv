@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d38194e-b607-4ff4-9c19-0e8636d463bf	land	land	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:land:s1,f:xs:XP:raging-ravine:land:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
 8d3a0b81-1895-47a8-87a3-3e4093cbd951	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winterflame:cast:s1,f:xs:XP:winterflame:cast:s1	-	-	-	d864b561c9cb	-	569ce1075334	-	-	2026-11-24	xproof
 8d47b78b-11cc-4351-91d6-c891eb63dd98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d47b78b-11cc-4351-91d6-c891eb63dd98	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	6267f016973a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+8d47b78b-11cc-4351-91d6-c891eb63dd98	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:keen-sense:f0t0:s1,f:xs:XP:keen-sense:f0t0:s1	-	-	-	45bde072980e	-	aa5a8c31b52f	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d7cf56c-94fd-47d8-9e0f-cd3163688983	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:luminous-angel:f0t0:s1,f:xs:XP:luminous-angel:f0t0:s1	-	-	-	3aa6ded33acb	-	3e6c5d72a1b3	-	-	2026-11-25	xproof
 8d83dfb3-5662-4109-b465-bf5f257e58a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d83dfb3-5662-4109-b465-bf5f257e58a5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	6267f016973a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	cast	cast	agreed	-	X	start	2	0	x:xs:XP:osseous-exhale:cast:s1	-	-	-	6267f016973a	-	3aea6828f66a	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	cast	cast	agreed	-	X	start	2	0	x:xs:XP:osseous-exhale:cast:s1	-	-	-	45bde072980e	-	3aea6828f66a	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Osseous Exhale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d857d79-bdb2-4ca3-abd6-7db8f6b3bcfa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tokka-rahzar-unsupervised:cast:s1,f:xs:XP:tokka-rahzar-unsupervised:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 8d857d79-bdb2-4ca3-abd6-7db8f6b3bcfa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tokka-rahzar-unsupervised:f0t0:s1,f:xs:XP:tokka-rahzar-unsupervised:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
