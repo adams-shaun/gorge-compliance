@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a1	NULL	owed	refused:as-enters:land	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd01ef1f-f6be-498f-82e0-dc04833e685f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd0412ee-6c14-4cfc-95d8-942a2392111a	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	808e1dd359c1	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-dd0412ee-6c14-4cfc-95d8-942a2392111a	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	808e1dd359c1	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dd0412ee-6c14-4cfc-95d8-942a2392111a	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dd0412ee-6c14-4cfc-95d8-942a2392111a	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd05fd8e-f25e-4b9e-b162-afea1b248282	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd05fd8e-f25e-4b9e-b162-afea1b248282	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd0bbf91-1826-42c7-82af-6820646fa003	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiderwig-boggart:f0t0:s1,f:xs:XP:spiderwig-boggart:f0t0:s1	-	-	-	d864b561c9cb	-	acd5722d58a9	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ ddb19cac-20b0-4ab8-a31d-c5c155491780	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:g
 ddb2fb87-235a-4365-aa25-40c197425e43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ddb2fb87-235a-4365-aa25-40c197425e43	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ddb770c1-a783-49c9-a36d-2434b8580743	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ddb770c1-a783-49c9-a36d-2434b8580743	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+ddb770c1-a783-49c9-a36d-2434b8580743	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 ddb7e868-8f1d-4d57-9ee2-ebadb17b398a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-forgotten-lore:cast:s1,f:xs:XP:sphinx-of-forgotten-lore:cast:s1	-	-	-	23c4009444b0	-	0577991fa6a7	-	-	2026-11-25	xproof
 ddb7e868-8f1d-4d57-9ee2-ebadb17b398a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-forgotten-lore:combat0.attack:s1,f:xs:XP:sphinx-of-forgotten-lore:combat0.attack:s1	-	-	-	23c4009444b0	-	0577991fa6a7	-	-	2026-11-25	xproof
 ddb7e868-8f1d-4d57-9ee2-ebadb17b398a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-forgotten-lore:combat0.block:s1,f:xs:XP:sphinx-of-forgotten-lore:combat0.block:s1	-	-	-	23c4009444b0	-	0577991fa6a7	-	-	2026-11-25	xproof
