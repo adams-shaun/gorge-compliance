@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f34d70e-7a3a-43f7-b2c9-f89519804d3c	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skull-storm:cast:s1,f:xs:XP:skull-storm:cast:s1	-	-	-	8c0bd19283bb	-	7c6eef0f2a29	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 6f3ed8a1-ff5f-411b-9d87-0cce52f42344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wort-boggart-auntie:f0t0:s1,f:xs:XP:wort-boggart-auntie:f0t0:s1	-	-	-	21b2cceac526	-	970afb1d1932	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:wort-boggart-auntie:f0t0:s1,f:xs:XP:wort-boggart-auntie:f0t0:s1	-	-	-	21b2cceac526	-	970afb1d1932	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6facb0f6-fa49-4ce6-9f95-15bb3ce4bcf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6facb0f6-fa49-4ce6-9f95-15bb3ce4bcf2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fb6e37e-d774-4a50-8ea3-b955535c2065	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teeka-s-dragon:cast:s1,f:xs:XP:teeka-s-dragon:cast:s1	-	-	-	ea3140b6974b	-	86b73cd230b5	-	-	2026-11-24	xproof
-6fb6e37e-d774-4a50-8ea3-b955535c2065	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+6fb6e37e-d774-4a50-8ea3-b955535c2065	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 6fbaa853-48d4-4a3b-b22d-27415cc266d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quaketusk-boar:cast:s1,f:xs:XP:quaketusk-boar:cast:s1	-	-	-	3aa6ded33acb	-	315321c2fc58	-	-	2026-11-25	xproof
 6fbaa853-48d4-4a3b-b22d-27415cc266d7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quaketusk-boar:combat0.attack:s1,f:xs:XP:quaketusk-boar:combat0.attack:s1	-	-	-	3aa6ded33acb	-	315321c2fc58	-	-	2026-11-25	xproof
 6fbaa853-48d4-4a3b-b22d-27415cc266d7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:quaketusk-boar:combat0.block:s1,f:xs:XP:quaketusk-boar:combat0.block:s1	-	-	-	3aa6ded33acb	-	315321c2fc58	-	-	2026-11-25	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ff1e793-1569-4887-b6bb-d9855c5e8a26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ff39311-565e-4414-b32b-eb24c70b3090	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coordinated-maneuver:cast:s1,f:xs:XP:coordinated-maneuver:cast:s1	-	-	-	da6bc3fe8458	-	4028497ce3e4	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6ff4ff67-ad08-447f-a112-1a071c1474a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hanged-executioner:f0t0:s1,f:xs:XP:hanged-executioner:f0t0:s1	-	-	-	d864b561c9cb	-	e13917533074	-	-	2026-11-24	xproof
-6ff4ff67-ad08-447f-a112-1a071c1474a4	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+6ff4ff67-ad08-447f-a112-1a071c1474a4	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 6ff4ff67-ad08-447f-a112-1a071c1474a4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hanged-executioner:f0t0:s1,f:xs:XP:hanged-executioner:f0t0:s1	-	-	-	d864b561c9cb	-	e13917533074	-	-	2026-11-24	xproof
 6ff995f9-080d-4316-8fbe-39bf195db91b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bola-slinger:f0t1:s1,f:xs:XP:bola-slinger:f0t1:s1	-	-	-	ae86f6029288	-	dd1be40b1df8	-	-	2026-11-24	xproof
 6ff995f9-080d-4316-8fbe-39bf195db91b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bola-slinger:f0t0:s1,f:xs:XP:bola-slinger:f0t0:s1	-	-	-	ae86f6029288	-	dd1be40b1df8	-	-	2026-11-24	xproof
