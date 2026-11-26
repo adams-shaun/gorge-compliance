@@ -45,9 +45,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b2ffdb8-3681-4d64-ac03-8c860082e60e	cast	cast-resolve	agreed	-	FX	scen	2	0	Ripclaw Wrangler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b2ffdb8-3681-4d64-ac03-8c860082e60e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Ripclaw Wrangler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b2ffdb8-3681-4d64-ac03-8c860082e60e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b30e368-a22b-46c8-8b81-8b2bf1718e1f	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	9d4a4fc435b6	-	9a001ce4bc23	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/a0	Token	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	9d4a4fc435b6	-	9a001ce4bc23	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	9d4a4fc435b6	-	9a001ce4bc23	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6b30e368-a22b-46c8-8b81-8b2bf1718e1f	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0683e0556427	-	9a001ce4bc23	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/a0	Token	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0683e0556427	-	9a001ce4bc23	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6b30e368-a22b-46c8-8b81-8b2bf1718e1f	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0683e0556427	-	9a001ce4bc23	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 6b315dc3-c330-4b30-b6ad-4da12ccf6ca3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b336228-92c0-4f14-a479-1f97aaeae018	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b336228-92c0-4f14-a479-1f97aaeae018	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:belisarius-cawl:f0a0:s1,f:xs:XP:belisarius-cawl:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6be21185-f85c-49e8-988a-a76b6613fdaa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:giant-inheritance:f0t0:s1,f:xs:XP:giant-inheritance:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 6be3cf35-f774-4afb-8c1f-5c9b616a2b3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6be663a5-70e2-435a-91ae-16168402787b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6be663a5-70e2-435a-91ae-16168402787b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	40db193f7915	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6be663a5-70e2-435a-91ae-16168402787b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	0683e0556427	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 6be78177-aef0-408c-9769-a1be0775f06d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bef2904-1ebe-4e7e-879a-79f4968174fb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sin-collector:cast:s1,f:xs:XP:sin-collector:cast:s1	-	-	-	d864b561c9cb	-	f1ed31cf733c	-	-	2026-11-24	xproof
 6bef2904-1ebe-4e7e-879a-79f4968174fb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sin-collector:cast:s1,f:xs:XP:sin-collector:cast:s1	-	-	-	d864b561c9cb	-	f1ed31cf733c	-	-	2026-11-24	xproof
