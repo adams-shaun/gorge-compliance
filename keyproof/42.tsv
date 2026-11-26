@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42226b87-0746-4ebf-9fd0-108d508462af	cast	cast	agreed	-	F	start	2	0	f:xs:XP:clone:cast:s1	-	-	-	25696bf19d5b	-	9473363c4d09	-	-	2026-11-24	xproof
 42258216-fe2b-42d0-a6ce-76ecf8104c10	cast	cast	agreed	-	F	start	2	0	f:xs:XP:rutherford-upgraded-ensign:cast:s1	-	-	-	4b8018a80bf0	-	d682028c4aed	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 42258216-fe2b-42d0-a6ce-76ecf8104c10	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:rutherford-upgraded-ensign:cast:s1	-	-	-	4b8018a80bf0	-	d682028c4aed	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-42258216-fe2b-42d0-a6ce-76ecf8104c10	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	648c37f81a31	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+42258216-fe2b-42d0-a6ce-76ecf8104c10	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	257af086124e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 422876dd-2801-4d0e-93ad-d9d48178f0d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 422876dd-2801-4d0e-93ad-d9d48178f0d0	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:font-of-vigor:f0a0:s1,f:xs:XP:font-of-vigor:f0a0:s1	-	-	-	d864b561c9cb	-	af71e20be4f8	-	-	2026-11-24	xproof
 4228dd75-1fdd-48dc-9259-b841b2e46c64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bugenhagen-wise-elder:f0t0:s1,f:xs:XP:bugenhagen-wise-elder:f0t0:s1	-	-	-	23c4009444b0	-	c4d6468c2de3	-	-	2026-11-25	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42b03dd7-e796-47c3-b596-87960d72818b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b03dd7-e796-47c3-b596-87960d72818b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b12ba0-7d1d-48f9-9473-881f7a19514a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nadier-agent-of-the-duskenel:cast:s1,f:xs:XP:nadier-agent-of-the-duskenel:cast:s1	-	-	-	d607930fa548	-	36dccda04fde	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
-42b12ba0-7d1d-48f9-9473-881f7a19514a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	648c37f81a31	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+42b12ba0-7d1d-48f9-9473-881f7a19514a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	257af086124e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 42b12ba0-7d1d-48f9-9473-881f7a19514a	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nadier-agent-of-the-duskenel:f0t1:s1,f:xs:XP:nadier-agent-of-the-duskenel:f0t1:s1	-	-	-	d607930fa548	-	36dccda04fde	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 42b17f78-d290-40ed-afac-f9362e526999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42b28dfb-de4d-4005-b0d7-1db3917cf159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
