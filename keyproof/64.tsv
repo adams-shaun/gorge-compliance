@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 642fa01d-025e-44dd-8360-5325e5a28282	cast	cast-resolve	agreed	-	FX	scen	2	0	Dread Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64337db7-a66b-42c5-89fd-c9dfc203c0dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a0	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:linessa-zephyr-mage:f0a0:s1,f:xs:XP:linessa-zephyr-mage:f0a0:s1	-	-	-	8c0bd19283bb	-	b448b857935e	-	-	2026-11-24	xproof
-64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	6267f016973a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 64368768-77b9-4f78-adb7-951ca71dfb28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6437867b-a658-4a71-a8a5-0c5a782d1f84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashes-of-the-fallen:cast:s1,f:xs:XP:ashes-of-the-fallen:cast:s1	-	-	-	64a08ba7d913	-	99b0c84eeda1	-	-	2026-11-24	xproof
 64399663-2c1e-447e-a3ed-c49ebd9f2231	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hoverstone-pilgrim:cast:s1,f:xs:XP:hoverstone-pilgrim:cast:s1	-	-	-	23b491658465	-	c7b4147c0b76	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64e29bfc-9313-4e8c-808c-bc27f6b018a6	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:bloodfell-caves:f0a0:s2,f:xs:XP:bloodfell-caves:f0a0:s2	-	-	-	23b491658465	-	e259c317ad5f	-	-	2026-11-24	xproof
 64e29bfc-9313-4e8c-808c-bc27f6b018a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodfell-caves:f0t0:s1,f:xs:XP:bloodfell-caves:f0t0:s1	-	-	-	8c0bd19283bb	-	e259c317ad5f	-	-	2026-11-24	xproof
 64e29bfc-9313-4e8c-808c-bc27f6b018a6	land	land	agreed	-	FX	start	2	0	x:xs:XP:bloodfell-caves:f0t0:s1,f:xs:XP:bloodfell-caves:f0t0:s1	-	-	-	8c0bd19283bb	-	e259c317ad5f	-	-	2026-11-24	xproof
-64e3791b-de99-4eed-af49-cbec218c28aa	cast	cast	agreed	-	X	start	2	0	x:xs:XP:airbender-s-reversal:cast:s1	-	-	-	6267f016973a	-	2d6b6d16536d	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+64e3791b-de99-4eed-af49-cbec218c28aa	cast	cast	agreed	-	X	start	2	0	x:xs:XP:airbender-s-reversal:cast:s1	-	-	-	45bde072980e	-	2d6b6d16536d	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:cast:s1,f:xs:XP:cetacean-ops:cast:s1	-	-	-	fb9d3088f0bf	-	7450a0f971bd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:f0t0:s1,f:xs:XP:cetacean-ops:f0t0:s1	-	-	-	23c4009444b0	-	7450a0f971bd	-	-	2026-11-25	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:f0t1:s1,f:xs:XP:cetacean-ops:f0t1:s1	-	-	-	23c4009444b0	-	7450a0f971bd	-	-	2026-11-25	xproof

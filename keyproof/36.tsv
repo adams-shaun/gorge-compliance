@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 364e8bd6-52e5-4397-8d2a-10c4706e5a45	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hag-hedge-mage:f0t0:s1,f:xs:XP:hag-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	63ffb020250c	-	-	2026-11-25	xproof
 364e8bd6-52e5-4397-8d2a-10c4706e5a45	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hag-hedge-mage:f0t1:s1,f:xs:XP:hag-hedge-mage:f0t1:s1	-	-	-	3aa6ded33acb	-	63ffb020250c	-	-	2026-11-25	xproof
 364fc1a7-b91d-470b-80fe-275828f36cfc	cast	cast	agreed	-	F	start	6	0	f:xs:XP:inventor-s-axe:cast:s1	-	-	-	ae86f6029288	-	027f2ae69867	-	-	2026-11-24	xproof
-364fc1a7-b91d-470b-80fe-275828f36cfc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6267f016973a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+364fc1a7-b91d-470b-80fe-275828f36cfc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 364fc1a7-b91d-470b-80fe-275828f36cfc	f0/t0	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:inventor-s-axe:cast:s1	-	-	-	ae86f6029288	-	027f2ae69867	-	-	2026-11-24	xproof
 364fc1a7-b91d-470b-80fe-275828f36cfc	f0/t1	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:inventor-s-axe:cast:s1	-	-	-	ae86f6029288	-	027f2ae69867	-	-	2026-11-24	xproof
 36508a8a-d1a4-400e-bfda-09436bc4d5d4	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:lonely-arroyo:f0a0:s1,f:xs:XP:lonely-arroyo:f0a0:s1	-	-	-	23b491658465	-	2b1259e41590	-	-	2026-11-25	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3688ad0d-653b-4d5d-a57e-444db679d83e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:cast:s1,f:xs:XP:the-serpent-society:cast:s1	-	-	-	fb9d3088f0bf	-	1bad5ae092f7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3688ad0d-653b-4d5d-a57e-444db679d83e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:combat0.attack:s1,f:xs:XP:the-serpent-society:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	1bad5ae092f7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3688ad0d-653b-4d5d-a57e-444db679d83e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:combat0.block:s1,f:xs:XP:the-serpent-society:combat0.block:s1	-	-	-	fb9d3088f0bf	-	1bad5ae092f7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-3688ad0d-653b-4d5d-a57e-444db679d83e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Serpent Society/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3688ad0d-653b-4d5d-a57e-444db679d83e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:f0t0:s1,f:xs:XP:the-serpent-society:f0t0:s1	-	-	-	45bde072980e	-	1bad5ae092f7	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 3688ad0d-653b-4d5d-a57e-444db679d83e	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:f0t1:s1,f:xs:XP:the-serpent-society:f0t1:s1	-	-	-	fb9d3088f0bf	-	1bad5ae092f7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 36896550-151d-472c-bfc1-1d9bbf7cc04d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36896550-151d-472c-bfc1-1d9bbf7cc04d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
