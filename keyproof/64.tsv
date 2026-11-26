@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 645fb11b-d684-4bec-8532-8fa97e8f7b28	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645fb11b-d684-4bec-8532-8fa97e8f7b28	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64611260-c9f7-4375-b67a-f88fee6d3bff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:joel-resolute-survivor:cast:s1,f:xs:XP:joel-resolute-survivor:cast:s1	-	-	-	65d07beecc37	-	5dadecc9584a	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-64611260-c9f7-4375-b67a-f88fee6d3bff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+64611260-c9f7-4375-b67a-f88fee6d3bff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 6465f93d-e6bf-4a7b-86f3-5a2376f8b127	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 6465f93d-e6bf-4a7b-86f3-5a2376f8b127	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64b63797-9db0-41fa-b2eb-fbf51de0e337	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64b63797-9db0-41fa-b2eb-fbf51de0e337	f0/a0	Reveal	agreed	-	FX	start	2	0	x:xs:XP:cinder-seer:f0a0:s1,f:xs:XP:cinder-seer:f0a0:s1	-	-	-	5f2128bf97e4	-	c4f6715abc3b	-	-	2026-11-24	xproof
 64bd0722-7123-43cf-b22d-0b4a385974e0	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	85d889512e9d	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-64bd0722-7123-43cf-b22d-0b4a385974e0	f0/a0	Attach/Equip	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	85d889512e9d	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-64bd0722-7123-43cf-b22d-0b4a385974e0	f0/t0	DamageDone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	85d889512e9d	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+64bd0722-7123-43cf-b22d-0b4a385974e0	f0/a0	Attach/Equip	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+64bd0722-7123-43cf-b22d-0b4a385974e0	f0/t0	DamageDone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 64c54c9f-0550-41e2-a44a-5892a199f670	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64c7e03d-ba38-4979-8889-9bf0e7b8c66e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-crowbar:f0t0:s1,f:xs:XP:citizen-s-crowbar:f0t0:s1	-	-	-	d864b561c9cb	-	6debc06ca582	-	-	2026-11-24	xproof
 64c7e03d-ba38-4979-8889-9bf0e7b8c66e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-crowbar:f0a0:s1,f:xs:XP:citizen-s-crowbar:f0a0:s1	-	-	-	d864b561c9cb	-	6debc06ca582	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64e29bfc-9313-4e8c-808c-bc27f6b018a6	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:bloodfell-caves:f0a0:s2,f:xs:XP:bloodfell-caves:f0a0:s2	-	-	-	23b491658465	-	e259c317ad5f	-	-	2026-11-24	xproof
 64e29bfc-9313-4e8c-808c-bc27f6b018a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodfell-caves:f0t0:s1,f:xs:XP:bloodfell-caves:f0t0:s1	-	-	-	8c0bd19283bb	-	e259c317ad5f	-	-	2026-11-24	xproof
 64e29bfc-9313-4e8c-808c-bc27f6b018a6	land	land	agreed	-	FX	start	2	0	x:xs:XP:bloodfell-caves:f0t0:s1,f:xs:XP:bloodfell-caves:f0t0:s1	-	-	-	8c0bd19283bb	-	e259c317ad5f	-	-	2026-11-24	xproof
-64e3791b-de99-4eed-af49-cbec218c28aa	cast	cast	agreed	-	X	start	2	0	x:xs:XP:airbender-s-reversal:cast:s1	-	-	-	4f8d2c6491d4	-	2d6b6d16536d	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+64e3791b-de99-4eed-af49-cbec218c28aa	cast	cast	agreed	-	X	start	2	0	x:xs:XP:airbender-s-reversal:cast:s1	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:cast:s1,f:xs:XP:cetacean-ops:cast:s1	-	-	-	fb9d3088f0bf	-	7450a0f971bd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:f0t0:s1,f:xs:XP:cetacean-ops:f0t0:s1	-	-	-	23c4009444b0	-	7450a0f971bd	-	-	2026-11-25	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:f0t1:s1,f:xs:XP:cetacean-ops:f0t1:s1	-	-	-	23c4009444b0	-	7450a0f971bd	-	-	2026-11-25	xproof

@@ -8,8 +8,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b067e44-2001-4b49-aa4a-2c86f8929751	f0/t1	Phase	agreed	-	FX	start	1	0	x:xs:XP:omenpath-journey:f0t0:s2,f:xs:XP:omenpath-journey:f0t0:s2	-	-	-	267e485f6204	-	3584cdc3fcba	-	-	2026-11-24	xproof
 8b0689b5-7c68-46b3-a72a-4f97ef1d0a15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fairgrounds-patrol:cast:s1,f:xs:XP:fairgrounds-patrol:cast:s1	-	-	-	d864b561c9cb	-	e72752db91eb	-	-	2026-11-24	xproof
 8b0689b5-7c68-46b3-a72a-4f97ef1d0a15	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:fairgrounds-patrol:f0a0:s1,f:xs:XP:fairgrounds-patrol:f0a0:s1	-	-	-	6f84be0f34c0	-	e72752db91eb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-8b0ae835-df89-4b02-9fe6-0ae2f66405bd	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7897a1cee22d	-	efd8d8e8145e	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-8b0ae835-df89-4b02-9fe6-0ae2f66405bd	f0/t0	Phase	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7897a1cee22d	-	efd8d8e8145e	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8b0ae835-df89-4b02-9fe6-0ae2f66405bd	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8b0ae835-df89-4b02-9fe6-0ae2f66405bd	f0/t0	Phase	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8b119579-38e1-4509-9dcb-019d5a160ac2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b119b69-4794-443e-aa13-747c125b5b1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b119b69-4794-443e-aa13-747c125b5b1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treeshaker-chimera:f0t0:s1,f:xs:XP:treeshaker-chimera:f0t0:s1	-	-	-	ae86f6029288	-	5725ba71f031	-	-	2026-11-24	xproof
@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chittering-witch:f0t0:s1,f:xs:XP:chittering-witch:f0t0:s1	-	-	-	ae86f6029288	-	c8dfc474ca91	-	-	2026-11-24	xproof
 8b1e6b7c-892d-4058-b183-9121cdd623f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	7897a1cee22d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8b1fc306-0d8f-4edb-b197-2e99f10c599e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boing:cast:s1,f:xs:XP:boing:cast:s1	-	-	-	23c4009444b0	-	a1e44c444b8d	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
