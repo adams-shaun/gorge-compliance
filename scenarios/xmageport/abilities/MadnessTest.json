@@ -246,8 +246,7 @@
      "eq": 1
     }
    ],
-   "xmage": "MadnessTest#testFalkenrathGorger",
-   "known_bug": "XP[madness-granted-keyword-ignored]: Falkenrath Gorger's AddKeyword$ Madness:ManaCost grant is not read by madnessReplacementApplies (engine/rules altcast, which reads the printed face's Madness only), so the Vampire Aristocrat discarded by Haunting Hymn goes to the graveyard with no madness cast ask (Vampire Aristocrat count 0, want 1; p0 graveyard 1, want 0; a printed Madness card is asked), CR 702.35a, verified at gorge c3b957bf36."
+   "xmage": "MadnessTest#testFalkenrathGorger"
   },
   {
    "name": "test-falkenrath-gorger-with-asylum-visitor",
