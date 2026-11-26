@@ -52,7 +52,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e3eafd7-5823-4cc1-bdb8-c456580e395a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-life-s-web:cast:s1,f:xs:XP:myojin-of-life-s-web:cast:s1	-	-	-	64a08ba7d913	-	91473dd1b33a	-	-	2026-11-24	xproof
 8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghitu-lavarunner:cast:s1,f:xs:XP:ghitu-lavarunner:cast:s1	-	-	-	8c0bd19283bb	-	114308efb12e	-	-	2026-11-24	xproof
 8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ghitu Lavarunner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8e409d83-b63d-48e8-b55a-2a2d364a7a0f	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	392ffc564d05	-	4b6f2f14e7c1	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8e409d83-b63d-48e8-b55a-2a2d364a7a0f	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	3817bc12abcc	-	4b6f2f14e7c1	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 8e414ad6-ba19-44a1-a291-2e420734a6dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prismatic-strands:cast:s1,f:xs:XP:prismatic-strands:cast:s1	-	-	-	fc71ca68c5ac	-	95a09f0b1fc9	-	-	2026-11-24	xproof
 8e42ed82-8b56-46ad-a1ca-e29689a9d030	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e42ed82-8b56-46ad-a1ca-e29689a9d030	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e7b079d-9ede-421c-bd2b-f9a5126a8e6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:esika-s-chariot:f0t0:s1,f:xs:XP:esika-s-chariot:f0t0:s1	-	-	-	6f84be0f34c0	-	830826146345	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8e7b079d-9ede-421c-bd2b-f9a5126a8e6f	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:esika-s-chariot:f0t0:s1,f:xs:XP:esika-s-chariot:f0t0:s1	-	-	-	6f84be0f34c0	-	830826146345	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8e7b079d-9ede-421c-bd2b-f9a5126a8e6f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:esika-s-chariot:f0t0:s1,f:xs:XP:esika-s-chariot:f0t0:s1	-	-	-	6f84be0f34c0	-	830826146345	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-8e7b079d-9ede-421c-bd2b-f9a5126a8e6f	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8e7b079d-9ede-421c-bd2b-f9a5126a8e6f	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 8e7b31eb-7a91-4992-b24a-d81173e1dbc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e7b31eb-7a91-4992-b24a-d81173e1dbc8	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:deeproot-waters:f0t0:s1,f:xs:XP:deeproot-waters:f0t0:s1	-	-	-	336eab778104	-	afc885bf5a3a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 8e7bd5ae-005a-47d8-90bc-69f48cd8793d	cast	cast	agreed	-	F	start	2	0	f:xs:XP:bond-of-agony:cast:s1	-	-	-	77494c1ce129	-	afd190f6c872	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ea607cd-c14b-4bb1-aba1-c5cdc397a825	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:crater-elemental:f0a1:s1,f:xs:XP:crater-elemental:f0a1:s1	-	-	-	41149fc165a7	-	9cf6c82b1129	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8ea8ee52-30e1-415c-af52-66b209f05f0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:k-t-inga-class-battle-cruiser:f0t0:s1,f:xs:XP:k-t-inga-class-battle-cruiser:f0t0:s1	-	-	-	8c0bd19283bb	-	92244edab572	-	-	2026-11-24	xproof
 8ea8ee52-30e1-415c-af52-66b209f05f0a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:k-t-inga-class-battle-cruiser:f0t0:s1,f:xs:XP:k-t-inga-class-battle-cruiser:f0t0:s1	-	-	-	8c0bd19283bb	-	92244edab572	-	-	2026-11-24	xproof
-8ea8ee52-30e1-415c-af52-66b209f05f0a	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8ea8ee52-30e1-415c-af52-66b209f05f0a	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 8ea941aa-ee0c-4830-912a-0c672546aa0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ea941aa-ee0c-4830-912a-0c672546aa0c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8eb328e6-332e-435c-9733-4c5336f17824	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

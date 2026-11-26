@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 072db429-3838-42ba-89b6-e26cbce22af9	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Pest Control/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:interplanar-beacon:f0a1:s1,f:xs:XP:interplanar-beacon:f0a1:s1	-	-	-	336eab778104	-	ecb30a63b0a7	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:interplanar-beacon:f0a1:s1,f:xs:XP:interplanar-beacon:f0a1:s1	-	-	-	336eab778104	-	ecb30a63b0a7	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-073169f2-da3a-4a93-8c01-b3fd8558d225	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+073169f2-da3a-4a93-8c01-b3fd8558d225	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	land	land	agreed	-	FX	start	2	0	x:xs:XP:interplanar-beacon:land:s1,f:xs:XP:interplanar-beacon:land:s1	-	-	-	d864b561c9cb	-	ecb30a63b0a7	-	-	2026-11-24	xproof
 0734272d-5cce-476d-a663-fbf0bd7cd3a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0734272d-5cce-476d-a663-fbf0bd7cd3a7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kithkin-shielddare:f0a0:s1,f:xs:XP:kithkin-shielddare:f0a0:s1	-	-	-	336eab778104	-	80919a17fed1	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0798eb13-83f1-4b7c-b537-83a9da2915a6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 07995092-af6c-43b8-b30b-17e020ead37c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thunderous-debut:cast:s1,f:xs:XP:thunderous-debut:cast:s1	-	-	-	23b491658465	-	cc282d96aca3	-	-	2026-11-24	xproof
 0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 0799df10-b489-4f79-bf98-7a0c500b46a1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 079b1f07-6910-491b-83ba-5ec41260f32d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 079d4698-dc11-4d29-91b6-725d78dfb75d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rend-flesh:cast:s1,f:xs:XP:rend-flesh:cast:s1	-	-	-	23c4009444b0	-	7b0eba22d7ff	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
