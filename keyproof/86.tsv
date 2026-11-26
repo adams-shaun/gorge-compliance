@@ -63,10 +63,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 864c81e4-d612-4939-b4df-4b125cb8cdf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:cast:s1,f:xs:XP:surge-engine:cast:s1	-	-	-	d864b561c9cb	-	297c1233c2c4	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:f0a1:s1,f:xs:XP:surge-engine:f0a1:s1	-	-	-	23b491658465	-	297c1233c2c4	-	-	2026-11-25	xproof
-864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a1	NULL	owed	refused:start:present-count	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a2	NULL	owed	refused:start:present-count	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a1	NULL	owed	refused:start:present-count	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a2	NULL	owed	refused:start:present-count	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 864fc52a-e9f4-4254-901e-b949d96b34eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-864fc52a-e9f4-4254-901e-b949d96b34eb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+864fc52a-e9f4-4254-901e-b949d96b34eb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 8650bd97-ecf6-420f-9b72-a749970afcd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wellspring:f0t1:s1,f:xs:XP:wellspring:f0t1:s1	-	-	-	baa6f696107c	-	e875d6d5f4a7	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 8650bd97-ecf6-420f-9b72-a749970afcd4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wellspring:f0t1:s1,f:xs:XP:wellspring:f0t1:s1	-	-	-	baa6f696107c	-	e875d6d5f4a7	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 8650bd97-ecf6-420f-9b72-a749970afcd4	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:wellspring:f0t1:s1,f:xs:XP:wellspring:f0t1:s1	-	-	-	baa6f696107c	-	e875d6d5f4a7	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -209,7 +209,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86ddbc56-3318-49cf-be95-78772ef87637	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 86df1de7-967a-4420-847f-7a77d0217a15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:holy-avenger:cast:s1,f:xs:XP:holy-avenger:cast:s1	-	-	-	8c0bd19283bb	-	5671c823bf22	-	-	2026-11-24	xproof
 86df1de7-967a-4420-847f-7a77d0217a15	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:holy-avenger:f0a0:s1,f:xs:XP:holy-avenger:f0a0:s1	-	-	-	8c0bd19283bb	-	5671c823bf22	-	-	2026-11-24	xproof
-86df1de7-967a-4420-847f-7a77d0217a15	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+86df1de7-967a-4420-847f-7a77d0217a15	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	cast	cast-resolve	agreed	-	FX	scen	2	0	Melded Moxite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Melded Moxite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 86e0e718-82b5-4c99-9837-1b4d8729a27e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
