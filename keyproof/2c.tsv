@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c09d296-5d15-449a-9b98-cf5056a17b91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ojutai-s-breath:cast:s1,f:xs:XP:ojutai-s-breath:cast:s1	-	-	-	3aa6ded33acb	-	c7c60736ca99	-	-	2026-11-25	xproof
 2c0b8cc3-b1c1-498d-b34c-f317c2c9468f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c0de95f-4269-439c-a1bc-faa11348b185	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c0de95f-4269-439c-a1bc-faa11348b185	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+2c0de95f-4269-439c-a1bc-faa11348b185	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	b3e0094abb22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 2c10cae2-951a-4f4f-94e4-8713b58d07dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c10cae2-951a-4f4f-94e4-8713b58d07dd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c10cae2-951a-4f4f-94e4-8713b58d07dd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:cast:s1,f:xs:XP:flailing-soldier:cast:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a0:s1,f:xs:XP:flailing-soldier:f0a0:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a1:s1,f:xs:XP:flailing-soldier:f0a1:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
-2c22af49-c6ef-4de6-bb84-6b3e99879148	cast	cast	agreed	-	X	start	2	0	x:xs:XP:steer-clear:cast:s1	-	-	-	3c85185f8caa	-	8d72e5b7b2cc	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+2c22af49-c6ef-4de6-bb84-6b3e99879148	cast	cast	agreed	-	X	start	2	0	x:xs:XP:steer-clear:cast:s1	-	-	-	b3e0094abb22	-	8d72e5b7b2cc	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:embereth-veteran:cast:s1,f:xs:XP:embereth-veteran:cast:s1	-	-	-	23b491658465	-	007a01468d54	-	-	2026-11-24	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:embereth-veteran:f0a0:s1,f:xs:XP:embereth-veteran:f0a0:s1	-	-	-	3aa6ded33acb	-	007a01468d54	-	-	2026-11-25	xproof
 2c24b7c3-7c90-4109-a4aa-d9cae6febf34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orb-of-dreams:cast:s1,f:xs:XP:orb-of-dreams:cast:s1	-	-	-	fb9d3088f0bf	-	11a4a29c55c4	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kroxa-titan-of-death-s-hunger:cast:s1,f:xs:XP:kroxa-titan-of-death-s-hunger:cast:s1	-	-	-	78568f009138	-	a9e1ff31a01f	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t2	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1,f:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
 2cb37c66-bba4-4f90-9134-6b738462457e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3c85185f8caa	-	4a30966f9302	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3c85185f8caa	-	161171aae5a6	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	cast	owed	harness	-	start	0	0	-	-	-	-	b3e0094abb22	-	161171aae5a6	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	b3e0094abb22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 2cb95721-56c8-4008-8055-579a5a97fc8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gaea-s-gift:cast:s1,f:xs:XP:gaea-s-gift:cast:s1	-	-	-	6f84be0f34c0	-	66bb9299d057	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torens-fist-of-the-angels:cast:s1,f:xs:XP:torens-fist-of-the-angels:cast:s1	-	-	-	d864b561c9cb	-	71137bf2c991	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:torens-fist-of-the-angels:f0t0:s1,f:xs:XP:torens-fist-of-the-angels:f0t0:s1	-	-	-	6f84be0f34c0	-	71137bf2c991	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
