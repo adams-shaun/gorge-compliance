@@ -128,9 +128,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 728d2e30-2f36-4054-81db-29b01e376a82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728f0a3f-722d-4936-ade8-31883499f56d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728f0a3f-722d-4936-ade8-31883499f56d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7292272d-6511-466b-aadd-c4fe7ed8df09	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+7292272d-6511-466b-aadd-c4fe7ed8df09	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	aa2041fc5d2c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	aa2041fc5d2c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	aa2041fc5d2c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 72949d87-76cd-472c-86b3-2b7d5fce3159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72949d87-76cd-472c-86b3-2b7d5fce3159	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:treetop-ambusher:f0t0:s1,f:xs:XP:treetop-ambusher:f0t0:s1	-	-	-	d864b561c9cb	-	22850a4e6059	-	-	2026-11-24	xproof
 72994a7a-7c0d-4f28-8cc0-28161d098d7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:appa-the-vigilant:f0t0:s1,f:xs:XP:appa-the-vigilant:f0t0:s1	-	-	-	8c0bd19283bb	-	c8206484abee	-	-	2026-11-24	xproof
@@ -184,8 +184,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72e0f7f2-1d04-4ea8-a6e8-4d6a13aae9c7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:desperate-sentry:f0t0:s1,f:xs:XP:desperate-sentry:f0t0:s1	-	-	-	d864b561c9cb	-	6fbdbd8fee7c	-	-	2026-11-24	xproof
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dance-of-many:f0t0:s1,f:xs:XP:dance-of-many:f0t0:s1	-	-	-	9087eefec3ee	-	0cd082966807	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dance-of-many:f0t0:s1,f:xs:XP:dance-of-many:f0t0:s1	-	-	-	9087eefec3ee	-	0cd082966807	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	aa2041fc5d2c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	aa2041fc5d2c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t3	Phase	agreed	-	FX	start	2	0	x:xs:XP:dance-of-many:f0t3:s1,f:xs:XP:dance-of-many:f0t3:s1	-	-	-	9087eefec3ee	-	0cd082966807	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 72e2b883-a284-4ab6-8174-1ca289141a49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-to-mind:cast:s1,f:xs:XP:call-to-mind:cast:s1	-	-	-	336eab778104	-	6a235bff7ead	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 72e61b73-980c-4ee4-b529-a367897620ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shinen-of-fear-s-chill:cast:s1,f:xs:XP:shinen-of-fear-s-chill:cast:s1	-	-	-	64a08ba7d913	-	8b973a392acf	-	-	2026-11-24	xproof
