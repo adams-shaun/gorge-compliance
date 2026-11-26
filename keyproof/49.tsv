@@ -36,13 +36,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 492dafd8-0393-4151-845c-d9ca10bda03e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 492dafd8-0393-4151-845c-d9ca10bda03e	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 492dafd8-0393-4151-845c-d9ca10bda03e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:utopia-mycon:f0t0:s1,f:xs:XP:utopia-mycon:f0t0:s1	-	-	-	3aa6ded33acb	-	5c161cbc3042	-	-	2026-11-25	xproof
-492e0e6c-8c27-4376-938b-f8a8b6205810	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+492e0e6c-8c27-4376-938b-f8a8b6205810	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 49325445-0825-405e-be86-2a814699ce03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49325445-0825-405e-be86-2a814699ce03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49330aaf-c005-4e07-ae3a-2579bea3c326	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 493acba2-92b0-43a4-9f4b-d49a91ca77f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 493acba2-92b0-43a4-9f4b-d49a91ca77f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 493ecd11-e980-42da-a79e-cddd9a94cc7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49b351d8-8b63-4f9e-a323-344ed35fdfff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49b351d8-8b63-4f9e-a323-344ed35fdfff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elvish-hunter:f0a0:s1,f:xs:XP:elvish-hunter:f0a0:s1	-	-	-	fc71ca68c5ac	-	658d196e4dc4	-	-	2026-11-24	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haazda-shield-mate:f0t0:s1,f:xs:XP:haazda-shield-mate:f0t0:s1	-	-	-	23c4009444b0	-	8474dbf19dfa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-49b689a3-9197-4a04-a62f-218b245d6e23	f0/a0	NULL	owed	refused:start:upkeep-cost	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+49b689a3-9197-4a04-a62f-218b245d6e23	f0/a0	NULL	owed	refused:start:upkeep-cost	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:haazda-shield-mate:f0t0:s1,f:xs:XP:haazda-shield-mate:f0t0:s1	-	-	-	23c4009444b0	-	8474dbf19dfa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 49b80368-d38a-4877-b1de-f3b5f3d40d4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-lost-thoughts:f0t0:s1,f:xs:XP:wall-of-lost-thoughts:f0t0:s1	-	-	-	d864b561c9cb	-	c686f9ecb8ea	-	-	2026-11-24	xproof
 49b80368-d38a-4877-b1de-f3b5f3d40d4d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wall-of-lost-thoughts:f0t0:s1,f:xs:XP:wall-of-lost-thoughts:f0t0:s1	-	-	-	d864b561c9cb	-	c686f9ecb8ea	-	-	2026-11-24	xproof
