@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f1afedd-c60f-454f-b84a-c8117aec0128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1afedd-c60f-454f-b84a-c8117aec0128	f0/t0	TapsForMana	agreed	-	FX	start	2	0	x:xs:XP:manabarbs:f0t0:s1,f:xs:XP:manabarbs:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gyome-master-chef:f0t0:s1,f:xs:XP:gyome-master-chef:f0t0:s1	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gyome-master-chef:f0a0:s1,f:xs:XP:gyome-master-chef:f0a0:s1	-	-	-	6cd204d1e61a	-	5ba5bbf8c792	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gyome-master-chef:f0a0:s1,f:xs:XP:gyome-master-chef:f0a0:s1	-	-	-	6cd204d1e61a	-	5ba5bbf8c792	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 0f208cd3-7673-4380-9cb8-5b6f09966ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:cast:s1,f:xs:XP:lake-town-toymaker:cast:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f208cd3-7673-4380-9cb8-5b6f09966ebd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:f0t0:s1,f:xs:XP:lake-town-toymaker:f0t0:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f222f3d-f02b-42b9-aedf-fb7ed92d4889	cast	cast-resolve	agreed	-	FX	scen	2	0	Two-Headed Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f35e73b-6a38-4185-a7d3-d237d67ba1cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f3c3e5f-6af3-4af2-8703-4ccc8ed8f675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f3fff7a-cc46-4c72-9edc-fdbddd3b51b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-liberator:cast:s1,f:xs:XP:aven-liberator:cast:s1	-	-	-	fc71ca68c5ac	-	c159d10255ca	-	-	2026-11-24	xproof
-0f3fff7a-cc46-4c72-9edc-fdbddd3b51b5	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+0f3fff7a-cc46-4c72-9edc-fdbddd3b51b5	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 0f41cefc-d6ff-4db7-ba35-502b7e081de1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venser-shaper-savant:f0t0:s1,f:xs:XP:venser-shaper-savant:f0t0:s1	-	-	-	d864b561c9cb	-	fb07358dc673	-	-	2026-11-24	xproof
 0f41cefc-d6ff-4db7-ba35-502b7e081de1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venser-shaper-savant:f0t0:s1,f:xs:XP:venser-shaper-savant:f0t0:s1	-	-	-	d864b561c9cb	-	fb07358dc673	-	-	2026-11-24	xproof
 0f485ea1-af00-4f6c-8e70-103ba172aa18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
