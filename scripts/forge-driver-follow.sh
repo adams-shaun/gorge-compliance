@@ -144,7 +144,7 @@ pin() {
 			print "# " substr(m, 1, 11) " = " o " merged with gorge FORGE_REF " f " by gorge-pin-follow (scripts/forge-driver-follow.sh pin); fork branch oracle/pin-" f "."
 			print "FORGE_ORACLE_REF ?= " m; next }
 		{ print }' Makefile >Makefile.tmp && mv Makefile.tmp Makefile
-	git commit -q --amend --no-edit -a
+	git -c user.name="gorge forge-driver-follow" -c user.email=noreply@github.com commit -q --amend --no-edit -a
 	echo "forge-driver-follow: FORGE_ORACLE_REF ${oracle:0:10} -> ${merged:0:10} (holds FORGE_REF ${fref:0:10})"
 }
 
