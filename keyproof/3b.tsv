@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b02dfca-bcaa-4e22-b143-401ed250d016	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:titan-forge:f0a1:s1,f:xs:XP:titan-forge:f0a1:s1	-	-	-	23c4009444b0	-	e9441810f0ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-oketra:f0t0:s1,f:xs:XP:god-eternal-oketra:f0t0:s1	-	-	-	336eab778104	-	42fc217d8808	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3b04f5b9-40d9-49aa-a38d-0f946401263c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-doctor-emh:f0t0:s1,f:xs:XP:the-doctor-emh:f0t0:s1	-	-	-	c2272f704fde	-	2ff387cdc9de	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 3b04f5b9-40d9-49aa-a38d-0f946401263c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-doctor-emh:f0t0:s1,f:xs:XP:the-doctor-emh:f0t0:s1	-	-	-	c2272f704fde	-	2ff387cdc9de	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 3b0694ff-aa92-4a2e-a366-69fdf5a57c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bb518ff-399b-4ce7-b9ad-a1d563dd7792	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bb518ff-399b-4ce7-b9ad-a1d563dd7792	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bb7041c-4f3e-4123-9181-3442ea0c98e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bb7041c-4f3e-4123-9181-3442ea0c98e8	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3bb7041c-4f3e-4123-9181-3442ea0c98e8	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:cast:s1,f:xs:XP:malcolm-alluring-scoundrel:cast:s1	-	-	-	23b491658465	-	1641639f428a	-	-	2026-11-24	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.block:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.block:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
@@ -206,7 +206,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bcf54f8-fcd7-4ec0-b011-92b367411cdb	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:stirring-honormancer:f0t0:s1	-	-	-	cfde1dc26c40	-	b3206a8b3305	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 3bcfc82c-3523-40e3-b236-78ece8a8d69f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elemental-appeal:cast:s1,f:xs:XP:elemental-appeal:cast:s1	-	-	-	8a1b1a193ec0	-	187d6c37a53f	-	-	2026-11-24	xproof
 3bd066d3-5b07-4986-9e6c-39d1ae6212ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bd066d3-5b07-4986-9e6c-39d1ae6212ff	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	fe8e838ad5dc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3bd066d3-5b07-4986-9e6c-39d1ae6212ff	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3bd3156f-dbc7-48f7-9e50-1f2b8b227f97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bd553db-2c7d-42cd-8ded-ab2c955b8f4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scotty-chief-engineer:cast:s1,f:xs:XP:scotty-chief-engineer:cast:s1	-	-	-	8c0bd19283bb	-	a00c11932c66	-	-	2026-11-24	xproof
 3bd553db-2c7d-42cd-8ded-ab2c955b8f4e	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:scotty-chief-engineer:f0a0:s1,f:xs:XP:scotty-chief-engineer:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
