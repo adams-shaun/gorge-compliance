@@ -364,3 +364,29 @@ func TestFocusHoldPassDropsBotPayment(t *testing.T) {
 		t.Errorf("holdPass: %+v, want only the pass choice", out)
 	}
 }
+
+// A ninjutsu focus waits for its scripted combat (one attacker, no block) and
+// takes the hand activation in the declare blockers step: its lands stay
+// untapped until the ability's ActivationPhases window opens (windowOpen), as
+// mana tapped at the declare attackers priority would empty before it.
+func TestFocusNinjutsuAfterBlockers(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	d0 := decks.Deck{Name: "p0", Colours: "B", Cards: []string{"Biting-Palm Ninja", "Swamp", "Swamp", "Swamp", "Grizzly Bears"}}
+	for len(d0.Cards) < 40 {
+		d0.Cards = append(d0.Cards, "Swamp")
+	}
+	d1 := decks.Deck{Name: "p1", Colours: "W"}
+	for len(d1.Cards) < 40 {
+		d1.Cards = append(d1.Cards, "Plains")
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{{Hand: []int{0}, Battlefield: []int{1, 2, 3, 4}}, {}}}
+	var fst *focusState
+	focusSeen = func(s *focusState) { fst = s }
+	defer func() { focusSeen = nil }()
+	opt := Options{Set: "NEO", MaxTurns: 2, Start: start,
+		Focus: &Focus{Seat: 0, Card: "Biting-Palm Ninja", Kind: "ability", Ability: 0, Attack: "Grizzly Bears"}}
+	play(t, reg, [2]decks.Deck{d0, d1}, rules.SeedForStarter(1, 2, 0), opt)
+	if fst == nil || !fst.attacked || !fst.done {
+		t.Fatalf("focus state %+v: want the attack declared and the ninjutsu activation taken", fst)
+	}
+}

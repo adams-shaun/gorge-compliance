@@ -1839,6 +1839,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", xmageBespokeChoiceLabel(d.Picks[k])})
 					continue
 				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeGenericBespokeChoiceQueue {
+					// A plain GenericChoice on a bespoke-dialog face (Pemmin's
+					// Aura, Shorecrasher Elemental): the CHOICE queue by XMage's
+					// own label, never the positional mode queue.
+					as = append(as, XAnswer{d.Seat, "choice", xmageGenericBespokeChoiceLabel(d.Picks[k])})
+					continue
+				}
 				if m, ok := modeNumberFor(d, k, modes); ok && (m == ModeYesQueue || m == ModeNoQueue) {
 					// A two-way GenericChoice XMage asks as chooseUse: a
 					// Timetwister-style per-player "may shuffle" (Turtles in
@@ -3003,6 +3010,13 @@ const ModeKWChoiceQueue = -3
 // queue, but the answer is the XMage label, not the keyword rule text.
 const ModeKWBespokeChoiceQueue = -4
 
+// ModeGenericBespokeChoiceQueue is the sentinel for a plain GenericChoice pick
+// on a face whose XMage class builds its own Choice dialog with its own labels
+// (xmageGenericChoiceBespokeFaces: Pemmin's Aura / Shorecrasher Elemental's
+// "Select how to boost" over "+1/-1", "-1/+1"). The CHOICE queue, answered
+// with the XMage label (xmageGenericBespokeChoiceLabel).
+const ModeGenericBespokeChoiceQueue = -5
+
 // modeNumbers maps each charm mode's label (as gorge's mode decision
 // shows it) to its 1-based position in its Choices$ list, for every Charm
 // on the face -- the spell's own and any modal trigger's. It ALSO carries
@@ -3184,6 +3198,12 @@ func modeNumbers(f *cards.Face) map[string]int {
 	for _, label := range kwChoiceBespokeLabels(f) {
 		if _, taken := out[label]; !taken {
 			out[label] = ModeKWBespokeChoiceQueue
+		}
+	}
+	// The bespoke-dialog GenericChoice faces: same queue, XMage's own labels.
+	for label := range genericChoiceBespokeLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeGenericBespokeChoiceQueue
 		}
 	}
 	for _, sa := range f.Abilities {

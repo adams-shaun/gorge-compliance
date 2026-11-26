@@ -558,3 +558,43 @@ func TestKeyproofXMageQuietCreditsForge(t *testing.T) {
 		t.Errorf("handoff.tsv rows %v, want none", hand)
 	}
 }
+
+// An owed item's reason is rng, or harness plus the two followers' signature.
+func TestKeyproofOwedReason(t *testing.T) {
+	t.Parallel()
+	f := func(class, msg string) classify.Finding { return classify.Finding{ID: "i", Class: class, Msg: msg} }
+	for _, c := range []struct {
+		x, f classify.Finding
+		want string
+	}{
+		{f(classify.ClassRNG, ""), f(classify.ClassHarness, "x"), "rng"},
+		{f(classify.ClassHarness, "xmage: a b"), f(classify.ClassRNG, ""), "rng"},
+		{f(classify.ClassNotSent, ""), f(classify.ClassAgree, ""), "harness:x=not_sent+f=agree"},
+		{classify.Finding{}, f(classify.ClassHarness, "forge: no priority at step 4"), "harness:x=none+f=harness~no-priority-at-step"},
+	} {
+		if got := owedReason(c.x, c.f); got != c.want {
+			t.Errorf("owedReason(%v, %v) = %q, want %q", c.x, c.f, got, c.want)
+		}
+	}
+}
+
+// A key's reason is voted by class first: splitting harness into signatures
+// must not move a key to rng.
+func TestKeyproofOwedPickClassFirst(t *testing.T) {
+	t.Parallel()
+	for _, c := range []struct {
+		name string
+		owed map[string]string
+		want string
+	}{
+		{"harness split three ways beats two rng", map[string]string{"1": "harness:A", "2": "harness:B", "3": "harness:C", "4": "rng", "5": "rng"}, "harness:A"},
+		{"two-two tie goes to harness", map[string]string{"1": "harness:B", "2": "harness:B", "3": "rng", "4": "rng"}, "harness:B"},
+		{"most common signature inside the class", map[string]string{"1": "harness:B", "2": "harness:A", "3": "harness:B", "4": "rng"}, "harness:B"},
+		{"rng majority", map[string]string{"1": "harness:A", "2": "rng", "3": "rng"}, "rng"},
+		{"one reason", map[string]string{"1": "rng"}, "rng"},
+	} {
+		if got := pickOwedReason(c.owed); got != c.want {
+			t.Errorf("%s: %q, want %q", c.name, got, c.want)
+		}
+	}
+}
