@@ -1336,7 +1336,7 @@ func placeStackBait(reg *cards.Registry, f *StartFile, seat int, plan stackBaitP
 			return false
 		}
 		cost := sa.Params["Cost"]
-		mana, why := costTokens(cost)
+		mana, why := baitCostTokens(cost)
 		if why != "" {
 			return false
 		}

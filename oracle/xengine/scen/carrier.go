@@ -884,7 +884,7 @@ func activationOK(sa *cards.SA) bool {
 		return false
 	}
 	if v := p["Cost"]; v != "" {
-		mana, why := costTokens(v)
+		mana, why := baitCostTokens(v)
 		if why != "" {
 			return false
 		}
