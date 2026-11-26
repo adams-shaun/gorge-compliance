@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3284010f-aeb2-493e-9252-3b953a192a94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3284010f-aeb2-493e-9252-3b953a192a94	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32845ed6-2328-462e-be3a-579589748588	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32845ed6-2328-462e-be3a-579589748588	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	4e2a4fb57596	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+32845ed6-2328-462e-be3a-579589748588	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 3289539e-51eb-4915-bd77-3ac362136f2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hidden-herbalists:f0t0:s1,f:xs:XP:hidden-herbalists:f0t0:s1	-	-	-	3aa6ded33acb	-	911aae6337db	-	-	2026-11-25	xproof
 3289539e-51eb-4915-bd77-3ac362136f2a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hidden-herbalists:f0t0:s1,f:xs:XP:hidden-herbalists:f0t0:s1	-	-	-	3aa6ded33acb	-	911aae6337db	-	-	2026-11-25	xproof
 328a0691-9453-4f2d-a9c3-5c69da252d20	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragon-trainer:f0t0:s2,f:xs:XP:dragon-trainer:f0t0:s2	-	-	-	e07cf3a05ba5	-	ecd6bf9b712a	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ickspitter:f0a0:s1,f:xs:XP:rakdos-ickspitter:f0a0:s1	-	-	-	23c4009444b0	-	f404b88708ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1,f:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1,f:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	4e2a4fb57596	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:groffskithur:f0t0:s1,f:xs:XP:groffskithur:f0t0:s1	-	-	-	6f84be0f34c0	-	35de71f7d003	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 32a9dac0-247e-42d5-bfd3-465043515e12	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hag-of-syphoned-breath:f0t0:s1	-	-	-	23c4009444b0	-	907fc2dac6c3	-	-	2026-11-25	xproof
