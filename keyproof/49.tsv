@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49325445-0825-405e-be86-2a814699ce03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49330aaf-c005-4e07-ae3a-2579bea3c326	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	155390b3b88a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	155390b3b88a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 493acba2-92b0-43a4-9f4b-d49a91ca77f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 493acba2-92b0-43a4-9f4b-d49a91ca77f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 493ecd11-e980-42da-a79e-cddd9a94cc7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49d149d6-de94-48cf-974b-6bb4a37ce77c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rangers' Aetherhive/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49d189dd-9ce7-434f-931b-7110cd5255e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brave-the-wilds:cast:s1,f:xs:XP:brave-the-wilds:cast:s1	-	-	-	23b491658465	-	ddf7261dafeb	-	-	2026-11-24	xproof
 49d44e89-b94e-43f7-a996-f50651df9264	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49d44e89-b94e-43f7-a996-f50651df9264	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	257af086124e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+49d44e89-b94e-43f7-a996-f50651df9264	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	155390b3b88a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 49d64ecb-3a4f-4013-9a34-8b1539a91e96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-the-schemer:cast:s1,f:xs:XP:tezzeret-the-schemer:cast:s1	-	-	-	d864b561c9cb	-	fbac42267eaa	-	-	2026-11-24	xproof
 49d64ecb-3a4f-4013-9a34-8b1539a91e96	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-the-schemer:f0a0:s1,f:xs:XP:tezzeret-the-schemer:f0a0:s1	-	-	-	da6bc3fe8458	-	fbac42267eaa	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 49d64ecb-3a4f-4013-9a34-8b1539a91e96	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-the-schemer:cast:s1,f:xs:XP:tezzeret-the-schemer:cast:s1	-	-	-	d864b561c9cb	-	fbac42267eaa	-	-	2026-11-24	xproof
