@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 986ae327-f433-4c58-93dc-afc544b9bfcb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 986ba716-3921-4f64-9acf-703200d666f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 986f510c-e2ec-423e-a443-51a169939558	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:tomb-fortress:f0a0:s2,f:xs:XP:tomb-fortress:f0a0:s2	-	-	-	8c0bd19283bb	-	d8199d49afb2	-	-	2026-11-24	xproof
-986f510c-e2ec-423e-a443-51a169939558	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+986f510c-e2ec-423e-a443-51a169939558	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	b74fd2a14608	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 986f510c-e2ec-423e-a443-51a169939558	land	land	agreed	-	FX	start	2	0	x:xs:XP:tomb-fortress:land:s1,f:xs:XP:tomb-fortress:land:s1	-	-	-	8c0bd19283bb	-	d8199d49afb2	-	-	2026-11-24	xproof
 98799336-a61e-4e35-ac30-51edb81301f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ovinize:cast:s1,f:xs:XP:ovinize:cast:s1	-	-	-	3aa6ded33acb	-	5004b932237d	-	-	2026-11-25	xproof
 987a0b61-2ce4-47bd-8f5e-1e7bf01d0869	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 987f8c13-0164-4536-b505-d9fa799222fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 987f8c13-0164-4536-b505-d9fa799222fb	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dogged-pursuit:f0t0:s1,f:xs:XP:dogged-pursuit:f0t0:s1	-	-	-	6f84be0f34c0	-	162d2abddf84	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9880ba09-d5b8-4675-bfb4-2161d86d2d41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9881b8b6-2e0a-492e-a1d1-40a087158784	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	61f994c1fc86	-	152ce6f4482b	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+9881b8b6-2e0a-492e-a1d1-40a087158784	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	b74fd2a14608	-	152ce6f4482b	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t0:s1,f:xs:XP:suleiman-s-legacy:f0t0:s1	-	-	-	ea3140b6974b	-	d86b0c834040	-	-	2026-11-24	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t0:s1,f:xs:XP:suleiman-s-legacy:f0t0:s1	-	-	-	ea3140b6974b	-	d86b0c834040	-	-	2026-11-24	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t1:s1,f:xs:XP:suleiman-s-legacy:f0t1:s1	-	-	-	cb99a158debc	-	d86b0c834040	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98cbac1d-7896-4c63-a265-03bc5d670fa6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relentless-drednok:cast:s1,f:xs:XP:relentless-drednok:cast:s1	-	-	-	fb9d3088f0bf	-	be77ce68f262	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 98cbac1d-7896-4c63-a265-03bc5d670fa6	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:relentless-drednok:f0a0:s1,f:xs:XP:relentless-drednok:f0a0:s1	-	-	-	23c4009444b0	-	be77ce68f262	-	-	2026-11-25	xproof
 98cc734d-16d5-4c3c-98ca-a45efad27127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98cc734d-16d5-4c3c-98ca-a45efad27127	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+98cc734d-16d5-4c3c-98ca-a45efad27127	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b74fd2a14608	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:goblin-town:f0a0:s1,f:xs:XP:goblin-town:f0a0:s1	-	-	-	41149fc165a7	-	a947795297da	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:goblin-town:f0a1:s1,f:xs:XP:goblin-town:f0a1:s1	-	-	-	fb9d3088f0bf	-	a947795297da	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	land	land	agreed	-	FX	start	2	0	x:xs:XP:goblin-town:land:s1,f:xs:XP:goblin-town:land:s1	-	-	-	fb9d3088f0bf	-	a947795297da	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

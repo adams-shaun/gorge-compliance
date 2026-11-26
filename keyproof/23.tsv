@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2359db1c-6029-4748-9f09-d57bb0ae92e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-scorn:cast:s1,f:xs:XP:liliana-s-scorn:cast:s1	-	-	-	3aa6ded33acb	-	7262d6e6152b	-	-	2026-11-25	xproof
 235bf0ba-658c-463f-b112-7478ba27bd7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-lannery-storm:cast:s1,f:xs:XP:captain-lannery-storm:cast:s1	-	-	-	6f84be0f34c0	-	a20024f09739	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:captain-lannery-storm:cast:s1,f:xs:XP:captain-lannery-storm:cast:s1	-	-	-	6f84be0f34c0	-	a20024f09739	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	480b0a8c12a9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	b74fd2a14608	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:f0t0:s1,f:xs:XP:scrapshooter:f0t0:s1	-	-	-	23c4009444b0	-	2bc37731cbf6	-	-	2026-11-25	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:combat0.attack:s1,f:xs:XP:scrapshooter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2bc37731cbf6	-	-	2026-11-25	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:combat0.block:s1,f:xs:XP:scrapshooter:combat0.block:s1	-	-	-	3aa6ded33acb	-	2bc37731cbf6	-	-	2026-11-25	xproof
@@ -210,7 +210,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23f73983-0337-4464-8817-5f7596d65b38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f73983-0337-4464-8817-5f7596d65b38	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f86ee2-b1e3-45c2-bfd5-044919033922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23f86ee2-b1e3-45c2-bfd5-044919033922	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+23f86ee2-b1e3-45c2-bfd5-044919033922	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	b74fd2a14608	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 23f93411-f83c-4ed2-abed-99cf905f7d7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f93411-f83c-4ed2-abed-99cf905f7d7f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:bog-initiate:f0a0:s1,f:xs:XP:bog-initiate:f0a0:s1	-	-	-	21b2cceac526	-	c03b50c76f0b	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 23f9bee4-ac7e-4828-82c0-576fee0d29b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:singing-tree:cast:s1,f:xs:XP:singing-tree:cast:s1	-	-	-	ae86f6029288	-	df2f93e45a50	-	-	2026-11-24	xproof
