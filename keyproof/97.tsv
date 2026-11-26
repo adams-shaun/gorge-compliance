@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sage-s-nouliths:static0.0:s1,f:xs:XP:sage-s-nouliths:static0.0:s1	-	-	-	6f84be0f34c0	-	83d7e70d4ba0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:sage-s-nouliths:static0.0:s1,f:xs:XP:sage-s-nouliths:static0.0:s1	-	-	-	6f84be0f34c0	-	83d7e70d4ba0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9728dec9-d482-4c7a-8cdc-44d010dc878d	cast	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	b74fd2a14608	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+9728dec9-d482-4c7a-8cdc-44d010dc878d	cast	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	64b2deb8ef2e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 97326cad-b13c-4e52-82ce-850a39e5ff08	cast	cast-resolve	agreed	-	FX	scen	2	0	Torpor Orb/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 97326cad-b13c-4e52-82ce-850a39e5ff08	static#0.0	static#0.0	agreed	-	X	scen	1	0	Torpor Orb/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 97332d4e-a55c-4e4f-9040-bf426a7c8e39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 977c2f33-b622-4172-9efb-7f523becd32b	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:blazemire-verge:f0a1:s1,f:xs:XP:blazemire-verge:f0a1:s1	-	-	-	c2272f704fde	-	538749f548bf	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 977c2f33-b622-4172-9efb-7f523becd32b	land	land	agreed	-	FX	start	2	0	x:xs:XP:blazemire-verge:land:s1,f:xs:XP:blazemire-verge:land:s1	-	-	-	23c4009444b0	-	538749f548bf	-	-	2026-11-25	xproof
 977f9390-e01d-4e9d-8e9c-e543b1266972	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zimone-infinite-analyst:cast:s1,f:xs:XP:zimone-infinite-analyst:cast:s1	-	-	-	8c0bd19283bb	-	76aa60ec7b95	-	-	2026-11-24	xproof
-977f9390-e01d-4e9d-8e9c-e543b1266972	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	b74fd2a14608	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+977f9390-e01d-4e9d-8e9c-e543b1266972	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	64b2deb8ef2e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 9780d975-acbe-40c6-b444-1e1e6b772788	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poetic-ingenuity:cast:s1,f:xs:XP:poetic-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	fa5accca791b	-	-	2026-11-24	xproof
 9780d975-acbe-40c6-b444-1e1e6b772788	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:poetic-ingenuity:f0t1:s1,f:xs:XP:poetic-ingenuity:f0t1:s1	-	-	-	3aa6ded33acb	-	fa5accca791b	-	-	2026-11-25	xproof
 9780d975-acbe-40c6-b444-1e1e6b772788	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:poetic-ingenuity:f0t1:s1,f:xs:XP:poetic-ingenuity:f0t1:s1	-	-	-	3aa6ded33acb	-	fa5accca791b	-	-	2026-11-25	xproof
