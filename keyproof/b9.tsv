@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 b9000917-4f09-42f4-ae85-fc1ac7571d93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 b9019332-2f02-48d9-be0a-a2b41b79e136	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sever-the-bloodline:cast:s1,f:xs:XP:sever-the-bloodline:cast:s1	-	-	-	3aa6ded33acb	-	a6baea635f66	-	-	2026-11-25	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myr-turbine:cast:s1,f:xs:XP:myr-turbine:cast:s1	-	-	-	d864b561c9cb	-	73c9f0463431	-	-	2026-11-24	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	f0/a0	Token	agreed	-	FX	start	4	0	x:xs:XP:myr-turbine:cast:s1,f:xs:XP:myr-turbine:cast:s1	-	-	-	d864b561c9cb	-	73c9f0463431	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ b93eaf66-91b3-44da-851c-79810901be0c	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Ways
 b9432430-df01-497d-b025-7576dce830e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9447f25-f285-4b62-8976-4a49363dfdd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-valor:cast:s1,f:xs:XP:sigil-of-valor:cast:s1	-	-	-	d864b561c9cb	-	1c4cc59d37b3	-	-	2026-11-24	xproof
 b9447f25-f285-4b62-8976-4a49363dfdd7	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-valor:f0a0:s1,f:xs:XP:sigil-of-valor:f0a0:s1	-	-	-	d864b561c9cb	-	1c4cc59d37b3	-	-	2026-11-24	xproof
-b9447f25-f285-4b62-8976-4a49363dfdd7	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+b9447f25-f285-4b62-8976-4a49363dfdd7	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 b94591b8-2e99-4983-8f36-9b52207bfd2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b947b9a7-7a42-447d-b3fd-e20dba8a8f41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b94c0336-2ca8-4bb1-bb1f-e9babd1826ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -223,7 +223,7 @@ b9e53414-c21f-4479-b8c1-8b36c3e6e006	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:civ
 b9e53414-c21f-4479-b8c1-8b36c3e6e006	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:civic-wayfinder:f0t0:s1,f:xs:XP:civic-wayfinder:f0t0:s1	-	-	-	64a08ba7d913	-	e47760e5d61b	-	-	2026-11-24	xproof
 b9e61e68-9dc8-4295-95dc-dd66a0907c8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forsaken-wastes:cast:s1,f:xs:XP:forsaken-wastes:cast:s1	-	-	-	ea3140b6974b	-	c72c91598317	-	-	2026-11-24	xproof
 b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:forsaken-wastes:cast:s1,f:xs:XP:forsaken-wastes:cast:s1	-	-	-	ea3140b6974b	-	c72c91598317	-	-	2026-11-24	xproof
-b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 b9e93832-93b7-409d-91aa-13757225824d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9e93832-93b7-409d-91aa-13757225824d	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:citadel-castellan:f0t0:s1,f:xs:XP:citadel-castellan:f0t0:s1	-	-	-	fb9d3088f0bf	-	c3e85c9c36bd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 b9ea2e9c-a83b-40dd-ad52-b16d65989ba3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
