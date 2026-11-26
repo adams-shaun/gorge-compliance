@@ -499,6 +499,21 @@ func placeBearer(p0, p1 *StartSeat, card, bearer string, bs int) {
 	p0.Attach = append(p0.Attach, at)
 }
 
+// attachKeyAura gives the key's own Aura, which p0 placed on the battlefield
+// bare, a vanilla bearer its Enchant keyword takes (attachBearer) and attaches
+// it (StartAttach): a bare Aura is refused (FieldBlock aura-unattached), and
+// the bearer is inert, so the start's focus play stays the only offer. False,
+// leaving both seats untouched, when the keyword names no permanent a carrier
+// can be.
+func attachKeyAura(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, p0, p1 *StartSeat) bool {
+	bearer, bs := attachBearer(reg, b, card, face)
+	if bearer == "" {
+		return false
+	}
+	placeBearer(p0, p1, card, bearer, bs)
+	return true
+}
+
 // attachBearer is the most inert creature the Aura's Enchant keyword takes and
 // the seat that must control it, or "" when the keyword names no permanent a
 // carrier can be (a player).

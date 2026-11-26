@@ -451,6 +451,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why == "" || why == "aura-unattached" && seat.Attached(n) {
 				continue
 			}
+			if why == "aura-unattached" && seat == p0 && attachKeyAura(reg, b, face, card, p0, p1) {
+				continue // the key Aura gets a vanilla bearer
+			}
 			return refuse("battlefield:" + why)
 		}
 	}
