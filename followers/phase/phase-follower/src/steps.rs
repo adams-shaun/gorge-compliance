@@ -170,6 +170,12 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         flush_layers(&mut m.board.state);
         rb.push_snapshot(snapshot(&m.board.state, &format!("step {i} ({})", step.op), &m.board.names));
     }
+    let unposed = m.settle_unposed_optional_costs();
+    if unposed > 0 {
+        rb.note(format!(
+            "consumed {unposed} optional-cost decision(s) phase posed no prompt for (declined, or an either-or cost's forced fallback)"
+        ));
+    }
     if let Some(l) = m.queue.leftover() {
         rb.leftover = Some(l);
     }
@@ -183,6 +189,21 @@ impl Machine<'_> {
 
     fn game_ended(&self) -> Stop {
         harness(format!("game ended at step {} before every step ran", self.step))
+    }
+
+    /// Consume the optional-cost decisions phase resolves without opening a prompt (a declined
+    /// trigger cost, or an either-or additional cost whose preferred branch is unpayable). The
+    /// predicate lives in `answer` beside the other decision shapes; the answerer consumes a
+    /// decision when phase does pose the prompt, so anything left at the end of the replay never
+    /// had one. Returns how many decisions were consumed.
+    fn settle_unposed_optional_costs(&mut self) -> usize {
+        let mut taken = 0;
+        for step in -1..self.req.item.steps.len() as i32 {
+            while self.queue.take(step, crate::answer::is_unposed_optional_cost).is_some() {
+                taken += 1;
+            }
+        }
+        taken
     }
 
     /// The live object a step's card ref names. A card ref follows its object through zone changes

@@ -43,7 +43,33 @@ fn random_source(v: &Value, parent: &str) -> Option<String> {
     }
 }
 
+/// The banding rule phase lacks: CR 702.22c makes the active player choose which creatures attack
+/// in a band, and phase has no prompt for it. The keyword reaches a face as a printed keyword, as a
+/// static grant (`AddKeyword`), or through an activated ability's static payload, so the check
+/// looks for the keyword value anywhere in the face rather than at a hand-written card list. The
+/// next card that grants banding is covered without an edit here.
+fn banding_source(v: &Value) -> Option<&'static str> {
+    match v {
+        // Exact keyword values only: oracle text that merely mentions banding is a sentence, not
+        // this value.
+        Value::String(s) if s == "Banding" => Some("banding"),
+        Value::Object(map) => {
+            if map.contains_key("BandsWithOther") {
+                return Some("banding with other creatures");
+            }
+            map.values().find_map(banding_source)
+        }
+        Value::Array(items) => items.iter().find_map(banding_source),
+        _ => None,
+    }
+}
+
 fn face_reason(face: &CardFace) -> Option<String> {
+    let json = serde_json::to_value(face).ok()?;
+    // A missing combat rule is a hard refusal: phase cannot present the prompt at all.
+    if let Some(kind) = banding_source(&json) {
+        return Some(format!("phase lacks rule: {kind} cannot be chosen (CR 702.22c)"));
+    }
     if let Some(class) = face.metadata.confirmed_misparse {
         let kind = serde_json::to_value(class).ok().and_then(|v| v.as_str().map(str::to_string));
         return Some(format!("confirmed misparse: {}", kind.unwrap_or_else(|| format!("{class:?}"))));
@@ -52,7 +78,6 @@ fn face_reason(face: &CardFace) -> Option<String> {
     if !gaps.is_empty() {
         return Some(format!("gaps: {}", gaps.join(", ")));
     }
-    let json = serde_json::to_value(face).ok()?;
     random_source(&json, "").map(|s| format!("random outcome: {s}"))
 }
 
