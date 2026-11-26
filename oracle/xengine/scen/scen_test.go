@@ -1260,21 +1260,53 @@ func TestStartmisctriggers(t *testing.T) {
 // as a channel key's cost is met), the focus the cycling activation itself,
 // the granted ability index the K:Cycling line expanded to. A watcher
 // (ValidCard$ Card or Card.Other: the card elsewhere while another card
-// cycles) needs a carrier with cycling, a follow-up, and keeps the plain
-// mode refusal the default arm gave it at develop.
+// cycles) is the watcher arm: the card where its TriggerZones put it (the
+// battlefield, or the graveyard for Benalish Partisan) while the ranked
+// cycling carrier (Sandbar Merfolk, K:Cycling {2}) sits in the cycler's hand
+// with its {2} of basics placed, the focus its cycling activation. An Aura
+// watcher (Withering Hex) enters attached to a bearer. FirstTime (Valiant
+// Rescuer) is met trivially: nothing has cycled yet.
 func TestStartCycledTriggers(t *testing.T) {
 	checkStartRows(t, []startRow{
 		{card: "Stir the Sands", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Stir the Sands"},
 			p0BF: rep("Swamp", 4), focusCard: "Stir the Sands", focusKind: "ability", focusAbility: 1},
 		{card: "Renewed Faith", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Renewed Faith"},
 			p0BF: rep("Plains", 2), focusCard: "Renewed Faith", focusKind: "ability", focusAbility: 1},
-		// watchers, refused by name at develop and still refused by it
-		{card: "Warped Researcher", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
-		{card: "Lightning Rift", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
-		{card: "Astral Slide", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
-		{card: "Valiant Rescuer", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
-		{card: "Benalish Partisan", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		// watchers: the carrier cycles on the watcher's controller's seat
+		{card: "Warped Researcher", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      cat([]string{"Warped Researcher"}, rep("Island", 2)),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Lightning Rift", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      cat([]string{"Lightning Rift"}, rep("Mountain", 2)),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Astral Slide", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF: cat([]string{"Astral Slide"}, rep("Plains", 2)), p1BF: []string{"Memnite"},
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Astral Drift", key: "f0/t1", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF: cat([]string{"Astral Drift"}, rep("Plains", 2)), p1BF: []string{"Ornithopter"},
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Valiant Rescuer", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      cat([]string{"Valiant Rescuer"}, rep("Plains", 2)),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Withering Hex", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF: []string{"Withering Hex", "Memnite", "Swamp", "Swamp"}, p1BF: []string{"Kobolds of Kher Keep"},
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Benalish Partisan", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      rep("Plains", 2),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
 	})
+	// the graveyard watcher: TriggerZones$ Graveyard puts the card in its
+	// controller's graveyard, where the trigger reads it while the carrier
+	// cycles from the hand
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Benalish Partisan", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Benalish Partisan: %+v %v", res, err)
+	}
+	if !slices.Contains(res.Start.Setup.P0.Graveyard, "Benalish Partisan") {
+		t.Errorf("Benalish Partisan graveyard %v, want the card in it",
+			res.Start.Setup.P0.Graveyard)
+	}
 }
 
 // TestStartCosts: an activated ability's non-mana cost is met by start
