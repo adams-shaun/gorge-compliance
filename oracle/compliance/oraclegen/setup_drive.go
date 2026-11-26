@@ -181,6 +181,9 @@ func setupModeAnswers(d rules.OracleDecision, modes map[string]int) []XAnswer {
 		case ModeKWBespokeChoiceQueue:
 			// A Pump KWChoice$ on a bespoke-dialog face: XMage's own label.
 			out = append(out, XAnswer{d.Seat, "setup_choice", xmageBespokeChoiceLabel(d.Picks[k])})
+		case ModeGenericBespokeChoiceQueue:
+			// A plain GenericChoice on a bespoke-dialog face: XMage's label.
+			out = append(out, XAnswer{d.Seat, "setup_choice", xmageGenericBespokeChoiceLabel(d.Picks[k])})
 		case ModeYesQueue, ModeNoQueue:
 			// A two-way GenericChoice XMage asks as chooseUse (a per-player
 			// "may shuffle" or an xmageChooseUseFaces face).
