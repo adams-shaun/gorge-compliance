@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 364e8bd6-52e5-4397-8d2a-10c4706e5a45	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hag-hedge-mage:f0t0:s1,f:xs:XP:hag-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	63ffb020250c	-	-	2026-11-25	xproof
 364e8bd6-52e5-4397-8d2a-10c4706e5a45	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hag-hedge-mage:f0t1:s1,f:xs:XP:hag-hedge-mage:f0t1:s1	-	-	-	3aa6ded33acb	-	63ffb020250c	-	-	2026-11-25	xproof
 364fc1a7-b91d-470b-80fe-275828f36cfc	cast	cast	agreed	-	F	start	6	0	f:xs:XP:inventor-s-axe:cast:s1	-	-	-	ae86f6029288	-	027f2ae69867	-	-	2026-11-24	xproof
-364fc1a7-b91d-470b-80fe-275828f36cfc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5ae52fb881a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+364fc1a7-b91d-470b-80fe-275828f36cfc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 364fc1a7-b91d-470b-80fe-275828f36cfc	f0/t0	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:inventor-s-axe:cast:s1	-	-	-	ae86f6029288	-	027f2ae69867	-	-	2026-11-24	xproof
 364fc1a7-b91d-470b-80fe-275828f36cfc	f0/t1	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:inventor-s-axe:cast:s1	-	-	-	ae86f6029288	-	027f2ae69867	-	-	2026-11-24	xproof
 36508a8a-d1a4-400e-bfda-09436bc4d5d4	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:lonely-arroyo:f0a0:s1,f:xs:XP:lonely-arroyo:f0a0:s1	-	-	-	23b491658465	-	2b1259e41590	-	-	2026-11-25	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36a247d6-0d40-4f61-935c-60f42aa98562	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a247d6-0d40-4f61-935c-60f42aa98562	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:halcyon-glaze:f0t0:s1,f:xs:XP:halcyon-glaze:f0t0:s1	-	-	-	23c4009444b0	-	0cece38ca467	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36a3c910-95b8-45a2-9f84-5681336d868c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36a3c910-95b8-45a2-9f84-5681336d868c	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	5ae52fb881a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+36a3c910-95b8-45a2-9f84-5681336d868c	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 36a3c910-95b8-45a2-9f84-5681336d868c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:frontline-medic:f0t0:s1,f:xs:XP:frontline-medic:f0t0:s1	-	-	-	3aa6ded33acb	-	7f577773f48e	-	-	2026-11-25	xproof
 36a600fe-91b4-46a0-97ee-0cea2b63ec8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a8ceb1-148b-41e0-a7bf-ceb879bf08e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36d55084-4696-4d16-ab3a-b00f1456603f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36d641d4-d3f5-4394-81d7-3209955a1628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36d6d6c0-721c-40c3-b81f-4f027fcf847e	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36d6d6c0-721c-40c3-b81f-4f027fcf847e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	5ae52fb881a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+36d6d6c0-721c-40c3-b81f-4f027fcf847e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 36dd999e-53da-45c7-ae98-90f7aad78680	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tabaxi-toucaneers:cast:s1,f:xs:XP:tabaxi-toucaneers:cast:s1	-	-	-	8c0bd19283bb	-	d3f8aa4865ec	-	-	2026-11-24	xproof
 36dd999e-53da-45c7-ae98-90f7aad78680	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:tabaxi-toucaneers:f0t0:s1,f:xs:XP:tabaxi-toucaneers:f0t0:s1	-	-	-	8c0bd19283bb	-	d3f8aa4865ec	-	-	2026-11-24	xproof
 36dda03b-a3c1-4ef4-ae62-da318028a39e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
