@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f5495d7-ac44-47cd-aa39-48a35034b390	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Abduction/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8f5495d7-ac44-47cd-aa39-48a35034b390	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fear-of-abduction:combat0.attack:s1,f:xs:XP:fear-of-abduction:combat0.attack:s1	-	-	-	23c4009444b0	-	1d80dc5963f5	-	-	2026-11-25	xproof
 8f5495d7-ac44-47cd-aa39-48a35034b390	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fear-of-abduction:combat0.block:s1,f:xs:XP:fear-of-abduction:combat0.block:s1	-	-	-	23c4009444b0	-	1d80dc5963f5	-	-	2026-11-25	xproof
-8f5495d7-ac44-47cd-aa39-48a35034b390	f0/t0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+8f5495d7-ac44-47cd-aa39-48a35034b390	f0/t0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 8f5495d7-ac44-47cd-aa39-48a35034b390	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fear-of-abduction:f0t1:s1,f:xs:XP:fear-of-abduction:f0t1:s1	-	-	-	23c4009444b0	-	1d80dc5963f5	-	-	2026-11-25	xproof
 8f561498-66e7-4cbf-8cb9-e6fd4717993d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f561498-66e7-4cbf-8cb9-e6fd4717993d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dragon-egg:f0t0:s1,f:xs:XP:dragon-egg:f0t0:s1	-	-	-	d864b561c9cb	-	f7c225ddb105	-	-	2026-11-24	xproof
@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fa3ac81-3dfe-4565-be99-5554f7597b4b	land	land	agreed	-	FX	start	2	0	x:xs:XP:boros-garrison:f0t0:s1,f:xs:XP:boros-garrison:f0t0:s1	-	-	-	d864b561c9cb	-	5255771b2e66	-	-	2026-11-24	xproof
 8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1,f:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1,f:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/t0	NULL	owed	refused:no-generator:face:not-on-battlefield	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/t0	NULL	owed	refused:no-generator:face:not-on-battlefield	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 8fb39f48-10a1-4d9c-870a-eeda070bf12b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fb39f48-10a1-4d9c-870a-eeda070bf12b	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 8fb44b03-017f-4cf3-a79b-8f6cc33570ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

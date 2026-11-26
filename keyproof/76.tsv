@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 763882f9-a7ad-4fb1-bdf4-c9a158d4b68e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 763a2d27-52a8-43d9-b649-0f6c0cf87a07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-cackler:cast:s1,f:xs:XP:rakdos-cackler:cast:s1	-	-	-	cfde1dc26c40	-	bf8c9738f1ec	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 763d60ea-a0ad-4f13-b8a7-aa1515283266	cast	cast-resolve	agreed	-	FX	scen	2	0	Shifting Grift/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76407853-7103-4010-b198-33a04ece7b23	cast	cast	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	390aaf2454b3	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-76407853-7103-4010-b198-33a04ece7b23	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	390aaf2454b3	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+76407853-7103-4010-b198-33a04ece7b23	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0394aba820c9	-	390aaf2454b3	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+76407853-7103-4010-b198-33a04ece7b23	f0/t0	ChangesZone	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0394aba820c9	-	390aaf2454b3	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 7644148f-3b26-447d-9f52-28c94c111b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7644148f-3b26-447d-9f52-28c94c111b69	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7647682d-d491-4cb1-add7-b4d745994e62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:underdark-explorer:cast:s1,f:xs:XP:underdark-explorer:cast:s1	-	-	-	8c0bd19283bb	-	f4a491261c17	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7661dda6-4e7b-42d0-8374-0a1fe65b83e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kyren-sniper:f0t0:s1,f:xs:XP:kyren-sniper:f0t0:s1	-	-	-	3aa6ded33acb	-	96bc2b6c440f	-	-	2026-11-25	xproof
 7661dda6-4e7b-42d0-8374-0a1fe65b83e4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kyren-sniper:f0t0:s1,f:xs:XP:kyren-sniper:f0t0:s1	-	-	-	3aa6ded33acb	-	96bc2b6c440f	-	-	2026-11-25	xproof
 7662af07-1ebc-4545-bffd-7a2e0c513b71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defenders-of-humanity:f0t0:s1,f:xs:XP:defenders-of-humanity:f0t0:s1	-	-	-	8c0bd19283bb	-	c9545afcdd99	-	-	2026-11-24	xproof
-7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:defenders-of-humanity:f0t0:s1,f:xs:XP:defenders-of-humanity:f0t0:s1	-	-	-	8c0bd19283bb	-	c9545afcdd99	-	-	2026-11-24	xproof
 7663ac7c-1de3-4250-b96a-fae9dbd66a27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76642e7a-3c8f-45b8-9cd7-dac8086bea87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76ed34d2-e09e-4b53-98bd-d96b367fd315	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steam-spitter:cast:s1,f:xs:XP:steam-spitter:cast:s1	-	-	-	0984227a67dd	-	ab62cfc08664	-	-	2026-11-24	xproof
 76ed34d2-e09e-4b53-98bd-d96b367fd315	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:steam-spitter:f0a0:s1,f:xs:XP:steam-spitter:f0a0:s1	-	-	-	d864b561c9cb	-	ab62cfc08664	-	-	2026-11-24	xproof
 76ee013d-5293-4432-b425-649a2e82bd74	cast	cast	agreed	-	F	start	2	0	f:xs:XP:crop-sigil:f0t0:s1	-	-	-	3aa6ded33acb	-	ac906882bbca	-	-	2026-11-25	xproof
-76ee013d-5293-4432-b425-649a2e82bd74	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+76ee013d-5293-4432-b425-649a2e82bd74	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 76ee013d-5293-4432-b425-649a2e82bd74	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:crop-sigil:f0t0:s1	-	-	-	3aa6ded33acb	-	ac906882bbca	-	-	2026-11-25	xproof
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:rogue-class:f0a1:s1,f:xs:XP:rogue-class:f0a1:s1	-	-	-	23b491658465	-	f2da5276a2e4	-	-	2026-11-25	xproof
@@ -204,4 +204,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76fdbc2c-d2b1-466f-9230-06e187bcc9e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:divert-disaster:cast:s1,f:xs:XP:divert-disaster:cast:s1	-	-	-	9087eefec3ee	-	20d3fce465c7	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 76fe7cfa-c3db-4122-b262-f7c5c90fcdd7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76ff6653-f9b9-4bfe-92a9-52bda275b340	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76ff6653-f9b9-4bfe-92a9-52bda275b340	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:noncombat	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+76ff6653-f9b9-4bfe-92a9-52bda275b340	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:noncombat	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof

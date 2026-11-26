@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:combat0.block:s1,f:xs:XP:dawnwing-marshal:combat0.block:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
 6640c234-8863-4670-a61f-ba6f59b60d69	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:f0a0:s1,f:xs:XP:dawnwing-marshal:f0a0:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
 66412a7a-4ec0-41f0-80ad-eb483213ff81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 66418c65-a15f-489e-8a2d-6cee1b5d977c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6643fc8e-548e-48db-9f67-ffbca9e57016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 668a6a9d-80fc-437b-99b8-6807e92eabca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agent-of-horizons:cast:s1,f:xs:XP:agent-of-horizons:cast:s1	-	-	-	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	xproof
 668a6a9d-80fc-437b-99b8-6807e92eabca	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:agent-of-horizons:f0a0:s1,f:xs:XP:agent-of-horizons:f0a0:s1	-	-	-	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	xproof
 668a9b6b-731c-4127-9c88-1c6112ffd590	cast	cast-resolve	agreed	-	FX	scen	2	0	Cloak and Phaser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-668c2c40-5334-493b-ae8e-913b26877732	cast	cast	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	a89063ce293c	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-668c2c40-5334-493b-ae8e-913b26877732	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	a89063ce293c	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+668c2c40-5334-493b-ae8e-913b26877732	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0394aba820c9	-	a89063ce293c	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+668c2c40-5334-493b-ae8e-913b26877732	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0394aba820c9	-	a89063ce293c	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 668f646b-94f0-4f1a-badd-2d69b559d8a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 668f646b-94f0-4f1a-badd-2d69b559d8a2	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cathar-s-companion:f0t0:s1,f:xs:XP:cathar-s-companion:f0t0:s1	-	-	-	fb9d3088f0bf	-	bfcf176a0079	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 66914a34-59b3-48a0-9305-ebd956d34f02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1,f:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof

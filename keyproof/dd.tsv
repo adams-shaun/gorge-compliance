@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd01ef1f-f6be-498f-82e0-dc04833e685f	f0/a1	NULL	owed	refused:as-enters:land	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd01ef1f-f6be-498f-82e0-dc04833e685f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd0412ee-6c14-4cfc-95d8-942a2392111a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-dd0412ee-6c14-4cfc-95d8-942a2392111a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dd0412ee-6c14-4cfc-95d8-942a2392111a	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0394aba820c9	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dd0412ee-6c14-4cfc-95d8-942a2392111a	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	0394aba820c9	-	4981ba569e97	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd05fd8e-f25e-4b9e-b162-afea1b248282	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd05fd8e-f25e-4b9e-b162-afea1b248282	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd0bbf91-1826-42c7-82af-6820646fa003	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiderwig-boggart:f0t0:s1,f:xs:XP:spiderwig-boggart:f0t0:s1	-	-	-	d864b561c9cb	-	acd5722d58a9	-	-	2026-11-24	xproof
@@ -17,7 +17,7 @@ dd1b4235-f053-4c46-8993-ae8d7860a0f3	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0
 dd1d21f5-f5cd-43e4-8155-3cca85da80a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd1d21f5-f5cd-43e4-8155-3cca85da80a9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:princess-lucrezia:f0a0:s2,f:xs:XP:princess-lucrezia:f0a0:s2	-	-	-	23b491658465	-	8a7a7c8def6f	-	-	2026-11-24	xproof
 dd21cbaa-7537-414b-b720-3c7d6fc7c93d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:orcish-hellraiser:cast:s1,f:xs:XP:orcish-hellraiser:cast:s1	-	-	-	336eab778104	-	ce071df8822a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-dd21cbaa-7537-414b-b720-3c7d6fc7c93d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dd21cbaa-7537-414b-b720-3c7d6fc7c93d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd21cbaa-7537-414b-b720-3c7d6fc7c93d	f0/t1	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:orcish-hellraiser:f0t1:s1,f:xs:XP:orcish-hellraiser:f0t1:s1	-	-	-	336eab778104	-	ce071df8822a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 dd2510cd-356c-4d5a-8e5d-e44872eba60b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faerie-miscreant:f0t0:s1,f:xs:XP:faerie-miscreant:f0t0:s1	-	-	-	3aa6ded33acb	-	4e7d2af964cc	-	-	2026-11-25	xproof
 dd2510cd-356c-4d5a-8e5d-e44872eba60b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faerie-miscreant:f0t0:s1,f:xs:XP:faerie-miscreant:f0t0:s1	-	-	-	3aa6ded33acb	-	4e7d2af964cc	-	-	2026-11-25	xproof
@@ -53,7 +53,7 @@ dd36aea8-9f1c-4daf-86f6-ab9307279ce7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 dd397a32-06b0-4530-b075-412e2881aa53	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flow-of-ideas:cast:s1,f:xs:XP:flow-of-ideas:cast:s1	-	-	-	64a08ba7d913	-	4dc9365373ec	-	-	2026-11-24	xproof
 dd39cccb-095c-4ef4-8423-f4d328849295	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burdened-aerialist:f0t0:s1,f:xs:XP:burdened-aerialist:f0t0:s1	-	-	-	6f84be0f34c0	-	22635f03a1f4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 dd39cccb-095c-4ef4-8423-f4d328849295	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:burdened-aerialist:f0t0:s1,f:xs:XP:burdened-aerialist:f0t0:s1	-	-	-	6f84be0f34c0	-	22635f03a1f4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-dd39cccb-095c-4ef4-8423-f4d328849295	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:condition	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dd39cccb-095c-4ef4-8423-f4d328849295	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:condition	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dd3a4b64-0987-4e9b-a18d-c54365438857	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dispelling-exhale:cast:s1,f:xs:XP:dispelling-exhale:cast:s1	-	-	-	9087eefec3ee	-	941b2e2eaa97	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 dd3a4b64-0987-4e9b-a18d-c54365438857	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dispelling Exhale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dd3d4d96-1e88-49e1-8276-7f62c22ad91a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seeds-of-strength:cast:s1,f:xs:XP:seeds-of-strength:cast:s1	-	-	-	3aa6ded33acb	-	9540492112f4	-	-	2026-11-25	xproof
@@ -166,8 +166,8 @@ ddd2a87e-4020-4408-b4e6-a2120d485855	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ddd2a87e-4020-4408-b4e6-a2120d485855	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ddd97b56-a80f-4515-9883-ae5fc1de0c5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rebuking-ceremony:cast:s1,f:xs:XP:rebuking-ceremony:cast:s1	-	-	-	336eab778104	-	f3913defe725	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 dde55256-5259-44e7-a267-fca45a7f0d04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dde55256-5259-44e7-a267-fca45a7f0d04	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-dde55256-5259-44e7-a267-fca45a7f0d04	f0/t0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dde55256-5259-44e7-a267-fca45a7f0d04	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+dde55256-5259-44e7-a267-fca45a7f0d04	f0/t0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 dde6bce5-8bbe-4866-b5aa-2c05c7d37241	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dde6bce5-8bbe-4866-b5aa-2c05c7d37241	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dded2874-e80f-401a-b700-52c54dd6da60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ ddf12758-b356-4ff8-b0ce-547083498335	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ddf12758-b356-4ff8-b0ce-547083498335	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ddf34404-39dd-4dcf-a706-ec78d47167e9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rakish-crew:f0t0:s2,f:xs:XP:rakish-crew:f0t0:s2	-	-	-	267e485f6204	-	3eaac069f6f1	-	-	2026-11-24	xproof
 ddf34404-39dd-4dcf-a706-ec78d47167e9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rakish-crew:f0t0:s2,f:xs:XP:rakish-crew:f0t0:s2	-	-	-	267e485f6204	-	3eaac069f6f1	-	-	2026-11-24	xproof
-ddf34404-39dd-4dcf-a706-ec78d47167e9	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rakish-crew:f0t1:s1,f:xs:XP:rakish-crew:f0t1:s1	-	-	-	17bda798c09c	-	3eaac069f6f1	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+ddf34404-39dd-4dcf-a706-ec78d47167e9	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rakish-crew:f0t1:s1,f:xs:XP:rakish-crew:f0t1:s1	-	-	-	0394aba820c9	-	3eaac069f6f1	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 ddf34a38-29d5-4bf3-9b08-e7c9579a4200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ddf34a38-29d5-4bf3-9b08-e7c9579a4200	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:warehouse-thief:f0a0:s1,f:xs:XP:warehouse-thief:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 ddf38a32-302a-4658-9eaf-b813ebe275c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:esior-wardwing-familiar:cast:s1,f:xs:XP:esior-wardwing-familiar:cast:s1	-	-	-	8c0bd19283bb	-	d22d656e15b6	-	-	2026-11-24	xproof

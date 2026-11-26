@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 7e00b0cd-d212-4604-ba07-da21f4fe00b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e00b0cd-d212-4604-ba07-da21f4fe00b0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+7e00b0cd-d212-4604-ba07-da21f4fe00b0	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sram-senior-edificer:f0t0:s1,f:xs:XP:sram-senior-edificer:f0t0:s1	-	-	-	0394aba820c9	-	d48236d680f9	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 7e050495-bed7-43b9-abce-866c61beb1da	cast	cast-resolve	agreed	-	X	scen	1	0	Push/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e063f60-876a-48fe-8bc6-9888180176d1	cast	cast-resolve	agreed	-	FX	scen	2	0	Wary Watchdog/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e063f60-876a-48fe-8bc6-9888180176d1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seismic-tutelage:f0t0:s1,f:xs:XP:seismic-tutelage:f0t0:s1	-	-	-	8c0bd19283bb	-	7e58bfb7043c	-	-	2026-11-24	xproof
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 7ecfa47e-1165-46a6-884c-290b1c14d020	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etched-oracle:cast:s1,f:xs:XP:etched-oracle:cast:s1	-	-	-	25696bf19d5b	-	a804c3de1b42	-	-	2026-11-24	xproof
-7ecfa47e-1165-46a6-884c-290b1c14d020	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+7ecfa47e-1165-46a6-884c-290b1c14d020	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 7ed3918d-509a-4fe6-a32d-5899df8f9046	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:remember-the-fallen:cast:s1,f:xs:XP:remember-the-fallen:cast:s1	-	-	-	9087eefec3ee	-	7657f7aebfa3	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intrepid-rabbit:f0t1:s1,f:xs:XP:intrepid-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	5103cd45c297	-	-	2026-11-25	xproof
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:intrepid-rabbit:f0t1:s1,f:xs:XP:intrepid-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	5103cd45c297	-	-	2026-11-25	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ef3f240-05a5-4fc9-a977-a729010a53c2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blitz-hellion:cast:s1,f:xs:XP:blitz-hellion:cast:s1	-	-	-	8a1b1a193ec0	-	28de511453de	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:equipped	-	start	0	0	-	-	-	-	0394aba820c9	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saved-by-the-shell:cast:s1,f:xs:XP:saved-by-the-shell:cast:s1	-	-	-	23c4009444b0	-	10b2664f0993	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saved by the Shell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef67bae-4af3-47b9-95d2-08f3c5a0b39d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
