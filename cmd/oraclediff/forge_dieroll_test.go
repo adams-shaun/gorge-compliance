@@ -258,7 +258,9 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged, ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
 // bdad3bd38b1 = 71fd77c15c0 plus the values-list chooseNumber answered from gorge's number pick (StepMachine.chooseNumberFrom);
 // die-roll forcing unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh, 278 tests).
-const forgeOracleDieRollRef = "bdad3bd38b1c0f5c85ffaae2a15f09548e4dfea7"
+// 4385467a9eb = bdad3bd38b1 merged with gorge's FORGE_REF 5bc5851a54 (three card scripts); `git diff bdad3bd38b1 4385467a9eb`
+// touches only forge-gui/res/cardsfolder, so the driver and die-roll code are byte-identical to bdad3bd38b1.
+const forgeOracleDieRollRef = "4385467a9eb5f1953a34498e07be47e24ae4b66c"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
