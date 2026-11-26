@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ec1b67a-5ff8-4ce7-8388-d11a23f76f0e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:manticore-of-the-gauntlet:f0t0:s1,f:xs:XP:manticore-of-the-gauntlet:f0t0:s1	-	-	-	d864b561c9cb	-	6e35854c8b21	-	-	2026-11-24	xproof
 3ec3d99d-2c49-469a-81d5-f1609b6e49ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reclaiming-vines:cast:s1,f:xs:XP:reclaiming-vines:cast:s1	-	-	-	d864b561c9cb	-	3325b952a0b9	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ec7ae18-b203-49bd-95f9-ad5482459a23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	5ae52fb881a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3ec7ae18-b203-49bd-95f9-ad5482459a23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3ecaefc8-ead2-47a3-a7ea-b030faab65a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quirion-ranger:cast:s1,f:xs:XP:quirion-ranger:cast:s1	-	-	-	fb9d3088f0bf	-	5706bcc90bfc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 3ecaefc8-ead2-47a3-a7ea-b030faab65a7	f0/a0	Untap	agreed	-	FX	start	4	0	x:xs:XP:quirion-ranger:cast:s1,f:xs:XP:quirion-ranger:cast:s1	-	-	-	fb9d3088f0bf	-	5706bcc90bfc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 3ece897d-5b52-4fca-9f97-d7e864134c0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ed4ee5c-91da-41a3-894c-6181496ec955	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grenzo-s-ruffians:cast:s1,f:xs:XP:grenzo-s-ruffians:cast:s1	-	-	-	8c0bd19283bb	-	d14fcafff6f4	-	-	2026-11-24	xproof
 3ed4ee5c-91da-41a3-894c-6181496ec955	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:grenzo-s-ruffians:f0t1:s1,f:xs:XP:grenzo-s-ruffians:f0t1:s1	-	-	-	8c0bd19283bb	-	d14fcafff6f4	-	-	2026-11-24	xproof
 3ed4ee5c-91da-41a3-894c-6181496ec955	f0/t1	Attacks/Melee	agreed	-	FX	start	2	0	x:xs:XP:grenzo-s-ruffians:f0t1:s1,f:xs:XP:grenzo-s-ruffians:f0t1:s1	-	-	-	8c0bd19283bb	-	d14fcafff6f4	-	-	2026-11-24	xproof
-3ed835f6-fb5c-45b6-906b-a5d36bcc3742	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	5ae52fb881a0	-	8ffb4523f120	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+3ed835f6-fb5c-45b6-906b-a5d36bcc3742	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	8ffb4523f120	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3edc147f-a385-413a-99b6-27d2cf8cf930	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drudge-reavers:cast:s1,f:xs:XP:drudge-reavers:cast:s1	-	-	-	9ee19e8250ce	-	bc458e630a22	-	-	2026-11-24	xproof
 3edc147f-a385-413a-99b6-27d2cf8cf930	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:drudge-reavers:f0a0:s1,f:xs:XP:drudge-reavers:f0a0:s1	-	-	-	d864b561c9cb	-	bc458e630a22	-	-	2026-11-24	xproof
 3edd6272-20fa-4c3a-bf34-2f253cc8ac9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glass-cast-heart:cast:s1,f:xs:XP:glass-cast-heart:cast:s1	-	-	-	8c0bd19283bb	-	93478ffd8052	-	-	2026-11-24	xproof
