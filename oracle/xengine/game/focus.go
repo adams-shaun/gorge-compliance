@@ -476,10 +476,33 @@ func (s *focusState) baitDone() bool {
 // taps its source never taps that source for mana: the {T} of Vitu-Ghazi, the
 // City-Tree's token ability is paid by the very land the pool would have used.
 func (s *focusState) manaFor(d decision.Decision) int {
-	if s.f.Kind != "cast" && s.f.Kind != "ability" || int(d.Player) != s.f.Seat {
+	if s.f.Kind != "cast" && s.f.Kind != "ability" || int(d.Player) != s.f.Seat || !s.windowOpen() {
 		return -1
 	}
 	return s.landTap(d)
+}
+
+// windowOpen is whether the game is at a step the focus ability's
+// ActivationPhases$ allows (true for any other focus, and for an ability
+// naming no window). A ninjutsu focus is offered from the declare blockers step
+// on, and mana tapped for it in the declare attackers step would empty before
+// then (CR 500.4), so its lands stay untapped until the window opens.
+func (s *focusState) windowOpen() bool {
+	if s.f.Kind != "ability" || s.e == nil {
+		return true
+	}
+	for id := range s.objs {
+		o := s.e.G.Obj(id)
+		if o == nil || o.Face() == nil || s.f.Ability < 0 || s.f.Ability >= len(o.Face().Abilities) {
+			continue
+		}
+		spec := o.Face().Abilities[s.f.Ability].Params["ActivationPhases"]
+		if set, unknown := state.ParsePhases(spec); spec != "" && len(unknown) == 0 && !set.Empty() {
+			return set.Has(s.e.G.Step)
+		}
+		return true
+	}
+	return true
 }
 
 // manaAbility is the focus ability of obj when it is a mana ability, else

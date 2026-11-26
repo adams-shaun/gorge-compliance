@@ -265,7 +265,7 @@ func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string
 // activation zone has it, the cost met by placed state (planCost), and the
 // focus the ability's activation. "" when built, else the refusal.
 func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, idx int, sa *cards.SA, f *StartFile) string {
-	plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
+	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic)
 	if why != "" {
 		return why
 	}
@@ -280,6 +280,20 @@ func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 	}
 	applyCost(plan, card, generic, f)
 	f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
+	if plan.attacker != "" {
+		// ninjutsu: the cost returns an unblocked attacker, so the focus waits
+		// for a scripted combat (one attacker, no block) and takes its
+		// activation at its first priority after the blocks (the ability's
+		// ActivationPhases are Declare Blockers and later)
+		fix, ok := reg.Lookup(combatFixture)
+		if !ok || len(fix.Faces) == 0 || !fix.Faces[0].IsCreature() {
+			return "steps-needed:cost:Return:fixture"
+		}
+		if why := combatLine(reg, b, face, fix.Faces[0], card, party{filter: plan.attacker}, nil, 0, f, "steps-needed:cost:Return"); why != "" {
+			return why
+		}
+		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx, Attack: f.Focus.Attack}
+	}
 	return ""
 }
 
@@ -376,8 +390,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		// A Transformed trigger places the card on its front face and
 		// transforms it there (transformedStart), so the trigger face's
 		// as-enters choice is not the placement's; transformedStart checks
-		// the front face's.
-		if fam == "trigger" && trig.Mode != "Transformed" && asEnters(face) {
+		// the front face's. A Cycled trigger's card cycles from hand and
+		// never enters the battlefield at all.
+		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
 			// The card cannot be placed (it would enter without its choice):
 			// it is cast, and its trigger is met on the line after the cast.
 			if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
@@ -385,7 +400,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 			break
 		}
-		if trig == nil || trig.Mode != "Transformed" {
+		if trig == nil || trig.Mode != "Transformed" && trig.Mode != "Cycled" {
 			if r, ok := onBF(); ok {
 				return r, nil
 			}
@@ -463,7 +478,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
-		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp":
+		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp", "Cycled":
 			if why := eventStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
@@ -530,6 +545,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			why := FieldBlock(face)
 			if why == "" || why == "aura-unattached" && seat.Attached(n) {
 				continue
+			}
+			if why == "aura-unattached" && seat == p0 && attachKeyAura(reg, b, face, card, p0, p1) {
+				continue // the key Aura gets a vanilla bearer
 			}
 			return refuse("battlefield:" + why)
 		}
@@ -605,6 +623,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		if err != nil {
 			return Result{}, err
 		}
+		return refuse(why)
+	}
+	if why := dayNightRefusal(reg, f); why != "" {
 		return refuse(why)
 	}
 	return Result{Path: PathStart, Start: f}, nil

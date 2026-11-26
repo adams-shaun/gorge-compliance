@@ -3,8 +3,10 @@ package scen
 import (
 	"bytes"
 	"encoding/json"
+	"os"
 	"reflect"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -1143,6 +1145,28 @@ func TestStartmisctriggers(t *testing.T) {
 	}
 }
 
+// TestStartCycledTriggers: "When you cycle CARDNAME" (Cycled, Card.Self) is
+// the card in hand with exactly the cycling cost's mana (planCost met it,
+// as a channel key's cost is met), the focus the cycling activation itself,
+// the granted ability index the K:Cycling line expanded to. A watcher
+// (ValidCard$ Card or Card.Other: the card elsewhere while another card
+// cycles) needs a carrier with cycling, a follow-up, and keeps the plain
+// mode refusal the default arm gave it at develop.
+func TestStartCycledTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Stir the Sands", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Stir the Sands"},
+			p0BF: rep("Swamp", 4), focusCard: "Stir the Sands", focusKind: "ability", focusAbility: 1},
+		{card: "Renewed Faith", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Renewed Faith"},
+			p0BF: rep("Plains", 2), focusCard: "Renewed Faith", focusKind: "ability", focusAbility: 1},
+		// watchers, refused by name at develop and still refused by it
+		{card: "Warped Researcher", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Lightning Rift", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Astral Slide", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Valiant Rescuer", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Benalish Partisan", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+	})
+}
+
 // TestStartCosts: an activated ability's non-mana cost is met by start
 // state (planCost), never by a play: Memnite to sacrifice for "another
 // creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
@@ -1192,6 +1216,54 @@ func TestStartCosts(t *testing.T) {
 	f = gen("Liliana, Dreadhorde General", "f0/a2")
 	if want := []StartCounter{{Card: "Liliana, Dreadhorde General", Kind: "LOYALTY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.Counters, want) {
 		t.Errorf("Liliana: counters %+v, want %+v", f.Setup.P0.Counters, want)
+	}
+}
+
+// TestStartNinjutsu: ninjutsu returns an unblocked attacker, so the start is
+// a combat line: the vanilla fixture attacks, nothing blocks, and the ninja
+// waits in hand with exactly its ninjutsu mana until the declare blockers step
+// (the focus attack scripts the line; the activation is the focus play). Other
+// cost refusals stay as they were: the unblocked-attacker Return is read only
+// by a focus ability (planCost, which every other caller uses, still refuses
+// it), and a Return the generator cannot place or a different cost keeps its
+// name.
+func TestStartNinjutsu(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card string
+		mana []string
+	}{
+		{"Biting-Palm Ninja", rep("Swamp", 3)},
+		{"Dokuchi Shadow-Walker", rep("Swamp", 4)},
+		{"Blade-Blizzard Kitsune", rep("Plains", 4)},
+	} {
+		res, err := Generate(reg, b, r.card, "f0/a0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: %+v %v", r.card, res, err)
+		}
+		f := res.Start
+		listIs(t, r.card+" p0 hand", f.Setup.P0.Hand, []string{r.card})
+		listIs(t, r.card+" p0 battlefield", f.Setup.P0.Battlefield, cat(r.mana, []string{combatFixture}))
+		listIs(t, r.card+" p1 battlefield", f.Setup.P1.Battlefield, nil)
+		focusIs(t, f, 0, r.card, "ability", 0)
+		if f.Focus.Attack != combatFixture || f.Focus.Block != "" || f.Active != 0 {
+			t.Errorf("%s: focus attack %q block %q active %d, want %q, no block, seat 0", r.card, f.Focus.Attack, f.Focus.Block, f.Active, combatFixture)
+		}
+	}
+	card, ok := reg.Lookup("Biting-Palm Ninja")
+	if !ok {
+		t.Fatal("Biting-Palm Ninja missing")
+	}
+	face := card.Faces[0]
+	for _, c := range []struct{ cost, want string }{
+		{"2 B Return<1/Creature.YouCtrl+attacking+unblocked>", "steps-needed:cost:Return"}, // not a focus ability: still refused
+		{"2 B Return<1/Creature.YouCtrl+attacking>", "steps-needed:cost:Return"},           // no unblocked: no line to script
+		{"2 B Return<1/Treasure.token>", "steps-needed:cost:Return"},
+		{"2 B Forage", "steps-needed:cost:Forage"},
+	} {
+		if _, why := planCost(reg, b, face, "Biting-Palm Ninja", c.cost, "B"); why != c.want {
+			t.Errorf("planCost(%q) = %q, want %q", c.cost, why, c.want)
+		}
 	}
 }
 
@@ -2344,7 +2416,6 @@ func TestStartfacestarts(t *testing.T) {
 	const (
 		aclazotz = "Aclazotz, Deepest Betrayal // Temple of the Dead"
 		arlinn   = "Arlinn Kord // Arlinn, Embraced by the Moon"
-		wolfkin  = "Wolfkin Outcast // Wedding Crasher"
 	)
 	for _, tc := range []struct {
 		card, key, kind string
@@ -2353,7 +2424,6 @@ func TestStartfacestarts(t *testing.T) {
 	}{
 		{aclazotz, "f1/a0", "ability", 0, false},         // a modal back face (a land)
 		{arlinn, "f1/a1", "ability", 1, false},           // a transformed planeswalker's loyalty ability
-		{wolfkin, "f1/t0", "", 0, false},                 // a transformed back face's trigger
 		{"Voldaren Pariah", "f1/t0", "ability", 0, true}, // a Transformed trigger: front face, own transform ability
 		{"Kindly Stranger", "f1/t0", "cast", 0, true},    // a Transformed trigger: front face, one-card enabler
 	} {
@@ -2500,6 +2570,86 @@ func TestStartcombattriggersRefused(t *testing.T) {
 		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // the only carrier has menace
 	} {
 		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("path %q reason %q, want refused %s", res.Path, res.Reason, r.reason)
+			}
+		})
+	}
+}
+
+// TestStartDamageDoneFilter: the DamageDone source filters that name an
+// attachment or a state. An Aura bearer (Card.AttachedBy) is placed attached to
+// a creature that attacks (hurting a player: Sigil of Sleep, Sleeper's Robe,
+// Necromantic Thirst; hurting a creature: Charisma, whose fixture blocks it); a
+// "modified" source gets a +1/+1 counter on the creature that attacks (Kodama
+// of the West Tree). An Equipment cannot enter attached from a start and a
+// damage to You from a source you control needs a self-hit, so those keep the
+// exact refusal, as do unrelated cards' refusals.
+func TestStartDamageDoneFilter(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card         string
+		attacksCard  bool // the card is the attacker (else its attached bearer)
+		block        bool
+		counterOnAtk bool
+	}{
+		{card: "Sigil of Sleep"}, {card: "Sleeper's Robe"}, {card: "Necromantic Thirst"},
+		{card: "Charisma", block: true},
+		{card: "Kodama of the West Tree", attacksCard: true, counterOnAtk: true},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, "f0/t0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			fo := f.Focus
+			if fo == nil || f.Active != 0 {
+				t.Fatalf("focus %+v active %d, want seat 0's attack", fo, f.Active)
+			}
+			attacker := fo.Card
+			if fo.Attack != "" {
+				attacker = fo.Attack
+			}
+			if r.attacksCard != (attacker == r.card) {
+				t.Errorf("attacker %q, card is attacker %v", attacker, r.attacksCard)
+			}
+			if r.block != (fo.Block != "") {
+				t.Errorf("block %q, want a block %v", fo.Block, r.block)
+			}
+			if !r.attacksCard {
+				attached(t, f, r.card)
+				if f.Setup.P0.Attach[0].To != attacker {
+					t.Errorf("attached to %q, want the attacker %q", f.Setup.P0.Attach[0].To, attacker)
+				}
+				c, ok := reg.Lookup(attacker)
+				if !ok || !attackingBearer(c.Faces[0]) {
+					t.Errorf("bearer %q cannot attack and deal damage", attacker)
+				}
+			}
+			if got := slices.Contains(f.Setup.P0.Counters, StartCounter{Card: attacker, Kind: "P1P1", N: 1}); got != r.counterOnAtk {
+				t.Errorf("counters %+v, want a +1/+1 counter on the attacker %v", f.Setup.P0.Counters, r.counterOnAtk)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		{"Daredevil, Fearless Fighter", "f0/t0", "no-generator:trigger:DamageDone:filter"},      // a source you control hurts You
+		{"Domesticated Watercourse", "f0/t0", "no-generator:trigger:DamageDone:filter"},         // EquippedBy: no attached Equipment start
+		{"Sword of Fire and Ice", "f0/t0", "no-generator:trigger:DamageDone:filter"},            // EquippedBy
+		{"Sword of War and Peace", "f0/t0", "no-generator:trigger:DamageDone:filter"},           // EquippedBy
+		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // unrelated: a 0-power card
+		{"Aqueous Form", "f0/t0", "no-generator:trigger:Attacks:filter"},                        // unrelated: another mode
+		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // unrelated: the only carrier has menace
+		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // unrelated: hand size
+	} {
+		t.Run("refused/"+r.card, func(t *testing.T) {
 			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 			if err != nil {
 				t.Fatal(err)
@@ -2748,5 +2898,58 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 	}
 	if res.Path != PathStart || res.Reason != "" {
 		t.Errorf("vanilla: path %q reason %q, want start", res.Path, res.Reason)
+	}
+}
+
+// The refusal reasons of cards unrelated to the harness census are unchanged.
+func TestScenRefusalReasonsUnchanged(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key, reason string }{
+		{"Thornvault Forager", "f0/a1", "steps-needed:cost:Forage"},
+		{"Banner of Kinship", "static#0.0", "as-enters"},
+		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
+		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", r.card, r.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != r.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", r.card, r.key, res.Path, res.Reason, r.reason)
+		}
+	}
+}
+
+// harness-census.tsv: the signature rows sum to the declared harness total
+// and each row's card count matches its names.
+func TestHarnessCensus(t *testing.T) {
+	b, err := os.ReadFile("testdata/harness-census.tsv")
+	if err != nil {
+		t.Fatal(err)
+	}
+	total, sum, rows := -1, 0, 0
+	for _, l := range strings.Split(strings.TrimRight(string(b), "\n"), "\n") {
+		if v, ok := strings.CutPrefix(l, "# harness-keys "); ok {
+			total, _ = strconv.Atoi(v)
+			continue
+		}
+		if strings.HasPrefix(l, "#") || strings.HasPrefix(l, "signature\t") {
+			continue
+		}
+		c := strings.Split(l, "\t")
+		if len(c) != 4 || !strings.HasPrefix(c[0], "x=") || !strings.Contains(c[0], "+f=") {
+			t.Fatalf("bad census row %q", l)
+		}
+		keys, _ := strconv.Atoi(c[1])
+		cards, _ := strconv.Atoi(c[2])
+		if names := strings.Split(c[3], "; "); len(names) != cards || keys < cards {
+			t.Errorf("%s: %d keys, %d cards, names %v", c[0], keys, cards, names)
+		}
+		sum += keys
+		rows++
+	}
+	if total < 0 || rows == 0 || sum != total {
+		t.Errorf("census rows sum to %d keys over %d signatures, header says %d", sum, rows, total)
 	}
 }

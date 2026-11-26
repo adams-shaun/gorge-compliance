@@ -127,7 +127,7 @@ func focusGateRefusal(reg *cards.Registry, b *certdeck.Builder, face *cards.Face
 	seat := *fc.Seat
 	switch {
 	case fc.Kind == "ability" && fc.Card == card && sa != nil:
-		if why := phaseGateRefusal(sa.Params, baitable, f.Active, seat); why != "" {
+		if why := phaseGateRefusal(sa.Params, baitable, f.Active, seat, fc.Attack != ""); why != "" {
 			return why
 		}
 		if why := activationConditionRefusal(reg, b, card, sa, f, seat); why != "" {
@@ -143,7 +143,7 @@ func focusGateRefusal(reg *cards.Registry, b *certdeck.Builder, face *cards.Face
 			if m.Kind != "SP" {
 				continue
 			}
-			why := phaseGateRefusal(m.Params, baitable, f.Active, seat)
+			why := phaseGateRefusal(m.Params, baitable, f.Active, seat, false)
 			if why == "" {
 				why = presentGateRefusal(reg, b, card, m.Params, f, seat, false)
 			}
@@ -178,11 +178,14 @@ func focusGateRefusal(reg *cards.Registry, b *certdeck.Builder, face *cards.Face
 // first-combat and after-blockers riders (both fail at the precombat main),
 // and the turn-owner gates (a non-True value fails anywhere; True requires
 // the named seat to be active -- skipped while a bait may be placed, which
-// can move the active seat).
-func phaseGateRefusal(params map[string]string, baitable bool, active, seat int) string {
+// can move the active seat). line: the play waits for a scripted combat
+// (StartFocus.Attack), so it is taken once the blocks are declared and a window
+// holding the declare blockers step (ninjutsu) serves it as the precombat main
+// does.
+func phaseGateRefusal(params map[string]string, baitable bool, active, seat int, line bool) string {
 	if spec := strings.TrimSpace(params["ActivationPhases"]); spec != "" {
 		set, unknown := state.ParsePhases(spec)
-		if len(unknown) > 0 || set.Empty() || !set.Has(state.StepMain1) {
+		if len(unknown) > 0 || set.Empty() || !set.Has(state.StepMain1) && !(line && set.Has(state.StepDeclareBlockers)) {
 			if strings.Contains(strings.ToLower(spec), "upkeep") {
 				return reasonUpkeepOnly
 			}
