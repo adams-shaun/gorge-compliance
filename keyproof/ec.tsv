@@ -12,7 +12,7 @@ ec136f6f-015b-4200-97b6-a2c1bf39e135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ec136f6f-015b-4200-97b6-a2c1bf39e135	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:butterbur-bree-innkeeper:f0t0:s1,f:xs:XP:butterbur-bree-innkeeper:f0t0:s1	-	-	-	054d9f516953	-	757caa362a8f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ec16008f-18d6-4461-b99c-0a504f211618	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sheriff-of-safe-passage:cast:s1,f:xs:XP:sheriff-of-safe-passage:cast:s1	-	-	-	3aa6ded33acb	-	3fb15b46cda7	-	-	2026-11-25	xproof
 ec17b9db-dd80-4b46-a1b5-215f26bf6498	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec17b9db-dd80-4b46-a1b5-215f26bf6498	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+ec17b9db-dd80-4b46-a1b5-215f26bf6498	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 ec187304-4c05-44da-8ad5-7c56f6b05212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec187304-4c05-44da-8ad5-7c56f6b05212	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec19a9bc-6fc1-4150-976b-37a47b165016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sandstorm-salvager:f0t0:s1,f:xs:XP:sandstorm-salvager:f0t0:s1	-	-	-	6f84be0f34c0	-	7079a105e931	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -151,8 +151,8 @@ ecd28e2a-e172-4f4c-8416-b9a0d97ee497	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ecd28e2a-e172-4f4c-8416-b9a0d97ee497	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecd307e6-9096-401f-bd82-ad190532d389	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecd49d85-9c8c-4cc9-9a83-072ecd433677	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-of-anor:cast:s1,f:xs:XP:flame-of-anor:cast:s1	-	-	-	fc71ca68c5ac	-	89cce4cec48e	-	-	2026-11-24	xproof
-ecd567aa-cbf0-4fc2-872c-a5c08ba60f52	cast	cast	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	d86442836899	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-ecd567aa-cbf0-4fc2-872c-a5c08ba60f52	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	45bde072980e	-	d86442836899	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+ecd567aa-cbf0-4fc2-872c-a5c08ba60f52	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	17bda798c09c	-	d86442836899	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+ecd567aa-cbf0-4fc2-872c-a5c08ba60f52	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	17bda798c09c	-	d86442836899	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 ecd6587c-3548-4bc1-89e4-9f7fbbc2d2ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecd6587c-3548-4bc1-89e4-9f7fbbc2d2ad	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 ecd8d7f4-7b11-4097-afc0-ef3c81edd90c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serra-paragon:cast:s1,f:xs:XP:serra-paragon:cast:s1	-	-	-	ae86f6029288	-	7409856c4295	-	-	2026-11-24	xproof

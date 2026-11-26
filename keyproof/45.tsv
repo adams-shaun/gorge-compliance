@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45181cb8-2090-4471-ba90-e5a8f04d525f	land	land	agreed	-	FX	start	2	0	x:xs:XP:sacred-foundry:land:s1,f:xs:XP:sacred-foundry:land:s1	-	-	-	23b491658465	-	f625037cae67	-	-	2026-11-24	xproof
 451a3f52-9810-4137-93b1-9594e7727c29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 451a3f52-9810-4137-93b1-9594e7727c29	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-451a3f52-9810-4137-93b1-9594e7727c29	f0/a1	ChangeZone/Ninjutsu	agreed	-	FX	start	2	0	x:xs:XP:walker-of-secret-ways:f0a1:s1,f:xs:XP:walker-of-secret-ways:f0a1:s1	-	-	-	45bde072980e	-	13436afc3b64	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-451a3f52-9810-4137-93b1-9594e7727c29	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:walker-of-secret-ways:f0a1:s1,f:xs:XP:walker-of-secret-ways:f0a1:s1	-	-	-	45bde072980e	-	13436afc3b64	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+451a3f52-9810-4137-93b1-9594e7727c29	f0/a1	ChangeZone/Ninjutsu	agreed	-	FX	start	1	0	x:xs:XP:walker-of-secret-ways:f0a1:s2,f:xs:XP:walker-of-secret-ways:f0a1:s2	-	-	-	17bda798c09c	-	13436afc3b64	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+451a3f52-9810-4137-93b1-9594e7727c29	f0/t0	DamageDone	agreed	-	FX	start	1	0	x:xs:XP:walker-of-secret-ways:f0a1:s2,f:xs:XP:walker-of-secret-ways:f0a1:s2	-	-	-	17bda798c09c	-	13436afc3b64	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 451e8ece-7389-4d52-8bc9-450cb5e53e6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4520c630-3650-462f-ab01-215eb2bdbbf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zerapa-minotaur:cast:s1,f:xs:XP:zerapa-minotaur:cast:s1	-	-	-	5f2128bf97e4	-	2cb4971700d1	-	-	2026-11-24	xproof
 4520c630-3650-462f-ab01-215eb2bdbbf5	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:zerapa-minotaur:f0a0:s1,f:xs:XP:zerapa-minotaur:f0a0:s1	-	-	-	5f2128bf97e4	-	2cb4971700d1	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4547625a-0caf-4ecc-a65f-0fd2cad70294	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:welkin-hawk:f0t0:s1,f:xs:XP:welkin-hawk:f0t0:s1	-	-	-	5f2128bf97e4	-	1045432cc2a7	-	-	2026-11-24	xproof
 4548d471-e78a-473e-84d4-cd2af64c9d28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4548d471-e78a-473e-84d4-cd2af64c9d28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4548d471-e78a-473e-84d4-cd2af64c9d28	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	45bde072980e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+4548d471-e78a-473e-84d4-cd2af64c9d28	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	17bda798c09c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 4548f379-2647-4446-9e56-e7ef0662793a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
 4548f379-2647-4446-9e56-e7ef0662793a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
 4548f379-2647-4446-9e56-e7ef0662793a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
