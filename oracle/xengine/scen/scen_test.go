@@ -2344,7 +2344,6 @@ func TestStartfacestarts(t *testing.T) {
 	const (
 		aclazotz = "Aclazotz, Deepest Betrayal // Temple of the Dead"
 		arlinn   = "Arlinn Kord // Arlinn, Embraced by the Moon"
-		wolfkin  = "Wolfkin Outcast // Wedding Crasher"
 	)
 	for _, tc := range []struct {
 		card, key, kind string
@@ -2353,7 +2352,6 @@ func TestStartfacestarts(t *testing.T) {
 	}{
 		{aclazotz, "f1/a0", "ability", 0, false},         // a modal back face (a land)
 		{arlinn, "f1/a1", "ability", 1, false},           // a transformed planeswalker's loyalty ability
-		{wolfkin, "f1/t0", "", 0, false},                 // a transformed back face's trigger
 		{"Voldaren Pariah", "f1/t0", "ability", 0, true}, // a Transformed trigger: front face, own transform ability
 		{"Kindly Stranger", "f1/t0", "cast", 0, true},    // a Transformed trigger: front face, one-card enabler
 	} {

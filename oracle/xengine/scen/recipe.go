@@ -607,6 +607,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		return refuse(why)
 	}
+	if why := dayNightRefusal(reg, f); why != "" {
+		return refuse(why)
+	}
 	return Result{Path: PathStart, Start: f}, nil
 }
 
