@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 124c8663-21f3-4cd8-a060-9d04be35c43f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 124cf15a-587a-4f1f-a943-f462072f2098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 124fea1b-c0e9-4e56-b026-82dddee0d36e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-124fea1b-c0e9-4e56-b026-82dddee0d36e	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+124fea1b-c0e9-4e56-b026-82dddee0d36e	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 1251691e-3c4c-4e45-9f59-f156852f2268	cast	cast	agreed	-	F	start	2	0	f:xs:XP:lossarnach-captain:f0t1:s1	-	-	-	23c4009444b0	-	ff9efc6767ab	-	-	2026-11-25	xproof
 1251691e-3c4c-4e45-9f59-f156852f2268	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:lossarnach-captain:f0t1:s1	-	-	-	23c4009444b0	-	ff9efc6767ab	-	-	2026-11-25	xproof
 1251691e-3c4c-4e45-9f59-f156852f2268	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:lossarnach-captain:f0t1:s1	-	-	-	23c4009444b0	-	ff9efc6767ab	-	-	2026-11-25	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 129b41cf-8327-42f0-b186-1111b42c08ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artifist-acumen:cast:s1,f:xs:XP:artifist-acumen:cast:s1	-	-	-	fb9d3088f0bf	-	e7ed8473b021	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 129ec223-e76d-491d-b299-07ac91168d31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 129ee7d6-e3df-40ef-9502-7aad10183031	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-129ee7d6-e3df-40ef-9502-7aad10183031	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+129ee7d6-e3df-40ef-9502-7aad10183031	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	cast	cast-resolve	agreed	-	FX	scen	2	0	Starseer Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:starseer-mentor:combat0.attack:s1,f:xs:XP:starseer-mentor:combat0.attack:s1	-	-	-	23c4009444b0	-	3440dff36a7c	-	-	2026-11-25	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:starseer-mentor:combat0.block:s1,f:xs:XP:starseer-mentor:combat0.block:s1	-	-	-	23c4009444b0	-	3440dff36a7c	-	-	2026-11-25	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12c7289f-da53-403a-a607-227f43c7e171	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trusty-packbeast:f0t0:s1,f:xs:XP:trusty-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	bbf4518e2d9c	-	-	2026-11-24	xproof
 12c7289f-da53-403a-a607-227f43c7e171	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trusty-packbeast:f0t0:s1,f:xs:XP:trusty-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	bbf4518e2d9c	-	-	2026-11-24	xproof
 12c98c1e-7e02-473d-b494-ad8a0731fe82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lagomos-hand-of-hatred:cast:s1,f:xs:XP:lagomos-hand-of-hatred:cast:s1	-	-	-	d864b561c9cb	-	0c40495b75c7	-	-	2026-11-24	xproof
-12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	3817bc12abcc	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lagomos-hand-of-hatred:f0a0:s1,f:xs:XP:lagomos-hand-of-hatred:f0a0:s1	-	-	-	23b491658465	-	0c40495b75c7	-	-	2026-11-25	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-torch-of-defiance:cast:s1,f:xs:XP:chandra-torch-of-defiance:cast:s1	-	-	-	8c0bd19283bb	-	cff2a43dbed9	-	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a0	Dig	agreed	-	FX	start	1	0	x:xs:XP:chandra-torch-of-defiance:cast:s2,f:xs:XP:chandra-torch-of-defiance:cast:s2	-	-	-	8c0bd19283bb	-	cff2a43dbed9	-	-	2026-11-24	xproof
