@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1aa532-4f19-407e-83a5-13b3160ad8c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chittering-witch:f0t0:s1,f:xs:XP:chittering-witch:f0t0:s1	-	-	-	ae86f6029288	-	c8dfc474ca91	-	-	2026-11-24	xproof
 8b1e6b7c-892d-4058-b183-9121cdd623f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8b1e6b7c-892d-4058-b183-9121cdd623f0	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8b1fc306-0d8f-4edb-b197-2e99f10c599e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boing:cast:s1,f:xs:XP:boing:cast:s1	-	-	-	23c4009444b0	-	a1e44c444b8d	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
 8b202c63-c961-4590-958f-d17e76610ab5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:indulgent-tormentor:f0t0:s1,f:xs:XP:indulgent-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	5481c7706132	-	-	2026-11-25	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b9918c3-1135-4c63-991f-f0a38340a33b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ascendant-acolyte:f0t0:s1,f:xs:XP:ascendant-acolyte:f0t0:s1	-	-	-	23c4009444b0	-	af12ea7340e1	-	-	2026-11-25	xproof
 8b9918c3-1135-4c63-991f-f0a38340a33b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ascendant-acolyte:f0t0:s1,f:xs:XP:ascendant-acolyte:f0t0:s1	-	-	-	23c4009444b0	-	af12ea7340e1	-	-	2026-11-25	xproof
 8ba0e831-054a-4e01-92ed-2845bd2fa12f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ba0e831-054a-4e01-92ed-2845bd2fa12f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8ba0e831-054a-4e01-92ed-2845bd2fa12f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:saruman-the-white:f0t0:s1,f:xs:XP:saruman-the-white:f0t0:s1	-	-	-	9087eefec3ee	-	0037d0f8d073	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8ba24644-8dff-4f1e-a96a-7361baf46b5a	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:saruman-the-white:f0t1:s1,f:xs:XP:saruman-the-white:f0t1:s1	-	-	-	9087eefec3ee	-	0037d0f8d073	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
