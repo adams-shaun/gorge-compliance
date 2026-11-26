@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 482006a0-bb2a-4533-891b-2195da5e0f01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 482006a0-bb2a-4533-891b-2195da5e0f01	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:manabond:f0t0:s1,f:xs:XP:manabond:f0t0:s1	-	-	-	baa6f696107c	-	0bed3ac264c0	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 48207d1c-448a-4e1b-974a-642dfea75933	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48220e6c-5752-46e0-9b7f-f0eef274d929	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+48220e6c-5752-46e0-9b7f-f0eef274d929	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 48252207-d345-455c-b655-c2027664e6a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rabaroo-troop:cast:s1,f:xs:XP:rabaroo-troop:cast:s1	-	-	-	23c4009444b0	-	6e5ac81be356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48252207-d345-455c-b655-c2027664e6a6	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:rabaroo-troop:f0a0:s1	-	-	-	23c4009444b0	-	6e5ac81be356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48252207-d345-455c-b655-c2027664e6a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rabaroo-troop:f0t0:s1,f:xs:XP:rabaroo-troop:f0t0:s1	-	-	-	23c4009444b0	-	6e5ac81be356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4863e1cf-3ef2-4c2d-a0ea-b73ca60c660d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fetid-horror:cast:s1,f:xs:XP:fetid-horror:cast:s1	-	-	-	8c0bd19283bb	-	e03850c47fc7	-	-	2026-11-24	xproof
 4863e1cf-3ef2-4c2d-a0ea-b73ca60c660d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:fetid-horror:f0a0:s1,f:xs:XP:fetid-horror:f0a0:s1	-	-	-	8c0bd19283bb	-	e03850c47fc7	-	-	2026-11-24	xproof
 4864cc98-4fde-4010-81e9-ea4944347e7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4864cc98-4fde-4010-81e9-ea4944347e7e	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+4864cc98-4fde-4010-81e9-ea4944347e7e	f0/t0	NULL	owed	refused:no-generator:trigger:Mutates	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 4867cc47-de84-4958-b1de-4a0a5050210e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4869a530-757f-4364-8d8e-4dc8001f433c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4869a530-757f-4364-8d8e-4dc8001f433c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48b561dd-f23d-409a-87c8-e49902b2477b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:orazca-relic:f0a1:s2,f:xs:XP:orazca-relic:f0a1:s2	-	-	-	23b491658465	-	21daa26dcf13	-	-	2026-11-25	xproof
-48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	f0/a1	NULL	owed	refused:start:activation-condition:blessing	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	f0/a1	NULL	owed	refused:start:activation-condition:blessing	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 48b891b6-3175-4864-bb98-af131098c557	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fblthp-knows-the-way:f0t0:s1	-	-	-	25696bf19d5b	-	db44721f8283	-	-	2026-11-24	xproof
 48b891b6-3175-4864-bb98-af131098c557	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:fblthp-knows-the-way:f0t0:s1	-	-	-	25696bf19d5b	-	db44721f8283	-	-	2026-11-24	xproof
 48b891b6-3175-4864-bb98-af131098c557	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fblthp, Knows the Way/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

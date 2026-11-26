@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 102bbedf-9f84-433a-bd01-e1a4c05fbedb	cast	cast	agreed	-	X	start	2	0	x:xs:XP:impeccable-timing:cast:s1	-	-	-	336eab778104	-	110d72c4eaf7	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 102d73bc-94ed-4a57-9872-6f7b9bf282f9	cast	cast	agreed	-	X	start	2	0	x:xs:XP:hunting-moa:f0t2:s1	-	-	-	23c4009444b0	-	bb3193201901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:hunting-moa:f0t2:s1	-	-	-	23c4009444b0	-	bb3193201901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 102d73bc-94ed-4a57-9872-6f7b9bf282f9	f0/t2	Phase/Echo	agreed	-	X	start	2	0	x:xs:XP:hunting-moa:f0t2:s1	-	-	-	23c4009444b0	-	bb3193201901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10330a79-a416-40da-bf5a-8b7cbd9a0498	cast	cast-resolve	agreed	-	X	scen	1	0	Wicked Visitor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10330a79-a416-40da-bf5a-8b7cbd9a0498	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wicked Visitor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10721d62-dc68-43b4-bfa2-dcb8cf8ea980	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10721d62-dc68-43b4-bfa2-dcb8cf8ea980	static#0.0	static.continuous	diverged	-	-	start	0	2	-	1621212ebc77	-	-	808e1dd359c1	-	c555208c6ad2	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 10733767-1c97-4e2e-b02b-54bf346f6583	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10733767-1c97-4e2e-b02b-54bf346f6583	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	6cd204d1e61a	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+10733767-1c97-4e2e-b02b-54bf346f6583	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 10736ea3-6253-44c3-8a1e-3b9a7f38f3cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10758aa7-0f64-499f-8010-514e8fc31b7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10762505-ebaa-47de-9f3e-08d48f2ac240	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
