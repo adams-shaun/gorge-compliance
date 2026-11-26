@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 182c9af9-d867-4848-ab36-ac7b1914f41a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:cast:s1,f:xs:XP:heliod-s-emissary:cast:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182c9af9-d867-4848-ab36-ac7b1914f41a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:f0t0:s1,f:xs:XP:heliod-s-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182d38b4-48bb-4050-a19a-c0a6bb241bbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:root-elemental:cast:s1,f:xs:XP:root-elemental:cast:s1	-	-	-	8c0bd19283bb	-	3acc51499661	-	-	2026-11-24	xproof
-182d38b4-48bb-4050-a19a-c0a6bb241bbd	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+182d38b4-48bb-4050-a19a-c0a6bb241bbd	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 18379907-ddba-479e-8953-3adc1ed40458	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:autochthon-wurm:cast:s1,f:xs:XP:autochthon-wurm:cast:s1	-	-	-	64a08ba7d913	-	cd801f9d3b80	-	-	2026-11-24	xproof
 183891b0-b5ec-47f4-8d09-b9d3cfc4e7f1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:god-eternal-bontu:cast:s1,f:xs:XP:god-eternal-bontu:cast:s1	-	-	-	d864b561c9cb	-	7e21eee067fb	-	-	2026-11-24	xproof
 183891b0-b5ec-47f4-8d09-b9d3cfc4e7f1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:god-eternal-bontu:cast:s1,f:xs:XP:god-eternal-bontu:cast:s1	-	-	-	d864b561c9cb	-	7e21eee067fb	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 189131b7-ed59-4750-a4ed-453e4497a5c8	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:indulging-patrician:f0t0:s1,f:xs:XP:indulging-patrician:f0t0:s1	-	-	-	6f84be0f34c0	-	d7a5200f7a38	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 18932bb9-e054-4ad6-80c8-d2f177312da0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18932bb9-e054-4ad6-80c8-d2f177312da0	f0/a0	SetState	agreed	-	FX	start	2	0	x:xs:XP:ravenous-demon-archdemon-of-greed:f0a0:s1,f:xs:XP:ravenous-demon-archdemon-of-greed:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-18932bb9-e054-4ad6-80c8-d2f177312da0	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+18932bb9-e054-4ad6-80c8-d2f177312da0	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 18961e25-3feb-4dba-a77f-240a4d664ecb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 189fc8f4-17ac-4f1d-82c8-8401445bdaf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 189fc8f4-17ac-4f1d-82c8-8401445bdaf4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:azorius-chancery:f0t0:s1,f:xs:XP:azorius-chancery:f0t0:s1	-	-	-	44e3ec152eea	-	15e2f55e6217	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ac2282-83af-4acc-b20b-6a95771da688	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ad0dd1-2d0e-46b4-8ab1-ece07180267f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ad0dd1-2d0e-46b4-8ab1-ece07180267f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18ad0dd1-2d0e-46b4-8ab1-ece07180267f	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	808e1dd359c1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+18ad0dd1-2d0e-46b4-8ab1-ece07180267f	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	6a2cbef58dfd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 18ae6be7-cfb6-42e3-a04e-99e9c1471ecd	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ae6be7-cfb6-42e3-a04e-99e9c1471ecd	f0/t0	Attacks/Myriad	agreed	-	FX	start	4	0	x:xs:XP:dalek-squadron:f0t0:s1,f:xs:XP:dalek-squadron:f0t0:s1	-	-	-	8c0bd19283bb	-	6ec5fa6e8e1c	-	-	2026-11-24	xproof
 18aee20d-ab73-4fdb-a65c-101beae5fcf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
