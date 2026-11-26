@@ -926,8 +926,30 @@ func rngShuffle(e game.Entry, after game.Digest) bool {
 		// A shuffle reorders the library, so the top five cannot stay put. A
 		// matching count with an unchanged top is a pick that drew the same
 		// number as a shuffle would (a one-draw pick at a two-card library),
-		// not a shuffle, and must be cut.
+		// not a shuffle, and must be cut. A library search is the exception:
+		// its shuffle is the search pick's own outcome (CR 701.24a), and the
+		// search's shuffle over a homogeneous library leaves the top five
+		// unchanged (Delivery Moogle's artifact search over an all-Plains
+		// library finds nothing and still shuffles), so the entry's own
+		// library-search pick says shuffle where the top cannot.
 		if i < len(e.Digest.Players) && !slices.Equal(e.Digest.Players[i].LibraryTop, p.LibraryTop) {
+			return true
+		}
+		if searchPicksLibrary(e.Picks, p.Seat) {
+			return true
+		}
+	}
+	return false
+}
+
+// searchPicksLibrary reports picks' zone election named the library: a
+// searchChooser option ("Search the library", effects.zone_search) the live
+// game answered for seat. Only a search decision poses zone-election options,
+// and only a library search shuffles; a search that finds no card still runs
+// the shuffle, so the pick alone pins the surplus draws.
+func searchPicksLibrary(picks []game.Pick, seat int) bool {
+	for _, p := range picks {
+		if p.Kind == "zone" && p.Player == seat && p.Label == "Search the library" {
 			return true
 		}
 	}
