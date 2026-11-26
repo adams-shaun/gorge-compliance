@@ -17,9 +17,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 271b37b6-b60b-4687-bd82-ecacf3b66cb3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vedalken-aethermage:f0t0:s1,f:xs:XP:vedalken-aethermage:f0t0:s1	-	-	-	d864b561c9cb	-	ae375bec09fc	-	-	2026-11-24	xproof
 271bfde0-6a6f-4bc8-ac0e-d2eff6784463	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 271bfde0-6a6f-4bc8-ac0e-d2eff6784463	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spectral-force:f0t0:s1,f:xs:XP:spectral-force:f0t0:s1	-	-	-	d864b561c9cb	-	b4b48f593ba0	-	-	2026-11-24	xproof
-2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	257af086124e	-	e747fe6aff00	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	257af086124e	-	e747fe6aff00	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t1	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	257af086124e	-	e747fe6aff00	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	e747fe6aff00	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	e747fe6aff00	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t1	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	fb2ee20680d0	-	e747fe6aff00	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 2727a7ec-1cf7-4cd7-b5d4-955db940ddd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 272ab5d5-7edb-4457-8a09-cabe2325c881	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-sentinel:f0t0:s1,f:xs:XP:llanowar-sentinel:f0t0:s1	-	-	-	25696bf19d5b	-	6172fcdf04bc	-	-	2026-11-24	xproof
 272ab5d5-7edb-4457-8a09-cabe2325c881	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:llanowar-sentinel:f0t0:s1,f:xs:XP:llanowar-sentinel:f0t0:s1	-	-	-	25696bf19d5b	-	6172fcdf04bc	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27692079-a517-4d38-b452-7409980b5912	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27692079-a517-4d38-b452-7409980b5912	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	HYDRA Infiltration/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2769751d-ca67-4d6e-93c9-9587367ae8ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2769751d-ca67-4d6e-93c9-9587367ae8ab	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	257af086124e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+2769751d-ca67-4d6e-93c9-9587367ae8ab	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb2ee20680d0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 276b1bd8-8918-4226-bab3-100cf5aa3c24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lingering-tormentor:cast:s1,f:xs:XP:lingering-tormentor:cast:s1	-	-	-	8a1b1a193ec0	-	464c71dd0676	-	-	2026-11-24	xproof
 276b1bd8-8918-4226-bab3-100cf5aa3c24	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:lingering-tormentor:f0t0:s1,f:xs:XP:lingering-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	464c71dd0676	-	-	2026-11-25	xproof
 276cece9-f9f2-46e6-ae76-daddaa2fb9ab	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:kor-haven:f0a1:s1,f:xs:XP:kor-haven:f0a1:s1	-	-	-	23b491658465	-	94c6b50b9017	-	-	2026-11-24	xproof
