@@ -210,30 +210,189 @@ func cycledAbility(sa *cards.SA) bool {
 // trigger's description reads on the card in hand, so a TriggerZones the
 // start does not name, a player other than the cycler or a gate the
 // start cannot meet is refused by name. A watcher (ValidCard$ Card or
-// Card.Other: the card elsewhere while another card cycles) needs a carrier
-// with cycling, a follow-up: it keeps the plain mode refusal the default
-// arm gave it.
+// Card.Other: the card elsewhere while another card cycles) takes the
+// watcher arm (cycledWatcher): a carrier with cycling cycles on the seat
+// the trigger names.
 func cycledStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:Cycled"
-	if !selfCard(trig) {
-		return none
+	if selfCard(trig) {
+		if tz := trig.Params["TriggerZones"]; tz != "" {
+			return none + ":zone"
+		}
+		for k := range trig.Params {
+			if !baseEventParams[k] && k != "ValidCard" && k != "ValidPlayer" {
+				return none + ":condition"
+			}
+		}
+		if vp := trig.Params["ValidPlayer"]; vp != "" && vp != "You" {
+			return none + ":player"
+		}
+		idx := selfAbility(face, cycledAbility)
+		if idx < 0 {
+			return none + ":ability"
+		}
+		return abilityFocus(reg, b, face, card, generic, idx, face.Abilities[idx], f)
 	}
-	if tz := trig.Params["TriggerZones"]; tz != "" {
-		return none + ":zone"
+	return cycledWatcher(reg, b, face, card, generic, trig, f)
+}
+
+// cyclingPools holds each registry's cycling carriers, built once.
+var cyclingPools sync.Map // *cards.Registry -> []*cards.Face
+
+// cyclingPool is every card the corpus holds that a start can cycle, ranked:
+// fewest abilities, triggers, statics and replacements (the most inert card
+// cycles, so the one event the start offers is the one the key reads), then
+// fewest keywords, then by mana value, nonlegendary first, then name.
+func cyclingPool(reg *cards.Registry, b *certdeck.Builder) []*cards.Face {
+	if v, ok := cyclingPools.Load(reg); ok {
+		return v.([]*cards.Face)
 	}
+	var out []*cards.Face
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) != 1 || !b.Playable(c) {
+			continue
+		}
+		if f := c.Faces[0]; selfAbility(f, cycledAbility) >= 0 {
+			out = append(out, f)
+		}
+	}
+	load := func(f *cards.Face) int {
+		return len(f.Abilities) + len(f.Triggers) + len(f.Statics) + len(f.Repls)
+	}
+	sort.SliceStable(out, func(i, j int) bool {
+		a, c := out[i], out[j]
+		if la, lc := load(a), load(c); la != lc {
+			return la < lc
+		}
+		if ka, kc := len(a.Keywords), len(c.Keywords); ka != kc {
+			return ka < kc
+		}
+		if a.Cmc() != c.Cmc() {
+			return a.Cmc() < c.Cmc()
+		}
+		if a.IsLegendary() != c.IsLegendary() {
+			return !a.IsLegendary()
+		}
+		return a.Name < c.Name
+	})
+	cyclingPools.Store(reg, out)
+	return out
+}
+
+// cyclingCarrier is the card that cycles for a watcher start: the ranked
+// pool's first entry other than the watcher whose cycling activation's cost
+// the start can meet with placed state (planCost), with the index of the
+// granted cycling ability the focus activates.
+func cyclingCarrier(reg *cards.Registry, b *certdeck.Builder, card, generic string) (name string, idx int) {
+	for _, f := range cyclingPool(reg, b) {
+		if f.Name == card {
+			continue
+		}
+		i := selfAbility(f, cycledAbility)
+		if _, why := planCost(reg, b, f, f.Name, f.Abilities[i].Params["Cost"], generic); why != "" {
+			continue
+		}
+		return f.Name, i
+	}
+	return "", -1
+}
+
+// auraBearer is an inert permanent the Aura takes, on the watcher's own
+// seat, for a watcher start that places an attached Aura on the battlefield.
+func auraBearer(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face) string {
+	req, ok := enchantReq(face)
+	if !ok {
+		return ""
+	}
+	for _, alt := range req.raw {
+		a := parseFilter(alt)
+		for i := range a {
+			if !a[i].known || a[i].self || a[i].ctrl == ctrlOpp {
+				continue
+			}
+			if n := pickCarrier(reg, b, card, func(f *cards.Face) bool {
+				return f.IsPermanent() && !deadOnArrival(f) && a[i].test(f)
+			}); n != "" {
+				return n
+			}
+		}
+	}
+	return ""
+}
+
+// cycledWatcher is the watcher arm of Cycled: the card is not the cycled one
+// ("Whenever a player cycles a card", "Whenever you cycle another card"). It
+// sits where its TriggerZones put it — the battlefield, or the graveyard a
+// return-to-battlefield watcher reads (Benalish Partisan) — while a carrier
+// of the corpus (cyclingCarrier) cycles from its hand on the seat the
+// trigger's player or cycled-card filter names: the carrier in that hand
+// with exactly its cycling cost's mana placed (planCost), the focus that
+// activation. FirstTime (Valiant Rescuer's "for the first time each turn")
+// the start meets trivially: nothing has cycled yet. A parameter the arm
+// does not model is refused by name, as is a watcher the trigger puts on a
+// turn the cycler is not active on (cycling is sorcery-speed, the cycler's
+// own turn).
+func cycledWatcher(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:Cycled"
 	for k := range trig.Params {
-		if !baseEventParams[k] && k != "ValidCard" && k != "ValidPlayer" {
+		if !baseEventParams[k] && k != "ValidCard" && k != "ValidPlayer" && k != "FirstTime" {
 			return none + ":condition"
 		}
 	}
-	if vp := trig.Params["ValidPlayer"]; vp != "" && vp != "You" {
-		return none + ":player"
+	tz := trig.Params["TriggerZones"]
+	switch tz {
+	case "", "Battlefield", "Graveyard":
+	default:
+		return none + ":zone"
 	}
-	idx := selfAbility(face, cycledAbility)
-	if idx < 0 {
-		return none + ":ability"
+	seat := 0
+	if vp := trig.Params["ValidPlayer"]; vp != "" {
+		s, na, ok := playerRef(vp)
+		if !ok || na || s > 1 {
+			return none + ":player"
+		}
+		seat = max(s, 0)
+	} else {
+		for _, a := range parseFilter(trig.Params["ValidCard"]) {
+			if a.known && a.ctrl == ctrlOpp {
+				seat = 1
+			}
+		}
 	}
-	return abilityFocus(reg, b, face, card, generic, idx, face.Abilities[idx], f)
+	if w := turnWanted(trig); w >= 0 && w != seat {
+		return none + ":turn"
+	}
+	name, idx := cyclingCarrier(reg, b, card, generic)
+	if name == "" {
+		return none + ":carrier"
+	}
+	carrier, _ := reg.Lookup(name)
+	cface := carrier.Faces[0]
+	plan, why := planCost(reg, b, cface, name, cface.Abilities[idx].Params["Cost"], generic)
+	if why != "" {
+		return none + ":cost"
+	}
+	seats := seatsOf(f)
+	if tz == "Graveyard" {
+		seats[0].Graveyard = []string{card}
+	} else {
+		f.Setup.P0.Battlefield = []string{card}
+		if blk := FieldBlock(face); blk != "" {
+			if blk != "aura-unattached" {
+				return none + ":" + blk
+			}
+			bearer := auraBearer(reg, b, card, face)
+			if bearer == "" {
+				return none + ":bearer"
+			}
+			f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, bearer)
+			f.Setup.P0.Attach = append(f.Setup.P0.Attach, StartAttach{Card: card, To: bearer})
+		}
+	}
+	applyCostSupportOn(plan, generic, f, seats[seat])
+	seats[seat].Hand = append(seats[seat].Hand, name)
+	act(f, seat, false, name, "ability", idx)
+	return ""
 }
 
 // drawStart is "whenever you draw a card" and its kin: the seat the draw is

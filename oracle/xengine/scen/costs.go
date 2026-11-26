@@ -291,11 +291,16 @@ func applyCost(p costPlan, card, generic string, f *StartFile) {
 }
 
 // applyCostSupport places the state a cost plan needs around the card that pays
-// it, without placing the card itself: applyCost uses it for an ability the
-// card activates, and a granted ability uses it for the carrier the ability was
-// granted to (already on the battlefield).
+// it, without placing the card itself, on seat 0: applyCost uses it for an
+// ability the card activates, and a granted ability uses it for the carrier the
+// ability was granted to (already on the battlefield).
 func applyCostSupport(p costPlan, generic string, f *StartFile) {
-	s := &f.Setup.P0
+	applyCostSupportOn(p, generic, f, &f.Setup.P0)
+}
+
+// applyCostSupportOn is applyCostSupport on seat s: a cost the cycler of a
+// watcher start pays sits on the seat the trigger names, not always seat 0.
+func applyCostSupportOn(p costPlan, generic string, f *StartFile, s *StartSeat) {
 	s.Battlefield = append(s.Battlefield, landsFor(p.mana, generic)...)
 	p.applyExtras(s)
 }
