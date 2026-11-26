@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19055292-1a79-413e-8056-7d4aec9839ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19055292-1a79-413e-8056-7d4aec9839ed	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:dawnray-archer:f0t0:s1,f:xs:XP:dawnray-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	52956f233d91	-	-	2026-11-24	xproof
 19066c43-eccd-461b-9695-c3fad95dc1da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blight:cast:s1,f:xs:XP:blight:cast:s1	-	-	-	ae86f6029288	-	d73879902534	-	-	2026-11-24	xproof
-19066c43-eccd-461b-9695-c3fad95dc1da	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	bdbd80c110f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+19066c43-eccd-461b-9695-c3fad95dc1da	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	18f6c5727729	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 190cdc23-fa05-475f-b853-471ca0f21b71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 190cdc23-fa05-475f-b853-471ca0f21b71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 190e664b-9875-4335-af46-353886ed18ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 197582b9-4c86-41a3-ad0c-789a0db8e087	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quantum-misalignment:cast:s1,f:xs:XP:quantum-misalignment:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 197809b7-1ddb-4329-8d82-7651696538a8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:frenzied-gorespawn:f0t0:s1	-	-	-	8c0bd19283bb	-	c9f19e6a29e0	-	-	2026-11-24	xproof
 197809b7-1ddb-4329-8d82-7651696538a8	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:frenzied-gorespawn:f0t0:s1	-	-	-	8c0bd19283bb	-	c9f19e6a29e0	-	-	2026-11-24	xproof
-197809b7-1ddb-4329-8d82-7651696538a8	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	bdbd80c110f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+197809b7-1ddb-4329-8d82-7651696538a8	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	18f6c5727729	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 19788405-7141-475e-94ee-d0c89488f50f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elder-owyn-lyons:f0t0:s1,f:xs:XP:elder-owyn-lyons:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 19788405-7141-475e-94ee-d0c89488f50f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elder-owyn-lyons:f0t0:s1,f:xs:XP:elder-owyn-lyons:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 19788405-7141-475e-94ee-d0c89488f50f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elder-owyn-lyons:f0t1:s1,f:xs:XP:elder-owyn-lyons:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
