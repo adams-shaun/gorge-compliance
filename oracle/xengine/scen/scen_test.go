@@ -125,6 +125,13 @@ func TestScenFixtures(t *testing.T) {
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
 		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		// a ChooseColor card is cast, not placed, so its choice is made by the
+		// engines' own decision; a ChooseType card or a land refuses by name
+		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
+		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
+		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
+		{"Unclaimed Territory", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "as-enters:land"}},
+		{"Big Apple, 3 a.m.", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "as-enters:land"}},
 		{"Gatekeeper of Malakir", "f0/t0", want{path: "start", check: gatekeeper}, want{path: "start", check: gatekeeper}},
 	}
 	for _, r := range rows {
@@ -156,6 +163,24 @@ func TestScenFixtures(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+// asEntersCast checks a ChooseColor card's start: it is in seat 0's hand with
+// carriers one-mana spells of each colour (the pick is not known when the start
+// is written), and the focus casts it.
+func asEntersCast(card string, carriers int) func(t *testing.T, f *StartFile) {
+	return func(t *testing.T, f *StartFile) {
+		t.Helper()
+		if h := f.Setup.P0.Hand; len(h) != 1+carriers || h[0] != card {
+			t.Errorf("p0 hand = %v, want %s and %d carriers", h, card, carriers)
+		}
+		for _, n := range f.Setup.P0.Battlefield {
+			if n == card {
+				t.Errorf("%s is placed on the battlefield: it would enter without its choice", card)
+			}
+		}
+		focusIs(t, f, 0, card, "cast", 0)
 	}
 }
 
