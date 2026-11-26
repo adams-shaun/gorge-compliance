@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:cast:s1,f:xs:XP:nezumi-linkbreaker:cast:s1	-	-	-	3aa6ded33acb	-	247a80a0836d	-	-	2026-11-25	xproof
 5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:f0t0:s1,f:xs:XP:nezumi-linkbreaker:f0t0:s1	-	-	-	3aa6ded33acb	-	247a80a0836d	-	-	2026-11-25	xproof
 5d258409-28d3-4eac-9f1a-3e494db818bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloak-of-confusion:cast:s1,f:xs:XP:cloak-of-confusion:cast:s1	-	-	-	3aa6ded33acb	-	fb14f95879a2	-	-	2026-11-25	xproof
-5d258409-28d3-4eac-9f1a-3e494db818bf	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	64b2deb8ef2e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+5d258409-28d3-4eac-9f1a-3e494db818bf	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 5d2a9859-1353-4431-9343-f5999450acd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d776be0-cece-4496-a3b0-b7424eca77fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d7acb89-1778-409a-9e91-aaeadd13ca27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venarian-gold:f0t0:s1,f:xs:XP:venarian-gold:f0t0:s1	-	-	-	fc71ca68c5ac	-	01ec8bc4069b	-	-	2026-11-24	xproof
 5d7acb89-1778-409a-9e91-aaeadd13ca27	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venarian-gold:f0t0:s1,f:xs:XP:venarian-gold:f0t0:s1	-	-	-	fc71ca68c5ac	-	01ec8bc4069b	-	-	2026-11-24	xproof
-5d7acb89-1778-409a-9e91-aaeadd13ca27	f0/t1	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	64b2deb8ef2e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+5d7acb89-1778-409a-9e91-aaeadd13ca27	f0/t1	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 5d7eea87-b60f-4ab9-b485-30aadda0cd79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d7eea87-b60f-4ab9-b485-30aadda0cd79	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ant-man-s-air-force:f0t0:s1,f:xs:XP:ant-man-s-air-force:f0t0:s1	-	-	-	8c0bd19283bb	-	ed62b0147810	-	-	2026-11-24	xproof
 5d808e64-a648-4f1b-a3a9-fd09568db281	cast	cast-resolve	agreed	-	FX	scen	2	0	Garrison Excavator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5de63529-7dea-4018-bf46-afb4bc8b69fd	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:krark-clan-ogre:f0a0:s1,f:xs:XP:krark-clan-ogre:f0a0:s1	-	-	-	23c4009444b0	-	26e9e8d53a4f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:noncreature	-	start	0	0	-	-	-	-	64b2deb8ef2e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:noncreature	-	start	0	0	-	-	-	-	4f8d2c6491d4	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 5ded56df-c7d5-4043-85df-410f47219faa	cast	cast-resolve	agreed	-	X	scen	1	0	Corpseberry Cultivator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ded56df-c7d5-4043-85df-410f47219faa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Corpseberry Cultivator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ded56df-c7d5-4043-85df-410f47219faa	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Corpseberry Cultivator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
