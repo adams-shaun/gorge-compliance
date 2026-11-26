@@ -1217,6 +1217,54 @@ func TestStartCosts(t *testing.T) {
 	}
 }
 
+// TestStartNinjutsu: ninjutsu returns an unblocked attacker, so the start is
+// a combat line: the vanilla fixture attacks, nothing blocks, and the ninja
+// waits in hand with exactly its ninjutsu mana until the declare blockers step
+// (the focus attack scripts the line; the activation is the focus play). Other
+// cost refusals stay as they were: the unblocked-attacker Return is read only
+// by a focus ability (planCost, which every other caller uses, still refuses
+// it), and a Return the generator cannot place or a different cost keeps its
+// name.
+func TestStartNinjutsu(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card string
+		mana []string
+	}{
+		{"Biting-Palm Ninja", rep("Swamp", 3)},
+		{"Dokuchi Shadow-Walker", rep("Swamp", 4)},
+		{"Blade-Blizzard Kitsune", rep("Plains", 4)},
+	} {
+		res, err := Generate(reg, b, r.card, "f0/a0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: %+v %v", r.card, res, err)
+		}
+		f := res.Start
+		listIs(t, r.card+" p0 hand", f.Setup.P0.Hand, []string{r.card})
+		listIs(t, r.card+" p0 battlefield", f.Setup.P0.Battlefield, cat(r.mana, []string{combatFixture}))
+		listIs(t, r.card+" p1 battlefield", f.Setup.P1.Battlefield, nil)
+		focusIs(t, f, 0, r.card, "ability", 0)
+		if f.Focus.Attack != combatFixture || f.Focus.Block != "" || f.Active != 0 {
+			t.Errorf("%s: focus attack %q block %q active %d, want %q, no block, seat 0", r.card, f.Focus.Attack, f.Focus.Block, f.Active, combatFixture)
+		}
+	}
+	card, ok := reg.Lookup("Biting-Palm Ninja")
+	if !ok {
+		t.Fatal("Biting-Palm Ninja missing")
+	}
+	face := card.Faces[0]
+	for _, c := range []struct{ cost, want string }{
+		{"2 B Return<1/Creature.YouCtrl+attacking+unblocked>", "steps-needed:cost:Return"}, // not a focus ability: still refused
+		{"2 B Return<1/Creature.YouCtrl+attacking>", "steps-needed:cost:Return"},           // no unblocked: no line to script
+		{"2 B Return<1/Treasure.token>", "steps-needed:cost:Return"},
+		{"2 B Forage", "steps-needed:cost:Forage"},
+	} {
+		if _, why := planCost(reg, b, face, "Biting-Palm Ninja", c.cost, "B"); why != c.want {
+			t.Errorf("planCost(%q) = %q, want %q", c.cost, why, c.want)
+		}
+	}
+}
+
 // TestStartCombat: an attack trigger is the card (or Memnite, for a
 // noncreature card such as a Vehicle) attacking, on the battlefield since
 // the turn began; a combat-damage start drops the opp-blockers need, so the

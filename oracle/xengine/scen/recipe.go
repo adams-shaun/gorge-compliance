@@ -265,7 +265,7 @@ func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string
 // activation zone has it, the cost met by placed state (planCost), and the
 // focus the ability's activation. "" when built, else the refusal.
 func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, idx int, sa *cards.SA, f *StartFile) string {
-	plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
+	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic)
 	if why != "" {
 		return why
 	}
@@ -280,6 +280,20 @@ func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 	}
 	applyCost(plan, card, generic, f)
 	f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
+	if plan.attacker != "" {
+		// ninjutsu: the cost returns an unblocked attacker, so the focus waits
+		// for a scripted combat (one attacker, no block) and takes its
+		// activation at its first priority after the blocks (the ability's
+		// ActivationPhases are Declare Blockers and later)
+		fix, ok := reg.Lookup(combatFixture)
+		if !ok || len(fix.Faces) == 0 || !fix.Faces[0].IsCreature() {
+			return "steps-needed:cost:Return:fixture"
+		}
+		if why := combatLine(reg, b, face, fix.Faces[0], card, party{filter: plan.attacker}, nil, 0, f, "steps-needed:cost:Return"); why != "" {
+			return why
+		}
+		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx, Attack: f.Focus.Attack}
+	}
 	return ""
 }
 

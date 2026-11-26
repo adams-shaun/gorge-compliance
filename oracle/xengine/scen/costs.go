@@ -43,6 +43,11 @@ type costPlan struct {
 	// PayEnergy<N> spends before the focus play.
 	playerCounters []StartCounter
 	life           int32 // the life a PayLife<N> needs: N+1 when N is 20 or more (0: the default 20)
+	// attacker, when set, is the filter (its attacking and unblocked
+	// properties stripped) of the one unblocked attacker the cost returns
+	// (ninjutsu): the cost is payable only inside a combat line, which only a
+	// focus ability (abilityFocus) scripts; planCost refuses it elsewhere.
+	attacker string
 }
 
 // planCost reads cost for the card's ability: every token a start can meet
@@ -63,6 +68,42 @@ type costPlan struct {
 //     PlayerCounters (a start position can hold the energy the ability
 //     spends). A malformed or non-positive amount stays refused.
 func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
+	p, why := planCostLine(reg, b, face, card, cost, generic)
+	if why == "" && p.attacker != "" {
+		return p, "steps-needed:cost:Return"
+	}
+	return p, why
+}
+
+// unblockedAttackerFilter is the filter a Return cost names when it returns an
+// unblocked attacker ("Creature.YouCtrl+attacking+unblocked": ninjutsu) with
+// those two properties stripped, and whether the filter names both.
+func unblockedAttackerFilter(spec string) (string, bool) {
+	head, props, _ := strings.Cut(spec, ".")
+	var keep []string
+	var atk, unb bool
+	for _, p := range strings.Split(props, "+") {
+		switch strings.ToLower(p) {
+		case "attacking":
+			atk = true
+		case "unblocked":
+			unb = true
+		default:
+			keep = append(keep, p)
+		}
+	}
+	if !atk || !unb {
+		return "", false
+	}
+	if len(keep) == 0 {
+		return head, true
+	}
+	return head + "." + strings.Join(keep, "+"), true
+}
+
+// planCostLine is planCost that also reads a Return of an unblocked attacker
+// (costPlan.attacker): the caller must script the combat line it needs.
+func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
 	p := costPlan{zone: zoneBattlefield}
 	for _, tok := range splitCost(cost) {
 		if manaTokenRE.MatchString(tok) {
@@ -105,6 +146,12 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 			}
 		}
 		self := len(args) >= 2 && (args[1] == "CARDNAME" || args[1] == "NICKNAME")
+		if head == "Return" && len(args) >= 2 && !self && n == 1 && p.attacker == "" {
+			if spec, ok := unblockedAttackerFilter(strings.Join(args[1:], "/")); ok {
+				p.attacker = spec
+				continue
+			}
+		}
 		if len(args) >= 2 && args[1] == "Hand" {
 			// Discard<N/Hand>: discard the hand, N cards of it
 			args[1] = "Card"
