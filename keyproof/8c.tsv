@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c53a177-c8c8-4b9f-a221-f205da67daa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c53a177-c8c8-4b9f-a221-f205da67daa5	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:ramosian-greatsword:f0a0:s1	-	-	-	3aa6ded33acb	-	e47992799c39	-	-	2026-11-25	xproof
 8c55039d-1303-420c-8547-ebdffb63bf89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-talent:cast:s1,f:xs:XP:liliana-s-talent:cast:s1	-	-	-	8c0bd19283bb	-	a3521227204c	-	-	2026-11-24	xproof
-8c55039d-1303-420c-8547-ebdffb63bf89	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:target	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8c55039d-1303-420c-8547-ebdffb63bf89	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:target	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:professor-dellian-fel:cast:s1,f:xs:XP:professor-dellian-fel:cast:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a0	GainLife	agreed	-	FX	start	4	0	x:xs:XP:professor-dellian-fel:cast:s1,f:xs:XP:professor-dellian-fel:cast:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:professor-dellian-fel:f0a1:s1,f:xs:XP:professor-dellian-fel:f0a1:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:ronin-shadow-stalker:f0a0:s1,f:xs:XP:ronin-shadow-stalker:f0a0:s1	-	-	-	baa6f696107c	-	6f1c97c2cb14	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf38025-5821-45a0-9483-266353b7e82d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cf38025-5821-45a0-9483-266353b7e82d	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	8aa6eb7938d2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8cf38025-5821-45a0-9483-266353b7e82d	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	61f994c1fc86	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca	cast	cast-resolve	agreed	-	FX	scen	2	0	Loxodon Battle Priest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Loxodon Battle Priest/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf57287-21b0-4194-8da3-62d00160234f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
