@@ -10,13 +10,15 @@
 # Graveyard" (and the return asks "order to Battlefield"). StepMachine.orderCards
 # used to strict-miss both asks with an empty leftover. It now keeps
 # Forge's offered order for an unpinned ask at exactly a graveyard, a
-# battlefield, a hand or an exile: Wrenn and Seven's -8 returns the
-# planeswalker and seven Forests to the hand, whose snapshot order is
-# unobservable (SnapshotWriter sorts hand names), so no pin can exist for it
-# either, and Flickerform's exile-the-bearer-and-itself resolution asks
-# "order to Exile" for two cards whose snapshot order is unobservable the
-# same way (scripts/forge-oracle-test-exile-order-unpinned.sh). Every
-# other zone (library arrange/dig, command, stack, sideboard) still
+# battlefield, a hand, an exile or a command zone: Wrenn and Seven's -8
+# returns the planeswalker and seven Forests to the hand, whose snapshot
+# order is unobservable (SnapshotWriter sorts hand names), so no pin can
+# exist for it either, Flickerform's exile-the-bearer-and-itself resolution
+# asks "order to Exile" for two cards whose snapshot order is unobservable
+# the same way (scripts/forge-oracle-test-exile-order-unpinned.sh), and a
+# Commander game's command zone is sorted by name on both sides
+# (scripts/forge-oracle-test-command-order-unpinned.sh). Every
+# other zone (library arrange/dig, stack, sideboard) still
 # strict-misses, and a pin a checkpoint can see is still consumed and still
 # orders the ask.
 #
@@ -36,7 +38,7 @@
 # OrderCardsTest.unpinnedGraveyardOrderKeepsForgeOrder,
 # .unpinnedBattlefieldOrderKeepsForgeOrder, .unpinnedHandOrderKeepsForgeOrder,
 # .unpinnedOtherZoneStillLooseMisses and .pinnedGraveyardOrderStillApplies pin
-# both halves. The wrapper asserts the 17-test count and each of those five
+# both halves. The wrapper asserts the 19-test count and each of those five
 # names and the three pinned-transit ones, not just the class's exit
 # status: a pin that predates these tests (c9419 has nine) would otherwise run
 # green and silently drop the coverage. Needs the out-of-tree build at
@@ -64,7 +66,7 @@ FORGE_ORACLE_DIR=$forge FORGE_ORACLE_JDK=$jdk \
   FORGE_ORACLE_TEST_CLASSES=forge.oracle.OrderCardsTest \
   bash "$runner" 2>&1 | tee "$log"
 
-want=18
+want=19
 passes=$(grep -c '^PASS OrderCardsTest\.' "$log" || true)
 [ "$passes" -eq "$want" ] || fail "OrderCardsTest passed $passes tests, want $want: the pinned driver is missing the transit-order tests"
 for t in unpinnedGraveyardOrderKeepsForgeOrder unpinnedBattlefieldOrderKeepsForgeOrder \
