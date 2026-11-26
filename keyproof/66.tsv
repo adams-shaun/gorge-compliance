@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6615f881-960c-4216-a32a-63856bc3afd0	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Ancient One/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6615f881-960c-4216-a32a-63856bc3afd0	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Ancient One/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 661618a2-54c7-4136-beff-fff5ff7d84cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	1fd23656d119	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 661736eb-97d7-4b3c-ab18-708479a5fb29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661a99ef-8d5b-4aac-98f6-52b17a8ecf52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:turntimber-basilisk:f0t0:s1,f:xs:XP:turntimber-basilisk:f0t0:s1	-	-	-	23c4009444b0	-	30b4f09fe5c6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:tarnished-citadel:f0a1:s1,f:xs:XP:tarnished-citadel:f0a1:s1	-	-	-	5b42d43d5d80	-	fe1f43cc6dc8	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 66ae2562-68e9-4c77-ba0a-57f8ff37f656	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66ae3349-ad37-47da-8ccc-3e1cdddb32a9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arctic-nishoba:f0t1:s1	-	-	-	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	1fd23656d119	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t1	Phase/Cumulative upkeep	agreed	-	F	start	2	0	f:xs:XP:arctic-nishoba:f0t1:s1	-	-	-	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66b46257-b64c-4672-bf47-12bf0bcd6f8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66bd5999-742a-43e0-827c-ecb8ec7db242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-warden:cast:s1,f:xs:XP:ghost-warden:cast:s1	-	-	-	77494c1ce129	-	1e158ef92b5a	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:cast:s1,f:xs:XP:gateway-sneak:cast:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:f0t1:s1,f:xs:XP:gateway-sneak:f0t1:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
-66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	cast	owed	harness:x=decision_shape~leftover-choices-of-playera-count-are+f=forge_skips_damage_step	-	start	0	0	-	-	-	-	1fd23656d119	-	eb72790bf1c4	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	cast	owed	harness:x=decision_shape~leftover-choices-of-playera-count-are+f=forge_skips_damage_step	-	start	0	0	-	-	-	-	4b06460ba8f6	-	eb72790bf1c4	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summon-titan:cast:s1,f:xs:XP:summon-titan:cast:s1	-	-	-	23c4009444b0	-	12cd7b1f69ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Titan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Titan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
