@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 250f8642-9754-48fd-8f09-70ed13d7a42c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:preemptive-strike:cast:s1,f:xs:XP:preemptive-strike:cast:s1	-	-	-	21b2cceac526	-	03a4a9955ea2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	b3e0094abb22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:cast:s1,f:xs:XP:eardrum-rattler:cast:s1	-	-	-	fb9d3088f0bf	-	bf3b5139ebd8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:f0a0:s1,f:xs:XP:eardrum-rattler:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2516949d-75bb-4aea-a41d-0298bb129471	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slip-through-space:cast:s1,f:xs:XP:slip-through-space:cast:s1	-	-	-	d864b561c9cb	-	44a5c0e15e85	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25977c02-e2d4-4afd-b12d-37ce4d58f453	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:golden-egg:f0a1:s1,f:xs:XP:golden-egg:f0a1:s1	-	-	-	ae86f6029288	-	9d0fe5f340e9	-	-	2026-11-24	xproof
 25977c02-e2d4-4afd-b12d-37ce4d58f453	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:golden-egg:cast:s1,f:xs:XP:golden-egg:cast:s1	-	-	-	ae86f6029288	-	9d0fe5f340e9	-	-	2026-11-24	xproof
 2598294c-a9a7-4bef-a562-23f297a80536	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:songbirds-blessing:cast:s1,f:xs:XP:songbirds-blessing:cast:s1	-	-	-	8c0bd19283bb	-	13c2b17ccfc6	-	-	2026-11-24	xproof
-2598294c-a9a7-4bef-a562-23f297a80536	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	3c85185f8caa	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+2598294c-a9a7-4bef-a562-23f297a80536	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	b3e0094abb22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 259a023a-de55-4bab-9e24-01aebcf716eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-s-path:cast:s1,f:xs:XP:ranger-s-path:cast:s1	-	-	-	d864b561c9cb	-	4fd577bbdf7b	-	-	2026-11-24	xproof
 259ac30c-cc05-4c04-9b23-71283f84b808	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 259ac30c-cc05-4c04-9b23-71283f84b808	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:wedding-announcement-wedding-festivity:f0t0:s1,f:xs:XP:wedding-announcement-wedding-festivity:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
