@@ -28,6 +28,8 @@ g "$W" checkout -q -b fr2 "$FR1"; echo v2 >"$W/forge-gui/res/cardsfolder/a/a.txt
 # DX: a driver that also edits a card script (tree mismatch); DC: one that edits a.txt (conflict)
 g "$W" checkout -q -b dx "$D1"; echo x >"$W/forge-gui/res/cardsfolder/a/b.txt"; g "$W" add -A; g "$W" commit -q -m DX; DX=$(g "$W" rev-parse HEAD)
 g "$W" checkout -q -b dc "$D1"; echo conflict >"$W/forge-gui/res/cardsfolder/a/a.txt"; g "$W" commit -q -am DC; DC=$(g "$W" rev-parse HEAD)
+# FR3: a FORGE_REF that also brings Forge code (an upstream merge): pin must leave it to a person
+g "$W" checkout -q -b fr3 "$FR1"; mkdir -p "$W/forge-game"; echo code >"$W/forge-game/Game.java"; echo v3 >"$W/forge-gui/res/cardsfolder/a/a.txt"; g "$W" add -A; g "$W" commit -q -m FR3; FR3=$(g "$W" rev-parse HEAD)
 git clone -q --bare "$W" "$F"
 
 BIN=$TMP/bin; mkdir -p "$BIN"; LOG=$TMP/gh.log
@@ -50,7 +52,7 @@ chmod +x "$BIN/gh"
 
 # The compliance tree the script runs in.
 C=$TMP/c; git init -q -b develop "$C"; mkdir -p "$C/scripts"; cp "$SCRIPT" "$C/scripts/"
-mkc() { printf '# pin\nFORGE_ORACLE_REF ?= %s\nX ?= 1\n' "$1" >"$C/Makefile"; echo 1111111111111111111111111111111111111111 >"$C/GORGE_PIN"; g "$C" add -A; g "$C" commit -q --allow-empty -m "gorge pin bump"; }
+mkc() { printf '# pin\nFORGE_ORACLE_REF ?= %s\nX ?= 1\n' "$1" >"$C/Makefile"; mkdir -p "$C/cmd/oraclediff"; printf 'package x\n\n// note\nconst forgeOracleDieRollRef = "%s"\n' "$1" >"$C/cmd/oraclediff/forge_dieroll_test.go"; echo 1111111111111111111111111111111111111111 >"$C/GORGE_PIN"; g "$C" add -A; g "$C" commit -q --allow-empty -m "gorge pin bump"; }
 run() { (cd "$C" && env PATH="$BIN:$PATH" GH_LOG="$LOG" FIX="$F" FORGE_FORK_URL="$F" WORK="$TMP/work" "$@" bash scripts/forge-driver-follow.sh "${ARGS[@]}" 2>&1); }
 
 # driver
@@ -71,6 +73,7 @@ new=$(awk '$1 == "FORGE_ORACLE_REF" {print $3}' "$C/Makefile")
 check "pin: merges FR2 into the driver and sets FORGE_ORACLE_REF" $([ "$rc" = 0 ] && [ "$new" != "$D1" ] && git -C "$F" merge-base --is-ancestor "$FR2" "$new" && git -C "$F" merge-base --is-ancestor "$D1" "$new" && echo 0 || echo 1) "rc=$rc $out"
 check "  ...pushed oracle/pin-<FR2 12>" $([ "$(git -C "$F" rev-parse "oracle/pin-${FR2:0:12}" 2>/dev/null)" = "$new" ] && echo 0 || echo 1)
 check "  ...trees equal FORGE_REF's" $([ "$(git -C "$F" rev-parse "$new:forge-gui/res/cardsfolder")" = "$(git -C "$F" rev-parse "$FR2:forge-gui/res/cardsfolder")" ] && echo 0 || echo 1)
+check "  ...forgeOracleDieRollRef follows (card scripts only)" $(/usr/bin/grep -q "^const forgeOracleDieRollRef = \"$new\"" "$C/cmd/oraclediff/forge_dieroll_test.go" && echo 0 || echo 1) "$(cat "$C/cmd/oraclediff/forge_dieroll_test.go")"
 check "  ...amended the bump commit (one commit, Makefile clean)" $([ "$(g "$C" rev-list --count HEAD)" = 2 ] && [ "$(g "$C" log -1 --format=%s)" = "gorge pin bump" ] && g "$C" diff --quiet && /usr/bin/grep -q "merged with gorge FORGE_REF ${FR2:0:10}" "$C/Makefile" && echo 0 || echo 1) "$(g "$C" log --oneline)"
 
 mkc "$DX"; before=$(cat "$C/Makefile")
@@ -79,6 +82,10 @@ check "pin: a driver whose card scripts differ is refused (exit 1, Makefile unto
 mkc "$DC"; before=$(cat "$C/Makefile")
 out=$(run FORGE_REF="$FR2"); rc=$?
 check "pin: a conflicting merge is refused (exit 1, Makefile untouched)" $([ "$rc" = 1 ] && has "$out" "conflicts" && [ "$(cat "$C/Makefile")" = "$before" ] && echo 0 || echo 1) "rc=$rc $out"
+
+mkc "$D1"; before=$(cat "$C/Makefile")
+out=$(run FORGE_REF="$FR3"); rc=$?
+check "pin: a FORGE_REF that brings Forge code is left to a person (exit 1, nothing pushed)" $([ "$rc" = 1 ] && has "$out" "changes Forge code" && [ "$(cat "$C/Makefile")" = "$before" ] && ! git -C "$F" rev-parse -q --verify "oracle/pin-${FR3:0:12}" >/dev/null && echo 0 || echo 1) "rc=$rc $out"
 
 ARGS=(bogus); out=$(run); rc=$?
 check "usage: exit 2" $([ "$rc" = 2 ] && echo 0 || echo 1) "rc=$rc $out"

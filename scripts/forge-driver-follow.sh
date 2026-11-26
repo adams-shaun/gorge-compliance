@@ -123,7 +123,22 @@ pin() {
 		b=$(git -C "$clone" rev-parse "$merged:$p" 2>/dev/null || echo none)
 		[ "$a" = "$b" ] || fail "$p differs between FORGE_REF ${fref:0:10} and the merge ${merged:0:10}: the driver carries script changes FORGE_REF lacks"
 	done
+	# cmd/oraclediff pins the driver its ForcedDieRollTest result holds for (forgeOracleDieRollRef). A merge that adds
+	# only card scripts leaves the driver and die-roll code byte-identical, so the pin follows; one that brings code
+	# (an upstream merge in FORGE_REF) needs that test re-run by a person.
+	if ! git -C "$clone" diff --quiet "$oracle" "$merged" -- . ':!forge-gui/res'; then
+		fail "the merge of ${fref:0:10} changes Forge code beyond forge-gui/res: re-run the driver tests (make forge-driver-tests) and bump FORGE_ORACLE_REF by hand"
+	fi
 	git -C "$clone" push -q "$(push_url)" "$merged:refs/heads/oracle/pin-${fref:0:12}" || fail "push of oracle/pin-${fref:0:12} refused"
+	dr=cmd/oraclediff/forge_dieroll_test.go
+	if [ -f "$dr" ] && /usr/bin/grep -q "^const forgeOracleDieRollRef = \"$oracle\"" "$dr"; then
+		awk -v m="$merged" -v o="${oracle:0:11}" -v f="${fref:0:10}" '
+			/^const forgeOracleDieRollRef = / {
+				print "// " substr(m, 1, 11) " = " o " merged with gorge FORGE_REF " f " by forge-driver-follow.sh pin: card scripts only, driver"
+				print "// and die-roll code byte-identical to " o "."
+				print "const forgeOracleDieRollRef = \"" m "\""; next }
+			{ print }' "$dr" >"$dr.tmp" && mv "$dr.tmp" "$dr"
+	fi
 	awk -v m="$merged" -v f="${fref:0:10}" -v o="${oracle:0:10}" '
 		$1 == "FORGE_ORACLE_REF" && $2 == "?=" {
 			print "# " substr(m, 1, 11) " = " o " merged with gorge FORGE_REF " f " by gorge-pin-follow (scripts/forge-driver-follow.sh pin); fork branch oracle/pin-" f "."
