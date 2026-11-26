@@ -1023,8 +1023,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # every other zone still strict-miss. OrderCardsTest.unpinnedExileOrderKeepsForgeOrder (run-unit-tests.sh) is red on 4385467a9eb
 # and green here; unpinnedOtherZoneStillLooseMisses now asserts Library instead of Exile. Driver-only; die-roll forcing,
 # cardsfolder and tokenscripts unchanged. Fork branch oracle-driver.
+# 3526a90f719 = 1dea7b45ce0 plus the unpinned order-to-Command ask kept (UNOBSERVABLE_ORDER_ZONES gains Command; both snapshots
+# sort a command zone's names -- Forge's SnapshotWriter.commandZone Collections.sort, gorge's digest "sorted; Commander games" --
+# so forge_order.go can never derive a pin there either, and ScriptedController builds the "order to " + destinationZone ask for
+# every destination zone). No scripted card is known to order to Command yet (corpus check: no xproof cluster or scenario names
+# it), so this is latent; OrderCardsTest.unpinnedCommandOrderKeepsForgeOrder (run-unit-tests.sh) is red on 1dea7b45ce0 and green
+# here, and the library and every other zone still strict-miss. Driver-only; die-roll forcing, cardsfolder and tokenscripts
+# unchanged. Fork branch oracle-driver.
 # 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 above (siblings on 4385467a9eb, textually clean, no conflicts): carries both the
 # commander-ninjutsu cost-shape fallback and the unpinned order-to-Exile ask. Fork branch fix/xp-forge-driver-ninjutsu-commander-identity.
+# NOTE (merge): develop's 3526a90f719 (order-to-Command ask kept, sibling of 5ceed32d687 on 1dea7b45ce0) is NOT carried by the pin below;
+# no fork commit holds both yet, so the Command-order driver test (forge-oracle-test-command-order-unpinned.sh) needs a follow-up pin merge.
 FORGE_ORACLE_REF ?= 5ceed32d687df24f60318030685b4dd0370a2218
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 

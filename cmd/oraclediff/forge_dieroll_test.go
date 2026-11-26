@@ -266,6 +266,10 @@ func TestForgeRolledDie(t *testing.T) {
 // OrderCardsTest gains unpinnedExileOrderKeepsForgeOrder and loses Exile from unpinnedOtherZoneStillLooseMisses); StepMachine's
 // order gate is not on the die-roll path, so the forcing is unchanged, and ForcedDieRollTest was re-run green on the pin
 // (run-unit-tests.sh).
+// 3526a90f719 = 1dea7b45ce0 plus the unpinned order-to-Command ask kept (UNOBSERVABLE_ORDER_ZONES gains Command,
+// OrderCardsTest gains unpinnedCommandOrderKeepsForgeOrder); the order gate is still not on the die-roll path, so the forcing
+// is unchanged, and ForcedDieRollTest was re-run green on the pin (run-unit-tests.sh).
+// NOTE (merge): the pin below does not carry 3526a90f719's Command-order change (no fork commit holds both yet); the die-roll path is unaffected.
 // 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 (siblings on 4385467a9eb); neither touches die-roll forcing, and
 // ForcedDieRollTest was re-run green on the merged pin (run-unit-tests.sh).
 const forgeOracleDieRollRef = "5ceed32d687df24f60318030685b4dd0370a2218"

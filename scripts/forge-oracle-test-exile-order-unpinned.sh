@@ -10,18 +10,20 @@
 # Exile are sorted names", so forge_order.go can never derive a pin for the
 # ask. StepMachine.orderCards used to strict-miss it with an empty leftover;
 # it now keeps Forge's offered order for an unpinned ask at exactly a
-# graveyard, a battlefield, a hand or an exile, the same fix the hand ask got
-# (the Wrenn and Seven -8). Every other zone (library arrange/dig, command,
-# stack, sideboard) still strict-misses, and a pin a checkpoint can see is
-# still consumed and still orders the ask.
+# graveyard, a battlefield, a hand, an exile or a command zone, the same fix
+# the hand ask got (the Wrenn and Seven -8). Every other zone (library
+# arrange/dig, stack, sideboard) still strict-misses, and a pin a checkpoint
+# can see is still consumed and still orders the ask.
 #
 # OrderCardsTest.unpinnedExileOrderKeepsForgeOrder is red on the previous pin
 # 4385467a9eb and green here; unpinnedOtherZoneStillLooseMisses now asserts
-# Library instead of Exile. The wrapper asserts the 18-test count and the
-# exile name, not just the class's exit status: a pin that predates the test
-# would otherwise run green and silently drop the coverage. Needs the
-# out-of-tree build at FORGE_ORACLE_REF (make forge-oracle-setup), like the
-# other forge-oracle-test-*.sh. Usage:
+# Library instead of Exile. The wrapper asserts the 19-test count (the class
+# gained unpinnedCommandOrderKeepsForgeOrder,
+# scripts/forge-oracle-test-command-order-unpinned.sh) and the
+# exile name, not just the class's exit
+# status: a pin that predates the test would otherwise run green and silently
+# drop the coverage. Needs the out-of-tree build at FORGE_ORACLE_REF (make
+# forge-oracle-setup), like the other forge-oracle-test-*.sh. Usage:
 # forge-oracle-test-exile-order-unpinned.sh [OUTDIR]
 set -euo pipefail
 
@@ -44,11 +46,12 @@ FORGE_ORACLE_DIR=$forge FORGE_ORACLE_JDK=$jdk \
   FORGE_ORACLE_TEST_CLASSES=forge.oracle.OrderCardsTest \
   bash "$runner" 2>&1 | tee "$log"
 
-want=18
+want=19
 passes=$(grep -c '^PASS OrderCardsTest\.' "$log" || true)
 [ "$passes" -eq "$want" ] || fail "OrderCardsTest passed $passes tests, want $want: the pinned driver is missing the exile-order test"
 for t in unpinnedGraveyardOrderKeepsForgeOrder unpinnedBattlefieldOrderKeepsForgeOrder \
   unpinnedHandOrderKeepsForgeOrder unpinnedExileOrderKeepsForgeOrder \
+  unpinnedCommandOrderKeepsForgeOrder \
   unpinnedOtherZoneStillLooseMisses pinnedGraveyardOrderStillApplies; do
   grep -qx "PASS OrderCardsTest\.$t" "$log" || fail "OrderCardsTest.$t did not pass; the pinned driver is missing the unpinned-order fix"
 done
