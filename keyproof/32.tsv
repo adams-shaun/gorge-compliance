@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3241a3f5-7ae5-4497-9dd2-a55f3370a055	cast	cast-resolve	agreed	-	FX	scen	2	0	Solve for Disappointment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
-3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	a2fe095204a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 32438050-5ae7-4c19-bcaf-5a07a673e0e0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:reef-roads:f0a0:s1,f:xs:XP:reef-roads:f0a0:s1	-	-	-	da6bc3fe8458	-	1f3ff3f7c59c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32654ffa-b869-4f8b-a153-4242e8f9d92e	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3269f589-00fc-4f0b-8693-656f2ab0670d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3269f589-00fc-4f0b-8693-656f2ab0670d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+3269f589-00fc-4f0b-8693-656f2ab0670d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	a2fe095204a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 326adf88-3f6d-4bc2-aafa-dd55c6c95784	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-baron-of-vizkopa:cast:s1,f:xs:XP:blood-baron-of-vizkopa:cast:s1	-	-	-	d864b561c9cb	-	e542ed23ab1d	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 326ba371-124c-4949-a048-3a0c8962e567	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ickspitter:f0a0:s1,f:xs:XP:rakdos-ickspitter:f0a0:s1	-	-	-	23c4009444b0	-	f404b88708ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1,f:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1,f:xs:XP:invasion-of-eldraine-prickle-faeries:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	a2fe095204a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32a8ca5f-0170-4f5d-97cd-63e2b74fd653	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:groffskithur:f0t0:s1,f:xs:XP:groffskithur:f0t0:s1	-	-	-	6f84be0f34c0	-	35de71f7d003	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 32a9dac0-247e-42d5-bfd3-465043515e12	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hag-of-syphoned-breath:f0t0:s1	-	-	-	23c4009444b0	-	907fc2dac6c3	-	-	2026-11-25	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32b0fc43-b5ce-4869-a780-946289305e5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32b401e9-163f-4917-a728-fc63b25ef602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32bb6d53-3b9e-4f13-a17e-46b564afd366	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32bb6d53-3b9e-4f13-a17e-46b564afd366	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+32bb6d53-3b9e-4f13-a17e-46b564afd366	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	a2fe095204a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 32c10a3e-85b0-49af-9b23-81d0b7e407df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c84176-cf11-4010-b1cc-ed570a8c3e54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c91719-f3dd-4cc7-9e32-7d5ccf18f07c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:radiant-grove:f0a0:s1,f:xs:XP:radiant-grove:f0a0:s1	-	-	-	054d9f516953	-	9257209e9655	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
