@@ -3,8 +3,10 @@ package scen
 import (
 	"bytes"
 	"encoding/json"
+	"os"
 	"reflect"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -2896,5 +2898,58 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 	}
 	if res.Path != PathStart || res.Reason != "" {
 		t.Errorf("vanilla: path %q reason %q, want start", res.Path, res.Reason)
+	}
+}
+
+// The refusal reasons of cards unrelated to the harness census are unchanged.
+func TestScenRefusalReasonsUnchanged(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key, reason string }{
+		{"Thornvault Forager", "f0/a1", "steps-needed:cost:Forage"},
+		{"Banner of Kinship", "static#0.0", "as-enters"},
+		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
+		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", r.card, r.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != r.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", r.card, r.key, res.Path, res.Reason, r.reason)
+		}
+	}
+}
+
+// harness-census.tsv: the signature rows sum to the declared harness total
+// and each row's card count matches its names.
+func TestHarnessCensus(t *testing.T) {
+	b, err := os.ReadFile("testdata/harness-census.tsv")
+	if err != nil {
+		t.Fatal(err)
+	}
+	total, sum, rows := -1, 0, 0
+	for _, l := range strings.Split(strings.TrimRight(string(b), "\n"), "\n") {
+		if v, ok := strings.CutPrefix(l, "# harness-keys "); ok {
+			total, _ = strconv.Atoi(v)
+			continue
+		}
+		if strings.HasPrefix(l, "#") || strings.HasPrefix(l, "signature\t") {
+			continue
+		}
+		c := strings.Split(l, "\t")
+		if len(c) != 4 || !strings.HasPrefix(c[0], "x=") || !strings.Contains(c[0], "+f=") {
+			t.Fatalf("bad census row %q", l)
+		}
+		keys, _ := strconv.Atoi(c[1])
+		cards, _ := strconv.Atoi(c[2])
+		if names := strings.Split(c[3], "; "); len(names) != cards || keys < cards {
+			t.Errorf("%s: %d keys, %d cards, names %v", c[0], keys, cards, names)
+		}
+		sum += keys
+		rows++
+	}
+	if total < 0 || rows == 0 || sum != total {
+		t.Errorf("census rows sum to %d keys over %d signatures, header says %d", sum, rows, total)
 	}
 }
