@@ -34,7 +34,8 @@ gorge does not log the decision.
   either-or additional cost whose preferred branch is unpayable (`altaddcost`, the fallback is paid
   without asking, CR 601.2b). A `ResolutionOptionalPaymentChoice` phase does pose is answered from
   the same decision. Equip with one legal creature is phase's auto-target path (no `EquipTarget`
-  prompt), so the stack sweep consumes its target decision, including one logged on the mana step.
+  prompt), so the stack sweep consumes its target decision, including one logged on the mana step;
+  when phase does pose `EquipTarget`, that prompt accepts the same earlier-step decision.
 - Cards that print or grant banding (including `BandsWithOther`) are refused by the preflight:
   phase has no CR 702.22c band choice, so the game would ask a prompt phase never poses.
 - Scry and surveil: phase cannot be told gorge's bottom order, so the cards bottomed by a scry

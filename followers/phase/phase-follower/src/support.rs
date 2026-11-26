@@ -65,7 +65,9 @@ fn banding_source(v: &Value) -> Option<&'static str> {
 }
 
 fn face_reason(face: &CardFace) -> Option<String> {
-    let json = serde_json::to_value(face).ok()?;
+    // A face that cannot serialise still gets the gap and misparse checks below; only the
+    // keyword and random searches need the JSON.
+    let json = serde_json::to_value(face).unwrap_or(Value::Null);
     // A missing combat rule is a hard refusal: phase cannot present the prompt at all.
     if let Some(kind) = banding_source(&json) {
         return Some(format!("phase lacks rule: {kind} cannot be chosen (CR 702.22c)"));

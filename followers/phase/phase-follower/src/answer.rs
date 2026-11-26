@@ -208,8 +208,9 @@ pub fn sweep_stack_targets(
 
 /// Target refs of `step` and every earlier step, in step order, up to `max`. The engine chooses a
 /// keyword action's target without a prompt while the recording's step is the checkpoint then
-/// current, which can be the mana step that funded the activation; matching by the entry's own
-/// target keeps this from taking a decision that names some other object.
+/// current, which can be the mana step that funded the activation; the same earlier-step decision
+/// reaches the `EquipTarget` prompt when phase asks after the mana payment. Both callers match by
+/// the entry's own target, so an earlier decision for another object is not taken.
 fn take_target_refs_through(
     queue: &mut DecisionQueue,
     step: usize,
@@ -762,7 +763,10 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         // the creatures tapped.
         WaitingFor::EquipTarget { equipment_id, valid_targets, .. } => {
             let board = cur.board;
-            let refs = cur.queue.take_target_refs(cur.step as i32, 1, |r| {
+            // phase can take the equip target after the mana payment of the same activation, so
+            // gorge logs the decision on an earlier step. Take it from this step or any earlier one,
+            // as the stack sweep does for the auto-target path.
+            let refs = take_target_refs_through(&mut *cur.queue, cur.step, 1, |r| {
                 matches!(target_of(board, r), Some(TargetRef::Object(id)) if valid_targets.contains(&id))
             });
             let a = refs.first().and_then(|r| match target_of(board, r) {
@@ -1465,11 +1469,12 @@ mod tests {
 
     #[test]
     fn answer_equip_target_by_ref() {
-        let target = |name: &str| {
+        let at = |step: usize, name: &str| {
             format!(
-                r#"{{"step":1,"seat":0,"kind":"target","picks":["{name} (a)"],"pick_refs":["p0:{name}"],"object_picks":["p0:{name}"],"pick_kinds":["permanent"],"gorge_kind":"target"}}"#
+                r#"{{"step":{step},"seat":0,"kind":"target","picks":["{name} (a)"],"pick_refs":["p0:{name}"],"object_picks":["p0:{name}"],"pick_kinds":["permanent"],"gorge_kind":"target"}}"#
             )
         };
+        let target = |name: &str| at(1, name);
         let (s, rb) = last(&equip_request(&target("Runeclaw Bear")));
         assert_eq!(perm(&s, 0, "Runeclaw Bear").attached_to, None, "equipment is the attached one");
         assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Runeclaw Bear"), "{:?}", rb.notes);
@@ -1477,6 +1482,12 @@ mod tests {
         // The other creature takes it when gorge picked that one.
         let (s, _) = last(&equip_request(&target("Grizzly Bears")));
         assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Grizzly Bears"));
+        // phase can take the target after the activation's mana payment, so gorge logs it on the
+        // mana step (0) while the prompt is still at the activate step (1). The prompt must consume
+        // the earlier decision, exactly as the stack sweep does for the auto-target path.
+        let (s, rb) = last(&equip_request(&at(0, "Grizzly Bears")));
+        assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Grizzly Bears"), "{:?}", rb.notes);
+        assert_eq!(rb.leftover, None, "{:?}", rb.notes);
         // No decision with two legal creatures: a strict miss that names the prompt.
         let (out, _) = go(&equip_request(""));
         assert_eq!(miss_of(out), "Missing EquipTarget answer at step 1");
