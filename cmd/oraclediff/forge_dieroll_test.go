@@ -269,10 +269,13 @@ func TestForgeRolledDie(t *testing.T) {
 // 3526a90f719 = 1dea7b45ce0 plus the unpinned order-to-Command ask kept (UNOBSERVABLE_ORDER_ZONES gains Command,
 // OrderCardsTest gains unpinnedCommandOrderKeepsForgeOrder); the order gate is still not on the die-roll path, so the forcing
 // is unchanged, and ForcedDieRollTest was re-run green on the pin (run-unit-tests.sh).
-// NOTE (merge): the pin below does not carry 3526a90f719's Command-order change (no fork commit holds both yet); the die-roll path is unaffected.
+// NOTE (merge): pin 5ceed32d687 did not carry 3526a90f719's Command-order change (no fork commit held both yet); the die-roll path is unaffected.
 // 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 (siblings on 4385467a9eb); neither touches die-roll forcing, and
 // ForcedDieRollTest was re-run green on the merged pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "5ceed32d687df24f60318030685b4dd0370a2218"
+// edf8473c4d6 = the merge of 5ceed32d687 and 3526a90f719 (siblings on 1dea7b45ce0, textually clean), so the pin carries both
+// unpinned order asks (Exile and Command); neither side touches die-roll forcing, and ForcedDieRollTest was re-run green on
+// the merged pin (7/7, run-unit-tests.sh).
+const forgeOracleDieRollRef = "edf8473c4d64d76ccd35280b666aaa2257b5eff5"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
