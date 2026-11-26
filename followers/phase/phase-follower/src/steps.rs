@@ -9,6 +9,7 @@
 //! answers itself is `ManaPayment` (pin the pool units gorge spent, then finalise).
 
 use std::cell::Cell;
+use std::collections::BTreeMap;
 
 use engine::ai_support::legal_actions_full;
 use engine::game::combat::AttackTarget;
@@ -29,7 +30,7 @@ use engine::types::Keyword;
 use follower_proto::batch::{RowBuilder, Stop};
 use follower_proto::decisions::DecisionQueue;
 use follower_proto::refs::Ref;
-use follower_proto::request::{NeutralAbility, Request, Step};
+use follower_proto::request::{Decision, NeutralAbility, Request, Step};
 use follower_proto::row::strict_miss_msg;
 use follower_proto::vocab;
 use serde_json::Value;
@@ -941,7 +942,8 @@ impl Machine<'_> {
         }
     }
 
-    /// At `ManaPayment`: pin the pool units to spend, then finalise (`PassPriority`).
+    /// At `ManaPayment`: apply gorge's Delve exiles, pin the pool units to spend, then finalise
+    /// (`PassPriority`).
     fn pay(&mut self, player: PlayerId) -> Result<(), Stop> {
         let i = self.step;
         let gorge_spent = self.req.item.payment.get(i).map(String::as_str).unwrap_or("");
@@ -962,12 +964,125 @@ impl Machine<'_> {
             let actor = self.board.state.waiting_for.acting_player().unwrap_or(player);
             let _ = apply(&mut self.board.state, actor, GameAction::SpendPoolMana { pip_id: pip });
         }
+        self.pay_delve()?;
         self.act(GameAction::PassPriority, "ManaPayment")?;
         if matches!(self.state().waiting_for, WaitingFor::ManaPayment { .. }) {
             return Err(harness(format!("mana payment incomplete at step {i}: the pool does not cover the cost")));
         }
         Ok(())
     }
+
+    /// CR 702.66a: Delve is not a `WaitingFor` prompt. phase exposes it as one `TapForConvoke`
+    /// per graveyard card while a spell with Delve is being paid for, and gorge records the
+    /// caster's exiles as one `choose_n` decision (a pick per card, with `[choice_skip]` as the
+    /// Done option). Apply exactly the picks phase's own legal set offers. The legal set is the
+    /// authority on whether this is a Delve payment at all (it is empty for every other cast), so
+    /// a future decision shape that still names graveyard cards is matched by the cards, not by a
+    /// hard-coded decision kind list.
+    fn pay_delve(&mut self) -> Result<(), Stop> {
+        let i = self.step;
+        let offered: BTreeMap<ObjectId, String> = legal_actions_full(self.state())
+            .0
+            .into_iter()
+            .filter_map(|action| match action {
+                GameAction::TapForConvoke { object_id, mana_type: ManaType::Colorless } => self
+                    .state()
+                    .objects
+                    .get(&object_id)
+                    .filter(|o| o.zone == Zone::Graveyard)
+                    .map(|o| (object_id, o.name.clone())),
+                _ => None,
+            })
+            .collect();
+        if offered.is_empty() {
+            return Ok(());
+        }
+        let board = &self.board;
+        let Some(decision) = self.queue.take(i as i32, |d| is_delve_decision(d, board, &offered)) else {
+            return Ok(());
+        };
+        let picks = delve_pick_ids(&decision, board, &offered)
+            .map_err(|e| Stop::StrictMiss(strict_miss_msg("ManaPayment", i as i64, &e)))?;
+        for object_id in picks {
+            self.act(GameAction::TapForConvoke { object_id, mana_type: ManaType::Colorless }, "Delve")?;
+        }
+        Ok(())
+    }
+}
+
+/// The Done option of a gorge multi-pick ask (`[choice_skip]`, and any other bracketed sentinel).
+fn is_choice_skip(label: &str) -> bool {
+    let t = label.trim();
+    t.starts_with('[') && t.ends_with(']')
+}
+
+/// The live object an offered Delve ref or label names. Refs are matched against the legal set
+/// (so a ref naming some other card cannot be taken for a Delve pick); a label falls back to the
+/// card name with gorge's optional ` (b)`/` (t)` spelling stripped.
+fn offered_object(board: &Board, offered: &BTreeMap<ObjectId, String>, token: &str) -> Option<ObjectId> {
+    let t = token.trim();
+    if t.is_empty() || is_choice_skip(t) {
+        return None;
+    }
+    if let Ok(r) = Ref::parse(t) {
+        if let Some(id) = board.resolve(&r).filter(|id| offered.contains_key(id)) {
+            return Some(id);
+        }
+    }
+    let name = t.rsplit_once(" (").map_or(t, |(name, _)| name);
+    offered.iter().find(|(_, n)| n.eq_ignore_ascii_case(name)).map(|(id, _)| *id)
+}
+
+/// Whether `d` is gorge's Delve ask at this payment: every identity it names is in phase's
+/// offered graveyard set, and (for a declined ask) the ask enumerated exactly such a set.
+fn is_delve_decision(d: &Decision, board: &Board, offered: &BTreeMap<ObjectId, String>) -> bool {
+    if d.kind != "choose_n" || d.gorge_kind != "choose" {
+        return false;
+    }
+    if !d.pick_refs.is_empty() || !d.object_picks.is_empty() {
+        return d
+            .pick_refs
+            .iter()
+            .chain(d.object_picks.iter())
+            .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r).is_some());
+    }
+    if d.picks.is_empty() {
+        return !d.option_refs.is_empty()
+            && d.option_refs
+                .iter()
+                .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r).is_some());
+    }
+    d.picks.iter().all(|p| is_choice_skip(p) || offered_object(board, offered, p).is_some())
+}
+
+/// The offered objects gorge's Delve picks name, in pick order and without repeats. Refs win over
+/// labels; a label picks the first still-unused offered card of that name (all Swamps are one
+/// card, and the exile set does not care which copy). A pick that names no offered card is a miss
+/// rather than a silent no-op.
+fn delve_pick_ids(d: &Decision, board: &Board, offered: &BTreeMap<ObjectId, String>) -> Result<Vec<ObjectId>, String> {
+    let mut out: Vec<ObjectId> = Vec::new();
+    let n = d.pick_refs.len().max(d.object_picks.len()).max(d.picks.len());
+    for k in 0..n {
+        let token = if let Some(r) = d.pick_refs.get(k).filter(|r| !r.is_empty()) {
+            r.as_str()
+        } else if let Some(r) = d.object_picks.get(k).filter(|r| !r.is_empty()) {
+            r.as_str()
+        } else if let Some(label) = d.picks.get(k) {
+            label.as_str()
+        } else {
+            continue;
+        };
+        if is_choice_skip(token) {
+            continue;
+        }
+        let id = offered_object(board, offered, token)
+            .ok_or_else(|| format!("gorge's Delve pick {token:?} is not one of phase's offered graveyard cards"))?;
+        if out.contains(&id) {
+            return Err(format!("gorge's Delve picks name {} twice", offered.get(&id).map_or("a card", String::as_str)));
+        }
+        out.push(id);
+    }
+    Ok(out)
 }
 
 /// gorge's decision kind for the prompts `pass_to` can stop on ("" for any other).
@@ -1223,6 +1338,82 @@ mod tests {
         assert_eq!(on_bf(resolve, 0, "Grizzly Bears"), 1);
         assert_eq!((resolve.step.as_str(), resolve.priority), ("main1", 0));
         assert!(rb.notes.iter().any(|n| n.starts_with("mana added")), "{:?}", rb.notes);
+    }
+
+    /// CR 702.66a: gorge's recorded Delve exiles (one `choose_n` pick per card, the ask's
+    /// trailing `[choice_skip]` is its Done) must become phase's `TapForConvoke` markers during
+    /// the manual payment, so the exiled graveyard matches and the cost is paid.
+    #[test]
+    fn delve_cast_exiles_gorge_picks() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[{"step":1,"seat":0,"kind":"choose_n","options":7,
+                "picks":["Swamp","Swamp","Swamp","Swamp","Swamp","[choice_skip]"],
+                "pick_idx":[0,1,2,3,4],"pick_refs":["p0:Swamp","p0:Swamp#2","p0:Swamp#3","p0:Swamp#4","p0:Swamp#5"],
+                "pick_kinds":["exile","exile","exile","exile","exile","choice_skip"],
+                "via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.checkpoint, "step 1 (cast)");
+        assert_eq!(cast.stack.len(), 1);
+        assert_eq!(cast.players[0].graveyard, ["Swamp", "Swamp"], "five Swamps exiled, two left");
+        assert_eq!(on_bf(cast, 0, "Sultai Scavenger"), 0);
+        let resolved = &rb.snapshots[3];
+        assert!(resolved.stack.is_empty());
+        assert_eq!(on_bf(resolved, 0, "Sultai Scavenger"), 1);
+        assert_eq!(resolved.players[0].graveyard, ["Swamp", "Swamp"]);
+        assert_eq!(rb.leftover, None, "the Delve decision is consumed");
+    }
+
+    /// The same path with an `{X}{B}` Delve spell: the X answer and the target come from the
+    /// answerer, the seven exiles pay all seven generic, and the one black mana pays the pip.
+    #[test]
+    fn delve_x_spell_pays_with_all_seven() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Swamp"],"hand":["Delve Too Deep"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]},
+                "p1":{"battlefield":["Grizzly Bears"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Swamp","ability_index":0},
+                     {"op":"cast","seat":0,"card":"p0:Delve Too Deep","targets":["p1:Grizzly Bears"]},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[
+                {"step":1,"seat":0,"kind":"target","picks":["Grizzly Bears (b)"],
+                 "pick_refs":["p1:Grizzly Bears"],"object_picks":["p1:Grizzly Bears"],
+                 "pick_kinds":["permanent"],"via":"target","gorge_kind":"target","min":1,"max":1},
+                {"step":1,"seat":0,"kind":"choose_n","options":8,"picks":["X = 7"],"pick_idx":[7],
+                 "pick_refs":["X = 7"],"pick_kinds":["x"],"via":"answer","gorge_kind":"choose","min":1,"max":1},
+                {"step":1,"seat":0,"kind":"choose_n","options":7,
+                 "picks":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","[choice_skip]"],
+                 "pick_refs":["p0:Swamp#2","p0:Swamp#3","p0:Swamp#4","p0:Swamp#5","p0:Swamp#6","p0:Swamp#7","p0:Swamp#8"],
+                 "pick_kinds":["exile","exile","exile","exile","exile","exile","exile","choice_skip"],
+                 "via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":7}],
+            "neutral":{"ability":{"0":{"class":"intrinsic_mana","ordinal":0,"cost":"{T}","produces":"B"}}}}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.checkpoint, "step 1 (cast)");
+        assert!(cast.players[0].graveyard.is_empty(), "all seven Swamps exiled");
+        assert_eq!(cast.stack.len(), 1);
+        let resolved = &rb.snapshots[3];
+        assert!(resolved.stack.is_empty());
+        assert_eq!(resolved.players[0].graveyard, ["Delve Too Deep"]);
+        assert_eq!(on_bf(resolved, 1, "Grizzly Bears"), 0, "X = 7 kills the 2/2");
+        assert_eq!(rb.leftover, None);
+    }
+
+    /// A Delve ask gorge declined is still one decision: consume it, pay with mana, exile nothing.
+    #[test]
+    fn delve_declined_decision_is_consumed() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"5B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"}]},
+            "gorge_decisions":[{"step":1,"seat":0,"kind":"choose_n","options":7,"picks":[],
+                "option_refs":["p0:Swamp","p0:Swamp#2","p0:Swamp#3","p0:Swamp#4","p0:Swamp#5","p0:Swamp#6","p0:Swamp#7"],
+                "via":"cast fallback","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.players[0].graveyard.len(), 7, "declined Delve exiles nothing");
+        assert_eq!(cast.stack.len(), 1);
+        assert_eq!(rb.leftover, None, "the declined Delve decision is consumed");
     }
 
     #[test]
