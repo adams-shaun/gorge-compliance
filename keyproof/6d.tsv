@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 6d03971a-8365-449a-8fbe-07b5b9bb42dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	a112dec6a3cd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:prosperous-thief:f0t0:s1,f:xs:XP:prosperous-thief:f0t0:s1	-	-	-	054d9f516953	-	23c28378593e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6d0a2e5f-af10-4754-81d7-b7afa6282d7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nectar-faerie:cast:s1,f:xs:XP:nectar-faerie:cast:s1	-	-	-	054d9f516953	-	710b9a77100b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6d0a2e5f-af10-4754-81d7-b7afa6282d7d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:nectar-faerie:f0a0:s1,f:xs:XP:nectar-faerie:f0a0:s1	-	-	-	054d9f516953	-	710b9a77100b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d972501-4174-4bf0-a26b-2edef31b3a0c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:slumbering-walker:cast:s1	-	-	-	23c4009444b0	-	412066f9b597	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d972501-4174-4bf0-a26b-2edef31b3a0c	f0/t0	Phase	agreed	-	F	start	4	0	f:xs:XP:slumbering-walker:cast:s1	-	-	-	23c4009444b0	-	412066f9b597	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	a112dec6a3cd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:orochi-soul-reaver:f0t0:s1,f:xs:XP:orochi-soul-reaver:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 6d9af084-cd5d-4242-b0f0-24a36d0a75d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d9af084-cd5d-4242-b0f0-24a36d0a75d4	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-worker:f0t0:s1,f:xs:XP:arcbound-worker:f0t0:s1	-	-	-	d864b561c9cb	-	682050e4e23c	-	-	2026-11-24	xproof
@@ -122,9 +122,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d9f2fe0-5657-45b4-9431-36e0f6c8eba2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:prison-sentence:cast:s1,f:xs:XP:prison-sentence:cast:s1	-	-	-	ae86f6029288	-	442bd81e0bd0	-	-	2026-11-24	xproof
 6d9f2fe0-5657-45b4-9431-36e0f6c8eba2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:prison-sentence:cast:s1,f:xs:XP:prison-sentence:cast:s1	-	-	-	ae86f6029288	-	442bd81e0bd0	-	-	2026-11-24	xproof
 6da00e2d-4287-48eb-8abe-d153318381fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	cast	cast	owed	harness	-	start	0	0	-	-	-	-	a112dec6a3cd	-	3b6fecdd04ee	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	f0/a0	Attach/Equip	owed	harness	-	start	0	0	-	-	-	-	a112dec6a3cd	-	3b6fecdd04ee	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	a112dec6a3cd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	cast	cast	owed	harness	-	start	0	0	-	-	-	-	10001bf36440	-	3b6fecdd04ee	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	f0/a0	Attach/Equip	owed	harness	-	start	0	0	-	-	-	-	10001bf36440	-	3b6fecdd04ee	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+6da2b7c2-e04d-43c4-9cbb-0bc17feb060d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	10001bf36440	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 6da4f16c-f187-479e-b19b-78a137b1abe5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:virtus-the-veiled:f0t1:s1,f:xs:XP:virtus-the-veiled:f0t1:s1	-	-	-	23c4009444b0	-	ef9d92ad6ce4	-	-	2026-11-25	xproof
 6da4f16c-f187-479e-b19b-78a137b1abe5	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:virtus-the-veiled:f0t0:s1,f:xs:XP:virtus-the-veiled:f0t0:s1	-	-	-	65d07beecc37	-	ef9d92ad6ce4	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 6da4f16c-f187-479e-b19b-78a137b1abe5	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:virtus-the-veiled:f0t1:s1,f:xs:XP:virtus-the-veiled:f0t1:s1	-	-	-	23c4009444b0	-	ef9d92ad6ce4	-	-	2026-11-25	xproof
