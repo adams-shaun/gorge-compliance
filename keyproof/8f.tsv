@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f5b71fd-469f-4370-a806-9bfefbae03a2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:collector-s-cage:f0a0:s1,f:xs:XP:collector-s-cage:f0a0:s1	-	-	-	336eab778104	-	e78238c68741	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 8f5b71fd-469f-4370-a806-9bfefbae03a2	f0/t0	ChangesZone/Hideaway	agreed	-	FX	start	1	0	x:xs:XP:collector-s-cage:f0t0:s2,f:xs:XP:collector-s-cage:f0t0:s2	-	-	-	267e485f6204	-	e78238c68741	-	-	2026-11-24	xproof
 8f5c52d2-0583-4c94-a043-15b2118877fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f5c52d2-0583-4c94-a043-15b2118877fa	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	7bc2927dcfca	-	f18d953c4c82	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8f5c52d2-0583-4c94-a043-15b2118877fa	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	2b206b761ee7	-	f18d953c4c82	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8f5ffb0b-0585-4a37-8048-eda53990d1dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:old-rutstein:f0t1:s1,f:xs:XP:old-rutstein:f0t1:s1	-	-	-	3aa6ded33acb	-	91e10f38e870	-	-	2026-11-25	xproof
 8f5ffb0b-0585-4a37-8048-eda53990d1dd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:old-rutstein:f0t1:s1,f:xs:XP:old-rutstein:f0t1:s1	-	-	-	3aa6ded33acb	-	91e10f38e870	-	-	2026-11-25	xproof
 8f5ffb0b-0585-4a37-8048-eda53990d1dd	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:old-rutstein:f0t1:s1,f:xs:XP:old-rutstein:f0t1:s1	-	-	-	3aa6ded33acb	-	91e10f38e870	-	-	2026-11-25	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f91e7aa-a2d4-42ed-a959-3acd621679a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hologram-stalker:f0t0:s1,f:xs:XP:hologram-stalker:f0t0:s1	-	-	-	25696bf19d5b	-	e8042bfdf598	-	-	2026-11-24	xproof
 8f91e7aa-a2d4-42ed-a959-3acd621679a5	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hologram-stalker:f0t0:s1,f:xs:XP:hologram-stalker:f0t0:s1	-	-	-	25696bf19d5b	-	e8042bfdf598	-	-	2026-11-24	xproof
 8f933fae-6c0c-42d7-a817-14760d8285cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f933fae-6c0c-42d7-a817-14760d8285cd	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	7bc2927dcfca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8f933fae-6c0c-42d7-a817-14760d8285cd	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	2b206b761ee7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8f94754d-fb2a-4634-a1de-049c82fa6f30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f9535f2-f00c-40d3-9997-d1c0ece15f9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f9535f2-f00c-40d3-9997-d1c0ece15f9f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:stealer-of-secrets:f0t0:s1,f:xs:XP:stealer-of-secrets:f0t0:s1	-	-	-	23c4009444b0	-	36f550ee029e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38347ab3-ae43-4d10-b665-8520ace0eb76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-filigree-sylex:cast:s1,f:xs:XP:the-filigree-sylex:cast:s1	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
 38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a0	PutCounter	agreed	-	FX	start	3	0	x:xs:XP:the-filigree-sylex:cast:s2,f:xs:XP:the-filigree-sylex:cast:s2	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
 38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a1	DestroyAll	agreed	-	FX	start	3	0	x:xs:XP:the-filigree-sylex:cast:s1,f:xs:XP:the-filigree-sylex:cast:s1	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
-38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a2	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	7bc2927dcfca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a2	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	2b206b761ee7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3834d3b0-9b66-465a-a8dc-22875a819fd9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:emancipation-angel:cast:s1,f:xs:XP:emancipation-angel:cast:s1	-	-	-	d864b561c9cb	-	365b161d3927	-	-	2026-11-24	xproof
 3834d3b0-9b66-465a-a8dc-22875a819fd9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:emancipation-angel:cast:s1,f:xs:XP:emancipation-angel:cast:s1	-	-	-	d864b561c9cb	-	365b161d3927	-	-	2026-11-24	xproof
 3835cb81-b6e4-4be8-9d49-8307ddc2e1a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38517711-e570-4337-b269-addcf8bfdd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	Blocks/Bushido	agreed	-	FX	start	2	0	x:xs:XP:mothrider-samurai:f0t0:s1,f:xs:XP:mothrider-samurai:f0t0:s1	-	-	-	6f84be0f34c0	-	a705500945cd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-38530399-d2c9-4445-92ba-14c5cd438055	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	7bc2927dcfca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+38530399-d2c9-4445-92ba-14c5cd438055	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	2b206b761ee7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:matter-reshaper:f0t0:s1	-	-	-	d864b561c9cb	-	25fd38f32e72	-	-	2026-11-24	xproof
 38561191-ecd1-4028-a0fd-4bca6a7eab58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troi-winging-it:cast:s1,f:xs:XP:troi-winging-it:cast:s1	-	-	-	8c0bd19283bb	-	9015cd3e1db0	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.0	static.cant-block-by-blocker-filter	agreed	-	FX	start	2	0	x:xs:XP:gate-colossus:static0.0:s1,f:xs:XP:gate-colossus:static0.0:s1	-	-	-	6f84be0f34c0	-	e37497feec00	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.1	static.cost	agreed	-	FX	start	2	0	x:xs:XP:gate-colossus:static0.1:s1,f:xs:XP:gate-colossus:static0.1:s1	-	-	-	6f84be0f34c0	-	e37497feec00	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:righteous-authority:cast:s1,f:xs:XP:righteous-authority:cast:s1	-	-	-	d864b561c9cb	-	73b012cf8628	-	-	2026-11-24	xproof
-386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	7bc2927dcfca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	2b206b761ee7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 3871cad2-e793-4c41-ac79-f84cbc2634a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	3aa6ded33acb	-	d4d8f32180b2	-	-	2026-11-25	xproof
 3871cad2-e793-4c41-ac79-f84cbc2634a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	3aa6ded33acb	-	d4d8f32180b2	-	-	2026-11-25	xproof
 3875aef0-3102-4fbf-be90-e4139f7a2348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
