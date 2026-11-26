@@ -383,19 +383,89 @@ func zoneStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card 
 		castCarrier(reg, seats[s], name)
 		f.Active = s
 		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "cast"}
-	case origin == "Battlefield" && (dest == "Graveyard" || dest == "Any"):
+	case origin == "Battlefield" && (dest == "Graveyard" || dest == "Any") || origin == "Any" && dest == "Graveyard":
+		// "Put into a graveyard from anywhere" (Origin Any) is met by a
+		// permanent dying, the same start as a dies trigger.
 		name, s := sacCarrier(reg, b, card, filter)
 		if name == "" {
-			return none + ":filter"
+			// No sacrifice carrier is the type the filter names (a Goblin, a
+			// Zombie, a creature with a counter): place a vanilla one and
+			// let the opponent's Murder kill it.
+			if !removalStart(reg, b, card, filter, "Murder", f) {
+				return none + ":filter"
+			}
+			return ""
 		}
 		seats[s].Battlefield = append(seats[s].Battlefield, name)
 		seats[s].Battlefield = append(seats[s].Battlefield, sacLands(reg, name)...)
 		f.Active = s
 		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "ability"}
+	case origin == "Battlefield" && leavesToHand(dest):
+		// "Leaves the battlefield to a hand, exile or library" with no
+		// graveyard: the opponent's Unsummon returns the carrier.
+		if !removalStart(reg, b, card, filter, "Unsummon", f) {
+			return none + ":filter"
+		}
 	default:
 		return none
 	}
 	return ""
+}
+
+// leavesToHand reports a Destination list ("Ante,Command,Exile,Hand,Library",
+// "Hand") a creature returned to its owner's hand meets.
+func leavesToHand(dest string) bool {
+	return slices.Contains(strings.Split(dest, ","), "Hand")
+}
+
+// removalStart is a zone-change trigger on a creature the filter takes, other
+// than the key card: the carrier is placed on the battlefield of the seat the
+// filter names (seat 0 when it says none), with the counters the filter
+// requires, and the other seat casts the removal spell (Murder, Unsummon) at
+// it as its only play. The carrier is the most inert creature that matches
+// (carrierPool), so the one event the start offers is the removal. It reports
+// false, leaving f untouched, when no creature the filter takes is in the
+// pool or the spell is not in the corpus.
+func removalStart(reg *cards.Registry, b *certdeck.Builder, card, filter, spell string, f *StartFile) bool {
+	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	for _, a := range parseFilterCounters(filter, true, false, false) {
+		if !a.known || a.self {
+			continue
+		}
+		name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
+			return c.IsCreature() && FieldBlock(c) == "" && a.matches(c, false) && survivesCounters(c, a.counters)
+		})
+		if name == "" {
+			continue
+		}
+		cs := 0
+		if a.ctrl == ctrlOpp {
+			cs = 1
+		}
+		caster := 1 - cs
+		if !focusCast(reg, b, seats[caster], spell) {
+			return false
+		}
+		seats[cs].Battlefield = append(seats[cs].Battlefield, name)
+		for _, g := range a.counters {
+			seats[cs].Counters = append(seats[cs].Counters, StartCounter{Card: name, Kind: g.kind, N: g.n})
+		}
+		f.Active = caster
+		f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spell, Kind: "cast", Targets: []string{name}}
+		return true
+	}
+	return false
+}
+
+// survivesCounters reports that a creature carrying gates is still alive at
+// the start: -1/-1 counters (M1M1) must leave a toughness.
+func survivesCounters(c *cards.Face, gates []counterGate) bool {
+	for _, g := range gates {
+		if g.kind == "M1M1" && c.Toughness() <= int(g.n) {
+			return false
+		}
+	}
+	return true
 }
 
 // filterHasProp reports whether some alternative of a Forge filter names prop
