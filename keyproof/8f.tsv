@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f5b71fd-469f-4370-a806-9bfefbae03a2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:collector-s-cage:f0a0:s1,f:xs:XP:collector-s-cage:f0a0:s1	-	-	-	336eab778104	-	e78238c68741	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 8f5b71fd-469f-4370-a806-9bfefbae03a2	f0/t0	ChangesZone/Hideaway	agreed	-	FX	start	1	0	x:xs:XP:collector-s-cage:f0t0:s2,f:xs:XP:collector-s-cage:f0t0:s2	-	-	-	267e485f6204	-	e78238c68741	-	-	2026-11-24	xproof
 8f5c52d2-0583-4c94-a043-15b2118877fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f5c52d2-0583-4c94-a043-15b2118877fa	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	e2af8661d368	-	f18d953c4c82	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8f5c52d2-0583-4c94-a043-15b2118877fa	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	392ffc564d05	-	f18d953c4c82	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8f5ffb0b-0585-4a37-8048-eda53990d1dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:old-rutstein:f0t1:s1,f:xs:XP:old-rutstein:f0t1:s1	-	-	-	3aa6ded33acb	-	91e10f38e870	-	-	2026-11-25	xproof
 8f5ffb0b-0585-4a37-8048-eda53990d1dd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:old-rutstein:f0t1:s1,f:xs:XP:old-rutstein:f0t1:s1	-	-	-	3aa6ded33acb	-	91e10f38e870	-	-	2026-11-25	xproof
 8f5ffb0b-0585-4a37-8048-eda53990d1dd	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:old-rutstein:f0t1:s1,f:xs:XP:old-rutstein:f0t1:s1	-	-	-	3aa6ded33acb	-	91e10f38e870	-	-	2026-11-25	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fa3ac81-3dfe-4565-be99-5554f7597b4b	land	land	agreed	-	FX	start	2	0	x:xs:XP:boros-garrison:f0t0:s1,f:xs:XP:boros-garrison:f0t0:s1	-	-	-	d864b561c9cb	-	5255771b2e66	-	-	2026-11-24	xproof
 8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1,f:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1,f:xs:XP:egon-god-of-death-throne-of-death:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	e2af8661d368	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8fa7bd8f-f712-4dd1-9ffb-e30dfe744389	f1/t0	NULL	owed	refused:no-generator:face:not-on-battlefield	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8fb39f48-10a1-4d9c-870a-eeda070bf12b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fb39f48-10a1-4d9c-870a-eeda070bf12b	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fba247e-9849-4a06-84ff-242894b0503a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:recon-craft-theta:f0t0:s1,f:xs:XP:recon-craft-theta:f0t0:s1	-	-	-	8c0bd19283bb	-	f5f7b1c944e1	-	-	2026-11-24	xproof
 8fba247e-9849-4a06-84ff-242894b0503a	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:recon-craft-theta:f0t0:s1,f:xs:XP:recon-craft-theta:f0t0:s1	-	-	-	8c0bd19283bb	-	f5f7b1c944e1	-	-	2026-11-24	xproof
 8fba247e-9849-4a06-84ff-242894b0503a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:recon-craft-theta:f0t0:s1,f:xs:XP:recon-craft-theta:f0t0:s1	-	-	-	8c0bd19283bb	-	f5f7b1c944e1	-	-	2026-11-24	xproof
-8fba247e-9849-4a06-84ff-242894b0503a	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	e2af8661d368	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8fba247e-9849-4a06-84ff-242894b0503a	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	392ffc564d05	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8fbca9ba-8b83-40ca-9f7e-5c483ba76675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fbdca3a-7aa3-4b5a-98d7-9168856045ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fbdca3a-7aa3-4b5a-98d7-9168856045ac	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:selesnya-guildmage:f0a0:s1,f:xs:XP:selesnya-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	db479234a11c	-	-	2026-11-24	xproof
