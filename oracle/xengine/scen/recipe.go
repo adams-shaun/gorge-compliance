@@ -148,6 +148,78 @@ func asEnters(f *cards.Face) bool {
 	return false
 }
 
+// asEntersRefusal is the refusal of a card whose as-enters choice a start that
+// places it cannot make: a land is played, not cast, so its choice (a colour or
+// a type) cannot be made by the one play the focus takes ("as-enters:land");
+// every other card is plain "as-enters".
+func asEntersRefusal(f *cards.Face) string {
+	if f.IsLand() {
+		return "as-enters:land"
+	}
+	return "as-enters"
+}
+
+// asEntersStart serves a trigger key of a card whose own replacement is a
+// ChooseColor: the card is cast from hand on turn 1 (castStart), so the three
+// engines make the choice by their normal decision and the replay carries the
+// pick, and the trigger is then met on the line after the cast:
+//
+//   - a state trigger on the chosen colour (Mode Always: "when you control no
+//     permanents of the chosen color") fires from the cast itself;
+//   - "whenever a player casts a spell of the chosen color" (SpellCast, ValidCard
+//     Card.ChosenColor) is met by a one-mana carrier of each colour in the hand,
+//     the pick not being known when the start is written, and exactly its lands:
+//     the focus bot casts the key card first, the bots then cast the carriers.
+//
+// Any other shape (a type choice, a trigger on another event) refuses by the
+// plain as-enters reason, as does a land (asEntersRefusal).
+func asEntersStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
+	if face.IsLand() || !asEntersColour(face) {
+		return asEntersRefusal(face)
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return asEntersRefusal(face)
+	}
+	switch trig.Mode {
+	case "Always":
+		if !strings.Contains(trig.Params["IsPresent"], "ChosenColor") {
+			return asEntersRefusal(face)
+		}
+	case "SpellCast":
+		if strings.TrimSpace(trig.Params["ValidCard"]) != "Card.ChosenColor" || trig.Params["ValidActivatingPlayer"] != "" {
+			return asEntersRefusal(face)
+		}
+	default:
+		return asEntersRefusal(face)
+	}
+	if why := castStart(reg, b, face, card, generic, f); why != "" {
+		return why
+	}
+	if trig.Mode == "Always" {
+		return ""
+	}
+	p0 := &f.Setup.P0
+	for _, sym := range []string{"W", "U", "B", "R", "G"} {
+		name := pickCarrier(reg, b, card, func(cf *cards.Face) bool { return cf.ManaCost == sym })
+		if name == "" {
+			return "as-enters:carrier"
+		}
+		castCarrier(reg, p0, name)
+	}
+	return ""
+}
+
+// asEntersColour reports whether the as-enters choice of f is a ChooseColor.
+func asEntersColour(f *cards.Face) bool {
+	for _, r := range f.Repls {
+		if r.Event == "Moved" && strings.Contains(r.Params["ValidCard"], "Card.Self") && r.Params["Destination"] == "Battlefield" &&
+			r.With != nil && r.With.API == "ChooseColor" {
+			return true
+		}
+	}
+	return false
+}
+
 // selfCard reports whether a trigger is about the card itself: some
 // alternative of its ValidCard is Card with the Self property
 // ("Card.Self+kicked", "Card.wasCastByYou+Self").
@@ -274,7 +346,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	}
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield
 		if asEnters(face) {
-			r, _ := refuse("as-enters")
+			r, _ := refuse(asEntersRefusal(face))
 			return r, true
 		}
 		return Result{}, false
@@ -306,6 +378,14 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		// as-enters choice is not the placement's; transformedStart checks
 		// the front face's. A Cycled trigger's card cycles from hand and
 		// never enters the battlefield at all.
+		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
+			// The card cannot be placed (it would enter without its choice):
+			// it is cast, and its trigger is met on the line after the cast.
+			if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
+				return refuse(why)
+			}
+			break
+		}
 		if trig == nil || trig.Mode != "Transformed" && trig.Mode != "Cycled" {
 			if r, ok := onBF(); ok {
 				return r, nil
@@ -526,6 +606,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		if err != nil {
 			return Result{}, err
 		}
+		return refuse(why)
+	}
+	if why := dayNightRefusal(reg, f); why != "" {
 		return refuse(why)
 	}
 	return Result{Path: PathStart, Start: f}, nil

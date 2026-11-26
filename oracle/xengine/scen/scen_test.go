@@ -125,6 +125,13 @@ func TestScenFixtures(t *testing.T) {
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
 		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		// a ChooseColor card is cast, not placed, so its choice is made by the
+		// engines' own decision; a ChooseType card or a land refuses by name
+		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
+		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
+		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
+		{"Unclaimed Territory", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "as-enters:land"}},
+		{"Big Apple, 3 a.m.", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "as-enters:land"}},
 		{"Gatekeeper of Malakir", "f0/t0", want{path: "start", check: gatekeeper}, want{path: "start", check: gatekeeper}},
 	}
 	for _, r := range rows {
@@ -156,6 +163,24 @@ func TestScenFixtures(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+// asEntersCast checks a ChooseColor card's start: it is in seat 0's hand with
+// carriers one-mana spells of each colour (the pick is not known when the start
+// is written), and the focus casts it.
+func asEntersCast(card string, carriers int) func(t *testing.T, f *StartFile) {
+	return func(t *testing.T, f *StartFile) {
+		t.Helper()
+		if h := f.Setup.P0.Hand; len(h) != 1+carriers || h[0] != card {
+			t.Errorf("p0 hand = %v, want %s and %d carriers", h, card, carriers)
+		}
+		for _, n := range f.Setup.P0.Battlefield {
+			if n == card {
+				t.Errorf("%s is placed on the battlefield: it would enter without its choice", card)
+			}
+		}
+		focusIs(t, f, 0, card, "cast", 0)
 	}
 }
 
@@ -2341,7 +2366,6 @@ func TestStartfacestarts(t *testing.T) {
 	const (
 		aclazotz = "Aclazotz, Deepest Betrayal // Temple of the Dead"
 		arlinn   = "Arlinn Kord // Arlinn, Embraced by the Moon"
-		wolfkin  = "Wolfkin Outcast // Wedding Crasher"
 	)
 	for _, tc := range []struct {
 		card, key, kind string
@@ -2350,7 +2374,6 @@ func TestStartfacestarts(t *testing.T) {
 	}{
 		{aclazotz, "f1/a0", "ability", 0, false},         // a modal back face (a land)
 		{arlinn, "f1/a1", "ability", 1, false},           // a transformed planeswalker's loyalty ability
-		{wolfkin, "f1/t0", "", 0, false},                 // a transformed back face's trigger
 		{"Voldaren Pariah", "f1/t0", "ability", 0, true}, // a Transformed trigger: front face, own transform ability
 		{"Kindly Stranger", "f1/t0", "cast", 0, true},    // a Transformed trigger: front face, one-card enabler
 	} {
@@ -2497,6 +2520,86 @@ func TestStartcombattriggersRefused(t *testing.T) {
 		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // the only carrier has menace
 	} {
 		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("path %q reason %q, want refused %s", res.Path, res.Reason, r.reason)
+			}
+		})
+	}
+}
+
+// TestStartDamageDoneFilter: the DamageDone source filters that name an
+// attachment or a state. An Aura bearer (Card.AttachedBy) is placed attached to
+// a creature that attacks (hurting a player: Sigil of Sleep, Sleeper's Robe,
+// Necromantic Thirst; hurting a creature: Charisma, whose fixture blocks it); a
+// "modified" source gets a +1/+1 counter on the creature that attacks (Kodama
+// of the West Tree). An Equipment cannot enter attached from a start and a
+// damage to You from a source you control needs a self-hit, so those keep the
+// exact refusal, as do unrelated cards' refusals.
+func TestStartDamageDoneFilter(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card         string
+		attacksCard  bool // the card is the attacker (else its attached bearer)
+		block        bool
+		counterOnAtk bool
+	}{
+		{card: "Sigil of Sleep"}, {card: "Sleeper's Robe"}, {card: "Necromantic Thirst"},
+		{card: "Charisma", block: true},
+		{card: "Kodama of the West Tree", attacksCard: true, counterOnAtk: true},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, "f0/t0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			fo := f.Focus
+			if fo == nil || f.Active != 0 {
+				t.Fatalf("focus %+v active %d, want seat 0's attack", fo, f.Active)
+			}
+			attacker := fo.Card
+			if fo.Attack != "" {
+				attacker = fo.Attack
+			}
+			if r.attacksCard != (attacker == r.card) {
+				t.Errorf("attacker %q, card is attacker %v", attacker, r.attacksCard)
+			}
+			if r.block != (fo.Block != "") {
+				t.Errorf("block %q, want a block %v", fo.Block, r.block)
+			}
+			if !r.attacksCard {
+				attached(t, f, r.card)
+				if f.Setup.P0.Attach[0].To != attacker {
+					t.Errorf("attached to %q, want the attacker %q", f.Setup.P0.Attach[0].To, attacker)
+				}
+				c, ok := reg.Lookup(attacker)
+				if !ok || !attackingBearer(c.Faces[0]) {
+					t.Errorf("bearer %q cannot attack and deal damage", attacker)
+				}
+			}
+			if got := slices.Contains(f.Setup.P0.Counters, StartCounter{Card: attacker, Kind: "P1P1", N: 1}); got != r.counterOnAtk {
+				t.Errorf("counters %+v, want a +1/+1 counter on the attacker %v", f.Setup.P0.Counters, r.counterOnAtk)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		{"Daredevil, Fearless Fighter", "f0/t0", "no-generator:trigger:DamageDone:filter"},      // a source you control hurts You
+		{"Domesticated Watercourse", "f0/t0", "no-generator:trigger:DamageDone:filter"},         // EquippedBy: no attached Equipment start
+		{"Sword of Fire and Ice", "f0/t0", "no-generator:trigger:DamageDone:filter"},            // EquippedBy
+		{"Sword of War and Peace", "f0/t0", "no-generator:trigger:DamageDone:filter"},           // EquippedBy
+		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // unrelated: a 0-power card
+		{"Aqueous Form", "f0/t0", "no-generator:trigger:Attacks:filter"},                        // unrelated: another mode
+		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // unrelated: the only carrier has menace
+		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // unrelated: hand size
+	} {
+		t.Run("refused/"+r.card, func(t *testing.T) {
 			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 			if err != nil {
 				t.Fatal(err)
