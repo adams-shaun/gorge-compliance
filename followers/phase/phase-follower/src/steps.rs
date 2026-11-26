@@ -13,16 +13,19 @@ use std::cell::Cell;
 use engine::ai_support::legal_actions_full;
 use engine::game::combat::AttackTarget;
 use engine::game::game_object::AttachTarget;
+use engine::game::keywords::object_has_effective_keyword_kind;
 use engine::game::layers::flush_layers;
 use engine::game::{apply, EngineError};
 use engine::types::ability::TargetRef;
 use engine::types::actions::{DebugAction, GameAction};
 use engine::types::game_state::{ActionDisposition, ActionResult, CastPaymentMode, GameState, WaitingFor};
 use engine::types::identifiers::ObjectId;
+use engine::types::keywords::KeywordKind;
 use engine::types::mana::{ManaCost, ManaCostShard, ManaPipId, ManaType};
 use engine::types::phase::Phase;
 use engine::types::player::PlayerId;
 use engine::types::zones::Zone;
+use engine::types::Keyword;
 use follower_proto::batch::{RowBuilder, Stop};
 use follower_proto::decisions::DecisionQueue;
 use follower_proto::refs::Ref;
@@ -709,6 +712,30 @@ impl Machine<'_> {
         let i = self.step;
         if let Some(kw) = &ability.keyword {
             let base = kw.split(':').next().unwrap_or("");
+            // The keyword line is gorge's; phase may not carry it. The Bear Force Pilot's token
+            // loses the swallowed "and crew 2" at the pin, and a crew-like ability can be another
+            // keyword (Station). Issuing the action anyway is an engine error ("Vehicle has no
+            // Crew keyword"), so name the gap as a follower row instead.
+            {
+                let state = self.state();
+                let name = state.objects.get(&id).map(|o| o.name.clone()).unwrap_or_default();
+                let has = match base {
+                    // phase models a printed Equip as an activated ability tagged Equip, not as
+                    // a `Keyword` (Leonin Scimitar), but a granted Equip can be either.
+                    "Equip" => state.objects.get(&id).is_some_and(|o| {
+                        o.abilities.iter().any(|a| a.ability_tag == Some(engine::types::ability::AbilityTag::Equip))
+                            || o.keywords.iter().any(|k| matches!(k, Keyword::Equip(_)))
+                    }),
+                    "Crew" => object_has_effective_keyword_kind(state, id, KeywordKind::Crew),
+                    "Saddle" => {
+                        state.objects.get(&id).is_some_and(|o| o.keywords.iter().any(|k| matches!(k, Keyword::Saddle(_))))
+                    }
+                    _ => true,
+                };
+                if !has {
+                    return Err(unmatched(i, format!("{name} has no {base} keyword in phase")));
+                }
+            }
             return match base {
                 "Equip" => Ok(GameAction::Equip { equipment_id: id, target_id: id }),
                 "Crew" => Ok(GameAction::CrewVehicle { vehicle_id: id, creature_ids: Vec::new() }),
@@ -1125,6 +1152,19 @@ mod tests {
             "neutral":{"ability":{"0":{"class":"activated","keyword":"Saddle:2"}}}}"#);
         assert!(!m.contains("unsupported") || m.contains("SaddleMount"), "{m}");
         assert!(m.contains("SaddleMount"), "{m}");
+    }
+
+    #[test]
+    fn activate_vehicle_without_crew_keyword_is_a_named_unmatched() {
+        // The Bear Force Pilot's token loses the swallowed "and crew 2" at the phase pin: the
+        // Vehicle reaches the battlefield with Flying only. A gorge crew activation must be a
+        // named follower row, never an engine action phase answers with "Vehicle has no Crew
+        // keyword".
+        let m = stop_text(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"tokens":[{"script":"vehicle_no_crew"}]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:token:Vehicle Token","ability_index":0}]},
+            "neutral":{"token":{"vehicle_no_crew":{"name":"Vehicle Token","types":["Artifact"],"subtypes":["Vehicle"],"keywords":["Flying"]}},
+                       "ability":{"0":{"class":"activated","keyword":"Crew:2"}}}}"#);
+        assert_eq!(m, "phase follower: ability_unmatched at step 0: Vehicle Token has no Crew keyword in phase");
     }
 
     #[test]

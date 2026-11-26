@@ -48,6 +48,16 @@ fn face_reason(face: &CardFace) -> Option<String> {
         let kind = serde_json::to_value(class).ok().and_then(|v| v.as_str().map(str::to_string));
         return Some(format!("confirmed misparse: {}", kind.unwrap_or_else(|| format!("{class:?}"))));
     }
+    // A parse warning means phase dropped or misread printed text. The card data can still look
+    // complete (The Bear Force Pilot's token loses the swallowed "and crew 2" inside an effect),
+    // so `card_face_gaps` does not see it; a replay that reaches the dropped ability would die in
+    // the engine instead. Fail closed here, naming the warning.
+    if let Some(warning) = face.parse_warnings.first() {
+        let kind = serde_json::to_value(warning)
+            .ok()
+            .and_then(|v| v.get("type").and_then(Value::as_str).map(str::to_string));
+        return Some(format!("parse warning: {}", kind.unwrap_or_else(|| format!("{warning:?}"))));
+    }
     let gaps = card_face_gaps(face);
     if !gaps.is_empty() {
         return Some(format!("gaps: {}", gaps.join(", ")));

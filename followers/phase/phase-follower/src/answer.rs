@@ -24,8 +24,8 @@ use engine::ai_support::AiDecisionContract;
 use engine::types::ability::{AdditionalCost, TargetRef};
 use engine::types::actions::{AlternativeCastDecision, GameAction, UnlessCostBranch};
 use engine::types::game_state::{
-    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, ReplacementChoiceKind,
-    TargetSelectionSlot, WaitingFor,
+    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, PayCostKind,
+    ReplacementChoiceKind, TargetSelectionSlot, WaitingFor,
 };
 use engine::types::identifiers::ObjectId;
 use engine::types::mana::ManaType;
@@ -235,13 +235,13 @@ fn text_match(a: &str, b: &str) -> bool {
 
 /// The object of `cards` a decision pick names: its ref when the ref resolves into `cards`, else
 /// the first unused card of `cards` with the pick's name.
-fn card_of(cur: &Cursor, d: &Decision, i: usize, cards: &[ObjectId], used: &[ObjectId]) -> Option<ObjectId> {
-    let state = &cur.board.state;
+fn card_of(board: &Board, d: &Decision, i: usize, cards: &[ObjectId], used: &[ObjectId]) -> Option<ObjectId> {
+    let state = &board.state;
     // An inexact ref was derived by counting live objects, not by identity: only the name is sound.
     let inexact = d.pick_refs_inexact.get(i).copied().unwrap_or(false);
     if !inexact {
         if let Some(r) = d.pick_refs.get(i).and_then(|s| Ref::parse(s).ok()) {
-            if let Some(id) = object_of(cur.board, &r) {
+            if let Some(id) = object_of(board, &r) {
                 if cards.contains(&id) && !used.contains(&id) {
                     return Some(id);
                 }
@@ -263,18 +263,18 @@ fn card_of(cur: &Cursor, d: &Decision, i: usize, cards: &[ObjectId], used: &[Obj
     cards.iter().copied().find(|id| {
         !used.contains(id)
             && state.objects.get(id).is_some_and(|o| {
-                o.name == name || cur.board.names.by_object.get(id).is_some_and(|n| n == name)
+                o.name == name || board.names.by_object.get(id).is_some_and(|n| n == name)
             })
     })
 }
 
 /// The cards of `cards` gorge's decision `d` picked, in pick order; a pick that finds no card is
 /// dropped.
-fn cards_of(cur: &Cursor, d: &Decision, cards: &[ObjectId]) -> Vec<ObjectId> {
+fn cards_of(board: &Board, d: &Decision, cards: &[ObjectId]) -> Vec<ObjectId> {
     let n = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
     let mut out: Vec<ObjectId> = Vec::new();
     for i in 0..n {
-        if let Some(id) = card_of(cur, d, i, cards, &out) {
+        if let Some(id) = card_of(board, d, i, cards, &out) {
             out.push(id);
         }
     }
@@ -620,7 +620,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         // the graveyard (surveil).
         WaitingFor::ScryChoice { cards, .. } | WaitingFor::SurveilChoice { cards, .. } => {
             let a = take(cur, is_arrange).map(|d| {
-                let top = cards_of(cur, &d, cards);
+                let top = cards_of(cur.board, &d, cards);
                 let bottomed = cards.len() - top.len();
                 if matches!(wf, WaitingFor::ScryChoice { .. }) && bottomed > 1 {
                     cur.notes.push(format!(
@@ -729,7 +729,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             or_forced(state, wf, cur, a)
         }
         WaitingFor::ManifestDreadChoice { cards, .. } => {
-            let a = take(cur, is_manifest_dread).map(|d| match cards_of(cur, &d, cards).as_slice() {
+            let a = take(cur, is_manifest_dread).map(|d| match cards_of(cur.board, &d, cards).as_slice() {
                 [id] => offered(state, wf, GameAction::SelectCards { cards: vec![*id] }, cur),
                 other => Err(miss(wf, cur, &format!("gorge picked {} card(s), phase manifests one", other.len()))),
             });
@@ -787,7 +787,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         }
         WaitingFor::EnlistChoice { eligible, .. } => {
             let a = if let Some(d) = take(cur, is_object_choice) {
-                let ids = cards_of(cur, &d, eligible);
+                let ids = cards_of(cur.board, &d, eligible);
                 if ids.len() > 1 {
                     Some(Err(miss(wf, cur, &format!("gorge picked {} creature(s), enlist taps up to one", ids.len()))))
                 } else {
@@ -1041,7 +1041,7 @@ fn crew_answer(
     d: &Decision,
     cur: &mut Cursor,
 ) -> Result<Answer, Stop> {
-    let mut tapped = cards_of(cur, d, eligible);
+    let mut tapped = cards_of(cur.board, d, eligible);
     let named = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
     if tapped.is_empty() || tapped.len() != named {
         return Err(miss(wf, cur, &format!("gorge tapped {named} creature(s), {} of them among phase's eligible", tapped.len())));
@@ -1100,11 +1100,30 @@ fn pick_cards(
     cur: &mut Cursor,
 ) -> Result<Answer, Stop> {
     let lo = if up_to { lo } else { hi.min(cards.len()) };
-    let discarding = matches!(
-        wf,
-        WaitingFor::DiscardChoice { .. } | WaitingFor::DiscardToHandSize { .. } | WaitingFor::ConniveDiscard { .. }
-    );
-    let picked = take(cur, |d| is_object_choice(d) || (arrangement_too && is_arrange(d)) || (discarding && is_discard_mode(d)));
+    // A discard cost is a discard whichever WaitingFor carries it. `PayCost` is how a CARD's
+    // additional cost reaches the answerer (Ruthless Disposal's "discard a card and sacrifice a
+    // creature" is one PayCost per leg), and its gorge decision is the same card-pick shape as a
+    // resolution discard.
+    let discarding = match wf {
+        WaitingFor::DiscardChoice { .. } | WaitingFor::DiscardToHandSize { .. } | WaitingFor::ConniveDiscard { .. } => true,
+        WaitingFor::PayCost { kind: PayCostKind::Discard, .. } => true,
+        _ => false,
+    };
+    let is_pick = |d: &Decision| {
+        is_object_choice(d) || (arrangement_too && is_arrange(d)) || (discarding && is_discard_mode(d))
+    };
+    // One step can pose several object picks (a composite additional cost, a target plus a
+    // discard, ...), and gorge logs them in its own order, which need not be phase's. Prefer the
+    // decision whose picks are cards THIS prompt offers; the card ids are the role, so the next
+    // sibling prompt cannot steal another's decision. A decision for a different prompt resolves
+    // to nothing here and is left for its own arm; only when none resolves does the old
+    // first-shape-match fallback run, so a genuine mismatch still reports as one.
+    let board = cur.board;
+    let fits = |d: &Decision| {
+        let named = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
+        named == 0 || cards_of(board, d, cards).len() == named
+    };
+    let picked = take(cur, |d| is_pick(d) && fits(d)).or_else(|| take(cur, is_pick));
     let picked = match picked {
         Some(d) => Some(d),
         // An explicit empty choice, when the prompt allows taking nothing.
@@ -1114,12 +1133,12 @@ fn pick_cards(
         None => None,
     };
     let Some(d) = picked else { return forced(state, wf, cur) };
-    let mut ids = cards_of(cur, &d, cards);
+    let mut ids = cards_of(cur.board, &d, cards);
     if is_discard_mode(&d) {
         // One decision per card discarded: take the rest of this prompt's.
         while ids.len() < hi {
             let Some(next) = take(cur, is_discard_mode) else { break };
-            for id in cards_of(cur, &next, cards) {
+            for id in cards_of(cur.board, &next, cards) {
                 if !ids.contains(&id) {
                     ids.push(id);
                 }
@@ -1477,6 +1496,42 @@ mod tests {
         // One decision for a two-card discard: phase wants two, so the miss says how many gorge took.
         let (out, _) = go(&mind_rot(&discard_mode("Island")));
         assert_eq!(miss_of(out), "Missing DiscardChoice answer at step 1: gorge picked 1 card(s), phase takes 2..=2");
+    }
+
+    /// Ruthless Disposal: the additional cost is "discard a card and sacrifice a creature" (CR
+    /// 601.2h). gorge logs the sacrifice before the discard (`cast_subcounter.rs`'s
+    /// `sacAsk || ... || discardAsk`), phase pays the printed order, discard first. Both are
+    /// object picks in one step, so the discard prompt must not take the sacrifice decision just
+    /// because it is first in the log.
+    fn ruthless_disposal(decisions: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Ruthless Disposal","Forest"],"battlefield":["Grizzly Bears","Runeclaw Bear"]}},
+              "p1":{{"battlefield":["Grizzly Bears","Runeclaw Bear"]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Ruthless Disposal","mana":"4B"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{TWO_P1_BEARS_TARGET}{decisions}]}}"#
+        )
+    }
+
+    const TWO_P1_BEARS_TARGET: &str = r#"{"step":0,"seat":0,"kind":"target","picks":["Grizzly Bears (a)","Runeclaw Bear (a)"],"pick_refs":["p1:Grizzly Bears","p1:Runeclaw Bear"],"object_picks":["p1:Grizzly Bears","p1:Runeclaw Bear"],"pick_kinds":["permanent","permanent"],"gorge_kind":"target"}"#;
+
+    #[test]
+    fn cast_ruthless_disposal_discards_then_sacrifices() {
+        let sacrifice = r#",{"step":0,"seat":0,"kind":"choose_n","picks":["Runeclaw Bear"],"pick_refs":["p0:Runeclaw Bear"],"object_picks":["p0:Runeclaw Bear"],"pick_kinds":["sacrifice"],"gorge_kind":"choose"}"#;
+        let discard = r#",{"step":0,"seat":0,"kind":"choose_n","picks":["Forest"],"pick_refs":["p0:Forest"],"object_picks":["p0:Forest"],"pick_kinds":["discard"],"gorge_kind":"choose"}"#;
+        // gorge's log order: sacrifice then discard. phase's prompt order: discard then sacrifice.
+        let (s, rb) = last(&ruthless_disposal(&format!("{sacrifice}{discard}")));
+        let mut p0_gy = s.players[0].graveyard.clone();
+        p0_gy.sort();
+        assert_eq!(
+            p0_gy,
+            ["Forest".to_string(), "Runeclaw Bear".to_string(), "Ruthless Disposal".to_string()],
+            "notes {:?}",
+            rb.notes
+        );
+        let mut p1_gy = s.players[1].graveyard.clone();
+        p1_gy.sort();
+        assert_eq!(p1_gy, ["Grizzly Bears".to_string(), "Runeclaw Bear".to_string()], "the two targets die");
+        assert_eq!(rb.leftover, None);
     }
 
     fn voyage(decision: &str) -> String {
