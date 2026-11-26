@@ -376,8 +376,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		// A Transformed trigger places the card on its front face and
 		// transforms it there (transformedStart), so the trigger face's
 		// as-enters choice is not the placement's; transformedStart checks
-		// the front face's.
-		if fam == "trigger" && trig.Mode != "Transformed" && asEnters(face) {
+		// the front face's. A Cycled trigger's card cycles from hand and
+		// never enters the battlefield at all.
+		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
 			// The card cannot be placed (it would enter without its choice):
 			// it is cast, and its trigger is met on the line after the cast.
 			if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
@@ -385,7 +386,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 			break
 		}
-		if trig == nil || trig.Mode != "Transformed" {
+		if trig == nil || trig.Mode != "Transformed" && trig.Mode != "Cycled" {
 			if r, ok := onBF(); ok {
 				return r, nil
 			}
@@ -463,7 +464,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
-		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp":
+		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp", "Cycled":
 			if why := eventStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
