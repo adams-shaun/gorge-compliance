@@ -177,8 +177,9 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 			if _, ok := tokenFodder(reg, args[1]); ok {
 				// a token kind ("Treasure", "Prism.token", "Permanent.token"):
 				// the cost mints its tokens, a vanilla permanent no card
-				// is (a Food card is busier than the Food token)
-				if !p.mintSac(reg, args[1], n) {
+				// is (a Food card is busier than the Food token). Only a Sac
+				// spends it: a token returned to hand is no cost to meet.
+				if head != "Sac" || !p.mintSac(reg, args[1], n) {
 					return p, refusal
 				}
 				continue
