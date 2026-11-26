@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4527c622-cebe-41eb-9178-4895cccffe99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45284633-8aab-4078-ae5c-7b0d75efe2f5	cast	cast	agreed	-	F	start	4	0	f:xs:XP:rikala-homarid-king:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 45284633-8aab-4078-ae5c-7b0d75efe2f5	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:rikala-homarid-king:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-45284633-8aab-4078-ae5c-7b0d75efe2f5	f0/t1	NULL	owed	refused:no-generator:trigger:TapsForMana:condition	-	start	0	0	-	-	-	-	7bc2927dcfca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+45284633-8aab-4078-ae5c-7b0d75efe2f5	f0/t1	NULL	owed	refused:no-generator:trigger:TapsForMana:condition	-	start	0	0	-	-	-	-	2b206b761ee7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 452d98ae-0fa2-4cff-9e18-eecd76ddb20b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anthropede:f0t0:s1,f:xs:XP:anthropede:f0t0:s1	-	-	-	23c4009444b0	-	a91700ca8d78	-	-	2026-11-25	xproof
 452d98ae-0fa2-4cff-9e18-eecd76ddb20b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:anthropede:combat0.attack:s1,f:xs:XP:anthropede:combat0.attack:s1	-	-	-	23c4009444b0	-	a91700ca8d78	-	-	2026-11-25	xproof
 452d98ae-0fa2-4cff-9e18-eecd76ddb20b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:anthropede:combat0.block:s1,f:xs:XP:anthropede:combat0.block:s1	-	-	-	23c4009444b0	-	a91700ca8d78	-	-	2026-11-25	xproof
@@ -207,7 +207,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45ddfa35-7b3c-4916-b231-dc721b7b56d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Bold Biochemist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45ddfa35-7b3c-4916-b231-dc721b7b56d9	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bold Biochemist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45de1caf-46c2-4acc-8be2-08e1840a3b98	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sidisi-s-faithful:cast:s1,f:xs:XP:sidisi-s-faithful:cast:s1	-	-	-	d864b561c9cb	-	ba643f0f17cb	-	-	2026-11-24	xproof
-45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	7bc2927dcfca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	2b206b761ee7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:sidisi-s-faithful:cast:s1,f:xs:XP:sidisi-s-faithful:cast:s1	-	-	-	d864b561c9cb	-	ba643f0f17cb	-	-	2026-11-24	xproof
 45dfb358-cd16-468e-bc89-ff17c6e244c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-report:cast:s1,f:xs:XP:war-report:cast:s1	-	-	-	d864b561c9cb	-	ca0c55a8bfc8	-	-	2026-11-24	xproof
 45e5135b-274c-46b4-8249-7e05e37aaff7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:heroes-for-hire:cast:s1,f:xs:XP:heroes-for-hire:cast:s1	-	-	-	8c0bd19283bb	-	3de12a8fa35e	-	-	2026-11-24	xproof
