@@ -185,6 +185,8 @@ func eventStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		return untapStart(reg, b, face, card, trig, f)
 	case "CommitCrime":
 		return crimeStart(reg, b, face, card, trig, f)
+	case "Cycled":
+		return cycledStart(reg, b, face, card, generic, trig, f)
 	case "TurnFaceUp":
 		// A face-down permanent cannot be placed, and turning one up takes a
 		// second play after the one that casts it face down: the focus is one
@@ -192,6 +194,46 @@ func eventStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		return "no-generator:trigger:TurnFaceUp:face-down"
 	}
 	return "no-generator:trigger:" + trig.Mode
+}
+
+// cycledAbility is the granted ability a printed K:Cycling or K:TypeCycling
+// line expands to (CR 702.29a): the play that raises the Cycled event.
+func cycledAbility(sa *cards.SA) bool {
+	h := cards.KeywordHead(sa.Params["KeywordLine"])
+	return h == "Cycling" || h == "TypeCycling"
+}
+
+// cycledStart is "When you cycle CARDNAME" (Cycled, ValidCard$ Card.Self):
+// the card is the cycled one, so the start is its own cycling activation,
+// the same shape a channel key takes (abilityFocus): the card in hand with
+// exactly the cycling cost's mana placed, the focus that activation. The
+// trigger's description reads on the card in hand, so a TriggerZones the
+// start does not name, a player other than the cycler or a gate the
+// start cannot meet is refused by name. A watcher (ValidCard$ Card or
+// Card.Other: the card elsewhere while another card cycles) needs a carrier
+// with cycling, a follow-up: it keeps the plain mode refusal the default
+// arm gave it.
+func cycledStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:Cycled"
+	if !selfCard(trig) {
+		return none
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" {
+		return none + ":zone"
+	}
+	for k := range trig.Params {
+		if !baseEventParams[k] && k != "ValidCard" && k != "ValidPlayer" {
+			return none + ":condition"
+		}
+	}
+	if vp := trig.Params["ValidPlayer"]; vp != "" && vp != "You" {
+		return none + ":player"
+	}
+	idx := selfAbility(face, cycledAbility)
+	if idx < 0 {
+		return none + ":ability"
+	}
+	return abilityFocus(reg, b, face, card, generic, idx, face.Abilities[idx], f)
 }
 
 // drawStart is "whenever you draw a card" and its kin: the seat the draw is

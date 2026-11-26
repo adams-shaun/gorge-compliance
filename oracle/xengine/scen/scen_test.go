@@ -1118,6 +1118,28 @@ func TestStartmisctriggers(t *testing.T) {
 	}
 }
 
+// TestStartCycledTriggers: "When you cycle CARDNAME" (Cycled, Card.Self) is
+// the card in hand with exactly the cycling cost's mana (planCost met it,
+// as a channel key's cost is met), the focus the cycling activation itself,
+// the granted ability index the K:Cycling line expanded to. A watcher
+// (ValidCard$ Card or Card.Other: the card elsewhere while another card
+// cycles) needs a carrier with cycling, a follow-up, and keeps the plain
+// mode refusal the default arm gave it at develop.
+func TestStartCycledTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Stir the Sands", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Stir the Sands"},
+			p0BF: rep("Swamp", 4), focusCard: "Stir the Sands", focusKind: "ability", focusAbility: 1},
+		{card: "Renewed Faith", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Renewed Faith"},
+			p0BF: rep("Plains", 2), focusCard: "Renewed Faith", focusKind: "ability", focusAbility: 1},
+		// watchers, refused by name at develop and still refused by it
+		{card: "Warped Researcher", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Lightning Rift", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Astral Slide", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Valiant Rescuer", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+		{card: "Benalish Partisan", key: "f0/t0", reason: "no-generator:trigger:Cycled"},
+	})
+}
+
 // TestStartCosts: an activated ability's non-mana cost is met by start
 // state (planCost), never by a play: Memnite to sacrifice for "another
 // creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
