@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 194af2be-50c7-484b-bdd3-402bad70335b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:donatello-way-with-machines:combat0.block:s1,f:xs:XP:donatello-way-with-machines:combat0.block:s1	-	-	-	23c4009444b0	-	b4c2e65677dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 194af2be-50c7-484b-bdd3-402bad70335b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Donatello, Way with Machines/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 194e2563-c0bf-4151-bbb0-0d626130b055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-194e2563-c0bf-4151-bbb0-0d626130b055	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	e1ac2b1c3ed8	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	3526a90f7194f8ae3d76d0bbe05723458371a2a6	2026-11-26	xproof
+194e2563-c0bf-4151-bbb0-0d626130b055	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	3562e7d0e792	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 1950067a-cc57-42a8-b1ee-f03e1b50591b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1950067a-cc57-42a8-b1ee-f03e1b50591b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alien-symbiosis:static0.1:s1,f:xs:XP:alien-symbiosis:static0.1:s1	-	-	-	30e95cdd1f63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	efd75d00b34da0fe9d0079dd5c9986f3525d6f67	2026-11-25	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1999b5ac-21fb-4d99-ad72-58bf507f9a59	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1999b5ac-21fb-4d99-ad72-58bf507f9a59	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 199c7604-6b4b-4cec-b6c2-b6b2918b11c8	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:underdark-rift:f0a0:s1,f:xs:XP:underdark-rift:f0a0:s1	-	-	-	d607930fa548	-	e9019acb237e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
-199c7604-6b4b-4cec-b6c2-b6b2918b11c8	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	e1ac2b1c3ed8	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	3526a90f7194f8ae3d76d0bbe05723458371a2a6	2026-11-26	xproof
+199c7604-6b4b-4cec-b6c2-b6b2918b11c8	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	3562e7d0e792	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 199c7604-6b4b-4cec-b6c2-b6b2918b11c8	land	land	agreed	-	FX	start	2	0	x:xs:XP:underdark-rift:land:s1,f:xs:XP:underdark-rift:land:s1	-	-	-	d607930fa548	-	e9019acb237e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	cast	cast-resolve	agreed	-	FX	scen	2	0	Beastrider Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Beastrider Vanguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
