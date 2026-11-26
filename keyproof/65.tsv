@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 658f5cfb-326d-4da9-a39b-2ecd393a1f54	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:sinuous-vermin:f0a0:s1,f:xs:XP:sinuous-vermin:f0a0:s1	-	-	-	8c0bd19283bb	-	d3eb5b016da4	-	-	2026-11-24	xproof
 6591a589-deb4-462f-a4f1-f6261f3433c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exalted-flamer-of-tzeentch:f0t0:s1,f:xs:XP:exalted-flamer-of-tzeentch:f0t0:s1	-	-	-	23c4009444b0	-	c37e513196b5	-	-	2026-11-25	xproof
 6591a589-deb4-462f-a4f1-f6261f3433c3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:exalted-flamer-of-tzeentch:f0t0:s1,f:xs:XP:exalted-flamer-of-tzeentch:f0t0:s1	-	-	-	23c4009444b0	-	c37e513196b5	-	-	2026-11-25	xproof
-6591a589-deb4-462f-a4f1-f6261f3433c3	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	1fd23656d119	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+6591a589-deb4-462f-a4f1-f6261f3433c3	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 6591f243-f94c-4a83-bb16-1fb838d9eb14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:altanak-the-thrice-called:cast:s1,f:xs:XP:altanak-the-thrice-called:cast:s1	-	-	-	23c4009444b0	-	434559c87453	-	-	2026-11-25	xproof
 6591f243-f94c-4a83-bb16-1fb838d9eb14	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:altanak-the-thrice-called:combat0.attack:s1,f:xs:XP:altanak-the-thrice-called:combat0.attack:s1	-	-	-	23c4009444b0	-	434559c87453	-	-	2026-11-25	xproof
 6591f243-f94c-4a83-bb16-1fb838d9eb14	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:altanak-the-thrice-called:combat0.block:s1,f:xs:XP:altanak-the-thrice-called:combat0.block:s1	-	-	-	23c4009444b0	-	434559c87453	-	-	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65afedc9-9446-4417-8576-807279061342	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65afedc9-9446-4417-8576-807279061342	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65afedc9-9446-4417-8576-807279061342	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65afedc9-9446-4417-8576-807279061342	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:noncreature	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+65afedc9-9446-4417-8576-807279061342	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:noncreature	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 65b61373-835a-4b22-90d1-d019446e98f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65b61373-835a-4b22-90d1-d019446e98f7	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:jetting-glasskite:f0t0:s1,f:xs:XP:jetting-glasskite:f0t0:s1	-	-	-	44e3ec152eea	-	c3af4e91c6ab	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 65b7a7ca-0e39-4612-9bcd-743bf903544a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -209,4 +209,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65f1dd09-0640-47f8-8bfd-7aceaa5646a6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:restless-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	5c62c458361c	-	-	2026-11-24	xproof
 65f3ebeb-1ca5-4923-b681-032579991c8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65fb1945-ed7a-4f1b-bc6b-166cbec1d8ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65fb1945-ed7a-4f1b-bc6b-166cbec1d8ec	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	4b06460ba8f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+65fb1945-ed7a-4f1b-bc6b-166cbec1d8ec	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	87c7a846ef22	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
