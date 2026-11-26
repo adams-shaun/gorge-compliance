@@ -503,13 +503,60 @@ func placeBearer(p0, p1 *StartSeat, card, bearer string, bs int) {
 // the seat that must control it, or "" when the keyword names no permanent a
 // carrier can be (a player).
 func attachBearer(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face) (string, int) {
+	return attachBearerWhere(reg, b, card, face, nil)
+}
+
+// attachBearerWhere is attachBearer narrowed by keep (nil: no narrowing): the
+// combat starts need a bearer that can attack and deal damage.
+func attachBearerWhere(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face, keep func(*cards.Face) bool) (string, int) {
 	req, ok := enchantReq(face)
 	if !ok {
 		return "", 0
 	}
 	return filterCarrier(reg, b, card, strings.Join(req.raw, ","), func(c *cards.Face) bool {
-		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c)
+		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && (keep == nil || keep(c))
 	})
+}
+
+// attackingBearer is a creature an Aura's Enchant keyword takes that attacks
+// and deals combat damage: it has power (CR 120.8) and no Defender.
+func attackingBearer(c *cards.Face) bool {
+	return c.IsCreature() && c.Power() > 0 && !c.HasKeyword("Defender")
+}
+
+// attachedSource reports whether a damage trigger's ValidSource is exactly "the
+// permanent this attaches to" (Card.AttachedBy, Creature.AttachedBy), the only
+// source shape an Aura bearer start reads.
+func attachedSource(filter string) bool {
+	head, props, _ := strings.Cut(strings.TrimSpace(filter), ".")
+	return (head == "Card" || head == "Creature") && props == "AttachedBy"
+}
+
+// modifiedSource reads a damage source filter with one "modified" property
+// (CR 700.9: a permanent with a counter, an Equipment or an Aura on it) and
+// returns the filter without it; a +1/+1 counter on the creature that deals
+// the damage meets the property.
+func modifiedSource(filter string) (string, bool) {
+	head, props, _ := strings.Cut(strings.TrimSpace(filter), ".")
+	if strings.Contains(filter, ",") || props == "" {
+		return filter, false
+	}
+	var rest []string
+	found := false
+	for _, p := range strings.Split(props, "+") {
+		if p == "modified" {
+			found = true
+			continue
+		}
+		rest = append(rest, p)
+	}
+	if !found {
+		return filter, false
+	}
+	if len(rest) == 0 {
+		return head, true
+	}
+	return head + "." + strings.Join(rest, "+"), true
 }
 
 // murderFocus is the opponent's Murder destroying the card or its bearer: the
@@ -932,13 +979,20 @@ func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 		return none
 	}
 	var filter string
+	var modified bool
 	switch trig.Mode {
 	case "DamageDone":
 		vt := trig.Params["ValidTarget"]
+		src := trig.Params["ValidSource"]
+		if (vt == "Player" || vt == "Opponent") && trig.Params["CombatDamage"] != "False" &&
+			attachedSource(src) && FieldBlock(face) == "aura-unattached" {
+			return auraAttackStart(reg, b, face, card, f, none)
+		}
 		if trig.Params["CombatDamage"] != "True" || vt != "Player" && vt != "Opponent" {
 			return none
 		}
-		filter = trig.Params["ValidSource"]
+		filter = src
+		filter, modified = modifiedSource(filter)
 		if selfCard(trig) || filter == "Card.Self" {
 			if !face.IsCreature() {
 				return none + ":noncreature"
@@ -959,7 +1013,25 @@ func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 	if attacker == "" {
 		return none + ":filter"
 	}
+	if modified {
+		f.Setup.P0.Counters = append(f.Setup.P0.Counters, StartCounter{Card: attacker, Kind: "P1P1", N: 1})
+	}
 	f.Focus = &StartFocus{Seat: seatPtr(0), Card: attacker, Kind: "attack"}
+	return ""
+}
+
+// auraAttackStart is "whenever enchanted creature deals (combat) damage to a
+// player" (ValidSource Card.AttachedBy): the Aura is placed attached
+// (StartAttach) to a bearer its Enchant keyword takes that can attack, on the
+// Aura's controller's side, and the bearer attacks a seat with no blocker.
+func auraAttackStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, f *StartFile, none string) string {
+	bearer, bs := attachBearerWhere(reg, b, card, face, attackingBearer)
+	if bearer == "" || bs != 0 {
+		return none + ":filter"
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	placeBearer(&f.Setup.P0, &f.Setup.P1, card, bearer, bs)
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: bearer, Kind: "attack"}
 	return ""
 }
 

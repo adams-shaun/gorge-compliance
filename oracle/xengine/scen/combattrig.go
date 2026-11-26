@@ -53,6 +53,9 @@ type party struct {
 	self   bool
 	filter string
 	dealer bool
+	// attached: the creature the card, an Aura, is attached to (ValidSource
+	// Card.AttachedBy); combatLine places the Aura on a bearer that is the party.
+	attached bool
 }
 
 // selfFilter reports whether some alternative of a filter reads the card
@@ -70,7 +73,7 @@ func selfFilter(s string) bool {
 }
 
 func partyOf(filter string) party {
-	return party{self: selfFilter(filter), filter: strings.TrimSpace(filter)}
+	return party{self: selfFilter(filter), filter: strings.TrimSpace(filter), attached: attachedSource(filter)}
 }
 
 // combatParties reads a combat trigger into the attacker, the blocker (nil: no
@@ -219,6 +222,19 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 				return blockable(c, other)
 			}
 			return blockable(other, c)
+		}
+		if p.attached {
+			if FieldBlock(face) != "aura-unattached" {
+				return "", none + ":filter"
+			}
+			bearer, bs := attachBearerWhere(reg, b, card, face, func(c *cards.Face) bool {
+				return c.IsCreature() && pairOK(c) && (!attacker || !c.HasKeyword("Defender")) && (!p.dealer || c.Power() > 0)
+			})
+			if bearer == "" || bs != seat {
+				return "", none + ":filter"
+			}
+			placeBearer(seats[0], seats[1], card, bearer, bs)
+			return bearer, ""
 		}
 		if p.self {
 			switch {
