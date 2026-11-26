@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5779d9b2-4de1-4aa4-a56d-0da05146743a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 577d027a-96c3-46fe-880b-f8b5dd3f3a3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sever-soul:cast:s1,f:xs:XP:sever-soul:cast:s1	-	-	-	3aa6ded33acb	-	9750401d2549	-	-	2026-11-25	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	RemoveCounter	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	1acec1822e82	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
-577eb51d-7979-4f97-a8b1-e31242720611	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	1acec1822e82	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	RemoveCounter	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	4e2a4fb57596	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+577eb51d-7979-4f97-a8b1-e31242720611	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	4e2a4fb57596	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 57828973-df3d-4288-988d-147a3016120e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-surveyor:f0t0:s1,f:xs:XP:aven-surveyor:f0t0:s1	-	-	-	3aa6ded33acb	-	93275a7448b6	-	-	2026-11-25	xproof
 57831c07-6915-4579-b3e1-de93a3664444	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-surveyor:f0t0:s1,f:xs:XP:aven-surveyor:f0t0:s1	-	-	-	3aa6ded33acb	-	93275a7448b6	-	-	2026-11-25	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57dfe4aa-1e9a-4891-851b-201edd1fc79c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57e4a1c0-4218-4a07-88e7-d6083884c2b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champions-from-beyond:f0t0:s1,f:xs:XP:champions-from-beyond:f0t0:s1	-	-	-	8c0bd19283bb	-	61aa93552384	-	-	2026-11-24	xproof
 57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:champions-from-beyond:f0t0:s1,f:xs:XP:champions-from-beyond:f0t0:s1	-	-	-	8c0bd19283bb	-	61aa93552384	-	-	2026-11-24	xproof
-57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	1acec1822e82	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	4e2a4fb57596	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t2	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	b73ff5809ab1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 57ea9f63-8267-4303-a3dd-9ded220294dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rise-of-the-deathbringer:cast:s1,f:xs:XP:rise-of-the-deathbringer:cast:s1	-	-	-	fb9d3088f0bf	-	ef31200ef4fe	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 57eba48e-87bd-4b54-8635-7348020f2ba4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alley-assailant:cast:s1,f:xs:XP:alley-assailant:cast:s1	-	-	-	23b491658465	-	4f3d8b2365a0	-	-	2026-11-25	xproof
