@@ -612,21 +612,13 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			sig, cite, ticket = d.sig, d.cite, d.ticket
 		default:
 			state = "owed"
-			count := map[string]int{}
 			var all []string
-			for id, r := range k.owed {
-				count[r]++
+			for id := range k.owed {
 				all = append(all, id)
 			}
 			sort.Strings(all)
 			deciding = all[0]
-			best := ""
-			for r, n := range count {
-				if best == "" || n > count[best] || (n == count[best] && r < best) {
-					best = r
-				}
-			}
-			reason = best
+			reason = pickOwedReason(k.owed)
 		}
 		hist[state]++
 		source := "steps"
@@ -724,6 +716,37 @@ func owedReason(x, f classify.Finding) string {
 		return "rng"
 	}
 	return "harness:" + classify.HarnessSignature(x, f)
+}
+
+// pickOwedReason is the one reason of an owed key (item id -> reason). The
+// class (the part before ':', so every harness:<sig> is "harness") is the most
+// common one, a tie going to the lexicographically first; then the most common
+// full reason inside that class, a tie again lexicographic. Voting by class
+// first keeps splitting "harness" into signatures from moving a key to another
+// class.
+func pickOwedReason(owed map[string]string) string {
+	classOf := func(r string) string { c, _, _ := strings.Cut(r, ":"); return c }
+	byClass, byReason := map[string]int{}, map[string]int{}
+	for _, r := range owed {
+		byClass[classOf(r)]++
+		byReason[r]++
+	}
+	bestClass := ""
+	for c, n := range byClass {
+		if bestClass == "" || n > byClass[bestClass] || (n == byClass[bestClass] && c < bestClass) {
+			bestClass = c
+		}
+	}
+	best := ""
+	for r, n := range byReason {
+		if classOf(r) != bestClass {
+			continue
+		}
+		if best == "" || n > byReason[best] || (n == byReason[best] && r < best) {
+			best = r
+		}
+	}
+	return best
 }
 
 // forgeAgreed reports a three-way pattern in which Forge agrees with gorge and

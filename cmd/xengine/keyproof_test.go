@@ -577,3 +577,24 @@ func TestKeyproofOwedReason(t *testing.T) {
 		}
 	}
 }
+
+// A key's reason is voted by class first: splitting harness into signatures
+// must not move a key to rng.
+func TestKeyproofOwedPickClassFirst(t *testing.T) {
+	t.Parallel()
+	for _, c := range []struct {
+		name string
+		owed map[string]string
+		want string
+	}{
+		{"harness split three ways beats two rng", map[string]string{"1": "harness:A", "2": "harness:B", "3": "harness:C", "4": "rng", "5": "rng"}, "harness:A"},
+		{"two-two tie goes to harness", map[string]string{"1": "harness:B", "2": "harness:B", "3": "rng", "4": "rng"}, "harness:B"},
+		{"most common signature inside the class", map[string]string{"1": "harness:B", "2": "harness:A", "3": "harness:B", "4": "rng"}, "harness:B"},
+		{"rng majority", map[string]string{"1": "harness:A", "2": "rng", "3": "rng"}, "rng"},
+		{"one reason", map[string]string{"1": "rng"}, "rng"},
+	} {
+		if got := pickOwedReason(c.owed); got != c.want {
+			t.Errorf("%s: %q, want %q", c.name, got, c.want)
+		}
+	}
+}

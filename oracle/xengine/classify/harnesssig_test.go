@@ -22,3 +22,39 @@ func TestHarnessSignature(t *testing.T) {
 		}
 	}
 }
+
+// XMage's real messages are "<engine>: AssertionError: <cause>": the slug must
+// name the cause, so distinct causes give distinct signatures.
+func TestHarnessSignatureXMageCauses(t *testing.T) {
+	msgs := []string{
+		"xmage: AssertionError: Found wrong choice command (invalid target or miss skip command):\nYes\nTarget: selected 0, more possible 1",
+		"xmage: AssertionError: Can't find ability to activate command: @act1 waterbend {X}",
+		"strict_miss: AssertionError: Missing TARGET def for turn 3, step PRECOMBAT_MAIN, PlayerA\nAbility: Sage of Days [c1] - EntersBattlefieldTriggeredAbility",
+		"strict_miss: AssertionError: Missing CHOICE def for turn 3, step PRECOMBAT_MAIN, PlayerA\nAbility: Bushy Bodyguard [4] - EntersBattlefieldTriggeredAbility",
+		"strict_miss:  leftover: AssertionError: (Choices of PlayerA) Count are not equal (found [Yes]). Make sure you use target.chooseXXX",
+	}
+	want := []string{
+		"decision_shape~found-wrong-choice-command-invalid-target",
+		"decision_shape~cant-find-ability-to-activate-command",
+		"decision_shape~missing-target-def-for-turn-step",
+		"decision_shape~missing-choice-def-for-turn-step",
+		"decision_shape~leftover-choices-of-playera-count-are",
+	}
+	seen := map[string]string{}
+	for i, m := range msgs {
+		got := engineSig(Finding{ID: "i", Class: ClassDecisionShape, Msg: m})
+		if got != want[i] {
+			t.Errorf("%q: %q, want %q", m, got, want[i])
+		}
+		if prev, dup := seen[got]; dup {
+			t.Errorf("%q and %q share signature %q", prev, m, got)
+		}
+		seen[got] = m
+	}
+	// the same cause on another card and step is one signature
+	a := engineSig(Finding{ID: "a", Class: ClassDecisionShape, Msg: msgs[2]})
+	b := engineSig(Finding{ID: "b", Class: ClassDecisionShape, Msg: "strict_miss: AssertionError: Missing TARGET def for turn 9, step PRECOMBAT_MAIN, PlayerB\nAbility: Polygraph Orb [N]"})
+	if a != b {
+		t.Errorf("same cause, other card: %q != %q", a, b)
+	}
+}

@@ -36,17 +36,35 @@ func engineSig(f Finding) string {
 // slugWords is how many words of a message the slug keeps.
 const slugWords = 6
 
-// msgSlug lower-cases msg, drops a leading "<engine>: ", quoted text, digits
-// and anything after the first colon past the prefix, and joins the first
-// slugWords words with '-'.
+// msgSlug lower-cases msg and drops the leading "<engine>: " and exception
+// type prefixes ("xmage: AssertionError: ...", "strict_miss: AssertionError:
+// ..."), so the slug names the cause and not the wrapper. A "leftover:" tag is
+// kept as a word. It then keeps the first line only, cuts at its first colon,
+// drops quoted text and digits, and joins the first slugWords words with '-'.
 func msgSlug(msg string) string {
 	msg = strings.ToLower(strings.TrimSpace(msg))
-	if i := strings.Index(msg, ": "); i >= 0 && !strings.ContainsAny(msg[:i], " ") {
-		msg = msg[i+2:] // "forge: ..." / "xmage: ..."
+	tag := ""
+	for {
+		i := colonEnd(msg)
+		if i < 0 {
+			break
+		}
+		head := strings.TrimSpace(msg[:i])
+		if head == "" || strings.ContainsAny(head, " \t\r\n") {
+			break
+		}
+		if head == "leftover" {
+			tag = "leftover "
+		}
+		msg = strings.TrimSpace(msg[i+1:])
+	}
+	if i := strings.IndexByte(msg, '\n'); i >= 0 {
+		msg = msg[:i]
 	}
 	if i := strings.Index(msg, ":"); i >= 0 {
 		msg = msg[:i]
 	}
+	msg = tag + msg
 	var b strings.Builder
 	var words []string
 	flush := func() {
@@ -55,25 +73,39 @@ func msgSlug(msg string) string {
 			b.Reset()
 		}
 	}
-	quote := rune(0)
+	quote, prev := rune(0), rune(0)
 	for _, r := range msg {
 		switch {
 		case quote != 0:
 			if r == quote {
 				quote = 0
 			}
-		case r == '"' || r == '\'' || r == '`':
+		case r == '"' || r == '`' || (r == '\'' && !(prev >= 'a' && prev <= 'z')):
+			// an apostrophe inside a word ("can't") is not a quote
 			flush()
 			quote = r
+		case r == '\'':
 		case r >= 'a' && r <= 'z':
 			b.WriteRune(r)
 		default: // digits, spaces and punctuation end a word
 			flush()
 		}
+		prev = r
 	}
 	flush()
 	if len(words) > slugWords {
 		words = words[:slugWords]
 	}
 	return strings.Join(words, "-")
+}
+
+// colonEnd is the index of the first colon of s that ends a token (followed by
+// whitespace or the end of s), or -1.
+func colonEnd(s string) int {
+	for i := 0; i < len(s); i++ {
+		if s[i] == ':' && (i+1 == len(s) || s[i+1] == ' ' || s[i+1] == '\n' || s[i+1] == '\t') {
+			return i
+		}
+	}
+	return -1
 }
