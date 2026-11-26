@@ -106,6 +106,9 @@ func TestRNGShuffleDraw(t *testing.T) {
 	}
 	dig := func(ps ...game.PlayerDigest) game.Digest { return game.Digest{Players: ps} }
 	before := dig(seat(34, "Forest", "Forest", "Forest"), seat(40, "Plains"))
+	// searchBefore is the state before Delivery Moogle's search: a homogeneous
+	// library whose top five the shuffle leaves looking unchanged.
+	searchBefore := dig(seat(35, "Plains", "Plains", "Plains"), seat(40, "Plains"))
 	cases := []struct {
 		name  string
 		e     game.Entry
@@ -134,6 +137,24 @@ func TestRNGShuffleDraw(t *testing.T) {
 		// count names, so it is cut too (the safe direction).
 		{"shuffle then draw", game.Entry{RNG: 33, Digest: dig(seat(34, "Forest", "Forest"))},
 			dig(seat(33, "Mountain", "Forest")), false},
+		// A library search shuffles even when the top five look unchanged: an
+		// artifact search over an all-Plains library finds nothing and still
+		// runs the Fisher-Yates pass (Delivery Moogle).
+		{"search over a same-name library", game.Entry{RNG: 34, Digest: searchBefore,
+			Picks: []game.Pick{{Kind: "zone", Player: 0, Label: "Search the library"}}},
+			dig(seat(35, "Plains", "Plains", "Plains"), seat(40, "Plains")), true},
+		// The search's seat must be the one whose library the count matches.
+		{"another seat's search", game.Entry{RNG: 34, Digest: searchBefore,
+			Picks: []game.Pick{{Kind: "zone", Player: 1, Label: "Search the library"}}},
+			dig(seat(35, "Plains", "Plains", "Plains"), seat(40, "Plains")), false},
+		// A zone election that searched the graveyard does not shuffle it.
+		{"graveyard search", game.Entry{RNG: 34, Digest: searchBefore,
+			Picks: []game.Pick{{Kind: "zone", Player: 0, Label: "Search the graveyard"}}},
+			dig(seat(35, "Plains", "Plains", "Plains"), seat(40, "Plains")), false},
+		// A search pick without the shuffle's draw count is not a shuffle.
+		{"search, wrong count", game.Entry{RNG: 34, Digest: searchBefore,
+			Picks: []game.Pick{{Kind: "zone", Player: 0, Label: "Search the library"}}},
+			dig(seat(34, "Plains", "Plains", "Plains"), seat(40, "Plains")), false},
 	}
 	for _, c := range cases {
 		if got := rngShuffle(c.e, c.after); got != c.want {

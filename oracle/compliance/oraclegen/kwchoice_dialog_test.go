@@ -179,3 +179,93 @@ func TestKWChoiceDialogFacesCensus(t *testing.T) {
 		t.Errorf("listed faces found in the corpus: %v of %d", seen, len(xmageKWChoiceDialogFaces))
 	}
 }
+
+// Pemmin's Aura and Shorecrasher Elemental pose the Forge GenericChoice as a
+// bespoke "Select how to boost" Choice over "+1/-1", "-1/+1": the pick is a
+// CHOICE answer with XMage's label, never the positional mode (xpt-47cd1baa).
+func TestGenericChoiceBespokeDialogScriptsXMageLabel(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, tc := range []struct{ card, pick, want string }{
+		{"Pemmin's Aura", "Enchanted creature gets +1/-1 until end of turn.", "+1/-1"},
+		{"Pemmin's Aura", "Enchanted creature gets -1/+1 until end of turn.", "-1/+1"},
+		{"Shorecrasher Elemental", "Shorecrasher Elemental gets +1/-1 until end of turn.", "+1/-1"},
+		{"Shorecrasher Elemental", "Shorecrasher Elemental gets -1/+1 until end of turn.", "-1/+1"},
+	} {
+		card, ok := reg.Lookup(tc.card)
+		if !ok {
+			t.Fatalf("%s missing from the corpus", tc.card)
+		}
+		modes := ModeNumbers(card.Faces[0])
+		if modes[tc.pick] != ModeGenericBespokeChoiceQueue {
+			t.Fatalf("%s: ModeNumbers[%q] = %d, want ModeGenericBespokeChoiceQueue (%#v)", tc.card, tc.pick, modes[tc.pick], modes)
+		}
+		d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "mode", GorgeKind: "modes", Resume: "modes",
+			Options: 2, Min: 1, Max: 1, Picks: []string{tc.pick}, PickIdx: []int{1}, PickKinds: []string{"mode"},
+			PickRefs: []string{"p0:" + tc.card}}
+		got := xanswers([]rules.OracleDecision{d}, 2, modes, nil)
+		want := [][]XAnswer{nil, {{Seat: 0, Kind: "choice", Value: tc.want}}}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("%s %q = %#v, want %#v", tc.card, tc.pick, got, want)
+		}
+		if setup := setupModeAnswers(d, modes); len(setup) != 1 || setup[0].Kind != "setup_choice" || setup[0].Value != tc.want {
+			t.Errorf("%s %q setup answer = %#v, want setup_choice %q", tc.card, tc.pick, setup, tc.want)
+		}
+	}
+}
+
+// Census: every face in xmageGenericChoiceBespokeFaces is a corpus face whose
+// GenericChoice labels all map to the bespoke queue, and every routed label's
+// XMage label agrees with an independently written table (the labels in
+// PemminsAura.java / ShorecrasherElemental.java at XMAGE_REF bec665044e).
+// A new entry needs an XMage-source proof (see choice_dialog.go).
+func TestGenericChoiceBespokeFacesCensus(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	expected := map[string]map[string]string{
+		"pemmin's aura": {
+			"Enchanted creature gets +1/-1 until end of turn.": "+1/-1",
+			"Enchanted creature gets -1/+1 until end of turn.": "-1/+1",
+		},
+		"shorecrasher elemental": {
+			"Shorecrasher Elemental gets +1/-1 until end of turn.": "+1/-1",
+			"Shorecrasher Elemental gets -1/+1 until end of turn.": "-1/+1",
+			"CARDNAME gets +1/-1 until end of turn.":               "+1/-1",
+			"CARDNAME gets -1/+1 until end of turn.":               "-1/+1",
+		},
+	}
+	if len(xmageGenericChoiceBespokeFaces) != 2 || len(expected) != 2 {
+		t.Fatalf("xmageGenericChoiceBespokeFaces has %d entries, expected table %d; adding one needs an XMage-source proof (see its comment)",
+			len(xmageGenericChoiceBespokeFaces), len(expected))
+	}
+	seen := map[string]bool{}
+	for _, c := range reg.AllCards() {
+		if c == nil {
+			continue
+		}
+		for _, f := range c.Faces {
+			key := ""
+			if f != nil {
+				key = strings.ToLower(f.Name)
+			}
+			if _, listed := xmageGenericChoiceBespokeFaces[key]; !listed {
+				continue
+			}
+			labels := genericChoiceBespokeLabels(f)
+			if !reflect.DeepEqual(labels, expected[key]) {
+				t.Errorf("%s: labels %v, want %v", f.Name, labels, expected[key])
+			}
+			m := ModeNumbers(f)
+			for l, want := range expected[key] {
+				if m[l] != ModeGenericBespokeChoiceQueue {
+					t.Errorf("%s: label %q not on the bespoke queue", f.Name, l)
+				}
+				if got := xmageGenericBespokeChoiceLabel(l); got != want {
+					t.Errorf("%s: %q -> %q, want %q", f.Name, l, got, want)
+				}
+			}
+			seen[key] = true
+		}
+	}
+	if len(seen) != len(xmageGenericChoiceBespokeFaces) {
+		t.Errorf("listed faces found in the corpus: %v of %d", seen, len(xmageGenericChoiceBespokeFaces))
+	}
+}

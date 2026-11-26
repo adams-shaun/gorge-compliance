@@ -3,8 +3,10 @@ package scen
 import (
 	"bytes"
 	"encoding/json"
+	"os"
 	"reflect"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -125,6 +127,13 @@ func TestScenFixtures(t *testing.T) {
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
 		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		// a ChooseColor card is cast, not placed, so its choice is made by the
+		// engines' own decision; a ChooseType card or a land refuses by name
+		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
+		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
+		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
+		{"Unclaimed Territory", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "as-enters:land"}},
+		{"Big Apple, 3 a.m.", "f0/a1", want{path: "steps"}, want{path: "refused", reason: "as-enters:land"}},
 		{"Gatekeeper of Malakir", "f0/t0", want{path: "start", check: gatekeeper}, want{path: "start", check: gatekeeper}},
 	}
 	for _, r := range rows {
@@ -156,6 +165,24 @@ func TestScenFixtures(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+// asEntersCast checks a ChooseColor card's start: it is in seat 0's hand with
+// carriers one-mana spells of each colour (the pick is not known when the start
+// is written), and the focus casts it.
+func asEntersCast(card string, carriers int) func(t *testing.T, f *StartFile) {
+	return func(t *testing.T, f *StartFile) {
+		t.Helper()
+		if h := f.Setup.P0.Hand; len(h) != 1+carriers || h[0] != card {
+			t.Errorf("p0 hand = %v, want %s and %d carriers", h, card, carriers)
+		}
+		for _, n := range f.Setup.P0.Battlefield {
+			if n == card {
+				t.Errorf("%s is placed on the battlefield: it would enter without its choice", card)
+			}
+		}
+		focusIs(t, f, 0, card, "cast", 0)
 	}
 }
 
@@ -747,6 +774,75 @@ func TestStartzonetriggers(t *testing.T) {
 	}
 }
 
+// TestStartattackstriggers is the dispatch's repro spelling (xpg-attacks-
+// filter): an Attacks trigger whose ValidCard names the key card's attached
+// creature (Card.AttachedBy, Card.EnchantedBy, Creature.EnchantedBy). The
+// unattached Aura is placed attached (StartAttach) to the most inert
+// attackable creature its Enchant keyword takes that the filter's stripped
+// alternative takes (Card.AttachedBy+powerLE2 on Writ of Passage keeps the
+// power gate), and that bearer is the focus attack. An Equipment cannot enter
+// attached from a start (gorge's StartAttach is the Aura entry), and
+// attaching it before the attack needs a Magnetic Theft cast plus a second
+// turn the one focus play cannot take, so its keys stay refused :equipped. A
+// non-Aura's bearer filter (Kitsune Ace, no attackable Vehicle) and the
+// unplaced attack target keep narrower refusals.
+func TestStartattackstriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Seismic Tutelage", "f0/t1"},
+		{"Contaminated Bond", "f0/t0"},
+		{"Coercive Impetus", "f0/t0"},
+		{"Primetime Suspect", "f0/t0"},
+		{"Writ of Passage", "f0/t0"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != 0 {
+				t.Errorf("active %d, want 0", f.Active)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != c.card {
+				t.Errorf("p0 battlefield %v, want %q first", f.Setup.P0.Battlefield, c.card)
+			}
+			attached(t, f, c.card)
+			bearer := attachBearerOf(t, f, c.card)
+			if bearer == c.card || !slices.Contains(f.Setup.P0.Battlefield, bearer) {
+				t.Fatalf("bearer %q is not a placed creature of the Aura's own", bearer)
+			}
+			focusIs(t, f, 0, bearer, "attack", 0)
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		{"Spiked Ripsaw", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		{"Pip-Boy 3000", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		{"Adaptive Omnitool", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		{"Strength-Testing Hammer", "f0/t0", "no-generator:trigger:Attacks:equipped"},
+		// unrelated refusals, unchanged: the card is not a creature the
+		// filter's bearer shape takes, and the attack target is not placed
+		{"Kitsune Ace", "f0/t0", "no-generator:trigger:Attacks:filter"}, // no attackable Vehicle
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("%s: %+v %v, want refused %q", r.card, res, err, r.reason)
+			}
+		})
+	}
+}
+
 // attached asserts the file places card attached to a bearer on the same seat.
 func attached(t *testing.T, f *StartFile, card string) {
 	t.Helper()
@@ -937,6 +1033,47 @@ func TestStartspellcasttriggers(t *testing.T) {
 	}
 }
 
+// TestStartSpellCastPermanentFilters: a ValidCard filter that names Equipment
+// or an Aura is a spell the inert carrier pool never holds. "Aura,Equipment"
+// (Armory Paladin, Mister Gutsy) casts the simplest Equipment the filter takes
+// (no target to pick); an Aura-only filter casts Rancor at the card, its one
+// bearer. The other ValidCard shapes of the SpellCast:filter class (a kicked
+// spell, a stat property, hasXCost) have no carrier and keep their refusal.
+func TestStartSpellCastPermanentFilters(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Armory Paladin", "Mister Gutsy"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: path %q reason %q %v, want a start", card, res.Path, res.Reason, err)
+		}
+		f := res.Start
+		if f.Focus == nil || f.Focus.Kind != "cast" || f.Active != 0 || !slices.Contains(f.Setup.P0.Hand, f.Focus.Card) || f.Setup.P0.Battlefield[0] != card {
+			t.Errorf("%s: focus %+v hand %v battlefield %v, want the card on the battlefield and an Equipment cast from hand", card, f.Focus, f.Setup.P0.Hand, f.Setup.P0.Battlefield)
+			continue
+		}
+		c, _ := reg.Lookup(f.Focus.Card)
+		if !c.Faces[0].HasTypeWord("Equipment") || c.Faces[0].IsCreature() || !plainCost(c.Faces[0]) {
+			t.Errorf("%s: focus %s is not a plain-cost non-creature Equipment", card, f.Focus.Card)
+		}
+	}
+	c, _ := reg.Lookup("Armory Paladin")
+	if got := permanentSpellCarrier(reg, b, c.Faces[0], "Armory Paladin", "Aura.YouCtrl", 0, func(*cards.Face) bool { return true }); got != "Rancor" {
+		t.Errorf("an Aura filter's carrier = %q, want Rancor (its bearer is the creature card)", got)
+	}
+	if got := permanentSpellCarrier(reg, b, c.Faces[0], "Armory Paladin", "Aura", 1, func(*cards.Face) bool { return true }); got != "" {
+		t.Errorf("an opponent-cast Aura filter's carrier = %q, want none", got)
+	}
+	const refused = "no-generator:trigger:SpellCast:filter"
+	checkStartRows(t, []startRow{
+		{card: "Saproling Infestation", key: "f0/t0", reason: refused},    // Card.YouCtrl+kicked
+		{card: "Pollywog Prodigy", key: "f0/t0", reason: refused},         // Card.nonCreature+cmcLTX, an opponent's cast
+		{card: "Lattice Library", key: "f0/t1", reason: refused},          // Card.hasXCost
+		{card: "Nev, the Practical Dean", key: "f0/t0", reason: refused},  // Card.hasXCost
+		{card: "Owlin Spiralmancer", key: "f0/t0", reason: refused},       // Card.hasXCost
+		{card: "Zimone, Infinite Analyst", key: "f0/t0", reason: refused}, // Card.hasXCost
+	})
+}
+
 // TestBareCastGateWhitelist: the no-filter carrier is safe only when the
 // trigger asks nothing more of the cast. A param outside the accounted set
 // -- a known gate or a future one -- refuses, and the self-target arm keeps
@@ -1118,6 +1255,60 @@ func TestStartmisctriggers(t *testing.T) {
 	}
 }
 
+// TestStartCycledTriggers: "When you cycle CARDNAME" (Cycled, Card.Self) is
+// the card in hand with exactly the cycling cost's mana (planCost met it,
+// as a channel key's cost is met), the focus the cycling activation itself,
+// the granted ability index the K:Cycling line expanded to. A watcher
+// (ValidCard$ Card or Card.Other: the card elsewhere while another card
+// cycles) is the watcher arm: the card where its TriggerZones put it (the
+// battlefield, or the graveyard for Benalish Partisan) while the ranked
+// cycling carrier (Sandbar Merfolk, K:Cycling {2}) sits in the cycler's hand
+// with its {2} of basics placed, the focus its cycling activation. An Aura
+// watcher (Withering Hex) enters attached to a bearer. FirstTime (Valiant
+// Rescuer) is met trivially: nothing has cycled yet.
+func TestStartCycledTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Stir the Sands", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Stir the Sands"},
+			p0BF: rep("Swamp", 4), focusCard: "Stir the Sands", focusKind: "ability", focusAbility: 1},
+		{card: "Renewed Faith", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Renewed Faith"},
+			p0BF: rep("Plains", 2), focusCard: "Renewed Faith", focusKind: "ability", focusAbility: 1},
+		// watchers: the carrier cycles on the watcher's controller's seat
+		{card: "Warped Researcher", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      cat([]string{"Warped Researcher"}, rep("Island", 2)),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Lightning Rift", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      cat([]string{"Lightning Rift"}, rep("Mountain", 2)),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Astral Slide", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF: cat([]string{"Astral Slide"}, rep("Plains", 2)), p1BF: []string{"Memnite"},
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Astral Drift", key: "f0/t1", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF: cat([]string{"Astral Drift"}, rep("Plains", 2)), p1BF: []string{"Ornithopter"},
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Valiant Rescuer", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      cat([]string{"Valiant Rescuer"}, rep("Plains", 2)),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Withering Hex", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF: []string{"Withering Hex", "Memnite", "Swamp", "Swamp"}, p1BF: []string{"Kobolds of Kher Keep"},
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+		{card: "Benalish Partisan", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Sandbar Merfolk"},
+			p0BF:      rep("Plains", 2),
+			focusCard: "Sandbar Merfolk", focusKind: "ability", focusAbility: 0},
+	})
+	// the graveyard watcher: TriggerZones$ Graveyard puts the card in its
+	// controller's graveyard, where the trigger reads it while the carrier
+	// cycles from the hand
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Benalish Partisan", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Benalish Partisan: %+v %v", res, err)
+	}
+	if !slices.Contains(res.Start.Setup.P0.Graveyard, "Benalish Partisan") {
+		t.Errorf("Benalish Partisan graveyard %v, want the card in it",
+			res.Start.Setup.P0.Graveyard)
+	}
+}
+
 // TestStartCosts: an activated ability's non-mana cost is met by start
 // state (planCost), never by a play: Memnite to sacrifice for "another
 // creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
@@ -1167,6 +1358,169 @@ func TestStartCosts(t *testing.T) {
 	f = gen("Liliana, Dreadhorde General", "f0/a2")
 	if want := []StartCounter{{Card: "Liliana, Dreadhorde General", Kind: "LOYALTY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.Counters, want) {
 		t.Errorf("Liliana: counters %+v, want %+v", f.Setup.P0.Counters, want)
+	}
+}
+
+// TestStartNinjutsu: ninjutsu returns an unblocked attacker, so the start is
+// a combat line: the vanilla fixture attacks, nothing blocks, and the ninja
+// waits in hand with exactly its ninjutsu mana until the declare blockers step
+// (the focus attack scripts the line; the activation is the focus play). Other
+// cost refusals stay as they were: the unblocked-attacker Return is read only
+// by a focus ability (planCost, which every other caller uses, still refuses
+// it), and a Return the generator cannot place or a different cost keeps its
+// name.
+func TestStartNinjutsu(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card string
+		mana []string
+	}{
+		{"Biting-Palm Ninja", rep("Swamp", 3)},
+		{"Dokuchi Shadow-Walker", rep("Swamp", 4)},
+		{"Blade-Blizzard Kitsune", rep("Plains", 4)},
+	} {
+		res, err := Generate(reg, b, r.card, "f0/a0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: %+v %v", r.card, res, err)
+		}
+		f := res.Start
+		listIs(t, r.card+" p0 hand", f.Setup.P0.Hand, []string{r.card})
+		listIs(t, r.card+" p0 battlefield", f.Setup.P0.Battlefield, cat(r.mana, []string{combatFixture}))
+		listIs(t, r.card+" p1 battlefield", f.Setup.P1.Battlefield, nil)
+		focusIs(t, f, 0, r.card, "ability", 0)
+		if f.Focus.Attack != combatFixture || f.Focus.Block != "" || f.Active != 0 {
+			t.Errorf("%s: focus attack %q block %q active %d, want %q, no block, seat 0", r.card, f.Focus.Attack, f.Focus.Block, f.Active, combatFixture)
+		}
+	}
+	card, ok := reg.Lookup("Biting-Palm Ninja")
+	if !ok {
+		t.Fatal("Biting-Palm Ninja missing")
+	}
+	face := card.Faces[0]
+	for _, c := range []struct{ cost, want string }{
+		{"2 B Return<1/Creature.YouCtrl+attacking+unblocked>", "steps-needed:cost:Return"}, // not a focus ability: still refused
+		{"2 B Return<1/Creature.YouCtrl+attacking>", "steps-needed:cost:Return"},           // no unblocked: no line to script
+		{"2 B Return<1/Treasure.token>", "steps-needed:cost:Return"},
+		{"2 B Forage", "steps-needed:cost:Forage"},
+	} {
+		if _, why := planCost(reg, b, face, "Biting-Palm Ninja", c.cost, "B"); why != c.want {
+			t.Errorf("planCost(%q) = %q, want %q", c.cost, why, c.want)
+		}
+	}
+}
+
+// TestStartSacCosts: the Sac cost shapes beyond Sac<1/CARDNAME> a start can
+// pay with placed state (operator 11-26, the steps-needed:cost:Sac class):
+//
+//   - an untapped-creature Sac places an untapped vanilla creature beside the
+//     card (Betrothed of Fire's "Sacrifice an untapped creature");
+//   - an AttachedBy Sac spends the Aura's own bearer, which applyCost places
+//     attached (StartAttach), and no separate permanent for the cost;
+//   - a named-card Sac places the named card beside the key card (Kyscu
+//     Drake's Spitting Drake, Urborg Panther's Feral Shadow and
+//     Breathstealer), and keeps the refusal when the named cards cannot be
+//     placed (Shadowborn Apostle's six creatures named it);
+//   - a token-kind Sac mints the cost's tokens: five Treasures (Kellogg,
+//     Dangerous Mind), a Food (Bosco, Just a Bear), a token of its own kind
+//     (Arcade Cabinet's, Rat King, Pale Piper's Permanent.token -> the
+//     corpus's Servo), and keeps the refusal for a kind the XMage setup token
+//     table does not map (Diamond Kaleidoscope's Prism);
+//   - a filtered-land Sac places the nonbasic land the filter takes (Glacial
+//     Crevasses' snow Mountain: Alpine Meadow, the corpus's only snow
+//     Mountain).
+func TestStartSacCosts(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(card, key string) *StartFile {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Start == nil {
+			t.Fatalf("%s %s: refused %q", card, key, res.Reason)
+		}
+		return res.Start
+	}
+	tokenScripts := func(ts []StartToken) []string {
+		out := make([]string, 0, len(ts))
+		for _, tk := range ts {
+			out = append(out, tk.Script)
+		}
+		return out
+	}
+	for _, r := range []struct {
+		card, key string
+		p0BF      []string
+		p1BF      []string
+		tokens    []string
+		attach    []StartAttach
+		ability   int
+	}{
+		{card: "Kyscu Drake", key: "f0/a1", p0BF: []string{"Kyscu Drake", "Spitting Drake"}, ability: 1},
+		{card: "Betrothed of Fire", key: "f0/a0", p0BF: []string{"Betrothed of Fire", "Memnite", "Crimson Kobolds", "Shield Sphere"},
+			p1BF: []string{"Crimson Kobolds"}, attach: []StartAttach{{Card: "Betrothed of Fire", To: "Memnite"}}},
+		{card: "Betrothed of Fire", key: "f0/a1", p0BF: []string{"Betrothed of Fire", "Memnite", "Shield Sphere"},
+			p1BF: []string{"Crimson Kobolds"}, attach: []StartAttach{{Card: "Betrothed of Fire", To: "Memnite"}}, ability: 1},
+		{card: "Urborg Panther", key: "f0/a1", p0BF: []string{"Urborg Panther", "Feral Shadow", "Breathstealer"},
+			p1BF: []string{"Phyrexian Walker"}, ability: 1},
+		{card: "Bubbling Cauldron", key: "f0/a1", p0BF: []string{"Bubbling Cauldron", "Plains", "Festering Newt"}, ability: 1},
+		{card: "Glacial Crevasses", key: "f0/a0", p0BF: []string{"Glacial Crevasses", "Alpine Meadow", "Karplusan Wolverine"}},
+		{card: "Kellogg, Dangerous Mind", key: "f0/a0", p0BF: []string{"Kellogg, Dangerous Mind"},
+			p1BF: []string{"Shield Sphere"}, tokens: rep("c_a_treasure_sac", 5)},
+		{card: "Bosco, Just a Bear", key: "f0/a0", p0BF: []string{"Bosco, Just a Bear", "Forest", "Forest", "Forest"},
+			tokens: []string{"c_a_food_sac"}},
+		{card: "Arcade Cabinet", key: "f0/a0", p0BF: []string{"Arcade Cabinet", "Plains", "Plains"},
+			p1BF: []string{"Shield Sphere"}, tokens: []string{"c_1_1_a_servo"}},
+		{card: "Rat King, Pale Piper", key: "f0/a0", p0BF: []string{"Rat King, Pale Piper", "Swamp", "Swamp"},
+			tokens: rep("c_1_1_a_servo", 2)},
+	} {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			f := gen(r.card, r.key)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			listIs(t, "p0 tokens", tokenScripts(f.Setup.P0.Tokens), r.tokens)
+			if !reflect.DeepEqual(f.Setup.P0.Attach, r.attach) {
+				t.Errorf("p0 attach %+v, want %+v", f.Setup.P0.Attach, r.attach)
+			}
+			focusIs(t, f, 0, r.card, "ability", r.ability)
+		})
+	}
+	checkStartRows(t, []startRow{
+		// Diamond Kaleidoscope f0/a1: the Prism token script exists, but the
+		// XMage setup token table does not map it, so the cost stays refused.
+		{card: "Diamond Kaleidoscope", key: "f0/a1", reason: "steps-needed:cost:Sac"},
+		// Shadowborn Apostle f0/a0: six creatures named it is beyond the
+		// four-copy budget a start's placements hold.
+		{card: "Shadowborn Apostle", key: "f0/a0", reason: "steps-needed:cost:Sac"},
+		// Phyrexian Scrapyard f0/a2: three Phyrexian Scrapyards (a named land
+		// the card itself is) are within the budget but no placeable card.
+		{card: "Phyrexian Scrapyard", key: "f0/a2", reason: "steps-needed:cost:Sac"},
+	})
+	// the filtered land fodder adds no mana: it is placed tapped
+	if f := gen("Glacial Crevasses", "f0/a0"); !slices.Contains(f.Setup.P0.Tapped, "Alpine Meadow") {
+		t.Errorf("p0 tapped %v, want the Alpine Meadow the cost sacrifices", f.Setup.P0.Tapped)
+	}
+}
+
+// TestBaitPoolActivation pins the bait pool a stack-target start draws its
+// bait activation from: a cost beyond mana, tap and Sac<1/CARDNAME> (a bait
+// has no placed permanent for another sacrifice) is not in it, so a change to
+// planCost's Sac shapes leaves every bait start's pick alone.
+func TestBaitPoolActivation(t *testing.T) {
+	reg, b := testBuilder(t)
+	pool := baitPoolOf(reg, b)
+	if len(pool.activation) == 0 {
+		t.Fatal("empty activation bait pool")
+	}
+	if got := pool.activation[0].Name; got != "Dark Sphere" {
+		t.Errorf("top activation bait %q, want Dark Sphere (T, Sac<1/CARDNAME>)", got)
+	}
+	for _, f := range pool.activation {
+		if sa := baitAbilityOf(f); sa != nil {
+			if _, why := baitCostTokens(sa.Params["Cost"]); why != "" {
+				t.Errorf("%s: bait cost %q in the pool: %s", f.Name, sa.Params["Cost"], why)
+			}
+		}
 	}
 }
 
@@ -1512,7 +1866,7 @@ func TestStartstacktarget(t *testing.T) {
 				if sa == nil {
 					t.Fatalf("%q has no activated ability", f.Focus.BaitAbility)
 				}
-				mana, why := costTokens(sa.Params["Cost"])
+				mana, why := baitCostTokens(sa.Params["Cost"])
 				if why != "" {
 					t.Fatalf("%q ability cost %q is not placeable: %s", f.Focus.BaitAbility, sa.Params["Cost"], why)
 				}
@@ -2319,7 +2673,6 @@ func TestStartfacestarts(t *testing.T) {
 	const (
 		aclazotz = "Aclazotz, Deepest Betrayal // Temple of the Dead"
 		arlinn   = "Arlinn Kord // Arlinn, Embraced by the Moon"
-		wolfkin  = "Wolfkin Outcast // Wedding Crasher"
 	)
 	for _, tc := range []struct {
 		card, key, kind string
@@ -2328,7 +2681,6 @@ func TestStartfacestarts(t *testing.T) {
 	}{
 		{aclazotz, "f1/a0", "ability", 0, false},         // a modal back face (a land)
 		{arlinn, "f1/a1", "ability", 1, false},           // a transformed planeswalker's loyalty ability
-		{wolfkin, "f1/t0", "", 0, false},                 // a transformed back face's trigger
 		{"Voldaren Pariah", "f1/t0", "ability", 0, true}, // a Transformed trigger: front face, own transform ability
 		{"Kindly Stranger", "f1/t0", "cast", 0, true},    // a Transformed trigger: front face, one-card enabler
 	} {
@@ -2400,8 +2752,9 @@ func TestStartfacestarts(t *testing.T) {
 // TestStartcombattriggers: a combat trigger (blocks, becomes blocked, combat
 // damage dealt or taken) is one scripted combat with no forced play: the active
 // seat attacks with exactly Attack, the other blocks with exactly Block (or not
-// at all), the card beside them. A trigger on an Aura's or Equipment's bearer
-// has no start file to attach with, and stays refused.
+// at all), the card beside them. A trigger on an Equipment's bearer has no
+// start file to attach with, and stays refused; an Aura's bearer is
+// attacksStart's bearer shape (TestStartattackstriggers).
 func TestStartcombattriggers(t *testing.T) {
 	reg, b := testBuilder(t)
 	rows := []struct {
@@ -2453,9 +2806,12 @@ func TestStartcombattriggers(t *testing.T) {
 			}
 		})
 	}
+	// Aqueous Form's Attacks trigger reads the Aura's bearer (Card.AttachedBy),
+	// which attacksStart now serves with its bearer shape: see
+	// TestStartattackstriggers.
 	res, err := Generate(reg, b, "Aqueous Form", "f0/t0", Options{Prefer: "start"})
-	if err != nil || res.Path != PathRefused || res.Reason != "no-generator:trigger:Attacks:filter" {
-		t.Errorf("Aqueous Form: %+v %v, want refused no-generator:trigger:Attacks:filter", res, err)
+	if err != nil || res.Start == nil || res.Start.Focus == nil || res.Start.Focus.Kind != "attack" {
+		t.Errorf("Aqueous Form: %+v %v, want a bearer-attack start", res, err)
 	}
 }
 
@@ -2475,6 +2831,85 @@ func TestStartcombattriggersRefused(t *testing.T) {
 		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // the only carrier has menace
 	} {
 		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("path %q reason %q, want refused %s", res.Path, res.Reason, r.reason)
+			}
+		})
+	}
+}
+
+// TestStartDamageDoneFilter: the DamageDone source filters that name an
+// attachment or a state. An Aura bearer (Card.AttachedBy) is placed attached to
+// a creature that attacks (hurting a player: Sigil of Sleep, Sleeper's Robe,
+// Necromantic Thirst; hurting a creature: Charisma, whose fixture blocks it); a
+// "modified" source gets a +1/+1 counter on the creature that attacks (Kodama
+// of the West Tree). An Equipment cannot enter attached from a start and a
+// damage to You from a source you control needs a self-hit, so those keep the
+// exact refusal, as do unrelated cards' refusals.
+func TestStartDamageDoneFilter(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card         string
+		attacksCard  bool // the card is the attacker (else its attached bearer)
+		block        bool
+		counterOnAtk bool
+	}{
+		{card: "Sigil of Sleep"}, {card: "Sleeper's Robe"}, {card: "Necromantic Thirst"},
+		{card: "Charisma", block: true},
+		{card: "Kodama of the West Tree", attacksCard: true, counterOnAtk: true},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, "f0/t0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			fo := f.Focus
+			if fo == nil || f.Active != 0 {
+				t.Fatalf("focus %+v active %d, want seat 0's attack", fo, f.Active)
+			}
+			attacker := fo.Card
+			if fo.Attack != "" {
+				attacker = fo.Attack
+			}
+			if r.attacksCard != (attacker == r.card) {
+				t.Errorf("attacker %q, card is attacker %v", attacker, r.attacksCard)
+			}
+			if r.block != (fo.Block != "") {
+				t.Errorf("block %q, want a block %v", fo.Block, r.block)
+			}
+			if !r.attacksCard {
+				attached(t, f, r.card)
+				if f.Setup.P0.Attach[0].To != attacker {
+					t.Errorf("attached to %q, want the attacker %q", f.Setup.P0.Attach[0].To, attacker)
+				}
+				c, ok := reg.Lookup(attacker)
+				if !ok || !attackingBearer(c.Faces[0]) {
+					t.Errorf("bearer %q cannot attack and deal damage", attacker)
+				}
+			}
+			if got := slices.Contains(f.Setup.P0.Counters, StartCounter{Card: attacker, Kind: "P1P1", N: 1}); got != r.counterOnAtk {
+				t.Errorf("counters %+v, want a +1/+1 counter on the attacker %v", f.Setup.P0.Counters, r.counterOnAtk)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		{"Daredevil, Fearless Fighter", "f0/t0", "no-generator:trigger:DamageDone:filter"},      // a source you control hurts You
+		{"Domesticated Watercourse", "f0/t0", "no-generator:trigger:DamageDone:filter"},         // EquippedBy: no attached Equipment start
+		{"Sword of Fire and Ice", "f0/t0", "no-generator:trigger:DamageDone:filter"},            // EquippedBy
+		{"Sword of War and Peace", "f0/t0", "no-generator:trigger:DamageDone:filter"},           // EquippedBy
+		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // unrelated: a 0-power card
+		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // unrelated: the only carrier has menace
+		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // unrelated: hand size
+	} {
+		t.Run("refused/"+r.card, func(t *testing.T) {
 			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 			if err != nil {
 				t.Fatal(err)
@@ -2723,5 +3158,58 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 	}
 	if res.Path != PathStart || res.Reason != "" {
 		t.Errorf("vanilla: path %q reason %q, want start", res.Path, res.Reason)
+	}
+}
+
+// The refusal reasons of cards unrelated to the harness census are unchanged.
+func TestScenRefusalReasonsUnchanged(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key, reason string }{
+		{"Thornvault Forager", "f0/a1", "steps-needed:cost:Forage"},
+		{"Banner of Kinship", "static#0.0", "as-enters"},
+		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
+		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", r.card, r.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != r.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", r.card, r.key, res.Path, res.Reason, r.reason)
+		}
+	}
+}
+
+// harness-census.tsv: the signature rows sum to the declared harness total
+// and each row's card count matches its names.
+func TestHarnessCensus(t *testing.T) {
+	b, err := os.ReadFile("testdata/harness-census.tsv")
+	if err != nil {
+		t.Fatal(err)
+	}
+	total, sum, rows := -1, 0, 0
+	for _, l := range strings.Split(strings.TrimRight(string(b), "\n"), "\n") {
+		if v, ok := strings.CutPrefix(l, "# harness-keys "); ok {
+			total, _ = strconv.Atoi(v)
+			continue
+		}
+		if strings.HasPrefix(l, "#") || strings.HasPrefix(l, "signature\t") {
+			continue
+		}
+		c := strings.Split(l, "\t")
+		if len(c) != 4 || !strings.HasPrefix(c[0], "x=") || !strings.Contains(c[0], "+f=") {
+			t.Fatalf("bad census row %q", l)
+		}
+		keys, _ := strconv.Atoi(c[1])
+		cards, _ := strconv.Atoi(c[2])
+		if names := strings.Split(c[3], "; "); len(names) != cards || keys < cards {
+			t.Errorf("%s: %d keys, %d cards, names %v", c[0], keys, cards, names)
+		}
+		sum += keys
+		rows++
+	}
+	if total < 0 || rows == 0 || sum != total {
+		t.Errorf("census rows sum to %d keys over %d signatures, header says %d", sum, rows, total)
 	}
 }

@@ -997,7 +997,23 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver strict-missed "gorge picked 1, Forge wants 2..2"). ChooseFewerThanMinTest (run-unit-tests.sh) fails on efd75d00b34 and passes here;
 # one pick over two candidates where two are required still misses. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-fewer-than-min.
-FORGE_ORACLE_REF ?= 71fd77c15c0e42d9357a53896dbac05812480ff5
+# bdad3bd38b1 = 71fd77c15c0 plus the values-list chooseNumber (RollDiceEffect ChosenSVar$, CR 706.2) answered from gorge's numeric choose_n
+# when the pick is an offered value (StepMachine.chooseNumberFrom); it missed unconditionally (xproof clusters xpt-8a6bce20, xpt-c9c0e640,
+# Valiant Endeavor "strict_miss: Missing number answer"). UnmappedAskTest's three Valiant Endeavor cases (forced rolls 3 and 6: pick 3 six
+# Knights, pick 6 three, unoffered 4 still misses) fail on 71fd77c15c0 and pass here. Driver-only; die-roll forcing, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-number-values.
+# 4385467a9eb = 483fcd27c71 (bdad3bd38b1 above, merged into fix/xp-forge-driver-choose-fewer-than-min) merged with gorge's FORGE_REF
+# 5bc5851a54 (gorge-cond-fixes-20261125: Laboratory Drudge, Barrowin of Clan Undurr, Park Heights Pegasus check their conditions on
+# resolution). gorge main moved FORGE_REF there on 11-25 and the pin invariant failed every xproof cycle; the merge was clean, and the
+# cardsfolder/tokenscripts trees now equal FORGE_REF 5bc5851a54's. Driver code unchanged from bdad3bd38b1. Fork branch
+# oracle/forge-pinfix-5bc5851a54. scripts/check-forge-ref-in-driver.sh now holds this in CI.
+# 1dea7b45ce0 = 4385467a9eb plus the unpinned order-to-Exile ask kept (StepMachine.UNOBSERVABLE_ORDER_ZONES gains Exile, beside
+# Graveyard/Battlefield/Hand; both snapshots sort an exile's names, so forge_order.go can never derive a pin and Flickerform's
+# exile-the-bearer-and-itself resolution strict-missed, xproof cluster xpt-1d42dce4 xs:XP:flickerform:f0a0:s1). The library and
+# every other zone still strict-miss. OrderCardsTest.unpinnedExileOrderKeepsForgeOrder (run-unit-tests.sh) is red on 4385467a9eb
+# and green here; unpinnedOtherZoneStillLooseMisses now asserts Library instead of Exile. Driver-only; die-roll forcing,
+# cardsfolder and tokenscripts unchanged. Fork branch oracle-driver.
+FORGE_ORACLE_REF ?= 1dea7b45ce06a7d0ab55a7946fb30aeff37e781e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
@@ -1173,6 +1189,7 @@ smoke:
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/check_fork_pins_smoke.sh
+	bash ops/scripts/tests/check_forge_ref_in_driver_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh

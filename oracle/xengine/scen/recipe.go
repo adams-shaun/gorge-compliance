@@ -117,13 +117,17 @@ func splitCost(cost string) []string {
 var payLifeRE = regexp.MustCompile(`^PayLife<[0-9]+>$`)
 
 // costTokens splits a cost into its mana tokens and its other tokens, refusing
-// the first other token no start setup can pay.
+// the first other token no start setup can pay. A Sac token's shape only is
+// pre-cleared here: planCost does the real work and refuses a spec no
+// placement meets (fodder, the token kinds, the fixture scan) with the same
+// steps-needed:cost:Sac.
 func costTokens(cost string) (mana []string, refusal string) {
 	for _, tok := range splitCost(cost) {
 		switch {
 		case manaTokenRE.MatchString(tok):
 			mana = append(mana, tok)
-		case tok == "T" || tok == "Q" || tok == "Sac<1/CARDNAME>" || payLifeRE.MatchString(tok):
+		case tok == "T" || tok == "Q" || payLifeRE.MatchString(tok):
+		case sacCostShape(tok):
 		default:
 			if i := strings.IndexByte(tok, '<'); i >= 0 {
 				tok = tok[:i]
@@ -134,6 +138,30 @@ func costTokens(cost string) (mana []string, refusal string) {
 	return mana, ""
 }
 
+// baitCostTokens is costTokens for a cost a bait seat pays from placed lands
+// alone: mana, T, Q, Sac<1/CARDNAME> and PayLife, exactly what costTokens took
+// before planCost learned the other Sac shapes. A bait's other sacrifice has no
+// permanent placed for it, so it keeps the refusal (the bait pool is unchanged).
+func baitCostTokens(cost string) (mana []string, refusal string) {
+	for _, tok := range splitCost(cost) {
+		if sacCostShape(tok) && tok != "Sac<1/CARDNAME>" {
+			return nil, "steps-needed:cost:Sac"
+		}
+	}
+	return costTokens(cost)
+}
+
+// sacCostShape reports whether tok is a Sac token costArgs reads: Sac<N/Spec>
+// with a whole N of 0 or more. The spec itself is planCost's work.
+func sacCostShape(tok string) bool {
+	head, args := costArgs(tok)
+	if head != "Sac" || len(args) < 2 {
+		return false
+	}
+	n, err := strconv.Atoi(args[0])
+	return err == nil && n >= 0
+}
+
 // asEnters reports an as-enters choice on face: a replacement of the card's own
 // move to the battlefield whose replacement effect is a Choose* API.
 func asEnters(f *cards.Face) bool {
@@ -142,6 +170,78 @@ func asEnters(f *cards.Face) bool {
 			continue
 		}
 		if r.With != nil && strings.HasPrefix(r.With.API, "Choose") {
+			return true
+		}
+	}
+	return false
+}
+
+// asEntersRefusal is the refusal of a card whose as-enters choice a start that
+// places it cannot make: a land is played, not cast, so its choice (a colour or
+// a type) cannot be made by the one play the focus takes ("as-enters:land");
+// every other card is plain "as-enters".
+func asEntersRefusal(f *cards.Face) string {
+	if f.IsLand() {
+		return "as-enters:land"
+	}
+	return "as-enters"
+}
+
+// asEntersStart serves a trigger key of a card whose own replacement is a
+// ChooseColor: the card is cast from hand on turn 1 (castStart), so the three
+// engines make the choice by their normal decision and the replay carries the
+// pick, and the trigger is then met on the line after the cast:
+//
+//   - a state trigger on the chosen colour (Mode Always: "when you control no
+//     permanents of the chosen color") fires from the cast itself;
+//   - "whenever a player casts a spell of the chosen color" (SpellCast, ValidCard
+//     Card.ChosenColor) is met by a one-mana carrier of each colour in the hand,
+//     the pick not being known when the start is written, and exactly its lands:
+//     the focus bot casts the key card first, the bots then cast the carriers.
+//
+// Any other shape (a type choice, a trigger on another event) refuses by the
+// plain as-enters reason, as does a land (asEntersRefusal).
+func asEntersStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
+	if face.IsLand() || !asEntersColour(face) {
+		return asEntersRefusal(face)
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return asEntersRefusal(face)
+	}
+	switch trig.Mode {
+	case "Always":
+		if !strings.Contains(trig.Params["IsPresent"], "ChosenColor") {
+			return asEntersRefusal(face)
+		}
+	case "SpellCast":
+		if strings.TrimSpace(trig.Params["ValidCard"]) != "Card.ChosenColor" || trig.Params["ValidActivatingPlayer"] != "" {
+			return asEntersRefusal(face)
+		}
+	default:
+		return asEntersRefusal(face)
+	}
+	if why := castStart(reg, b, face, card, generic, f); why != "" {
+		return why
+	}
+	if trig.Mode == "Always" {
+		return ""
+	}
+	p0 := &f.Setup.P0
+	for _, sym := range []string{"W", "U", "B", "R", "G"} {
+		name := pickCarrier(reg, b, card, func(cf *cards.Face) bool { return cf.ManaCost == sym })
+		if name == "" {
+			return "as-enters:carrier"
+		}
+		castCarrier(reg, p0, name)
+	}
+	return ""
+}
+
+// asEntersColour reports whether the as-enters choice of f is a ChooseColor.
+func asEntersColour(f *cards.Face) bool {
+	for _, r := range f.Repls {
+		if r.Event == "Moved" && strings.Contains(r.Params["ValidCard"], "Card.Self") && r.Params["Destination"] == "Battlefield" &&
+			r.With != nil && r.With.API == "ChooseColor" {
 			return true
 		}
 	}
@@ -193,7 +293,7 @@ func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string
 // activation zone has it, the cost met by placed state (planCost), and the
 // focus the ability's activation. "" when built, else the refusal.
 func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, idx int, sa *cards.SA, f *StartFile) string {
-	plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
+	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic)
 	if why != "" {
 		return why
 	}
@@ -206,8 +306,32 @@ func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 			return "start:activation-zone:" + z
 		}
 	}
+	if plan.zone == zoneBattlefield && plan.bearer == "" && FieldBlock(face) == "aura-unattached" {
+		// The focus Aura a start places enters attached (FieldBlock refuses a
+		// bare one): the bearer its Enchant keyword takes. A cost that spends
+		// the enchanted permanent (Sac<Card.AttachedBy>) already picked it.
+		bearer, bs := attachBearer(reg, b, card, face)
+		if bearer == "" {
+			return "battlefield:aura-unattached"
+		}
+		plan.bearer, plan.bearerSeat = bearer, bs
+	}
 	applyCost(plan, card, generic, f)
 	f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
+	if plan.attacker != "" {
+		// ninjutsu: the cost returns an unblocked attacker, so the focus waits
+		// for a scripted combat (one attacker, no block) and takes its
+		// activation at its first priority after the blocks (the ability's
+		// ActivationPhases are Declare Blockers and later)
+		fix, ok := reg.Lookup(combatFixture)
+		if !ok || len(fix.Faces) == 0 || !fix.Faces[0].IsCreature() {
+			return "steps-needed:cost:Return:fixture"
+		}
+		if why := combatLine(reg, b, face, fix.Faces[0], card, party{filter: plan.attacker}, nil, 0, f, "steps-needed:cost:Return"); why != "" {
+			return why
+		}
+		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx, Attack: f.Focus.Attack}
+	}
 	return ""
 }
 
@@ -274,7 +398,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	}
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield
 		if asEnters(face) {
-			r, _ := refuse("as-enters")
+			r, _ := refuse(asEntersRefusal(face))
 			return r, true
 		}
 		return Result{}, false
@@ -304,8 +428,17 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		// A Transformed trigger places the card on its front face and
 		// transforms it there (transformedStart), so the trigger face's
 		// as-enters choice is not the placement's; transformedStart checks
-		// the front face's.
-		if trig == nil || trig.Mode != "Transformed" {
+		// the front face's. A Cycled trigger's card cycles from hand and
+		// never enters the battlefield at all.
+		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
+			// The card cannot be placed (it would enter without its choice):
+			// it is cast, and its trigger is met on the line after the cast.
+			if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
+				return refuse(why)
+			}
+			break
+		}
+		if trig == nil || trig.Mode != "Transformed" && trig.Mode != "Cycled" {
 			if r, ok := onBF(); ok {
 				return r, nil
 			}
@@ -383,7 +516,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
-		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp":
+		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp", "Cycled":
 			if why := eventStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
@@ -450,6 +583,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			why := FieldBlock(face)
 			if why == "" || why == "aura-unattached" && seat.Attached(n) {
 				continue
+			}
+			if why == "aura-unattached" && seat == p0 && attachKeyAura(reg, b, face, card, p0, p1) {
+				continue // the key Aura gets a vanilla bearer
 			}
 			return refuse("battlefield:" + why)
 		}
@@ -525,6 +661,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		if err != nil {
 			return Result{}, err
 		}
+		return refuse(why)
+	}
+	if why := dayNightRefusal(reg, f); why != "" {
 		return refuse(why)
 	}
 	return Result{Path: PathStart, Start: f}, nil

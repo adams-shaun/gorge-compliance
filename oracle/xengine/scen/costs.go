@@ -32,17 +32,29 @@ func costArgs(tok string) (head string, args []string) {
 // seat 0 (the forced start: the cost's prerequisites are start state, never
 // a play).
 type costPlan struct {
-	mana      []string // mana tokens: one basic each on the battlefield
-	zone      string   // where the card sits (zoneBattlefield, zoneHand, zoneGraveyard)
-	field     []string // permanents the cost sacrifices, returns or taps
-	tapped    []string // of field, those placed tapped (lands: they add no mana)
-	hand      []string // cards the cost discards
-	graveyard []string // cards the cost exiles from the graveyard
-	counters  []StartCounter
+	mana      []string     // mana tokens: one basic each on the battlefield
+	zone      string       // where the card sits (zoneBattlefield, zoneHand, zoneGraveyard)
+	field     []string     // permanents the cost sacrifices, returns or taps
+	tapped    []string     // of field, those placed tapped (lands: they add no mana)
+	hand      []string     // cards the cost discards
+	graveyard []string     // cards the cost exiles from the graveyard
+	tokens    []StartToken // tokens the cost spends (Sac<N/Kind> of a token kind), minted on the battlefield
+	// bearer is the creature the card's own attachment reads (Sac<Card.AttachedBy>,
+	// "sacrifice enchanted creature"): the Aura the ability is on is placed
+	// attached to it (StartAttach), and the cost sacrifices it. bearerSeat is
+	// the seat that must control it.
+	bearer     string
+	bearerSeat int
+	counters   []StartCounter
 	// playerCounters seed the seat itself (Card empty): the energy a
 	// PayEnergy<N> spends before the focus play.
 	playerCounters []StartCounter
 	life           int32 // the life a PayLife<N> needs: N+1 when N is 20 or more (0: the default 20)
+	// attacker, when set, is the filter (its attacking and unblocked
+	// properties stripped) of the one unblocked attacker the cost returns
+	// (ninjutsu): the cost is payable only inside a combat line, which only a
+	// focus ability (abilityFocus) scripts; planCost refuses it elsewhere.
+	attacker string
 }
 
 // planCost reads cost for the card's ability: every token a start can meet
@@ -63,6 +75,42 @@ type costPlan struct {
 //     PlayerCounters (a start position can hold the energy the ability
 //     spends). A malformed or non-positive amount stays refused.
 func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
+	p, why := planCostLine(reg, b, face, card, cost, generic)
+	if why == "" && p.attacker != "" {
+		return p, "steps-needed:cost:Return"
+	}
+	return p, why
+}
+
+// unblockedAttackerFilter is the filter a Return cost names when it returns an
+// unblocked attacker ("Creature.YouCtrl+attacking+unblocked": ninjutsu) with
+// those two properties stripped, and whether the filter names both.
+func unblockedAttackerFilter(spec string) (string, bool) {
+	head, props, _ := strings.Cut(spec, ".")
+	var keep []string
+	var atk, unb bool
+	for _, p := range strings.Split(props, "+") {
+		switch strings.ToLower(p) {
+		case "attacking":
+			atk = true
+		case "unblocked":
+			unb = true
+		default:
+			keep = append(keep, p)
+		}
+	}
+	if !atk || !unb {
+		return "", false
+	}
+	if len(keep) == 0 {
+		return head, true
+	}
+	return head + "." + strings.Join(keep, "+"), true
+}
+
+// planCostLine is planCost that also reads a Return of an unblocked attacker
+// (costPlan.attacker): the caller must script the combat line it needs.
+func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
 	p := costPlan{zone: zoneBattlefield}
 	for _, tok := range splitCost(cost) {
 		if manaTokenRE.MatchString(tok) {
@@ -98,13 +146,22 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 		n := 0
 		if len(args) >= 2 {
 			var err error
-			if n, err = strconv.Atoi(args[0]); err != nil || n < 0 || n > 4 && head != "SubCounter" {
+			// the budget of four placements holds for every head but SubCounter
+			// (a loyalty or counter total) and a Sac or Return, whose arm
+			// caps its own count (tokens beyond four, cards at four)
+			if n, err = strconv.Atoi(args[0]); err != nil || n < 0 || n > 4 && head != "SubCounter" && head != "Sac" && head != "Return" {
 				if !(head == "tapXType" && args[0] == "Any") {
 					return p, refusal
 				}
 			}
 		}
 		self := len(args) >= 2 && (args[1] == "CARDNAME" || args[1] == "NICKNAME")
+		if head == "Return" && len(args) >= 2 && !self && n == 1 && p.attacker == "" {
+			if spec, ok := unblockedAttackerFilter(strings.Join(args[1:], "/")); ok {
+				p.attacker = spec
+				continue
+			}
+		}
 		if len(args) >= 2 && args[1] == "Hand" {
 			// Discard<N/Hand>: discard the hand, N cards of it
 			args[1] = "Card"
@@ -117,17 +174,42 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 		case head == "ExileFromGrave" && self && n == 1:
 			p.zone = zoneGraveyard
 		case (head == "Sac" || head == "Return") && len(args) >= 2 && !self:
-			names, land := fodder(reg, b, card, args[1], generic, false)
-			if names == "" {
+			if _, ok := tokenFodder(reg, args[1]); ok {
+				// a token kind ("Treasure", "Prism.token", "Permanent.token"):
+				// the cost mints its tokens, a vanilla permanent no card
+				// is (a Food card is busier than the Food token). Only a Sac
+				// spends it: a token returned to hand is no cost to meet.
+				if head != "Sac" || !p.mintSac(reg, args[1], n) {
+					return p, refusal
+				}
+				continue
+			}
+			if head == "Sac" && args[1] == "Card.AttachedBy" {
+				// "Sacrifice enchanted creature": the bearer the Aura the
+				// ability is on is placed attached to (applyCost), not a
+				// permanent of its own. You can sacrifice only what you
+				// control, so the bearer must be on the card's side.
+				bearer, bs := attachBearer(reg, b, card, face)
+				if bearer == "" || bs == 1 {
+					return p, refusal
+				}
+				p.bearer, p.bearerSeat = bearer, bs
+				continue
+			}
+			if n > 4 {
+				return p, refusal
+			}
+			name, tapped := sacFodder(reg, b, card, args[1], generic)
+			if name == "" {
 				return p, refusal
 			}
 			for range n {
-				p.field = append(p.field, names)
-				if land {
-					p.tapped = append(p.tapped, names)
+				p.field = append(p.field, name)
+				if tapped {
+					p.tapped = append(p.tapped, name)
 				}
 			}
-		case head == "tapXType" && len(args) >= 2 && !self:
+		case head == "tapXType" && len(args) >= 2 && !self && n <= 4:
 			typ := args[1]
 			if args[0] == "Any" {
 				// crew n: Creature.Other+withTotalPowerGEn is one creature with
@@ -145,7 +227,7 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 			for range n {
 				p.field = append(p.field, name)
 			}
-		case head == "Discard" && len(args) >= 2 && !self && n >= 1:
+		case head == "Discard" && len(args) >= 2 && !self && n >= 1 && n <= 4:
 			name, _ := fodder(reg, b, card, args[1], generic, false)
 			if name == "" {
 				return p, refusal
@@ -153,7 +235,7 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 			for range n {
 				p.hand = append(p.hand, name)
 			}
-		case head == "ExileFromGrave" && len(args) >= 2 && !self && n >= 1:
+		case head == "ExileFromGrave" && len(args) >= 2 && !self && n >= 1 && n <= 4:
 			name, _ := fodder(reg, b, card, args[1], generic, false)
 			if name == "" {
 				return p, refusal
@@ -179,7 +261,7 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 				return p, refusal
 			}
 			p.mana = append(p.mana, args[0])
-		case (head == "Behold" || head == "BeholdExile") && len(args) >= 2:
+		case (head == "Behold" || head == "BeholdExile") && len(args) >= 2 && n <= 4:
 			// "behold a <Spec>": the revealed cards stay in the caster's hand
 			// (the engine's beheldCostAsk takes hand candidates too; a
 			// BeholdExile's ThenExile mark does not move the ask)
@@ -228,6 +310,104 @@ func fodder(reg *cards.Registry, b *certdeck.Builder, card, typ, generic string,
 	return name, false
 }
 
+// sacFodder is the permanent a Sac or Return cost spends: fodder's pick when
+// the inert carrier pool meets the spec, else the least busy playable
+// permanent (pickFixture, or a nonbasic land for a spec no non-land card
+// takes, a snow Mountain) some understood, non-Self, own-side alternative of
+// the spec takes. It reports the alternative's tapped requirement (a
+// Sac<Creature.tapped> is placed tapped); a permanent you do not control is
+// not a cost you can pay, so an opponent-side alternative keeps the refusal.
+// "" when no placement meets the spec (a named card the corpus does not hold,
+// a counter-gated creature, a FieldBlock card).
+func sacFodder(reg *cards.Registry, b *certdeck.Builder, card, typ, generic string) (name string, tapped bool) {
+	if name, land := fodder(reg, b, card, typ, generic, false); name != "" {
+		return name, land
+	}
+	for _, a := range parseFilterPlaced(typ) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		if n := pickFixture(reg, b, card, a.test, nil, true); n != "" {
+			return n, a.tapped > 0
+		}
+		if n := pickLandFixture(reg, b, a.test); n != "" {
+			// tapped unless the filter wants it untapped: a land adds no
+			// mana to the start (the focus plays stay the only affordable ones)
+			return n, a.tapped >= 0
+		}
+	}
+	return "", false
+}
+
+// maxSacTokens is the most tokens one Sac cost mints (Kellogg, Dangerous Mind
+// sacrifices five Treasures); a card count keeps the budget of four.
+const maxSacTokens = 8
+
+// mintSac adds the n tokens a Sac or Return spec of a token kind spends to the
+// plan. False when the spec names no token the start can mint (a kind the XMage
+// setup table lacks, no token kind at all, more than maxSacTokens).
+func (p *costPlan) mintSac(reg *cards.Registry, typ string, n int) bool {
+	script, ok := tokenFodder(reg, typ)
+	if !ok || script == "" || n > maxSacTokens {
+		return false
+	}
+	for range n {
+		p.tokens = append(p.tokens, StartToken{Script: script})
+	}
+	return true
+}
+
+// tokenFodder is the token script a Sac or Return spec of a token kind mints,
+// and whether the spec names tokens at all: ok false when the spec may name a
+// card and the card scan runs; ok true with ""
+// when it names a token kind no start can mint (the token script the XMage
+// setup table lacks), so the refusal stands; the script when it does.
+//
+//   - "<Kind>.token" is a token of Kind ("Prism.token"); "Permanent.token",
+//     "Card.token" and a bare ".token" are any token, the corpus's Servo.
+//   - a bare kind ("Treasure", "Food", "Goblin") names a token only when the
+//     corpus mints one (that token, not a card of the kind, is the vanilla
+//     permanent), so a kind with no token definition falls to the card scan
+//     and, with no card either, keeps the refusal. A kind that is
+//     not a single type word ("Creature.Other", a dotted spec) is no token
+//     kind.
+func tokenFodder(reg *cards.Registry, typ string) (string, bool) {
+	if kind, tail, found := strings.Cut(typ, "."); found && tail == "token" {
+		switch kind {
+		case "Permanent", "Card", "":
+			kind = ""
+		}
+		script, _ := tokenScript(reg, kind)
+		// the script must be a token of the named kind: tokenScript also
+		// matches a key that merely contains it ("Rat" in "pirate")
+		if script != "" && kind != "" {
+			if c := reg.Tokens[script]; c == nil || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord(kind) {
+				script = ""
+			}
+		}
+		return script, true
+	}
+	switch typ {
+	case "", "Permanent", "Card", "Spell":
+		return "", false
+	}
+	if !typeWord(typ) {
+		return "", false
+	}
+	script, ok := tokenScript(reg, typ)
+	if ok {
+		// The token definition must be of the kind the cost names (its face
+		// carries the type word): tokenScript also matches a script whose
+		// key merely contains the kind ("c_a_lander_sac_search" for "Land"),
+		// and a Lander is no land.
+		if c := reg.Tokens[script]; c == nil || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord(typ) {
+			return "", false
+		}
+		return script, true
+	}
+	return "", false
+}
+
 // applyCost places the card in the zone its cost reads and the cost plan
 // around it on seat 0.
 func applyCost(p costPlan, card, generic string, f *StartFile) {
@@ -239,16 +419,27 @@ func applyCost(p costPlan, card, generic string, f *StartFile) {
 		s.Graveyard = append(s.Graveyard, card)
 	default:
 		s.Battlefield = append(s.Battlefield, card)
+		if p.bearer != "" {
+			// The cost reads the card's own enchanted permanent
+			// (Sac<Card.AttachedBy>): the card enters attached to the bearer
+			// the plan picked (attachBearer), and the cost sacrifices it.
+			placeBearer(&f.Setup.P0, &f.Setup.P1, card, p.bearer, p.bearerSeat)
+		}
 	}
 	applyCostSupport(p, generic, f)
 }
 
 // applyCostSupport places the state a cost plan needs around the card that pays
-// it, without placing the card itself: applyCost uses it for an ability the
-// card activates, and a granted ability uses it for the carrier the ability was
-// granted to (already on the battlefield).
+// it, without placing the card itself, on seat 0: applyCost uses it for an
+// ability the card activates, and a granted ability uses it for the carrier the
+// ability was granted to (already on the battlefield).
 func applyCostSupport(p costPlan, generic string, f *StartFile) {
-	s := &f.Setup.P0
+	applyCostSupportOn(p, generic, f, &f.Setup.P0)
+}
+
+// applyCostSupportOn is applyCostSupport on seat s: a cost the cycler of a
+// watcher start pays sits on the seat the trigger names, not always seat 0.
+func applyCostSupportOn(p costPlan, generic string, f *StartFile, s *StartSeat) {
 	s.Battlefield = append(s.Battlefield, landsFor(p.mana, generic)...)
 	p.applyExtras(s)
 }
@@ -261,6 +452,7 @@ func (p costPlan) applyExtras(s *StartSeat) {
 	s.Tapped = append(s.Tapped, p.tapped...)
 	s.Hand = append(s.Hand, p.hand...)
 	s.Graveyard = append(s.Graveyard, p.graveyard...)
+	s.Tokens = append(s.Tokens, p.tokens...)
 	s.Counters = append(s.Counters, p.counters...)
 	for _, c := range p.playerCounters {
 		s.PlayerCounters = addPlayerCounter(s.PlayerCounters, c.Kind, c.N)
