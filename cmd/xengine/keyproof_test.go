@@ -558,3 +558,22 @@ func TestKeyproofXMageQuietCreditsForge(t *testing.T) {
 		t.Errorf("handoff.tsv rows %v, want none", hand)
 	}
 }
+
+// An owed item's reason is rng, or harness plus the two followers' signature.
+func TestKeyproofOwedReason(t *testing.T) {
+	t.Parallel()
+	f := func(class, msg string) classify.Finding { return classify.Finding{ID: "i", Class: class, Msg: msg} }
+	for _, c := range []struct {
+		x, f classify.Finding
+		want string
+	}{
+		{f(classify.ClassRNG, ""), f(classify.ClassHarness, "x"), "rng"},
+		{f(classify.ClassHarness, "xmage: a b"), f(classify.ClassRNG, ""), "rng"},
+		{f(classify.ClassNotSent, ""), f(classify.ClassAgree, ""), "harness:x=not_sent+f=agree"},
+		{classify.Finding{}, f(classify.ClassHarness, "forge: no priority at step 4"), "harness:x=none+f=harness~no-priority-at-step"},
+	} {
+		if got := owedReason(c.x, c.f); got != c.want {
+			t.Errorf("owedReason(%v, %v) = %q, want %q", c.x, c.f, got, c.want)
+		}
+	}
+}

@@ -532,10 +532,7 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			witnesses = append(witnesses, w)
 			continue
 		}
-		reason := "harness"
-		if xc == classify.ClassRNG || fc == classify.ClassRNG {
-			reason = "rng"
-		}
+		reason := owedReason(in.XFind[id], in.FFind[id])
 		for _, u := range uses {
 			keyOf(u).owed[id] = reason
 		}
@@ -717,6 +714,16 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 	}
 	fmt.Printf("; %d signature(s) to hand off, %d witness(es), %d XMage-only finding(s)\n", len(hand), len(witnesses), followerOnly)
 	return nil
+}
+
+// owedReason is the reason of an owed item no engine agreed on: "rng", else
+// "harness:" and the classify.HarnessSignature of the two followers' findings,
+// so the next cycle's owed table splits the class by cause.
+func owedReason(x, f classify.Finding) string {
+	if x.Class == classify.ClassRNG || f.Class == classify.ClassRNG {
+		return "rng"
+	}
+	return "harness:" + classify.HarnessSignature(x, f)
 }
 
 // forgeAgreed reports a three-way pattern in which Forge agrees with gorge and
