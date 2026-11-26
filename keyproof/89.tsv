@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89560e1c-b7fb-46b7-955e-647e3ae9091b	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:thunder-totem:f0a1:s1,f:xs:XP:thunder-totem:f0a1:s1	-	-	-	d864b561c9cb	-	768bedb87ab7	-	-	2026-11-24	xproof
 8957f7c2-040c-4048-9f21-efa7c97682b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8958a6fe-76ef-45e3-8522-6bc13486b447	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8958a6fe-76ef-45e3-8522-6bc13486b447	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+8958a6fe-76ef-45e3-8522-6bc13486b447	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 8959a147-75b1-4f4a-a699-cb354ff55e59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-castle:f0a1:s1,f:xs:XP:eiganjo-castle:f0a1:s1	-	-	-	c2272f704fde	-	113d59cd623a	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89a3a6a3-e5f9-4e28-8372-99219db3f976	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-overseer:f0a0:s1,f:xs:XP:flowstone-overseer:f0a0:s1	-	-	-	5f2128bf97e4	-	0d7d8541ea26	-	-	2026-11-24	xproof
 89a59a6d-e9d4-405c-8518-4da86dae30d1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:norn-s-inquisitor:cast:s1,f:xs:XP:norn-s-inquisitor:cast:s1	-	-	-	ae86f6029288	-	b370a309e3be	-	-	2026-11-24	xproof
 89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:norn-s-inquisitor:cast:s1,f:xs:XP:norn-s-inquisitor:cast:s1	-	-	-	ae86f6029288	-	b370a309e3be	-	-	2026-11-24	xproof
-89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t1	NULL	owed	refused:no-generator:trigger:Transformed:not-self	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+89a59a6d-e9d4-405c-8518-4da86dae30d1	f0/t1	NULL	owed	refused:no-generator:trigger:Transformed:not-self	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 89a6e876-0b00-4671-9652-766fd7ef9bf2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:the-theorist-jace-beleren:cast:s1,f:xs:XP:the-theorist-jace-beleren:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 89a6e876-0b00-4671-9652-766fd7ef9bf2	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:the-theorist-jace-beleren:cast:s2,f:xs:XP:the-theorist-jace-beleren:cast:s2	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 89a6e876-0b00-4671-9652-766fd7ef9bf2	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:the-theorist-jace-beleren:cast:s1,f:xs:XP:the-theorist-jace-beleren:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof

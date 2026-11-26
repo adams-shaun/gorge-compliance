@@ -25,8 +25,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3415a199-05ac-4627-be97-f842eb1415a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avenging-angel:f0t0:s1,f:xs:XP:avenging-angel:f0t0:s1	-	-	-	8c0bd19283bb	-	b35437309155	-	-	2026-11-24	xproof
 34161ec4-5d99-45e6-b43c-c8d28958660a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasury-thrull:cast:s1,f:xs:XP:treasury-thrull:cast:s1	-	-	-	d864b561c9cb	-	3c652934d957	-	-	2026-11-24	xproof
-34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t0	Attacks	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	586a5352c4ef	-	3c652934d957	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t1	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	586a5352c4ef	-	3c652934d957	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t0	Attacks	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	b13dd1155db3	-	3c652934d957	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t1	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	b13dd1155db3	-	3c652934d957	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 341680e2-12a8-484f-be09-24dae9dbfaea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3416ac84-c5ef-44be-894f-ab3b89e592ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undead-sprinter:cast:s1,f:xs:XP:undead-sprinter:cast:s1	-	-	-	23c4009444b0	-	bf74602dff1b	-	-	2026-11-25	xproof
 3416ac84-c5ef-44be-894f-ab3b89e592ce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:undead-sprinter:combat0.attack:s1,f:xs:XP:undead-sprinter:combat0.attack:s1	-	-	-	23c4009444b0	-	bf74602dff1b	-	-	2026-11-25	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34d5f249-df46-49d1-a692-da2348fbc51e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hunter-of-eyeblights:f0t0:s1,f:xs:XP:hunter-of-eyeblights:f0t0:s1	-	-	-	d864b561c9cb	-	bf364c57ec62	-	-	2026-11-24	xproof
 34d5f249-df46-49d1-a692-da2348fbc51e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34d5f249-df46-49d1-a692-da2348fbc51e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunter-of-eyeblights:f0t0:s1,f:xs:XP:hunter-of-eyeblights:f0t0:s1	-	-	-	d864b561c9cb	-	bf364c57ec62	-	-	2026-11-24	xproof
-34da0b06-565f-4964-b8bc-dd106278e086	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	586a5352c4ef	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+34da0b06-565f-4964-b8bc-dd106278e086	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b13dd1155db3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 34da0b06-565f-4964-b8bc-dd106278e086	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	aa2041fc5d2c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 34dd789c-4d80-4ccc-a4f7-2e5388a9689d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-arbiter:cast:s1,f:xs:XP:angelic-arbiter:cast:s1	-	-	-	d864b561c9cb	-	fdebc6dd26ea	-	-	2026-11-24	xproof
 34e05dc1-35af-402d-96ae-e249b3738493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
