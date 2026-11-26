@@ -117,13 +117,17 @@ func splitCost(cost string) []string {
 var payLifeRE = regexp.MustCompile(`^PayLife<[0-9]+>$`)
 
 // costTokens splits a cost into its mana tokens and its other tokens, refusing
-// the first other token no start setup can pay.
+// the first other token no start setup can pay. A Sac token's shape only is
+// pre-cleared here: planCost does the real work and refuses a spec no
+// placement meets (fodder, the token kinds, the fixture scan) with the same
+// steps-needed:cost:Sac.
 func costTokens(cost string) (mana []string, refusal string) {
 	for _, tok := range splitCost(cost) {
 		switch {
 		case manaTokenRE.MatchString(tok):
 			mana = append(mana, tok)
-		case tok == "T" || tok == "Q" || tok == "Sac<1/CARDNAME>" || payLifeRE.MatchString(tok):
+		case tok == "T" || tok == "Q" || payLifeRE.MatchString(tok):
+		case sacCostShape(tok):
 		default:
 			if i := strings.IndexByte(tok, '<'); i >= 0 {
 				tok = tok[:i]
@@ -132,6 +136,17 @@ func costTokens(cost string) (mana []string, refusal string) {
 		}
 	}
 	return mana, ""
+}
+
+// sacCostShape reports whether tok is a Sac token costArgs reads: Sac<N/Spec>
+// with a whole N of 0 or more. The spec itself is planCost's work.
+func sacCostShape(tok string) bool {
+	head, args := costArgs(tok)
+	if head != "Sac" || len(args) < 2 {
+		return false
+	}
+	n, err := strconv.Atoi(args[0])
+	return err == nil && n >= 0
 }
 
 // asEnters reports an as-enters choice on face: a replacement of the card's own
@@ -277,6 +292,16 @@ func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 		default:
 			return "start:activation-zone:" + z
 		}
+	}
+	if plan.zone == zoneBattlefield && plan.bearer == "" && FieldBlock(face) == "aura-unattached" {
+		// The focus Aura a start places enters attached (FieldBlock refuses a
+		// bare one): the bearer its Enchant keyword takes. A cost that spends
+		// the enchanted permanent (Sac<Card.AttachedBy>) already picked it.
+		bearer, bs := attachBearer(reg, b, card, face)
+		if bearer == "" {
+			return "battlefield:aura-unattached"
+		}
+		plan.bearer, plan.bearerSeat = bearer, bs
 	}
 	applyCost(plan, card, generic, f)
 	f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}

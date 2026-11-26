@@ -1409,6 +1409,92 @@ func TestStartNinjutsu(t *testing.T) {
 	}
 }
 
+// TestStartSacCosts: the Sac cost shapes beyond Sac<1/CARDNAME> a start can
+// pay with placed state (operator 11-26, the steps-needed:cost:Sac class):
+//
+//   - an untapped-creature Sac places an untapped vanilla creature beside the
+//     card (Betrothed of Fire's "Sacrifice an untapped creature");
+//   - an AttachedBy Sac spends the Aura's own bearer, which applyCost places
+//     attached (StartAttach), and no separate permanent for the cost;
+//   - a named-card Sac places the named card beside the key card (Kyscu
+//     Drake's Spitting Drake, Urborg Panther's Feral Shadow and
+//     Breathstealer), and keeps the refusal when the named cards cannot be
+//     placed (Shadowborn Apostle's six creatures named it);
+//   - a token-kind Sac mints the cost's tokens: five Treasures (Kellogg,
+//     Dangerous Mind), a Food (Bosco, Just a Bear), a token of its own kind
+//     (Arcade Cabinet's, Rat King, Pale Piper's Permanent.token -> the
+//     corpus's Servo), and keeps the refusal for a kind the XMage setup token
+//     table does not map (Diamond Kaleidoscope's Prism);
+//   - a filtered-land Sac places the nonbasic land the filter takes (Glacial
+//     Crevasses' snow Mountain: Alpine Meadow, the corpus's only snow
+//     Mountain).
+func TestStartSacCosts(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(card, key string) *StartFile {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Start == nil {
+			t.Fatalf("%s %s: refused %q", card, key, res.Reason)
+		}
+		return res.Start
+	}
+	tokenScripts := func(ts []StartToken) []string {
+		out := make([]string, 0, len(ts))
+		for _, tk := range ts {
+			out = append(out, tk.Script)
+		}
+		return out
+	}
+	for _, r := range []struct {
+		card, key string
+		p0BF      []string
+		p1BF      []string
+		tokens    []string
+		attach    []StartAttach
+		ability   int
+	}{
+		{card: "Kyscu Drake", key: "f0/a1", p0BF: []string{"Kyscu Drake", "Spitting Drake"}, ability: 1},
+		{card: "Betrothed of Fire", key: "f0/a0", p0BF: []string{"Betrothed of Fire", "Memnite", "Crimson Kobolds", "Shield Sphere"},
+			p1BF: []string{"Crimson Kobolds"}, attach: []StartAttach{{Card: "Betrothed of Fire", To: "Memnite"}}},
+		{card: "Betrothed of Fire", key: "f0/a1", p0BF: []string{"Betrothed of Fire", "Memnite", "Shield Sphere"},
+			p1BF: []string{"Crimson Kobolds"}, attach: []StartAttach{{Card: "Betrothed of Fire", To: "Memnite"}}, ability: 1},
+		{card: "Urborg Panther", key: "f0/a1", p0BF: []string{"Urborg Panther", "Feral Shadow", "Breathstealer"},
+			p1BF: []string{"Phyrexian Walker"}, ability: 1},
+		{card: "Bubbling Cauldron", key: "f0/a1", p0BF: []string{"Bubbling Cauldron", "Plains", "Festering Newt"}, ability: 1},
+		{card: "Glacial Crevasses", key: "f0/a0", p0BF: []string{"Glacial Crevasses", "Alpine Meadow", "Karplusan Wolverine"}},
+		{card: "Kellogg, Dangerous Mind", key: "f0/a0", p0BF: []string{"Kellogg, Dangerous Mind"},
+			p1BF: []string{"Shield Sphere"}, tokens: rep("c_a_treasure_sac", 5)},
+		{card: "Bosco, Just a Bear", key: "f0/a0", p0BF: []string{"Bosco, Just a Bear", "Forest", "Forest", "Forest"},
+			tokens: []string{"c_a_food_sac"}},
+		{card: "Arcade Cabinet", key: "f0/a0", p0BF: []string{"Arcade Cabinet", "Plains", "Plains"},
+			p1BF: []string{"Shield Sphere"}, tokens: []string{"c_1_1_a_servo"}},
+		{card: "Rat King, Pale Piper", key: "f0/a0", p0BF: []string{"Rat King, Pale Piper", "Swamp", "Swamp"},
+			tokens: rep("c_1_1_a_servo", 2)},
+	} {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			f := gen(r.card, r.key)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			listIs(t, "p0 tokens", tokenScripts(f.Setup.P0.Tokens), r.tokens)
+			if !reflect.DeepEqual(f.Setup.P0.Attach, r.attach) {
+				t.Errorf("p0 attach %+v, want %+v", f.Setup.P0.Attach, r.attach)
+			}
+			focusIs(t, f, 0, r.card, "ability", r.ability)
+		})
+	}
+	checkStartRows(t, []startRow{
+		// Diamond Kaleidoscope f0/a1: the Prism token script exists, but the
+		// XMage setup token table does not map it, so the cost stays refused.
+		{card: "Diamond Kaleidoscope", key: "f0/a1", reason: "steps-needed:cost:Sac"},
+		// Shadowborn Apostle f0/a0: six creatures named it is beyond the
+		// four-copy budget a start's placements hold.
+		{card: "Shadowborn Apostle", key: "f0/a0", reason: "steps-needed:cost:Sac"},
+	})
+}
+
 // TestStartCombat: an attack trigger is the card (or Memnite, for a
 // noncreature card such as a Vehicle) attacking, on the battlefield since
 // the turn began; a combat-damage start drops the opp-blockers need, so the
@@ -1751,10 +1837,12 @@ func TestStartstacktarget(t *testing.T) {
 				if sa == nil {
 					t.Fatalf("%q has no activated ability", f.Focus.BaitAbility)
 				}
-				mana, why := costTokens(sa.Params["Cost"])
-				if why != "" {
-					t.Fatalf("%q ability cost %q is not placeable: %s", f.Focus.BaitAbility, sa.Params["Cost"], why)
+				for _, tok := range splitCost(sa.Params["Cost"]) {
+					if tok != "T" && tok != "Q" && !manaTokenRE.MatchString(tok) {
+						t.Errorf("%q ability cost %q holds %q, not payable from placed lands alone", f.Focus.BaitAbility, sa.Params["Cost"], tok)
+					}
 				}
+				mana, _ := costTokens(sa.Params["Cost"])
 				bf := f.Setup.P1.Battlefield
 				if f.Focus.BaitAbilitySelf {
 					bf = f.Setup.P0.Battlefield

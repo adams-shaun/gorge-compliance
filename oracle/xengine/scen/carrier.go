@@ -884,12 +884,14 @@ func activationOK(sa *cards.SA) bool {
 		return false
 	}
 	if v := p["Cost"]; v != "" {
-		mana, why := costTokens(v)
-		if why != "" {
-			return false
-		}
-		for _, tok := range mana {
-			if tok == "X" || tok == "S" || tok == "C" {
+		// mana, tap and, with the mana, only plain coloured/generic symbols:
+		// the bait seat pays the activation from placed lands alone (no cost
+		// plan places a Sac's permanent for it)
+		for _, tok := range splitCost(v) {
+			if tok == "T" || tok == "Q" {
+				continue
+			}
+			if !manaTokenRE.MatchString(tok) || tok == "X" || tok == "S" || tok == "C" {
 				return false
 			}
 		}

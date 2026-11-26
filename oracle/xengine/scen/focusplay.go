@@ -1336,10 +1336,15 @@ func placeStackBait(reg *cards.Registry, f *StartFile, seat int, plan stackBaitP
 			return false
 		}
 		cost := sa.Params["Cost"]
-		mana, why := costTokens(cost)
-		if why != "" {
-			return false
+		// the bait seat pays the ability from placed lands alone (no cost
+		// plan places a Sac's permanent for it), so the cost may hold mana
+		// and a tap, nothing else
+		for _, tok := range splitCost(cost) {
+			if tok != "T" && tok != "Q" && !manaTokenRE.MatchString(tok) {
+				return false
+			}
 		}
+		mana, _ := costTokens(cost)
 		bait := append([]string{plan.ability}, landsFor(mana, basicFor(cost))...)
 		// an ability target the focus seat itself controls ("Activated.YouCtrl")
 		// is met by its own activation: the carrier sits on its battlefield,
