@@ -1,8 +1,10 @@
 //! Which cards phase can replay faithfully.
 //!
-//! A card is supported when every face (back faces included) has no coverage gaps and no confirmed
-//! misparse, and none of its abilities draws a random outcome from phase's own RNG, which a
-//! scripted replay cannot force.
+//! A card is supported when every face (back faces included) has no parse warnings, no coverage
+//! gaps and no confirmed misparse, and none of its abilities draws a random outcome from phase's
+//! own RNG, which a scripted replay cannot force. Phase's own coverage result folds parse warnings
+//! into its gap set; `card_face_gaps` is the lightweight entry point that does not, so the warnings
+//! are checked here too.
 
 use engine::database::card_db::CardDatabase;
 use engine::game::coverage::card_face_gaps;
