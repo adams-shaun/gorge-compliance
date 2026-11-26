@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 698c9882-4117-4919-8a19-b1cbffc16692	cast	cast	agreed	-	F	start	4	0	f:xs:XP:hunted-wumpus:cast:s1	-	-	-	25696bf19d5b	-	2eb63dfe1c95	-	-	2026-11-24	xproof
 698c9882-4117-4919-8a19-b1cbffc16692	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:hunted-wumpus:cast:s1	-	-	-	25696bf19d5b	-	2eb63dfe1c95	-	-	2026-11-24	xproof
 698e79ec-c2bc-4973-a095-f3c57b50e39c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69909846-94f9-4b2c-918f-274ba2aa4279	cast	cast	owed	harness	-	start	0	0	-	-	-	-	0eea096c7979	-	4165c0077f08	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+69909846-94f9-4b2c-918f-274ba2aa4279	cast	cast	owed	harness	-	start	0	0	-	-	-	-	a112dec6a3cd	-	4165c0077f08	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 6990ac82-49d4-412d-9c3d-1e7fb5479313	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vanquish-the-foul:cast:s1,f:xs:XP:vanquish-the-foul:cast:s1	-	-	-	da6bc3fe8458	-	28619f02cba0	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:cast:s1,f:xs:XP:finneas-ace-archer:cast:s1	-	-	-	6f84be0f34c0	-	da3cf727d5d6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.attack:s1,f:xs:XP:finneas-ace-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
@@ -195,12 +195,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69d4ecac-4735-4667-bfc1-c8800b436d08	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:endless-ranks-of-the-dead:f0t0:s1,f:xs:XP:endless-ranks-of-the-dead:f0t0:s1	-	-	-	3aa6ded33acb	-	12ac9d774bbc	-	-	2026-11-25	xproof
 69e0d9f1-f9dd-4614-ad9f-13e7153710ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonclaw-strike:cast:s1,f:xs:XP:dragonclaw-strike:cast:s1	-	-	-	336eab778104	-	156abef4eb0a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 69e15fd8-9531-4392-8b85-b539c138ea91	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:qarsi-sadist:cast:s1,f:xs:XP:qarsi-sadist:cast:s1	-	-	-	d864b561c9cb	-	c1c0508f0577	-	-	2026-11-24	xproof
-69e15fd8-9531-4392-8b85-b539c138ea91	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	a2fe095204a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+69e15fd8-9531-4392-8b85-b539c138ea91	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	a112dec6a3cd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 69e15fd8-9531-4392-8b85-b539c138ea91	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:qarsi-sadist:cast:s1,f:xs:XP:qarsi-sadist:cast:s1	-	-	-	d864b561c9cb	-	c1c0508f0577	-	-	2026-11-24	xproof
 69e2df4e-c7f3-4c3a-be5b-1c4afb29cead	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69e4e5bf-f0e2-4ed1-8b17-c8c7a9381551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69e5df2f-be1f-4608-a90f-3e2f51e2fea4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thassa-god-of-the-sea:f0t0:s1,f:xs:XP:thassa-god-of-the-sea:f0t0:s1	-	-	-	3aa6ded33acb	-	0ff40c305135	-	-	2026-11-25	xproof
-69e5df2f-be1f-4608-a90f-3e2f51e2fea4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	a2fe095204a0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
+69e5df2f-be1f-4608-a90f-3e2f51e2fea4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	a112dec6a3cd	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
 69e5df2f-be1f-4608-a90f-3e2f51e2fea4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thassa-god-of-the-sea:f0t0:s1,f:xs:XP:thassa-god-of-the-sea:f0t0:s1	-	-	-	3aa6ded33acb	-	0ff40c305135	-	-	2026-11-25	xproof
 69e8333a-bddf-49e2-9c39-3dc46fec81e0	cast	cast-resolve	agreed	-	FX	scen	2	0	Remnant Elemental/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69e8333a-bddf-49e2-9c39-3dc46fec81e0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:remnant-elemental:combat0.attack:s1,f:xs:XP:remnant-elemental:combat0.attack:s1	-	-	-	336eab778104	-	7aa6ca39633e	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
