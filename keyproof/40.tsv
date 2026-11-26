@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40760bfa-a423-487c-ba29-043b2d00c736	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dark-fortress:f0a0:s1,f:xs:XP:dark-fortress:f0a0:s1	-	-	-	9087eefec3ee	-	915b4c875867	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 40760bfa-a423-487c-ba29-043b2d00c736	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Dark Fortress/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 40760bfa-a423-487c-ba29-043b2d00c736	land	land	agreed	-	FX	start	2	0	x:xs:XP:dark-fortress:land:s1,f:xs:XP:dark-fortress:land:s1	-	-	-	23c4009444b0	-	915b4c875867	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-40784a5b-2e3c-4ceb-a1e8-88428a13f409	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8b227b261f39	-	73d533a8edf9	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-40784a5b-2e3c-4ceb-a1e8-88428a13f409	f0/t0	SpellCast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8b227b261f39	-	73d533a8edf9	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+40784a5b-2e3c-4ceb-a1e8-88428a13f409	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	264833d9fa92	-	73d533a8edf9	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+40784a5b-2e3c-4ceb-a1e8-88428a13f409	f0/t0	SpellCast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	264833d9fa92	-	73d533a8edf9	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 407a0761-7ccc-4607-8df6-e744d30a81a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 407a0761-7ccc-4607-8df6-e744d30a81a0	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-gremlins:f0a0:s1,f:xs:XP:phyrexian-gremlins:f0a0:s1	-	-	-	ae86f6029288	-	5915e0e1b612	-	-	2026-11-24	xproof
 407d9d09-3db6-49b0-9e80-4e1538156e44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40b85f70-78b6-427a-9fb9-c3a72b8528ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-hydra:f0t0:s1,f:xs:XP:ulvenwald-hydra:f0t0:s1	-	-	-	d864b561c9cb	-	137931b2e368	-	-	2026-11-24	xproof
 40b85f70-78b6-427a-9fb9-c3a72b8528ed	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-hydra:f0t0:s1,f:xs:XP:ulvenwald-hydra:f0t0:s1	-	-	-	d864b561c9cb	-	137931b2e368	-	-	2026-11-24	xproof
 40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8b227b261f39	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	264833d9fa92	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 40be0923-5d57-46fd-84ef-7f1a1fd5da42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c1375b-1d15-4525-894a-16b7a0ac02b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c1375b-1d15-4525-894a-16b7a0ac02b4	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:renowned-weaponsmith:f0a0:s2,f:xs:XP:renowned-weaponsmith:f0a0:s2	-	-	-	d864b561c9cb	-	290c2317f8fd	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40c5d6fe-854a-436d-9f80-13eb5f1f8f68	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40cabb8b-d9bd-40ba-9624-c4526bf0f888	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	264833d9fa92	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 40cabb8b-d9bd-40ba-9624-c4526bf0f888	f0/a0	Attach/Equip	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	264833d9fa92	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
-40cabb8b-d9bd-40ba-9624-c4526bf0f888	f0/a1	Animate/Crew	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8b227b261f39	-	d41f46a9863e	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
+40cabb8b-d9bd-40ba-9624-c4526bf0f888	f0/a1	Animate/Crew	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	264833d9fa92	-	d41f46a9863e	bec665044ecd9134639047e1156af2c70c1da7e5	5ceed32d687df24f60318030685b4dd0370a2218	2026-11-26	xproof
 40cc8ac6-114f-439d-816d-f65cd52bbbd2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:jhessian-zombies:cast:s1,f:xs:XP:jhessian-zombies:cast:s1	-	-	-	8a1b1a193ec0	-	8948e04afe81	-	-	2026-11-24	xproof
 40cc8ac6-114f-439d-816d-f65cd52bbbd2	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:jhessian-zombies:cast:s2,f:xs:XP:jhessian-zombies:cast:s2	-	-	-	8a1b1a193ec0	-	8948e04afe81	-	-	2026-11-24	xproof
 40cc8ac6-114f-439d-816d-f65cd52bbbd2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
