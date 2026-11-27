@@ -319,10 +319,19 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		if err := start.Validate(dk[:]); err != nil {
 			return refuse(err)
 		}
+		// And a position dirac's kernel loader would panic on is refused here:
+		// dirac's startObjs states the contract ("A bad start panics: the loader
+		// refuses these before a game is built"), so this loader refuses them by
+		// name. startLoaderErr mirrors the checks it can state from outside the
+		// kernel; openSide's recover is the backstop for any the kernel still
+		// panics on (operator 11-24: dirac never fails the run).
+		if err := startLoaderErr(start, pair); err != nil {
+			return refuse(err)
+		}
 		m.Start = start
 	}
 	cfg := oracle.Config{GorgeAutopaySurface: true}
-	k, err := oracle.SetSide(set, tbl, cfg)(m, seed)
+	k, err := openSide(oracle.SetSide(set, tbl, cfg), m, seed)
 	if err != nil {
 		return refuse(err)
 	}
@@ -349,6 +358,133 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		row.Status = StatusHang
 		return row, nil
 	}
+}
+
+// openSide opens dirac's side of one lockstep game. The kernel's start loader panics
+// rather than erroring on a bad start (dirac's startObjs: "A bad start panics: the
+// loader refuses these before a game is built") and startLoaderErr answers every such
+// start its words state outside the kernel; this recover is the backstop for whatever
+// else opening a scripted position could panic on. The panic becomes a refusal: dirac
+// never takes the run's verdict down with it (operator 11-24). A side opened with no
+// start cannot reach those panics - the kernel only reads a start there - so this
+// guards exactly the -start lane and costs the dealt lane nothing.
+func openSide(f oracle.SideFactory, m *oracle.Matchup, seed uint64) (k oracle.Side, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("dirac kernel refused the start: %v", r)
+		}
+	}()
+	return f(m, seed)
+}
+
+// startLoaderErr refuses, naming it, any scripted start dirac's kernel loader (dirac's
+// startObjs, reached through kernelStart) would panic on: an index no deck holds, a
+// card two zones name, a tap / back face / counter naming a card that is not on the
+// battlefield, a negative counter pile, a seat count the two-seat game does not have
+// and an attach host that is out of range or not on a battlefield. It mirrors the
+// numbering kernelStart hands the kernel: each seat's battlefield entries naming an
+// attach are removed from the zone (the attach claims that card instead). gorge's own
+// StartSpec.Validate is no substitute - it skips an out-of-range index rather than
+// refusing it - and the kernel panics instead of erroring, so this loader is the one
+// place left to refuse. Checks startObjs itself defers to the table (a battlefield
+// non-permanent, an unattached Aura's taps) stay with the kernel: gorge's Validate
+// answers the first and openSide's recover turns the rest into refusals.
+func startLoaderErr(start *rules.StartSpec, pair [2]decks.Deck) error {
+	if len(start.Seats) > 2 {
+		return fmt.Errorf("start: %d seats named, the game has 2", len(start.Seats))
+	}
+	for p, seat := range start.Seats {
+		deck := len(pair[p].Cards)
+		attached := make(map[int]bool, len(seat.Attach))
+		for _, a := range seat.Attach {
+			attached[a.Card] = true
+		}
+		claimed := make([]bool, deck)
+		claim := func(zone string, i int) error {
+			if i < 0 || i >= deck {
+				return fmt.Errorf("start: seat %d %s names card index %d, the deck holds %d", p, zone, i, deck)
+			}
+			if claimed[i] {
+				return fmt.Errorf("start: seat %d names card index %d in two zones", p, i)
+			}
+			claimed[i] = true
+			return nil
+		}
+		for _, z := range []struct {
+			name string
+			zone []int
+		}{
+			{"hand", seat.Hand}, {"battlefield", seat.Battlefield}, {"graveyard", seat.Graveyard},
+			{"exile", seat.Exile}, {"library", seat.Library},
+		} {
+			for _, i := range z.zone {
+				if z.name == "battlefield" && attached[i] {
+					continue // kernelStart removes the attach's card from the zone; the attach claims it
+				}
+				if err := claim(z.name, i); err != nil {
+					return err
+				}
+			}
+		}
+		onBF := make([]bool, deck)
+		for _, i := range seat.Battlefield {
+			if i >= 0 && i < deck {
+				onBF[i] = true
+			}
+		}
+		for _, a := range seat.Attach {
+			if err := claim("attach", a.Card); err != nil {
+				return err
+			}
+			onBF[a.Card] = true
+		}
+		for _, z := range []struct {
+			name string
+			zone []int
+		}{{"tapped", seat.Tapped}, {"back face", seat.BackFace}} {
+			for _, i := range z.zone {
+				if i < 0 || i >= deck || !onBF[i] {
+					return fmt.Errorf("start: seat %d %s card index %d is not on the battlefield", p, z.name, i)
+				}
+			}
+		}
+		for _, c := range seat.Counters {
+			if c.Card < 0 || c.Card >= deck || !onBF[c.Card] {
+				return fmt.Errorf("start: seat %d counters card index %d is not on the battlefield", p, c.Card)
+			}
+			if c.N < 0 {
+				return fmt.Errorf("start: seat %d counters %d of %s on card index %d", p, c.N, c.Kind, c.Card)
+			}
+		}
+		for _, a := range seat.Attach {
+			if a.ToSeat < 0 || a.ToSeat >= len(start.Seats) || a.To < 0 || a.To >= len(pair[a.ToSeat].Cards) {
+				return fmt.Errorf("start: seat %d attach host seat %d card %d is out of range", p, a.ToSeat, a.To)
+			}
+			host := &start.Seats[a.ToSeat]
+			if !startHasIndex(host.Battlefield, a.To) && !startHasAttachCard(host.Attach, a.To) {
+				return fmt.Errorf("start: seat %d attach host card index %d of seat %d is not on the battlefield", p, a.To, a.ToSeat)
+			}
+		}
+	}
+	return nil
+}
+
+func startHasIndex(l []int, i int) bool {
+	for _, x := range l {
+		if x == i {
+			return true
+		}
+	}
+	return false
+}
+
+func startHasAttachCard(l []rules.StartAttach, i int) bool {
+	for _, a := range l {
+		if a.Card == i {
+			return true
+		}
+	}
+	return false
 }
 
 func (r *Row) classify(res oracle.Result, m *oracle.Matchup) {

@@ -958,11 +958,22 @@ var kernelMirrored = map[string]bool{
 	"Tapped": true, "BackFace": true, "Life": true, "Counters": true, "Attach": true,
 }
 
-// kernelRefused are the fields dirac's kernel names and refuses outright (kernelStart:
-// "tokens are not modelled by the kernel"); they are refused here with the same
-// reason, before the table is asked for a game no kernel can hold.
+// kernelRefused are the fields a seat can name that dirac's kernel does not mirror,
+// each with the reason it cannot: Tokens, which kernelStart refuses outright
+// ("tokens are not modelled by the kernel"); PlayerCounters, which kernelStart
+// silently drops (it copies the zones, the taps, the back faces, the life, the card
+// counters and the attachments, and never reads the seat's own counters) and which
+// must therefore be refused here, or dirac would answer a position without them while
+// gorge answers one with them; and Commanders, which only the start file's seat has —
+// the designation rides game.Options StartCommanders, so the kernel never sees it. The
+// two seat structs share these field names, so one list answers for both; a field
+// either struct carries that neither list names is refused by firstNotMirrored under
+// its own name, and TestKernelMirroredFieldsExist is the failure that sends someone to
+// read kernelStart and name it in the right list when gorge or a start file adds one.
 var kernelRefused = map[string]string{
-	"Tokens": "mints tokens, which dirac's kernel start does not model",
+	"Tokens":         "mints tokens, which dirac's kernel start does not model",
+	"PlayerCounters": "seats player counters, which dirac's kernel start does not mirror",
+	"Commanders":     "designates commanders, which ride game.Options StartCommanders rather than the start, so dirac's kernel never sees the designation",
 }
 
 // startNotExpressible is why dirac cannot mirror this start's scripted position,
@@ -975,29 +986,47 @@ var kernelRefused = map[string]string{
 // gorge holds its commander. Each of these would leave the two engines in different
 // positions, and the row would report the missing injection as dirac disagreeing with
 // gorge: refuse it with the reason instead of guessing.
+// firstNotMirrored is why one seat (of either seat struct, t its type) names a field
+// dirac's kernel cannot mirror, or "" when it names none. Fields are visited in
+// declaration order, so the reason of a seat naming two unmirrored fields is the same
+// on every run. Anything the kernel's side of the lockstep can be handed that no list
+// names is refused under its own name: dirac's kernel mirrors exactly kernelMirrored,
+// so a field unknown to the lists must not ride into the lockstep unseen — until
+// someone reads kernelStart and names it (TestKernelMirroredFieldsExist), the only
+// thing a new field can do is fail the run's rows with its name in the reason.
+func firstNotMirrored(t reflect.Type, seat any) string {
+	v := reflect.ValueOf(seat)
+	for j := 0; j < t.NumField(); j++ {
+		name := t.Field(j).Name
+		if kernelMirrored[name] || v.Field(j).IsZero() {
+			continue
+		}
+		why, ok := kernelRefused[name]
+		if !ok {
+			why = fmt.Sprintf("seats %s, which dirac's kernel start does not mirror", name)
+		}
+		return why
+	}
+	return ""
+}
+
 func startNotExpressible(f *startFile, start *rules.StartSpec) string {
+	// The file's own seats first: a name the file spells never reaches the spec
+	// (gorge may reject the game before then, or hold the position gorge alone
+	// understands), so the refusal reads what the file asked for, not a spec an
+	// earlier stage already trimmed.
+	ft := reflect.TypeOf(startSeat{})
 	for i, s := range []startSeat{f.Setup.P0, f.Setup.P1} {
-		if len(s.Commanders) > 0 {
-			return fmt.Sprintf("start not expressible: seat %d designates a commander, which rides game.Options StartCommanders rather than the start, so dirac's kernel never sees the designation", i)
+		if why := firstNotMirrored(ft, s); why != "" {
+			return fmt.Sprintf("start not expressible: seat %d %s", i, why)
 		}
 	}
 	if start == nil {
 		return ""
 	}
-	t := reflect.TypeOf(rules.StartSeat{})
+	st := reflect.TypeOf(rules.StartSeat{})
 	for i, seat := range start.Seats {
-		v := reflect.ValueOf(seat)
-		for j := 0; j < t.NumField(); j++ {
-			// declaration order, so the reason of a start that names two
-			// unmirrored fields is the same on every run.
-			name := t.Field(j).Name
-			if kernelMirrored[name] || v.Field(j).IsZero() {
-				continue
-			}
-			why, ok := kernelRefused[name]
-			if !ok {
-				why = fmt.Sprintf("seats %s, which dirac's kernel start does not mirror", name)
-			}
+		if why := firstNotMirrored(st, seat); why != "" {
 			return fmt.Sprintf("start not expressible: seat %d %s", i, why)
 		}
 	}

@@ -3,6 +3,7 @@ package dside
 import (
 	"errors"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -386,9 +387,17 @@ func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
 	if row.Decisions <= 0 {
 		t.Errorf("row %+v: no decision was posed from the scripted position", row)
 	}
-	// A counter kind the kernel does not keep, or an index no deck holds, is the
-	// position's own refusal: it names what cannot be mirrored rather than blaming
-	// dirac for gorge's setup.
+	// Every start dirac's kernel loader would PANIC on (dirac's startObjs: "A bad
+	// start panics: the loader refuses these before a game is built") is the
+	// position's own refusal here: out of range, named twice, a tap or a counter
+	// pile on a card that is not on the battlefield, an attach host outside the
+	// game - each names what cannot be mirrored rather than blaming dirac for
+	// gorge's setup, and none reaches the run as a panic or a false divergence.
+	l0 := landIndices(pair[0])
+	if len(l0) < 2 {
+		t.Skipf("deck %q holds no two lands to misplace", pair[0].Name)
+	}
+	atoi := strconv.Itoa
 	for _, c := range []struct {
 		name string
 		spec *rules.StartSpec
@@ -396,6 +405,14 @@ func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
 	}{
 		{"a counter kind the kernel does not keep", pos("NOTAKIND"), "NOTAKIND"},
 		{"a start no deck holds", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: []int{9999}}, {}}}, "9999"},
+		{"a card two zones name", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: l0[:1], Hand: l0[:1]}, {}}}, "two zones"},
+		{"a tap on a card off the battlefield", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: l0[:1], Tapped: l0[1:2]}, {}}}, atoi(l0[1])},
+		{"counters on a card off the battlefield", &rules.StartSpec{Seats: []rules.StartSeat{{
+			Battlefield: l0[:1], Counters: []rules.StartCounter{{Card: l0[1], Kind: "+1/+1", N: 1}},
+		}, {}}}, "not on the battlefield"},
+		{"an attach host out of range", &rules.StartSpec{Seats: []rules.StartSeat{{
+			Battlefield: l0[:1], Attach: []rules.StartAttach{{Card: l0[1], ToSeat: 0, To: 9999}},
+		}, {}}}, "out of range"},
 	} {
 		r, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, c.spec)
 		if r.Status != StatusNA {

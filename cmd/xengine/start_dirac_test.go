@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -66,6 +67,49 @@ func readFileBytes(t *testing.T, path string) []byte {
 		t.Fatal(err)
 	}
 	return b
+}
+
+// TestKernelMirroredFieldsExist holds the two lists against both seat structs, in both
+// directions: no list names a field neither struct has (a list running ahead of the
+// kernel it was read from is a stale claim on kernelStart), and every field either
+// struct does have is named by one of the lists. A field gorge adds to
+// rules.StartSeat, or the corpus lane adds to a start file's seat, is this test's
+// failure — the one that sends someone to read dirac/oracle kernelStart and name the
+// field mirrored or refused — rather than a field silently riding into the lockstep
+// unseen by the kernel, reported as dirac disagreeing with gorge.
+func TestKernelMirroredFieldsExist(t *testing.T) {
+	t.Parallel()
+	structs := []struct {
+		name string
+		typ  reflect.Type
+	}{
+		{"rules.StartSeat", reflect.TypeOf(rules.StartSeat{})},
+		{"startSeat", reflect.TypeOf(startSeat{})},
+	}
+	have := map[string]bool{}
+	for _, s := range structs {
+		for j := 0; j < s.typ.NumField(); j++ {
+			have[s.typ.Field(j).Name] = true
+		}
+	}
+	for name := range kernelMirrored {
+		if !have[name] {
+			t.Errorf("kernelMirrored names %s, which no seat struct has", name)
+		}
+	}
+	for name := range kernelRefused {
+		if !have[name] {
+			t.Errorf("kernelRefused names %s, which no seat struct has", name)
+		}
+	}
+	for _, s := range structs {
+		for j := 0; j < s.typ.NumField(); j++ {
+			name := s.typ.Field(j).Name
+			if !kernelMirrored[name] && kernelRefused[name] == "" {
+				t.Errorf("%s has %s, which neither list names: read dirac/oracle kernelStart and put it in one of them", s.name, name)
+			}
+		}
+	}
 }
 
 // TestStartFlagErrAcceptsDirac: -start plays a scripted position, so every flag that
