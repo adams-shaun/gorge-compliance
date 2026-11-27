@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# test-targets.sh <one|targeted|smart|list>: capped, corpus-checked test runs
+# test-targets.sh <one|whole|targeted|smart|list>: capped, corpus-checked test runs
 # with one verdict line. A port of gorge's modes onto this repository's tools
 # (cmd/testselect is the single selector):
 #
@@ -13,6 +13,10 @@
 #   make precheck                      an alias for test-smart
 #   make test-list [BASE=develop]      print the targeted selection, one package
 #                                      per line
+#   make boundary                      this script's whole mode on the licence
+#                                      guards: one package run whole with
+#                                      -count=1 (the guard must re-execute, not
+#                                      replay the test cache)
 #
 # The LAST stdout line is `test-<mode>: <STATUS> <sha10>[+dirty] <pkgs> <seconds>`;
 # nothing else on stdout starts with `test-`. Exit codes:
@@ -40,9 +44,9 @@ set -uo pipefail
 
 mode=${1:-}
 case $mode in
-one | targeted | smart | list) ;;
+one | whole | targeted | smart | list) ;;
 *)
-	echo "test-targets.sh: usage: test-targets.sh one|targeted|smart|list" >&2
+	echo "test-targets.sh: usage: test-targets.sh one|whole|targeted|smart|list" >&2
 	exit 2
 	;;
 esac
@@ -96,6 +100,7 @@ usage() {
 	echo "test-targets: $mode: $*" >&2
 	case $mode in
 	one) echo "test-targets: make test-one PKG=./path RUN='^TestX\$' [SKIP=re] [V=1] [TIMEOUT=2m] [TAGS=a,b]" >&2 ;;
+	whole) echo "test-targets: make boundary (scripts/test-targets.sh whole PKG=./path)" >&2 ;;
 	targeted) echo "test-targets: make test-targeted [BASE=develop]" >&2 ;;
 	smart) echo "test-targets: make test-smart [BASE=develop]" >&2 ;;
 	list) echo "test-targets: make test-list [BASE=develop]" >&2 ;;
@@ -114,10 +119,10 @@ fi
 export GOFLAGS=-trimpath GORGE_TEST_WRAPPER=1
 
 # ---- validation (usage, exit 2) ----
-if [ "$mode" = one ]; then
+if [ "$mode" = one ] || [ "$mode" = whole ]; then
 	[[ $PKG =~ ^\./[A-Za-z0-9_./-]+$ ]] && [[ $PKG != *...* ]] ||
 		usage "PKG must be one package path like ./oracle/xengine/follower (got '${PKG}'; no '...' patterns)"
-	[ -n "$RUN" ] || usage "RUN is required (a go test -run regexp)"
+	[ "$mode" = whole ] || [ -n "$RUN" ] || usage "RUN is required (a go test -run regexp)"
 	pkgs_label=$PKG
 fi
 if [ "$mode" != list ]; then
@@ -139,7 +144,7 @@ if [ "$mode" != list ]; then
 fi
 
 mb=
-if [ "$mode" != one ]; then
+if [ "$mode" != one ] && [ "$mode" != whole ]; then
 	git -C "$ROOT" rev-parse --verify -q "$BASE^{commit}" >/dev/null ||
 		verdict ENV "base $BASE does not resolve in this worktree"
 	mb=$(git -C "$ROOT" merge-base "$BASE" HEAD) ||
@@ -305,6 +310,24 @@ if [ "$mode" = one ]; then
 	[ -n "$SKIP" ] && args+=(-skip "$SKIP")
 	[ -n "$TAGS" ] && args+=(-tags "$TAGS")
 	[ -n "$V" ] && [ "$V" != 0 ] && args+=(-v)
+	args+=("$PKG")
+	"$GO" "${args[@]}" > "$out"
+	rc=$?
+	finish
+fi
+
+# ---- test-whole ----------------------------------------------------------------
+# One package run whole, no -run, with the shared test cache bypassed
+# (-count=1): `make boundary`'s licence guards must re-execute on every call
+# rather than replay a cached PASS, which is exactly what makes this mode the
+# script's exception to the no--count seat rule. Like one mode it takes only a
+# single relative package path and skips the BASE merge-base checks (nothing
+# is diffed), but a RUN is not required: the whole package is the request.
+if [ "$mode" = whole ]; then
+	out=.oracle-build/test/whole-${sha%+dirty}.json
+	mkdir -p "$(dirname "$out")"
+	args=(test -json -failfast -count=1 -timeout "$TIMEOUT")
+	[ -n "$TAGS" ] && args+=(-tags "$TAGS")
 	args+=("$PKG")
 	"$GO" "${args[@]}" > "$out"
 	rc=$?
