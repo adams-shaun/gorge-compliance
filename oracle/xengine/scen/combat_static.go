@@ -111,20 +111,28 @@ func staticFilterCovered(filter string, owner, face *cards.Face) bool {
 
 // cantBlockByBlocked is the CantBlockBy arm of combatPairBlocked: the pair is
 // forbidden only when the attacker matches the static's ValidAttacker (or
-// Affected) and the blocker matches its ValidBlocker (or ValidCard).
-// restrictingStatic counts a match on either filter as a restriction, which
-// refused every blocker of Sidar Kondo of Jamuraa's power-2 Flanking creature.
+// ValidCard) and the blocker matches its ValidBlocker. restrictingStatic
+// counts a match on either filter as a restriction, which refused every
+// blocker of Sidar Kondo of Jamuraa's power-2 Flanking creature.
+//
+// Gorge reads the record by creature role, not by which permanent carries it:
+// StatCantBlockBy matches Filter against the attacker and Filter2 against the
+// blocker (dirac/statics_gen.go), so the same pair test runs from either
+// creature's statics. A Self alternative is its carrier (owner), never the
+// other creature.
 func cantBlockByBlocked(atk, blk *cards.Face) *cards.Static {
-	for i := range atk.Statics {
-		st := &atk.Statics[i]
-		if st.Mode != "CantBlockBy" {
-			continue
-		}
-		if staticFilterCovered(st.Params["Affected"], atk, atk) &&
-			staticFilterCovered(st.Params["ValidAttacker"], atk, atk) &&
-			staticFilterCovered(st.Params["ValidBlocker"], atk, blk) &&
-			staticFilterCovered(st.Params["ValidCard"], atk, blk) {
-			return st
+	for _, own := range []*cards.Face{atk, blk} {
+		for i := range own.Statics {
+			st := &own.Statics[i]
+			if st.Mode != "CantBlockBy" {
+				continue
+			}
+			if staticFilterCovered(st.Params["Affected"], own, own) &&
+				staticFilterCovered(st.Params["ValidAttacker"], own, atk) &&
+				staticFilterCovered(st.Params["ValidBlocker"], own, blk) &&
+				staticFilterCovered(st.Params["ValidCard"], own, atk) {
+				return st
+			}
 		}
 	}
 	return nil
@@ -137,6 +145,13 @@ func cantBlockByBlocked(atk, blk *cards.Face) *cards.Static {
 // and an attack restriction is read against the attacker, not the blocker.
 // Every other block restriction keeps the conservative read, so a pair the
 // start cannot show legal is still refused.
+//
+// An attack restriction is read by creature role from either carrier: gorge's
+// StatCantAttack matches its filter against the attacking creature, so the
+// attacker's own record is read here (a Self alternative is the attacker) and
+// the blocker's record is read against the attacker too (its Self alternative
+// is the blocker and does not match). A blocker's CantBlockBy is read above as
+// the pair it names, never as a restriction on its own block.
 func combatPairBlocked(atk, blk *cards.Face) *cards.Static {
 	if st := restrictingStatic(atk, blk, true); st != nil {
 		return st
@@ -144,12 +159,16 @@ func combatPairBlocked(atk, blk *cards.Face) *cards.Static {
 	if st := cantBlockByBlocked(atk, blk); st != nil {
 		return st
 	}
-	for _, side := range []struct{ own, other *cards.Face }{{blk, atk}, {atk, blk}} {
+	for _, side := range []struct {
+		own, other *cards.Face
+		readAttack bool // read this carrier's attack restrictions against the attacker
+	}{{blk, atk, true}, {atk, blk, false}} {
 		for i := range side.own.Statics {
 			st := &side.own.Statics[i]
-			// CantBlockBy on the blocker is about blocking that creature, not
-			// its block: it cannot keep this pair from being declared.
-			if !blockModes[st.Mode] || st.Mode == "CantBlockBy" {
+			if st.Mode == "CantBlockBy" {
+				continue // read as the pair above
+			}
+			if !blockModes[st.Mode] && !(side.readAttack && attackModes[st.Mode]) {
 				continue
 			}
 			if restrictsCombat(st, side.own, side.other, false) {

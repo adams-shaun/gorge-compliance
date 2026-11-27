@@ -912,9 +912,10 @@ func TestStartAttachedBearerSeat(t *testing.T) {
 // TestScenKeyAuraLandBearer: an Aura whose Enchant keyword takes no carrier
 // creature (Genju of the Cedars' Enchant:Forest, Pooling Venom's Enchant:land)
 // gets the basic land it can legally enchant as its StartAttach bearer. The
-// land is inert (the focus is the Aura's own activation), and the start lists
-// it on the Aura's controller's battlefield; every aura-unattached refusal of
-// this shape becomes a start, the same way the creature-Aura shape does.
+// land is inert for the focus event (the Aura's own activation; it can still
+// tap for mana), and the start lists it on the Aura's controller's battlefield;
+// every aura-unattached refusal of this shape becomes a start, the same way the
+// creature-Aura shape does.
 func TestScenKeyAuraLandBearer(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, r := range []struct{ card, bearer string }{
@@ -3031,6 +3032,90 @@ func TestScenCombatTriggerLegalBlocker(t *testing.T) {
 	}
 	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
 		t.Errorf("start file does not decode: %v", err)
+	}
+}
+
+// TestScenCombatTriggerAttackerRestriction: Evil Eye of Urborg's own CantAttack
+// record ("non-Eye creatures you control can't attack") is a restriction on
+// its own attack, not on the creature blocking it: the Eye may attack a
+// non-Eye blocker, so its AttackerBlockedByCreature trigger still starts.
+// Reading the record against the blocker was the false positive that refused
+// it while a blocker-owned record went unread.
+func TestScenCombatTriggerAttackerRestriction(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Evil Eye of Urborg", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	if f.Focus == nil || f.Focus.Attack != "Evil Eye of Urborg" || f.Focus.Block == "" {
+		t.Fatalf("focus %+v, want Evil Eye attacking and a blocker", f.Focus)
+	}
+	c, ok := reg.Lookup(f.Focus.Block)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("blocker %q not in the corpus", f.Focus.Block)
+	}
+	if blk := c.Faces[0]; blk.HasTypeWord("Eye") {
+		t.Errorf("blocker %s is an Eye; the test does not pin the non-Eye restriction", blk.Name)
+	}
+	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+		t.Errorf("start file does not decode: %v", err)
+	}
+}
+
+// TestScenCombatPairBlockedByRole: a pair restriction is read by creature role,
+// whichever permanent carries it. Stronghold Zeppelin's CantBlockBy ("can block
+// only creatures with flying") names the attacker in ValidAttacker and itself
+// in ValidBlocker, so a non-flier attacker is no legal pair while a flier is.
+// A blocker's CantAttack is read against the attacker, and its Self
+// alternative (the blocker) is not.
+func TestScenCombatPairBlockedByRole(t *testing.T) {
+	reg, _ := testBuilder(t)
+	face := func(name string) *cards.Face {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+	stat := func(mode string, params ...string) cards.Static {
+		st := cards.Static{Mode: mode, Params: map[string]string{}}
+		for i := 0; i+1 < len(params); i += 2 {
+			st.Params[params[i]] = params[i+1]
+		}
+		return st
+	}
+	bears := face("Grizzly Bears")
+	drake := face("Wind Drake")
+	zeppelin := face("Stronghold Zeppelin") // CantBlockBy ValidAttacker$ Creature.withoutFlying, ValidBlocker$ Creature.Self
+	if st := combatPairBlocked(bears, zeppelin); st == nil || st.Mode != "CantBlockBy" {
+		t.Errorf("non-flier attacker vs Stronghold Zeppelin: static %+v, want its CantBlockBy", st)
+	}
+	if st := combatPairBlocked(drake, zeppelin); st != nil {
+		t.Errorf("flier attacker vs Stronghold Zeppelin: static %+v, want a legal pair", st)
+	}
+	// Evil Eye of Urborg's CantAttack names non-Eye creatures its controller
+	// controls: it does not make the Eye's own attack illegal against a non-Eye
+	// blocker.
+	if st := combatPairBlocked(face("Evil Eye of Urborg"), bears); st != nil {
+		t.Errorf("Evil Eye attacking a non-Eye: static %+v, want a legal pair", st)
+	}
+	// The same record on the blocker is read against the attacker: gorge
+	// matches StatCantAttack's filter against the attacking creature.
+	restrictor := &cards.Face{Name: "Eye Wall", Types: []string{"Creature", "Eye"},
+		Statics: []cards.Static{stat("CantAttack", "ValidCard", "Creature.nonEye+YouCtrl")}}
+	if st := combatPairBlocked(bears, restrictor); st == nil || st.Mode != "CantAttack" {
+		t.Errorf("non-Eye attacker vs a blocker-owned CantAttack: static %+v, want it read against the attacker", st)
+	}
+	// A blocker's CantAttack naming Self restricts the blocker, not the
+	// attacker, so the pair stays legal.
+	selfRestrictor := &cards.Face{Name: "Wall of Stone", Types: []string{"Creature"},
+		Statics: []cards.Static{stat("CantAttack", "ValidCard", "Card.Self")}}
+	if st := combatPairBlocked(bears, selfRestrictor); st != nil {
+		t.Errorf("self-only CantAttack on the blocker: static %+v, want a legal pair", st)
 	}
 }
 

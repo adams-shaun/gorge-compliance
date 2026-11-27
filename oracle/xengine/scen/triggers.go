@@ -984,9 +984,11 @@ func attachBearerWhere(reg *cards.Registry, b *certdeck.Builder, card string, fa
 	// A keyword that takes no carrier creature (Enchant:Forest, Enchant:land
 	// you control) still takes a permanent a start file can place: a basic
 	// land. The carrier pool holds no land (inertCarrier excludes one), so the
-	// fallback walks the basics the filter names, the same pick bearerFor
-	// makes for a static's bearer. A player or a planeswalker has no such
-	// inert basic here and stays a refusal.
+	// fallback walks the basics the filter names, in the fixed basic order,
+	// and takes the first that fits; it starts at Plains rather than a
+	// colour-matched basic, since the bearer is inert for the focus event (it
+	// can still tap for mana). A player or a planeswalker has no such inert
+	// basic here and stays a refusal.
 	for _, a := range parseFilter(filter) {
 		if !a.known || a.self {
 			continue
