@@ -3346,6 +3346,44 @@ func TestStartFilterFixtures(t *testing.T) {
 	}
 }
 
+// TestAttacksCounterGatePlacesCounter: an Attacks filter's counter gate
+// ("Creature.YouCtrl+counters_GE1_P1P1") is unknown to parseFilter, which used
+// to make attacksStart return a self-attack without the counter and skip
+// attackCarrier's placement arm. attacksStart must route the unknown-counter
+// case through attackCarrier: the attacker is the card and the counter gate is
+// placed in the setup (no recipe/placeNeeds is involved here).
+func TestAttacksCounterGatePlacesCounter(t *testing.T) {
+	reg, b := testBuilder(t)
+	c, ok := reg.Lookup("Elite Scaleguard")
+	if !ok || len(c.Faces) == 0 {
+		t.Fatal("Elite Scaleguard is not in the corpus")
+	}
+	face := c.Faces[0]
+	var trig *cards.Trigger
+	for i := range face.Triggers {
+		if face.Triggers[i].Mode == "Attacks" {
+			trig = &face.Triggers[i]
+			break
+		}
+	}
+	if trig == nil {
+		t.Fatal("Elite Scaleguard has no Attacks trigger")
+	}
+	var f StartFile
+	if why := attacksStart(reg, b, face, "Elite Scaleguard", trig, &f); why != "" {
+		t.Fatalf("attacksStart refused: %s", why)
+	}
+	if f.Focus == nil || f.Focus.Card != "Elite Scaleguard" || f.Focus.Kind != "attack" {
+		t.Fatalf("focus %+v, want Elite Scaleguard attacking", f.Focus)
+	}
+	for _, ct := range f.Setup.P0.Counters {
+		if ct.Card == "Elite Scaleguard" && ct.N >= 1 {
+			return
+		}
+	}
+	t.Errorf("no counter placed on the attacker: %+v", f.Setup.P0.Counters)
+}
+
 // TestStartFilterFixtureCounterGateRefused: an enters filter that requires a
 // counter on the entering object cannot be served by a cast fixture. A start's
 // setup counters have nothing to sit on while the card is still in hand, so
