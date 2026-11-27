@@ -23,6 +23,8 @@ import (
 //     wasCastByYou history (The Sibsig Ceremony);
 //   - the Aura's bearer dies to Murder while enchanted (Necrotic Plague);
 //   - a countered creature dies, the gate placed (The Ozolith);
+//   - a counter-gated creature attacks, its +1/+1 counter placed (Elite
+//     Scaleguard);
 //   - the Aura's attached bearer blocks and is dealt damage (Cracked Skull);
 //   - a flying carrier blocks the flying attacker the fixture cannot pair with
 //     (Gustcloak Harrier).
@@ -38,6 +40,7 @@ func TestStartFilterFixtureKeysFires(t *testing.T) {
 		{"The Sibsig Ceremony", "f0/t0"},
 		{"Necrotic Plague", "f0/t0"},
 		{"The Ozolith", "f0/t0"},
+		{"Elite Scaleguard", "f0/t1"},
 		{"Cracked Skull", "f0/t1"},
 		{"Gustcloak Harrier", "f0/t0"},
 	} {

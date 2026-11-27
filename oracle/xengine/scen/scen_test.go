@@ -3281,6 +3281,8 @@ func TestStartFilterFixtures(t *testing.T) {
 			carrierProp: (*cards.Face).IsCreature, carrierWhy: "countered creature", needCounter: true},
 		{card: "Yathan Tombguard", key: "f0/t0", fSeat: 0, fKind: "attack",
 			carrierProp: (*cards.Face).IsCreature, carrierWhy: "countered attacker", needCounter: true},
+		{card: "Elite Scaleguard", key: "f0/t1", fSeat: 0, fKind: "attack",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "counter-gated attacker", needCounter: true},
 	}
 	for _, r := range rows {
 		t.Run(r.card, func(t *testing.T) {
@@ -3367,10 +3369,72 @@ func TestStartFilterFixtureCounterGateRefused(t *testing.T) {
 	}
 }
 
+// TestStartFilterFixtureAttachFilterGated: an attachment trigger whose filter
+// also gates the bearer on a property must make that property hold of the
+// bearer, or refuse. The bearer lane used to route any filter that merely
+// contained EnchantedBy/EquippedBy to attachedByStart, which chose the bearer
+// from the Aura's Enchant keyword (or the Equipment's end-step sacrifice pool)
+// alone:
+//
+//   - Endless Evil (Card.EnchantedBy+Horror) attached to Memnite, a bearer
+//     that is not a Horror, so "when enchanted Horror dies" could never fire.
+//     The start may now serve a Horror bearer or refuse: both are honest, and
+//     an inert Horror (Vorstclaw) is in the carrier pool;
+//   - Forgeborn Phoenix (Creature.EquippedBy,Creature.Self) is itself a
+//     creature Equipment, so Magnetic Theft's second target (a creature) can
+//     be answered with the Equipment itself and it attaches to itself. That
+//     start must stay refused;
+//   - Curator's Ward (Card.AttachedBy+Historic) can be served on a historic
+//     bearer, but its own static gives that bearer hexproof, so the opponent's
+//     Murder is never offered; the lane must refuse rather than attach and
+//     never fire.
+func TestStartFilterFixtureAttachFilterGated(t *testing.T) {
+	reg, b := testBuilder(t)
+	const none = "no-generator:trigger:ChangesZone:filter"
+	res, err := Generate(reg, b, "Endless Evil", "f0/t1", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatalf("Endless Evil f0/t1: %v", err)
+	}
+	switch {
+	case res.Path == PathRefused:
+		if res.Reason != none {
+			t.Errorf("Endless Evil f0/t1 refused with %q, want %q", res.Reason, none)
+		}
+	case res.Path == PathStart && res.Start != nil && res.Start.Focus != nil:
+		// The focus is Murder destroying the Aura's bearer: the first target
+		// that is not the Aura itself.
+		bearer := ""
+		for _, name := range res.Start.Focus.Targets {
+			if name != "Endless Evil" {
+				bearer = name
+				break
+			}
+		}
+		c, ok := reg.Lookup(bearer)
+		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Horror") {
+			t.Errorf("Endless Evil f0/t1 served on bearer %q, want a Horror or a refusal", bearer)
+		}
+	default:
+		t.Errorf("Endless Evil f0/t1: path %q reason %q, want a start on a Horror or %q", res.Path, res.Reason, none)
+	}
+	for _, c := range []struct{ card, key string }{
+		{"Forgeborn Phoenix", "f0/t0"},
+		{"Curator's Ward", "f0/t0"},
+	} {
+		res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", c.card, c.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != none {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, none)
+		}
+	}
+}
+
 // TestCastableAlt: the gate castFixtureCarrierIn passes to the fixture
-// fallback. A counter gate (counters_*, HasCounters) and a token requirement
-// are alternatives a cast cannot establish; a non-token requirement and a
-// plain card are.
+// fallback. A counter gate (counters_*, HasCounters), a token requirement and
+// a top-of-library requirement are alternatives a cast cannot establish; a
+// non-token requirement and a plain card are.
 func TestCastableAlt(t *testing.T) {
 	for _, tc := range []struct {
 		filter string
@@ -3381,6 +3445,7 @@ func TestCastableAlt(t *testing.T) {
 		{"Creature.YouCtrl+counters_GE1_OIL", false},
 		{"Creature.YouCtrl+HasCounters", false},
 		{"Creature.YouCtrl+token", false},
+		{"Creature.YouCtrl+TopLibrary", false},
 	} {
 		t.Run(tc.filter, func(t *testing.T) {
 			alts := parseFilterStatic(tc.filter)
@@ -3391,8 +3456,8 @@ func TestCastableAlt(t *testing.T) {
 				t.Fatalf("filter %q is not understood", tc.filter)
 			}
 			if got := castableAlt(alts[0]); got != tc.cast {
-				t.Errorf("castableAlt(%q) = %v, want %v (counters %v, token %d)",
-					tc.filter, got, tc.cast, alts[0].counters, alts[0].token)
+				t.Errorf("castableAlt(%q) = %v, want %v (counters %v, token %d, topLibrary %v)",
+					tc.filter, got, tc.cast, alts[0].counters, alts[0].token, alts[0].topLibrary)
 			}
 		})
 	}

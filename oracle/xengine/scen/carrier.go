@@ -169,7 +169,11 @@ type filterAlt struct {
 	// a permanent on the battlefield, not a property of a face, so only a
 	// reader that knows the placed object's state enables it.
 	tapped int
-	known  bool
+	// topLibrary is true when the alternative requires the object to be the
+	// top card of its owner's library. Only the static start places a card
+	// there, so a lane that casts or places its fixture cannot meet it.
+	topLibrary bool
+	known      bool
 	// history is the first game-history property ("wasDealtDamageThisTurn")
 	// the alternative carries: the engine reads it, and nothing has happened
 	// yet at the start's step, so no placed object can meet it.
@@ -432,6 +436,8 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 					// only the static start places the affected card there
 					if !topLibraryOK {
 						a.known = false
+					} else {
+						a.topLibrary = true
 					}
 					continue
 				case "!token", "nonToken":
@@ -618,13 +624,14 @@ func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter str
 // castableAlt reports whether a start can establish alternative a by casting
 // its carrier from hand rather than placing it: a counter gate
 // ("counters_GE1_OIL", "HasCounters") cannot be met, because a setup counter
-// has nothing to sit on while the card is still in hand, and a token
-// requirement names an object a cast card is not. A caller that casts the
-// fixture must skip such an alternative instead of letting its test alone
-// stand for the gate; a caller that places the object on the battlefield meets
-// the gate with filterGateCounters.
+// has nothing to sit on while the card is still in hand, a token requirement
+// names an object a cast card is not, and a top-of-library requirement names a
+// card the cast does not put there. A caller that casts the fixture must skip
+// such an alternative instead of letting its test alone stand for the gate; a
+// caller that places the object on the battlefield meets the counter gate with
+// filterGateCounters and the library gate by placing it there.
 func castableAlt(a filterAlt) bool {
-	return len(a.counters) == 0 && a.token <= 0
+	return len(a.counters) == 0 && a.token <= 0 && !a.topLibrary
 }
 
 // castFixtureCarrierIn is fixtureCarrierIn for a fixture the start casts from
