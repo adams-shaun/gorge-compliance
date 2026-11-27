@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f0ec90b-e5a0-49bd-8fa0-9be6ba259a62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f10b164-6d36-4935-92e7-53be73ac4c8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orbital-plunge:cast:s1,f:xs:XP:orbital-plunge:cast:s1	-	-	-	23c4009444b0	-	d51897c542a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4f142d99-8146-4b16-a2cc-ac03da19b960	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ursine-champion:cast:s1,f:xs:XP:ursine-champion:cast:s1	-	-	-	d864b561c9cb	-	b446e6aa811c	-	-	2026-11-24	xproof
-4f142d99-8146-4b16-a2cc-ac03da19b960	f0/a0	Pump	diverged	-	-	start	0	2	-	b5315e147b9b	-	-	03d59e300ef0	-	b446e6aa811c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+4f142d99-8146-4b16-a2cc-ac03da19b960	f0/a0	Pump	diverged	-	-	start	0	2	-	b5315e147b9b	-	-	ad6fb83576d3	-	b446e6aa811c	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 4f14bf38-13ec-461d-8a1b-340843b5d95d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-atlas:f0t0:s1,f:xs:XP:planar-atlas:f0t0:s1	-	-	-	8c0bd19283bb	-	812761623628	-	-	2026-11-24	xproof
 4f14bf38-13ec-461d-8a1b-340843b5d95d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:planar-atlas:f0a0:s1,f:xs:XP:planar-atlas:f0a0:s1	-	-	-	8c0bd19283bb	-	812761623628	-	-	2026-11-24	xproof
 4f14bf38-13ec-461d-8a1b-340843b5d95d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:planar-atlas:f0t0:s1,f:xs:XP:planar-atlas:f0t0:s1	-	-	-	8c0bd19283bb	-	812761623628	-	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gumdrop-poisoner-tempt-with-treats:combat0.block:s1,f:xs:XP:gumdrop-poisoner-tempt-with-treats:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5f2792-0cc4-4caa-b798-2ee9597f2524	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f5f2792-0cc4-4caa-b798-2ee9597f2524	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	03d59e300ef0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+4f5f2792-0cc4-4caa-b798-2ee9597f2524	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 4f5fee21-bf29-4873-baf4-04911c309d81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5fee21-bf29-4873-baf4-04911c309d81	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	77b4a10eff48	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 4f63d306-cc14-405c-8424-d8990c670c74	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:territorial-aetherkite:cast:s1,f:xs:XP:territorial-aetherkite:cast:s1	-	-	-	8c0bd19283bb	-	419183ee5893	-	-	2026-11-24	xproof
