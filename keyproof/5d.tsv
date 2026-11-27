@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d776be0-cece-4496-a3b0-b7424eca77fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d7acb89-1778-409a-9e91-aaeadd13ca27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venarian-gold:f0t0:s1,f:xs:XP:venarian-gold:f0t0:s1	-	-	-	fc71ca68c5ac	-	01ec8bc4069b	-	-	2026-11-24	xproof
 5d7acb89-1778-409a-9e91-aaeadd13ca27	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venarian-gold:f0t0:s1,f:xs:XP:venarian-gold:f0t0:s1	-	-	-	fc71ca68c5ac	-	01ec8bc4069b	-	-	2026-11-24	xproof
-5d7acb89-1778-409a-9e91-aaeadd13ca27	f0/t1	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	99621abfbce1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+5d7acb89-1778-409a-9e91-aaeadd13ca27	f0/t1	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	cc735bf668f0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 5d7eea87-b60f-4ab9-b485-30aadda0cd79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d7eea87-b60f-4ab9-b485-30aadda0cd79	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ant-man-s-air-force:f0t0:s1,f:xs:XP:ant-man-s-air-force:f0t0:s1	-	-	-	8c0bd19283bb	-	ed62b0147810	-	-	2026-11-24	xproof
 5d808e64-a648-4f1b-a3a9-fd09568db281	cast	cast-resolve	agreed	-	FX	scen	2	0	Garrison Excavator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d96840e-f9b3-4c86-8f59-f12e5736318f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:voracious-greatshark:cast:s1,f:xs:XP:voracious-greatshark:cast:s1	-	-	-	23b491658465	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d96840e-f9b3-4c86-8f59-f12e5736318f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:voracious-greatshark:cast:s1,f:xs:XP:voracious-greatshark:cast:s1	-	-	-	23b491658465	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d998c09-7d89-4265-ada4-6d80cbf56dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	99621abfbce1	-	be94ce4b7baa	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	cc735bf668f0	-	be94ce4b7baa	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:cast:s1,f:xs:XP:syr-alin-the-lion-s-claw:cast:s1	-	-	-	23b491658465	-	d4670641a491	-	-	2026-11-24	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1,f:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d4670641a491	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.block:s1,f:xs:XP:syr-alin-the-lion-s-claw:combat0.block:s1	-	-	-	fb9d3088f0bf	-	d4670641a491	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
