@@ -998,7 +998,7 @@ func placeCount(reg *cards.Registry, b *certdeck.Builder, card string, need coun
 		seat = &f.Setup.P1
 	}
 	for _, g := range gates {
-		seat.Counters = addSelfCounter(seat.Counters, StartCounter{Card: name, Kind: g.kind, N: g.n})
+		seat.Counters = addSelfCounter(seat.Counters, StartCounter{Card: name, Kind: g.placedKind(), N: g.n})
 	}
 	return name, s
 }

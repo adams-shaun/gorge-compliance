@@ -3213,3 +3213,399 @@ func TestHarnessCensus(t *testing.T) {
 		t.Errorf("census rows sum to %d keys over %d signatures, header says %d", sum, rows, total)
 	}
 }
+
+// TestStartFilterFixtures: the ShapesFilterFixtures shapes that the stock
+// inert-carrier pool could not answer, each once (xproof top-owed
+// no-generator:trigger:<mode>:filter, census 11-27):
+//
+//   - ChangesZone on the bearer an Aura enchants (Card.EnchantedBy) or an
+//     Equipment equips (Card.EquippedBy): the pinned gorge reads EquippedBy,
+//     EnchantedBy and AttachedBy as one predicate, so the bearer-death start
+//     is attachedByStart's (an Aura StartAttach + Murder, an Equipment +
+//     Magnetic Theft + an end-step self-sacrifice);
+//   - a land the filter takes dies (Land.!token+YouOwn): the removal is
+//     Stone Rain, since Murder cannot destroy a land;
+//   - an enters trigger whose class no vanilla card holds (Detective) takes
+//     the simplest playable permanent the filter takes;
+//   - an enters trigger whose class only Auras hold (Cartouche) casts the
+//     Aura at a vanilla bearer, naming it, so the Aura enters attached;
+//   - "whenever a creature you cast this turn enters" (wasCastByYou) is the
+//     carrier cast itself: the stripped filter picks the creature and the
+//     cast makes the property true of the entering object;
+//   - "a creature you control with a counter on it" (HasCounters) is the
+//     generic counter gate: the start places a +1/+1 counter on the creature
+//     the trigger reads, whether it dies (The Ozolith) or attacks (Yathan
+//     Tombguard's DamageDone dealer).
+func TestStartFilterFixtures(t *testing.T) {
+	reg, b := testBuilder(t)
+	type row struct {
+		card, key string
+		// focus: seat, card, kind the focus play must have ("" for any).
+		fSeat int
+		fKind string
+		// carrierProp, when set, must hold of the focus's first target (the
+		// removal target, the Aura's bearer) or of the focus cast card.
+		carrierProp func(*cards.Face) bool
+		carrierWhy  string
+		// needCounter: the start must place a counter on the named target or
+		// the focus attack card.
+		needCounter bool
+		// propOnFocus: check carrierProp of the focus card (the cast spell),
+		// not of a focus target (whose bearer sits in Targets beside it).
+		propOnFocus bool
+		// focusCard, when set, is the focus cast card the fixture must name
+		// (an Equipment cannot enter attached from a start, so the focus is
+		// the Magnetic Theft that attaches it).
+		focusCard string
+		// attach: the focus cast must name the key card first and the equipped
+		// creature second, the order Magnetic Theft takes its targets in; a
+		// start that decodes but never attaches would pass the shape checks
+		// above and fail to fire.
+		attach bool
+	}
+	rows := []row{
+		{card: "Necrotic Plague", key: "f0/t0", fSeat: 1, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "bearer"},
+		{card: "Skullclamp", key: "f0/t0", fSeat: 0, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "equipped bearer",
+			focusCard: "Magnetic Theft", attach: true},
+		{card: "Skola Grovedancer", key: "f0/t0", fSeat: 1, fKind: "cast",
+			carrierProp: (*cards.Face).IsLand, carrierWhy: "land"},
+		{card: "Case of the Pilfered Proof", key: "f0/t0", fSeat: 0, fKind: "cast",
+			carrierProp: func(f *cards.Face) bool { return f.HasTypeWord("Detective") }, carrierWhy: "Detective"},
+		{card: "Trial of Ambition", key: "f0/t1", fSeat: 0, fKind: "cast", propOnFocus: true,
+			carrierProp: func(f *cards.Face) bool { return f.HasTypeWord("Aura") && f.HasTypeWord("Cartouche") }, carrierWhy: "Cartouche Aura"},
+		{card: "The Sibsig Ceremony", key: "f0/t0", fSeat: 0, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "cast creature"},
+		{card: "The Ozolith", key: "f0/t0", fSeat: 1, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "countered creature", needCounter: true},
+		{card: "Yathan Tombguard", key: "f0/t0", fSeat: 0, fKind: "attack",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "countered attacker", needCounter: true},
+		{card: "Elite Scaleguard", key: "f0/t1", fSeat: 0, fKind: "attack",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "counter-gated attacker", needCounter: true},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Seat == nil || *f.Focus.Seat != r.fSeat || f.Focus.Kind != r.fKind {
+				t.Fatalf("focus %+v, want seat %d kind %q", f.Focus, r.fSeat, r.fKind)
+			}
+			// The carrier is a focus target that is not the key card (a
+			// removal's victim, an Aura's bearer, Magnetic Theft's equipped
+			// creature, named second), else the focus cast card itself.
+			carrier := f.Focus.Card
+			if !r.propOnFocus {
+				for _, tname := range f.Focus.Targets {
+					if tname != r.card {
+						carrier = tname
+						break
+					}
+				}
+			}
+			if r.focusCard != "" && f.Focus.Card != r.focusCard {
+				t.Errorf("focus card %q, want %q", f.Focus.Card, r.focusCard)
+			}
+			if r.attach {
+				// Magnetic Theft targets the Equipment, then the creature it
+				// attaches to: naming both is the attach.
+				if len(f.Focus.Targets) != 2 || f.Focus.Targets[0] != r.card || f.Focus.Targets[1] != carrier {
+					t.Errorf("focus targets %v, want [%q %q] (equipment then equipped creature)", f.Focus.Targets, r.card, carrier)
+				}
+			}
+			c, ok := reg.Lookup(carrier)
+			if !ok || len(c.Faces) == 0 {
+				t.Fatalf("carrier %q is not in the corpus", carrier)
+			}
+			if !r.carrierProp(c.Faces[0]) {
+				t.Errorf("carrier %q does not meet the filter (%s)", carrier, r.carrierWhy)
+			}
+			if r.needCounter {
+				found := false
+				for _, s := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+					for _, ct := range s.Counters {
+						if ct.Card == carrier && ct.N >= 1 {
+							found = true
+						}
+					}
+				}
+				if !found {
+					t.Errorf("no counter placed on %q: p0 %+v p1 %+v", carrier, f.Setup.P0.Counters, f.Setup.P1.Counters)
+				}
+			}
+			if _, err := DecodeStartFile(mustMarshal(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestAttacksCounterGatePlacesCounter: an Attacks filter's counter gate
+// ("Creature.YouCtrl+counters_GE1_P1P1") is unknown to parseFilter, which used
+// to make attacksStart return a self-attack without the counter and skip
+// attackCarrier's placement arm. attacksStart must route the unknown-counter
+// case through attackCarrier: the attacker is the card and the counter gate is
+// placed in the setup (no recipe/placeNeeds is involved here).
+func TestAttacksCounterGatePlacesCounter(t *testing.T) {
+	reg, b := testBuilder(t)
+	c, ok := reg.Lookup("Elite Scaleguard")
+	if !ok || len(c.Faces) == 0 {
+		t.Fatal("Elite Scaleguard is not in the corpus")
+	}
+	face := c.Faces[0]
+	var trig *cards.Trigger
+	for i := range face.Triggers {
+		if face.Triggers[i].Mode == "Attacks" {
+			trig = &face.Triggers[i]
+			break
+		}
+	}
+	if trig == nil {
+		t.Fatal("Elite Scaleguard has no Attacks trigger")
+	}
+	var f StartFile
+	if why := attacksStart(reg, b, face, "Elite Scaleguard", trig, &f); why != "" {
+		t.Fatalf("attacksStart refused: %s", why)
+	}
+	if f.Focus == nil || f.Focus.Card != "Elite Scaleguard" || f.Focus.Kind != "attack" {
+		t.Fatalf("focus %+v, want Elite Scaleguard attacking", f.Focus)
+	}
+	for _, ct := range f.Setup.P0.Counters {
+		if ct.Card == "Elite Scaleguard" && ct.N >= 1 {
+			return
+		}
+	}
+	t.Errorf("no counter placed on the attacker: %+v", f.Setup.P0.Counters)
+}
+
+// TestStartFilterFixtureCounterGateRefused: an enters filter that requires a
+// counter on the entering object cannot be served by a cast fixture. A start's
+// setup counters have nothing to sit on while the card is still in hand, so
+// the carrier the fixture scan could pick would enter without the gate and the
+// trigger would never reach the stack (Ichorplate Golem: "whenever a creature
+// you control enters, if it has one or more oil counters on it"). The lane
+// must keep the ":filter" refusal rather than move the key refused→start.
+func TestStartFilterFixtureCounterGateRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Ichorplate Golem", "f0/t0"},
+	} {
+		res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", c.card, c.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != "no-generator:trigger:ChangesZone:filter" {
+			t.Errorf("%s %s: path %q reason %q, want refused no-generator:trigger:ChangesZone:filter",
+				c.card, c.key, res.Path, res.Reason)
+		}
+	}
+}
+
+// TestStartFilterFixtureAttachFilterGated: an attachment trigger whose filter
+// also gates the bearer on a property must make that property hold of the
+// bearer, or refuse. The bearer lane used to route any filter that merely
+// contained EnchantedBy/EquippedBy to attachedByStart, which chose the bearer
+// from the Aura's Enchant keyword (or the Equipment's end-step sacrifice pool)
+// alone:
+//
+//   - Endless Evil (Card.EnchantedBy+Horror) attached to Memnite, a bearer
+//     that is not a Horror, so "when enchanted Horror dies" could never fire.
+//     The start may now serve a Horror bearer or refuse: both are honest, and
+//     an inert Horror (Vorstclaw) is in the carrier pool;
+//   - Forgeborn Phoenix (Creature.EquippedBy,Creature.Self) is itself a
+//     creature Equipment, so Magnetic Theft's second target (a creature) can
+//     be answered with the Equipment itself and it attaches to itself. That
+//     start must stay refused;
+//   - Curator's Ward (Card.AttachedBy+Historic) can be served on a historic
+//     bearer, but its own static gives that bearer hexproof, so the opponent's
+//     Murder is never offered; the lane must refuse rather than attach and
+//     never fire.
+func TestStartFilterFixtureAttachFilterGated(t *testing.T) {
+	reg, b := testBuilder(t)
+	const none = "no-generator:trigger:ChangesZone:filter"
+	res, err := Generate(reg, b, "Endless Evil", "f0/t1", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatalf("Endless Evil f0/t1: %v", err)
+	}
+	switch {
+	case res.Path == PathRefused:
+		if res.Reason != none {
+			t.Errorf("Endless Evil f0/t1 refused with %q, want %q", res.Reason, none)
+		}
+	case res.Path == PathStart && res.Start != nil && res.Start.Focus != nil:
+		// The focus is Murder destroying the Aura's bearer: the first target
+		// that is not the Aura itself.
+		bearer := ""
+		for _, name := range res.Start.Focus.Targets {
+			if name != "Endless Evil" {
+				bearer = name
+				break
+			}
+		}
+		c, ok := reg.Lookup(bearer)
+		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Horror") {
+			t.Errorf("Endless Evil f0/t1 served on bearer %q, want a Horror or a refusal", bearer)
+		}
+	default:
+		t.Errorf("Endless Evil f0/t1: path %q reason %q, want a start on a Horror or %q", res.Path, res.Reason, none)
+	}
+	for _, c := range []struct{ card, key string }{
+		{"Forgeborn Phoenix", "f0/t0"},
+		{"Curator's Ward", "f0/t0"},
+	} {
+		res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", c.card, c.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != none {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, none)
+		}
+	}
+}
+
+// TestStartAttachBearerSurvivesAura: an Aura whose own static shrinks its
+// bearer (Infectious Rage +2/-1, Screams from Within -1/-1) must not be put
+// on a bearer that dies to state-based actions during setup; the start either
+// refuses :filter or names a bearer whose toughness stays above zero.
+func TestStartAttachBearerSurvivesAura(t *testing.T) {
+	reg, b := testBuilder(t)
+	const none = "no-generator:trigger:ChangesZone:filter"
+	for _, name := range []string{"Infectious Rage", "Screams from Within"} {
+		aura, ok := reg.Lookup(name)
+		if !ok || len(aura.Faces) == 0 {
+			t.Fatalf("%s is not in the registry", name)
+		}
+		res, err := Generate(reg, b, name, "f0/t0", Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s f0/t0: %v", name, err)
+		}
+		if res.Path == PathRefused {
+			if res.Reason != none {
+				t.Errorf("%s f0/t0 refused with %q, want %q", name, res.Reason, none)
+			}
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil || len(res.Start.Setup.P0.Attach) != 1 {
+			t.Fatalf("%s f0/t0: path %q reason %q, want a start with one attachment", name, res.Path, res.Reason)
+		}
+		bearer := res.Start.Setup.P0.Attach[0].To
+		c, ok := reg.Lookup(bearer)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s: bearer %q is not in the registry", name, bearer)
+		}
+		if !survivesAura(aura.Faces[0], c.Faces[0]) {
+			t.Errorf("%s f0/t0: bearer %q (toughness %d) dies to the Aura at setup", name, bearer, c.Faces[0].Toughness())
+		}
+	}
+	// The predicate itself: a 1/1 dies to a -1/-1 or +2/-1 Aura, a 2/2 keeps
+	// toughness 1 under both.
+	for _, name := range []string{"Infectious Rage", "Screams from Within"} {
+		aura, _ := reg.Lookup(name)
+		one, _ := reg.Lookup("Memnite")
+		two, _ := reg.Lookup("Grizzly Bears")
+		if survivesAura(aura.Faces[0], one.Faces[0]) {
+			t.Errorf("%s: a 1/1 bearer must not survive", name)
+		}
+		if !survivesAura(aura.Faces[0], two.Faces[0]) {
+			t.Errorf("%s: a 2/2 bearer must survive", name)
+		}
+	}
+}
+
+// TestCastableAlt: the gate castFixtureCarrierIn passes to the fixture
+// fallback. A counter gate (counters_*, HasCounters), a token requirement and
+// a top-of-library requirement are alternatives a cast cannot establish; a
+// non-token requirement and a plain card are.
+func TestCastableAlt(t *testing.T) {
+	for _, tc := range []struct {
+		filter string
+		cast   bool
+	}{
+		{"Creature.YouCtrl", true},
+		{"Creature.YouCtrl+!token", true},
+		{"Creature.YouCtrl+counters_GE1_OIL", false},
+		{"Creature.YouCtrl+HasCounters", false},
+		{"Creature.YouCtrl+token", false},
+		{"Creature.YouCtrl+TopLibrary", false},
+	} {
+		t.Run(tc.filter, func(t *testing.T) {
+			alts := parseFilterStatic(tc.filter)
+			if len(alts) != 1 {
+				t.Fatalf("filter %q parsed to %d alternatives", tc.filter, len(alts))
+			}
+			if !alts[0].known {
+				t.Fatalf("filter %q is not understood", tc.filter)
+			}
+			if got := castableAlt(alts[0]); got != tc.cast {
+				t.Errorf("castableAlt(%q) = %v, want %v (counters %v, token %d, topLibrary %v)",
+					tc.filter, got, tc.cast, alts[0].counters, alts[0].token, alts[0].topLibrary)
+			}
+		})
+	}
+}
+
+// TestStartCombatFilterFixtures: the two combat :filter shapes the fixture
+// lanes now answer. "When enchanted creature is dealt damage" (Cracked Skull,
+// Sporogenic Infection: ValidTarget Creature.EnchantedBy) is one scripted
+// combat with the Aura placed attached (StartAttach) to its bearer, which is
+// the blocker that is hurt (gorge reads EnchantedBy as AttachedBy). And a
+// filter the fixture cannot pair with (Gustcloak Harrier's own flying means
+// Grizzly Bears cannot block it) takes a carrier blocker that can, rather
+// than the plain ":filter" refusal.
+func TestStartCombatFilterFixtures(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key         string
+		active            int
+		attack, block     string // exact names, "" to skip
+		blockProp         func(*cards.Face) bool
+		wantAttachKeyCard bool
+	}{
+		{card: "Cracked Skull", key: "f0/t1", active: 1, blockProp: (*cards.Face).IsCreature, wantAttachKeyCard: true},
+		{card: "Sporogenic Infection", key: "f0/t1", active: 1, blockProp: (*cards.Face).IsCreature, wantAttachKeyCard: true},
+		{card: "Gustcloak Harrier", key: "f0/t0", active: 0, attack: "Gustcloak Harrier",
+			blockProp: func(f *cards.Face) bool { return f.IsCreature() && (f.HasKeyword("Flying") || f.HasKeyword("Reach")) }},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active || f.Focus == nil || f.Focus.Attack != r.attack && r.attack != "" {
+				t.Fatalf("active %d focus %+v, want active %d attack %q", f.Active, f.Focus, r.active, r.attack)
+			}
+			if f.Focus.Block == "" {
+				t.Fatalf("focus %+v, want a scripted blocker", f.Focus)
+			}
+			c, ok := reg.Lookup(f.Focus.Block)
+			if !ok || len(c.Faces) == 0 || !r.blockProp(c.Faces[0]) {
+				t.Fatalf("blocker %q does not meet the pairing", f.Focus.Block)
+			}
+			if r.wantAttachKeyCard {
+				found := false
+				for _, a := range f.Setup.P0.Attach {
+					if a.Card == r.card && a.To == f.Focus.Block {
+						found = true
+					}
+				}
+				if !found {
+					t.Errorf("p0 attach %+v, want %q attached to the blocker %q", f.Setup.P0.Attach, r.card, f.Focus.Block)
+				}
+			}
+			if _, err := DecodeStartFile(mustMarshal(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}

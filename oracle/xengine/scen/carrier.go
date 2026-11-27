@@ -169,7 +169,11 @@ type filterAlt struct {
 	// a permanent on the battlefield, not a property of a face, so only a
 	// reader that knows the placed object's state enables it.
 	tapped int
-	known  bool
+	// topLibrary is true when the alternative requires the object to be the
+	// top card of its owner's library. Only the static start places a card
+	// there, so a lane that casts or places its fixture cannot meet it.
+	topLibrary bool
+	known      bool
 	// history is the first game-history property ("wasDealtDamageThisTurn")
 	// the alternative carries: the engine reads it, and nothing has happened
 	// yet at the start's step, so no placed object can meet it.
@@ -185,6 +189,19 @@ type filterAlt struct {
 type counterGate struct {
 	kind string
 	n    int32
+}
+
+// countersAny is the KIND of the generic "HasCounters" gate: the object must
+// carry at least one counter of any kind. A placement cannot name "any", so
+// placedKind turns it into one P1P1 counter (every kind a start places).
+const countersAny = "*"
+
+// placedKind is the counter kind to place for this gate.
+func (g counterGate) placedKind() string {
+	if g.kind == countersAny {
+		return "P1P1"
+	}
+	return g.kind
 }
 
 // parseCounterGate reads "GE1_P1P1" (the part after "counters_") into a gate.
@@ -419,6 +436,8 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 					// only the static start places the affected card there
 					if !topLibraryOK {
 						a.known = false
+					} else {
+						a.topLibrary = true
 					}
 					continue
 				case "!token", "nonToken":
@@ -433,6 +452,18 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 						a.known = false // never read a named property as a type word
 					}
 					tests = append(tests, test)
+					continue
+				}
+				if p == "HasCounters" {
+					// "a creature with a counter on it": the generic gate. A
+					// reader that places no counters cannot meet it, so the
+					// alternative stays unknown outside the countersOK lanes
+					// (like counters_, which it joins below).
+					if !countersOK {
+						a.known = false
+						continue
+					}
+					a.counters = append(a.counters, counterGate{kind: countersAny, n: 1})
 					continue
 				}
 				if c, ok := strings.CutPrefix(p, "counters_"); ok {
@@ -587,6 +618,35 @@ func zoneFixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter s
 }
 
 func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, nil)
+}
+
+// castableAlt reports whether a start can establish alternative a by casting
+// its carrier from hand rather than placing it: a counter gate
+// ("counters_GE1_OIL", "HasCounters") cannot be met, because a setup counter
+// has nothing to sit on while the card is still in hand, a token requirement
+// names an object a cast card is not, and a top-of-library requirement names a
+// card the cast does not put there. A caller that casts the fixture must skip
+// such an alternative instead of letting its test alone stand for the gate; a
+// caller that places the object on the battlefield meets the counter gate with
+// filterGateCounters and the library gate by placing it there.
+func castableAlt(a filterAlt) bool {
+	return len(a.counters) == 0 && a.token <= 0 && !a.topLibrary
+}
+
+// castFixtureCarrierIn is fixtureCarrierIn for a fixture the start casts from
+// hand (entersFallback): an alternative the cast cannot establish
+// (castableAlt) is not answered, so the ":filter" refusal follows rather than
+// a start whose entering object never meets the trigger's filter.
+func castFixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, castableAlt)
+}
+
+// fixtureCarrierMode is fixtureCarrierIn with an optional accept gate on the
+// fixture fallback: nil takes every understood, non-Self alternative, and
+// castFixtureCarrierIn passes castableAlt to drop the ones its cast cannot
+// establish.
+func fixtureCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool, accept func(filterAlt) bool) (name string, seat int) {
 	// Both passes refuse a FieldBlock card on the battlefield: the inert
 	// carrier pool is not filtered for it, and an unattached Aura or a
 	// non-permanent listed there aborts the whole start file.
@@ -597,7 +657,7 @@ func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter str
 		return n, s
 	}
 	for _, a := range parseFilterStatic(filter) {
-		if !a.known || a.self {
+		if !a.known || a.self || accept != nil && !accept(a) {
 			continue
 		}
 		var n string
@@ -787,7 +847,7 @@ func filterGateCounters(filter string, face *cards.Face, self bool) []StartCount
 		}
 		out := make([]StartCounter, 0, len(a.counters))
 		for _, g := range a.counters {
-			out = append(out, StartCounter{Card: face.Name, Kind: g.kind, N: g.n})
+			out = append(out, StartCounter{Card: face.Name, Kind: g.placedKind(), N: g.n})
 		}
 		return out
 	}

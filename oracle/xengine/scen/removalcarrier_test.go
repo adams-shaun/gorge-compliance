@@ -113,24 +113,37 @@ func TestStartGraveyardFromAnywhere(t *testing.T) {
 // does not serve keep the refusal they had (a type no vanilla creature has, a
 // state the start cannot place, a trigger zone off the battlefield, an
 // attachment or Equipment filter, a tapped permanent), and the plain
-// sacrifice carrier and aura starts are untouched.
+// sacrifice carrier and aura starts are untouched. The four starts at the
+// bottom are the shapes the wider fixture lanes now serve (a land dies to
+// Stone Rain, HasCounters places a counter gate, an Equipment enters as a
+// fixture cast, a Cartouche enters cast at a bearer): they left the refusal
+// list when those arms landed and stay pinned here against regression.
 func TestStartRemovalCarrierOtherRefusalsUnchanged(t *testing.T) {
 	const filter = "no-generator:trigger:ChangesZone:filter"
 	const plain = "no-generator:trigger:ChangesZone"
 	checkStartRows(t, []startRow{
-		{card: "Indebted Samurai", key: "f0/t0", reason: filter},         // no vanilla Samurai
-		{card: "Akki Raider", key: "f0/t0", reason: filter},              // a land dies: not a creature
-		{card: "Kithkin Mourncaller", key: "f0/t0", reason: filter},      // attacking: battlefield state
-		{card: "Village Pillagers", key: "f0/t1", reason: filter},        // HasCounters: not a counter kind
-		{card: "Amulet of Vigor", key: "f0/t0", reason: filter},          // a tapped permanent entering
-		{card: "Twilight Drover", key: "f0/t0", reason: filter},          // a token dies
-		{card: "Trial of Ambition", key: "f0/t1", reason: filter},        // Cartouche enters
-		{card: "Barret, Avalanche Leader", key: "f0/t0", reason: filter}, // Equipment enters
-		{card: "Nether Traitor", key: "f0/t0", reason: plain},            // trigger zone Graveyard
-		{card: "Silvan Reveler", key: "f0/t1", reason: plain},            // trigger zone Graveyard
-		{card: "Gift of Wrath", key: "f0/t0", reason: plain},             // Card.Self leaves: not this trigger
-		{card: "Cryptid Inspector", key: "f0/t0", reason: filter},        // an enters filter the removal start does not touch
+		{card: "Indebted Samurai", key: "f0/t0", reason: filter},    // no vanilla Samurai
+		{card: "Kithkin Mourncaller", key: "f0/t0", reason: filter}, // attacking: battlefield state
+		{card: "Amulet of Vigor", key: "f0/t0", reason: filter},     // a tapped permanent entering
+		{card: "Twilight Drover", key: "f0/t0", reason: filter},     // a token dies
+		{card: "Nether Traitor", key: "f0/t0", reason: plain},       // trigger zone Graveyard
+		{card: "Silvan Reveler", key: "f0/t1", reason: plain},       // trigger zone Graveyard
+		{card: "Gift of Wrath", key: "f0/t0", reason: plain},        // Card.Self leaves: not this trigger
+		{card: "Cryptid Inspector", key: "f0/t0", reason: filter},   // an enters filter the removal start does not touch
 		{card: "Garna, Bloodfist of Keld", key: "f0/t0", maxTurns: 1, p0BF: []string{"Garna, Bloodfist of Keld", "Kami of False Hope"},
 			focusCard: "Kami of False Hope", focusKind: "ability"}, // the sacrifice carrier still wins where it fits
+		{card: "Akki Raider", key: "f0/t0", active: 1, maxTurns: 1,
+			p0BF: []string{"Akki Raider", "Plains"}, p1Hand: []string{"Stone Rain"}, p1BF: rep("Mountain", 3),
+			focusSeat: 1, focusCard: "Stone Rain", focusKind: "cast"}, // a land dies: Stone Rain, not Murder
+		{card: "Village Pillagers", key: "f0/t1", maxTurns: 1,
+			p0Hand: []string{"Murder"}, p0BF: []string{"Village Pillagers", "Swamp", "Swamp", "Swamp"}, p1BF: []string{"Memnite"},
+			focusCard: "Murder", focusKind: "cast"}, // a countered opponent creature dies (the gate is placed)
+		{card: "Barret, Avalanche Leader", key: "f0/t0", maxTurns: 1,
+			p0Hand:    []string{"Bloodthirsty Blade"},
+			p0BF:      []string{"Barret, Avalanche Leader", "Plains", "Plains", "Freedom Fighter Recruit", "Kite Shield"},
+			focusCard: "Bloodthirsty Blade", focusKind: "cast"}, // an Equipment enters: the fixture cast
+		{card: "Trial of Ambition", key: "f0/t1", maxTurns: 1,
+			p0Hand: []string{"Cartouche of Solidarity"}, p0BF: []string{"Trial of Ambition", "Plains", "Memnite"},
+			focusCard: "Cartouche of Solidarity", focusKind: "cast"}, // a Cartouche enters, cast at its bearer
 	})
 }
