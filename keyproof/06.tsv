@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 060c7999-ab81-4e37-af65-7cd219b693c8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fiend-binder:f0t0:s1,f:xs:XP:fiend-binder:f0t0:s1	-	-	-	d864b561c9cb	-	37d7e1395001	-	-	2026-11-24	xproof
 060d109f-2969-4f9e-a723-535d662a571a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mukotai-soulripper:cast:s1,f:xs:XP:mukotai-soulripper:cast:s1	-	-	-	d864b561c9cb	-	381a74e5a8f6	-	-	2026-11-24	xproof
 060d109f-2969-4f9e-a723-535d662a571a	f0/a0	Animate/Crew	agreed	-	F	start	2	0	f:xs:XP:mukotai-soulripper:f0a0:s1	-	-	-	054d9f516953	-	381a74e5a8f6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-060d109f-2969-4f9e-a723-535d662a571a	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+060d109f-2969-4f9e-a723-535d662a571a	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	03d59e300ef0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	cast	cast-resolve	agreed	-	FX	scen	2	0	Drakuseth, Maw of Flames/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.block:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.block:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0635ab65-fc1a-4e43-9e11-3a1ad3093830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ecological-appreciation:cast:s1,f:xs:XP:ecological-appreciation:cast:s1	-	-	-	d864b561c9cb	-	43fb014dcc92	-	-	2026-11-24	xproof
 0636b6c3-0662-420a-b30d-f0a14e7c512d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0636b6c3-0662-420a-b30d-f0a14e7c512d	f0/t0	NULL	owed	refused:no-generator:trigger:TokenCreated	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-0636b6c3-0662-420a-b30d-f0a14e7c512d	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+0636b6c3-0662-420a-b30d-f0a14e7c512d	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	03d59e300ef0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 06374e6d-62fa-4833-81cd-b4d0a35e7365	cast	cast-resolve	agreed	-	FX	scen	2	0	Beluna Grandsquall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06374e6d-62fa-4833-81cd-b4d0a35e7365	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:beluna-grandsquall-seek-thrills:combat0.attack:s1,f:xs:XP:beluna-grandsquall-seek-thrills:combat0.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 06374e6d-62fa-4833-81cd-b4d0a35e7365	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:beluna-grandsquall-seek-thrills:combat0.block:s1,f:xs:XP:beluna-grandsquall-seek-thrills:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06af8e20-6f60-400d-9120-c99311232dde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06af8e20-6f60-400d-9120-c99311232dde	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06b1fd96-a3ad-4ebd-9ea4-b3cfb4c9c43d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06b1fd96-a3ad-4ebd-9ea4-b3cfb4c9c43d	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	31e42e2a3f78	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+06b1fd96-a3ad-4ebd-9ea4-b3cfb4c9c43d	f0/t0	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	03d59e300ef0	-	31e42e2a3f78	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 06b60766-a1fb-4ed0-93f6-8423008f75b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06bea0b2-1d0f-4d64-a13e-723d08042e83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	3aa6ded33acb	-	2618e309c43b	-	-	2026-11-25	xproof
 06bea0b2-1d0f-4d64-a13e-723d08042e83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	3aa6ded33acb	-	2618e309c43b	-	-	2026-11-25	xproof
