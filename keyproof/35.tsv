@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3518e273-bd92-46bc-b361-da52c670dfe1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunseed-nurturer:f0t0:s1,f:xs:XP:sunseed-nurturer:f0t0:s1	-	-	-	23c4009444b0	-	8a14b158ebda	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 351c4f85-8792-4710-8cc9-d3e36657f6db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 351c4f85-8792-4710-8cc9-d3e36657f6db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-351c4f85-8792-4710-8cc9-d3e36657f6db	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	622aad4640f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+351c4f85-8792-4710-8cc9-d3e36657f6db	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heraldic-banner:cast:s1,f:xs:XP:heraldic-banner:cast:s1	-	-	-	23b491658465	-	167b44d6a92e	-	-	2026-11-24	xproof
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:heraldic-banner:cast:s1,f:xs:XP:heraldic-banner:cast:s1	-	-	-	23b491658465	-	167b44d6a92e	-	-	2026-11-24	xproof
 352844c5-2160-4787-97f1-9cd0fed060eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3577c47e-76d3-4659-b922-31c4b74be3a0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:f0t0:s1,f:xs:XP:enduring-vitality:f0t0:s1	-	-	-	23c4009444b0	-	9de47fe2c0d5	-	-	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	static#0.0	static.continuous	agreed	-	F	start	1	0	f:xs:XP:enduring-vitality:static0.0:s2	-	-	-	cb99a158debc	-	9de47fe2c0d5	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 3579e40c-6ec5-4927-8252-5a188db400ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhoda-geist-avenger:f0t1:s1,f:xs:XP:rhoda-geist-avenger:f0t1:s1	-	-	-	23c4009444b0	-	5db6d560fb94	-	-	2026-11-25	xproof
-3579e40c-6ec5-4927-8252-5a188db400ab	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:condition	-	start	0	0	-	-	-	-	622aad4640f6	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+3579e40c-6ec5-4927-8252-5a188db400ab	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:condition	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 3579e40c-6ec5-4927-8252-5a188db400ab	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:rhoda-geist-avenger:f0t1:s1,f:xs:XP:rhoda-geist-avenger:f0t1:s1	-	-	-	23c4009444b0	-	5db6d560fb94	-	-	2026-11-25	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:alchemist-s-refuge:f0a0:s2,f:xs:XP:alchemist-s-refuge:f0a0:s2	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:f0a1:s1,f:xs:XP:alchemist-s-refuge:f0a1:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
