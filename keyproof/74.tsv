@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 74027ba4-a6ba-4696-baf1-60ef0b27ee0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74027ba4-a6ba-4696-baf1-60ef0b27ee0a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+74027ba4-a6ba-4696-baf1-60ef0b27ee0a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 74027d31-6efb-471d-9499-cdb1cefc9eae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74027d31-6efb-471d-9499-cdb1cefc9eae	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:goma-fada-vanguard:f0t0:s1,f:xs:XP:goma-fada-vanguard:f0t0:s1	-	-	-	ae86f6029288	-	8ec3e4837f5e	-	-	2026-11-24	xproof
 7402d98f-6d58-4ff2-a0db-9eec4417a75f	cast	cast-resolve	agreed	-	FX	scen	2	0	Bovine Intervention/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 748d5353-b66c-4d7a-8c55-0d28fefb1e2a	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8ced781a5200	-	e7b8e3fdd349	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 748fd75b-c61b-4e02-889d-b7dab23319ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 748fd75b-c61b-4e02-889d-b7dab23319ef	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:heavy-arbalest:f0a0:s1,f:xs:XP:heavy-arbalest:f0a0:s1	-	-	-	3aa6ded33acb	-	cbddad497fec	-	-	2026-11-25	xproof
-74900080-80a6-4fd8-9557-5f773c0e4bec	f0/a0	Mana	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8ced781a5200	-	5a952d0c7587	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-74900080-80a6-4fd8-9557-5f773c0e4bec	land	land	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8ced781a5200	-	5a952d0c7587	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+74900080-80a6-4fd8-9557-5f773c0e4bec	f0/a0	Mana	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	5a952d0c7587	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+74900080-80a6-4fd8-9557-5f773c0e4bec	land	land	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	5a952d0c7587	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 74910702-e385-48f7-a6b3-064ebed08be7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 749141aa-f6c4-4ad8-b146-406e68ae9b0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 749141aa-f6c4-4ad8-b146-406e68ae9b0b	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74a1a484-7c35-466a-b097-9aaf6fc2073b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thaumaturge-s-familiar:f0t0:s1,f:xs:XP:thaumaturge-s-familiar:f0t0:s1	-	-	-	ae86f6029288	-	f6f217c0173b	-	-	2026-11-24	xproof
 74a1a484-7c35-466a-b097-9aaf6fc2073b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thaumaturge-s-familiar:f0t0:s1,f:xs:XP:thaumaturge-s-familiar:f0t0:s1	-	-	-	ae86f6029288	-	f6f217c0173b	-	-	2026-11-24	xproof
 74a62c7b-4753-4af2-b7a1-9a4ae8988801	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74a62c7b-4753-4af2-b7a1-9a4ae8988801	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+74a62c7b-4753-4af2-b7a1-9a4ae8988801	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 74a6597c-13ea-47bd-adb3-45671897b11b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74a6597c-13ea-47bd-adb3-45671897b11b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74a71bbd-c307-481c-b0cf-70e24b0c8ad4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
