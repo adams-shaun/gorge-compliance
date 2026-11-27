@@ -87,7 +87,7 @@ func runPlay(args []string) error {
 	xmage := fs.Bool("xmage", false, "leave out the cards XMage spells differently (an XMage item names no per-card spelling)")
 	random := fs.String("random", "", "set codes, space or comma separated: draw the decks at random across these sets, ignoring the ledger; -set only names the run in the item ids")
 	forgeOnly := fs.String("forge-only", "", "with -random, a file of card names, one per line, to add to the cross-set deal: a set XMage has no class for, so its items go to Forge alone")
-	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, after each card it refuses is replaced by a basic of the deck's colours (commander.json swaps); in a set, a pair its table refuses as an interaction has the named card replaced by a basic first, up to 4 times a game (swaps.jsonl); a pair it still does not hold reads not_applicable")
+	dirac := fs.Bool("dirac", false, "play dirac beside gorge (dirac.jsonl): every game of a set, every other game under -random, draws only cards the set's dirac table plays; with -format commander every game is offered to dirac's cmd5 Commander table, after each card it refuses is replaced by a basic of the deck's colours (commander.json swaps); in a set, a pair its table refuses as an interaction has the named card replaced by a basic first, up to 4 times a game (swaps.jsonl); a pair it still does not hold reads not_applicable; with -start it plays each start file's own scripted position in lockstep, one row per file (a position its kernel cannot mirror reads not_applicable with the reason)")
 	diracEvery := fs.Int("dirac-every", 2, "with -random and -dirac, every K-th game (game g with g%K == K-1) draws from one set's dirac-playable cards; 1 makes every game one dirac plays beside gorge, so all four engines see every deck; not used with -format commander")
 	format := fs.String("format", "", "game format: empty or constructed, or commander (with -commander-decks)")
 	seats := fs.Int("seats", 2, "with -format commander: seats a game deals, 2 to 4, each a distinct deck of -commander-decks. More than two seats are played and recorded by gorge alone: the lowering refuses every window and tape of such a game (seats:<n>)")
@@ -95,7 +95,7 @@ func runPlay(args []string) error {
 	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
 	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
 	decksDir := fs.String("decks", "", "a directory of gorge deck files (*.json, engine/deck's format): every game plays two different fixed decks of it, main deck only, instead of building 40-card decks; -set only names the run. A deck gorge does not fully support (or, with -xmage, naming a card XMage spells otherwise) is skipped; DIR/decks.json records each. Not with -pool, -random, -forge-only or -dirac")
-	start := fs.String("start", "", "an xproof start file, or a directory of them (*.json, sorted): play each from its scripted position, one focus seat taking the action the file's key names, and lower the whole game from turn 1's first main phase to the end of the tape (items ...:xs:<set>:<card>:<key>:s<seed>). -set names the ids and is required; not with -random, -pool, -decks, -dirac, -windows, -tape-turns, -format or -forge-only")
+	start := fs.String("start", "", "an xproof start file, or a directory of them (*.json, sorted): play each from its scripted position, one focus seat taking the action the file's key names, and lower the whole game from turn 1's first main phase to the end of the tape (items ...:xs:<set>:<card>:<key>:s<seed>). -set names the ids and is required; -dirac answers each scripted position beside gorge (dirac.jsonl, one row per start file); not with -random, -pool, -decks, -windows, -tape-turns, -format or -forge-only")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
 	if *start != "" {
@@ -109,7 +109,13 @@ func runPlay(args []string) error {
 		if err != nil {
 			return err
 		}
-		return playStart(reg, []string{*start}, *set, *out, *xmage)
+		// -dirac beside a start is a report, never a failure: no tables (this pin
+		// and corpus have none built) is one not_applicable row per start, saying so.
+		var tables *dside.Tables
+		if *dirac {
+			tables = dside.NewTables(reg)
+		}
+		return playStartDirac(reg, []string{*start}, *set, *out, *xmage, tables)
 	}
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
