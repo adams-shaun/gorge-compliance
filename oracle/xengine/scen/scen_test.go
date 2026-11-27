@@ -602,11 +602,19 @@ func TestStartPlayerCounters(t *testing.T) {
 // TestStartPlayerCounterCost: a PayEnergy<N> cost is paid from the seat's
 // player counters (CR 107.14, 122.1), so a start seeds ENERGY on the seat
 // itself instead of refusing the ability. Aethersquall Ancient's {8} ability
-// is the class's first card; the start output stays a sorted slice with no
-// card name, and a malformed amount keeps the old refusal.
+// was the class's first card, but its mandatory upkeep trigger makes the
+// lowering's start gate refuse the placed card (Vitaspore Thallid's shape), so
+// Whirler Virtuoso carries the energy start and Aethersquall Ancient is the
+// named refusal; the start output stays a sorted slice with no card name, and
+// a malformed amount keeps the old refusal.
 func TestStartPlayerCounterCost(t *testing.T) {
 	reg, b := testBuilder(t)
-	const card = "Aethersquall Ancient"
+	const card = "Whirler Virtuoso"
+	if gate, err := Generate(reg, b, "Aethersquall Ancient", "f0/a0", Options{Prefer: "start"}); err != nil {
+		t.Fatal(err)
+	} else if gate.Path != PathRefused || gate.Reason != "start:upkeep-trigger" {
+		t.Fatalf("Aethersquall Ancient: path %q reason %q, want refused start:upkeep-trigger", gate.Path, gate.Reason)
+	}
 	res, err := Generate(reg, b, card, "f0/a0", Options{Prefer: "start"})
 	if err != nil {
 		t.Fatal(err)
@@ -616,7 +624,7 @@ func TestStartPlayerCounterCost(t *testing.T) {
 	}
 	f := res.Start
 	focusIs(t, f, 0, card, "ability", 0)
-	if want := []StartCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+	if want := []StartCounter{{Kind: "ENERGY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
 		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
 	}
 	if len(f.Setup.P1.PlayerCounters) != 0 {
