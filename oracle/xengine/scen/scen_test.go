@@ -126,9 +126,10 @@ func TestScenFixtures(t *testing.T) {
 		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
-		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: reasonAsEntersStamp}},
 		// a ChooseColor card is cast, not placed, so its choice is made by the
-		// engines' own decision; a ChooseType card or a land refuses by name
+		// engines' own decision; a ChooseType card the recipe would place keeps
+		// the specific stamp refusal; a land refuses by name
 		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
 		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
 		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
@@ -165,6 +166,63 @@ func TestScenFixtures(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+// TestScenStartAsEntersPlacedRefused: a card the recipe would place while its
+// as-enters replacement asks a state-backed choice keeps a specific generator
+// refusal. The choice is answered after genesis, so the live cut carries the
+// placement as a move this turn (Object.EnteredThisTurn, Object.AcqTurn) and
+// the lowering's setup cannot restate it yet; emitting the start would only
+// move the refusal downstream. A cast puts the entry and its choice on the
+// tape, so those shapes still generate a start (Gathering Stone below).
+func TestScenStartAsEntersPlacedRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key, reason string }{
+		{"Adaptive Automaton", "static#0.0", reasonAsEntersStamp},
+		{"Lifecraft Engine", "f0/a0", reasonAsEntersStamp},
+		{"Roaming Throne", "f0/t0", reasonAsEntersStamp},
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
+	} {
+		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Start != nil || res.Reason != tc.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, tc.reason)
+			}
+		})
+	}
+	// Gathering Stone's self-ETB trigger casts it, so its entry and type
+	// choice are on the tape rather than a genesis placement.
+	res, err := Generate(reg, b, "Gathering Stone", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("Gathering Stone: path %q reason %q, want a start", res.Path, res.Reason)
+	}
+	if !slices.Contains(res.Start.Setup.P0.Hand, "Gathering Stone") {
+		t.Errorf("p0 hand %v, want Gathering Stone", res.Start.Setup.P0.Hand)
+	}
+	focusIs(t, res.Start, 0, "Gathering Stone", "cast", 0)
+}
+
+// TestScenFixtureSkipsAsEnters: the same placement stamp the focus card's
+// refusal guards applies to a battlefield fixture, so the picker must not
+// choose a card whose own entry asks a choice. A fixture that would be the
+// only match picks none (the calling recipe then refuses by its own reason)
+// rather than emitting a start the lower rejects; an ordinary fixture is
+// still picked.
+func TestScenFixtureSkipsAsEnters(t *testing.T) {
+	reg, b := testBuilder(t)
+	if got := pickFixture(reg, b, "", func(f *cards.Face) bool { return f.Name == "Adaptive Automaton" }, nil, true); got != "" {
+		t.Errorf("fixture = %q, want none: a placed as-enters permanent would be refused downstream", got)
+	}
+	if got := pickFixture(reg, b, "", func(f *cards.Face) bool { return f.Name == "Grizzly Bears" }, nil, true); got != "Grizzly Bears" {
+		t.Errorf("fixture = %q, want Grizzly Bears", got)
 	}
 }
 
@@ -3508,7 +3566,8 @@ func TestScenRefusalReasonsUnchanged(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, r := range []struct{ card, key, reason string }{
 		{"Thornvault Forager", "f0/a1", "steps-needed:cost:Forage"},
-		{"Banner of Kinship", "static#0.0", "as-enters"},
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
 		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
 		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},
