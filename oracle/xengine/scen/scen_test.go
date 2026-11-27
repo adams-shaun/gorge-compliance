@@ -126,10 +126,18 @@ func TestScenFixtures(t *testing.T) {
 		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
-		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: reasonAsEntersStamp}},
+		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
+			// a state-backed as-enters placement is cast as the start line,
+			// so the entry and its choice are tape events
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Banner of Kinship"})
+			if slices.Contains(f.Setup.P0.Battlefield, "Banner of Kinship") {
+				t.Errorf("p0 battlefield %v lists Banner of Kinship: it must be cast, not placed", f.Setup.P0.Battlefield)
+			}
+			focusIs(t, f, 0, "Banner of Kinship", "cast", 0)
+		}}},
 		// a ChooseColor card is cast, not placed, so its choice is made by the
-		// engines' own decision; a ChooseType card the recipe would place keeps
-		// the specific stamp refusal; a land refuses by name
+		// engines' own decision; a land refuses by name, and a choice that is
+		// not state (a player) keeps its kind
 		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
 		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
 		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
@@ -169,21 +177,41 @@ func TestScenFixtures(t *testing.T) {
 	}
 }
 
-// TestScenStartAsEntersPlacedRefused: a card the recipe would place while its
-// as-enters replacement asks a state-backed choice keeps a specific generator
-// refusal. The choice is answered after genesis, so the live cut carries the
-// placement as a move this turn (Object.EnteredThisTurn, Object.AcqTurn) and
-// the lowering's setup cannot restate it yet; emitting the start would only
-// move the refusal downstream. A cast puts the entry and its choice on the
-// tape, so those shapes still generate a start (Gathering Stone below).
-func TestScenStartAsEntersPlacedRefused(t *testing.T) {
+// TestScenStartAsEntersPlaced: a card whose as-enters replacement asks a
+// state-backed choice is cast as the start line rather than placed at genesis.
+// The placement would be a real move this turn, so the live cut would carry
+// Object.EnteredThisTurn and Object.AcqTurn, which the lowering's setup drive
+// cannot restate (it places permanents directly, CR 302.6). A cast puts the
+// entry, the choose answer and both stamps on the tape. A choice setup cannot
+// read (a player) keeps its named refusal, and a land -- played, not cast --
+// keeps "as-enters:land".
+func TestScenStartAsEntersPlaced(t *testing.T) {
 	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Adaptive Automaton", "static#0.0"},
+		{"Lifecraft Engine", "f0/a0"},
+		{"Roaming Throne", "f0/t0"},
+		{"Banner of Kinship", "static#0.0"},
+	} {
+		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start", res.Path, res.Reason)
+			}
+			if !slices.Contains(res.Start.Setup.P0.Hand, tc.card) || slices.Contains(res.Start.Setup.P0.Battlefield, tc.card) {
+				t.Errorf("p0 hand %v battlefield %v, want %s in hand and not placed",
+					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, tc.card)
+			}
+			focusIs(t, res.Start, 0, tc.card, "cast", 0)
+		})
+	}
 	for _, tc := range []struct{ card, key, reason string }{
-		{"Adaptive Automaton", "static#0.0", reasonAsEntersStamp},
-		{"Lifecraft Engine", "f0/a0", reasonAsEntersStamp},
-		{"Roaming Throne", "f0/t0", reasonAsEntersStamp},
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
+		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
 	} {
 		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
 			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})

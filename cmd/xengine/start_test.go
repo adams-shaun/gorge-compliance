@@ -1460,9 +1460,9 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 		})
 	}
 	for _, c := range []struct{ card, key, reason string }{
-		{"Adaptive Automaton", "static#0.0", "start:as-enters-stamp"},
-		{"Lifecraft Engine", "f0/a0", "start:as-enters-stamp"},
-		{"Roaming Throne", "f0/t0", "start:as-enters-stamp"},
+		// A state-backed as-enters creature is cast as the start line (see
+		// TestStartAsEntersCreatureIsExercised); the kinds setup cannot read
+		// keep their named refusal.
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 	} {
@@ -1471,6 +1471,89 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 			t.Fatal(err)
 		}
 		if res.Path != scen.PathRefused || res.Reason != c.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+		}
+	}
+}
+
+// TestStartAsEntersCreatureIsExercised: a creature whose own as-enters
+// replacement asks a state-backed choice (a creature type here) is not placed
+// at genesis. That placement is a real move this turn, so the live cut carries
+// Object.EnteredThisTurn and Object.AcqTurn -- the summoning-sick stamp the
+// lowering's setup drive cannot restate (it places permanents directly, CR
+// 302.6). The recipe casts the card as the start line instead: the entry, the
+// choose answer and both turn stamps are tape events, so every seed lowers to
+// one item. A creature start whose answer is not state setup can read (Sower
+// of Discord chooses players) keeps a named refusal rather than an item the
+// lower must refuse downstream.
+func TestStartAsEntersCreatureIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Adaptive Automaton", "static#0.0"},
+		{"Lifecraft Engine", "f0/a0"},
+		{"Roaming Throne", "f0/t0"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			if !slices.Contains(res.Start.Setup.P0.Hand, c.card) || slices.Contains(res.Start.Setup.P0.Battlefield, c.card) {
+				t.Fatalf("p0 hand %v battlefield %v, want %s in hand and not placed",
+					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, c.card)
+			}
+			if res.Start.Focus == nil || res.Start.Focus.Seat == nil || *res.Start.Focus.Seat != 0 ||
+				res.Start.Focus.Card != c.card || res.Start.Focus.Kind != "cast" {
+				t.Fatalf("focus %+v, want seat 0 %s cast", res.Start.Focus, c.card)
+			}
+			items, rows, raw := playStartFile(t, reg, res.Start)
+			if len(items) != res.Start.Seeds {
+				t.Errorf("%d item(s), want %d: one per seed (start %s)", len(items), res.Start.Seeds, raw)
+			}
+			if len(rows) != res.Start.Seeds {
+				t.Errorf("%d lowering row(s), want %d (start %s)", len(rows), res.Start.Seeds, raw)
+			}
+			for _, r := range rows {
+				if r.Status != "lower_ok" {
+					t.Errorf("%s: status %s reasons %v (start %s)", r.ID, r.Status, r.Reasons, raw)
+				}
+			}
+			// The as-enters answer must be on the tape, not only in the start's
+			// state: the engine asked it during the cast and the lowering
+			// scripted the pick.
+			chosen := false
+			for _, it := range items {
+				for _, st := range it.Steps {
+					for _, a := range st.Answers {
+						if a.Kind == "choose" && len(a.Pick) > 0 {
+							chosen = true
+						}
+					}
+				}
+			}
+			if !chosen {
+				t.Errorf("no item records the as-enters choose answer (start %s)", raw)
+			}
+		})
+	}
+	for _, c := range []struct{ card, key, reason string }{
+		// A combat key is the creature's attack or block: it needs the
+		// permanent placed for that play, so the entry stamp cannot be
+		// restated and the generator keeps the named refusal.
+		{"Haktos the Unscarred", "combat#0.attack", "start:as-enters-stamp"},
+		// A creature whose as-enters answer is not state setup can read keeps
+		// its named refusal too.
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+	} {
+		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != scen.PathRefused || res.Start != nil || res.Reason != c.reason {
 			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
 		}
 	}
