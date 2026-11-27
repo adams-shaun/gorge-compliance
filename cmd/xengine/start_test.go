@@ -940,6 +940,56 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartTargetShapesAreExercised: the focus-target shapes that used to
+// refuse as start:needs-target because the placement search only knew a card
+// of a permanent type: a token target (Replicator, Dogged Hunter), a creature
+// subtype no card in the corpus holds (Blinkmoth Nexus, met by a changeling), a
+// six-target spell (Hex), and a monocolored permanent (Vanishing Verse). A
+// TargetValidTargeting$ restriction that needs the bait spell itself to have a
+// target is the stack-target sibling, covered by the hard-card census.
+func TestStartTargetShapesAreExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Replicator", "f0/a0"},        // target token you control
+		{"Dogged Hunter", "f0/a0"},     // target creature token
+		{"Blinkmoth Nexus", "f0/a2"},   // target Blinkmoth creature (a changeling)
+		{"Hex", "cast"},                // six target creatures
+		{"Vanishing Verse", "cast"},    // target monocolored permanent
+		{"Avoid Fate", "cast"},         // target spell that targets a permanent you control
+		{"Cerulean Drake", "f0/a0"},    // counter target spell that targets you
+		{"Hydromorph Gull", "f0/a0"},   // counter target spell that targets a creature you control
+		{"Ring of Immortals", "f0/a0"}, // counter target spell that targets a permanent you control
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartUnsupportedTargetKeepsReason: a target shape no start can place keeps
+// a specific refusal instead of a written start the replay would refuse as
+// start-not-exercised. Cradle to Grave needs a creature that entered this turn,
+// which a setup permanent or token does not (it is placed before turn 1); Wash
+// Away's default cast mode needs a spell not cast from its owner's hand, and its
+// cleave mode is not the mode the bot takes.
+func TestStartUnsupportedTargetKeepsReason(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key, reason string }{
+		{"Cradle to Grave", "cast", "start:target-condition:this-turn-entered"},
+		{"Wash Away", "cast", "start:needs-stack-target"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
+			}
+		})
+	}
+}
+
 // TestStartStackTargetIsExercised: a focus play that targets a spell was
 // refused as start:needs-stack-target, because a start holds at main 1 with an
 // empty stack. The start now scripts the opponent's bait cast (Focus.Bait): the

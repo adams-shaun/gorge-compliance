@@ -1220,7 +1220,7 @@ func TestFilterProps(t *testing.T) {
 	// could never fire: each stays an unknown alternative (a refusal) until the
 	// pin learns it. This is the known-unsupported set at the current pin; a
 	// bump that learns one fails here and the entry is deleted.
-	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric"}
+	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric", "nonMonoColor"}
 	for p := range filterProps {
 		for _, q := range []string{p, "non" + p} {
 			if supported, listed := pinMatches(q), slices.Contains(unsupported, q); supported == listed {
@@ -1832,8 +1832,12 @@ func TestStartstacktarget(t *testing.T) {
 		creature bool
 		// baitForm is the bait class the card's stack target takes: "cast"
 		// (the opponent's plain-spell cast), "ability", "abilitySelf",
-		// "targeted" or "self".
+		// "targeted" (a permanent target), "targetedPlayer" (the focus seat)
+		// or "self".
 		baitForm string
+		// targetSelf is whether the targeted bait's permanent must sit on the
+		// focus seat's battlefield ("targets a permanent you control").
+		targetSelf bool
 		// key is the cast key by default; an ability bait form may take the
 		// key of the targeting ability instead
 		key string
@@ -1849,6 +1853,12 @@ func TestStartstacktarget(t *testing.T) {
 		{card: "Divert", baitForm: "targeted"},   // target spell with a single target
 		{card: "Deflection", baitForm: "targeted"},
 		{card: "Misdirection", baitForm: "targeted"},
+		// a TargetValidTargeting$ restriction: the bait spell must itself
+		// target a permanent the focus seat controls, or the focus seat
+		{card: "Avoid Fate", baitForm: "targeted", targetSelf: true},
+		{card: "Hydromorph Gull", baitForm: "targeted", targetSelf: true, key: "f0/a0"},
+		{card: "Ring of Immortals", baitForm: "targeted", targetSelf: true, key: "f0/a0"},
+		{card: "Cerulean Drake", baitForm: "targetedPlayer", key: "f0/a0"},
 		{card: "Double Major", baitForm: "self", creature: true}, // target creature spell you control
 		{card: "Increasing Vengeance", baitForm: "self"},         // target instant or sorcery spell you control
 		// an ability target only the focus seat controls: the focus seat
@@ -1934,9 +1944,9 @@ func TestStartstacktarget(t *testing.T) {
 						t.Errorf("bait battlefield %v has no %s to pay the ability cost", bf, l)
 					}
 				}
-			case "targeted":
-				if f.Focus.Bait == "" || f.Focus.BaitTarget == "" || f.Focus.BaitSelf != "" || f.Focus.BaitAbility != "" {
-					t.Fatalf("focus %+v, want a targeted bait cast with its own target", f.Focus)
+			case "targeted", "targetedPlayer":
+				if f.Focus.Bait == "" || f.Focus.BaitSelf != "" || f.Focus.BaitAbility != "" {
+					t.Fatalf("focus %+v, want a targeted bait cast", f.Focus)
 				}
 				bc, ok := reg.Lookup(f.Focus.Bait)
 				if !ok || len(bc.Faces) == 0 {
@@ -1952,9 +1962,21 @@ func TestStartstacktarget(t *testing.T) {
 				if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
 					t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
 				}
-				if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.BaitTarget) &&
-					!slices.Contains(f.Setup.P0.Battlefield, f.Focus.BaitTarget) {
-					t.Errorf("battlefields %v / %v do not list the bait's target %q", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield, f.Focus.BaitTarget)
+				if c.baitForm == "targetedPlayer" {
+					if !f.Focus.BaitTargetPlayer || f.Focus.BaitTarget != "" {
+						t.Fatalf("focus %+v, want the bait to target the focus seat itself", f.Focus)
+					}
+					return
+				}
+				if f.Focus.BaitTarget == "" || f.Focus.BaitTargetPlayer {
+					t.Fatalf("focus %+v, want a targeted bait cast with its own permanent target", f.Focus)
+				}
+				bf := f.Setup.P1.Battlefield
+				if c.targetSelf {
+					bf = f.Setup.P0.Battlefield
+				}
+				if !slices.Contains(bf, f.Focus.BaitTarget) {
+					t.Errorf("battlefield %v does not list the bait's target %q (targetSelf %v)", bf, f.Focus.BaitTarget, c.targetSelf)
 				}
 			case "self":
 				if f.Focus.BaitSelf == "" || f.Focus.Bait != "" || f.Focus.BaitAbility != "" || f.Focus.BaitTarget != "" {
@@ -2320,14 +2342,13 @@ func TestStarttokensteps(t *testing.T) {
 	}
 }
 
-// TestStartStackTargetTargetingRefused: a stack target with a
+// TestStartStackTargetTargetingBaited: a stack target with a
 // TargetValidTargeting$ restriction (Keep Safe's "target spell that targets a
-// permanent you control") is not met by any inert bait, because an inert bait
-// has no target of its own. The start generator used to accept the first
-// no-target instant anyway and wrote a start whose focus play was never
-// offered (xengine play refused it as start-not-exercised). Each of these keys
-// must keep the clean start:needs-stack-target refusal instead.
-func TestStartStackTargetTargetingRefused(t *testing.T) {
+// permanent you control", Cerulean Drake's "targets you") is not met by an
+// inert bait, because an inert bait has no target of its own. The start now
+// scripts a targeted bait whose own target meets the restriction: a permanent
+// the restriction names, or the focus seat itself for a "You"/player one.
+func TestStartStackTargetTargetingBaited(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Keep Safe", "cast"},          // Permanent.YouCtrl+inRealZoneBattlefield
@@ -2341,6 +2362,8 @@ func TestStartStackTargetTargetingRefused(t *testing.T) {
 		{"Rebuff the Wicked", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
 		{"Not of This World", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
 		{"Teferi's Response", "cast"},  // Land.YouCtrl+inRealZoneBattlefield
+		{"Cerulean Drake", "f0/a0"},    // You: counter target spell that targets you
+		{"Hydromorph Gull", "f0/a0"},   // Creature.YouCtrl+inRealZoneBattlefield
 		{"Ring of Immortals", "f0/a0"}, // ability: Permanent.YouCtrl+inRealZoneBattlefield
 	} {
 		t.Run(c.card, func(t *testing.T) {
@@ -2348,8 +2371,15 @@ func TestStartStackTargetTargetingRefused(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
-				t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+			if res.Path != PathStart || res.Start == nil || res.Start.Focus == nil {
+				t.Fatalf("path %q reason %q, want a start with a targeted bait (start %+v)", res.Path, res.Reason, res.Start)
+			}
+			fc := res.Start.Focus
+			if fc.Bait == "" || fc.BaitSelf != "" || fc.BaitAbility != "" {
+				t.Fatalf("focus %+v, want an opponent-cast targeted bait", fc)
+			}
+			if (fc.BaitTarget != "") == fc.BaitTargetPlayer {
+				t.Fatalf("focus %+v, want exactly one of the bait's permanent target or the focus player", fc)
 			}
 		})
 	}
@@ -3257,6 +3287,109 @@ func TestStarttappedtarget(t *testing.T) {
 					}
 				}
 			}
+		})
+	}
+}
+
+// TestScenTargetShapes: the focus-target shapes that used to refuse as
+// start:needs-target because the placement search only knew a card of a
+// permanent type:
+//
+//   - a token target (Replicator's "target token you control", Dogged Hunter's
+//     "target creature token") is now a minted start token, because no card
+//     can stand in for a token;
+//   - a creature subtype no card in the corpus holds (Blinkmoth Nexus's
+//     "target Blinkmoth creature") is met by a changeling, which is every
+//     creature type (CR 702.73a);
+//   - a six-target spell (Hex) is placed target by target past the old
+//     four-placement cap;
+//   - a monocolored permanent (Vanishing Verse) reads the MonoColor filter
+//     property;
+//   - a TargetValidTargeting$ stack target (Avoid Fate, Cerulean Drake) gets a
+//     bait whose own target meets the restriction.
+//
+// Cradle to Grave is the residual: its target must have entered this turn, and
+// a setup permanent or token is placed before turn 1 and does not count, so it
+// keeps a named refusal instead of a start the replay would refuse.
+func TestScenTargetShapes(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card, key, reason string
+		check             func(t *testing.T, f *StartFile)
+	}{
+		{card: "Replicator", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if len(f.Setup.P0.Tokens) == 0 {
+				t.Fatalf("p0 tokens empty, want a minted token target: %+v", f.Setup.P0)
+			}
+		}},
+		{card: "Dogged Hunter", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if len(f.Setup.P0.Tokens)+len(f.Setup.P1.Tokens) == 0 {
+				t.Fatalf("no minted token on either battlefield, want a creature-token target: %+v / %+v", f.Setup.P0, f.Setup.P1)
+			}
+		}},
+		{card: "Blinkmoth Nexus", key: "f0/a2", check: func(t *testing.T, f *StartFile) {
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, p := range permanents(t, reg, bf) {
+					if p.HasKeyword("Changeling") || p.AllCreatureTypesCDA() {
+						return
+					}
+				}
+			}
+			t.Fatalf("no changeling placed for the Blinkmoth-creature target: %+v / %+v", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield)
+		}},
+		{card: "Hex", key: "cast", check: func(t *testing.T, f *StartFile) {
+			creatures := 0
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, p := range permanents(t, reg, bf) {
+					if p.IsCreature() {
+						creatures++
+					}
+				}
+			}
+			if creatures < 6 {
+				t.Fatalf("%d creature(s) placed, want six for Hex: %+v / %+v", creatures, f.Setup.P0.Battlefield, f.Setup.P1.Battlefield)
+			}
+		}},
+		{card: "Vanishing Verse", key: "cast", check: func(t *testing.T, f *StartFile) {
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, p := range permanents(t, reg, bf) {
+					if len(faceColours(p)) == 1 {
+						return
+					}
+				}
+			}
+			t.Fatalf("no monocolored permanent placed for Vanishing Verse: %+v / %+v", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield)
+		}},
+		{card: "Avoid Fate", key: "cast", check: func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.BaitTarget == "" || f.Focus.BaitTargetPlayer {
+				t.Fatalf("focus %+v, want a targeted bait with a permanent target", f.Focus)
+			}
+			if !slices.Contains(f.Setup.P0.Battlefield, f.Focus.BaitTarget) {
+				t.Errorf("p0 battlefield %v does not list the bait target %q: Avoid Fate needs a permanent you control", f.Setup.P0.Battlefield, f.Focus.BaitTarget)
+			}
+		}},
+		{card: "Cerulean Drake", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || !f.Focus.BaitTargetPlayer || f.Focus.BaitTarget != "" {
+				t.Fatalf("focus %+v, want a bait that targets the focus seat", f.Focus)
+			}
+		}},
+		{card: "Cradle to Grave", key: "cast", reason: "start:target-condition:this-turn-entered"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if tc.reason != "" {
+				if res.Path != PathRefused || res.Reason != tc.reason {
+					t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, tc.reason)
+				}
+				return
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			tc.check(t, res.Start)
 		})
 	}
 }

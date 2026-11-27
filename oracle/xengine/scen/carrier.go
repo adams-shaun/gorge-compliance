@@ -300,10 +300,15 @@ func compare(prop string) (stat string, test func(int) bool, ok bool) {
 
 // historyProp reports whether a filter property words a this-turn event
 // ("wasDealtDamageThisTurn", "dealtDamageToYouThisTurn", "blockedThisTurn"):
-// the start's step is turn 1's precombat main with nothing yet happened, so
-// the engine's reading of it is false for every object. ThisTurnEntered, a
-// prefix, is different (a placed permanent may count) and is not one.
-func historyProp(p string) bool { return strings.HasSuffix(p, "ThisTurn") }
+// the start's step is turn 1's precombat main with nothing yet happened, so the
+// engine's reading of it is false for every object. ThisTurnEntered is the
+// same for a start: setup permanents and tokens are placed before turn 1 and
+// do not count as entered this turn (gorge's
+// TestOracleSetupPermanentsDoNotCountAsEnteredThisTurn), so no placement meets
+// it.
+func historyProp(p string) bool {
+	return p == "ThisTurnEntered" || strings.HasSuffix(p, "ThisTurn")
+}
 
 // typeWord reports whether w reads as a type word (Creature, Dragon, Legendary):
 // capitalised letters and hyphens only.
@@ -317,6 +322,33 @@ func typeWord(w string) bool {
 		}
 	}
 	return true
+}
+
+// cardTypeSet are the card types and supertypes; any other type word in a
+// filter is a subtype. A changeling (or Mistform Ultimus's every-creature-type
+// CDA) is every creature type (CR 702.73a), so it meets a creature-subtype
+// requirement even though its Types list does not materialise every subtype.
+var cardTypeSet = map[string]bool{
+	"artifact": true, "battle": true, "creature": true, "enchantment": true,
+	"instant": true, "kindred": true, "land": true, "planeswalker": true,
+	"sorcery": true, "tribal": true, "basic": true, "legendary": true,
+	"ongoing": true, "snow": true, "world": true, "card": true,
+	"permanent": true, "spell": true, "player": true, "token": true,
+	"emblem": true, "plane": true, "phenomenon": true, "scheme": true,
+	"vanguard": true, "dungeon": true,
+}
+
+// typeWordTest is the filter test for one type word under a filter head. A
+// creature subtype is also met by a changeling or an every-creature-types CDA;
+// a card type, supertype or noncreature subtype is not.
+func typeWordTest(head, w string) func(*cards.Face) bool {
+	subtype := strings.EqualFold(head, "Creature") && !cardTypeSet[strings.ToLower(w)]
+	return func(f *cards.Face) bool {
+		if f.HasTypeWord(w) {
+			return true
+		}
+		return subtype && (f.HasKeyword("Changeling") || f.AllCreatureTypesCDA())
+	}
 }
 
 // parseFilter reads a ValidCard filter into its alternatives. A counter gate
@@ -360,6 +392,8 @@ var filterProps = map[string]func(*cards.Face) bool{
 	"Colorless":  func(f *cards.Face) bool { return faceColours(f) == "" },
 	"Multicolor": func(f *cards.Face) bool { return len(faceColours(f)) > 1 },
 	"MultiColor": func(f *cards.Face) bool { return len(faceColours(f)) > 1 }, // Forge's spelling
+	// CR 105.2: a monocolored object is exactly one colour.
+	"MonoColor": func(f *cards.Face) bool { return len(faceColours(f)) == 1 },
 	// CR 700.6: a card is historic if it is legendary, an artifact, or a Saga.
 	"Historic": func(f *cards.Face) bool {
 		return f.IsLegendary() || f.IsArtifact() || f.HasTypeWord("Saga")
@@ -398,8 +432,7 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 			if !typeWord(head) {
 				a.known = false
 			}
-			t := head
-			tests = append(tests, func(f *cards.Face) bool { return f.HasTypeWord(t) })
+			tests = append(tests, typeWordTest(head, head))
 		}
 		if props != "" {
 			for _, p := range strings.Split(props, "+") {
@@ -416,7 +449,7 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 				case "Other":
 					a.other = true
 					continue
-				case "inZoneBattlefield":
+				case "inZoneBattlefield", "inRealZoneBattlefield":
 					continue // a placed carrier is on the battlefield
 				case "tapped":
 					if !tappedOK {
@@ -506,7 +539,8 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 						continue
 					}
 					if typeWord(w) {
-						tests = append(tests, func(f *cards.Face) bool { return !f.HasTypeWord(w) })
+						neg := typeWordTest(head, w)
+						tests = append(tests, func(f *cards.Face) bool { return !neg(f) })
 						continue
 					}
 				}
@@ -522,15 +556,21 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 					})
 					continue
 				}
+				if historyProp(p) {
+					// a this-turn event no setup placement has undergone: the
+					// alternative is not placeable, and refusing by name beats
+					// a blind pick the engine would reject
+					a.known = false
+					if a.history == "" {
+						a.history = p
+					}
+					continue
+				}
 				if typeWord(p) {
-					w := p
-					tests = append(tests, func(f *cards.Face) bool { return f.HasTypeWord(w) })
+					tests = append(tests, typeWordTest(head, p))
 					continue
 				}
 				a.known = false
-				if a.history == "" && historyProp(p) {
-					a.history = p
-				}
 			}
 		}
 		a.test = func(f *cards.Face) bool {
@@ -1010,55 +1050,50 @@ func targetedCastCarrier(f *cards.Face) bool {
 	return true
 }
 
-// baitTgtFor is a permanent the bait spell's one ability can target, and
-// whether it sits on the bait seat's battlefield (false: only the focus
-// seat's meets the filter, "Creature.OppCtrl" from the bait's view). The most
-// inert carrier of the type the filter takes, on the bait seat's side for an
-// unrestricted or YouCtrl alternative (from the bait's own view), on the
-// focus seat's for an OppCtrl one. Only a filter parseFilter reads is placed:
-// an unknown restriction could make the bait's own target illegal in the
-// engine, and a start that cannot place it keeps the refusal.
-func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA) (name string, onBaitSeat bool) {
+// baitTgtFor is the target the bait spell's one ability names: a player (the
+// focus seat, for a TargetValidTargeting$ "You"/player restriction) or a
+// permanent on the bait seat's battlefield (false onBaitSeat: only the focus
+// seat's meets the filter, "Permanent.YouCtrl" from the focus play's view).
+// The target must meet both the bait's own ValidTgts filter and every required
+// TargetValidTargeting$ alternative of the focus play, so the bait's cast and
+// the focus play's target are both legal. Only a filter parseFilterPlaced
+// reads is placed: an unknown restriction could make either target illegal in
+// the engine, and a start that cannot place it keeps the refusal.
+func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA, sts []stackTgt, seat int) (name string, onBaitSeat, player, ok bool) {
+	focus, bait := seat, 1-seat
+	needs := false
+	for _, st := range sts {
+		needs = needs || st.needsTarget
+	}
+	if needs {
+		if targetSeat, ok := baitPlayerSeat(sts, focus); ok {
+			for _, raw := range strings.Split(sa.Params["ValidTgts"], ",") {
+				raw = strings.TrimSpace(raw)
+				if raw == "" {
+					continue
+				}
+				if baitPlayerAllows(raw, targetSeat, bait) {
+					return "", false, true, true
+				}
+			}
+		}
+	}
 	for _, raw := range strings.Split(sa.Params["ValidTgts"], ",") {
 		raw = strings.TrimSpace(raw)
 		if raw == "" {
 			continue
 		}
-		n := parseAlt(strings.ToLower(raw))
-		if n.combat || !permanentTarget(reg, raw) {
+		bf, ok := baitPermanentFilter(raw)
+		if !ok {
 			continue
 		}
-		alts := parseFilterPlaced(raw)
-		if len(alts) != 1 || !alts[0].known {
+		side, ok := baitPermanentSide(sts, bf, focus)
+		if !ok {
 			continue
 		}
-		a := alts[0]
-		pick := pickCarrier(reg, b, card, func(f *cards.Face) bool {
-			return faceIs(n, f) && FieldBlock(f) == "" && !deadOnArrival(f) && a.matchesState(f, false, false)
-		})
-		if pick != "" {
-			// n.side -1 is "the opponent's" from the bait's own view: the
-			// focus seat, where the target is placed
-			return pick, n.side != -1
+		if pick := pickBaitPermanent(reg, b, card, sts, bf, side, focus); pick != "" {
+			return pick, side == bait, false, true
 		}
 	}
-	return "", false
-}
-
-// faceIs is the type part of altMet without a side: whether f is the kind of
-// permanent the alternative n asks for.
-func faceIs(n altNeed, f *cards.Face) bool {
-	switch n.typ {
-	case "creature":
-		return f.IsCreature()
-	case "artifact":
-		return f.HasTypeWord("Artifact")
-	case "enchantment":
-		return f.HasTypeWord("Enchantment")
-	case "land":
-		return f.IsLand()
-	case "planeswalker":
-		return f.IsPlaneswalker()
-	}
-	return f.IsPermanent()
+	return "", false, false, false
 }

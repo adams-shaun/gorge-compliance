@@ -151,6 +151,9 @@ type startFocus struct {
 	// BaitAbility permanent (it sits on its own battlefield).
 	BaitAbilitySelf bool   `json:"baitAbilitySelf,omitempty"`
 	BaitTarget      string `json:"baitTarget"`
+	// BaitTargetPlayer is whether the bait spell targets the focus seat
+	// itself (game.Focus.BaitTargetPlayer).
+	BaitTargetPlayer bool `json:"baitTargetPlayer,omitempty"`
 	// Targets are the permanents the focus play must target, in the order the
 	// play asks for them (game.Focus.Targets).
 	Targets []string `json:"targets"`
@@ -309,6 +312,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 		out.Bait, out.BaitSelf, out.BaitAbility, out.BaitTarget =
 			o.Bait, o.BaitSelf, o.BaitAbility, o.BaitTarget
 		out.BaitAbilitySelf = o.BaitAbilitySelf
+		out.BaitTargetPlayer = o.BaitTargetPlayer
 		out.Targets = o.Targets
 	}
 	if out.Seat < 0 || out.Seat > 1 {
