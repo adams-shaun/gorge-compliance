@@ -61,9 +61,11 @@ type costPlan struct {
 // with placed state, or the refusal of the first it cannot
 // (steps-needed:cost:<head>, as costTokens names it).
 //
-//   - Sac<N/Type>, Return<N/Type>, Exile<N/Type>: N fodder permanents of
-//     Type (fodder); of a token kind (Treasure, Permanent.token), a Sac or an
-//     Exile mints its tokens (mintSac);
+//   - Sac<N/Type>, Return<N/Type>: N fodder permanents of Type (fodder); of a
+//     token kind (Treasure, Permanent.token), a Sac mints its tokens
+//     (mintSac). An Exile<N/Type> is planned only as a spell's additional
+//     cost (planCastCost): an activated ability's exile shape does not lower
+//     from a placed start, so it keeps its refusal;
 //   - tapXType<N/Type>: N untapped fodder creatures; tapXType<Any/...
 //     withTotalPowerGEn> (crew n) one vanilla creature with power n or more;
 //     of a token kind (Baylen's Permanent.token) N minted tokens, untapped
@@ -76,13 +78,27 @@ type costPlan struct {
 //     LOYALTY: only those its printed loyalty lacks); SubCounter<N/Kind/NICKNAME>
 //     or SubCounter<N/Kind/CARDNAME> (Migloz's OIL): the same, the counter of
 //     a personal kind; SubCounter<N/Kind/Spec/...> (Ion Storm's
-//     P1P1/Permanent): N counters of Kind on a placed fodder permanent of
-//     Spec; AddCounter<N/Kind> on the card needs nothing;
+//     P1P1/Permanent): N counters of Kind on a placed inert permanent of Spec
+//     (counterFodder); AddCounter<N/Kind> on the card needs nothing;
 //   - PayEnergy<N>: N ENERGY counters on the seat itself, recorded in
 //     PlayerCounters (a start position can hold the energy the ability
 //     spends). A malformed or non-positive amount stays refused.
 func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
-	p, why := planCostLine(reg, b, face, card, cost, generic)
+	return planCostMode(reg, b, face, card, cost, generic, false)
+}
+
+// planCastCost is planCost for the additional cost of a spell being cast: the
+// only shape whose Exile<N/Type> a placed start lowers (Fear of Abduction,
+// Soul Exchange, Necrotic Fumes). An activated ability's Exile costs keep
+// their refusal: Food Chain's mana ability's colour ask and The Soul Stone's
+// harness (whose graveyard-return trigger is an upkeep trigger) reach no item
+// from a placed start.
+func planCastCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
+	return planCostMode(reg, b, face, card, cost, generic, true)
+}
+
+func planCostMode(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string, cast bool) (costPlan, string) {
+	p, why := planCostLine(reg, b, face, card, cost, generic, cast)
 	if why == "" && p.attacker != "" {
 		return p, "steps-needed:cost:Return"
 	}
@@ -116,8 +132,10 @@ func unblockedAttackerFilter(spec string) (string, bool) {
 }
 
 // planCostLine is planCost that also reads a Return of an unblocked attacker
-// (costPlan.attacker): the caller must script the combat line it needs.
-func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
+// (costPlan.attacker): the caller must script the combat line it needs. cast
+// enables the Exile<N/Type> arm, whose start only a spell's additional cost
+// lowers.
+func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string, cast bool) (costPlan, string) {
 	p := costPlan{zone: zoneBattlefield}
 	for _, tok := range splitCost(cost) {
 		if manaTokenRE.MatchString(tok) {
@@ -216,11 +234,14 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 					p.tapped = append(p.tapped, name)
 				}
 			}
-		case head == "Exile" && len(args) >= 2 && !self:
-			// "Exile a <Type> you control" as a cost (Fear of Abduction's
-			// Exile<1/Creature>): the same placed permanent a Sac spends,
-			// paid by exiling instead of sacrificing. A token kind mints its
-			// tokens (a permanent no card is), like a Sac of a token kind.
+		case head == "Exile" && cast && len(args) >= 2 && !self:
+			// "Exile a <Type> you control" as a spell's additional cost (Fear
+			// of Abduction's Exile<1/Creature>): the same placed permanent a
+			// Sac spends, paid by exiling instead of sacrificing. A token kind
+			// mints its tokens (a permanent no card is), like a Sac of a token
+			// kind. An activated ability's Exile cost is not planned: no placed
+			// start lowers Food Chain's colour ask or The Soul Stone's harness
+			// (an upkeep trigger), so it keeps steps-needed:cost:Exile.
 			if _, ok := tokenFodder(reg, args[1]); ok {
 				if !p.mintSac(reg, args[1], n) {
 					return p, refusal
@@ -286,16 +307,32 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 			if !placeableCounterKind(kind) {
 				return p, refusal // a wildcard kind names kinds, not one to place
 			}
+			if !cast && entryCounterOther(face) {
+				// The card's own entry replacement puts counters on other
+				// permanents (Sage of Fables's other Wizards): when the focus
+				// is its battlefield ability, the placement re-runs it on
+				// every permanent placed after the card, and no start field
+				// can subtract the extra (lower's setup_entry_counter_other).
+				// Keep the cost refusal rather than turn it into an
+				// unlowerable start. A cast cost's card is in hand and enters
+				// only on the line, so its replacement is not part of setup.
+				return p, refusal
+			}
 			need := int32(n)
 			bearer := card
 			if len(args) >= 3 && args[2] != "NICKNAME" && args[2] != "CARDNAME" {
 				// "remove a <Kind> counter from a <Spec> you control" (Ion
 				// Storm's SubCounter<1/P1P1/Permanent/...>): the counters ride
-				// an inert fodder permanent of Spec the start places. A NICKNAME
-				// or CARDNAME third argument (Migloz's OIL) is the personal
-				// kind: the same planCost reads for the card itself.
-				name, _ := sacFodder(reg, b, card, args[2], generic)
-				if name == "" {
+				// an inert permanent of Spec the start places. counterFodder
+				// picks a name the battlefield holds once and a body that
+				// survives the counters: the lowering binds a counters entry
+				// by card name (setup_by_name:counters), so a basic land the
+				// mana already duplicates or a 1/1 a -1/-1 counter kills is no
+				// bearer. A NICKNAME or CARDNAME third argument (Migloz's OIL)
+				// is the personal kind: the same planCost reads for the card
+				// itself.
+				name, ok := counterFodder(reg, b, card, args[2], kind, n)
+				if !ok {
 					return p, refusal
 				}
 				p.field = append(p.field, name)
@@ -392,6 +429,73 @@ func sacFodder(reg *cards.Registry, b *certdeck.Builder, card, typ, generic stri
 		}
 	}
 	return "", false
+}
+
+// counterFodder is the permanent a SubCounter cost places its counters on when
+// the cost names a spec ("remove a +1/+1 counter from a creature you control"):
+// the corpus's inert bearers (Wall of Stone) first, then any inert carrier, an
+// assumed-untapped permanent an understood own-side alternative of the spec
+// takes that survives the counter kind and whose entry counter state setup can
+// restate. It is never a basic land: the start's mana lands carry that name,
+// and the lowering binds a counters entry by card name
+// (setup_by_name:counters), so only a name the battlefield holds once is a
+// safe bearer. "" when nothing meets the spec, and the cost keeps its refusal.
+func counterFodder(reg *cards.Registry, b *certdeck.Builder, card, spec, kind string, n int) (string, bool) {
+	filter := strings.ReplaceAll(spec, ";", ",")
+	for _, a := range parseFilterPlaced(filter) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		ok := func(f *cards.Face) bool {
+			return f.IsPermanent() && f.Name != card && !deadOnArrival(f) && a.matches(f, false) &&
+				survivesPlacedCounters(f, kind, n) && !entryCounterUnrestatable(f) && !entryCounterOther(f)
+		}
+		for _, name := range bearers {
+			c, found := reg.Lookup(name)
+			if !found || len(c.Faces) == 0 || !b.Playable(c) || !ok(c.Faces[0]) {
+				continue
+			}
+			return name, true
+		}
+		if name := pickCarrier(reg, b, card, ok); name != "" {
+			return name, true
+		}
+	}
+	return "", false
+}
+
+// survivesPlacedCounters reports whether a placed permanent survives the n
+// counters of kind a cost puts on it. Only a -1/-1 counter lowers toughness
+// (Forge's "M1M1"; CR 122.1b), so a creature must have base toughness above n
+// times the reduction; every other kind a cost removes (P1P1, CHARGE, TIME,
+// OIL) or a noncreature bearer survives.
+func survivesPlacedCounters(f *cards.Face, kind string, n int) bool {
+	red, minus := minusCounterToughness(kind)
+	if !minus || !f.IsCreature() {
+		return true
+	}
+	return f.Toughness() > n*red
+}
+
+// minusCounterToughness reads Forge's -N/-N counter kind (M1M1) and returns
+// the toughness it removes, or false for every other kind.
+func minusCounterToughness(kind string) (int, bool) {
+	rest, ok := strings.CutPrefix(kind, "M")
+	if !ok {
+		return 0, false
+	}
+	i := strings.IndexByte(rest, 'M')
+	if i <= 0 || i == len(rest)-1 {
+		return 0, false
+	}
+	if _, err := strconv.Atoi(rest[:i]); err != nil {
+		return 0, false
+	}
+	tough, err := strconv.Atoi(rest[i+1:])
+	if err != nil || tough < 0 {
+		return 0, false
+	}
+	return tough, true
 }
 
 // maxSacTokens is the most tokens one Sac cost mints (Kellogg, Dangerous Mind
@@ -540,7 +644,7 @@ func sortPlayerCounters(cs []StartCounter) {
 
 // castStart places the card in seat 0's hand with the lands for its mana cost
 // and what its spell's Cost$ spends beyond mana (an additional cost:
-// Sacrifice, ExileFromGrave, Discard, tapXType; planCost), and makes seat 0's
+// Sacrifice, ExileFromGrave, Discard, tapXType; planCastCost), and makes seat 0's
 // focus its cast. A start placed only the mana, so a spell with an additional
 // cost was never castable and play refused it as start-not-exercised (Costly
 // Plunder, Fiery Conclusion, Skaab Goliath, Shared Discovery). "" when
@@ -583,7 +687,7 @@ func castStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card,
 			}
 		}
 		if len(extra) > 0 {
-			plan, why := planCost(reg, b, face, card, strings.Join(extra, " "), generic)
+			plan, why := planCastCost(reg, b, face, card, strings.Join(extra, " "), generic)
 			if why != "" {
 				return why
 			}
@@ -597,7 +701,7 @@ func castStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card,
 	if alt, ok := face.KeywordParam("AlternateAdditionalCost"); ok {
 		why := "steps-needed:cost:AlternateAdditionalCost"
 		for _, opt := range strings.Split(alt, ":") {
-			plan, w := planCost(reg, b, face, card, opt, generic)
+			plan, w := planCastCost(reg, b, face, card, opt, generic)
 			if w != "" {
 				continue
 			}
@@ -623,7 +727,7 @@ func castStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card,
 		if !raiseCostModelled(cost) {
 			continue // an optional or X cost (waterbend {X}, a "you may" exile): the bot may decline it
 		}
-		plan, why := planCost(reg, b, face, card, cost, generic)
+		plan, why := planCastCost(reg, b, face, card, cost, generic)
 		if why != "" {
 			return why
 		}

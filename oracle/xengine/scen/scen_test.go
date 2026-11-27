@@ -3632,6 +3632,17 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 	}
 }
 
+// countAmong counts name in xs.
+func countAmong(xs []string, name string) int {
+	n := 0
+	for _, x := range xs {
+		if x == name {
+			n++
+		}
+	}
+	return n
+}
+
 // TestScenStepsNeededCostClass is the xproof repro for the steps-needed:cost
 // class (xproof refused.tsv, the top cards of the class): a cost whose payment
 // needs a prior step is met by placed state, so each builds a start where the
@@ -3642,17 +3653,69 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 //     cost may tap them (summoning sickness never guards a cost's tap);
 //   - Fear of Abduction's cast exiles a creature you control
 //     (Exile<1/Creature> in the spell's additional cost): an inert creature
-//     sits beside the lands, like the fodder a Sac spends;
-//   - Ion Storm's activations remove a P1P1 (or CHARGE) counter from a
-//     permanent you control: an inert permanent carries the counters;
+//     sits beside the lands, like the fodder a Sac spends; Soul Exchange and
+//     Necrotic Fumes are the other two cast Exile shapes;
+//   - Ion Storm, Rift Elemental and Quillspike remove a counter from a
+//     permanent they do not own (SubCounter<N/Kind/Spec>): an inert creature
+//     of the spec carries the counters. The bearer is a name the battlefield
+//     holds once and survives the counter kind (a Wall of Stone, not a basic
+//     land the mana duplicates nor a 1/1 a -1/-1 counter kills), because the
+//     lowering binds a counters entry by card name (counterBindingRefusal);
 //   - Migloz, Maze Crusher's minus abilities spend a counter of a personal
 //     kind (SubCounter<N/OIL/NICKNAME>): the counters sit on Migloz itself.
 //
 // A card the class cannot yet meet keeps its specific refusal: Bloodvial
 // Purveyor's Blood token need names a token the setup table does not map
-// (steps-needed:token), which a placed start could not replay.
+// (steps-needed:token), Sage of Fables's own entry replacement puts counters
+// on other permanents (steps-needed:cost:SubCounter), Moxite Refinery removes
+// a wildcard counter kind (steps-needed:cost:SubCounter), and Food Chain and
+// The Soul Stone exile from activated abilities whose starts do not lower
+// (steps-needed:cost:Exile).
 func TestScenStepsNeededCostClass(t *testing.T) {
 	reg, b := testBuilder(t)
+	// counterOn is the one counter of kind the start places, proved bindable:
+	// the name appears on the battlefield once (the lowering's counters field
+	// is by name) and a creature bearer survives the counters placed.
+	counterOn := func(t *testing.T, f *StartFile, kind string, n int32) StartCounter {
+		t.Helper()
+		var got []StartCounter
+		for _, c := range f.Setup.P0.Counters {
+			if c.Kind == kind {
+				got = append(got, c)
+			}
+		}
+		if len(got) != 1 || got[0].N != n {
+			t.Fatalf("p0 counters %+v, want one %s=%d", f.Setup.P0.Counters, kind, n)
+		}
+		c := got[0]
+		if c.Card == f.Focus.Card {
+			t.Errorf("counter bearer %q is the focus card, want a placed fodder permanent", c.Card)
+		}
+		if k := countAmong(f.Setup.P0.Battlefield, c.Card); k != 1 {
+			t.Errorf("counter bearer %q appears %d times on p0 battlefield %v, want once", c.Card, k, f.Setup.P0.Battlefield)
+		}
+		card, ok := reg.Lookup(c.Card)
+		if !ok || len(card.Faces) == 0 {
+			t.Fatalf("counter bearer %q not in the corpus", c.Card)
+		}
+		if face := card.Faces[0]; face.IsCreature() && kind == "M1M1" && face.Toughness() <= int(n) {
+			t.Errorf("counter bearer %q (%s) dies to %d M1M1 counters", c.Card, face.PT, n)
+		}
+		return c
+	}
+	extraCreature := func(t *testing.T, f *StartFile, card string) {
+		t.Helper()
+		focusIs(t, f, 0, card, "cast", 0)
+		found := false
+		for _, n := range f.Setup.P0.Battlefield {
+			if c, ok := reg.Lookup(n); ok && c.Faces[0].IsCreature() && n != card {
+				found = true
+			}
+		}
+		if !found {
+			t.Errorf("p0 battlefield %v holds no creature the Exile additional cost spends", f.Setup.P0.Battlefield)
+		}
+	}
 	for _, r := range []struct {
 		card, key, want string
 		check           func(t *testing.T, f *StartFile)
@@ -3676,31 +3739,30 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 			}
 		}},
 		{"Fear of Abduction", "cast", "", func(t *testing.T, f *StartFile) {
-			focusIs(t, f, 0, "Fear of Abduction", "cast", 0)
+			extraCreature(t, f, "Fear of Abduction")
 			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Fear of Abduction"})
-			lands := 0
-			for _, n := range f.Setup.P0.Battlefield {
-				if c, ok := reg.Lookup(n); ok && c.Faces[0].IsLand() {
-					lands++
-					continue
-				}
-				if c, ok := reg.Lookup(n); ok && c.Faces[0].IsCreature() {
-					continue // the exiled creature the additional cost spends
-				}
-				t.Errorf("p0 battlefield %q: neither a land nor the exiled creature", n)
-			}
-			if lands < 6 {
-				t.Errorf("p0 lands %d, want the 4WW the cast pays", lands)
-			}
+		}},
+		{"Soul Exchange", "cast", "", func(t *testing.T, f *StartFile) {
+			extraCreature(t, f, "Soul Exchange")
+		}},
+		{"Necrotic Fumes", "cast", "", func(t *testing.T, f *StartFile) {
+			extraCreature(t, f, "Necrotic Fumes")
 		}},
 		{"Ion Storm", "f0/a0", "", func(t *testing.T, f *StartFile) {
 			focusIs(t, f, 0, "Ion Storm", "ability", 0)
-			if len(f.Setup.P0.Counters) != 1 || f.Setup.P0.Counters[0].Kind != "P1P1" || f.Setup.P0.Counters[0].N != 1 {
-				t.Fatalf("p0 counters %+v, want one P1P1 counter on a placed permanent", f.Setup.P0.Counters)
-			}
-			if f.Setup.P0.Counters[0].Card == "Ion Storm" || !slices.Contains(f.Setup.P0.Battlefield, f.Setup.P0.Counters[0].Card) {
-				t.Errorf("counter bearer %q not among p0 battlefield %v", f.Setup.P0.Counters[0].Card, f.Setup.P0.Battlefield)
-			}
+			counterOn(t, f, "P1P1", 1)
+		}},
+		{"Ion Storm", "f0/a1", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Ion Storm", "ability", 1)
+			counterOn(t, f, "CHARGE", 1)
+		}},
+		{"Rift Elemental", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Rift Elemental", "ability", 0)
+			counterOn(t, f, "TIME", 1)
+		}},
+		{"Quillspike", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Quillspike", "ability", 0)
+			counterOn(t, f, "M1M1", 1)
 		}},
 		{"Migloz, Maze Crusher", "f0/a2", "", func(t *testing.T, f *StartFile) {
 			focusIs(t, f, 0, "Migloz, Maze Crusher", "ability", 2)
@@ -3709,7 +3771,13 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
 			}
 		}},
+		// Still-unsupported shapes keep a named refusal rather than an
+		// unlowerable start.
 		{"Bloodvial Purveyor", "f0/t0", "steps-needed:token", nil},
+		{"Sage of Fables", "f0/a0", "steps-needed:cost:SubCounter", nil},
+		{"Moxite Refinery", "f0/a0", "steps-needed:cost:SubCounter", nil},
+		{"Food Chain", "f0/a0", "steps-needed:cost:Exile", nil},
+		{"The Soul Stone", "f0/a1", "steps-needed:cost:Exile", nil},
 	} {
 		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 		if err != nil {
@@ -3725,6 +3793,28 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 			t.Fatalf("%s %s: path %q reason %q, want a start file", r.card, r.key, res.Path, res.Reason)
 		}
 		r.check(t, res.Start)
+	}
+}
+
+// TestCounterBindingRefusal: a counters row binds by card name, so a bearer
+// whose name appears twice on its seat's battlefield is refused (the lower's
+// setup_by_name:counters), not written as a start the followers cannot replay.
+// A player counter (Card empty) binds to the seat and needs no permanent.
+func TestCounterBindingRefusal(t *testing.T) {
+	f := &StartFile{}
+	f.Setup.P0.Battlefield = []string{"Mountain", "Mountain"}
+	f.Setup.P0.Counters = []StartCounter{{Card: "Mountain", Kind: "P1P1", N: 1}}
+	if got := counterBindingRefusal(f); got != "start:counters-by-name" {
+		t.Errorf("counter on one of two Mountains: %q, want start:counters-by-name", got)
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, "Wall of Stone")
+	f.Setup.P0.Counters = []StartCounter{{Card: "Wall of Stone", Kind: "P1P1", N: 1}}
+	if got := counterBindingRefusal(f); got != "" {
+		t.Errorf("counter on the one Wall of Stone: %q, want no refusal", got)
+	}
+	f.Setup.P0.Counters = []StartCounter{{Kind: "ENERGY", N: 1}}
+	if got := counterBindingRefusal(f); got != "" {
+		t.Errorf("player counter: %q, want no refusal", got)
 	}
 }
 
