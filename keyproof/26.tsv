@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 262a5d83-506c-4781-9bc9-1a2b5d83955c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 262a5d83-506c-4781-9bc9-1a2b5d83955c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:thallid-germinator:f0t0:s1	-	-	-	3aa6ded33acb	-	a150840d1833	-	-	2026-11-25	xproof
-262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	77b4a10eff48	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:thallid-germinator:f0t0:s1	-	-	-	3aa6ded33acb	-	a150840d1833	-	-	2026-11-25	xproof
 262c5ac9-af41-42d1-a53a-8a671eedd5a6	cast	cast-resolve	agreed	-	FX	scen	2	0	Duel Tactics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 265236d1-d96c-4424-835e-a0fe91c41170	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2659c0ea-9ae0-4be3-b9f7-5a38230815ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-speaker:f0t0:s1,f:xs:XP:blood-speaker:f0t0:s1	-	-	-	23c4009444b0	-	5ecf65b1310f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2659c0ea-9ae0-4be3-b9f7-5a38230815ad	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blood-speaker:f0t0:s1,f:xs:XP:blood-speaker:f0t0:s1	-	-	-	23c4009444b0	-	5ecf65b1310f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-2659c0ea-9ae0-4be3-b9f7-5a38230815ad	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+2659c0ea-9ae0-4be3-b9f7-5a38230815ad	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	77b4a10eff48	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 2659cc53-d20d-476f-bc64-4b35a4288d0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2659cc53-d20d-476f-bc64-4b35a4288d0e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stalking-drone:f0a0:s1,f:xs:XP:stalking-drone:f0a0:s1	-	-	-	d864b561c9cb	-	9e4d032366d5	-	-	2026-11-24	xproof
 265f461e-d076-4119-8ea4-96360305f3a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26e92eb8-7a23-4e7e-be83-244bb6078606	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:captain-america-liberator:f0t1:s1,f:xs:XP:captain-america-liberator:f0t1:s1	-	-	-	8c0bd19283bb	-	bdc5b72c0201	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dino-dna:cast:s1,f:xs:XP:dino-dna:cast:s1	-	-	-	8c0bd19283bb	-	950cda8d056e	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:dino-dna:f0a1:s1,f:xs:XP:dino-dna:f0a1:s1	-	-	-	8c0bd19283bb	-	950cda8d056e	-	-	2026-11-24	xproof
-26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	77b4a10eff48	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 26eb7ee3-c0b6-4be0-bc80-92952f55a6f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emperor-crocodile:cast:s1,f:xs:XP:emperor-crocodile:cast:s1	-	-	-	25696bf19d5b	-	d5bdb9053f53	-	-	2026-11-24	xproof
 26eb7ee3-c0b6-4be0-bc80-92952f55a6f9	f0/t0	Always	agreed	-	FX	start	2	0	x:xs:XP:emperor-crocodile:cast:s1,f:xs:XP:emperor-crocodile:cast:s1	-	-	-	25696bf19d5b	-	d5bdb9053f53	-	-	2026-11-24	xproof
 26f034b1-9a96-4371-a28e-be00b02d9d60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
