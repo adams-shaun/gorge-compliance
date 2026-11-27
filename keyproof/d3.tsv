@@ -37,8 +37,8 @@ d32f570a-3738-4a9d-845f-6c7892b69991	combat#0.block	combat.block	agreed	-	FX	sta
 d32f570a-3738-4a9d-845f-6c7892b69991	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:combat0.attack:s1,f:xs:XP:screaming-phantom:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4053d7d08b9f	-	-	2026-11-25	xproof
 d32f973e-38db-4f74-aec6-258d25c1fb7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-arsonist:cast:s1,f:xs:XP:keldon-arsonist:cast:s1	-	-	-	5f2128bf97e4	-	81b0b9378073	-	-	2026-11-24	xproof
 d32f973e-38db-4f74-aec6-258d25c1fb7d	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:keldon-arsonist:f0a0:s1,f:xs:XP:keldon-arsonist:f0a0:s1	-	-	-	21b2cceac526	-	81b0b9378073	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-d331db6a-21ff-4dec-aa6a-e30bf925ca32	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	1a1e6d5c701e	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-d331db6a-21ff-4dec-aa6a-e30bf925ca32	f0/a0	PutCounter	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	1a1e6d5c701e	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+d331db6a-21ff-4dec-aa6a-e30bf925ca32	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	aece20b90a73	-	1a1e6d5c701e	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+d331db6a-21ff-4dec-aa6a-e30bf925ca32	f0/a0	PutCounter	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	aece20b90a73	-	1a1e6d5c701e	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 d331db6a-21ff-4dec-aa6a-e30bf925ca32	f0/a1	Draw	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	1a1e6d5c701e	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 d334717a-f3a8-4ffa-bdc9-44ae7bdcc772	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d334717a-f3a8-4ffa-bdc9-44ae7bdcc772	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toggo-goblin-weaponsmith:f0t0:s1,f:xs:XP:toggo-goblin-weaponsmith:f0t0:s1	-	-	-	d607930fa548	-	45fd7112e550	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
@@ -121,14 +121,14 @@ d3828907-1321-40ca-9531-30401e82a6b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d383902c-63ba-4714-bfeb-377829950b0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d383c589-d8c7-4c4d-8084-37034d14b385	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d383c589-d8c7-4c4d-8084-37034d14b385	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d383c589-d8c7-4c4d-8084-37034d14b385	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+d383c589-d8c7-4c4d-8084-37034d14b385	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	aece20b90a73	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 d38476e9-2e47-4c0c-8129-483c0bd09ec0	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:gruul-guildgate:f0a0:s2,f:xs:XP:gruul-guildgate:f0a0:s2	-	-	-	23b491658465	-	1287d2aab50f	-	-	2026-11-24	xproof
 d38476e9-2e47-4c0c-8129-483c0bd09ec0	land	land	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildgate:land:s1,f:xs:XP:gruul-guildgate:land:s1	-	-	-	23b491658465	-	1287d2aab50f	-	-	2026-11-24	xproof
 d385c2e1-a62e-43ad-80ef-a6178deac82c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brindle-shoat:cast:s1,f:xs:XP:brindle-shoat:cast:s1	-	-	-	8c0bd19283bb	-	e69f557a9912	-	-	2026-11-24	xproof
 d385c2e1-a62e-43ad-80ef-a6178deac82c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brindle-shoat:f0t0:s1,f:xs:XP:brindle-shoat:f0t0:s1	-	-	-	8c0bd19283bb	-	e69f557a9912	-	-	2026-11-24	xproof
 d38646dc-d1ea-473c-aaf1-df8ba327459f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d38646dc-d1ea-473c-aaf1-df8ba327459f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d38646dc-d1ea-473c-aaf1-df8ba327459f	f0/t0	NULL	owed	refused:no-generator:trigger:ManaExpend	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+d38646dc-d1ea-473c-aaf1-df8ba327459f	f0/t0	NULL	owed	refused:no-generator:trigger:ManaExpend	-	start	0	0	-	-	-	-	aece20b90a73	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 d388080d-5ad4-4e27-b361-340f410423a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golden-scale-aeronaut:f0t0:s1,f:xs:XP:golden-scale-aeronaut:f0t0:s1	-	-	-	ae86f6029288	-	9d6aff2ac7ce	-	-	2026-11-24	xproof
 d388080d-5ad4-4e27-b361-340f410423a7	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:golden-scale-aeronaut:f0t0:s1,f:xs:XP:golden-scale-aeronaut:f0t0:s1	-	-	-	ae86f6029288	-	9d6aff2ac7ce	-	-	2026-11-24	xproof
 d38937a6-ab1c-4de8-a278-d81a6ce0d921	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,9 +181,9 @@ d3bdfb25-dfb2-4df4-b502-ef0909a39f86	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d3beb624-f589-4ed5-97a0-11ad61481250	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vanish-into-memory:cast:s1,f:xs:XP:vanish-into-memory:cast:s1	-	-	-	0984227a67dd	-	6779ee747456	-	-	2026-11-24	xproof
 d3c56fc4-3611-41b1-952e-4c5311b1510b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lathiel-the-bounteous-dawn:cast:s1,f:xs:XP:lathiel-the-bounteous-dawn:cast:s1	-	-	-	8c0bd19283bb	-	af8f480d1eed	-	-	2026-11-24	xproof
 d3c56fc4-3611-41b1-952e-4c5311b1510b	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:lathiel-the-bounteous-dawn:f0t0:s1	-	-	-	d607930fa548	-	af8f480d1eed	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
-d3c5b218-a00b-4530-a88c-60a2aa83137b	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	fd62891c2369	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+d3c5b218-a00b-4530-a88c-60a2aa83137b	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	aece20b90a73	-	fd62891c2369	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 d3c5b218-a00b-4530-a88c-60a2aa83137b	f0/a0	Token	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	ad6fb83576d3	-	fd62891c2369	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-d3c5b218-a00b-4530-a88c-60a2aa83137b	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	fd62891c2369	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+d3c5b218-a00b-4530-a88c-60a2aa83137b	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	aece20b90a73	-	fd62891c2369	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 d3c623f3-c7c9-47c0-8096-6dee3267baff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d3cad867-142c-4e9d-bcd8-0e7ed1fd2f77	cast	cast-resolve	agreed	-	FX	scen	2	0	Sinuous Benthisaur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d3cad867-142c-4e9d-bcd8-0e7ed1fd2f77	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
