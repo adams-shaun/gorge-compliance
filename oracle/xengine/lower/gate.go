@@ -267,40 +267,38 @@ func mandatoryPhaseTriggered(f *cards.Face) bool {
 	return false
 }
 
-// mandatoryUpkeepRemovesSelf reports that every mandatory beginning-of-upkeep
-// or draw Phase trigger of f takes the permanent itself off the battlefield,
-// so the setup drive resolves them and the card is gone before the cut: the
-// battlefield permanent carrying the live phase trigger that captureAt
-// refuses never stands in the cut, and play lowers the start (Earthlink,
-// Thelon's Chant: "sacrifice CARDNAME unless you pay X", the echo population
-// gorge's own UnlessCost tests pin as a Sacrifice with no SacValid$ or
-// Defined$). A mandatory trigger whose effect leaves the card standing
-// (Vitaspore Thallid's spore counter) is the start gate's refusal, and
-// several mandatory triggers must all remove the card: the one that leaves it
-// standing is in the cut.
-func mandatoryUpkeepRemovesSelf(f *cards.Face) bool {
+// MandatoryUpkeepTriggers is f's beginning-of-upkeep or draw Phase triggers
+// that are not optional: the list mandatoryPhaseTriggered asks about, and
+// the shape captureStart refuses a battlefield permanent for (the setup
+// drive would resolve one and the scenario has no answer saying it already
+// resolved). A generator deciding whether its own drive takes the permanent
+// off the battlefield before the cut needs the gate's list, not its own
+// reading of optionality.
+func MandatoryUpkeepTriggers(f *cards.Face) []*cards.Trigger {
 	if f == nil {
-		return false
+		return nil
 	}
-	saw := false
+	var out []*cards.Trigger
 	for i := range f.Triggers {
-		t := &f.Triggers[i]
-		if !isUpkeepOrDrawPhase(t) || optionalPhaseAsk(f, t) {
-			continue
-		}
-		saw = true
-		if !triggerRemovesSelf(t) {
-			return false
+		if t := &f.Triggers[i]; isUpkeepOrDrawPhase(t) && !optionalPhaseAsk(f, t) {
+			out = append(out, t)
 		}
 	}
-	return saw
+	return out
 }
 
-// triggerRemovesSelf is whether a trigger's compiled Execute takes its own
-// card off the battlefield: an echo Sacrifice naming no other kind, target or
-// bearer, a Destroy of the card itself, or a ChangeZone moving it off the
-// battlefield. An uncompilable Execute is no removal: the refusal stands.
-func triggerRemovesSelf(t *cards.Trigger) bool {
+// TriggerRemovesSelf is whether a trigger's compiled Execute takes its own
+// card off the battlefield: an echo Sacrifice naming no other kind, target
+// or bearer (the population gorge's own UnlessCost tests pin as a Sacrifice
+// with no SacValid$ or Defined$), an untargeted Destroy of the card itself,
+// or a ChangeZone moving only the card itself off the battlefield. A trigger
+// that reads targets is no self-removal: The Abyss ("destroy all nonartifact
+// creatures you don't control", ValidTgts$ ControlledBy the triggered
+// player) and Crumbling Ashes ("destroy target creature with a +1/+1 counter
+// on it") are DB$ Destroy with ValidTgts$ and leave the card standing, and a
+// ChangeZone reading ChangeType$ or DefinedPlayer$ does not move the card
+// itself. An uncompilable Execute is no removal: the refusal stands.
+func TriggerRemovesSelf(t *cards.Trigger) bool {
 	e := t.Effect
 	if e == nil {
 		return false
@@ -309,33 +307,40 @@ func triggerRemovesSelf(t *cards.Trigger) bool {
 		d := e.Params["Defined"]
 		return d == "" || d == "Self" || d == "TriggeredCard"
 	}
+	targets := e.Params["ValidTgts"] != "" || e.Params["Target"] != ""
 	switch e.API {
 	case "Sacrifice":
-		return e.Params["SacValid"] == "" && e.Params["Target"] == "" && selfish()
+		return !targets && e.Params["SacValid"] == "" && selfish()
 	case "Destroy":
-		return selfish()
+		return !targets && selfish()
 	case "ChangeZone":
-		return selfish() && e.Params["Origin"] == "Battlefield" && e.Params["Destination"] != "Battlefield"
+		return !targets && selfish() && e.Params["ChangeType"] == "" && e.Params["DefinedPlayer"] == "" &&
+			e.Params["Origin"] == "Battlefield" && e.Params["Destination"] != "Battlefield"
 	}
 	return false
 }
 
 // StartCardRefusal is why a scripted start cannot place c's face f on the
-// battlefield, or "": a mandatory beginning-of-upkeep or draw trigger that
-// leaves the card standing at the cut (the setup drive would resolve it
-// before the cut, and a start has no answer saying it already resolved —
-// mandatoryUpkeepRemovesSelf excuses the echo whose own trigger sacrifices
-// the card before the first main), or a card naming the
+// battlefield, or "": a mandatory beginning-of-upkeep or draw trigger (the
+// setup drive would resolve it before the cut, and a start has no answer
+// saying it already resolved), or a card naming the
 // startedTheTurnUntapped filter word (the turn-change fold stamps that field
 // on every untapped battlefield object, and the gate refuses it once any card
 // in the game names the word, which every start's untapped lands then are).
 // It is the start gate's own read, so a cost planner can keep its named
-// refusal instead of emitting a start the lowering refuses.
+// refusal instead of emitting a start the lowering refuses. It is
+// deliberately conservative about the first half: an echo whose UnlessCost
+// the drive can pay (Earthlink's {2}, Thelon's Chant's {G}) keeps the card
+// standing at the cut, where captureAt refuses it, and only the finished
+// start knows whether its drive can pay — so the generator sweeps the
+// finished start and grants that exception there
+// (scen.startGateRefusal/upkeepRemovalExcused), never here on effect shape
+// alone.
 func StartCardRefusal(c *cards.Card, f *cards.Face) string {
 	if f == nil {
 		return "start:no-face"
 	}
-	if mandatoryPhaseTriggered(f) && !mandatoryUpkeepRemovesSelf(f) {
+	if mandatoryPhaseTriggered(f) {
 		return "start:upkeep-trigger"
 	}
 	if StartTurnStampMention(c) {
@@ -352,7 +357,9 @@ func StartCardRefusal(c *cards.Card, f *cards.Face) string {
 // hand, library or graveyard stamps the live field exactly as one on the
 // battlefield does. The generator reads it for the start's off-battlefield
 // placements, whose mandatory-trigger half StartCardRefusal would over-refuse
-// (captureAt refuses a phase trigger only for a battlefield object).
+// (captureAt refuses a phase trigger only for a battlefield object), and for
+// a battlefield card whose upkeep half the finished start excuses
+// (scen.upkeepRemovalExcused).
 func StartTurnStampMention(c *cards.Card) bool {
 	return cardMentions(c, "startedTheTurnUntapped")
 }

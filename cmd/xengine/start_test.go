@@ -2388,9 +2388,13 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 	}
 	// The rest of the report's keys are the same class: a CDA or X focus or
 	// target, an upkeep-sacrifice focus, an Echo or cumulative-upkeep enabler,
-	// and an attack focus that cannot attack. A key the generator already
-	// could not build keeps its named no-generator refusal; any start it does
-	// write must play and exercise.
+	// an attack focus that cannot attack, and a mandatory upkeep whose Destroy
+	// only reads targets — The Abyss and Crumbling Ashes are refused on the
+	// battlefield (a Destroy with ValidTgts is no self-removal, so the sweep
+	// keeps lower.captureStart's refusal) and exercised on the cast lane, the
+	// card in hand and the play firing the trigger after the cut. A key the
+	// generator already could not build keeps its named no-generator refusal;
+	// any start it does write must play and exercise.
 	for _, c := range []struct{ card, key string }{
 		{"Soramaro, First to Dream", "f0/a0"}, // CDA */* with an empty hand
 		{"Savageborn Hydra", "f0/a0"},         // X counters never placed
@@ -2401,6 +2405,8 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 		{"Goldenhide Ox", "cast"},             // Elephant Grass' cumulative upkeep
 		{"Grimgrin, Corpse-Born", "f0/t0"},    // enters tapped and does not untap
 		{"Guardians of Akrasa", "f0/t0"},      // Defender
+		{"The Abyss", "f0/t0"},                // upkeep destroys only targeted creatures
+		{"Crumbling Ashes", "f0/t0"},          // upkeep destroys a countered creature
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})

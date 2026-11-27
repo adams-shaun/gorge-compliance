@@ -3946,6 +3946,22 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 		{"Rasputin Dreamweaver", "cast", "start:started-turn-untapped", nil},
 		{"Rasputin Dreamweaver", "f0/t0", "start:started-turn-untapped", nil},
 		{"Vitaspore Thallid", "f0/a1", "start:upkeep-trigger", nil},
+		// A Destroy that only reads targets is no self-removal: The Abyss
+		// ("destroy all nonartifact creatures you don't control") and
+		// Crumbling Ashes ("destroy target creature with a +1/+1 counter on
+		// it") are DB$ Destroy with ValidTgts, so the battlefield lane stays
+		// their refusal (the sweep itself, over finished StartFiles, is the
+		// white-box TestScenStartGateRefusalSweepsFinishedStart); what builds is
+		// their cast lane, the card in hand and the play — not the setup
+		// drive — firing the trigger after the cut.
+		{"The Abyss", "f0/t0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "The Abyss", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"The Abyss"})
+		}},
+		{"Crumbling Ashes", "f0/t0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Crumbling Ashes", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Crumbling Ashes"})
+		}},
 	} {
 		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 		if err != nil {
@@ -3961,6 +3977,58 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 			t.Fatalf("%s %s: path %q reason %q, want a start file", r.card, r.key, res.Path, res.Reason)
 		}
 		r.check(t, res.Start)
+	}
+}
+
+// TestScenStartGateRefusalSweepsFinishedStart drives the whole-start sweep over
+// finished StartFiles, the reviewer's witnesses of the shape develop emitted
+// and play lowered to zero items on both seeds:
+//   - a mandatory upkeep that only reads targets is not self-removal: The
+//     Abyss (ValidTgts Creature.nonArtifact+ControlledBy TriggeredPlayer)
+//     and Crumbling Ashes (ValidTgts Creature.counters_GE1_M1M1) are DB$
+//     Destroy with targets and stay the gate's refusal, not excused by the
+//     echo shape (lower.TriggerRemovesSelf's tightening);
+//   - the echo exception is start-aware (upkeepRemovalExcused): Earthlink's
+//     {2} over two spare Plains and Thelon's Chant's {G} over a Forest are
+//     payable, the drive pays, the card stands at the cut where captureStart
+//     refuses — so the sweep refuses by name instead of emitting; the same
+//     cards with no payable mana are sacrificed before the cut and stay
+//     starts (develop's generated Earthlink and Thelon's Chant starts);
+//   - Tapped names bind to copies (TappedCopies, as the lowering binds
+//     them): four Plains with Tapped ["Plains"] leave three untapped copies
+//     for the startedTheTurnUntapped stamp Rasputin names from hand, and
+//     three untapped Plains minus one for a payable echo; all four tapped
+//     leaves no stamp anywhere, so no refusal.
+//
+// Reverting any guard in the sweep — the targeted-Destroy arms, the
+// payable-echo half, or the per-copy TappedCopies read (here or in
+// upkeepManaShort) — turns one expected refusal back into "" (or one
+// expected "" into a refusal) and fails here.
+func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
+	reg, _ := testBuilder(t)
+	start := func(p0 StartSeat) *StartFile {
+		f := &StartFile{Format: StartFormat, Players: 2, Seeds: 2}
+		f.Setup.P0 = p0
+		return f
+	}
+	for _, r := range []struct {
+		name string
+		p0   StartSeat
+		want string
+	}{
+		{"targeted destroy, triggered player's creatures", StartSeat{Battlefield: []string{"The Abyss", "Grizzly Bears"}}, "start:upkeep-trigger"},
+		{"targeted destroy of a countered creature", StartSeat{Battlefield: []string{"Crumbling Ashes"}}, "start:upkeep-trigger"},
+		{"payable echo, spare generic", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Plains"}}, "start:upkeep-trigger"},
+		{"payable echo under a partially tapped name", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:upkeep-trigger"},
+		{"unpayable echo (develop's generated start)", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}}, ""},
+		{"payable echo colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Forest"}}, "start:upkeep-trigger"},
+		{"unpayable echo colour (develop's generated start)", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears"}}, ""},
+		{"mention word with one tapped duplicate", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:started-turn-untapped"},
+		{"mention word with every copy tapped", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains", "Plains", "Plains", "Plains"}}, ""},
+	} {
+		if got := startGateRefusal(reg, start(r.p0)); got != r.want {
+			t.Errorf("%s: startGateRefusal %q, want %q", r.name, got, r.want)
+		}
 	}
 }
 

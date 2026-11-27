@@ -962,28 +962,41 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 }
 
 // startGateRefusal is the finished start's read against the lowering's own
-// start gate, or "": every battlefield permanent (card on its placed face,
-// or setup token) is read through lower.StartCardRefusal, so a card carrying
-// a mandatory upkeep/draw Phase trigger that captureStart refuses is named
+// start gate, or "", over the two seats' placements: every battlefield
+// permanent (card on its placed face — BackFace read per copy through
+// BackFaceCopies, as the lowering binds it — or setup token) is read through
+// lower.StartCardRefusal, the gate's own predicate, so a card carrying a
+// mandatory upkeep/draw Phase trigger that captureStart refuses is named
 // before the start is emitted (Vitaspore Thallid f0/a1: its spore upkeep is
-// mandatory, and play lowers that start to no item); and every card the start
-// places in any zone is read for the startedTheTurnUntapped filter word,
-// because the gate's gameMentions spans all zones and the turn-change fold
-// stamps that field on every untapped permanent once any card in the game
-// names the word (Rasputin Dreamweaver cast: the card sits in hand for the
-// focus cast, and its own text names the word, so its start's untapped Plains
-// carry the live field and captureStart refuses). The mention read is the
-// gate's, not a hand-built list of shapes, so the next card naming the word
-// cannot slip past on a lane no per-lane guard covered. The mandatory-trigger
-// half reads the battlefield only, exactly as captureAt refuses a phase
-// trigger only for a battlefield object: a hand card with an upkeep trigger
-// never fires it. The mention half is skipped when the start has no untapped
-// battlefield object, since the field is refused only where its stamp is set.
+// mandatory, and play lowers that start to no item). That read is the gate's
+// conservative one, so the battlefield branch also carries the one exception
+// the finished start can judge (upkeepRemovalExcused): an echo the drive
+// cannot pay sacrifices its card before the cut, while a payable one leaves
+// it standing where captureStart refuses, so a payable echo stays refused by
+// name (Earthlink with two spare Plains, Thelon's Chant with a Forest).
+// Every card the start places in any zone is then read for the
+// startedTheTurnUntapped filter word, because the gate's gameMentions spans
+// all zones and the turn-change fold stamps that field on every untapped
+// permanent once any card in the game names the word (Rasputin Dreamweaver
+// cast: the card sits in hand for the focus cast, and its own text names the
+// word, so its start's untapped Plains carry the live field and captureStart
+// refuses). The mention read is the gate's, not a hand-built list of shapes,
+// so the next card naming the word cannot slip past on a lane no per-lane
+// guard covered. The mandatory-trigger half reaches the battlefield through
+// StartCardRefusal (which reads the mention word for those cards too), the
+// off-battlefield zones through StartTurnStampMention only, exactly as
+// captureAt refuses a phase trigger only for a battlefield object: a hand
+// card with an upkeep trigger never fires it. The mention half is skipped
+// when no battlefield copy is untapped, since the field is refused only
+// where its stamp is set — per copy through TappedCopies (four Plains with
+// Tapped ["Plains"] leave three copies that carry the stamp), the same
+// binding the lowering's startDeck uses.
 func startGateRefusal(reg *cards.Registry, f *StartFile) string {
+	seats := []*StartSeat{&f.Setup.P0, &f.Setup.P1}
 	untapped := false
-	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
-		for _, name := range sd.Battlefield {
-			if !slices.Contains(sd.Tapped, name) {
+	for _, sd := range seats {
+		for _, tapped := range sd.TappedCopies() {
+			if !tapped {
 				untapped = true
 			}
 		}
@@ -993,17 +1006,28 @@ func startGateRefusal(reg *cards.Registry, f *StartFile) string {
 			}
 		}
 	}
-	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
-		for _, name := range sd.Battlefield {
+	for seat, sd := range seats {
+		back := sd.BackFaceCopies()
+		for i, name := range sd.Battlefield {
 			c, ok := reg.Lookup(name)
 			if !ok || len(c.Faces) == 0 {
 				continue
 			}
 			face := c.Faces[0]
-			if slices.Contains(sd.BackFace, name) && len(c.Faces) > 1 {
+			if back[i] && len(c.Faces) > 1 {
 				face = c.Faces[1] // the placed face: captureStart reads o.Face()
 			}
 			if why := lower.StartCardRefusal(c, face); why != "" {
+				if why == "start:upkeep-trigger" && upkeepRemovalExcused(reg, f, face, seat) {
+					// The drive takes the card off the battlefield before the
+					// cut, so captureAt never holds it there; its text can
+					// still name the stamp word from the battlefield, so the
+					// mention half still reads it.
+					if lower.StartTurnStampMention(c) {
+						return "start:started-turn-untapped"
+					}
+					continue
+				}
 				return why
 			}
 		}
@@ -1013,6 +1037,9 @@ func startGateRefusal(reg *cards.Registry, f *StartFile) string {
 				continue
 			}
 			if why := lower.StartCardRefusal(c, c.Faces[0]); why != "" {
+				if why == "start:upkeep-trigger" && upkeepRemovalExcused(reg, f, c.Faces[0], seat) {
+					continue
+				}
 				return why
 			}
 		}
@@ -1020,7 +1047,7 @@ func startGateRefusal(reg *cards.Registry, f *StartFile) string {
 	if !untapped {
 		return ""
 	}
-	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+	for _, sd := range seats {
 		for _, names := range [][]string{sd.Battlefield, sd.Hand, sd.Library, sd.Graveyard, sd.Exile} {
 			for _, name := range names {
 				if c, ok := reg.Lookup(name); ok && lower.StartTurnStampMention(c) {
@@ -1030,6 +1057,67 @@ func startGateRefusal(reg *cards.Registry, f *StartFile) string {
 		}
 	}
 	return ""
+}
+
+// upkeepRemovalExcused reports whether the finished start's own turn-1 setup
+// drive provably takes the seat's battlefield permanent off the battlefield
+// before the cut, so lower.captureStart never holds it there: every
+// mandatory upkeep or draw trigger the gate counts
+// (lower.MandatoryUpkeepTriggers) fires from this placement
+// (upkeepTriggerFires), its compiled Execute really removes the card
+// (lower.TriggerRemovesSelf — The Abyss's and Crumbling Ashes's targeted
+// Destroy is not), and the trigger's UnlessCost is the seat's own, pure
+// mana, and unpayable from the seat's untapped lands on top of the focus
+// play's mana (the echo population: Earthlink {2}, Thelon's Chant {G}, with
+// no payable mana short as develop's generated starts hold). The heuristic
+// drive pays when it can, so a payable echo leaves the card standing at the
+// cut and is no exception: it stays the gate's named refusal instead of an
+// emitted start play lowers to zero items. A trigger that never fires, a
+// non-mana ask, a payer the seat is not, or a cost the judge cannot read is
+// no proof the card goes. This is why the exception lives here, with the
+// finished start, and not in lower.StartCardRefusal: only the finished start
+// can say whether its drive can pay.
+func upkeepRemovalExcused(reg *cards.Registry, f *StartFile, face *cards.Face, seat int) bool {
+	trigs := lower.MandatoryUpkeepTriggers(face)
+	if len(trigs) == 0 {
+		return false
+	}
+	fm := focusManaCost(reg, f)
+	for _, t := range trigs {
+		if !lower.TriggerRemovesSelf(t) || !upkeepTriggerFires(t, seat, f) {
+			return false
+		}
+		for sa := t.Effect; sa != nil; sa = sa.Sub {
+			if p := sa.Params["UnlessPayer"]; p != "" && !strings.EqualFold(p, "You") {
+				return false // not this seat's payment to judge
+			}
+		}
+		req, _ := triggerUpkeepReq(t, seat, f)
+		if req.hand > 0 || req.grave > 0 || req.field != "" {
+			return false // a non-mana ask: not the drive's pay decision
+		}
+		if req.mana != "" && !upkeepManaShort(reg, f, seat, req.mana, fm) {
+			return false // payable: the drive pays and the card stands
+		}
+	}
+	return true
+}
+
+// upkeepTriggerFires is whether one mandatory upkeep or draw trigger of a
+// seat's battlefield permanent runs during the start's turn-1 drive: it
+// fires from the battlefield (a TriggerZones omitting it never fires there),
+// and a "your upkeep" trigger fires only on the active seat's turn. A
+// trigger that never fires leaves the card standing at the cut, where
+// captureAt's start read refuses it, so it is no removal (triggerUpkeepReq
+// treats the same shapes as unbinding).
+func upkeepTriggerFires(t *cards.Trigger, seat int, f *StartFile) bool {
+	if z := t.Params["TriggerZones"]; z != "" && !zoneOnBattlefield(z) {
+		return false
+	}
+	if strings.EqualFold(t.Params["ValidPlayer"], "You") && seat != f.Active {
+		return false
+	}
+	return true
 }
 
 // counterBindingRefusal is why a start's counters cannot be restated, or "":
@@ -1522,9 +1610,10 @@ func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, f
 		sd = &f.Setup.P1
 	}
 	pool, avail := 0, map[string]int{}
-	for _, name := range sd.Battlefield {
+	tapped := sd.TappedCopies() // per copy, as the lowering binds Tapped names
+	for i, name := range sd.Battlefield {
 		c, ok := reg.Lookup(name)
-		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Land") || slices.Contains(sd.Tapped, name) {
+		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Land") || tapped[i] {
 			continue
 		}
 		pool++
