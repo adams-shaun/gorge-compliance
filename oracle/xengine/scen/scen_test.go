@@ -126,15 +126,10 @@ func TestScenFixtures(t *testing.T) {
 		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
-		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
-			// a state-backed as-enters placement is cast as the start line,
-			// so the entry and its choice are tape events
-			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Banner of Kinship"})
-			if slices.Contains(f.Setup.P0.Battlefield, "Banner of Kinship") {
-				t.Errorf("p0 battlefield %v lists Banner of Kinship: it must be cast, not placed", f.Setup.P0.Battlefield)
-			}
-			focusIs(t, f, 0, "Banner of Kinship", "cast", 0)
-		}}},
+		// staticKeyStart refuses Banner's static (no carrier can observe it),
+		// so the named static refusal stands; casting the card cannot turn an
+		// unobservable static into an exercised key.
+		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static:affected"}},
 		// a ChooseColor card is cast, not placed, so its choice is made by the
 		// engines' own decision; a land refuses by name, and a choice that is
 		// not state (a player) keeps its kind
@@ -181,24 +176,31 @@ func TestScenFixtures(t *testing.T) {
 // state-backed choice is never placed at genesis. The placement would be a
 // real move this turn, so the live cut would carry Object.EnteredThisTurn and
 // Object.AcqTurn, which the lowering's setup drive cannot restate (it places
-// permanents directly, CR 302.6). A static key is served by a cast start; an
-// ability or BecomesTarget trigger key casts the card as a prelude so its own
-// action is still exercised afterwards (a plain cast item would credit the
-// ability or trigger without ever taking it). A choice setup cannot read (a
-// player) keeps its named refusal, a land -- played, not cast -- keeps
-// "as-enters:land", and an event a creature cast this turn cannot produce
-// keeps the placement refusal.
+// permanents directly, CR 302.6). A static key keeps staticKeyStart's own
+// setup (its affected carrier, Compare fields and named refusals) and only the
+// card's placement moves to hand, where the focus casts it; an ability or
+// BecomesTarget trigger key casts the card as a prelude so its own action is
+// still exercised afterwards (a plain cast item would credit the ability or
+// trigger without ever taking it). A choice setup cannot read (a player) keeps
+// its named refusal, a land -- played, not cast -- keeps "as-enters:land", and
+// an event a creature cast this turn cannot produce keeps the placement
+// refusal.
 func TestScenStartAsEntersPlaced(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, tc := range []struct {
 		card, key, focusKind string
 		ability              int
 		prelude              bool
+		carrier              string
+		compare              []string
 	}{
-		{"Adaptive Automaton", "static#0.0", "cast", 0, false},
-		{"Banner of Kinship", "static#0.0", "cast", 0, false},
-		{"Lifecraft Engine", "f0/a0", "ability", 0, true},
-		{"Roaming Throne", "f0/t0", "cast", 0, true}, // the opponent's targeting spell is the focus
+		{"Adaptive Automaton", "static#0.0", "cast", 0, false, "", nil},
+		// staticKeyStart's affected carrier and Compare survive the move to
+		// hand; a plain cast start would drop both.
+		{"Rukarumel, Biologist", "static#0.0", "cast", 0, false, "Memnite", nil},
+		{"Kindred Boon", "static#0.0", "cast", 0, false, "Crimson Kobolds", []string{"keywords"}},
+		{"Lifecraft Engine", "f0/a0", "ability", 0, true, "", nil},
+		{"Roaming Throne", "f0/t0", "cast", 0, true, "", nil}, // the opponent's targeting spell is the focus
 	} {
 		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
 			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
@@ -211,6 +213,12 @@ func TestScenStartAsEntersPlaced(t *testing.T) {
 			if !slices.Contains(res.Start.Setup.P0.Hand, tc.card) || slices.Contains(res.Start.Setup.P0.Battlefield, tc.card) {
 				t.Errorf("p0 hand %v battlefield %v, want %s in hand and not placed",
 					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, tc.card)
+			}
+			if tc.carrier != "" && !slices.Contains(res.Start.Setup.P0.Battlefield, tc.carrier) {
+				t.Errorf("p0 battlefield %v, want staticKeyStart's carrier %q", res.Start.Setup.P0.Battlefield, tc.carrier)
+			}
+			if !slices.Equal(res.Start.Compare, tc.compare) {
+				t.Errorf("compare %v, want %v: the static setup's observation fields were dropped", res.Start.Compare, tc.compare)
 			}
 			if tc.prelude {
 				if res.Start.Prelude != tc.card || res.Start.PreludeSeat != 0 {
@@ -234,6 +242,11 @@ func TestScenStartAsEntersPlaced(t *testing.T) {
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		// A static whose own setup refuses keeps its named refusal: the cast
+		// must not replace a key staticKeyStart cannot observe.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
 		// A trigger whose event a creature cast this turn cannot produce
 		// (an attack, another creature's entry, an upkeep, a chosen-colour
 		// spell) keeps the named refusal instead of a cast-only item.
@@ -3625,6 +3638,11 @@ func TestScenRefusalReasonsUnchanged(t *testing.T) {
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		// A static whose own setup refuses keeps its named refusal: the cast
+		// must not replace a key staticKeyStart cannot observe.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
 		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
 		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},
 	} {

@@ -1497,7 +1497,9 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 // creditDeclared is off: the item id would otherwise credit any lowered start,
 // including one whose cast never activated the ability or fired the trigger.
 // The exercised ledger here is the tape's alone. A static key has no tape
-// entry naming it (credit's declared join is its only reader), so only the
+// entry naming it (credit's declared join is its only reader), so the static
+// cases instead assert the observation setup staticKeyStart builds (its carrier
+// and Compare fields), which a plain cast start would drop, and only the
 // ability and trigger keys are read from the ledger.
 func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 	reg, b := certdeckBuilder(t)
@@ -1507,10 +1509,17 @@ func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 		card, key, focusKind, focusCard string
 		focusSeat                       int
 		prelude, tapeOnly               bool
+		carrier                         string
+		compare                         []string
 	}{
-		{"Adaptive Automaton", "static#0.0", "cast", "Adaptive Automaton", 0, false, false},
-		{"Lifecraft Engine", "f0/a0", "ability", "Lifecraft Engine", 0, true, true},
-		{"Roaming Throne", "f0/t0", "cast", "Murder", 1, true, true}, // the opponent's targeting spell, after the prelude cast
+		{"Adaptive Automaton", "static#0.0", "cast", "Adaptive Automaton", 0, false, false, "", nil},
+		// staticKeyStart's own observation setup -- the affected carrier it
+		// places and the Compare fields it sets -- must survive the move to
+		// hand. A plain cast start drops both and credits the key by id only.
+		{"Rukarumel, Biologist", "static#0.0", "cast", "Rukarumel, Biologist", 0, false, false, "Memnite", nil},
+		{"Kindred Boon", "static#0.0", "cast", "Kindred Boon", 0, false, false, "Crimson Kobolds", []string{oraclediff.CompareKeywords}},
+		{"Lifecraft Engine", "f0/a0", "ability", "Lifecraft Engine", 0, true, true, "", nil},
+		{"Roaming Throne", "f0/t0", "cast", "Murder", 1, true, true, "", nil}, // the opponent's targeting spell, after the prelude cast
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
@@ -1523,6 +1532,12 @@ func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 			if !slices.Contains(res.Start.Setup.P0.Hand, c.card) || slices.Contains(res.Start.Setup.P0.Battlefield, c.card) {
 				t.Fatalf("p0 hand %v battlefield %v, want %s in hand and not placed",
 					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, c.card)
+			}
+			if c.carrier != "" && !slices.Contains(res.Start.Setup.P0.Battlefield, c.carrier) {
+				t.Errorf("p0 battlefield %v, want staticKeyStart's carrier %q", res.Start.Setup.P0.Battlefield, c.carrier)
+			}
+			if !slices.Equal(res.Start.Compare, c.compare) {
+				t.Errorf("compare %v, want %v: the static setup's observation fields were dropped", res.Start.Compare, c.compare)
 			}
 			if c.prelude {
 				if res.Start.Prelude != c.card || res.Start.PreludeSeat != 0 {
@@ -1585,6 +1600,11 @@ func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 		// item that never exercises it.
 		{"Titan of Littjara", "f0/t1", "start:as-enters-stamp"},
 		{"Herald's Horn", "f0/t0", "start:as-enters-stamp"},
+		// A static whose own setup refuses keeps that named refusal: casting
+		// the card cannot make an unobservable static exercised.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
 	} {
 		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
 		if err != nil {

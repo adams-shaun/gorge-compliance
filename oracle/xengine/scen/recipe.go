@@ -208,17 +208,17 @@ func asEntersSupported(f *cards.Face) bool {
 // choice is answered after genesis, so the live cut has the placement as a
 // move this turn: Object.EnteredThisTurn and Object.AcqTurn are stamped and the
 // lowering's setup cannot restate them. The recipe avoids this by casting such
-// a card (asEntersCastKey for a static key, preludeCast for an ability,
-// targetStart's prelude for a BecomesTarget trigger); a path that must place
-// the permanent for its own key (a combat key, a transformed front face) or
-// fire an event a cast this turn cannot produce keeps the refusal.
+// a card (asEntersStaticCast moves a static key's own setup to hand; preludeCast
+// serves an ability, targetStart's prelude a BecomesTarget trigger); a path that
+// must place the permanent for its own key (a combat key, a transformed front
+// face) or fire an event a cast this turn cannot produce keeps the refusal.
 const reasonAsEntersStamp = "start:as-enters-stamp"
 
 // asEntersPlacedRefusal is the refusal of a recipe that places the card on
 // the battlefield although it enters with a choice. It is the shared check of
 // every placement path (recipe's onBF and transformedStart), so a new shape
 // that places the card cannot silently skip it. The state-backed shapes a
-// cast can replace are routed to one before onBF runs (a static cast, an
+// cast can replace are routed to one before onBF runs (asEntersStaticCast, an
 // ability prelude, a BecomesTarget prelude); a land, an unsupported kind, or a
 // trigger a cast this turn cannot fire keeps the narrower reason
 // asEntersRefusal names.
@@ -245,10 +245,10 @@ func asEntersCastRefusal(f *cards.Face) string {
 
 // asEntersPrecast reports whether face's own move to the battlefield runs a
 // state-backed as-enters replacement that a start cannot restate at genesis.
-// The recipe never places such a card: it is cast from hand (asEntersCastKey
-// for a static key, preludeCast for an ability, targetStart's prelude for a
-// BecomesTarget trigger), so the entry, the choice and the turn's stamps are
-// tape events.
+// The recipe never places such a card: it is cast from hand (asEntersStaticCast
+// moves a static key's own setup to hand, preludeCast serves an ability,
+// targetStart's prelude a BecomesTarget trigger), so the entry, the choice and
+// the turn's stamps are tape events.
 //
 // Only the front face is convertible: a back-face key is not cast, and a land
 // is played rather than cast. An unsupported choice leaves no state setup can
@@ -257,16 +257,57 @@ func asEntersPrecast(face *cards.Face, fi int) bool {
 	return fi == 0 && !face.IsLand() && asEntersSupported(face)
 }
 
-// asEntersCastKey reports whether key family fam serves its key as a plain
-// cast start. Only a static key does: the cast is the whole line (a static
-// effect is read from the battlefield), and the key is credited from the item
-// id because no tape entry names a static key. An ability or trigger key is
-// served by a prelude instead (preludeCast, targetStart), so the cast's entry
-// cannot replace the key action the item exists for. A combat key is the
-// creature's attack or block, which a cast focus cannot produce, so it keeps
-// the stamp refusal rather than trading its key for a lowerable start.
-func asEntersCastKey(face *cards.Face, fi int, fam string) bool {
-	return fam == "static" && asEntersPrecast(face, fi)
+// asEntersStaticCast turns a successful static key's setup into a cast. The
+// static's own recipe (staticKeyStart) is the only thing that places the
+// affected carrier, sets the Compare fields and names a refusal the setup
+// cannot serve, so it runs first and its battlefield placements stay; only the
+// key card's placement moves from the battlefield to hand, with the cast's
+// lands, and the focus becomes its cast. The entry, its as-enters choice and
+// the turn's Object.EnteredThisTurn/Object.AcqTurn stamps are then tape events
+// instead of a genesis placement the lowering cannot restate.
+//
+// A static key already focused on the cast (attachStart's Aura path) needs no
+// move. A setup focused on anything else (an Equipment's equip) needs the
+// permanent already on the battlefield, so it keeps the named stamp refusal
+// rather than leaving a focus the cast invalidates. A card the setup left off
+// the battlefield never entered this turn, so it keeps the setup unchanged.
+func asEntersStaticCast(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, f *StartFile) string {
+	if f.Focus != nil {
+		if f.Focus.Kind == "cast" && f.Focus.Card == card && f.Focus.Seat != nil && *f.Focus.Seat == 0 {
+			return ""
+		}
+		return reasonAsEntersStamp
+	}
+	i := slices.Index(f.Setup.P0.Battlefield, card)
+	if i < 0 {
+		return ""
+	}
+	if f.Setup.P0.Attached(card) {
+		return reasonAsEntersStamp
+	}
+	// castStart also plans a spell's additional cost (the lands and the fodder
+	// planCost places), so run it on a scratch file and merge only what the
+	// cast adds beyond the card's placement.
+	cast := newStart(card, f.Key)
+	if why := castStart(reg, b, face, card, generic, cast); why != "" {
+		return why
+	}
+	p0 := &f.Setup.P0
+	p0.Battlefield = append(p0.Battlefield[:i], p0.Battlefield[i+1:]...)
+	p0.Battlefield = append(p0.Battlefield, cast.Setup.P0.Battlefield...)
+	p0.Hand = append(p0.Hand, cast.Setup.P0.Hand...)
+	p0.Graveyard = append(p0.Graveyard, cast.Setup.P0.Graveyard...)
+	p0.Exile = append(p0.Exile, cast.Setup.P0.Exile...)
+	p0.Tokens = append(p0.Tokens, cast.Setup.P0.Tokens...)
+	p0.Tapped = append(p0.Tapped, cast.Setup.P0.Tapped...)
+	p0.Counters = append(p0.Counters, cast.Setup.P0.Counters...)
+	p0.PlayerCounters = append(p0.PlayerCounters, cast.Setup.P0.PlayerCounters...)
+	if l := cast.Setup.P0.Life; l != nil && (p0.Life == nil || *p0.Life < *l) {
+		life := *l
+		p0.Life = &life
+	}
+	f.Focus = cast.Focus
+	return ""
 }
 
 // asEntersPreludeAbility reports whether an activate key's card is cast from
@@ -597,11 +638,6 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if fi > 0 && (face.ManaCost == "" || face.ManaCost == "no cost") {
 		generic = basicFor(c.Faces[0].ManaCost) // a transformed face has no cost: its colours are the front's
 	}
-	if asEntersCastKey(face, fi, fam) {
-		// A static key's placement would lose the entry's turn stamps; the
-		// cast keeps them on the tape. From here the key is a plain cast start.
-		fam, sa, trig = "cast", nil, nil
-	}
 	// An ability or trigger key keeps its own action: the card is cast as a
 	// prelude instead, so the entry, its choice and the turn's stamps are tape
 	// events and the key itself is still exercised afterwards.
@@ -623,6 +659,18 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		p0.Hand = []string{card}
 		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "land"}
 	case "static", "combat":
+		if fam == "static" && asEntersPrecast(face, fi) {
+			// The static's own setup runs first, so its carrier, Compare and
+			// named refusals are kept; only the card's placement becomes a
+			// cast. A refusal here is the key's real gap, not a stamp issue.
+			if why := staticKeyStart(reg, b, c, card, key, f); why != "" {
+				return refuse(why)
+			}
+			if why := asEntersStaticCast(reg, b, face, card, generic, f); why != "" {
+				return refuse(why)
+			}
+			break
+		}
 		if r, ok := onBF(); ok {
 			return r, nil
 		}
