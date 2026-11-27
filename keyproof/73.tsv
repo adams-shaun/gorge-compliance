@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 730809d7-cb8c-495c-8972-7e85b967358e	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:field-surgeon:cast:s1,f:xs:XP:field-surgeon:cast:s1	-	-	-	5f2128bf97e4	-	d08ac856759c	-	-	2026-11-24	xproof
 73089a39-a2f6-4aa2-a058-e6551475153d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sanguine-bond:cast:s1,f:xs:XP:sanguine-bond:cast:s1	-	-	-	8a1b1a193ec0	-	4ee12bdc202e	-	-	2026-11-24	xproof
 73089a39-a2f6-4aa2-a058-e6551475153d	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:sanguine-bond:f0t0:s1,f:xs:XP:sanguine-bond:f0t0:s1	-	-	-	23c4009444b0	-	4ee12bdc202e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-73094bde-5466-41a4-88f9-a98e67f5ed2e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	f0f55e7af905	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+73094bde-5466-41a4-88f9-a98e67f5ed2e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	f0/t0	NULL	owed	refused:start:day-night	-	start	0	0	-	-	-	-	4a9d30814f49	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	f1/t0	NULL	owed	refused:start:day-night	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73733fa5-d292-40ec-8f17-05ba5feb40ab	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:reckless-lackey:combat0.attack:s1,f:xs:XP:reckless-lackey:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9a762c70f777	-	-	2026-11-25	xproof
 73733fa5-d292-40ec-8f17-05ba5feb40ab	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:reckless-lackey:combat0.block:s1,f:xs:XP:reckless-lackey:combat0.block:s1	-	-	-	3aa6ded33acb	-	9a762c70f777	-	-	2026-11-25	xproof
 73733fa5-d292-40ec-8f17-05ba5feb40ab	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Reckless Lackey/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7373b50b-a707-40fb-967a-550c31e6ea59	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	f0f55e7af905	-	2601e50f29a4	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7373b50b-a707-40fb-967a-550c31e6ea59	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	8ced781a5200	-	2601e50f29a4	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 7373b50b-a707-40fb-967a-550c31e6ea59	f0/t0	ChangesZone	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	22e5bea53982	-	2601e50f29a4	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 73757d44-7889-416b-94d2-e730e601ace3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-poisoner:f0t0:s1,f:xs:XP:aether-poisoner:f0t0:s1	-	-	-	d864b561c9cb	-	4b4941820208	-	-	2026-11-24	xproof
 73757d44-7889-416b-94d2-e730e601ace3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-poisoner:f0t0:s1,f:xs:XP:aether-poisoner:f0t0:s1	-	-	-	d864b561c9cb	-	4b4941820208	-	-	2026-11-24	xproof
