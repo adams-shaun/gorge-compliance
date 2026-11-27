@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# follower-check.sh ENGINE [--set FDN] [--pool FILE] [--limit N] [--setup-only]
-#                          [--min-agree PCT] [--out DIR]
+# follower-check.sh ENGINE [--set FDN] [--manifest FILE] [--pool FILE]
+#                          [--require-mana] [--limit N] [--setup-only] [--min-agree PCT] [--out DIR]
 #
 # Level-A scenarios through one registered follower, in one command:
 #   oraclediff gen -level A  ->  filter (--pool, --limit, --setup-only)
@@ -13,8 +13,22 @@
 # the repository root. With an empty request file the runner is not started.
 #
 #   --set S         the set manifest oracle/compliance/manifests/S.json (default FDN)
-#   --pool FILE     keep the items whose .card is a name in FILE (one name per line,
-#                   '#' starts a comment, blank lines skipped; oracle/xengine/pools/README.md)
+#   --manifest FILE read cards from an explicit manifest instead of --set. A
+#                   follower-check pool outside every committed set uses this,
+#                   and --pool without --set builds one from the pool names so
+#                   a card in no committed manifest is selectable too.
+#   --pool FILE     keep only the items whose card is named in FILE (one name per
+#                   line, '#' starts a comment, blank lines skipped;
+#                   oracle/xengine/pools/README.md). Without --set the pool names
+#                   are the card source; with --set they filter within it.
+#   --require-mana  mana-gate mode, for a pool of mana sources: gen adds each
+#                   card's level-A activation item (-mana-abilities), and the
+#                   script exits 2 unless every pool name has an activate-mana
+#                   item both generated and sent (a misspelling, an activation
+#                   the activate family cannot build, a follower preflight
+#                   refusal and a --limit that cuts it are all errors). A pool
+#                   file whose first non-blank line is '#!require-mana' turns it
+#                   on, as oracle/xengine/pools/mana-abilities.txt does.
 #   --limit N       then keep the first N items
 #   --setup-only    every item becomes steps=[] with no payment: gorge and the
 #                   follower both stop at the setup checkpoint, which is compared alone
@@ -36,11 +50,13 @@ cd "$repo"
 
 die() { echo "follower-check: $*" >&2; exit 2; }
 
-engine="" set=FDN pool="" limit="" setup_only=0 min_agree="" out=""
+engine="" set=FDN set_given=0 manifest="" pool="" require_mana=0 limit="" setup_only=0 min_agree="" out=""
 while [ $# -gt 0 ]; do
 	case "$1" in
-	--set) set=${2:?--set needs a set code}; shift 2 ;;
+	--set) set=${2:?--set needs a set code}; set_given=1; shift 2 ;;
+	--manifest) manifest=${2:?--manifest needs a file}; shift 2 ;;
 	--pool) pool=${2:?--pool needs a file}; shift 2 ;;
+	--require-mana) require_mana=1; shift ;;
 	--limit) limit=${2:?--limit needs a number}; shift 2 ;;
 	--setup-only) setup_only=1; shift ;;
 	--min-agree) min_agree=${2:?--min-agree needs a percentage}; shift 2 ;;
@@ -49,11 +65,13 @@ while [ $# -gt 0 ]; do
 	*) [ -z "$engine" ] || die "unexpected argument $1"; engine=$1; shift ;;
 	esac
 done
-[ -n "$engine" ] || die "usage: follower-check.sh ENGINE [--set FDN] [--pool FILE] [--limit N] [--setup-only] [--min-agree PCT] [--out DIR]"
+[ -n "$engine" ] || die "usage: follower-check.sh ENGINE [--set FDN] [--manifest FILE] [--pool FILE] [--require-mana] [--limit N] [--setup-only] [--min-agree PCT] [--out DIR]"
 case "$limit" in *[!0-9]*) die "--limit wants a non-negative integer" ;; esac
 case "$min_agree" in *[!0-9.]* | .) die "--min-agree wants a number" ;; esac
 case "$set" in "" | */* | .*) die "--set wants a set code" ;; esac
 [ -z "$pool" ] || [ -f "$pool" ] || die "--pool $pool: no such file"
+[ -z "$manifest" ] || [ -f "$manifest" ] || die "--manifest $manifest: no such file"
+[ -z "$manifest" ] || [ "$set_given" = 0 ] || die "--manifest and --set name different card sources; pass one"
 command -v jq >/dev/null || die "jq is needed"
 
 GO=${XENGINE_GO:-go}
@@ -101,17 +119,67 @@ run_od() {
 	if [ -n "${XENGINE_ORACLEDIFF:-}" ]; then "$XENGINE_ORACLEDIFF" "$@"; else capped "$out/bin/oraclediff" "$@"; fi
 }
 
-manifest=oracle/compliance/manifests/$set.json
-rm -f "$out/gen.jsonl" "$out/items.jsonl" "$out/req.jsonl" "$out/rows.jsonl" "$out/diff.jsonl" "$out/$engine-prep.jsonl"
-
-# 3. gen
-run_od gen -level A -manifest "$manifest" -out "$out/gen.jsonl"
-
-# 4. filter
 pool_names=$out/pool-names.txt
-filter='.'
 if [ -n "$pool" ]; then
 	sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' "$pool" | sed -e '/^$/d' >"$pool_names"
+	# The directive is the first non-blank line, so a name list cannot hold it by accident.
+	if [ "$(sed -e '/^[[:space:]]*$/d' "$pool" | head -n 1 | tr -d '[:space:]')" = '#!require-mana' ]; then require_mana=1; fi
+fi
+[ "$require_mana" = 0 ] || [ -n "$pool" ] || die "--require-mana needs --pool"
+
+
+# A pool without an explicit --set selects the cards themselves: followers test
+# cards every committed manifest may omit (The Alright Henge), and a card in a
+# set other than FDN is still reachable. --set keeps the set manifest as the
+# card source and the pool as a filter within it.
+if [ -z "$manifest" ]; then
+	if [ "$set_given" = 0 ] && [ -n "$pool" ]; then
+		manifest=$out/manifest.json
+		jq -R -s 'split("\n") | map(select(length > 0)) | {code:"POOL", name:"follower-check pool", cards: map({name: .})}' "$pool_names" >"$manifest"
+		set=POOL
+	else
+		manifest=oracle/compliance/manifests/$set.json
+	fi
+else
+	manifest=$(realpath -m "$manifest")
+	set=$(jq -r '.code // empty' "$manifest" 2>/dev/null || true)
+	[ -n "$set" ] || set=MANIFEST
+fi
+rm -f "$out/gen.jsonl" "$out/items.jsonl" "$out/req.jsonl" "$out/rows.jsonl" "$out/diff.jsonl" "$out/$engine-prep.jsonl"
+
+# 3. gen. -mana-abilities is the mana-gate mode (--require-mana): it appends the
+# level-A activation item for every battlefield mana ability, the step a
+# follower's mana-source mapping reads. A plain --pool or --set keeps the
+# ordinary level-A scenario set, so its behaviour and committed bytes do not
+# move.
+if [ -n "$pool" ] && [ ! -s "$pool_names" ]; then
+	: >"$out/gen.jsonl"
+	: >"$out/gen.jsonl.skips.jsonl"
+else
+	gen_args=(-level A)
+	if [ "$require_mana" = 1 ]; then gen_args+=(-mana-abilities); fi
+	run_od gen "${gen_args[@]}" -manifest "$manifest" -out "$out/gen.jsonl"
+fi
+
+# 3b. (--require-mana) every pool name must have produced an activation item. A
+# misspelling is a "not in corpus" skip; a real mana source the activate family
+# cannot build is a mana-ability skip beside its base item. Either way,
+# filtering it out would leave the gate reporting AGREE for a card whose mana
+# ability it never exercised, so the names that produced none are an input error.
+if [ "$require_mana" = 1 ] && [ -s "$pool_names" ]; then
+	missing=$(jq -r -s --rawfile names "$pool_names" '
+		($names | split("\n") | map(select(length > 0))) as $want
+		| ([.[] | select((.template // "") | startswith("activate-mana")) | .card]) as $got
+		| ($want - $got) | .[]
+	' "$out/gen.jsonl")
+	if [ -n "$missing" ]; then
+		die "pool names with no level-A mana activation item: $(printf '%s\n' "$missing" | paste -sd, -) (see $out/gen.jsonl.skips.jsonl)"
+	fi
+fi
+
+# 4. filter
+filter='.'
+if [ -n "$pool" ]; then
 	jq -c --rawfile names "$pool_names" '($names | split("\n") | map(select(. != "")) | map({key: ., value: true}) | from_entries) as $p | select($p[.card] // false)' \
 		"$out/gen.jsonl" >"$out/pooled.jsonl"
 	src=$out/pooled.jsonl
@@ -124,7 +192,7 @@ if [ -n "$limit" ]; then
 else
 	jq -c "$filter" "$src" >"$out/items.jsonl"
 fi
-rm -f "$out/pooled.jsonl" "$pool_names"
+rm -f "$out/pooled.jsonl"
 
 # 5. prep
 case "$prep" in
@@ -132,6 +200,26 @@ follower-export) run_od follower-export -engine "$engine" -scenarios "$out/items
 forge-export) run_od forge-export -scenarios "$out/items.jsonl" -out "$out/req.jsonl" -runner "$runner" >"$out/export.log" 2>&1 || { cat "$out/export.log" >&2; echo "follower-check: forge-export failed" >&2; exit 1; } ;;
 esac
 [ -e "$out/req.jsonl" ] || : >"$out/req.jsonl"
+
+# 5b. (--require-mana) the activation item must have reached the runner. gen
+# can make it and the follower's preflight refuse it (a mana source the driver
+# does not map), or --limit can cut it; either leaves the named card
+# unexercised under an AGREE, so each is an input error naming the card.
+if [ "$require_mana" = 1 ] && [ -s "$pool_names" ]; then
+	unsent=$(jq -r -s --rawfile names "$pool_names" '
+		($names | split("\n") | map(select(length > 0))) as $want
+		| ([.[] | (.item // .) | select((.template // "") | startswith("activate-mana")) | .card]) as $got
+		| ($want - $got) | .[]
+	' "$out/req.jsonl")
+	if [ -n "$unsent" ]; then
+		reasons=""
+		if [ -s "$out/$engine-prep.jsonl" ]; then
+			reasons=$(jq -r 'select(.id | contains("/activate-mana")) | "\(.id): \(.reason) \(.detail // "")"' "$out/$engine-prep.jsonl" | paste -sd';' -)
+		fi
+		die "pool names whose mana activation item was not sent: $(printf '%s\n' "$unsent" | paste -sd, -) (refused by $engine's preflight: ${reasons:-none}; or cut by --limit)"
+	fi
+fi
+rm -f "$pool_names"
 
 # 6. runner (not started for an empty request file)
 rc_run=0

@@ -1367,7 +1367,9 @@ pr:
 
 # follower-check runs level-A scenarios through one registered follower and
 # diffs them against gorge (scripts/follower-check.sh): ENGINE=phase
-# ARGS='--set FDN --setup-only --pool FILE --limit N --min-agree PCT'.
+# ARGS='--set FDN --setup-only --pool FILE [--require-mana] --limit N --min-agree PCT'.
+# --pool FILE filters; a pool starting '#!require-mana' (oracle/xengine/pools/
+# mana-abilities.txt) or --require-mana also activates and requires every named mana source.
 .PHONY: follower-check
 follower-check:
 	scripts/follower-check.sh $(ENGINE) $(ARGS)
