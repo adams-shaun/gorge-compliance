@@ -29,10 +29,11 @@ type startDiracCall struct {
 	seed     uint64
 	maxTurns int
 	start    *rules.StartSpec
+	focus    dside.StartFocus
 }
 
 // useStartDirac replaces the dirac driver for one test and puts it back after.
-func useStartDirac(t *testing.T, fn func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) dside.Row) {
+func useStartDirac(t *testing.T, fn func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row) {
 	t.Helper()
 	prev := startDirac
 	startDirac = fn
@@ -155,56 +156,61 @@ func TestStartDiracLockstepRows(t *testing.T) {
 	const wantGame = "xs:BLB:thornvault-forager:f0a2"
 
 	t.Run("agree", func(t *testing.T) {
-		var got startDiracCall
-		calls := 0
-		useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) dside.Row {
-			got = startDiracCall{gameID: gameID, set: set, pair: pair, seed: seed, maxTurns: maxTurns, start: start}
-			calls++
-			return dside.Row{Game: gameID, Status: dside.StatusClean, Table: "std-blb", Decisions: 12, Intents: 12}
+		var got []startDiracCall
+		useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
+			got = append(got, startDiracCall{gameID: gameID, set: set, pair: pair, seed: seed, maxTurns: maxTurns, start: start, focus: focus})
+			return dside.Row{Game: gameID, Status: dside.StatusClean, Table: "std-blb", Decisions: 12, Intents: 12, FocusTook: true}
 		})
 		out := t.TempDir()
 		if err := playStartDirac(reg, []string{"testdata/start"}, "BLB", out, false, dside.NewTables(reg)); err != nil {
 			t.Fatal(err)
 		}
-		if calls != 1 {
-			t.Fatalf("dirac answered %d starts, want one row per start file", calls)
+		if len(got) != 2 {
+			t.Fatalf("dirac played %d games, want one per seed gorge played (2)", len(got))
 		}
 		rows := diracRowsOf(t, out)
 		if len(rows) != 1 {
-			t.Fatalf("dirac.jsonl has %d rows, want 1", len(rows))
+			t.Fatalf("dirac.jsonl has %d rows, want 1 (one per key)", len(rows))
 		}
 		if rows[0].Game != wantGame {
 			t.Errorf("row game %q, want %q (the prefix of the file's item ids)", rows[0].Game, wantGame)
 		}
-		// dirac played gorge's position, not a game it dealt itself.
-		if got.gameID != wantGame || got.set != "BLB" {
-			t.Errorf("dirac called with game %q set %q", got.gameID, got.set)
-		}
-		if got.pair[0].Name != "start-p0" || got.pair[1].Name != "start-p1" {
-			t.Errorf("dirac played decks %q %q, want the start file's own", got.pair[0].Name, got.pair[1].Name)
-		}
-		for i, d := range got.pair {
-			if len(d.Cards) != startDeckSize {
-				t.Errorf("seat %d's deck holds %d cards, want %d", i, len(d.Cards), startDeckSize)
+		s1 := rules.SeedForStarter(1, 2, 0)
+		seeds := []uint64{s1, rules.SeedForStarter(s1+1, 2, 0)}
+		for i, c := range got {
+			// dirac played gorge's position and focus play, not a game it dealt itself.
+			if c.gameID != wantGame || c.set != "BLB" {
+				t.Errorf("call %d: game %q set %q", i, c.gameID, c.set)
+			}
+			if c.pair[0].Name != "start-p0" || c.pair[1].Name != "start-p1" {
+				t.Errorf("call %d: decks %q %q, want the start file's own", i, c.pair[0].Name, c.pair[1].Name)
+			}
+			for j, d := range c.pair {
+				if len(d.Cards) != startDeckSize {
+					t.Errorf("call %d: seat %d's deck holds %d cards, want %d", i, j, len(d.Cards), startDeckSize)
+				}
+			}
+			if want := seeds[i]; c.seed != want {
+				t.Errorf("call %d: seed %d, want the file's game seed %d", i, c.seed, want)
+			}
+			if c.maxTurns != 2 { // the file's max_turns 1, plus the watchdog turn
+				t.Errorf("call %d: %d turns, want 2 (the file's max_turns plus one)", i, c.maxTurns)
+			}
+			if c.start == nil || len(c.start.Seats) != 2 {
+				t.Fatalf("call %d: start %+v, want the file's two-seat position", i, c.start)
+			}
+			if len(c.start.Seats[0].Battlefield) != 5 || len(c.start.Seats[1].Battlefield) != 0 {
+				t.Errorf("call %d: position seats %v / %v, want gorge's 5 permanents beside none",
+					i, c.start.Seats[0].Battlefield, c.start.Seats[1].Battlefield)
+			}
+			if len(c.start.Seats[0].Library) != 1 {
+				t.Errorf("call %d: p0 library %v, want the file's one listed card", i, c.start.Seats[0].Library)
+			}
+			if want := (dside.StartFocus{Seat: 0, Card: "Thornvault Forager", Key: "f0/a2", Kind: "ability"}); c.focus != want {
+				t.Errorf("call %d: focus %+v, want gorge's %+v", i, c.focus, want)
 			}
 		}
-		if got.seed != rules.SeedForStarter(1, 2, 0) {
-			t.Errorf("dirac played seed %d, want the file's first game seed %d", got.seed, rules.SeedForStarter(1, 2, 0))
-		}
-		if got.maxTurns != 2 { // the file's max_turns 1, plus the watchdog turn
-			t.Errorf("dirac played %d turns, want 2 (the file's max_turns plus one)", got.maxTurns)
-		}
-		if got.start == nil || len(got.start.Seats) != 2 {
-			t.Fatalf("dirac got start %+v, want the file's two-seat position", got.start)
-		}
-		if len(got.start.Seats[0].Battlefield) != 5 || len(got.start.Seats[1].Battlefield) != 0 {
-			t.Errorf("dirac's position seats %v / %v, want gorge's 5 permanents beside none",
-				got.start.Seats[0].Battlefield, got.start.Seats[1].Battlefield)
-		}
-		if len(got.start.Seats[0].Library) != 1 {
-			t.Errorf("dirac's p0 library %v, want the file's one listed card", got.start.Seats[0].Library)
-		}
-		// Every item of the file reads dirac's answer for the game it was lowered from.
+		// Every item of the file reads dirac's answer for the key.
 		for _, s := range []int{1, 2} {
 			if a := rows[0].Answer(scen.StartID("BLB", "Thornvault Forager", "f0/a2", s)); a != dside.Agree {
 				t.Errorf("seed %d: answer %q, want %q", s, a, dside.Agree)
@@ -212,8 +218,59 @@ func TestStartDiracLockstepRows(t *testing.T) {
 		}
 	})
 
+	t.Run("a seed that diverges is the key's row", func(t *testing.T) {
+		// seed 2 diverges where seed 1 agreed: the row must not read agree.
+		n := 0
+		useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
+			n++
+			if n == 1 {
+				return dside.Row{Game: gameID, Status: dside.StatusClean, Decisions: 9, FocusTook: true}
+			}
+			return dside.Row{Game: gameID, Status: dside.StatusDiverged, Field: "Life[0]", Diff: []string{"Life[0] 20 != 19"}}
+		})
+		out := t.TempDir()
+		if err := playStartDirac(reg, []string{"testdata/start"}, "BLB", out, false, dside.NewTables(reg)); err != nil {
+			t.Fatal(err)
+		}
+		rows := diracRowsOf(t, out)
+		if len(rows) != 1 || rows[0].Status != dside.StatusDiverged {
+			t.Fatalf("rows %+v, want the one diverged row", rows)
+		}
+		if a := rows[0].Answer(scen.StartID("BLB", "Thornvault Forager", "f0/a2", 1)); a != dside.Diverge {
+			t.Errorf("answer %q, want %q", a, dside.Diverge)
+		}
+	})
+
+	t.Run("a key gorge never played is not an agreement", func(t *testing.T) {
+		// the focus play is never offered (the only ability's source is in the
+		// graveyard): gorge refuses the start as not exercised, so dirac has no
+		// game to agree with and must not be asked.
+		dir := t.TempDir()
+		raw := `{"format":"xproof-start-1","card":"Thornvault Forager","key":"f0/a2","players":2,"active":0,"max_turns":1,
+ "setup":{"p0":{"graveyard":["Thornvault Forager"],"battlefield":["Forest"]},"p1":{}},"filler":"basics","seeds":2}`
+		if err := os.WriteFile(filepath.Join(dir, "x.json"), []byte(raw), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		asked := 0
+		useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
+			asked++
+			return dside.Row{Game: gameID, Status: dside.StatusClean}
+		})
+		out := t.TempDir()
+		if err := playStartDirac(reg, []string{dir}, "BLB", out, false, dside.NewTables(reg)); err != nil {
+			t.Fatal(err)
+		}
+		rows := diracRowsOf(t, out)
+		if len(rows) != 1 || rows[0].Status != dside.StatusNA || !strings.Contains(rows[0].Reason, "not played by gorge") {
+			t.Fatalf("rows %+v (dirac asked %d times), want one not_applicable row saying gorge did not play it", rows, asked)
+		}
+		if asked != 0 {
+			t.Errorf("dirac was asked about %d seeds of a key gorge refused", asked)
+		}
+	})
+
 	t.Run("refused", func(t *testing.T) {
-		useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) dside.Row {
+		useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
 			return dside.NotApplicable(gameID, "table std-blb: card not held")
 		})
 		out := t.TempDir()
@@ -251,16 +308,15 @@ func TestStartDiracLockstepRows(t *testing.T) {
 			if err := json.Unmarshal([]byte(raw), f); err != nil {
 				t.Fatalf("%s: %v", c.name, err)
 			}
-			row := startDiracRow(dside.NewTables(reg), "BLB", f,
-				[2]decks.Deck{{Name: "start-p0"}, {Name: "start-p1"}}, 1, &rules.StartSpec{})
-			if row.Status != dside.StatusNA || !strings.HasPrefix(row.Reason, "start not expressible: ") {
-				t.Errorf("%s: row %+v, want not_applicable with the reason", c.name, row)
+			why := startNotExpressible(f, &rules.StartSpec{})
+			if !strings.HasPrefix(why, "start not expressible: ") {
+				t.Errorf("%s: reason %q, want a start not expressible", c.name, why)
 			}
-			if !strings.Contains(row.Reason, c.name) {
-				t.Errorf("%s: reason %q does not name what dirac cannot mirror", c.name, row.Reason)
+			if !strings.Contains(why, c.name) {
+				t.Errorf("%s: reason %q does not name what dirac cannot mirror", c.name, why)
 			}
-			if row.Game != "xs:BLB:thornvault-forager:f0a2" {
-				t.Errorf("%s: row game %q", c.name, row.Game)
+			if g := startGameID("BLB", f); g != "xs:BLB:thornvault-forager:f0a2" {
+				t.Errorf("%s: game id %q", c.name, g)
 			}
 		}
 	})
@@ -280,9 +336,11 @@ func TestStartDiracDivergenceNeverFails(t *testing.T) {
 	}
 
 	out := t.TempDir()
-	useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) dside.Row {
+	useStartDirac(t, func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
+		seat := 1
 		return dside.Row{Game: gameID, Status: dside.StatusDiverged, Table: "std-xp",
-			Decisions: 7, What: "kernel", Field: "p0.life", Diff: []string{"p0.life 20 != 19"}}
+			Decisions: 7, What: "decision", Field: "p0.life", Diff: []string{"p0.life 20 != 19"},
+			FromTurn: 1, ToTurn: 1, Seat: &seat, Kind: "priority"}
 	})
 	if err := playStartDirac(reg, []string{"testdata/start"}, "XP", out, false, dside.NewTables(reg)); err != nil {
 		t.Fatalf("dirac diverged and the run failed: %v", err)
@@ -300,6 +358,9 @@ func TestStartDiracDivergenceNeverFails(t *testing.T) {
 	if r.Status != dside.StatusDiverged || r.Field != "p0.life" || len(r.Diff) != 1 {
 		t.Fatalf("row %+v, want the divergence with its first differing decision", r)
 	}
+	if r.FromTurn != 1 || r.Seat == nil || *r.Seat != 1 || r.Kind != "priority" {
+		t.Errorf("row %+v: the first differing decision names no turn, seat and kind", r)
+	}
 	if r.Answer(scen.StartID("XP", "Thornvault Forager", "f0/a2", 1)) != dside.Diverge {
 		t.Errorf("answer %q, want %q", r.Answer(scen.StartID("XP", "Thornvault Forager", "f0/a2", 1)), dside.Diverge)
 	}
@@ -311,5 +372,34 @@ func TestStartDiracDivergenceNeverFails(t *testing.T) {
 	}
 	if _, err := os.Stat(filepath.Join(run, "dirac.jsonl")); err != nil {
 		t.Fatalf("play -start -dirac wrote no dirac.jsonl: %v", err)
+	}
+}
+
+// TestStartDiracRealLockstep runs the real lockstep (no double) over the in-tree start
+// file on BLB's table: dirac plays the file's scripted position with the focus seat
+// taking the key's ability, and the row records that the key was reached.
+func TestStartDiracRealLockstep(t *testing.T) {
+	reg := testutil.CorpusRegistry(t) // skips without the corpus
+	tables := dside.NewTables(reg)
+	if _, err := tables.Table("BLB"); err != nil {
+		if dside.NoTables(err) {
+			t.Skip(err)
+		}
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	if err := playStartDirac(reg, []string{"testdata/start"}, "BLB", out, false, tables); err != nil {
+		t.Fatal(err)
+	}
+	rows := diracRowsOf(t, out)
+	if len(rows) != 1 {
+		t.Fatalf("dirac.jsonl has %d rows, want 1", len(rows))
+	}
+	r := rows[0]
+	if r.Status != dside.StatusClean || r.Decisions <= 0 || !r.FocusTook {
+		t.Errorf("row %+v, want a clean game that took the focus play", r)
+	}
+	if a := r.Answer(scen.StartID("BLB", "Thornvault Forager", "f0/a2", 2)); a != dside.Agree {
+		t.Errorf("answer %q, want %q", a, dside.Agree)
 	}
 }

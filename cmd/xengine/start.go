@@ -743,6 +743,17 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 	diracN := 0
 	em := &emitter{out: out, items: &items, gorge: &gorge, lowerLog: &lowerLog, hist: hist}
 	games := 0
+	// noteDirac writes one start file's dirac row.
+	noteDirac := func(row dside.Row) error {
+		b, err := jsonl(row)
+		if err != nil {
+			return err
+		}
+		diracLog.Write(b)
+		diracHist[row.Status]++
+		diracN++
+		return nil
+	}
 	for _, path := range files {
 		f, err := readStartFile(path)
 		if err != nil {
@@ -770,6 +781,11 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 				lowerLog.Write(b)
 				hist[statusRefused]++
 			}
+			if tables != nil {
+				if err := noteDirac(dside.NotApplicable(startGameID(set, f), "start not expressible: "+reasonStartPlayerCountersPin)); err != nil {
+					return err
+				}
+			}
 			continue
 		}
 		if err != nil {
@@ -784,25 +800,28 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 			}
 		}
 		seeds := f.gameSeeds()
-		if tables != nil {
-			// dirac's answer for this start's position, on one line, keyed by the
-			// game id every item of the file shares. It is a report beside the
-			// rows: nothing here reads gorge's outcome and nothing gorge writes
-			// reads this (operator 11-24).
-			row := startDiracRow(tables, set, f, [2]decks.Deck{d0, d1}, seeds[0],
-				&rules.StartSpec{Seats: []rules.StartSeat{s0, s1}})
-			b, jerr := jsonl(row)
-			if jerr != nil {
-				return jerr
+		// dirac answers the game gorge plays, so it runs after gorge's focus game
+		// is accepted, once per seed, and only for a seed gorge actually played: a
+		// key gorge refuses (room locked, key not exercised, a lowering refusal)
+		// has no game for dirac to agree with. The seeds' rows fold into one row
+		// per key (startFileRow), the granularity adjudicate reads them at.
+		startSpec := &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}
+		var seedRows []dside.Row
+		gorgeWhy := ""
+		refuse := func(why string) {
+			if gorgeWhy == "" {
+				gorgeWhy = why
 			}
-			diracLog.Write(b)
-			diracHist[row.Status]++
-			diracN++
+		}
+		expressible := ""
+		if tables != nil {
+			expressible = startNotExpressible(f, startSpec)
 		}
 		for s := 1; s <= f.Seeds; s++ {
 			games++
 			id := scen.StartID(set, f.Card, f.Key, s)
 			if locked := roomDoorLocked(reg, f, focus); locked != "" {
+				refuse(reasonStartRoomLocked + ":" + locked)
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartRoomLocked + ":" + locked}})
 				if err != nil {
 					return err
@@ -831,6 +850,7 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 			seed := seeds[s-1]
 			l, reasons, tp, err := lower.Span(reg, pair, seed, opt, xmage, id, name)
 			if err != nil || tp == nil {
+				refuse("gorge's focus game did not play: " + fmt.Sprint(err))
 				row := lowerRow{ID: id, Step: -1, Status: statusPlayError, Field: "play", Gorge: fmt.Sprint(err)}
 				b, _ := jsonl(row)
 				lowerLog.Write(b)
@@ -842,6 +862,7 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 				// timing, an enabler that died), or the scripted combat of a focus
 				// with no play (a combat trigger) was never declared: the game
 				// exercises nothing of the key, so the file is refused, not written.
+				refuse(reasonStartNotExercised)
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartNotExercised}})
 				if err != nil {
 					return err
@@ -851,6 +872,7 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 				continue
 			}
 			if lost := backFaceLost(reg, f, l.Item); lost != "" {
+				refuse(reasonStartFaceLost + ":" + lost)
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartFaceLost + ":" + lost}})
 				if err != nil {
 					return err
@@ -869,6 +891,7 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 				exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
 			}
 			if len(reasons) > 0 {
+				refuse("gorge refused the start: " + strings.Join(reasons, ", "))
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: reasons})
 				if err != nil {
 					return err
@@ -883,6 +906,25 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 				}
 			}
 			if err := em.emit(l, spanFile(l), lower.CheckWindow(reg, l)); err != nil {
+				return err
+			}
+			if tables != nil && expressible == "" {
+				// gorge played and kept this seed: dirac plays the same position
+				// from the same seed. A report beside the rows, never read by them
+				// (operator 11-24).
+				seedRows = append(seedRows, startDirac(tables, startGameID(set, f), set, [2]decks.Deck{d0, d1},
+					seed, startMaxTurns(f), startSpec, startFocusOf(reg, f, focus)))
+			}
+		}
+		if tables != nil {
+			var row dside.Row
+			switch {
+			case expressible != "":
+				row = dside.NotApplicable(startGameID(set, f), expressible)
+			default:
+				row = startFileRow(startGameID(set, f), seedRows, gorgeWhy)
+			}
+			if err := noteDirac(row); err != nil {
 				return err
 			}
 		}
@@ -920,29 +962,73 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 	return nil
 }
 
-// startDirac is one start file's dirac lockstep. A var so a test can put an answer
+// startDirac is one start seed's dirac lockstep. A var so a test can put an answer
 // on the record that no built table produces on demand (a divergence at a chosen
-// decision, a refusal); the real one is dside.StartLockstep, which answers the
-// file's own scripted position and never fails the run.
-var startDirac = func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) dside.Row {
-	row, _ := tables.StartLockstep(gameID, set, pair, seed, maxTurns, start)
-	return row
+// decision, a refusal); the real one is dside.StartLockstep, which plays the seed's
+// scripted position beside gorge and never fails the run.
+var startDirac = func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
+	return tables.StartLockstep(gameID, set, pair, seed, maxTurns, start, focus)
 }
 
-// startDiracRow is the dirac.jsonl line of one start file: the lockstep of its
-// scripted position on the set's table, or the refusal of a position dirac cannot
-// hold (no table, a start it cannot mirror). The row's game id is the prefix its
-// items' ids share, so the adjudication reads every item of the file from it.
-func startDiracRow(tables *dside.Tables, set string, f *startFile, pair [2]decks.Deck, seed uint64, start *rules.StartSpec) dside.Row {
+// startGameID is the id every item of the file shares (the prefix dirac.jsonl keys the
+// file's row by): its first item's id without the seed ordinal.
+func startGameID(set string, f *startFile) string {
 	id := scen.StartID(set, f.Card, f.Key, 1)
 	gameID, _, ok := dside.SplitID(id)
 	if !ok {
 		gameID = strings.TrimSuffix(id, ":s1")
 	}
-	if why := startNotExpressible(f, start); why != "" {
-		return dside.NotApplicable(gameID, why)
+	return gameID
+}
+
+// startFocusOf is the play of the file's focus game as dirac's focus policy takes it:
+// the same seat, card and key gorge's game.Focus names.
+func startFocusOf(reg *cards.Registry, f *startFile, focus game.Focus) dside.StartFocus {
+	out := dside.StartFocus{Seat: focus.Seat, Card: canonicalCard(reg, focus.Card), Kind: focus.Kind}
+	if focus.Kind == "ability" {
+		face := "0"
+		if m := keyFA.FindStringSubmatch(f.Key); m != nil {
+			face = m[1]
+		}
+		out.Key = fmt.Sprintf("f%s/a%d", face, focus.Ability)
 	}
-	return startDirac(tables, gameID, set, pair, seed, startMaxTurns(f), start)
+	return out
+}
+
+// startFileRow is one start file's dirac.jsonl row, from the lockstep of each seed
+// gorge played (the row is the key's: adjudicate reads one row for every seed item
+// of it). A seed that diverged makes the row diverged, so no seed's divergence is
+// hidden; otherwise the first seed dirac could not carry through (a hang, an
+// unmodelled rule, a capacity, a focus play it never reached) is the row, and only
+// seeds that all agreed make it clean. A file gorge played no seed of has no game for
+// dirac to agree with: not_applicable, saying why gorge refused it.
+func startFileRow(gameID string, rows []dside.Row, gorgeWhy string) dside.Row {
+	if len(rows) == 0 {
+		return dside.NotApplicable(gameID, "start not played by gorge: "+gorgeWhy)
+	}
+	rank := func(status string) int {
+		switch status {
+		case dside.StatusDiverged:
+			return 0
+		case dside.StatusHang:
+			return 1
+		case dside.StatusUnmodelled:
+			return 2
+		case dside.StatusCapacity:
+			return 3
+		case dside.StatusNA:
+			return 4
+		}
+		return 5
+	}
+	best := rows[0]
+	for _, r := range rows[1:] {
+		if rank(r.Status) < rank(best.Status) {
+			best = r
+		}
+	}
+	best.Game = gameID
+	return best
 }
 
 // kernelMirrored is every field of the pinned rules.StartSeat dirac's kernel mirrors

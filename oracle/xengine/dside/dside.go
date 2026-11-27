@@ -9,6 +9,7 @@ package dside
 import (
 	"errors"
 	"fmt"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -64,6 +65,13 @@ type Row struct {
 	Field      string   `json:"field,omitempty"`
 	Diff       []string `json:"diff,omitempty"`
 	Implicates []string `json:"implicates,omitempty"`
+	// Seat and Kind are the seat and the kind of the decision at which a start's
+	// lockstep first differed (StartLockstep: the decision whose answer the two
+	// engines read differently; Diff holds gorge's value beside dirac's), and
+	// FocusTook that dirac's side of the game took the start's focus play.
+	Seat      *int   `json:"seat,omitempty"`
+	Kind      string `json:"kind,omitempty"`
+	FocusTook bool   `json:"focus_took,omitempty"`
 }
 
 // Locate sets the row's turns from the tape of the game the lockstep's answers
@@ -241,27 +249,47 @@ func (t *Tables) Lockstep(gameID, code string, pair [2]decks.Deck, seed uint64, 
 	return t.lockstep(row, set, pair, seed, maxTurns, nil, nil)
 }
 
+// StartFocus is the play an xproof start file exists for, as dirac's focus policy
+// takes it: the seat that takes it, the card it is for, the coverage key ("f<face>/a<i>"
+// for an ability) and the kind of play ("ability", "cast", "land", "attack", "block"
+// or "" for none forced).
+type StartFocus struct {
+	Seat int
+	Card string
+	Key  string
+	Kind string
+}
+
 // StartLockstep plays pair on code's table in lockstep with gorge from a scripted
 // position (start, the rules.StartSpec of an xproof start file) rather than the
 // ordinary genesis, as Lockstep plays a dealt game: gorge's side opens in it through
 // rules.Config.Start (Matchup.Config copies it) and dirac's kernel mirrors it from the
 // same deck indices (dirac/oracle kernelStart), so both engines answer the decisions
-// of one position and the row is dirac's answer beside gorge's on that start.
+// of one position.
 //
-// Unlike Lockstep its answers are no one's script: an xproof start item is lowered
-// from gorge's own focus game, not from this replay, so the row is the answer alone
-// and Locate is not called on it (the divergence's turns are the lockstep's, not the
-// item's). start must be a position dirac can mirror; the caller refuses the ones
-// with no kernel equivalent (player counters, minted tokens, commander
-// designations), and a counter kind the kernel does not keep is refused here, naming
-// it, as any other pair the table does not hold is.
-func (t *Tables) StartLockstep(gameID, code string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) (Row, []decision.Intent) {
+// The focus seat plays through dirac's own oracle.FocusPolicy for focus (the dirac
+// counterpart of game.Focus: from turn 1's first main phase on it takes the key's
+// ability, cast, land play or attack at its first chance) and every other decision
+// is the explore policy's, so the lockstep exercises the key the start file exists
+// for. Row.FocusTook says whether it did. A start whose focus play is never taken
+// (dirac or gorge does not offer it in this game) is not an agreement: the row is
+// not_applicable, naming it, rather than a clean game that never reached the key.
+// On a divergence the row carries the turn, seat and kind of the decision where the
+// engines first differed, and Diff holds gorge's value beside dirac's.
+//
+// start must be a position dirac can mirror; the caller refuses the ones with no
+// kernel equivalent (player counters, minted tokens, commander designations), and a
+// counter kind the kernel does not keep is refused here, naming it, as any other pair
+// the table does not hold is.
+func (t *Tables) StartLockstep(gameID, code string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus StartFocus) Row {
 	row := Row{Game: gameID, Table: "std-" + strings.ToLower(code)}
 	set, err := t.Table(code)
 	if err != nil {
-		return refused(row, err)
+		r, _ := refused(row, err)
+		return r
 	}
-	return t.lockstep(row, set, pair, seed, maxTurns, nil, start)
+	r, _ := t.lockstep(row, set, pair, seed, maxTurns, nil, &startRun{spec: start, focus: focus})
+	return r
 }
 
 // CommanderLockstep plays a 1v1 Commander pair on dirac's Commander table
@@ -283,9 +311,16 @@ func refused(row Row, err error) (Row, []decision.Intent) {
 	return row, nil
 }
 
+// startRun is what makes a lockstep game a start's: the scripted position and the
+// focus play the focus seat takes from it.
+type startRun struct {
+	spec  *rules.StartSpec
+	focus StartFocus
+}
+
 // lockstep plays pair on set, a Commander game with commanders (indices into each
-// deck) when non-nil, from the scripted position start when non-nil (StartLockstep).
-func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int, start *rules.StartSpec) (Row, []decision.Intent) {
+// deck) when non-nil, from the scripted position of sr when non-nil (StartLockstep).
+func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int, sr *startRun) (Row, []decision.Intent) {
 	refuse := func(err error) (Row, []decision.Intent) { return refused(row, err) }
 	tbl, _, _, err := set.Matchup(entries(pair[0]), entries(pair[1]))
 	if err != nil {
@@ -311,6 +346,10 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 	if commanders != nil {
 		m.Commander = true
 		m.Commanders = *commanders
+	}
+	var start *rules.StartSpec
+	if sr != nil {
+		start = sr.spec
 	}
 	if start != nil {
 		// A position gorge itself would not open in is a refusal, not a
@@ -339,6 +378,16 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		res     oracle.Result
 		intents []decision.Intent
 	}
+	var pol oracle.Policy = oracle.ExplorePolicy(seed)
+	var ft *focusTrack
+	if sr != nil {
+		var err error
+		if ft, err = newFocusTrack(t.reg, m, sr.focus, pol); err != nil {
+			oracle.CloseSide(k)
+			return refuse(err)
+		}
+		pol = ft
+	}
 	done := make(chan outcome, 1)
 	go func() {
 		defer oracle.CloseSide(k)
@@ -346,18 +395,132 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		rc := oracle.RunConfig{Config: cfg, MaxTurns: int32(maxTurns), Finish: func(g *oracle.GorgeSide) {
 			o.intents = append(o.intents, g.E.L.Intents...)
 		}}
-		o.res = oracle.Lockstep(m, seed, k, oracle.ExplorePolicy(seed), rc)
+		o.res = oracle.Lockstep(m, seed, k, pol, rc)
 		done <- o
 	}()
 	select {
 	case o := <-done:
 		row.classify(o.res, m)
 		row.Intents = len(o.intents)
+		if ft != nil {
+			ft.finish(&row, o.res)
+		}
 		return row, o.intents
 	case <-time.After(GameTimeout):
 		row.Status = StatusHang
 		return row, nil
 	}
+}
+
+// focusTrack is the policy of a start's lockstep game: dirac's FocusPolicy for the
+// focus seat over the explore policy, which also answers every other decision. It
+// records, for each decision it answers, the turn, seat and kind (trail), and whether
+// the focus seat took the focus play (took), so the row can say where the engines first
+// differed and whether the game reached the key at all.
+type focusTrack struct {
+	pol   oracle.Policy
+	f     StartFocus
+	refs  []oracle.Ref
+	want  func(oracle.CanonKind) bool
+	took  int
+	trail []trailStep
+}
+
+type trailStep struct {
+	turn int32
+	seat uint8
+	kind string
+}
+
+// newFocusTrack builds the policy for focus on m: the focus seat's instances of the
+// card are the focus refs (Matchup.InstanceCard's layout: seat by seat, card by card),
+// and the focus seat only passes until turn 1's first main phase, as game.Focus waits.
+func newFocusTrack(reg *cards.Registry, m *oracle.Matchup, f StartFocus, base oracle.Policy) (*focusTrack, error) {
+	ft := &focusTrack{f: f}
+	spec := oracle.FocusSpec{Seat: uint8(f.Seat), Turn: 1, Phase: "main1"}
+	if f.Kind == "ability" {
+		spec.Keys = []string{f.Key}
+	}
+	if f.Card != "" {
+		c, ok := reg.Lookup(f.Card)
+		if !ok {
+			return nil, fmt.Errorf("focus card %q not found", f.Card)
+		}
+		off := 0
+		for s := 0; s < f.Seat; s++ {
+			off += len(m.SeatDeck(s))
+		}
+		for i, d := range m.SeatDeck(f.Seat) {
+			if d != c {
+				continue
+			}
+			if off+i >= oracle.MaxInst {
+				return nil, fmt.Errorf("focus card instance %d is past the %d the projection holds", off+i, oracle.MaxInst)
+			}
+			spec.Refs = append(spec.Refs, oracle.Ref(off+i))
+		}
+	}
+	ft.refs = spec.Refs
+	switch f.Kind {
+	case "ability":
+		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActActivate }
+	case "cast":
+		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActCast || k == oracle.ActCastFace }
+	case "land":
+		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActPlayLand }
+	case "attack":
+		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActAttack }
+	}
+	ft.pol = oracle.FocusPolicy(base, spec)
+	return ft, nil
+}
+
+// decisionKindName is the name of a canonical decision kind, for a row.
+func decisionKindName(k oracle.DKind) string {
+	names := map[oracle.DKind]string{
+		oracle.DPriority: "priority", oracle.DAttackers: "attackers", oracle.DBlockers: "blockers",
+		oracle.DTarget: "target", oracle.DModes: "modes", oracle.DChoose: "choose",
+		oracle.DTriggerOrder: "trigger_order", oracle.DMulligan: "mulligan", oracle.DNone: "none",
+		oracle.DTriggerOptional: "trigger_optional", oracle.DArrange: "arrange",
+		oracle.DReplacement: "replacement", oracle.DStartingPlayer: "starting_player",
+		oracle.DCommanderZone: "commander_zone",
+	}
+	if n, ok := names[k]; ok {
+		return n
+	}
+	return "kind" + strconv.Itoa(int(k))
+}
+
+func (ft *focusTrack) Pick(c *oracle.PickCtx) oracle.Canon {
+	a := ft.pol.Pick(c)
+	st := trailStep{seat: c.D.Player, kind: decisionKindName(c.D.Kind)}
+	if c.G != nil {
+		st.turn = int32(c.G.Turn())
+	}
+	ft.trail = append(ft.trail, st)
+	if ft.want != nil && int(c.D.Player) == ft.f.Seat && ft.want(a.Kind()) && slices.Contains(ft.refs, a.Src()) {
+		ft.took++
+	}
+	return a
+}
+
+// finish completes row from the finished game: whether the focus play was taken, and a
+// divergence's turn, seat and kind from the decision it was found at (the last one
+// answered when the engines differed before the next was picked).
+func (ft *focusTrack) finish(row *Row, res oracle.Result) {
+	row.FocusTook = ft.took > 0
+	if row.Status == StatusClean && ft.want != nil && ft.took == 0 {
+		row.Status = StatusNA
+		row.Reason = "dirac's lockstep game never took the " + ft.f.Kind + " focus play of " + ft.f.Card + ": the key was not reached on dirac's side"
+		return
+	}
+	if res.Div == nil || len(ft.trail) == 0 {
+		return
+	}
+	st := ft.trail[min(max(res.Div.At, 0), len(ft.trail)-1)]
+	seat := int(st.seat)
+	row.Seat, row.Kind = &seat, st.kind
+	row.FromTurn, row.ToTurn = st.turn, st.turn
 }
 
 // openSide opens dirac's side of one lockstep game. The kernel's start loader panics

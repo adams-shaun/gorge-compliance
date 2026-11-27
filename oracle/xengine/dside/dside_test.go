@@ -11,6 +11,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/dirac/cardset"
+	"github.com/adams-shaun/gorge/dirac/oracle"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
@@ -377,7 +378,7 @@ func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
 	}
 	// The position gorge opens in is the one dirac mirrors: both sides take their
 	// first decision from it, so the row is an answer and not a setup refusal.
-	row, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, pos(""))
+	row, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, &startRun{spec: pos("")})
 	if row.Status == StatusNA {
 		t.Fatalf("the start was refused: %s", row.Reason)
 	}
@@ -414,7 +415,7 @@ func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
 			Battlefield: l0[:1], Attach: []rules.StartAttach{{Card: l0[1], ToSeat: 0, To: 9999}},
 		}, {}}}, "out of range"},
 	} {
-		r, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, c.spec)
+		r, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, &startRun{spec: c.spec})
 		if r.Status != StatusNA {
 			t.Errorf("%s: row %+v, want not_applicable", c.name, r)
 			continue
@@ -422,5 +423,34 @@ func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
 		if !strings.Contains(r.Reason, c.want) {
 			t.Errorf("%s: reason %q does not name %s", c.name, r.Reason, c.want)
 		}
+	}
+}
+
+// TestFocusTrackFinish: a clean lockstep game that never took the focus play is not an
+// agreement (the key was not reached on dirac's side), and a divergence is located at
+// the decision it was found at.
+func TestFocusTrackFinish(t *testing.T) {
+	t.Parallel()
+	ft := &focusTrack{
+		f:     StartFocus{Seat: 0, Card: "C", Key: "f0/a1", Kind: "ability"},
+		want:  func(oracle.CanonKind) bool { return true },
+		trail: []trailStep{{turn: 1, seat: 0, kind: "priority"}, {turn: 2, seat: 1, kind: "target"}},
+	}
+	row := Row{Status: StatusClean}
+	ft.finish(&row, oracle.Result{})
+	if row.Status != StatusNA || !strings.Contains(row.Reason, "never took the ability focus play") {
+		t.Errorf("clean game with no focus play: %+v, want not_applicable naming it", row)
+	}
+	ft.took = 1
+	row = Row{Status: StatusDiverged}
+	ft.finish(&row, oracle.Result{Div: &oracle.Divergence{At: 1}})
+	if row.Seat == nil || *row.Seat != 1 || row.Kind != "target" || row.FromTurn != 2 || row.ToTurn != 2 || !row.FocusTook {
+		t.Errorf("divergence at decision 1: %+v, want turn 2 seat 1 target", row)
+	}
+	// a divergence found before the next decision was picked reads the last answered one
+	row = Row{Status: StatusDiverged}
+	ft.finish(&row, oracle.Result{Div: &oracle.Divergence{At: 5}})
+	if row.Seat == nil || *row.Seat != 1 || row.Kind != "target" {
+		t.Errorf("divergence past the trail: %+v, want the last decision", row)
 	}
 }
