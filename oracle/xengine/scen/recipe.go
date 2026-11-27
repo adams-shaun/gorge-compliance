@@ -208,17 +208,20 @@ func asEntersSupported(f *cards.Face) bool {
 // choice is answered after genesis, so the live cut has the placement as a
 // move this turn: Object.EnteredThisTurn and Object.AcqTurn are stamped and the
 // lowering's setup cannot restate them. The recipe avoids this by casting such
-// a card instead (asEntersCastKey); only a path that must place the permanent
-// for its own key (a combat key, a transformed front face) keeps the refusal.
+// a card (asEntersCastKey for a static key, preludeCast for an ability,
+// targetStart's prelude for a BecomesTarget trigger); a path that must place
+// the permanent for its own key (a combat key, a transformed front face) or
+// fire an event a cast this turn cannot produce keeps the refusal.
 const reasonAsEntersStamp = "start:as-enters-stamp"
 
 // asEntersPlacedRefusal is the refusal of a recipe that places the card on
 // the battlefield although it enters with a choice. It is the shared check of
 // every placement path (recipe's onBF and transformedStart), so a new shape
 // that places the card cannot silently skip it. The state-backed shapes a
-// cast can replace (static, activate, a trigger not already cast) are routed
-// to a cast before onBF runs; a land or an unsupported kind keeps the narrower
-// reason asEntersRefusal names.
+// cast can replace are routed to one before onBF runs (a static cast, an
+// ability prelude, a BecomesTarget prelude); a land, an unsupported kind, or a
+// trigger a cast this turn cannot fire keeps the narrower reason
+// asEntersRefusal names.
 func asEntersPlacedRefusal(f *cards.Face) string {
 	if !asEnters(f) {
 		return ""
@@ -240,43 +243,89 @@ func asEntersCastRefusal(f *cards.Face) string {
 	return ""
 }
 
-// asEntersCastKey reports whether key family fam would place face on the
-// battlefield although the face's as-enters choice is state-backed. The recipe
-// serves such a key as a plain cast start instead: a genesis placement runs
-// the replacement as a real move this turn, so the live cut carries
-// Object.EnteredThisTurn and Object.AcqTurn, and the lower's setup drive
-// places permanents directly (CR 302.6) and cannot restate either stamp. A
-// cast puts the entry, the choice and both stamps on the tape, where the
-// replay produces them from the same cast.
+// asEntersPrecast reports whether face's own move to the battlefield runs a
+// state-backed as-enters replacement that a start cannot restate at genesis.
+// The recipe never places such a card: it is cast from hand (asEntersCastKey
+// for a static key, preludeCast for an ability, targetStart's prelude for a
+// BecomesTarget trigger), so the entry, the choice and the turn's stamps are
+// tape events.
 //
-// Only the front face is convertible: a back-face key is not cast, and a
-// Transformed or Cycled trigger needs the permanent placed for its own event.
-// A land is played rather than cast, and an unsupported choice leaves no state
-// setup can read, so both keep asEntersPlacedRefusal's named refusal. A
-// trigger that already casts the card (a self-ETB or self-cast trigger) or a
-// ChooseColor trigger met by the cast (asEntersStart) already has the entry on
-// the tape and keeps its own path. A combat key is the creature's attack or
-// block, which a cast focus cannot produce, so it keeps the stamp refusal
-// rather than trading its key for a lowerable start.
-func asEntersCastKey(face *cards.Face, fi int, fam string, trig *cards.Trigger) bool {
-	if fi != 0 || face.IsLand() || !asEntersSupported(face) {
+// Only the front face is convertible: a back-face key is not cast, and a land
+// is played rather than cast. An unsupported choice leaves no state setup can
+// read, so all keep asEntersPlacedRefusal's named refusal.
+func asEntersPrecast(face *cards.Face, fi int) bool {
+	return fi == 0 && !face.IsLand() && asEntersSupported(face)
+}
+
+// asEntersCastKey reports whether key family fam serves its key as a plain
+// cast start. Only a static key does: the cast is the whole line (a static
+// effect is read from the battlefield), and the key is credited from the item
+// id because no tape entry names a static key. An ability or trigger key is
+// served by a prelude instead (preludeCast, targetStart), so the cast's entry
+// cannot replace the key action the item exists for. A combat key is the
+// creature's attack or block, which a cast focus cannot produce, so it keeps
+// the stamp refusal rather than trading its key for a lowerable start.
+func asEntersCastKey(face *cards.Face, fi int, fam string) bool {
+	return fam == "static" && asEntersPrecast(face, fi)
+}
+
+// asEntersPreludeAbility reports whether an activate key's card is cast from
+// hand before the ability. A {T}/{Q} cost cannot be paid by a creature that
+// entered this turn (CR 302.6), so that ability keeps the placement refusal
+// instead; preludeCast moves the card its cost plan placed into hand, so an
+// ability activated from hand or graveyard is left alone.
+func asEntersPreludeAbility(face *cards.Face, fi int, sa *cards.SA) bool {
+	if !asEntersPrecast(face, fi) || sa == nil || face.ManaCost == "" || face.ManaCost == "no cost" {
 		return false
 	}
-	switch fam {
-	case "static", "activate":
-		return true
-	case "combat":
-		return false
-	case "trigger":
-		if trig == nil || trig.Mode == "Transformed" || trig.Mode == "Cycled" || triggerCastsCard(trig) {
+	for _, tok := range splitCost(sa.Params["Cost"]) {
+		if tok == "T" || tok == "Q" {
 			return false
 		}
-		if kind, _ := asEntersKind(face); kind == "color" && asEntersCastTrigger(trig) {
-			return false
-		}
-		return true
 	}
-	return false
+	return true
+}
+
+// asEntersPreludeTrigger reports whether a trigger key's card is cast from
+// hand before the trigger's own line. Only BecomesTarget works this way: its
+// targeter is an instant, so the controller can cast the card at turn 1's
+// first main and the opponent can target it in the same turn. An attack,
+// upkeep, another permanent's entry or a spell of another colour cannot be
+// produced by a creature cast this turn (it is summoning sick), so those
+// triggers keep the named placement refusal instead of a cast-only item whose
+// trigger never fires.
+func asEntersPreludeTrigger(face *cards.Face, fi int, trig *cards.Trigger) bool {
+	if !asEntersPrecast(face, fi) || trig == nil || trig.Mode != "BecomesTarget" {
+		return false
+	}
+	if face.ManaCost == "" || face.ManaCost == "no cost" {
+		return false
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return false
+	}
+	return true
+}
+
+// preludeCast moves the key card its ability's cost plan placed from the
+// battlefield to hand, pays the cast's lands, and declares the prelude the
+// focus player casts before the ability. A card the plan leaves in hand or the
+// graveyard is activated there: it never entered, so it needs no prelude.
+func preludeCast(face *cards.Face, card string, f *StartFile) string {
+	i := slices.Index(f.Setup.P0.Battlefield, card)
+	if i < 0 {
+		return ""
+	}
+	if FieldBlock(face) == "aura-unattached" {
+		// an Aura's prelude cast would need its bearer on the battlefield, and
+		// the ability plan attached it to one; keep the placement refusal
+		return reasonAsEntersStamp
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield[:i], f.Setup.P0.Battlefield[i+1:]...)
+	f.Setup.P0.Hand = append(f.Setup.P0.Hand, card)
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, landsFor(splitCost(face.ManaCost), basicFor(face.ManaCost))...)
+	f.Prelude, f.PreludeSeat = card, 0
+	return ""
 }
 
 // asEntersRefusal is the refusal of a card whose as-enters choice a start
@@ -296,9 +345,10 @@ func asEntersRefusal(f *cards.Face) string {
 
 // asEntersCastTrigger reports whether a ChooseColor as-enters trigger is met
 // by casting the card: a state trigger that reads the chosen colour, or
-// "whenever a player casts a spell of the chosen color". A supported choice
-// on a trigger that places the permanent is served by asEntersCastKey's plain
-// cast; an unsupported one keeps asEntersPlacedRefusal's named refusal.
+// "whenever a player casts a spell of the chosen color". This path serves the
+// trigger by the cast itself. A supported choice on any other trigger that
+// would place the permanent is served only by asEntersPreludeTrigger
+// (BecomesTarget); the rest keep asEntersPlacedRefusal's named refusal.
 func asEntersCastTrigger(trig *cards.Trigger) bool {
 	if trig == nil {
 		return false
@@ -320,8 +370,9 @@ func asEntersCastTrigger(trig *cards.Trigger) bool {
 // rather than a genesis placement: "when this enters" (ChangesZone to the
 // battlefield on Self) and "when you cast this spell" (SpellCast on Self).
 // Every other trigger mode places the permanent: a supported as-enters choice
-// there is served by asEntersCastKey's plain cast, and an unsupported one
-// keeps asEntersPlacedRefusal's named refusal.
+// there is served by asEntersPreludeTrigger only when the event is a target
+// (BecomesTarget), and an unsupported one keeps asEntersPlacedRefusal's named
+// refusal. A trigger a cast this turn cannot fire keeps that refusal too.
 func triggerCastsCard(trig *cards.Trigger) bool {
 	if trig == nil {
 		return false
@@ -349,8 +400,8 @@ func triggerCastsCard(trig *cards.Trigger) bool {
 //     the focus bot casts the key card first, the bots then cast the carriers.
 //
 // Another supported choice on a trigger that places the permanent is served
-// by asEntersCastKey's plain cast; an unsupported one keeps the placement
-// refusal (asEntersPlacedRefusal).
+// by asEntersPreludeTrigger (a BecomesTarget prelude) or keeps the placement
+// refusal; an unsupported one keeps the refusal (asEntersPlacedRefusal).
 func asEntersStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	if face.IsLand() || !asEntersColour(face) {
 		return asEntersRefusal(face)
@@ -546,11 +597,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if fi > 0 && (face.ManaCost == "" || face.ManaCost == "no cost") {
 		generic = basicFor(c.Faces[0].ManaCost) // a transformed face has no cost: its colours are the front's
 	}
-	if asEntersCastKey(face, fi, fam, trig) {
-		// A placement would lose the entry's turn stamps; the cast keeps them
-		// on the tape. From here the key is a plain cast start.
+	if asEntersCastKey(face, fi, fam) {
+		// A static key's placement would lose the entry's turn stamps; the
+		// cast keeps them on the tape. From here the key is a plain cast start.
 		fam, sa, trig = "cast", nil, nil
 	}
+	// An ability or trigger key keeps its own action: the card is cast as a
+	// prelude instead, so the entry, its choice and the turn's stamps are tape
+	// events and the key itself is still exercised afterwards.
+	preludeAbility := fam == "activate" && asEntersPreludeAbility(face, fi, sa)
+	preludeTrigger := fam == "trigger" && asEntersPreludeTrigger(face, fi, trig)
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield
 		if why := asEntersPlacedRefusal(face); why != "" {
 			r, _ := refuse(why)
@@ -588,9 +644,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
 			// A ChooseColor state or cast trigger is met on the line after
 			// the cast (asEntersStart): the three engines make the colour
-			// choice themselves. Every other as-enters choice is refused by
-			// asEntersPlacedRefusal below unless the trigger's own path casts
-			// the card, which puts the entry and choice on the tape.
+			// choice themselves. A BecomesTarget trigger is served by a
+			// prelude cast (targetStart); every other as-enters choice keeps
+			// asEntersPlacedRefusal's named refusal, since a cast this turn
+			// cannot produce its event.
 			if kind, supported := asEntersKind(face); supported && kind == "color" && asEntersCastTrigger(trig) {
 				if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
 					return refuse(why)
@@ -605,14 +662,21 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 				if why := asEntersCastRefusal(face); why != "" {
 					return refuse(why)
 				}
-			} else if r, ok := onBF(); ok {
-				return r, nil
+			} else if !preludeAbility && !preludeTrigger {
+				if r, ok := onBF(); ok {
+					return r, nil
+				}
 			}
 		}
 		idx, _ := strconv.Atoi(m[3])
 		if fam == "activate" {
 			if why := abilityFocus(reg, b, face, card, generic, idx, sa, f); why != "" {
 				return refuse(why)
+			}
+			if preludeAbility {
+				if why := preludeCast(face, card, f); why != "" {
+					return refuse(why)
+				}
 			}
 			break
 		}
@@ -667,7 +731,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 				return refuse(why)
 			}
 		case "BecomesTarget":
-			if why := targetStart(reg, b, face, card, trig, f); why != "" {
+			if why := targetStart(reg, b, face, card, trig, f, preludeTrigger); why != "" {
 				return refuse(why)
 			}
 		case "LifeGained":

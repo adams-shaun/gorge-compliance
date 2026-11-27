@@ -744,6 +744,14 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 // lowering rows and the rendered start. A play error is fatal.
 func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte) {
 	t.Helper()
+	items, rows, raw, _ := playStartFileAt(t, reg, st)
+	return items, rows, raw
+}
+
+// playStartFileAt is playStartFile that also returns the play directory, so a
+// caller can read the exercised ledger the tape alone filled.
+func playStartFileAt(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte, string) {
+	t.Helper()
 	raw, err := st.Marshal()
 	if err != nil {
 		t.Fatal(err)
@@ -778,7 +786,7 @@ func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]ora
 	}); err != nil {
 		t.Fatal(err)
 	}
-	return items, rows, raw
+	return items, rows, raw, out
 }
 
 // TestStartChangesZoneTriggersAreExercised: the ChangesZone/ChangesZoneAll
@@ -1481,18 +1489,28 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 // at genesis. That placement is a real move this turn, so the live cut carries
 // Object.EnteredThisTurn and Object.AcqTurn -- the summoning-sick stamp the
 // lowering's setup drive cannot restate (it places permanents directly, CR
-// 302.6). The recipe casts the card as the start line instead: the entry, the
-// choose answer and both turn stamps are tape events, so every seed lowers to
-// one item. A creature start whose answer is not state setup can read (Sower
-// of Discord chooses players) keeps a named refusal rather than an item the
-// lower must refuse downstream.
+// 302.6). A static key is cast as the start line; an ability or BecomesTarget
+// trigger key casts the card as a prelude and then takes the key's own action,
+// so the entry, the choose answer and both turn stamps are tape events without
+// turning an honest refusal into an item that credits a key it never took.
+//
+// creditDeclared is off: the item id would otherwise credit any lowered start,
+// including one whose cast never activated the ability or fired the trigger.
+// The exercised ledger here is the tape's alone. A static key has no tape
+// entry naming it (credit's declared join is its only reader), so only the
+// ability and trigger keys are read from the ledger.
 func TestStartAsEntersCreatureIsExercised(t *testing.T) {
-	t.Parallel()
 	reg, b := certdeckBuilder(t)
-	for _, c := range []struct{ card, key string }{
-		{"Adaptive Automaton", "static#0.0"},
-		{"Lifecraft Engine", "f0/a0"},
-		{"Roaming Throne", "f0/t0"},
+	creditDeclared = false
+	t.Cleanup(func() { creditDeclared = true })
+	for _, c := range []struct {
+		card, key, focusKind, focusCard string
+		focusSeat                       int
+		prelude, tapeOnly               bool
+	}{
+		{"Adaptive Automaton", "static#0.0", "cast", "Adaptive Automaton", 0, false, false},
+		{"Lifecraft Engine", "f0/a0", "ability", "Lifecraft Engine", 0, true, true},
+		{"Roaming Throne", "f0/t0", "cast", "Murder", 1, true, true}, // the opponent's targeting spell, after the prelude cast
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
@@ -1506,11 +1524,18 @@ func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 				t.Fatalf("p0 hand %v battlefield %v, want %s in hand and not placed",
 					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, c.card)
 			}
-			if res.Start.Focus == nil || res.Start.Focus.Seat == nil || *res.Start.Focus.Seat != 0 ||
-				res.Start.Focus.Card != c.card || res.Start.Focus.Kind != "cast" {
-				t.Fatalf("focus %+v, want seat 0 %s cast", res.Start.Focus, c.card)
+			if c.prelude {
+				if res.Start.Prelude != c.card || res.Start.PreludeSeat != 0 {
+					t.Fatalf("prelude %q seat %d, want %q seat 0", res.Start.Prelude, res.Start.PreludeSeat, c.card)
+				}
+			} else if res.Start.Prelude != "" {
+				t.Fatalf("prelude %q, want none for a cast start", res.Start.Prelude)
 			}
-			items, rows, raw := playStartFile(t, reg, res.Start)
+			if res.Start.Focus == nil || res.Start.Focus.Seat == nil || *res.Start.Focus.Seat != c.focusSeat ||
+				res.Start.Focus.Card != c.focusCard || res.Start.Focus.Kind != c.focusKind {
+				t.Fatalf("focus %+v, want seat %d %s %s", res.Start.Focus, c.focusSeat, c.focusKind, c.focusCard)
+			}
+			items, rows, raw, out := playStartFileAt(t, reg, res.Start)
 			if len(items) != res.Start.Seeds {
 				t.Errorf("%d item(s), want %d: one per seed (start %s)", len(items), res.Start.Seeds, raw)
 			}
@@ -1538,6 +1563,13 @@ func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 			if !chosen {
 				t.Errorf("no item records the as-enters choose answer (start %s)", raw)
 			}
+			if c.tapeOnly {
+				// The tape itself must credit the key: the prelude cast alone
+				// is not the ability / trigger the item exists for.
+				if got := readExercised(t, out).Get(c.card, c.key); got.Exercised == 0 {
+					t.Errorf("%s %s: the tape credits no use of the key (ledger %+v)", c.card, c.key, got)
+				}
+			}
 		})
 	}
 	for _, c := range []struct{ card, key, reason string }{
@@ -1548,6 +1580,11 @@ func TestStartAsEntersCreatureIsExercised(t *testing.T) {
 		// A creature whose as-enters answer is not state setup can read keeps
 		// its named refusal too.
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		// A trigger a cast this turn cannot fire (an attack, an upkeep, another
+		// permanent's entry) keeps the named refusal rather than a cast-only
+		// item that never exercises it.
+		{"Titan of Littjara", "f0/t1", "start:as-enters-stamp"},
+		{"Herald's Horn", "f0/t0", "start:as-enters-stamp"},
 	} {
 		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
 		if err != nil {

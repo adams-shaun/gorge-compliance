@@ -178,20 +178,27 @@ func TestScenFixtures(t *testing.T) {
 }
 
 // TestScenStartAsEntersPlaced: a card whose as-enters replacement asks a
-// state-backed choice is cast as the start line rather than placed at genesis.
-// The placement would be a real move this turn, so the live cut would carry
-// Object.EnteredThisTurn and Object.AcqTurn, which the lowering's setup drive
-// cannot restate (it places permanents directly, CR 302.6). A cast puts the
-// entry, the choose answer and both stamps on the tape. A choice setup cannot
-// read (a player) keeps its named refusal, and a land -- played, not cast --
-// keeps "as-enters:land".
+// state-backed choice is never placed at genesis. The placement would be a
+// real move this turn, so the live cut would carry Object.EnteredThisTurn and
+// Object.AcqTurn, which the lowering's setup drive cannot restate (it places
+// permanents directly, CR 302.6). A static key is served by a cast start; an
+// ability or BecomesTarget trigger key casts the card as a prelude so its own
+// action is still exercised afterwards (a plain cast item would credit the
+// ability or trigger without ever taking it). A choice setup cannot read (a
+// player) keeps its named refusal, a land -- played, not cast -- keeps
+// "as-enters:land", and an event a creature cast this turn cannot produce
+// keeps the placement refusal.
 func TestScenStartAsEntersPlaced(t *testing.T) {
 	reg, b := testBuilder(t)
-	for _, tc := range []struct{ card, key string }{
-		{"Adaptive Automaton", "static#0.0"},
-		{"Lifecraft Engine", "f0/a0"},
-		{"Roaming Throne", "f0/t0"},
-		{"Banner of Kinship", "static#0.0"},
+	for _, tc := range []struct {
+		card, key, focusKind string
+		ability              int
+		prelude              bool
+	}{
+		{"Adaptive Automaton", "static#0.0", "cast", 0, false},
+		{"Banner of Kinship", "static#0.0", "cast", 0, false},
+		{"Lifecraft Engine", "f0/a0", "ability", 0, true},
+		{"Roaming Throne", "f0/t0", "cast", 0, true}, // the opponent's targeting spell is the focus
 	} {
 		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
 			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
@@ -205,13 +212,34 @@ func TestScenStartAsEntersPlaced(t *testing.T) {
 				t.Errorf("p0 hand %v battlefield %v, want %s in hand and not placed",
 					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, tc.card)
 			}
-			focusIs(t, res.Start, 0, tc.card, "cast", 0)
+			if tc.prelude {
+				if res.Start.Prelude != tc.card || res.Start.PreludeSeat != 0 {
+					t.Errorf("prelude %q seat %d, want %q seat 0", res.Start.Prelude, res.Start.PreludeSeat, tc.card)
+				}
+				if res.Start.Focus == nil || res.Start.Focus.Kind != tc.focusKind {
+					t.Errorf("focus %+v, want a %s action after the prelude", res.Start.Focus, tc.focusKind)
+				}
+				if res.Start.Focus != nil && res.Start.Focus.Kind == "cast" && res.Start.Focus.Card == tc.card {
+					t.Errorf("focus %+v is the prelude cast, not the key's own action", res.Start.Focus)
+				}
+				return
+			}
+			if res.Start.Prelude != "" {
+				t.Errorf("prelude %q, want none for a plain cast start", res.Start.Prelude)
+			}
+			focusIs(t, res.Start, 0, tc.card, tc.focusKind, tc.ability)
 		})
 	}
 	for _, tc := range []struct{ card, key, reason string }{
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		// A trigger whose event a creature cast this turn cannot produce
+		// (an attack, another creature's entry, an upkeep, a chosen-colour
+		// spell) keeps the named refusal instead of a cast-only item.
+		{"Titan of Littjara", "f0/t1", reasonAsEntersStamp},
+		{"Bloodline Pretender", "f0/t0", reasonAsEntersStamp},
+		{"Herald's Horn", "f0/t0", reasonAsEntersStamp},
 	} {
 		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
 			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
