@@ -22,6 +22,8 @@ import (
 //   - a creature you cast this turn enters, the cast itself making the
 //     wasCastByYou history (The Sibsig Ceremony);
 //   - the Aura's bearer dies to Murder while enchanted (Necrotic Plague);
+//   - an Aura that shrinks its bearer (+2/-1) is placed on one that survives
+//     it, so the bearer dies to Murder and not to setup (Infectious Rage);
 //   - a countered creature dies, the gate placed (The Ozolith);
 //   - a counter-gated creature attacks, its +1/+1 counter placed (Elite
 //     Scaleguard);
@@ -39,6 +41,7 @@ func TestStartFilterFixtureKeysFires(t *testing.T) {
 		{"Trial of Ambition", "f0/t1"},
 		{"The Sibsig Ceremony", "f0/t0"},
 		{"Necrotic Plague", "f0/t0"},
+		{"Infectious Rage", "f0/t0"},
 		{"The Ozolith", "f0/t0"},
 		{"Elite Scaleguard", "f0/t1"},
 		{"Cracked Skull", "f0/t1"},

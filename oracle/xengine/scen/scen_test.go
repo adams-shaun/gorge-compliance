@@ -3469,6 +3469,55 @@ func TestStartFilterFixtureAttachFilterGated(t *testing.T) {
 	}
 }
 
+// TestStartAttachBearerSurvivesAura: an Aura whose own static shrinks its
+// bearer (Infectious Rage +2/-1, Screams from Within -1/-1) must not be put
+// on a bearer that dies to state-based actions during setup; the start either
+// refuses :filter or names a bearer whose toughness stays above zero.
+func TestStartAttachBearerSurvivesAura(t *testing.T) {
+	reg, b := testBuilder(t)
+	const none = "no-generator:trigger:ChangesZone:filter"
+	for _, name := range []string{"Infectious Rage", "Screams from Within"} {
+		aura, ok := reg.Lookup(name)
+		if !ok || len(aura.Faces) == 0 {
+			t.Fatalf("%s is not in the registry", name)
+		}
+		res, err := Generate(reg, b, name, "f0/t0", Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s f0/t0: %v", name, err)
+		}
+		if res.Path == PathRefused {
+			if res.Reason != none {
+				t.Errorf("%s f0/t0 refused with %q, want %q", name, res.Reason, none)
+			}
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil || len(res.Start.Setup.P0.Attach) != 1 {
+			t.Fatalf("%s f0/t0: path %q reason %q, want a start with one attachment", name, res.Path, res.Reason)
+		}
+		bearer := res.Start.Setup.P0.Attach[0].To
+		c, ok := reg.Lookup(bearer)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s: bearer %q is not in the registry", name, bearer)
+		}
+		if !survivesAura(aura.Faces[0], c.Faces[0]) {
+			t.Errorf("%s f0/t0: bearer %q (toughness %d) dies to the Aura at setup", name, bearer, c.Faces[0].Toughness())
+		}
+	}
+	// The predicate itself: a 1/1 dies to a -1/-1 or +2/-1 Aura, a 2/2 keeps
+	// toughness 1 under both.
+	for _, name := range []string{"Infectious Rage", "Screams from Within"} {
+		aura, _ := reg.Lookup(name)
+		one, _ := reg.Lookup("Memnite")
+		two, _ := reg.Lookup("Grizzly Bears")
+		if survivesAura(aura.Faces[0], one.Faces[0]) {
+			t.Errorf("%s: a 1/1 bearer must not survive", name)
+		}
+		if !survivesAura(aura.Faces[0], two.Faces[0]) {
+			t.Errorf("%s: a 2/2 bearer must survive", name)
+		}
+	}
+}
+
 // TestCastableAlt: the gate castFixtureCarrierIn passes to the fixture
 // fallback. A counter gate (counters_*, HasCounters), a token requirement and
 // a top-of-library requirement are alternatives a cast cannot establish; a

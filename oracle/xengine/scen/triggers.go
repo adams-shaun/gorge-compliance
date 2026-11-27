@@ -821,6 +821,34 @@ func auraHidesBearer(face *cards.Face) bool {
 	return false
 }
 
+// survivesAura reports that creature c, enchanted or equipped by aura, keeps a
+// toughness above zero: an Aura whose own static shrinks its bearer
+// (Infectious Rage +2/-1, Screams from Within -1/-1) would otherwise kill a
+// small bearer to state-based actions during setup, so the key would be
+// exercised by that death and not by the focus play. Pumps whose amount is not
+// a number are not read (they cannot be counted here).
+func survivesAura(aura, c *cards.Face) bool {
+	if !c.IsCreature() {
+		return true
+	}
+	t := c.Toughness()
+	add := 0
+	for i := range aura.Statics {
+		st := &aura.Statics[i]
+		affected := strings.ToLower(st.Params["AffectedDefined"] + " " + st.Params["Affected"])
+		if !strings.Contains(affected, "enchanted") && !strings.Contains(affected, "equipped") {
+			continue
+		}
+		if v, err := strconv.Atoi(strings.TrimPrefix(strings.TrimSpace(st.Params["SetToughness"]), "+")); err == nil {
+			t = v
+		}
+		if v, err := strconv.Atoi(strings.TrimPrefix(strings.TrimSpace(st.Params["AddToughness"]), "+")); err == nil {
+			add += v
+		}
+	}
+	return t+add > 0
+}
+
 // bearerMatchesSeat reports whether some alternative of the stripped trigger
 // filter takes c when the start places it on seat.
 func bearerMatchesSeat(alts []filterAlt, c *cards.Face, seat int) bool {
@@ -860,6 +888,7 @@ func attachBearerFor(reg *cards.Registry, b *certdeck.Builder, card string, face
 			name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
 				return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) &&
 					!c.HasKeyword("Hexproof") && !c.HasKeyword("Shroud") &&
+					survivesAura(face, c) &&
 					a.matches(c, false) && r.matches(c, false)
 			})
 			if name != "" {
