@@ -1,0 +1,45 @@
+# Keep the Forge oracle driver line (the fork's oracle-driver branch) holding every FORGE_REF that gorge main or an
+# open gorge pull request names, with no person in the loop (2026-11-25: FORGE_REF moved past the driver and every
+# xproof cycle failed for 2 h). gorge CI refuses a FORGE_REF move until oracle-driver holds it
+# (gorge scripts/check-forge-ref-driver.sh); this run merges it there within 15 minutes and pushes the branch
+# directly (a fast-forward; operator 11-25: no pull requests to our forks). gorge-pin-follow.yml then moves
+# FORGE_ORACLE_REF with the pin bump (scripts/forge-driver-follow.sh pin).
+#
+# A conflict fails the run (red); resolve it on the fork by hand. Secret FORGE_PUSH_TOKEN: contents write on
+# adams-shaun/forge (~/op/forgepin.sh sets it). Schedules run the default branch's copy of this file.
+name: forge-driver-follow
+
+on:
+  schedule:
+    - cron: '7-59/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      forge_ref:
+        description: 'FORGE_REF commit(s) to merge into oracle-driver (space-separated); empty = gorge main and open PRs'
+        required: false
+  repository_dispatch:
+    types: [gorge-main, gorge-forge-ref]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-driver-follow
+  cancel-in-progress: false
+
+jobs:
+  follow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+      - name: Merge FORGE_REFs into oracle-driver
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FORGE_PUSH_TOKEN: ${{ secrets.FORGE_PUSH_TOKEN }}
+          REFS: ${{ inputs.forge_ref }}
+        run: |
+          # shellcheck disable=SC2086
+          bash scripts/forge-driver-follow.sh driver $REFS

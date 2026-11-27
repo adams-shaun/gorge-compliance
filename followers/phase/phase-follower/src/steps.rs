@@ -170,6 +170,12 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         flush_layers(&mut m.board.state);
         rb.push_snapshot(snapshot(&m.board.state, &format!("step {i} ({})", step.op), &m.board.names));
     }
+    let unposed = m.settle_unposed_optional_costs();
+    if unposed > 0 {
+        rb.note(format!(
+            "consumed {unposed} optional-cost decision(s) phase posed no prompt for (declined, or an either-or cost's forced fallback)"
+        ));
+    }
     if let Some(l) = m.queue.leftover() {
         rb.leftover = Some(l);
     }
@@ -183,6 +189,21 @@ impl Machine<'_> {
 
     fn game_ended(&self) -> Stop {
         harness(format!("game ended at step {} before every step ran", self.step))
+    }
+
+    /// Consume the optional-cost decisions phase resolves without opening a prompt (a declined
+    /// trigger cost, or an either-or additional cost whose preferred branch is unpayable). The
+    /// predicate lives in `answer` beside the other decision shapes; the answerer consumes a
+    /// decision when phase does pose the prompt, so anything left at the end of the replay never
+    /// had one. Returns how many decisions were consumed.
+    fn settle_unposed_optional_costs(&mut self) -> usize {
+        let mut taken = 0;
+        for step in -1..self.req.item.steps.len() as i32 {
+            while self.queue.take(step, crate::answer::is_unposed_optional_cost).is_some() {
+                taken += 1;
+            }
+        }
+        taken
     }
 
     /// The live object a step's card ref names. A card ref follows its object through zone changes
@@ -606,7 +627,13 @@ impl Machine<'_> {
         }
     }
 
-    /// The one mana-source candidate of `id` that makes the ability's colour.
+    /// The one mana-source activation of `id` that runs `ability`.
+    ///
+    /// The produced colour is not a reliable identity: an any-colour activation asks phase for its
+    /// colour in a later prompt, and a fixed combination ("Add {U}{B}") is one activation, not a
+    /// choice. Match the ability by the class ordinal the neutral export names — the same role
+    /// phase's own ability list has — and let the activation (or the prompt that follows it)
+    /// settle the colour.
     fn mana_source(&mut self, id: ObjectId, ability: &NeutralAbility) -> Result<GameAction, Stop> {
         let i = self.step;
         let inc = self.state().objects[&id].incarnation;
@@ -620,38 +647,114 @@ impl Machine<'_> {
                 GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
                     selection.source.object_id == id && selection.source.incarnation == inc
                 }
+                GameAction::ActivateAbility { source_id, .. } => *source_id == id,
                 _ => false,
             })
             .collect();
-        let produces = ability.produces.as_deref().unwrap_or("");
-        let single: Vec<char> = produces.chars().filter(|c| mana_type(*c).is_some()).collect();
-        let wanted: ManaType = if produces != "any" && single.len() == 1 {
-            mana_type(single[0]).expect("filtered")
-        } else {
-            // "any" or several colours: gorge's colour decision for this step names the colour.
-            let d = self
-                .queue
-                .take(i as i32, |d| {
-                    d.kind == "choose_n"
-                        && (d.pick_kinds.iter().any(|k| k == "color") || d.picks.iter().any(|p| p.starts_with("Add ")))
-                })
-                .ok_or_else(|| unmatched(i, format!("mana ability producing {produces:?} has no colour decision")))?;
-            d.picks
-                .first()
-                .and_then(|p| colour_of_label(p))
-                .ok_or_else(|| unmatched(i, format!("colour decision {:?} names no colour", d.picks)))?
-        };
-        let mut matching = candidates.into_iter().filter(|a| match a {
-            GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
-                selection.mana_type == wanted
+        let phase_index = self.mana_ability_index(id, ability);
+        // A nonland mana ability is a plain activation at priority. Its colour is either fixed by
+        // the ability or asked in phase's own `ChooseManaColor` prompt, so never consume gorge's
+        // colour decision here.
+        if let Some(index) = phase_index {
+            let mut activations = candidates.iter().filter(|a| {
+                matches!(a, GameAction::ActivateAbility { source_id, ability_index, .. }
+                    if *source_id == id && *ability_index == index)
+            });
+            match (activations.next(), activations.next()) {
+                (Some(action), None) => return Ok(action.clone()),
+                (Some(_), Some(_)) => {
+                    return Err(unmatched(
+                        i,
+                        format!("{} has several activations for its mana ability", self.state().objects[&id].name),
+                    ))
+                }
+                (None, _) => {}
             }
-            _ => false,
-        });
-        match (matching.next(), matching.next()) {
-            (Some(a), None) => Ok(a),
-            (None, _) => Err(unmatched(i, format!("no mana source of {} produces {}", self.state().objects[&id].name, letter(wanted)))),
-            (Some(_), Some(_)) => Err(unmatched(i, format!("several mana sources of {} produce {}", self.state().objects[&id].name, letter(wanted)))),
         }
+        // A land tap carries the chosen output in its selection and needs one row. Fixed production
+        // is not a choice; only a flexible land source consumes gorge's colour decision. A basic
+        // land subtype's intrinsic ability has no phase index: phase may list it synthetically or
+        // not at all, so it is matched by production instead.
+        let intrinsic = ability.class == "intrinsic_mana";
+        let fixed = if intrinsic {
+            None
+        } else {
+            phase_index
+                .and_then(|index| self.state().objects[&id].abilities.get(index))
+                .and_then(fixed_mana_units)
+        };
+        let mine: Vec<&GameAction> = candidates
+            .iter()
+            .filter(|a| match a {
+                GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
+                    selection.source.object_id == id
+                        && selection.source.incarnation == inc
+                        // With no phase index (a granted ability has none in the export), the
+                        // production/colour below is the only identity; do not reject every row
+                        // because its own ability index is Some.
+                        && (intrinsic || phase_index.is_none() || selection.ability_index == phase_index)
+                }
+                _ => false,
+            })
+            .collect();
+        let want = match fixed {
+            Some(units) => units,
+            None => {
+                let produces = ability.produces.as_deref().unwrap_or("");
+                let single: Vec<char> = produces.chars().filter(|c| mana_type(*c).is_some()).collect();
+                let wanted: ManaType = if produces != "any" && single.len() == 1 {
+                    mana_type(single[0]).expect("filtered")
+                } else {
+                    // "any" or several colours: gorge's colour decision for this step names the colour.
+                    let d = self
+                        .queue
+                        .take(i as i32, |d| {
+                            d.kind == "choose_n"
+                                && (d.pick_kinds.iter().any(|k| k == "color") || d.picks.iter().any(|p| p.starts_with("Add ")))
+                        })
+                        .ok_or_else(|| unmatched(i, format!("mana ability producing {produces:?} has no colour decision")))?;
+                    d.picks
+                        .first()
+                        .and_then(|p| colour_of_label(p))
+                        .ok_or_else(|| unmatched(i, format!("colour decision {:?} names no colour", d.picks)))?
+                };
+                vec![wanted]
+            }
+        };
+        let mut matching = mine
+            .into_iter()
+            .filter(|a| mana_selection(a).is_some_and(|s| selection_units(s).starts_with(&want)));
+        let shown: String = want.iter().map(|t| letter(*t)).collect();
+        match (matching.next(), matching.next()) {
+            (Some(a), None) => Ok((*a).clone()),
+            (None, _) => Err(unmatched(i, format!("no mana source of {} produces {shown}", self.state().objects[&id].name))),
+            (Some(_), Some(_)) => Err(unmatched(i, format!("several mana sources of {} produce {shown}", self.state().objects[&id].name))),
+        }
+    }
+
+    /// The index of the neutral ability's `ordinal`-th activated mana ability among phase's
+    /// abilities, or `None` when the neutral side has no face-relative ordinal.
+    ///
+    /// `follower-export` deliberately omits the ordinal for a granted/gained ability (it is not on
+    /// the recipient's face) and phase may merge several printed abilities into one, so a missing
+    /// or out-of-range ordinal is not an error: it means "no phase index", and [`Self::mana_source`]
+    /// identifies the activation by its production/colour instead. The subtype-granted land ability
+    /// (`intrinsic_mana`) is the same case.
+    fn mana_ability_index(&self, id: ObjectId, ability: &NeutralAbility) -> Option<usize> {
+        if ability.class == "intrinsic_mana" {
+            return None;
+        }
+        let ordinal = ability.ordinal.and_then(|o| usize::try_from(o).ok())?;
+        self.state().objects[&id]
+            .abilities
+            .iter()
+            .enumerate()
+            .filter(|(_, a)| {
+                a.kind == engine::types::ability::AbilityKind::Activated
+                    && engine::types::ability::is_mana_ability(a)
+            })
+            .nth(ordinal)
+            .map(|(index, _)| index)
     }
 
     /// CR 702.29a / CR 702.29e: the hand-zone cycling ability of `id` (`typed` = a typecycling one,
@@ -947,6 +1050,43 @@ fn colour_of_label(label: &str) -> Option<ManaType> {
     }
 }
 
+/// The selection a land-tap action carries, if it is one.
+fn mana_selection(action: &GameAction) -> Option<&engine::types::mana::ManaSourceSelection> {
+    match action {
+        GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => Some(selection),
+        _ => None,
+    }
+}
+
+/// The mana units one land-tap selection produces: the atomic combination (the full output of one
+/// activation) when there is one, else the single selected type.
+fn selection_units(selection: &engine::types::mana::ManaSourceSelection) -> Vec<ManaType> {
+    selection.atomic_combination.clone().unwrap_or_else(|| match selection.output {
+        engine::types::mana::ManaSourceOutput::Concrete(t) => vec![t],
+        engine::types::mana::ManaSourceOutput::DeferredColorChoice { .. } => vec![selection.mana_type],
+    })
+}
+
+/// The exact units phase's mana ability adds when the production is fixed, so no colour choice is
+/// asked. `None` when the ability asks the player for a colour or a combination.
+fn fixed_mana_units(ability: &engine::types::ability::AbilityDefinition) -> Option<Vec<ManaType>> {
+    use engine::types::ability::{Effect, ManaProduction, QuantityExpr};
+    let Effect::Mana { produced, .. } = &*ability.effect else { return None };
+    let units: Vec<ManaType> = match produced {
+        ManaProduction::Fixed { colors, .. } => colors.iter().map(|c| ManaType::from(*c)).collect(),
+        ManaProduction::Colorless { count: QuantityExpr::Fixed { value }, .. } => {
+            vec![ManaType::Colorless; usize::try_from((*value).max(0)).ok()?]
+        }
+        ManaProduction::Mixed { colorless_count, colors } => {
+            let mut units = vec![ManaType::Colorless; usize::try_from(*colorless_count).ok()?];
+            units.extend(colors.iter().map(|c| ManaType::from(*c)));
+            units
+        }
+        _ => return None,
+    };
+    (!units.is_empty()).then_some(units)
+}
+
 /// Text for the ability check: the card's own names become `~`, spacing and case are folded.
 fn normalise(text: &str, name: &str, corpus: &str) -> String {
     let mut t = text.to_string();
@@ -1076,6 +1216,72 @@ mod tests {
         assert_eq!(on_bf(resolved, 0, "Llanowar Elves"), 1);
     }
 
+    /// One nonland mana ability, activated for the colour gorge chose from an "any color" source.
+    #[test]
+    fn mana_source_any_colour_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Torgal, A Fine Hound"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Torgal, A Fine Hound","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","picks":["Add G"],"pick_kinds":["color"]}]}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "G", "gorge's colour decision answers phase's ChooseManaColor prompt");
+        assert!(s.permanents.iter().find(|p| p.name == "Torgal, A Fine Hound").unwrap().tapped);
+    }
+
+    /// A colourless nonland mana ability whose production phase stores outside `ManaType`'s colours.
+    #[test]
+    fn mana_source_colourless_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Sol Talisman"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Sol Talisman","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"C"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "CC");
+        assert!(s.permanents.iter().find(|p| p.name == "Sol Talisman").unwrap().tapped);
+    }
+
+    /// A fixed two-colour production is one activation, not a colour choice.
+    #[test]
+    fn mana_source_fixed_two_colour_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Riven Turnbull and Princess Lucrezia"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Riven Turnbull and Princess Lucrezia","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"UB"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "UB");
+    }
+
+    /// A fixed multi-unit production of one colour is likewise one activation.
+    #[test]
+    fn mana_source_fixed_multi_unit_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["The Alright Henge"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:The Alright Henge","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"G"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "GG");
+        assert!(s.permanents.iter().find(|p| p.name == "The Alright Henge").unwrap().tapped);
+    }
+
+    /// A granted mana ability on a land has no face-relative ordinal in the neutral export; the
+    /// activation is still matched by the colour it produces (Chromatic Lantern grants the Forest
+    /// "{T}: Add one mana of any color", which phase exposes as a land-tap selection).
+    #[test]
+    fn mana_source_granted_ability_without_ordinal_falls_back_to_production() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Forest","Chromatic Lantern"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Forest","ability_index":1,
+                      "ability":"Forest: Add one mana of any color."}]},
+            "neutral":{"ability":{"0":{"class":"mana","granted":true,"cost":"{T}",
+                                       "text":"Add one mana of any color.","produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","picks":["Add W"],"pick_kinds":["color"]}]}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "W", "the producer's colour decision picks the granted ability's output");
+        assert!(s.permanents.iter().find(|p| p.name == "Forest").unwrap().tapped);
+        assert!(!s.permanents.iter().find(|p| p.name == "Chromatic Lantern").unwrap().tapped);
+    }
+
     /// The row of a hand-written request that must stop, as its error text.
     fn stop_text(json: &str) -> String {
         match go(json).0.err() {
@@ -1083,7 +1289,6 @@ mod tests {
             other => panic!("expected a stop, got {other:?}"),
         }
     }
-
     #[test]
     fn ability_action_cycling_discards_and_draws() {
         let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Lonely Sandbar"]}},
