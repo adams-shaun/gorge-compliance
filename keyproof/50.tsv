@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 506ea048-aca5-439a-a5b5-059ddda0672a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hope-and-glory:cast:s1,f:xs:XP:hope-and-glory:cast:s1	-	-	-	baa6f696107c	-	e3ba754b0e61	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 50779f73-c538-4364-aca4-4ab069a00814	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50779f73-c538-4364-aca4-4ab069a00814	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:life-insurance:f0t0:s1,f:xs:XP:life-insurance:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-50779f73-c538-4364-aca4-4ab069a00814	f0/t1	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	4ede227d2c00	-	03527e2ce1e7	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+50779f73-c538-4364-aca4-4ab069a00814	f0/t1	SpellCast/Extort	owed	harness:x=agree+f=decision_shape~leftover-unconsumed-gorge-decision-s	-	start	0	0	-	-	-	-	37469579b6da	-	03527e2ce1e7	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 507bdb1a-90b4-4fd3-a1a3-e8be316e97f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fyndhorn-elder:cast:s1,f:xs:XP:fyndhorn-elder:cast:s1	-	-	-	25696bf19d5b	-	9c3be11b136c	-	-	2026-11-24	xproof
 507bdb1a-90b4-4fd3-a1a3-e8be316e97f3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:fyndhorn-elder:f0a0:s1,f:xs:XP:fyndhorn-elder:f0a0:s1	-	-	-	c2272f704fde	-	9c3be11b136c	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 507c2921-7070-482d-8754-dc667e3315bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,7 +200,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50de5faa-d22e-4909-a1ff-3810cfcfcb1a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dissection Tools/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50de88d4-0beb-45e5-9664-d4f0e280e652	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50de88d4-0beb-45e5-9664-d4f0e280e652	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50e3540f-963f-4c91-a205-c2f8259a969e	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	4ede227d2c00	-	a61de30b19f8	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+50e3540f-963f-4c91-a205-c2f8259a969e	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	37469579b6da	-	a61de30b19f8	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 50e6558d-5a70-4c12-9c3e-a9657ef26222	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	4ede227d2c00	-	752f3066d979	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 50e6558d-5a70-4c12-9c3e-a9657ef26222	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	4ede227d2c00	-	752f3066d979	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 50e7ae38-2a66-4e32-bfb3-fefbae0caa61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
