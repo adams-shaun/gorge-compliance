@@ -2,6 +2,7 @@ package templates
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -65,11 +66,10 @@ const (
 	delveGrave = "Swamp"
 )
 
-// delvePicks is how many graveyard cards a Delve cast exiles for generic mana:
-// the generic symbols in its pool, capped at delveCap. Zero for a card without
-// Delve and for a Delve card whose pool has no generic symbol (nothing to
-// delve).
-func delvePicks(f *cards.Face) int {
+// delveGeneric is the uncapped number of generic symbols in a Delve card's
+// pool: the mana delve can pay. Zero for a card without Delve and for one
+// whose pool cannot be built (so there is nothing to delve).
+func delveGeneric(f *cards.Face) int {
 	if !f.HasKeyword("Delve") {
 		return 0
 	}
@@ -77,7 +77,23 @@ func delvePicks(f *cards.Face) int {
 	if why != "" {
 		return 0
 	}
-	return min(strings.Count(pool, "C"), delveCap)
+	return strings.Count(pool, "C")
+}
+
+// delvePicks is how many graveyard cards a Delve cast exiles for generic mana:
+// the generic symbols in its pool, capped at delveCap. Zero for a card without
+// Delve and for a Delve card whose pool has no generic symbol (nothing to
+// delve).
+func delvePicks(f *cards.Face) int {
+	return min(delveGeneric(f), delveCap)
+}
+
+// delveSeed is the graveyard extra for a Delve cast that exiles picks cards.
+func delveSeed(picks int) []string {
+	if picks <= 0 {
+		return nil
+	}
+	return oraclegen.Repeat(delveGrave, picks)
 }
 
 // delveGraveyard is the setup extra a cast needs: a Delve card gets exactly the
@@ -85,9 +101,56 @@ func delvePicks(f *cards.Face) int {
 // seven-Wastes threshold graveyard.
 func delveGraveyard(f *cards.Face) []string {
 	if n := delvePicks(f); n > 0 {
-		return oraclegen.Repeat(delveGrave, n)
+		return delveSeed(n)
 	}
 	return oraclegen.Repeat("Wastes", 7)
+}
+
+// scriptedX returns the X an answer list scripts ("X = n"), if any. The
+// generator's X answers are the single source for a spell's announced X, so a
+// cost's generic count can be read from what the scenario actually pays
+// instead of assuming PoolFor's default.
+func scriptedX(answers []oraclegen.Answer) (int, bool) {
+	for _, a := range answers {
+		for _, pick := range a.Pick {
+			if rest, ok := strings.CutPrefix(pick, "X = "); ok {
+				if n, err := strconv.Atoi(rest); err == nil {
+					return n, true
+				}
+			}
+		}
+	}
+	return 0, false
+}
+
+// delvePlan returns the graveyard count and short pool for a Delve cast whose
+// scripted answers may name an X below PoolFor's default. The seed and the
+// short pool are derived from the same effective generic count: PoolFor
+// charges oraclegen.XValue for every X symbol, and a lower announced X removes
+// that much generic from the cost, so the fixture cannot over-offer Swamps for
+// a cheaper spell. ok is false when there is nothing to delve.
+func delvePlan(f *cards.Face, mana string, answers []oraclegen.Answer) (picks int, short string, ok bool) {
+	generic := delveGeneric(f)
+	if generic == 0 {
+		return 0, mana, false
+	}
+	// The generic symbols PoolFor charged for the default X that the scenario
+	// does not spend.
+	adjust := 0
+	if x, scripted := scriptedX(answers); scripted && x < oraclegen.XValue {
+		adjust = (oraclegen.XValue - x) * strings.Count(f.ManaCost, "X")
+	}
+	if adjust > generic {
+		adjust = generic
+	}
+	picks = min(generic-adjust, delveCap)
+	if picks == 0 {
+		return 0, mana, false
+	}
+	// mana is PoolFor's pool at XValue. Keep the coloured pips, the generic
+	// symbols the delve does not cover and the ones the lower X removed.
+	short = strings.Replace(mana, "C", "", adjust+picks)
+	return picks, short, true
 }
 
 func castResolve(reg *cards.Registry, f *cards.Face, name, mana string) (oraclegen.Item, *oraclegen.Skip) {

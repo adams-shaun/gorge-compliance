@@ -11,6 +11,24 @@ import (
 // while holding priority (CR 117.3c), and resolves.
 var CounterSpell = Template{ID: "counter-spell", Version: 1}
 
+// counterSpellDelve is counter-spell's second generation, for the items the
+// Delve arm actually produced: it seeds a Swamp graveyard and scripts the
+// exile ask (CR 702.66), so those scenarios' bytes moved. It shares
+// CounterSpell's ID, so a verdict row still keys on "counter-spell" alone;
+// only the id and the scenario name carry the generation.
+var counterSpellDelve = Template{ID: CounterSpell.ID, Version: 2}
+
+// counterTemplateFor is the single stamp for a counter's generation, derived
+// from the same predicate (delvePicks) that seeds its graveyard and writes its
+// exile answer. A counterspell the Delve arm never touches keeps v1 and the
+// committed verdict row it recorded; only Delve items move.
+func counterTemplateFor(f *cards.Face) Template {
+	if delvePicks(f) > 0 {
+		return counterSpellDelve
+	}
+	return CounterSpell
+}
+
 // targetsSpell reports whether the card counters a spell on the stack: a
 // Counter ability anywhere along a spell ability's chain (the top ability or
 // a SubAbility) whose target names the stack. A card whose leading ability
@@ -103,13 +121,31 @@ func counterSpell(reg *cards.Registry, f *cards.Face, name, mana string) (oracle
 	slots := oraclegen.SlotSpecs(f)
 	stackIdx := stackSlotIndexes(slots)
 	plain := nonStackSlots(slots)
+	if picks, short, ok := delvePlan(f, mana, xAns); ok {
+		// Delve (CR 702.66): the counterspell's own cast pays short of its
+		// generic mana against a graveyard of Swamps and appends the exile
+		// answer, an ask the full pool never reaches. The precast spell being
+		// countered keeps paying its own mana in full in counterWith. Try this
+		// arm first; a fixture it cannot settle falls through to the full pool.
+		answers := append(append([]oraclegen.Answer(nil), xAns...), oraclegen.Answer{Kind: "choose", Pick: oraclegen.Repeat(delveGrave, picks)})
+		for _, pre := range precasts {
+			if !precastFitsSlots(slots, stackIdx, pre) {
+				continue
+			}
+			for _, fx := range oraclegen.Fixtures(reg, plain) {
+				if it, ok := counterWith(reg, f, name, short, pre, fx, slots, stackIdx, answers, picks); ok {
+					return it, nil
+				}
+			}
+		}
+	}
 	for _, m := range []string{mana, mana + "C", mana + "CC", mana + "CCC"} {
 		for _, pre := range precasts {
 			if !precastFitsSlots(slots, stackIdx, pre) {
 				continue
 			}
 			for _, fx := range oraclegen.Fixtures(reg, plain) {
-				if it, ok := counterWith(reg, f, name, m, pre, fx, slots, stackIdx, xAns); ok {
+				if it, ok := counterWith(reg, f, name, m, pre, fx, slots, stackIdx, xAns, 0); ok {
 					return it, nil
 				}
 			}
@@ -118,8 +154,13 @@ func counterSpell(reg *cards.Registry, f *cards.Face, name, mana string) (oracle
 	return oraclegen.Item{}, &oraclegen.Skip{Card: name, Reason: "no spell fixture gorge can counter"}
 }
 
-func counterWith(reg *cards.Registry, f *cards.Face, name, mana string, pre precast, fx oraclegen.Fixture, slots []oraclegen.Slot, stackIdx []int, answers []oraclegen.Answer) (oraclegen.Item, bool) {
+// counterWith builds one precast-plus-counter scenario. picks is the Delve
+// graveyard counterWith seeds and verifies; zero leaves the fixture untouched.
+func counterWith(reg *cards.Registry, f *cards.Face, name, mana string, pre precast, fx oraclegen.Fixture, slots []oraclegen.Slot, stackIdx []int, answers []oraclegen.Answer, picks int) (oraclegen.Item, bool) {
 	p0, p1 := *fx.P0(), *fx.P1()
+	if picks > 0 {
+		p0.Graveyard = append(p0.Graveyard, delveSeed(picks)...)
+	}
 	// The counterspell first in hand, the spell it counters second: the
 	// order main's fixture always used, so the scenario stays the same.
 	p0 = oraclegen.WithHand(oraclegen.WithHand(p0, pre.card), physicalName(reg, name))
@@ -133,7 +174,7 @@ func counterWith(reg *cards.Registry, f *cards.Face, name, mana string, pre prec
 		},
 	}
 	oraclegen.Baseline(sc.Setup, f)
-	it := CounterSpell.item(f, name, sc)
+	it := counterTemplateFor(f).item(f, name, sc)
 	sc = it.Scenario
 	res, ok := oraclegen.ProbeTargets(reg, sc)
 	if !ok {
