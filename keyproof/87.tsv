@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:f0a0:s1,f:xs:XP:contested-game-ball:f0a0:s1	-	-	-	23b491658465	-	95f2cf204d12	-	-	2026-11-24	xproof
 876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:f0t0:s1,f:xs:XP:contested-game-ball:f0t0:s1	-	-	-	6f84be0f34c0	-	95f2cf204d12	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clay-golem:cast:s1,f:xs:XP:clay-golem:cast:s1	-	-	-	8c0bd19283bb	-	596944c34acc	-	-	2026-11-24	xproof
-8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/a0	NULL	owed	refused:steps-needed:cost:RollDice	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/a0	NULL	owed	refused:steps-needed:cost:RollDice	-	start	0	0	-	-	-	-	03d59e300ef0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 8776d14f-a5a2-4ef3-98d0-e1148e579e4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sacred-mesa:f0t0:s1,f:xs:XP:sacred-mesa:f0t0:s1	-	-	-	23c4009444b0	-	a7d5060bed5c	-	-	2026-11-25	xproof
 8776d14f-a5a2-4ef3-98d0-e1148e579e4d	f0/a0	Token	agreed	-	FX	start	1	0	x:xs:XP:sacred-mesa:f0t0:s1,f:xs:XP:sacred-mesa:f0t0:s1	-	-	-	23c4009444b0	-	a7d5060bed5c	-	-	2026-11-25	xproof
@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87b55d99-badc-45e3-8364-173a400c4d7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87b5d197-4400-47ff-89a7-9aeeb7c9a0b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigil-blessing:cast:s1,f:xs:XP:sigil-blessing:cast:s1	-	-	-	336eab778104	-	b4f255b90a14	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 87b61c1f-18e3-446a-a732-cff40adc5e05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:one-eyed-scarecrow:cast:s1,f:xs:XP:one-eyed-scarecrow:cast:s1	-	-	-	d864b561c9cb	-	5679f175d73b	-	-	2026-11-24	xproof
-87b8fef3-f40e-44a9-afd5-31d3917b1d59	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	f5b8cf8b714d	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+87b8fef3-f40e-44a9-afd5-31d3917b1d59	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	03d59e300ef0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 87b8fef3-f40e-44a9-afd5-31d3917b1d59	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	8ced781a5200	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 87bafa97-38fd-41a2-8b1d-315e88d9d0bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bafa97-38fd-41a2-8b1d-315e88d9d0bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
