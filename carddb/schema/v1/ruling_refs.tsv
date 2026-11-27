@@ -1,0 +1,7 @@
+#carddb-schema ruling_refs v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id
+ruling_id	string	yes	yes	public	sha256 of oracle_id, date and normalised text, first 12 hex
+published	date	yes	no	public	Date the ruling was published, YYYY-MM-DD
+source	string	yes	no	public	Publisher of the ruling (wotc, scryfall)
+retrieved	date	yes	no	public	Date fetched, YYYY-MM-DD

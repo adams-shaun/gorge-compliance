@@ -215,7 +215,7 @@ func (p *playKeys) describe(u classify.Use) adjudicate.KeyDesc {
 		k.Family = "none"
 		return k
 	}
-	for _, ck := range cov.Keys(c) {
+	for _, ck := range cov.Universe(c) {
 		if ck.ID == u.Key {
 			k.Desc = ck.Desc
 		}
@@ -230,6 +230,12 @@ func (p *playKeys) describe(u classify.Use) adjudicate.KeyDesc {
 		k.Family = "static"
 	case strings.HasPrefix(u.Key, "combat#"):
 		k.Family = "combat"
+	case strings.HasPrefix(u.Key, "mode#"):
+		k.Family = "mode"
+	case strings.HasPrefix(u.Key, "repl#"):
+		k.Family = "repl"
+	case strings.HasPrefix(u.Key, "kw#"):
+		k.Family = "keyword"
 	case strings.Contains(u.Key, "/t"):
 		k.Family = "trigger"
 	default:
@@ -362,7 +368,7 @@ func newKpTable(reg *cards.Registry, a keyproofArgs) *kpTable {
 func (t *kpTable) desc(u classify.Use) string {
 	desc := "-"
 	if c, ok := t.reg.Lookup(u.Card); ok {
-		for _, ck := range cov.Keys(c) {
+		for _, ck := range cov.Universe(c) {
 			if ck.ID == u.Key {
 				desc = ck.Desc
 			}

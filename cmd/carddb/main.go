@@ -5,8 +5,9 @@
 //
 // validate checks every .tsv shard under DIR against the schema: header line,
 // column set, sorted unique keys, cell syntax. boundary checks that DIR is
-// publishable: no private table or column, no banned field name, no Forge
-// card-script line. Output is one violation per line in path order.
+// publishable: no private table or column, no undeclared column, no banned
+// field name, no Forge card-script line. Output is one violation per line in
+// path order.
 //
 // Exit status: 0 clean, 1 violations found, 2 usage or I/O error.
 package main
