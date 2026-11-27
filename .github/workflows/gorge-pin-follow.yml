@@ -75,10 +75,15 @@ jobs:
         env:
           CUR: ${{ steps.plan.outputs.cur }}
           MAIN: ${{ steps.plan.outputs.main }}
+          GH_TOKEN: ${{ github.token }}
+          FORGE_PUSH_TOKEN: ${{ secrets.FORGE_PUSH_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           scripts/gorge-pin-follow.sh commit "$CUR" "$MAIN"
+          # The Forge oracle driver moves in the same commit when the new pin's FORGE_REF is not in
+          # FORGE_ORACLE_REF (scripts/forge-driver-follow.sh pin; 2026-11-25 xproof outage). A conflict fails here.
+          bash scripts/forge-driver-follow.sh pin
           git push --force origin HEAD:refs/heads/auto/gorge-pin
       - name: Open the PR, or retitle the open one
         if: steps.plan.outputs.action == 'bump' || steps.plan.outputs.action == 'proposed'
