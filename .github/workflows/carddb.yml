@@ -134,6 +134,17 @@ jobs:
       - name: carddb tool tests (release planner and dry run)
         working-directory: tool
         run: make carddb-test
+      # The schema moves with this ref and the data with the branch: bring the branch's legacy keyproof
+      # shards (one row per key) to leg rows before the first validate; the publish job migrates the
+      # clone it publishes the same way, so the schema and the data land in one publish.
+      - name: Migrate the keyproof shards to leg rows
+        if: github.event_name != 'pull_request'
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/migrate-home"
+          ln -sfn "$GITHUB_WORKSPACE/data" "$RUNNER_TEMP/migrate-home/public"
+          CARDDB_HOME="$RUNNER_TEMP/migrate-home" python3 -I cmd/carddb/main.py migrate keyproof-legs
       - name: Pick the tree
         id: tree
         run: |
@@ -269,6 +280,9 @@ jobs:
           # Any writer that falls back to CARDDB_NOW gets the same date.
           echo "CARDDB_NOW=$measured" >> "$GITHUB_ENV"
           echo "TOOL_REV=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_ENV"
+      - name: Migrate the keyproof shards to leg rows
+        working-directory: tool
+        run: python3 -I cmd/carddb/main.py migrate keyproof-legs
       # The carddb branch runs its own copy of this workflow. Refreshing it from
       # main on every publish is the structural fix for a stale copy: the next
       # workflow change reaches the branch with the data commit that follows it.

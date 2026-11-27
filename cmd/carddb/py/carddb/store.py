@@ -17,7 +17,7 @@ import shutil
 import subprocess
 import sys
 
-from . import shard
+from . import keylegs, shard
 from .boundary import boundary_text
 from .merge import WRITER_PRIORITY
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
@@ -392,7 +392,28 @@ class Store:
             return False
         return WRITER_PRIORITY.get(old[w], 0) >= WRITER_PRIORITY.get(new[w], 0)
 
-    def _plan(self, table, cols, rows, replace=False):
+    def _stale_legs(self, table, cols, cells, legacy):
+        """[(rel, key)] of the stored xmage/forge/cite rows of the legacy keys in legacy (see
+        keylegs.split_batch) that the batch does not rewrite: a legacy row states the whole key, so a leg it
+        no longer holds (FX narrowed to X, diagnosed turned agreed) must not linger and outvote it."""
+        kidx = shard.key_indexes(cols)
+        by_key = {}
+        for r in cells:
+            k = shard.row_key(r, kidx)
+            if (k[0], k[1]) in legacy:
+                by_key.setdefault((k[0], k[1]), r)
+        kept = {shard.row_key(r, kidx) for r in cells}
+        seen, out = {}, []
+        for ok, r in sorted(by_key.items()):
+            rel = self._shard_rel_scoped(table, cols, r)
+            if rel not in seen:
+                seen[rel] = self._read_shard(table, cols, kidx, rel)[1]
+            for k in sorted(seen[rel]):
+                if (k[0], k[1]) == ok and k[2] in keylegs.LEGACY_LEGS and k not in kept:
+                    out.append((rel, k))
+        return out
+
+    def _plan(self, table, cols, rows, replace=False, drop=()):
         """(plan {rel: text, or None to delete the file}, changed row count) of merging rows (cells) into
         table's shards. A key keeps one home: when a row lands in a different shard than the one that holds
         its key (a table sharded outside its key), the old copy goes. replace drops every existing key of the
@@ -420,6 +441,10 @@ class Store:
                 for rel in sorted(homes[k]):
                     del state[rel][1][k]
                     touched.add(rel)
+                changed += 1
+        for rel, k in drop:  # stored rows the batch retires (a legacy put narrowing a key)
+                load(rel).pop(k, None)
+                touched.add(rel)
                 changed += 1
         for k in sorted(incoming):
             rel, r = incoming[k]
@@ -469,6 +494,28 @@ class Store:
             full[idx[c.name]] = v
         return shard_rel(table, full)
 
+    def apply_plan(self, table, plan, writer, changed):
+        """Validate plan (rel -> text, None deletes), write it, `git add` it and ledger it. The caller holds
+        the lock. Raises ValidationError, writing nothing."""
+        viol = []
+        for rel, text in sorted(plan.items()):
+            if text is not None:
+                viol += self._check_text(rel, text)
+        if not placement_follows_key(table):
+            viol += self._cross_shard_check(table, plan)
+        if viol:
+            raise ValidationError(viol)
+        for rel, text in plan.items():
+            if text is None:
+                with contextlib.suppress(FileNotFoundError):
+                    os.remove(os.path.join(self.dir, rel))
+            else:
+                _atomic_write(os.path.join(self.dir, rel), text)
+        if plan:
+            self.git("add", "-A", "--", *sorted(plan))
+            with open(os.path.join(self.dir, ".git", LEDGER), "a", encoding="utf-8") as f:
+                f.write("%s\t%s\t%d\n" % (writer, table.name, changed))
+
     def put(self, table_name, rows, writer=None, version=None, raw=False, ran=None, replace=False):
         """Merge rows into table_name's shards, validate, write, `git add`. -> rows changed.
 
@@ -479,11 +526,14 @@ class Store:
         if not _WRITER.match(writer):
             raise StoreError("writer %r is not a valid writer name" % writer)
         table = self._table(table_name)
-        rows = list(rows)
+        rows, legacy = list(rows), {}
+        if table_name == keylegs.TABLE:
+            rows, legacy = keylegs.split_batch(rows)  # the proof loop's one-row-per-key shape -> leg rows
         self.ensure()
         with self.lock():
             cols, cells = self._cells(table, rows, raw, writer)
-            plan, changed = self._plan(table, cols, cells, replace=replace)
+            drop = self._stale_legs(table, cols, cells, legacy) if legacy else ()
+            plan, changed = self._plan(table, cols, cells, replace=replace, drop=drop)
             if plan and table_name != "_meta/writers":
                 wt = self.schema.tables["_meta/writers"]
                 wcols = wt.scope_columns(self.kind)
@@ -491,24 +541,7 @@ class Store:
                         today(ran)]
                 wplan, _ = self._plan(wt, wcols, [wrow])
                 plan.update(wplan)
-            viol = []
-            for rel, text in sorted(plan.items()):
-                if text is not None:
-                    viol += self._check_text(rel, text)
-            if not placement_follows_key(table):
-                viol += self._cross_shard_check(table, plan)
-            if viol:
-                raise ValidationError(viol)
-            for rel, text in plan.items():
-                if text is None:
-                    with contextlib.suppress(FileNotFoundError):
-                        os.remove(os.path.join(self.dir, rel))
-                else:
-                    _atomic_write(os.path.join(self.dir, rel), text)
-            if plan:
-                self.git("add", "-A", "--", *sorted(plan))
-                with open(os.path.join(self.dir, ".git", LEDGER), "a", encoding="utf-8") as f:
-                    f.write("%s\t%s\t%d\n" % (writer, table_name, changed))
+            self.apply_plan(table, plan, writer, changed)
         return changed
 
     # ---- reading ------------------------------------------------------

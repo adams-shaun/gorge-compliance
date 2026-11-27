@@ -126,7 +126,7 @@ _PREFERRED_SECTIONS = (
 def _section_order(conn):
     present = [t for t in _PREFERRED_SECTIONS if _has_table(conn, t)]
     known = set(present) | {"cards", "card_names", "card_fts", "proven", "proven_keys", "keyproof_cards",
-                              "build_meta"}
+                              "keyproof_keys", "build_meta"}
     rest = [t for t in _tables(conn)
             if t not in known and not t.startswith("src_") and not t.startswith("card_fts_")
             and not t.startswith("_meta_") and "oracle_id" in _columns(conn, t)]
@@ -418,7 +418,7 @@ def _tier_sql(conn, fmt=None, only=None):
     sql = ("SELECT t0.oracle_id AS oracle_id, t0.tier AS tier, "
            "CASE WHEN t0.tier=3 THEN %s ELSE 0 END AS rank FROM "
            "(SELECT c.oracle_id AS oracle_id, CASE %s ELSE 4 END AS tier FROM cards c "
-           "WHERE c.oracle_id IN (SELECT oracle_id FROM keyproof) "
+           "WHERE c.oracle_id IN (SELECT oracle_id FROM keyproof_keys) "
            "AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)" % (
                rank.replace("c.oracle_id", "t0.oracle_id"), " ".join(whens)))
     if fmt:
@@ -449,7 +449,7 @@ def run_need(conn, args, out):
         where = "k.state IN ('owed','diverged')"
     sql = ("SELECT t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
            "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
-           "JOIN keyproof k ON k.oracle_id=c.oracle_id WHERE %s "
+           "JOIN keyproof_keys k ON k.oracle_id=c.oracle_id WHERE %s "
            "ORDER BY %s, k.\"key\"" % (tier, where, _NEED_ORDER))
     if recredit is not None:
         params.append(recredit)
@@ -482,7 +482,7 @@ def run_proof(conn, args, out):
     curated = {r[0]: _dash(r[1]) for r in _rows(
         conn, "SELECT oracle_id, reason FROM curated_exclusions WHERE oracle_id IN "
               "(SELECT value FROM json_each(?))", (js,))}
-    keys = _rows(conn, 'SELECT oracle_id, "key", state, reason, refs, sig, ticket FROM keyproof '
+    keys = _rows(conn, 'SELECT oracle_id, "key", state, reason, refs, sig, ticket FROM keyproof_keys '
                        "WHERE oracle_id IN (SELECT value FROM json_each(?)) ORDER BY oracle_id, \"key\"", (js,))
     by_card = {}
     for r in keys:
@@ -533,7 +533,7 @@ def run_proof(conn, args, out):
     live_oids = [oid for oid in paper if oid in by_card and oid not in excluded]
     tier, params = _tier_sql(conn, only=live_oids)
     sql = ("SELECT t.tier, c.name, COUNT(*) AS n FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
-           "JOIN keyproof k ON k.oracle_id=c.oracle_id WHERE k.state='owed' "
+           "JOIN keyproof_keys k ON k.oracle_id=c.oracle_id WHERE k.state='owed' "
            "GROUP BY c.oracle_id ORDER BY %s LIMIT 20" % (tier, _NEED_ORDER))
     _section(out, "top owed", ("tier", "name", "owed_keys"), [tuple(r) for r in _rows(conn, sql, params)])
 
@@ -909,6 +909,20 @@ PROVEN_VIEW_SQL = ("CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2
                    "AND (exclusion IS NULL OR exclusion = '-')")
 
 
+# One row per (card, key): the leg rows of keyproof rolled up to the per-key state the verbs below read.
+KEYPROOF_KEYS_VIEW_SQL = (
+    '''CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key", MAX(k."desc") AS "desc",
+  CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
+       WHEN SUM(k.leg IN ('xmage','forge') AND k.state='agreed') > 0 THEN 'agreed'
+       WHEN SUM(k.leg='cite' AND k.state='diagnosed') > 0 THEN 'diagnosed'
+       WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS state,
+  MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS reason,
+  CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'
+       WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 THEN 'X'
+       WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS refs,
+  MAX(k.sig) AS sig, MAX(k.ticket) AS ticket
+FROM keyproof k WHERE k.leg IN ('xmage','forge','cite') GROUP BY k.oracle_id, k."key"''')
+
 # Per-key proof (xproof). A card is proven when it is not curated-excluded, at least one key
 # agrees or is diagnosed, and every key that is not `excluded` agrees or is diagnosed.
 KEYPROOF_CARDS_VIEW_SQL = (
@@ -918,7 +932,7 @@ KEYPROOF_CARDS_VIEW_SQL = (
     "CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
     "AND SUM(k.state IN ('agreed','diagnosed'))>0 "
     "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS proven "
-    "FROM keyproof k GROUP BY k.oracle_id")
+    "FROM keyproof_keys k GROUP BY k.oracle_id")
 
 PROVEN_KEYS_VIEW_SQL = ("CREATE VIEW proven_keys AS SELECT c.* FROM cards c "
                         "JOIN keyproof_cards k USING (oracle_id) WHERE k.proven = 1")

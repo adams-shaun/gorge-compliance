@@ -2,21 +2,26 @@
 name	type	required	key	visibility	doc
 oracle_id	string	yes	yes	public	cards.oracle_id
 key	string	yes	yes	public	Ability key: cast, land, f<face>/a<i>, f<face>/t<i>, static#<face>.<i>, combat#<face>.attack, combat#<face>.block
+leg	string	yes	yes	public	Evidence leg: xmage, forge, lockstep, scenario or cite
 desc	string	no	no	public	API or trigger Mode of the key (Mana/Forage, ChangesZone), for grouping
-state	string	yes	no	public	agreed, diagnosed, diverged, owed or excluded
+state	string	yes	no	public	agreed, diagnosed, diverged, owed, excluded or stale
 reason	string	no	no	public	Owed reason (no-generator, harness, not-sent, rng, refused:<why>) or exclusion cause; - otherwise
-refs	string	no	no	public	Engines behind an agreement: FX, X or F, each with +P when phase.rs agreed
+refs	string	no	no	public	X on an xmage row, F on a forge row, - otherwise
 source	string	no	no	public	scen (level-B verdict), game (farm window), start (xproof start item), steps (xproof scripted-steps item)
 agree_items	int	no	no	public	Agreeing items on the key at this pin
 diff_items	int	no	no	public	Diverging items on the key at this pin
-witness	string	no	no	public	One agreeing item id per engine with its seed, e.g. xs:BLB:thornvault-forager:f0a2:s2
+witness	string	no	no	public	One reference: a witness item id, a level-B verdict id, or list=<name>
 sig	string	no	no	public	Class signature (sha12) when diverged or diagnosed
 cite	string	no	no	public	CR rule or upstream-bugs.md row for a diagnosed key
 ticket	string	no	no	public	Open ticket ids, comma-separated
+seats	int	yes	no	public	Seats of the game the state was measured in (0 on a seed row)
+multiplayer	bool	yes	no	public	The key reads something that differs with more than two players
 gorge_sha	string	yes	no	public	gorge commit the state was measured at
 corpus_pin	string	no	no	public	Forge corpus pin (FORGE_REF)
 script_sha	string	no	no	public	Digest of the card's Forge script; keeps evidence across reprints
 xmage_ref	string	no	no	public	XMage commit of the follower
 forge_ref	string	no	no	public	Forge oracle driver commit
 measured	date	yes	no	public	Date measured, YYYY-MM-DD; the merge tie-break timestamp
+replayed	date	no	no	public	Last date the witness was replayed and held, YYYY-MM-DD
+replayed_sha	string	no	no	public	gorge commit the witness last held at
 writer	string	no	no	public	Program that wrote the row (xproof)

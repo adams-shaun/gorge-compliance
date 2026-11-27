@@ -155,7 +155,7 @@ class DocsSets(Base):
     """export_sets: sets.json, writers.json and the finished sets-carddb.md snippet from keyproof."""
 
     def fixture(self, with_status=True):
-        from .test_query import keyproof_row, OID_A, OID_B, OID_C
+        from .test_query import flat, keyproof_rows, OID_A, OID_B, OID_C
         a = self.machine("a", init=True)
         a.put("sets", [{"set_code": "lea", "name": "Limited Edition Alpha", "release_date": "1993-08-05", "set_type": "core"},
                        {"set_code": "2ed", "name": "Unlimited | Edition", "release_date": "1993-12-01", "set_type": "core"},
@@ -169,12 +169,12 @@ class DocsSets(Base):
             {"printing_id": "p4", "oracle_id": OID_C, "set_code": "2ed", "collector_number": "3", "rarity": "common"},
             {"printing_id": "p5", "oracle_id": OID_C, "set_code": "3ed", "collector_number": "3", "rarity": "common"},
         ], writer="catalogue")
-        a.put("keyproof", [
-            keyproof_row(OID_A, "cast", "agreed"), keyproof_row(OID_A, "f0/a0", "agreed"),
-            keyproof_row(OID_B, "cast", "owed", reason="no-generator"),
-            keyproof_row(OID_B, "f0/a0", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
-            keyproof_row(OID_C, "cast", "diverged", diff_items=1),
-        ], writer="xproof")
+        a.put("keyproof", flat(
+            keyproof_rows(OID_A, "cast", "agreed"), keyproof_rows(OID_A, "f0/a0", "agreed"),
+            keyproof_rows(OID_B, "cast", "owed", reason="no-generator"),
+            keyproof_rows(OID_B, "f0/a0", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
+            keyproof_rows(OID_C, "cast", "diverged", diff_items=1),
+        ), writer="xproof")
         if with_status:
             a.put("status", [{"oracle_id": OID_A, "level": "A", "verdict": "agree", "gorge_pin": "8f7095353a64",
                               "measured": "2026-11-19", "writer": "loop"},
