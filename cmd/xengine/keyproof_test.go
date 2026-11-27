@@ -14,6 +14,8 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/adjudicate"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -62,8 +64,10 @@ func readTSV(t *testing.T, path string) (header []string, rows []map[string]stri
 	return header, rows
 }
 
-// kpFixture is a two-item play whose second item both followers diverge on
-// identically (FX|G), adjudicated, ready for keyproof.
+// kpFixture is a play whose first item agrees and whose diverging item (fx.div:
+// the second of a two-item play, else the first item with a lowered step that
+// exercises a key the first did not) both followers diverge on identically
+// (FX|G), adjudicated, ready for keyproof.
 type kpFixture struct {
 	reg        *cards.Registry
 	play, tmp  string
@@ -72,7 +76,8 @@ type kpFixture struct {
 	xrows      string
 	frows      string
 	lower      map[string]lowerRow
-	step       int // the second item's diverging step
+	div        string // the diverging item (the second of a two-item play)
+	step       int    // its diverging step
 }
 
 func newKpFixture(t *testing.T) *kpFixture { return newKpFixtureMode(t, kpBoth) }
@@ -91,6 +96,15 @@ func newKpFixtureMode(t *testing.T, mode kpMode) *kpFixture {
 	t.Helper()
 	reg, play := playTwo(t)
 	xprepPlayDir(t, reg, play)
+	return newKpFixtureFrom(t, mode, reg, play)
+}
+
+// newKpFixtureFrom is the fixture over any play dir whose items diff to the
+// mode's verdicts: playTwo's xe: tape items, or lowerKeyStarts' xs: start
+// items (the only ones that declare a key, so the only ones that can name a
+// key when keyproof drops them).
+func newKpFixtureFrom(t *testing.T, mode kpMode, reg *cards.Registry, play string) *kpFixture {
+	t.Helper()
 	tmp := t.TempDir()
 	raw := filepath.Join(tmp, "raw.jsonl")
 	ids := goldenRows(t, play, raw, nil)
@@ -108,37 +122,47 @@ func newKpFixtureMode(t *testing.T, mode kpMode) *kpFixture {
 	}); err != nil {
 		t.Fatal(err)
 	}
-	// The second item diverges at the first lowered step that exercised a key
-	// no agreeing item did (an agreement outranks a diagnosis, so a class could
-	// only clear such a key).
-	l1 := fx.lower[ids[1]]
-	hi1 := len(l1.StepEntry) - 1
-	if l1.Truncated != "" {
-		hi1 = 0
-		for hi1+1 < len(l1.StepEntry) && l1.StepEntry[hi1+1] < l1.TruncatedAt {
-			hi1++
-		}
-	}
-	for s := 1; s <= hi1 && fx.step < 0; s++ {
-		if l1.StepEntry[s] < 0 {
-			continue
-		}
-		for u := range fx.stepUsesAt(t, ids[1], s) {
-			if _, shared := fx.full(t, ids[0])[u]; !shared {
-				fx.step = s
+	// The diverging item is the first (after the agreeing first item) with a
+	// lowered step that exercised a key the first item did not (an agreement
+	// outranks a diagnosis, so a class could only clear such a key): the
+	// second item of a two-item play, the interesting start of a batch.
+	divStep := func(id string) int {
+		l := fx.lower[id]
+		hi := len(l.StepEntry) - 1
+		if l.Truncated != "" {
+			hi = 0
+			for hi+1 < len(l.StepEntry) && l.StepEntry[hi+1] < l.TruncatedAt {
+				hi++
 			}
+		}
+		for s := 1; s <= hi; s++ {
+			if l.StepEntry[s] < 0 {
+				continue
+			}
+			for u := range fx.stepUsesAt(t, id, s) {
+				if _, shared := fx.full(t, ids[0])[u]; !shared {
+					return s
+				}
+			}
+		}
+		return -1
+	}
+	for _, id := range ids[1:] {
+		if s := divStep(id); s >= 0 {
+			fx.div, fx.step = id, s
+			break
 		}
 	}
 	if fx.step < 0 {
-		t.Skip("no lowered step of the second item exercised a key the first did not")
+		t.Skip("no lowered step of any item but the first exercised a key the first did not")
 	}
 	differ := func(i int, x *oraclediff.XResult) {
-		if i == 1 {
+		if ids[i] == fx.div {
 			x.Snapshots[fx.step+1].Players[0].Life++
 		}
 	}
 	quiet := func(i int, x *oraclediff.XResult) {
-		if i == 1 {
+		if ids[i] == fx.div {
 			x.Snapshots, x.Harness = nil, "driver: no answer"
 		}
 	}
@@ -175,8 +199,8 @@ func newKpFixtureMode(t *testing.T, mode kpMode) *kpFixture {
 		if len(res.Rows) != 0 {
 			t.Fatalf("adjudication rows %+v, want none", res.Rows)
 		}
-	} else if len(res.Rows) != 1 || res.Rows[0].ID != ids[1] || res.Rows[0].Pattern != string(p) {
-		t.Fatalf("adjudication rows %+v, want one %s row for %s", res.Rows, p, ids[1])
+	} else if len(res.Rows) != 1 || res.Rows[0].ID != fx.div || res.Rows[0].Pattern != string(p) {
+		t.Fatalf("adjudication rows %+v, want one %s row for %s", res.Rows, p, fx.div)
 	}
 	if err := adjudicate.Write(fx.ad, res); err != nil {
 		t.Fatal(err)
@@ -213,7 +237,7 @@ func (fx *kpFixture) full(t *testing.T, id string) map[classify.Use]int {
 
 // stepUses is the uses of the second item's diverging step.
 func (fx *kpFixture) stepUses(t *testing.T) map[classify.Use]int {
-	return fx.stepUsesAt(t, fx.ids[1], fx.step)
+	return fx.stepUsesAt(t, fx.div, fx.step)
 }
 
 // stepUsesAt is the uses of item id's step: the tape entries after the
@@ -458,7 +482,7 @@ func (fx *kpFixture) onlySecond(t *testing.T) []classify.Use {
 	for u := range fx.stepUses(t) {
 		shared := false
 		for _, id := range fx.ids {
-			if _, ok := fx.full(t, id)[u]; ok && id != fx.ids[1] {
+			if _, ok := fx.full(t, id)[u]; ok && id != fx.div {
 				shared = true
 			}
 		}
@@ -578,6 +602,372 @@ func TestKeyproofOwedReason(t *testing.T) {
 	}
 }
 
+// dropFinding rewrites a diff's verdicts.jsonl without item id's finding, as
+// a follower whose driver never answered (nor refused) the item would leave it.
+func dropFinding(t *testing.T, path, id string) {
+	t.Helper()
+	var kept []byte
+	if err := readLines(path, func(b []byte) error {
+		var f classify.Finding
+		if err := json.Unmarshal(b, &f); err != nil {
+			return err
+		}
+		if f.ID == id {
+			return nil
+		}
+		kept = append(append(kept, b...), '\n')
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(path, kept, 0o644); err != nil {
+		t.Fatal(err)
+	}
+}
+
+// setLowerStatus rewrites a play dir's lower.jsonl row for id with the given
+// status and no tape, as a lowering that produced no tape leaves it.
+func setLowerStatus(t *testing.T, play, id, status string) {
+	t.Helper()
+	var out []byte
+	if err := readLines(filepath.Join(play, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		if r.ID == id {
+			r.Status, r.Tape = status, ""
+		}
+		nb, err := json.Marshal(r)
+		if err != nil {
+			return err
+		}
+		out = append(append(out, nb...), '\n')
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(play, "lower.jsonl"), out, 0o644); err != nil {
+		t.Fatal(err)
+	}
+}
+
+// item reads one items.jsonl row of the fixture's play.
+func (fx *kpFixture) item(t *testing.T, id string) oraclegen.Item {
+	t.Helper()
+	var found oraclegen.Item
+	if err := readLines(filepath.Join(fx.play, "items.jsonl"), func(b []byte) error {
+		var it oraclegen.Item
+		if err := json.Unmarshal(b, &it); err != nil {
+			return err
+		}
+		if it.ID == id {
+			found = it
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if found.ID == "" {
+		t.Fatalf("%s is not in items.jsonl", id)
+	}
+	return found
+}
+
+// coveredElsewhere is the keys another item credits (its whole lowered range)
+// or the diverging step exercised: the keys whose row state is not decided by
+// the dropped items alone.
+func (fx *kpFixture) coveredElsewhere(t *testing.T, except ...string) map[classify.Use]bool {
+	t.Helper()
+	skip := map[string]bool{}
+	for _, id := range except {
+		skip[id] = true
+	}
+	covered := map[classify.Use]bool{}
+	for u := range fx.stepUses(t) {
+		covered[u] = true
+	}
+	for _, id := range fx.ids {
+		if skip[id] || id == fx.div {
+			continue // the diverging item credits nothing outside its step
+		}
+		for u := range fx.full(t, id) {
+			covered[u] = true
+		}
+	}
+	return covered
+}
+
+// cardIDs are the fixture's item ids whose item names card.
+func (fx *kpFixture) cardIDs(t *testing.T, card string) []string {
+	t.Helper()
+	var ids []string
+	for _, id := range fx.ids {
+		if fx.item(t, id).Card == card {
+			ids = append(ids, id)
+		}
+	}
+	if len(ids) == 0 {
+		t.Fatalf("no item of %s (items %v)", card, fx.ids)
+	}
+	return ids
+}
+
+// newKpStartPair is a played start pair over xs: items (playTwo's xe: tape
+// items declare no key, so only xs: items can name a key when keyproof drops
+// them): every cardA item agrees with both followers, the last cardB item
+// diverges from them identically at its last snapshot (a start's early steps
+// are inside XMage's comparison cuts, its last checkpoint is compared by both
+// followers), adjudicated, ready for keyproof.
+func newKpStartPair(t *testing.T, cardA, keyA, cardB, keyB string) *kpFixture {
+	t.Helper()
+	ks := lowerKeyStarts(t, [][2]string{{cardA, keyA}, {cardB, keyB}})
+	xprepPlayDir(t, ks.reg, ks.play)
+	reg, play := ks.reg, ks.play
+	tmp := t.TempDir()
+	ids := goldenRows(t, play, filepath.Join(tmp, "raw.jsonl"), nil)
+	fx := &kpFixture{reg: reg, play: play, tmp: tmp, ids: ids, lower: map[string]lowerRow{}, step: -1}
+	if err := readLines(filepath.Join(play, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		fx.lower[r.ID] = r
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	// The diverging item is the last of cardB's two seeds.
+	fx.div = ""
+	for _, id := range ids {
+		if strings.HasPrefix(id, "xs:"+strings.Join([]string{"XP", scen.Slug(cardB)}, ":")) {
+			fx.div = id
+		}
+	}
+	if fx.div == "" {
+		t.Fatalf("no %s item in %v", cardB, ids)
+	}
+	differ := func(i int, x *oraclediff.XResult) {
+		if ids[i] == fx.div {
+			x.Snapshots[len(x.Snapshots)-1].Players[0].Life++
+		}
+	}
+	rawX, rawF := filepath.Join(tmp, "rawx.jsonl"), filepath.Join(tmp, "rawf.jsonl")
+	goldenRows(t, play, rawX, differ)
+	goldenRows(t, play, rawF, differ)
+	fx.xrows = filepath.Join(tmp, "xrows.jsonl")
+	fx.frows = filepath.Join(tmp, "frows.jsonl")
+	stampRows(t, rawX, fx.xrows, "xmage")
+	stampRows(t, rawF, fx.frows, "forge")
+	fx.xd, fx.fd, fx.ad = filepath.Join(tmp, "xd"), filepath.Join(tmp, "fd"), filepath.Join(tmp, "ad")
+	if err := diff(reg, play, "xmage", fx.xrows, fx.xd, ""); err != nil {
+		t.Fatal(err)
+	}
+	if err := diff(reg, play, "forge", fx.frows, fx.fd, ""); err != nil {
+		t.Fatal(err)
+	}
+	xc := verdictClasses(t, filepath.Join(fx.xd, "verdicts.jsonl"))
+	fc := verdictClasses(t, filepath.Join(fx.fd, "verdicts.jsonl"))
+	for _, e := range []struct {
+		name string
+		c    map[string]string
+	}{
+		{"xmage", xc}, {"forge", fc},
+	} {
+		if c := e.c[fx.div]; c != classify.ClassDiverge {
+			t.Fatalf("%s class of the diverging item %s: %s, want diverge", e.name, fx.div, c)
+		}
+		for _, id := range ids {
+			if id != fx.div && e.c[id] != classify.ClassAgree {
+				t.Fatalf("%s class of %s: %s, want agree", e.name, id, e.c[id])
+			}
+		}
+	}
+	// The diverging step is the one classify cut the finding at.
+	var xf classify.Finding
+	if err := readLines(filepath.Join(fx.xd, "verdicts.jsonl"), func(b []byte) error {
+		var f classify.Finding
+		if err := json.Unmarshal(b, &f); err != nil {
+			return err
+		}
+		if f.ID == fx.div {
+			xf = f
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	fx.step = xf.Step
+	if fx.step < 0 || fx.step >= len(fx.lower[fx.div].StepEntry) || fx.lower[fx.div].StepEntry[fx.step] < 0 {
+		t.Fatalf("diverging step %d outside %s's lowered steps", fx.step, fx.div)
+	}
+	in, err := adjudicate.Load(play, fx.xd, fx.fd, fx.xrows, fx.frows)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res := adjudicate.Run(in)
+	if len(res.Rows) != 1 || res.Rows[0].ID != fx.div || res.Rows[0].Pattern != string(oraclediff.ForgeXMageG) {
+		t.Fatalf("adjudication rows %+v, want one FX|G row for %s", res.Rows, fx.div)
+	}
+	if err := adjudicate.Write(fx.ad, res); err != nil {
+		t.Fatal(err)
+	}
+	return fx
+}
+
+// owedWant is the reason keyproof must name for a key its dropped item alone
+// exercised.
+const (
+	reasonForgeMissing = "follower-missing:forge:agree"
+	reasonNoTape       = "credited-refused:status:refused"
+)
+
+// assertOwed checks that every own key no other item credits got an owed row
+// with exactly reason, and returns how many did.
+func (fx *kpFixture) assertOwed(t *testing.T, byKey map[classify.Use]map[string]string, dropped []string, own map[classify.Use]int, reason string) int {
+	t.Helper()
+	n := 0
+	covered := fx.coveredElsewhere(t, dropped...)
+	for u := range own {
+		if covered[u] {
+			continue
+		}
+		r := byKey[u]
+		if r == nil {
+			t.Errorf("%v: no row, want owed %s", u, reason)
+			continue
+		}
+		if r["state"] != "owed" || r["reason"] != reason || r["refs"] != "-" {
+			t.Errorf("%v: %v, want owed %s with refs -", u, r, reason)
+			continue
+		}
+		n++
+	}
+	return n
+}
+
+// An item only one follower's diff answered compared nothing, but its keys
+// must not vanish: each gets an owed row with the follower-missing reason (the
+// absent follower, then the present one's class), not a silent drop.
+func TestKeyproofFollowerMissingOwed(t *testing.T) {
+	t.Parallel()
+	fx := newKpFixture(t)
+	dropped := fx.ids[0]
+	dropFinding(t, filepath.Join(fx.fd, "verdicts.jsonl"), dropped)
+	out := filepath.Join(fx.tmp, "out")
+	byKey, _ := fx.keyRows(t, out)
+
+	own := fx.full(t, dropped)
+	if len(own) == 0 {
+		t.Fatalf("%s exercised no key", dropped)
+	}
+	if n := fx.assertOwed(t, byKey, []string{dropped}, own, reasonForgeMissing); n == 0 {
+		t.Error("no key of the dropped item was its alone: the case covered nothing")
+	}
+	// The dropped item credits nothing: no witness.
+	if b, _ := os.ReadFile(filepath.Join(out, "witness.jsonl")); strings.Contains(string(b), `"id":"`+dropped+`"`) {
+		t.Errorf("the follower-missing item wrote a witness")
+	}
+}
+
+// The same for a start's xs: items (both seeds of one card, dropped together):
+// each key they alone exercised -- including the declared key no tape entry
+// names -- gets an owed row with the follower-missing reason.
+func TestKeyproofFollowerMissingOwedStart(t *testing.T) {
+	t.Parallel()
+	const card = "Anointer Priest"
+	fx := newKpStartPair(t, card, "f0/t0", "Vengeant Vampire", "f0/t0")
+	dropped := fx.cardIDs(t, card)
+	for _, id := range dropped {
+		dropFinding(t, filepath.Join(fx.fd, "verdicts.jsonl"), id)
+	}
+	byKey, _ := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
+
+	own := map[classify.Use]int{}
+	for _, id := range dropped {
+		for u, n := range fx.full(t, id) {
+			own[u] += n
+		}
+		u, ok := declaredKey(fx.reg, fx.item(t, id))
+		if !ok {
+			t.Fatalf("%s declares no key", id)
+		}
+		own[u]++
+	}
+	if n := fx.assertOwed(t, byKey, dropped, own, reasonForgeMissing); n == 0 {
+		t.Error("no key of the dropped start was its alone: the case covered nothing")
+	}
+	if r := byKey[classify.Use{Card: card, Key: "f0/t0"}]; r["state"] != "owed" || r["reason"] != reasonForgeMissing {
+		t.Errorf("the declared key of the dropped start: %v, want owed %s", r, reasonForgeMissing)
+	}
+}
+
+// credited refusing an item (its lowering gave no tape) used to drop its keys
+// silently; the key its id declares now gets an owed row naming the refusal.
+// Once the item is also follower-missing, that reason wins (the item was never
+// compared at all), still naming the declared key.
+func TestKeyproofCreditedRefusalOwed(t *testing.T) {
+	t.Parallel()
+	const card = "Anointer Priest"
+	fx := newKpStartPair(t, card, "f0/t0", "Vengeant Vampire", "f0/t0")
+	dropped := fx.cardIDs(t, card)
+	u := classify.Use{Card: card, Key: "f0/t0"}
+	if _, ok := declaredKey(fx.reg, fx.item(t, dropped[0])); !ok {
+		t.Fatalf("%s declares no key", dropped[0])
+	}
+	for _, id := range dropped {
+		setLowerStatus(t, fx.play, id, statusRefused)
+	}
+	byKey, _ := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
+	if r := byKey[u]; r == nil || r["state"] != "owed" || r["reason"] != reasonNoTape {
+		t.Errorf("declared key %v: %v, want owed %s", u, r, reasonNoTape)
+	}
+
+	// The same items then lose Forge's findings too: follower-missing is the
+	// answer triage needs, and it still names the declared key.
+	for _, id := range dropped {
+		dropFinding(t, filepath.Join(fx.fd, "verdicts.jsonl"), id)
+	}
+	byKey, _ = fx.keyRows(t, filepath.Join(fx.tmp, "out2"))
+	if r := byKey[u]; r == nil || r["state"] != "owed" || r["reason"] != reasonForgeMissing {
+		t.Errorf("follower-missing: declared key %v: %v, want owed %s", u, r, reasonForgeMissing)
+	}
+}
+
+// The drop reasons bucket by class: follower-missing names the absent follower
+// and the present one's class, credited-refusal why there was no tape.
+func TestKeyproofDropReasons(t *testing.T) {
+	t.Parallel()
+	for _, c := range []struct {
+		absent  string
+		present classify.Finding
+		want    string
+	}{
+		{"forge", classify.Finding{Class: classify.ClassAgree}, "follower-missing:forge:agree"},
+		{"xmage", classify.Finding{Class: classify.ClassHarness}, "follower-missing:xmage:harness"},
+		{"xmage", classify.Finding{}, "follower-missing:xmage:none"},
+	} {
+		if got := owedReasonFollowerMissing(c.absent, c.present); got != c.want {
+			t.Errorf("owedReasonFollowerMissing(%q, %+v) = %q, want %q", c.absent, c.present, got, c.want)
+		}
+	}
+	p := &playKeys{lower: map[string]lowerRow{
+		"ok-notape": {ID: "ok-notape", Status: lower.StatusOK},
+		"gap":       {ID: "gap", Status: "lower_gap"},
+		"nostatus":  {ID: "nostatus"},
+	}}
+	for id, want := range map[string]string{
+		"missing":   "credited-refused:no-lower-row",
+		"ok-notape": "credited-refused:no-tape",
+		"gap":       "credited-refused:status:lower_gap",
+		"nostatus":  "credited-refused:status:none",
+	} {
+		if got := p.creditRefusal(id); got != want {
+			t.Errorf("creditRefusal(%q) = %q, want %q", id, got, want)
+		}
+	}
+}
+
 // A key's reason is voted by class first: splitting harness into signatures
 // must not move a key to rng.
 func TestKeyproofOwedPickClassFirst(t *testing.T) {
@@ -592,6 +982,7 @@ func TestKeyproofOwedPickClassFirst(t *testing.T) {
 		{"most common signature inside the class", map[string]string{"1": "harness:B", "2": "harness:A", "3": "harness:B", "4": "rng"}, "harness:B"},
 		{"rng majority", map[string]string{"1": "harness:A", "2": "rng", "3": "rng"}, "rng"},
 		{"one reason", map[string]string{"1": "rng"}, "rng"},
+		{"drop reasons vote by class too", map[string]string{"1": "follower-missing:forge:agree", "2": "credited-refused:status:refused", "3": "follower-missing:xmage:harness"}, "follower-missing:forge:agree"},
 	} {
 		if got := pickOwedReason(c.owed); got != c.want {
 			t.Errorf("%s: %q, want %q", c.name, got, c.want)
