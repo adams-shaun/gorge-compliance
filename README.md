@@ -51,7 +51,9 @@ make cards                                 # links ../gorge/.cards here as .card
 make boundary oracle-audit ORACLE_RUN=Fatal_Push
 ```
 
-The last line should end with `ok` for both packages.
+`make boundary` ends with a `test-whole: PASS ...` verdict line and runs with or without
+the corpus; `make oracle-audit`'s last line should end with `ok` (it needs the corpus, so
+run it after `make cards`).
 
 `make cards` looks for a gorge checkout at `../gorge`. For a checkout elsewhere, run
 `make cards GORGE_ROOT=/path/to/gorge`. It fails, saying what to do, when there is no
