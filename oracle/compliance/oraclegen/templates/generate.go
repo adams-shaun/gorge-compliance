@@ -24,12 +24,16 @@ func (t Template) item(f *cards.Face, card string, sc oraclegen.Scenario) oracle
 	return oraclegen.NewItem(f, card, t.ID, t.Version, sc)
 }
 
-// All lists every template.
+// All lists every template Generate picks by default. ActivateMana is not
+// here: GenerateManaAbilities emits it only for -mana-abilities, so the XMage
+// pass's level-A template set (and every committed verdict) is unchanged.
 var All = []Template{PlayLand, CastResolve, CounterSpell}
 
 // Generate builds the level-A scenario for one card, or says why not: a
 // land is played, a spell that targets a spell counters one of ours, and
-// any other spell is cast and resolved.
+// any other spell is cast and resolved. A no-mana-cost permanent with a mana
+// ability (Sol Talisman) has no cast scenario; GenerateManaAbilities serves
+// its activation, opt-in, so the XMage pass keeps its committed rows.
 func Generate(reg *cards.Registry, name string) (oraclegen.Item, *oraclegen.Skip) {
 	c, ok := reg.Lookup(name)
 	if !ok || len(c.Faces) == 0 {

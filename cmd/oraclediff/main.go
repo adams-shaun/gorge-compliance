@@ -1,6 +1,6 @@
 // Command oraclediff runs the XMage compliance pipeline's gorge side.
 //
-//	oraclediff gen  [-cards .cards] [-level A|B] -manifest oracle/compliance/manifests/FRA.json -out scenarios.jsonl
+//	oraclediff gen  [-cards .cards] [-level A|B] [-mana-abilities] -manifest oracle/compliance/manifests/FRA.json -out scenarios.jsonl
 //	oraclediff plan [-cards .cards] -scenarios scenarios.jsonl -xmage-ref REF -driver SHA -cache DIR -replay todo.jsonl -rediff rediff.jsonl
 //	oraclediff diff [-cards .cards] -scenarios scenarios.jsonl [-xmage xmage.jsonl] [-cache DIR] [-driver SHA] -out verdicts.jsonl
 //	oraclediff adjudicate -scenarios scen.jsonl -forge-diff forge-diff.jsonl
@@ -19,9 +19,11 @@
 // the measurement itself failed. `go run` reports both as 1.
 //
 // gen writes one level-A scenario per manifest card gorge fully supports
-// (skips go to <out>.skips.jsonl); -level B writes the level-A scenario and
-// then every generable level-B one, with a level-B skip (keyed by its
-// requirement) for each the generator cannot make yet. plan splits them into the stale ones
+// (skips go to <out>.skips.jsonl); -mana-abilities appends the level-A
+// activation item for each nonland mana ability (follower-check's mode, off
+// for the XMage pass); -level B writes the level-A scenario and then every
+// generable level-B one, with a level-B skip (keyed by its requirement) for
+// each the generator cannot make yet. plan splits them into the stale ones
 // (no passing verdict for this exact scenario and XMAGE_REF) and, of those,
 // the ones XMage has not replayed yet. The XMage driver (scripts/xmage-
 // oracle-run.sh) replays the latter; diff runs gorge on each scenario,
@@ -82,8 +84,9 @@ func main() {
 		out := fs.String("out", "", "scenario JSONL")
 		level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
 		printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
+		manaAbilities := fs.Bool("mana-abilities", false, "also generate a level-A activation item for every nonland activated mana ability (follower-check)")
 		fs.Parse(os.Args[2:])
-		err = runGen(*dir, *manifest, *out, *level, *printed)
+		err = runGenOpts(*dir, *manifest, *out, *level, *printed, *manaAbilities)
 	case "plan":
 		fs := flag.NewFlagSet("plan", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -242,6 +245,13 @@ func loadReg(dir string) (*cards.Registry, error) {
 }
 
 func runGen(dir, manifest, out, level, printed string) error {
+	return runGenOpts(dir, manifest, out, level, printed, false)
+}
+
+// runGenOpts is runGen with the follower-check mana-ability append. The
+// ordinary level-A pass keeps the flag false, so every committed level-A
+// scenario (and its verdict) keeps its bytes.
+func runGenOpts(dir, manifest, out, level, printed string, manaAbilities bool) error {
 	if manifest == "" || out == "" {
 		return fmt.Errorf("gen needs -manifest and -out")
 	}
@@ -276,7 +286,7 @@ func runGen(dir, manifest, out, level, printed string) error {
 	if err != nil {
 		return err
 	}
-	return genManifest(reg, m, out, level)
+	return genManifestOpts(reg, m, out, level, manaAbilities)
 }
 
 // withPrinted adds the printed cards XMage's manifest omits to a copy of m and
@@ -305,6 +315,13 @@ func withPrinted(m compliance.Manifest, pr compliance.Printed) compliance.Manife
 // genManifest generates from an already loaded registry, so deterministic
 // fixtures can exercise the manifest/name boundary without an external corpus.
 func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) error {
+	return genManifestOpts(reg, m, out, level, false)
+}
+
+// genManifestOpts is genManifest with manaAbilities: one extra level-A
+// activation item per nonland mana ability. It is follower-check's mode; the
+// XMage pass never sets it, so its scenario set and verdicts do not move.
+func genManifestOpts(reg *cards.Registry, m compliance.Manifest, out, level string, manaAbilities bool) error {
 	sup := effects.Supported()
 	has := func(n string) bool { _, ok := reg.Lookup(n); return ok }
 	folded := compliance.FoldedNames(reg)
@@ -360,32 +377,60 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 			skipped++
 			continue
 		}
-		var it oraclegen.Item
-		var skip *oraclegen.Skip
+		var items []oraclegen.Item
+		var skips []*oraclegen.Skip
+		hasBase := false
 		c, _ := reg.Lookup(name)
 		switch {
 		case !ok:
-			skip = &oraclegen.Skip{Card: mc.Name, Reason: "not in corpus"}
+			skips = append(skips, &oraclegen.Skip{Card: mc.Name, Reason: "not in corpus"})
 		default:
 			if u := reg.Unsupported(c, sup); len(u) > 0 {
-				skip = &oraclegen.Skip{Card: name, Reason: fmt.Sprintf("unsupported %v", u)}
+				skips = append(skips, &oraclegen.Skip{Card: name, Reason: fmt.Sprintf("unsupported %v", u)})
 			} else {
-				it, skip = templates.Generate(reg, name)
+				it, skip := templates.Generate(reg, name)
+				if skip != nil {
+					skips = append(skips, skip)
+				} else {
+					items = append(items, it)
+					hasBase = true
+				}
+			}
+			// -level B already emits every activated ability (activate.mana
+			// included) as a level-B item; the level-A append is for the
+			// level-A follower gate only.
+			if manaAbilities && level == "A" {
+				mits, mskips := templates.GenerateManaAbilities(reg, name)
+				for _, mit := range mits {
+					if !hasItemID(items, mit.ID) {
+						items = append(items, mit)
+					}
+				}
+				// A card with no generated item names the first reason it
+				// got none. A card with a cast item and a mana-ability cost
+				// gap still has a scenario; the skip would only obscure it.
+				if len(items) == 0 {
+					skips = append(skips, mskips...)
+				}
 			}
 		}
-		if skip != nil {
-			b, _ := json.Marshal(skip)
-			fmt.Fprintln(sw, string(b))
-			skipped++
+		if len(items) == 0 {
+			if len(skips) > 0 {
+				b, _ := json.Marshal(skips[0])
+				fmt.Fprintln(sw, string(b))
+				skipped++
+			}
 			continue
 		}
-		if name != mc.Name && !mc.PrintedOnly {
-			it.XMageName = mc.Name
+		for _, it := range items {
+			if name != mc.Name && !mc.PrintedOnly {
+				it.XMageName = mc.Name
+			}
+			b, _ := json.Marshal(it)
+			fmt.Fprintln(ow, string(b))
+			n++
 		}
-		b, _ := json.Marshal(it)
-		fmt.Fprintln(ow, string(b))
-		n++
-		if level != "B" {
+		if level != "B" || !hasBase {
 			continue
 		}
 		// Level B is a superset of A: a card that got a level-A item also
@@ -412,6 +457,17 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 	}
 	fmt.Printf("gen %s: %d scenarios, %d skipped (%s.skips.jsonl)\n", m.Code, n, skipped, out)
 	return nil
+}
+
+// hasItemID reports whether items already holds an item with this id, so a
+// card whose level-A item and activation item collide is written once.
+func hasItemID(items []oraclegen.Item, id string) bool {
+	for _, it := range items {
+		if it.ID == id {
+			return true
+		}
+	}
+	return false
 }
 
 // Row is one verdict line.

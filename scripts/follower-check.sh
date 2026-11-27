@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# follower-check.sh ENGINE [--set FDN] [--pool FILE] [--limit N] [--setup-only]
-#                          [--min-agree PCT] [--out DIR]
+# follower-check.sh ENGINE [--set FDN] [--manifest FILE] [--pool FILE]
+#                          [--limit N] [--setup-only] [--min-agree PCT] [--out DIR]
 #
 # Level-A scenarios through one registered follower, in one command:
 #   oraclediff gen -level A  ->  filter (--pool, --limit, --setup-only)
@@ -13,6 +13,10 @@
 # the repository root. With an empty request file the runner is not started.
 #
 #   --set S         the set manifest oracle/compliance/manifests/S.json (default FDN)
+#   --manifest FILE read cards from an explicit manifest instead of --set. A
+#                   follower-check pool outside every committed set uses this,
+#                   and --pool without --set builds one from the pool names so
+#                   a card in no committed manifest is selectable too.
 #   --pool FILE     keep the items whose .card is a name in FILE (one name per line,
 #                   '#' starts a comment, blank lines skipped; oracle/xengine/pools/README.md)
 #   --limit N       then keep the first N items
@@ -36,10 +40,11 @@ cd "$repo"
 
 die() { echo "follower-check: $*" >&2; exit 2; }
 
-engine="" set=FDN pool="" limit="" setup_only=0 min_agree="" out=""
+engine="" set=FDN set_given=0 manifest="" pool="" limit="" setup_only=0 min_agree="" out=""
 while [ $# -gt 0 ]; do
 	case "$1" in
-	--set) set=${2:?--set needs a set code}; shift 2 ;;
+	--set) set=${2:?--set needs a set code}; set_given=1; shift 2 ;;
+	--manifest) manifest=${2:?--manifest needs a file}; shift 2 ;;
 	--pool) pool=${2:?--pool needs a file}; shift 2 ;;
 	--limit) limit=${2:?--limit needs a number}; shift 2 ;;
 	--setup-only) setup_only=1; shift ;;
@@ -49,11 +54,13 @@ while [ $# -gt 0 ]; do
 	*) [ -z "$engine" ] || die "unexpected argument $1"; engine=$1; shift ;;
 	esac
 done
-[ -n "$engine" ] || die "usage: follower-check.sh ENGINE [--set FDN] [--pool FILE] [--limit N] [--setup-only] [--min-agree PCT] [--out DIR]"
+[ -n "$engine" ] || die "usage: follower-check.sh ENGINE [--set FDN] [--manifest FILE] [--pool FILE] [--limit N] [--setup-only] [--min-agree PCT] [--out DIR]"
 case "$limit" in *[!0-9]*) die "--limit wants a non-negative integer" ;; esac
 case "$min_agree" in *[!0-9.]* | .) die "--min-agree wants a number" ;; esac
 case "$set" in "" | */* | .*) die "--set wants a set code" ;; esac
 [ -z "$pool" ] || [ -f "$pool" ] || die "--pool $pool: no such file"
+[ -z "$manifest" ] || [ -f "$manifest" ] || die "--manifest $manifest: no such file"
+[ -z "$manifest" ] || [ "$set_given" = 0 ] || die "--manifest and --set name different card sources; pass one"
 command -v jq >/dev/null || die "jq is needed"
 
 GO=${XENGINE_GO:-go}
@@ -101,17 +108,42 @@ run_od() {
 	if [ -n "${XENGINE_ORACLEDIFF:-}" ]; then "$XENGINE_ORACLEDIFF" "$@"; else capped "$out/bin/oraclediff" "$@"; fi
 }
 
-manifest=oracle/compliance/manifests/$set.json
-rm -f "$out/gen.jsonl" "$out/items.jsonl" "$out/req.jsonl" "$out/rows.jsonl" "$out/diff.jsonl" "$out/$engine-prep.jsonl"
-
-# 3. gen
-run_od gen -level A -manifest "$manifest" -out "$out/gen.jsonl"
-
-# 4. filter
 pool_names=$out/pool-names.txt
-filter='.'
 if [ -n "$pool" ]; then
 	sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' "$pool" | sed -e '/^$/d' >"$pool_names"
+fi
+
+# A pool without an explicit --set selects the cards themselves: followers test
+# cards every committed manifest may omit (The Alright Henge), and a card in a
+# set other than FDN is still reachable. --set keeps the set manifest as the
+# card source and the pool as a filter within it.
+if [ -z "$manifest" ]; then
+	if [ "$set_given" = 0 ] && [ -n "$pool" ]; then
+		manifest=$out/manifest.json
+		jq -R -s 'split("\n") | map(select(length > 0)) | {code:"POOL", name:"follower-check pool", cards: map({name: .})}' "$pool_names" >"$manifest"
+		set=POOL
+	else
+		manifest=oracle/compliance/manifests/$set.json
+	fi
+else
+	manifest=$(realpath -m "$manifest")
+	set=$(jq -r '.code // empty' "$manifest" 2>/dev/null || true)
+	[ -n "$set" ] || set=MANIFEST
+fi
+rm -f "$out/gen.jsonl" "$out/items.jsonl" "$out/req.jsonl" "$out/rows.jsonl" "$out/diff.jsonl" "$out/$engine-prep.jsonl"
+
+# 3. gen. -mana-abilities appends the level-A activation item for every
+# nonland mana ability: the step a follower's mana-source mapping reads.
+if [ -n "$pool" ] && [ ! -s "$pool_names" ]; then
+	: >"$out/gen.jsonl"
+	: >"$out/gen.jsonl.skips.jsonl"
+else
+	run_od gen -level A -mana-abilities -manifest "$manifest" -out "$out/gen.jsonl"
+fi
+
+# 4. filter
+filter='.'
+if [ -n "$pool" ]; then
 	jq -c --rawfile names "$pool_names" '($names | split("\n") | map(select(. != "")) | map({key: ., value: true}) | from_entries) as $p | select($p[.card] // false)' \
 		"$out/gen.jsonl" >"$out/pooled.jsonl"
 	src=$out/pooled.jsonl

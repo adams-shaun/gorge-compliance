@@ -43,7 +43,12 @@ cat >"$BIN/oraclediff" <<'STUB'
 #!/usr/bin/env bash
 sub=$1; shift
 declare -A o
-while [ $# -gt 0 ]; do o[${1#-}]=$2; shift 2; done
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-mana-abilities) o[mana-abilities]=true; shift ;;
+	*) o[${1#-}]=$2; shift 2 ;;
+	esac
+done
 echo "oraclediff $sub" >>"$LOG"
 case "$sub" in
 gen)
