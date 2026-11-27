@@ -1,7 +1,7 @@
 import unittest
 
 from .helpers import Base, OID_A, OID_B  # noqa: F401  (sets up sys.path-independent imports)
-from carddb import Resolver, norm_name, pseudo_id
+from carddb import Resolver, norm_name, pseudo_id, ruling_id
 
 
 class NormName(unittest.TestCase):
@@ -40,6 +40,29 @@ class NormName(unittest.TestCase):
         self.assertEqual(r.resolve("Lim-Dul's Vault"), OID_A)
         self.assertTrue(r.resolve("No Such Card").startswith("x:"))
         self.assertEqual(list(r.misses), ["No Such Card"])
+
+
+class TestRulingId(unittest.TestCase):
+    OID = OID_A
+    PUBLISHED = "2026-01-02"
+    TEXT = 'The "named" permanent stays tapped.'
+
+    def test_fixed_id(self):
+        # sha256("ab00...00\n2026-01-02\nThe \"named\" permanent stays tapped.")[:12]
+        self.assertEqual(ruling_id(self.OID, self.PUBLISHED, self.TEXT), "cd162149f976")
+
+    def test_formatting_variants_agree(self):
+        want = ruling_id(self.OID, self.PUBLISHED, self.TEXT)
+        for text in (
+            '  The   "named"\tpermanent stays tapped.  ',
+            "The \u201cnamed\u201d permanent stays tapped.\r\n",
+            'The\n"named" permanent\nstays tapped.',
+        ):
+            self.assertEqual(ruling_id(self.OID, self.PUBLISHED, text), want, repr(text))
+
+    def test_date_changes_id(self):
+        self.assertNotEqual(ruling_id(self.OID, self.PUBLISHED, self.TEXT),
+                            ruling_id(self.OID, "2026-01-03", self.TEXT))
 
 
 # (input, gorge cards.NormalizeName output at the pinned commit), measured with go run

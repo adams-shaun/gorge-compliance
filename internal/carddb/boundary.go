@@ -17,7 +17,7 @@ import (
 var privateTableNames = map[string]bool{
 	"text": true, "tags": true, "edhrec": true, "prims": true,
 	"values": true, "labels_private": true, "decks": true,
-	"cert_events": true, "cert_runs": true,
+	"cert_events": true, "cert_runs": true, "rulings": true,
 }
 
 // forbiddenFieldRe names the fields no public tree may carry, in any table.
@@ -34,8 +34,9 @@ var forgeLineRe = regexp.MustCompile(`^A:|^SVar:|^T:Mode\$|^S:Mode\$|\$ [A-Z]`)
 var jsonFieldRe = regexp.MustCompile(`(?i)"(oracle_text|price[a-z0-9_]*|prims|tagger|edhrec[a-z0-9_]*|value[a-z0-9_]*)"\s*:`)
 
 // Boundary checks that the tree (everything under it but .git) holds nothing
-// that must not be published: no private table or column, no field with a
-// banned name, no Forge-script-shaped line in any file. Real schema
+// that must not be published: no private table or column, no column the schema
+// does not declare public, no field with a banned name, no Forge-script-shaped
+// line in any file. Real schema
 // declarations (IsSchemaDecl: a table the trusted schema declares, whose
 // whole content equals that declaration) name private tables and columns, so
 // they are exempt from the table and field checks (not from the Forge-line
@@ -153,7 +154,9 @@ func headerTable(s *Schema, ln int, line string, add func(int, string, ...any)) 
 }
 
 // columnViolations checks a shard's column-header line: no banned field name,
-// no column the schema declares private for the table.
+// no column the schema declares private for the table, and no column the
+// schema does not declare public (a public shard may not grow a column, such
+// as `comment` on ruling_refs, to carry the private data of its table).
 func columnViolations(s *Schema, table, line string, add func(string, ...any)) {
 	var t *Table
 	if table != "" {
@@ -167,10 +170,17 @@ func columnViolations(s *Schema, table, line string, add func(string, ...any)) {
 		if t == nil {
 			continue
 		}
+		declared, private := false, false
 		for _, c := range t.Columns {
-			if c.Name == name && c.Visibility == Private {
-				add("column %q of table %q is private", name, table)
+			if c.Name == name {
+				declared, private = true, c.Visibility == Private
+				break
 			}
+		}
+		if private {
+			add("column %q of table %q is private", name, table)
+		} else if !declared {
+			add("column %q is not declared public in table %q", name, table)
 		}
 	}
 }

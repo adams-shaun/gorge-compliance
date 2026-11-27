@@ -59,7 +59,7 @@ class GoParity(Base):
 
     HDR = "#carddb printings v1\nprinting_id\toracle_id\tset_code\tcollector_number\trarity\treleased\n"
     LEG = "#carddb legality v1\noracle_id\tformat\tstatus\n"
-    CLEAN = ("ok", "real schema decl")
+    CLEAN = ("ok", "real schema decl", "ruling refs ok")
 
     @classmethod
     def cases(cls):
@@ -96,6 +96,16 @@ class GoParity(Base):
             "stray schema file": one("schema/v1/leak.tsv", "#carddb-schema cards v1\n"),
             "altered schema decl": [("schema/v1/cards.tsv", decl("schema/v1/cards.tsv")[1] + "extra\tstring\tno\tno\tpublic\tx\n")],
             "schema dir holds a shard": one("schema/legality.tsv", cls.LEG + "ab1\tmodern\tlegal\n"),
+            # rulings: the text is a private table; its public mirror carries ids only
+            "ruling refs ok": one("ruling_refs/ab.tsv",
+                                  "#carddb ruling_refs v1\noracle_id\truling_id\tpublished\tsource\tretrieved\n"
+                                  "ab1\tcd162149f976\t2026-01-02\twotc\t2026-01-03\n"),
+            "rulings private": one("rulings/ab.tsv",
+                                   "#carddb rulings v1\noracle_id\truling_id\tpublished\tsource\tcomment\tretrieved\n"
+                                   "ab1\tcd162149f976\t2026-01-02\twotc\tAn invented sentence.\t2026-01-03\n"),
+            "ruling refs comment": one("ruling_refs/ab.tsv",
+                                       "#carddb ruling_refs v1\noracle_id\truling_id\tpublished\tsource\tretrieved\tcomment\n"
+                                       "ab1\tcd162149f976\t2026-01-02\twotc\t2026-01-03\tAn invented sentence.\n"),
         }
 
     def test_same_verdict(self):

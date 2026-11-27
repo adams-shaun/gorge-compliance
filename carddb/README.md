@@ -6,8 +6,12 @@ curated inputs it is built from.
 - `schema/VERSION`, `schema/v<N>/<table>.tsv`: the schema. One file per table,
   columns `name type required key visibility doc`. Types: `string int bool date
   list`. Tables whose every column is `private` (text, tags, edhrec, prims,
-  values, labels_private, decks, cert_events, cert_runs) are declared so the
-  boundary can name them and are never published.
+  values, labels_private, decks, cert_events, cert_runs, rulings) are declared
+  so the boundary can name them and are never published. `rulings` holds the
+  ruling text (`comment`); its public mirror `ruling_refs` keeps only
+  `oracle_id`, `ruling_id`, `published`, `source` and `retrieved`, so a
+  diagnosed row can cite `ruling:<ruling_id>` without a word of the ruling
+  reaching the public tree.
 - `curated/*.tsv`: human-maintained inputs. `game-changers` and `bracket-flags` are
   seeded from the published WotC lists with a `source` URL and `cited` date per row;
   a human reviews a change to them.

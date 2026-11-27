@@ -20,7 +20,7 @@ _FORBIDDEN_FIELD = re.compile(r"^(oracle_text|price.*|prims|tagger|edhrec.*|valu
 # boundary holds against a schema edited to call one public (boundary.go).
 PRIVATE_TABLE_NAMES = frozenset(
     ["text", "tags", "edhrec", "prims", "values", "labels_private", "decks",
-     "cert_events", "cert_runs"])
+     "cert_events", "cert_runs", "rulings"])
 
 
 class SchemaError(Exception):
