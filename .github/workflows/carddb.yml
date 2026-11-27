@@ -48,6 +48,14 @@
 #    be promoted develop -> main BEFORE the first publish to `carddb`.
 #  - The `carddb` branch must carry a copy of this file for the push trigger
 #    to fire; the first `carddb init` creates it and each publish refreshes it.
+#  - keyproof leg rows (one-time): until a publish refreshes the branch's copy
+#    of this file, a push to `carddb` runs the old copy, which has no migrate
+#    step and fails validating legacy keyproof shards against main's schema.
+#    After promoting the leg-row change to main, run this workflow once from
+#    main (dispatch, or wait for the nightly: both use main's copy); it
+#    migrates, publishes the leg rows and refreshes the branch's copy. A push
+#    of already-migrated shards (`carddb migrate keyproof-legs`, then
+#    `carddb publish`) also passes the old copy.
 #  - The write job needs `contents: write`; it is separate from the
 #    pull-request check so that path never holds a write token.
 name: carddb
@@ -252,6 +260,13 @@ jobs:
           # the verb is new: a main checkout that predates it must fail here, not in the publish step
           grep -q docs-sets cmd/carddb/py/carddb/cli.py || {
             echo "::error::the writer ref has no docs-sets verb: promote the carddb change to main first"
+            exit 1; }
+          # the keyproof leg rows: the migrate verb and the schema's leg column move together
+          grep -q 'keyproof-legs' cmd/carddb/py/carddb/cli.py || {
+            echo "::error::the writer ref has no migrate keyproof-legs verb: promote the carddb change to main first"
+            exit 1; }
+          grep -q '^leg[[:space:]]' carddb/schema/v1/keyproof.tsv || {
+            echo "::error::the writer ref's keyproof schema has no leg column: promote the carddb change to main first"
             exit 1; }
       - name: Clone the data branch and fix the run's date
         working-directory: tool

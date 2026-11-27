@@ -320,17 +320,26 @@ class Query(QueryFixture):
                          [("Lightning Bolt", "cast")], r.stdout)  # Fire // Ice is banned in modern
         r = self.run_cli("need", "--recredit", "X+P")
         self.assertNotEqual(r.returncode, 0)
-        # refs X+P (a P witness beside XMage) still counts as XMage alone
-        db = os.path.join(self.tmp, "need-recredit.sqlite")
-        shutil.copy(self.priv, db)
+        # a legacy refs X+P (a P witness beside XMage) counts as XMage alone: split_legacy strips the +P
+        # into a lone xmage leg (TestKeyLegs.test_split_table), and keyproof_keys derives refs from the legs
+
+    def test_per_key_verbs_ask_to_rebuild_a_build_without_keyproof_keys(self):
+        # a SQLite built before keyproof had legs has the table but not the rollup view
+        db = os.path.join(self.tmp, "old-build.sqlite")
+        shutil.copy(self.pub, db)
         conn = sqlite3.connect(db)
-        conn.execute("UPDATE keyproof SET refs='X+P' WHERE oracle_id=? AND \"key\"='f0/a0' AND leg='xmage'",
-                     (OID_A,))
+        conn.execute("DROP VIEW keyproof_keys")
         conn.commit()
         conn.close()
-        r = self.cli(self.home, "need", "--db", db, "--private", "--recredit", "X")
-        self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertEqual([l.split("\t")[3] for l in r.stdout.splitlines()[1:]], ["f0/a0"], r.stdout)
+        for argv in (("need",), ("proof", "--set", "lea")):
+            r = self.cli(self.home, *argv, "--db", db)
+            self.assertEqual(r.returncode, 2, r.stdout)  # QueryError's default, as "has no keyproof table"
+            self.assertIn("carddb %s: %s: this build predates the keyproof leg rows" % (argv[0], argv[0]), r.stderr)
+            self.assertIn("rebuild it with carddb build", r.stderr)
+        r = self.cli(self.home, "docs-sets", "--db", db, "--out", os.path.join(self.tmp, "docs-sets"))
+        self.assertNotEqual(r.returncode, 0, r.stdout)
+        self.assertIn("predates the keyproof leg rows", r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
 
     def test_need_edhrec_rank_only_orders_tier_three(self):
         # Bolt (tier 2, edhrec rank 42, released first) and Dain (tier 2, no edhrec, released later)
@@ -754,7 +763,9 @@ class TestLegacyNumbersHold(QueryFixture):
             legacy_row(OID_B, "f1/a0", "owed", desc="Forage", reason="no-generator"),
             legacy_row(OID_C, "cast", "diverged", desc="Mana", diff_items=3, sig="a1b2c3d4e5f6",
                        ticket="xp-a1b2c3d4e5f6"),
-            legacy_row(OID_C, "combat#0.attack", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
+            # the real ledger's shape: every diagnosed row has cite '-' (a cite leg owed diagnosed-no-cite),
+            # and the key must still roll up as diagnosed, not owed
+            legacy_row(OID_C, "combat#0.attack", "diagnosed", sig="a1b2c3d4e5f6"),
             legacy_row(OID_E, "cast", "owed", desc="Mana", reason="no-generator"),
         ])
         self.assertEqual(keylegs.migrate(self.a), 12)

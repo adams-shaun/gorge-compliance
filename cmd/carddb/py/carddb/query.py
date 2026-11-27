@@ -431,12 +431,21 @@ def _tier_sql(conn, fmt=None, only=None):
     return sql + ") t0", params
 
 
+def _need_keyproof_keys(conn, verb):
+    """The per-key verbs read the keyproof_keys rollup view: a build with no keyproof table has nothing to
+    report, and a build made before keyproof held leg rows has the table but not the view."""
+    if not _has_table(conn, "keyproof") or not _has_table(conn, "curated_exclusions"):
+        raise QueryError("%s: this build has no keyproof table" % verb)
+    if not _has_table(conn, "keyproof_keys"):
+        raise QueryError("%s: this build predates the keyproof leg rows (no keyproof_keys view); "
+                         "rebuild it with carddb build" % verb)
+
+
 _NEED_ORDER = "t.tier, t.rank, c.first_released IS NULL, c.first_released, c.name, c.oracle_id"
 
 
 def run_need(conn, args, out):
-    if not _has_table(conn, "keyproof") or not _has_table(conn, "curated_exclusions"):
-        raise QueryError("need: this build has no keyproof table")
+    _need_keyproof_keys(conn, "need")
     limit = _limit(args.limit, "need")
     tier, params = _tier_sql(conn, args.format)
     # --recredit REFS: agreed keys only REFS backs (X: XMage alone), replayed for the missing engine
@@ -472,8 +481,7 @@ def _section(out, name, columns, rows):
 
 
 def run_proof(conn, args, out):
-    if not _has_table(conn, "keyproof") or not _has_table(conn, "curated_exclusions"):
-        raise QueryError("proof: this build has no keyproof table")
+    _need_keyproof_keys(conn, "proof")
     paper = [r[0] for r in _rows(
         conn, "SELECT c.oracle_id FROM cards c WHERE c.oracle_id IN (SELECT p.oracle_id FROM printings p "
               "WHERE lower(p.set_code)=lower(?)) AND %s ORDER BY c.oracle_id" % _eligible_sql(),
@@ -910,11 +918,14 @@ PROVEN_VIEW_SQL = ("CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2
 
 
 # One row per (card, key): the leg rows of keyproof rolled up to the per-key state the verbs below read.
+# A cite leg owed for `diagnosed-no-cite` is a legacy `diagnosed` key whose cite was never recorded
+# (keylegs.split_legacy): the rollup still calls it diagnosed, so the migration moves no number.
 KEYPROOF_KEYS_VIEW_SQL = (
     '''CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key", MAX(k."desc") AS "desc",
   CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
        WHEN SUM(k.leg IN ('xmage','forge') AND k.state='agreed') > 0 THEN 'agreed'
-       WHEN SUM(k.leg='cite' AND k.state='diagnosed') > 0 THEN 'diagnosed'
+       WHEN SUM(k.leg='cite' AND (k.state='diagnosed'
+                OR (k.state='owed' AND k.reason='diagnosed-no-cite'))) > 0 THEN 'diagnosed'
        WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS state,
   MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS reason,
   CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'

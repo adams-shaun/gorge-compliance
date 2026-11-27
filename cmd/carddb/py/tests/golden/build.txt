@@ -55,7 +55,8 @@ CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, COUNT(*) AS keys,
 CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key", MAX(k."desc") AS "desc",
   CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
        WHEN SUM(k.leg IN ('xmage','forge') AND k.state='agreed') > 0 THEN 'agreed'
-       WHEN SUM(k.leg='cite' AND k.state='diagnosed') > 0 THEN 'diagnosed'
+       WHEN SUM(k.leg='cite' AND (k.state='diagnosed'
+                OR (k.state='owed' AND k.reason='diagnosed-no-cite'))) > 0 THEN 'diagnosed'
        WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS state,
   MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS reason,
   CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'

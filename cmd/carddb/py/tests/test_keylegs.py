@@ -1,6 +1,8 @@
 import os
+import sqlite3
 
 from carddb import keylegs, shard
+from carddb.query import KEYPROOF_CARDS_VIEW_SQL, KEYPROOF_KEYS_VIEW_SQL
 
 from .helpers import Base, OID_A, OID_B, OID_C
 from .test_query import GORGE, legacy_row, read, write_legacy_shards
@@ -106,6 +108,56 @@ class TestKeyLegs(Base):
                             "gorge_sha": GORGE, "measured": "2026-11-23"}], writer="xproof")
         self.assertEqual(sorted(r["leg"] for r in a.rows("keyproof") if r["oracle_id"] == OID_A),
                          ["lockstep", "xmage"])
+
+    def test_rollup_keeps_a_diagnosed_key_without_a_cite_diagnosed(self):
+        # the real ledger's diagnosed rows all have cite '-': split, they are a cite leg owed
+        # diagnosed-no-cite, and keyproof_keys must still call the key diagnosed (and the card proven)
+        conn = sqlite3.connect(":memory:")
+        names = [c.name for c in self.schema.tables["keyproof"].columns]
+        conn.execute("CREATE TABLE keyproof (%s)" % ", ".join('"%s"' % n for n in names))
+        conn.execute("CREATE TABLE curated_exclusions (oracle_id, reason)")
+        for row in [legacy_row(OID_A, "cast", "agreed", refs="FX"), legacy_row(OID_A, "f0/a0", "diagnosed", sig="s1"),
+                    legacy_row(OID_B, "cast", "agreed", refs="FX"), legacy_row(OID_B, "f0/a0", "owed", reason="harness")]:
+            for lr in keylegs.split_legacy(row):
+                conn.execute("INSERT INTO keyproof VALUES (%s)" % ",".join("?" * len(names)),
+                             [str(lr[n]) for n in names])
+        conn.execute(KEYPROOF_KEYS_VIEW_SQL)
+        conn.execute(KEYPROOF_CARDS_VIEW_SQL)
+        keys = conn.execute('SELECT oracle_id, "key", state, reason, refs, sig FROM keyproof_keys '
+                            'ORDER BY oracle_id, "key"').fetchall()
+        self.assertEqual(keys, [(OID_A, "cast", "agreed", None, "FX", "-"),
+                                (OID_A, "f0/a0", "diagnosed", "diagnosed-no-cite", None, "s1"),
+                                (OID_B, "cast", "agreed", None, "FX", "-"),
+                                (OID_B, "f0/a0", "owed", "harness", None, "-")])
+        self.assertEqual(conn.execute("SELECT oracle_id, diagnosed, owed, proven FROM keyproof_cards "
+                                      "ORDER BY oracle_id").fetchall(), [(OID_A, 1, 0, 1), (OID_B, 0, 1, 0)])
+
+    def test_put_legacy_drops_a_stale_cite_leg(self):
+        # a key diagnosed then agreed: the legacy row states the whole key, so the cite leg goes; a
+        # lockstep leg (no legacy row speaks for it) stays
+        a = self.machine("a", init=True)
+        a.put("keyproof", [legacy_row(OID_A, "cast", "diagnosed", cite="CR 702.4b")], writer="xproof")
+        a.put("keyproof", [{**dict(zip(keylegs.LEGACY_COLUMNS, ["-"] * 20)), "oracle_id": OID_A, "key": "cast",
+                            "leg": "lockstep", "state": "agreed", "seats": 2, "multiplayer": "false",
+                            "gorge_sha": GORGE, "measured": "2026-11-23"}], writer="xproof")
+        self.assertEqual(sorted((r["leg"], r["state"]) for r in a.rows("keyproof")),
+                         [("cite", "diagnosed"), ("lockstep", "agreed")])
+        a.put("keyproof", [legacy_row(OID_A, "cast", "agreed", refs="FX")], writer="xproof")
+        self.assertEqual(sorted((r["leg"], r["state"]) for r in a.rows("keyproof")),
+                         [("forge", "agreed"), ("lockstep", "agreed"), ("xmage", "agreed")])
+
+    def test_migrate_reports_a_bad_legacy_row(self):
+        a = self.machine("a", init=True)
+        write_legacy_shards(a.dir, [legacy_row(OID_A, "cast", "agreed", refs="FX"),
+                                    legacy_row(OID_A, "f0/a0", "bogus")])
+        before = self.snapshot(a.dir)
+        r = self.cli(a.home, "migrate", "keyproof-legs")
+        self.assertEqual(r.returncode, 1, r.stdout)
+        self.assertIn("carddb migrate: invalid:", r.stderr)
+        self.assertIn("keyproof/%s.tsv:4: " % OID_A[:2], r.stderr)
+        self.assertIn("unknown state 'bogus'", r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertEqual(self.snapshot(a.dir), before)  # nothing written
 
     def test_put_cli_reads_a_legacy_header(self):
         a = self.machine("a", init=True)

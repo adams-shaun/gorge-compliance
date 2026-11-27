@@ -142,10 +142,14 @@ def migrate(store):
             if hdr != want_hdr or head != old_head:
                 continue  # the new shape (or not ours to judge: validation reports it)
             out = {}
-            for r in rows:
+            for n, r in enumerate(rows, 3):  # line 1 is the shard header, line 2 the column names
                 if len(r) != len(old_head):
-                    raise ValidationError(["%s: legacy row has %d cells, want %d" % (rel, len(r), len(old_head))])
-                for lr in split_legacy(dict(zip(old_head, r))):
+                    raise ValidationError(["%s:%d: legacy row has %d cells, want %d" % (rel, n, len(r), len(old_head))])
+                try:
+                    legs = split_legacy(dict(zip(old_head, r)))
+                except ValueError as e:
+                    raise ValidationError(["%s:%d: %s" % (rel, n, e)])
+                for lr in legs:
                     cells = [str(lr[n]) for n in names]  # shard cells are already escaped: copy as is
                     out[shard.row_key(cells, kidx)] = cells
             plan[rel] = shard.render(TABLE, store.schema.version, names, [out[k] for k in sorted(out)])
