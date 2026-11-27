@@ -1053,9 +1053,14 @@ pub fn is_unposed_optional_cost(d: &Decision) -> bool {
     d.pick_kinds.iter().any(|k| k == "altaddcost" || k == "trigger_cost_decline")
 }
 
-/// A colour pick: `choose_n` with a `color` pick kind or an `Add X` label.
+/// A colour pick: `choose_n` with a `color`/`mana` pick kind or an `Add X` label, whose first
+/// pick names a colour. The `mana` kind covers gorge's cost-prefixed `pay.ManaAbilityLabel`
+/// ("Pay 1: Add W" for a `{1}` ability); the colour test keeps the wheel label
+/// ("Pay 1: Add any color") and multi-pip combo labels out.
 fn is_colour_decision(d: &Decision) -> bool {
-    d.kind == "choose_n" && (d.pick_kinds.iter().any(|k| k == "color") || d.picks.iter().any(|p| p.starts_with("Add ")))
+    d.kind == "choose_n"
+        && (d.pick_kinds.iter().any(|k| k == "color" || k == "mana") || d.picks.iter().any(|p| p.starts_with("Add ")))
+        && d.picks.first().is_some_and(|p| colour_of(p).is_some())
 }
 
 /// A single label pick that is not any of the other decision shapes.
