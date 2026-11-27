@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50120e90-2fdf-43c1-93e2-2230ee4e63fc	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Swarmweaver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 501580b9-692c-4804-be34-012a25ba8adf	cast	cast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-wildspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	a547856fc3cb	-	-	2026-11-24	xproof
 501580b9-692c-4804-be34-012a25ba8adf	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-wildspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	a547856fc3cb	-	-	2026-11-24	xproof
-501580b9-692c-4804-be34-012a25ba8adf	static#0.0	static.continuous	diverged	-	-	start	0	2	-	1621212ebc77	-	-	eb4e86ebfdb8	-	a547856fc3cb	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+501580b9-692c-4804-be34-012a25ba8adf	static#0.0	static.continuous	diverged	-	-	start	0	2	-	46198097bc36	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 5017c07d-8ad5-4ee2-91d3-974811cdff75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fortitude:cast:s1,f:xs:XP:fortitude:cast:s1	-	-	-	5f2128bf97e4	-	e48c954ace21	-	-	2026-11-24	xproof
 5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:fortitude:cast:s1,f:xs:XP:fortitude:cast:s1	-	-	-	5f2128bf97e4	-	e48c954ace21	-	-	2026-11-24	xproof
 5017c07d-8ad5-4ee2-91d3-974811cdff75	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fortitude:f0t0:s1,f:xs:XP:fortitude:f0t0:s1	-	-	-	baa6f696107c	-	e48c954ace21	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -52,7 +52,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50330e48-db74-4c5f-a0bc-f9a8607e8f31	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50330e48-db74-4c5f-a0bc-f9a8607e8f31	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50330e48-db74-4c5f-a0bc-f9a8607e8f31	f0/a1	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:lion-sash:f0a2:s1	-	-	-	23b491658465	-	e8af5d371b44	-	-	2026-11-25	xproof
-50330e48-db74-4c5f-a0bc-f9a8607e8f31	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+50330e48-db74-4c5f-a0bc-f9a8607e8f31	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 50343947-d127-4479-9c1b-8f5040a97afb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5036fe35-43c6-45af-99d5-7b79ebcfc406	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50372c54-359c-4ee6-9e21-1e40ba53652d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50bc464e-1c8d-455c-a870-ddbbc4618343	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50bc464e-1c8d-455c-a870-ddbbc4618343	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:pyre-charger:f0a0:s1,f:xs:XP:pyre-charger:f0a0:s1	-	-	-	8a1b1a193ec0	-	838aefb1cd4c	-	-	2026-11-24	xproof
 50bebbb9-01b7-4eb6-8efd-307c9bcd2517	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50bebbb9-01b7-4eb6-8efd-307c9bcd2517	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+50bebbb9-01b7-4eb6-8efd-307c9bcd2517	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 50bee80e-89df-48c2-b608-ba66ff3e794a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:imodane-s-recruiter-train-troops:cast:s1,f:xs:XP:imodane-s-recruiter-train-troops:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 50bee80e-89df-48c2-b608-ba66ff3e794a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:imodane-s-recruiter-train-troops:cast:s1,f:xs:XP:imodane-s-recruiter-train-troops:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 50bf5af6-50d7-4dea-936e-508e24db0a03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
