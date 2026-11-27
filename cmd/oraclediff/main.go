@@ -78,20 +78,7 @@ func main() {
 	var err error
 	switch os.Args[1] {
 	case "gen":
-		fs := flag.NewFlagSet("gen", flag.ExitOnError)
-		dir := fs.String("cards", ".cards", "corpus dir")
-		manifest := fs.String("manifest", "", "set manifest")
-		out := fs.String("out", "", "scenario JSONL")
-		level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
-		printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
-		manaAbilities := fs.Bool("mana-abilities", false, "also generate a level-A activation item for every activated mana ability (follower-check)")
-		fs.Parse(os.Args[2:])
-		// XMage's known names always come from the committed manifests.
-		// -manifest names the card source and may live outside that directory
-		// (follower-check's synthetic POOL manifest); parsing that directory
-		// as an XMage set list made an empty file or a sibling non-manifest
-		// JSON fail gen outright.
-		err = runGenKnown(*dir, *manifest, *out, *level, *printed, *manaAbilities, committedManifestDir())
+		err = runGenCLI(os.Args[2:])
 	case "plan":
 		fs := flag.NewFlagSet("plan", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -251,6 +238,24 @@ func loadReg(dir string) (*cards.Registry, error) {
 
 func runGen(dir, manifest, out, level, printed string) error {
 	return runGenOpts(dir, manifest, out, level, printed, false)
+}
+
+// runGenCLI is the gen subcommand: flag parsing plus runGenKnown with the
+// committed manifests dir. XMage's known names always come from the committed
+// manifests; -manifest names the card source and may live outside that
+// directory (follower-check's synthetic POOL manifest), and parsing that
+// directory as an XMage set list made an empty file or a sibling non-manifest
+// JSON fail gen outright. A test drives this function, so the wiring is guarded.
+func runGenCLI(args []string) error {
+	fs := flag.NewFlagSet("gen", flag.ExitOnError)
+	dir := fs.String("cards", ".cards", "corpus dir")
+	manifest := fs.String("manifest", "", "set manifest")
+	out := fs.String("out", "", "scenario JSONL")
+	level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
+	printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
+	manaAbilities := fs.Bool("mana-abilities", false, "also generate a level-A activation item for every activated mana ability (follower-check)")
+	fs.Parse(args)
+	return runGenKnown(*dir, *manifest, *out, *level, *printed, *manaAbilities, committedManifestDir())
 }
 
 // runGenOpts is runGen with the follower-check mana-ability append. The

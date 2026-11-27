@@ -92,7 +92,7 @@ func TestGenManaAbilitiesSendsActivation(t *testing.T) {
 	}
 }
 
-// TestGenArbitraryManifestUsesCommittedXMageNames: gen's CLI passes the
+// TestGenArbitraryManifestUsesCommittedXMageNames: gen's CLI (runGenCLI) passes the
 // committed manifests dir to installXMageKnown even when -manifest points
 // outside it. A follower-check synthetic manifest lives in an arbitrary
 // output directory; parsing that directory as an XMage set list failed on an
@@ -105,12 +105,14 @@ func TestGenArbitraryManifestUsesCommittedXMageNames(t *testing.T) {
 	if err := os.WriteFile(filepath.Join(tmp, "sibling.json"), []byte("not a manifest\n"), 0o644); err != nil {
 		t.Fatal(err)
 	}
-	known := committedManifestDir()
-	if known == "" {
+	if committedManifestDir() == "" {
 		t.Skip("no repository root")
 	}
 	out := filepath.Join(tmp, "gen.jsonl")
-	if err := runGenKnown(filepath.Join("..", "..", ".cards"), filepath.Join(tmp, "EMPTY.json"), out, "A", "", false, known); err != nil {
+	// The CLI entry point itself, so a regression that stops passing the
+	// committed manifests dir (an "" known dir parses tmp as a set list) fails.
+	args := []string{"-cards", filepath.Join("..", "..", ".cards"), "-manifest", filepath.Join(tmp, "EMPTY.json"), "-out", out, "-level", "A"}
+	if err := runGenCLI(args); err != nil {
 		t.Fatalf("gen with an arbitrary manifest dir: %v", err)
 	}
 }
