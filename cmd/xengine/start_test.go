@@ -712,12 +712,14 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 // TestStartStepsNeededCostClassIsExercised: every card the scen
 // steps-needed:cost class now starts (a cost paid by placed state: minted
 // tokens, a discarded/exiled/sacrificed permanent, a counter on an inert
-// bearer) lowers both seeds and offers the focus play. Generating a start is
-// not enough: the reviewer's q2 round found Ion Storm, Rift Elemental,
-// Quillspike and Sage of Fables generated starts that lowered to zero items
-// (a counter on one of the mana Mountains, a 1/1 killed by its own -1/-1
-// counter, an entry counter setup cannot restate), so each card is played
-// through the cmd/xengine path here.
+// bearer or on the card itself) lowers both seeds and offers the focus play.
+// Generating a start is not enough: the reviewer's q2 round found Ion Storm,
+// Rift Elemental, Quillspike and Sage of Fables generated starts that lowered
+// to zero items (a counter on one of the mana Mountains, a 1/1 killed by its
+// own -1/-1 counter, an entry counter setup cannot restate), and the dh1
+// round found Rasputin Dreamweaver's personal counter arm doing the same
+// (a mandatory upkeep and the startedTheTurnUntapped field), so each card is
+// played through the cmd/xengine path here.
 func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
 	t.Parallel()
 	reg, b := certdeckBuilder(t)
@@ -738,6 +740,9 @@ func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
 		{"Shapers of Nature", "f0/a1"},    //
 		{"Sunstar Chaplain", "f0/a0"},     //
 		{"Migloz, Maze Crusher", "f0/a2"}, // SubCounter<N/OIL/NICKNAME>
+		{"Charforger", "f0/a0"},           // SubCounter<3/OIL/CARDNAME>
+		{"Glistener Seer", "f0/a0"},       // SubCounter<1/OIL/CARDNAME>
+		{"Tamiyo's Immobilizer", "f0/a0"}, // SubCounter<1/OIL/CARDNAME>
 	} {
 		t.Run(c.card+" "+c.key, func(t *testing.T) {
 			_ = startIsExercised(t, reg, b, c.card, c.key)
@@ -746,13 +751,17 @@ func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
 	// A shape the class cannot yet meet keeps its named refusal: the start
 	// schema cannot restate Sage of Fables's entry counter on another
 	// permanent, an activated ability's Exile cost does not lower (Food Chain's
-	// colour ask, The Soul Stone's upkeep trigger), and Moxite Refinery removes
-	// a wildcard counter kind.
+	// colour ask, The Soul Stone's upkeep trigger), Moxite Refinery removes
+	// a wildcard counter kind, and Rasputin Dreamweaver's personal counters
+	// need a battlefield placement the start gate refuses (its upkeep trigger
+	// is mandatory and its startedTheTurnUntapped word is live).
 	for _, c := range []struct{ card, key, reason string }{
 		{"Sage of Fables", "f0/a0", "steps-needed:cost:SubCounter"},
 		{"Moxite Refinery", "f0/a0", "steps-needed:cost:SubCounter"},
 		{"Food Chain", "f0/a0", "steps-needed:cost:Exile"},
 		{"The Soul Stone", "f0/a1", "steps-needed:cost:Exile"},
+		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter"},
+		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter"},
 	} {
 		t.Run(c.card+" refused", func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})

@@ -3662,15 +3662,19 @@ func countAmong(xs []string, name string) int {
 //     land the mana duplicates nor a 1/1 a -1/-1 counter kills), because the
 //     lowering binds a counters entry by card name (counterBindingRefusal);
 //   - Migloz, Maze Crusher's minus abilities spend a counter of a personal
-//     kind (SubCounter<N/OIL/NICKNAME>): the counters sit on Migloz itself.
+//     kind (SubCounter<N/OIL/NICKNAME>): the counters sit on Migloz itself;
+//     Charforger, Glistener Seer and Tamiyo's Immobilizer are the CARDNAME
+//     spelling of the same arm.
 //
 // A card the class cannot yet meet keeps its specific refusal: Bloodvial
 // Purveyor's Blood token need names a token the setup table does not map
 // (steps-needed:token), Sage of Fables's own entry replacement puts counters
 // on other permanents (steps-needed:cost:SubCounter), Moxite Refinery removes
-// a wildcard counter kind (steps-needed:cost:SubCounter), and Food Chain and
+// a wildcard counter kind (steps-needed:cost:SubCounter), Food Chain and
 // The Soul Stone exile from activated abilities whose starts do not lower
-// (steps-needed:cost:Exile).
+// (steps-needed:cost:Exile), and Rasputin Dreamweaver's personal counters
+// need a battlefield placement the start gate refuses (steps-needed:cost:
+// SubCounter).
 func TestScenStepsNeededCostClass(t *testing.T) {
 	reg, b := testBuilder(t)
 	// counterOn is the one counter of kind the start places, proved bindable:
@@ -3702,6 +3706,16 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 			t.Errorf("counter bearer %q (%s) dies to %d M1M1 counters", c.Card, face.PT, n)
 		}
 		return c
+	}
+	// personalCounter is the one counter of kind on the focus card itself: a
+	// personal SubCounter kind (NICKNAME/CARDNAME) spends the card's own
+	// counters, so the card is its bearer.
+	personalCounter := func(t *testing.T, f *StartFile, card, kind string, n int32) {
+		t.Helper()
+		want := []StartCounter{{Card: card, Kind: kind, N: n}}
+		if !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+			t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
+		}
 	}
 	extraCreature := func(t *testing.T, f *StartFile, card string) {
 		t.Helper()
@@ -3771,6 +3785,18 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
 			}
 		}},
+		{"Charforger", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Charforger", "ability", 0)
+			personalCounter(t, f, "Charforger", "OIL", 3)
+		}},
+		{"Glistener Seer", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Glistener Seer", "ability", 0)
+			personalCounter(t, f, "Glistener Seer", "OIL", 1)
+		}},
+		{"Tamiyo's Immobilizer", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Tamiyo's Immobilizer", "ability", 0)
+			personalCounter(t, f, "Tamiyo's Immobilizer", "OIL", 1)
+		}},
 		// Still-unsupported shapes keep a named refusal rather than an
 		// unlowerable start.
 		{"Bloodvial Purveyor", "f0/t0", "steps-needed:token", nil},
@@ -3778,6 +3804,12 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 		{"Moxite Refinery", "f0/a0", "steps-needed:cost:SubCounter", nil},
 		{"Food Chain", "f0/a0", "steps-needed:cost:Exile", nil},
 		{"The Soul Stone", "f0/a1", "steps-needed:cost:Exile", nil},
+		// A personal kind's counters ride the card, so the card must be
+		// placeable at a start. Rasputin's mandatory upkeep and its
+		// startedTheTurnUntapped filter word both refuse that placement: keep
+		// the cost refusal rather than a start play writes no item for.
+		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter", nil},
+		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter", nil},
 	} {
 		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 		if err != nil {
@@ -3815,6 +3847,63 @@ func TestCounterBindingRefusal(t *testing.T) {
 	f.Setup.P0.Counters = []StartCounter{{Kind: "ENERGY", N: 1}}
 	if got := counterBindingRefusal(f); got != "" {
 		t.Errorf("player counter: %q, want no refusal", got)
+	}
+}
+
+// TestScenCounterBindingRefusalFromPlan drives the guard through the recipe: two
+// SubCounter costs in one ability both pick the same inert bearer, so the
+// finished start lists Wall of Stone twice while both counters entries bind
+// to that name. The lowering refuses that shape (setup_by_name:counters), so
+// the generator must refuse it too instead of emitting an unlowerable start.
+// No corpus card produces the shape today, so the double-cost card is
+// synthetic; the real corpus fills the certification deck certdeck builds
+// around it. Deleting the counterBindingRefusal call from recipe turns this
+// refusal into a start and fails here.
+func TestScenCounterBindingRefusalFromPlan(t *testing.T) {
+	reg := cards.NewRegistry()
+	add := func(name, src string) {
+		t.Helper()
+		c, diags := cards.ParseBytes(name+".txt", []byte(src))
+		if len(diags) != 0 {
+			t.Fatalf("%s: diags %v", name, diags)
+		}
+		reg.Add(c)
+	}
+	add("Wall of Stone", "Name:Wall of Stone\nManaCost:1 R\nTypes:Creature Wall\nPT:0/8\nOracle:Defender\n")
+	add("Ion Storm", "Name:Ion Storm\nManaCost:0\nTypes:Artifact\n"+
+		"A:AB$ Mana | Cost$ SubCounter<1/CHARGE/Creature> SubCounter<1/P1P1/Creature> | Produced$ C | SpellDescription$ Add {C}.\n"+
+		"Oracle:{T}: Add {C}.\n")
+	// The real corpus supplies the fillers and lands a deck needs. The two
+	// synthetics go in first, so the registry's first-wins name index keeps
+	// them over the corpus cards of the same names.
+	for _, c := range testutil.CorpusRegistry(t).AllCards() {
+		reg.Add(c)
+	}
+	sp, err := decks.LoadSpellings(manifests)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := certdeck.NewBuilder(reg, sp)
+	// The cost plan is the duplicated-name shape itself: both costs ride the
+	// one inert bearer, and the start would list it twice.
+	card, ok := reg.Lookup("Ion Storm")
+	if !ok || len(card.Faces) == 0 {
+		t.Fatal("synthetic Ion Storm not in the registry")
+	}
+	plan, why := planCost(reg, b, card.Faces[0], "Ion Storm",
+		"SubCounter<1/CHARGE/Creature> SubCounter<1/P1P1/Creature>", "")
+	if why != "" {
+		t.Fatalf("planCost refused %q, want the duplicated-bearer plan", why)
+	}
+	if got := countAmong(plan.field, "Wall of Stone"); got != 2 {
+		t.Fatalf("cost plan places Wall of Stone %d times %v, want twice", got, plan.field)
+	}
+	res, err := Generate(reg, b, "Ion Storm", "f0/a0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathRefused || res.Reason != "start:counters-by-name" {
+		t.Fatalf("Ion Storm f0/a0: path %q reason %q, want refused start:counters-by-name", res.Path, res.Reason)
 	}
 }
 

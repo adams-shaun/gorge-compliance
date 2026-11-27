@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -77,9 +78,11 @@ type costPlan struct {
 //   - SubCounter<N/Kind>: N counters of Kind on the card (a planeswalker's
 //     LOYALTY: only those its printed loyalty lacks); SubCounter<N/Kind/NICKNAME>
 //     or SubCounter<N/Kind/CARDNAME> (Migloz's OIL): the same, the counter of
-//     a personal kind; SubCounter<N/Kind/Spec/...> (Ion Storm's
-//     P1P1/Permanent): N counters of Kind on a placed inert permanent of Spec
-//     (counterFodder); AddCounter<N/Kind> on the card needs nothing;
+//     a personal kind, planned only when the start gate admits the card on
+//     the battlefield (lower.StartCardRefusal: Rasputin Dreamweaver's
+//     mandatory upkeep keeps its refusal); SubCounter<N/Kind/Spec/...> (Ion
+//     Storm's P1P1/Permanent): N counters of Kind on a placed inert permanent
+//     of Spec (counterFodder); AddCounter<N/Kind> on the card needs nothing;
 //   - PayEnergy<N>: N ENERGY counters on the seat itself, recorded in
 //     PlayerCounters (a start position can hold the energy the ability
 //     spends). A malformed or non-positive amount stays refused.
@@ -306,6 +309,22 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 			kind := strings.ToUpper(args[1])
 			if !placeableCounterKind(kind) {
 				return p, refusal // a wildcard kind names kinds, not one to place
+			}
+			personal := len(args) < 3 || args[2] == "NICKNAME" || args[2] == "CARDNAME"
+			if !cast && personal {
+				// A personal kind's counters ride the card itself, so the
+				// focus ability's start must place it on the battlefield. A
+				// card the lowering's start gate refuses there cannot be
+				// placed (Rasputin Dreamweaver: its upkeep trigger is
+				// mandatory, and its startedTheTurnUntapped filter word makes
+				// the turn-begin stamp live on every untapped permanent,
+				// its own and the start's lands): keep the cost refusal
+				// rather than emit a start play writes no item for. The gate
+				// reads the card, not a hand of shapes, so the next refused
+				// field or trigger cannot slip a new arm past this.
+				if c, ok := reg.Lookup(card); !ok || lower.StartCardRefusal(c, face) != "" {
+					return p, refusal
+				}
 			}
 			if !cast && entryCounterOther(face) {
 				// The card's own entry replacement puts counters on other
