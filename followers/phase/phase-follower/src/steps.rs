@@ -1030,8 +1030,9 @@ fn is_choice_skip(label: &str) -> bool {
 
 /// The live object an offered Delve ref or label names. Refs are matched against the legal set
 /// (so a ref naming some other card cannot be taken for a Delve pick); a label falls back to the
-/// card name with gorge's optional ` (b)`/` (t)` spelling stripped.
-fn offered_object(board: &Board, offered: &BTreeMap<ObjectId, String>, token: &str) -> Option<ObjectId> {
+/// card name with gorge's optional ` (b)`/` (t)` spelling stripped, taking the first offered card
+/// of that name not already in `used` (a ref is exact, so `used` does not filter it).
+fn offered_object(board: &Board, offered: &BTreeMap<ObjectId, String>, token: &str, used: &[ObjectId]) -> Option<ObjectId> {
     let t = token.trim();
     if t.is_empty() || is_choice_skip(t) {
         return None;
@@ -1042,7 +1043,7 @@ fn offered_object(board: &Board, offered: &BTreeMap<ObjectId, String>, token: &s
         }
     }
     let name = t.rsplit_once(" (").map_or(t, |(name, _)| name);
-    offered.iter().find(|(_, n)| n.eq_ignore_ascii_case(name)).map(|(id, _)| *id)
+    offered.iter().find(|(id, n)| !used.contains(id) && n.eq_ignore_ascii_case(name)).map(|(id, _)| *id)
 }
 
 /// Whether `d` is gorge's Delve ask at this payment: every identity it names is in phase's
@@ -1056,15 +1057,15 @@ fn is_delve_decision(d: &Decision, board: &Board, offered: &BTreeMap<ObjectId, S
             .pick_refs
             .iter()
             .chain(d.object_picks.iter())
-            .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r).is_some());
+            .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r, &[]).is_some());
     }
     if d.picks.is_empty() {
         return !d.option_refs.is_empty()
             && d.option_refs
                 .iter()
-                .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r).is_some());
+                .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r, &[]).is_some());
     }
-    d.picks.iter().all(|p| is_choice_skip(p) || offered_object(board, offered, p).is_some())
+    d.picks.iter().all(|p| is_choice_skip(p) || offered_object(board, offered, p, &[]).is_some())
 }
 
 /// The offered objects gorge's Delve picks name, in pick order and without repeats. Refs win over
@@ -1087,7 +1088,7 @@ fn delve_pick_ids(d: &Decision, board: &Board, offered: &BTreeMap<ObjectId, Stri
         if is_choice_skip(token) {
             continue;
         }
-        let id = offered_object(board, offered, token)
+        let id = offered_object(board, offered, token, &out)
             .ok_or_else(|| format!("gorge's Delve pick {token:?} is not one of phase's offered graveyard cards"))?;
         if out.contains(&id) {
             return Err(format!("gorge's Delve picks name {} twice", offered.get(&id).map_or("a card", String::as_str)));
@@ -1412,9 +1413,9 @@ mod tests {
         assert_eq!(rb.leftover, None);
     }
 
-    /// The engine's own ask is one card per decision, so a request may carry the same five
-    /// exiles as five one-pick decisions rather than one multi-pick decision. The follower must
-    /// consume the whole sequence, not just the first pick.
+    /// Defensive future-proofing, not a shape `follower-export` produces today (gorge logs one
+    /// multi-pick decision per ask): a request carrying the same five exiles as five one-pick
+    /// decisions must still be consumed whole, not just up to its first pick.
     #[test]
     fn delve_one_pick_per_decision_is_applied() {
         let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
@@ -1443,7 +1444,27 @@ mod tests {
         assert_eq!(rb.leftover, None, "every Delve decision is consumed");
     }
 
+    /// `pick_refs` are optional on a `Decision`: five bare `Swamp` labels name five distinct
+    /// graveyard cards (each label takes the first not-yet-used offered copy), not one card five times.
+    #[test]
+    fn delve_label_only_picks_take_distinct_copies() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[{"step":1,"seat":0,"kind":"choose_n","options":7,
+                "picks":["Swamp","Swamp","Swamp","Swamp","Swamp","[choice_skip]"],
+                "via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        assert_eq!(rb.snapshots.len(), 4);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.players[0].graveyard, ["Swamp", "Swamp"], "five Swamps exiled, two left");
+        assert_eq!(rb.leftover, None);
+    }
+
     /// A Delve ask gorge declined is still one decision: consume it, pay with mana, exile nothing.
+    /// Synthetic: the `5B` pool covers the generic, which gorge would not have asked about; it
+    /// proves only that the decision is consumed.
     #[test]
     fn delve_declined_decision_is_consumed() {
         let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
