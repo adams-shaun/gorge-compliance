@@ -1209,10 +1209,13 @@ carddb-test:
 # oracle-audit runs both scenario corpora through gorge's runner: the hand
 # Oracle-text audit (scenarios/oracle plus gorge's residual
 # engine/rules/testdata/oracle) and the XMage ports (scenarios/xmageport).
-# ORACLE_RUN filters the audit per card, e.g. ORACLE_RUN='Fatal_Push'.
+# ORACLE_RUN filters the audit per card, e.g. ORACLE_RUN='Fatal_Push'. It runs
+# through scripts/test-targets.sh whole — the only seat-permitted `go test`
+# path — which carries the -count=1 cache bypass and caps the run itself; V=1
+# keeps the verbose stream, saved under .oracle-build/test/whole-*.json.
 ORACLE_RUN ?=
 oracle-audit:
-	go test $(GO_TEST_FLAGS) -count=1 ./audit -run 'TestOracleScenarioFilesWellFormed|TestOracleAudit/$(ORACLE_RUN)|TestXMagePortScenarios' -v
+	@PKG=./audit RUN='TestOracleScenarioFilesWellFormed|TestOracleAudit/$(ORACLE_RUN)|TestXMagePortScenarios' V=1 bash scripts/test-targets.sh whole
 
 smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
@@ -1255,7 +1258,7 @@ mtgish-fetch:
 	MTGISH_REF=$(MTGISH_REF) scripts/mtgish-fetch.sh
 mtgish-xc:
 	go run ./cmd/mtgishxc -all
-	go test -count=1 ./oracle/mtgish -run TestMtgishLedger -v
+	@PKG=./oracle/mtgish RUN=TestMtgishLedger V=1 bash scripts/test-targets.sh whole
 
 # xmage-driver-tests compiles the Java replay driver and runs its unit tests
 # (oracle/xmageoracle/test) against the xmage-oracle-setup build. Needs Java

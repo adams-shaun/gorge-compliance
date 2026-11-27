@@ -201,6 +201,12 @@ check "  ...verdict names the package" $([[ $LAST == *" ./p "* ]] && echo 0 || e
 check "  ...go test -json -failfast -count=1, no -run" $(/usr/bin/grep -q '^go test -json -failfast -count=1 -timeout 2m ./p$' "$STUB_LOG" && ! /usr/bin/grep '^go ' "$STUB_LOG" | /usr/bin/grep -q -- '-run ' && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
 check "  ...stream saved under .oracle-build/test" $(ls "$TMP"/work/.oracle-build/test/whole-*.json >/dev/null 2>&1 && echo 0 || echo 1)
 
+# RUN is optional in whole mode: with none the package runs whole (make
+# boundary); when set it passes through as -run, and V as -v, the way one mode
+# does (make oracle-audit's composite regexp, make mtgish-xc's ledger test).
+tw "RUN and V pass through" 0 "test-whole: PASS" PKG=./p RUN=TestA V=1 STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...go test -json -failfast -count=1 -run TestA -v" $(/usr/bin/grep -q '^go test -json -failfast -count=1 -timeout 2m -run TestA -v ./p$' "$STUB_LOG" && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
+
 # make boundary's licence guards are documented corpus-less (internal/boundary
 # skips its corpus rule when no corpus is present), so the corpus preflight
 # must not turn a link-less worktree into test-whole: ENV.
