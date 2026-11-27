@@ -135,7 +135,7 @@ func placePartyGates(seats [2]*StartSeat, seat int, name, filter string, chosen 
 	if filter == "" {
 		return
 	}
-	for _, a := range parseFilterCounters(filter, true, false, false) {
+	for _, a := range parseFilterCounters(filter, true, false, false, false) {
 		if !a.known || a.self || len(a.counters) == 0 {
 			continue
 		}
@@ -284,7 +284,7 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 		// counters_<OP><N>_<KIND>) are battlefield state the start meets by
 		// placing them (removalStart's rule), so parseFilterCounters reads
 		// them rather than leaving the alternative unknown.
-		alts := parseFilterCounters(p.filter, true, false, false)
+		alts := parseFilterCounters(p.filter, true, false, false, false)
 		fits := func(c *cards.Face) bool {
 			if !c.IsCreature() || !pairOK(c) || attacker && c.HasKeyword("Defender") || p.dealer && c.Power() <= 0 {
 				return false
