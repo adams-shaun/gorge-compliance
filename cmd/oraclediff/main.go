@@ -1,6 +1,6 @@
 // Command oraclediff runs the XMage compliance pipeline's gorge side.
 //
-//	oraclediff gen  [-cards .cards] [-level A|B] -manifest oracle/compliance/manifests/FRA.json -out scenarios.jsonl
+//	oraclediff gen  [-cards .cards] [-level A|B] [-mana-abilities] -manifest oracle/compliance/manifests/FRA.json -out scenarios.jsonl
 //	oraclediff plan [-cards .cards] -scenarios scenarios.jsonl -xmage-ref REF -driver SHA -cache DIR -replay todo.jsonl -rediff rediff.jsonl
 //	oraclediff diff [-cards .cards] -scenarios scenarios.jsonl [-xmage xmage.jsonl] [-cache DIR] [-driver SHA] -out verdicts.jsonl
 //	oraclediff adjudicate -scenarios scen.jsonl -forge-diff forge-diff.jsonl
@@ -19,9 +19,11 @@
 // the measurement itself failed. `go run` reports both as 1.
 //
 // gen writes one level-A scenario per manifest card gorge fully supports
-// (skips go to <out>.skips.jsonl); -level B writes the level-A scenario and
-// then every generable level-B one, with a level-B skip (keyed by its
-// requirement) for each the generator cannot make yet. plan splits them into the stale ones
+// (skips go to <out>.skips.jsonl); -mana-abilities appends the level-A
+// activation item for each battlefield mana ability (follower-check's mode,
+// off for the XMage pass); -level B writes the level-A scenario and then every
+// generable level-B one, with a level-B skip (keyed by its requirement) for
+// each the generator cannot make yet. plan splits them into the stale ones
 // (no passing verdict for this exact scenario and XMAGE_REF) and, of those,
 // the ones XMage has not replayed yet. The XMage driver (scripts/xmage-
 // oracle-run.sh) replays the latter; diff runs gorge on each scenario,
@@ -76,14 +78,7 @@ func main() {
 	var err error
 	switch os.Args[1] {
 	case "gen":
-		fs := flag.NewFlagSet("gen", flag.ExitOnError)
-		dir := fs.String("cards", ".cards", "corpus dir")
-		manifest := fs.String("manifest", "", "set manifest")
-		out := fs.String("out", "", "scenario JSONL")
-		level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
-		printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
-		fs.Parse(os.Args[2:])
-		err = runGen(*dir, *manifest, *out, *level, *printed)
+		err = runGenCLI(os.Args[2:])
 	case "plan":
 		fs := flag.NewFlagSet("plan", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -242,6 +237,52 @@ func loadReg(dir string) (*cards.Registry, error) {
 }
 
 func runGen(dir, manifest, out, level, printed string) error {
+	return runGenOpts(dir, manifest, out, level, printed, false)
+}
+
+// runGenCLI is the gen subcommand: flag parsing plus runGenKnown with the
+// committed manifests dir. XMage's known names always come from the committed
+// manifests; -manifest names the card source and may live outside that
+// directory (follower-check's synthetic POOL manifest), and parsing that
+// directory as an XMage set list made an empty file or a sibling non-manifest
+// JSON fail gen outright. A test drives this function, so the wiring is guarded.
+func runGenCLI(args []string) error {
+	fs := flag.NewFlagSet("gen", flag.ExitOnError)
+	dir := fs.String("cards", ".cards", "corpus dir")
+	manifest := fs.String("manifest", "", "set manifest")
+	out := fs.String("out", "", "scenario JSONL")
+	level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
+	printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
+	manaAbilities := fs.Bool("mana-abilities", false, "also generate a level-A activation item for every activated mana ability (follower-check)")
+	fs.Parse(args)
+	return runGenKnown(*dir, *manifest, *out, *level, *printed, *manaAbilities, committedManifestDir())
+}
+
+// runGenOpts is runGen with the follower-check mana-ability append. The
+// ordinary level-A pass keeps the flag false, so every committed level-A
+// scenario (and its verdict) keeps its bytes. It installs XMage's known names
+// from the manifest's own directory: a fixture manifest is its own known set.
+// The CLI passes the committed manifests dir explicitly (runGenKnown).
+func runGenOpts(dir, manifest, out, level, printed string, manaAbilities bool) error {
+	return runGenKnown(dir, manifest, out, level, printed, manaAbilities, "")
+}
+
+// committedManifestDir is the committed XMage manifest directory, or "" when
+// the repository root cannot be found (a standalone binary run outside its
+// checkout), in which case gen falls back to the manifest's own directory.
+func committedManifestDir() string {
+	root := repoRoot()
+	if root == "" {
+		return ""
+	}
+	return filepath.Join(root, "oracle", "compliance", "manifests")
+}
+
+// runGenKnown is runGenOpts with an explicit XMage-known directory. An empty
+// knownDir keeps the manifest's directory (the test seam); the CLI passes the
+// committed manifests dir so an arbitrary -manifest path is never parsed as
+// an XMage set list.
+func runGenKnown(dir, manifest, out, level, printed string, manaAbilities bool, knownDir string) error {
 	if manifest == "" || out == "" {
 		return fmt.Errorf("gen needs -manifest and -out")
 	}
@@ -269,14 +310,17 @@ func runGen(dir, manifest, out, level, printed string) error {
 			m = withPrinted(m, pr)
 		}
 	}
-	if err := installXMageKnown(filepath.Dir(manifest)); err != nil {
+	if knownDir == "" {
+		knownDir = filepath.Dir(manifest)
+	}
+	if err := installXMageKnown(knownDir); err != nil {
 		return err
 	}
 	reg, err := loadReg(dir)
 	if err != nil {
 		return err
 	}
-	return genManifest(reg, m, out, level)
+	return genManifestOpts(reg, m, out, level, manaAbilities)
 }
 
 // withPrinted adds the printed cards XMage's manifest omits to a copy of m and
@@ -305,6 +349,13 @@ func withPrinted(m compliance.Manifest, pr compliance.Printed) compliance.Manife
 // genManifest generates from an already loaded registry, so deterministic
 // fixtures can exercise the manifest/name boundary without an external corpus.
 func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) error {
+	return genManifestOpts(reg, m, out, level, false)
+}
+
+// genManifestOpts is genManifest with manaAbilities: one extra level-A
+// activation item per battlefield mana ability. It is follower-check's mode;
+// the XMage pass never sets it, so its scenario set and verdicts do not move.
+func genManifestOpts(reg *cards.Registry, m compliance.Manifest, out, level string, manaAbilities bool) error {
 	sup := effects.Supported()
 	has := func(n string) bool { _, ok := reg.Lookup(n); return ok }
 	folded := compliance.FoldedNames(reg)
@@ -360,32 +411,74 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 			skipped++
 			continue
 		}
-		var it oraclegen.Item
-		var skip *oraclegen.Skip
+		var items []oraclegen.Item
+		var manaSkips []*oraclegen.Skip
+		var baseSkip *oraclegen.Skip
+		hasBase := false
 		c, _ := reg.Lookup(name)
 		switch {
 		case !ok:
-			skip = &oraclegen.Skip{Card: mc.Name, Reason: "not in corpus"}
+			baseSkip = &oraclegen.Skip{Card: mc.Name, Reason: "not in corpus"}
 		default:
 			if u := reg.Unsupported(c, sup); len(u) > 0 {
-				skip = &oraclegen.Skip{Card: name, Reason: fmt.Sprintf("unsupported %v", u)}
+				baseSkip = &oraclegen.Skip{Card: name, Reason: fmt.Sprintf("unsupported %v", u)}
 			} else {
-				it, skip = templates.Generate(reg, name)
+				it, skip := templates.Generate(reg, name)
+				if skip != nil {
+					baseSkip = skip
+				} else {
+					items = append(items, it)
+					hasBase = true
+				}
+				// -level B already emits every activated ability
+				// (activate.mana included) as a level-B item; the level-A
+				// append is for the level-A follower gate only. It sits in
+				// the supported branch: a card the engine calls unplayable
+				// keeps its unsupported skip and gets no activation.
+				if manaAbilities && level == "A" {
+					mits, mskips := templates.GenerateManaAbilities(reg, name)
+					for _, mit := range mits {
+						if !hasItemID(items, mit.ID) {
+							items = append(items, mit)
+						}
+					}
+					// A mana-ability gap is written even when the card has
+					// a base scenario. Otherwise a pool name whose activation
+					// could not be built disappears while follower-check
+					// still reports AGREE (Millikin).
+					manaSkips = append(manaSkips, mskips...)
+				}
 			}
 		}
-		if skip != nil {
+		if len(items) == 0 {
+			first := baseSkip
+			if first == nil && len(manaSkips) > 0 {
+				first = manaSkips[0]
+			}
+			if first != nil {
+				b, _ := json.Marshal(first)
+				fmt.Fprintln(sw, string(b))
+				skipped++
+			}
+			continue
+		}
+		// An item was written, so the base-generate skip (Sol Talisman's "no
+		// mana cost") is superseded. A mana-ability gap still has no item and
+		// stays visible beside the card's other rows.
+		for _, skip := range manaSkips {
 			b, _ := json.Marshal(skip)
 			fmt.Fprintln(sw, string(b))
 			skipped++
-			continue
 		}
-		if name != mc.Name && !mc.PrintedOnly {
-			it.XMageName = mc.Name
+		for _, it := range items {
+			if name != mc.Name && !mc.PrintedOnly {
+				it.XMageName = mc.Name
+			}
+			b, _ := json.Marshal(it)
+			fmt.Fprintln(ow, string(b))
+			n++
 		}
-		b, _ := json.Marshal(it)
-		fmt.Fprintln(ow, string(b))
-		n++
-		if level != "B" {
+		if level != "B" || !hasBase {
 			continue
 		}
 		// Level B is a superset of A: a card that got a level-A item also
@@ -412,6 +505,17 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 	}
 	fmt.Printf("gen %s: %d scenarios, %d skipped (%s.skips.jsonl)\n", m.Code, n, skipped, out)
 	return nil
+}
+
+// hasItemID reports whether items already holds an item with this id, so a
+// card whose level-A item and activation item collide is written once.
+func hasItemID(items []oraclegen.Item, id string) bool {
+	for _, it := range items {
+		if it.ID == id {
+			return true
+		}
+	}
+	return false
 }
 
 // Row is one verdict line.

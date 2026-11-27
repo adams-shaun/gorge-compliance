@@ -1,0 +1,11 @@
+#!require-mana
+# Nonland mana sources a follower driver must activate. The directive above
+# puts follower-check in mana-gate mode; `--pool` without `--set` builds its
+# card source from these names, so a card in no committed set manifest (The
+# Alright Henge) is selectable too.
+#   make follower-check ENGINE=phase ARGS='--pool oracle/xengine/pools/mana-abilities.txt'
+The Alright Henge
+Torgal, A Fine Hound
+Sol Talisman
+Riven Turnbull
+Princess Lucrezia

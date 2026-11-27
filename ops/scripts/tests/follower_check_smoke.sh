@@ -7,6 +7,10 @@
 #   - an --out inside the repository but outside .oracle-build/ exits 2;
 #   - --setup-only items have "steps":[] and no payment;
 #   - --pool keeps only pool cards (comments and blank lines skipped), --limit the first N;
+#   - a plain --pool is a generic filter: gen gets no -mana-abilities and a non-mana name is fine;
+#   - --require-mana (or a '#!require-mana' first line) gives gen -mana-abilities and exits 2,
+#     naming the card, for a pool name with no generated activation item, one the follower's
+#     preflight refuses, or one --limit cuts;
 #   - a runner that drops a row makes the script exit 1;
 #   - --min-agree below/above the measured rate exits 0/1;
 #   - SUMMARY.txt has the status histogram; an empty request file never starts the runner.
@@ -42,20 +46,35 @@ STUB
 cat >"$BIN/oraclediff" <<'STUB'
 #!/usr/bin/env bash
 sub=$1; shift
+argv="$*"
 declare -A o
-while [ $# -gt 0 ]; do o[${1#-}]=$2; shift 2; done
-echo "oraclediff $sub" >>"$LOG"
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-mana-abilities) o[mana-abilities]=true; shift ;;
+	*) o[${1#-}]=$2; shift 2 ;;
+	esac
+done
+echo "oraclediff $sub $argv" >>"$LOG"
 case "$sub" in
 gen)
 	for c in A B C D E F; do
 		printf '{"id":"s:%s","card":"%s","setup":{},"steps":[{"op":"pass"}],"payment":{"x":1}}\n' "$c" "$c"
 	done >"${o[out]}"
+	# The cards B, D and F get an activation item when the script passes
+	# -mana-abilities (F's is then refused by the stub follower-export).
+	if [ "${o[mana-abilities]:-}" = true ]; then
+		for c in B D F; do
+			printf '{"id":"%s/activate-mana/v1","card":"%s","template":"activate-mana","setup":{},"steps":[{"op":"activate"}],"payment":{"x":1}}\n' "$c" "$c"
+		done >>"${o[out]}"
+	fi
 	;;
 follower-export | forge-export)
 	eng=${o[engine]:-forge}
 	echo "$sub engine=${o[engine]} runner=${o[runner]}" >>"$LOG"
-	grep -v '"card":"F"' "${o[scenarios]}" >"${o[out]}" || true
-	grep '"card":"F"' "${o[scenarios]}" >"$(dirname "${o[out]}")/$eng-prep.jsonl" || true
+	# The request lines wrap the item like the real follower-export; the
+	# refusal rows carry id/reason/detail only.
+	grep -v '"card":"F"' "${o[scenarios]}" | jq -c '{id, item: .}' >"${o[out]}" || true
+	grep '"card":"F"' "${o[scenarios]}" | jq -c '{id, reason: "phase_lacks_card", detail: "F: stub refusal"}' >"$(dirname "${o[out]}")/$eng-prep.jsonl" || true
 	;;
 follower-diff)
 	n=0
@@ -97,6 +116,7 @@ check "summary line" 'has "$out" "follower-check: phase set=XYZ items=6 refused=
 check "SUMMARY.txt has the status histogram" '/usr/bin/grep -q "AGREE 3" "$O/SUMMARY.txt" && /usr/bin/grep -q "DIVERGE 2" "$O/SUMMARY.txt" && /usr/bin/grep -q " 2 life" "$O/SUMMARY.txt"' "$(cat "$O/SUMMARY.txt" 2>/dev/null)"
 check "plain: steps and payment kept" '[ "$(jq -c ".steps|length" "$O/items.jsonl" | sort -u)" = 1 ] && jq -e "has(\"payment\")" "$O/items.jsonl" >/dev/null'
 check "runner got the env override and the prep the runner path" '/usr/bin/grep -q "follower-export engine=phase runner=$BIN/runner" "$LOG"' "$(cat "$LOG")"
+check "plain run: gen omits -mana-abilities" '! /usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "$(cat "$LOG")"
 
 # Forge (forge-export): the same runner is passed to the preflight with
 # -runner, and the refusals land in forge-prep.jsonl.
@@ -107,13 +127,54 @@ check "forge summary line" 'has "$out" "follower-check: forge set=XYZ items=6 re
 check "forge: -runner passed to the forge-export preflight" '/usr/bin/grep -q "forge-export engine= runner=$BIN/runner" "$LOG"' "$(cat "$LOG")"
 check "forge: refusal rows in forge-prep.jsonl" '[ "$(wc -l <"$O/forge-prep.jsonl")" = 1 ]' "$(cat "$O/forge-prep.jsonl" 2>/dev/null)"
 
-# --setup-only, --pool (comments, blanks), --limit.
+# --setup-only, --pool (comments, blanks), --limit. A plain --pool is the
+# generic card filter: no activation items, a non-mana name (Z, in no gen
+# output) is not an error.
 printf '# pool\nB\n\nD # inline\nZ\n' >"$TMP/pool.txt"
-O=$TMP/o2
+O=$TMP/o2; : >"$LOG"
 out=$(cc phase --setup-only --pool "$TMP/pool.txt" --out "$O"); rc=$?
 check "setup-only+pool exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
 check "setup-only: steps [] and no payment" '[ "$(jq -c ".steps" "$O/items.jsonl" | sort -u)" = "[]" ] && ! jq -e "has(\"payment\")" "$O/items.jsonl" >/dev/null'
-check "pool keeps only pool cards" '[ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "B D " ]' "$(jq -r .card "$O/items.jsonl")"
+check "plain pool: gen omits -mana-abilities" '! /usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "$(cat "$LOG")"
+check "plain pool keeps only pool cards, no activation items" '[ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "B D " ]' "$(jq -r .card "$O/items.jsonl")"
+out=$(cc phase --set XYZ --pool "$TMP/pool.txt" --out "$O"); rc=$?
+check "plain --set --pool exits 0 with a name gen never produced" '[ "$rc" = 0 ] && [ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "B D " ]' "rc=$rc $out"
+
+# --require-mana: B and D have an activation item that reaches the runner.
+printf 'B\nD\n' >"$TMP/mana.txt"
+O=$TMP/o2m; : >"$LOG"
+out=$(cc phase --pool "$TMP/mana.txt" --require-mana --out "$O"); rc=$?
+check "require-mana pool exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
+check "require-mana: gen got -mana-abilities" '/usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "$(cat "$LOG")"
+check "require-mana: every pool card has an activation request" '[ "$(jq -r "select(.template == \"activate-mana\") | .card" "$O/items.jsonl" | tr "\n" " ")" = "B D " ] && [ "$(jq -r "select(.item.template == \"activate-mana\") | .item.card" "$O/req.jsonl" | tr "\n" " ")" = "B D " ]' "$(cat "$O/req.jsonl")"
+# The directive on the pool file's first non-blank line is the same mode.
+printf '\n#!require-mana\nB\nD\n' >"$TMP/mana-dir.txt"
+: >"$LOG"
+out=$(cc phase --pool "$TMP/mana-dir.txt" --out "$TMP/o2d"); rc=$?
+check "directive pool: exits 0, gen got -mana-abilities" '[ "$rc" = 0 ] && /usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "rc=$rc $out"
+# A directive anywhere but first is just a comment.
+printf 'B\n#!require-mana\n' >"$TMP/mana-late.txt"
+: >"$LOG"
+out=$(cc phase --pool "$TMP/mana-late.txt" --out "$TMP/o2e"); rc=$?
+check "late directive is a comment: plain filter" '[ "$rc" = 0 ] && ! /usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "rc=$rc $out"
+out=$(cc phase --require-mana --out "$TMP/o2f"); rc=$?
+check "require-mana without a pool exits 2" '[ "$rc" = 2 ] && has "$out" "--require-mana needs --pool"' "rc=$rc $out"
+
+# A name with no generated activation item is an input error naming it.
+printf 'B\nSol Talismann\n' >"$TMP/pool-missing.txt"
+out=$(cc phase --pool "$TMP/pool-missing.txt" --require-mana --out "$TMP/o2g"); rc=$?
+check "require-mana: name with no activation item exits 2" '[ "$rc" = 2 ] && has "$out" "no level-A mana activation item: Sol Talismann"' "rc=$rc $out"
+# The activation gen made is refused by the follower's preflight: not sent, exit 2, reason shown.
+printf 'B\nF\n' >"$TMP/pool-refused.txt"
+: >"$LOG"
+out=$(cc phase --pool "$TMP/pool-refused.txt" --require-mana --out "$TMP/o2h"); rc=$?
+check "require-mana: refused activation exits 2 naming the card and reason" '[ "$rc" = 2 ] && has "$out" "mana activation item was not sent: F" && has "$out" "F/activate-mana/v1: phase_lacks_card F: stub refusal"' "rc=$rc $out"
+check "require-mana: refused activation never starts the runner" '[ "$(runs)" = 0 ]'
+# --limit cuts the activation items (pooled order: both base items, then the activations).
+out=$(cc phase --pool "$TMP/mana.txt" --require-mana --limit 1 --out "$TMP/o2i"); rc=$?
+check "require-mana: --limit that cuts an activation exits 2" '[ "$rc" = 2 ] && has "$out" "mana activation item was not sent: B,D"' "rc=$rc $out"
+out=$(cc phase --pool "$TMP/mana.txt" --require-mana --limit 4 --out "$TMP/o2j"); rc=$?
+check "require-mana: --limit that keeps them exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
 out=$(cc phase --limit 2 --out "$O"); rc=$?
 check "limit keeps the first N" '[ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "A B " ]'
 : >"$LOG"
