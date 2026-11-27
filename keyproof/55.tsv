@@ -1,13 +1,13 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5502741a-e3b9-454e-8121-4360a6db6750	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5502741a-e3b9-454e-8121-4360a6db6750	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+5502741a-e3b9-454e-8121-4360a6db6750	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	4ede227d2c00	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 5502741a-e3b9-454e-8121-4360a6db6750	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5502741a-e3b9-454e-8121-4360a6db6750	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 550811ca-0995-4886-aa8c-5cee118aa54f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 550811ca-0995-4886-aa8c-5cee118aa54f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:spellgorger-weird:f0t0:s1,f:xs:XP:spellgorger-weird:f0t0:s1	-	-	-	336eab778104	-	4a1c5f1f68f2	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 550921f5-ec65-460d-9ada-f2c5a4c4b2c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-550921f5-ec65-460d-9ada-f2c5a4c4b2c4	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	0b36a6dc4937	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+550921f5-ec65-460d-9ada-f2c5a4c4b2c4	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	4ede227d2c00	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 550abd9b-9aae-4812-9bc0-7f131d6dcde8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:untamed-hunger:static0.0:s1,f:xs:XP:untamed-hunger:static0.0:s1	-	-	-	44e3ec152eea	-	3019443d4439	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 550abd9b-9aae-4812-9bc0-7f131d6dcde8	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:untamed-hunger:static0.0:s1,f:xs:XP:untamed-hunger:static0.0:s1	-	-	-	44e3ec152eea	-	3019443d4439	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 551023a7-9db3-4204-ac64-5847adbafe79	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	777d1ac759f1	-	242faa74b238	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55de434c-0fb9-4127-81b6-47c1c0b088fe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55dfe722-7487-4d25-b90c-e6ad2c82a671	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55e04860-f4f5-445b-81f2-b500fa9b456a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55e04860-f4f5-445b-81f2-b500fa9b456a	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	777d1ac759f1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
+55e04860-f4f5-445b-81f2-b500fa9b456a	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	4ede227d2c00	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-26	xproof
 55e897e9-5c70-4e32-8f24-3e0fefa319cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-s-encouragement:cast:s1,f:xs:XP:nissa-s-encouragement:cast:s1	-	-	-	d864b561c9cb	-	bb1bfdeb453b	-	-	2026-11-24	xproof
 55eb3c21-6834-4c62-8ab9-54b901531fed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55eb9310-f24b-410b-850b-a7d0d5117946	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
