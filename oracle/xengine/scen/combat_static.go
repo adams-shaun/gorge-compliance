@@ -94,6 +94,72 @@ func restrictingStatic(face, fix *cards.Face, attack bool) *cards.Static {
 	return nil
 }
 
+// staticFilterCovered reports whether a static filter names face (or is
+// absent). An alternative the filter code does not understand counts as
+// covering it: the start cannot show the restriction missing.
+func staticFilterCovered(filter string, owner, face *cards.Face) bool {
+	if strings.TrimSpace(filter) == "" {
+		return true
+	}
+	for _, a := range parseFilter(filter) {
+		if !a.known || (!a.self || owner == face) && a.matches(face, false) {
+			return true
+		}
+	}
+	return false
+}
+
+// cantBlockByBlocked is the CantBlockBy arm of combatPairBlocked: the pair is
+// forbidden only when the attacker matches the static's ValidAttacker (or
+// Affected) and the blocker matches its ValidBlocker (or ValidCard).
+// restrictingStatic counts a match on either filter as a restriction, which
+// refused every blocker of Sidar Kondo of Jamuraa's power-2 Flanking creature.
+func cantBlockByBlocked(atk, blk *cards.Face) *cards.Static {
+	for i := range atk.Statics {
+		st := &atk.Statics[i]
+		if st.Mode != "CantBlockBy" {
+			continue
+		}
+		if staticFilterCovered(st.Params["Affected"], atk, atk) &&
+			staticFilterCovered(st.Params["ValidAttacker"], atk, atk) &&
+			staticFilterCovered(st.Params["ValidBlocker"], atk, blk) &&
+			staticFilterCovered(st.Params["ValidCard"], atk, blk) {
+			return st
+		}
+	}
+	return nil
+}
+
+// combatPairBlocked is the static that keeps the scripted pair (atk attacks,
+// blk blocks it) from being declared, or nil. It is restrictingStatic without
+// its two false positives: a CantBlockBy is read as what it says (both
+// creatures named; a flier may block a power-2 attacker Sidar Kondo shields),
+// and an attack restriction is read against the attacker, not the blocker.
+// Every other block restriction keeps the conservative read, so a pair the
+// start cannot show legal is still refused.
+func combatPairBlocked(atk, blk *cards.Face) *cards.Static {
+	if st := restrictingStatic(atk, blk, true); st != nil {
+		return st
+	}
+	if st := cantBlockByBlocked(atk, blk); st != nil {
+		return st
+	}
+	for _, side := range []struct{ own, other *cards.Face }{{blk, atk}, {atk, blk}} {
+		for i := range side.own.Statics {
+			st := &side.own.Statics[i]
+			// CantBlockBy on the blocker is about blocking that creature, not
+			// its block: it cannot keep this pair from being declared.
+			if !blockModes[st.Mode] || st.Mode == "CantBlockBy" {
+				continue
+			}
+			if restrictsCombat(st, side.own, side.other, false) {
+				return st
+			}
+		}
+	}
+	return nil
+}
+
 // combatKeyStart is a level-B combat key (combat#F.attack, combat#F.block) as
 // a start: the card on the battlefield since the turn began (no summoning
 // sickness), and the fixture creature on the other side.

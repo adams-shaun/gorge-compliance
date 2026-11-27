@@ -909,6 +909,57 @@ func TestStartAttachedBearerSeat(t *testing.T) {
 	}
 }
 
+// TestScenKeyAuraLandBearer: an Aura whose Enchant keyword takes no carrier
+// creature (Genju of the Cedars' Enchant:Forest, Pooling Venom's Enchant:land)
+// gets the basic land it can legally enchant as its StartAttach bearer. The
+// land is inert (the focus is the Aura's own activation), and the start lists
+// it on the Aura's controller's battlefield; every aura-unattached refusal of
+// this shape becomes a start, the same way the creature-Aura shape does.
+func TestScenKeyAuraLandBearer(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, bearer string }{
+		{"Genju of the Cedars", "Forest"},   // Enchant:Forest
+		{"Genju of the Spires", "Mountain"}, // Enchant:Mountain
+		{"Pooling Venom", "Plains"},         // Enchant:land: the first basic the filter takes
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, "f0/a0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if len(f.Setup.P0.Attach) != 1 || f.Setup.P0.Attach[0].Card != r.card || f.Setup.P0.Attach[0].To != r.bearer {
+				t.Fatalf("p0 attach %+v, want %s on %s", f.Setup.P0.Attach, r.card, r.bearer)
+			}
+			if !slices.Contains(f.Setup.P0.Battlefield, r.bearer) {
+				t.Errorf("p0 battlefield %v does not hold the bearer %s", f.Setup.P0.Battlefield, r.bearer)
+			}
+			if f.Focus == nil || f.Focus.Card != r.card || f.Focus.Kind != "ability" {
+				t.Errorf("focus %+v, want the Aura's ability", f.Focus)
+			}
+			if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestScenAuraLandBearerRefused: an Aura whose Enchant keyword names a player
+// (no card can be its bearer) or a planeswalker (the carrier pool has no inert
+// one) keeps the exact refusal, and a land Aura whose own upkeep cost the start
+// cannot pay names that cost rather than aura-unattached.
+func TestScenAuraLandBearerRefused(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Curse of Stalked Prey", key: "f0/t0", reason: "battlefield:aura-unattached"}, // Enchant:Player
+		{card: "Vivien's Talent", key: "f0/t0", reason: "battlefield:aura-unattached"},       // Enchant:Planeswalker
+		{card: "Tourach's Gate", key: "f0/a0", reason: "start:upkeep-cost"},                  // Enchant:land, cumulative upkeep
+		{card: "Wand of Orcus", key: "f0/t1", reason: "no-generator:trigger:Blocks:filter"},  // Equipment: StartAttach enters Auras only
+	})
+}
+
 // TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or
 // exiles a card from the graveyard still needs its own target placed. The
 // focus play (Murder) names no graveyard target, so an override that read only
@@ -2949,6 +3000,37 @@ func TestStartcombattriggersDealer(t *testing.T) {
 				t.Errorf("attacker %s has power %d (menace %v)", f.Name, f.Power(), f.HasKeyword("Menace"))
 			}
 		})
+	}
+}
+
+// TestScenCombatTriggerLegalBlocker: a block trigger whose attacker's own
+// CantBlockBy static keeps every blocker without flying or reach from blocking
+// it (Sidar Kondo of Jamuraa: creatures with power 2 or less) still starts in
+// declare-blockers. The pair is legal when the blocker is one the static lets
+// block (a flier), which combatPairBlocked reads from the mode's ValidAttacker
+// and ValidBlocker together instead of counting a match on either alone.
+func TestScenCombatTriggerLegalBlocker(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Sidar Kondo of Jamuraa", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	if f.Focus == nil || f.Focus.Attack != "Sidar Kondo of Jamuraa" || f.Focus.Block == "" {
+		t.Fatalf("focus %+v, want Sidar attacking and a blocker", f.Focus)
+	}
+	c, ok := reg.Lookup(f.Focus.Block)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("blocker %q not in the corpus", f.Focus.Block)
+	}
+	if blk := c.Faces[0]; !blk.HasKeyword("Flying") && !blk.HasKeyword("Reach") {
+		t.Errorf("blocker %s has neither flying nor reach; the attacker's CantBlockBy keeps it from blocking", blk.Name)
+	}
+	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+		t.Errorf("start file does not decode: %v", err)
 	}
 }
 
