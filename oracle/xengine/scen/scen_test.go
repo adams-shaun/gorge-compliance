@@ -3630,6 +3630,102 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 	}
 }
 
+// TestScenStepsNeededCostClass is the xproof repro for the steps-needed:cost
+// class (xproof refused.tsv, the top cards of the class): a cost whose payment
+// needs a prior step is met by placed state, so each builds a start where the
+// focus play is the key's line:
+//
+//   - Baylen, the Haymaker taps any number of untapped tokens
+//     (tapXType<N/Permanent.token/token>): the start mints the tokens, and a
+//     cost may tap them (summoning sickness never guards a cost's tap);
+//   - Fear of Abduction's cast exiles a creature you control
+//     (Exile<1/Creature> in the spell's additional cost): an inert creature
+//     sits beside the lands, like the fodder a Sac spends;
+//   - Ion Storm's activations remove a P1P1 (or CHARGE) counter from a
+//     permanent you control: an inert permanent carries the counters;
+//   - Migloz, Maze Crusher's minus abilities spend a counter of a personal
+//     kind (SubCounter<N/OIL/NICKNAME>): the counters sit on Migloz itself.
+//
+// A card the class cannot yet meet keeps its specific refusal: Bloodvial
+// Purveyor's Blood token need names a token the setup table does not map
+// (steps-needed:token), which a placed start could not replay.
+func TestScenStepsNeededCostClass(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card, key, want string
+		check           func(t *testing.T, f *StartFile)
+	}{
+		{"Baylen, the Haymaker", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Baylen, the Haymaker", "ability", 0)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Baylen, the Haymaker"})
+			if len(f.Setup.P0.Tokens) != 2 {
+				t.Errorf("p0 tokens %v, want two minted tokens to tap", f.Setup.P0.Tokens)
+			}
+			for _, tok := range f.Setup.P0.Tokens {
+				if tok.Tapped {
+					t.Errorf("token %s placed tapped, want untapped to tap as a cost", tok.Script)
+				}
+			}
+		}},
+		{"Baylen, the Haymaker", "f0/a2", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Baylen, the Haymaker", "ability", 2)
+			if len(f.Setup.P0.Tokens) != 4 {
+				t.Errorf("p0 tokens %v, want four minted tokens to tap", f.Setup.P0.Tokens)
+			}
+		}},
+		{"Fear of Abduction", "cast", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Fear of Abduction", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Fear of Abduction"})
+			lands := 0
+			for _, n := range f.Setup.P0.Battlefield {
+				if c, ok := reg.Lookup(n); ok && c.Faces[0].IsLand() {
+					lands++
+					continue
+				}
+				if c, ok := reg.Lookup(n); ok && c.Faces[0].IsCreature() {
+					continue // the exiled creature the additional cost spends
+				}
+				t.Errorf("p0 battlefield %q: neither a land nor the exiled creature", n)
+			}
+			if lands < 6 {
+				t.Errorf("p0 lands %d, want the 4WW the cast pays", lands)
+			}
+		}},
+		{"Ion Storm", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Ion Storm", "ability", 0)
+			if len(f.Setup.P0.Counters) != 1 || f.Setup.P0.Counters[0].Kind != "P1P1" || f.Setup.P0.Counters[0].N != 1 {
+				t.Fatalf("p0 counters %+v, want one P1P1 counter on a placed permanent", f.Setup.P0.Counters)
+			}
+			if f.Setup.P0.Counters[0].Card == "Ion Storm" || !slices.Contains(f.Setup.P0.Battlefield, f.Setup.P0.Counters[0].Card) {
+				t.Errorf("counter bearer %q not among p0 battlefield %v", f.Setup.P0.Counters[0].Card, f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Migloz, Maze Crusher", "f0/a2", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Migloz, Maze Crusher", "ability", 2)
+			want := []StartCounter{{Card: "Migloz, Maze Crusher", Kind: "OIL", N: 3}}
+			if !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
+			}
+		}},
+		{"Bloodvial Purveyor", "f0/t0", "steps-needed:token", nil},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", r.card, r.key, err)
+		}
+		if r.want != "" {
+			if res.Path != PathRefused || res.Reason != r.want {
+				t.Errorf("%s %s: path %q reason %q, want refused %q", r.card, r.key, res.Path, res.Reason, r.want)
+			}
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Fatalf("%s %s: path %q reason %q, want a start file", r.card, r.key, res.Path, res.Reason)
+		}
+		r.check(t, res.Start)
+	}
+}
+
 // The refusal reasons of cards unrelated to the harness census are unchanged.
 func TestScenRefusalReasonsUnchanged(t *testing.T) {
 	reg, b := testBuilder(t)

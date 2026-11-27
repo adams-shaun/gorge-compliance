@@ -1641,6 +1641,12 @@ func placeCounters(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card
 		if c.Card == card && c.Kind == kind {
 			return nil // a cost's counters (planCost) already meet the need
 		}
+		if c.Card != "" && c.Kind == kind && slices.Contains(s.Battlefield, c.Card) {
+			// A cost's SubCounter of a spec (Ion Storm's P1P1/Permanent)
+			// places its counters on a fodder permanent it also places: that
+			// permanent you control already meets a counters need of the kind.
+			return nil
+		}
 		bound = bound || c.Card == card
 	}
 	// A start binds one counters entry to each battlefield copy, so a card

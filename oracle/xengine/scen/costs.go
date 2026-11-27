@@ -61,16 +61,23 @@ type costPlan struct {
 // with placed state, or the refusal of the first it cannot
 // (steps-needed:cost:<head>, as costTokens names it).
 //
-//   - Sac<N/Type>, Return<N/Type>: N fodder permanents of Type (fodder);
+//   - Sac<N/Type>, Return<N/Type>, Exile<N/Type>: N fodder permanents of
+//     Type (fodder); of a token kind (Treasure, Permanent.token), a Sac or an
+//     Exile mints its tokens (mintSac);
 //   - tapXType<N/Type>: N untapped fodder creatures; tapXType<Any/...
 //     withTotalPowerGEn> (crew n) one vanilla creature with power n or more;
+//     of a token kind (Baylen's Permanent.token) N minted tokens, untapped
+//     (summoning sickness never guards a cost's tap);
 //   - Discard<1/CARDNAME>: the card in hand; Discard<N/Type>: N fodder cards
 //     in hand;
 //   - ExileFromGrave<1/CARDNAME>: the card in the graveyard;
 //     ExileFromGrave<N/Type>: N fodder cards in the graveyard;
 //   - SubCounter<N/Kind>: N counters of Kind on the card (a planeswalker's
-//     LOYALTY: only those its printed loyalty lacks); AddCounter<N/Kind> on
-//     the card needs nothing;
+//     LOYALTY: only those its printed loyalty lacks); SubCounter<N/Kind/NICKNAME>
+//     or SubCounter<N/Kind/CARDNAME> (Migloz's OIL): the same, the counter of
+//     a personal kind; SubCounter<N/Kind/Spec/...> (Ion Storm's
+//     P1P1/Permanent): N counters of Kind on a placed fodder permanent of
+//     Spec; AddCounter<N/Kind> on the card needs nothing;
 //   - PayEnergy<N>: N ENERGY counters on the seat itself, recorded in
 //     PlayerCounters (a start position can hold the energy the ability
 //     spends). A malformed or non-positive amount stays refused.
@@ -168,7 +175,7 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 		}
 		switch {
 		case head == "Discard" && n == 0 && len(args) >= 2:
-		case (head == "Sac" || head == "Return") && self && n == 1:
+		case (head == "Sac" || head == "Return" || head == "Exile") && self && n == 1:
 		case head == "Discard" && self && n == 1:
 			p.zone = zoneHand
 		case head == "ExileFromGrave" && self && n == 1:
@@ -209,6 +216,27 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 					p.tapped = append(p.tapped, name)
 				}
 			}
+		case head == "Exile" && len(args) >= 2 && !self:
+			// "Exile a <Type> you control" as a cost (Fear of Abduction's
+			// Exile<1/Creature>): the same placed permanent a Sac spends,
+			// paid by exiling instead of sacrificing. A token kind mints its
+			// tokens (a permanent no card is), like a Sac of a token kind.
+			if _, ok := tokenFodder(reg, args[1]); ok {
+				if !p.mintSac(reg, args[1], n) {
+					return p, refusal
+				}
+				continue
+			}
+			name, tapped := sacFodder(reg, b, card, args[1], generic)
+			if name == "" {
+				return p, refusal
+			}
+			for range n {
+				p.field = append(p.field, name)
+				if tapped {
+					p.tapped = append(p.tapped, name)
+				}
+			}
 		case head == "tapXType" && len(args) >= 2 && !self && n <= 4:
 			typ := args[1]
 			if args[0] == "Any" {
@@ -219,6 +247,16 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 					return p, refusal
 				}
 				typ, n = before+"+powerGE"+power, 1
+			}
+			if _, ok := tokenFodder(reg, typ); ok {
+				// "Tap N untapped tokens" (Baylen's tapXType<3/Permanent.token/
+				// token>): the start mints them, like a Sac of a token kind.
+				// They sit untapped: a cost may tap any permanent, summoning
+				// sickness guards activations and attacks, never a cost's tap.
+				if !p.mintSac(reg, typ, n) {
+					return p, refusal
+				}
+				continue
 			}
 			name, land := fodder(reg, b, card, typ, generic, true)
 			if name == "" || land {
@@ -243,16 +281,33 @@ func planCostLine(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 			for range n {
 				p.graveyard = append(p.graveyard, name)
 			}
-		case head == "SubCounter" && len(args) == 2 && n >= 1:
+		case head == "SubCounter" && len(args) >= 2 && n >= 1:
 			kind := strings.ToUpper(args[1])
+			if !placeableCounterKind(kind) {
+				return p, refusal // a wildcard kind names kinds, not one to place
+			}
 			need := int32(n)
-			if kind == "LOYALTY" {
+			bearer := card
+			if len(args) >= 3 && args[2] != "NICKNAME" && args[2] != "CARDNAME" {
+				// "remove a <Kind> counter from a <Spec> you control" (Ion
+				// Storm's SubCounter<1/P1P1/Permanent/...>): the counters ride
+				// an inert fodder permanent of Spec the start places. A NICKNAME
+				// or CARDNAME third argument (Migloz's OIL) is the personal
+				// kind: the same planCost reads for the card itself.
+				name, _ := sacFodder(reg, b, card, args[2], generic)
+				if name == "" {
+					return p, refusal
+				}
+				p.field = append(p.field, name)
+				bearer = name
+			}
+			if bearer == card && kind == "LOYALTY" {
 				if l, err := strconv.Atoi(face.Loyalty); err == nil {
 					need -= int32(l)
 				}
 			}
 			if need > 0 {
-				p.counters = append(p.counters, StartCounter{Card: card, Kind: kind, N: need})
+				p.counters = append(p.counters, StartCounter{Card: bearer, Kind: kind, N: need})
 			}
 		case head == "Waterbend" && len(args) == 1:
 			// "waterbend {N}": N more basics — landsFor expands the bare
