@@ -3998,8 +3998,15 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 //     UnlessCost SubCounter and Koskun Falls's tapXType are asks the drive
 //     can pay, so they are not an empty cost; and a mana source the estimate
 //     cannot see (Sol Ring's artifact, Ancient Tomb's two colourless from a
-//     non-basic land) makes the payment provable, so no exception either.
-//     Both arms are refused by name instead of emitted;
+//     non-basic land, an untapped Treasure token, Wild Growth's
+//     TapsForMana trigger on a Plains, a static grant of a mana ability or a
+//     ManaConvert static) makes the payment provable, so no exception either.
+//     All arms are refused by name instead of emitted;
+//   - the exception only rests on the proven unconditional self-removal
+//     shape (provenUpkeepRemoval): a condition on the trigger or effect
+//     (Impending Disaster's seven lands, Defense of the Heart's CheckSVar,
+//     fading's counters_EQ0 with placed FADE counters) means the drive does
+//     not provably take the card off the battlefield, so it stays refused;
 //   - Tapped names bind to copies (TappedCopies, as the lowering binds
 //     them): four Plains with Tapped ["Plains"] leave three untapped copies
 //     for the startedTheTurnUntapped stamp Rasputin names from hand, and
@@ -4007,10 +4014,10 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 //     leaves no stamp anywhere, so no refusal.
 //
 // Reverting any guard in the sweep — the targeted-Destroy arms, the
-// payable-echo half, the unparsed-cost arm, the non-land/non-basic mana arm,
-// or the per-copy TappedCopies read (here or in upkeepManaShort) — turns one
-// expected refusal back into "" (or one expected "" into a refusal) and
-// fails here.
+// payable-echo half, the unparsed-cost arm, the shape allowlist, the
+// non-land/non-basic/trigger/attachment/token mana arms, or the per-copy
+// TappedCopies/BackFaceCopies reads — turns one expected refusal back into ""
+// (or one expected "" into a refusal) and fails here.
 func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
 	reg, _ := testBuilder(t)
 	start := func(p0 StartSeat) *StartFile {
@@ -4034,6 +4041,13 @@ func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
 		{"payable non-mana unless cost, tap", StartSeat{Battlefield: []string{"Koskun Falls", "Grizzly Bears"}}, "start:upkeep-trigger"},
 		{"payable echo from an artifact", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Sol Ring"}}, "start:upkeep-trigger"},
 		{"payable echo from a multi-mana land", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Ancient Tomb"}}, "start:upkeep-trigger"},
+		{"payable echo from a mana token", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}, Tokens: []StartToken{{Script: "c_a_treasure_sac"}}}, "start:upkeep-trigger"},
+		{"payable echo from an attached mana trigger", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Wild Growth"}, Attach: []StartAttach{{Card: "Wild Growth", To: "Plains"}}}, "start:upkeep-trigger"},
+		{"payable echo from a granted mana ability", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Basal Sliver"}}, "start:upkeep-trigger"},
+		{"payable echo by converted colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Island", "Mycosynth Lattice"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, seven lands", StartSeat{Battlefield: []string{"Impending Disaster"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, checked creature count", StartSeat{Battlefield: []string{"Defense of the Heart"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, fading counters", StartSeat{Battlefield: []string{"Blastoderm"}, Counters: []StartCounter{{Card: "Blastoderm", Kind: "FADE", N: 3}}}, "start:upkeep-trigger"},
 		{"mention word with one tapped duplicate", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:started-turn-untapped"},
 		{"mention word with every copy tapped", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains", "Plains", "Plains", "Plains"}}, ""},
 	} {
