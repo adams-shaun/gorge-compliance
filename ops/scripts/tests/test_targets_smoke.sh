@@ -201,6 +201,12 @@ check "  ...verdict names the package" $([[ $LAST == *" ./p "* ]] && echo 0 || e
 check "  ...go test -json -failfast -count=1, no -run" $(/usr/bin/grep -q '^go test -json -failfast -count=1 -timeout 2m ./p$' "$STUB_LOG" && ! /usr/bin/grep '^go ' "$STUB_LOG" | /usr/bin/grep -q -- '-run ' && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
 check "  ...stream saved under .oracle-build/test" $(ls "$TMP"/work/.oracle-build/test/whole-*.json >/dev/null 2>&1 && echo 0 || echo 1)
 
+# make boundary's licence guards are documented corpus-less (internal/boundary
+# skips its corpus rule when no corpus is present), so the corpus preflight
+# must not turn a link-less worktree into test-whole: ENV.
+tw "missing corpus is not an ENV failure" 0 "test-whole: PASS" PKG=./p TEST_TARGETS_CARDS="$TMP/nope" STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...and go still ran" $(/usr/bin/grep -q '^go test' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
 tw "missing PKG" 2 PKG
 tw "PKG=./..." 2 PKG PKG=./...
 check "  ...usage errors never reached go" $(! /usr/bin/grep -q '^go ' "$STUB_LOG" && echo 0 || echo 1)

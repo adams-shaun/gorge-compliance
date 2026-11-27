@@ -16,7 +16,8 @@
 #   make boundary                      this script's whole mode on the licence
 #                                      guards: one package run whole with
 #                                      -count=1 (the guard must re-execute, not
-#                                      replay the test cache)
+#                                      replay the test cache) and no corpus
+#                                      preflight (the guards run corpus-less)
 #
 # The LAST stdout line is `test-<mode>: <STATUS> <sha10>[+dirty] <pkgs> <seconds>`;
 # nothing else on stdout starts with `test-`. Exit codes:
@@ -134,7 +135,16 @@ if [ "$mode" != list ]; then
 fi
 
 # ---- preflight (ENV, exit 3) ----
-if [ "$mode" != list ]; then
+# whole is exempt: it runs one named package exactly as asked, so that
+# package's corpus need is the caller's assertion, not something this script
+# can judge. Its only user today is make boundary, whose licence guards are
+# designed to run corpus-less (internal/boundary skips its byte-identity rule
+# when no corpus is present and still runs its content and path rules) and
+# which the README documents as needing no corpus — so requiring .cards here
+# would red a link-less worktree on a guard that passes. The modes that fan
+# out over a selection keep the check: there, a green run of silently
+# skipping tests is a false green.
+if [ "$mode" != list ] && [ "$mode" != whole ]; then
 	# Every corpus test skips without the corpus, so a green run would be a false green.
 	cards=${TEST_TARGETS_CARDS:-$ROOT/.cards}/cardsfolder
 	if [ ! -d "$cards" ] || [ -z "$(ls -A "$cards" 2>/dev/null | head -n 1)" ]; then
@@ -322,7 +332,9 @@ fi
 # rather than replay a cached PASS, which is exactly what makes this mode the
 # script's exception to the no--count seat rule. Like one mode it takes only a
 # single relative package path and skips the BASE merge-base checks (nothing
-# is diffed), but a RUN is not required: the whole package is the request.
+# is diffed), but a RUN is not required: the whole package is the request. It
+# also skips the corpus preflight (see the comment there): the caller names a
+# specific package, so that package's corpus need is the caller's business.
 if [ "$mode" = whole ]; then
 	out=.oracle-build/test/whole-${sha%+dirty}.json
 	mkdir -p "$(dirname "$out")"
