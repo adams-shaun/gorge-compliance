@@ -3,6 +3,8 @@
 # pushed: resolve its full SHA with `git ls-remote`, write GORGE_PIN, require its pseudo-version in go.mod and
 # tidy. `make gorge-pin-bump` and .github/workflows/gorge-pin-follow.yml run it. Refreshing the corpus and the
 # targets (docs/PINNING.md steps 3 and 4) is the bump PR's CI and triage, not this script.
+# gorge-pin.sh check: verify the pin invariant offline (docs/PINNING.md "How the pin is expressed"): GORGE_PIN
+# holds a full SHA and go.mod requires the module at that commit's pseudo-version. No network, no writes.
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 mod=github.com/adams-shaun/gorge
@@ -23,8 +25,17 @@ bump)
 	GOWORK=off GOFLAGS=-mod=mod go mod tidy
 	echo "gorge-pin: pinned $mod $v"
 	;;
+check)
+	[ $# -eq 1 ] || { echo "usage: gorge-pin.sh check" >&2; exit 2; }
+	sha=$(head -n1 GORGE_PIN | awk '{print $1}')
+	[[ $sha =~ ^[0-9a-f]{40}$ ]] || { echo "gorge-pin: GORGE_PIN is not a full SHA: '$sha'" >&2; exit 1; }
+	v=$(awk '$1=="github.com/adams-shaun/gorge"{print $2; exit} $2=="github.com/adams-shaun/gorge"{print $3; exit}' go.mod)
+	[ -n "$v" ] || { echo "gorge-pin: go.mod does not require $mod" >&2; exit 1; }
+	[[ $v == *-"${sha:0:12}" ]] || { echo "gorge-pin: go.mod requires $mod $v, not the pseudo-version of GORGE_PIN $sha" >&2; exit 1; }
+	echo "gorge-pin: GORGE_PIN $sha matches go.mod $v"
+	;;
 *)
-	echo "usage: gorge-pin.sh bump [REV]" >&2
+	echo "usage: gorge-pin.sh bump [REV] | check" >&2
 	exit 2
 	;;
 esac
