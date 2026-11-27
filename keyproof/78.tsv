@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78171447-1bc8-4588-b427-5b82701324c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ivory-guardians:cast:s1,f:xs:XP:ivory-guardians:cast:s1	-	-	-	9087eefec3ee	-	fd596adb090c	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 781c9391-0322-40ad-8050-07151e2e6fc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 781c9391-0322-40ad-8050-07151e2e6fc7	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:tui-and-la-moon-and-ocean:f0t0:s1,f:xs:XP:tui-and-la-moon-and-ocean:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-781c9391-0322-40ad-8050-07151e2e6fc7	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+781c9391-0322-40ad-8050-07151e2e6fc7	f0/t1	NULL	owed	refused:setup_trigger:taps	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 781cee5f-f9cb-42ed-b408-543d297bf96d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 781cee5f-f9cb-42ed-b408-543d297bf96d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:draconic-disciple:f0a0:s1,f:xs:XP:draconic-disciple:f0a0:s1	-	-	-	8c0bd19283bb	-	f7e3b6badbf1	-	-	2026-11-24	xproof
 781cee5f-f9cb-42ed-b408-543d297bf96d	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:draconic-disciple:f0a1:s1,f:xs:XP:draconic-disciple:f0a1:s1	-	-	-	d864b561c9cb	-	f7e3b6badbf1	-	-	2026-11-24	xproof
@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78260893-c443-44c8-ab45-ce86ef347d98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thunderous-wrath:cast:s1,f:xs:XP:thunderous-wrath:cast:s1	-	-	-	d864b561c9cb	-	49f3186e1a81	-	-	2026-11-24	xproof
 7826f3f5-c8f2-43f5-a837-ff016da625e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:webspinner-cuff:cast:s1,f:xs:XP:webspinner-cuff:cast:s1	-	-	-	d864b561c9cb	-	7c016df776d7	-	-	2026-11-24	xproof
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:webspinner-cuff:f0a0:s1	-	-	-	3aa6ded33acb	-	7c016df776d7	-	-	2026-11-25	xproof
-7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 782c47c5-b108-415c-9b70-a033ac52956f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 782c47c5-b108-415c-9b70-a033ac52956f	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:stonework-packbeast:f0a0:s2,f:xs:XP:stonework-packbeast:f0a0:s2	-	-	-	6f84be0f34c0	-	cb40b8b67bd7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 782dcbc4-5a11-42f5-b8d9-4572e36d45b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

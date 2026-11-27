@@ -17,9 +17,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 271b37b6-b60b-4687-bd82-ecacf3b66cb3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vedalken-aethermage:f0t0:s1,f:xs:XP:vedalken-aethermage:f0t0:s1	-	-	-	d864b561c9cb	-	ae375bec09fc	-	-	2026-11-24	xproof
 271bfde0-6a6f-4bc8-ac0e-d2eff6784463	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 271bfde0-6a6f-4bc8-ac0e-d2eff6784463	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spectral-force:f0t0:s1,f:xs:XP:spectral-force:f0t0:s1	-	-	-	d864b561c9cb	-	b4b48f593ba0	-	-	2026-11-24	xproof
-2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t1	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+2724677f-7ae8-4e6b-9bd8-d8a76b31d0b4	f0/t1	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 2727a7ec-1cf7-4cd7-b5d4-955db940ddd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 272ab5d5-7edb-4457-8a09-cabe2325c881	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-sentinel:f0t0:s1,f:xs:XP:llanowar-sentinel:f0t0:s1	-	-	-	25696bf19d5b	-	6172fcdf04bc	-	-	2026-11-24	xproof
 272ab5d5-7edb-4457-8a09-cabe2325c881	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:llanowar-sentinel:f0t0:s1,f:xs:XP:llanowar-sentinel:f0t0:s1	-	-	-	25696bf19d5b	-	6172fcdf04bc	-	-	2026-11-24	xproof
@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 274d89b8-1e59-4992-9299-dc793b7f6752	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feast-of-the-unicorn:cast:s1,f:xs:XP:feast-of-the-unicorn:cast:s1	-	-	-	3aa6ded33acb	-	6a5b973a7b6b	-	-	2026-11-25	xproof
 274f8860-c8c3-4aeb-ba87-94a5139397d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2750451f-348e-452f-88d0-bc921c46e8cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2750451f-348e-452f-88d0-bc921c46e8cc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+2750451f-348e-452f-88d0-bc921c46e8cc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 27521e70-3a1f-4819-a111-c38216ffe7c3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gerrard-capashen:f0t0:s1	-	-	-	3aa6ded33acb	-	b3a5e18f82b1	-	-	2026-11-25	xproof
 27521e70-3a1f-4819-a111-c38216ffe7c3	f0/a0	Tap	agreed	-	F	start	1	0	f:xs:XP:gerrard-capashen:f0t0:s1	-	-	-	3aa6ded33acb	-	b3a5e18f82b1	-	-	2026-11-25	xproof
 27521e70-3a1f-4819-a111-c38216ffe7c3	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:gerrard-capashen:f0t0:s1	-	-	-	3aa6ded33acb	-	b3a5e18f82b1	-	-	2026-11-25	xproof

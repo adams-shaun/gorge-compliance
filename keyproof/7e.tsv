@@ -7,9 +7,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e063f60-876a-48fe-8bc6-9888180176d1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e063f60-876a-48fe-8bc6-9888180176d1	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Wary Watchdog/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e074b14-0ec8-439b-9b83-5f7c1a904384	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunt-the-network:cast:s1,f:xs:XP:haunt-the-network:cast:s1	-	-	-	054d9f516953	-	d4da103fb16d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-7e09daa4-a0e6-447b-b0c5-6b1bf728525f	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	ad6fb83576d3	-	d248eb6ea202	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a0	Draw	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a1	Counter	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	844894199329	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7e09daa4-a0e6-447b-b0c5-6b1bf728525f	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a0	Draw	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a1	Counter	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 7e0b9e67-3103-4299-934b-46d8fe96f553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e0b9e67-3103-4299-934b-46d8fe96f553	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:keldon-berserker:f0t0:s1,f:xs:XP:keldon-berserker:f0t0:s1	-	-	-	8c0bd19283bb	-	400f98a5dc1c	-	-	2026-11-24	xproof
 7e0d2965-bbcd-4214-b1b6-c0d2601ce078	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ef3f240-05a5-4fc9-a977-a729010a53c2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blitz-hellion:cast:s1,f:xs:XP:blitz-hellion:cast:s1	-	-	-	8a1b1a193ec0	-	28de511453de	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:equipped	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:equipped	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saved-by-the-shell:cast:s1,f:xs:XP:saved-by-the-shell:cast:s1	-	-	-	23c4009444b0	-	10b2664f0993	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saved by the Shell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef67bae-4af3-47b9-95d2-08f3c5a0b39d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9808c424-0d74-45b8-a092-fd296c6833d2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9808c424-0d74-45b8-a092-fd296c6833d2	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:orzhov-keyrune:f0a1:s1,f:xs:XP:orzhov-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	d79a3909c7b5	-	-	2026-11-24	xproof
 980939db-d867-4c16-a288-52f6528f2376	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-980939db-d867-4c16-a288-52f6528f2376	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+980939db-d867-4c16-a288-52f6528f2376	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:polluted-mire:f0a0:s2,f:xs:XP:polluted-mire:f0a0:s2	-	-	-	5f2128bf97e4	-	35e7029e5303	-	-	2026-11-24	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 987f8c13-0164-4536-b505-d9fa799222fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 987f8c13-0164-4536-b505-d9fa799222fb	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dogged-pursuit:f0t0:s1,f:xs:XP:dogged-pursuit:f0t0:s1	-	-	-	6f84be0f34c0	-	162d2abddf84	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9880ba09-d5b8-4675-bfb4-2161d86d2d41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9881b8b6-2e0a-492e-a1d1-40a087158784	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	eb4e86ebfdb8	-	152ce6f4482b	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+9881b8b6-2e0a-492e-a1d1-40a087158784	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t0:s1,f:xs:XP:suleiman-s-legacy:f0t0:s1	-	-	-	ea3140b6974b	-	d86b0c834040	-	-	2026-11-24	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t0:s1,f:xs:XP:suleiman-s-legacy:f0t0:s1	-	-	-	ea3140b6974b	-	d86b0c834040	-	-	2026-11-24	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t1:s1,f:xs:XP:suleiman-s-legacy:f0t1:s1	-	-	-	cb99a158debc	-	d86b0c834040	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
