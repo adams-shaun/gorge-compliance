@@ -73,6 +73,17 @@ type Focus struct {
 	// Times is how many times the seat takes the action (0: once), each at its
 	// first chance after the last.
 	Times int
+	// Prelude names a card PreludeSeat casts from hand at turn 1's first main
+	// priority and lets resolve before the focus play. A start whose key card
+	// enters with a choice (a Moved replacement) cannot place it at genesis
+	// without this turn's entry stamps, but a cast produces the entry, the
+	// choice and the stamps on the tape; the key's own ability or trigger is
+	// then taken after it, where a plain cast focus would stop short.
+	Prelude string
+	// PreludeSeat is the seat that casts Prelude (0 when unset). The card's
+	// controller is the only seat that can cast it, and a sorcery-speed card
+	// needs that seat to be the active one.
+	PreludeSeat int
 	// Attack and Block are the scripted combat the focus play waits for (the
 	// line of a play that targets a creature in combat, "target attacking
 	// creature"): the active seat attacks with exactly Attack, the defending
@@ -122,6 +133,12 @@ type focusState struct {
 	// the engine may still ask which of the source's mana abilities it
 	// activates (manaChoice); nil otherwise.
 	manaPick *cards.SA
+	// preludeObjs are the hand objects of the prelude card on PreludeSeat;
+	// preludeCast is whether the prelude spell has been cast. The prelude is
+	// done once the cast object has left the stack, whether it resolved or was
+	// countered. Only read when f.Prelude is set.
+	preludeObjs map[state.ObjID]bool
+	preludeCast bool
 }
 
 // took records one focus action, done once the seat has taken Times of them.
@@ -161,6 +178,15 @@ func (s *focusState) read(e *rules.Engine) {
 	s.baitObjs = map[state.ObjID]bool{}
 	s.baitActObjs, s.baitTgtObjs = map[state.ObjID]bool{}, map[state.ObjID]bool{}
 	s.attackObjs, s.blockObjs = map[state.ObjID]bool{}, map[state.ObjID]bool{}
+	s.preludeObjs = map[state.ObjID]bool{}
+	if s.f.Prelude != "" && s.f.PreludeSeat >= 0 && s.f.PreludeSeat < len(e.G.Players) {
+		want := cards.NormalizeName(s.f.Prelude)
+		for _, id := range e.G.Zone(state.ZHand, state.PlayerID(s.f.PreludeSeat)) {
+			if isNamed(e.G.Obj(id), want) {
+				s.preludeObjs[id] = true
+			}
+		}
+	}
 	for _, l := range []struct {
 		name string
 		objs map[state.ObjID]bool
@@ -320,11 +346,14 @@ func pass(d decision.Decision, in decision.Intent) decision.Intent {
 	return in
 }
 
-// holdPass is the focus seat's answer to a priority decision before the focus
-// opens: pass, whatever the bot chose. Any other seat or decision keeps the
-// bot's answer.
+// holdPass is the focus seat's (and a prelude seat's) answer to a priority
+// decision before the focus opens: pass, whatever the bot chose. Any other
+// seat or decision keeps the bot's answer. The prelude seat's mana must not be
+// tapped in the upkeep either: it would empty before main 1 and the prelude
+// cast would never be offered.
 func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.Intent {
-	if d.Kind != decision.KPriority || int(d.Player) != s.f.Seat {
+	if d.Kind != decision.KPriority || int(d.Player) != s.f.Seat &&
+		(s.f.Prelude == "" || int(d.Player) != s.f.PreludeSeat) {
 		return in
 	}
 	return pass(d, in)
@@ -346,6 +375,58 @@ func (s *focusState) landTap(d decision.Decision) int {
 		}
 	}
 	return -1
+}
+
+// preludeOnStack reports whether the prelude spell is on the stack, i.e. cast
+// but not yet resolved or countered.
+func (s *focusState) preludeOnStack() bool {
+	want := cards.NormalizeName(s.f.Prelude)
+	for _, id := range s.e.G.Zone(state.ZStack, state.PlayerID(s.f.PreludeSeat)) {
+		if isNamed(s.e.G.Obj(id), want) {
+			return true
+		}
+	}
+	return false
+}
+
+// prelude casts the prelude card from its controller's hand at turn 1's first
+// main priority and lets it resolve before the focus play. Until it resolves
+// the focus seat passes, so its own action cannot happen first; the prelude
+// seat taps lands for the cast. ok is false for a start with no prelude, an
+// unrelated decision, or once the prelude is done.
+func (s *focusState) prelude(d decision.Decision, in decision.Intent) (decision.Intent, bool) {
+	if s.f.Prelude == "" || s.e == nil || s.done || !s.open() {
+		return in, false
+	}
+	if !s.preludeCast {
+		if int(d.Player) == s.f.PreludeSeat && d.Kind == decision.KPriority {
+			for i, o := range d.Options {
+				if o.Kind == "cast" && s.preludeObjs[o.Obj] {
+					s.preludeCast = true
+					return answer(in, i), true
+				}
+			}
+			if i := s.landTap(d); i >= 0 {
+				return answer(in, i), true // tap the mana the cast's payment asks for
+			}
+		}
+		if int(d.Player) == s.f.Seat {
+			return pass(d, in), true
+		}
+		return in, false
+	}
+	if s.preludeOnStack() {
+		if int(d.Player) == s.f.PreludeSeat || int(d.Player) == s.f.Seat {
+			return pass(d, in), true
+		}
+		return in, false
+	}
+	if s.f.PreludeSeat != s.f.Seat && !s.done && int(d.Player) == s.f.PreludeSeat {
+		// the prelude is done; the caster keeps still so the focus seat (the
+		// other seat) gets the priority its play needs
+		return pass(d, in), true
+	}
+	return in, false
 }
 
 // bait is the scripted bait and both seats' passes before it. For a cast bait
@@ -693,6 +774,9 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 			in = answer(in, i)
 			return in, nil
 		}
+	}
+	if out, ok := st.prelude(d, in); ok {
+		return out, nil
 	}
 	if out, ok := st.bait(d, in); ok {
 		return out, nil

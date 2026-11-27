@@ -744,6 +744,14 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 // lowering rows and the rendered start. A play error is fatal.
 func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte) {
 	t.Helper()
+	items, rows, raw, _ := playStartFileAt(t, reg, st)
+	return items, rows, raw
+}
+
+// playStartFileAt is playStartFile that also returns the play directory, so a
+// caller can read the exercised ledger the tape alone filled.
+func playStartFileAt(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte, string) {
+	t.Helper()
 	raw, err := st.Marshal()
 	if err != nil {
 		t.Fatal(err)
@@ -778,7 +786,7 @@ func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]ora
 	}); err != nil {
 		t.Fatal(err)
 	}
-	return items, rows, raw
+	return items, rows, raw, out
 }
 
 // TestStartChangesZoneTriggersAreExercised: the ChangesZone/ChangesZoneAll
@@ -1460,9 +1468,9 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 		})
 	}
 	for _, c := range []struct{ card, key, reason string }{
-		{"Adaptive Automaton", "static#0.0", "start:as-enters-stamp"},
-		{"Lifecraft Engine", "f0/a0", "start:as-enters-stamp"},
-		{"Roaming Throne", "f0/t0", "start:as-enters-stamp"},
+		// A state-backed as-enters creature is cast as the start line (see
+		// TestStartAsEntersCreatureIsExercised); the kinds setup cannot read
+		// keep their named refusal.
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 	} {
@@ -1471,6 +1479,138 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 			t.Fatal(err)
 		}
 		if res.Path != scen.PathRefused || res.Reason != c.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+		}
+	}
+}
+
+// TestStartAsEntersCreatureIsExercised: a creature whose own as-enters
+// replacement asks a state-backed choice (a creature type here) is not placed
+// at genesis. That placement is a real move this turn, so the live cut carries
+// Object.EnteredThisTurn and Object.AcqTurn -- the summoning-sick stamp the
+// lowering's setup drive cannot restate (it places permanents directly, CR
+// 302.6). A static key is cast as the start line; an ability or BecomesTarget
+// trigger key casts the card as a prelude and then takes the key's own action,
+// so the entry, the choose answer and both turn stamps are tape events without
+// turning an honest refusal into an item that credits a key it never took.
+//
+// creditDeclared is off: the item id would otherwise credit any lowered start,
+// including one whose cast never activated the ability or fired the trigger.
+// The exercised ledger here is the tape's alone. A static key has no tape
+// entry naming it (credit's declared join is its only reader), so the static
+// cases instead assert the observation setup staticKeyStart builds (its carrier
+// and Compare fields), which a plain cast start would drop, and only the
+// ability and trigger keys are read from the ledger.
+func TestStartAsEntersCreatureIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	creditDeclared = false
+	t.Cleanup(func() { creditDeclared = true })
+	for _, c := range []struct {
+		card, key, focusKind, focusCard string
+		focusSeat                       int
+		prelude, tapeOnly               bool
+		carrier                         string
+		compare                         []string
+	}{
+		{"Adaptive Automaton", "static#0.0", "cast", "Adaptive Automaton", 0, false, false, "", nil},
+		// staticKeyStart's own observation setup -- the affected carrier it
+		// places and the Compare fields it sets -- must survive the move to
+		// hand. A plain cast start drops both and credits the key by id only.
+		{"Rukarumel, Biologist", "static#0.0", "cast", "Rukarumel, Biologist", 0, false, false, "Memnite", nil},
+		{"Kindred Boon", "static#0.0", "cast", "Kindred Boon", 0, false, false, "Crimson Kobolds", []string{oraclediff.CompareKeywords}},
+		{"Lifecraft Engine", "f0/a0", "ability", "Lifecraft Engine", 0, true, true, "", nil},
+		{"Roaming Throne", "f0/t0", "cast", "Murder", 1, true, true, "", nil}, // the opponent's targeting spell, after the prelude cast
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			if !slices.Contains(res.Start.Setup.P0.Hand, c.card) || slices.Contains(res.Start.Setup.P0.Battlefield, c.card) {
+				t.Fatalf("p0 hand %v battlefield %v, want %s in hand and not placed",
+					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, c.card)
+			}
+			if c.carrier != "" && !slices.Contains(res.Start.Setup.P0.Battlefield, c.carrier) {
+				t.Errorf("p0 battlefield %v, want staticKeyStart's carrier %q", res.Start.Setup.P0.Battlefield, c.carrier)
+			}
+			if !slices.Equal(res.Start.Compare, c.compare) {
+				t.Errorf("compare %v, want %v: the static setup's observation fields were dropped", res.Start.Compare, c.compare)
+			}
+			if c.prelude {
+				if res.Start.Prelude != c.card || res.Start.PreludeSeat != 0 {
+					t.Fatalf("prelude %q seat %d, want %q seat 0", res.Start.Prelude, res.Start.PreludeSeat, c.card)
+				}
+			} else if res.Start.Prelude != "" {
+				t.Fatalf("prelude %q, want none for a cast start", res.Start.Prelude)
+			}
+			if res.Start.Focus == nil || res.Start.Focus.Seat == nil || *res.Start.Focus.Seat != c.focusSeat ||
+				res.Start.Focus.Card != c.focusCard || res.Start.Focus.Kind != c.focusKind {
+				t.Fatalf("focus %+v, want seat %d %s %s", res.Start.Focus, c.focusSeat, c.focusKind, c.focusCard)
+			}
+			items, rows, raw, out := playStartFileAt(t, reg, res.Start)
+			if len(items) != res.Start.Seeds {
+				t.Errorf("%d item(s), want %d: one per seed (start %s)", len(items), res.Start.Seeds, raw)
+			}
+			if len(rows) != res.Start.Seeds {
+				t.Errorf("%d lowering row(s), want %d (start %s)", len(rows), res.Start.Seeds, raw)
+			}
+			for _, r := range rows {
+				if r.Status != "lower_ok" {
+					t.Errorf("%s: status %s reasons %v (start %s)", r.ID, r.Status, r.Reasons, raw)
+				}
+			}
+			// The as-enters answer must be on the tape, not only in the start's
+			// state: the engine asked it during the cast and the lowering
+			// scripted the pick.
+			chosen := false
+			for _, it := range items {
+				for _, st := range it.Steps {
+					for _, a := range st.Answers {
+						if a.Kind == "choose" && len(a.Pick) > 0 {
+							chosen = true
+						}
+					}
+				}
+			}
+			if !chosen {
+				t.Errorf("no item records the as-enters choose answer (start %s)", raw)
+			}
+			if c.tapeOnly {
+				// The tape itself must credit the key: the prelude cast alone
+				// is not the ability / trigger the item exists for.
+				if got := readExercised(t, out).Get(c.card, c.key); got.Exercised == 0 {
+					t.Errorf("%s %s: the tape credits no use of the key (ledger %+v)", c.card, c.key, got)
+				}
+			}
+		})
+	}
+	for _, c := range []struct{ card, key, reason string }{
+		// A combat key is the creature's attack or block: it needs the
+		// permanent placed for that play, so the entry stamp cannot be
+		// restated and the generator keeps the named refusal.
+		{"Haktos the Unscarred", "combat#0.attack", "start:as-enters-stamp"},
+		// A creature whose as-enters answer is not state setup can read keeps
+		// its named refusal too.
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		// A trigger a cast this turn cannot fire (an attack, an upkeep, another
+		// permanent's entry) keeps the named refusal rather than a cast-only
+		// item that never exercises it.
+		{"Titan of Littjara", "f0/t1", "start:as-enters-stamp"},
+		{"Herald's Horn", "f0/t0", "start:as-enters-stamp"},
+		// A static whose own setup refuses keeps that named refusal: casting
+		// the card cannot make an unobservable static exercised.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
+	} {
+		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != scen.PathRefused || res.Start != nil || res.Reason != c.reason {
 			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
 		}
 	}
