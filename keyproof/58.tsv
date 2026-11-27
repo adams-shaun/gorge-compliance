@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 589abb40-04b4-4dbe-9c2a-446b6c3075d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warchief-giant:cast:s1,f:xs:XP:warchief-giant:cast:s1	-	-	-	8c0bd19283bb	-	9c4698f0a6f0	-	-	2026-11-24	xproof
 589abb40-04b4-4dbe-9c2a-446b6c3075d1	f0/t0	Attacks/Myriad	agreed	-	FX	start	4	0	x:xs:XP:warchief-giant:cast:s1,f:xs:XP:warchief-giant:cast:s1	-	-	-	8c0bd19283bb	-	9c4698f0a6f0	-	-	2026-11-24	xproof
 589b742c-fee5-413a-a56c-4d4ffaf0f73d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-589b742c-fee5-413a-a56c-4d4ffaf0f73d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	7a768868d7ca	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+589b742c-fee5-413a-a56c-4d4ffaf0f73d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	00a3a9cd06e0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 589d1c6e-5808-424c-a6e4-dadef90d119e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 589d6b67-17ad-4ca7-9b0c-1b919bf03a27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 589ea35b-c64e-4cf6-81c5-806e9463e992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundering-chariot:cast:s1,f:xs:XP:thundering-chariot:cast:s1	-	-	-	ae86f6029288	-	aec42c9cd9e3	-	-	2026-11-24	xproof
@@ -222,9 +222,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58e4f299-bb32-4727-8498-a364166adc38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58e754ad-88b4-47c5-b105-8b50e54143c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58e7e904-a925-48fb-998a-17c647a2c448	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	ad6fb83576d3	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-58e7e904-a925-48fb-998a-17c647a2c448	f0/a0	AddTurn	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7a768868d7ca	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-58e7e904-a925-48fb-998a-17c647a2c448	f0/a1	Animate/Crew	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7a768868d7ca	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-58e7e904-a925-48fb-998a-17c647a2c448	f0/t0	SpellCast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	7a768868d7ca	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+58e7e904-a925-48fb-998a-17c647a2c448	f0/a0	AddTurn	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	00a3a9cd06e0	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+58e7e904-a925-48fb-998a-17c647a2c448	f0/a1	Animate/Crew	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	00a3a9cd06e0	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+58e7e904-a925-48fb-998a-17c647a2c448	f0/t0	SpellCast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	00a3a9cd06e0	-	728f816af905	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 58e9f5db-c369-42c6-a26d-fc31e25d5f83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58ea9b0a-1bef-4ccb-acb7-f03c8daf3df3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ominous-seas:cast:s1,f:xs:XP:ominous-seas:cast:s1	-	-	-	ae86f6029288	-	c244dd2c8fdf	-	-	2026-11-24	xproof
 58ea9b0a-1bef-4ccb-acb7-f03c8daf3df3	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:ominous-seas:f0a0:s1,f:xs:XP:ominous-seas:f0a0:s1	-	-	-	44e3ec152eea	-	c244dd2c8fdf	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
