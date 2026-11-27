@@ -16,6 +16,7 @@ CREATE INDEX "idx_legality_format" ON "legality" ("format");
 CREATE INDEX "idx_legality_status" ON "legality" ("status");
 CREATE INDEX "idx_printings_oracle_id" ON "printings" ("oracle_id");
 CREATE INDEX "idx_printings_set_code" ON "printings" ("set_code");
+CREATE INDEX "idx_ruling_refs_source" ON "ruling_refs" ("source");
 CREATE INDEX "idx_sets_name" ON "sets" ("name");
 CREATE INDEX idx_src_diagnosed_card ON src_diagnosed (card);
 CREATE INDEX idx_src_manifest_cards_name ON src_manifest_cards (name);
@@ -44,6 +45,7 @@ CREATE TABLE "keyproof" ("oracle_id" TEXT NOT NULL, "key" TEXT NOT NULL, "desc" 
 CREATE TABLE "labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "origin" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
 CREATE TABLE "legality" ("oracle_id" TEXT NOT NULL, "format" TEXT NOT NULL, "status" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "format")) WITHOUT ROWID;
 CREATE TABLE "printings" ("printing_id" TEXT NOT NULL, "oracle_id" TEXT NOT NULL, "set_code" TEXT NOT NULL, "collector_number" TEXT NOT NULL, "rarity" TEXT NOT NULL, "released" TEXT, PRIMARY KEY ("printing_id")) WITHOUT ROWID;
+CREATE TABLE "ruling_refs" ("oracle_id" TEXT NOT NULL, "ruling_id" TEXT NOT NULL, "published" TEXT NOT NULL, "source" TEXT NOT NULL, "retrieved" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "ruling_id")) WITHOUT ROWID;
 CREATE TABLE "sets" ("set_code" TEXT NOT NULL, "name" TEXT NOT NULL, "release_date" TEXT NOT NULL, "set_type" TEXT NOT NULL, "parent_code" TEXT, PRIMARY KEY ("set_code")) WITHOUT ROWID;
 CREATE TABLE src_diagnosed (kind TEXT, set_code TEXT, card TEXT, field TEXT, wrong TEXT, cr TEXT, evidence TEXT, upstream TEXT, ticket TEXT);
 CREATE TABLE src_manifest_cards (set_code TEXT NOT NULL, name TEXT NOT NULL, numbers TEXT, rarity TEXT);
@@ -54,3 +56,4 @@ CREATE TABLE "xledger" ("oracle_id" TEXT NOT NULL, "tier" TEXT NOT NULL, "state"
 CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, COUNT(*) AS keys, SUM(k.state='agreed') AS agreed, SUM(k.state='diagnosed') AS diagnosed, SUM(k.state='diverged') AS diverged, SUM(k.state='owed') AS owed, SUM(k.state='excluded') AS excluded, CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) AND SUM(k.state IN ('agreed','diagnosed'))>0 AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS proven FROM keyproof k GROUP BY k.oracle_id;
 CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2', 'C3') AND (exclusion IS NULL OR exclusion = '-');
 CREATE VIEW proven_keys AS SELECT c.* FROM cards c JOIN keyproof_cards k USING (oracle_id) WHERE k.proven = 1;
+CREATE VIEW scope_cards AS SELECT c.oracle_id AS oracle_id, c.name AS name FROM cards c WHERE c.paper = 1 AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id = c.oracle_id AND l.format = 'commander' AND l.status = 'legal') AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions);

@@ -4,9 +4,11 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -22,8 +24,9 @@ var goldenCards = []string{
 	"The Eldest Reborn",  // saga
 }
 
-func TestInventoryGolden(t *testing.T) {
-	reg := testutil.CorpusRegistry(t)
+// keysGolden renders testdata/keys.golden from the fixed corpus fixture.
+func keysGolden(t *testing.T, reg *cards.Registry) string {
+	t.Helper()
 	var b strings.Builder
 	for _, n := range goldenCards {
 		c, ok := reg.Lookup(n)
@@ -39,7 +42,163 @@ func TestInventoryGolden(t *testing.T) {
 			fmt.Fprintf(&b, "  %s\t%s%s\n", k.ID, k.Desc, m)
 		}
 	}
+	return b.String()
+}
+
+func TestInventoryGolden(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	b := keysGolden(t, reg)
 	const path = "testdata/keys.golden"
+	if os.Getenv("XENGINE_REGEN") != "" {
+		if err := os.WriteFile(path, []byte(b), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	want, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if string(want) != b {
+		t.Errorf("keys differ from %s (XENGINE_REGEN=1 to regenerate)\n--- got\n%s--- want\n%s", path, b, want)
+	}
+}
+
+// universeFixture is a hand-built card and the exact Universe ids it must
+// produce. The cards stand in for loader output -- an expanded keyword carries
+// the printed name in Params["Keyword"] -- so the universe tests do not depend
+// on which cards happen to be in the corpus pin.
+type universeFixture struct {
+	name string
+	card *cards.Card
+	want []string
+}
+
+func universeFixtures() []universeFixture {
+	creature := func(keywords ...string) *cards.Card {
+		return &cards.Card{Faces: []*cards.Face{{Types: []string{"Creature"}, Keywords: keywords}}}
+	}
+	return []universeFixture{
+		{
+			name: "static",
+			card: &cards.Card{Faces: []*cards.Face{{
+				Types:   []string{"Creature"},
+				Statics: []cards.Static{{Mode: "Continuous"}},
+			}}},
+			want: []string{"cast", "static#0.0"},
+		},
+		{
+			name: "replacement",
+			card: &cards.Card{Faces: []*cards.Face{{
+				Types: []string{"Enchantment"},
+				Repls: []cards.Repl{{Event: "GainLife", Params: map[string]string{"Keyword": "Test"}}},
+			}}},
+			want: []string{"cast", "repl#0.0"},
+		},
+		{
+			name: "unexpanded keyword",
+			card: creature("Haste"),
+			want: []string{"cast", "kw#0.0"},
+		},
+		{
+			name: "expanded keyword",
+			card: &cards.Card{Faces: []*cards.Face{{
+				Types:    []string{"Creature"},
+				Keywords: []string{"Cycling:2"},
+				Abilities: []*cards.SA{{
+					Kind: "AB", API: "ChangeZone",
+					Params: map[string]string{"Keyword": "Cycling"},
+				}},
+			}}},
+			want: []string{"cast", "f0/a0"},
+		},
+		{
+			name: "three-mode charm",
+			card: &cards.Card{Faces: []*cards.Face{{
+				Types: []string{"Sorcery"},
+				Abilities: []*cards.SA{{
+					Kind: "SP", API: "Charm",
+					Params: map[string]string{"Choices": "Dosan's Oldest Chant,Kodama's Reach,Time of Need"},
+				}},
+			}}},
+			want: []string{"cast", "mode#0.0.0", "mode#0.0.1", "mode#0.0.2"},
+		},
+		{
+			name: "flying creature",
+			card: creature("Flying"),
+			want: []string{"cast", "combat#0.attack", "combat#0.block"},
+		},
+		{
+			name: "two faces",
+			card: &cards.Card{Faces: []*cards.Face{
+				{Types: []string{"Creature"}, Keywords: []string{"Haste"}, Statics: []cards.Static{{Mode: "Continuous"}}},
+				{Types: []string{"Creature"}, Keywords: []string{"Flying"}, Repls: []cards.Repl{{Event: "Moved"}}},
+			}},
+			want: []string{"cast", "static#0.0", "repl#1.0", "kw#0.0", "combat#1.attack", "combat#1.block"},
+		},
+		{
+			name: "basic land",
+			card: &cards.Card{Faces: []*cards.Face{{
+				Types:    []string{"Basic", "Land"},
+				Keywords: []string{"Haste"}, // not a level-B combat keyword, but still no group 5
+			}}},
+			want: []string{"land"},
+		},
+	}
+}
+
+func TestUniverseCoversStaticsReplacementsKeywords(t *testing.T) {
+	for _, fx := range universeFixtures() {
+		var ids []string
+		for _, k := range Universe(fx.card) {
+			ids = append(ids, k.ID)
+		}
+		if !slices.Equal(ids, fx.want) {
+			t.Errorf("%s: Universe ids = %v, want %v", fx.name, ids, fx.want)
+		}
+	}
+}
+
+func TestUniverseKeepsKeysPrefix(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	type namedCard struct {
+		name string
+		card *cards.Card
+	}
+	var fixtures []namedCard
+	for _, n := range goldenCards {
+		c, ok := reg.Lookup(n)
+		if !ok {
+			t.Fatalf("%q not in the corpus", n)
+		}
+		fixtures = append(fixtures, namedCard{n, c})
+	}
+	for _, fx := range universeFixtures() {
+		fixtures = append(fixtures, namedCard{fx.name, fx.card})
+	}
+	for _, fx := range fixtures {
+		keys := Keys(fx.card)
+		all := Universe(fx.card)
+		if len(all) < len(keys) || !slices.Equal(all[:len(keys)], keys) {
+			t.Errorf("%s: Universe = %v, want Keys prefix %v", fx.name, all, keys)
+		}
+	}
+	// Keys is unchanged: the committed keys.golden still renders byte for byte.
+	gotKeys := keysGolden(t, reg)
+	wantKeys, err := os.ReadFile("testdata/keys.golden")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if gotKeys != string(wantKeys) {
+		t.Errorf("testdata/keys.golden changed (XENGINE_REGEN=1 to regenerate)\n--- got\n%s--- want\n%s", gotKeys, wantKeys)
+	}
+	// One line per fixture card and key: <card>\t<id>\t<desc>.
+	var b strings.Builder
+	for _, fx := range fixtures {
+		for _, k := range Universe(fx.card) {
+			fmt.Fprintf(&b, "%s\t%s\t%s\n", fx.name, k.ID, k.Desc)
+		}
+	}
+	const path = "testdata/universe.golden"
 	if os.Getenv("XENGINE_REGEN") != "" {
 		if err := os.WriteFile(path, []byte(b.String()), 0o644); err != nil {
 			t.Fatal(err)
@@ -49,8 +208,30 @@ func TestInventoryGolden(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if string(want) != b.String() {
-		t.Errorf("keys differ from %s (XENGINE_REGEN=1 to regenerate)\n--- got\n%s--- want\n%s", path, b.String(), want)
+	if b.String() != string(want) {
+		t.Errorf("universe differs from %s (XENGINE_REGEN=1 to regenerate)\n--- got\n%s--- want\n%s", path, b.String(), want)
+	}
+}
+
+func TestFamily(t *testing.T) {
+	for _, tc := range []struct{ id, want string }{
+		{"cast", "cast"},
+		{"land", "land"},
+		{"f0/a0", "activated"},
+		{"f11/a23", "activated"},
+		{"f0/t0", "trigger"},
+		{"f11/t23", "trigger"},
+		{"mode#0.0.0", "mode"},
+		{"static#1.0", "static"},
+		{"repl#0.2", "repl"},
+		{"kw#0.1", "keyword"},
+		{"combat#0.attack", "combat"},
+		{"combat#1.block", "combat"},
+		{"not-a-key", ""},
+	} {
+		if got := Family(tc.id); got != tc.want {
+			t.Errorf("Family(%q) = %q, want %q", tc.id, got, tc.want)
+		}
 	}
 }
 
