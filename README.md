@@ -52,8 +52,10 @@ make boundary oracle-audit ORACLE_RUN=Fatal_Push
 ```
 
 `make boundary` ends with a `test-whole: PASS ...` verdict line and runs with or without
-the corpus; `make oracle-audit`'s last line should end with `ok` (it needs the corpus, so
-run it after `make cards`).
+the corpus; `make oracle-audit` also runs through that script's whole mode, so its last
+line is the same `test-whole: PASS ... ./audit ...` verdict line and its verbose stream is
+saved under `.oracle-build/test/whole-*.json` (it needs the corpus, so run it after
+`make cards`).
 
 `make cards` looks for a gorge checkout at `../gorge`. For a checkout elsewhere, run
 `make cards GORGE_ROOT=/path/to/gorge`. It fails, saying what to do, when there is no
