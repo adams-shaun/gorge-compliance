@@ -1,8 +1,10 @@
 //! Which cards phase can replay faithfully.
 //!
-//! A card is supported when every face (back faces included) has no coverage gaps and no confirmed
-//! misparse, and none of its abilities draws a random outcome from phase's own RNG, which a
-//! scripted replay cannot force.
+//! A card is supported when every face (back faces included) has no parse warnings, no coverage
+//! gaps and no confirmed misparse, and none of its abilities draws a random outcome from phase's
+//! own RNG, which a scripted replay cannot force. Phase's own coverage result folds parse warnings
+//! into its gap set; `card_face_gaps` is the lightweight entry point that does not, so the warnings
+//! are checked here too.
 
 use engine::database::card_db::CardDatabase;
 use engine::game::coverage::card_face_gaps;
@@ -75,6 +77,16 @@ fn face_reason(face: &CardFace) -> Option<String> {
     if let Some(class) = face.metadata.confirmed_misparse {
         let kind = serde_json::to_value(class).ok().and_then(|v| v.as_str().map(str::to_string));
         return Some(format!("confirmed misparse: {}", kind.unwrap_or_else(|| format!("{class:?}"))));
+    }
+    // A parse warning means phase dropped or misread printed text. The card data can still look
+    // complete (The Bear Force Pilot's token loses the swallowed "and crew 2" inside an effect),
+    // so `card_face_gaps` does not see it; a replay that reaches the dropped ability would die in
+    // the engine instead. Fail closed here, naming the warning.
+    if let Some(warning) = face.parse_warnings.first() {
+        let kind = serde_json::to_value(warning)
+            .ok()
+            .and_then(|v| v.get("type").and_then(Value::as_str).map(str::to_string));
+        return Some(format!("parse warning: {}", kind.unwrap_or_else(|| format!("{warning:?}"))));
     }
     let gaps = card_face_gaps(face);
     if !gaps.is_empty() {
