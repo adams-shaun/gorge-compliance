@@ -181,7 +181,15 @@ type filterAlt struct {
 	// counters are the counters every object the alternative matches must
 	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
 	counters []counterGate
-	test     func(f *cards.Face) bool
+	// commander is true when the alternative reads the positive IsCommander
+	// property. The inert carrier pool can never hold a card the seat would
+	// designate as its commander (Commander is no evergreen keyword, and a
+	// commander-shaped creature is no inert stand-in), so the attacks lane
+	// reaches the fixture picker on this flag instead of refusing a pool it
+	// cannot fill; only a lane that records the designation (commanderOK)
+	// reads the alternative as known at all.
+	commander bool
+	test      func(f *cards.Face) bool
 }
 
 // counterGate is a "counters_<OP><N>_<KIND>" filter property: the object must
@@ -351,17 +359,34 @@ func typeWordTest(head, w string) func(*cards.Face) bool {
 // would pick a carrier that does not meet the filter, so the alternative stays
 // unknown. The static start reads the first two with parseFilterStatic, and a
 // focus target the start places reads its state with parseFilterPlaced.
-func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false, false) }
+func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false, false, false) }
 
 // parseFilterStatic is parseFilter for the static start: it places counters and
 // may put the affected card on top of the library, so both markers are
 // understood.
-func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true, false) }
+func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true, false, false) }
 
 // parseFilterPlaced is parseFilter for a target the start places on the
 // battlefield: whether the placed permanent is tapped is then known from
 // StartSeat.Tapped, so the property is read rather than left unknown.
-func parseFilterPlaced(s string) []filterAlt { return parseFilterCounters(s, false, false, true) }
+func parseFilterPlaced(s string) []filterAlt {
+	return parseFilterCounters(s, false, false, true, false)
+}
+
+// parseFilterCommander is parseFilter for a lane that designates its carrier as
+// the seat's commander (StartSeat.Commanders): the IsCommander alternative is
+// read rather than left unknown, because the lane records the designation the
+// engine reads (Game.CommanderOf). Every other lane keeps the alternative
+// unknown: an undesignated permanent reads false there whatever its face says.
+func parseFilterCommander(s string) []filterAlt {
+	return parseFilterCounters(s, false, false, false, true)
+}
+
+// parseFilterStaticCommander is parseFilterStatic with the commander
+// alternative read, for a lane that designates its fixture.
+func parseFilterStaticCommander(s string) []filterAlt {
+	return parseFilterCounters(s, true, true, false, true)
+}
 
 // typeWordAny is a filter test any of the given type words (or creature
 // types) satisfies.
@@ -395,6 +420,17 @@ var filterProps = map[string]func(*cards.Face) bool{
 	"Outlaw": typeWordAny("Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"),
 	// CR 700.8: a party card is a Cleric, Rogue, Warrior, or Wizard.
 	"Party": typeWordAny("Cleric", "Rogue", "Warrior", "Wizard"),
+	// CR 903.3: each deck designates a legendary card as its commander, and
+	// the designated card must be a creature. The designation is an attribute
+	// of the card, not a printed characteristic (CR 903.3), which is why the
+	// engine reads Game.CommanderOf list membership rather than a keyword:
+	// the face test here only picks a carrier that could legally be
+	// designated, and the lane that reads this row must record the
+	// designation too (parseFilterCounters' commanderOK and
+	// designateCommander), or the trigger never fires. The Vehicle,
+	// Spacecraft and says-it-can-be variants of CR 903.3/903.3a stay
+	// unmatched: refusing those is the existing unknown-property behaviour.
+	"IsCommander": func(f *cards.Face) bool { return f.IsLegendary() && f.IsCreature() },
 }
 
 // pinMatches reports whether the pinned gorge can evaluate the filter
@@ -407,7 +443,13 @@ func pinMatches(p string) bool {
 	return len(effects.UnknownPredicates("Card."+p)) == 0
 }
 
-func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []filterAlt {
+// parseFilterCounters reads a ValidCard filter into its alternatives, with the
+// same opt-in gates its wrappers set: commanderOK is only true for a lane that
+// records the designation on its seat (designateCommander) — the engine answers
+// Card.IsCommander from Game.CommanderOf list membership, not from the face, so
+// a carrier a lane never designated reads false there and the alternative stays
+// unknown elsewhere, like the counter, library-top and tapped gates.
+func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK, commanderOK bool) []filterAlt {
 	var out []filterAlt
 	for _, raw := range strings.Split(s, ",") {
 		raw = strings.TrimSpace(raw)
@@ -476,6 +518,12 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 				if test, ok := filterProps[p]; ok {
 					if !pinMatches(p) {
 						a.known = false // never read a named property as a type word
+					}
+					if p == "IsCommander" {
+						a.commander = true
+						if !commanderOK {
+							a.known = false // only a lane that designates reads this row
+						}
 					}
 					tests = append(tests, test)
 					continue
@@ -595,7 +643,23 @@ func pickCarrier(reg *cards.Registry, b *certdeck.Builder, card string, keep fun
 // control it (an alternative with no controller: seat 0). extra further
 // narrows the carriers (a permanent for an enters trigger).
 func filterCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool) (name string, seat int) {
-	for _, a := range parseFilter(filter) {
+	return filterCarrierMode(reg, b, card, filter, extra, false)
+}
+
+// filterCarrierCommander is filterCarrier for a lane that designates the
+// carrier it picks as the seat's commander (StartSeat.Commanders,
+// designateCommander): the IsCommander alternative is read rather than left
+// unknown, because the lane records the designation the engine reads.
+func filterCarrierCommander(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool) (name string, seat int) {
+	return filterCarrierMode(reg, b, card, filter, extra, true)
+}
+
+func filterCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, commanderOK bool) (name string, seat int) {
+	parse := parseFilter
+	if commanderOK {
+		parse = parseFilterCommander
+	}
+	for _, a := range parse(filter) {
 		if !a.known || a.self {
 			continue
 		}
@@ -651,7 +715,7 @@ func zoneFixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter s
 }
 
 func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
-	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, nil)
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, nil, false)
 }
 
 // castableAlt reports whether a start can establish alternative a by casting
@@ -671,25 +735,29 @@ func castableAlt(a filterAlt) bool {
 // hand (entersFallback): an alternative the cast cannot establish
 // (castableAlt) is not answered, so the ":filter" refusal follows rather than
 // a start whose entering object never meets the trigger's filter.
-func castFixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
-	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, castableAlt)
+func castFixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield, commanderOK bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, castableAlt, commanderOK)
 }
 
 // fixtureCarrierMode is fixtureCarrierIn with an optional accept gate on the
 // fixture fallback: nil takes every understood, non-Self alternative, and
 // castFixtureCarrierIn passes castableAlt to drop the ones its cast cannot
 // establish.
-func fixtureCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool, accept func(filterAlt) bool) (name string, seat int) {
+func fixtureCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool, accept func(filterAlt) bool, commanderOK bool) (name string, seat int) {
 	// Both passes refuse a FieldBlock card on the battlefield: the inert
 	// carrier pool is not filtered for it, and an unattached Aura or a
 	// non-permanent listed there aborts the whole start file.
 	first := func(f *cards.Face) bool {
 		return (!onBattlefield || FieldBlock(f) == "") && (extra == nil || extra(f))
 	}
-	if n, s := filterCarrier(reg, b, card, filter, first); n != "" {
+	if n, s := filterCarrierMode(reg, b, card, filter, first, commanderOK); n != "" {
 		return n, s
 	}
-	for _, a := range parseFilterStatic(filter) {
+	parse := parseFilterStatic
+	if commanderOK {
+		parse = parseFilterStaticCommander
+	}
+	for _, a := range parse(filter) {
 		if !a.known || a.self || accept != nil && !accept(a) {
 			continue
 		}

@@ -69,6 +69,16 @@ type StartSeat struct {
 	Exile       []string `json:"exile,omitempty"`
 	Library     []string `json:"library,omitempty"`
 	Tapped      []string `json:"tapped,omitempty"`
+	// Commanders names the cards this seat designates as its commanders
+	// (CR 903.3: an attribute of the card itself, retained across zones). The
+	// card sits in Hand or Battlefield as any other: a start never names a
+	// card in Commanders without placing it. The designation is what the
+	// executor records into Game.Players[seat].Commanders, the list the
+	// engine reads for Card.IsCommander (Game.CommanderOf) — a printed-keyword
+	// read would never work, which is why the lanes that pick an IsCommander
+	// carrier (designateCommander) also carry the name here. In file order,
+	// never a map walk, so the emitted file is deterministic.
+	Commanders []string `json:"commanders,omitempty"`
 	// BackFace names battlefield cards that enter on their back face (a
 	// double-faced card's transformed side), as rules.StartSeat.BackFace.
 	BackFace []string       `json:"back_face,omitempty"`
