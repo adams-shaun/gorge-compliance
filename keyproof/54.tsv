@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5432bd43-e92c-464b-9ad2-3515f3042799	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-totem:f0t0:s1,f:xs:XP:sentinel-totem:f0t0:s1	-	-	-	d864b561c9cb	-	b5a4c8626e78	-	-	2026-11-24	xproof
 5432bd43-e92c-464b-9ad2-3515f3042799	f0/a0	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:sentinel-totem:f0t0:s1,f:xs:XP:sentinel-totem:f0t0:s1	-	-	-	d864b561c9cb	-	b5a4c8626e78	-	-	2026-11-24	xproof
 5432bd43-e92c-464b-9ad2-3515f3042799	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sentinel-totem:f0t0:s1,f:xs:XP:sentinel-totem:f0t0:s1	-	-	-	d864b561c9cb	-	b5a4c8626e78	-	-	2026-11-24	xproof
-5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	cast	cast	owed	harness:x=agree+f=decision_shape~missing-cost-costforage-answer-at-step	-	start	0	0	-	-	-	-	03d59e300ef0	-	4da4cfd16ff3	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness:x=agree+f=decision_shape~missing-cost-costforage-answer-at-step	-	start	0	0	-	-	-	-	03d59e300ef0	-	4da4cfd16ff3	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	cast	cast	owed	harness:x=agree+f=decision_shape~missing-cost-costforage-answer-at-step	-	start	0	0	-	-	-	-	ad6fb83576d3	-	4da4cfd16ff3	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness:x=agree+f=decision_shape~missing-cost-costforage-answer-at-step	-	start	0	0	-	-	-	-	ad6fb83576d3	-	4da4cfd16ff3	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t1	ChangesZone/Offspring	owed	harness:x=agree+f=decision_shape~missing-cost-costforage-answer-at-step	-	start	0	0	-	-	-	-	03d59e300ef0	-	4da4cfd16ff3	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	ae86f6029288	-	3024cb56266f	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	d864b561c9cb	-	3024cb56266f	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54b3ccdc-e5b0-44d9-bc81-a296fc5dc005	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rosemane-centaur:cast:s1,f:xs:XP:rosemane-centaur:cast:s1	-	-	-	d864b561c9cb	-	dc6cda715c1f	-	-	2026-11-24	xproof
 54b44499-398b-47ad-b790-bd5b5994d1a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:village-pillagers:f0t0:s1,f:xs:XP:village-pillagers:f0t0:s1	-	-	-	8c0bd19283bb	-	f0d2ae46caae	-	-	2026-11-24	xproof
 54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:village-pillagers:f0t0:s1,f:xs:XP:village-pillagers:f0t0:s1	-	-	-	8c0bd19283bb	-	f0d2ae46caae	-	-	2026-11-24	xproof
-54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	03d59e300ef0	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	ad6fb83576d3	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 54b5e429-7a44-480d-bea4-4f8eeb7449b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54b5e429-7a44-480d-bea4-4f8eeb7449b5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54bd7b7c-4052-437d-b2e4-311339e8e16e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
