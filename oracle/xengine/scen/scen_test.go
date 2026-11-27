@@ -3310,7 +3310,12 @@ func TestStarttappedtarget(t *testing.T) {
 //
 // Cradle to Grave is the residual: its target must have entered this turn, and
 // a setup permanent or token is placed before turn 1 and does not count, so it
-// keeps a named refusal instead of a start the replay would refuse.
+// keeps a named refusal instead of a start the replay would refuse. Commander's
+// Plate's equip and Seasinger's activation name a Forge predicate under the
+// Creature head (IsCommander, ControllerControlsIsland), not a creature
+// subtype: the changeling shortcut must not match them, so both keep the
+// develop baseline's named start:needs-target instead of a start the replay
+// refuses as start-not-exercised.
 func TestScenTargetShapes(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, tc := range []struct {
@@ -3374,6 +3379,8 @@ func TestScenTargetShapes(t *testing.T) {
 			}
 		}},
 		{card: "Cradle to Grave", key: "cast", reason: "start:target-condition:this-turn-entered"},
+		{card: "Commander's Plate", key: "f0/a0", reason: "start:needs-target"},
+		{card: "Seasinger", key: "f0/a0", reason: "start:needs-target"},
 	} {
 		t.Run(tc.card, func(t *testing.T) {
 			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
@@ -3391,6 +3398,41 @@ func TestScenTargetShapes(t *testing.T) {
 			}
 			tc.check(t, res.Start)
 		})
+	}
+}
+
+// TestScenTypeWordOnlyMatchesRealCreatureSubtypes: the changeling shortcut is
+// CR 702.73a ("every creature type"), so it applies to a real creature subtype
+// (Blinkmoth) and not to a Forge filter predicate spelled under the Creature
+// head (IsCommander, ControllerControlsIsland). Treating the latter as a
+// subtype is how the generator once wrote a start with a changeling standing in
+// for "target creature you control that is your commander" or "whose controller
+// controls an Island", which the replay then refused as start-not-exercised.
+func TestScenTypeWordOnlyMatchesRealCreatureSubtypes(t *testing.T) {
+	reg, _ := testBuilder(t)
+	automaton := permanents(t, reg, []string{"Universal Automaton"})[0]
+	if !typeWordTest("Creature", "Blinkmoth")(automaton) {
+		t.Fatal("a changeling does not meet the real creature subtype Blinkmoth")
+	}
+	for _, pred := range []string{"IsCommander", "ControllerControlsIsland"} {
+		if typeWordTest("Creature", pred)(automaton) {
+			t.Errorf("a changeling meets the filter predicate %q as if it were a creature subtype", pred)
+		}
+	}
+}
+
+// TestScenTargetValidOpponentKeepsRefusal: a TargetValidTargeting$ "Opponent"
+// names the bait spell's target as the focus seat's opponent, but the start
+// document carries only the boolean BaitTargetPlayer and its bait always
+// targets the focus seat. Rather than write a start that targets the wrong
+// player, the alternative stays unknown and the play keeps its named refusal.
+func TestScenTargetValidOpponentKeepsRefusal(t *testing.T) {
+	alts := parseTargetValid("Opponent")
+	if len(alts) != 1 || alts[0].known {
+		t.Fatalf("parseTargetValid(Opponent) = %+v, want one unknown alternative", alts)
+	}
+	if _, ok := baitPlayerSeat([]stackTgt{{needsTarget: true, valid: alts}}, 0); ok {
+		t.Fatal("an Opponent restriction is served by a bait that targets the focus seat")
 	}
 }
 

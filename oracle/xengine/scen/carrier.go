@@ -324,25 +324,18 @@ func typeWord(w string) bool {
 	return true
 }
 
-// cardTypeSet are the card types and supertypes; any other type word in a
-// filter is a subtype. A changeling (or Mistform Ultimus's every-creature-type
-// CDA) is every creature type (CR 702.73a), so it meets a creature-subtype
-// requirement even though its Types list does not materialise every subtype.
-var cardTypeSet = map[string]bool{
-	"artifact": true, "battle": true, "creature": true, "enchantment": true,
-	"instant": true, "kindred": true, "land": true, "planeswalker": true,
-	"sorcery": true, "tribal": true, "basic": true, "legendary": true,
-	"ongoing": true, "snow": true, "world": true, "card": true,
-	"permanent": true, "spell": true, "player": true, "token": true,
-	"emblem": true, "plane": true, "phenomenon": true, "scheme": true,
-	"vanguard": true, "dungeon": true,
-}
-
 // typeWordTest is the filter test for one type word under a filter head. A
-// creature subtype is also met by a changeling or an every-creature-types CDA;
-// a card type, supertype or noncreature subtype is not.
+// creature subtype is also met by a changeling or an every-creature-types CDA
+// (CR 702.73a); a card type, supertype or noncreature subtype is not.
+//
+// "Is a creature subtype" is the engine's positive CR 205.3m vocabulary
+// (effects.CreatureTypeWords), not "any capitalised word a filter spells that
+// is not a card type". Forge filters also spell predicates as capitalised words
+// (Commander's Plate's Creature.IsCommander, Seasinger's
+// Creature.ControllerControlsIsland), and those are not subtypes: a changeling
+// must not stand in for one, or the start places a target the engine rejects.
 func typeWordTest(head, w string) func(*cards.Face) bool {
-	subtype := strings.EqualFold(head, "Creature") && !cardTypeSet[strings.ToLower(w)]
+	subtype := strings.EqualFold(head, "Creature") && effects.CreatureTypeWords(w)
 	return func(f *cards.Face) bool {
 		if f.HasTypeWord(w) {
 			return true

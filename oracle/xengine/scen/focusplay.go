@@ -454,9 +454,12 @@ type stackTgt struct {
 }
 
 // validTgt is one alternative of a TargetValidTargeting$ restriction: a player
-// the targeted spell must target (side 1: the focus seat, -1: its opponent, 0:
-// either), or a permanent filter its target must meet. any is a plain "Any"
-// restriction, which a player or permanent target both meet.
+// the targeted spell must target (side 1: the focus seat), or a permanent
+// filter its target must meet. any is a plain "Any" restriction, which a player
+// or permanent target both meet. side -1 (the opponent) is never produced: the
+// start carries only the boolean BaitTargetPlayer and its bait always targets
+// the focus seat, so an "Opponent" alternative stays unknown and the play keeps
+// its refusal rather than writing a start that targets the wrong player.
 type validTgt struct {
 	player bool
 	side   int
@@ -466,9 +469,10 @@ type validTgt struct {
 }
 
 // parseTargetValid reads a TargetValidTargeting$ value: a comma list of "You",
-// "Player", "Opponent", "Any", or a ValidTgts-style permanent filter
+// "Player", "Any", or a ValidTgts-style permanent filter
 // ("Permanent.YouCtrl+inRealZoneBattlefield"). An alternative no reader
-// understands stays unknown, so no bait is picked for it blindly.
+// understands stays unknown, so no bait is picked for it blindly; that includes
+// "Opponent", which no start field can name today.
 func parseTargetValid(s string) []validTgt {
 	var out []validTgt
 	for _, raw := range strings.Split(s, ",") {
@@ -482,7 +486,7 @@ func parseTargetValid(s string) []validTgt {
 			out = append(out, validTgt{player: true, side: 1, known: true})
 			continue
 		case "opponent", "opponents":
-			out = append(out, validTgt{player: true, side: -1, known: true})
+			out = append(out, validTgt{})
 			continue
 		case "player":
 			out = append(out, validTgt{player: true, side: 0, known: true})
@@ -735,6 +739,16 @@ func altMet(n altNeed, a filterAlt, f *cards.Face, mine bool, source string, tap
 	return f.IsPermanent()
 }
 
+// placeRef names one placed permanent for the TargetUnique bookkeeping: a
+// battlefield card by its index, or a minted token by its index in the seat's
+// Tokens list. The token flag keeps the two index spaces from colliding, and a
+// token index is stable however many cards later placements append.
+type placeRef struct {
+	side  int
+	token bool
+	idx   int
+}
+
 // unmet is the first target of reqs the placed board cannot meet, with the
 // refusal its absence is when no permanent could be placed to meet it. A
 // target of n permanents (Switcheroo's "two target creatures") needs n
@@ -745,10 +759,10 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq, source st
 	if seat == 1 {
 		mine, theirs = theirs, mine
 	}
-	taken := map[[2]int]bool{} // {side, index} of a permanent an earlier target took
+	taken := map[placeRef]bool{} // a permanent an earlier target took
 	for i := range reqs {
 		ok, combat := false, false
-		var took [][2]int
+		var took []placeRef
 		for k, alt := range reqs[i].alts {
 			n := parseAlt(alt)
 			if !n.combat && !permanentTarget(reg, alt) {
@@ -757,37 +771,37 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq, source st
 			}
 			combat = combat || n.combat
 			filter, _ := reqs[i].altFilter(k)
-			var met [][2]int
+			var met []placeRef
 			if n.combat && k < len(reqs[i].raw) {
 				// a creature in combat: the start's scripted combat (lineMet)
-				if side, j, found := lineMet(reg, f, seat, reqs[i].raw[k]); found && !(reqs[i].unique && taken[[2]int{side, j}]) {
-					met = append(met, [2]int{side, j})
+				if side, j, found := lineMet(reg, f, seat, reqs[i].raw[k]); found && !(reqs[i].unique && taken[placeRef{side: side, idx: j}]) {
+					met = append(met, placeRef{side: side, idx: j})
 				}
 			}
 			for side, sd := range []*StartSeat{mine, theirs} {
 				tapped := sd.TappedCopies()
 				for j, name := range sd.Battlefield {
-					if reqs[i].unique && taken[[2]int{side, j}] {
+					if reqs[i].unique && taken[placeRef{side: side, idx: j}] {
 						continue
 					}
 					if c, found := reg.Lookup(name); found && len(c.Faces) > 0 && altMet(n, filter, c.Faces[0], side == 0, source, tapped[j], false) {
-						met = append(met, [2]int{side, j})
+						met = append(met, placeRef{side: side, idx: j})
 					}
 				}
 				// a minted token is a placed permanent too, and a "target
 				// token" filter (Replicator, Dogged Hunter) or a token's type
-				// is met only by one. Its index follows the battlefield so the
-				// TargetUnique bookkeeping cannot collide with a card.
+				// is met only by one. Its own index space cannot collide with
+				// a card's and does not shift as later placements append.
 				for j, tok := range sd.Tokens {
-					idx := len(sd.Battlefield) + j
-					if reqs[i].unique && taken[[2]int{side, idx}] {
+					ref := placeRef{side: side, token: true, idx: j}
+					if reqs[i].unique && taken[ref] {
 						continue
 					}
 					tc, found := reg.Tokens[tok.Script]
 					if !found || len(tc.Faces) == 0 || !altMet(n, filter, tc.Faces[0], side == 0, source, tok.Tapped, true) {
 						continue
 					}
-					met = append(met, [2]int{side, idx})
+					met = append(met, ref)
 				}
 			}
 			if len(met) >= max(reqs[i].n, 1) {
@@ -1230,9 +1244,11 @@ func baitPlayerAllows(raw string, targetSeat, baitSeat int) bool {
 }
 
 // baitPlayerSeat is the absolute seat a player-target bait must name to meet
-// every required TargetValidTargeting$ alternative: 1 is the focus seat, -1
-// its opponent, 0 either. ok is false when a restriction has no player
-// alternative, or two restrictions name different players.
+// every required TargetValidTargeting$ alternative. Only the focus seat is
+// nameable: the start field is the boolean BaitTargetPlayer, so an "Opponent"
+// alternative arrives here unknown and fails the restriction below. ok is false
+// when a restriction has no player alternative, or two restrictions name
+// different players.
 func baitPlayerSeat(sts []stackTgt, focus int) (seat int, ok bool) {
 	seat = -1
 	for _, st := range sts {
@@ -1245,9 +1261,6 @@ func baitPlayerSeat(sts []stackTgt, focus int) (seat int, ok bool) {
 				continue
 			}
 			s := focus
-			if v.player && v.side < 0 {
-				s = 1 - focus // "targets an opponent" names the bait seat
-			}
 			if seat >= 0 && seat != s {
 				continue
 			}

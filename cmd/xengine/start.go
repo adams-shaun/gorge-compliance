@@ -318,6 +318,12 @@ func (f *startFile) focusOf() (game.Focus, error) {
 	if out.Seat < 0 || out.Seat > 1 {
 		return out, fmt.Errorf("focus seat %d: no seat lists %q", out.Seat, f.Card)
 	}
+	if out.BaitTargetPlayer && out.Bait == "" {
+		// the flag says the bait spell's own target is the focus player; with
+		// no bait spell there is nothing to target, and the focus bot would
+		// answer an unrelated target ask with the focus seat
+		return out, fmt.Errorf("focus baitTargetPlayer needs a bait spell")
+	}
 	return out, nil
 }
 

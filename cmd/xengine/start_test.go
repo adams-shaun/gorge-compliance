@@ -522,6 +522,29 @@ func TestStartFocusTimes(t *testing.T) {
 	}
 }
 
+// TestStartBaitTargetPlayerNeedsBait: baitTargetPlayer is independently
+// settable in a start document, and it says the bait spell's own target is the
+// focus player. Without a bait spell there is no such target ask, and the focus
+// bot would answer an unrelated one with the focus seat, so focusOf refuses.
+func TestStartBaitTargetPlayerNeedsBait(t *testing.T) {
+	t.Parallel()
+	dir := t.TempDir()
+	p := filepath.Join(dir, "f.json")
+	body := `{"format":"xproof-start-1","card":"Cori-Steel Cutter","key":"f0/t0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"hand":["Memnite","Memnite"],"battlefield":["Cori-Steel Cutter"]},"p1":{}},"filler":"basics","seeds":1,` +
+		`"focus":{"seat":0,"card":"Memnite","kind":"cast","ability":0,"baitTargetPlayer":true}}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := f.focusOf(); err == nil || !strings.Contains(err.Error(), "baitTargetPlayer") {
+		t.Fatalf("err %v, want a refusal naming baitTargetPlayer", err)
+	}
+}
+
 // TestStartRefusesUnofferedFocus: a start whose focus seat is never offered the
 // focus play is refused, not written. Burning Oil targets an attacking or
 // blocking creature and nothing attacks at main 1, so the cast is never offered
@@ -970,13 +993,18 @@ func TestStartTargetShapesAreExercised(t *testing.T) {
 // start-not-exercised. Cradle to Grave needs a creature that entered this turn,
 // which a setup permanent or token does not (it is placed before turn 1); Wash
 // Away's default cast mode needs a spell not cast from its owner's hand, and its
-// cleave mode is not the mode the bot takes.
+// cleave mode is not the mode the bot takes. Commander's Plate and Seasinger
+// name Forge predicates under the Creature head (IsCommander,
+// ControllerControlsIsland), which are not creature subtypes: the changeling
+// shortcut must not write a start whose target the engine rejects.
 func TestStartUnsupportedTargetKeepsReason(t *testing.T) {
 	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key, reason string }{
 		{"Cradle to Grave", "cast", "start:target-condition:this-turn-entered"},
 		{"Wash Away", "cast", "start:needs-stack-target"},
+		{"Commander's Plate", "f0/a0", "start:needs-target"},
+		{"Seasinger", "f0/a0", "start:needs-target"},
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
