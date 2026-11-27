@@ -522,6 +522,29 @@ func TestStartFocusTimes(t *testing.T) {
 	}
 }
 
+// TestStartBaitTargetPlayerNeedsBait: baitTargetPlayer is independently
+// settable in a start document, and it says the bait spell's own target is the
+// focus player. Without a bait spell there is no such target ask, and the focus
+// bot would answer an unrelated one with the focus seat, so focusOf refuses.
+func TestStartBaitTargetPlayerNeedsBait(t *testing.T) {
+	t.Parallel()
+	dir := t.TempDir()
+	p := filepath.Join(dir, "f.json")
+	body := `{"format":"xproof-start-1","card":"Cori-Steel Cutter","key":"f0/t0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"hand":["Memnite","Memnite"],"battlefield":["Cori-Steel Cutter"]},"p1":{}},"filler":"basics","seeds":1,` +
+		`"focus":{"seat":0,"card":"Memnite","kind":"cast","ability":0,"baitTargetPlayer":true}}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := f.focusOf(); err == nil || !strings.Contains(err.Error(), "baitTargetPlayer") {
+		t.Fatalf("err %v, want a refusal naming baitTargetPlayer", err)
+	}
+}
+
 // TestStartRefusesUnofferedFocus: a start whose focus seat is never offered the
 // focus play is refused, not written. Burning Oil targets an attacking or
 // blocking creature and nothing attacks at main 1, so the cast is never offered
@@ -937,6 +960,61 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 		{"Daraja Griffin", "f0/a0"}, // Sac<1/CARDNAME>: destroy target black creature
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartTargetShapesAreExercised: the focus-target shapes that used to
+// refuse as start:needs-target because the placement search only knew a card
+// of a permanent type: a token target (Replicator, Dogged Hunter), a creature
+// subtype no card in the corpus holds (Blinkmoth Nexus, met by a changeling), a
+// six-target spell (Hex), and a monocolored permanent (Vanishing Verse). A
+// TargetValidTargeting$ restriction that needs the bait spell itself to have a
+// target is the stack-target sibling, covered by the hard-card census.
+func TestStartTargetShapesAreExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Replicator", "f0/a0"},        // target token you control
+		{"Dogged Hunter", "f0/a0"},     // target creature token
+		{"Blinkmoth Nexus", "f0/a2"},   // target Blinkmoth creature (a changeling)
+		{"Hex", "cast"},                // six target creatures
+		{"Vanishing Verse", "cast"},    // target monocolored permanent
+		{"Avoid Fate", "cast"},         // target spell that targets a permanent you control
+		{"Cerulean Drake", "f0/a0"},    // counter target spell that targets you
+		{"Hydromorph Gull", "f0/a0"},   // counter target spell that targets a creature you control
+		{"Ring of Immortals", "f0/a0"}, // counter target spell that targets a permanent you control
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartUnsupportedTargetKeepsReason: a target shape no start can place keeps
+// a specific refusal instead of a written start the replay would refuse as
+// start-not-exercised. Cradle to Grave needs a creature that entered this turn,
+// which a setup permanent or token does not (it is placed before turn 1); Wash
+// Away's default cast mode needs a spell not cast from its owner's hand, and its
+// cleave mode is not the mode the bot takes. Commander's Plate and Seasinger
+// name Forge predicates under the Creature head (IsCommander,
+// ControllerControlsIsland), which are not creature subtypes: the changeling
+// shortcut must not write a start whose target the engine rejects.
+func TestStartUnsupportedTargetKeepsReason(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key, reason string }{
+		{"Cradle to Grave", "cast", "start:target-condition:this-turn-entered"},
+		{"Wash Away", "cast", "start:needs-stack-target"},
+		{"Commander's Plate", "f0/a0", "start:needs-target"},
+		{"Seasinger", "f0/a0", "start:needs-target"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
+			}
+		})
 	}
 }
 
