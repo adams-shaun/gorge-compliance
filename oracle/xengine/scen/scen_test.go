@@ -3795,7 +3795,12 @@ func countAmong(xs []string, name string) int {
 // The Soul Stone exile from activated abilities whose starts do not lower
 // (steps-needed:cost:Exile), and Rasputin Dreamweaver's personal counters
 // need a battlefield placement the start gate refuses (steps-needed:cost:
-// SubCounter).
+// SubCounter). The gate's own read then sweeps the finished start itself
+// (startGateRefusal): Rasputin's cast and upkeep-trigger keys name the
+// startedTheTurnUntapped word the gate stamps on every untapped permanent,
+// from hand included (start:started-turn-untapped), and Vitaspore Thallid's
+// spore ability places a permanent whose upkeep trigger is mandatory
+// (start:upkeep-trigger), starts play lowers to zero items on both seeds.
 func TestScenStepsNeededCostClass(t *testing.T) {
 	reg, b := testBuilder(t)
 	// counterOn is the one counter of kind the start places, proved bindable:
@@ -3931,6 +3936,16 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 		// the cost refusal rather than a start play writes no item for.
 		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter", nil},
 		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter", nil},
+		// The same gate read, whole-start: every lane that emits a start is
+		// swept through it (startGateRefusal), so a card naming the
+		// startedTheTurnUntapped word cannot reach PathStart through a lane
+		// with no per-lane guard - cast from hand included, where the gate's
+		// gameMentions still stamps the field on every untapped land - and a
+		// permanent with a mandatory upkeep trigger is named, not emitted.
+		// Play lowers each of these starts to zero items on both seeds.
+		{"Rasputin Dreamweaver", "cast", "start:started-turn-untapped", nil},
+		{"Rasputin Dreamweaver", "f0/t0", "start:started-turn-untapped", nil},
+		{"Vitaspore Thallid", "f0/a1", "start:upkeep-trigger", nil},
 	} {
 		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 		if err != nil {

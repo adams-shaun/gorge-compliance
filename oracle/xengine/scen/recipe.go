@@ -955,7 +955,81 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if why := counterBindingRefusal(f); why != "" {
 		return refuse(why)
 	}
+	if why := startGateRefusal(reg, f); why != "" {
+		return refuse(why)
+	}
 	return Result{Path: PathStart, Start: f}, nil
+}
+
+// startGateRefusal is the finished start's read against the lowering's own
+// start gate, or "": every battlefield permanent (card on its placed face,
+// or setup token) is read through lower.StartCardRefusal, so a card carrying
+// a mandatory upkeep/draw Phase trigger that captureStart refuses is named
+// before the start is emitted (Vitaspore Thallid f0/a1: its spore upkeep is
+// mandatory, and play lowers that start to no item); and every card the start
+// places in any zone is read for the startedTheTurnUntapped filter word,
+// because the gate's gameMentions spans all zones and the turn-change fold
+// stamps that field on every untapped permanent once any card in the game
+// names the word (Rasputin Dreamweaver cast: the card sits in hand for the
+// focus cast, and its own text names the word, so its start's untapped Plains
+// carry the live field and captureStart refuses). The mention read is the
+// gate's, not a hand-built list of shapes, so the next card naming the word
+// cannot slip past on a lane no per-lane guard covered. The mandatory-trigger
+// half reads the battlefield only, exactly as captureAt refuses a phase
+// trigger only for a battlefield object: a hand card with an upkeep trigger
+// never fires it. The mention half is skipped when the start has no untapped
+// battlefield object, since the field is refused only where its stamp is set.
+func startGateRefusal(reg *cards.Registry, f *StartFile) string {
+	untapped := false
+	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		for _, name := range sd.Battlefield {
+			if !slices.Contains(sd.Tapped, name) {
+				untapped = true
+			}
+		}
+		for _, tok := range sd.Tokens {
+			if !tok.Tapped {
+				untapped = true
+			}
+		}
+	}
+	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		for _, name := range sd.Battlefield {
+			c, ok := reg.Lookup(name)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			face := c.Faces[0]
+			if slices.Contains(sd.BackFace, name) && len(c.Faces) > 1 {
+				face = c.Faces[1] // the placed face: captureStart reads o.Face()
+			}
+			if why := lower.StartCardRefusal(c, face); why != "" {
+				return why
+			}
+		}
+		for _, tok := range sd.Tokens {
+			c, ok := reg.Token(tok.Script)
+			if !ok || c == nil || len(c.Faces) == 0 {
+				continue
+			}
+			if why := lower.StartCardRefusal(c, c.Faces[0]); why != "" {
+				return why
+			}
+		}
+	}
+	if !untapped {
+		return ""
+	}
+	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		for _, names := range [][]string{sd.Battlefield, sd.Hand, sd.Library, sd.Graveyard, sd.Exile} {
+			for _, name := range names {
+				if c, ok := reg.Lookup(name); ok && lower.StartTurnStampMention(c) {
+					return "start:started-turn-untapped"
+				}
+			}
+		}
+	}
+	return ""
 }
 
 // counterBindingRefusal is why a start's counters cannot be restated, or "":

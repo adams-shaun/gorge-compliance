@@ -781,7 +781,10 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 // own -1/-1 counter, an entry counter setup cannot restate), and the dh1
 // round found Rasputin Dreamweaver's personal counter arm doing the same
 // (a mandatory upkeep and the startedTheTurnUntapped field), so each card is
-// played through the cmd/xengine path here.
+// played through the cmd/xengine path here. The refusal list carries the
+// whole-start gate sweep's named refusals (scen.startGateRefusal): starts on
+// the unguarded cast and trigger lanes for the same two Rasputin shapes, and
+// Vitaspore Thallid's spore ability placing a mandatory-upkeep permanent.
 func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
 	t.Parallel()
 	reg, b := certdeckBuilder(t)
@@ -816,7 +819,13 @@ func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
 	// colour ask, The Soul Stone's upkeep trigger), Moxite Refinery removes
 	// a wildcard counter kind, and Rasputin Dreamweaver's personal counters
 	// need a battlefield placement the start gate refuses (its upkeep trigger
-	// is mandatory and its startedTheTurnUntapped word is live).
+	// is mandatory and its startedTheTurnUntapped word is live). The same gate
+	// now sweeps every finished start (scen.startGateRefusal), so the lanes
+	// that placed no guard there name it too instead of emitting a start play
+	// lowers to zero items: Rasputin's cast and upkeep-trigger keys carry the
+	// startedTheTurnUntapped word even from hand (the gate's gameMentions
+	// stamps the field on every untapped land), and Vitaspore Thallid's spore
+	// ability places a permanent whose upkeep trigger is mandatory.
 	for _, c := range []struct{ card, key, reason string }{
 		{"Sage of Fables", "f0/a0", "steps-needed:cost:SubCounter"},
 		{"Moxite Refinery", "f0/a0", "steps-needed:cost:SubCounter"},
@@ -824,6 +833,9 @@ func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
 		{"The Soul Stone", "f0/a1", "steps-needed:cost:Exile"},
 		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter"},
 		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter"},
+		{"Rasputin Dreamweaver", "cast", "start:started-turn-untapped"},
+		{"Rasputin Dreamweaver", "f0/t0", "start:started-turn-untapped"},
+		{"Vitaspore Thallid", "f0/a1", "start:upkeep-trigger"},
 	} {
 		t.Run(c.card+" refused", func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})

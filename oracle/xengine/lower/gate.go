@@ -267,26 +267,94 @@ func mandatoryPhaseTriggered(f *cards.Face) bool {
 	return false
 }
 
+// mandatoryUpkeepRemovesSelf reports that every mandatory beginning-of-upkeep
+// or draw Phase trigger of f takes the permanent itself off the battlefield,
+// so the setup drive resolves them and the card is gone before the cut: the
+// battlefield permanent carrying the live phase trigger that captureAt
+// refuses never stands in the cut, and play lowers the start (Earthlink,
+// Thelon's Chant: "sacrifice CARDNAME unless you pay X", the echo population
+// gorge's own UnlessCost tests pin as a Sacrifice with no SacValid$ or
+// Defined$). A mandatory trigger whose effect leaves the card standing
+// (Vitaspore Thallid's spore counter) is the start gate's refusal, and
+// several mandatory triggers must all remove the card: the one that leaves it
+// standing is in the cut.
+func mandatoryUpkeepRemovesSelf(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	saw := false
+	for i := range f.Triggers {
+		t := &f.Triggers[i]
+		if !isUpkeepOrDrawPhase(t) || optionalPhaseAsk(f, t) {
+			continue
+		}
+		saw = true
+		if !triggerRemovesSelf(t) {
+			return false
+		}
+	}
+	return saw
+}
+
+// triggerRemovesSelf is whether a trigger's compiled Execute takes its own
+// card off the battlefield: an echo Sacrifice naming no other kind, target or
+// bearer, a Destroy of the card itself, or a ChangeZone moving it off the
+// battlefield. An uncompilable Execute is no removal: the refusal stands.
+func triggerRemovesSelf(t *cards.Trigger) bool {
+	e := t.Effect
+	if e == nil {
+		return false
+	}
+	selfish := func() bool {
+		d := e.Params["Defined"]
+		return d == "" || d == "Self" || d == "TriggeredCard"
+	}
+	switch e.API {
+	case "Sacrifice":
+		return e.Params["SacValid"] == "" && e.Params["Target"] == "" && selfish()
+	case "Destroy":
+		return selfish()
+	case "ChangeZone":
+		return selfish() && e.Params["Origin"] == "Battlefield" && e.Params["Destination"] != "Battlefield"
+	}
+	return false
+}
+
 // StartCardRefusal is why a scripted start cannot place c's face f on the
-// battlefield, or "": a mandatory beginning-of-upkeep or draw trigger (the
-// setup drive would resolve it before the cut, and a start has no answer
-// saying it already resolved), or a card naming the startedTheTurnUntapped
-// filter word (the turn-change fold stamps that field on every untapped
-// battlefield object, and the gate refuses it once any card in the game names
-// the word, which every start's untapped lands then are). It is the start
-// gate's own read, so a cost planner can keep its named refusal instead of
-// emitting a start the lowering refuses.
+// battlefield, or "": a mandatory beginning-of-upkeep or draw trigger that
+// leaves the card standing at the cut (the setup drive would resolve it
+// before the cut, and a start has no answer saying it already resolved —
+// mandatoryUpkeepRemovesSelf excuses the echo whose own trigger sacrifices
+// the card before the first main), or a card naming the
+// startedTheTurnUntapped filter word (the turn-change fold stamps that field
+// on every untapped battlefield object, and the gate refuses it once any card
+// in the game names the word, which every start's untapped lands then are).
+// It is the start gate's own read, so a cost planner can keep its named
+// refusal instead of emitting a start the lowering refuses.
 func StartCardRefusal(c *cards.Card, f *cards.Face) string {
 	if f == nil {
 		return "start:no-face"
 	}
-	if mandatoryPhaseTriggered(f) {
+	if mandatoryPhaseTriggered(f) && !mandatoryUpkeepRemovesSelf(f) {
 		return "start:upkeep-trigger"
 	}
-	if cardMentions(c, "startedTheTurnUntapped") {
+	if StartTurnStampMention(c) {
 		return "start:started-turn-untapped"
 	}
 	return ""
+}
+
+// StartTurnStampMention is the mention half of StartCardRefusal: true when c
+// names the startedTheTurnUntapped filter word. captureAt reads that word
+// across the whole game (walker.gameMentions scans every object, in every
+// zone), and the turn-change fold stamps the field on every untapped
+// battlefield object once any card names it, so a card the start places in a
+// hand, library or graveyard stamps the live field exactly as one on the
+// battlefield does. The generator reads it for the start's off-battlefield
+// placements, whose mandatory-trigger half StartCardRefusal would over-refuse
+// (captureAt refuses a phase trigger only for a battlefield object).
+func StartTurnStampMention(c *cards.Card) bool {
+	return cardMentions(c, "startedTheTurnUntapped")
 }
 
 // captureAt is capture with the scripted-start distinction: start is true when
