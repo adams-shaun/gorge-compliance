@@ -946,7 +946,7 @@ func placeBearer(p0, p1 *StartSeat, card, bearer string, bs int) {
 }
 
 // attachKeyAura gives the key's own Aura, which p0 placed on the battlefield
-// bare, a vanilla bearer its Enchant keyword takes (attachBearer) and attaches
+// bare, an inert bearer its Enchant keyword takes (attachBearer) and attaches
 // it (StartAttach): a bare Aura is refused (FieldBlock aura-unattached), and
 // the bearer is inert, so the start's focus play stays the only offer. False,
 // leaving both seats untouched, when the keyword names no permanent a carrier
@@ -960,9 +960,9 @@ func attachKeyAura(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 	return true
 }
 
-// attachBearer is the most inert creature the Aura's Enchant keyword takes and
-// the seat that must control it, or "" when the keyword names no permanent a
-// carrier can be (a player).
+// attachBearer is the most inert permanent the Aura's Enchant keyword takes (a
+// carrier creature, else a basic land) and the seat that must control it, or
+// "" when the keyword names no permanent a start can place (a player).
 func attachBearer(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face) (string, int) {
 	return attachBearerWhere(reg, b, card, face, nil)
 }
@@ -974,9 +974,37 @@ func attachBearerWhere(reg *cards.Registry, b *certdeck.Builder, card string, fa
 	if !ok {
 		return "", 0
 	}
-	return filterCarrier(reg, b, card, strings.Join(req.raw, ","), func(c *cards.Face) bool {
+	filter := strings.Join(req.raw, ",")
+	fits := func(c *cards.Face) bool {
 		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && (keep == nil || keep(c))
-	})
+	}
+	if n, seat := filterCarrier(reg, b, card, filter, fits); n != "" {
+		return n, seat
+	}
+	// A keyword that takes no carrier creature (Enchant:Forest, Enchant:land
+	// you control) still takes a permanent a start file can place: a basic
+	// land. The carrier pool holds no land (inertCarrier excludes one), so the
+	// fallback walks the basics the filter names, in the fixed basic order,
+	// and takes the first that fits; it starts at Plains rather than a
+	// colour-matched basic, since the bearer is inert for the focus event (it
+	// can still tap for mana). A player or a planeswalker has no such inert
+	// basic here and stays a refusal.
+	for _, a := range parseFilter(filter) {
+		if !a.known || a.self {
+			continue
+		}
+		for _, basic := range []string{"Plains", "Island", "Swamp", "Mountain", "Forest"} {
+			c, ok := reg.Lookup(basic)
+			if !ok || len(c.Faces) == 0 || !fits(c.Faces[0]) || !a.matches(c.Faces[0], false) {
+				continue
+			}
+			if a.ctrl == ctrlOpp {
+				return basic, 1
+			}
+			return basic, 0
+		}
+	}
+	return "", 0
 }
 
 // attackingBearer is a creature an Aura's Enchant keyword takes that attacks

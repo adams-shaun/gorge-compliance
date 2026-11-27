@@ -909,6 +909,58 @@ func TestStartAttachedBearerSeat(t *testing.T) {
 	}
 }
 
+// TestScenKeyAuraLandBearer: an Aura whose Enchant keyword takes no carrier
+// creature (Genju of the Cedars' Enchant:Forest, Pooling Venom's Enchant:land)
+// gets the basic land it can legally enchant as its StartAttach bearer. The
+// land is inert for the focus event (the Aura's own activation; it can still
+// tap for mana), and the start lists it on the Aura's controller's battlefield;
+// every aura-unattached refusal of this shape becomes a start, the same way the
+// creature-Aura shape does.
+func TestScenKeyAuraLandBearer(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, bearer string }{
+		{"Genju of the Cedars", "Forest"},   // Enchant:Forest
+		{"Genju of the Spires", "Mountain"}, // Enchant:Mountain
+		{"Pooling Venom", "Plains"},         // Enchant:land: the first basic the filter takes
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, "f0/a0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if len(f.Setup.P0.Attach) != 1 || f.Setup.P0.Attach[0].Card != r.card || f.Setup.P0.Attach[0].To != r.bearer {
+				t.Fatalf("p0 attach %+v, want %s on %s", f.Setup.P0.Attach, r.card, r.bearer)
+			}
+			if !slices.Contains(f.Setup.P0.Battlefield, r.bearer) {
+				t.Errorf("p0 battlefield %v does not hold the bearer %s", f.Setup.P0.Battlefield, r.bearer)
+			}
+			if f.Focus == nil || f.Focus.Card != r.card || f.Focus.Kind != "ability" {
+				t.Errorf("focus %+v, want the Aura's ability", f.Focus)
+			}
+			if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestScenAuraLandBearerRefused: an Aura whose Enchant keyword names a player
+// (no card can be its bearer) or a planeswalker (the carrier pool has no inert
+// one) keeps the exact refusal, and a land Aura whose own upkeep cost the start
+// cannot pay names that cost rather than aura-unattached.
+func TestScenAuraLandBearerRefused(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Curse of Stalked Prey", key: "f0/t0", reason: "battlefield:aura-unattached"}, // Enchant:Player
+		{card: "Vivien's Talent", key: "f0/t0", reason: "battlefield:aura-unattached"},       // Enchant:Planeswalker
+		{card: "Tourach's Gate", key: "f0/a0", reason: "start:upkeep-cost"},                  // Enchant:land, cumulative upkeep
+		{card: "Wand of Orcus", key: "f0/t1", reason: "no-generator:trigger:Blocks:filter"},  // Equipment: StartAttach enters Auras only
+	})
+}
+
 // TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or
 // exiles a card from the graveyard still needs its own target placed. The
 // focus play (Murder) names no graveyard target, so an override that read only
@@ -2949,6 +3001,121 @@ func TestStartcombattriggersDealer(t *testing.T) {
 				t.Errorf("attacker %s has power %d (menace %v)", f.Name, f.Power(), f.HasKeyword("Menace"))
 			}
 		})
+	}
+}
+
+// TestScenCombatTriggerLegalBlocker: a block trigger whose attacker's own
+// CantBlockBy static keeps every blocker without flying or reach from blocking
+// it (Sidar Kondo of Jamuraa: creatures with power 2 or less) still starts in
+// declare-blockers. The pair is legal when the blocker is one the static lets
+// block (a flier), which combatPairBlocked reads from the mode's ValidAttacker
+// and ValidBlocker together instead of counting a match on either alone.
+func TestScenCombatTriggerLegalBlocker(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Sidar Kondo of Jamuraa", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	if f.Focus == nil || f.Focus.Attack != "Sidar Kondo of Jamuraa" || f.Focus.Block == "" {
+		t.Fatalf("focus %+v, want Sidar attacking and a blocker", f.Focus)
+	}
+	c, ok := reg.Lookup(f.Focus.Block)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("blocker %q not in the corpus", f.Focus.Block)
+	}
+	if blk := c.Faces[0]; !blk.HasKeyword("Flying") && !blk.HasKeyword("Reach") {
+		t.Errorf("blocker %s has neither flying nor reach; the attacker's CantBlockBy keeps it from blocking", blk.Name)
+	}
+	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+		t.Errorf("start file does not decode: %v", err)
+	}
+}
+
+// TestScenCombatTriggerAttackerRestriction: Evil Eye of Urborg's own CantAttack
+// record ("non-Eye creatures you control can't attack") is a restriction on
+// its own attack, not on the creature blocking it: the Eye may attack a
+// non-Eye blocker, so its AttackerBlockedByCreature trigger still starts.
+// Reading the record against the blocker was the false positive that refused
+// it while a blocker-owned record went unread.
+func TestScenCombatTriggerAttackerRestriction(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Evil Eye of Urborg", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	if f.Focus == nil || f.Focus.Attack != "Evil Eye of Urborg" || f.Focus.Block == "" {
+		t.Fatalf("focus %+v, want Evil Eye attacking and a blocker", f.Focus)
+	}
+	c, ok := reg.Lookup(f.Focus.Block)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("blocker %q not in the corpus", f.Focus.Block)
+	}
+	if blk := c.Faces[0]; blk.HasTypeWord("Eye") {
+		t.Errorf("blocker %s is an Eye; the test does not pin the non-Eye restriction", blk.Name)
+	}
+	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+		t.Errorf("start file does not decode: %v", err)
+	}
+}
+
+// TestScenCombatPairBlockedByRole: a pair restriction is read by creature role,
+// whichever permanent carries it. Stronghold Zeppelin's CantBlockBy ("can block
+// only creatures with flying") names the attacker in ValidAttacker and itself
+// in ValidBlocker, so a non-flier attacker is no legal pair while a flier is.
+// A blocker's CantAttack is read against the attacker, and its Self
+// alternative (the blocker) is not.
+func TestScenCombatPairBlockedByRole(t *testing.T) {
+	reg, _ := testBuilder(t)
+	face := func(name string) *cards.Face {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+	stat := func(mode string, params ...string) cards.Static {
+		st := cards.Static{Mode: mode, Params: map[string]string{}}
+		for i := 0; i+1 < len(params); i += 2 {
+			st.Params[params[i]] = params[i+1]
+		}
+		return st
+	}
+	bears := face("Grizzly Bears")
+	drake := face("Wind Drake")
+	zeppelin := face("Stronghold Zeppelin") // CantBlockBy ValidAttacker$ Creature.withoutFlying, ValidBlocker$ Creature.Self
+	if st := combatPairBlocked(bears, zeppelin); st == nil || st.Mode != "CantBlockBy" {
+		t.Errorf("non-flier attacker vs Stronghold Zeppelin: static %+v, want its CantBlockBy", st)
+	}
+	if st := combatPairBlocked(drake, zeppelin); st != nil {
+		t.Errorf("flier attacker vs Stronghold Zeppelin: static %+v, want a legal pair", st)
+	}
+	// Evil Eye of Urborg's CantAttack names non-Eye creatures its controller
+	// controls: it does not make the Eye's own attack illegal against a non-Eye
+	// blocker.
+	if st := combatPairBlocked(face("Evil Eye of Urborg"), bears); st != nil {
+		t.Errorf("Evil Eye attacking a non-Eye: static %+v, want a legal pair", st)
+	}
+	// The same record on the blocker is read against the attacker: gorge
+	// matches StatCantAttack's filter against the attacking creature.
+	restrictor := &cards.Face{Name: "Eye Wall", Types: []string{"Creature", "Eye"},
+		Statics: []cards.Static{stat("CantAttack", "ValidCard", "Creature.nonEye+YouCtrl")}}
+	if st := combatPairBlocked(bears, restrictor); st == nil || st.Mode != "CantAttack" {
+		t.Errorf("non-Eye attacker vs a blocker-owned CantAttack: static %+v, want it read against the attacker", st)
+	}
+	// A blocker's CantAttack naming Self restricts the blocker, not the
+	// attacker, so the pair stays legal.
+	selfRestrictor := &cards.Face{Name: "Wall of Stone", Types: []string{"Creature"},
+		Statics: []cards.Static{stat("CantAttack", "ValidCard", "Card.Self")}}
+	if st := combatPairBlocked(bears, selfRestrictor); st != nil {
+		t.Errorf("self-only CantAttack on the blocker: static %+v, want a legal pair", st)
 	}
 }
 
