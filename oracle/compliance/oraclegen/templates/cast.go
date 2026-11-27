@@ -9,8 +9,29 @@ import (
 )
 
 // CastResolve casts the spell with exactly its mana in pool, with legal
-// targets on the board, and resolves the stack.
-var CastResolve = Template{ID: "cast-resolve", Version: 2}
+// targets on the board, and resolves the stack. Its version stays 1: the
+// Delve arm below changed the bytes of a Delve cast only, and bumping this
+// value would move every other cast-resolve scenario's id and name off the
+// id its committed verdict row recorded.
+var CastResolve = Template{ID: "cast-resolve", Version: 1}
+
+// castResolveDelve is cast-resolve's second generation, for the items the
+// Delve arm actually produced: it seeds a Swamp graveyard and scripts the
+// exile ask (CR 702.66), so those scenarios' bytes moved. It shares
+// CastResolve's ID, so a verdict row still keys on "cast-resolve" alone; only
+// the id and the scenario name carry the generation.
+var castResolveDelve = Template{ID: CastResolve.ID, Version: 2}
+
+// castTemplateFor is the single stamp for a cast's generation. The answer is
+// re-derived from delvePicks -- the one predicate that decides both the
+// graveyard seed and the exile answer -- so an item cannot carry a generation
+// whose bytes it does not have, and no call site has to remember to pass one.
+func castTemplateFor(f *cards.Face) Template {
+	if delvePicks(f) > 0 {
+		return castResolveDelve
+	}
+	return CastResolve
+}
 
 // xAnswers scripts X for a spell with X in its cost.
 func xAnswers(f *cards.Face) []oraclegen.Answer {
@@ -233,7 +254,7 @@ func castWithProbes(reg *cards.Registry, f *cards.Face, name, mana string, slots
 					setup(&fx)
 				}
 				// Apply face-derived scenario defaults before probing the cast.
-				it := CastResolve.item(f, name, buildStackScenario(f, name, physicalName(reg, name), mana, pre, fx, slots, stackIdx, answers))
+				it := castTemplateFor(f).item(f, name, buildStackScenario(f, name, physicalName(reg, name), mana, pre, fx, slots, stackIdx, answers))
 				sc := it.Scenario
 				if oraclegen.ShufflesBackAndDraws(f) {
 					oraclegen.UniformShuffleSetup(&sc, name)
