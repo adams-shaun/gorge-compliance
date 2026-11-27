@@ -267,8 +267,12 @@ func transformedStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, f
 	if why := FieldBlock(front); why != "" {
 		return "battlefield:" + why
 	}
-	if asEnters(front) {
-		return "as-enters"
+	// The front face is placed and transformed at genesis. An as-enters
+	// choice there is answered after setup, so the live cut carries the
+	// entry's turn stamps; until the lowering can restate them the start
+	// keeps the specific refusal instead of emitting a start it refuses.
+	if why := asEntersPlacedRefusal(front); why != "" {
+		return why
 	}
 	// A daybound or nightbound permanent cannot be transformed by another
 	// effect or ability (CR 702.145b), and a battlefield permanent with an
