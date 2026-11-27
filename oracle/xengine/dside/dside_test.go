@@ -3,6 +3,7 @@ package dside
 import (
 	"errors"
 	"slices"
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
@@ -10,6 +11,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/dirac/cardset"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -320,6 +322,88 @@ func TestFewestNamed(t *testing.T) {
 		card, seat, ok := fewestNamed(c.pair, c.names)
 		if card != c.card || seat != c.seat || ok != c.ok {
 			t.Errorf("%v %v: %q seat %d %v, want %q seat %d %v", c.pair, c.names, card, seat, ok, c.card, c.seat, c.ok)
+		}
+	}
+}
+
+// landIndices is the deck's first two basic lands' deck indices: a permanent a
+// scripted start can place without knowing the deck's contents.
+func landIndices(d decks.Deck) []int {
+	var out []int
+	for i, n := range d.Cards {
+		switch n {
+		case "Plains", "Island", "Swamp", "Mountain", "Forest":
+			out = append(out, i)
+			if len(out) == 2 {
+				return out
+			}
+		}
+	}
+	return out
+}
+
+// TestStartLockstepPlaysTheScriptedPosition drives the same lockstep StartLockstep
+// runs (the matchup's Start, mirrored to the kernel from the same deck indices) over
+// a table it holds: a valid position is played and answered, and a position the
+// kernel cannot mirror or gorge would not open in is refused by name, never read as
+// dirac disagreeing with gorge.
+func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
+	reg := testutil.CorpusRegistry(t) // skips without the corpus
+	tables := NewTables(reg)
+	pair := playablePair(t, reg, tables)
+	set, err := tables.CommanderSet()
+	if err != nil {
+		if NoTables(err) {
+			t.Skip(err)
+		}
+		t.Fatal(err)
+	}
+	// pos is the position: two of the seat's lands on the battlefield, one tapped,
+	// the other carrying kind ("" none).
+	pos := func(kind string) *rules.StartSpec {
+		seats := make([]rules.StartSeat, 2)
+		for i, d := range pair {
+			bf := landIndices(d)
+			if len(bf) < 2 {
+				t.Skipf("deck %q holds no two lands to place", d.Name)
+			}
+			seats[i] = rules.StartSeat{Battlefield: bf[:2], Tapped: bf[:1]}
+			if kind != "" {
+				seats[i].Counters = []rules.StartCounter{{Card: bf[1], Kind: kind, N: 1}}
+			}
+		}
+		return &rules.StartSpec{Seats: seats}
+	}
+	// The position gorge opens in is the one dirac mirrors: both sides take their
+	// first decision from it, so the row is an answer and not a setup refusal.
+	row, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, pos(""))
+	if row.Status == StatusNA {
+		t.Fatalf("the start was refused: %s", row.Reason)
+	}
+	if row.Status == StatusDiverged && row.Field == "setup" {
+		t.Fatalf("the matchup rejected the start: %+v", row)
+	}
+	if row.Decisions <= 0 {
+		t.Errorf("row %+v: no decision was posed from the scripted position", row)
+	}
+	// A counter kind the kernel does not keep, or an index no deck holds, is the
+	// position's own refusal: it names what cannot be mirrored rather than blaming
+	// dirac for gorge's setup.
+	for _, c := range []struct {
+		name string
+		spec *rules.StartSpec
+		want string
+	}{
+		{"a counter kind the kernel does not keep", pos("NOTAKIND"), "NOTAKIND"},
+		{"a start no deck holds", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: []int{9999}}, {}}}, "9999"},
+	} {
+		r, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, c.spec)
+		if r.Status != StatusNA {
+			t.Errorf("%s: row %+v, want not_applicable", c.name, r)
+			continue
+		}
+		if !strings.Contains(r.Reason, c.want) {
+			t.Errorf("%s: reason %q does not name %s", c.name, r.Reason, c.want)
 		}
 	}
 }

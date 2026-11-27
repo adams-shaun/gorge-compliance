@@ -20,6 +20,7 @@ import (
 	"github.com/adams-shaun/gorge/dirac/oracle"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/rules"
 )
 
 // How a game went on dirac.
@@ -237,7 +238,30 @@ func (t *Tables) Lockstep(gameID, code string, pair [2]decks.Deck, seed uint64, 
 	if err != nil {
 		return refused(row, err)
 	}
-	return t.lockstep(row, set, pair, seed, maxTurns, nil)
+	return t.lockstep(row, set, pair, seed, maxTurns, nil, nil)
+}
+
+// StartLockstep plays pair on code's table in lockstep with gorge from a scripted
+// position (start, the rules.StartSpec of an xproof start file) rather than the
+// ordinary genesis, as Lockstep plays a dealt game: gorge's side opens in it through
+// rules.Config.Start (Matchup.Config copies it) and dirac's kernel mirrors it from the
+// same deck indices (dirac/oracle kernelStart), so both engines answer the decisions
+// of one position and the row is dirac's answer beside gorge's on that start.
+//
+// Unlike Lockstep its answers are no one's script: an xproof start item is lowered
+// from gorge's own focus game, not from this replay, so the row is the answer alone
+// and Locate is not called on it (the divergence's turns are the lockstep's, not the
+// item's). start must be a position dirac can mirror; the caller refuses the ones
+// with no kernel equivalent (player counters, minted tokens, commander
+// designations), and a counter kind the kernel does not keep is refused here, naming
+// it, as any other pair the table does not hold is.
+func (t *Tables) StartLockstep(gameID, code string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) (Row, []decision.Intent) {
+	row := Row{Game: gameID, Table: "std-" + strings.ToLower(code)}
+	set, err := t.Table(code)
+	if err != nil {
+		return refused(row, err)
+	}
+	return t.lockstep(row, set, pair, seed, maxTurns, nil, start)
 }
 
 // CommanderLockstep plays a 1v1 Commander pair on dirac's Commander table
@@ -250,7 +274,7 @@ func (t *Tables) CommanderLockstep(gameID string, pair [2]decks.Deck, seed uint6
 	if err != nil {
 		return refused(row, err)
 	}
-	return t.lockstep(row, set, pair, seed, maxTurns, &[2]int{pair[0].CommanderIndex(), pair[1].CommanderIndex()})
+	return t.lockstep(row, set, pair, seed, maxTurns, &[2]int{pair[0].CommanderIndex(), pair[1].CommanderIndex()}, nil)
 }
 
 // refused is row as a game no table holds, for err.
@@ -260,8 +284,8 @@ func refused(row Row, err error) (Row, []decision.Intent) {
 }
 
 // lockstep plays pair on set, a Commander game with commanders (indices into each
-// deck) when non-nil.
-func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int) (Row, []decision.Intent) {
+// deck) when non-nil, from the scripted position start when non-nil (StartLockstep).
+func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int, start *rules.StartSpec) (Row, []decision.Intent) {
 	refuse := func(err error) (Row, []decision.Intent) { return refused(row, err) }
 	tbl, _, _, err := set.Matchup(entries(pair[0]), entries(pair[1]))
 	if err != nil {
@@ -287,6 +311,15 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 	if commanders != nil {
 		m.Commander = true
 		m.Commanders = *commanders
+	}
+	if start != nil {
+		// A position gorge itself would not open in is a refusal, not a
+		// divergence: NewGorgeSide turns a rejected start into a setup
+		// divergence, which would read as dirac disagreeing with gorge.
+		if err := start.Validate(dk[:]); err != nil {
+			return refuse(err)
+		}
+		m.Start = start
 	}
 	cfg := oracle.Config{GorgeAutopaySurface: true}
 	k, err := oracle.SetSide(set, tbl, cfg)(m, seed)

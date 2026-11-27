@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"reflect"
 	"regexp"
 	"slices"
 	"sort"
@@ -17,6 +18,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/dside"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
@@ -188,6 +190,13 @@ type startFocus struct {
 
 // startFlagErr is the error of -start given with a flag it does not combine
 // with, or without -set.
+//
+// The dirac parameter is the flag it does not refuse: dirac follows gorge
+// (operator 11-24), so it needs nothing of the deal -start replaces and answers each
+// start file's scripted position beside gorge (see startDiracRow). The flags named
+// below each pick another way to build the game, which a scripted position leaves no
+// room for; the caller hands every one of them here, dirac included, so the list of
+// refusals is one list.
 func startFlagErr(set, random, pool, decksDir string, dirac, windows bool, tapeTurns, format, forgeOnly string) error {
 	if set == "" {
 		return errors.New("-start needs -set (it names the item ids)")
@@ -196,7 +205,7 @@ func startFlagErr(set, random, pool, decksDir string, dirac, windows bool, tapeT
 		name string
 		on   bool
 	}{
-		{"-random", random != ""}, {"-pool", pool != ""}, {"-decks", decksDir != ""}, {"-dirac", dirac},
+		{"-random", random != ""}, {"-pool", pool != ""}, {"-decks", decksDir != ""},
 		{"-windows", windows}, {"-tape-turns", tapeTurns != ""}, {"-format", format != ""}, {"-forge-only", forgeOnly != ""},
 	} {
 		if f.on {
@@ -706,13 +715,32 @@ func roomDoorLocked(reg *cards.Registry, f *startFile, focus game.Focus) string 
 // items, gorge rows, lowering log, exercised ledger and tapes of the games into
 // out, as play does. set names the item ids; xmage says XMage replays them.
 func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool) error {
+	return playStartDirac(reg, paths, set, out, xmage, nil)
+}
+
+// playStartDirac is playStart with dirac beside gorge: tables, when non-nil, is the
+// dirac cardset server of the -dirac run, and each start file gets one line of
+// out/dirac.jsonl holding dirac's answer for its scripted position, as play's sweep
+// gives one to each game it plays (see startDiracRow). Nil tables plays gorge alone
+// and writes no dirac file.
+func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage bool, tables *dside.Tables) error {
 	files, err := startFiles(paths)
 	if err != nil {
 		return err
 	}
-	var items, gorge, lowerLog bytes.Buffer
+	if tables != nil {
+		// A table this pin and corpus has none of is the same answer for every
+		// file, so say it once here rather than in the reason of every row (the
+		// set lane does the same, see randomPicker).
+		if _, terr := tables.Table(set); terr != nil {
+			fmt.Printf("xengine: -dirac: %v\n", diracTablesHint(terr))
+		}
+	}
+	var items, gorge, lowerLog, diracLog bytes.Buffer
 	exercised := cov.New()
 	hist := map[string]int{}
+	diracHist := map[string]int{}
+	diracN := 0
 	em := &emitter{out: out, items: &items, gorge: &gorge, lowerLog: &lowerLog, hist: hist}
 	games := 0
 	for _, path := range files {
@@ -756,6 +784,21 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			}
 		}
 		seeds := f.gameSeeds()
+		if tables != nil {
+			// dirac's answer for this start's position, on one line, keyed by the
+			// game id every item of the file shares. It is a report beside the
+			// rows: nothing here reads gorge's outcome and nothing gorge writes
+			// reads this (operator 11-24).
+			row := startDiracRow(tables, set, f, [2]decks.Deck{d0, d1}, seeds[0],
+				&rules.StartSpec{Seats: []rules.StartSeat{s0, s1}})
+			b, jerr := jsonl(row)
+			if jerr != nil {
+				return jerr
+			}
+			diracLog.Write(b)
+			diracHist[row.Status]++
+			diracN++
+		}
 		for s := 1; s <= f.Seeds; s++ {
 			games++
 			id := scen.StartID(set, f.Card, f.Key, s)
@@ -859,9 +902,116 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			return err
 		}
 	}
+	if tables != nil {
+		if err := writeAtomic(filepath.Join(out, "dirac.jsonl"), diracLog.Bytes()); err != nil {
+			return err
+		}
+	}
 	fmt.Printf("played %d games into %s\n", games, out)
 	for _, s := range sortedKeys(hist) {
 		fmt.Printf("  %-14s %d\n", s, hist[s])
 	}
+	if tables != nil {
+		fmt.Printf("dirac answered %d starts\n", diracN)
+		for _, s := range sortedKeys(diracHist) {
+			fmt.Printf("  %-14s %d\n", s, diracHist[s])
+		}
+	}
 	return nil
+}
+
+// startDirac is one start file's dirac lockstep. A var so a test can put an answer
+// on the record that no built table produces on demand (a divergence at a chosen
+// decision, a refusal); the real one is dside.StartLockstep, which answers the
+// file's own scripted position and never fails the run.
+var startDirac = func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec) dside.Row {
+	row, _ := tables.StartLockstep(gameID, set, pair, seed, maxTurns, start)
+	return row
+}
+
+// startDiracRow is the dirac.jsonl line of one start file: the lockstep of its
+// scripted position on the set's table, or the refusal of a position dirac cannot
+// hold (no table, a start it cannot mirror). The row's game id is the prefix its
+// items' ids share, so the adjudication reads every item of the file from it.
+func startDiracRow(tables *dside.Tables, set string, f *startFile, pair [2]decks.Deck, seed uint64, start *rules.StartSpec) dside.Row {
+	id := scen.StartID(set, f.Card, f.Key, 1)
+	gameID, _, ok := dside.SplitID(id)
+	if !ok {
+		gameID = strings.TrimSuffix(id, ":s1")
+	}
+	if why := startNotExpressible(f, start); why != "" {
+		return dside.NotApplicable(gameID, why)
+	}
+	return startDirac(tables, gameID, set, pair, seed, startMaxTurns(f), start)
+}
+
+// kernelMirrored is every field of the pinned rules.StartSeat dirac's kernel mirrors
+// from the gorge start: dirac/oracle kernelStart copies exactly these (the zones, the
+// taps, the back faces, the life total, the counters and the attachments), so a start
+// that names only these needs no exception. It is checked against the struct by
+// reflection at every start (startNotExpressible), so a field gorge adds to
+// StartSeat is refused by default until someone reads kernelStart and names it here:
+// the list cannot silently fall behind the kernel, only run ahead of it (which
+// TestKernelMirroredFieldsExist holds).
+var kernelMirrored = map[string]bool{
+	"Hand": true, "Battlefield": true, "Graveyard": true, "Exile": true, "Library": true,
+	"Tapped": true, "BackFace": true, "Life": true, "Counters": true, "Attach": true,
+}
+
+// kernelRefused are the fields dirac's kernel names and refuses outright (kernelStart:
+// "tokens are not modelled by the kernel"); they are refused here with the same
+// reason, before the table is asked for a game no kernel can hold.
+var kernelRefused = map[string]string{
+	"Tokens": "mints tokens, which dirac's kernel start does not model",
+}
+
+// startNotExpressible is why dirac cannot mirror this start's scripted position,
+// naming it, or "" when it can. gorge's side of the lockstep opens in the very
+// rules.StartSpec its own game did; the row is only dirac's answer if dirac's kernel
+// opens in the same position, which is what kernelMirrored holds. A commander
+// designation is the one thing a start file names that does not even ride the spec:
+// it travels on game.Options StartCommanders and gorge's Setup hook records it, so
+// dirac's kernel has nothing to mirror it from and would hold an ordinary card while
+// gorge holds its commander. Each of these would leave the two engines in different
+// positions, and the row would report the missing injection as dirac disagreeing with
+// gorge: refuse it with the reason instead of guessing.
+func startNotExpressible(f *startFile, start *rules.StartSpec) string {
+	for i, s := range []startSeat{f.Setup.P0, f.Setup.P1} {
+		if len(s.Commanders) > 0 {
+			return fmt.Sprintf("start not expressible: seat %d designates a commander, which rides game.Options StartCommanders rather than the start, so dirac's kernel never sees the designation", i)
+		}
+	}
+	if start == nil {
+		return ""
+	}
+	t := reflect.TypeOf(rules.StartSeat{})
+	for i, seat := range start.Seats {
+		v := reflect.ValueOf(seat)
+		for j := 0; j < t.NumField(); j++ {
+			// declaration order, so the reason of a start that names two
+			// unmirrored fields is the same on every run.
+			name := t.Field(j).Name
+			if kernelMirrored[name] || v.Field(j).IsZero() {
+				continue
+			}
+			why, ok := kernelRefused[name]
+			if !ok {
+				why = fmt.Sprintf("seats %s, which dirac's kernel start does not mirror", name)
+			}
+			return fmt.Sprintf("start not expressible: seat %d %s", i, why)
+		}
+	}
+	return ""
+}
+
+// startMaxTurns is the turn cap of a start's dirac game: gorge's own cap for the
+// file, so dirac answers the same length of game it is compared against rather than
+// a longer one it would run out of on its own.
+func startMaxTurns(f *startFile) int {
+	if f.MaxTurns > 0 {
+		// the same +1 game.Options.MaxTurns carries: the watchdog stalls the
+		// game as the turn after the played turns begins.
+		return f.MaxTurns + 1
+	}
+	return game.DefaultMaxTurns
 }

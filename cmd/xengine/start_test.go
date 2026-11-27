@@ -92,7 +92,9 @@ func TestPlayStartThornvault(t *testing.T) {
 
 func TestPlayStartFlagsExclusive(t *testing.T) {
 	t.Parallel()
-	for _, f := range []string{"-windows", "-random=BLB", "-pool=x", "-decks=x", "-dirac", "-tape-turns=1", "-format=commander", "-forge-only=x"} {
+	// -dirac is not among these: dirac follows gorge and answers a scripted
+	// position beside it (TestStartFlagErrAcceptsDirac).
+	for _, f := range []string{"-windows", "-random=BLB", "-pool=x", "-decks=x", "-tape-turns=1", "-format=commander", "-forge-only=x"} {
 		err := runPlay([]string{"-set", "BLB", "-start", "testdata/start", "-out", t.TempDir(), f})
 		if err == nil || !strings.Contains(err.Error(), "-start") {
 			t.Errorf("-start with %s: err %v, want a -start error", f, err)
