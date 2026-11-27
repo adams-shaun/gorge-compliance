@@ -2,6 +2,7 @@ package dside
 
 import (
 	"errors"
+	"reflect"
 	"slices"
 	"strconv"
 	"strings"
@@ -426,31 +427,59 @@ func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
 	}
 }
 
-// TestFocusTrackFinish: a clean lockstep game that never took the focus play is not an
-// agreement (the key was not reached on dirac's side), and a divergence is located at
-// the decision it was found at.
-func TestFocusTrackFinish(t *testing.T) {
+// TestTapeReplayFinish: a replay that left the tape is not applicable (naming where and
+// why, whatever the lockstep made of it), a divergence is located at the decision it
+// was found at - the one being posed when the engines differed as it was posed, the
+// one just answered when an answer failed to apply - and gorge's offer is on the row
+// beside dirac's.
+func TestTapeReplayFinish(t *testing.T) {
 	t.Parallel()
-	ft := &focusTrack{
-		f:     StartFocus{Seat: 0, Card: "C", Key: "f0/a1", Kind: "ability"},
-		want:  func(oracle.CanonKind) bool { return true },
-		trail: []trailStep{{turn: 1, seat: 0, kind: "priority"}, {turn: 2, seat: 1, kind: "target"}},
-	}
-	row := Row{Status: StatusClean}
-	ft.finish(&row, oracle.Result{})
-	if row.Status != StatusNA || !strings.Contains(row.Reason, "never took the ability focus play") {
-		t.Errorf("clean game with no focus play: %+v, want not_applicable naming it", row)
-	}
-	ft.took = 1
-	row = Row{Status: StatusDiverged}
-	ft.finish(&row, oracle.Result{Div: &oracle.Divergence{At: 1}})
-	if row.Seat == nil || *row.Seat != 1 || row.Kind != "target" || row.FromTurn != 2 || row.ToTurn != 2 || !row.FocusTook {
-		t.Errorf("divergence at decision 1: %+v, want turn 2 seat 1 target", row)
-	}
-	// a divergence found before the next decision was picked reads the last answered one
-	row = Row{Status: StatusDiverged}
-	ft.finish(&row, oracle.Result{Div: &oracle.Divergence{At: 5}})
-	if row.Seat == nil || *row.Seat != 1 || row.Kind != "target" {
-		t.Errorf("divergence past the trail: %+v, want the last decision", row)
-	}
+	answered := &decisionAt{turn: 1, seat: 0, kind: "priority"}
+	posed := &decisionAt{turn: 2, seat: 1, kind: "target"}
+	t.Run("left the tape", func(t *testing.T) {
+		r := &tapeReplay{stop: "decision 3 (turn 1, priority): the replayed game's state is not the tape's at this decision"}
+		row := Row{Game: "g", Table: "std-x", Status: StatusDiverged, What: "policy", Field: "panic", Decisions: 3}
+		r.finish(&row, oracle.Result{Div: &oracle.Divergence{At: 3, What: "policy", Field: "panic"}})
+		if row.Status != StatusNA || !strings.HasPrefix(row.Reason, "tape not replayable: decision 3") || row.Field != "" || row.Seat != nil {
+			t.Errorf("row %+v, want a bare not_applicable naming the decision", row)
+		}
+		if row.Answer("xs:X:c:k:s1") != NotAppl {
+			t.Errorf("a refused replay answers %q, want %q", row.Answer("xs:X:c:k:s1"), NotAppl)
+		}
+	})
+	t.Run("found as the decision was posed", func(t *testing.T) {
+		r := &tapeReplay{last: answered, pose: posed}
+		row := Row{Status: StatusDiverged}
+		res := oracle.Result{Decisions: 4, Div: &oracle.Divergence{At: 4, What: "options", RefOptions: []string{"pass", "cast"}, KerOptions: []string{"pass"}}}
+		r.finish(&row, res)
+		if row.Seat == nil || *row.Seat != 1 || row.Kind != "target" || row.FromTurn != 2 || row.ToTurn != 2 {
+			t.Errorf("row %+v, want the posed decision: turn 2 seat 1 target", row)
+		}
+		if !reflect.DeepEqual(row.Diff, []string{"gorge: pass | cast", "dirac: pass"}) {
+			t.Errorf("diff %q, want gorge's offer beside dirac's", row.Diff)
+		}
+	})
+	t.Run("an answer that failed to apply", func(t *testing.T) {
+		r := &tapeReplay{last: answered, pose: posed}
+		row := Row{Status: StatusDiverged}
+		res := oracle.Result{Decisions: 4, Div: &oracle.Divergence{At: 3, What: "kernel", Field: "apply", Detail: "not offered"}}
+		r.finish(&row, res)
+		if row.Seat == nil || *row.Seat != 0 || row.Kind != "priority" || row.FromTurn != 1 {
+			t.Errorf("row %+v, want the answered decision: turn 1 seat 0 priority", row)
+		}
+		if !reflect.DeepEqual(row.Diff, []string{"not offered"}) {
+			t.Errorf("diff %q, want the detail", row.Diff)
+		}
+	})
+	t.Run("running out of tape is the game's end", func(t *testing.T) {
+		r := &tapeReplay{ended: true}
+		res := r.settle(oracle.Result{Div: &oracle.Divergence{What: "policy", Field: "panic"}})
+		if res.Div != nil {
+			t.Errorf("a spent tape settled as %+v, want no divergence", res.Div)
+		}
+		r = &tapeReplay{}
+		if res := r.settle(oracle.Result{Div: &oracle.Divergence{What: "policy", Field: "panic"}}); res.Div == nil {
+			t.Error("a panic that was not the tape's end was settled away")
+		}
+	})
 }

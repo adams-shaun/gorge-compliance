@@ -31,8 +31,9 @@
 // the pool, its "# supp" identity and -pool-filter used); -decks DIR plays two different fixed deck
 // files of DIR per game, main deck only (DIR/decks.json records each deck, its
 // sha256 and whether it is playable or why not); -dirac plays each game a dirac table holds in lockstep first and replays
-// gorge's answers as the game, with DIR/dirac.jsonl saying how each went; with -start it instead answers each start file's
-// own scripted position beside gorge, one dirac.jsonl row per file, and never changes a start's verdict or the exit code.
+// gorge's answers as the game, with DIR/dirac.jsonl saying how each went; with -start it instead replays each start file's tape
+// (gorge's decisions from the file's scripted position) through dirac decision for decision, one dirac.jsonl row per file
+// (agree, diverge at the first differing decision, or not_applicable naming why), and never changes a start's verdict or the exit code.
 // diff compares a follower's rows with
 // gorge's stored results, never replaying gorge, and writes DIR2/verdicts.jsonl,
 // DIR2/compared.tsv and DIR2/finds/<class>/<id>/ (a repro directory per

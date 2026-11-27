@@ -193,7 +193,7 @@ type startFocus struct {
 //
 // The dirac parameter is the flag it does not refuse: dirac follows gorge
 // (operator 11-24), so it needs nothing of the deal -start replaces and answers each
-// start file's scripted position beside gorge (see startDiracRow). The flags named
+// start file's scripted position beside gorge (see playStartDirac). The flags named
 // below each pick another way to build the game, which a scripted position leaves no
 // room for; the caller hands every one of them here, dirac included, so the list of
 // refusals is one list.
@@ -721,7 +721,7 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 // playStartDirac is playStart with dirac beside gorge: tables, when non-nil, is the
 // dirac cardset server of the -dirac run, and each start file gets one line of
 // out/dirac.jsonl holding dirac's answer for its scripted position, as play's sweep
-// gives one to each game it plays (see startDiracRow). Nil tables plays gorge alone
+// gives one to each game it plays (see playStartDirac). Nil tables plays gorge alone
 // and writes no dirac file.
 func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage bool, tables *dside.Tables) error {
 	files, err := startFiles(paths)
@@ -909,11 +909,11 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 				return err
 			}
 			if tables != nil && expressible == "" {
-				// gorge played and kept this seed: dirac plays the same position
-				// from the same seed. A report beside the rows, never read by them
-				// (operator 11-24).
+				// gorge played and kept this seed: dirac replays its tape from the
+				// same scripted position and seed, decision for decision. A report
+				// beside the rows, never read by them (operator 11-24).
 				seedRows = append(seedRows, startDirac(tables, startGameID(set, f), set, [2]decks.Deck{d0, d1},
-					seed, startMaxTurns(f), startSpec, startFocusOf(reg, f, focus)))
+					seed, startSpec, tp))
 			}
 		}
 		if tables != nil {
@@ -966,8 +966,8 @@ func playStartDirac(reg *cards.Registry, paths []string, set, out string, xmage 
 // on the record that no built table produces on demand (a divergence at a chosen
 // decision, a refusal); the real one is dside.StartLockstep, which plays the seed's
 // scripted position beside gorge and never fails the run.
-var startDirac = func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus dside.StartFocus) dside.Row {
-	return tables.StartLockstep(gameID, set, pair, seed, maxTurns, start, focus)
+var startDirac = func(tables *dside.Tables, gameID, set string, pair [2]decks.Deck, seed uint64, start *rules.StartSpec, tape *game.Tape) dside.Row {
+	return tables.StartLockstep(gameID, set, pair, seed, start, tape)
 }
 
 // startGameID is the id every item of the file shares (the prefix dirac.jsonl keys the
@@ -981,25 +981,11 @@ func startGameID(set string, f *startFile) string {
 	return gameID
 }
 
-// startFocusOf is the play of the file's focus game as dirac's focus policy takes it:
-// the same seat, card and key gorge's game.Focus names.
-func startFocusOf(reg *cards.Registry, f *startFile, focus game.Focus) dside.StartFocus {
-	out := dside.StartFocus{Seat: focus.Seat, Card: canonicalCard(reg, focus.Card), Kind: focus.Kind}
-	if focus.Kind == "ability" {
-		face := "0"
-		if m := keyFA.FindStringSubmatch(f.Key); m != nil {
-			face = m[1]
-		}
-		out.Key = fmt.Sprintf("f%s/a%d", face, focus.Ability)
-	}
-	return out
-}
-
 // startFileRow is one start file's dirac.jsonl row, from the lockstep of each seed
 // gorge played (the row is the key's: adjudicate reads one row for every seed item
 // of it). A seed that diverged makes the row diverged, so no seed's divergence is
 // hidden; otherwise the first seed dirac could not carry through (a hang, an
-// unmodelled rule, a capacity, a focus play it never reached) is the row, and only
+// unmodelled rule, a capacity, a tape it could not replay) is the row, and only
 // seeds that all agreed make it clean. A file gorge played no seed of has no game for
 // dirac to agree with: not_applicable, saying why gorge refused it.
 func startFileRow(gameID string, rows []dside.Row, gorgeWhy string) dside.Row {
@@ -1117,16 +1103,4 @@ func startNotExpressible(f *startFile, start *rules.StartSpec) string {
 		}
 	}
 	return ""
-}
-
-// startMaxTurns is the turn cap of a start's dirac game: gorge's own cap for the
-// file, so dirac answers the same length of game it is compared against rather than
-// a longer one it would run out of on its own.
-func startMaxTurns(f *startFile) int {
-	if f.MaxTurns > 0 {
-		// the same +1 game.Options.MaxTurns carries: the watchdog stalls the
-		// game as the turn after the played turns begins.
-		return f.MaxTurns + 1
-	}
-	return game.DefaultMaxTurns
 }

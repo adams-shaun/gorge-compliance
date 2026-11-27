@@ -9,6 +9,8 @@ package dside
 import (
 	"errors"
 	"fmt"
+	"math"
+	"reflect"
 	"slices"
 	"sort"
 	"strconv"
@@ -66,12 +68,10 @@ type Row struct {
 	Diff       []string `json:"diff,omitempty"`
 	Implicates []string `json:"implicates,omitempty"`
 	// Seat and Kind are the seat and the kind of the decision at which a start's
-	// lockstep first differed (StartLockstep: the decision whose answer the two
-	// engines read differently; Diff holds gorge's value beside dirac's), and
-	// FocusTook that dirac's side of the game took the start's focus play.
-	Seat      *int   `json:"seat,omitempty"`
-	Kind      string `json:"kind,omitempty"`
-	FocusTook bool   `json:"focus_took,omitempty"`
+	// lockstep first differed (StartLockstep; FromTurn and ToTurn are its turn).
+	// Diff holds gorge's value beside dirac's.
+	Seat *int   `json:"seat,omitempty"`
+	Kind string `json:"kind,omitempty"`
 }
 
 // Locate sets the row's turns from the tape of the game the lockstep's answers
@@ -249,31 +249,26 @@ func (t *Tables) Lockstep(gameID, code string, pair [2]decks.Deck, seed uint64, 
 	return t.lockstep(row, set, pair, seed, maxTurns, nil, nil)
 }
 
-// StartFocus is the play an xproof start file exists for, as dirac's focus policy
-// takes it: the seat that takes it, the card it is for, the coverage key ("f<face>/a<i>"
-// for an ability) and the kind of play ("ability", "cast", "land", "attack", "block"
-// or "" for none forced).
-type StartFocus struct {
-	Seat int
-	Card string
-	Key  string
-	Kind string
-}
-
-// StartLockstep plays pair on code's table in lockstep with gorge from a scripted
-// position (start, the rules.StartSpec of an xproof start file) rather than the
-// ordinary genesis, as Lockstep plays a dealt game: gorge's side opens in it through
-// rules.Config.Start (Matchup.Config copies it) and dirac's kernel mirrors it from the
-// same deck indices (dirac/oracle kernelStart), so both engines answer the decisions
-// of one position.
+// StartLockstep plays one start file's game on code's table in lockstep with gorge:
+// the scripted position (start, the rules.StartSpec of the file) rather than the
+// ordinary genesis, answered decision for decision from tape, the game gorge itself
+// played from that position (lower.Span's tape: the item's decisions, the focus
+// seat's key action and any scripted bait, prelude or combat included).
 //
-// The focus seat plays through dirac's own oracle.FocusPolicy for focus (the dirac
-// counterpart of game.Focus: from turn 1's first main phase on it takes the key's
-// ability, cast, land play or attack at its first chance) and every other decision
-// is the explore policy's, so the lockstep exercises the key the start file exists
-// for. Row.FocusTook says whether it did. A start whose focus play is never taken
-// (dirac or gorge does not offer it in this game) is not an agreement: the row is
-// not_applicable, naming it, rather than a clean game that never reached the key.
+// gorge's side opens in the position through rules.Config.Start (Matchup.Config
+// copies it) and dirac's kernel mirrors it from the same deck indices (dirac/oracle
+// kernelStart). At each decision the tape's answer for that decision (by its Seq) is
+// translated to the canonical action it stands for (GorgeSide.CanonOfIntent,
+// CanonOfOption, CanonDone) and applied to both engines, which are compared as in
+// Lockstep. Before each answer the replayed gorge game's state digest is compared with
+// the digest the tape took at that decision: a replay that has left the tape's game
+// (an answer gorge's side makes for itself that the tape's bots made differently, a
+// decision the tape does not hold, an answer with no canonical form: an announced
+// manual payment, a split arrange) is not the item's game, so the row is
+// not_applicable naming the decision and why, never an agreement or a divergence
+// of a game the item did not play. A tape replayed to its end with every decision
+// equal is clean.
+//
 // On a divergence the row carries the turn, seat and kind of the decision where the
 // engines first differed, and Diff holds gorge's value beside dirac's.
 //
@@ -281,14 +276,18 @@ type StartFocus struct {
 // kernel equivalent (player counters, minted tokens, commander designations), and a
 // counter kind the kernel does not keep is refused here, naming it, as any other pair
 // the table does not hold is.
-func (t *Tables) StartLockstep(gameID, code string, pair [2]decks.Deck, seed uint64, maxTurns int, start *rules.StartSpec, focus StartFocus) Row {
+func (t *Tables) StartLockstep(gameID, code string, pair [2]decks.Deck, seed uint64, start *rules.StartSpec, tape *game.Tape) Row {
 	row := Row{Game: gameID, Table: "std-" + strings.ToLower(code)}
+	if tape == nil || len(tape.Entries) == 0 {
+		r, _ := refused(row, errors.New("tape not replayable: the tape holds no decision"))
+		return r
+	}
 	set, err := t.Table(code)
 	if err != nil {
 		r, _ := refused(row, err)
 		return r
 	}
-	r, _ := t.lockstep(row, set, pair, seed, maxTurns, nil, &startRun{spec: start, focus: focus})
+	r, _ := t.lockstep(row, set, pair, seed, math.MaxInt32, nil, &startRun{spec: start, replay: newTapeReplay(tape)})
 	return r
 }
 
@@ -312,10 +311,10 @@ func refused(row Row, err error) (Row, []decision.Intent) {
 }
 
 // startRun is what makes a lockstep game a start's: the scripted position and the
-// focus play the focus seat takes from it.
+// tape of decisions played from it.
 type startRun struct {
-	spec  *rules.StartSpec
-	focus StartFocus
+	spec   *rules.StartSpec
+	replay *tapeReplay
 }
 
 // lockstep plays pair on set, a Commander game with commanders (indices into each
@@ -370,7 +369,15 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		m.Start = start
 	}
 	cfg := oracle.Config{GorgeAutopaySurface: true}
-	k, err := openSide(oracle.SetSide(set, tbl, cfg), m, seed)
+	mk := oracle.SetSide(set, tbl, cfg)
+	var k oracle.Side
+	if sr != nil {
+		// only a scripted start reaches the kernel's start loader, which panics
+		// on a bad start (openSide); the dealt lane keeps its own path
+		k, err = openSide(mk, m, seed)
+	} else {
+		k, err = mk(m, seed)
+	}
 	if err != nil {
 		return refuse(err)
 	}
@@ -379,14 +386,10 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		intents []decision.Intent
 	}
 	var pol oracle.Policy = oracle.ExplorePolicy(seed)
-	var ft *focusTrack
-	if sr != nil {
-		var err error
-		if ft, err = newFocusTrack(t.reg, m, sr.focus, pol); err != nil {
-			oracle.CloseSide(k)
-			return refuse(err)
-		}
-		pol = ft
+	var rp *tapeReplay
+	if sr != nil && sr.replay != nil {
+		rp = sr.replay
+		pol = rp
 	}
 	done := make(chan outcome, 1)
 	go func() {
@@ -394,16 +397,22 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		var o outcome
 		rc := oracle.RunConfig{Config: cfg, MaxTurns: int32(maxTurns), Finish: func(g *oracle.GorgeSide) {
 			o.intents = append(o.intents, g.E.L.Intents...)
+			if rp != nil {
+				rp.atEnd(g)
+			}
 		}}
 		o.res = oracle.Lockstep(m, seed, k, pol, rc)
 		done <- o
 	}()
 	select {
 	case o := <-done:
+		if rp != nil {
+			o.res = rp.settle(o.res)
+		}
 		row.classify(o.res, m)
 		row.Intents = len(o.intents)
-		if ft != nil {
-			ft.finish(&row, o.res)
+		if rp != nil {
+			rp.finish(&row, o.res)
 		}
 		return row, o.intents
 	case <-time.After(GameTimeout):
@@ -412,115 +421,178 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 	}
 }
 
-// focusTrack is the policy of a start's lockstep game: dirac's FocusPolicy for the
-// focus seat over the explore policy, which also answers every other decision. It
-// records, for each decision it answers, the turn, seat and kind (trail), and whether
-// the focus seat took the focus play (took), so the row can say where the engines first
-// differed and whether the game reached the key at all.
-type focusTrack struct {
-	pol   oracle.Policy
-	f     StartFocus
-	refs  []oracle.Ref
-	want  func(oracle.CanonKind) bool
-	took  int
-	trail []trailStep
+// tapeReplay is the policy of a start's lockstep game: it answers each decision with
+// the answer the start's own tape holds for it, as the canonical action that answer
+// stands for. It is the whole of what a start's dirac row compares, so it refuses
+// to guess: any decision it cannot answer from the tape ends the replay (stop), and
+// the row then says the tape was not replayable, rather than reporting the answers of
+// some other game as the item's.
+type tapeReplay struct {
+	bySeq  map[uint64]*game.Entry
+	maxSeq uint64
+	curSeq uint64 // the gorge decision being answered
+	picks  int    // picks made toward curSeq's answer so far
+	seen   bool
+	// stop is why the replay left the tape ("" while on it) and ended whether it ran
+	// out of tape at a decision past its last (a whole game replayed).
+	stop  string
+	ended bool
+	// last is the decision most recently answered, pose the decision pending when the
+	// lockstep stopped (a divergence found as a decision was posed).
+	last, pose *decisionAt
 }
 
-type trailStep struct {
+// decisionAt is a decision of the replayed game: its turn, seat and kind.
+type decisionAt struct {
 	turn int32
-	seat uint8
+	seat int
 	kind string
 }
 
-// newFocusTrack builds the policy for focus on m: the focus seat's instances of the
-// card are the focus refs (Matchup.InstanceCard's layout: seat by seat, card by card),
-// and the focus seat only passes until turn 1's first main phase, as game.Focus waits.
-func newFocusTrack(reg *cards.Registry, m *oracle.Matchup, f StartFocus, base oracle.Policy) (*focusTrack, error) {
-	ft := &focusTrack{f: f}
-	spec := oracle.FocusSpec{Seat: uint8(f.Seat), Turn: 1, Phase: "main1"}
-	if f.Kind == "ability" {
-		spec.Keys = []string{f.Key}
-	}
-	if f.Card != "" {
-		c, ok := reg.Lookup(f.Card)
-		if !ok {
-			return nil, fmt.Errorf("focus card %q not found", f.Card)
+func newTapeReplay(t *game.Tape) *tapeReplay {
+	r := &tapeReplay{bySeq: make(map[uint64]*game.Entry, len(t.Entries))}
+	for i := range t.Entries {
+		e := &t.Entries[i]
+		if _, dup := r.bySeq[e.Seq]; !dup {
+			r.bySeq[e.Seq] = e
 		}
-		off := 0
-		for s := 0; s < f.Seat; s++ {
-			off += len(m.SeatDeck(s))
-		}
-		for i, d := range m.SeatDeck(f.Seat) {
-			if d != c {
-				continue
-			}
-			if off+i >= oracle.MaxInst {
-				return nil, fmt.Errorf("focus card instance %d is past the %d the projection holds", off+i, oracle.MaxInst)
-			}
-			spec.Refs = append(spec.Refs, oracle.Ref(off+i))
-		}
+		r.maxSeq = max(r.maxSeq, e.Seq)
 	}
-	ft.refs = spec.Refs
-	switch f.Kind {
-	case "ability":
-		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActActivate }
-	case "cast":
-		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActCast || k == oracle.ActCastFace }
-	case "land":
-		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActPlayLand }
-	case "attack":
-		ft.want = func(k oracle.CanonKind) bool { return k == oracle.ActAttack }
-	}
-	ft.pol = oracle.FocusPolicy(base, spec)
-	return ft, nil
+	return r
 }
 
-// decisionKindName is the name of a canonical decision kind, for a row.
-func decisionKindName(k oracle.DKind) string {
-	names := map[oracle.DKind]string{
-		oracle.DPriority: "priority", oracle.DAttackers: "attackers", oracle.DBlockers: "blockers",
-		oracle.DTarget: "target", oracle.DModes: "modes", oracle.DChoose: "choose",
-		oracle.DTriggerOrder: "trigger_order", oracle.DMulligan: "mulligan", oracle.DNone: "none",
-		oracle.DTriggerOptional: "trigger_optional", oracle.DArrange: "arrange",
-		oracle.DReplacement: "replacement", oracle.DStartingPlayer: "starting_player",
-		oracle.DCommanderZone: "commander_zone",
-	}
-	if n, ok := names[k]; ok {
-		return n
-	}
-	return "kind" + strconv.Itoa(int(k))
+// tapeStop is the panic a replay ends the lockstep with: LockstepLed turns a policy's
+// panic into a divergence of What "policy", which settle then takes back.
+type tapeStop struct{}
+
+func (r *tapeReplay) leave(c *oracle.PickCtx, why string) {
+	r.stop = fmt.Sprintf("decision %d (turn %d, %s): %s", c.Seq, turnOf(c), decisionKindOf(c), why)
+	panic(tapeStop{})
 }
 
-func (ft *focusTrack) Pick(c *oracle.PickCtx) oracle.Canon {
-	a := ft.pol.Pick(c)
-	st := trailStep{seat: c.D.Player, kind: decisionKindName(c.D.Kind)}
+func turnOf(c *oracle.PickCtx) int {
 	if c.G != nil {
-		st.turn = int32(c.G.Turn())
+		return c.G.Turn()
 	}
-	ft.trail = append(ft.trail, st)
-	if ft.want != nil && int(c.D.Player) == ft.f.Seat && ft.want(a.Kind()) && slices.Contains(ft.refs, a.Src()) {
-		ft.took++
+	return 0
+}
+
+func decisionKindOf(c *oracle.PickCtx) string {
+	if c.G != nil {
+		if d := c.G.Pending(); d != nil {
+			return string(d.Kind)
+		}
 	}
+	return "unknown"
+}
+
+func (r *tapeReplay) Pick(c *oracle.PickCtx) oracle.Canon {
+	g := c.G
+	var d *decision.Decision
+	if g != nil {
+		d = g.Pending()
+	}
+	if d == nil {
+		r.leave(c, "gorge has no pending decision to answer")
+	}
+	en, ok := r.bySeq[d.Seq]
+	switch {
+	case !ok && d.Seq > r.maxSeq:
+		// the tape is spent: the game it recorded ended (or stalled) here
+		r.ended = true
+		panic(tapeStop{})
+	case !ok:
+		r.leave(c, fmt.Sprintf("the tape holds no answer for gorge's decision %d", d.Seq))
+	}
+	if !r.seen || d.Seq != r.curSeq {
+		r.seen, r.curSeq, r.picks = true, d.Seq, 0
+		switch {
+		case en.Reanswered:
+			r.leave(c, "the engine reanswered the tape's intent")
+		case en.Seat != int(d.Player) || en.Kind != string(d.Kind):
+			r.leave(c, fmt.Sprintf("the tape's decision is %s for seat %d, gorge poses %s for seat %d", en.Kind, en.Seat, d.Kind, d.Player))
+		case len(en.Rest) > 0 || en.Announce != "":
+			r.leave(c, "the tape's answer (a manual payment announcement or a split arrangement) has no canonical form")
+		case !reflect.DeepEqual(en.Digest, game.DigestOfGame(g.E)):
+			r.leave(c, "the replayed game's state is not the tape's at this decision")
+		}
+	}
+	var a oracle.Canon
+	switch {
+	case en.Payment != "":
+		a, ok = g.CanonOfPayment(en.Payment)
+	case g.Multi():
+		if r.picks < len(en.Choices) {
+			a, ok = g.CanonOfOption(en.Choices[r.picks])
+		} else {
+			a, ok = g.CanonDone()
+		}
+		r.picks++
+	case len(en.Choices) == 1:
+		a, ok = g.CanonOfOption(en.Choices[0])
+	default:
+		ok = false
+	}
+	if ok && !slices.Contains(c.D.Options, a) {
+		ok = false
+	}
+	if !ok {
+		what := ""
+		if len(en.Picks) > 0 {
+			what = " (" + en.Picks[0].Kind + ": " + en.Picks[0].Label + ")"
+		}
+		r.leave(c, "the tape's answer"+what+" is not among the canonical options gorge offers")
+	}
+	r.last = &decisionAt{turn: int32(g.Turn()), seat: int(d.Player), kind: string(d.Kind)}
 	return a
 }
 
-// finish completes row from the finished game: whether the focus play was taken, and a
-// divergence's turn, seat and kind from the decision it was found at (the last one
-// answered when the engines differed before the next was picked).
-func (ft *focusTrack) finish(row *Row, res oracle.Result) {
-	row.FocusTook = ft.took > 0
-	if row.Status == StatusClean && ft.want != nil && ft.took == 0 {
-		row.Status = StatusNA
-		row.Reason = "dirac's lockstep game never took the " + ft.f.Kind + " focus play of " + ft.f.Card + ": the key was not reached on dirac's side"
+// atEnd is the Finish hook: the decision gorge's side was posing when the lockstep
+// stopped, which is the differing decision of a divergence found as it was posed.
+func (r *tapeReplay) atEnd(g *oracle.GorgeSide) {
+	if d := g.Pending(); d != nil {
+		r.pose = &decisionAt{turn: int32(g.Turn()), seat: int(d.Player), kind: string(d.Kind)}
+	}
+}
+
+// settle reads the policy's own stops back out of the result: running out of tape is
+// the game's end, not a disagreement.
+func (r *tapeReplay) settle(res oracle.Result) oracle.Result {
+	if r.ended && res.Div != nil && res.Div.Field == "panic" {
+		res.Div = nil
+	}
+	return res
+}
+
+// finish completes row from the finished replay: a replay that left the tape is not
+// applicable, and a divergence is located at the decision it was found at.
+func (r *tapeReplay) finish(row *Row, res oracle.Result) {
+	if r.stop != "" {
+		*row = Row{Game: row.Game, Table: row.Table, Status: StatusNA, Decisions: row.Decisions,
+			Reason: "tape not replayable: " + r.stop}
 		return
 	}
-	if res.Div == nil || len(ft.trail) == 0 {
+	if res.Div == nil {
 		return
 	}
-	st := ft.trail[min(max(res.Div.At, 0), len(ft.trail)-1)]
-	seat := int(st.seat)
-	row.Seat, row.Kind = &seat, st.kind
-	row.FromTurn, row.ToTurn = st.turn, st.turn
+	at := r.last
+	if res.Div.At == res.Decisions && r.pose != nil {
+		at = r.pose // found as the decision was posed, before it was answered
+	}
+	if at != nil {
+		seat := at.seat
+		row.Seat, row.Kind = &seat, at.kind
+		row.FromTurn, row.ToTurn = at.turn, at.turn
+	}
+	if len(row.Diff) == 0 {
+		// an options or kind divergence: gorge's offer beside dirac's
+		clip := func(l []string) []string { return l[:min(len(l), diffClip)] }
+		if len(res.Div.RefOptions) > 0 || len(res.Div.KerOptions) > 0 {
+			row.Diff = []string{"gorge: " + strings.Join(clip(res.Div.RefOptions), " | "), "dirac: " + strings.Join(clip(res.Div.KerOptions), " | ")}
+		} else if res.Div.Detail != "" {
+			row.Diff = []string{res.Div.Detail}
+		}
+	}
 }
 
 // openSide opens dirac's side of one lockstep game. The kernel's start loader panics
@@ -528,9 +600,9 @@ func (ft *focusTrack) finish(row *Row, res oracle.Result) {
 // loader refuses these before a game is built") and startLoaderErr answers every such
 // start its words state outside the kernel; this recover is the backstop for whatever
 // else opening a scripted position could panic on. The panic becomes a refusal: dirac
-// never takes the run's verdict down with it (operator 11-24). A side opened with no
-// start cannot reach those panics - the kernel only reads a start there - so this
-// guards exactly the -start lane and costs the dealt lane nothing.
+// never takes the run's verdict down with it (operator 11-24). Only the -start lane
+// opens through it: a side opened with no start cannot reach those panics, and the
+// dealt lane keeps its own path.
 func openSide(f oracle.SideFactory, m *oracle.Matchup, seed uint64) (k oracle.Side, err error) {
 	defer func() {
 		if r := recover(); r != nil {
