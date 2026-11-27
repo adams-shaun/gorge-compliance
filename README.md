@@ -140,7 +140,7 @@ any register file is over the 1,048,576-byte committed-file cap.
 | `oracle/xengine/`, `cmd/xengine` | The full-game differential harness |
 | `oracle/mtgish/`, `cmd/mtgishxc` | The card-definition cross-check |
 | `oracle/validation/oracle/` | [Runbook](oracle/validation/oracle/README.md) for refreshing verdicts |
-| `cmd/` | `oraclediff` (generate, diff, triage, status), `compliance` (manifests), `xmageport`, `oraclepacket` (the printed card, for scenario authors) |
+| `cmd/` | `oraclediff` (generate, diff, triage, status), `compliance` (manifests), `xmageport`, `oraclepacket` (the printed card, for scenario authors), `xmagemine` (XMage card-source census, no JVM) |
 | `scripts/`, `ops/scripts/tests/` | Oracle setup and run scripts; their smokes |
 | `internal/` | `gorgedir` (locates the gorge module), `boundary` (the licence guards) |
 | `docs/` | [The oracles](docs/oracles.md), [the pin](docs/PINNING.md), [the bug hunter](docs/hunt.md), [capacity stalls](docs/capacity.md), [old designs](docs/design/README.md) |
