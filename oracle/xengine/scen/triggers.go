@@ -1699,7 +1699,13 @@ func sourceCaster(trig *cards.Trigger) (caster int, accepts func(*cards.Face) bo
 // refused when the target is another permanent. When the target is the card
 // itself, a permanent that placeNeeds adds beside it later can also be a legal
 // target and is not checked here (the start-not-exercised lane reads it).
-func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+//
+// prelude says the card's own entry runs a state-backed as-enters replacement:
+// it is cast from hand at turn 1's first main (the targeters are instants, so
+// the caster can act on the controller's turn) instead of being placed at
+// genesis, which would carry entry stamps the lowering's setup cannot restate.
+// The card's controller is then the active seat and the cast is the prelude.
+func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile, prelude bool) string {
 	none := "no-generator:trigger:BecomesTarget"
 	if why := eventParamsOK(trig, "BecomesTarget", "ValidTarget", "ValidSource", "Ward", "Keyword", "KeywordLine", "FirstTime", "Valiant"); why != "" {
 		return why
@@ -1760,12 +1766,24 @@ func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 		return none + ":source"
 	}
 	seats := seatsOf(f)
-	f.Setup.P0.Battlefield = []string{card}
+	if prelude {
+		// The entry stamps are the cast's, not a genesis placement's: the card
+		// starts in hand with the lands its cost takes, and the controller is
+		// the active seat so it can cast a sorcery-speed permanent.
+		castCarrier(reg, &f.Setup.P0, card)
+		f.Prelude, f.PreludeSeat = card, 0
+	} else {
+		f.Setup.P0.Battlefield = []string{card}
+	}
 	if target != card {
 		seats[tseat].Battlefield = append(seats[tseat].Battlefield, target)
 	}
 	castCarrier(reg, seats[caster], spellName)
-	f.Active = caster
+	if prelude {
+		f.Active = 0
+	} else {
+		f.Active = caster
+	}
 	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spellName, Kind: "cast"}
 	return ""
 }

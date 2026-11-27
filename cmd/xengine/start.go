@@ -85,8 +85,15 @@ type startFile struct {
 	DayNight string `json:"day_night"`
 	// SeedBase is where the file's seed search starts (0 or absent: 1), so a
 	// key retried in a later cycle plays new games, not the same Seeds again.
-	SeedBase uint64      `json:"seed_base"`
-	Focus    *startFocus `json:"focus"`
+	SeedBase uint64 `json:"seed_base"`
+	// Prelude is the card PreludeSeat casts from hand at turn 1's first main
+	// priority, before the focus play (see scen.StartFile): the key card of an
+	// as-enters start is not placed at genesis, so its entry, choice and turn
+	// stamps are tape events.
+	Prelude string `json:"prelude"`
+	// PreludeSeat is the seat that casts Prelude (0 when unset).
+	PreludeSeat int         `json:"prelude_seat"`
+	Focus       *startFocus `json:"focus"`
 	// Compare is the item's opt-in comparison fields (oraclediff.Compare*),
 	// carried onto the lowered item: a start whose key is a keyword grant is
 	// observable only with "keywords" (null: the item compares nothing extra).
@@ -324,6 +331,15 @@ func (f *startFile) focusOf() (game.Focus, error) {
 		out.BaitAbilitySelf = o.BaitAbilitySelf
 		out.BaitTargetPlayer = o.BaitTargetPlayer
 		out.Targets = o.Targets
+	}
+	out.Prelude, out.PreludeSeat = f.Prelude, f.PreludeSeat
+	if out.Prelude != "" {
+		if out.PreludeSeat < 0 || out.PreludeSeat > 1 {
+			return out, fmt.Errorf("prelude seat %d: no seat casts %q", out.PreludeSeat, out.Prelude)
+		}
+		if !slices.Contains(seats[out.PreludeSeat].Hand, out.Prelude) {
+			return out, fmt.Errorf("prelude %q: not in seat %d's hand", out.Prelude, out.PreludeSeat)
+		}
 	}
 	if out.Seat < 0 || out.Seat > 1 {
 		return out, fmt.Errorf("focus seat %d: no seat lists %q", out.Seat, f.Card)

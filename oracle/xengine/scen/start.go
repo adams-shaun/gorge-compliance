@@ -38,8 +38,17 @@ type StartFile struct {
 	DayNight string `json:"day_night,omitempty"`
 	// SeedBase is where `xengine play -start` starts its seed search (0 or
 	// absent: 1): a retried key sets it to play new games.
-	SeedBase uint64      `json:"seed_base,omitempty"`
-	Focus    *StartFocus `json:"focus,omitempty"`
+	SeedBase uint64 `json:"seed_base,omitempty"`
+	// Prelude is a card PreludeSeat casts from hand at turn 1's first main
+	// priority, before the focus play, so a permanent whose own entry
+	// replacement asks a choice is not placed at genesis. The cast puts the
+	// entry, the choice and the turn's entry stamps on the tape, where the
+	// lowering's setup drive never has to restate them; the focus action then
+	// exercises the key itself.
+	Prelude string `json:"prelude,omitempty"`
+	// PreludeSeat is the seat that casts Prelude (0 when unset).
+	PreludeSeat int         `json:"prelude_seat,omitempty"`
+	Focus       *StartFocus `json:"focus,omitempty"`
 	// Compare is the item's opt-in comparison fields (oraclediff.Compare*) the
 	// lowered item carries: a static start whose effect is a keyword is
 	// observable only with "keywords".

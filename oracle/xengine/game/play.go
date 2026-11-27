@@ -233,11 +233,12 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		if opt.plainSeats {
 			bot = hb
 		}
-		// a block focus, a scripted combat and a scripted bait (cast or ability
-		// activation) also steer the other seats: their attack, block or bait is
-		// forced
+		// a block focus, a scripted combat, a scripted bait (cast or ability
+		// activation) and a prelude cast also steer the other seats: their
+		// attack, block, bait or prelude is forced
 		if fst != nil && (opt.Focus.Seat == i || opt.Focus.Kind == "block" || opt.Focus.Attack != "" || opt.Focus.Block != "" ||
-			opt.Focus.Bait != "" || opt.Focus.BaitAbility != "" || opt.Focus.BaitTarget != "" || opt.Focus.BaitTargetPlayer) {
+			opt.Focus.Bait != "" || opt.Focus.BaitAbility != "" || opt.Focus.BaitTarget != "" || opt.Focus.BaitTargetPlayer ||
+			opt.Focus.Prelude != "") {
 			bot = focusBot{bot: bot, st: fst}
 		}
 		seats[i] = bot
