@@ -996,6 +996,123 @@ func attachBearerOf(t *testing.T, f *StartFile, card string) string {
 	return ""
 }
 
+// TestStartCommanderFilter is the dispatch's repro spelling (xpg-commander-
+// filter): ChangesZone and Attacks triggers whose ValidCard reads IsCommander
+// (Tome of Legends and Search for Dagger, "whenever your commander enters or
+// attacks"; Keleth, Sunmane Familiar, "whenever a commander you control
+// attacks"). The engine resolves Card.IsCommander through Game.CommanderOf
+// list membership, never a printed keyword (CR 903.3: the designation is an
+// attribute of the card itself), so a start must do more than pick a carrier
+// the face test takes: it must designate that carrier in the file's
+// Commanders list, or the trigger never reads the entering object or the
+// attacker as the seat's commander and the focus is never exercised. The
+// inert carrier pool can never hold a commander-shaped card, so the enters
+// arm casts a fixture (entersFallback) and the Attacks lane falls back to
+// pickFixture (attackCarrier), each recording the designation
+// (designateCommander); a commander filter on the card itself (Keleth) is
+// the card's own attack with the card designated. A filter still naming a
+// property the reader does not understand keeps its ":filter" refusal
+// (Secret Summoning's NamedCard): the fail-closed rule is unchanged.
+func TestStartCommanderFilter(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key, kind string }{
+		{"Tome of Legends", "f0/t0", "cast"},
+		{"Tome of Legends", "f0/t1", "attack"},
+		{"Search for Dagger", "f0/t0", "cast"},
+		{"Keleth, Sunmane Familiar", "f0/t0", "attack"},
+	} {
+		t.Run(c.card+" "+c.key, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Seat == nil {
+				t.Fatalf("focus %+v, want a focus with a seat", f.Focus)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != c.card {
+				t.Errorf("p0 battlefield %v, want %q first", f.Setup.P0.Battlefield, c.card)
+			}
+			if *f.Focus.Seat != 0 || f.Focus.Kind != c.kind {
+				t.Fatalf("focus %+v, want seat 0 kind %q", f.Focus, c.kind)
+			}
+			seat := f.Setup.P0
+			// The trigger reads the focus object as the commander, so the
+			// file designates the focus object itself.
+			if len(seat.Commanders) != 1 || seat.Commanders[0] != f.Focus.Card {
+				t.Fatalf("p0 commanders %v, want the focus carrier %q designated", seat.Commanders, f.Focus.Card)
+			}
+			// The designated card is placed like any other (CR 903.3: the
+			// designation does not move it).
+			if c.kind == "cast" {
+				if !slices.Contains(seat.Hand, f.Focus.Card) {
+					t.Errorf("hand %v does not hold the designated commander %q", seat.Hand, f.Focus.Card)
+				}
+			} else if !slices.Contains(seat.Battlefield, f.Focus.Card) {
+				t.Errorf("battlefield %v does not place the designated commander %q", seat.Battlefield, f.Focus.Card)
+			}
+			// CR 903.3: the designated card must be a legendary creature.
+			cmdr, ok := reg.Lookup(f.Focus.Card)
+			if !ok || len(cmdr.Faces) == 0 || !cmdr.Faces[0].IsLegendary() || !cmdr.Faces[0].IsCreature() {
+				t.Errorf("designated commander %q is not a legendary creature", f.Focus.Card)
+			}
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !strings.Contains(string(raw), `"commanders"`) {
+				t.Errorf("marshalled file carries no commanders designation:\n%s", raw)
+			}
+			g, err := DecodeStartFile(raw)
+			if err != nil {
+				t.Fatalf("start file does not decode: %v", err)
+			}
+			if got := g.Setup.P0.Commanders; !slices.Equal(got, seat.Commanders) {
+				t.Errorf("round-trip p0 commanders %v, want %v", got, seat.Commanders)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		// unchanged fail-closed: an unread property is not a carrier test,
+		// and the enters lane keeps its named refusal rather than a blind
+		// pick the engine would reject
+		{"Secret Summoning", "f0/t0", "no-generator:trigger:ChangesZone:filter"},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("%s: %+v %v, want refused %q", r.card, res, err, r.reason)
+			}
+		})
+	}
+	// The IsCommander row is opt-in: only the commander-OK readers know it,
+	// so every lane that cannot record a designation (targets, counters,
+	// tapped state) still refuses it exactly as an unknown property.
+	for _, r := range []struct {
+		name  string
+		alts  []filterAlt
+		known bool
+	}{
+		{"parseFilter", parseFilter("Card.IsCommander+YouOwn"), false},
+		{"parseFilterStatic", parseFilterStatic("Card.IsCommander+YouOwn"), false},
+		{"parseFilterPlaced", parseFilterPlaced("Card.IsCommander+YouOwn"), false},
+		{"parseFilterCommander", parseFilterCommander("Card.IsCommander+YouOwn"), true},
+		{"parseFilterStaticCommander", parseFilterStaticCommander("Card.IsCommander+YouOwn"), true},
+	} {
+		t.Run(r.name, func(t *testing.T) {
+			if len(r.alts) != 1 || r.alts[0].known != r.known {
+				t.Errorf("%s(IsCommander) = %+v, want known %v", r.name, r.alts, r.known)
+			}
+			if r.known && (len(r.alts) != 1 || !r.alts[0].commander) {
+				t.Errorf("%s(IsCommander) lost the commander flag that drives the fixture fallback", r.name)
+			}
+		})
+	}
+}
+
 // TestStartAttachedBearerSeat: an Aura whose Enchant keyword is "creature an
 // opponent controls" (Dead Man's Chest) is attached to a bearer on the
 // opponent's seat, which the start's attach marks Opp; and a self-dies trigger
@@ -1347,7 +1464,11 @@ func TestFilterProps(t *testing.T) {
 	// could never fire: each stays an unknown alternative (a refusal) until the
 	// pin learns it. This is the known-unsupported set at the current pin; a
 	// bump that learns one fails here and the entry is deleted.
-	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric", "nonMonoColor"}
+	// nonIsCommander joins with the IsCommander row: the pin evaluates the
+	// positive predicate (the row is on) but not the non form, which stays
+	// unknown by the pin and refused by the reader (its negation needs the
+	// engine's non form, and only a commanderOK lane reads even the positive).
+	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric", "nonMonoColor", "nonIsCommander"}
 	for p := range filterProps {
 		for _, q := range []string{p, "non" + p} {
 			if supported, listed := pinMatches(q), slices.Contains(unsupported, q); supported == listed {

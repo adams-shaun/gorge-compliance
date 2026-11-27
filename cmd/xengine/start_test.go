@@ -156,6 +156,68 @@ func TestPlayStartBezaSetup(t *testing.T) {
 	}
 }
 
+// TestPlayStartCommanderDesignation plays the start scen writes for a
+// Card.IsCommander+YouOwn trigger: the key (Tome of Legends) on the
+// battlefield and the commander carrier (Isamaru, Hound of Konda) in p0's
+// hand, with the file naming that card in "commanders" (CR 903.3). The
+// runner hands the designation lists to game.Options and the Setup hook
+// appends the held object's ID to Game.Players[0].Commanders — the list the
+// engine reads for Card.IsCommander (Game.CommanderOf), never a printed
+// keyword — so the focus cast plays: the id is not refused (a start whose
+// focus was never taken is refused as start-not-exercised, and one whose
+// lowering disagreed is not lower_ok), and the lowered setup carries the
+// designation, which only the live list can show. The sibling file
+// designates a card the seat does not hold (Tome of Legends in the graveyard
+// only): that is a broken claim, so the game fails loud — a play_error row
+// naming the designation, not a silently skipped commander.
+func TestPlayStartCommanderDesignation(t *testing.T) {
+	t.Parallel()
+	reg := testutil.CorpusRegistry(t)
+	out := t.TempDir()
+	if err := playStart(reg, []string{"testdata/start-commander"}, "FIC", out, false); err != nil {
+		t.Fatal(err)
+	}
+	rows := map[string]lowerRow{}
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		rows[r.ID] = r
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	okID := scen.StartID("FIC", "Tome of Legends", "cast", 1)
+	if r := rows[okID]; r.Status != "lower_ok" {
+		t.Errorf("%s: status %s reasons %v gorge %q, want lower_ok", okID, r.Status, r.Reasons, r.Gorge)
+	}
+	badID := scen.StartID("FIC", "Tome of Legends", "missing", 1)
+	if r := rows[badID]; r.Status != statusPlayError || !strings.Contains(r.Gorge, "designates commander") {
+		t.Errorf("%s: status %s gorge %q, want %s naming the designation", badID, r.Status, r.Gorge, statusPlayError)
+	}
+	if n := len(rows); n != 2 {
+		t.Errorf("lower.jsonl has %d rows, want 2", n)
+	}
+	n := 0
+	if err := readLines(filepath.Join(out, "items.jsonl"), func(b []byte) error {
+		var it oraclegen.Item
+		if err := json.Unmarshal(b, &it); err != nil {
+			return err
+		}
+		n++
+		if want := []string{"Isamaru, Hound of Konda"}; !slices.Equal(it.Setup["p0"].Commanders, want) {
+			t.Errorf("%s: p0 setup commanders %v, want %v", it.ID, it.Setup["p0"].Commanders, want)
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if n != 1 {
+		t.Errorf("items.jsonl has %d rows, want 1 (the designated start)", n)
+	}
+}
+
 // TestStartDeckRefusesFieldBlocked: a start file listing an instant, a
 // sorcery or an Aura on the battlefield is refused (scen.FieldBlock), since
 // gorge and Forge place it differently and the setup could never agree.

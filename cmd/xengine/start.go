@@ -108,6 +108,14 @@ type startSeat struct {
 	Exile       []string `json:"exile"`
 	Library     []string `json:"library"`
 	Tapped      []string `json:"tapped"`
+	// Commanders names the cards the seat designates as its commanders
+	// (scen.StartSeat.Commanders, CR 903.3): the named cards sit in Hand or
+	// Battlefield as any other card of the file, so the decks need no change;
+	// the runner only passes the designation through game.Options
+	// StartCommanders for the Setup hook to record in
+	// Game.Players[seat].Commanders, the list the engine reads for
+	// Card.IsCommander (Game.CommanderOf).
+	Commanders []string `json:"commanders"`
 	// BackFace names battlefield cards that enter on their back face.
 	BackFace []string       `json:"back_face"`
 	Counters []startCounter `json:"counters"`
@@ -763,6 +771,15 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
 			took := -1
 			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}
+			if len(f.Setup.P0.Commanders) > 0 || len(f.Setup.P1.Commanders) > 0 {
+				// A designated commander is an ordinary dealt card of the
+				// seat's deck (startDeckAt placed it); only the designation
+				// travels, as file-ordered names the Setup hook resolves to
+				// object IDs. This never rides the Commander-format lane
+				// (decks.Deck.Commander), which needs a commander in every
+				// deck and switches the life total and format.
+				opt.StartCommanders = [][]string{f.Setup.P0.Commanders, f.Setup.P1.Commanders}
+			}
 			if f.MaxTurns > 0 {
 				// max_turns is the turns played: the engine's watchdog stalls
 				// the game as the turn after them begins.

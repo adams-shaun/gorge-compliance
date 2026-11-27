@@ -406,6 +406,12 @@ func zoneStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card 
 			// the entered Aura's bearer, placed beside its caster
 			seats[s].Battlefield = append(seats[s].Battlefield, targets...)
 		}
+		// An IsCommander filter names a card the seat must designate: the
+		// engine reads Card.IsCommander through Game.CommanderOf list
+		// membership (CR 903.3's designation is an attribute of the card, not
+		// a printed characteristic), so an undesignated entering carrier would
+		// never fire the trigger.
+		designateCommander(reg, seats[s], name, filter)
 		f.Active = s
 		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "cast", Targets: targets}
 	case origin == "Battlefield" && (dest == "Graveyard" || dest == "Any") || origin == "Any" && dest == "Graveyard":
@@ -453,7 +459,7 @@ func leavesToHand(dest string) bool {
 // pool or the spell is not in the corpus.
 func removalStart(reg *cards.Registry, b *certdeck.Builder, card, filter, removal string, f *StartFile) bool {
 	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
-	for _, a := range parseFilterCounters(filter, true, false, false) {
+	for _, a := range parseFilterCounters(filter, true, false, false, false) {
 		if !a.known || a.self {
 			continue
 		}
@@ -597,7 +603,10 @@ func entersFallback(reg *cards.Registry, b *certdeck.Builder, card, filter strin
 		filters = []string{stripped, filter}
 	}
 	for _, flt := range filters {
-		if n, s := castFixtureCarrierIn(reg, b, card, flt, (*cards.Face).IsPermanent, true); n != "" {
+		// commanderOK: the enters arm designates an IsCommander fixture it
+		// casts (the inert pool can never hold one), and the designation is
+		// what makes the entering object the engine reads as a commander.
+		if n, s := castFixtureCarrierIn(reg, b, card, flt, (*cards.Face).IsPermanent, true, true); n != "" {
 			return n, s, nil
 		}
 	}
@@ -662,6 +671,29 @@ func filterHasProp(filter, prop string) bool {
 		}
 	}
 	return false
+}
+
+// designateCommander records name as a commander of seat when the trigger's
+// filter names the IsCommander property: the engine resolves Card.IsCommander
+// through Game.CommanderOf list membership, not a printed keyword (CR 903.3
+// says the designation is an attribute of the card itself), so a start whose
+// carrier was picked for the IsCommander face test must also designate it or
+// the trigger never reads it and the focus is never exercised. Only a face
+// CR 903.3 could legally designate (a legendary creature) is recorded: a
+// carrier that matched another alternative of a multi-alternative filter
+// stays undesignated, and a start the trigger never fires is refused by the
+// executor as not-exercised rather than claiming an illegal commander.
+func designateCommander(reg *cards.Registry, seat *StartSeat, name, filter string) {
+	if name == "" || !filterHasProp(filter, "IsCommander") {
+		return
+	}
+	c, ok := reg.Lookup(name)
+	if !ok || len(c.Faces) == 0 {
+		return
+	}
+	if f := c.Faces[0]; f.IsLegendary() && f.IsCreature() {
+		seat.Commanders = append(seat.Commanders, name)
+	}
 }
 
 // damageStart is "whenever a creature dealt damage by CARDNAME this turn dies"
@@ -1520,9 +1552,10 @@ func attackCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 		return card
 	}
 	if face.IsCreature() {
-		for _, a := range parseFilterCounters(filter, true, false, false) {
+		for _, a := range parseFilterCounters(filter, true, false, false, true) {
 			if a.known && !a.other && a.ctrl != ctrlOpp && a.matches(face, false) && survivesCounters(face, a.counters) {
 				placeAttackGates(&f.Setup.P0, card, a.counters)
+				designateCommander(reg, &f.Setup.P0, card, filter)
 				return card
 			}
 		}
@@ -1534,18 +1567,29 @@ func attackCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 	// alternative some inert creature matches; an OppCtrl alternative names a
 	// seat 1 attacker, never taken here) with the counter gates read and
 	// placed, so "a creature you control with a counter on it" attacks.
-	for _, a := range parseFilterCounters(filter, true, false, false) {
+	for _, a := range parseFilterCounters(filter, true, false, false, true) {
 		if !a.known || a.self || a.ctrl == ctrlOpp {
 			continue
 		}
-		name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
-			return c.IsCreature() && FieldBlock(c) == "" && !deadOnArrival(c) && a.matches(c, false) && survivesCounters(c, a.counters)
-		})
+		keep := func(c *cards.Face) bool {
+			return c.IsCreature() && FieldBlock(c) == "" && !deadOnArrival(c) && survivesCounters(c, a.counters)
+		}
+		takes := func(c *cards.Face) bool { return keep(c) && a.matches(c, false) }
+		name := pickCarrier(reg, b, card, takes)
+		if name == "" && a.commander {
+			// The inert carrier pool can never hold a card the seat would
+			// designate as its commander, so an IsCommander alternative is
+			// not refused on an empty pool: the same fixture scan the static
+			// lane uses (fixtureCarrierMode's pickFixture), the same
+			// fixtureLess ordering, so the attacker stays deterministic.
+			name = pickFixture(reg, b, card, a.test, takes, true)
+		}
 		if name == "" {
 			continue
 		}
 		f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, name)
 		placeAttackGates(&f.Setup.P0, name, a.counters)
+		designateCommander(reg, &f.Setup.P0, name, filter)
 		return name
 	}
 	return ""
@@ -1848,7 +1892,11 @@ func attacksStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 		}
 		return ""
 	}
-	for _, a := range parseFilter(filter) {
+	// parseFilterCommander: the IsCommander alternative is understood here
+	// because attackCarrier designates the attacker it picks (the engine
+	// reads Card.IsCommander through Game.CommanderOf, so an undesignated
+	// attacker would never fire the trigger).
+	for _, a := range parseFilterCommander(filter) {
 		if a.self || !a.known {
 			// An unread property is not a carrier test: a counter gate is a
 			// placement and a tapped state a battlefield state. attackCarrier
@@ -1870,13 +1918,14 @@ func attacksStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 	case att == "":
 	case strings.HasPrefix(att, "You"):
 		// the opponent attacks the card's controller
-		name, s := filterCarrier(reg, b, card, filter, func(c *cards.Face) bool {
+		name, s := filterCarrierCommander(reg, b, card, filter, func(c *cards.Face) bool {
 			return c.IsCreature() && !c.HasKeyword("Defender") && !deadOnArrival(c)
 		})
 		if name == "" || s != 0 {
 			return none + ":filter"
 		}
 		f.Setup.P1.Battlefield = append(f.Setup.P1.Battlefield, name)
+		designateCommander(reg, &f.Setup.P1, name, filter)
 		f.Active = 1
 		f.Focus = &StartFocus{Seat: seatPtr(1), Card: name, Kind: "attack"}
 		return ""
