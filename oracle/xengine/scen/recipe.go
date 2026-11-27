@@ -955,7 +955,228 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if why := counterBindingRefusal(f); why != "" {
 		return refuse(why)
 	}
+	if why := startGateRefusal(reg, f); why != "" {
+		return refuse(why)
+	}
 	return Result{Path: PathStart, Start: f}, nil
+}
+
+// startGateRefusal is the finished start's read against the lowering's own
+// start gate, or "", over the two seats' placements: every battlefield
+// permanent (card on its placed face — BackFace read per copy through
+// BackFaceCopies, as the lowering binds it — or setup token) is read through
+// lower.StartCardRefusal, the gate's own predicate, so a card carrying a
+// mandatory upkeep/draw Phase trigger that captureStart refuses is named
+// before the start is emitted (Vitaspore Thallid f0/a1: its spore upkeep is
+// mandatory, and play lowers that start to no item). That read is the gate's
+// conservative one, so the battlefield branch also carries the one exception
+// the finished start can judge (upkeepRemovalExcused): an echo the drive
+// cannot pay sacrifices its card before the cut, while a payable one leaves
+// it standing where captureStart refuses, so a payable echo stays refused by
+// name (Earthlink with two spare Plains, Thelon's Chant with a Forest).
+// Every card the start places in any zone is then read for the
+// startedTheTurnUntapped filter word, because the gate's gameMentions spans
+// all zones and the turn-change fold stamps that field on every untapped
+// permanent once any card in the game names the word (Rasputin Dreamweaver
+// cast: the card sits in hand for the focus cast, and its own text names the
+// word, so its start's untapped Plains carry the live field and captureStart
+// refuses). The mention read is the gate's, not a hand-built list of shapes,
+// so the next card naming the word cannot slip past on a lane no per-lane
+// guard covered. The mandatory-trigger half reaches the battlefield through
+// StartCardRefusal (which reads the mention word for those cards too), the
+// off-battlefield zones through StartTurnStampMention only, exactly as
+// captureAt refuses a phase trigger only for a battlefield object: a hand
+// card with an upkeep trigger never fires it. The mention half is skipped
+// when no battlefield copy is untapped, since the field is refused only
+// where its stamp is set — per copy through TappedCopies (four Plains with
+// Tapped ["Plains"] leave three copies that carry the stamp), the same
+// binding the lowering's startDeck uses.
+func startGateRefusal(reg *cards.Registry, f *StartFile) string {
+	seats := []*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	untapped := false
+	for _, sd := range seats {
+		for _, tapped := range sd.TappedCopies() {
+			if !tapped {
+				untapped = true
+			}
+		}
+		for _, tok := range sd.Tokens {
+			if !tok.Tapped {
+				untapped = true
+			}
+		}
+	}
+	for seat, sd := range seats {
+		back := sd.BackFaceCopies()
+		for i, name := range sd.Battlefield {
+			c, ok := reg.Lookup(name)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			face := c.Faces[0]
+			if back[i] && len(c.Faces) > 1 {
+				face = c.Faces[1] // the placed face: captureStart reads o.Face()
+			}
+			if why := lower.StartCardRefusal(c, face); why != "" {
+				if why == "start:upkeep-trigger" && upkeepRemovalExcused(reg, f, face, seat, name) {
+					// The drive takes the card off the battlefield before the
+					// cut, so captureAt never holds it there; its text can
+					// still name the stamp word from the battlefield, so the
+					// mention half still reads it.
+					if lower.StartTurnStampMention(c) {
+						return "start:started-turn-untapped"
+					}
+					continue
+				}
+				return why
+			}
+		}
+		for _, tok := range sd.Tokens {
+			c, ok := reg.Token(tok.Script)
+			if !ok || c == nil || len(c.Faces) == 0 {
+				continue
+			}
+			if why := lower.StartCardRefusal(c, c.Faces[0]); why != "" {
+				if why == "start:upkeep-trigger" && upkeepRemovalExcused(reg, f, c.Faces[0], seat, tok.Script) {
+					continue
+				}
+				return why
+			}
+		}
+	}
+	if !untapped {
+		return ""
+	}
+	for _, sd := range seats {
+		for _, names := range [][]string{sd.Battlefield, sd.Hand, sd.Library, sd.Graveyard, sd.Exile} {
+			for _, name := range names {
+				if c, ok := reg.Lookup(name); ok && lower.StartTurnStampMention(c) {
+					return "start:started-turn-untapped"
+				}
+			}
+		}
+	}
+	return ""
+}
+
+// upkeepRemovalExcused reports whether the finished start's own turn-1 setup
+// drive provably takes the seat's battlefield permanent off the battlefield
+// before the cut, so lower.captureStart never holds it there: every
+// mandatory upkeep or draw trigger the gate counts
+// (lower.MandatoryUpkeepTriggers) is the proven unconditional self-removal
+// shape (provenUpkeepRemoval), fires from this placement (upkeepTriggerFires),
+// and its UnlessCost is the seat's own, pure mana, and unpayable from any
+// source the seat could tap at the upkeep (the echo population: Earthlink
+// {2}, Thelon's Chant {G}, with no payable mana short as develop's generated
+// starts hold). The heuristic drive pays when it can, so a payable echo
+// leaves the card standing at the cut and is no exception: it stays the
+// gate's named refusal instead of an emitted start play lowers to zero items.
+// A trigger that never fires, a condition (Impending Disaster's seven lands,
+// Defense of the Heart's CheckSVar, fading's counters_EQ0), an extra
+// sub-ability, a non-mana ask, a payer the seat is not, or a cost the judge
+// cannot read is no proof the card goes — and an unclassified cost is
+// unreadable, not empty: Magmasaur's SubCounter and Koskun Falls's tapXType
+// are asks the drive can pay, so they never take the card off the
+// battlefield. A placed counter on the card changes what its own trigger
+// reads (fading sacrifices only with no fade counter left), so it is no
+// proof either. This is why the exception lives here, with the finished
+// start, and not in lower.StartCardRefusal: only the finished start can say
+// whether its drive can pay.
+func upkeepRemovalExcused(reg *cards.Registry, f *StartFile, face *cards.Face, seat int, name string) bool {
+	trigs := lower.MandatoryUpkeepTriggers(face)
+	if len(trigs) == 0 {
+		return false
+	}
+	sd := &f.Setup.P0
+	if seat != 0 {
+		sd = &f.Setup.P1
+	}
+	for _, c := range sd.Counters {
+		if c.Card == name && c.N > 0 {
+			return false // a placed counter changes what the trigger reads
+		}
+	}
+	for _, t := range trigs {
+		if !provenUpkeepRemoval(t) || !upkeepTriggerFires(t, seat, f) {
+			return false
+		}
+		if p := t.Effect.Params["UnlessPayer"]; p != "" && !strings.EqualFold(p, "You") {
+			return false // not this seat's payment to judge
+		}
+		req, binds := triggerUpkeepReq(t, seat, f)
+		if !binds {
+			// No resource the estimate can price: an UnlessCost this judge
+			// cannot classify (Magmasaur's SubCounter, Koskun Falls's
+			// tapXType) is unprovable, not absent, so it is no removal.
+			return false
+		}
+		if req.unparsed {
+			return false // part pure mana, part unreadable: not provable either
+		}
+		if req.hand > 0 || req.grave > 0 || req.field != "" {
+			return false // a non-mana ask: not the drive's pay decision
+		}
+		// The drive pays the upkeep before any focus play, so the focus's
+		// cost is not reserved here: counting it as already spent would
+		// overstate "short" and widen the exception (the wrong direction for
+		// a fail-closed judge).
+		if req.mana != "" && !upkeepManaShort(reg, f, seat, req.mana, nil) {
+			return false // payable: the drive pays and the card stands
+		}
+	}
+	return true
+}
+
+// provenUpkeepRemoval is whether one mandatory upkeep or draw trigger is the
+// proven self-removal shape the exception may rest on: a bare sacrifice (or
+// untargeted destroy/self change-zone) whose parameter maps hold only the
+// keys the "sacrifice unless you pay" and echo shapes use, with no
+// sub-ability. Any other key can make the trigger not fire or not remove the
+// card — IsPresent/PresentCompare (Impending Disaster), CheckSVar/SVarCompare
+// (Defense of the Heart), Condition* (fading), UnlessResolveSubs,
+// SubAbility — so the shape is unprovable and the exception is not granted.
+// The maps are allowlisted as a whole, not screened for known-bad keys, so
+// the next conditional spelling cannot slip past.
+func provenUpkeepRemoval(t *cards.Trigger) bool {
+	if t == nil || t.Effect == nil || t.Effect.Sub != nil || !lower.TriggerRemovesSelf(t) {
+		return false
+	}
+	triggerKeys := map[string]bool{
+		"Execute": true, "Mode": true, "Phase": true, "TriggerDescription": true,
+		"TriggerZones": true, "ValidPlayer": true, "Keyword": true, "KeywordLine": true,
+	}
+	effectKeys := map[string]bool{
+		"UnlessCost": true, "UnlessPayer": true, "Defined": true, "SacValid": true, "OrString": true,
+	}
+	for _, p := range []struct {
+		params map[string]string
+		ok     map[string]bool
+	}{{t.Params, triggerKeys}, {t.Effect.Params, effectKeys}} {
+		for k, v := range p.params {
+			if strings.TrimSpace(v) == "" || p.ok[k] {
+				continue
+			}
+			return false
+		}
+	}
+	return true
+}
+
+// upkeepTriggerFires is whether one mandatory upkeep or draw trigger of a
+// seat's battlefield permanent runs during the start's turn-1 drive: it
+// fires from the battlefield (a TriggerZones omitting it never fires there),
+// and a "your upkeep" trigger fires only on the active seat's turn. A
+// trigger that never fires leaves the card standing at the cut, where
+// captureAt's start read refuses it, so it is no removal (triggerUpkeepReq
+// treats the same shapes as unbinding).
+func upkeepTriggerFires(t *cards.Trigger, seat int, f *StartFile) bool {
+	if z := t.Params["TriggerZones"]; z != "" && !zoneOnBattlefield(z) {
+		return false
+	}
+	if strings.EqualFold(t.Params["ValidPlayer"], "You") && seat != f.Active {
+		return false
+	}
+	return true
 }
 
 // counterBindingRefusal is why a start's counters cannot be restated, or "":
@@ -1156,6 +1377,7 @@ type upkeepReq struct {
 	field       string // a permanent type the battlefield must hold (a sacrifice of another)
 	self        bool   // the card itself is sacrificed with no cost to avoid it
 	atRisk      bool   // the chain sacrifices the card (a cost unpaid loses it)
+	unparsed    bool   // an UnlessCost/Cost token this judge cannot classify
 }
 
 // triggerUpkeepReq is the upkeepReq of one Phase trigger, and whether it
@@ -1254,6 +1476,9 @@ func sacValidSelf(sa *cards.SA) bool {
 
 // mergeUpkeepCost reads one UnlessCost/Cost into req: mana tokens, and the
 // non-mana steps a start can lack (a discard, a graveyard exile, a reveal).
+// A token it cannot classify sets unparsed, so a caller that must prove the
+// payment happened (upkeepRemovalExcused) can tell an unreadable ask from an
+// empty one instead of treating it as free.
 func mergeUpkeepCost(req *upkeepReq, cost string) {
 	for _, tok := range splitCost(cost) {
 		if manaTokenRE.MatchString(tok) {
@@ -1286,7 +1511,11 @@ func mergeUpkeepCost(req *upkeepReq, cost string) {
 		case "PayMana":
 			if len(args) >= 1 {
 				req.mana = strings.TrimSpace(req.mana + " " + args[0])
+			} else {
+				req.unparsed = true
 			}
+		default:
+			req.unparsed = true
 		}
 	}
 }
@@ -1415,13 +1644,97 @@ func focusManaCost(reg *cards.Registry, f *StartFile) []string {
 	return mana
 }
 
-// basicColour is a basic land's colour letter.
-var basicColour = map[string]string{"Plains": "W", "Island": "U", "Swamp": "B", "Mountain": "R", "Forest": "G"}
+// basicLandColours maps a basic land's type word to its colour letter. The
+// type word, not the printed name, so a Snow-Covered or reprint basic still
+// counts its colour.
+var basicLandColours = []struct{ word, colour string }{
+	{"Plains", "W"}, {"Island", "U"}, {"Swamp", "B"}, {"Mountain", "R"}, {"Forest", "G"},
+}
+
+// basicLandColour is a basic land face's colour letter, "" for a basic that
+// produces only colourless mana (Wastes).
+func basicLandColour(face *cards.Face) string {
+	for _, b := range basicLandColours {
+		if face.HasTypeWord(b.word) {
+			return b.colour
+		}
+	}
+	return ""
+}
+
+// faceAddsManaBeyondBasic reports whether face could add mana the basic-land
+// estimate cannot price: the canonical mana ability cards.Face.HasManaAbility
+// defines (an activated Mana/ManaReflected ability, or the CR 605.1b
+// TapsForMana/ManaAdded triggered form — Wild Growth and Utopia Sprawl), any
+// trigger whose Execute chain reaches a Mana effect outside that shape, a
+// static that grants another permanent a mana ability or a mana trigger
+// (Ambulatory Reactor), a static that lets mana be spent as another type
+// (ManaConvert), or an Aura/Equipment, whose text can grant its bearer mana.
+// Every one of those makes a land's output more than the one mana the
+// estimate counts.
+func faceAddsManaBeyondBasic(face *cards.Face) bool {
+	if face == nil {
+		return false
+	}
+	if face.HasManaAbility() {
+		return true
+	}
+	if face.HasTypeWord("Aura") || face.HasTypeWord("Equipment") {
+		return true
+	}
+	for i := range face.Triggers {
+		if triggerAddsMana(&face.Triggers[i]) {
+			return true
+		}
+	}
+	for i := range face.Statics {
+		st := &face.Statics[i]
+		if st.Mode == "ManaConvert" {
+			return true // a colour the estimate did not count could pay
+		}
+		for _, key := range []cards.ParamKey{cards.PKAddAbility, cards.PKAddTrigger, cards.PKAddTriggers} {
+			names, _ := cards.ParamSetParam(st.ParamSetOf(), st.Params, key)
+			for _, n := range cards.SplitGrantNames(names) {
+				if sa := cards.ResolveSVar(face.SVars, n); sa != nil && (sa.API == "Mana" || sa.API == "ManaReflected") {
+					return true
+				}
+				if t, ok := cards.ParseTriggerLine(face.SVars[n]); ok && triggerAddsMana(&t) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// triggerAddsMana reports whether t can add mana: a TapsForMana/ManaAdded
+// trigger, or any Execute chain reaching a Mana effect.
+func triggerAddsMana(t *cards.Trigger) bool {
+	if t == nil {
+		return false
+	}
+	if t.Mode == "TapsForMana" || t.Mode == "ManaAdded" {
+		return true
+	}
+	for sa, d := t.Effect, 0; sa != nil && d < 32; sa, d = sa.Sub, d+1 {
+		if sa.API == "Mana" || sa.API == "ManaReflected" {
+			return true
+		}
+	}
+	return false
+}
 
 // upkeepManaShort reports whether seat's untapped lands cannot pay mana as
-// well as the focus play's own cost: a basic pays its colour, an untapped
-// non-basic land pays generic only, and the focus play's tokens are paid
-// first. A cost the judge cannot read is not a short start.
+// well as the focus play's own cost: a basic pays its colour, and the focus
+// play's tokens are paid first. It fails closed on every source it cannot
+// price, through one characteristic (faceAddsManaBeyondBasic): an untapped
+// non-land permanent with a mana ability (Sol Ring) or one with a mana
+// trigger or grant (Wild Growth), an untapped Aura/Equipment, a mana-making
+// token, or an untapped non-basic land (Ancient Tomb, {C}{C}) could pay the
+// cost, so the answer is "not short" and the caller does not grant an
+// exception on a payment it cannot prove. A cost the judge cannot read is not
+// a short start either. The placed face is read per copy through
+// BackFaceCopies, as the lowering binds it.
 func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, focusMana []string) bool {
 	mana, why := costTokens(cost)
 	if why != "" {
@@ -1448,14 +1761,37 @@ func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, f
 		sd = &f.Setup.P1
 	}
 	pool, avail := 0, map[string]int{}
-	for _, name := range sd.Battlefield {
+	tapped := sd.TappedCopies() // per copy, as the lowering binds Tapped names
+	back := sd.BackFaceCopies() // per copy, the face captureStart reads
+	for i, name := range sd.Battlefield {
 		c, ok := reg.Lookup(name)
-		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Land") || slices.Contains(sd.Tapped, name) {
+		if !ok || len(c.Faces) == 0 || tapped[i] {
 			continue
 		}
-		pool++
-		if col, ok := basicColour[name]; ok {
-			avail[col]++
+		face := c.Faces[0]
+		if back[i] && len(c.Faces) > 1 {
+			face = c.Faces[1]
+		}
+		if face.IsBasic() && face.HasTypeWord("Land") {
+			pool++
+			if col := basicLandColour(face); col != "" {
+				avail[col]++
+			}
+			continue
+		}
+		if face.HasTypeWord("Land") {
+			return false // a non-basic land may produce more than one mana
+		}
+		if faceAddsManaBeyondBasic(face) || sd.Attached(name) {
+			return false // a source this estimate cannot price
+		}
+	}
+	for _, tok := range sd.Tokens {
+		if tok.Tapped {
+			continue
+		}
+		if c, ok := reg.Token(tok.Script); ok && c != nil && len(c.Faces) > 0 && faceAddsManaBeyondBasic(c.Faces[0]) {
+			return false // an untapped mana-making token, same as any other source
 		}
 	}
 	for col, n := range need {

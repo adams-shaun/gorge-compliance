@@ -602,11 +602,19 @@ func TestStartPlayerCounters(t *testing.T) {
 // TestStartPlayerCounterCost: a PayEnergy<N> cost is paid from the seat's
 // player counters (CR 107.14, 122.1), so a start seeds ENERGY on the seat
 // itself instead of refusing the ability. Aethersquall Ancient's {8} ability
-// is the class's first card; the start output stays a sorted slice with no
-// card name, and a malformed amount keeps the old refusal.
+// was the class's first card, but its mandatory upkeep trigger makes the
+// lowering's start gate refuse the placed card (Vitaspore Thallid's shape), so
+// Whirler Virtuoso carries the energy start and Aethersquall Ancient is the
+// named refusal; the start output stays a sorted slice with no card name, and
+// a malformed amount keeps the old refusal.
 func TestStartPlayerCounterCost(t *testing.T) {
 	reg, b := testBuilder(t)
-	const card = "Aethersquall Ancient"
+	const card = "Whirler Virtuoso"
+	if gate, err := Generate(reg, b, "Aethersquall Ancient", "f0/a0", Options{Prefer: "start"}); err != nil {
+		t.Fatal(err)
+	} else if gate.Path != PathRefused || gate.Reason != "start:upkeep-trigger" {
+		t.Fatalf("Aethersquall Ancient: path %q reason %q, want refused start:upkeep-trigger", gate.Path, gate.Reason)
+	}
 	res, err := Generate(reg, b, card, "f0/a0", Options{Prefer: "start"})
 	if err != nil {
 		t.Fatal(err)
@@ -616,7 +624,7 @@ func TestStartPlayerCounterCost(t *testing.T) {
 	}
 	f := res.Start
 	focusIs(t, f, 0, card, "ability", 0)
-	if want := []StartCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+	if want := []StartCounter{{Kind: "ENERGY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
 		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
 	}
 	if len(f.Setup.P1.PlayerCounters) != 0 {
@@ -3795,7 +3803,12 @@ func countAmong(xs []string, name string) int {
 // The Soul Stone exile from activated abilities whose starts do not lower
 // (steps-needed:cost:Exile), and Rasputin Dreamweaver's personal counters
 // need a battlefield placement the start gate refuses (steps-needed:cost:
-// SubCounter).
+// SubCounter). The gate's own read then sweeps the finished start itself
+// (startGateRefusal): Rasputin's cast and upkeep-trigger keys name the
+// startedTheTurnUntapped word the gate stamps on every untapped permanent,
+// from hand included (start:started-turn-untapped), and Vitaspore Thallid's
+// spore ability places a permanent whose upkeep trigger is mandatory
+// (start:upkeep-trigger), starts play lowers to zero items on both seeds.
 func TestScenStepsNeededCostClass(t *testing.T) {
 	reg, b := testBuilder(t)
 	// counterOn is the one counter of kind the start places, proved bindable:
@@ -3931,6 +3944,32 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 		// the cost refusal rather than a start play writes no item for.
 		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter", nil},
 		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter", nil},
+		// The same gate read, whole-start: every lane that emits a start is
+		// swept through it (startGateRefusal), so a card naming the
+		// startedTheTurnUntapped word cannot reach PathStart through a lane
+		// with no per-lane guard - cast from hand included, where the gate's
+		// gameMentions still stamps the field on every untapped land - and a
+		// permanent with a mandatory upkeep trigger is named, not emitted.
+		// Play lowers each of these starts to zero items on both seeds.
+		{"Rasputin Dreamweaver", "cast", "start:started-turn-untapped", nil},
+		{"Rasputin Dreamweaver", "f0/t0", "start:started-turn-untapped", nil},
+		{"Vitaspore Thallid", "f0/a1", "start:upkeep-trigger", nil},
+		// A Destroy that only reads targets is no self-removal: The Abyss
+		// ("destroy all nonartifact creatures you don't control") and
+		// Crumbling Ashes ("destroy target creature with a +1/+1 counter on
+		// it") are DB$ Destroy with ValidTgts, so the battlefield lane stays
+		// their refusal (the sweep itself, over finished StartFiles, is the
+		// white-box TestScenStartGateRefusalSweepsFinishedStart); what builds is
+		// their cast lane, the card in hand and the play — not the setup
+		// drive — firing the trigger after the cut.
+		{"The Abyss", "f0/t0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "The Abyss", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"The Abyss"})
+		}},
+		{"Crumbling Ashes", "f0/t0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Crumbling Ashes", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Crumbling Ashes"})
+		}},
 	} {
 		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
 		if err != nil {
@@ -3946,6 +3985,83 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 			t.Fatalf("%s %s: path %q reason %q, want a start file", r.card, r.key, res.Path, res.Reason)
 		}
 		r.check(t, res.Start)
+	}
+}
+
+// TestScenStartGateRefusalSweepsFinishedStart drives the whole-start sweep over
+// finished StartFiles, the reviewer's witnesses of the shape develop emitted
+// and play lowered to zero items on both seeds:
+//   - a mandatory upkeep that only reads targets is not self-removal: The
+//     Abyss (ValidTgts Creature.nonArtifact+ControlledBy TriggeredPlayer)
+//     and Crumbling Ashes (ValidTgts Creature.counters_GE1_M1M1) are DB$
+//     Destroy with targets and stay the gate's refusal, not excused by the
+//     echo shape (lower.TriggerRemovesSelf's tightening);
+//   - the echo exception is start-aware (upkeepRemovalExcused): Earthlink's
+//     {2} over two spare Plains and Thelon's Chant's {G} over a Forest are
+//     payable, the drive pays, the card stands at the cut where captureStart
+//     refuses — so the sweep refuses by name instead of emitting; the same
+//     cards with no payable mana are sacrificed before the cut and stay
+//     starts (develop's generated Earthlink and Thelon's Chant starts);
+//   - the exception only prices pure mana from basic lands: Magmasaur's
+//     UnlessCost SubCounter and Koskun Falls's tapXType are asks the drive
+//     can pay, so they are not an empty cost; and a mana source the estimate
+//     cannot see (Sol Ring's artifact, Ancient Tomb's two colourless from a
+//     non-basic land, an untapped Treasure token, Wild Growth's
+//     TapsForMana trigger on a Plains, a static grant of a mana ability or a
+//     ManaConvert static) makes the payment provable, so no exception either.
+//     All arms are refused by name instead of emitted;
+//   - the exception only rests on the proven unconditional self-removal
+//     shape (provenUpkeepRemoval): a condition on the trigger or effect
+//     (Impending Disaster's seven lands, Defense of the Heart's CheckSVar,
+//     fading's counters_EQ0 with placed FADE counters) means the drive does
+//     not provably take the card off the battlefield, so it stays refused;
+//   - Tapped names bind to copies (TappedCopies, as the lowering binds
+//     them): four Plains with Tapped ["Plains"] leave three untapped copies
+//     for the startedTheTurnUntapped stamp Rasputin names from hand, and
+//     three untapped Plains minus one for a payable echo; all four tapped
+//     leaves no stamp anywhere, so no refusal.
+//
+// Reverting any guard in the sweep — the targeted-Destroy arms, the
+// payable-echo half, the unparsed-cost arm, the shape allowlist, the
+// non-land/non-basic/trigger/attachment/token mana arms, or the per-copy
+// TappedCopies/BackFaceCopies reads — turns one expected refusal back into ""
+// (or one expected "" into a refusal) and fails here.
+func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
+	reg, _ := testBuilder(t)
+	start := func(p0 StartSeat) *StartFile {
+		f := &StartFile{Format: StartFormat, Players: 2, Seeds: 2}
+		f.Setup.P0 = p0
+		return f
+	}
+	for _, r := range []struct {
+		name string
+		p0   StartSeat
+		want string
+	}{
+		{"targeted destroy, triggered player's creatures", StartSeat{Battlefield: []string{"The Abyss", "Grizzly Bears"}}, "start:upkeep-trigger"},
+		{"targeted destroy of a countered creature", StartSeat{Battlefield: []string{"Crumbling Ashes"}}, "start:upkeep-trigger"},
+		{"payable echo, spare generic", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Plains"}}, "start:upkeep-trigger"},
+		{"payable echo under a partially tapped name", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:upkeep-trigger"},
+		{"unpayable echo (develop's generated start)", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}}, ""},
+		{"payable echo colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Forest"}}, "start:upkeep-trigger"},
+		{"unpayable echo colour (develop's generated start)", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears"}}, ""},
+		{"payable non-mana unless cost, counter", StartSeat{Battlefield: []string{"Magmasaur"}}, "start:upkeep-trigger"},
+		{"payable non-mana unless cost, tap", StartSeat{Battlefield: []string{"Koskun Falls", "Grizzly Bears"}}, "start:upkeep-trigger"},
+		{"payable echo from an artifact", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Sol Ring"}}, "start:upkeep-trigger"},
+		{"payable echo from a multi-mana land", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Ancient Tomb"}}, "start:upkeep-trigger"},
+		{"payable echo from a mana token", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}, Tokens: []StartToken{{Script: "c_a_treasure_sac"}}}, "start:upkeep-trigger"},
+		{"payable echo from an attached mana trigger", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Wild Growth"}, Attach: []StartAttach{{Card: "Wild Growth", To: "Plains"}}}, "start:upkeep-trigger"},
+		{"payable echo from a granted mana ability", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Basal Sliver"}}, "start:upkeep-trigger"},
+		{"payable echo by converted colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Island", "Mycosynth Lattice"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, seven lands", StartSeat{Battlefield: []string{"Impending Disaster"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, checked creature count", StartSeat{Battlefield: []string{"Defense of the Heart"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, fading counters", StartSeat{Battlefield: []string{"Blastoderm"}, Counters: []StartCounter{{Card: "Blastoderm", Kind: "FADE", N: 3}}}, "start:upkeep-trigger"},
+		{"mention word with one tapped duplicate", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:started-turn-untapped"},
+		{"mention word with every copy tapped", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains", "Plains", "Plains", "Plains"}}, ""},
+	} {
+		if got := startGateRefusal(reg, start(r.p0)); got != r.want {
+			t.Errorf("%s: startGateRefusal %q, want %q", r.name, got, r.want)
+		}
 	}
 }
 
