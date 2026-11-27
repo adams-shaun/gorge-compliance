@@ -1032,9 +1032,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # unchanged. Fork branch oracle-driver.
 # 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 above (siblings on 4385467a9eb, textually clean, no conflicts): carries both the
 # commander-ninjutsu cost-shape fallback and the unpinned order-to-Exile ask. Fork branch fix/xp-forge-driver-ninjutsu-commander-identity.
-# edf8473c4d6 = the merge of 5ceed32d687 and 3526a90f719 above (siblings on 1dea7b45ce0, textually clean, no conflicts): the two pins had
-# diverged, so every promote PR failed check-fork-pins with "diverged"; the join carries the commander-ninjutsu cost-shape fallback and
-# both unpinned order asks (Exile and Command). ForcedDieRollTest is 7/7 on it. Fork branch oracle/fpin-1126-join23.
+# edf8473c4d6 = join23 on the fork (oracle/fpin-1126-join23): 5ceed32d687 merged with 3526a90f719, so the pin carries the Command-order
+# gate, the ninjutsu cost-shape fallback and the unpinned order-to-Exile ask together. None of the three is on the die-roll path;
+# OrderCardsTest (incl. unpinnedCommandOrderKeepsForgeOrder) and ForcedDieRollTest were re-run green on the merged pin
+# (run-unit-tests.sh with FORGE_ORACLE_DIR=forgeoracle-1120 -- the default env's forge-game jar (10-29) predates the record
+# GameEventRollDie and does not compile any 11-2x pin, this one included).
 FORGE_ORACLE_REF ?= edf8473c4d64d76ccd35280b666aaa2257b5eff5
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
