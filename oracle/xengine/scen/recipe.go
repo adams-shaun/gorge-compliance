@@ -535,7 +535,7 @@ func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string
 // activation zone has it, the cost met by placed state (planCost), and the
 // focus the ability's activation. "" when built, else the refusal.
 func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, idx int, sa *cards.SA, f *StartFile) string {
-	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic)
+	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic, false)
 	if why != "" {
 		return why
 	}
@@ -952,7 +952,38 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if why := dayNightStart(reg, f); why != "" {
 		return refuse(why)
 	}
+	if why := counterBindingRefusal(f); why != "" {
+		return refuse(why)
+	}
 	return Result{Path: PathStart, Start: f}, nil
+}
+
+// counterBindingRefusal is why a start's counters cannot be restated, or "":
+// the lowering keys each counters entry by card name and refuses a name whose
+// copies carry different counters (setup_by_name:counters), so a counter must
+// name the one copy of that card on its seat's battlefield. The check reads
+// the finished start, after every recipe and need has placed its permanents,
+// so no plan (a cost's SubCounter, a counters need on an enabler) can emit an
+// entry the followers cannot bind. A player counter (Card empty) names the
+// seat, not a permanent.
+func counterBindingRefusal(f *StartFile) string {
+	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		for _, c := range sd.Counters {
+			if c.Card == "" {
+				continue
+			}
+			n := 0
+			for _, name := range sd.Battlefield {
+				if name == c.Card {
+					n++
+				}
+			}
+			if n != 1 {
+				return "start:counters-by-name"
+			}
+		}
+	}
+	return ""
 }
 
 // FieldBlock is why a start file cannot list face on the battlefield, or "":
@@ -1641,6 +1672,15 @@ func placeCounters(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card
 		if c.Card == card && c.Kind == kind {
 			return nil // a cost's counters (planCost) already meet the need
 		}
+		if c.Card != "" && c.Kind == kind && slices.Contains(s.Battlefield, c.Card) {
+			// A placed permanent already carries a counter of the needed kind:
+			// a cost's SubCounter of a spec (Ion Storm's P1P1/Permanent) rides
+			// an inert bearer it places, and that bearer you control already
+			// meets the counters need. A second row would key the same kind to
+			// another object for no new state (counterBindingRefusal keeps each
+			// row on the one copy of its name).
+			return nil
+		}
 		bound = bound || c.Card == card
 	}
 	// A start binds one counters entry to each battlefield copy, so a card
@@ -1719,6 +1759,55 @@ func entryCounterUnrestatable(f *cards.Face) bool {
 	}
 	_, err := strconv.Atoi(parts[1])
 	return err != nil
+}
+
+// entryCounterOther reports whether f's battlefield entry re-runs a
+// replacement that puts counters on a permanent other than itself (Sage of
+// Fables's "each other Wizard creature you control enters with an additional
+// +1/+1 counter"). The placement runs it for every permanent placed after f,
+// and the extra counters depend on that order; the start schema has no field
+// to subtract them. It mirrors the lower gate's reasonEntryCounterOther
+// (movedCounterBodies) so a cost plan cannot make the start unlowerable.
+func entryCounterOther(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Repls {
+		r := &f.Repls[i]
+		if r.Event != "Moved" {
+			continue
+		}
+		if dest, ok := r.Params["Destination"]; ok && !strings.EqualFold(dest, "Battlefield") {
+			continue
+		}
+		vc := strings.TrimSpace(r.Params["ValidCard"])
+		selfEntry := vc == "" || strings.Contains(strings.ToLower(vc), "self")
+		for s := r.With; s != nil; s = s.Sub {
+			switch {
+			case s.API == "PutCounterAll" || s.API == "PutCounterPlayer":
+				if !selfEntry {
+					return true
+				}
+			case s.API != "PutCounter" || !strings.EqualFold(strings.TrimSpace(s.Params["ETB"]), "True"):
+			default:
+				if !selfEntry || !counterTargetsSelf(s.Params) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// counterTargetsSelf reports whether a PutCounter body's Defined$ names the
+// entering card: the default, Self, and ReplacedCard are all the object the
+// Moved replacement is replacing (the lower gate's counterTargetsSelf).
+func counterTargetsSelf(p map[string]string) bool {
+	switch d := strings.ToLower(strings.TrimSpace(p["Defined"])); d {
+	case "", "self", "replacedcard", "replacedcardlki":
+		return true
+	}
+	return false
 }
 
 // inertRank orders placeable enablers, lowest first: a noncreature with no

@@ -267,6 +267,28 @@ func mandatoryPhaseTriggered(f *cards.Face) bool {
 	return false
 }
 
+// StartCardRefusal is why a scripted start cannot place c's face f on the
+// battlefield, or "": a mandatory beginning-of-upkeep or draw trigger (the
+// setup drive would resolve it before the cut, and a start has no answer
+// saying it already resolved), or a card naming the startedTheTurnUntapped
+// filter word (the turn-change fold stamps that field on every untapped
+// battlefield object, and the gate refuses it once any card in the game names
+// the word, which every start's untapped lands then are). It is the start
+// gate's own read, so a cost planner can keep its named refusal instead of
+// emitting a start the lowering refuses.
+func StartCardRefusal(c *cards.Card, f *cards.Face) string {
+	if f == nil {
+		return "start:no-face"
+	}
+	if mandatoryPhaseTriggered(f) {
+		return "start:upkeep-trigger"
+	}
+	if cardMentions(c, "startedTheTurnUntapped") {
+		return "start:started-turn-untapped"
+	}
+	return ""
+}
+
 // captureAt is capture with the scripted-start distinction: start is true when
 // the cut is the genesis position of a rules.StartSpec.
 func captureAt(e *rules.Engine, entry int, xmage, start bool) *cut {
