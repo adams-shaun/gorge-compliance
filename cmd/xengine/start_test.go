@@ -1418,6 +1418,56 @@ func TestStartTransformedTriggerIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartAsEntersAndDayNightIsExercised: a start whose as-enters choice the
+// permanent's entry state carries (a chosen type), and one whose day/night
+// designation the start declares, play through playStart to an item on every
+// seed and lower cleanly. The still-unsupported as-enters kinds keep their own
+// name instead of a plain as-enters.
+func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key, day string }{
+		{"Gathering Stone", "f0/t0", ""},
+		{"Weaver of Blossoms", "f0/a0", scen.DayNightDay},
+		{"Graveyard Trespasser // Graveyard Glutton", "f0/t1", scen.DayNightDay},
+		{"Lunar Rejection", "cast", scen.DayNightDay},
+	} {
+		t.Run(c.card+"/"+c.key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start", res.Path, res.Reason)
+			}
+			if res.Start.DayNight != c.day {
+				t.Errorf("day_night %q, want %q", res.Start.DayNight, c.day)
+			}
+			items, rows, raw := playStartFile(t, reg, res.Start)
+			if len(items) != res.Start.Seeds {
+				t.Errorf("wrote %d item(s), want %d (start %s)", len(items), res.Start.Seeds, raw)
+			}
+			for _, r := range rows {
+				if r.Status != "lower_ok" {
+					t.Errorf("%s: status %s reasons %v (start %s)", r.ID, r.Status, r.Reasons, raw)
+				}
+			}
+		})
+	}
+	for _, c := range []struct{ card, key, reason string }{
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
+	} {
+		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != scen.PathRefused || res.Reason != c.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+		}
+	}
+}
+
 // TestStartBackFaceLostIsRefused: a back-face start whose card turns to its
 // front before the recorded span (Doric's back face transforms it at the
 // upkeep) is refused as start-face-lost, writes no item and credits nothing:

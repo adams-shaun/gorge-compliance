@@ -126,9 +126,10 @@ func TestScenFixtures(t *testing.T) {
 		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
-		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static:affected"}},
 		// a ChooseColor card is cast, not placed, so its choice is made by the
-		// engines' own decision; a ChooseType card or a land refuses by name
+		// engines' own decision; a ChooseType card is placed and its entry
+		// state is read back as a setup answer; a land refuses by name
 		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
 		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
 		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
@@ -165,6 +166,64 @@ func TestScenFixtures(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+// TestStartAsEntersPlaced: a state-backed as-enters choice (colour, type,
+// name, number) no longer refuses the key. A permanent the start places
+// carries the choice in its entry state, which the lowering reads back as a
+// setup answer; a self-ETB trigger is still cast so the entry happens on the
+// tape. The unsupported kinds keep their own names (as-enters:player below).
+func TestScenStartAsEntersPlaced(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card, key string
+		check     func(t *testing.T, f *StartFile)
+	}{
+		{"Adaptive Automaton", "static#0.0", func(t *testing.T, f *StartFile) {
+			if !slices.Contains(f.Setup.P0.Battlefield, "Adaptive Automaton") {
+				t.Errorf("p0 battlefield %v, want Adaptive Automaton", f.Setup.P0.Battlefield)
+			}
+			if f.Focus != nil && f.Focus.Kind != "" {
+				t.Errorf("focus %+v, want no forced action", f.Focus)
+			}
+		}},
+		{"Lifecraft Engine", "f0/a0", func(t *testing.T, f *StartFile) {
+			if !slices.Contains(f.Setup.P0.Battlefield, "Lifecraft Engine") {
+				t.Errorf("p0 battlefield %v, want Lifecraft Engine", f.Setup.P0.Battlefield)
+			}
+			focusIs(t, f, 0, "Lifecraft Engine", "ability", 0)
+		}},
+		{"Gathering Stone", "f0/t0", func(t *testing.T, f *StartFile) {
+			// a self-ETB trigger: the card is cast, so the entry and its type
+			// choice are on the tape rather than in the cut
+			if !slices.Contains(f.Setup.P0.Hand, "Gathering Stone") {
+				t.Errorf("p0 hand %v, want Gathering Stone", f.Setup.P0.Hand)
+			}
+			focusIs(t, f, 0, "Gathering Stone", "cast", 0)
+		}},
+		{"Roaming Throne", "f0/t0", func(t *testing.T, f *StartFile) {
+			// a SpellCast trigger: the permanent is placed and the opponent
+			// casts the bait that fires it
+			if !slices.Contains(f.Setup.P0.Battlefield, "Roaming Throne") {
+				t.Errorf("p0 battlefield %v, want Roaming Throne", f.Setup.P0.Battlefield)
+			}
+			if f.Active != 1 {
+				t.Errorf("active %d, want 1", f.Active)
+			}
+			focusIs(t, f, 1, "Murder", "cast", 0)
+		}},
+	} {
+		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start", res.Path, res.Reason)
+			}
+			tc.check(t, res.Start)
+		})
 	}
 }
 
@@ -3508,7 +3567,8 @@ func TestScenRefusalReasonsUnchanged(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, r := range []struct{ card, key, reason string }{
 		{"Thornvault Forager", "f0/a1", "steps-needed:cost:Forage"},
-		{"Banner of Kinship", "static#0.0", "as-enters"},
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
 		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
 		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},

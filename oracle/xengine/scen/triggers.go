@@ -267,8 +267,12 @@ func transformedStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, f
 	if why := FieldBlock(front); why != "" {
 		return "battlefield:" + why
 	}
-	if asEnters(front) {
-		return "as-enters"
+	// A supported as-enters choice (colour, type, number) is carried by the
+	// front-face placement's entry state and read back as a setup answer, so
+	// the transform line can still be built. An unsupported choice keeps its
+	// own name: setup has no state field for it.
+	if kind, supported := asEntersKind(front); kind != "" && !supported {
+		return "as-enters:" + kind
 	}
 	// A daybound or nightbound permanent cannot be transformed by another
 	// effect or ability (CR 702.145b), and a battlefield permanent with an
