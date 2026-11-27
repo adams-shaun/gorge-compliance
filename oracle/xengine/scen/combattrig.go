@@ -247,9 +247,9 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 			case other == nil:
 				return true
 			case attacker:
-				return blockable(c, other)
+				return blockable(c, other) && cantBlockByBlocked(c, other) == nil
 			}
-			return blockable(other, c)
+			return blockable(other, c) && cantBlockByBlocked(other, c) == nil
 		}
 		if p.attached {
 			if FieldBlock(face) != "aura-unattached" {
@@ -345,8 +345,11 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 	if blocker != "" {
 		blkFace = faceOf(blocker)
 	}
-	if restrictingStatic(atk, blkFace, true) != nil || blocker != "" &&
-		(restrictingStatic(atk, blkFace, false) != nil || restrictingStatic(blkFace, atk, false) != nil) {
+	if blocker == "" {
+		if restrictingStatic(atk, blkFace, true) != nil {
+			return none + ":restricted"
+		}
+	} else if combatPairBlocked(atk, blkFace) != nil {
 		return none + ":restricted"
 	}
 	f.Active = attackSeat
