@@ -612,6 +612,34 @@ func zoneFixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter s
 }
 
 func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, nil)
+}
+
+// castableAlt reports whether a start can establish alternative a by casting
+// its carrier from hand rather than placing it: a counter gate
+// ("counters_GE1_OIL", "HasCounters") cannot be met, because a setup counter
+// has nothing to sit on while the card is still in hand, and a token
+// requirement names an object a cast card is not. A caller that casts the
+// fixture must skip such an alternative instead of letting its test alone
+// stand for the gate; a caller that places the object on the battlefield meets
+// the gate with filterGateCounters.
+func castableAlt(a filterAlt) bool {
+	return len(a.counters) == 0 && a.token <= 0
+}
+
+// castFixtureCarrierIn is fixtureCarrierIn for a fixture the start casts from
+// hand (entersFallback): an alternative the cast cannot establish
+// (castableAlt) is not answered, so the ":filter" refusal follows rather than
+// a start whose entering object never meets the trigger's filter.
+func castFixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, castableAlt)
+}
+
+// fixtureCarrierMode is fixtureCarrierIn with an optional accept gate on the
+// fixture fallback: nil takes every understood, non-Self alternative, and
+// castFixtureCarrierIn passes castableAlt to drop the ones its cast cannot
+// establish.
+func fixtureCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool, accept func(filterAlt) bool) (name string, seat int) {
 	// Both passes refuse a FieldBlock card on the battlefield: the inert
 	// carrier pool is not filtered for it, and an unattached Aura or a
 	// non-permanent listed there aborts the whole start file.
@@ -622,7 +650,7 @@ func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter str
 		return n, s
 	}
 	for _, a := range parseFilterStatic(filter) {
-		if !a.known || a.self {
+		if !a.known || a.self || accept != nil && !accept(a) {
 			continue
 		}
 		var n string

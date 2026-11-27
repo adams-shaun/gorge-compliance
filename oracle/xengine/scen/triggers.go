@@ -576,20 +576,24 @@ func strippedFilter(filter string) (string, bool) {
 //     enters": wasCastByYou) is met by the cast itself, so the stripped
 //     filter picks the carrier (strippedFilter);
 //   - the simplest playable permanent the filter takes, the static lane's
-//     fixtureCarrierIn for a class no vanilla card holds (a Detective);
+//     fixture scan (castFixtureCarrierIn) for a class no vanilla card holds
+//     (a Detective);
 //   - an Aura the filter takes (a Cartouche) cast attached: a bare Aura is
 //     FieldBlock-refused on the battlefield, so the start casts it at a
 //     vanilla bearer its Enchant keyword takes and names the bearer.
 //
 // "" keeps the ":filter" refusal: an alternative no arm can meet (a face-down
-// permanent, a token state the cast cannot establish) is not answered.
+// permanent, a counter gate or a token state the cast cannot establish) is not
+// answered. A setup counter cannot sit on a card still in hand, and a token is
+// not a card, so those alternatives are castableAlt-rejected rather than
+// matched by their test alone.
 func entersFallback(reg *cards.Registry, b *certdeck.Builder, card, filter string) (string, int, []string) {
 	filters := []string{filter}
 	if stripped, ok := strippedFilter(filter); ok {
 		filters = []string{stripped, filter}
 	}
 	for _, flt := range filters {
-		if n, s := fixtureCarrierIn(reg, b, card, flt, (*cards.Face).IsPermanent, true); n != "" {
+		if n, s := castFixtureCarrierIn(reg, b, card, flt, (*cards.Face).IsPermanent, true); n != "" {
 			return n, s, nil
 		}
 	}
@@ -604,7 +608,7 @@ func entersFallback(reg *cards.Registry, b *certdeck.Builder, card, filter strin
 // alternative takes a plain Aura or its Enchant names no placeable permanent.
 func entersAuraCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string) (string, int, []string) {
 	for _, a := range parseFilterStatic(filter) {
-		if !a.known || a.self || a.token != 0 {
+		if !a.known || a.self || !castableAlt(a) {
 			continue
 		}
 		aura := pickZoneFixture(reg, b, card, func(f *cards.Face) bool {

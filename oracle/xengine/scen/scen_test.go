@@ -3253,12 +3253,22 @@ func TestStartFilterFixtures(t *testing.T) {
 		// propOnFocus: check carrierProp of the focus card (the cast spell),
 		// not of a focus target (whose bearer sits in Targets beside it).
 		propOnFocus bool
+		// focusCard, when set, is the focus cast card the fixture must name
+		// (an Equipment cannot enter attached from a start, so the focus is
+		// the Magnetic Theft that attaches it).
+		focusCard string
+		// attach: the focus cast must name the key card first and the equipped
+		// creature second, the order Magnetic Theft takes its targets in; a
+		// start that decodes but never attaches would pass the shape checks
+		// above and fail to fire.
+		attach bool
 	}
 	rows := []row{
 		{card: "Necrotic Plague", key: "f0/t0", fSeat: 1, fKind: "cast",
 			carrierProp: (*cards.Face).IsCreature, carrierWhy: "bearer"},
 		{card: "Skullclamp", key: "f0/t0", fSeat: 0, fKind: "cast",
-			carrierProp: (*cards.Face).IsCreature, carrierWhy: "equipped bearer"},
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "equipped bearer",
+			focusCard: "Magnetic Theft", attach: true},
 		{card: "Skola Grovedancer", key: "f0/t0", fSeat: 1, fKind: "cast",
 			carrierProp: (*cards.Face).IsLand, carrierWhy: "land"},
 		{card: "Case of the Pilfered Proof", key: "f0/t0", fSeat: 0, fKind: "cast",
@@ -3297,6 +3307,16 @@ func TestStartFilterFixtures(t *testing.T) {
 					}
 				}
 			}
+			if r.focusCard != "" && f.Focus.Card != r.focusCard {
+				t.Errorf("focus card %q, want %q", f.Focus.Card, r.focusCard)
+			}
+			if r.attach {
+				// Magnetic Theft targets the Equipment, then the creature it
+				// attaches to: naming both is the attach.
+				if len(f.Focus.Targets) != 2 || f.Focus.Targets[0] != r.card || f.Focus.Targets[1] != carrier {
+					t.Errorf("focus targets %v, want [%q %q] (equipment then equipped creature)", f.Focus.Targets, r.card, carrier)
+				}
+			}
 			c, ok := reg.Lookup(carrier)
 			if !ok || len(c.Faces) == 0 {
 				t.Fatalf("carrier %q is not in the corpus", carrier)
@@ -3319,6 +3339,60 @@ func TestStartFilterFixtures(t *testing.T) {
 			}
 			if _, err := DecodeStartFile(mustMarshal(t, f)); err != nil {
 				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestStartFilterFixtureCounterGateRefused: an enters filter that requires a
+// counter on the entering object cannot be served by a cast fixture. A start's
+// setup counters have nothing to sit on while the card is still in hand, so
+// the carrier the fixture scan could pick would enter without the gate and the
+// trigger would never reach the stack (Ichorplate Golem: "whenever a creature
+// you control enters, if it has one or more oil counters on it"). The lane
+// must keep the ":filter" refusal rather than move the key refused→start.
+func TestStartFilterFixtureCounterGateRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Ichorplate Golem", "f0/t0"},
+	} {
+		res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", c.card, c.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != "no-generator:trigger:ChangesZone:filter" {
+			t.Errorf("%s %s: path %q reason %q, want refused no-generator:trigger:ChangesZone:filter",
+				c.card, c.key, res.Path, res.Reason)
+		}
+	}
+}
+
+// TestCastableAlt: the gate castFixtureCarrierIn passes to the fixture
+// fallback. A counter gate (counters_*, HasCounters) and a token requirement
+// are alternatives a cast cannot establish; a non-token requirement and a
+// plain card are.
+func TestCastableAlt(t *testing.T) {
+	for _, tc := range []struct {
+		filter string
+		cast   bool
+	}{
+		{"Creature.YouCtrl", true},
+		{"Creature.YouCtrl+!token", true},
+		{"Creature.YouCtrl+counters_GE1_OIL", false},
+		{"Creature.YouCtrl+HasCounters", false},
+		{"Creature.YouCtrl+token", false},
+	} {
+		t.Run(tc.filter, func(t *testing.T) {
+			alts := parseFilterStatic(tc.filter)
+			if len(alts) != 1 {
+				t.Fatalf("filter %q parsed to %d alternatives", tc.filter, len(alts))
+			}
+			if !alts[0].known {
+				t.Fatalf("filter %q is not understood", tc.filter)
+			}
+			if got := castableAlt(alts[0]); got != tc.cast {
+				t.Errorf("castableAlt(%q) = %v, want %v (counters %v, token %d)",
+					tc.filter, got, tc.cast, alts[0].counters, alts[0].token)
 			}
 		})
 	}
