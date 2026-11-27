@@ -54,9 +54,17 @@ type Focus struct {
 	// play.
 	BaitAbilitySelf bool
 	// BaitTarget names the permanent the bait spell targets at its cast, when
-	// the bait spell itself has a target (a Spell.singleTarget focus play).
-	// The start places it on the bait seat's battlefield.
+	// the bait spell itself has a target (a Spell.singleTarget focus play, or
+	// a TargetValidTargeting$ restriction on a permanent the focus seat
+	// controls). The start places it on the bait seat's battlefield, or on the
+	// focus seat's when the bait's filter names an opponent-controlled
+	// permanent.
 	BaitTarget string
+	// BaitTargetPlayer is whether the bait spell targets the focus seat
+	// itself, for a TargetValidTargeting$ restriction of "You" (Cerulean
+	// Drake's "counter target spell that targets you"). Exclusive with
+	// BaitTarget.
+	BaitTargetPlayer bool
 	// Targets are the permanents the focus play must target, in the order the
 	// play asks for them. A forced start names them because another placed
 	// card can be a legal alternative the bot would pick instead (an Aura's
@@ -434,18 +442,30 @@ func (s *focusState) bait(d decision.Decision, in decision.Intent) (decision.Int
 }
 
 // baitTarget answers the target ask of a bait spell that itself has one
-// (f.BaitTarget): the ask whose source is the bait object is answered with the
-// named permanent, so the bait is a spell with a single target and the start
-// knows which one (a Spell.singleTarget focus play). ok is false for any other
-// ask, which the bot answers as before.
+// (f.BaitTarget or f.BaitTargetPlayer): the ask whose source is the bait object
+// is answered with the named permanent, or the focus seat when the target is
+// the player itself, so the bait is a spell with a single target and the start
+// knows which one (a Spell.singleTarget or TargetValidTargeting$ focus play).
+// ok is false for any other ask, which the bot answers as before.
 func (s *focusState) baitTarget(d decision.Decision, in decision.Intent) (decision.Intent, bool) {
-	if s.f.BaitTarget == "" || d.Kind != decision.KTarget || s.e == nil || !s.baitObjs[d.Source] {
+	if s.f.BaitTarget == "" && !s.f.BaitTargetPlayer ||
+		d.Kind != decision.KTarget || s.e == nil || !s.baitObjs[d.Source] {
 		return in, false
 	}
 	most := max(d.Max, 1)
 	var picks []int
 	for i, o := range d.Options {
-		if len(picks) >= most || !s.baitTgtObjs[o.Obj] {
+		if len(picks) >= most {
+			continue
+		}
+		if s.f.BaitTargetPlayer {
+			// a player target option carries the seat and no object; a
+			// permanent option also echoes its controller in Player, so the
+			// zero Obj is what distinguishes the player itself.
+			if o.Obj != 0 || int(o.Player) != s.f.Seat {
+				continue
+			}
+		} else if !s.baitTgtObjs[o.Obj] {
 			continue
 		}
 		picks = append(picks, i)
