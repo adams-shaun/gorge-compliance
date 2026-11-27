@@ -1497,7 +1497,8 @@ func TestStartCycledTriggers(t *testing.T) {
 // vanilla creature with power 3 or more to crew 3 (Apocalypse Runner), and
 // the loyalty a planeswalker's ultimate takes beyond its printed loyalty
 // (Liliana, Dreadhorde General: 9 of 6). A token cost (Baylen taps tokens)
-// stays refused.
+// mints its tokens (the corpus's Servo, untapped: a cost may tap any
+// permanent; TestScenStepsNeededCostClass checks the token placements).
 func TestStartCosts(t *testing.T) {
 	checkStartRows(t, []startRow{
 		{card: "Agency Coroner", key: "f0/a0", maxTurns: 1, p0BF: cat([]string{"Agency Coroner"}, rep("Swamp", 3), []string{"Memnite"}),
@@ -1506,7 +1507,8 @@ func TestStartCosts(t *testing.T) {
 			focusCard: "Possessed Goat", focusKind: "ability"},
 		{card: "Bedhead Beastie", key: "f0/a0", maxTurns: 1, p0Hand: []string{"Bedhead Beastie"}, p0BF: rep("Mountain", 3),
 			focusCard: "Bedhead Beastie", focusKind: "ability"},
-		{card: "Baylen, the Haymaker", key: "f0/a0", reason: "steps-needed:cost:tapXType"},
+		{card: "Baylen, the Haymaker", key: "f0/a0", maxTurns: 1, p0BF: []string{"Baylen, the Haymaker"},
+			focusCard: "Baylen, the Haymaker", focusKind: "ability"},
 	})
 	reg, b := testBuilder(t)
 	gen := func(card, key string) *StartFile {
