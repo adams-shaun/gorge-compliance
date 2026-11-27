@@ -1191,8 +1191,14 @@ phase-preflight:
 # job is what runs the full `go test` gate.
 #
 # boundary is the licence guard on its own (the same step test-smart runs).
+# It runs through scripts/test-targets.sh whole — the same helper test-one
+# uses — so it works inside a seat: the seat go shim blocks a raw `go test`
+# whose process ancestry lacks that script, and a recipe cannot self-declare
+# the marker the shim accepts (only the script sets it legitimately). The
+# whole mode carries the recipe's -count=1 cache bypass, so the guard still
+# re-runs rather than replaying the test cache.
 boundary:
-	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
+	@PKG=./internal/boundary/ bash scripts/test-targets.sh whole
 
 # carddb-test runs the Python carddb tool's tests (put, publish, merge driver, build, fetch);
 # CARDDB_UPDATE_GOLDEN=1 rewrites cmd/carddb/py/tests/golden after a deliberate schema change.
