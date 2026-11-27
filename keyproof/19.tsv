@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1972e0db-e595-4ec2-b97c-902561bb275b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kavaron-harrier:cast:s1,f:xs:XP:kavaron-harrier:cast:s1	-	-	-	23c4009444b0	-	4f5739b93c5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1972e0db-e595-4ec2-b97c-902561bb275b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kavaron-harrier:f0t0:s1,f:xs:XP:kavaron-harrier:f0t0:s1	-	-	-	23c4009444b0	-	4f5739b93c5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1973f1e9-aa14-49dc-bafe-be17b30ba288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1973f1e9-aa14-49dc-bafe-be17b30ba288	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	768a40d55cb1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+1973f1e9-aa14-49dc-bafe-be17b30ba288	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	77930cc7e1b1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 197582b9-4c86-41a3-ad0c-789a0db8e087	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quantum-misalignment:cast:s1,f:xs:XP:quantum-misalignment:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 197809b7-1ddb-4329-8d82-7651696538a8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:frenzied-gorespawn:f0t0:s1	-	-	-	8c0bd19283bb	-	c9f19e6a29e0	-	-	2026-11-24	xproof
 197809b7-1ddb-4329-8d82-7651696538a8	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:frenzied-gorespawn:f0t0:s1	-	-	-	8c0bd19283bb	-	c9f19e6a29e0	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1999b5ac-21fb-4d99-ad72-58bf507f9a59	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1999b5ac-21fb-4d99-ad72-58bf507f9a59	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 199c7604-6b4b-4cec-b6c2-b6b2918b11c8	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:underdark-rift:f0a0:s1,f:xs:XP:underdark-rift:f0a0:s1	-	-	-	d607930fa548	-	e9019acb237e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
-199c7604-6b4b-4cec-b6c2-b6b2918b11c8	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	768a40d55cb1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+199c7604-6b4b-4cec-b6c2-b6b2918b11c8	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	77930cc7e1b1	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 199c7604-6b4b-4cec-b6c2-b6b2918b11c8	land	land	agreed	-	FX	start	2	0	x:xs:XP:underdark-rift:land:s1,f:xs:XP:underdark-rift:land:s1	-	-	-	d607930fa548	-	e9019acb237e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	cast	cast-resolve	agreed	-	FX	scen	2	0	Beastrider Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Beastrider Vanguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
