@@ -538,7 +538,15 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		sa = face.Abilities[f.Focus.Ability]
 	}
 	if hist != "" {
-		if why := castLine(face, card, hist, generic, f); why != "" {
+		if hist == "wascast" && trig != nil && !selfCard(trig) && f.Focus != nil && f.Focus.Kind == "cast" && f.Focus.Card != card {
+			// A watcher trigger's "wasCastByYou" reads the history of the
+			// object the filter names, not of the key card: the focus play
+			// itself casts that object from its controller's hand (the enters
+			// lane picked a carrier the wasCast-stripped filter takes,
+			// strippedFilter), so the history the trigger reads is the one
+			// this start produces. castLine's card-itself rule stays for
+			// Card.Self history ("when you cast CARDNAME").
+		} else if why := castLine(face, card, hist, generic, f); why != "" {
 			return refuse(why)
 		}
 	}

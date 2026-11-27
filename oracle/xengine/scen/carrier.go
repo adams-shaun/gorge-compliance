@@ -187,6 +187,19 @@ type counterGate struct {
 	n    int32
 }
 
+// countersAny is the KIND of the generic "HasCounters" gate: the object must
+// carry at least one counter of any kind. A placement cannot name "any", so
+// placedKind turns it into one P1P1 counter (every kind a start places).
+const countersAny = "*"
+
+// placedKind is the counter kind to place for this gate.
+func (g counterGate) placedKind() string {
+	if g.kind == countersAny {
+		return "P1P1"
+	}
+	return g.kind
+}
+
 // parseCounterGate reads "GE1_P1P1" (the part after "counters_") into a gate.
 // A comparison a counter placement cannot meet (LE/LT) is not understood.
 func parseCounterGate(s string) (counterGate, bool) {
@@ -433,6 +446,18 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 						a.known = false // never read a named property as a type word
 					}
 					tests = append(tests, test)
+					continue
+				}
+				if p == "HasCounters" {
+					// "a creature with a counter on it": the generic gate. A
+					// reader that places no counters cannot meet it, so the
+					// alternative stays unknown outside the countersOK lanes
+					// (like counters_, which it joins below).
+					if !countersOK {
+						a.known = false
+						continue
+					}
+					a.counters = append(a.counters, counterGate{kind: countersAny, n: 1})
 					continue
 				}
 				if c, ok := strings.CutPrefix(p, "counters_"); ok {
@@ -787,7 +812,7 @@ func filterGateCounters(filter string, face *cards.Face, self bool) []StartCount
 		}
 		out := make([]StartCounter, 0, len(a.counters))
 		for _, g := range a.counters {
-			out = append(out, StartCounter{Card: face.Name, Kind: g.kind, N: g.n})
+			out = append(out, StartCounter{Card: face.Name, Kind: g.placedKind(), N: g.n})
 		}
 		return out
 	}
