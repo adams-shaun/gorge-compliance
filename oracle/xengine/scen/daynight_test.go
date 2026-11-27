@@ -1,6 +1,10 @@
 package scen
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/adams-shaun/gorge/engine/cards"
+)
 
 // TestScenStartDayNightDeclared: a start whose initial battlefield sets the
 // day/night designation (CR 731) declares it instead of refusing the key.
@@ -62,8 +66,53 @@ func TestScenStartDayNightUnrelatedUnchanged(t *testing.T) {
 		}
 	}
 	for _, name := range []string{"Lightning Bolt", "Own the Day"} {
-		if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && dayNightOfFace(c.Faces[0]) != "" {
-			t.Errorf("%s: dayNightOfFace = %q, want none", name, dayNightOfFace(c.Faces[0]))
+		if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 {
+			if got, _ := dayNightOfFace(c.Faces[0]); got != "" {
+				t.Errorf("%s: dayNightOfFace = %q, want none", name, got)
+			}
 		}
+	}
+}
+
+// TestScenStartDayNightUngatedSetter: the corpus's Moved DayTime replacements
+// are all gated DayTime$ Neither, so an earlier placement's designation wins.
+// An ungated one ("it becomes day as CARDNAME enters") sets the designation
+// whoever entered before, so the later placement overrides; both orders are
+// checked so the first-setter reading cannot creep back in.
+func TestScenStartDayNightUngatedSetter(t *testing.T) {
+	reg := cards.NewRegistry()
+	add := func(name, value, gate string) {
+		reg.Add(&cards.Card{Faces: []*cards.Face{{
+			Name: name,
+			Repls: []cards.Repl{{
+				Event:  "Moved",
+				Params: map[string]string{"ValidCard": "Card.Self", "Destination": "Battlefield", "DayTime": gate},
+				With:   &cards.SA{API: "DayTime", Params: map[string]string{"Value": value}},
+			}},
+		}}})
+	}
+	add("Gated Day", "Day", "Neither")
+	add("Ungated Night", "Night", "")
+	for _, tc := range []struct {
+		name string
+		p0   []string
+		p1   []string
+		want string
+	}{
+		{"gated then ungated", []string{"Gated Day"}, []string{"Ungated Night"}, DayNightNight},
+		{"ungated then gated", []string{"Ungated Night"}, []string{"Gated Day"}, DayNightNight},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			f := &StartFile{Setup: StartSetup{
+				P0: StartSeat{Battlefield: tc.p0},
+				P1: StartSeat{Battlefield: tc.p1},
+			}}
+			if why := dayNightStart(reg, f); why != "" {
+				t.Fatalf("dayNightStart refused %q", why)
+			}
+			if f.DayNight != tc.want {
+				t.Errorf("day_night %q, want %q", f.DayNight, tc.want)
+			}
+		})
 	}
 }

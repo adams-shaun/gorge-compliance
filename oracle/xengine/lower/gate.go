@@ -655,11 +655,13 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		// cut mid-game has no such derivation and keeps the refusal. IsZero,
 		// not Int: the field is an unsigned enum at this pin.
 		return !v.IsZero() && !w.start
-	case typ == "Object" && entryChoiceAPI[name] != "":
-		// A ChosenColor/Type/Number is placeable only when the card's own
-		// as-enters replacement asks it; a choice a later effect made has no
-		// entry ask for the setup drive to answer.
-		return !v.IsZero() && entryChoiceField(o, name) == ""
+	case typ == "Object" && name == "ChosenColor":
+		// The setup drive answers a placed permanent's as-enters colour ask
+		// from the battlefield loop, so only a battlefield object has a
+		// placement to answer. The engine clears the field when a permanent
+		// leaves the battlefield, which makes the other zones latent rather
+		// than impossible; they still have no answer and must refuse.
+		return !v.IsZero() && o.Zone != state.ZBattlefield
 	case typ == "Player" && name == "LandsPlayed":
 		return v.Int() > 0 && w.seat == int(w.g.Active)
 	case typ == "Player" && name == "LandsPlayedOffHand":
@@ -1072,62 +1074,6 @@ func entryPrepareReplacement(f *cards.Face) bool {
 	return false
 }
 
-// entryChoiceAPI maps an Object field a card's own as-enters replacement
-// writes to the Choose* API that asks it: the state-backed choice kinds the
-// setup drive can re-ask. An object whose Chosen* field was set by anything
-// else (a resolution effect, a permanent's later ability) is still refused by
-// walker.live; only an entry replacement makes the field placeable.
-var entryChoiceAPI = map[string]string{
-	"ChosenColor":  "ChooseColor",
-	"ChosenType":   "ChooseType",
-	"ChosenNumber": "ChooseNumber",
-}
-
-// entryChoiceField returns the Choose* API that writes field for o, or "" when
-// o's face has no own-entry replacement asking it.
-func entryChoiceField(o *state.Object, field string) string {
-	api := entryChoiceAPI[field]
-	if api == "" {
-		return ""
-	}
-	f := o.Face()
-	if f == nil {
-		return ""
-	}
-	for _, r := range f.Repls {
-		if r.Event != "Moved" || !strings.Contains(r.Params["ValidCard"], "Card.Self") ||
-			r.Params["Destination"] != "Battlefield" || r.With == nil || r.With.API != api {
-			continue
-		}
-		return api
-	}
-	return ""
-}
-
-// setupChoiceAnswer maps a battlefield object's as-enters choice to the setup
-// answer the runner poses while placing it. The state carries one field per
-// choice kind; exactly one entry-backed field populated is the shape setup can
-// restate, and every other object returns ok=false so a multi-ask entry is
-// refused by setupAnswerReasons instead of answered in a guessed order. The
-// field set is the one walker.live admits, so a future single-choice kind
-// cannot be captured here without being placed there.
-func setupChoiceAnswer(o *state.Object) (oraclegen.Answer, bool) {
-	var picks []string
-	if o.ChosenColor != "" && entryChoiceField(o, "ChosenColor") != "" {
-		picks = append(picks, o.ChosenColor)
-	}
-	if o.ChosenType != "" && entryChoiceField(o, "ChosenType") != "" {
-		picks = append(picks, o.ChosenType)
-	}
-	if o.ChosenNumber != 0 && entryChoiceField(o, "ChosenNumber") != "" {
-		picks = append(picks, strconv.FormatInt(int64(o.ChosenNumber), 10))
-	}
-	if len(picks) != 1 {
-		return oraclegen.Answer{}, false
-	}
-	return oraclegen.Answer{Kind: "choose", Pick: picks}, true
-}
-
 // place fills c.Setup, c.Refs and c.Attach from the live game, adding to w.why
 // whatever setup cannot say.
 func (w *walker) place(c *cut) {
@@ -1216,8 +1162,8 @@ func (w *walker) place(c *cut) {
 			if s != c.Active && !o.Tapped && entryTapReplacement(o.Face()) {
 				w.why[reasonEntryTap] = true
 			}
-			if a, ok := setupChoiceAnswer(o); ok {
-				c.Answers[s] = append(c.Answers[s], a)
+			if o.ChosenColor != "" {
+				c.Answers[s] = append(c.Answers[s], oraclegen.Answer{Kind: "choose", Pick: []string{o.ChosenColor}})
 			}
 			if tapState[n] == nil {
 				tapState[n] = map[bool]bool{}

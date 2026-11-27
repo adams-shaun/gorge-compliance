@@ -1418,11 +1418,12 @@ func TestStartTransformedTriggerIsExercised(t *testing.T) {
 	}
 }
 
-// TestStartAsEntersAndDayNightIsExercised: a start whose as-enters choice the
-// permanent's entry state carries (a chosen type), and one whose day/night
-// designation the start declares, play through playStart to an item on every
-// seed and lower cleanly. The still-unsupported as-enters kinds keep their own
-// name instead of a plain as-enters.
+// TestStartAsEntersAndDayNightIsExercised: an as-enters choice the cast puts
+// on the tape (a self-ETB card, so the choice is made by the engine during the
+// cast) and a day/night designation the start declares play through playStart
+// to an item on every seed and lower cleanly. A placement whose as-enters
+// choice would be answered after genesis keeps a specific refusal, and the
+// still-unsupported kinds keep their own name instead of a plain as-enters.
 func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 	t.Parallel()
 	reg, b := certdeckBuilder(t)
@@ -1455,6 +1456,9 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 		})
 	}
 	for _, c := range []struct{ card, key, reason string }{
+		{"Adaptive Automaton", "static#0.0", "start:as-enters-stamp"},
+		{"Lifecraft Engine", "f0/a0", "start:as-enters-stamp"},
+		{"Roaming Throne", "f0/t0", "start:as-enters-stamp"},
 		{"Sower of Discord", "f0/t0", "as-enters:player"},
 		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 	} {

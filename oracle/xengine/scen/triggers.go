@@ -267,12 +267,12 @@ func transformedStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, f
 	if why := FieldBlock(front); why != "" {
 		return "battlefield:" + why
 	}
-	// A supported as-enters choice (colour, type, number) is carried by the
-	// front-face placement's entry state and read back as a setup answer, so
-	// the transform line can still be built. An unsupported choice keeps its
-	// own name: setup has no state field for it.
-	if kind, supported := asEntersKind(front); kind != "" && !supported {
-		return "as-enters:" + kind
+	// The front face is placed and transformed at genesis. An as-enters
+	// choice there is answered after setup, so the live cut carries the
+	// entry's turn stamps; until the lowering can restate them the start
+	// keeps the specific refusal instead of emitting a start it refuses.
+	if why := asEntersPlacedRefusal(front); why != "" {
+		return why
 	}
 	// A daybound or nightbound permanent cannot be transformed by another
 	// effect or ability (CR 702.145b), and a battlefield permanent with an

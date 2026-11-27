@@ -20,22 +20,25 @@ const (
 const reasonDayNight = "start:day-night"
 
 // dayNightOfFace reports the designation face gives the game as it enters the
-// battlefield from nowhere, or "". A daybound permanent makes it day and a
-// nightbound one night (CR 702.145a); a Moved replacement whose body is a
-// DayTime effect ("if it's neither day nor night, it becomes day as CARDNAME
-// enters") gives the value it sets. An ability or trigger that changes the
-// designation later (a cast's ETB trigger, an upkeep "it becomes night") is
-// not an entry state: at the start's cut it has not happened yet, so it is
-// not read here.
-func dayNightOfFace(f *cards.Face) string {
+// battlefield from nowhere, and whether that change is gated on the game being
+// at neither. A daybound permanent makes it day and a nightbound one night
+// (CR 702.145a); a Moved replacement whose body is a DayTime effect ("if it's
+// neither day nor night, it becomes day as CARDNAME enters", gate DayTime$
+// Neither) gives the value it sets. An ungated Moved DayTime replacement sets
+// the designation whoever enters, so it is reported as conditional=false: it
+// overrides a designation an earlier placement set. An ability or trigger that
+// changes the designation later (a cast's ETB trigger, an upkeep "it becomes
+// night") is not an entry state: at the start's cut it has not happened yet,
+// so it is not read here.
+func dayNightOfFace(f *cards.Face) (value string, conditional bool) {
 	if f == nil {
-		return ""
+		return "", false
 	}
 	if f.HasKeyword("Daybound") {
-		return DayNightDay
+		return DayNightDay, true
 	}
 	if f.HasKeyword("Nightbound") {
-		return DayNightNight
+		return DayNightNight, true
 	}
 	for _, r := range f.Repls {
 		if r.Event != "Moved" || !strings.Contains(r.Params["ValidCard"], "Card.Self") ||
@@ -44,13 +47,15 @@ func dayNightOfFace(f *cards.Face) string {
 		}
 		switch {
 		case strings.EqualFold(r.With.Params["Value"], "Day"):
-			return DayNightDay
+			value = DayNightDay
 		case strings.EqualFold(r.With.Params["Value"], "Night"):
-			return DayNightNight
+			value = DayNightNight
+		default:
+			return "unknown", false
 		}
-		return "unknown"
+		return value, r.Params["DayTime"] == "Neither"
 	}
-	return ""
+	return "", false
 }
 
 // placedFace is the face a battlefield placement enters: the back face when
@@ -68,10 +73,10 @@ func placedFace(c *cards.Card, back bool) *cards.Face {
 // dayNightStart declares the designation the finished start's initial
 // battlefield sets on either seat, and returns reasonDayNight when an entry
 // value cannot be read. Placements run p0's cards then p1's, in battlefield
-// order; the first entry that sets a designation fixes it, because a later
-// daybound or nightbound permanent entering when day or night already exists
-// changes nothing (CR 731.1). A focus cast declares nothing here: the card is
-// still in hand at the cut.
+// order. A gated entry ("if it's neither day nor night") changes nothing when
+// an earlier placement already set the designation, so it is skipped then; an
+// ungated entry sets it whoever entered before, so it overrides. A focus cast
+// declares nothing here: the card is still in hand at the cut.
 func dayNightStart(reg *cards.Registry, f *StartFile) string {
 	f.DayNight = ""
 	state := ""
@@ -82,16 +87,17 @@ func dayNightStart(reg *cards.Registry, f *StartFile) string {
 			if !ok {
 				continue
 			}
-			got := dayNightOfFace(placedFace(c, backs[i]))
+			got, conditional := dayNightOfFace(placedFace(c, backs[i]))
 			switch got {
 			case "":
 				continue
 			case "unknown":
 				return reasonDayNight
 			}
-			if state == "" {
-				state = got
+			if conditional && state != "" {
+				continue
 			}
+			state = got
 		}
 	}
 	f.DayNight = state
