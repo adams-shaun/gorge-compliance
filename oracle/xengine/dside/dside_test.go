@@ -2,14 +2,19 @@ package dside
 
 import (
 	"errors"
+	"reflect"
 	"slices"
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/dirac/cardset"
+	"github.com/adams-shaun/gorge/dirac/oracle"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -322,4 +327,159 @@ func TestFewestNamed(t *testing.T) {
 			t.Errorf("%v %v: %q seat %d %v, want %q seat %d %v", c.pair, c.names, card, seat, ok, c.card, c.seat, c.ok)
 		}
 	}
+}
+
+// landIndices is the deck's first two basic lands' deck indices: a permanent a
+// scripted start can place without knowing the deck's contents.
+func landIndices(d decks.Deck) []int {
+	var out []int
+	for i, n := range d.Cards {
+		switch n {
+		case "Plains", "Island", "Swamp", "Mountain", "Forest":
+			out = append(out, i)
+			if len(out) == 2 {
+				return out
+			}
+		}
+	}
+	return out
+}
+
+// TestStartLockstepPlaysTheScriptedPosition drives the same lockstep StartLockstep
+// runs (the matchup's Start, mirrored to the kernel from the same deck indices) over
+// a table it holds: a valid position is played and answered, and a position the
+// kernel cannot mirror or gorge would not open in is refused by name, never read as
+// dirac disagreeing with gorge.
+func TestStartLockstepPlaysTheScriptedPosition(t *testing.T) {
+	reg := testutil.CorpusRegistry(t) // skips without the corpus
+	tables := NewTables(reg)
+	pair := playablePair(t, reg, tables)
+	set, err := tables.CommanderSet()
+	if err != nil {
+		if NoTables(err) {
+			t.Skip(err)
+		}
+		t.Fatal(err)
+	}
+	// pos is the position: two of the seat's lands on the battlefield, one tapped,
+	// the other carrying kind ("" none).
+	pos := func(kind string) *rules.StartSpec {
+		seats := make([]rules.StartSeat, 2)
+		for i, d := range pair {
+			bf := landIndices(d)
+			if len(bf) < 2 {
+				t.Skipf("deck %q holds no two lands to place", d.Name)
+			}
+			seats[i] = rules.StartSeat{Battlefield: bf[:2], Tapped: bf[:1]}
+			if kind != "" {
+				seats[i].Counters = []rules.StartCounter{{Card: bf[1], Kind: kind, N: 1}}
+			}
+		}
+		return &rules.StartSpec{Seats: seats}
+	}
+	// The position gorge opens in is the one dirac mirrors: both sides take their
+	// first decision from it, so the row is an answer and not a setup refusal.
+	row, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, &startRun{spec: pos("")})
+	if row.Status == StatusNA {
+		t.Fatalf("the start was refused: %s", row.Reason)
+	}
+	if row.Status == StatusDiverged && row.Field == "setup" {
+		t.Fatalf("the matchup rejected the start: %+v", row)
+	}
+	if row.Decisions <= 0 {
+		t.Errorf("row %+v: no decision was posed from the scripted position", row)
+	}
+	// Every start dirac's kernel loader would PANIC on (dirac's startObjs: "A bad
+	// start panics: the loader refuses these before a game is built") is the
+	// position's own refusal here: out of range, named twice, a tap or a counter
+	// pile on a card that is not on the battlefield, an attach host outside the
+	// game - each names what cannot be mirrored rather than blaming dirac for
+	// gorge's setup, and none reaches the run as a panic or a false divergence.
+	l0 := landIndices(pair[0])
+	if len(l0) < 2 {
+		t.Skipf("deck %q holds no two lands to misplace", pair[0].Name)
+	}
+	atoi := strconv.Itoa
+	for _, c := range []struct {
+		name string
+		spec *rules.StartSpec
+		want string
+	}{
+		{"a counter kind the kernel does not keep", pos("NOTAKIND"), "NOTAKIND"},
+		{"a start no deck holds", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: []int{9999}}, {}}}, "9999"},
+		{"a card two zones name", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: l0[:1], Hand: l0[:1]}, {}}}, "two zones"},
+		{"a tap on a card off the battlefield", &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: l0[:1], Tapped: l0[1:2]}, {}}}, atoi(l0[1])},
+		{"counters on a card off the battlefield", &rules.StartSpec{Seats: []rules.StartSeat{{
+			Battlefield: l0[:1], Counters: []rules.StartCounter{{Card: l0[1], Kind: "+1/+1", N: 1}},
+		}, {}}}, "not on the battlefield"},
+		{"an attach host out of range", &rules.StartSpec{Seats: []rules.StartSeat{{
+			Battlefield: l0[:1], Attach: []rules.StartAttach{{Card: l0[1], ToSeat: 0, To: 9999}},
+		}, {}}}, "out of range"},
+	} {
+		r, _ := tables.lockstep(Row{Game: "xe:CMDR:0:0", Table: CommanderTable}, set, pair, 1000, 4, nil, &startRun{spec: c.spec})
+		if r.Status != StatusNA {
+			t.Errorf("%s: row %+v, want not_applicable", c.name, r)
+			continue
+		}
+		if !strings.Contains(r.Reason, c.want) {
+			t.Errorf("%s: reason %q does not name %s", c.name, r.Reason, c.want)
+		}
+	}
+}
+
+// TestTapeReplayFinish: a replay that left the tape is not applicable (naming where and
+// why, whatever the lockstep made of it), a divergence is located at the decision it
+// was found at - the one being posed when the engines differed as it was posed, the
+// one just answered when an answer failed to apply - and gorge's offer is on the row
+// beside dirac's.
+func TestTapeReplayFinish(t *testing.T) {
+	t.Parallel()
+	answered := &decisionAt{turn: 1, seat: 0, kind: "priority"}
+	posed := &decisionAt{turn: 2, seat: 1, kind: "target"}
+	t.Run("left the tape", func(t *testing.T) {
+		r := &tapeReplay{stop: "decision 3 (turn 1, priority): the replayed game's state is not the tape's at this decision"}
+		row := Row{Game: "g", Table: "std-x", Status: StatusDiverged, What: "policy", Field: "panic", Decisions: 3}
+		r.finish(&row, oracle.Result{Div: &oracle.Divergence{At: 3, What: "policy", Field: "panic"}})
+		if row.Status != StatusNA || !strings.HasPrefix(row.Reason, "tape not replayable: decision 3") || row.Field != "" || row.Seat != nil {
+			t.Errorf("row %+v, want a bare not_applicable naming the decision", row)
+		}
+		if row.Answer("xs:X:c:k:s1") != NotAppl {
+			t.Errorf("a refused replay answers %q, want %q", row.Answer("xs:X:c:k:s1"), NotAppl)
+		}
+	})
+	t.Run("found as the decision was posed", func(t *testing.T) {
+		r := &tapeReplay{last: answered, pose: posed}
+		row := Row{Status: StatusDiverged}
+		res := oracle.Result{Decisions: 4, Div: &oracle.Divergence{At: 4, What: "options", RefOptions: []string{"pass", "cast"}, KerOptions: []string{"pass"}}}
+		r.finish(&row, res)
+		if row.Seat == nil || *row.Seat != 1 || row.Kind != "target" || row.FromTurn != 2 || row.ToTurn != 2 {
+			t.Errorf("row %+v, want the posed decision: turn 2 seat 1 target", row)
+		}
+		if !reflect.DeepEqual(row.Diff, []string{"gorge: pass | cast", "dirac: pass"}) {
+			t.Errorf("diff %q, want gorge's offer beside dirac's", row.Diff)
+		}
+	})
+	t.Run("an answer that failed to apply", func(t *testing.T) {
+		r := &tapeReplay{last: answered, pose: posed}
+		row := Row{Status: StatusDiverged}
+		res := oracle.Result{Decisions: 4, Div: &oracle.Divergence{At: 3, What: "kernel", Field: "apply", Detail: "not offered"}}
+		r.finish(&row, res)
+		if row.Seat == nil || *row.Seat != 0 || row.Kind != "priority" || row.FromTurn != 1 {
+			t.Errorf("row %+v, want the answered decision: turn 1 seat 0 priority", row)
+		}
+		if !reflect.DeepEqual(row.Diff, []string{"not offered"}) {
+			t.Errorf("diff %q, want the detail", row.Diff)
+		}
+	})
+	t.Run("running out of tape is the game's end", func(t *testing.T) {
+		r := &tapeReplay{ended: true}
+		res := r.settle(oracle.Result{Div: &oracle.Divergence{What: "policy", Field: "panic"}})
+		if res.Div != nil {
+			t.Errorf("a spent tape settled as %+v, want no divergence", res.Div)
+		}
+		r = &tapeReplay{}
+		if res := r.settle(oracle.Result{Div: &oracle.Divergence{What: "policy", Field: "panic"}}); res.Div == nil {
+			t.Error("a panic that was not the tape's end was settled away")
+		}
+	})
 }
