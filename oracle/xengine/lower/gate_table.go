@@ -190,6 +190,7 @@ var objectTable = map[string]entry{
 	"AcqTurn":                          isRefused("turn stamp: live only when it names the cut's turn (came under control this turn)"),
 	"AcqStep":                          isIgnored("step half of AcqTurn"),
 	"ActivatedThisTurn":                isRefused("activation count of this turn; only the ActivationLimit gates read it, so live only on a face that has one"),
+	"TurnedFaceUpThisTurn":             isRefused("turn-up record of this turn (CR 708.6); setup cannot place a permanent that turned face up this turn (FaceDown is refused), and its one reader is the turnedFaceUpThisTurn filter word (Kaust, Eyes of the Glade)"),
 	"RegeneratedThisTurn":              isRefused("regeneration count of this turn (CR 701.19, Count$RegeneratedThisTurn); setup cannot restate it; live only when some card in the game mentions RegeneratedThisTurn"),
 	"AttacksThisTurn":                  isRefused("attack count of this turn"),
 	"ExertedThisTurn":                  isRefused("exert of this turn"),
