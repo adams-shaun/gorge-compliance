@@ -188,6 +188,14 @@ mod tests {
     }
 
     #[test]
+    fn preflight_refuses_bear_force_pilot_swallowed_crew_token() {
+        // phase's parser swallows the token's "and crew 2" (parse_warnings, SwallowedClause), so
+        // the Vehicle token has no Crew keyword. The card must be refused here, not sent to a run
+        // that dies on "Vehicle has no Crew keyword".
+        assert_eq!(run("The Bear Force Pilot\n"), "The Bear Force Pilot\tparse warning: SwallowedClause\n");
+    }
+
+    #[test]
     fn preflight_resolves_split_card_by_corpus_name() {
         for name in ["Fire // Ice", "Fire", "Ice"] {
             let faces = names::phase_faces(db(), name).expect(name);
