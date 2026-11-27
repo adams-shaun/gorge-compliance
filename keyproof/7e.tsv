@@ -8,8 +8,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e063f60-876a-48fe-8bc6-9888180176d1	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Wary Watchdog/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e074b14-0ec8-439b-9b83-5f7c1a904384	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunt-the-network:cast:s1,f:xs:XP:haunt-the-network:cast:s1	-	-	-	054d9f516953	-	d4da103fb16d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7e09daa4-a0e6-447b-b0c5-6b1bf728525f	cast	cast	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	6f0add86915c	-	d248eb6ea202	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a0	Draw	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	6f0add86915c	-	d248eb6ea202	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a1	Counter	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	6f0add86915c	-	d248eb6ea202	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a0	Draw	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	71bd817bab96	-	d248eb6ea202	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7e09daa4-a0e6-447b-b0c5-6b1bf728525f	f0/a1	Counter	owed	harness:x=agree+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	71bd817bab96	-	d248eb6ea202	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 7e0b9e67-3103-4299-934b-46d8fe96f553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e0b9e67-3103-4299-934b-46d8fe96f553	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:keldon-berserker:f0t0:s1,f:xs:XP:keldon-berserker:f0t0:s1	-	-	-	8c0bd19283bb	-	400f98a5dc1c	-	-	2026-11-24	xproof
 7e0d2965-bbcd-4214-b1b6-c0d2601ce078	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ea71a36-8fa8-4ba3-9cb1-7fc6917c3ddd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ea71a36-8fa8-4ba3-9cb1-7fc6917c3ddd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:firemane-avenger:f0t0:s1,f:xs:XP:firemane-avenger:f0t0:s1	-	-	-	3aa6ded33acb	-	4f9220f84582	-	-	2026-11-25	xproof
 7eade76f-92e4-4d26-9eb8-d3d954845c04	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shelob-dread-weaver:cast:s1,f:xs:XP:shelob-dread-weaver:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a0	NULL	owed	refused:steps-needed:cost:ExiledMoveToGrave	-	start	0	0	-	-	-	-	6f0add86915c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	6f0add86915c	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a0	NULL	owed	refused:steps-needed:cost:ExiledMoveToGrave	-	start	0	0	-	-	-	-	71bd817bab96	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
+7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	71bd817bab96	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
 7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shelob-dread-weaver:f0t0:s1,f:xs:XP:shelob-dread-weaver:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rupture-spire:f0t0:s1,f:xs:XP:rupture-spire:f0t0:s1	-	-	-	8a1b1a193ec0	-	09f7a4a97e48	-	-	2026-11-24	xproof
