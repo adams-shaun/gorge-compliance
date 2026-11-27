@@ -608,6 +608,11 @@ impl Machine<'_> {
         let i = self.step;
         self.need_priority(seat)?;
         let id = self.object(&step.card, step.seat)?;
+        // The generator writes the activation cost's pool onto the step (e.g. "C" for a {1});
+        // without it `legal_actions_full` sees an empty pool and rejects the activation. As in
+        // `cast`, an empty `mana` is a no-op, so no-cost activations are unchanged.
+        let units = parse_mana(&step.mana)?;
+        self.add_mana(seat, units, rb)?;
         let key = i.to_string();
         let ability = self
             .req
@@ -710,11 +715,18 @@ impl Machine<'_> {
                     mana_type(single[0]).expect("filtered")
                 } else {
                     // "any" or several colours: gorge's colour decision for this step names the colour.
+                    // gorge's `pay.ManaAbilityLabel` prefixes the activation cost, so a {1}
+                    // ability's pick reads "Pay 1: Add W", not "Add W". Accept a mana/color pick
+                    // only when the label itself names a colour: the family also holds the wheel
+                    // label "Pay 1: Add any color" and multi-pip combo labels, which are not
+                    // colour decisions.
                     let d = self
                         .queue
                         .take(i as i32, |d| {
                             d.kind == "choose_n"
-                                && (d.pick_kinds.iter().any(|k| k == "color") || d.picks.iter().any(|p| p.starts_with("Add ")))
+                                && (d.pick_kinds.iter().any(|k| k == "color" || k == "mana")
+                                    || d.picks.iter().any(|p| p.starts_with("Add ")))
+                                && d.picks.first().is_some_and(|p| colour_of_label(p).is_some())
                         })
                         .ok_or_else(|| unmatched(i, format!("mana ability producing {produces:?} has no colour decision")))?;
                     d.picks
@@ -1511,6 +1523,23 @@ mod tests {
         assert_eq!(s.checkpoint, "step 0 (activate)");
         assert_eq!(s.players[0].pool, "G", "gorge's colour decision answers phase's ChooseManaColor prompt");
         assert!(s.permanents.iter().find(|p| p.name == "Torgal, A Fine Hound").unwrap().tapped);
+    }
+
+    /// A mana ability with a non-{T} cost: gorge labels its colour pick "Pay 1: Add G", and the
+    /// activate step's `mana` funds the {1}. Both the label and the funding must be replayed.
+    #[test]
+    fn mana_source_cost_prefixed_any_colour_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Three Tree Mascot"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Three Tree Mascot","mana":"C","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"cost":"{1}","produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","options":5,
+                "picks":["Pay 1: Add G"],"pick_idx":[0],"pick_refs":["p0:Three Tree Mascot"],
+                "pick_kinds":["mana"],"via":"mana ability","gorge_kind":"choose",
+                "first":"Pay 1: Add G","min":1,"max":1}]}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "G", "the cost-prefixed label picks phase's ChooseManaColor");
+        assert_eq!(rb.leftover, None, "the colour decision is consumed");
     }
 
     /// A colourless nonland mana ability whose production phase stores outside `ManaType`'s colours.
