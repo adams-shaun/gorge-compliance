@@ -13,7 +13,7 @@ import (
 )
 
 // TestGenManaAbilitiesSendsActivation: gen -mana-abilities writes an
-// activation item for every named nonland mana source, the no-mana-cost Sol
+// activation item for every named mana source, the no-mana-cost Sol
 // Talisman included, and the follower request for it carries the
 // neutral.ability entry a driver's mana-source mapping reads.
 func TestGenManaAbilitiesSendsActivation(t *testing.T) {
@@ -90,6 +90,96 @@ func TestGenManaAbilitiesSendsActivation(t *testing.T) {
 	if strings.Contains(string(skips), "no mana cost") {
 		t.Errorf("skips still name no mana cost: %s", skips)
 	}
+}
+
+// TestGenArbitraryManifestUsesCommittedXMageNames: gen's CLI passes the
+// committed manifests dir to installXMageKnown even when -manifest points
+// outside it. A follower-check synthetic manifest lives in an arbitrary
+// output directory; parsing that directory as an XMage set list failed on an
+// empty manifest (no names) or a sibling non-manifest JSON.
+func TestGenArbitraryManifestUsesCommittedXMageNames(t *testing.T) {
+	tmp := t.TempDir()
+	if err := os.WriteFile(filepath.Join(tmp, "EMPTY.json"), []byte(`{"code":"EMPTY","cards":[]}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(tmp, "sibling.json"), []byte("not a manifest\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	known := committedManifestDir()
+	if known == "" {
+		t.Skip("no repository root")
+	}
+	out := filepath.Join(tmp, "gen.jsonl")
+	if err := runGenKnown(filepath.Join("..", "..", ".cards"), filepath.Join(tmp, "EMPTY.json"), out, "A", "", false, known); err != nil {
+		t.Fatalf("gen with an arbitrary manifest dir: %v", err)
+	}
+}
+
+// TestGenManaAbilityGapIsWrittenBesideBase: a real mana source whose
+// activation the activate family cannot build (Millikin's Mill cost) keeps
+// its cast item and still writes a skip naming the activation gap. The skip
+// used to be dropped whenever the base cast item existed, so follower-check
+// saw only cast-resolve and reported AGREE.
+func TestGenManaAbilityGapIsWrittenBesideBase(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	m := compliance.Manifest{Code: "GAP", Cards: []compliance.ManifestCard{{Name: "Millikin"}}}
+	out := filepath.Join(t.TempDir(), "gen.jsonl")
+	if err := genManifestOpts(reg, m, out, "A", true); err != nil {
+		t.Fatalf("genManifestOpts: %v", err)
+	}
+	items := genItems(t, out)
+	if len(items) != 1 || items[0].Template != "cast-resolve" {
+		t.Fatalf("Millikin: %v, want only the cast-resolve item", templatesOf(items))
+	}
+	raw, err := os.ReadFile(out + ".skips.jsonl")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(raw), "activate cost gap") {
+		t.Fatalf("Millikin: skips %q do not name the activation cost gap", raw)
+	}
+}
+
+// TestGenUnknownManaNameIsSkipped: a pool name the corpus does not know
+// produces no item and a "not in corpus" skip, which follower-check turns
+// into an error instead of an AGREE row.
+func TestGenUnknownManaNameIsSkipped(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	m := compliance.Manifest{Code: "TYPO", Cards: []compliance.ManifestCard{{Name: "Sol Talismann"}}}
+	out := filepath.Join(t.TempDir(), "gen.jsonl")
+	if err := genManifestOpts(reg, m, out, "A", true); err != nil {
+		t.Fatalf("genManifestOpts: %v", err)
+	}
+	if items := genItems(t, out); len(items) != 0 {
+		t.Fatalf("Sol Talismann: %v, want no items", templatesOf(items))
+	}
+	raw, err := os.ReadFile(out + ".skips.jsonl")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(raw), "not in corpus") {
+		t.Fatalf("Sol Talismann: skips %q, want not in corpus", raw)
+	}
+}
+
+func genItems(t *testing.T, path string) []oraclegen.Item {
+	t.Helper()
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var out []oraclegen.Item
+	for _, line := range strings.Split(strings.TrimSpace(string(raw)), "\n") {
+		if line == "" {
+			continue
+		}
+		var it oraclegen.Item
+		if err := json.Unmarshal([]byte(line), &it); err != nil {
+			t.Fatalf("item line %q: %v", line, err)
+		}
+		out = append(out, it)
+	}
+	return out
 }
 
 func templatesOf(items []oraclegen.Item) []string {

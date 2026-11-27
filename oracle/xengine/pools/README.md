@@ -57,7 +57,7 @@ curl -sSfLO https://mtgjson.com/api/v5/FDN.json.gz     # outside the repo: it ca
 go run ./cmd/xengine pool -set FDN -legal pauper -mtgjson FDN.json.gz -out oracle/xengine/pools/fdn-commons.txt
 ```
 
-`mana-abilities.txt` is the follower-check gate's pool: `scripts/follower-check.sh ENGINE --pool oracle/xengine/pools/mana-abilities.txt` reads it without `--set`, builds a card source from the names, and appends each card's level-A mana-ability activation item. The Alright Henge is in no committed set manifest, which is why the pool (not `--set`) is the card source.
+`mana-abilities.txt` is the follower-check gate's pool: `scripts/follower-check.sh ENGINE --pool oracle/xengine/pools/mana-abilities.txt` reads it without `--set`, builds a card source from the names, and appends each card's level-A mana-ability activation item. The Alright Henge is in no committed set manifest, which is why the pool (not `--set`) is the card source. The gate refuses (exit 2) and names every pool name that produced no `activate-mana` item, so a misspelling or a mana ability the activate family cannot build cannot shrink the gate in silence. A basic land is not a valid pool name here: its intrinsic mana ability is engine-provided and has no Forge requirement to activate.
 
 `fdn-commons.txt` was cut from MTGJSON 5.3.0+20261110 (`FDN.json.gz`, sha256
 in the file's header). The repository holds no legality data of its own (the

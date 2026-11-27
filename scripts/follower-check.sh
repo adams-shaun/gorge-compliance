@@ -17,8 +17,11 @@
 #                   follower-check pool outside every committed set uses this,
 #                   and --pool without --set builds one from the pool names so
 #                   a card in no committed manifest is selectable too.
-#   --pool FILE     keep the items whose .card is a name in FILE (one name per line,
-#                   '#' starts a comment, blank lines skipped; oracle/xengine/pools/README.md)
+#   --pool FILE     select the mana sources to activate (one name per line, '#'
+#                   starts a comment, blank lines skipped; oracle/xengine/pools/README.md).
+#                   Adds -mana-abilities and refuses (exit 2) if any pool name
+#                   yields no activate-mana item. Without --set the pool names
+#                   are the card source; with --set they filter within it.
 #   --limit N       then keep the first N items
 #   --setup-only    every item becomes steps=[] with no payment: gorge and the
 #                   follower both stop at the setup checkpoint, which is compared alone
@@ -132,13 +135,33 @@ else
 fi
 rm -f "$out/gen.jsonl" "$out/items.jsonl" "$out/req.jsonl" "$out/rows.jsonl" "$out/diff.jsonl" "$out/$engine-prep.jsonl"
 
-# 3. gen. -mana-abilities appends the level-A activation item for every
-# nonland mana ability: the step a follower's mana-source mapping reads.
+# 3. gen. -mana-abilities is the pool mode: it appends the level-A activation
+# item for every battlefield mana ability, the step a follower's mana-source
+# mapping reads. --set alone keeps the ordinary level-A scenario set, so its
+# behaviour and committed bytes do not move.
 if [ -n "$pool" ] && [ ! -s "$pool_names" ]; then
 	: >"$out/gen.jsonl"
 	: >"$out/gen.jsonl.skips.jsonl"
 else
-	run_od gen -level A -mana-abilities -manifest "$manifest" -out "$out/gen.jsonl"
+	gen_args=(-level A)
+	if [ -n "$pool" ]; then gen_args+=(-mana-abilities); fi
+	run_od gen "${gen_args[@]}" -manifest "$manifest" -out "$out/gen.jsonl"
+fi
+
+# 3b. every pool name must have produced an activation item. A misspelling is
+# a "not in corpus" skip; a real mana source the activate family cannot build
+# is a mana-ability skip beside its base item. Either way, filtering it out
+# would leave the gate reporting AGREE for a card whose mana ability it never
+# exercised, so the names that produced none are an input error.
+if [ -n "$pool" ] && [ -s "$pool_names" ]; then
+	missing=$(jq -r -s --rawfile names "$pool_names" '
+		($names | split("\n") | map(select(length > 0))) as $want
+		| ([.[] | select((.template // "") | startswith("activate-mana")) | .card]) as $got
+		| ($want - $got) | .[]
+	' "$out/gen.jsonl")
+	if [ -n "$missing" ]; then
+		die "pool names with no level-A mana activation item: $(printf '%s\n' "$missing" | paste -sd, -) (see $out/gen.jsonl.skips.jsonl)"
+	fi
 fi
 
 # 4. filter

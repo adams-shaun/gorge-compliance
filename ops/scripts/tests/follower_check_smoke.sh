@@ -7,6 +7,8 @@
 #   - an --out inside the repository but outside .oracle-build/ exits 2;
 #   - --setup-only items have "steps":[] and no payment;
 #   - --pool keeps only pool cards (comments and blank lines skipped), --limit the first N;
+#   - gen gets -mana-abilities for --pool but not for --set alone;
+#   - a --pool name with no activation item exits 2 and names it;
 #   - a runner that drops a row makes the script exit 1;
 #   - --min-agree below/above the measured rate exits 0/1;
 #   - SUMMARY.txt has the status histogram; an empty request file never starts the runner.
@@ -42,6 +44,7 @@ STUB
 cat >"$BIN/oraclediff" <<'STUB'
 #!/usr/bin/env bash
 sub=$1; shift
+argv="$*"
 declare -A o
 while [ $# -gt 0 ]; do
 	case "$1" in
@@ -49,12 +52,19 @@ while [ $# -gt 0 ]; do
 	*) o[${1#-}]=$2; shift 2 ;;
 	esac
 done
-echo "oraclediff $sub" >>"$LOG"
+echo "oraclediff $sub $argv" >>"$LOG"
 case "$sub" in
 gen)
 	for c in A B C D E F; do
 		printf '{"id":"s:%s","card":"%s","setup":{},"steps":[{"op":"pass"}],"payment":{"x":1}}\n' "$c" "$c"
 	done >"${o[out]}"
+	# The pool cards B and D get an activation item when the script passes
+	# -mana-abilities, so the per-pool-name coverage check sees them.
+	if [ "${o[mana-abilities]:-}" = true ]; then
+		for c in B D; do
+			printf '{"id":"m:%s","card":"%s","template":"activate-mana","setup":{},"steps":[{"op":"activate"}],"payment":{"x":1}}\n' "$c" "$c"
+		done >>"${o[out]}"
+	fi
 	;;
 follower-export | forge-export)
 	eng=${o[engine]:-forge}
@@ -102,6 +112,7 @@ check "summary line" 'has "$out" "follower-check: phase set=XYZ items=6 refused=
 check "SUMMARY.txt has the status histogram" '/usr/bin/grep -q "AGREE 3" "$O/SUMMARY.txt" && /usr/bin/grep -q "DIVERGE 2" "$O/SUMMARY.txt" && /usr/bin/grep -q " 2 life" "$O/SUMMARY.txt"' "$(cat "$O/SUMMARY.txt" 2>/dev/null)"
 check "plain: steps and payment kept" '[ "$(jq -c ".steps|length" "$O/items.jsonl" | sort -u)" = 1 ] && jq -e "has(\"payment\")" "$O/items.jsonl" >/dev/null'
 check "runner got the env override and the prep the runner path" '/usr/bin/grep -q "follower-export engine=phase runner=$BIN/runner" "$LOG"' "$(cat "$LOG")"
+check "plain run: gen omits -mana-abilities" '! /usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "$(cat "$LOG")"
 
 # Forge (forge-export): the same runner is passed to the preflight with
 # -runner, and the refusals land in forge-prep.jsonl.
@@ -112,13 +123,20 @@ check "forge summary line" 'has "$out" "follower-check: forge set=XYZ items=6 re
 check "forge: -runner passed to the forge-export preflight" '/usr/bin/grep -q "forge-export engine= runner=$BIN/runner" "$LOG"' "$(cat "$LOG")"
 check "forge: refusal rows in forge-prep.jsonl" '[ "$(wc -l <"$O/forge-prep.jsonl")" = 1 ]' "$(cat "$O/forge-prep.jsonl" 2>/dev/null)"
 
-# --setup-only, --pool (comments, blanks), --limit.
-printf '# pool\nB\n\nD # inline\nZ\n' >"$TMP/pool.txt"
-O=$TMP/o2
+# --setup-only, --pool (comments, blanks), --limit. The stub's B and D get an
+# activation item when -mana-abilities is passed, so the coverage check holds.
+printf '# pool\nB\n\nD # inline\n' >"$TMP/pool.txt"
+O=$TMP/o2; : >"$LOG"
 out=$(cc phase --setup-only --pool "$TMP/pool.txt" --out "$O"); rc=$?
 check "setup-only+pool exits 0" '[ "$rc" = 0 ]' "rc=$rc $out"
 check "setup-only: steps [] and no payment" '[ "$(jq -c ".steps" "$O/items.jsonl" | sort -u)" = "[]" ] && ! jq -e "has(\"payment\")" "$O/items.jsonl" >/dev/null'
-check "pool keeps only pool cards" '[ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "B D " ]' "$(jq -r .card "$O/items.jsonl")"
+check "pool run: gen got -mana-abilities" '/usr/bin/grep -q "oraclediff gen .*-mana-abilities" "$LOG"' "$(cat "$LOG")"
+check "pool keeps only pool cards" '[ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "B D B D " ]' "$(jq -r .card "$O/items.jsonl")"
+
+# A pool name that yields no activation item is an input error naming it.
+printf 'B\nSol Talismann\n' >"$TMP/pool-missing.txt"
+out=$(cc phase --pool "$TMP/pool-missing.txt" --out "$TMP/o2m"); rc=$?
+check "pool name with no activation item exits 2" '[ "$rc" = 2 ] && has "$out" "no level-A mana activation item: Sol Talismann"' "rc=$rc $out"
 out=$(cc phase --limit 2 --out "$O"); rc=$?
 check "limit keeps the first N" '[ "$(jq -r .card "$O/items.jsonl" | tr "\n" " ")" = "A B " ]'
 : >"$LOG"

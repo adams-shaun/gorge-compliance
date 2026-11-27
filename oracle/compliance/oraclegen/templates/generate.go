@@ -24,10 +24,12 @@ func (t Template) item(f *cards.Face, card string, sc oraclegen.Scenario) oracle
 	return oraclegen.NewItem(f, card, t.ID, t.Version, sc)
 }
 
-// All lists every template Generate picks by default. ActivateMana is not
-// here: GenerateManaAbilities emits it only for -mana-abilities, so the XMage
-// pass's level-A template set (and every committed verdict) is unchanged.
-var All = []Template{PlayLand, CastResolve, CounterSpell}
+// All lists every level-A template, so the version/identity test and the
+// gate's level-A row filter cover ActivateMana too. Generate itself dispatches
+// only PlayLand, CastResolve and CounterSpell; GenerateManaAbilities emits
+// ActivateMana for -mana-abilities, so the XMage pass's generated set (and
+// every committed verdict) is unchanged.
+var All = []Template{PlayLand, CastResolve, CounterSpell, ActivateMana}
 
 // Generate builds the level-A scenario for one card, or says why not: a
 // land is played, a spell that targets a spell counters one of ours, and

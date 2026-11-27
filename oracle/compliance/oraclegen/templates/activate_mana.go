@@ -13,13 +13,15 @@ package templates
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
-// ActivateMana activates one nonland mana ability and resolves it. Its own
+// ActivateMana activates one battlefield mana ability and resolves it. Its own
 // version: bumping it stales only these items (they are not committed
 // verdicts, but follower-check output names the version).
 var ActivateMana = Template{ID: "activate-mana", Version: 1}
@@ -41,7 +43,10 @@ func manaTemplate(ordinal int) (string, int) {
 // mana ability on the card's front face, in IR order. It is the append step
 // `oraclediff gen -mana-abilities` runs. Generate's own item is unchanged, so
 // the XMage pass keeps its committed level-A bytes; a no-mana-cost mana
-// source (Sol Talisman) gets its activation here instead of its skip.
+// source (Sol Talisman) gets its activation here instead of its skip. A
+// land's explicit `AB$ Mana` ability is generated too (play-land only puts
+// the land on the battlefield and never emits the activate step); a basic
+// land has no requirement because its intrinsic ability is engine-provided.
 //
 // A skip names the one ability that could not be served. A card with no mana
 // ability returns no items and no skips.
@@ -51,17 +56,19 @@ func GenerateManaAbilities(reg *cards.Registry, name string) ([]oraclegen.Item, 
 		return nil, []*oraclegen.Skip{{Card: name, Reason: "not in corpus"}}
 	}
 	f := c.Faces[0]
-	if oraclegen.HasType(f, "Land") {
-		// A land's intrinsic mana ability is played through play-land and
-		// has no forge `AB$ Mana` requirement; the nonland source is the
-		// shape follower-check could not reach.
-		return nil, nil
-	}
 	var items []oraclegen.Item
 	var skips []*oraclegen.Skip
 	ordinal := 0
 	for _, req := range levelb.Requirements(c) {
 		if req.Face != 0 || req.Sub != "activate.mana" {
+			continue
+		}
+		if idx, err := strconv.Atoi(req.Slot); err == nil && idx >= 0 && idx < len(f.Abilities) &&
+			strings.EqualFold(strings.TrimSpace(f.Abilities[idx].ParamStr(cards.PKPlaneswalker)), "True") {
+			// A loyalty ability is not a mana ability (CR 605.1a), even
+			// when it adds mana: it uses the stack, follower-export classes
+			// it "loyalty", and the driver runs ability_action, not
+			// mana_source. The level-B activate family already covers it.
 			continue
 		}
 		it, skip := GenerateB(reg, name, req)

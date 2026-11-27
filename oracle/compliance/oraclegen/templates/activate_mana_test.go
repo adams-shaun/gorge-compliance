@@ -65,12 +65,20 @@ func TestActivateManaLevelAItems(t *testing.T) {
 
 // TestGenerateManaAbilitiesIsRequirementDriven: the item set comes from
 // levelb.Requirements' activate.mana rows, not a hand-rolled API check, so a
-// card with two mana abilities gets both (unique ids) and a land gets none
-// (play-land already plays it).
+// card with two mana abilities gets both (unique ids), a nonbasic land's
+// explicit AB$ Mana ability gets one, and a basic land gets none (its
+// intrinsic ability is engine-provided, not a requirement).
 func TestGenerateManaAbilitiesIsRequirementDriven(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	if items, _ := GenerateManaAbilities(reg, "Forest"); len(items) != 0 {
-		t.Fatalf("Forest: %d activation items, want 0 (play-land serves it)", len(items))
+		t.Fatalf("Forest: %d activation items, want 0 (a basic land has no AB$ Mana requirement)", len(items))
+	}
+	landItems, landSkips := GenerateManaAbilities(reg, "Kher Keep")
+	if len(landSkips) != 0 || len(landItems) != 1 {
+		t.Fatalf("Kher Keep: %d items, %d skips; want its one AB$ Mana ability", len(landItems), len(landSkips))
+	}
+	if got := landItems[0].Scenario.Setup["p0"].Battlefield; !containsString(got, "Kher Keep") {
+		t.Fatalf("Kher Keep: p0 battlefield %v does not hold the land", got)
 	}
 	for _, name := range []string{"The Alright Henge", "Torgal, A Fine Hound", "Talisman of Unity"} {
 		c, _ := reg.Lookup(name)
@@ -94,5 +102,38 @@ func TestGenerateManaAbilitiesIsRequirementDriven(t *testing.T) {
 			}
 			seen[it.ID] = true
 		}
+	}
+}
+
+// TestGenerateManaAbilitiesSkipsLoyalty: a loyalty ability that adds mana is
+// not a mana ability (CR 605.1a); it uses the stack and follower-export
+// classes it "loyalty", so an activation item here would never exercise
+// mana_source and would stamp the wrong CR. The level-B activate family still
+// covers it (TestActivateLoyaltyManaUsesStack).
+func TestGenerateManaAbilitiesSkipsLoyalty(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, name := range []string{"Chandra, Flameshaper", "Xenagos, the Reveler"} {
+		items, skips := GenerateManaAbilities(reg, name)
+		if len(items) != 0 || len(skips) != 0 {
+			t.Errorf("%s: %d items, %d skips; a loyalty ability is not a mana ability", name, len(items), len(skips))
+		}
+	}
+}
+
+// TestActivateManaTemplatePinned: ActivateMana is a level-A template, so its
+// identity lives in All and its id/version are pinned to the values that name
+// the generated items. TestTemplatesAreDistinctAndVersioned checks the rest.
+func TestActivateManaTemplatePinned(t *testing.T) {
+	if ActivateMana.ID != "activate-mana" || ActivateMana.Version != 1 {
+		t.Fatalf("ActivateMana = %+v, want activate-mana v1", ActivateMana)
+	}
+	found := false
+	for _, tp := range All {
+		if tp == ActivateMana {
+			found = true
+		}
+	}
+	if !found {
+		t.Fatal("ActivateMana is missing from All; the template version test would not cover it")
 	}
 }

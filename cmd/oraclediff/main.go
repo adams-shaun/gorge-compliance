@@ -20,8 +20,8 @@
 //
 // gen writes one level-A scenario per manifest card gorge fully supports
 // (skips go to <out>.skips.jsonl); -mana-abilities appends the level-A
-// activation item for each nonland mana ability (follower-check's mode, off
-// for the XMage pass); -level B writes the level-A scenario and then every
+// activation item for each battlefield mana ability (follower-check's mode,
+// off for the XMage pass); -level B writes the level-A scenario and then every
 // generable level-B one, with a level-B skip (keyed by its requirement) for
 // each the generator cannot make yet. plan splits them into the stale ones
 // (no passing verdict for this exact scenario and XMAGE_REF) and, of those,
@@ -84,9 +84,14 @@ func main() {
 		out := fs.String("out", "", "scenario JSONL")
 		level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
 		printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
-		manaAbilities := fs.Bool("mana-abilities", false, "also generate a level-A activation item for every nonland activated mana ability (follower-check)")
+		manaAbilities := fs.Bool("mana-abilities", false, "also generate a level-A activation item for every activated mana ability (follower-check)")
 		fs.Parse(os.Args[2:])
-		err = runGenOpts(*dir, *manifest, *out, *level, *printed, *manaAbilities)
+		// XMage's known names always come from the committed manifests.
+		// -manifest names the card source and may live outside that directory
+		// (follower-check's synthetic POOL manifest); parsing that directory
+		// as an XMage set list made an empty file or a sibling non-manifest
+		// JSON fail gen outright.
+		err = runGenKnown(*dir, *manifest, *out, *level, *printed, *manaAbilities, committedManifestDir())
 	case "plan":
 		fs := flag.NewFlagSet("plan", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
@@ -250,8 +255,29 @@ func runGen(dir, manifest, out, level, printed string) error {
 
 // runGenOpts is runGen with the follower-check mana-ability append. The
 // ordinary level-A pass keeps the flag false, so every committed level-A
-// scenario (and its verdict) keeps its bytes.
+// scenario (and its verdict) keeps its bytes. It installs XMage's known names
+// from the manifest's own directory: a fixture manifest is its own known set.
+// The CLI passes the committed manifests dir explicitly (runGenKnown).
 func runGenOpts(dir, manifest, out, level, printed string, manaAbilities bool) error {
+	return runGenKnown(dir, manifest, out, level, printed, manaAbilities, "")
+}
+
+// committedManifestDir is the committed XMage manifest directory, or "" when
+// the repository root cannot be found (a standalone binary run outside its
+// checkout), in which case gen falls back to the manifest's own directory.
+func committedManifestDir() string {
+	root := repoRoot()
+	if root == "" {
+		return ""
+	}
+	return filepath.Join(root, "oracle", "compliance", "manifests")
+}
+
+// runGenKnown is runGenOpts with an explicit XMage-known directory. An empty
+// knownDir keeps the manifest's directory (the test seam); the CLI passes the
+// committed manifests dir so an arbitrary -manifest path is never parsed as
+// an XMage set list.
+func runGenKnown(dir, manifest, out, level, printed string, manaAbilities bool, knownDir string) error {
 	if manifest == "" || out == "" {
 		return fmt.Errorf("gen needs -manifest and -out")
 	}
@@ -279,7 +305,10 @@ func runGenOpts(dir, manifest, out, level, printed string, manaAbilities bool) e
 			m = withPrinted(m, pr)
 		}
 	}
-	if err := installXMageKnown(filepath.Dir(manifest)); err != nil {
+	if knownDir == "" {
+		knownDir = filepath.Dir(manifest)
+	}
+	if err := installXMageKnown(knownDir); err != nil {
 		return err
 	}
 	reg, err := loadReg(dir)
@@ -319,8 +348,8 @@ func genManifest(reg *cards.Registry, m compliance.Manifest, out, level string) 
 }
 
 // genManifestOpts is genManifest with manaAbilities: one extra level-A
-// activation item per nonland mana ability. It is follower-check's mode; the
-// XMage pass never sets it, so its scenario set and verdicts do not move.
+// activation item per battlefield mana ability. It is follower-check's mode;
+// the XMage pass never sets it, so its scenario set and verdicts do not move.
 func genManifestOpts(reg *cards.Registry, m compliance.Manifest, out, level string, manaAbilities bool) error {
 	sup := effects.Supported()
 	has := func(n string) bool { _, ok := reg.Lookup(n); return ok }
@@ -378,49 +407,63 @@ func genManifestOpts(reg *cards.Registry, m compliance.Manifest, out, level stri
 			continue
 		}
 		var items []oraclegen.Item
-		var skips []*oraclegen.Skip
+		var manaSkips []*oraclegen.Skip
+		var baseSkip *oraclegen.Skip
 		hasBase := false
 		c, _ := reg.Lookup(name)
 		switch {
 		case !ok:
-			skips = append(skips, &oraclegen.Skip{Card: mc.Name, Reason: "not in corpus"})
+			baseSkip = &oraclegen.Skip{Card: mc.Name, Reason: "not in corpus"}
 		default:
 			if u := reg.Unsupported(c, sup); len(u) > 0 {
-				skips = append(skips, &oraclegen.Skip{Card: name, Reason: fmt.Sprintf("unsupported %v", u)})
+				baseSkip = &oraclegen.Skip{Card: name, Reason: fmt.Sprintf("unsupported %v", u)}
 			} else {
 				it, skip := templates.Generate(reg, name)
 				if skip != nil {
-					skips = append(skips, skip)
+					baseSkip = skip
 				} else {
 					items = append(items, it)
 					hasBase = true
 				}
-			}
-			// -level B already emits every activated ability (activate.mana
-			// included) as a level-B item; the level-A append is for the
-			// level-A follower gate only.
-			if manaAbilities && level == "A" {
-				mits, mskips := templates.GenerateManaAbilities(reg, name)
-				for _, mit := range mits {
-					if !hasItemID(items, mit.ID) {
-						items = append(items, mit)
+				// -level B already emits every activated ability
+				// (activate.mana included) as a level-B item; the level-A
+				// append is for the level-A follower gate only. It sits in
+				// the supported branch: a card the engine calls unplayable
+				// keeps its unsupported skip and gets no activation.
+				if manaAbilities && level == "A" {
+					mits, mskips := templates.GenerateManaAbilities(reg, name)
+					for _, mit := range mits {
+						if !hasItemID(items, mit.ID) {
+							items = append(items, mit)
+						}
 					}
-				}
-				// A card with no generated item names the first reason it
-				// got none. A card with a cast item and a mana-ability cost
-				// gap still has a scenario; the skip would only obscure it.
-				if len(items) == 0 {
-					skips = append(skips, mskips...)
+					// A mana-ability gap is written even when the card has
+					// a base scenario. Otherwise a pool name whose activation
+					// could not be built disappears while follower-check
+					// still reports AGREE (Millikin).
+					manaSkips = append(manaSkips, mskips...)
 				}
 			}
 		}
 		if len(items) == 0 {
-			if len(skips) > 0 {
-				b, _ := json.Marshal(skips[0])
+			first := baseSkip
+			if first == nil && len(manaSkips) > 0 {
+				first = manaSkips[0]
+			}
+			if first != nil {
+				b, _ := json.Marshal(first)
 				fmt.Fprintln(sw, string(b))
 				skipped++
 			}
 			continue
+		}
+		// An item was written, so the base-generate skip (Sol Talisman's "no
+		// mana cost") is superseded. A mana-ability gap still has no item and
+		// stays visible beside the card's other rows.
+		for _, skip := range manaSkips {
+			b, _ := json.Marshal(skip)
+			fmt.Fprintln(sw, string(b))
+			skipped++
 		}
 		for _, it := range items {
 			if name != mc.Name && !mc.PrintedOnly {
