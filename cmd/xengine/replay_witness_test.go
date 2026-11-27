@@ -143,6 +143,111 @@ func TestReplayWitness(t *testing.T) {
 	}
 }
 
+func TestReplayWitnessResults(t *testing.T) {
+	reg, play := playTwo(t)
+	path, ids, keys := witnessFile(t, reg, play, 1)
+	out := t.TempDir()
+	if err := replayWitness(reg, []string{path}, out, "2026-11-24", "newsha123456"); err != nil {
+		t.Fatal(err)
+	}
+	rows := tsvRows(t, filepath.Join(out, "replay.tsv"))
+	if strings.Join(rows[0], "\t") != replayHeader {
+		t.Fatalf("replay header %q", rows[0])
+	}
+	got := map[string]map[kpUse]replayResult{}
+	for _, r := range rows[1:] {
+		if len(r) != 6 {
+			t.Fatalf("replay row %v: %d columns, want 6", r, len(r))
+		}
+		u := kpUse{r[0], r[1]}
+		m := got[r[2]]
+		if m == nil {
+			m = map[kpUse]replayResult{}
+			got[r[2]] = m
+		}
+		if _, dup := m[u]; dup {
+			t.Errorf("replay row %v: duplicate (witness, key)", r)
+		}
+		m[u] = replayResult{r[0], r[1], r[2], r[3], r[4], r[5]}
+	}
+	if want := len(keys[0]) + len(keys[1]); len(rows)-1 != want {
+		t.Errorf("%d replay rows, want %d (one per witness, key)", len(rows)-1, want)
+	}
+	for _, u := range keys[0] {
+		r, ok := got[ids[0]][u]
+		if !ok {
+			t.Errorf("first witness key %v: no replay row", u)
+			continue
+		}
+		if r.result != "held" || r.checkpoint != "-" || r.field != "-" {
+			t.Errorf("first witness key %v: %+v, want held with no checkpoint or field", u, r)
+		}
+	}
+	for _, u := range keys[1] {
+		r, ok := got[ids[1]][u]
+		if !ok {
+			t.Errorf("second witness key %v: no replay row", u)
+			continue
+		}
+		if r.result != "changed" || r.checkpoint == "-" || r.field == "-" {
+			t.Errorf("second witness key %v: %+v, want changed with its checkpoint and field", u, r)
+		}
+	}
+}
+
+func TestReplayWitnessDir(t *testing.T) {
+	reg, play := playTwo(t)
+	path, _, _ := witnessFile(t, reg, play, 1)
+	b, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	lines := strings.Split(strings.TrimSuffix(string(b), "\n"), "\n")
+	if len(lines) != 2 {
+		t.Fatalf("%s has %d lines, want 2", path, len(lines))
+	}
+	dir := t.TempDir()
+	f1 := filepath.Join(dir, "01-first.jsonl")
+	f2 := filepath.Join(dir, "02-second.jsonl")
+	if err := os.WriteFile(f1, []byte(lines[0]+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(f2, []byte(lines[1]+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	// Not a witness: the directory expansion reads *.jsonl only.
+	if err := os.WriteFile(filepath.Join(dir, "notes.txt"), []byte("ignore me\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	run := func(out string, args ...string) {
+		t.Helper()
+		argv := []string{"-cards", "../../.cards", "-measured", "2026-11-24", "-gorge-sha", "newsha123456", "-out", out}
+		if err := runReplayWitness(append(argv, args...)); err != nil {
+			t.Fatal(err)
+		}
+	}
+	outDir, outFlags := t.TempDir(), t.TempDir()
+	run(outDir, "-witness-dir", dir)
+	run(outFlags, "-witness", f1, "-witness", f2)
+	for _, name := range []string{"keyproof.tsv", "regressions.tsv", "replay.tsv"} {
+		fromDir, err := os.ReadFile(filepath.Join(outDir, name))
+		if err != nil {
+			t.Fatal(err)
+		}
+		fromFlags, err := os.ReadFile(filepath.Join(outFlags, name))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !bytes.Equal(fromDir, fromFlags) {
+			t.Errorf("%s differs between -witness-dir and -witness runs", name)
+		}
+	}
+	err = runReplayWitness([]string{"-cards", "../../.cards", "-measured", "2026-11-24", "-gorge-sha", "newsha123456", "-witness-dir", t.TempDir(), "-out", t.TempDir()})
+	if err == nil || !strings.Contains(err.Error(), "-witness or -witness-dir") {
+		t.Fatalf("empty dir err %v, want one naming both flags", err)
+	}
+}
+
 func TestReplayWitnessBadFormat(t *testing.T) {
 	reg, play := playTwo(t)
 	path, _, _ := witnessFile(t, reg, play, -1)
