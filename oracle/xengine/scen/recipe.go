@@ -162,35 +162,141 @@ func sacCostShape(tok string) bool {
 	return err == nil && n >= 0
 }
 
-// asEnters reports an as-enters choice on face: a replacement of the card's own
-// move to the battlefield whose replacement effect is a Choose* API.
-func asEnters(f *cards.Face) bool {
+// asEntersKind reports the as-enters choice on face: a replacement of the
+// card's own move to the battlefield whose replacement effect is a Choose*
+// API. kind is "" when there is none. supported says a placed permanent's own
+// state restates the answer (the chosen colour, type or number), so the
+// lowering can queue it as a setup answer; a player, card, mode, etc. choice
+// leaves no state setup can read and is refused by its own name.
+func asEntersKind(f *cards.Face) (kind string, supported bool) {
 	for _, r := range f.Repls {
 		if r.Event != "Moved" || !strings.Contains(r.Params["ValidCard"], "Card.Self") || r.Params["Destination"] != "Battlefield" {
 			continue
 		}
-		if r.With != nil && strings.HasPrefix(r.With.API, "Choose") {
-			return true
+		if r.With == nil || !strings.HasPrefix(r.With.API, "Choose") {
+			continue
 		}
+		switch r.With.API {
+		case "ChooseColor":
+			return "color", true
+		case "ChooseType":
+			return "type", true
+		case "ChooseNumber":
+			return "number", true
+		}
+		return strings.ToLower(strings.TrimPrefix(r.With.API, "Choose")), false
 	}
-	return false
+	return "", false
 }
 
-// asEntersRefusal is the refusal of a card whose as-enters choice a start that
-// places it cannot make: a land is played, not cast, so its choice (a colour or
-// a type) cannot be made by the one play the focus takes ("as-enters:land");
-// every other card is plain "as-enters".
+// asEnters reports an as-enters choice on face.
+func asEnters(f *cards.Face) bool {
+	kind, _ := asEntersKind(f)
+	return kind != ""
+}
+
+// asEntersSupported reports whether the answer to face's as-enters choice is
+// state a placed permanent carries (ChosenColor, ChosenType or ChosenNumber),
+// as opposed to a player, name or mode that leaves no state setup can read.
+func asEntersSupported(f *cards.Face) bool {
+	_, ok := asEntersKind(f)
+	return ok
+}
+
+// reasonAsEntersStamp is the refusal of a card the recipe would place while
+// its own as-enters replacement asks a choice. The choice is answered after
+// genesis, so the live cut has the placement as a move this turn:
+// Object.EnteredThisTurn and Object.AcqTurn are stamped and the lowering's
+// setup cannot restate them yet. A cast puts the entry and its choice on the
+// tape instead (a self-ETB or a self-cast trigger), so the cast shapes never
+// come through here.
+const reasonAsEntersStamp = "start:as-enters-stamp"
+
+// asEntersPlacedRefusal is the refusal of a recipe that places the card on
+// the battlefield although it enters with a choice. It is the shared check of
+// every placement path (recipe's onBF and transformedStart), so a new shape
+// that places the card cannot silently skip it. A land or an unsupported kind
+// keeps the narrower reason asEntersRefusal names.
+func asEntersPlacedRefusal(f *cards.Face) string {
+	if !asEnters(f) {
+		return ""
+	}
+	if !asEntersSupported(f) || f.IsLand() {
+		return asEntersRefusal(f)
+	}
+	return reasonAsEntersStamp
+}
+
+// asEntersCastRefusal is the refusal a cast path keeps: a land or an
+// unsupported choice is refused by name as before, while a supported choice
+// is made by the engine during the cast, so the entry and the choice are on
+// the tape and no placement stamp is involved.
+func asEntersCastRefusal(f *cards.Face) string {
+	if asEnters(f) && (f.IsLand() || !asEntersSupported(f)) {
+		return asEntersRefusal(f)
+	}
+	return ""
+}
+
+// asEntersRefusal is the refusal of a card whose as-enters choice a start
+// cannot place. A land is played, not cast, so its choice cannot be made by
+// the one play the focus takes ("as-enters:land"). A non-land choice setup
+// cannot read keeps its own kind, so the next sibling names its gap instead of
+// hiding in a plain "as-enters".
 func asEntersRefusal(f *cards.Face) string {
 	if f.IsLand() {
 		return "as-enters:land"
 	}
+	if kind, supported := asEntersKind(f); kind != "" && !supported {
+		return "as-enters:" + kind
+	}
 	return "as-enters"
 }
 
+// asEntersCastTrigger reports whether a ChooseColor as-enters trigger is met
+// by casting the card: a state trigger that reads the chosen colour, or
+// "whenever a player casts a spell of the chosen color". A trigger that
+// places the permanent keeps the as-enters refusal (asEntersPlacedRefusal).
+func asEntersCastTrigger(trig *cards.Trigger) bool {
+	if trig == nil {
+		return false
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return false
+	}
+	switch trig.Mode {
+	case "Always":
+		return strings.Contains(trig.Params["IsPresent"], "ChosenColor")
+	case "SpellCast":
+		return strings.TrimSpace(trig.Params["ValidCard"]) == "Card.ChosenColor" && trig.Params["ValidActivatingPlayer"] == ""
+	}
+	return false
+}
+
+// triggerCastsCard reports whether the trigger recipe serves its key by
+// casting the card, so the entry and any as-enters choice are on the tape
+// rather than a genesis placement: "when this enters" (ChangesZone to the
+// battlefield on Self) and "when you cast this spell" (SpellCast on Self).
+// Every other trigger mode places the permanent, where an as-enters choice
+// keeps the reasonAsEntersStamp refusal.
+func triggerCastsCard(trig *cards.Trigger) bool {
+	if trig == nil {
+		return false
+	}
+	switch trig.Mode {
+	case "ChangesZone":
+		return trig.Params["Destination"] == "Battlefield" && selfCard(trig)
+	case "SpellCast", "SpellCastOrCopy":
+		return selfCard(trig)
+	}
+	return false
+}
+
 // asEntersStart serves a trigger key of a card whose own replacement is a
-// ChooseColor: the card is cast from hand on turn 1 (castStart), so the three
-// engines make the choice by their normal decision and the replay carries the
-// pick, and the trigger is then met on the line after the cast:
+// ChooseColor and whose trigger is met by its own cast (asEntersCastTrigger):
+// the card is cast from hand on turn 1 (castStart), so the three engines make
+// the choice by their normal decision and the replay carries the pick, and
+// the trigger is then met on the line after the cast:
 //
 //   - a state trigger on the chosen colour (Mode Always: "when you control no
 //     permanents of the chosen color") fires from the cast itself;
@@ -199,8 +305,8 @@ func asEntersRefusal(f *cards.Face) string {
 //     the pick not being known when the start is written, and exactly its lands:
 //     the focus bot casts the key card first, the bots then cast the carriers.
 //
-// Any other shape (a type choice, a trigger on another event) refuses by the
-// plain as-enters reason, as does a land (asEntersRefusal).
+// Every other as-enters choice keeps the specific placement refusal
+// (asEntersPlacedRefusal): the lower cannot restate the entry stamps yet.
 func asEntersStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	if face.IsLand() || !asEntersColour(face) {
 		return asEntersRefusal(face)
@@ -397,8 +503,8 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		generic = basicFor(c.Faces[0].ManaCost) // a transformed face has no cost: its colours are the front's
 	}
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield
-		if asEnters(face) {
-			r, _ := refuse(asEntersRefusal(face))
+		if why := asEntersPlacedRefusal(face); why != "" {
+			r, _ := refuse(why)
 			return r, true
 		}
 		return Result{}, false
@@ -431,15 +537,26 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		// the front face's. A Cycled trigger's card cycles from hand and
 		// never enters the battlefield at all.
 		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
-			// The card cannot be placed (it would enter without its choice):
-			// it is cast, and its trigger is met on the line after the cast.
-			if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
-				return refuse(why)
+			// A ChooseColor state or cast trigger is met on the line after
+			// the cast (asEntersStart): the three engines make the colour
+			// choice themselves. Every other as-enters choice is refused by
+			// asEntersPlacedRefusal below unless the trigger's own path casts
+			// the card, which puts the entry and choice on the tape.
+			if kind, supported := asEntersKind(face); supported && kind == "color" && asEntersCastTrigger(trig) {
+				if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
+					return refuse(why)
+				}
+				break
 			}
-			break
 		}
 		if trig == nil || trig.Mode != "Transformed" && trig.Mode != "Cycled" {
-			if r, ok := onBF(); ok {
+			if fam == "trigger" && triggerCastsCard(trig) {
+				// The trigger's own path casts the card: a supported choice
+				// is on the tape, and an unsupported one keeps its name.
+				if why := asEntersCastRefusal(face); why != "" {
+					return refuse(why)
+				}
+			} else if r, ok := onBF(); ok {
 				return r, nil
 			}
 		}
@@ -671,7 +788,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		return refuse(why)
 	}
-	if why := dayNightRefusal(reg, f); why != "" {
+	if why := dayNightStart(reg, f); why != "" {
 		return refuse(why)
 	}
 	return Result{Path: PathStart, Start: f}, nil

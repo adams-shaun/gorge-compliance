@@ -25,6 +25,17 @@ type StartFile struct {
 	Setup    StartSetup `json:"setup"`
 	Filler   string     `json:"filler"`
 	Seeds    int        `json:"seeds"`
+	// DayNight is the day/night designation (CR 731) the start has at turn 1's
+	// first-main cut: DayNightDay or DayNightNight, empty when neither. It is
+	// declared because the lowered digest does not carry Game.DayNight; the
+	// replay re-derives the same designation from the start's own placements
+	// and the turn-1 untap check (a gated Moved DayTime entry makes it day
+	// during genesis, then CR 731.2a makes it night before the cut, while a
+	// lone daybound permanent is read only after that check). A start whose
+	// designation is set only by its focus play (a cast, an activated "it
+	// becomes night") declares nothing: it is neither at the cut, and the play
+	// produces the change.
+	DayNight string `json:"day_night,omitempty"`
 	// SeedBase is where `xengine play -start` starts its seed search (0 or
 	// absent: 1): a retried key sets it to play new games.
 	SeedBase uint64      `json:"seed_base,omitempty"`
@@ -98,6 +109,23 @@ func (s *StartSeat) TappedCopies() []bool {
 	flags := make([]bool, len(s.Battlefield))
 	used := make([]bool, len(s.Battlefield))
 	for _, name := range s.Tapped {
+		for i, card := range s.Battlefield {
+			if !used[i] && card == name {
+				used[i], flags[i] = true, true
+				break
+			}
+		}
+	}
+	return flags
+}
+
+// BackFaceCopies reports, for each Battlefield entry in order, whether that
+// copy enters on its back face. BackFace names bind to the first copy of the
+// name not bound yet, like TappedCopies: a repeated name marks one copy.
+func (s *StartSeat) BackFaceCopies() []bool {
+	flags := make([]bool, len(s.Battlefield))
+	used := make([]bool, len(s.Battlefield))
+	for _, name := range s.BackFace {
 		for i, card := range s.Battlefield {
 			if !used[i] && card == name {
 				used[i], flags[i] = true, true

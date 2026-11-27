@@ -272,7 +272,7 @@ func mandatoryPhaseTriggered(f *cards.Face) bool {
 func captureAt(e *rules.Engine, entry int, xmage, start bool) *cut {
 	g := e.G
 	c := &cut{Entry: entry, Turn: g.Turn, Active: int(g.Active), Refs: map[state.ObjID]string{}, MaxID: state.ObjID(len(g.Objs))}
-	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}, xmage: xmage}
+	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}, xmage: xmage, start: start}
 	w.struct_(reflect.ValueOf(g).Elem(), "Game", gameTable, nil)
 	for i := range g.Players {
 		w.seat = i
@@ -562,6 +562,12 @@ type walker struct {
 	// xmage says XMage replays the window, so a setup token it cannot place is
 	// refused; a Forge-only run places any token by its script stem.
 	xmage bool
+	// start says this cut is a scripted start (lower.Span): its setup re-runs
+	// the placements and focus play that produced the live state, so a state
+	// the start itself derives is not an unplaceable field. Game.DayNight is
+	// the one such field today (the start's own entry replacements and
+	// daybound/nightbound placements plus the turn-1 untap check re-derive it).
+	start bool
 	// mention memoises gameMentions per word for this capture.
 	mention map[string]bool
 	// exilerRead memoises whether any card of the game reads HasExiledBy
@@ -642,6 +648,21 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 // refused as exile_self.
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
+	case typ == "Game" && name == "DayNight":
+		// A scripted start re-runs the entry replacements, daybound/nightbound
+		// placements and the turn-1 untap check that produced the live
+		// designation, so the designation is derived state, not a field setup
+		// must restate (CR 731.1). A window cut mid-game has no such
+		// derivation and keeps the refusal. IsZero, not Int: the field is an
+		// unsigned enum at this pin.
+		return !v.IsZero() && !w.start
+	case typ == "Object" && name == "ChosenColor":
+		// The setup drive answers a placed permanent's as-enters colour ask
+		// from the battlefield loop, so only a battlefield object has a
+		// placement to answer. The engine clears the field when a permanent
+		// leaves the battlefield, which makes the other zones latent rather
+		// than impossible; they still have no answer and must refuse.
+		return !v.IsZero() && o.Zone != state.ZBattlefield
 	case typ == "Player" && name == "LandsPlayed":
 		return v.Int() > 0 && w.seat == int(w.g.Active)
 	case typ == "Player" && name == "LandsPlayedOffHand":

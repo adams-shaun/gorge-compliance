@@ -827,6 +827,14 @@ func pickFixtureIn(reg *cards.Registry, b *certdeck.Builder, card string, keep, 
 		if onBattlefield && FieldBlock(f) != "" {
 			continue
 		}
+		// A fixture placed with its own as-enters choice is a real move this
+		// turn, and the lower refuses the entry stamps setup cannot restate
+		// (reasonAsEntersStamp). Prefer any other card, or none: a start that
+		// names no fixture refuses by its own reason instead of emitting a
+		// position the lower rejects.
+		if onBattlefield && asEnters(f) {
+			continue
+		}
 		if !keep(f) || extra != nil && !extra(f) || deadOnArrival(f) {
 			continue
 		}
