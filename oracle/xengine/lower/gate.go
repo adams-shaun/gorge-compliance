@@ -768,6 +768,12 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		return o.Zone == state.ZStack && v.Len() > 0
 	case typ == "Object" && name == "ActivatedThisTurn":
 		return v.Int() > 0 && hasActivationLimit(o)
+	case typ == "Object" && name == "TurnedFaceUpThisTurn":
+		// The TurnFaceUp fold sets it and the TurnChange and zone-change folds
+		// clear it (CR 400.7), so it only records a turn-up this turn; setup
+		// cannot place that past and its only reader is the
+		// turnedFaceUpThisTurn filter word (Kaust, Eyes of the Glade).
+		return v.Bool() && o.Zone == state.ZBattlefield && w.gameMentions("turnedFaceUpThisTurn")
 	case typ == "Object" && name == "RegeneratedThisTurn":
 		// The TurnChange and zone-change folds reset it (CR 400.7), so it only
 		// carries this turn's regeneration count (CR 701.19); its only reader
