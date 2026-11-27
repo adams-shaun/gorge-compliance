@@ -75,11 +75,13 @@ type startFile struct {
 	} `json:"setup"`
 	Filler string `json:"filler"`
 	Seeds  int    `json:"seeds"`
-	// DayNight is the designation the start's initial battlefield sets ("day"
-	// or "night", empty when neither), as scen.StartFile declares it. The
-	// runner only validates the spelling: genesis re-derives the designation
-	// from the daybound/nightbound placements, and the lowered item's replay
-	// does the same.
+	// DayNight is the designation the start has at turn 1's first-main cut
+	// ("day" or "night", empty when neither), as scen.StartFile declares it.
+	// The runner only validates the spelling: genesis and the turn-1 untap
+	// check re-derive the designation from the placements (a gated Moved
+	// DayTime entry makes it day, then CR 731.2a makes it night; a daybound
+	// permanent is read by the state-based check after the untap check), and
+	// the lowered item's replay does the same.
 	DayNight string `json:"day_night"`
 	// SeedBase is where the file's seed search starts (0 or absent: 1), so a
 	// key retried in a later cycle plays new games, not the same Seeds again.

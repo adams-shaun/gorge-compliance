@@ -565,8 +565,8 @@ type walker struct {
 	// start says this cut is a scripted start (lower.Span): its setup re-runs
 	// the placements and focus play that produced the live state, so a state
 	// the start itself derives is not an unplaceable field. Game.DayNight is
-	// the one such field today (the daybound/nightbound permanents the start
-	// places make it day or night again at genesis).
+	// the one such field today (the start's own entry replacements and
+	// daybound/nightbound placements plus the turn-1 untap check re-derive it).
 	start bool
 	// mention memoises gameMentions per word for this capture.
 	mention map[string]bool
@@ -649,11 +649,12 @@ func (w *walker) struct_(v reflect.Value, typ string, table map[string]entry, o 
 func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 	switch {
 	case typ == "Game" && name == "DayNight":
-		// A scripted start replays the daybound/nightbound placements that
-		// produced the live designation at genesis, so the designation is
-		// derived state, not a field setup must restate (CR 731.1). A window
-		// cut mid-game has no such derivation and keeps the refusal. IsZero,
-		// not Int: the field is an unsigned enum at this pin.
+		// A scripted start re-runs the entry replacements, daybound/nightbound
+		// placements and the turn-1 untap check that produced the live
+		// designation, so the designation is derived state, not a field setup
+		// must restate (CR 731.1). A window cut mid-game has no such
+		// derivation and keeps the refusal. IsZero, not Int: the field is an
+		// unsigned enum at this pin.
 		return !v.IsZero() && !w.start
 	case typ == "Object" && name == "ChosenColor":
 		// The setup drive answers a placed permanent's as-enters colour ask

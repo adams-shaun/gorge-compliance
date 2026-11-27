@@ -15,10 +15,13 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -1430,6 +1433,7 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 	for _, c := range []struct{ card, key, day string }{
 		{"Gathering Stone", "f0/t0", ""},
 		{"Weaver of Blossoms", "f0/a0", scen.DayNightDay},
+		{"Weaver of Blossoms", "f1/a0", scen.DayNightNight},
 		{"Graveyard Trespasser // Graveyard Glutton", "f0/t1", scen.DayNightDay},
 		{"Lunar Rejection", "cast", scen.DayNightDay},
 	} {
@@ -1469,6 +1473,103 @@ func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
 		if res.Path != scen.PathRefused || res.Reason != c.reason {
 			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
 		}
+	}
+}
+
+// TestStartDayNightMatchesEngineCut: the day_night a start declares is the
+// designation the engine actually has at turn 1's first precombat main, not
+// the designation the genesis placements alone suggest. A gated Moved DayTime
+// replacement (Brimstone Vandal, Obsessive Astronomer) makes the game day as
+// the permanent enters during genesis; CR 731.2a's turn-1 untap check then
+// makes it night before the cut because PrevTurnSpells is zero. A daybound
+// permanent is read by the post-untap state-based action (CR 702.145d), so a
+// lone Weaver of Blossoms stays day, while its nightbound back face is night.
+// TestScenStartDayNightTurnOneCut pins the generator's model to these same
+// values; this test makes the engine, not the model, the source of truth.
+func TestStartDayNightMatchesEngineCut(t *testing.T) {
+	t.Parallel()
+	reg, _ := certdeckBuilder(t)
+	for _, c := range []struct {
+		name string
+		seat startSeat
+		want state.DayNight
+	}{
+		{"Brimstone Vandal", startSeat{Battlefield: []string{"Brimstone Vandal"}}, state.DayNightNight},
+		{"Obsessive Astronomer", startSeat{Battlefield: []string{"Obsessive Astronomer"}}, state.DayNightNight},
+		{"Weaver of Blossoms front", startSeat{Battlefield: []string{"Weaver of Blossoms"}}, state.DayNightDay},
+		{"Weaver of Blossoms back", startSeat{Battlefield: []string{"Weaver of Blossoms"}, BackFace: []string{"Weaver of Blossoms"}}, state.DayNightNight},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			if got := engineCutDayNight(t, reg, c.seat); got != c.want {
+				t.Errorf("turn 1 main1 DayNight = %v, want %v", got, c.want)
+			}
+		})
+	}
+}
+
+// engineCutDayNight plays the hand-built seat as p0's scripted start and
+// returns the designation the engine holds at turn 1's first-main cut.
+func engineCutDayNight(t *testing.T, reg *cards.Registry, seat startSeat) state.DayNight {
+	t.Helper()
+	d0, s0, err := startDeckAt(reg, "start-p0", 0, seat, startSeat{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	d1, s1, err := startDeckAt(reg, "start-p1", 1, startSeat{}, seat)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := state.DayNightNeither
+	seen := false
+	opt := game.Options{
+		Set: "XP", MaxTurns: 2,
+		Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}},
+		OnCut: func(e *rules.Engine, entry int) {
+			if !seen {
+				got, seen = e.G.DayNight, true
+			}
+		},
+	}
+	seed := rules.SeedForStarter(1, 2, 0)
+	if _, err := game.Play(reg, []decks.Deck{d0, d1}, seed, opt); err != nil {
+		t.Fatal(err)
+	}
+	if !seen {
+		t.Fatal("the start never reached turn 1's first-main cut")
+	}
+	return got
+}
+
+// TestStartDayNightSpelling: the runner validates the declaration instead of
+// silently ignoring a misspelt designation; day, night and empty are accepted.
+func TestStartDayNightSpelling(t *testing.T) {
+	dir := t.TempDir()
+	for _, tc := range []struct{ value, wantErr string }{
+		{"", ""},
+		{scen.DayNightDay, ""},
+		{scen.DayNightNight, ""},
+		{"Day", "day_night"},
+		{"dusk", "day_night"},
+	} {
+		t.Run("value="+tc.value, func(t *testing.T) {
+			p := filepath.Join(dir, "start.json")
+			body := `{"format":"xproof-start-1","card":"Llanowar Elves","key":"f0/a0","players":2,"active":0,` +
+				`"max_turns":1,"setup":{"p0":{"battlefield":["Llanowar Elves"]},"p1":{}},"filler":"basics","seeds":1,` +
+				`"day_night":"` + tc.value + `"}`
+			if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			_, err := readStartFile(p)
+			if tc.wantErr == "" {
+				if err != nil {
+					t.Fatalf("day_night %q: %v", tc.value, err)
+				}
+				return
+			}
+			if err == nil || !strings.Contains(err.Error(), tc.wantErr) {
+				t.Fatalf("day_night %q: err %v, want one naming %q", tc.value, err, tc.wantErr)
+			}
+		})
 	}
 }
 
