@@ -1459,6 +1459,8 @@ mod tests {
         assert_eq!(rb.snapshots.len(), 4);
         let cast = &rb.snapshots[2];
         assert_eq!(cast.players[0].graveyard, ["Swamp", "Swamp"], "five Swamps exiled, two left");
+        assert!(rb.snapshots[3].stack.is_empty());
+        assert_eq!(on_bf(&rb.snapshots[3], 0, "Sultai Scavenger"), 1);
         assert_eq!(rb.leftover, None);
     }
 

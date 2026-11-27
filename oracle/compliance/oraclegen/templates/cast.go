@@ -34,6 +34,10 @@ func xAnswers(f *cards.Face) []oraclegen.Answer {
 	return nil
 }
 
+// delveFixture is the graveyard the seven-card extra in castWithProbes supplies; a Delve cast
+// exiles up to that many of them.
+var delveFixture = oraclegen.Repeat("Wastes", 7)
+
 func castResolve(reg *cards.Registry, f *cards.Face, name, mana string) (oraclegen.Item, *oraclegen.Skip) {
 	return castResolveWith(reg, f, name, mana, nil, nil)
 }
@@ -74,6 +78,19 @@ func castResolveWith(reg *cards.Registry, f *cards.Face, name, mana string, prob
 	manas := []string{mana, mana + "C", mana + "CC", mana + "CCC"}
 	if hasWaterbendCost(f) {
 		manas = append(manas, mana+"CCCC", mana+"CCCCC")
+	}
+	if g := min(strings.Count(mana, "C"), len(delveFixture)); g > 0 && f.HasKeyword("Delve") {
+		// Delve (CR 702.66): the cast asks which graveyard cards to exile for generic mana,
+		// an ask the full pool never reaches. Try the pool short of g generic with the
+		// seven-card graveyard extra below and an explicit exile answer first; a fixture
+		// that cannot settle falls through to the full pool.
+		short := strings.Replace(mana, "C", "", g)
+		for _, pl := range plans {
+			answers := append(append([]oraclegen.Answer(nil), pl.answers...), oraclegen.Answer{Kind: "choose", Pick: delveFixture[:g]})
+			if it, ok := castWithProbes(reg, f, name, short, pl.slots, answers, probes, setup); ok {
+				return it, nil
+			}
+		}
 	}
 	for _, m := range manas {
 		for _, pl := range plans {
