@@ -1067,16 +1067,19 @@ func startGateRefusal(reg *cards.Registry, f *StartFile) string {
 // (upkeepTriggerFires), its compiled Execute really removes the card
 // (lower.TriggerRemovesSelf — The Abyss's and Crumbling Ashes's targeted
 // Destroy is not), and the trigger's UnlessCost is the seat's own, pure
-// mana, and unpayable from the seat's untapped lands on top of the focus
+// mana, and unpayable from any source the seat could tap on top of the focus
 // play's mana (the echo population: Earthlink {2}, Thelon's Chant {G}, with
 // no payable mana short as develop's generated starts hold). The heuristic
 // drive pays when it can, so a payable echo leaves the card standing at the
 // cut and is no exception: it stays the gate's named refusal instead of an
 // emitted start play lowers to zero items. A trigger that never fires, a
 // non-mana ask, a payer the seat is not, or a cost the judge cannot read is
-// no proof the card goes. This is why the exception lives here, with the
-// finished start, and not in lower.StartCardRefusal: only the finished start
-// can say whether its drive can pay.
+// no proof the card goes — and an unclassified cost is unreadable, not
+// empty: Magmasaur's SubCounter and Koskun Falls's tapXType are asks the
+// drive can pay, so they never take the card off the battlefield. This is
+// why the exception lives here, with the finished start, and not in
+// lower.StartCardRefusal: only the finished start can say whether its drive
+// can pay.
 func upkeepRemovalExcused(reg *cards.Registry, f *StartFile, face *cards.Face, seat int) bool {
 	trigs := lower.MandatoryUpkeepTriggers(face)
 	if len(trigs) == 0 {
@@ -1092,7 +1095,16 @@ func upkeepRemovalExcused(reg *cards.Registry, f *StartFile, face *cards.Face, s
 				return false // not this seat's payment to judge
 			}
 		}
-		req, _ := triggerUpkeepReq(t, seat, f)
+		req, binds := triggerUpkeepReq(t, seat, f)
+		if !binds {
+			// No resource the estimate can price: an UnlessCost this judge
+			// cannot classify (Magmasaur's SubCounter, Koskun Falls's
+			// tapXType) is unprovable, not absent, so it is no removal.
+			return false
+		}
+		if req.unparsed {
+			return false // part pure mana, part unreadable: not provable either
+		}
 		if req.hand > 0 || req.grave > 0 || req.field != "" {
 			return false // a non-mana ask: not the drive's pay decision
 		}
@@ -1318,6 +1330,7 @@ type upkeepReq struct {
 	field       string // a permanent type the battlefield must hold (a sacrifice of another)
 	self        bool   // the card itself is sacrificed with no cost to avoid it
 	atRisk      bool   // the chain sacrifices the card (a cost unpaid loses it)
+	unparsed    bool   // an UnlessCost/Cost token this judge cannot classify
 }
 
 // triggerUpkeepReq is the upkeepReq of one Phase trigger, and whether it
@@ -1416,6 +1429,9 @@ func sacValidSelf(sa *cards.SA) bool {
 
 // mergeUpkeepCost reads one UnlessCost/Cost into req: mana tokens, and the
 // non-mana steps a start can lack (a discard, a graveyard exile, a reveal).
+// A token it cannot classify sets unparsed, so a caller that must prove the
+// payment happened (upkeepRemovalExcused) can tell an unreadable ask from an
+// empty one instead of treating it as free.
 func mergeUpkeepCost(req *upkeepReq, cost string) {
 	for _, tok := range splitCost(cost) {
 		if manaTokenRE.MatchString(tok) {
@@ -1448,7 +1464,11 @@ func mergeUpkeepCost(req *upkeepReq, cost string) {
 		case "PayMana":
 			if len(args) >= 1 {
 				req.mana = strings.TrimSpace(req.mana + " " + args[0])
+			} else {
+				req.unparsed = true
 			}
+		default:
+			req.unparsed = true
 		}
 	}
 }
@@ -1577,13 +1597,43 @@ func focusManaCost(reg *cards.Registry, f *StartFile) []string {
 	return mana
 }
 
-// basicColour is a basic land's colour letter.
-var basicColour = map[string]string{"Plains": "W", "Island": "U", "Swamp": "B", "Mountain": "R", "Forest": "G"}
+// basicLandColours maps a basic land's type word to its colour letter. The
+// type word, not the printed name, so a Snow-Covered or reprint basic still
+// counts its colour.
+var basicLandColours = []struct{ word, colour string }{
+	{"Plains", "W"}, {"Island", "U"}, {"Swamp", "B"}, {"Mountain", "R"}, {"Forest", "G"},
+}
+
+// basicLandColour is a basic land face's colour letter, "" for a basic that
+// produces only colourless mana (Wastes).
+func basicLandColour(face *cards.Face) string {
+	for _, b := range basicLandColours {
+		if face.HasTypeWord(b.word) {
+			return b.colour
+		}
+	}
+	return ""
+}
+
+// faceManaSource reports whether face has an activated mana ability: any
+// untapped permanent the drive could tap for mana, land or not.
+func faceManaSource(face *cards.Face) bool {
+	for _, a := range face.Abilities {
+		if a != nil && (a.API == "Mana" || a.API == "ManaReflected") {
+			return true
+		}
+	}
+	return false
+}
 
 // upkeepManaShort reports whether seat's untapped lands cannot pay mana as
-// well as the focus play's own cost: a basic pays its colour, an untapped
-// non-basic land pays generic only, and the focus play's tokens are paid
-// first. A cost the judge cannot read is not a short start.
+// well as the focus play's own cost: a basic pays its colour, and the focus
+// play's tokens are paid first. It fails closed on every source it cannot
+// price: an untapped non-land permanent with a mana ability (Sol Ring) or an
+// untapped non-basic land (Ancient Tomb, {C}{C}) could pay the cost, so the
+// answer is "not short" and the caller does not grant an exception on a
+// payment it cannot prove. A cost the judge cannot read is not a short start
+// either.
 func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, focusMana []string) bool {
 	mana, why := costTokens(cost)
 	if why != "" {
@@ -1613,12 +1663,30 @@ func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, f
 	tapped := sd.TappedCopies() // per copy, as the lowering binds Tapped names
 	for i, name := range sd.Battlefield {
 		c, ok := reg.Lookup(name)
-		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Land") || tapped[i] {
+		if !ok || len(c.Faces) == 0 || tapped[i] {
 			continue
 		}
+		face := c.Faces[0]
+		if !face.HasTypeWord("Land") {
+			if faceManaSource(face) {
+				return false // a mana source this estimate cannot price
+			}
+			continue
+		}
+		if !face.IsBasic() {
+			return false // a non-basic land may produce more than one mana
+		}
 		pool++
-		if col, ok := basicColour[name]; ok {
+		if col := basicLandColour(face); col != "" {
 			avail[col]++
+		}
+	}
+	for _, tok := range sd.Tokens {
+		if tok.Tapped {
+			continue
+		}
+		if c, ok := reg.Token(tok.Script); ok && c != nil && len(c.Faces) > 0 && faceManaSource(c.Faces[0]) {
+			return false // an untapped mana-making token, same as any other source
 		}
 	}
 	for col, n := range need {

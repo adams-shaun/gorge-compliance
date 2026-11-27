@@ -3994,6 +3994,12 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 //     refuses — so the sweep refuses by name instead of emitting; the same
 //     cards with no payable mana are sacrificed before the cut and stay
 //     starts (develop's generated Earthlink and Thelon's Chant starts);
+//   - the exception only prices pure mana from basic lands: Magmasaur's
+//     UnlessCost SubCounter and Koskun Falls's tapXType are asks the drive
+//     can pay, so they are not an empty cost; and a mana source the estimate
+//     cannot see (Sol Ring's artifact, Ancient Tomb's two colourless from a
+//     non-basic land) makes the payment provable, so no exception either.
+//     Both arms are refused by name instead of emitted;
 //   - Tapped names bind to copies (TappedCopies, as the lowering binds
 //     them): four Plains with Tapped ["Plains"] leave three untapped copies
 //     for the startedTheTurnUntapped stamp Rasputin names from hand, and
@@ -4001,9 +4007,10 @@ func TestScenStepsNeededCostClass(t *testing.T) {
 //     leaves no stamp anywhere, so no refusal.
 //
 // Reverting any guard in the sweep — the targeted-Destroy arms, the
-// payable-echo half, or the per-copy TappedCopies read (here or in
-// upkeepManaShort) — turns one expected refusal back into "" (or one
-// expected "" into a refusal) and fails here.
+// payable-echo half, the unparsed-cost arm, the non-land/non-basic mana arm,
+// or the per-copy TappedCopies read (here or in upkeepManaShort) — turns one
+// expected refusal back into "" (or one expected "" into a refusal) and
+// fails here.
 func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
 	reg, _ := testBuilder(t)
 	start := func(p0 StartSeat) *StartFile {
@@ -4023,6 +4030,10 @@ func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
 		{"unpayable echo (develop's generated start)", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}}, ""},
 		{"payable echo colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Forest"}}, "start:upkeep-trigger"},
 		{"unpayable echo colour (develop's generated start)", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears"}}, ""},
+		{"payable non-mana unless cost, counter", StartSeat{Battlefield: []string{"Magmasaur"}}, "start:upkeep-trigger"},
+		{"payable non-mana unless cost, tap", StartSeat{Battlefield: []string{"Koskun Falls", "Grizzly Bears"}}, "start:upkeep-trigger"},
+		{"payable echo from an artifact", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Sol Ring"}}, "start:upkeep-trigger"},
+		{"payable echo from a multi-mana land", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Ancient Tomb"}}, "start:upkeep-trigger"},
 		{"mention word with one tapped duplicate", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:started-turn-untapped"},
 		{"mention word with every copy tapped", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains", "Plains", "Plains", "Plains"}}, ""},
 	} {
