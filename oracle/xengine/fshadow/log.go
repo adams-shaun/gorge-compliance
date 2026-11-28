@@ -5,8 +5,12 @@
 // the answer Forge's seat gave. gorge is built with
 // rules.NewHypotheticalChancePlanned, so Forge's shuffles and random draws
 // are gorge's too, and each cast is paid with an explicit PaymentPlan of the
-// sources Forge tapped. At every snap line gorge's state is compared with
-// Forge's through oraclediff.CompareOpts, the comparison classify uses.
+// sources Forge tapped. A cast gorge has no such plan for, or an activation it
+// does not offer (a filter land's or a Signet's mana, which gorge's planner
+// does not plan), is paid by hand: the follower activates those sources at
+// priority, then takes the offer (Result.HandPayments counts them). At every
+// snap line gorge's state is compared with Forge's through
+// oraclediff.CompareOpts, the comparison classify uses.
 //
 // The MVP stops at the first hard divergence (Follow's Result.Hard); option-set
 // differences that leave Forge's answer on gorge's list are soft and only
