@@ -1,0 +1,52 @@
+{
+ "card": "Dingus Egg",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "5a3de52f739c",
+ "scenarios": [
+  {
+   "name": "each-land-is-a-separate-occurrence",
+   "cr": [
+    "603.2c"
+   ],
+   "why": "Armageddon puts several lands into graveyards at once, but the Egg's trigger watches one land at a time and fires once for each. Both players lose 2 life per land they controlled.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Dingus Egg",
+      "Forest",
+      "Forest"
+     ],
+     "hand": [
+      "Armageddon"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Armageddon",
+     "mana": "CCCW"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 16,
+      "p1": 16
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -6,6 +6,7 @@ import unittest
 
 from .helpers import Base, OID_A, ROOT, git
 from .test_build import write
+from .test_query import keyproof_row
 
 
 class Cli(Base):
@@ -134,3 +135,31 @@ class GoParity(Base):
                 for verb, want in zip(("validate", "boundary"), gos):
                     r = self.cli(os.path.join(self.tmp, "h"), verb, "--tree", tree)
                     self.assertEqual(r.returncode == 1, want, "%s: carddb %s: %s%s" % (name, verb, r.stdout, r.stderr))
+
+    def test_keyproof_row_messages_match(self):
+        """The keyproof hook's messages are byte-identical in both validators."""
+        go = shutil.which("go")
+        if go is None:
+            self.skipTest("no go")
+        from carddb import shard
+        rows = [
+            keyproof_row(OID_A, "bad-leg", "agreed", leg="bogus"),
+            keyproof_row(OID_A, "bad-state", "bogus"),
+            keyproof_row(OID_A, "diag-no-cite", "diagnosed", leg="cite"),
+            keyproof_row(OID_A, "cite-agreed", "agreed", leg="cite", cite="CR 702.4b"),
+            keyproof_row(OID_A, "bad-seats", "agreed", seats=1),
+            keyproof_row(OID_A, "zero-seats", "agreed", seats=0),
+        ]
+        rows.sort(key=lambda r: (r["oracle_id"], r["key"], r["leg"]))
+        cols = self.schema.tables["keyproof"].scope_columns("public")
+        names = [c.name for c in cols]
+        cells = [[shard.escape_cell(r.get(n)) for n in names] for r in rows]
+        text = shard.render("keyproof", self.schema.version, names, cells)
+        py = shard.validate_tree(self.schema, "public", [("keyproof/ab.tsv", text)])
+        self.assertEqual(len(py), 6, py)
+        tree = os.path.join(self.tmp, "keyproof-messages")
+        write(os.path.join(tree, "keyproof/ab.tsv"), text)
+        p = subprocess.run([go, "run", "./cmd/carddb", "validate", "-schema", "carddb/schema", "-tree", tree],
+                           cwd=ROOT, capture_output=True, text=True, env=dict(os.environ, GOWORK="off"))
+        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+        self.assertEqual(p.stdout.splitlines(), py)

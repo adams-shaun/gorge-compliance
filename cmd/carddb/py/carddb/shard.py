@@ -288,6 +288,44 @@ def validate_tree(schema, scope, files):
     return out + cross_shard_duplicates(schema, scope, files)
 
 
+# The closed value sets of the keyproof ledger. One table-specific hook rather
+# than per-column vocabularies: the schema's string columns are open by design,
+# but a keyproof row can only mean one of these.
+KEYPROOF_LEGS = ("xmage", "forge", "lockstep", "scenario", "cite")
+KEYPROOF_STATES = ("agreed", "diagnosed", "diverged", "owed", "stale", "excluded")
+KEYPROOF_CITE_STATES = ("diagnosed", "owed", "excluded")
+KEYPROOF_SEATS = ("0", "2", "3", "4")
+
+
+def keyproof_row_rules(rel, head, row):
+    """Violations of a keyproof row that cannot mean anything, as `rel: key: rule` messages.
+
+    Runs after the generic cell checks and looks every column up by name, so a
+    reordered header does not change the verdict. The row key is the schema's
+    key columns in order: oracle_id, key, leg."""
+    cell = {name: row[i] for i, name in enumerate(head) if i < len(row)}
+    leg, state, cite, seats = cell.get("leg", ""), cell.get("state", ""), cell.get("cite", ""), cell.get("seats", "")
+    key = " ".join((cell.get("oracle_id", ""), cell.get("key", ""), leg))
+    out = []
+
+    def add(msg):
+        out.append("%s: %s: %s" % (rel, key, msg))
+
+    if leg not in KEYPROOF_LEGS:
+        add("leg '%s' is not xmage, forge, lockstep, scenario or cite" % leg)
+    if state not in KEYPROOF_STATES:
+        add("state '%s' is not agreed, diagnosed, diverged, owed, stale or excluded" % state)
+    if state == "diagnosed" and cite == EMPTY:
+        add("diagnosed without a cite")
+    if leg == "cite" and state not in KEYPROOF_CITE_STATES:
+        add("cite leg must be diagnosed, owed or excluded, not '%s'" % state)
+    if seats not in KEYPROOF_SEATS:
+        add("seats '%s' is not 0, 2, 3 or 4" % seats)
+    if state == "agreed" and seats == "0":
+        add("agreed with seats 0")
+    return out
+
+
 def validate_shard(schema, scope, rel, text):
     """Violations (strings `path:line: msg`) of one shard, as Go's validateShard reports them for a shard
     that stands alone. Keys that two shards of a table share are cross_shard_duplicates'."""
@@ -345,6 +383,8 @@ def validate_shard(schema, scope, rel, text):
                 bad = True
         if bad:
             continue
+        if table == "keyproof":
+            out += keyproof_row_rules(rel, head, cells)
         key = tuple(cells[j] for j in kidx)
         if key in seen:
             add(ln, "duplicate key (%s), first at %s:%d" % (", ".join(key), rel, seen[key]))

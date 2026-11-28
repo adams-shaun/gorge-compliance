@@ -379,9 +379,9 @@ def run_proven_keys(conn, args, out):
         raise QueryError("proven: this build has no keyproof table")
     if args.format in ("tsv", "json", "count"):
         raise QueryError("proven --by keys: --format is a legality format, not %r" % args.format)
-    sql =("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, k.keys, k.proven_keys, "
-          "k.forge_only_keys, k.unwitnessed_keys "
-          "FROM proven_keys c JOIN card_proven k ON k.oracle_id=c.oracle_id WHERE 1=1")
+    sql = ("SELECT c.oracle_id, c.name, c.type_line, c.mana_value, k.keys, k.proven_keys, "
+           "k.forge_only_keys, k.unwitnessed_keys "
+           "FROM proven_keys c JOIN card_proven k ON k.oracle_id=c.oracle_id WHERE 1=1")
     params = []
     if args.format:
         sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
@@ -460,12 +460,16 @@ def run_need(conn, args, out):
         where = "k.state='agreed' AND replace(k.refs,'+P','')=?"
     else:
         # owed or diverged by the rollup, or held up below it: a leg row the replay loop marked
-        # stale, or a key whose every row is a seed row (seats 0 proves nothing)
+        # stale, or a key whose only rows are seed rows. A seed row is a placeholder no engine
+        # has played: seats 0 (no game at any seat count) and not `excluded` (an exclusion is a
+        # decision, not owed work). The row rules forbid `agreed` at seats 0, so a seed-only key
+        # has no agreed leg however the rollup labels it (e.g. `diagnosed` by a seats-0 cite);
+        # an all-excluded key is never seed-only, so need does not list it.
         where = ("(k.state IN ('owed','diverged') "
                  "OR EXISTS (SELECT 1 FROM keyproof l WHERE l.oracle_id=k.oracle_id "
                  "AND l.\"key\"=k.\"key\" AND l.state='stale') "
                  "OR NOT EXISTS (SELECT 1 FROM keyproof l WHERE l.oracle_id=k.oracle_id "
-                 "AND l.\"key\"=k.\"key\" AND l.seats > 0))")
+                 "AND l.\"key\"=k.\"key\" AND (l.seats > 0 OR l.state='excluded')))")
     sql = ("SELECT t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
            "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
            "JOIN keyproof_keys k ON k.oracle_id=c.oracle_id WHERE %s "
@@ -946,18 +950,22 @@ PROVEN_VIEW_SQL = ("CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2
 # One row per (card, key): the leg rows of keyproof rolled up to the per-key state the verbs below read.
 # A cite leg owed for `diagnosed-no-cite` is a legacy `diagnosed` key whose cite was never recorded
 # (keylegs.split_legacy): the rollup still calls it diagnosed, so the migration moves no number.
+# Every aggregate/CASE expression is CAST AS TEXT, for the same reason KEYPROOF_CARDS_VIEW_SQL casts
+# its aggregates AS INTEGER: a bare expression view column has no declared type and the parquet
+# exporter types columns from declarations only.
 KEYPROOF_KEYS_VIEW_SQL = (
-    '''CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key", MAX(k."desc") AS "desc",
-  CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
+    '''CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key",
+  CAST(MAX(k."desc") AS TEXT) AS "desc",
+  CAST(CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
        WHEN SUM(k.leg IN ('xmage','forge') AND k.state='agreed') > 0 THEN 'agreed'
        WHEN SUM(k.leg='cite' AND (k.state='diagnosed'
                 OR (k.state='owed' AND k.reason='diagnosed-no-cite'))) > 0 THEN 'diagnosed'
-       WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS state,
-  MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS reason,
-  CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'
+       WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS TEXT) AS state,
+  CAST(MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS TEXT) AS reason,
+  CAST(CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'
        WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 THEN 'X'
-       WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS refs,
-  MAX(k.sig) AS sig, MAX(k.ticket) AS ticket
+       WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS TEXT) AS refs,
+  CAST(MAX(k.sig) AS TEXT) AS sig, CAST(MAX(k.ticket) AS TEXT) AS ticket
 FROM keyproof k WHERE k.leg IN ('xmage','forge','cite') GROUP BY k.oracle_id, k."key"''')
 
 # The proof denominator: every Commander-legal paper card not on the committed
@@ -977,6 +985,9 @@ SCOPE_CARDS_VIEW_SQL = (
 # age. A key whose every leg is excluded is NULL (it counts neither way). The forge leg alone, an
 # agreed xmage/forge row with no witness, or a two-seat proof of a multiplayer key are reported
 # (forge_only / unwitnessed / two_seat_only) but never counted as proven.
+# Every aggregate/CASE/scalar-MAX expression column is CAST AS INTEGER, as in keyproof_cards
+# below: SQLite gives a bare expression column no declared type, and the parquet exporter (which
+# exports every view) types columns from declarations only.
 KEY_LEGS_VIEW_SQL = '''CREATE VIEW key_legs AS
 WITH asof AS (SELECT MAX(COALESCE(replayed, measured)) AS d FROM keyproof),
 fresh AS (
@@ -984,64 +995,73 @@ fresh AS (
          (k.witness IS NOT NULL AND k.witness NOT IN ('', '-')) AS has_witness
   FROM keyproof k)
 SELECT oracle_id, "key",
-  MAX(COALESCE(multiplayer, 0)) AS multiplayer,
-  CASE WHEN MAX(COALESCE(multiplayer, 0)) = 1 THEN 4 ELSE 2 END AS need_seats,
-  COUNT(*) AS legs,
-  SUM(state = 'excluded') AS excluded_legs,
-  SUM(state = 'diverged') AS diverged_legs,
-  SUM(state = 'stale' OR (state = 'agreed' AND NOT is_fresh)) AS stale_legs,
-  MAX(CASE WHEN leg = 'lockstep' AND state = 'agreed' AND is_fresh THEN seats ELSE 0 END) AS lockstep_seats,
-  MAX(CASE WHEN leg = 'xmage' AND state = 'agreed' AND is_fresh AND has_witness THEN seats ELSE 0 END) AS xmage_seats,
-  MAX(CASE WHEN leg = 'scenario' AND state = 'agreed' AND is_fresh AND has_witness THEN seats ELSE 0 END) AS scenario_seats,
-  MAX(CASE WHEN leg = 'cite' AND state = 'diagnosed' AND cite IS NOT NULL AND cite NOT IN ('', '-') THEN 4 ELSE 0 END) AS cite_seats,
-  MAX(CASE WHEN leg = 'forge' AND state = 'agreed' AND is_fresh AND has_witness THEN seats ELSE 0 END) AS forge_seats,
-  MAX(CASE WHEN leg IN ('xmage', 'forge') AND state = 'agreed' AND NOT has_witness THEN seats ELSE 0 END) AS unwitnessed_seats
+  CAST(MAX(COALESCE(multiplayer, 0)) AS INTEGER) AS multiplayer,
+  CAST(CASE WHEN MAX(COALESCE(multiplayer, 0)) = 1 THEN 4 ELSE 2 END AS INTEGER) AS need_seats,
+  CAST(COUNT(*) AS INTEGER) AS legs,
+  CAST(SUM(state = 'excluded') AS INTEGER) AS excluded_legs,
+  CAST(SUM(state = 'diverged') AS INTEGER) AS diverged_legs,
+  CAST(SUM(state = 'stale' OR (state = 'agreed' AND NOT is_fresh)) AS INTEGER) AS stale_legs,
+  CAST(MAX(CASE WHEN leg = 'lockstep' AND state = 'agreed' AND is_fresh THEN seats ELSE 0 END) AS INTEGER) AS lockstep_seats,
+  CAST(MAX(CASE WHEN leg = 'xmage' AND state = 'agreed' AND is_fresh AND has_witness THEN seats ELSE 0 END) AS INTEGER) AS xmage_seats,
+  CAST(MAX(CASE WHEN leg = 'scenario' AND state = 'agreed' AND is_fresh AND has_witness THEN seats ELSE 0 END) AS INTEGER) AS scenario_seats,
+  CAST(MAX(CASE WHEN leg = 'cite' AND state = 'diagnosed' AND cite IS NOT NULL AND cite NOT IN ('', '-') THEN 4 ELSE 0 END) AS INTEGER) AS cite_seats,
+  CAST(MAX(CASE WHEN leg = 'forge' AND state = 'agreed' AND is_fresh AND has_witness THEN seats ELSE 0 END) AS INTEGER) AS forge_seats,
+  CAST(MAX(CASE WHEN leg IN ('xmage', 'forge') AND state = 'agreed' AND NOT has_witness THEN seats ELSE 0 END) AS INTEGER) AS unwitnessed_seats
 FROM fresh GROUP BY oracle_id, "key"'''
 
 KEY_PROVEN_VIEW_SQL = '''CREATE VIEW key_proven AS
 SELECT l.*,
-  MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) AS outside_seats,
-  CASE WHEN l.excluded_legs = l.legs THEN NULL
+  CAST(MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) AS INTEGER) AS outside_seats,
+  CAST(CASE WHEN l.excluded_legs = l.legs THEN NULL
        WHEN l.diverged_legs = 0 AND l.lockstep_seats >= l.need_seats
-            AND MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) >= l.need_seats THEN 1 ELSE 0 END AS proven,
-  CASE WHEN l.excluded_legs = l.legs THEN NULL
+            AND MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) >= l.need_seats THEN 1 ELSE 0 END AS INTEGER) AS proven,
+  CAST(CASE WHEN l.excluded_legs = l.legs THEN NULL
        WHEN l.diverged_legs = 0 AND l.lockstep_seats >= l.need_seats
             AND MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) < l.need_seats
-            AND l.forge_seats >= l.need_seats THEN 1 ELSE 0 END AS forge_only,
-  CASE WHEN l.excluded_legs = l.legs THEN NULL
+            AND l.forge_seats >= l.need_seats THEN 1 ELSE 0 END AS INTEGER) AS forge_only,
+  CAST(CASE WHEN l.excluded_legs = l.legs THEN NULL
        WHEN l.diverged_legs = 0 AND l.lockstep_seats >= l.need_seats
             AND MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) < l.need_seats
             AND l.forge_seats < l.need_seats
-            AND l.unwitnessed_seats >= l.need_seats THEN 1 ELSE 0 END AS unwitnessed,
-  CASE WHEN l.excluded_legs = l.legs THEN NULL
+            AND l.unwitnessed_seats >= l.need_seats THEN 1 ELSE 0 END AS INTEGER) AS unwitnessed,
+  CAST(CASE WHEN l.excluded_legs = l.legs THEN NULL
        WHEN l.multiplayer = 1 AND l.lockstep_seats >= 2 AND MAX(l.xmage_seats, l.scenario_seats) >= 2
-            AND (l.lockstep_seats < 4 OR MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) < 4) THEN 1 ELSE 0 END AS two_seat_only
+            AND (l.lockstep_seats < 4 OR MAX(l.xmage_seats, l.scenario_seats, l.cite_seats) < 4) THEN 1 ELSE 0 END AS INTEGER) AS two_seat_only
 FROM key_legs l'''
 
 CARD_PROVEN_VIEW_SQL = '''CREATE VIEW card_proven AS
 SELECT p.oracle_id,
-  COUNT(*) AS keys,
-  SUM(p.proven IS NOT NULL) AS live_keys,
-  COALESCE(SUM(p.proven), 0) AS proven_keys,
-  COALESCE(SUM(p.forge_only), 0) AS forge_only_keys,
-  COALESCE(SUM(p.unwitnessed), 0) AS unwitnessed_keys,
-  COALESCE(SUM(p.two_seat_only), 0) AS two_seat_only_keys,
-  SUM(p.stale_legs > 0) AS stale_keys,
-  CASE WHEN p.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)
+  CAST(COUNT(*) AS INTEGER) AS keys,
+  CAST(SUM(p.proven IS NOT NULL) AS INTEGER) AS live_keys,
+  CAST(COALESCE(SUM(p.proven), 0) AS INTEGER) AS proven_keys,
+  CAST(COALESCE(SUM(p.forge_only), 0) AS INTEGER) AS forge_only_keys,
+  CAST(COALESCE(SUM(p.unwitnessed), 0) AS INTEGER) AS unwitnessed_keys,
+  CAST(COALESCE(SUM(p.two_seat_only), 0) AS INTEGER) AS two_seat_only_keys,
+  CAST(SUM(p.stale_legs > 0) AS INTEGER) AS stale_keys,
+  CAST(CASE WHEN p.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)
         AND COALESCE(SUM(p.proven), 0) > 0
-        AND SUM(p.proven = 0) = 0 THEN 1 ELSE 0 END AS proven
+        AND SUM(p.proven = 0) = 0 THEN 1 ELSE 0 END AS INTEGER) AS proven
 FROM key_proven p GROUP BY p.oracle_id'''
 
 # Per-key proof (xproof), the LEGACY rule kept for the `# proven` section's legacy_proven count:
 # a card is proven when it is not curated-excluded, at least one key agrees or is diagnosed, and
 # every key that is not `excluded` agrees or is diagnosed.
+# Every aggregate/CASE expression is CAST AS INTEGER: SQLite gives a view column that is a bare
+# expression no declared type at all (PRAGMA table_info reports ''), and the parquet exporter
+# types its columns from declarations only, never from values. SQLite reports the declared type
+# of CAST(x AS INTEGER) as `INT`; the CI parquet exporter maps declared types by SQLite
+# affinity, so it accepts that spelling.
 KEYPROOF_CARDS_VIEW_SQL = (
-    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, COUNT(*) AS keys, "
-    "SUM(k.state='agreed') AS agreed, SUM(k.state='diagnosed') AS diagnosed, "
-    "SUM(k.state='diverged') AS diverged, SUM(k.state='owed') AS owed, SUM(k.state='excluded') AS excluded, "
-    "CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
+    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, "
+    "CAST(COUNT(*) AS INTEGER) AS keys, "
+    "CAST(SUM(k.state='agreed') AS INTEGER) AS agreed, "
+    "CAST(SUM(k.state='diagnosed') AS INTEGER) AS diagnosed, "
+    "CAST(SUM(k.state='diverged') AS INTEGER) AS diverged, "
+    "CAST(SUM(k.state='owed') AS INTEGER) AS owed, "
+    "CAST(SUM(k.state='excluded') AS INTEGER) AS excluded, "
+    "CAST(CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
     "AND SUM(k.state IN ('agreed','diagnosed'))>0 "
-    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS proven "
+    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS INTEGER) AS proven "
     "FROM keyproof_keys k GROUP BY k.oracle_id")
 
 # The cards the approved rule proves: not curated-excluded, at least one live key, every live

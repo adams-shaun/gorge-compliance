@@ -12,6 +12,8 @@ from carddb import shard
 from carddb.boundary import boundary_tree
 from carddb.store import Store
 
+import parquet_export
+
 from .helpers import Base, GOLDEN, OID_A, OID_B, OID_C, ROOT, git
 from .test_cert import cert_row
 
@@ -866,10 +868,18 @@ class TestProvenRule(Base):
             ("xmage", "agreed", {"refs": "X", "witness": "xs:w11"}),
             ("forge", "stale", {}),
             ("lockstep", "agreed", {}))
-        card("Seed Only", 0x1c)  # every row is a seed row (seats 0): need must list it, proof cannot
+        # every row is a seed row (seats 0, not excluded): the rollup says `diagnosed` (a seats-0
+        # cite), so only the seed clause makes need list it; no lockstep game, so never proven
+        card("Seed Only", 0x1c)
         key("Seed Only", "cast",
-            ("xmage", "agreed", {"refs": "X", "witness": "xs:w12", "seats": 0}),
-            ("lockstep", "agreed", {"seats": 0}))
+            ("cite", "diagnosed", {"cite": "CR 702.75a", "seats": 0}),
+            ("lockstep", "owed", {"seats": 0}))
+        card("Excluded Seed", 0x1d)  # every row seats 0 but excluded: not seed rows, need skips it
+        key("Excluded Seed", "cast",
+            ("xmage", "excluded", {"seats": 0}), ("forge", "excluded", {"seats": 0}))
+        key("Excluded Seed", "land",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w12"}),
+            ("lockstep", "agreed", {}))
 
         self.a.put("cards", cards, writer="catalogue")
         self.a.put("keyproof", rows, writer="xproof")
@@ -988,6 +998,45 @@ class TestProvenRule(Base):
         self.assertEqual(self.key_row("Stale Forge Leg")["proven"], 1)
         self.assertEqual(self.key_row("Seed Only")["proven"], 0)
         self.assertEqual(self.card_row("Seed Only")["proven"], 0)
+        # an all-excluded key written at seats 0 is a decision, not owed work
+        self.assertNotIn(("Excluded Seed", "cast"), listed, r.stdout)
+        self.assertIsNone(self.key_row("Excluded Seed")["proven"])
+        self.assertEqual(self.card_row("Excluded Seed")["proven"], 1)
+
+    def test_proven_by_keys_lists_the_proven_cards_with_their_counts(self):
+        r = self.cli(self.home, "proven", "--by", "keys", "--db", self.db)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        lines = r.stdout.splitlines()
+        head = lines[0].split("\t")
+        self.assertEqual(head, ["oracle_id", "name", "type_line", "mana_value", "keys", "proven_keys",
+                                "forge_only_keys", "unwitnessed_keys"])
+        got = {f[1]: dict(zip(head, f)) for f in (l.split("\t") for l in lines[1:])}
+        self.assertEqual(sorted(got), sorted([
+            "Proven Witnessed", "Replayed Fresh", "Multiplayer Proven", "Cite Proven",
+            "Excluded Key", "Stale Forge Leg", "Excluded Seed"]), r.stdout)
+        self.assertEqual((got["Proven Witnessed"]["keys"], got["Proven Witnessed"]["proven_keys"],
+                          got["Proven Witnessed"]["forge_only_keys"],
+                          got["Proven Witnessed"]["unwitnessed_keys"]), ("1", "1", "0", "0"))
+        self.assertEqual((got["Excluded Key"]["keys"], got["Excluded Key"]["proven_keys"]), ("2", "1"))
+        for absent in ("Forge Only", "Unwitnessed", "Stale Xmage", "Two Seat Only", "Diverged Forge",
+                       "Curated Out", "Seed Only"):
+            self.assertNotIn(absent, got, r.stdout)
+
+    def test_every_view_column_has_a_parquet_type(self):
+        # parquet_export exports every view and types columns from declarations only; an
+        # aggregate/CASE column without a CAST has no declared type. Checked without pyarrow.
+        objs = parquet_export.data_objects(self.conn)
+        views = [name for kind, name in objs if kind == "view"]
+        for v in ("key_legs", "key_proven", "card_proven", "proven_keys", "keyproof_cards"):
+            self.assertIn(v, views)
+        bad = []
+        for _kind, name in objs:
+            for col, declared, _pk in parquet_export.columns(self.conn, name):
+                try:
+                    parquet_export.parquet_type(declared)
+                except parquet_export.ExportError as e:  # report every untyped column at once
+                    bad.append("%s.%s: %s" % (name, col, e))
+        self.assertEqual(bad, [])
 
 
 class TestScopeCards(Base):
