@@ -13,7 +13,6 @@ import fcntl
 import os
 import re
 import shlex
-import shutil
 import subprocess
 import sys
 
@@ -256,14 +255,8 @@ class Store:
         self.git("remote", "add", "origin", self.remote)
         self.configure()
         _atomic_write(os.path.join(self.dir, ".gitattributes"), GITATTRIBUTES)
-        paths = [".gitattributes"]
-        wf = os.path.join(repo_root(), ".github", "workflows", "carddb.yml")
-        if self.kind == PUBLIC and os.path.isfile(wf):
-            os.makedirs(os.path.join(self.dir, ".github", "workflows"), exist_ok=True)
-            shutil.copyfile(wf, os.path.join(self.dir, ".github", "workflows", "carddb.yml"))
-            paths.append(".github/workflows/carddb.yml")
-        self._check_paths(paths)
-        self.git("add", "--", *paths)
+        self._check_paths([".gitattributes"])
+        self.git("add", "--", ".gitattributes")
         self.git("commit", "--quiet", "-m", "carddb: init")
         self.git("push", "--quiet", "origin", "HEAD:" + self.branch)
         return self

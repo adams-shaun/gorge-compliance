@@ -274,6 +274,39 @@ class SizeVerb(Base):
 
 
 class Workflow(Base):
+    def test_workflow_copy_leaves_the_data_branch_in_the_publish(self):
+        try:
+            import yaml
+        except ImportError:
+            self.skipTest("PyYAML is not installed")
+        doc = yaml.safe_load(read(os.path.join(ROOT, ".github/workflows/carddb.yml")))
+        steps = doc["jobs"]["publish"]["steps"]
+        names = [s.get("name", "") for s in steps]
+        at = names.index("Drop the data branch's workflow copy")
+        self.assertLess(at, names.index("Publish the data branch"))
+
+        pub = self.machine("pub", init=True)
+        copy = ".github/workflows/carddb.yml"
+        write(os.path.join(pub.dir, copy), "name: carddb\n")  # what an older publish left there
+        pub.git("add", "--", copy)
+        pub.git("commit", "--quiet", "-m", "legacy workflow copy")
+        pub.git("push", "--quiet", "origin", "HEAD:carddb")
+
+        def tracked():
+            return pub.git("ls-tree", "-r", "--name-only", "origin/carddb").stdout.split()
+
+        def drop():
+            p = subprocess.run(["bash", "-c", steps[at]["run"]], capture_output=True, text=True,
+                               env=dict(os.environ, CARDDB_HOME=pub.home))
+            self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+        self.assertIn(copy, tracked())
+        drop()
+        self.assertTrue(pub.publish(bulk=True)["pushed"])
+        self.assertEqual(tracked(), [".gitattributes"])
+        drop()  # already gone: nothing staged, nothing to publish
+        self.assertIsNone(pub.publish(bulk=True))
+
     def test_carddb_workflow_yaml_and_lint(self):
         try:
             import yaml
@@ -283,20 +316,21 @@ class Workflow(Base):
         text = read(path)
         doc = yaml.safe_load(text)
         trig = doc.get(True) or doc.get("on")
-        self.assertIn("carddb", trig["push"]["branches"])
-        self.assertEqual(trig["schedule"][0]["cron"], "23 4 * * *")
+        self.assertNotIn("push", trig)  # writers push every few minutes: only the schedule publishes
+        self.assertEqual(trig["schedule"][0]["cron"], "23 */3 * * *")
         self.assertEqual(trig["workflow_dispatch"]["inputs"]["dry_run"]["type"], "boolean")
         self.assertIn("carddb", doc["concurrency"]["group"])
-        self.assertIn("run_id", doc["concurrency"]["group"])  # only a PR's runs cancel each other
-        self.assertTrue({"lint", "check", "ready", "publish"} <= set(doc["jobs"]))
+        self.assertIn("run_id", doc["concurrency"]["group"])
+        # Only a PR's runs cancel each other: a publishing run is never cut off by the next one.
+        self.assertEqual(doc["concurrency"]["cancel-in-progress"], "${{ github.event_name == 'pull_request' }}")
+        self.assertEqual(set(doc["jobs"]), {"lint", "check", "publish"})
         publish = doc["jobs"]["publish"]
-        # A data push cancels only the older run's debounce wait, never a build in progress (11-28).
-        self.assertEqual(doc["jobs"]["ready"]["concurrency"], {"group": "carddb-debounce", "cancel-in-progress": True})
         self.assertEqual(publish["concurrency"], {"group": "carddb-publish", "cancel-in-progress": False})
         self.assertEqual(publish["permissions"]["contents"], "write")
-        # A red lint must not let the data branch/release move.
-        self.assertIn("lint", publish["needs"])
-        self.assertIn("needs.lint.result == 'success'", publish["if"])
+        # A red check or lint must not let the data branch/release move: an `if`
+        # without a status function keeps the implied success() of every need.
+        self.assertEqual(publish["needs"], ["check", "lint"])
+        self.assertEqual(publish["if"], "github.event_name != 'pull_request'")
 
         steps = publish["steps"]
         by_name = {s.get("name"): s for s in steps}
@@ -322,12 +356,12 @@ class Workflow(Base):
         self.assertIn("carddb-parquet.tar.gz", release_step)
 
         # No wall clock reaches a generated report: schedule/dispatch date from
-        # the data tip, and the debounce from the push event, not the commit.
+        # the data tip.
         runs = "\n".join(s.get("run", "") for s in steps)
         self.assertNotIn("date -u +%F", runs)
         self.assertIn("--format=%cs", runs)
         self.assertIn("CARDDB_NOW", runs)
-        self.assertIn("repository.pushed_at", text)
+        self.assertNotIn("HEAD_TS", text)
         self.assertIn("MemAvailable", runs)
         self.assertIn("actionlint", text)
         self.assertIn("carddb-latest", text)

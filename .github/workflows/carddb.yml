@@ -4,23 +4,22 @@
 #   pull request   touching carddb/** (or the checker itself): the committed
 #                  carddb/ tree (schema + curated inputs) must validate and
 #                  hold nothing private or Forge-shaped; the workflow lints.
-#   push to        the published data branch: after a two-hour quiet period
-#   `carddb`       measured from the push event (not the commit's authored
-#                  time) the catalogue (CDB-03) and compliance-status (CDB-16)
-#                  writers run from `main`, `carddb publish` commits their
-#                  shards, and the built asset is uploaded to the
-#                  `carddb-latest` release. A new push cancels the waiting run
-#                  (one concurrency group), so a burst of data commits produces
-#                  one publish.
-#   nightly        the same write path without the debounce, so a quiet branch
-#   (04:23 UTC)    still gets a fresh catalogue, support rows and release.
+#   schedule       every three hours (at minute 23): the catalogue (CDB-03) and
+#                  compliance-status (CDB-16) writers run from `main` over the
+#                  published `carddb` data branch, `carddb publish` commits
+#                  their shards, and the built asset is uploaded to the
+#                  `carddb-latest` release.
 #   dispatch       the same path; `dry_run=true` builds and packs but neither
 #                  publishes the data branch nor creates, uploads or deletes a
 #                  release.
 #
-# The run's date is never the wall clock: a push uses `HEAD_TS`, a
-# schedule/dispatch the data tip's date, so the same inputs rerun on another day
-# produce byte-identical shards and release metadata.
+# A push to the data branch starts nothing: the next scheduled run picks it up.
+# (Writers push every few minutes, so a quiet period measured from the last push
+# never elapsed.)
+#
+# The run's date is never the wall clock: a schedule/dispatch uses the data
+# tip's date, so the same inputs rerun on another day produce byte-identical
+# shards and release metadata.
 #
 # Release assets (see cmd/carddb/py/carddb/release.py):
 #   `carddb-latest`            floating release; carddb.sqlite.zst is replaced
@@ -36,26 +35,15 @@
 # `size` step fails before `publish`, so the branch cannot ship over-budget.
 #
 # Limits of the write-path guarantee:
-#  - A workflow file runs from the branch that was pushed, so the steps
-#    themselves come from the pushed `carddb` branch. Protect the `carddb`
-#    branch (Settings -> Branches -> `carddb`: require linear history and
-#    fast-forward only; allow only the Actions token and the publisher deploy
-#    key to push), so the steps cannot be edited on the way in; this workflow
-#    also pins the checker, writer and release tool to `main`, and refreshes
-#    the branch's own copy of this file on every publish.
+#  - Protect the `carddb` branch (Settings -> Branches -> `carddb`: require
+#    linear history and fast-forward only; allow only the Actions token and the
+#    publisher deploy key to push). Schedules run the default branch's copy of
+#    this file, and the checker, writer and release tool are pinned to `main`.
+#    The data branch needs no copy of this file; a publish removes a leftover
+#    one.
 #  - `main` must already contain cmd/carddb (including the compliance, size and
 #    release writers), carddb/schema and the manifests, i.e. this change must
 #    be promoted develop -> main BEFORE the first publish to `carddb`.
-#  - The `carddb` branch must carry a copy of this file for the push trigger
-#    to fire; the first `carddb init` creates it and each publish refreshes it.
-#  - keyproof leg rows (one-time): until a publish refreshes the branch's copy
-#    of this file, a push to `carddb` runs the old copy, which has no migrate
-#    step and fails validating legacy keyproof shards against main's schema.
-#    After promoting the leg-row change to main, run this workflow once from
-#    main (dispatch, or wait for the nightly: both use main's copy); it
-#    migrates, publishes the leg rows and refreshes the branch's copy. A push
-#    of already-migrated shards (`carddb migrate keyproof-legs`, then
-#    `carddb publish`) also passes the old copy.
 #  - The write job needs `contents: write`; it is separate from the
 #    pull-request check so that path never holds a write token.
 name: carddb
@@ -68,10 +56,8 @@ on:
       - 'cmd/carddb/**'
       - 'internal/carddb/**'
       - '.github/workflows/carddb.yml'
-  push:
-    branches: [carddb]
   schedule:
-    - cron: '23 4 * * *'
+    - cron: '23 */3 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -82,14 +68,12 @@ on:
 permissions:
   contents: read
 
-# Pull requests: one group per PR, newest wins. Everything else gets its own run
-# (run_id); the debounce lives on the `ready` job (a newer push cancels only the
-# older run's quiet-period wait) and `publish` queues in one non-cancelling group.
-# 11-28: one workflow-wide cancelling group let every data push cancel a running
-# build, the nightly and a manual dispatch alike; carddb-latest went 2 days unpublished.
+# Pull requests: one group per PR, newest wins. A schedule or dispatch run gets
+# its own group (run_id) and cancels nothing; `publish` queues in one
+# non-cancelling group, so a run that is publishing is never cut off by the next.
 concurrency:
   group: carddb-${{ github.event.pull_request.number && format('pr-{0}', github.event.pull_request.number) || github.run_id }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   GOWORK: 'off'
@@ -169,67 +153,12 @@ jobs:
       - name: Public boundary
         run: ./carddb-bin boundary -schema tool/carddb/schema -tree "${{ steps.tree.outputs.dir }}"
 
-  # The debounce is a real quiet period, not a cron approximation: a push waits
-  # two hours from the push event (not from the commit's authored timestamp, so
-  # pushing an older commit still waits), and the next push cancels it through
-  # the concurrency group. The survivor checks that it still owns the tip.
-  ready:
-    needs: check
-    if: github.event_name == 'push' && github.event.deleted != true
-    concurrency:
-      group: carddb-debounce
-      cancel-in-progress: true
-    runs-on: ubuntu-24.04
-    timeout-minutes: 135
-    outputs:
-      stale: ${{ steps.tip.outputs.stale }}
-    steps:
-      - name: Wait two hours from the push
-        env:
-          # repository.pushed_at is the push event's time; head_commit.timestamp
-          # is the commit's, which can be hours older and would shorten (or
-          # erase) the quiet period.
-          PUSHED_AT: ${{ github.event.repository.pushed_at }}
-        run: |
-          set -euo pipefail
-          now=$(date -u +%s)
-          if [[ "$PUSHED_AT" =~ ^[0-9]+$ ]]; then
-            start=$PUSHED_AT  # a push payload sends pushed_at as epoch seconds; date -d refused it (11-25)
-          elif [ -n "$PUSHED_AT" ]; then
-            start=$(date -u -d "$PUSHED_AT" +%s)
-          else
-            start=$now  # no push time in the payload: wait from now
-          fi
-          target=$(( start + 7200 ))
-          wait=$(( target - now ))
-          if [ "$wait" -gt 0 ]; then
-            echo "waiting ${wait}s for the carddb branch to stop moving"
-            sleep "$wait"
-          fi
-      - name: The newest push owns the publish
-        id: tip
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          head=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/carddb" --jq .object.sha)
-          if [ "$head" = "$GITHUB_SHA" ]; then
-            echo "stale=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "stale=true" >> "$GITHUB_OUTPUT"
-            echo "superseded by $head; the newer run publishes"
-          fi
-
   # The writers run from `main` (the tool, schema and manifests), after the data
   # tree has validated and passed the boundary. It is a separate job so the
   # pull-request path never holds a write token.
   publish:
-    needs: [check, ready, lint]
-    if: |
-      always() && github.event_name != 'pull_request' && needs.check.result == 'success' &&
-      needs.lint.result == 'success' &&
-      (needs.ready.result == 'skipped' ||
-       (needs.ready.result == 'success' && needs.ready.outputs.stale != 'true'))
+    needs: [check, lint]
+    if: github.event_name != 'pull_request'
     concurrency:
       group: carddb-publish
       cancel-in-progress: false
@@ -245,7 +174,6 @@ jobs:
       GIT_TERMINAL_PROMPT: '0'
       GH_TOKEN: ${{ github.token }}
       DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
-      HEAD_TS: ${{ github.event.head_commit.timestamp }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -286,19 +214,13 @@ jobs:
           export CARDDB_HOME="$RUNNER_TEMP/carddb"
           echo "CARDDB_HOME=$CARDDB_HOME" >> "$GITHUB_ENV"
           python3 -I cmd/carddb/main.py init
-          # The pushed commit's date, not the wall clock: re-running the same
-          # push is byte-identical. A schedule/dispatch has no head commit, so
-          # it uses the data branch tip's date (the same fallback release.py
-          # uses); a wall-clock date would rewrite the shards and the release
-          # metadata when the same inputs were rerun on another day.
-          if [ "${GITHUB_EVENT_NAME}" = push ]; then
-            measured=${HEAD_TS%%T*}
-          else
-            measured=$(git -C "$CARDDB_HOME/public" log -1 --format=%cs)
-          fi
+          # The data branch tip's date, not the wall clock (the same fallback
+          # release.py uses): a wall-clock date would rewrite the shards and the
+          # release metadata when the same inputs were rerun on another day.
+          measured=$(git -C "$CARDDB_HOME/public" log -1 --format=%cs)
           case "$measured" in
             [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
-            *) echo "::error::cannot read the run date (HEAD_TS=$HEAD_TS, data tip=$measured)"; exit 1 ;;
+            *) echo "::error::cannot read the run date (data tip=$measured)"; exit 1 ;;
           esac
           echo "MEASURED=$measured" >> "$GITHUB_ENV"
           echo "RELEASE_DATE=$measured" >> "$GITHUB_ENV"
@@ -308,16 +230,14 @@ jobs:
       - name: Migrate the keyproof shards to leg rows
         working-directory: tool
         run: python3 -I cmd/carddb/main.py migrate keyproof-legs
-      # The carddb branch runs its own copy of this workflow. Refreshing it from
-      # main on every publish is the structural fix for a stale copy: the next
-      # workflow change reaches the branch with the data commit that follows it.
-      - name: Refresh the branch's workflow copy
+      # Nothing runs from the data branch (no push trigger), so it carries no
+      # copy of this workflow: stage the removal of a leftover one for this
+      # run's publish. A no-op once the file is gone.
+      - name: Drop the data branch's workflow copy
         working-directory: tool
         run: |
           set -euo pipefail
-          data="$CARDDB_HOME/public"
-          install -D -m 644 .github/workflows/carddb.yml "$data/.github/workflows/carddb.yml"
-          git -C "$data" add .github/workflows/carddb.yml
+          git -C "$CARDDB_HOME/public" rm --quiet --ignore-unmatch -- .github/workflows/carddb.yml
       - name: Fetch AllPrintings
         working-directory: tool
         run: |
@@ -396,8 +316,8 @@ jobs:
       # docs-data branch next to status-A/B.jsonl and meta.json. ci.yml force-pushes that branch as an
       # orphan commit, so this step fetches the branch first and adds only these three files on top of
       # whatever is there (status files untouched); ci.yml's publish re-adds the three in turn.
-      # A dry run publishes nothing. A push that finds nothing changed commits nothing.
-      # Best effort: the docs snippet must never block the nightly release (a ci.yml force-push can
+      # A dry run publishes nothing. A run that finds nothing changed commits nothing.
+      # Best effort: the docs snippet must never block the release (a ci.yml force-push can
       # land between this clone and push, or the network can fail), so a failure here only warns.
       - name: Publish the per-set xproof snippet to docs-data
         if: env.DRY_RUN != 'true'
