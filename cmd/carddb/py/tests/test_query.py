@@ -12,6 +12,8 @@ from carddb import shard
 from carddb.boundary import boundary_tree
 from carddb.store import Store
 
+import parquet_export
+
 from .helpers import Base, GOLDEN, OID_A, OID_B, OID_C, ROOT, git
 from .test_cert import cert_row
 
@@ -442,7 +444,9 @@ class Query(QueryFixture):
         r = self.run_cli("proven", "--by", "keys")
         self.assertEqual(r.returncode, 0, r.stderr)
         self.golden("query_proven_keys.txt", r.stdout)
-        self.assertIn("Lightning Bolt", r.stdout)
+        # the fixture ledger has no lockstep leg, so the approved rule proves no card (the old
+        # rule's count survives only as the proof section's legacy_proven)
+        self.assertNotIn("Lightning Bolt", r.stdout)
         self.assertNotIn("Dáin Ironfoot", r.stdout)
         self.assertNotIn("Fun Card", r.stdout)
 
@@ -783,6 +787,259 @@ class TestLegacyNumbersHold(QueryFixture):
 
     def test_proven_keys(self):
         self.check("query_proven_keys.txt", self.run_cli("proven", "--by", "keys").stdout)
+
+
+PROVEN_NEW = "2026-11-23"  # every fresh row is measured this day: the table's newest date
+PROVEN_OLD = "2026-11-03"  # 20 days before the newest row, well outside the 7-day window
+
+
+class TestProvenRule(Base):
+    """The approved proven rule (lockstep plus one independent leg fresh at need_seats) over one
+    fixture card per case, asserted against the key_proven and card_proven views."""
+
+    def setUp(self):
+        super().setUp()
+        self.home = os.path.join(self.tmp, "proven")
+        self.a = self.machine("proven", init=True)
+        self.oid = {}
+        cards, rows = [], []
+
+        def card(name, i):
+            self.oid[name] = oid = "%02x" % i + "9" * 30
+            cards.append({"oracle_id": oid, "name": name, "layout": "normal", "mana_value": 1,
+                          "type_line": "Instant"})
+            return oid
+
+        def key(name, keyname, *legs):
+            for leg, state, kw in legs:
+                rows.append(keyproof_row(self.oid[name], keyname, state, leg=leg, **kw))
+
+        card("Proven Witnessed", 0x10)  # xmage witness + forge + lockstep, all fresh
+        key("Proven Witnessed", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w1"}),
+            ("forge", "agreed", {"refs": "F", "witness": "fo:w2"}),
+            ("lockstep", "agreed", {}))
+        card("Forge Only", 0x11)  # no independent leg: forge plus lockstep
+        key("Forge Only", "cast",
+            ("forge", "agreed", {"refs": "F", "witness": "fo:w3"}),
+            ("lockstep", "agreed", {}))
+        card("Unwitnessed", 0x12)  # agreed xmage with an empty witness, plus lockstep
+        key("Unwitnessed", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "-"}),
+            ("lockstep", "agreed", {}))
+        card("Stale Xmage", 0x13)  # xmage measured 20 days old, never replayed
+        key("Stale Xmage", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w4", "measured": PROVEN_OLD}),
+            ("lockstep", "agreed", {}))
+        card("Replayed Fresh", 0x14)  # the same rows, but replayed on the newest date
+        key("Replayed Fresh", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w5", "measured": PROVEN_OLD,
+                                 "replayed": PROVEN_NEW}),
+            ("lockstep", "agreed", {}))
+        card("Two Seat Only", 0x15)  # multiplayer key proven at two seats only
+        key("Two Seat Only", "cast",
+            ("lockstep", "agreed", {"seats": 4, "multiplayer": "true"}),
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w6", "seats": 2, "multiplayer": "true"}))
+        card("Multiplayer Proven", 0x16)  # multiplayer key at four seats everywhere
+        key("Multiplayer Proven", "cast",
+            ("lockstep", "agreed", {"seats": 4, "multiplayer": "true"}),
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w7", "seats": 4, "multiplayer": "true"}))
+        card("Cite Proven", 0x17)  # a diagnosed cite is the independent leg; cites do not age
+        key("Cite Proven", "cast",
+            ("cite", "diagnosed", {"cite": "CR 702.75a"}),
+            ("lockstep", "agreed", {}))
+        card("Diverged Forge", 0x18)  # one diverged leg holds the whole key up
+        key("Diverged Forge", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w8"}),
+            ("forge", "diverged", {}),
+            ("lockstep", "agreed", {}))
+        card("Excluded Key", 0x19)  # an all-excluded key counts neither way; the card is still proven
+        key("Excluded Key", "cast",
+            ("xmage", "excluded", {}), ("forge", "excluded", {}), ("lockstep", "excluded", {}))
+        key("Excluded Key", "land",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w9"}),
+            ("lockstep", "agreed", {}))
+        card("Curated Out", 0x1a)  # proven keys, but curated-excluded: the card is not proven
+        key("Curated Out", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w10"}),
+            ("lockstep", "agreed", {}))
+        card("Stale Forge Leg", 0x1b)  # proven, but a stale forge leg: need must still list the key
+        key("Stale Forge Leg", "cast",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w11"}),
+            ("forge", "stale", {}),
+            ("lockstep", "agreed", {}))
+        # every row is a seed row (seats 0, not excluded): the rollup says `diagnosed` (a seats-0
+        # cite), so only the seed clause makes need list it; no lockstep game, so never proven
+        card("Seed Only", 0x1c)
+        key("Seed Only", "cast",
+            ("cite", "diagnosed", {"cite": "CR 702.75a", "seats": 0}),
+            ("lockstep", "owed", {"seats": 0}))
+        card("Excluded Seed", 0x1d)  # every row seats 0 but excluded: not seed rows, need skips it
+        key("Excluded Seed", "cast",
+            ("xmage", "excluded", {"seats": 0}), ("forge", "excluded", {"seats": 0}))
+        key("Excluded Seed", "land",
+            ("xmage", "agreed", {"refs": "X", "witness": "xs:w12"}),
+            ("lockstep", "agreed", {}))
+
+        self.a.put("cards", cards, writer="catalogue")
+        # Only the seed writer may set a key's multiplayer flag (store._keyproof_multiplayer, plan pf-ledger-04);
+        # a later xproof row replacing a seeded one keeps it. So the multiplayer keys are seeded first.
+        self.a.put("keyproof", [r for r in rows if r.get("multiplayer") == "true"], writer="seed")
+        self.a.put("keyproof", rows, writer="xproof")
+        src = os.path.join(self.tmp, "proven-src")
+        write(os.path.join(src, "carddb", "curated", "exclusions.tsv"),
+              "#carddb curated/exclusions v1\noracle_id\treason\n%s\tante\n" % self.oid["Curated Out"])
+        db = self.db = os.path.join(self.tmp, "proven.sqlite")
+        build_mod.build(db, self.schema, self.a.dir, None, build_mod.read_committed(directory=src))
+        conn = sqlite3.connect(db)
+        conn.row_factory = sqlite3.Row
+        self.conn = conn
+        self.addCleanup(conn.close)
+
+    def key_row(self, name, keyname="cast"):
+        row = self.conn.execute('SELECT * FROM key_proven WHERE oracle_id=? AND "key"=?',
+                                (self.oid[name], keyname)).fetchone()
+        self.assertIsNotNone(row, "no key_proven row for %s %s" % (name, keyname))
+        return dict(row)
+
+    def card_row(self, name):
+        row = self.conn.execute("SELECT * FROM card_proven WHERE oracle_id=?", (self.oid[name],)).fetchone()
+        self.assertIsNotNone(row, "no card_proven row for %s" % name)
+        return dict(row)
+
+    def test_witnessed_xmage_forge_and_lockstep_is_proven(self):
+        r = self.key_row("Proven Witnessed")
+        self.assertEqual(r["proven"], 1, r)
+        self.assertEqual((r["lockstep_seats"], r["xmage_seats"], r["outside_seats"]), (2, 2, 2), r)
+        self.assertEqual((r["forge_only"], r["unwitnessed"], r["two_seat_only"]), (0, 0, 0), r)
+        c = self.card_row("Proven Witnessed")
+        self.assertEqual(c["proven"], 1, c)
+        self.assertEqual((c["keys"], c["live_keys"], c["proven_keys"]), (1, 1, 1), c)
+
+    def test_forge_and_lockstep_only_is_forge_only(self):
+        r = self.key_row("Forge Only")
+        self.assertEqual(r["proven"], 0, r)
+        self.assertEqual(r["forge_only"], 1, r)
+        self.assertEqual((r["unwitnessed"], r["two_seat_only"]), (0, 0), r)
+        self.assertEqual(self.card_row("Forge Only")["forge_only_keys"], 1)
+
+    def test_agreed_xmage_without_a_witness_is_unwitnessed(self):
+        r = self.key_row("Unwitnessed")
+        self.assertEqual(r["proven"], 0, r)
+        self.assertEqual(r["unwitnessed"], 1, r)
+        self.assertEqual(r["unwitnessed_seats"], 2, r)
+        self.assertEqual(self.card_row("Unwitnessed")["unwitnessed_keys"], 1)
+
+    def test_xmage_older_than_the_window_is_a_stale_leg(self):
+        r = self.key_row("Stale Xmage")
+        self.assertEqual(r["proven"], 0, r)
+        self.assertEqual(r["stale_legs"], 1, r)
+        self.assertEqual(r["xmage_seats"], 0, r)
+        c = self.card_row("Stale Xmage")
+        self.assertEqual((c["proven"], c["stale_keys"]), (0, 1), c)
+
+    def test_a_row_replayed_on_the_newest_date_is_fresh(self):
+        r = self.key_row("Replayed Fresh")
+        self.assertEqual(r["proven"], 1, r)
+        self.assertEqual(r["stale_legs"], 0, r)
+        self.assertEqual(self.card_row("Replayed Fresh")["proven"], 1)
+
+    def test_multiplayer_key_proven_at_two_seats_is_two_seat_only(self):
+        r = self.key_row("Two Seat Only")
+        self.assertEqual((r["multiplayer"], r["need_seats"]), (1, 4), r)
+        self.assertEqual(r["proven"], 0, r)
+        self.assertEqual(r["two_seat_only"], 1, r)
+        self.assertEqual((r["forge_only"], r["unwitnessed"]), (0, 0), r)
+        c = self.card_row("Two Seat Only")
+        self.assertEqual((c["proven"], c["two_seat_only_keys"]), (0, 1), c)
+
+    def test_multiplayer_key_proven_at_four_seats_is_proven(self):
+        r = self.key_row("Multiplayer Proven")
+        self.assertEqual((r["multiplayer"], r["need_seats"]), (1, 4), r)
+        self.assertEqual(r["proven"], 1, r)
+        self.assertEqual(r["two_seat_only"], 0, r)
+        self.assertEqual(self.card_row("Multiplayer Proven")["proven"], 1)
+
+    def test_diagnosed_cite_with_a_rule_number_is_the_independent_leg(self):
+        r = self.key_row("Cite Proven")
+        self.assertEqual(r["cite_seats"], 4, r)
+        self.assertEqual(r["proven"], 1, r)
+        self.assertEqual(self.card_row("Cite Proven")["proven"], 1)
+
+    def test_one_diverged_leg_holds_the_key_up(self):
+        r = self.key_row("Diverged Forge")
+        self.assertEqual(r["diverged_legs"], 1, r)
+        self.assertEqual(r["proven"], 0, r)
+        self.assertEqual((r["forge_only"], r["unwitnessed"], r["two_seat_only"]), (0, 0, 0), r)
+        self.assertEqual(self.card_row("Diverged Forge")["proven"], 0)
+
+    def test_an_all_excluded_key_counts_neither_way(self):
+        r = self.key_row("Excluded Key", "cast")
+        self.assertIsNone(r["proven"], r)
+        self.assertEqual((r["legs"], r["excluded_legs"]), (3, 3), r)
+        self.assertIsNone(r["forge_only"], r)
+        self.assertIsNone(r["unwitnessed"], r)
+        self.assertIsNone(r["two_seat_only"], r)
+        c = self.card_row("Excluded Key")  # the live key still proves the card
+        self.assertEqual((c["keys"], c["live_keys"], c["proven_keys"], c["proven"]), (2, 1, 1, 1), c)
+
+    def test_a_curated_excluded_card_is_never_proven(self):
+        self.assertEqual(self.key_row("Curated Out")["proven"], 1)
+        self.assertEqual(self.card_row("Curated Out")["proven"], 0)
+
+    def test_need_lists_stale_legs_and_seed_only_keys(self):
+        # need goes below the rollup: a key with one stale leg (rollup agreed) and a key whose
+        # every row is a seed row (seats 0) are owed work the rollup cannot see
+        r = self.cli(self.home, "need", "--db", self.db)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        listed = {(l.split("\t")[2], l.split("\t")[3]) for l in r.stdout.splitlines()[1:]}
+        self.assertIn(("Stale Forge Leg", "cast"), listed, r.stdout)
+        self.assertIn(("Seed Only", "cast"), listed, r.stdout)
+        self.assertNotIn(("Proven Witnessed", "cast"), listed, r.stdout)
+        self.assertNotIn(("Multiplayer Proven", "cast"), listed, r.stdout)
+        # the stale forge leg does not hold the key up under the proven rule; a seed row cannot prove it
+        self.assertEqual(self.key_row("Stale Forge Leg")["proven"], 1)
+        self.assertEqual(self.key_row("Seed Only")["proven"], 0)
+        self.assertEqual(self.card_row("Seed Only")["proven"], 0)
+        # an all-excluded key written at seats 0 is a decision, not owed work
+        self.assertNotIn(("Excluded Seed", "cast"), listed, r.stdout)
+        self.assertIsNone(self.key_row("Excluded Seed")["proven"])
+        self.assertEqual(self.card_row("Excluded Seed")["proven"], 1)
+
+    def test_proven_by_keys_lists_the_proven_cards_with_their_counts(self):
+        r = self.cli(self.home, "proven", "--by", "keys", "--db", self.db)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        lines = r.stdout.splitlines()
+        head = lines[0].split("\t")
+        self.assertEqual(head, ["oracle_id", "name", "type_line", "mana_value", "keys", "proven_keys",
+                                "forge_only_keys", "unwitnessed_keys"])
+        got = {f[1]: dict(zip(head, f)) for f in (l.split("\t") for l in lines[1:])}
+        self.assertEqual(sorted(got), sorted([
+            "Proven Witnessed", "Replayed Fresh", "Multiplayer Proven", "Cite Proven",
+            "Excluded Key", "Stale Forge Leg", "Excluded Seed"]), r.stdout)
+        self.assertEqual((got["Proven Witnessed"]["keys"], got["Proven Witnessed"]["proven_keys"],
+                          got["Proven Witnessed"]["forge_only_keys"],
+                          got["Proven Witnessed"]["unwitnessed_keys"]), ("1", "1", "0", "0"))
+        self.assertEqual((got["Excluded Key"]["keys"], got["Excluded Key"]["proven_keys"]), ("2", "1"))
+        for absent in ("Forge Only", "Unwitnessed", "Stale Xmage", "Two Seat Only", "Diverged Forge",
+                       "Curated Out", "Seed Only"):
+            self.assertNotIn(absent, got, r.stdout)
+
+    def test_every_view_column_has_a_parquet_type(self):
+        # parquet_export exports every view and types columns from declarations only; an
+        # aggregate/CASE column without a CAST has no declared type. Checked without pyarrow.
+        objs = parquet_export.data_objects(self.conn)
+        views = [name for kind, name in objs if kind == "view"]
+        for v in ("key_legs", "key_proven", "card_proven", "proven_keys", "keyproof_cards"):
+            self.assertIn(v, views)
+        bad = []
+        for _kind, name in objs:
+            for col, declared, _pk in parquet_export.columns(self.conn, name):
+                try:
+                    parquet_export.parquet_type(declared)
+                except parquet_export.ExportError as e:  # report every untyped column at once
+                    bad.append("%s.%s: %s" % (name, col, e))
+        self.assertEqual(bad, [])
 
 
 class TestScopeCards(Base):

@@ -1,0 +1,72 @@
+{
+ "card": "Wrath of God",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "35902648b91a",
+ "scenarios": [
+  {
+   "name": "phased-out-creature-is-not-destroyed",
+   "cr": [
+    "702.26b"
+   ],
+   "why": "Reality Ripple phases out Grizzly Bears, then Wrath of God destroys all creatures. The phased-out Bears are not affected and remain, while the opponent's Hill Giant is destroyed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Reality Ripple",
+      "Wrath of God"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Reality Ripple",
+     "mana": "CU",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Wrath of God",
+     "mana": "CCWW"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "battlefield"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "graveyard",
+      "name": "Grizzly Bears"
+     },
+     "eq": 0
+    },
+    {
+     "card": "p1:Hill Giant",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}
