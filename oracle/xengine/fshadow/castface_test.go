@@ -1,7 +1,6 @@
 package fshadow
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"slices"
@@ -25,26 +24,7 @@ func recorded(t *testing.T, card, mode, answer string, listed ...string) (*Log, 
 		{land: "Island"},
 		{plan: card, mode: mode},
 	})
-	a, line := lastAsk(t, l, "cast")
-	opts := make([]string, len(listed))
-	for i, fields := range listed {
-		opts[i] = fmt.Sprintf(`{"action":"cast","card":%d%s}`, a.Answer.Card, fields)
-	}
-	if err := json.Unmarshal([]byte("["+strings.Join(opts, ",")+"]"), &a.Options); err != nil {
-		t.Fatal(err)
-	}
-	if err := json.Unmarshal([]byte("{"+answer+"}"), &a.Answer); err != nil {
-		t.Fatal(err)
-	}
-	var b bytes.Buffer
-	if err := Write(&b, l); err != nil {
-		t.Fatal(err)
-	}
-	read, err := Read(&b)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return read, line
+	return asRecorded(t, l, answer, listed...)
 }
 
 // TestCastTakesTheFaceForgesAbilityNames: Forge lists an adventurer's creature
@@ -105,18 +85,20 @@ func TestAbilityWays(t *testing.T) {
 		answer string
 		listed []string
 		want   []way
+		named  bool
 	}{
-		"split right half":      {[]way{cast("split_alt"), front}, `1`, []string{`0`, `1`}, []way{cast("split_alt")}},
-		"split left half":       {[]way{cast("split_alt"), front}, `0`, []string{`0`, `1`}, []way{front}},
-		"free alternative cost": {[]way{front, free}, ``, []string{`0`, ``}, []way{free}},
-		"front over a grant":    {[]way{front, cast("blitz")}, `0`, []string{`0`, ``, `1`}, []way{front}},
+		"split right half":      {[]way{cast("split_alt"), front}, `1`, []string{`0`, `1`}, []way{cast("split_alt")}, true},
+		"split left half":       {[]way{cast("split_alt"), front}, `0`, []string{`0`, `1`}, []way{front}, true},
+		"free alternative cost": {[]way{front, free}, ``, []string{`0`, ``}, []way{free}, true},
+		"front over a grant":    {[]way{front, cast("blitz")}, `0`, []string{`0`, ``, `1`}, []way{front}, true},
 		"two others stay": {[]way{front, cast("split_alt"), cast("fuse")}, `2`, []string{`0`, `1`, `2`},
-			[]way{cast("split_alt"), cast("fuse")}},
+			[]way{cast("split_alt"), cast("fuse")}, false},
 		// gorge asks the variant during the front cast and has no second way.
-		"one gorge way":      {[]way{front}, ``, []string{`0`, ``}, []way{front}},
-		"one way, one cast":  {[]way{front}, ``, []string{`0`}, []way{front}},
-		"no front way":       {[]way{cast("mayplay")}, `0`, []string{`0`}, []way{cast("mayplay")}},
-		"evoke alone listed": {[]way{front, cast("evoke")}, `1`, []string{`1`}, []way{front, cast("evoke")}},
+		"one gorge way":      {[]way{front}, ``, []string{`0`, ``}, []way{front}, false},
+		"one way, one cast":  {[]way{front}, ``, []string{`0`}, []way{front}, false},
+		"no front way":       {[]way{cast("mayplay")}, `0`, []string{`0`}, []way{cast("mayplay")}, false},
+		"evoke alone listed": {[]way{front, cast("evoke")}, `1`, []string{`1`}, []way{front, cast("evoke")}, false},
+		"two of index 0":     {[]way{front, cast("evoke")}, `0`, []string{`0`, `0`}, []way{front, cast("evoke")}, false},
 	} {
 		t.Run(name, func(t *testing.T) {
 			ability := func(s string) string {
@@ -137,8 +119,8 @@ func TestAbilityWays(t *testing.T) {
 				t.Fatal(err)
 			}
 			ws := slices.Clone(c.ways)
-			if got := abilityWays(ws, &a); !slices.Equal(got, c.want) {
-				t.Errorf("ways %+v, want %+v", got, c.want)
+			if got, named := abilityWays(ws, &a); !slices.Equal(got, c.want) || named != c.named {
+				t.Errorf("ways %+v named %v, want %+v named %v", got, named, c.want, c.named)
 			}
 			if !slices.Equal(ws, c.ways) {
 				t.Errorf("the input ways became %+v", ws)

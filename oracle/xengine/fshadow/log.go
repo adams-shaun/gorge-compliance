@@ -9,9 +9,9 @@
 // does not offer (a filter land's or a Signet's mana, which gorge's planner
 // does not plan), is paid by hand: the follower activates those sources at
 // priority, then takes the offer (Result.HandPayments counts them). It does so
-// only where Forge's answer names one gorge option (a card with one way to be
-// cast, an ability both engines list) and the floating mana pays it with no
-// further ask. At every
+// only where Forge's answer names one gorge option (the way its ability index
+// leaves, a card with one way to be cast, an ability both engines list) and the
+// floating mana pays it with no further ask. At every
 // snap line gorge's state is compared with Forge's through
 // oraclediff.CompareOpts, the comparison classify uses.
 //
@@ -66,7 +66,9 @@
 // answered from the next part instead (Result.CastTargets counts them), still
 // consuming no line: a part Forge left empty answers an optional ask with
 // nothing, a mandatory ask passes over it, and a combined modal ask takes one
-// part per mode. A target line that follows the cast wins over these parts. A
+// part per mode. A target line that follows the cast wins over these parts. The
+// recorder writes no target on an Equip activation, so an activation's mandatory
+// ask that must take every option, with every part left empty, takes them. A
 // decision the next part cannot answer, or an optional sub-ability ask that
 // could be an empty part's or a later one's, is a harness divergence (field
 // "cast_targets").

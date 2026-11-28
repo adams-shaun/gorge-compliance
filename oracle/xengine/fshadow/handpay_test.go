@@ -24,7 +24,7 @@ type handStep struct {
 	activate        bool
 	ability         int
 	target          string // the cast's or ability's target, a card name or "player" (seat 1)
-	mode            string // a land's or a plan cast's gorge Mode ("modal_land", "adventure_alt"); "" the plain one
+	mode            string // a land's or a cast's gorge Mode ("modal_land", "bestowed"); "" the plain one
 }
 
 // handGame plays steps in a real 2-seat gorge game, seat 0's own main phase,
@@ -101,10 +101,10 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		}
 	}
 	// option is the nth pending option of kind on a card called name, or -1.
-	// Of a card's casts only the plain one counts.
-	option := func(kind, name string, nth int) int {
+	// Of a card's casts only the one in mode counts.
+	option := func(kind, name, mode string, nth int) int {
 		for i, o := range e.Pending().Options {
-			if o.Kind == kind && objName(e.G.Obj(o.Obj)) == name && (kind != "cast" || o.Mode == "") {
+			if o.Kind == kind && objName(e.G.Obj(o.Obj)) == name && (kind != "cast" || o.Mode == mode) {
 				if nth == 0 {
 					return i
 				}
@@ -113,9 +113,11 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		}
 		return -1
 	}
-	untapped := func(name string) state.ObjID {
+	// untapped is seat 0's first untapped permanent called name whose Forge
+	// id is not in taken, or 0.
+	untapped := func(name string, taken []int) state.ObjID {
 		for _, id := range e.G.Zone(state.ZBattlefield, 0) {
-			if o := e.G.Obj(id); objName(o) == name && !o.Tapped {
+			if o := e.G.Obj(id); objName(o) == name && !o.Tapped && !slices.Contains(taken, toF[id]) {
 				return id
 			}
 		}
@@ -161,7 +163,7 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		ans := Answer{Action: "cast"}
 		for _, tap := range s.taps {
 			name, _, _ := strings.Cut(tap, ":")
-			id := untapped(name)
+			id := untapped(name, ans.Tapped)
 			if id == 0 {
 				return false, nil
 			}
@@ -175,7 +177,7 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 			if name == s.use && s.activate {
 				continue // tapped as the ability's own cost
 			}
-			i := option("activate", name, 0)
+			i := option("activate", name, "", 0)
 			if i < 0 {
 				t.Fatalf("%s: no mana activation offered: %+v", name, e.Pending().Options)
 			}
@@ -198,14 +200,14 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		if s.activate {
 			kind, nth = "ability", s.ability
 		}
-		i := option(kind, s.use, nth)
+		i := option(kind, s.use, s.mode, nth)
 		if i < 0 {
 			t.Fatalf("%s: no %s offered after paying: %+v", s.use, kind, e.Pending().Options)
 		}
 		a.Answer.Card = toF[e.Pending().Options[i].Obj]
 		if s.activate {
 			a.Answer.Action, a.Answer.Ability = "activate", intPtr(10+s.ability)
-			for k := 0; option(kind, s.use, k) >= 0; k++ {
+			for k := 0; option(kind, s.use, "", k) >= 0; k++ {
 				a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: intPtr(10 + k)})
 			}
 		}
@@ -272,7 +274,7 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 			}
 			ask(kind, Answer{})
 			submit(decision.Intent{Choices: []int{}})
-		case decision.KChoose:
+		case decision.KChoose, decision.KTriggerOrder:
 			submit(firstMin(d))
 		default:
 			t.Fatalf("the hand-payment game poses %s", d.Kind)
