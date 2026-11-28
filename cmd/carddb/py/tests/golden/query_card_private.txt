@@ -31,9 +31,10 @@ T1	agree	fixture
 norm_name	name	gorge_sha	corpus_pin	script_sha	oracle_sha	first_set	released	level	exclusion	refs	keys_total	keys_used	keys_compared	keys_agreed	keys_unreachable	triggers_unmeasured	scen_level	oracle_audit	open_deltas	diagnosed_deltas	tickets	why	witness	measured	writer
 lightning bolt	Lightning Bolt	8f7095353a64	418ba5215f	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb	lea	1993-08-05	C2	NULL	FX	3	3	3	3	0	0	B	ok	0	0	NULL	NULL	f0/a0=item=1;seed=2	2026-11-19	certification
 -- keyproof
-key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-cast	Mana	agreed	NULL	FX	scen	2	0	NULL	NULL	NULL	NULL	8f7095353a64	NULL	NULL	NULL	NULL	2026-11-23	xproof
-f0/a0	Damage	agreed	NULL	X	start	1	0	xs:LEA:lightning-bolt:f0a0:s1	NULL	NULL	NULL	8f7095353a64	NULL	NULL	NULL	NULL	2026-11-23	xproof
+key	leg	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	seats	multiplayer	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	replayed	replayed_sha	writer
+cast	forge	Mana	agreed	NULL	F	scen	2	0	NULL	NULL	NULL	NULL	2	0	8f7095353a64	NULL	NULL	NULL	NULL	2026-11-23	NULL	NULL	xproof
+cast	xmage	Mana	agreed	NULL	X	scen	2	0	NULL	NULL	NULL	NULL	2	0	8f7095353a64	NULL	NULL	NULL	NULL	2026-11-23	NULL	NULL	xproof
+f0/a0	xmage	Damage	agreed	NULL	X	start	1	0	xs:LEA:lightning-bolt:f0a0:s1	NULL	NULL	NULL	2	0	8f7095353a64	NULL	NULL	NULL	NULL	2026-11-23	NULL	NULL	xproof
 -- labels
 label	origin
 burn	derived
