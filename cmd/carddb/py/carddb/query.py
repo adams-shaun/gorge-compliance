@@ -99,6 +99,13 @@ def _has_table(conn, name):
                         (name,)).fetchone() is not None
 
 
+def _has_sample(conn):
+    """The deck sample is present: the schema declares deck_sample, so a private build always has
+    the table; it counts as missing until the census has written a row."""
+    return _has_table(conn, "deck_sample") and conn.execute(
+        "SELECT 1 FROM deck_sample LIMIT 1").fetchone() is not None
+
+
 def _columns(conn, table):
     return [r[1] for r in _rows(conn, "PRAGMA table_info(%s)" % q(table))]
 
@@ -491,7 +498,7 @@ def run_need(conn, args, out):
     by_decks = getattr(args, "by", "tier") == "decks"
     if by_decks:
         for table in ("deck_sample", "decks", "card_proven"):
-            if not _has_table(conn, table):
+            if not (_has_sample(conn) if table == "deck_sample" else _has_table(conn, table)):
                 raise QueryError("need: --by decks needs the private build with the deck sample "
                                  "(no %s table)" % table, 1)
         sql = ("SELECT COALESCE(r.unlocked, 0), COALESCE(r.blocked, 0), COALESCE(r.weight, 0), "
@@ -659,7 +666,7 @@ def run_headline(conn, args, out):
             raise QueryError("headline: this build has no %s view" % need)
     now = _now(args).isoformat()
     rows = []
-    if _has_table(conn, "deck_sample") and _has_table(conn, "decks"):
+    if _has_sample(conn) and _has_table(conn, "decks"):
         rows += [tuple(r) for r in _rows(conn, HEADLINE_DECKS_SQL)]
         rows += [tuple(r) + ("-",) for r in _rows(conn, HEADLINE_MEDIAN_SQL)]
     else:
