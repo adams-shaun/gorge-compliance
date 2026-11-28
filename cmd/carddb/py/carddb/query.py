@@ -1095,7 +1095,9 @@ SELECT p.oracle_id,
   CAST(COALESCE(SUM(p.unwitnessed), 0) AS INTEGER) AS unwitnessed_keys,
   CAST(COALESCE(SUM(p.two_seat_only), 0) AS INTEGER) AS two_seat_only_keys,
   CAST(SUM(p.stale_legs > 0) AS INTEGER) AS stale_keys,
+  CAST((SELECT COUNT(*) FROM evidence e WHERE e.oracle_id = p.oracle_id AND e.outcome = 'known_bug') AS INTEGER) AS known_bugs,
   CAST(CASE WHEN p.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)
+        AND NOT EXISTS (SELECT 1 FROM evidence e WHERE e.oracle_id = p.oracle_id AND e.outcome = 'known_bug')
         AND COALESCE(SUM(p.proven), 0) > 0
         AND SUM(p.proven = 0) = 0 THEN 1 ELSE 0 END AS INTEGER) AS proven
 FROM key_proven p GROUP BY p.oracle_id'''
@@ -1127,8 +1129,8 @@ DECK_PROVEN_VIEW_SQL = ("CREATE VIEW deck_proven AS SELECT d.deck_id, COUNT(*) A
                         "(SUM(COALESCE(p.proven, 0)) = COUNT(*)) AS proven "
                         "FROM decks d LEFT JOIN card_proven p ON p.oracle_id = d.oracle_id GROUP BY d.deck_id")
 
-# The cards the approved rule proves: not curated-excluded, at least one live key, every live
-# key proven (card_proven.proven). The legacy rollup's count is not used here.
+# The cards the approved rule proves: not curated-excluded, no known_bug evidence row, at least
+# one live key, every live key proven (card_proven.proven). The legacy rollup's count is not used here.
 PROVEN_KEYS_VIEW_SQL = ("CREATE VIEW proven_keys AS SELECT c.* FROM cards c "
                         "JOIN card_proven k USING (oracle_id) WHERE k.proven = 1")
 
