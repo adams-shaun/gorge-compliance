@@ -13,30 +13,29 @@ import (
 )
 
 // LEDGER.tsv holds one row per worked example of the Comprehensive Rules text
-// the pinned scenarios restate (277 examples for the 2026-08-07 text). Each
-// row's scenario column is "<file stem>#<scenario name>" under
-// scenarios/oracle/cr-examples/ for a covered row; scenarios no row can name
-// (extra demonstrations of an already-claimed example) are listed, with a
-// note, in LEDGER-UNANCHORED.tsv next to it. The ledger holds rule ids and
-// counts only: no sentence of the rules text is ever copied into this
+// the pinned scenarios restate (277 examples for the 2026-08-07 text). A
+// covered row's scenario column is one or more references
+// "<file stem>#<scenario name>" under scenarios/oracle/cr-examples/, separated
+// by crRefSep; several scenarios often demonstrate the same example. Every
+// scenario there must be named by some covered row. The ledger holds rule ids
+// and counts only: no sentence of the rules text is ever copied into this
 // repository. scripts/cr_example_ledger.py diffs it against the rules text by
 // hand when the pinned text changes.
 //
-// This test needs no corpus and runs no scenario: it reads the two TSV files
-// and the scenario heads (loadOracleFiles/headOf) and checks the ledger in
-// both directions.
+// This test needs no corpus and runs no scenario: it reads the ledger and the
+// scenario heads (loadOracleFiles/headOf) and checks the ledger in both
+// directions.
 
 const (
 	crExamplesFamily = "cr-examples"
 	crLedgerName     = "LEDGER.tsv"
-	crUnclaimedName  = "LEDGER-UNANCHORED.tsv"
+	crRefSep         = ";"
 )
 
 var (
-	crLedgerStatuses  = map[string]bool{"covered": true, "open": true, "not-scenario": true, "out-of-scope": true}
-	crLedgerRuleRe    = regexp.MustCompile(`^[0-9]+\.[0-9]+[a-z]*$`)
-	crLedgerHeader    = []string{"rule", "n", "status", "scenario", "note"}
-	crUnclaimedHeader = []string{"scenario", "note"}
+	crLedgerStatuses = map[string]bool{"covered": true, "open": true, "not-scenario": true, "out-of-scope": true}
+	crLedgerRuleRe   = regexp.MustCompile(`^[0-9]+\.[0-9]+[a-z]*$`)
+	crLedgerHeader   = []string{"rule", "n", "status", "scenario", "note"}
 )
 
 // crLedgerRow is one data row of LEDGER.tsv.
@@ -92,63 +91,61 @@ func crParseLedger(lines []string) ([]crLedgerRow, []string) {
 	return rows, problems
 }
 
-// crParseUnclaimed parses the LEDGER-UNANCHORED.tsv lines (header first).
-func crParseUnclaimed(lines []string) (map[string]string, []string) {
-	var problems []string
-	out := map[string]string{}
-	if len(lines) == 0 {
-		return out, nil // no registry lines at all: an empty registry
-	}
-	if !equalStrings(lines[0], crUnclaimedHeader) {
-		return nil, []string{crUnclaimedName + ": header must be scenario\\tnote"}
-	}
-	for _, line := range lines[1:] {
-		if line == "" {
-			continue
-		}
-		src := crUnclaimedName + ": " + line
-		cols, bad := crSplitRow(src, line, len(crUnclaimedHeader))
-		if bad != nil {
-			problems = append(problems, bad...)
-			continue
-		}
-		if cols[1] == "" {
-			problems = append(problems, src+": every unclaimed scenario carries a note")
-		}
-		if _, dup := out[cols[0]]; dup {
-			problems = append(problems, src+": unclaimed scenario listed twice")
-		}
-		out[cols[0]] = cols[1]
-	}
-	return out, problems
-}
-
 // crRuleSortKey orders rule ids the way the rules text does: major number,
-// minor number, then subrule letters.
-func crRuleSortKey(rule string) (int, int, string, bool) {
+// minor number, then subrule letters shortest first, so 704.5z precedes
+// 704.5aa.
+func crRuleSortKey(rule string) (major, minor, letters int, sub string, ok bool) {
 	m := regexp.MustCompile(`^([0-9]+)\.([0-9]+)([a-z]*)$`).FindStringSubmatch(rule)
 	if m == nil {
-		return 0, 0, "", false
+		return 0, 0, 0, "", false
 	}
-	major, _ := strconv.Atoi(m[1])
-	minor, _ := strconv.Atoi(m[2])
-	return major, minor, m[3], true
+	major, _ = strconv.Atoi(m[1])
+	minor, _ = strconv.Atoi(m[2])
+	return major, minor, len(m[3]), m[3], true
+}
+
+// crRuleLess reports whether a comes before b in rule order.
+func crRuleLess(a, b string) bool {
+	amaj, amin, alen, alet, aok := crRuleSortKey(a)
+	bmaj, bmin, blen, blet, bok := crRuleSortKey(b)
+	if !aok || !bok {
+		return false // syntax problems are reported by the parser
+	}
+	if amaj != bmaj {
+		return amaj < bmaj
+	}
+	if amin != bmin {
+		return amin < bmin
+	}
+	if alen != blen {
+		return alen < blen
+	}
+	return alet < blet
+}
+
+// crScenarioRefs splits a covered row's scenario cell into its references.
+func crScenarioRefs(cell string) []string {
+	if cell == "" {
+		return nil
+	}
+	return strings.Split(cell, crRefSep)
 }
 
 // crLedgerCheck is the pure check function behind TestCRExampleLedger and
 // TestCRExampleLedgerProblems. rows are the ledger's parsed data rows;
 // scenarioCR maps every scenario reference "<file stem>#<scenario name>"
 // under scenarios/oracle/cr-examples/ to the rule ids the scenario's head
-// cites; unclaimed is the LEDGER-UNANCHORED.tsv registry (reference to note)
-// of scenarios no row can name. It returns one message per problem, checking
-// in order: statuses in the closed set; (rule, n) uniqueness; a covered
-// row's scenario exists and cites the row's rule; every scenario appears in
-// at least one row or is registered unclaimed (and registered scenarios
-// exist, are unnamed, and are stale-proof); no open row's rule is cited by a
-// scenario no covered row of that rule names; not-scenario rows have notes.
-func crLedgerCheck(rows []crLedgerRow, scenarioCR map[string][]string, unclaimed map[string]string) []string {
+// cites. It returns one message per problem, checking in order: statuses in
+// the closed set; (rule, n) uniqueness; a covered row's scenarios exist and
+// cite the row's rule; every scenario appears in at least one covered row;
+// no open row's rule is cited by a scenario no covered row of that rule
+// names; not-scenario rows have notes; rows are sorted in rule order, then
+// ordinal.
+func crLedgerCheck(rows []crLedgerRow, scenarioCR map[string][]string) []string {
 	var problems []string
 	seen := map[[2]string]bool{}
+	named := map[string]bool{}
+	namedByRule := map[string]map[string]bool{}
 	for _, r := range rows {
 		src := crLedgerName + ": " + r.rule + " " + strconv.Itoa(r.n)
 		if !crLedgerStatuses[r.status] {
@@ -161,42 +158,35 @@ func crLedgerCheck(rows []crLedgerRow, scenarioCR map[string][]string, unclaimed
 		}
 		seen[key] = true
 		if r.status == "covered" {
-			if r.scenario == "" {
+			refs := crScenarioRefs(r.scenario)
+			if len(refs) == 0 {
 				problems = append(problems, src+": a covered row names a scenario")
-			} else if crs, ok := scenarioCR[r.scenario]; !ok {
-				problems = append(problems, src+": scenario "+r.scenario+" does not exist under "+crExamplesFamily+"/")
-			} else if !contains(crs, r.rule) {
-				problems = append(problems, src+": scenario "+r.scenario+" does not cite "+r.rule)
+			}
+			for _, ref := range refs {
+				if ref == "" {
+					problems = append(problems, src+": empty scenario reference in "+strconv.Quote(r.scenario))
+					continue
+				}
+				if crs, ok := scenarioCR[ref]; !ok {
+					problems = append(problems, src+": scenario "+ref+" does not exist under "+crExamplesFamily+"/")
+					continue
+				} else if !contains(crs, r.rule) {
+					problems = append(problems, src+": scenario "+ref+" does not cite "+r.rule)
+				}
+				named[ref] = true
+				if namedByRule[r.rule] == nil {
+					namedByRule[r.rule] = map[string]bool{}
+				}
+				namedByRule[r.rule][ref] = true
 			}
 		} else if r.scenario != "" {
 			problems = append(problems, src+": only covered rows name a scenario")
 		}
 	}
-	// Every scenario appears in at least one row, or is registered.
-	named := map[string]bool{}
-	namedByRule := map[string]map[string]bool{}
-	for _, r := range rows {
-		if r.status == "covered" && r.scenario != "" {
-			named[r.scenario] = true
-			if namedByRule[r.rule] == nil {
-				namedByRule[r.rule] = map[string]bool{}
-			}
-			namedByRule[r.rule][r.scenario] = true
-		}
-	}
+	// Every scenario appears in at least one covered row.
 	for _, ref := range sortedKeys(scenarioCR) {
 		if !named[ref] {
-			if _, ok := unclaimed[ref]; !ok {
-				problems = append(problems, "scenario "+ref+" appears in no ledger row and is not registered in "+crUnclaimedName)
-			}
-		}
-	}
-	for _, ref := range sortedKeys(unclaimed) {
-		if _, ok := scenarioCR[ref]; !ok {
-			problems = append(problems, crUnclaimedName+": "+ref+" is not a scenario under "+crExamplesFamily+"/")
-		}
-		if named[ref] {
-			problems = append(problems, crUnclaimedName+": "+ref+" is named by a covered row and must be struck from the registry")
+			problems = append(problems, "scenario "+ref+" appears in no ledger row")
 		}
 	}
 	// No open row whose rule is cited by a scenario no covered row names.
@@ -213,6 +203,12 @@ func crLedgerCheck(rows []crLedgerRow, scenarioCR map[string][]string, unclaimed
 	for _, r := range rows {
 		if r.status == "not-scenario" && r.note == "" {
 			problems = append(problems, crLedgerName+": "+r.rule+" "+strconv.Itoa(r.n)+": a not-scenario row states why no game can show the example")
+		}
+	}
+	for i := 1; i < len(rows); i++ {
+		a, b := rows[i-1], rows[i]
+		if crRuleLess(b.rule, a.rule) || (a.rule == b.rule && a.n > b.n) {
+			problems = append(problems, crLedgerName+": rows must be sorted by rule in rule order, then n: "+a.rule+" "+strconv.Itoa(a.n)+" before "+b.rule+" "+strconv.Itoa(b.n))
 		}
 	}
 	return problems
@@ -284,28 +280,10 @@ func TestCRExampleLedger(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	un, err := os.ReadFile(filepath.Join(dir, crUnclaimedName))
-	if err != nil {
-		t.Fatal(err)
-	}
 	rows, problems := crParseLedger(strings.Split(string(raw), "\n"))
-	unreg, unProblems := crParseUnclaimed(strings.Split(string(un), "\n"))
-	problems = append(problems, unProblems...)
 	files := loadOracleFiles(t)
 	scenarioCR := crExampleScenarioHeads(t, files)
-	problems = append(problems, crLedgerCheck(rows, scenarioCR, unreg)...)
-	// The file is sorted by rule (rule order, then ordinal).
-	for i := 1; i < len(rows); i++ {
-		amaj, amin, alet, aok := crRuleSortKey(rows[i-1].rule)
-		bmaj, bmin, blet, bok := crRuleSortKey(rows[i].rule)
-		if !aok || !bok {
-			continue // syntax problems already reported
-		}
-		outOfOrder := amaj > bmaj || (amaj == bmaj && (amin > bmin || (amin == bmin && alet > blet)))
-		if outOfOrder || (amaj == bmaj && amin == bmin && alet == blet && rows[i-1].n > rows[i].n) {
-			problems = append(problems, crLedgerName+": rows must be sorted by rule in rule order, then n: "+rows[i-1].rule+" "+strconv.Itoa(rows[i-1].n)+" before "+rows[i].rule+" "+strconv.Itoa(rows[i].n))
-		}
-	}
+	problems = append(problems, crLedgerCheck(rows, scenarioCR)...)
 	for _, p := range problems {
 		t.Error(p)
 	}
@@ -317,12 +295,11 @@ func TestCRExampleLedger(t *testing.T) {
 }
 
 // crLedgerCase is one synthetic ledger (TSV lines, header first) with the
-// scenario heads and the unclaimed registry it is checked against.
+// scenario heads it is checked against.
 type crLedgerCase struct {
 	name       string
 	lines      []string
 	scenarioCR map[string][]string
-	unclaimed  []string // TSV lines, header first
 	want       []string // substrings each expected problem must contain
 }
 
@@ -333,31 +310,35 @@ func TestCRExampleLedgerProblems(t *testing.T) {
 		"603.7a\t2\topen\t\t",
 	}
 	baseScen := map[string][]string{"foo#one": {"603.7a"}}
+	header := "rule\tn\tstatus\tscenario\tnote"
 	cases := []crLedgerCase{
 		{name: "clean", lines: base, scenarioCR: baseScen},
+		{name: "clean with several scenarios on one row", lines: []string{header, "603.7a\t1\tcovered\tfoo#one;bar#two\t", "603.7a\t2\topen\t\t"}, scenarioCR: map[string][]string{"foo#one": {"603.7a"}, "bar#two": {"603.7a"}}},
 		{name: "bad header", lines: []string{"n\trule\tstatus\tscenario\tnote", "603.7a\t1\topen\t\t"}, scenarioCR: map[string][]string{}, want: []string{"header must be"}},
-		{name: "wrong columns", lines: []string{"rule\tn\tstatus\tscenario\tnote", "603.7a\t1\topen"}, scenarioCR: map[string][]string{}, want: []string{"expected 5 tab-separated columns"}},
+		{name: "wrong columns", lines: []string{header, "603.7a\t1\topen"}, scenarioCR: map[string][]string{}, want: []string{"expected 5 tab-separated columns"}},
 		{name: "bad status", lines: append(append([]string{}, base...), "603.8\t1\tdone\t\t"), scenarioCR: baseScen, want: []string{`status "done" is not covered`}},
 		{name: "duplicate row", lines: append(append([]string{}, base...), "603.7a\t1\topen\t\t"), scenarioCR: baseScen, want: []string{"duplicate row"}},
 		{name: "bad rule id", lines: append(append([]string{}, base...), "6037a\t1\topen\t\t"), scenarioCR: baseScen, want: []string{"rule must look like 603.7a"}},
 		{name: "bad n", lines: append(append([]string{}, base...), "603.9\t0\topen\t\t"), scenarioCR: baseScen, want: []string{"n must be a positive integer"}},
-		{name: "covered scenario missing", lines: []string{"rule\tn\tstatus\tscenario\tnote", "603.7a\t1\tcovered\tfoo#ghost\t"}, scenarioCR: map[string][]string{}, want: []string{"scenario foo#ghost does not exist under"}},
-		{name: "covered scenario does not cite rule", lines: []string{"rule\tn\tstatus\tscenario\tnote", "603.7a\t1\tcovered\tfoo#one\t"}, scenarioCR: map[string][]string{"foo#one": {"603.7b"}}, want: []string{"scenario foo#one does not cite 603.7a"}},
+		{name: "covered scenario missing", lines: []string{header, "603.7a\t1\tcovered\tfoo#ghost\t"}, scenarioCR: map[string][]string{}, want: []string{"scenario foo#ghost does not exist under"}},
+		{name: "covered scenario does not cite rule", lines: []string{header, "603.7a\t1\tcovered\tfoo#one\t"}, scenarioCR: map[string][]string{"foo#one": {"603.7b"}}, want: []string{"scenario foo#one does not cite 603.7a"}},
+		{name: "one of several covered scenarios missing", lines: []string{header, "603.7a\t1\tcovered\tfoo#one;bar#ghost\t"}, scenarioCR: map[string][]string{"foo#one": {"603.7a"}}, want: []string{"scenario bar#ghost does not exist under"}},
+		{name: "one of several covered scenarios does not cite", lines: []string{header, "603.7a\t1\tcovered\tfoo#one;bar#two\t"}, scenarioCR: map[string][]string{"foo#one": {"603.7a"}, "bar#two": {"603.7b"}}, want: []string{"scenario bar#two does not cite 603.7a"}},
+		{name: "covered row names no scenario", lines: []string{header, "603.7a\t1\tcovered\t\t"}, scenarioCR: map[string][]string{}, want: []string{"a covered row names a scenario"}},
+		{name: "empty scenario reference", lines: []string{header, "603.7a\t1\tcovered\tfoo#one;\t"}, scenarioCR: map[string][]string{"foo#one": {"603.7a"}}, want: []string{"empty scenario reference"}},
 		{name: "non-covered names a scenario", lines: append(append([]string{}, base...), "700.1\t1\topen\tfoo#one\t"), scenarioCR: baseScen, want: []string{"only covered rows name a scenario"}},
-		{name: "unregistered scenario", lines: base, scenarioCR: map[string][]string{"foo#one": {"603.7a"}, "bar#two": {"701.3"}}, want: []string{"scenario bar#two appears in no ledger row"}},
-		{name: "registered scenario is exempt", lines: base, scenarioCR: map[string][]string{"foo#one": {"603.7a"}, "bar#two": {"701.3"}}, unclaimed: []string{"scenario\tnote", "bar#two\textra demonstration of another example."}},
-		{name: "registry entry missing scenario", lines: base, scenarioCR: baseScen, unclaimed: []string{"scenario\tnote", "bar#two\tnote."}, want: []string{"bar#two is not a scenario under"}},
-		{name: "registry entry already named", lines: base, scenarioCR: baseScen, unclaimed: []string{"scenario\tnote", "foo#one\tstale."}, want: []string{"foo#one is named by a covered row"}},
-		{name: "registry entry no note", lines: base, scenarioCR: baseScen, unclaimed: []string{"scenario\tnote", "bar#two\t"}, want: []string{"carries a note"}},
+		{name: "unnamed scenario", lines: base, scenarioCR: map[string][]string{"foo#one": {"603.7a"}, "bar#two": {"701.3"}}, want: []string{"scenario bar#two appears in no ledger row"}},
 		{name: "open row rule cited by unnamed scenario", lines: base, scenarioCR: map[string][]string{"foo#one": {"603.7a"}, "baz#three": {"603.7a"}}, want: []string{"open row 603.7a 2 is cited by scenario baz#three"}},
 		{name: "not-scenario without note", lines: append(append([]string{}, base...), "604.1\t1\tnot-scenario\t\t"), scenarioCR: baseScen, want: []string{"states why no game can show"}},
+		{name: "clean multi-letter subrule order", lines: []string{header, "704.5z\t1\topen\t\t", "704.5aa\t1\topen\t\t"}, scenarioCR: map[string][]string{}},
+		{name: "multi-letter subrule out of order", lines: []string{header, "704.5aa\t1\topen\t\t", "704.5z\t1\topen\t\t"}, scenarioCR: map[string][]string{}, want: []string{"rows must be sorted"}},
+		{name: "numeric rule order not lexical", lines: []string{header, "603.7a\t1\topen\t\t", "603.10a\t1\topen\t\t"}, scenarioCR: map[string][]string{}},
+		{name: "ordinal out of order", lines: []string{header, "603.7a\t2\topen\t\t", "603.7a\t1\topen\t\t"}, scenarioCR: map[string][]string{}, want: []string{"rows must be sorted"}},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			rows, problems := crParseLedger(c.lines)
-			unreg, unProblems := crParseUnclaimed(c.unclaimed)
-			problems = append(problems, unProblems...)
-			problems = append(problems, crLedgerCheck(rows, c.scenarioCR, unreg)...)
+			problems = append(problems, crLedgerCheck(rows, c.scenarioCR)...)
 			if len(c.want) == 0 {
 				for _, p := range problems {
 					t.Errorf("unexpected problem: %s", p)

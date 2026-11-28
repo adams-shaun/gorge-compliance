@@ -3,7 +3,7 @@ rule	n	status	scenario	note
 101.4	1	open		
 106.5	1	covered	meteor-crater#no-coloured-permanent-adds-nothing	
 106.6	1	open		
-106.7	1	covered	exotic-orchard#opponent-with-no-lands-adds-nothing	
+106.7	1	covered	exotic-orchard#opponent-with-no-lands-adds-nothing;exotic-orchard#forest-and-orchard-add-green;exotic-orchard#two-orchards-alone-add-nothing	
 107.1b	1	open		
 107.1b	2	covered	viridian-joiner#negative-power-adds-no-mana	
 107.1b	3	covered	chameleon-colossus#negative-power-pump-does-not-make-it-worse	
@@ -20,7 +20,7 @@ rule	n	status	scenario	note
 113.2a	1	open		
 113.6k	1	covered	absolver-thrull#haunted-creature-dies-and-the-exiled-thrull-triggers	
 113.6m	1	covered	reassembling-skeleton#graveyard-is-the-only-working-zone	
-113.12	1	covered	muraganda-petroglyphs#flying-aura-turns-the-bonus-off	
+113.12	1	covered	muraganda-petroglyphs#flying-aura-turns-the-bonus-off;muraganda-petroglyphs#plain-bear-gets-the-bonus;muraganda-petroglyphs#unblockable-aura-keeps-the-bonus	
 115.1a	1	open		
 115.7e	1	covered	arc-trail#redirect-swaps-the-two-targets	
 118.11	1	covered	psychic-vortex#paying-the-upkeep-with-a-skipped-draw-still-pays	
@@ -34,7 +34,7 @@ rule	n	status	scenario	note
 123.6c	2	out-of-scope		
 123.6c	3	out-of-scope		
 201.2b	1	covered	liliana-contract#nameless-face-down-demon-does-not-complete-the-set	
-201.4a	1	not-scenario		The example names a card outside the current game and format; a name choice across the whole card pool is a deck-construction concern, not a played game.
+201.4a	1	open		
 201.5a	1	covered	gutter-grime#each-ooze-counts-only-its-own-gutter-grime	
 201.5b	1	covered	quicksilver-elemental#gained-regeneration-uses-the-gaining-creatures-name	
 201.5b	2	open		
@@ -53,7 +53,7 @@ rule	n	status	scenario	note
 205.3c	1	covered	dryad-arbor#forest-is-a-land-type-and-dryad-a-creature-type	
 205.3e	1	open		
 205.4b	1	open		
-208.2a	1	covered	lost-order-of-jarkeld#outside-play-there-is-no-chosen-player	
+208.2a	1	covered	lost-order-of-jarkeld#outside-play-there-is-no-chosen-player;lost-order-of-jarkeld#counts-the-chosen-opponents-creatures	
 208.3a	1	covered	veteran-motorist#crew-trigger-applies-after-the-vehicle-becomes-a-creature	
 302.3	1	open		
 305.5	1	open		
@@ -66,7 +66,6 @@ rule	n	status	scenario	note
 509.1c	1	open		
 509.3f	1	open		
 510.1c	1	covered	elvish-regrower#four-damage-split-between-two-blockers	
-601.2b	1	open		
 601.2c	1	open		
 601.2h	1	covered	altars-reap#familiar-pays-for-the-reap-as-it-is-sacrificed	
 601.3a	1	covered	void-winnower#odd-mana-value-slips-past-the-lock	
@@ -78,7 +77,7 @@ rule	n	status	scenario	note
 603.2c	1	open		
 603.2e	1	open		
 603.2g	1	open		
-603.4	1	covered	felidar-sovereign#short-of-forty-the-upkeep-ability-never-triggers	
+603.4	1	covered	felidar-sovereign#short-of-forty-the-upkeep-ability-never-triggers;felidar-sovereign#falling-below-forty-removes-the-trigger-before-it-resolves	
 603.6b	1	open		
 603.7a	1	open		
 603.7a	2	open		
@@ -86,11 +85,11 @@ rule	n	status	scenario	note
 603.8	1	open		
 603.10a	1	open		
 603.11	1	open		
-603.12	1	covered	heart-piercer-manticore#a-sacrifice-for-another-cost-does-not-trigger-the-reflexive-ability	
+603.12	1	covered	heart-piercer-manticore#a-sacrifice-for-another-cost-does-not-trigger-the-reflexive-ability;heart-piercer-manticore#reflexive-damage-fires-after-the-sacrifice	
 605.2	1	open		
 605.4a	1	open		
-606.5	1	covered	carth-the-lion#a-plus-one-ability-adds-two-counters	
-607.2i	1	covered	stormscape-battlemage#white-kicker-only-gains-life	
+606.5	1	covered	carth-the-lion#a-plus-one-ability-adds-two-counters;carth-the-lion#a-minus-four-ability-removes-only-three	
+607.2i	1	covered	stormscape-battlemage#white-kicker-only-gains-life;stormscape-battlemage#black-kicker-only-destroys	
 607.4	1	covered	paradise-plume#chosen-red-links-the-life-trigger-and-the-mana-ability	
 607.5	1	open		
 607.5a	1	covered	voice-of-all#copying-the-angel-does-not-give-the-copy-a-chosen-color	
@@ -132,7 +131,7 @@ rule	n	status	scenario	note
 614.12	2	covered	yixlid-jailer#treefolk-from-the-graveyard-enters-tapped	
 614.12	3	covered	orb-of-dreams#the-orb-does-not-tap-itself	
 614.13a	1	covered	sutured-ghoul#simultaneous-arrival-leaves-nothing-to-exile	
-614.13b	1	covered	jund#the-two-devour-effects-do-not-stack	
+614.13b	1	covered	jund#the-two-devour-effects-do-not-stack;jund#junds-devour-five-applies-to-a-creature-without-its-own	
 614.13c	1	covered	ashiok-wicked-manipulator#the-life-payment-is-replaced-by-exiling-two-cards	
 615.4	1	open		
 615.10	1	covered	daunting-defender#clerics-take-one-less-from-the-sweeper	
@@ -143,7 +142,7 @@ rule	n	status	scenario	note
 616.2	1	open		
 700.1	1	open		
 700.3c	1	open		
-700.5a	1	covered	altar-of-the-pantheon#altar-lifts-devotion-to-five-before-type-change	
+700.5a	1	covered	altar-of-the-pantheon#altar-lifts-devotion-to-five-before-type-change;altar-of-the-pantheon#without-the-altar-devotion-stays-four	
 700.7	1	open		
 700.14	1	covered	bark-knuckle-boxer#fourth-mana-spent-on-spells-triggers-expend	
 701.12a	1	open		
@@ -173,12 +172,13 @@ rule	n	status	scenario	note
 702.26b	1	open		
 702.26b	2	open		
 702.44c	1	open		
+702.47a	1	open		
 702.47c	1	open		
 702.51b	1	open		
 702.65b	1	open		
 702.65b	2	open		
 702.103d	1	covered	aether-storm#creature-card-with-bestow-still-castable-bestowed	
-702.103d	2	covered	garruks-horde#bestow-card-on-top-castable-only-as-a-creature	
+702.103d	2	covered	garruks-horde#bestow-card-on-top-castable-only-as-a-creature;garruks-horde#bestow-card-on-top-cannot-be-cast-bestowed	
 702.164b	1	open		
 702.177b	1	open		
 702.184c	1	open		
@@ -227,12 +227,12 @@ rule	n	status	scenario	note
 723.5	2	open		
 723.5a	1	open		
 723.5b	1	not-scenario		The example is tournament conduct of a controlled player (restroom breaks, card trades, judges), which no game engine can show.
-727.2	1	not-scenario		Restarting the game and sideboarding between restarts is a tournament procedure, not a game the engine plays.
+727.2	1	open		
 729.5	1	out-of-scope		
 732.2a	1	not-scenario		Announcing and agreeing to a move shortcut is table procedure, not a game state the engine reaches.
 732.2b	1	not-scenario		Passing priority by verbal shortcut ("Go") is table procedure, not a game state the engine reaches.
-732.3	1	not-scenario		A preference loop between two players is a judge-shortcut scenario, not a game the engine plays.
-732.5	1	not-scenario		Whether a player is forced to act to end a mandatory loop is a shortcut judgement, not a game state the engine reaches.
+732.3	1	open		
+732.5	1	open		
 800.4a	1	open		
 800.4a	2	open		
 800.4a	3	open		

@@ -6,7 +6,10 @@ Usage: cr_example_ledger.py <rules-text> <ledger>
 Reads the rules text the way gorge's rules-index script does: "\\r" and form
 feeds are dropped, the body lies between the second "1. Game Concepts" line
 and the second "Glossary" line, and a line starting "Example:" belongs to the
-last rule or subrule heading before it. Prints the (rule, n) pairs the ledger
+last rule or subrule heading before it. A wrapped line that merely begins
+with a rule id (a cross-reference such as "601.2b and 601.2f-h.") is not a
+heading: the text moves forward in rule order and a heading starts a
+paragraph. Prints the (rule, n) pairs the ledger
 lacks or has in excess; writes nothing. The rules text is not in this
 repository and is never committed; the script is run by hand when the pinned
 text changes. Expected output for the 2026-08-07 text, against an empty
@@ -47,10 +50,19 @@ OUT_OF_SCOPE_RULES = frozenset(
 GAME_CONCEPTS = "1. Game Concepts"
 GLOSSARY = "Glossary"
 
-# A rule or subrule heading, once the line is stripped: "106.10." or
-# "106.12a ". Section headings ("106. Mana") deliberately do not match; an
-# example belongs to the last rule or subrule heading before it.
-HEADING_RE = re.compile(r"(\d+\.\d+[a-z]*)(?:\.|\s)")
+# A rule or subrule heading: "106.10.", "106.12a ", and the text's one
+# unpunctuated rule heading, "606.5 ". Section headings ("106. Mana")
+# deliberately do not match; an example belongs to the last rule or subrule
+# heading before it.
+HEADING_RE = re.compile(r"^\s*(\d{3})\.(\d+)([a-z]*)(?:\.\s+|\s+)\S")
+
+# A section heading ("106. Mana"). It anchors no example, but it does start
+# a paragraph, which the wrapped-line guard below needs to know.
+SECTION_RE = re.compile(r"^\d{3}\. \S")
+
+# The end of a paragraph. A real heading starts one; a line wrapped in the
+# middle of a sentence does not.
+PARAGRAPH_END_RE = re.compile(r'[.?!:”’"’)\]}]$')
 
 EXAMPLE_PREFIX = "Example:"
 
@@ -65,11 +77,12 @@ def is_out_of_scope(rule):
 
 
 def rule_sort_key(rule):
-    """Rule order: major number, then minor number, then subrule letters."""
+    """Rule order: major, minor, then subrule letters shortest first (z < aa)."""
     m = re.match(r"(\d+)\.(\d+)([a-z]*)$", rule)
     if m is None:
         raise ValueError("not a rule id: %r" % (rule,))
-    return (int(m.group(1)), int(m.group(2)), m.group(3))
+    letters = m.group(3)
+    return (int(m.group(1)), int(m.group(2)), len(letters), letters)
 
 
 def body_lines(text):
@@ -82,20 +95,40 @@ def body_lines(text):
     return lines[headings[1]:glossary[1]]
 
 
+def _headingish(line):
+    """True when the line is itself a section or rule heading."""
+    return bool(SECTION_RE.match(line) or HEADING_RE.match(line))
+
+
 def example_pairs(text):
     """[(rule, n)] for every worked example, in rule order then ordinal."""
     counts = {}
     last_rule = None
-    for ln in body_lines(text):
-        stripped = ln.strip()
-        m = HEADING_RE.match(stripped)
-        if m is not None:
-            last_rule = m.group(1)
-            continue
+    last_key = None
+    lines = body_lines(text)
+    for i, raw in enumerate(lines):
+        stripped = raw.strip()
         if stripped.startswith(EXAMPLE_PREFIX):
             if last_rule is None:
                 raise ValueError("example before any rule heading")
             counts[last_rule] = counts.get(last_rule, 0) + 1
+            continue
+        m = HEADING_RE.match(raw)
+        if m is None:
+            continue
+        rule = "%s.%s%s" % (m.group(1), m.group(2), m.group(3))
+        key = rule_sort_key(rule)
+        if last_key is not None and key <= last_key:
+            # A wrapped cross-reference ("601.2b and 601.2f-h.") begins with
+            # a rule id, but the rules text only ever moves forward.
+            continue
+        if i > 0:
+            prev = lines[i - 1].rstrip()
+            if (prev and prev.strip() != GAME_CONCEPTS
+                    and not PARAGRAPH_END_RE.search(prev) and not _headingish(prev)):
+                # A line wrapped out of the preceding sentence, not a heading.
+                continue
+        last_rule, last_key = rule, key
     pairs = []
     for rule in sorted(counts, key=rule_sort_key):
         for n in range(1, counts[rule] + 1):

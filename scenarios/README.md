@@ -61,9 +61,11 @@ A scenario file lives in one directory only: here or in gorge's
 A scenario that restates a worked example of the Comprehensive Rules goes in the `cr-examples/`
 family and restates the example in its own words (never copy the rules text). `cr-examples/LEDGER.tsv`
 has one row per example in the rules text; in the same change that adds the scenario, move that
-example's row from `open` to `covered` and name the scenario as `<file stem>#<scenario name>`.
-`TestCRExampleLedger` fails if a covered row names no scenario that cites the rule, if a scenario
-there is named by no row, or if an `open` row's rule is already cited by a scenario there.
+example's row from `open` to `covered` and name the scenario as `<file stem>#<scenario name>`. One
+example can have several scenarios (a control case, the opposite polarity, another facet), so a
+covered row names each of them, separated by `;`. `TestCRExampleLedger` fails if a covered row names a
+scenario that does not exist or does not cite the row's rule, if a scenario there is named by no row,
+or if an `open` row's rule is already cited by a scenario there.
 `scripts/cr_example_ledger.py` diffs the ledger against the rules text by hand when the pinned text
 changes; the rules text itself is never committed here.
 
