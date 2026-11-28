@@ -446,6 +446,33 @@ class Store:
                     out.append(merged)
         return out
 
+    def _stored_rows(self, table, cols):
+        """[(rel, key, {column: cell})] of every stored row of table, in shard then key order."""
+        names = [c.name for c in cols]
+        kidx = shard.key_indexes(cols)
+        return [(rel, k, dict(zip(names, r)))
+                for rel in self._table_shards(table)
+                for k, r in sorted(self._read_shard(table, cols, kidx, rel)[1].items())]
+
+    def _check_seed_batch(self, table, cols, cells):
+        """-> the keys of a --prune-seed batch. The prune deletes by absence, so it refuses (StoreError) a
+        batch that is not the seed's own, or one naming fewer than half of the cards that have a stored
+        seed row: a partial seed file must not delete the rest of the seed."""
+        names = [c.name for c in cols]
+        w, oid = names.index("writer"), names.index("oracle_id")
+        others = sorted({r[w] for r in cells} - {keylegs.SEED_WRITER})
+        if others:
+            raise StoreError("put: prune_seed takes seed rows only, the batch has rows of writer %s; "
+                             "nothing written" % ", ".join(others))
+        seeded = {row["oracle_id"] for _, _, row in self._stored_rows(table, cols)
+                  if row["writer"] == keylegs.SEED_WRITER}
+        named = seeded & {r[oid] for r in cells}
+        if 2 * len(named) < len(seeded):
+            raise StoreError("put: prune_seed refuses a partial seed: the batch names %d of the %d cards with "
+                             "a stored seed row (want at least half); nothing written" % (len(named), len(seeded)))
+        kidx = shard.key_indexes(cols)
+        return {shard.row_key(r, kidx) for r in cells}
+
     def _keyproof_multiplayer(self, table, cols, cells):
         """The one keyproof multiplayer rule, for every writer but the seed: the flag
         belongs to the key, and only the seed -- which reads the card's script -- may
@@ -584,7 +611,7 @@ class Store:
                 f.write("%s\t%s\t%d\n" % (writer, table.name, changed))
 
     def put(self, table_name, rows, writer=None, version=None, raw=False, ran=None, replace=False,
-            if_absent=False, refresh=()):
+            if_absent=False, refresh=(), prune_seed=False):
         """Merge rows into table_name's shards, validate, write, `git add`. -> rows changed.
 
         rows: dicts (column -> value) or sequences in column order. A rerun with the
@@ -596,24 +623,37 @@ class Store:
         work stays). refresh (column names, only meaningful with if_absent) excepts
         them: the stored row takes the input's value for each named column. For every
         writer but the seed, a keyproof row never takes `multiplayer` from the input
-        (see _keyproof_multiplayer)."""
+        (see _keyproof_multiplayer).
+
+        prune_seed (keyproof only; rows is the whole seed file) also deletes the
+        untried seed rows whose key rows does not name (keylegs.seed_prune) and
+        leaves the counts in last_pruned and last_orphans."""
+        self.last_pruned = self.last_orphans = 0
         writer = writer or os.environ.get("CARDDB_WRITER") or "cli"
         if not _WRITER.match(writer):
             raise StoreError("writer %r is not a valid writer name" % writer)
         if refresh and not if_absent:
             raise StoreError("put: refresh needs if_absent")
+        if prune_seed and table_name != keylegs.TABLE:
+            raise StoreError("put: prune_seed applies to the %s table only" % keylegs.TABLE)
         table = self._table(table_name)
         rows, legacy = list(rows), {}
         if table_name == keylegs.TABLE:
             rows, legacy = keylegs.split_batch(rows)  # the proof loop's one-row-per-key shape -> leg rows
         self.ensure()
+        cols, cells = self._cells(table, rows, raw, writer)
+        # the keys of the whole input: if_absent must not make a key the seed still names look absent
+        batch_keys = self._check_seed_batch(table, cols, cells) if prune_seed else None
         with self.lock():
-            cols, cells = self._cells(table, rows, raw, writer)
             if if_absent:
                 cells = self._only_absent(table, cols, cells, tuple(refresh))
             if table_name == keylegs.TABLE and writer != "seed":
                 cells = self._keyproof_multiplayer(table, cols, cells)
-            drop = self._stale_legs(table, cols, cells, legacy) if legacy else ()
+            drop = self._stale_legs(table, cols, cells, legacy) if legacy else []
+            pruned, orphans = [], 0
+            if prune_seed:
+                pruned, orphans = keylegs.seed_prune(self._stored_rows(table, cols), batch_keys)
+                drop = list(dict.fromkeys(drop + pruned))  # a row both lists retire counts once
             plan, changed = self._plan(table, cols, cells, replace=replace, drop=drop)
             if plan and table_name != "_meta/writers":
                 wt = self.schema.tables["_meta/writers"]
@@ -623,6 +663,7 @@ class Store:
                 wplan, _ = self._plan(wt, wcols, [wrow])
                 plan.update(wplan)
             self.apply_plan(table, plan, writer, changed)
+        self.last_pruned, self.last_orphans = len(pruned), orphans
         return changed
 
     # ---- reading ------------------------------------------------------
