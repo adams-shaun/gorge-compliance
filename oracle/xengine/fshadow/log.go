@@ -23,6 +23,17 @@
 // default (offered cards stay on top in order; Result.Arranges counts them)
 // and consumes no log line.
 //
+// Forge's recorder writes one target ask over a whole sub-ability chain, with
+// its targets split by targeting part ("target_slots"), while gorge asks each
+// targeting link its own decision. The line answers the first of them; the
+// parts left answer the later asks with the same Source before any further line
+// is read, the next trigger's target line included (Result.TargetParts counts
+// them). A root or triggered link's ask names its link on the source's ability
+// chain, which picks its part: gorge asks nothing for an optional link with no
+// candidate, while Forge still counts its empty part. A decision the parts
+// cannot answer, or one whose part cannot be told, is a harness divergence
+// (field "target_slots").
+//
 // Forge's recorder writes a target ask only where its targeting hook is asked,
 // so a gorge target decision whose log line is an ask of another kind (the
 // seat's next priority) is answered by default (the first Min options;
@@ -33,8 +44,10 @@
 // answered from the next part instead (Result.CastTargets counts them), still
 // consuming no line: a part Forge left empty answers an optional ask with
 // nothing, a mandatory ask passes over it, and a combined modal ask takes one
-// part per mode. A decision the next part cannot answer is a harness
-// divergence (field "cast_targets").
+// part per mode. A target line that follows the cast wins over these parts. A
+// decision the next part cannot answer, or an optional sub-ability ask that
+// could be an empty part's or a later one's, is a harness divergence (field
+// "cast_targets").
 //
 // Forge's recorder writes no ask for a "may" trigger's yes/no, so a gorge
 // optional-trigger decision (trigger_optional) is answered by default (the
@@ -44,6 +57,13 @@
 // triggered abilities, so a gorge trigger-order decision (trigger_order) is
 // answered by default (the offered order; Result.Orders counts them) and
 // consumes no log line.
+//
+// Forge's recorder writes no ask for a commander's owner choosing the command
+// zone (CR 903.9), so a gorge commander_zone decision is answered from the
+// next snapshot's command zone (Result.CommanderZones counts them) and consumes
+// no log line. Any other decision of a kind the log never carries (a
+// replacement choice) is answered by default (the first Min options;
+// Result.OtherDefaults counts them), likewise consuming none.
 //
 // # The forge-shadow-1 log
 //
