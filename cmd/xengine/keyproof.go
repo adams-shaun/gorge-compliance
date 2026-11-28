@@ -39,6 +39,8 @@ type keyproofArgs struct {
 	Measured, GorgeSHA, CorpusPin string
 	XRef, FRef                    string
 	Out                           string
+	Seed                          bool
+	Scope                         string
 }
 
 func runKeyproof(args []string) error {
@@ -60,7 +62,25 @@ func runKeyproof(args []string) error {
 	fs.StringVar(&a.XRef, "xmage-ref", "", "XMage ref stamped on rows")
 	fs.StringVar(&a.FRef, "forge-ref", "", "Forge ref stamped on rows")
 	fs.StringVar(&a.Out, "out", "", "output dir, outside the repository (required)")
+	fs.BoolVar(&a.Seed, "seed", false, "write the key universe of every card of -scope as owed seed rows instead of proving a play")
+	fs.StringVar(&a.Scope, "scope", "", "scope file: tab-separated oracle_id<TAB>name, one card per line (the scope_cards view)")
 	fs.Parse(args)
+	if a.GorgeSHA == "" {
+		if b, err := os.ReadFile("GORGE_PIN"); err == nil {
+			a.GorgeSHA = strings.TrimSpace(string(b))
+			a.GorgeSHA = a.GorgeSHA[:min(12, len(a.GorgeSHA))]
+		}
+	}
+	if a.Seed {
+		if a.Scope == "" || a.Out == "" || a.Measured == "" {
+			return fmt.Errorf("keyproof -seed needs -scope, -measured and -out")
+		}
+		reg, err := loadReg(a.Cards)
+		if err != nil {
+			return err
+		}
+		return seedKeyproof(reg, a.Scope, a.Cards, a.Measured, a.GorgeSHA, a.Out)
+	}
 	if a.Play == "" || a.XDiff == "" || a.FDiff == "" || a.Adjudicate == "" || a.Out == "" || a.Measured == "" {
 		return fmt.Errorf("keyproof needs -play, -xmage, -forge, -adjudicate, -measured and -out")
 	}
@@ -72,12 +92,6 @@ func runKeyproof(args []string) error {
 	}
 	if a.PRows == "" {
 		a.PRows = filepath.Join(a.Play, "phase.jsonl")
-	}
-	if a.GorgeSHA == "" {
-		if b, err := os.ReadFile("GORGE_PIN"); err == nil {
-			a.GorgeSHA = strings.TrimSpace(string(b))
-			a.GorgeSHA = a.GorgeSHA[:min(12, len(a.GorgeSHA))]
-		}
 	}
 	reg, err := loadReg(a.Cards)
 	if err != nil {
@@ -470,6 +484,18 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		}
 		return k
 	}
+	// legs is the same keys' per-follower evidence (keyproof-legs.tsv);
+	// legOf also raises the key's seat count to item's.
+	legs := map[classify.Use]*kpLegKey{}
+	legOf := func(u classify.Use, item oraclegen.Item) *kpLegKey {
+		l := legs[u]
+		if l == nil {
+			l = newKpLegKey()
+			legs[u] = l
+		}
+		l.seats = max(l.seats, max(2, item.Players))
+		return l
+	}
 	sigs := map[string]*kpSig{}
 	var witnesses []kpWitness
 	// itemRefs of the agreeing items, for the witness.
@@ -508,6 +534,9 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			}
 			for _, u := range uses {
 				keyOf(u).owed[id] = owedReasonFollowerMissing(absent, present)
+				l := legOf(u, item)
+				l.x.owed[id] = owedReasonFollowerMissing(absent, present)
+				l.f.owed[id] = owedReasonFollowerMissing(absent, present)
 			}
 			continue
 		}
@@ -545,6 +574,30 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 				}
 				s.items = append(s.items, kpSigItem{id: id, card: row.Card, steps: f.Steps, keys: uses})
 			}
+			for _, u := range uses {
+				l := legOf(u, item)
+				switch {
+				case d.diagnosed && !xmageOnly:
+					l.cite[id] = d
+					l.x.owed[id], l.f.owed[id] = "diagnosed", "diagnosed"
+				case d.diagnosed:
+					l.x.owed[id] = "diagnosed" // Forge is credited below
+				default:
+					for _, e := range []struct {
+						acc         kpLegAcc
+						class, agro string
+					}{{l.x, xc, "forge-differs"}, {l.f, fc, "not-credited"}} {
+						switch e.class {
+						case classify.ClassDiverge:
+							e.acc.div[id] = sig
+						case classify.ClassAgree:
+							e.acc.owed[id] = e.agro
+						default:
+							e.acc.owed[id] = owedReason(in.XFind[id], in.FFind[id])
+						}
+					}
+				}
+			}
 			if !xmageOnly {
 				for _, u := range uses {
 					keyOf(u).div[id] = d
@@ -566,6 +619,8 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			// owed row naming the refusal instead of no row at all.
 			if u, dok := declaredKey(reg, item); dok {
 				keyOf(u).owed[id] = p.creditRefusal(id)
+				l := legOf(u, item)
+				l.x.owed[id], l.f.owed[id] = p.creditRefusal(id), p.creditRefusal(id)
 			}
 			continue
 		}
@@ -579,6 +634,26 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			// Forge leads (operator 11-24): Forge agreeing credits the key when
 			// XMage could not answer, or answered differently (follower-only).
 			refs, fa = "F", true
+		}
+		// The per-follower legs (before refs gains +P, which has no leg): an
+		// engine refs names agreed; one it does not name is owed the item's
+		// reason, unless its diverging step already said why for this item
+		// (an XMage divergence, "diagnosed").
+		for _, u := range uses {
+			l := legOf(u, item)
+			for _, e := range []struct {
+				acc    kpLegAcc
+				agreed bool
+			}{{l.x, xa}, {l.f, fa}} {
+				_, said := e.acc.owed[id]
+				_, div := e.acc.div[id]
+				switch {
+				case e.agreed:
+					e.acc.agree[id] = true
+				case !said && !div:
+					e.acc.owed[id] = owedReason(in.XFind[id], in.FFind[id])
+				}
+			}
 		}
 		if refs != "" {
 			pa := in.PFind != nil && in.PFind[id].Class == classify.ClassAgree
@@ -754,6 +829,14 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 	files["keyproof.tsv"] = tab.buf.Bytes()
 	files["handoff.tsv"] = hb.Bytes()
 	files["witness.jsonl"] = wb.Bytes()
+	// keyproof-legs.tsv has exactly keyproof.tsv's keys: a step use of an
+	// XMage-only divergence that credit did not name has no keyproof.tsv row.
+	for u := range legs {
+		if keys[u] == nil {
+			delete(legs, u)
+		}
+	}
+	files["keyproof-legs.tsv"] = legRows(tab, legs)
 	var names []string
 	for n := range files {
 		names = append(names, n)

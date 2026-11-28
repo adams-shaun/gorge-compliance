@@ -11,6 +11,7 @@ import (
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -4594,6 +4595,103 @@ func TestStartCombatFilterFixtures(t *testing.T) {
 			}
 			if _, err := DecodeStartFile(mustMarshal(t, f)); err != nil {
 				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestStartReplSelfEntryTap: a self-entry tap replacement (an enter-tapped
+// land or creature) starts the card's own entry: a land is played from hand
+// (a check land's condition is exercised whichever way it reads), anything
+// else is cast.
+func TestStartReplSelfEntryTap(t *testing.T) {
+	t.Parallel()
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, kind string }{
+		{"Azorius Guildgate", "land"},
+		{"Glacial Fortress", "land"},
+		{"Wolf Cove Villager", "cast"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, "repl#0.0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start", res.Path, res.Reason)
+			}
+			focusIs(t, res.Start, 0, tc.card, tc.kind, 0)
+			if res.Start.Key != "repl#0.0" {
+				t.Errorf("start key %q, want repl#0.0", res.Start.Key)
+			}
+			listIs(t, "p0 hand", res.Start.Setup.P0.Hand, []string{tc.card})
+		})
+	}
+}
+
+// TestStartReplRefusals: a replacement outside the self-entry tap class is
+// refused by name, a shock land's pay-or-tap choice by its own name.
+func TestStartReplRefusals(t *testing.T) {
+	t.Parallel()
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key, reason string }{
+		{"Hallowed Fountain", "repl#0.0", "no-generator:repl:unless-cost"},
+		{"Kinjalli's Sunwing", "repl#0.0", "no-generator:repl:Moved"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Start != nil || res.Reason != tc.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, tc.reason)
+			}
+		})
+	}
+}
+
+// TestStartReplKeyIDRoundTrip: a replacement start's item id names its key,
+// so keyproof's declaredKey credits it.
+func TestStartReplKeyIDRoundTrip(t *testing.T) {
+	t.Parallel()
+	id := StartID("SCEN", "Azorius Guildgate", "repl#0.0", 1)
+	if id != "xs:SCEN:azorius-guildgate:repl0.0:s1" {
+		t.Errorf("StartID = %q, want xs:SCEN:azorius-guildgate:repl0.0:s1", id)
+	}
+	if _, _, key, _, ok := ParseID(id); !ok || key != "repl#0.0" {
+		t.Errorf("ParseID(%q) key %q ok %v, want repl#0.0", id, key, ok)
+	}
+	if got := Family("repl#0.0"); got != "repl" {
+		t.Errorf("Family(repl#0.0) = %q, want repl", got)
+	}
+}
+
+// TestStartKeywordAndModeRefused: a keyword or spell-mode key of the universe
+// is an owed row, so Generate refuses it by name rather than erroring.
+func TestStartKeywordAndModeRefused(t *testing.T) {
+	t.Parallel()
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key, reason string }{
+		{"The Eldest Reborn", "kw#0.0", "no-generator:keyword"},
+		{"Cryptic Command", "mode#0.0.0", "no-generator:mode"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			c, ok := reg.Lookup(tc.card)
+			if !ok {
+				t.Fatalf("%q not in the corpus", tc.card)
+			}
+			if !slices.ContainsFunc(cov.Universe(c), func(k cov.Key) bool { return k.ID == tc.key }) {
+				t.Fatalf("%q is not a cov.Universe key of %q", tc.key, tc.card)
+			}
+			if slices.Contains(Keys(c), tc.key) {
+				t.Errorf("Keys(%q) lists %q", tc.card, tc.key)
+			}
+			res, err := Generate(reg, b, tc.card, tc.key, Options{})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != tc.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, tc.reason)
 			}
 		})
 	}

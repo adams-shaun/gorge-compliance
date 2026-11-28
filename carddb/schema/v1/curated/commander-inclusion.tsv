@@ -1,0 +1,8 @@
+#carddb-schema curated/commander-inclusion v1
+name	type	required	key	visibility	doc
+oracle_id	string	yes	yes	public	cards.oracle_id of a non-basic card held by at least one sample deck
+decks	int	yes	no	public	Sample decks holding the card
+rate	string	yes	no	public	Share of sample decks holding the card, 6 decimals
+rate_casual	string	yes	no	public	The same over the casual bracket, 6 decimals
+rate_cedh	string	yes	no	public	The same over the cEDH bracket, 6 decimals
+sample	string	yes	no	public	The sample the row was measured on, e.g. decksample-v1

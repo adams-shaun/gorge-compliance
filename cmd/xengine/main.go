@@ -13,6 +13,7 @@
 //	xengine replay-witness -witness FILE [-witness FILE ...] [-witness-dir DIR] [-cards .cards] -measured YYYY-MM-DD [-gorge-sha SHA] -out DIR
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]
 //	xengine keyproof -play DIR -xmage DIFF_X -forge DIFF_F -adjudicate DIR3 [-phase DIFF_P] [-classes oracle/xengine/diagnosed-classes.tsv] -measured YYYY-MM-DD -out DIR4
+//	xengine keyproof -seed -scope FILE [-cards .cards] [-gorge-sha SHA] -measured YYYY-MM-DD -out DIR
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
 //	xengine pool -set S [-legal FORMAT -mtgjson S.json.gz] [-out FILE]
 //	xengine followers
@@ -58,7 +59,12 @@
 // unsupported, "P?", never a disagreement); -classes (default oracle/xengine/diagnosed-classes.tsv) labels the findings whose card-independent
 // signature a diagnosed class matches (Row.Diagnosed). keyproof turns a play, its two diffs and its adjudication into per-key proof
 // (DIR4/keyproof.tsv: one row per card key, agreed by FX, X or F, or diverged by a signature, diagnosed by a class row, or owed), the
-// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, and witness.jsonl, one line per agreeing item. Follower output is never committed: it goes outside the
+// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, witness.jsonl, one line per agreeing item, and keyproof-legs.tsv (the
+// same keys as carddb leg rows: an xmage and a forge row each in that follower's own state, plus a cite row for a diagnosed key).
+// keyproof -seed proves no play: it reads -scope (tab-separated oracle_id<TAB>name, the output of `carddb sql "SELECT oracle_id, name FROM scope_cards ORDER BY 1"`) and writes
+// DIR4/keyproof-seed.tsv with one owed row per cov.Universe key of every scope card and each of the xmage and lockstep legs (two cast rows with reason not-in-corpus when the
+// registry lacks the card), for `carddb put keyproof --source seed --if-absent --refresh multiplayer,desc,script_sha` to add without touching a measured row. It runs where the
+// corpus is, never in CI. Follower output is never committed: it goes outside the
 // repository or under the gitignored .oracle-build/.
 package main
 
