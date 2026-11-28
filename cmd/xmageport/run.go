@@ -184,7 +184,11 @@ func mergePicks(g *group, n int) bool {
 func skipEmptyDeclaration(s *step, line string) bool {
 	switch {
 	case s.Op == "block" && len(s.Blocks) == 0 && strings.Contains(line, "no blockers decision pending"):
-		*s = step{Op: "pass_to", Step: stepNames[sDeclareBlockers], Active: pref(1 - s.Seat), Expect: s.Expect, Answers: s.Answers, Targets: s.Targets}
+		act := s.blockActive
+		if act == "" {
+			act = pref(1 - s.Seat)
+		}
+		*s = step{Op: "pass_to", Step: stepNames[sDeclareBlockers], Active: act, Expect: s.Expect, Answers: s.Answers, Targets: s.Targets}
 		return true
 	case s.Op == "attack" && len(s.Attackers) == 0 && strings.Contains(line, "passed declare-attackers without being asked"):
 		*s = step{Op: "pass_to", Step: stepNames[sDeclareAttackers], Active: pref(s.Seat), Expect: s.Expect, Answers: s.Answers, Targets: s.Targets}
@@ -196,15 +200,16 @@ func skipEmptyDeclaration(s *step, line string) bool {
 // scenarioBody drops the wrapper fields rules' strict decoder does not know.
 func scenarioBody(sc *portScenario) any {
 	type body struct {
-		Name   string           `json:"name"`
-		Turn   *int             `json:"turn,omitempty"`
-		CR     []string         `json:"cr"`
-		Why    string           `json:"why"`
-		Setup  map[string]*seat `json:"setup"`
-		Steps  []*step          `json:"steps"`
-		Expect []*expect        `json:"expect"`
+		Name    string           `json:"name"`
+		Turn    *int             `json:"turn,omitempty"`
+		CR      []string         `json:"cr"`
+		Why     string           `json:"why"`
+		Players int              `json:"players,omitempty"`
+		Setup   map[string]*seat `json:"setup"`
+		Steps   []*step          `json:"steps"`
+		Expect  []*expect        `json:"expect"`
 	}
-	return body{sc.Name, sc.Turn, sc.CR, sc.Why, sc.Setup, sc.Steps, sc.Expect}
+	return body{sc.Name, sc.Turn, sc.CR, sc.Why, sc.Players, sc.Setup, sc.Steps, sc.Expect}
 }
 
 var reNotOffered = regexp.MustCompile(`harness: answer "((?:[^"\\]|\\.)*)" not offered for (\w+):`)
@@ -221,7 +226,7 @@ func answerKinds(a answer) []string {
 	switch {
 	case p == "yes" || p == "no":
 		return []string{"any", "trigger_optional", "choose", "replacement", "modes"}
-	case strings.HasPrefix(p, "p0:") || strings.HasPrefix(p, "p1:") || p == "p0" || p == "p1":
+	case isSeatRef(p) || len(p) > 2 && isSeatRef(p[:2]) && p[2] == ':':
 		return []string{"any", "choose", "target", "replacement", "arrange", "modes"}
 	}
 	return []string{"any", "choose", "modes", "replacement", "trigger_order"}
@@ -249,7 +254,7 @@ func splitUnaskedTail(r *result, g *group, i, n, steps int) bool {
 // ok is false for anything that is not a ref.
 func refBareName(pick string) (string, bool) {
 	i := strings.IndexByte(pick, ':')
-	if i != 2 || pick[0] != 'p' || (pick[1] != '0' && pick[1] != '1') {
+	if i != 2 || !isSeatRef(pick[:2]) {
 		return "", false
 	}
 	n := pick[i+1:]
@@ -407,7 +412,7 @@ func optionSeat(line string) (int, bool) {
 
 // pickSeat reads the seat a pN: pick names.
 func pickSeat(pick string) (int, bool) {
-	if len(pick) >= 2 && pick[0] == 'p' && (pick[1] == '0' || pick[1] == '1') {
+	if len(pick) >= 2 && isSeatRef(pick[:2]) {
 		return int(pick[1] - '0'), true
 	}
 	return 0, false

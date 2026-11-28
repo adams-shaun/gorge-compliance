@@ -124,7 +124,8 @@ func main() {
 	if *xmIn != "" {
 		var b strings.Builder
 		for _, r := range results {
-			if r.Scenario == nil || r.Status == "fail-harness" {
+			if r.Scenario == nil || r.Status == "fail-harness" || r.Scenario.Players > 2 {
+				// the XMage driver replays the two-player game only
 				continue
 			}
 			line, err := driverLine(r)
