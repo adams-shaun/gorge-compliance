@@ -11,8 +11,9 @@ fails -- so each outcome is read off the committed files.
       <family>/<slug>/<scenario name>, one row for the file's `card`
 
 Outcome, first match:
-  known_bug    the scenario's `xmage` value is a row of cmd/xmageport/known_bugs.tsv
-  diverge      a hand scenario listed in <family>/known-divergent/ (CI requires it to fail)
+  known_bug    a triaged failure: the scenario's `xmage` value is a row of
+               cmd/xmageport/known_bugs.tsv, or it is a hand scenario listed in
+               <family>/known-divergent/ (CI requires it to fail)
   unconsumed   a hand scenario listed in <family>/known-unconsumed/ (CI requires a step
                answer no decision matched)
   pass         every other scenario
@@ -45,7 +46,7 @@ PORT_REL = os.path.join("scenarios", "xmageport")
 HAND_REL = os.path.join("scenarios", "oracle")
 KNOWN_BUGS_REL = os.path.join("cmd", "xmageport", "known_bugs.tsv")
 # the hand corpus's two ratchet directories and the outcome each one's rows carry, first match
-HAND_RATCHETS = (("known-divergent", "diverge"), ("known-unconsumed", "unconsumed"))
+HAND_RATCHETS = (("known-divergent", "known_bug"), ("known-unconsumed", "unconsumed"))
 
 _SEAT = re.compile(r"^p[0-9]+:")
 _ORDINAL = re.compile(r"#[0-9]+$")

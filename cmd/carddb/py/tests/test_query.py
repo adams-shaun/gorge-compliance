@@ -7,6 +7,7 @@ import unittest
 from carddb import build as build_mod
 from carddb import keylegs
 from carddb import query as query_mod
+from carddb import scenarios as scenarios_mod
 from carddb import schema as schema_mod
 from carddb import shard
 from carddb.boundary import boundary_tree
@@ -16,6 +17,7 @@ import parquet_export
 
 from .helpers import Base, GOLDEN, OID_A, OID_B, OID_C, ROOT, git
 from .test_cert import cert_row
+from .test_scenarios import hand_file, port_file, ratchet, scenario, write
 
 UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
 
@@ -1045,31 +1047,54 @@ class TestProvenRule(Base):
 class TestKnownBugBlocksProven(Base):
     """A known_bug evidence row holds a card the proven rule would otherwise count."""
 
-    def test_a_known_bug_row_blocks_proven(self):
+    def two_provable_cards(self, *names):
+        """A store whose two cards, OID_A and OID_B, both satisfy the key rule."""
         a = self.machine("bug", init=True)
         oids = (OID_A, OID_B)
         a.put("cards", [{"oracle_id": oid, "name": name, "layout": "normal", "mana_value": 1,
-                         "type_line": "Instant"} for oid, name in zip(oids, ("Bugged", "Clean"))],
+                         "type_line": "Instant"} for oid, name in zip(oids, names)],
               writer="catalogue")
         a.put("keyproof", flat(*([keyproof_row(oid, "cast", "agreed", leg="xmage", refs="X", witness="xs:w"),
                                   keyproof_row(oid, "cast", "agreed", leg="lockstep")] for oid in oids)),
               writer="xproof")
-        a.put("evidence", [
-            {"oracle_id": OID_A, "source": "xmageport", "ref": "BugTest#bug", "outcome": "known_bug"},
-            {"oracle_id": OID_A, "source": "xmageport", "ref": "BugTest#ok", "outcome": "pass"},
-            {"oracle_id": OID_B, "source": "xmageport", "ref": "BugTest#ok", "outcome": "pass"},
-            {"oracle_id": OID_B, "source": "hand", "ref": "evasion/clean/one", "outcome": "diverge"},
-        ], writer="scenario")
+        return a
+
+    def built(self, store):
         db = os.path.join(self.tmp, "bug.sqlite")
-        build_mod.build(db, self.schema, a.dir, None,
+        build_mod.build(db, self.schema, store.dir, None,
                         build_mod.read_committed(directory=os.path.join(self.tmp, "bug-src")))
         conn = sqlite3.connect(db)
         self.addCleanup(conn.close)
+        return conn
+
+    def assert_only_the_second_card_is_proven(self, conn):
         # both cards satisfy the key rule: only the known_bug row separates them
         got = {r[0]: r[1:] for r in conn.execute(
             "SELECT oracle_id, proven_keys, live_keys, proven, known_bugs FROM card_proven")}
         self.assertEqual(got, {OID_A: (1, 1, 0, 1), OID_B: (1, 1, 1, 0)})
         self.assertEqual([r[0] for r in conn.execute("SELECT oracle_id FROM proven_keys")], [OID_B])
+
+    def test_a_known_bug_row_blocks_proven(self):
+        a = self.two_provable_cards("Bugged", "Clean")
+        a.put("evidence", [
+            {"oracle_id": OID_A, "source": "xmageport", "ref": "BugTest#bug", "outcome": "known_bug"},
+            {"oracle_id": OID_A, "source": "xmageport", "ref": "BugTest#ok", "outcome": "pass"},
+            {"oracle_id": OID_B, "source": "xmageport", "ref": "BugTest#ok", "outcome": "pass"},
+            {"oracle_id": OID_B, "source": "hand", "ref": "evasion/clean/one", "outcome": "unconsumed"},
+        ], writer="scenario")
+        self.assert_only_the_second_card_is_proven(self.built(a))
+
+    def test_a_known_divergent_hand_scenario_blocks_proven(self):
+        a = self.two_provable_cards("Divergent", "Clean")
+        repo = os.path.join(self.tmp, "repo")
+        # the writer refuses a repo without a known_bugs.tsv or a translated corpus
+        write(os.path.join(repo, "cmd", "xmageport", "known_bugs.tsv"), "# none\n")
+        port_file(repo, "damage", "CleanTest", scenario("ok", "CleanTest#ok", "p0:Clean"))
+        hand_file(repo, "evasion", "divergent", "Divergent", "fails", "passes")
+        hand_file(repo, "evasion", "clean", "Clean", "passes")
+        ratchet(repo, "evasion", "known-divergent", "divergent", "Divergent", "fails")
+        scenarios_mod.run(a, repo=repo)
+        self.assert_only_the_second_card_is_proven(self.built(a))
 
 
 class TestScopeCards(Base):
