@@ -338,7 +338,7 @@ func TestSpellTargetAndSource(t *testing.T) {
 	}
 	f := &follower{toG: map[int]state.ObjID{105: 6, 203: 13}, toF: map[state.ObjID]int{6: 105, 13: 203}, name: map[int]string{105: "Shock", 203: "Spellstutter"}}
 	d := &decision.Decision{Kind: decision.KTarget, Options: []decision.Option{{Index: 0, Player: 0}, {Index: 1, Obj: 6}}}
-	in, dv := f.targets(d, a)
+	in, dv := f.targets(d, a, 1)
 	if dv != nil || len(in.Choices) != 1 || in.Choices[0] != 1 {
 		t.Fatalf("intent %+v, divergence %+v", in, dv)
 	}
@@ -379,7 +379,7 @@ func TestTargetGroupsOneChoicePerGroup(t *testing.T) {
 	if err := d.Validate(naive); err == nil || !strings.Contains(err.Error(), `mutually exclusive (group "charm-mode-0")`) {
 		t.Fatalf("fixture no longer reproduces the pod rejection: %v", err)
 	}
-	in, dv := f.targets(d, a)
+	in, dv := f.targets(d, a, 1)
 	if dv != nil {
 		t.Fatalf("logged target ask: divergence %+v", dv)
 	}
@@ -1169,8 +1169,8 @@ func TestTargetFromTheCastAnswer(t *testing.T) {
 	if !reflect.DeepEqual(in.Choices, []int{1}) {
 		t.Errorf("choices %v, want [1]: Forge's Arcane Signet, not the first offered artifact", in.Choices)
 	}
-	if f.pos != 0 || f.res.CastTargets != 1 || f.res.Targets != 0 || len(f.castTargets) != 0 {
-		t.Errorf("pos %d cast_targets %d targets %d left %v, want one cast target spent and no line consumed", f.pos, f.res.CastTargets, f.res.Targets, f.castTargets)
+	if f.pos != 0 || f.res.CastTargets != 1 || f.res.Targets != 0 || len(f.chain.parts) != 0 {
+		t.Errorf("pos %d cast_targets %d targets %d left %v, want one cast target spent and no line consumed", f.pos, f.res.CastTargets, f.res.Targets, f.chain.parts)
 	}
 
 	// Another seat's target decision does not take seat 0's cast targets.
@@ -1203,8 +1203,8 @@ func TestTargetFromTheCastAnswer(t *testing.T) {
 	f = newF()
 	f.rememberCastTargets(cast)
 	ta := parseAsk(t, `{"t":"ask","n":210,"seat":0,"turn":6,"step":"main2","kind":"target","options":[{"card":57}],"answer":{"targets":[{"card":57}]}}`)
-	if in, ok = f.answer(d, Entry{Line: 270, T: TAsk, Ask: ta}); !ok || f.pos != 1 || len(f.castTargets) != 0 || !reflect.DeepEqual(in.Choices, []int{0}) {
-		t.Errorf("logged target: ok %v pos %d left %v intent %+v, want the line followed and the cast targets cleared", ok, f.pos, f.castTargets, in)
+	if in, ok = f.answer(d, Entry{Line: 270, T: TAsk, Ask: ta}); !ok || f.pos != 1 || len(f.chain.parts) != 0 || !reflect.DeepEqual(in.Choices, []int{0}) {
+		t.Errorf("logged target: ok %v pos %d left %v intent %+v, want the line followed and the cast targets cleared", ok, f.pos, f.chain.parts, in)
 	}
 	if in, _ = f.answer(d, Entry{Line: 271, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{0}) || f.res.Targets != 1 {
 		t.Errorf("after a consumed line: choices %v targets %d, want the default", in.Choices, f.res.Targets)
@@ -1275,8 +1275,8 @@ func TestCastTargetPartsAndSource(t *testing.T) {
 		if err := d.Validate(in); err != nil {
 			t.Errorf("%s: %v", c.name, err)
 		}
-		if f.res.CastTargets != c.taken || f.res.Targets != 1-c.taken || len(f.castTargets) != c.left {
-			t.Errorf("%s: cast_targets %d targets %d left %v", c.name, f.res.CastTargets, f.res.Targets, f.castTargets)
+		if f.res.CastTargets != c.taken || f.res.Targets != 1-c.taken || len(f.chain.parts) != c.left {
+			t.Errorf("%s: cast_targets %d targets %d left %v", c.name, f.res.CastTargets, f.res.Targets, f.chain.parts)
 		}
 	}
 }
@@ -1584,33 +1584,247 @@ func TestSearchPickFromTheShuffleLine(t *testing.T) {
 	}
 }
 
+// targetChain is a sub-ability chain of n targeting links, root first, as
+// gorge's decisions name them in ResumeSA.
+func targetChain(n int) []*cards.SA {
+	links := make([]*cards.SA, n)
+	for i := n - 1; i >= 0; i-- {
+		links[i] = &cards.SA{Params: map[string]string{"ValidTgts": "Creature"}}
+		if i+1 < n {
+			links[i].Sub = links[i+1]
+		}
+	}
+	return links
+}
+
+// stackAbilities is an engine holding each source object's ability chain,
+// where the follower looks up the link an ask names.
+func stackAbilities(abilities map[state.ObjID]*cards.SA) *rules.Engine {
+	objs := make([]state.Object, 1000)
+	for id, sa := range abilities {
+		objs[id-1] = state.Object{ID: id, Ability: sa}
+	}
+	return &rules.Engine{G: &state.Game{Objs: objs}}
+}
+
+// linkAsk is the ask gorge poses for one link of a triggered ability's chain:
+// the root's own (no ResumeKind) or a "trig_sub" one.
+func linkAsk(source state.ObjID, link *cards.SA, root bool, min int, offer ...state.ObjID) *decision.Decision {
+	d := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: source, ResumeSA: link, Min: min, Max: 1}
+	if !root {
+		d.ResumeKind = "trig_sub"
+	}
+	for i, o := range offer {
+		d.Options = append(d.Options, decision.Option{Index: i, Obj: o})
+	}
+	return d
+}
+
 // A logged target line over a chain of two targeting parts (target_slots
 // [1,1]) answers gorge's two asks one part each: the first ask offers only
 // card 57, the second only card 138, which a whole-line answer to the first
 // reported as a missing answer filed against gorge.
 func TestLoggedTargetAskSplitsBySlot(t *testing.T) {
-	const trig, a, b = state.ObjID(97), state.ObjID(57), state.ObjID(138)
+	const trig, a, b = state.ObjID(900), state.ObjID(57), state.ObjID(138)
 	line := Entry{Line: 268, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":208,"seat":0,"kind":"target","answer":{"source":97,"targets":[{"card":57},{"card":138}],"target_slots":[1,1],"ok":true}}`)}
 	next := Entry{Line: 269, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":209,"seat":0,"kind":"priority","answer":{"action":"pass"}}`)}
-	f := &follower{log: &Log{}, toG: map[int]state.ObjID{97: trig, 57: a, 138: b}}
-	first := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: trig, Min: 1, Max: 1, Options: []decision.Option{{Index: 0, Obj: a}}}
-	in, ok := f.answer(first, line)
+	links := targetChain(2)
+	newF := func() *follower {
+		return &follower{log: &Log{}, e: stackAbilities(map[state.ObjID]*cards.SA{trig: links[0]}),
+			toG: map[int]state.ObjID{57: a, 138: b}, name: map[int]string{97: "Host"}}
+	}
+	f := newF()
+	in, ok := f.answer(linkAsk(trig, links[0], true, 1, a), line)
 	if !ok || f.res.Hard != nil || !reflect.DeepEqual(in.Choices, []int{0}) || f.pos != 1 {
 		t.Fatalf("first ask: ok %v hard %+v choices %v pos %d, want [0] and the line consumed", ok, f.res.Hard, in.Choices, f.pos)
 	}
-	second := &decision.Decision{Seq: 12, Player: 0, Kind: decision.KTarget, Source: trig, ResumeKind: "trig_sub", Min: 1, Max: 1, Options: []decision.Option{{Index: 0, Obj: b}}}
-	in, ok = f.answer(second, next)
+	in, ok = f.answer(linkAsk(trig, links[1], false, 1, b), next)
 	if !ok || f.res.Hard != nil || !reflect.DeepEqual(in.Choices, []int{0}) || f.pos != 1 {
 		t.Errorf("second ask: ok %v hard %+v choices %v pos %d, want [0] and no line consumed", ok, f.res.Hard, in.Choices, f.pos)
 	}
-	if f.res.CastTargets != 1 || len(f.castTargets) != 0 {
-		t.Errorf("cast_targets %d left %v, want 1 and none", f.res.CastTargets, f.castTargets)
+	if f.res.TargetParts != 1 || f.res.CastTargets != 0 || f.res.Targets != 0 || len(f.chain.parts) != 0 {
+		t.Errorf("target_parts %d cast_targets %d targets %d left %v, want 1, 0, 0 and none", f.res.TargetParts, f.res.CastTargets, f.res.Targets, f.chain.parts)
 	}
 
-	// A part gorge cannot answer stops the follow as the follower's finding.
-	f = &follower{log: &Log{}, toG: map[int]state.ObjID{97: trig, 57: a, 138: b}}
-	wrong := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: trig, Min: 1, Max: 1, Options: []decision.Option{{Index: 0, Obj: b}}}
-	if _, ok := f.answer(wrong, line); ok || f.res.Hard == nil || f.res.Hard.Harness != HarnessUnmapped || f.res.Hard.Field != "target_slots" || f.res.Hard.Line != 268 {
-		t.Errorf("unanswerable part: ok %v hard %+v", ok, f.res.Hard)
+	// A part gorge cannot answer stops the follow as the follower's finding,
+	// naming the target line and its host card: the first part, and a later one.
+	for _, c := range []struct {
+		name          string
+		first, second state.ObjID // the one object each ask offers
+		forge         string
+	}{
+		{"first part", b, b, "card:57"},
+		{"second part", a, a, "card:138"},
+	} {
+		f = newF()
+		if _, ok := f.answer(linkAsk(trig, links[0], true, 1, c.first), line); ok {
+			f.answer(linkAsk(trig, links[1], false, 1, c.second), next)
+		}
+		h := f.res.Hard
+		if h == nil || h.Harness != HarnessUnmapped || h.Field != "target_slots" || h.Forge != c.forge || h.Line != 268 || h.Ask != 208 ||
+			!reflect.DeepEqual(h.Cards, []Implicated{{Name: "Host"}}) || f.res.TargetParts != 0 {
+			t.Errorf("%s unanswerable: hard %+v target_parts %d", c.name, h, f.res.TargetParts)
+		}
+	}
+}
+
+// Two targeted triggers put on the stack together leave two target lines back
+// to back, and gorge asks the first chain's links before the second trigger's.
+// Each chain's later ask takes its own line's part and reads no line, whatever
+// the next line is: the other trigger's target line (whose seat may differ), a
+// priority line or the log's end.
+func TestConsecutiveTargetLinesKeepTheirParts(t *testing.T) {
+	const trigA, trigB = state.ObjID(900), state.ObjID(901)
+	ids := map[int]state.ObjID{57: 57, 138: 138, 60: 60, 61: 61}
+	for _, seatB := range []int{0, 1} {
+		lines := []Entry{
+			{Line: 268, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":208,"seat":0,"kind":"target","answer":{"source":97,"targets":[{"card":57},{"card":138}],"target_slots":[1,1]}}`)},
+			{Line: 269, T: TAsk, Ask: parseAsk(t, fmt.Sprintf(`{"t":"ask","n":209,"seat":%d,"kind":"target","answer":{"source":98,"targets":[{"card":60},{"card":61}],"target_slots":[1,1]}}`, seatB))},
+		}
+		linksA, linksB := targetChain(2), targetChain(2)
+		f := &follower{log: &Log{Entries: lines}, toG: ids,
+			e: stackAbilities(map[state.ObjID]*cards.SA{trigA: linksA[0], trigB: linksB[0]})}
+		asks := []struct {
+			d    *decision.Decision
+			want state.ObjID
+		}{
+			{linkAsk(trigA, linksA[0], true, 1, 57, 138, 60, 61), 57},
+			{linkAsk(trigA, linksA[1], false, 1, 57, 138, 60, 61), 138},
+			{linkAsk(trigB, linksB[0], true, 1, 57, 138, 60, 61), 60},
+			{linkAsk(trigB, linksB[1], false, 1, 57, 138, 60, 61), 61},
+		}
+		asks[2].d.Player, asks[3].d.Player = state.PlayerID(seatB), state.PlayerID(seatB)
+		for i, a := range asks {
+			var e Entry // past the log's last line
+			if f.pos < len(lines) {
+				e = lines[f.pos]
+			}
+			in, ok := f.answer(a.d, e)
+			if !ok || len(in.Choices) != 1 || a.d.Options[in.Choices[0]].Obj != a.want {
+				t.Fatalf("seat %d ask %d: ok %v choices %v hard %+v, want object %d", seatB, i, ok, in.Choices, f.res.Hard, a.want)
+			}
+		}
+		if f.pos != 2 || f.res.Asks != 2 || f.res.TargetParts != 2 || f.res.Targets != 0 {
+			t.Errorf("seat %d: pos %d asks %d target_parts %d targets %d, want 2, 2, 2, 0", seatB, f.pos, f.res.Asks, f.res.TargetParts, f.res.Targets)
+		}
+	}
+}
+
+// gorge poses no ask for an optional link with no candidate, while Forge's line
+// counts that link's empty part: each ask takes the part of the link it names.
+// Where it names none and the part cannot be told, or gorge posed no ask for a
+// link Forge chose a target for, the follow stops as the follower's finding.
+func TestLoggedTargetPartsMatchTheirLink(t *testing.T) {
+	const trig, a, b = state.ObjID(900), state.ObjID(57), state.ObjID(138)
+	ids := map[int]state.ObjID{57: a, 138: b, 97: trig}
+	target := func(answer string) Entry {
+		return Entry{Line: 300, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":300,"seat":0,"kind":"target","answer":{"source":97,`+answer+`}}`)}
+	}
+	next := Entry{Line: 301, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":301,"seat":0,"kind":"priority","answer":{"action":"pass"}}`)}
+	two, three := targetChain(2), targetChain(3)
+	newF := func(root *cards.SA) *follower {
+		return &follower{log: &Log{}, toG: ids, e: stackAbilities(map[state.ObjID]*cards.SA{trig: root})}
+	}
+
+	// A later ask passes over an unposed middle link's empty part.
+	f := newF(three[0])
+	f.answer(linkAsk(trig, three[0], true, 1, a), target(`"targets":[{"card":57},{"card":138}],"target_slots":[1,0,1]`))
+	in, ok := f.answer(linkAsk(trig, three[2], false, 0, b), next)
+	if !ok || !reflect.DeepEqual(in.Choices, []int{0}) {
+		t.Errorf("unposed middle link: ok %v hard %+v choices %v, want [0]", ok, f.res.Hard, in.Choices)
+	}
+
+	// A chosen mode's ask names a link that is not on the ability's chain (a
+	// modal trigger's root is the charm): it takes the next part.
+	mode := &cards.SA{Params: map[string]string{"ValidTgts": "Land"}}
+	f = newF(&cards.SA{Params: map[string]string{"Choices": "DBLand,DBCreature"}})
+	in, ok = f.answer(linkAsk(trig, mode, true, 1, a), target(`"targets":[{"card":57},{"card":138}],"target_slots":[1,1]`))
+	if !ok || !reflect.DeepEqual(in.Choices, []int{0}) || len(f.chain.parts) != 1 {
+		t.Errorf("mode ask: ok %v hard %+v choices %v left %v, want [0] and one part", ok, f.res.Hard, in.Choices, f.chain.parts)
+	}
+
+	castSub := linkAsk(trig, nil, false, 0, b)
+	castSub.ResumeKind = "cast_sub"
+	for _, c := range []struct {
+		name  string
+		root  *cards.SA
+		d     *decision.Decision
+		cast  bool // the parts are a cast's, not a target line's
+		slots string
+	}{
+		{"a link Forge targeted was not asked", two[0], linkAsk(trig, two[1], false, 0, b), false, `"targets":[{"card":57},{"card":138}],"target_slots":[1,1]`},
+		{"more links asked than parts", three[0], linkAsk(trig, three[0], true, 0, b), false, `"targets":[{"card":138}],"target_slots":[0,1]`},
+		{"a trigger ask that names no link", two[0], linkAsk(trig, nil, false, 0, b), false, `"targets":[{"card":138}],"target_slots":[0,1]`},
+		{"a cast's sub ask that names no link", two[0], castSub, true, `"targets":[{"card":138}],"target_slots":[0,1]`},
+	} {
+		f := newF(c.root)
+		e, field := target(c.slots), "target_slots"
+		if c.cast {
+			f.rememberCastTargets(parseAsk(t, `{"t":"ask","n":208,"seat":0,"kind":"priority","answer":{"action":"cast","card":97,`+c.slots+`}}`))
+			e, field = next, "cast_targets"
+		}
+		in, ok := f.answer(c.d, e)
+		if h := f.res.Hard; ok || h == nil || h.What != WhatAnswerMissing || h.Harness != HarnessUnmapped || h.Field != field {
+			t.Errorf("%s: ok %v choices %v hard %+v, want a %s finding", c.name, ok, in.Choices, h, field)
+		}
+	}
+}
+
+// Omo's enters trigger on a real engine: up to one target land, then up to one
+// target creature, one target line with an empty first part. With no land on the
+// battlefield gorge asks the creature link alone, which takes the second part;
+// with one it asks both, the first takes nothing and the second, asked after the
+// log's last line, still takes its part.
+func TestLoggedTargetPartsOnAGorgeTrigger(t *testing.T) {
+	reg := corpus(t)
+	card := func(name string) *cards.Card {
+		c, ok := reg.Lookup(name)
+		if !ok {
+			t.Fatalf("%q is not in the corpus", name)
+		}
+		return c
+	}
+	omo, forest := card("Omo, Queen of Vesuva"), card("Forest")
+	for _, c := range []struct {
+		name  string
+		lands int
+		parts int // Result.TargetParts
+	}{{"the land link unasked", 0, 0}, {"both links asked", 1, 1}} {
+		t.Run(c.name, func(t *testing.T) {
+			player := rules.StagedPlayer{Life: 20, Library: []*cards.Card{forest, forest, forest}}
+			holder := player
+			holder.Hand, holder.ManaPool = []*cards.Card{omo}, "GGUU"
+			st := rules.Stage{Turn: 3, Step: state.StepMain1, Players: []rules.StagedPlayer{holder, player}}
+			for range c.lands {
+				st.Permanents = append(st.Permanents, rules.StagedPermanent{Card: forest})
+			}
+			e, ids, err := rules.NewStaged(rules.Config{Seed: 1, Names: []string{"a", "b"}, Tokens: reg.Tokens}, st)
+			if err != nil {
+				t.Fatal(err)
+			}
+			spell := ids.Hand[0][0]
+			var entries []Entry
+			for i, line := range []string{
+				`"seat":0,"kind":"priority","answer":{"action":"cast","card":1}`,
+				`"seat":0,"kind":"priority","answer":{"action":"pass"}`,
+				`"seat":1,"kind":"priority","answer":{"action":"pass"}`,
+				`"seat":0,"kind":"target","answer":{"source":1,"targets":[{"card":1}],"target_slots":[0,1]}`,
+			} {
+				entries = append(entries, Entry{Line: i + 2, T: TAsk, Ask: parseAsk(t, fmt.Sprintf(`{"t":"ask","n":%d,"turn":3,"step":"main1",%s}`, i+1, line))})
+			}
+			f := &follower{log: &Log{Entries: entries}, e: e, toG: map[int]state.ObjID{1: spell},
+				toF: map[state.ObjID]int{spell: 1}, name: map[int]string{1: omo.Faces[0].Name}}
+			f.run(20)
+			if f.res.Hard != nil || f.res.End != "log" || f.res.Asks != 4 || f.res.Targets != 0 || f.res.TargetParts != c.parts || len(f.chain.parts) != 0 {
+				t.Fatalf("result %+v hard %+v left %v, want the log followed to its end with %d target parts", f.res, f.res.Hard, f.chain.parts, c.parts)
+			}
+			if len(e.G.Stack) != 1 {
+				t.Fatalf("stack %v, want the trigger", e.G.Stack)
+			}
+			trig := e.G.Obj(e.G.Stack[0])
+			if want := []state.Target{{Obj: spell}}; len(trig.Targets) != 0 || !reflect.DeepEqual(trig.SubTargets, want) {
+				t.Errorf("trigger targets %v sub targets %v, want none and Omo", trig.Targets, trig.SubTargets)
+			}
+		})
 	}
 }
