@@ -1583,3 +1583,34 @@ func TestSearchPickFromTheShuffleLine(t *testing.T) {
 		})
 	}
 }
+
+// A logged target line over a chain of two targeting parts (target_slots
+// [1,1]) answers gorge's two asks one part each: the first ask offers only
+// card 57, the second only card 138, which a whole-line answer to the first
+// reported as a missing answer filed against gorge.
+func TestLoggedTargetAskSplitsBySlot(t *testing.T) {
+	const trig, a, b = state.ObjID(97), state.ObjID(57), state.ObjID(138)
+	line := Entry{Line: 268, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":208,"seat":0,"kind":"target","answer":{"source":97,"targets":[{"card":57},{"card":138}],"target_slots":[1,1],"ok":true}}`)}
+	next := Entry{Line: 269, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":209,"seat":0,"kind":"priority","answer":{"action":"pass"}}`)}
+	f := &follower{log: &Log{}, toG: map[int]state.ObjID{97: trig, 57: a, 138: b}}
+	first := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: trig, Min: 1, Max: 1, Options: []decision.Option{{Index: 0, Obj: a}}}
+	in, ok := f.answer(first, line)
+	if !ok || f.res.Hard != nil || !reflect.DeepEqual(in.Choices, []int{0}) || f.pos != 1 {
+		t.Fatalf("first ask: ok %v hard %+v choices %v pos %d, want [0] and the line consumed", ok, f.res.Hard, in.Choices, f.pos)
+	}
+	second := &decision.Decision{Seq: 12, Player: 0, Kind: decision.KTarget, Source: trig, ResumeKind: "trig_sub", Min: 1, Max: 1, Options: []decision.Option{{Index: 0, Obj: b}}}
+	in, ok = f.answer(second, next)
+	if !ok || f.res.Hard != nil || !reflect.DeepEqual(in.Choices, []int{0}) || f.pos != 1 {
+		t.Errorf("second ask: ok %v hard %+v choices %v pos %d, want [0] and no line consumed", ok, f.res.Hard, in.Choices, f.pos)
+	}
+	if f.res.CastTargets != 1 || len(f.castTargets) != 0 {
+		t.Errorf("cast_targets %d left %v, want 1 and none", f.res.CastTargets, f.castTargets)
+	}
+
+	// A part gorge cannot answer stops the follow as the follower's finding.
+	f = &follower{log: &Log{}, toG: map[int]state.ObjID{97: trig, 57: a, 138: b}}
+	wrong := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: trig, Min: 1, Max: 1, Options: []decision.Option{{Index: 0, Obj: b}}}
+	if _, ok := f.answer(wrong, line); ok || f.res.Hard == nil || f.res.Hard.Harness != HarnessUnmapped || f.res.Hard.Field != "target_slots" || f.res.Hard.Line != 268 {
+		t.Errorf("unanswerable part: ok %v hard %+v", ok, f.res.Hard)
+	}
+}

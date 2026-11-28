@@ -810,7 +810,20 @@ func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, boo
 	if len(f.castTargets) == 0 || !f.castPoses(d) {
 		return in, false, nil
 	}
-	parts := f.castTargets
+	in, rest, dv := f.answerParts(d, f.castTargets, "cast_targets", "the cast's", f.castObj)
+	if dv != nil {
+		return in, false, dv
+	}
+	f.castTargets = rest
+	return in, true, nil
+}
+
+// answerParts answers target decision d from the next of the targeting parts
+// (see answerCastTargets for which parts d takes) and returns the parts left.
+// what names the parts' origin in a detail, field is the divergence's Field
+// and obj the object whose card the divergence implicates.
+func (f *follower) answerParts(d *decision.Decision, parts [][]Ref, field, what string, obj state.ObjID) (decision.Intent, [][]Ref, *Divergence) {
+	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	for d.Min > 0 && len(parts) > 0 && len(parts[0]) == 0 {
 		parts = parts[1:]
 	}
@@ -821,41 +834,40 @@ func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, boo
 	for combinedModeAsk(d) && len(refs) < d.Min && len(parts) > 0 {
 		refs, parts = append(refs, parts[0]...), parts[1:]
 	}
-	mismatch := func(detail string) (decision.Intent, bool, *Divergence) {
+	mismatch := func(detail string) (decision.Intent, [][]Ref, *Divergence) {
 		forge := targetRefKeys(refs)
 		if forge == "" {
 			forge = "none"
 		}
 		var cards []Implicated
-		if n, ok := f.name[f.toF[f.castObj]]; ok {
+		if n, ok := f.name[f.toF[obj]]; ok {
 			cards = []Implicated{{Name: n}}
 		}
-		return in, false, &Divergence{What: WhatAnswerMissing, Harness: HarnessUnmapped, Field: "cast_targets",
+		return in, nil, &Divergence{What: WhatAnswerMissing, Harness: HarnessUnmapped, Field: field,
 			Forge: forge, Gorge: strings.Join(f.gorgeOptionKeys(d), " "), Cards: cards, Detail: detail}
 	}
 	if len(refs) < d.Min || d.Max > 0 && len(refs) > d.Max {
-		return mismatch(fmt.Sprintf("the cast's next targeting part holds %d targets, gorge asks %d to %d", len(refs), d.Min, d.Max))
+		return mismatch(fmt.Sprintf(what+" next targeting part holds %d targets, gorge asks %d to %d", len(refs), d.Min, d.Max))
 	}
 	cands := make([][]int, len(refs))
 	for i, r := range refs {
 		c, bound := f.targetCandidates(d, r)
 		if !bound {
 			dv := f.unbound(r.Card + r.Spell)
-			dv.Field = "cast_targets"
-			return in, false, dv
+			dv.Field = field
+			return in, nil, dv
 		}
 		if len(c) == 0 {
-			return mismatch("gorge does not offer the cast's target " + refKey(r))
+			return mismatch("gorge does not offer " + what + " target " + refKey(r))
 		}
 		cands[i] = c
 	}
 	choices, ok := assignTargetOptions(d, cands)
 	if !ok {
-		return mismatch("no assignment of the cast's targets to one option per Group")
+		return mismatch("no assignment of " + what + " targets to one option per Group")
 	}
-	f.castTargets = parts
 	in.Choices = choices
-	return in, true, nil
+	return in, parts, nil
 }
 
 // kindContext places a kind divergence: where Forge's ask sits (turn, step,
@@ -1054,6 +1066,9 @@ func (f *follower) blockers(d *decision.Decision, a *Ask) (decision.Intent, *Div
 }
 
 func (f *follower) targets(d *decision.Decision, a *Ask) (decision.Intent, *Divergence) {
+	if len(a.Answer.TargetSlots) > 1 {
+		return f.targetParts(d, a)
+	}
 	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{}}
 	cands := make([][]int, len(a.Answer.Targets))
 	for i, r := range a.Answer.Targets {
@@ -1072,6 +1087,24 @@ func (f *follower) targets(d *decision.Decision, a *Ask) (decision.Intent, *Dive
 			Detail: "no assignment of the answer to one option per Group"}
 	}
 	in.Choices = choices
+	return in, nil
+}
+
+// targetParts answers a logged target line whose target_slots hold several
+// targeting parts: Forge's recorder writes one line over a spell or ability's
+// whole sub-ability chain, while gorge asks each targeting link its own
+// decision. d takes the next part as a cast's ask does, and the parts left
+// answer the chain's later asks from the next lines (castTargets), which are
+// not target lines.
+func (f *follower) targetParts(d *decision.Decision, a *Ask) (decision.Intent, *Divergence) {
+	in, rest, dv := f.answerParts(d, a.Answer.targetParts(), "target_slots", "the logged answer's", d.Source)
+	if dv != nil {
+		return in, dv
+	}
+	if len(rest) > 0 {
+		f.castTargets, f.castSeat, f.castAsk = rest, a.Seat, a.N
+		f.castObj, f.castAbility = d.Source, d.Source == 0
+	}
 	return in, nil
 }
 
