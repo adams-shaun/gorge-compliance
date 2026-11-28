@@ -732,6 +732,27 @@ def _alias_groups(registry):
     return head
 
 
+# Registered writers with no live path that produces a _meta/writers row in the
+# public scope. `put` records a row only when a run CHANGES data (a rerun, even a
+# day later, is byte-identical — test_store.Put.test_rerun_is_zero_byte_change),
+# so a writer that never changes public data can never register. Each entry names
+# why it is not observed today. This is not a retirement list: a writer whose
+# run path starts producing rows again is dropped from here in the same commit.
+# A writer in this map that DOES record a row is still judged by its age (the
+# loop falls through to the normal line); the map only replaces the hard
+# "no _meta/writers row" failure with a non-!! line naming the reason.
+_NO_RUN_PATH = {
+    "certification": "retired: the set-certification tick was deleted; per-key proof replaces it",
+    "labels": "no labels writer is implemented",
+    "rulings": "the rulings import is not built yet (pf-truth-02)",
+    "farm": "operator-held; no farm rows published since the data branch was created",
+    "hunt": "the hunt box is down; no hunt rows published since the data branch was created",
+    "replay": "newly installed; its first run has not happened yet",
+    "seed": "no live loop runs the keyproof seed (xproof already filled the keys)",
+    "dirac": "dirac's support/evidence are published as gorge-pin/evloop rows",
+}
+
+
 def _expected(tables, private, from_build):
     """Whether this scope's _meta/writers should hold a row for a writer that
     writes `tables`. A public build has no private table, so a writer of only
@@ -848,6 +869,12 @@ def run_freshness(args, schema, out):
                     continue  # an alias is reported once, under its job's name
                 if not _expected(registry[writer][1], private, conn is not None):
                     continue  # this scope never holds this writer's tables
+                why = None if private else _NO_RUN_PATH.get(writer)
+                if why is not None:
+                    # A registered public writer with no live row-producing path:
+                    # not a stale-data failure, but not silent either — name it.
+                    line(False, "writer %s has no _meta/writers row (not live: %s)" % (writer, why))
+                    continue
                 line(True, "writer %s has no _meta/writers row" % writer)
                 continue
             age = _hours(now, _midnight(by_writer[writer]))

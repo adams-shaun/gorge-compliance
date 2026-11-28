@@ -643,7 +643,8 @@ class Query(QueryFixture):
         self.assertTrue({"scryfall", "values", "decklib"} <= set(reg))
         aliases = query_mod._alias_groups(reg)
         self.assertEqual({w: h for w, h in aliases.items() if w != h},
-                         {"ci": "compliance", "cert": "certification", "loop": "evloop"})
+                         {"ci": "compliance", "cert": "certification", "loop": "evloop",
+                          "mtgjson": "catalogue"})
         home = os.path.join(self.tmp, "public-only")
         os.makedirs(home)
         pub = Store("public", home=home, schema=self.schema)
@@ -685,6 +686,40 @@ class Query(QueryFixture):
         r = self.cli(h3, "freshness", "--public-dir", p3.dir, "--now", "2026-11-19T00:00:00Z")
         self.assertIn("!! writer catalogue has no _meta/writers row", r.stdout)
         self.assertNotIn("writer scryfall has no", r.stdout)
+
+    def test_freshness_names_registered_writers_with_no_run_path(self):
+        # A registered public writer that can never record a _meta/writers row
+        # (put logs a run only when it changes data) must not be a hard failure,
+        # but it must not vanish silently either: _NO_RUN_PATH names it with a
+        # reason. The map cannot rot in either direction: every key is a
+        # registered writer and every entry carries a reason.
+        reg = query_mod.load_registry(os.path.join(ROOT, "carddb", "schema", "writers.tsv"))
+        self.assertTrue(query_mod._NO_RUN_PATH)
+        self.assertLessEqual(set(query_mod._NO_RUN_PATH), set(reg))
+        for writer, why in query_mod._NO_RUN_PATH.items():
+            self.assertTrue(why.strip(), writer)
+        home = os.path.join(self.tmp, "no-run-path")
+        os.makedirs(home)
+        # A row for one live writer, none for the no-run-path writers.
+        pub = Store("public", home=home, schema=self.schema)
+        pub.init()
+        pub.put("_meta/writers", [{"writer": "catalogue", "table": "_meta/writers",
+                                   "version": "t", "ran": "2026-11-19"}])
+        write(os.path.join(home, "carddb-latest.json"),
+              json.dumps({"scope": "public", "published_at": "2026-11-19T00:00:00Z",
+                          "unresolved": 1}) + "\n")
+        r = self.cli(home, "freshness", "--public-dir", pub.dir, "--now", "2026-11-19T00:00:00Z")
+        self.assertNotIn("Traceback", r.stderr)
+        for writer in query_mod._NO_RUN_PATH:
+            self.assertNotIn("!! writer %s has no _meta/writers row" % writer, r.stdout, writer)
+            self.assertIn("writer %s has no _meta/writers row (not live: " % writer, r.stdout, writer)
+        # --tick suppresses the non-!! lines, so the missing-row class is silent there
+        tick = self.cli(home, "freshness", "--tick", "--public-dir", pub.dir,
+                        "--now", "2026-11-19T00:00:00Z")
+        for writer in query_mod._NO_RUN_PATH:
+            self.assertNotIn(writer, tick.stdout, writer)
+        # a live writer with no row is still a hard failure (ci writes through compliance)
+        self.assertIn("!! writer compliance has no _meta/writers row", r.stdout)
 
     def test_freshness_uses_the_committed_registry_and_scope_metadata(self):
         # No --sla and no --asset-meta: the default path loads the committed
