@@ -159,6 +159,15 @@ type Result struct {
 	// the next snapshot line: the offered cards new among their owner's
 	// permanents there are the ones Forge took.
 	FieldPicks int `json:"field_picks,omitempty"`
+	// PilePicks counts the TwoPiles splits (Fact or Fiction's) read from
+	// the next snapshot line: pile A is the offered cards that reached where
+	// the chosen pile goes, and the pile pick that follows takes pile A.
+	PilePicks int `json:"pile_picks,omitempty"`
+	// GraveyardOrders counts the snapshots where a graveyard held gorge's
+	// cards in another order than Forge's only within cards put there by one
+	// zone change since the previous snapshot (CR 404.3: their owner orders
+	// them), which the follower adopted (adoptGraveyardOrder).
+	GraveyardOrders int `json:"graveyard_orders,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -169,6 +178,10 @@ type Result struct {
 	// picks a spell's targets while casting it, records them on the cast,
 	// and writes no target ask.
 	CastTargets int `json:"cast_targets,omitempty"`
+	// BearerPicks counts the CastTargets of an activation that attaches its
+	// source (an Equip) and records no bearer, read from the next snapshot
+	// line: the permanent the source is newly attached to there.
+	BearerPicks int `json:"bearer_picks,omitempty"`
 	// TargetParts counts the target decisions answered from a later
 	// targeting part of an already consumed target line (its "target_slots"):
 	// Forge writes one line over a whole sub-ability chain, gorge asks each
@@ -236,7 +249,14 @@ type follower struct {
 	// pay are the choices still to submit of a payment by hand (payByHand);
 	// the priority line it answers stays unconsumed until the last.
 	pay []int
-	res Result
+	// pileRead is the source of a TwoPiles split read from the next snapshot
+	// (twoPilesChoose) whose pile pick is still to come: the pick takes pile
+	// A, the cards the read put there.
+	pileRead state.ObjID
+	// graveMark is how many gorge events the last compared snapshot had
+	// seen: adoptGraveyardOrder reads only the zone changes after it.
+	graveMark int
+	res       Result
 }
 
 // chainTargets are the targeting parts one log line carried for a spell or
@@ -521,6 +541,24 @@ func snapPrecedesOwnDeclaration(e, next Entry, gorge int, d *decision.Decision) 
 		return false // a pre-declaration snapshot still compares
 	}
 	return next.Ask.Turn == int(s.Turn) && next.Ask.Step == s.Step
+}
+
+// turnDrawBefore reports whether seat may have drawn for its turn (CR 504.1)
+// after gorge's position and up to snapshot snap: a draw step of a turn whose
+// active player is seat lies in between. The active player is known for
+// gorge's turn (the engine's) and the snapshot's (its Active); a turn strictly
+// between them is unknown and counts as one seat may have drawn in.
+func (f *follower) turnDrawBefore(seat int, snap *rules.OracleSnapshot) bool {
+	gt, st := int(f.e.G.Turn), int(snap.Turn)
+	if st > gt+1 {
+		return true
+	}
+	draw := func(turn int) int { return at(turn, "draw") }
+	from, to := f.gorgeAt(), at(st, snap.Step)
+	if int(f.e.G.Active) == seat && from < draw(gt) && draw(gt) <= to {
+		return true
+	}
+	return st > gt && snap.Active == seat && from < draw(st) && draw(st) <= to
 }
 
 func (f *follower) gorgeAt() int { return at(int(f.e.G.Turn), f.e.G.Step.String()) }
@@ -850,6 +888,9 @@ func (f *follower) answerUnlogged(d *decision.Decision) decision.Intent {
 		if in, ok := f.mayShuffleChoose(d); ok {
 			return in
 		}
+		if in, ok := f.twoPilesChoose(d); ok {
+			return in
+		}
 		if in, ok := f.discardElection(d); ok {
 			return in
 		}
@@ -871,10 +912,11 @@ func (f *follower) answerUnlogged(d *decision.Decision) decision.Intent {
 // or an activation's "targets", split by "target_slots"): Forge chooses them
 // while it casts and writes no target ask, so gorge's target decisions that
 // follow have no line of their own and are answered from these. An answer
-// whose only parts are empty is kept too: Forge chose nothing there.
+// whose only parts are empty is kept too: Forge chose nothing there. So is an
+// activation with no part at all, for its attach ask (attachAsk).
 func (f *follower) rememberCastTargets(a *Ask) {
 	parts := a.Answer.targetParts()
-	if len(parts) == 0 {
+	if len(parts) == 0 && a.Answer.Action != "activate" {
 		return
 	}
 	f.chain = chainTargets{parts: parts, seat: a.Seat, ask: a.N, obj: f.toG[a.Answer.Card], ability: a.Answer.Action == "activate"}
@@ -921,14 +963,30 @@ func combinedModeAsk(d *decision.Decision) bool {
 // targeting parts, in chain order: d takes its own part (partsFor) whole
 // (nothing, if Forge left it empty), and a combined mode ask takes parts until
 // it has Min refs. Taken and passed-over parts are spent. ok is false (answer
-// by default) when d is not the chain's ask or no part is left. A divergence
-// means d is the chain's ask and the parts do not answer it: the follower
-// cannot tell what Forge chose there, so it stops (a harness finding) instead
-// of answering by default.
+// by default) when d is not the chain's ask or no part is left. An activation's
+// attach ask with a choice of bearers and nothing recorded is answered from the
+// next snapshot (answerAttach), with or without a part left. An activation's
+// ask with no choice and nothing recorded takes every option (unrecorded) and
+// spends one part. A divergence means d is the chain's ask and the parts do not
+// answer it: the follower cannot tell what Forge chose there, so it stops (a
+// harness finding) instead of answering by default.
 func (f *follower) answerChainTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	if len(f.chain.parts) == 0 || !f.castPoses(d) {
+	if !f.castPoses(d) {
 		return in, false, nil
+	}
+	if host := f.attachAsk(d); host != 0 && len(d.Options) > d.Min {
+		return f.answerAttach(d, host)
+	}
+	if len(f.chain.parts) == 0 {
+		return in, false, nil
+	}
+	if f.chain.unrecorded(d) {
+		for i := range d.Options {
+			in.Choices = append(in.Choices, i)
+		}
+		f.chain.parts = f.chain.parts[1:]
+		return in, true, nil
 	}
 	in, rest, dv := f.answerParts(d, f.chain)
 	if dv != nil {
@@ -936,6 +994,15 @@ func (f *follower) answerChainTargets(d *decision.Decision) (decision.Intent, bo
 	}
 	f.chain.parts = rest
 	return in, true, nil
+}
+
+// unrecorded reports whether d, an ask of activation c, leaves no choice (it
+// is mandatory and must take every option) while c's line holds no target in
+// any part left: Forge's recorder writes none on an Equip activation, and
+// there is only one way to answer.
+func (c chainTargets) unrecorded(d *decision.Decision) bool {
+	return c.ability && !c.fromLine() && d.Min > 0 && len(d.Options) == d.Min &&
+		!slices.ContainsFunc(c.parts, func(p []Ref) bool { return len(p) > 0 })
 }
 
 // targetingLinks counts the targeting links of the sub-ability chain from sa,
@@ -1342,11 +1409,12 @@ var frontWay = way{kind: "cast"}
 //     gorge asks during frontWay's cast.
 //
 // ws is returned as it is when it has no frontWay or Forge lists no index 0 (a
-// commander's cast, a may-play's), and a narrowing never empties it.
-func abilityWays(ws []way, a *Ask) []way {
+// commander's cast, a may-play's), and a narrowing never empties it. named
+// reports that the index alone left one way, so that way is Forge's cast.
+func abilityWays(ws []way, a *Ask) (narrowed []way, named bool) {
 	front := slices.Index(ws, frontWay)
 	if front < 0 {
-		return ws
+		return ws, false
 	}
 	listed, first := 0, 0
 	for _, o := range a.Options {
@@ -1360,13 +1428,14 @@ func abilityWays(ws []way, a *Ask) []way {
 	}
 	switch {
 	case first != 1:
-		return ws
+		return ws, false
 	case a.Answer.abilityID() == 0:
-		return []way{frontWay}
+		return []way{frontWay}, true
 	case listed != len(ws) || len(ws) < 2:
-		return ws
+		return ws, false
 	}
-	return slices.Delete(slices.Clone(ws), front, front+1)
+	narrowed = slices.Delete(slices.Clone(ws), front, front+1)
+	return narrowed, len(narrowed) == 1
 }
 
 // unnamedWay is the stop when n of gorge's ways match all of Forge's line: the
@@ -1385,9 +1454,10 @@ func unnamedWay(a *Ask, gorge string, n int) *Divergence {
 // (unnamedWay) when two or more do: on a line without an ability index to tell
 // them apart, Bonecrusher Giant's creature and Stomp plans both paid from Sol
 // Ring and a Mountain. A cast Forge paid with nothing is likewise the option of
-// the one candidate way gorge offers as a cast option. A card with only one way
-// to be cast (soleCast) and no such plan is paid by hand from Forge's sources,
-// if that makes gorge offer it.
+// the one candidate way gorge offers as a cast option. With no such plan, a
+// cast whose gorge option is settled (handOffer) is paid by hand from Forge's
+// sources, if that makes gorge offer it: gorge's planner plans only some of the
+// ways to cast a card.
 func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	tapped, dv := f.boundTapped(a)
@@ -1400,7 +1470,7 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 	if dv != nil {
 		return in, dv
 	}
-	ws = abilityWays(ws, a)
+	ws, named := abilityWays(ws, a)
 	offered := false
 	var matched []way
 	var pay *decision.PaymentSelection
@@ -1459,8 +1529,7 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 			return in, unnamedWay(a, gorge, len(opts))
 		}
 	}
-	if soleCast(f.e, a, obj) {
-		offer := func(d *decision.Decision) int { return plainCast(d.Options, obj) }
+	if offer, ok := handOffer(f.e, a, obj, ws, named); ok {
 		if paid, ok := f.payByHand(d, a, tapped, offer); ok {
 			return paid, nil
 		}
@@ -1824,6 +1893,10 @@ func sameLibraryDepth(x rules.OracleSnapshot) rules.OracleSnapshot {
 func (f *follower) compareSnap(e Entry) bool {
 	f.res.Snaps++
 	x := sameLibraryDepth(e.Snap.Snapshot)
+	f.res.GraveyardOrders += f.adoptGraveyardOrder(x)
+	if f.e.L != nil {
+		f.graveMark = len(f.e.L.Events)
+	}
 	g := Snapshot(f.e, x.Checkpoint)
 	v := oraclediff.CompareOpts(rules.OracleResult{Snapshots: []rules.OracleSnapshot{g}}, nil, oraclediff.XResult{Snapshots: []rules.OracleSnapshot{x}}, nil)
 	if v.Status == oraclediff.Agree {
@@ -2422,6 +2495,107 @@ func (f *follower) cardPickChoose(d *decision.Decision) (decision.Intent, bool) 
 	return decision.Intent{}, false
 }
 
+// twoPilesChoose answers a TwoPiles split (twopiles_split) and the pile pick
+// that follows it (twopiles_pick); Forge's recorder logs neither. The split
+// alone names no route -- pile A's fate is the pick's -- which is why
+// pickRouteOf declines it, so the two are read as one: where the chosen pile's
+// body puts its cards in a hand (or onto the battlefield) and the unchosen
+// pile's does not, pile A is the offered cards the next snapshot shows arrived
+// there (handArriveChoose, fieldArriveChoose), and the pick takes pile A. Any
+// split with that outcome reproduces Forge's; which cards Forge's separator
+// put in which pile the log does not show, and no later state depends on it.
+func (f *follower) twoPilesChoose(d *decision.Decision) (decision.Intent, bool) {
+	var no decision.Intent
+	switch d.ResumeKind {
+	case "twopiles_pick":
+		src := f.pileRead
+		f.pileRead = 0
+		if src == 0 || src != d.Source {
+			return no, false
+		}
+		for _, o := range d.Options {
+			if o.Kind == "pile-a" {
+				in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{o.Index}}
+				if d.Validate(in) != nil {
+					return no, false
+				}
+				f.res.Chooses++
+				return in, true
+			}
+		}
+		return no, false
+	case "twopiles_split":
+	default:
+		return no, false
+	}
+	f.pileRead = 0
+	chosen, rest, ok := f.twoPilesDestinations(d)
+	if !ok {
+		return no, false
+	}
+	var in decision.Intent
+	switch {
+	case chosen == state.ZHand && rest != state.ZHand:
+		in, ok = f.handArriveChoose(d)
+	case chosen == state.ZBattlefield && rest != state.ZBattlefield:
+		in, ok = f.fieldArriveChoose(d)
+	default:
+		ok = false
+	}
+	if !ok {
+		return no, false
+	}
+	f.pileRead = d.Source
+	f.res.PilePicks++
+	return in, true
+}
+
+// twoPilesDestinations is where a TwoPiles split's chosen and unchosen piles
+// go: each pile body's one ChangeZone destination, and for an absent
+// UnchosenPile$ the zone the offered cards are in (they stay). ok is false
+// when a body is no single-destination ChangeZone of the source's face, or
+// the offered cards are not all in one zone.
+func (f *follower) twoPilesDestinations(d *decision.Decision) (chosen, rest state.Zone, ok bool) {
+	sa := d.ResumeSA
+	if sa == nil || f.e == nil || f.e.G == nil || len(d.Options) == 0 {
+		return 0, 0, false
+	}
+	src := f.e.G.Obj(d.Source)
+	if src == nil || src.Face() == nil {
+		return 0, 0, false
+	}
+	svars := src.Face().SVars
+	body := func(name string) (state.Zone, bool) {
+		sub := cards.ResolveSVar(svars, strings.TrimSpace(name))
+		if sub == nil || sub.API != "ChangeZone" {
+			return 0, false
+		}
+		to, ok := changeZoneDestinations(sub)
+		if !ok || len(to) != 1 {
+			return 0, false
+		}
+		return to[0], true
+	}
+	var from state.Zone
+	for i, o := range d.Options {
+		obj := f.e.G.Obj(o.Obj)
+		if obj == nil || (i > 0 && obj.Zone != from) {
+			return 0, 0, false
+		}
+		from = obj.Zone
+	}
+	if chosen, ok = body(sa.ParamStr(cards.PKChosenPile)); !ok {
+		return 0, 0, false
+	}
+	rest = from
+	if u := strings.TrimSpace(sa.ParamStr(cards.PKUnchosenPile)); u != "" {
+		if rest, ok = body(u); !ok {
+			return 0, 0, false
+		}
+	}
+	return chosen, rest, true
+}
+
 // pickRoute is where an ask sends the cards it offers, the ones the answer
 // names (chosen) and the ones it leaves out (rest): whether they leave the
 // zone they are offered from, and whether they reach a hand.
@@ -2709,9 +2883,9 @@ func (f *follower) handArriveChoose(d *decision.Decision) (decision.Intent, bool
 		return decision.Intent{}, false
 	}
 	// A draw_upto ask offers the library's own top cards, so a later draw
-	// step takes exactly a card the ask offered: read it only from a snapshot
-	// of the step gorge is asking in.
-	if d.ResumeKind == "draw_upto" && at(int(snap.Turn), snap.Step) != f.gorgeAt() {
+	// step of the drawing seat takes exactly a card the ask offered: read it
+	// only when no such draw step lies between the ask and the snapshot.
+	if d.ResumeKind == "draw_upto" && f.turnDrawBefore(int(f.e.G.Obj(d.Options[0].Obj).Owner), snap) {
 		return decision.Intent{}, false
 	}
 	now := Snapshot(f.e, "")

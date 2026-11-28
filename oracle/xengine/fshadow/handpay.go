@@ -41,9 +41,10 @@ import (
 // Forge's line does not always name the gorge option its seat took
 // (abilityWays). The search tries colour choices until its offer appears, so an
 // offer that accepted any of them would steer into the cheaper one. A cast is
-// therefore paid by hand only when neither engine had a second way to cast the
-// card (soleCast), an activation only when both list as many abilities
-// (forgeAbility).
+// therefore paid by hand only for one option (handOffer): the one in the way the
+// line's ability index names, or the plain cast when neither engine had a second
+// way to cast the card (soleCast). An activation is paid by hand only when both
+// list as many abilities (forgeAbility).
 
 // maxPaySubmits bounds one search, in decisions submitted to clones.
 const maxPaySubmits = 4096
@@ -94,6 +95,31 @@ func soleCast(e *rules.Engine, a *Ask, obj state.ObjID) bool {
 		}
 	}
 	return a.Answer.Mode == "" && listed <= 1 && plainCast(unconstrained(e), obj) >= 0
+}
+
+// handOffer is the offer a payment by hand of Forge's cast a of obj looks for:
+// the index in a priority decision of the one gorge option a names, or -1. When
+// the ability index alone left one way of ws (named, abilityWays), that is
+// gorge's option of obj in it, if gorge has just one whatever the mana;
+// otherwise only a sole plain cast (soleCast) is named. False when a names no
+// one option. e is not changed.
+func handOffer(e *rules.Engine, a *Ask, obj state.ObjID, ws []way, named bool) (func(*decision.Decision) int, bool) {
+	if named {
+		want, ok := onlyIn(unconstrained(e), obj, ws[0])
+		return func(d *decision.Decision) int { return optionOf(d, want) }, ok
+	}
+	return func(d *decision.Decision) int { return plainCast(d.Options, obj) }, soleCast(e, a, obj)
+}
+
+// onlyIn is obj's one option of way w in opts; false when it has none or more.
+func onlyIn(opts []decision.Option, obj state.ObjID, w way) (found decision.Option, ok bool) {
+	n := 0
+	for _, o := range opts {
+		if o.Obj == obj && wayOf(o) == w {
+			found, n = o, n+1
+		}
+	}
+	return found, n == 1
 }
 
 // forgeAbility is the gorge ability option of obj that Forge's activate answer a

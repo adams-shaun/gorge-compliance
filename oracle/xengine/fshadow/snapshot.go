@@ -68,14 +68,8 @@ func Snapshot(e *rules.Engine, checkpoint string) rules.OracleSnapshot {
 		sort.Strings(types)
 		kws := append([]string(nil), e.Keywords(id)...)
 		sort.Strings(kws)
-		name := objName(o)
-		if o.FaceDown {
-			name = ""
-		} else if d.NameSet {
-			name = d.Name
-		}
 		p := rules.OracleSnapPerm{
-			Ref: ref(o), Name: name, Controller: int(o.Controller), Owner: int(o.Owner),
+			Ref: ref(o), Name: shownName(e, o), Controller: int(o.Controller), Owner: int(o.Owner),
 			Token: o.IsToken, Tapped: o.Tapped, FaceDown: o.FaceDown, Damage: o.Damage,
 			Counters: counters(o.Counters), Types: types, AllCreatureTypes: d.AllCreatureTypes,
 			Colors: e.Colors(id), Keywords: kws,
@@ -108,6 +102,18 @@ func Snapshot(e *rules.Engine, checkpoint string) rules.OracleSnapshot {
 		s.Stack = append(s.Stack, it)
 	}
 	return s
+}
+
+// shownName is permanent o's name as a snapshot shows it: none while face down
+// (CR 708.2a), else the name an effect set, else its face's.
+func shownName(e *rules.Engine, o *state.Object) string {
+	if o.FaceDown {
+		return ""
+	}
+	if d := e.Derived(o.ID); d.NameSet {
+		return d.Name
+	}
+	return objName(o)
 }
 
 func objName(o *state.Object) string {
