@@ -1,6 +1,7 @@
 package main
 
 import (
+	"maps"
 	"os"
 	"path/filepath"
 	"strings"
@@ -194,5 +195,34 @@ func TestKeyproofSeedNotInCorpus(t *testing.T) {
 				t.Errorf("row %d column %s: %q, want %q", i, k, r[k], v)
 			}
 		}
+	}
+}
+
+func TestKeyproofSeedMultiplayerCell(t *testing.T) {
+	corpus := seedCorpus(t)
+	// An original card: its cast reads nobody, its ability reads an opponent.
+	script := "Name:Seat Herald\nManaCost:1 B\nTypes:Creature Human\nPT:1/1\n" +
+		"A:AB$ LoseLife | Cost$ T | Defined$ Opponent | LifeAmount$ 1\n"
+	if err := os.WriteFile(filepath.Join(corpus, "cardsfolder", "a", "herald.txt"), []byte(script), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	herald, missing := "bbbb"+strings.Repeat("0", 28), "ffff"+strings.Repeat("0", 28)
+	summary, rows := runSeed(t, corpus,
+		writeScope(t, []string{herald + "\tSeat Herald", missing + "\tNoSuch Card"}), t.TempDir())
+	got := map[string]string{}
+	for _, r := range rows {
+		got[r["oracle_id"]+" "+r["key"]+" "+r["leg"]] = r["multiplayer"]
+	}
+	want := map[string]string{}
+	for _, leg := range []string{"xmage", "lockstep"} {
+		want[herald+" f0/a0 "+leg] = "true"
+		want[herald+" cast "+leg] = "false"
+		want[missing+" cast "+leg] = "false"
+	}
+	if !maps.Equal(got, want) {
+		t.Errorf("multiplayer cells %v, want %v", got, want)
+	}
+	if !strings.Contains(summary, "multiplayer: 1 of 3 keys flagged") {
+		t.Errorf("summary %q does not count the flagged keys", summary)
 	}
 }

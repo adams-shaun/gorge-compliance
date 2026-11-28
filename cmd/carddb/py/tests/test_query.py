@@ -1098,3 +1098,110 @@ class TestScopeCards(Base):
         r = self.cli(self.tmp, "export", "scope", "--tsv", "--db", db)
         self.assertEqual(r.returncode, 2, r.stderr)
         self.assertIn("no scope_cards view", r.stderr)
+
+
+class TestHeadline(Base):
+    """`carddb headline`: the held-out deck share proven at four seats, plus its supporting numbers."""
+
+    def setUp(self):
+        super().setUp()
+        self.home = os.path.join(self.tmp, "headline")
+        a = self.machine("headline", init=True)
+        names = {OID_A: "Proven One", OID_B: "Proven Two", OID_C: "Unproven", OID_D: "No Row"}
+        a.put("cards", [{"oracle_id": oid, "name": n, "layout": "normal", "mana_value": 1,
+                         "type_line": "Instant", "paper": True} for oid, n in names.items()],
+              writer="catalogue")
+        a.put("legality", [{"oracle_id": oid, "format": "commander", "status": "legal"} for oid in names],
+              writer="catalogue")
+        rows = []
+        for oid in (OID_A, OID_B):  # proven: a witnessed xmage leg plus lockstep, both fresh
+            rows.append(keyproof_row(oid, "cast", "agreed", leg="xmage", refs="X", witness="xs:w",
+                                     measured="2026-11-20"))
+            rows.append(keyproof_row(oid, "cast", "agreed", leg="lockstep", measured="2026-11-23"))
+        rows.append(keyproof_row(OID_C, "cast", "owed", leg="xmage", reason="no-generator"))
+        a.put("keyproof", rows, writer="xproof")
+        src = os.path.join(self.tmp, "headline-src")
+        write(os.path.join(src, "carddb/curated/exclusions.tsv"),
+              "#carddb curated/exclusions v1\noracle_id\treason\n")
+        committed = build_mod.read_committed(directory=src)
+        self.pub = os.path.join(self.tmp, "carddb.sqlite")
+        build_mod.build(self.pub, self.schema, a.dir, None, committed)
+        os.environ["CARDDB_PRIVATE_REMOTE"] = os.path.join(self.tmp, "private.git")
+        self.addCleanup(os.environ.pop, "CARDDB_PRIVATE_REMOTE", None)
+        git("init", "--bare", "--quiet", os.environ["CARDDB_PRIVATE_REMOTE"])
+        p = Store("private", home=self.home, schema=self.schema).init()
+        p.put("decks", [
+            {"deck_id": "h1", "oracle_id": OID_A, "count": 1},  # all proven, seats four
+            {"deck_id": "h1", "oracle_id": OID_B, "count": 1},
+            {"deck_id": "h2", "oracle_id": OID_A, "count": 1},  # all proven, not four-seat
+            {"deck_id": "h3", "oracle_id": OID_A, "count": 1},  # one unproven card
+            {"deck_id": "h3", "oracle_id": OID_C, "count": 1},
+            {"deck_id": "r1", "oracle_id": OID_A, "count": 1},  # ranking half: never counted
+        ], writer="decklib")
+        self.priv = os.path.join(self.tmp, "carddb-private.sqlite")
+        build_mod.build(self.priv, self.schema, a.dir, p.dir, committed)
+        # deck_sample is declared by the deck-support work; the fixture creates it by hand.
+        conn = sqlite3.connect(self.priv)
+        conn.execute("CREATE TABLE deck_sample (deck_id TEXT, half TEXT, bracket TEXT, dirac_four_seat INTEGER)")
+        conn.executemany("INSERT INTO deck_sample VALUES (?,?,?,?)", [
+            ("h1", "holdout", "cedh", 1), ("h2", "holdout", "casual", 0),
+            ("h3", "holdout", "cedh", 1), ("r1", "rank", "precon", 1)])
+        conn.commit()
+        conn.close()
+
+    def headline(self, private=False):
+        db = self.priv if private else self.pub
+        r = self.cli(self.home, "headline", "--db", db, "--now", "2026-12-01",
+                     *(["--private"] if private else []))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()]
+        self.assertEqual(rows[0], ["metric", "n", "of", "pct"])
+        return r.stdout, {row[0]: row[1:] for row in rows[1:]}
+
+    def golden(self, name, text):
+        path = os.path.join(GOLDEN, name)
+        if UPDATE:
+            write(path, text)
+        self.assertEqual(text, read(path), "golden %s differs (CARDDB_UPDATE_GOLDEN=1 rewrites it)" % name)
+
+    def test_private_decks_proven_counts_holdout_four_seat_fully_proven(self):
+        text, m = self.headline(private=True)
+        self.assertEqual(m["decks_proven:all"], ["1", "3", "33.3"])
+        self.assertEqual(m["decks_proven:cedh"], ["1", "2", "50.0"])
+        self.assertEqual(m["decks_proven:casual"], ["0", "1", "0.0"])
+        self.assertNotIn("decks_proven:precon", m)  # the ranking-half deck is not counted
+        metrics = [l.split("\t")[0] for l in text.splitlines()[1:]]
+        self.assertEqual(metrics[:4], ["decks_proven:all", "decks_proven:casual", "decks_proven:cedh",
+                                       "median_deck_share_pct"])
+        self.golden("query_headline_private.txt", text)
+
+    def test_median_over_holdout_shares(self):
+        # shares 100, 100, 50 -> median 100
+        _text, m = self.headline(private=True)
+        self.assertEqual(m["median_deck_share_pct"], ["100.0", "3", "-"])
+
+    def test_public_prints_dash_row_and_key_and_leg_rows(self):
+        text, m = self.headline()
+        self.assertEqual(m["decks_proven:all"], ["-", "-", "-"])
+        self.assertNotIn("median_deck_share_pct", m)
+        self.assertEqual(m["keys_proven"], ["2", "3", "-"])
+        self.assertEqual(m["keys_forge_only"], ["0", "3", "-"])
+        self.assertEqual(m["keys_unwitnessed"], ["0", "3", "-"])
+        self.assertEqual(m["keys_two_seat_only"], ["0", "3", "-"])
+        # oldest leg first: xmage last agreed 2026-11-20, lockstep 2026-11-23
+        self.assertEqual(m["leg_age_hours:xmage"], ["264", "2", "-"])
+        self.assertEqual(m["leg_age_hours:lockstep"], ["192", "2", "-"])
+        legs = [l.split("\t")[0] for l in text.splitlines() if l.startswith("leg_age_hours:")]
+        self.assertEqual(legs, ["leg_age_hours:xmage", "leg_age_hours:lockstep"])
+        self.golden("query_headline.txt", text)
+
+    def test_cards_without_a_row_counts_scope_card_with_no_keyproof(self):
+        _text, m = self.headline()
+        self.assertEqual(m["cards_without_a_row"], ["1", "4", "-"])
+
+    def test_deck_proven_view(self):
+        conn = sqlite3.connect(self.priv)
+        self.addCleanup(conn.close)
+        self.assertEqual(conn.execute("SELECT deck_id, cards, proven_cards, proven FROM deck_proven "
+                                      "ORDER BY deck_id").fetchall(),
+                         [("h1", 2, 2, 1), ("h2", 1, 1, 1), ("h3", 2, 1, 0), ("r1", 1, 1, 1)])

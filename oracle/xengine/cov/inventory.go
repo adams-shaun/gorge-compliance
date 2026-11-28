@@ -5,6 +5,8 @@ package cov
 
 import (
 	"fmt"
+	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
@@ -122,10 +124,7 @@ func Universe(c *cards.Card) []Key {
 			continue
 		}
 		for i, kw := range f.Keywords {
-			name := strings.TrimSpace(kw)
-			if j := strings.IndexByte(name, ':'); j >= 0 {
-				name = strings.TrimSpace(name[:j])
-			}
+			name := keywordName(kw)
 			if name == "" || levelb.IsCombatKeyword(name) || keywordExpanded(f, name) {
 				continue
 			}
@@ -138,6 +137,169 @@ func Universe(c *cards.Card) []Key {
 		}
 	}
 	return out
+}
+
+// keywordName is a keyword string without its ":"-separated parameters.
+func keywordName(kw string) string {
+	name, _, _ := strings.Cut(kw, ":")
+	return strings.TrimSpace(name)
+}
+
+// multiplayerTokens are the case-sensitive substrings that mark a script value
+// as reading something that differs with more than two players. Sorted.
+var multiplayerTokens = []string{
+	"ChoosePlayer", "Commander", "DefendingPlayer", "Goad", "Initiative", "Monarch",
+	"OppCtrl", "OppOwn", "Opponent", "Player.Other", "Vote",
+}
+
+// multiplayerKeywords are the keywords that mark a key by name. Sorted.
+var multiplayerKeywords = []string{"Dethrone", "Encore", "Melee", "Myriad"}
+
+// MultiplayerTokens is every listed token followed by every listed keyword name,
+// the list docs/oracles.md prints. The slice is the caller's.
+func MultiplayerTokens() []string { return slices.Concat(multiplayerTokens, multiplayerKeywords) }
+
+// Multiplayer reports whether key id of c reads something that differs with more
+// than two players. It judges the key's own script text only, never the card's
+// name: the effect names and parameter values of the key's IR node and of what
+// it executes (a spell mode: the raw SVar its choice names; a keyword: the
+// keyword string). A value holding a token of MultiplayerTokens flags the key,
+// as does a Defined or ValidPlayers of exactly "Player" (each player) and a
+// listed keyword, either unexpanded (a kw# key) or named by the Keyword param
+// of the entry the loader expanded it into. A combat# key is never flagged, nor
+// is an id the card does not hold.
+func Multiplayer(c *cards.Card, id string) bool {
+	if c == nil {
+		return false
+	}
+	switch Family(id) {
+	case "cast", "land":
+		if f := faceAt(c, 0); f != nil {
+			for _, a := range f.Abilities {
+				if a != nil && a.Kind == "SP" && multiplayerChain(a) {
+					return true
+				}
+			}
+		}
+	case "activated":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "f"), "/a", 2); ok && n[1] < len(f.Abilities) {
+			return multiplayerChain(f.Abilities[n[1]])
+		}
+	case "trigger":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "f"), "/t", 2); ok && n[1] < len(f.Triggers) {
+			t := f.Triggers[n[1]]
+			return multiplayerParams(t.Params) || multiplayerChain(t.Effect)
+		}
+	case "mode":
+		f, n, ok := keyEntry(c, strings.TrimPrefix(id, "mode#"), ".", 3)
+		if !ok || n[1] >= len(f.Abilities) || f.Abilities[n[1]] == nil {
+			return false
+		}
+		choices := strings.Split(f.Abilities[n[1]].Params["Choices"], ",")
+		if n[2] < len(choices) {
+			return multiplayerRaw(f.SVars[strings.TrimSpace(choices[n[2]])])
+		}
+	case "static":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "static#"), ".", 2); ok && n[1] < len(f.Statics) {
+			return multiplayerParams(f.Statics[n[1]].Params)
+		}
+	case "repl":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "repl#"), ".", 2); ok && n[1] < len(f.Repls) {
+			r := f.Repls[n[1]]
+			return multiplayerParams(r.Params) || multiplayerChain(r.With)
+		}
+	case "keyword":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "kw#"), ".", 2); ok && n[1] < len(f.Keywords) {
+			kw := f.Keywords[n[1]]
+			return hasMultiplayerToken(kw) || slices.Contains(multiplayerKeywords, keywordName(kw))
+		}
+	}
+	return false
+}
+
+// faceAt is c's face i, or nil when the card has none.
+func faceAt(c *cards.Card, i int) *cards.Face {
+	if i >= len(c.Faces) {
+		return nil
+	}
+	return c.Faces[i]
+}
+
+// keyEntry parses the want sep-separated indices of a key id (its prefix already
+// removed), the first of them a face of c. ok is false for a malformed id or a
+// face the card does not have; the caller bounds the remaining indices.
+func keyEntry(c *cards.Card, s, sep string, want int) (*cards.Face, []int, bool) {
+	parts := strings.Split(s, sep)
+	if len(parts) != want {
+		return nil, nil, false
+	}
+	n := make([]int, want)
+	for i, p := range parts {
+		v, err := strconv.Atoi(p)
+		if err != nil || v < 0 {
+			return nil, nil, false
+		}
+		n[i] = v
+	}
+	f := faceAt(c, n[0])
+	return f, n, f != nil
+}
+
+// maxSubChain stops a cyclic Sub walk; it is past any chain the loader links.
+const maxSubChain = 64
+
+// multiplayerChain reads sa and its Sub chain. The effect name ("DB$ Goad") is
+// a script value too; the loader keeps it in API rather than Params.
+func multiplayerChain(sa *cards.SA) bool {
+	for d := 0; sa != nil && d < maxSubChain; d, sa = d+1, sa.Sub {
+		if hasMultiplayerToken(sa.API) || multiplayerParams(sa.Params) {
+			return true
+		}
+	}
+	return false
+}
+
+// multiplayerParams reports whether any one parameter flags its key. The result
+// does not depend on the map's order.
+func multiplayerParams(params map[string]string) bool {
+	for name, v := range params {
+		if multiplayerParam(name, v) {
+			return true
+		}
+	}
+	return false
+}
+
+func multiplayerParam(name, v string) bool {
+	switch name {
+	case "Defined", "ValidPlayers":
+		if strings.TrimSpace(v) == "Player" {
+			return true
+		}
+	case "Keyword":
+		// An expanded keyword has no kw# key: its entry carries the name here.
+		if slices.Contains(multiplayerKeywords, keywordName(v)) {
+			return true
+		}
+	}
+	return hasMultiplayerToken(v)
+}
+
+// multiplayerRaw judges an unparsed "Key$ value | ..." script body.
+func multiplayerRaw(body string) bool {
+	if hasMultiplayerToken(body) {
+		return true
+	}
+	for seg := range strings.SplitSeq(body, "|") {
+		if name, v, ok := strings.Cut(seg, "$"); ok && multiplayerParam(strings.TrimSpace(name), strings.TrimSpace(v)) {
+			return true
+		}
+	}
+	return false
+}
+
+func hasMultiplayerToken(v string) bool {
+	return slices.ContainsFunc(multiplayerTokens, func(t string) bool { return strings.Contains(v, t) })
 }
 
 // keywordExpanded reports whether the loader turned a printed keyword into an
