@@ -39,6 +39,8 @@ type keyproofArgs struct {
 	Measured, GorgeSHA, CorpusPin string
 	XRef, FRef                    string
 	Out                           string
+	Seed                          bool
+	Scope                         string
 }
 
 func runKeyproof(args []string) error {
@@ -60,7 +62,25 @@ func runKeyproof(args []string) error {
 	fs.StringVar(&a.XRef, "xmage-ref", "", "XMage ref stamped on rows")
 	fs.StringVar(&a.FRef, "forge-ref", "", "Forge ref stamped on rows")
 	fs.StringVar(&a.Out, "out", "", "output dir, outside the repository (required)")
+	fs.BoolVar(&a.Seed, "seed", false, "write the key universe of every card of -scope as owed seed rows instead of proving a play")
+	fs.StringVar(&a.Scope, "scope", "", "scope file: tab-separated oracle_id<TAB>name, one card per line (the scope_cards view)")
 	fs.Parse(args)
+	if a.GorgeSHA == "" {
+		if b, err := os.ReadFile("GORGE_PIN"); err == nil {
+			a.GorgeSHA = strings.TrimSpace(string(b))
+			a.GorgeSHA = a.GorgeSHA[:min(12, len(a.GorgeSHA))]
+		}
+	}
+	if a.Seed {
+		if a.Scope == "" || a.Out == "" || a.Measured == "" {
+			return fmt.Errorf("keyproof -seed needs -scope, -measured and -out")
+		}
+		reg, err := loadReg(a.Cards)
+		if err != nil {
+			return err
+		}
+		return seedKeyproof(reg, a.Scope, a.Cards, a.Measured, a.GorgeSHA, a.Out)
+	}
 	if a.Play == "" || a.XDiff == "" || a.FDiff == "" || a.Adjudicate == "" || a.Out == "" || a.Measured == "" {
 		return fmt.Errorf("keyproof needs -play, -xmage, -forge, -adjudicate, -measured and -out")
 	}
@@ -72,12 +92,6 @@ func runKeyproof(args []string) error {
 	}
 	if a.PRows == "" {
 		a.PRows = filepath.Join(a.Play, "phase.jsonl")
-	}
-	if a.GorgeSHA == "" {
-		if b, err := os.ReadFile("GORGE_PIN"); err == nil {
-			a.GorgeSHA = strings.TrimSpace(string(b))
-			a.GorgeSHA = a.GorgeSHA[:min(12, len(a.GorgeSHA))]
-		}
 	}
 	reg, err := loadReg(a.Cards)
 	if err != nil {

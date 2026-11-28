@@ -277,11 +277,15 @@ def _derived(conn, schema, texts):
     conn.execute("CREATE INDEX idx_card_names_oracle_id ON card_names (oracle_id)")
     # Imported here: query imports this module for `q`/`sql_name`, so a
     # module-level import would be circular.
-    from .query import (KEYPROOF_CARDS_VIEW_SQL, KEYPROOF_KEYS_VIEW_SQL, PROVEN_KEYS_VIEW_SQL,
+    from .query import (CARD_PROVEN_VIEW_SQL, KEY_LEGS_VIEW_SQL, KEY_PROVEN_VIEW_SQL,
+                        KEYPROOF_CARDS_VIEW_SQL, KEYPROOF_KEYS_VIEW_SQL, PROVEN_KEYS_VIEW_SQL,
                         PROVEN_VIEW_SQL, SCOPE_CARDS_VIEW_SQL)
     conn.execute(PROVEN_VIEW_SQL)
     conn.execute(KEYPROOF_KEYS_VIEW_SQL)
     conn.execute(KEYPROOF_CARDS_VIEW_SQL)
+    conn.execute(KEY_LEGS_VIEW_SQL)
+    conn.execute(KEY_PROVEN_VIEW_SQL)
+    conn.execute(CARD_PROVEN_VIEW_SQL)
     conn.execute(PROVEN_KEYS_VIEW_SQL)
     # Scope needs the legality table. A partial build without it has no
     # denominator; readers report the missing view instead of guessing.
