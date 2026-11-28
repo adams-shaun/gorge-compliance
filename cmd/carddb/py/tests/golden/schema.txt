@@ -41,7 +41,7 @@ CREATE TABLE "curated_labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL,
 CREATE TABLE "curated_relations" ("oracle_id" TEXT NOT NULL, "relation" TEXT NOT NULL, "other_oracle_id" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "relation", "other_oracle_id")) WITHOUT ROWID;
 CREATE TABLE "evidence" ("oracle_id" TEXT NOT NULL, "source" TEXT NOT NULL, "ref" TEXT NOT NULL, "outcome" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "source", "ref")) WITHOUT ROWID;
 CREATE TABLE "faces" ("oracle_id" TEXT NOT NULL, "face" TEXT NOT NULL, "mana_cost" TEXT, "type_line" TEXT NOT NULL, "power" TEXT, "toughness" TEXT, PRIMARY KEY ("oracle_id", "face")) WITHOUT ROWID;
-CREATE TABLE "keyproof" ("oracle_id" TEXT NOT NULL, "key" TEXT NOT NULL, "desc" TEXT, "state" TEXT NOT NULL, "reason" TEXT, "refs" TEXT, "source" TEXT, "agree_items" INTEGER, "diff_items" INTEGER, "witness" TEXT, "sig" TEXT, "cite" TEXT, "ticket" TEXT, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT, "script_sha" TEXT, "xmage_ref" TEXT, "forge_ref" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "key")) WITHOUT ROWID;
+CREATE TABLE "keyproof" ("oracle_id" TEXT NOT NULL, "key" TEXT NOT NULL, "leg" TEXT NOT NULL, "desc" TEXT, "state" TEXT NOT NULL, "reason" TEXT, "refs" TEXT, "source" TEXT, "agree_items" INTEGER, "diff_items" INTEGER, "witness" TEXT, "sig" TEXT, "cite" TEXT, "ticket" TEXT, "seats" INTEGER NOT NULL, "multiplayer" INTEGER NOT NULL, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT, "script_sha" TEXT, "xmage_ref" TEXT, "forge_ref" TEXT, "measured" TEXT NOT NULL, "replayed" TEXT, "replayed_sha" TEXT, "writer" TEXT, PRIMARY KEY ("oracle_id", "key", "leg")) WITHOUT ROWID;
 CREATE TABLE "labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "origin" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
 CREATE TABLE "legality" ("oracle_id" TEXT NOT NULL, "format" TEXT NOT NULL, "status" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "format")) WITHOUT ROWID;
 CREATE TABLE "printings" ("printing_id" TEXT NOT NULL, "oracle_id" TEXT NOT NULL, "set_code" TEXT NOT NULL, "collector_number" TEXT NOT NULL, "rarity" TEXT NOT NULL, "released" TEXT, PRIMARY KEY ("printing_id")) WITHOUT ROWID;
@@ -53,7 +53,20 @@ CREATE TABLE src_manifest_sets (code TEXT NOT NULL, name TEXT, released TEXT, se
 CREATE TABLE "status" ("oracle_id" TEXT NOT NULL, "level" TEXT NOT NULL, "verdict" TEXT NOT NULL, "gorge_pin" TEXT NOT NULL, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "level")) WITHOUT ROWID;
 CREATE TABLE "support" ("oracle_id" TEXT NOT NULL, "engine" TEXT NOT NULL, "status" TEXT NOT NULL, "pin" TEXT NOT NULL, "why" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id", "engine")) WITHOUT ROWID;
 CREATE TABLE "xledger" ("oracle_id" TEXT NOT NULL, "tier" TEXT NOT NULL, "state" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "tier")) WITHOUT ROWID;
-CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, CAST(COUNT(*) AS INTEGER) AS keys, CAST(SUM(k.state='agreed') AS INTEGER) AS agreed, CAST(SUM(k.state='diagnosed') AS INTEGER) AS diagnosed, CAST(SUM(k.state='diverged') AS INTEGER) AS diverged, CAST(SUM(k.state='owed') AS INTEGER) AS owed, CAST(SUM(k.state='excluded') AS INTEGER) AS excluded, CAST(CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) AND SUM(k.state IN ('agreed','diagnosed'))>0 AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS INTEGER) AS proven FROM keyproof k GROUP BY k.oracle_id;
+CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, CAST(COUNT(*) AS INTEGER) AS keys, CAST(SUM(k.state='agreed') AS INTEGER) AS agreed, CAST(SUM(k.state='diagnosed') AS INTEGER) AS diagnosed, CAST(SUM(k.state='diverged') AS INTEGER) AS diverged, CAST(SUM(k.state='owed') AS INTEGER) AS owed, CAST(SUM(k.state='excluded') AS INTEGER) AS excluded, CAST(CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) AND SUM(k.state IN ('agreed','diagnosed'))>0 AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS INTEGER) AS proven FROM keyproof_keys k GROUP BY k.oracle_id;
+CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key",
+  CAST(MAX(k."desc") AS TEXT) AS "desc",
+  CAST(CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
+       WHEN SUM(k.leg IN ('xmage','forge') AND k.state='agreed') > 0 THEN 'agreed'
+       WHEN SUM(k.leg='cite' AND (k.state='diagnosed'
+                OR (k.state='owed' AND k.reason='diagnosed-no-cite'))) > 0 THEN 'diagnosed'
+       WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS TEXT) AS state,
+  CAST(MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS TEXT) AS reason,
+  CAST(CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'
+       WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 THEN 'X'
+       WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS TEXT) AS refs,
+  CAST(MAX(k.sig) AS TEXT) AS sig, CAST(MAX(k.ticket) AS TEXT) AS ticket
+FROM keyproof k WHERE k.leg IN ('xmage','forge','cite') GROUP BY k.oracle_id, k."key";
 CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2', 'C3') AND (exclusion IS NULL OR exclusion = '-');
 CREATE VIEW proven_keys AS SELECT c.* FROM cards c JOIN keyproof_cards k USING (oracle_id) WHERE k.proven = 1;
 CREATE VIEW scope_cards AS SELECT c.oracle_id AS oracle_id, c.name AS name FROM cards c WHERE c.paper = 1 AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id = c.oracle_id AND l.format = 'commander' AND l.status = 'legal') AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions);

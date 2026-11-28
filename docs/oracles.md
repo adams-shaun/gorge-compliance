@@ -41,6 +41,20 @@ only are committed, along with `known_bug` rows that must keep failing
 **Run:** `make oracle-audit`. To regenerate, run `go run ./cmd/xmageport -mage <Mage.Tests test
 root> -out <dir>`, which reads an XMage checkout.
 
+**Dropped choices:** when an XMage test scripts a `setChoice`/`addTarget` that gorge never asks
+for, the translator drops that choice and the scenario's `why` records how many were dropped. A
+choice XMage asks and gorge does not is a difference between the two engines, so each such test
+gets a row in `cmd/xmageport/dropped_choices.tsv` (`xmage`, `dropped`, `class`, `cr`, `note`) to
+triage rather than resting as prose: `xmage-extra-ask` (the rules need no choice there),
+`setup-trigger` (the answer belongs to a setup permanent's trigger the format can't script),
+`harness` (a translation limit), or `gorge-missing-ask` -- the rules give the player a choice
+gorge makes for them, which is a **gorge defect** and becomes a gorge ticket, never a workaround
+here. `go run ./cmd/xmageport -commit` rewrites the record from the committed scenarios: a row
+whose count did not change keeps its triage, while a row whose count changed returns to untriaged
+but keeps its `cr` and `note` as context for the re-triage;
+`TestDroppedChoicesRecordMatchesScenarios` fails when record and scenarios disagree in either
+direction.
+
 ## XMage verdicts
 
 **Checks:** `oraclediff gen` writes scenarios per card from the set's manifest:
