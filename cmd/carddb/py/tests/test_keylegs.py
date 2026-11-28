@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import unittest
 
 from carddb import keylegs, shard
 from carddb.query import KEYPROOF_CARDS_VIEW_SQL, KEYPROOF_KEYS_VIEW_SQL
@@ -10,6 +11,28 @@ from .test_query import GORGE, legacy_row, read, write_legacy_shards
 
 def legs(row):
     return [(r["leg"], r["state"], r["refs"], r["reason"], r["witness"]) for r in keylegs.split_legacy(row)]
+
+
+class TestSeedPruneRule(unittest.TestCase):
+    def test_only_untried_seed_rows_absent_from_the_batch(self):
+        def stored(oid, key, leg, state="owed", reason="untried", writer="seed"):
+            return "keyproof/ab.tsv", (oid, key, leg), {"state": state, "reason": reason, "writer": writer}
+
+        rows = [
+            stored(OID_A, "f0/a1", "xmage"),                                   # dropped
+            stored(OID_A, "cast", "xmage", reason="not-in-corpus"),            # dropped
+            stored(OID_A, "f0/a0", "xmage"),                                   # named by the batch
+            stored(OID_A, "f0/a0", "forge", writer="xproof"),                  # its key is named: no orphan
+            stored(OID_A, "f0/a2", "xmage", state="agreed", reason="-"),       # measured
+            stored(OID_A, "f0/a3", "xmage", reason="harness:x"),               # worked on
+            stored(OID_A, "static#0.0", "xmage", writer="xproof"),             # orphan, one key ...
+            stored(OID_A, "static#0.0", "forge", writer="replay"),             # ... however many rows
+            stored(OID_B, "cast", "xmage", writer="xproof"),                   # orphan
+        ]
+        drop, orphans = keylegs.seed_prune(iter(rows), {(OID_A, "f0/a0", "xmage")})
+        self.assertEqual(drop, [("keyproof/ab.tsv", (OID_A, "cast", "xmage")),
+                                ("keyproof/ab.tsv", (OID_A, "f0/a1", "xmage"))])
+        self.assertEqual(orphans, 2)
 
 
 class TestKeyLegs(Base):
