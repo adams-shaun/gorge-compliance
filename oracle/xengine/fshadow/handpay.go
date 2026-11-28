@@ -136,7 +136,7 @@ func optionOf(d *decision.Decision, want decision.Option) int {
 // paySearch is one depth-first search for the activations behind an offer.
 type paySearch struct {
 	f       *follower
-	targets []Ref // the line's cast targets
+	ask     *Ask // the line being paid
 	player  state.PlayerID
 	sources []state.ObjID // distinct, in Forge's tap order
 	stack   int           // stack depth before the first activation
@@ -152,7 +152,7 @@ type paySearch struct {
 // that follow. False, with nothing changed, when no activation order and colour
 // choice reaches an offer the floating mana pays.
 func (f *follower) payByHand(d *decision.Decision, a *Ask, tapped []state.ObjID, offer func(*decision.Decision) int) (decision.Intent, bool) {
-	s := &paySearch{f: f, targets: a.Answer.Targets, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits}
+	s := &paySearch{f: f, ask: a, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits}
 	for _, id := range tapped {
 		if !slices.Contains(s.sources, id) {
 			s.sources = append(s.sources, id)
@@ -269,10 +269,11 @@ func (s *paySearch) submit(e *rules.Engine, in decision.Intent) *rules.Engine {
 // convoke pick, the mana window, a sacrifice) the follow would answer by
 // default, which may tap or spend what Forge did not.
 func (s *paySearch) settles(e *rules.Engine, i int) bool {
-	// The trial answers targets as the follow will, then puts them back.
-	targets, seat := s.f.castTargets, s.f.castSeat
-	defer func() { s.f.castTargets, s.f.castSeat = targets, seat }()
-	s.f.castTargets, s.f.castSeat = s.targets, int(s.player)
+	// The trial answers targets as the follow will, from this line's targets
+	// remembered on a copy of the follower: the follow's own memory stays.
+	trial := *s.f
+	trial.castTargets = nil
+	trial.rememberCastTargets(s.ask)
 	in := decision.Intent{Choices: []int{i}}
 	for range maxSettle {
 		if e = s.submit(e, in); e == nil {
@@ -288,10 +289,14 @@ func (s *paySearch) settles(e *rules.Engine, i int) bool {
 		case decision.KModes:
 			in = modeIntent(d)
 		case decision.KTarget:
-			var ok bool
-			if in, ok = s.f.answerCastTargets(d); !ok {
-				in = s.f.defaultTargets(d)
+			answered, ok, dv := trial.answerCastTargets(d)
+			if dv != nil {
+				return false // the follow would stop here
 			}
+			if !ok {
+				answered = trial.defaultTargets(d)
+			}
+			in = answered
 		case decision.KTriggerOrder, decision.KTriggerOptional:
 			in = firstMin(d)
 		default:
