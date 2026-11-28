@@ -6,14 +6,31 @@ Usage: cr_example_ledger.py <rules-text> <ledger>
 Reads the rules text the way gorge's rules-index script does: "\\r" and form
 feeds are dropped, the body lies between the second "1. Game Concepts" line
 and the second "Glossary" line, and a line starting "Example:" belongs to the
-last rule or subrule heading before it. A wrapped line that merely begins
-with a rule id (a cross-reference such as "601.2b and 601.2f-h.") is not a
-heading: the text moves forward in rule order and a heading starts a
-paragraph. Prints the (rule, n) pairs the ledger
-lacks or has in excess; writes nothing. The rules text is not in this
-repository and is never committed; the script is run by hand when the pinned
-text changes. Expected output for the 2026-08-07 text, against an empty
-ledger: 277 pairs on 215 rules.
+last rule or subrule heading before it.
+
+A wrapped line that merely begins with a rule id (a cross-reference such as
+"601.2b and 601.2f-h.") is not a heading. Four properties of the format rule
+it out; a differently shaped wrap fails at least one of them:
+
+- a rule id is a heading only the first time it appears (gorge's cr_index.py
+  keeps the first row for an id); a later occurrence is a cross-reference;
+- the text only moves forward in rule order;
+- a heading starts a paragraph (the previous line is blank, ends a sentence,
+  or is itself a heading); and
+- a heading starts a sentence, so its text begins with a capital letter, a
+  digit or punctuation, while a wrapped reference continues a sentence with
+  a lowercase word such as "and", "has" or "for".
+
+A forward reference to a rule the text has not reached, on a line that starts
+a paragraph and whose text continues with a capitalised word, satisfies all
+four properties and cannot be told from a heading. The 2026-08-07 text
+contains no such line; the tests pin the lowercase wrap that would otherwise
+silently steal an example.
+
+Prints the (rule, n) pairs the ledger lacks or has in excess; writes nothing.
+The rules text is not in this repository and is never committed; the script
+is run by hand when the pinned text changes. Expected output for the
+2026-08-07 text, against an empty ledger: 277 pairs on 215 rules.
 
 A row the ledger lacks prints as
 
@@ -103,6 +120,7 @@ def _headingish(line):
 def example_pairs(text):
     """[(rule, n)] for every worked example, in rule order then ordinal."""
     counts = {}
+    seen = set()
     last_rule = None
     last_key = None
     lines = body_lines(text)
@@ -118,9 +136,16 @@ def example_pairs(text):
             continue
         rule = "%s.%s%s" % (m.group(1), m.group(2), m.group(3))
         key = rule_sort_key(rule)
+        if rule in seen:
+            # Only the first appearance of an id is its heading; a later one
+            # ("see rule 601.2b") is a cross-reference.
+            continue
+        if raw[m.end() - 1].islower():
+            # A heading starts a sentence; a wrapped cross-reference
+            # continues one with a lowercase word ("601.2b and ...").
+            continue
         if last_key is not None and key <= last_key:
-            # A wrapped cross-reference ("601.2b and 601.2f-h.") begins with
-            # a rule id, but the rules text only ever moves forward.
+            # The rules text only ever moves forward.
             continue
         if i > 0:
             prev = lines[i - 1].rstrip()
@@ -128,6 +153,7 @@ def example_pairs(text):
                     and not PARAGRAPH_END_RE.search(prev) and not _headingish(prev)):
                 # A line wrapped out of the preceding sentence, not a heading.
                 continue
+        seen.add(rule)
         last_rule, last_key = rule, key
     pairs = []
     for rule in sorted(counts, key=rule_sort_key):

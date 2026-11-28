@@ -26,18 +26,19 @@ SYNTHETIC = (
     "Glossary\n"
 )
 
-# A wrapped cross-reference that starts a continuation line. The splice rule
-# reflows into "601.2b and 601.2f-h."; that is prose, not a heading, and the
-# example after it belongs to the subrule that was already open.
+# A wrapped cross-reference that starts a continuation line. The invented
+# keyword text reflows into "601.2b and 601.2f-h."; that is prose, not a
+# heading, and the example after it belongs to the subrule that was already
+# open.
 WRAPPED_BACKWARD = (
     "1. Game Concepts\n"
     "Glossary\n"
     "1. Game Concepts\n"
-    "   601.2b Some rule about costs.\n"
-    "   702.47a Splice is a static ability that functions while a card is in your hand.\n"
-    "      Paying a card's splice cost follows the rules for paying additional costs in\n"
+    "   601.2b Some rule about invented costs.\n"
+    "   702.47a Flibbertigibbet is a keyword this test invents for itself.\n"
+    "      Working through its invented procedure follows the made-up steps in\n"
     "      601.2b and 601.2f–h.\n"
-    "              Example: The card with splice stays in the player's hand.\n"
+    "              Example: The made-up card stays where this fixture puts it.\n"
     "\fGlossary\n"
     "Glossary\n"
 )
@@ -51,6 +52,21 @@ WRAPPED_FORWARD = (
     "   700.1. Some rule that points elsewhere.\n"
     "      See rule\n"
     "      900.4 for the details.\n"
+    "         Example: Still an example of 700.1.\n"
+    "\fGlossary\n"
+    "Glossary\n"
+)
+
+# The same forward wrap, but its previous line ends a sentence. The
+# paragraph-start guard alone would accept it; the sentence-start guard must
+# not, because a heading starts with a capital and this continues with a
+# lowercase word.
+WRAPPED_FORWARD_AFTER_PERIOD = (
+    "1. Game Concepts\n"
+    "Glossary\n"
+    "1. Game Concepts\n"
+    "   700.1. Some rule that points elsewhere. The next line continues it.\n"
+    "      900.4 has the details.\n"
     "         Example: Still an example of 700.1.\n"
     "\fGlossary\n"
     "Glossary\n"
@@ -87,6 +103,9 @@ class PairsTest(unittest.TestCase):
 
     def test_wrapped_forward_cross_reference_is_not_a_heading(self):
         self.assertEqual(C.example_pairs(WRAPPED_FORWARD), [("700.1", 1)])
+
+    def test_wrapped_forward_cross_reference_after_a_period_is_not_a_heading(self):
+        self.assertEqual(C.example_pairs(WRAPPED_FORWARD_AFTER_PERIOD), [("700.1", 1)])
 
     def test_unpunctuated_heading_still_anchors_its_example(self):
         self.assertEqual(C.example_pairs(UNPUNCTUATED), [("606.5", 1)])
