@@ -940,14 +940,22 @@ func combinedModeAsk(d *decision.Decision) bool {
 // targeting parts, in chain order: d takes its own part (partsFor) whole
 // (nothing, if Forge left it empty), and a combined mode ask takes parts until
 // it has Min refs. Taken and passed-over parts are spent. ok is false (answer
-// by default) when d is not the chain's ask or no part is left. A divergence
-// means d is the chain's ask and the parts do not answer it: the follower
-// cannot tell what Forge chose there, so it stops (a harness finding) instead
-// of answering by default.
+// by default) when d is not the chain's ask or no part is left. An activation's
+// ask with no choice and nothing recorded takes every option (unrecorded) and
+// spends one part. A divergence means d is the chain's ask and the parts do not
+// answer it: the follower cannot tell what Forge chose there, so it stops (a
+// harness finding) instead of answering by default.
 func (f *follower) answerChainTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	if len(f.chain.parts) == 0 || !f.castPoses(d) {
 		return in, false, nil
+	}
+	if f.chain.unrecorded(d) {
+		for i := range d.Options {
+			in.Choices = append(in.Choices, i)
+		}
+		f.chain.parts = f.chain.parts[1:]
+		return in, true, nil
 	}
 	in, rest, dv := f.answerParts(d, f.chain)
 	if dv != nil {
@@ -955,6 +963,15 @@ func (f *follower) answerChainTargets(d *decision.Decision) (decision.Intent, bo
 	}
 	f.chain.parts = rest
 	return in, true, nil
+}
+
+// unrecorded reports whether d, an ask of activation c, leaves no choice (it
+// is mandatory and must take every option) while c's line holds no target in
+// any part left: Forge's recorder writes none on an Equip activation, and
+// there is only one way to answer.
+func (c chainTargets) unrecorded(d *decision.Decision) bool {
+	return c.ability && !c.fromLine() && d.Min > 0 && len(d.Options) == d.Min &&
+		!slices.ContainsFunc(c.parts, func(p []Ref) bool { return len(p) > 0 })
 }
 
 // targetingLinks counts the targeting links of the sub-ability chain from sa,
@@ -1361,11 +1378,12 @@ var frontWay = way{kind: "cast"}
 //     gorge asks during frontWay's cast.
 //
 // ws is returned as it is when it has no frontWay or Forge lists no index 0 (a
-// commander's cast, a may-play's), and a narrowing never empties it.
-func abilityWays(ws []way, a *Ask) []way {
+// commander's cast, a may-play's), and a narrowing never empties it. named
+// reports that the index alone left one way, so that way is Forge's cast.
+func abilityWays(ws []way, a *Ask) (narrowed []way, named bool) {
 	front := slices.Index(ws, frontWay)
 	if front < 0 {
-		return ws
+		return ws, false
 	}
 	listed, first := 0, 0
 	for _, o := range a.Options {
@@ -1379,13 +1397,14 @@ func abilityWays(ws []way, a *Ask) []way {
 	}
 	switch {
 	case first != 1:
-		return ws
+		return ws, false
 	case a.Answer.abilityID() == 0:
-		return []way{frontWay}
+		return []way{frontWay}, true
 	case listed != len(ws) || len(ws) < 2:
-		return ws
+		return ws, false
 	}
-	return slices.Delete(slices.Clone(ws), front, front+1)
+	narrowed = slices.Delete(slices.Clone(ws), front, front+1)
+	return narrowed, len(narrowed) == 1
 }
 
 // unnamedWay is the stop when n of gorge's ways match all of Forge's line: the
@@ -1404,9 +1423,10 @@ func unnamedWay(a *Ask, gorge string, n int) *Divergence {
 // (unnamedWay) when two or more do: on a line without an ability index to tell
 // them apart, Bonecrusher Giant's creature and Stomp plans both paid from Sol
 // Ring and a Mountain. A cast Forge paid with nothing is likewise the option of
-// the one candidate way gorge offers as a cast option. A card with only one way
-// to be cast (soleCast) and no such plan is paid by hand from Forge's sources,
-// if that makes gorge offer it.
+// the one candidate way gorge offers as a cast option. With no such plan, a
+// cast whose gorge option is settled (handOffer) is paid by hand from Forge's
+// sources, if that makes gorge offer it: gorge's planner plans only some of the
+// ways to cast a card.
 func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	tapped, dv := f.boundTapped(a)
@@ -1419,7 +1439,7 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 	if dv != nil {
 		return in, dv
 	}
-	ws = abilityWays(ws, a)
+	ws, named := abilityWays(ws, a)
 	offered := false
 	var matched []way
 	var pay *decision.PaymentSelection
@@ -1478,8 +1498,7 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 			return in, unnamedWay(a, gorge, len(opts))
 		}
 	}
-	if soleCast(f.e, a, obj) {
-		offer := func(d *decision.Decision) int { return plainCast(d.Options, obj) }
+	if offer, ok := handOffer(f.e, a, obj, ws, named); ok {
 		if paid, ok := f.payByHand(d, a, tapped, offer); ok {
 			return paid, nil
 		}
