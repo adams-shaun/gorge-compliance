@@ -161,13 +161,16 @@ func MultiplayerTokens() []string { return slices.Concat(multiplayerTokens, mult
 
 // Multiplayer reports whether key id of c reads something that differs with more
 // than two players. It judges the key's own script text only, never the card's
-// name: the effect names and parameter values of the key's IR node and of what
-// it executes (a spell mode: the raw SVar its choice names; a keyword: the
-// keyword string). A value holding a token of MultiplayerTokens flags the key,
-// as does a Defined or ValidPlayers of exactly "Player" (each player) and a
-// listed keyword, either unexpanded (a kw# key) or named by the Keyword param
-// of the entry the loader expanded it into. A combat# key is never flagged, nor
-// is an id the card does not hold.
+// name: the effect names and parameter values of the key's IR node and of every
+// SVar those values name, followed transitively (a SubAbility$, a delayed or
+// immediate trigger's Execute$, an AddTrigger$, a mode's choice, a count SVar;
+// description parameters are not read). A spell mode starts from the raw SVar
+// its choice names; a keyword key is the keyword string. A value holding a token
+// of MultiplayerTokens flags the key, as does a Defined or ValidPlayers of
+// exactly "Player" (each player) and a listed keyword, either unexpanded (a kw#
+// key), named by the Keyword param of the entry the loader expanded it into, or
+// granted by a keyword parameter (KW$, AddKeyword$, Keywords$ and the like). A
+// combat# key is never flagged, nor is an id the card does not hold.
 func Multiplayer(c *cards.Card, id string) bool {
 	if c == nil {
 		return false
@@ -175,20 +178,21 @@ func Multiplayer(c *cards.Card, id string) bool {
 	switch Family(id) {
 	case "cast", "land":
 		if f := faceAt(c, 0); f != nil {
+			r := newMPReader(f)
 			for _, a := range f.Abilities {
-				if a != nil && a.Kind == "SP" && multiplayerChain(a) {
+				if a != nil && a.Kind == "SP" && r.chain(a) {
 					return true
 				}
 			}
 		}
 	case "activated":
 		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "f"), "/a", 2); ok && n[1] < len(f.Abilities) {
-			return multiplayerChain(f.Abilities[n[1]])
+			return newMPReader(f).chain(f.Abilities[n[1]])
 		}
 	case "trigger":
 		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "f"), "/t", 2); ok && n[1] < len(f.Triggers) {
-			t := f.Triggers[n[1]]
-			return multiplayerParams(t.Params) || multiplayerChain(t.Effect)
+			t, r := f.Triggers[n[1]], newMPReader(f)
+			return r.params(t.Params) || r.chain(t.Effect)
 		}
 	case "mode":
 		f, n, ok := keyEntry(c, strings.TrimPrefix(id, "mode#"), ".", 3)
@@ -197,16 +201,16 @@ func Multiplayer(c *cards.Card, id string) bool {
 		}
 		choices := strings.Split(f.Abilities[n[1]].Params["Choices"], ",")
 		if n[2] < len(choices) {
-			return multiplayerRaw(f.SVars[strings.TrimSpace(choices[n[2]])])
+			return newMPReader(f).svar(strings.TrimSpace(choices[n[2]]))
 		}
 	case "static":
 		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "static#"), ".", 2); ok && n[1] < len(f.Statics) {
-			return multiplayerParams(f.Statics[n[1]].Params)
+			return newMPReader(f).params(f.Statics[n[1]].Params)
 		}
 	case "repl":
 		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "repl#"), ".", 2); ok && n[1] < len(f.Repls) {
-			r := f.Repls[n[1]]
-			return multiplayerParams(r.Params) || multiplayerChain(r.With)
+			rp, r := f.Repls[n[1]], newMPReader(f)
+			return r.params(rp.Params) || r.chain(rp.With)
 		}
 	case "keyword":
 		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "kw#"), ".", 2); ok && n[1] < len(f.Keywords) {
@@ -248,22 +252,76 @@ func keyEntry(c *cards.Card, s, sep string, want int) (*cards.Face, []int, bool)
 // maxSubChain stops a cyclic Sub walk; it is past any chain the loader links.
 const maxSubChain = 64
 
-// multiplayerChain reads sa and its Sub chain. The effect name ("DB$ Goad") is
-// a script value too; the loader keeps it in API rather than Params.
-func multiplayerChain(sa *cards.SA) bool {
+// mpReader reads one face's script text for Multiplayer, following every SVar a
+// value names. seen visits each SVar once, which also stops a reference cycle.
+// Every reader method returns whether anything reachable flags the key, so the
+// answer does not depend on map order.
+type mpReader struct {
+	f    *cards.Face
+	seen map[string]bool
+}
+
+func newMPReader(f *cards.Face) *mpReader { return &mpReader{f: f, seen: map[string]bool{}} }
+
+// chain reads sa and its Sub chain. The effect name ("DB$ Goad") is a script
+// value too; the loader keeps it in API rather than Params.
+func (r *mpReader) chain(sa *cards.SA) bool {
 	for d := 0; sa != nil && d < maxSubChain; d, sa = d+1, sa.Sub {
-		if hasMultiplayerToken(sa.API) || multiplayerParams(sa.Params) {
+		if hasMultiplayerToken(sa.API) || r.params(sa.Params) {
 			return true
 		}
 	}
 	return false
 }
 
-// multiplayerParams reports whether any one parameter flags its key. The result
-// does not depend on the map's order.
-func multiplayerParams(params map[string]string) bool {
+func (r *mpReader) params(params map[string]string) bool {
 	for name, v := range params {
-		if multiplayerParam(name, v) {
+		if r.param(name, v) {
+			return true
+		}
+	}
+	return false
+}
+
+// param judges one parameter and every SVar its value names. A description is
+// prose about the key, not what it does, and is skipped.
+func (r *mpReader) param(name, v string) bool {
+	if strings.Contains(name, "Desc") {
+		return false
+	}
+	if multiplayerParam(name, v) {
+		return true
+	}
+	for _, ref := range strings.FieldsFunc(v, func(c rune) bool {
+		return c == ',' || c == '&' || c == ' ' || c == '\t'
+	}) {
+		if r.svar(ref) {
+			return true
+		}
+	}
+	return false
+}
+
+// svar judges the raw body of the face's SVar name, once; a name the face does
+// not hold is plain text.
+func (r *mpReader) svar(name string) bool {
+	body, ok := r.f.SVars[name]
+	if !ok || r.seen[name] {
+		return false
+	}
+	r.seen[name] = true
+	return r.raw(body)
+}
+
+// raw judges an unparsed "Key$ value | ..." script body segment by segment, so
+// its descriptions are skipped. A body with no "$" (a bare keyword or a
+// constant) is judged as one value.
+func (r *mpReader) raw(body string) bool {
+	if !strings.Contains(body, "$") {
+		return hasMultiplayerToken(body) || slices.Contains(multiplayerKeywords, keywordName(body))
+	}
+	for seg := range strings.SplitSeq(body, "|") {
+		if name, v, ok := strings.Cut(seg, "$"); ok && r.param(strings.TrimSpace(name), strings.TrimSpace(v)) {
 			return true
 		}
 	}
@@ -276,26 +334,18 @@ func multiplayerParam(name, v string) bool {
 		if strings.TrimSpace(v) == "Player" {
 			return true
 		}
-	case "Keyword":
-		// An expanded keyword has no kw# key: its entry carries the name here.
-		if slices.Contains(multiplayerKeywords, keywordName(v)) {
-			return true
+	}
+	// An expanded keyword has no kw# key: its entry carries the name in
+	// Keyword$. A grant names its keywords in KW$, AddKeyword$, Keywords$ and
+	// the like, "&"-separated.
+	if name == "KW" || strings.Contains(name, "Keyword") {
+		for kw := range strings.SplitSeq(v, "&") {
+			if slices.Contains(multiplayerKeywords, keywordName(kw)) {
+				return true
+			}
 		}
 	}
 	return hasMultiplayerToken(v)
-}
-
-// multiplayerRaw judges an unparsed "Key$ value | ..." script body.
-func multiplayerRaw(body string) bool {
-	if hasMultiplayerToken(body) {
-		return true
-	}
-	for seg := range strings.SplitSeq(body, "|") {
-		if name, v, ok := strings.Cut(seg, "$"); ok && multiplayerParam(strings.TrimSpace(name), strings.TrimSpace(v)) {
-			return true
-		}
-	}
-	return false
 }
 
 func hasMultiplayerToken(v string) bool {
