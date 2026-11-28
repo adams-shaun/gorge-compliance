@@ -869,11 +869,23 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 
 // activate answers a Forge "activate" with gorge's "ability" option of the
 // same card (a printed activated ability that is not a mana tap: Evolving
-// Wilds' sacrifice, a manland's animation). An ability gorge does not offer is
-// paid by hand from the sources Forge tapped, if that makes gorge offer it.
+// Wilds' sacrifice, a manland's animation). An ability both engines list
+// (forgeAbility) that gorge does not offer is paid by hand from the sources
+// Forge tapped, if that makes gorge offer it.
 func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	if pick := abilityOption(d, a, obj); pick >= 0 {
+	offered := abilityOption(d, a, obj)
+	// Every ability Forge listed is offered: its rank among them names it.
+	if offered >= 0 && len(forgeAbilityIDs(a)) == len(abilityOptions(d.Options, obj)) {
+		in.Choices = []int{offered}
+		return in, nil
+	}
+	want, known := forgeAbility(f.e, a, obj)
+	pick := offered
+	if known {
+		pick = optionOf(d, want)
+	}
+	if pick >= 0 {
 		in.Choices = []int{pick}
 		return in, nil
 	}
@@ -885,15 +897,17 @@ func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (deci
 		}
 		tapped = append(tapped, g)
 	}
-	offer := func(d *decision.Decision) int { return abilityOption(d, a, obj) }
-	if paid, ok := f.payByHand(d, tapped, offer); ok {
-		return paid, nil
-	}
-	// Forge's tapped list holds {T} costs too: the ability's own card may be
-	// on it for its cost, not for mana.
-	if i := slices.Index(tapped, obj); i >= 0 {
-		if paid, ok := f.payByHand(d, slices.Delete(tapped, i, i+1), offer); ok {
+	if known {
+		offer := func(d *decision.Decision) int { return optionOf(d, want) }
+		if paid, ok := f.payByHand(d, a, tapped, offer); ok {
 			return paid, nil
+		}
+		// Forge's tapped list holds {T} costs too: the ability's own card
+		// may be on it for its cost, not for mana.
+		if i := slices.Index(tapped, obj); i >= 0 {
+			if paid, ok := f.payByHand(d, a, slices.Delete(tapped, i, i+1), offer); ok {
+				return paid, nil
+			}
 		}
 	}
 	return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
@@ -906,23 +920,12 @@ func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (deci
 // ability's rank among the activate options Forge listed for the card picks
 // the option of the same rank, when both sides list as many.
 func abilityOption(d *decision.Decision, a *Ask, obj state.ObjID) int {
-	var cands []int
-	for i, o := range d.Options {
-		if o.Kind == "ability" && o.Obj == obj {
-			cands = append(cands, i)
-		}
-	}
+	cands := abilityOptions(d.Options, obj)
 	switch {
 	case len(cands) == 1:
 		return cands[0]
 	case len(cands) > 1:
-		var ids []int
-		for _, o := range a.Options {
-			if o.Action == "activate" && o.Card == a.Answer.Card {
-				ids = append(ids, o.Ability)
-			}
-		}
-		if len(ids) == len(cands) {
+		if ids := forgeAbilityIDs(a); len(ids) == len(cands) {
 			for r, id := range ids {
 				if id == a.Answer.Ability {
 					return cands[r]
@@ -933,7 +936,8 @@ func abilityOption(d *decision.Decision, a *Ask, obj state.ObjID) int {
 	return -1
 }
 
-// castOption is the index of d's first plain "cast" option of obj, or -1.
+// castOption is the index of d's first "cast" option of obj, of any mode, or
+// -1.
 func castOption(d *decision.Decision, obj state.ObjID) int {
 	for i, o := range d.Options {
 		if o.Kind == "cast" && o.Obj == obj {
@@ -945,8 +949,9 @@ func castOption(d *decision.Decision, obj state.ObjID) int {
 
 // cast pays a cast with the payment plan whose activations tap exactly the
 // sources Forge tapped. A cast Forge paid with nothing and gorge offers as a
-// plain option is that option. A cast with no such plan is paid by hand from
-// Forge's sources, if that makes gorge offer it.
+// cast option is the first such option. A card with only one way to be cast
+// (soleCast) and no such plan is paid by hand from Forge's sources, if that
+// makes gorge offer it.
 func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	tapped := make([]state.ObjID, 0, len(a.Answer.Tapped))
@@ -983,8 +988,11 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 			return in, nil
 		}
 	}
-	if paid, ok := f.payByHand(d, tapped, func(d *decision.Decision) int { return castOption(d, obj) }); ok {
-		return paid, nil
+	if soleCast(f.e, a, obj) {
+		offer := func(d *decision.Decision) int { return plainCast(d.Options, obj) }
+		if paid, ok := f.payByHand(d, a, tapped, offer); ok {
+			return paid, nil
+		}
 	}
 	if offered {
 		// gorge offers the cast, but neither a plan nor Forge's sources by
@@ -1483,6 +1491,12 @@ func optKeys(f *follower, d *decision.Decision) string {
 // Max and, for a budgeted pick, within MaxSum. A Repeatable ask may name a
 // mode more than once, so its picks cycle through the offered modes.
 func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
+	f.res.Modes++
+	return modeIntent(d)
+}
+
+// modeIntent is defaultModes' answer, uncounted.
+func modeIntent(d *decision.Decision) decision.Intent {
 	k := d.Min
 	if k < 1 {
 		k = 1
@@ -1495,7 +1509,6 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 	}
 	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{}}
 	if len(d.Options) == 0 {
-		f.res.Modes++
 		return in
 	}
 	budgeted := d.Budgeted || d.MaxSum > 0
@@ -1513,7 +1526,6 @@ func (f *follower) defaultModes(d *decision.Decision) decision.Intent {
 		in.Choices = append(in.Choices, c)
 		sum += d.Options[c].Value
 	}
-	f.res.Modes++
 	return in
 }
 

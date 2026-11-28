@@ -21,7 +21,7 @@ type handStep struct {
 	taps            []string
 	activate        bool
 	ability         int
-	target          string // the ability's target
+	target          string // the cast's or ability's target, a card name or "player" (seat 1)
 }
 
 // handGame plays steps in a real 2-seat gorge game, seat 0's own main phase,
@@ -98,9 +98,10 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		}
 	}
 	// option is the nth pending option of kind on a card called name, or -1.
+	// Of a card's casts only the plain one counts.
 	option := func(kind, name string, nth int) int {
 		for i, o := range e.Pending().Options {
-			if o.Kind == kind && objName(e.G.Obj(o.Obj)) == name {
+			if o.Kind == kind && objName(e.G.Obj(o.Obj)) == name && (kind != "cast" || o.Mode == "") {
 				if nth == 0 {
 					return i
 				}
@@ -236,11 +237,21 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 			ask(KindPriority, Answer{Action: "pass"})
 			submit(decision.Intent{Choices: []int{indexOf(d, "pass")}})
 		case decision.KTarget:
-			i := slices.IndexFunc(d.Options, func(o decision.Option) bool { return objName(e.G.Obj(o.Obj)) == target })
+			i := slices.IndexFunc(d.Options, func(o decision.Option) bool {
+				if target == "player" {
+					return o.Obj == 0 && int(o.Player) == 1
+				}
+				return objName(e.G.Obj(o.Obj)) == target
+			})
 			if i < 0 || announcing == nil {
 				t.Fatalf("target ask %+v: want %q", d.Options, target)
 			}
-			announcing.Answer.Targets = []Ref{{Card: toF[d.Options[i].Obj]}}
+			ref := Ref{Card: toF[d.Options[i].Obj]}
+			if target == "player" {
+				p := 1
+				ref = Ref{Player: &p}
+			}
+			announcing.Answer.Targets = []Ref{ref}
 			submit(decision.Intent{Choices: []int{i}})
 		case decision.KAttackers, decision.KBlockers:
 			kind := KindAttack
@@ -374,4 +385,140 @@ func TestHandPaymentThatTriggersDiverges(t *testing.T) {
 	if res.HandPayments != 1 {
 		t.Errorf("%d hand payments, want only the Paladin's cast", res.HandPayments)
 	}
+}
+
+// lastAsk is the last ask of l answering action.
+func lastAsk(t *testing.T, l *Log, action string) (*Ask, int) {
+	t.Helper()
+	for _, e := range slices.Backward(l.Entries) {
+		if e.Ask != nil && e.Ask.Answer.Action == action {
+			return e.Ask, e.Line
+		}
+	}
+	t.Fatalf("no %s ask", action)
+	return nil, 0
+}
+
+// stopsAt follows l expecting an answer-missing stop at line after handPayments
+// payments by hand, none of them that line's.
+func stopsAt(t *testing.T, l *Log, line, handPayments int) {
+	t.Helper()
+	res := follow(t, l)
+	h := res.Hard
+	if h == nil || h.What != WhatAnswerMissing || h.Line != line {
+		t.Fatalf("divergence %+v, want answer-missing at line %d", h, line)
+	}
+	if res.HandPayments != handPayments || len(h.Record.Log.Intents) != res.Decisions {
+		t.Errorf("%d hand payments, want %d; %d intents for %d decisions", res.HandPayments, handPayments, len(h.Record.Log.Intents), res.Decisions)
+	}
+}
+
+// TestHandPaymentOfAMultiWayCardDiverges: gorge lists every way to cast a card
+// as a "cast" option and Forge's line does not say which gorge option its seat
+// took, so a card with a second way is never cast by hand: an Adventure, a
+// split card, a foretell card.
+func TestHandPaymentOfAMultiWayCardDiverges(t *testing.T) {
+	for _, c := range []struct {
+		name    string
+		library []string
+		steps   []handStep
+	}{
+		{"adventure", []string{"Mountain", "Wastes", "Sol Ring", "Boros Signet", "Bonecrusher Giant"}, []handStep{
+			{land: "Mountain"},
+			{plan: "Sol Ring"},
+			{land: "Wastes"},
+			{plan: "Boros Signet"},
+			{use: "Bonecrusher Giant", taps: []string{"Mountain", "Wastes", "Boros Signet"}},
+		}},
+		{"split", []string{"Wastes", "Sol Ring", "Izzet Signet", "Fire"}, []handStep{
+			{land: "Wastes"},
+			{plan: "Sol Ring"},
+			{plan: "Izzet Signet"},
+			{use: "Fire", taps: []string{"Wastes", "Izzet Signet"}, target: "player"},
+		}},
+		{"foretell", []string{"Plains", "Wastes", "Sol Ring", "Boros Signet", "Starnheim Unleashed"}, []handStep{
+			{land: "Plains"},
+			{plan: "Sol Ring"},
+			{land: "Wastes"},
+			{plan: "Boros Signet"},
+			{use: "Starnheim Unleashed", taps: []string{"Sol Ring", "Boros Signet", "Plains"}},
+		}},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			l := handGame(t, corpus(t), "", c.library, c.steps)
+			_, line := lastAsk(t, l, "cast")
+			stopsAt(t, l, line, 0)
+		})
+	}
+}
+
+// TestHandPaymentForgeDoesNotNameDiverges: Forge listing a second cast of the
+// card, or marking the cast kicked, leaves it unpaid although gorge has only the
+// plain cast.
+func TestHandPaymentForgeDoesNotNameDiverges(t *testing.T) {
+	for name, doctor := range map[string]func(*Ask){
+		"second cast": func(a *Ask) {
+			for k := range 2 {
+				a.Options = append(a.Options, Option{Action: "cast", Card: a.Answer.Card, Ability: k})
+			}
+		},
+		"marked": func(a *Ask) { a.Answer.Mode = "kicked" },
+	} {
+		t.Run(name, func(t *testing.T) {
+			l := shikoGame(t)
+			a, line := lastAsk(t, l, "cast")
+			doctor(a)
+			stopsAt(t, l, line, 0)
+		})
+	}
+}
+
+// TestHandPaymentAskingMoreDiverges: gorge offers an {X} cast the floating mana
+// pays at X = 0 and then asks for X, which the follow could only guess.
+func TestHandPaymentAskingMoreDiverges(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Wastes", "Sol Ring", "Boros Signet", "Blaze"}, []handStep{
+		{land: "Wastes"},
+		{plan: "Sol Ring"},
+		{plan: "Boros Signet"},
+		{use: "Blaze", taps: []string{"Wastes", "Boros Signet"}, target: "player"},
+	})
+	_, line := lastAsk(t, l, "cast")
+	stopsAt(t, l, line, 0)
+}
+
+// thornscapeGame activates Thornscape Master's second ability ({W}{W}) by hand.
+// Clifftop Retreat's first offered colour pays the first one ({R}{R}) instead.
+// Forge lists the ids listed and answers with 11.
+func thornscapeGame(t *testing.T, listed ...int) (*Log, int) {
+	const master = "Thornscape Master"
+	l := handGame(t, corpus(t), "", []string{"Forest", "Sol Ring", "Forest", master, "Wastes", "Boros Signet", "Clifftop Retreat"}, []handStep{
+		{land: "Forest"},
+		{plan: "Sol Ring"},
+		{land: "Forest"},
+		{plan: master},
+		{land: "Wastes"},
+		{plan: "Boros Signet"},
+		{land: "Clifftop Retreat"},
+		{use: master, activate: true, taps: []string{"Wastes", "Boros Signet", "Clifftop Retreat:W", master}, target: master},
+	})
+	a, line := lastAsk(t, l, "activate")
+	a.Answer.Ability, a.Options = 11, nil
+	for _, id := range listed {
+		a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: id})
+	}
+	return l, line
+}
+
+// TestHandActivationTakesForgesAbility: the search passes over a colour choice
+// that makes only the card's other ability payable.
+func TestHandActivationTakesForgesAbility(t *testing.T) {
+	l, _ := thornscapeGame(t, 10, 11)
+	followClean(t, l, 1)
+}
+
+// TestHandActivationOfAnUnrankedAbilityDiverges: Forge listing fewer abilities
+// than gorge has leaves its id unranked, so nothing is paid by hand.
+func TestHandActivationOfAnUnrankedAbilityDiverges(t *testing.T) {
+	l, line := thornscapeGame(t, 11)
+	stopsAt(t, l, line, 0)
 }

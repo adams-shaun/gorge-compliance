@@ -8,7 +8,10 @@
 // sources Forge tapped. A cast gorge has no such plan for, or an activation it
 // does not offer (a filter land's or a Signet's mana, which gorge's planner
 // does not plan), is paid by hand: the follower activates those sources at
-// priority, then takes the offer (Result.HandPayments counts them). At every
+// priority, then takes the offer (Result.HandPayments counts them). It does so
+// only where Forge's answer names one gorge option (a card with one way to be
+// cast, an ability both engines list) and the floating mana pays it with no
+// further ask. At every
 // snap line gorge's state is compared with Forge's through
 // oraclediff.CompareOpts, the comparison classify uses.
 //
@@ -71,7 +74,8 @@
 // forge-oracle's ShadowLog (adams-shaun/forge, forge-oracle/.../ShadowLog.java);
 // fields it marks as extras (policy, index, label, ...) are ignored, except a
 // mull line's hand, which tells a state-neutral mulligan after the hand has
-// emptied from an ordinary one.
+// emptied from an ordinary one, and a priority answer's mode, which rules out
+// paying a flashback or kicked cast by hand.
 package fshadow
 
 import (
@@ -200,12 +204,15 @@ type Option struct {
 
 // Answer is the seat's answer to an ask.
 type Answer struct {
-	Action  string   `json:"action,omitempty"` // priority: pass, land, cast, activate, other
-	Card    int      `json:"card,omitempty"`
-	Source  int      `json:"source,omitempty"` // target: the host card
-	Ability int      `json:"ability,omitempty"`
-	Tapped  []int    `json:"tapped,omitempty"`  // the mana sources tapped to pay
-	Targets []Ref    `json:"targets,omitempty"` // target
+	Action  string `json:"action,omitempty"` // priority: pass, land, cast, activate, other
+	Card    int    `json:"card,omitempty"`
+	Source  int    `json:"source,omitempty"` // target: the host card
+	Ability int    `json:"ability,omitempty"`
+	Tapped  []int  `json:"tapped,omitempty"`  // the mana sources tapped to pay
+	Targets []Ref  `json:"targets,omitempty"` // target
+	// Mode is Forge's mark on a cast that is not the ordinary one
+	// ("flashback", "kicked"); the recorder marks no other.
+	Mode    string   `json:"mode,omitempty"`
 	Attacks []Attack `json:"attacks,omitempty"` // attack
 	Blocks  []Block  `json:"blocks,omitempty"`  // block
 }
