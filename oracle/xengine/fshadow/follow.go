@@ -141,9 +141,14 @@ type Result struct {
 	// from it are the ones Forge took.
 	LibraryPicks int `json:"library_picks,omitempty"`
 	// HandPicks counts the Chooses that picked hand cards (a cleanup
-	// discard) from the next snapshot line: the offered cards gone from the
-	// seat's hand there are the ones Forge took.
+	// discard), and the card picks gorge poses as modes (an effect's discard),
+	// from the next snapshot line: the offered cards gone from the seat's hand
+	// there are the ones Forge took.
 	HandPicks int `json:"hand_picks,omitempty"`
+	// DiscardElections counts the Chooses that answered a discard's election
+	// (one card of a type instead of the count, a "may" discard) from the
+	// cards gone from the seat's hand at the next snapshot line.
+	DiscardElections int `json:"discard_elections,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -694,9 +699,14 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// Forge's recorder logs no modal answer (a charm's modes, a
 		// modal trigger's, a nested Charm): the AI answers through hooks that
 		// write no ask line, so the next line belongs to a later decision.
-		// Answer by default -- the first modes the ask requires, at least
-		// one -- and consume no line; Forge's real choice, if it differs,
-		// shows at the next snapshot.
+		// gorge also poses card picks as modes (a discard, a connive): those
+		// are read from the log as a KChoose's are. Otherwise answer by
+		// default -- the first modes the ask requires, at least one -- and
+		// consume no line; Forge's real choice, if it differs, shows at the
+		// next snapshot.
+		if in, ok := f.unloggedPick(d); ok {
+			return in, true
+		}
 		return f.defaultModes(d), true
 	}
 	if d.Kind == decision.KArrange {
@@ -739,13 +749,7 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// a later decision. Answer by default -- the first Min options in
 		// offered order -- and consume no line; Forge's real choice, if it
 		// differs, shows at the next snapshot.
-		if in, ok := f.mayShuffleChoose(d); ok {
-			return in, true
-		}
-		if in, ok := f.libraryPickChoose(d); ok {
-			return in, true
-		}
-		if in, ok := f.handLeaveChoose(d); ok {
+		if in, ok := f.unloggedPick(d); ok {
 			return in, true
 		}
 		return f.defaultChoose(d), true
@@ -1859,6 +1863,30 @@ func firstMin(d *decision.Decision) decision.Intent {
 	return in
 }
 
+// unloggedPick answers a choose or modes decision the log has no line for
+// from what the log shows Forge did: a shuffle election, a library pick, a
+// discard election or a hand pick. Every such reader goes here, so it serves
+// both decision kinds gorge poses them as. False is a decision the log says
+// nothing about, answered by default.
+func (f *follower) unloggedPick(d *decision.Decision) (decision.Intent, bool) {
+	for _, read := range []func(*decision.Decision) (decision.Intent, bool){
+		f.mayShuffleChoose, f.libraryPickChoose, f.discardElection, f.handLeaveChoose,
+	} {
+		if in, ok := read(d); ok {
+			return in, true
+		}
+	}
+	return decision.Intent{}, false
+}
+
+// namesPickedObject reports whether o's object is the card option o of d picks.
+// A modal ask's "mode" options name the ask's source, whichever zone that is
+// in, and pick no card; gorge also poses some card picks as "mode" options
+// (a "play" effect's), which name other objects.
+func namesPickedObject(d *decision.Decision, o decision.Option) bool {
+	return o.Obj != 0 && !(o.Kind == "mode" && o.Obj == d.Source)
+}
+
 // mayShuffleChoose answers a "you may shuffle" election (the resume kinds
 // ending in "mayshuffle": a search or rearrange effect's optional shuffle)
 // from the shuffle lines instead of by default. Forge's recorder writes no
@@ -1905,7 +1933,7 @@ func (f *follower) mayShuffleChoose(d *decision.Decision) (decision.Intent, bool
 // card larger than Forge's (chance-misaligned, "Forge shuffled 89 cards,
 // gorge 90"; farm cmdr4 pod 14201, Terramorphic Expanse).
 //
-// It applies to any KChoose whose every option is a card in one seat's
+// It applies to any pick whose every option is a card in one seat's
 // library, matched by where the objects are rather than by resume kind, so a
 // later search-shaped pick is covered too. It answers only when every card
 // of gorge's library absent from that shuffle is offered (a shuffle that is
@@ -1919,7 +1947,7 @@ func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, boo
 	var lib []state.ObjID
 	inLib := map[state.ObjID]bool{}
 	for _, o := range d.Options {
-		if o.Obj == 0 {
+		if !namesPickedObject(d, o) {
 			return decision.Intent{}, false
 		}
 		if seat < 0 {
@@ -1992,7 +2020,7 @@ func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, boo
 // Avenger of Zendikar and discarded Welcome the Dead, Forge the reverse), and
 // the p0..p3.hand snapshot classes stopped the follow.
 //
-// It applies to any KChoose whose every option is a card in one seat's hand,
+// It applies to any pick whose every option is a card in one seat's hand,
 // matched by where the objects are rather than by resume kind, so a later
 // hand-shaped pick is covered too. It answers only when every card that left
 // the hand by that snapshot is offered, the departed count is a legal pick
@@ -2006,7 +2034,7 @@ func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool)
 	inHand := map[state.ObjID]bool{}
 	var hand []state.ObjID
 	for _, o := range d.Options {
-		if o.Obj == 0 {
+		if !namesPickedObject(d, o) {
 			return decision.Intent{}, false
 		}
 		if seat < 0 {
@@ -2028,35 +2056,9 @@ func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool)
 			return decision.Intent{}, false
 		}
 	}
-	snap := f.nextSnapshot()
-	if snap == nil {
+	gone, total, ok := f.handDeparture(seat)
+	if !ok {
 		return decision.Intent{}, false
-	}
-	var after []string
-	found := false
-	for _, p := range snap.Players {
-		if p.Seat == seat {
-			after, found = p.Hand, true
-			break
-		}
-	}
-	if !found {
-		return decision.Intent{}, false
-	}
-	// gone counts, by name, the cards of gorge's hand now missing from
-	// Forge's hand at the snapshot (a multiset difference).
-	gone := map[string]int{}
-	for _, id := range hand {
-		gone[objName(f.e.G.Obj(id))]++
-	}
-	for _, n := range after {
-		if gone[n] > 0 {
-			gone[n]--
-		}
-	}
-	total := 0
-	for _, n := range gone {
-		total += n
 	}
 	var picks []int
 	seen := map[state.ObjID]bool{}
@@ -2082,6 +2084,93 @@ func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool)
 	}
 	f.res.Chooses++
 	f.res.HandPicks++
+	return in, true
+}
+
+// handDeparture counts, by name, the cards of seat's gorge hand now missing
+// from Forge's hand at the next snapshot (a multiset difference), and their
+// total. False is a log with no such snapshot.
+func (f *follower) handDeparture(seat int) (map[string]int, int, bool) {
+	snap := f.nextSnapshot()
+	if snap == nil {
+		return nil, 0, false
+	}
+	i := slices.IndexFunc(snap.Players, func(p rules.OracleSnapPlayer) bool { return p.Seat == seat })
+	if i < 0 {
+		return nil, 0, false
+	}
+	gone := map[string]int{}
+	for _, id := range f.e.G.Zone(state.ZHand, state.PlayerID(seat)) {
+		gone[objName(f.e.G.Obj(id))]++
+	}
+	for _, n := range snap.Players[i].Hand {
+		if gone[n] > 0 {
+			gone[n]--
+		}
+	}
+	total := 0
+	for _, n := range gone {
+		total += n
+	}
+	return gone, total, true
+}
+
+// discardElection answers the election gorge poses ahead of a discard, which
+// Forge's recorder writes no ask line for, from how many cards left the seat's
+// hand by the next snapshot:
+//
+//   - "discard_unless" (Thirst for Knowledge: "discard two cards unless you
+//     discard an artifact card"): one card gone is "unless", more is
+//     "ordinary". Defaulting to "unless" followed a seat that discarded two
+//     wrongly.
+//   - "discard_may" and "discard_hand" (a "may" discard of cards or of the
+//     whole hand): none gone from a non-empty hand is "no", any gone "yes".
+//
+// A card of that hand the seat casts or plays before the snapshot left it for
+// another reason, so it is no evidence of a second discard: "ordinary" is not
+// read then. False keeps the default.
+func (f *follower) discardElection(d *decision.Decision) (decision.Intent, bool) {
+	switch d.ResumeKind {
+	case "discard_unless", "discard_may", "discard_hand":
+	default:
+		return decision.Intent{}, false
+	}
+	if f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	seat := int(d.Player)
+	hand := f.e.G.Zone(state.ZHand, d.Player)
+	_, total, ok := f.handDeparture(seat)
+	if !ok || len(hand) == 0 {
+		return decision.Intent{}, false
+	}
+	var kind string
+	switch {
+	case d.ResumeKind != "discard_unless":
+		kind = "no"
+		if total > 0 {
+			kind = "yes"
+		}
+	case total == 1:
+		kind = "unless"
+	case total > 1 && !slices.ContainsFunc(hand, func(id state.ObjID) bool {
+		fid, bound := f.toF[id]
+		return bound && f.playedBeforeSnapshot(seat, fid, "cast", "land")
+	}):
+		kind = "ordinary"
+	default:
+		return decision.Intent{}, false
+	}
+	i := slices.IndexFunc(d.Options, func(o decision.Option) bool { return o.Kind == kind })
+	if i < 0 {
+		return decision.Intent{}, false
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{i}}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.DiscardElections++
 	return in, true
 }
 
@@ -2112,22 +2201,23 @@ func (f *follower) commanderZone(d *decision.Decision) decision.Intent {
 	if i < 0 || slices.Contains(snap.Players[i].Command, f.name[fid]) {
 		return in
 	}
-	if d.Options[leave].Mode == "" && f.castBeforeSnapshot(int(d.Player), fid) {
+	if d.Options[leave].Mode == "" && f.playedBeforeSnapshot(int(d.Player), fid, "cast") {
 		return in
 	}
 	in.Choices = []int{leave}
 	return in
 }
 
-// castBeforeSnapshot reports whether seat casts Forge's card fid on a line at
-// or after f.pos and before the next snapshot.
-func (f *follower) castBeforeSnapshot(seat, fid int) bool {
+// playedBeforeSnapshot reports whether seat takes one of the priority actions
+// ("cast", "land") with Forge's card fid on a line at or after f.pos and before
+// the next snapshot.
+func (f *follower) playedBeforeSnapshot(seat, fid int, actions ...string) bool {
 	for i := f.pos; i < len(f.log.Entries); i++ {
 		e := f.log.Entries[i]
 		if e.Snap != nil || e.End != nil {
 			return false
 		}
-		if a := e.Ask; a != nil && a.Seat == seat && a.Answer.Action == "cast" && a.Answer.Card == fid {
+		if a := e.Ask; a != nil && a.Seat == seat && a.Answer.Card == fid && slices.Contains(actions, a.Answer.Action) {
 			return true
 		}
 	}
