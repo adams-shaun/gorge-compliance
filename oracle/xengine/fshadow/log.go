@@ -28,8 +28,13 @@
 // seat's next priority) is answered by default (the first Min options;
 // Result.Targets counts them) and consumes no log line. A cast or an
 // activation carries the targets Forge chose for it in its priority answer
-// ("targets"), so a target decision that follows one is answered from those
-// refs instead (Result.CastTargets counts them), still consuming no line.
+// ("targets"), split by targeting part ("target_slots"), so each target
+// decision gorge then poses for that object (the decision's Source) is
+// answered from the next part instead (Result.CastTargets counts them), still
+// consuming no line: a part Forge left empty answers an optional ask with
+// nothing, a mandatory ask passes over it, and a combined modal ask takes one
+// part per mode. A decision the next part cannot answer is a harness
+// divergence (field "cast_targets").
 //
 // Forge's recorder writes no ask for a "may" trigger's yes/no, so a gorge
 // optional-trigger decision (trigger_optional) is answered by default (the
@@ -76,6 +81,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"slices"
 
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -196,14 +202,54 @@ type Option struct {
 
 // Answer is the seat's answer to an ask.
 type Answer struct {
-	Action  string   `json:"action,omitempty"` // priority: pass, land, cast, activate, other
-	Card    int      `json:"card,omitempty"`
-	Source  int      `json:"source,omitempty"` // target: the host card
-	Ability int      `json:"ability,omitempty"`
-	Tapped  []int    `json:"tapped,omitempty"`  // the mana sources tapped to pay
-	Targets []Ref    `json:"targets,omitempty"` // target
-	Attacks []Attack `json:"attacks,omitempty"` // attack
-	Blocks  []Block  `json:"blocks,omitempty"`  // block
+	Action  string `json:"action,omitempty"` // priority: pass, land, cast, activate, other
+	Card    int    `json:"card,omitempty"`
+	Source  int    `json:"source,omitempty"` // target: the host card
+	Ability int    `json:"ability,omitempty"`
+	Tapped  []int  `json:"tapped,omitempty"`  // the mana sources tapped to pay
+	Targets []Ref  `json:"targets,omitempty"` // target; also a cast's or activation's
+	// TargetSlots is how many of Targets each targeting part of the spell or
+	// ability holds, in chain order; 0 is a part Forge chose nothing for. A
+	// log without it is read as one part holding every target.
+	TargetSlots []int    `json:"target_slots,omitempty"`
+	Attacks     []Attack `json:"attacks,omitempty"` // attack
+	Blocks      []Block  `json:"blocks,omitempty"`  // block
+}
+
+// targetParts is Targets split by TargetSlots, one entry per targeting part
+// (Read holds the two to one length).
+func (a *Answer) targetParts() [][]Ref {
+	if len(a.TargetSlots) == 0 {
+		if len(a.Targets) == 0 {
+			return nil
+		}
+		return [][]Ref{slices.Clone(a.Targets)}
+	}
+	rest := slices.Clone(a.Targets)
+	parts := make([][]Ref, len(a.TargetSlots))
+	for i, n := range a.TargetSlots {
+		n = max(0, min(n, len(rest)))
+		parts[i], rest = rest[:n:n], rest[n:]
+	}
+	return parts
+}
+
+// checkTargetSlots rejects target_slots that do not split targets exactly.
+func (a *Answer) checkTargetSlots() error {
+	if len(a.TargetSlots) == 0 {
+		return nil
+	}
+	held := 0
+	for _, n := range a.TargetSlots {
+		if n < 0 {
+			return fmt.Errorf("target_slots %v: a negative count", a.TargetSlots)
+		}
+		held += n
+	}
+	if held != len(a.Targets) {
+		return fmt.Errorf("target_slots %v hold %d targets, the answer has %d", a.TargetSlots, held, len(a.Targets))
+	}
+	return nil
 }
 
 // Ref is a card, a player, or a spell on the stack (by its host card's id).
@@ -329,6 +375,11 @@ func Read(r io.Reader) (*Log, error) {
 		}
 		if err := json.Unmarshal(b, v); err != nil {
 			return nil, fmt.Errorf("fshadow: line %d (%s): %w", n, tag.T, err)
+		}
+		if e.Ask != nil {
+			if err := e.Ask.Answer.checkTargetSlots(); err != nil {
+				return nil, fmt.Errorf("fshadow: line %d (%s): %w", n, tag.T, err)
+			}
 		}
 		if e.Header != nil {
 			if len(l.Entries) > 0 || l.Header.T != "" {

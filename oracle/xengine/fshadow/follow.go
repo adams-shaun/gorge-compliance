@@ -139,6 +139,10 @@ type Result struct {
 	// pick) from the owner's next shuffle line: the offered cards missing
 	// from it are the ones Forge took.
 	LibraryPicks int `json:"library_picks,omitempty"`
+	// HandPicks counts the Chooses that picked hand cards (a cleanup
+	// discard) from the next snapshot line: the offered cards gone from the
+	// seat's hand there are the ones Forge took.
+	HandPicks int `json:"hand_picks,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -189,13 +193,19 @@ type follower struct {
 	// bottom (the recorder cleared it on a no-op mulligan line): the whole
 	// hand goes to the bottom.
 	mullBottomAll map[int]bool
-	// castTargets are the refs the last consumed priority answer (a cast or
-	// an activation) chose as targets, not yet given to a gorge target
-	// decision; castSeat is the seat that chose them. Consuming the next log
-	// line clears them, so they never reach a later spell's or a trigger's
-	// target.
-	castTargets []Ref
+	// castTargets are the targeting parts of the last consumed priority
+	// answer (a cast or an activation) not yet given to a gorge target
+	// decision, in chain order, each holding the refs Forge chose for that
+	// part (none, where it chose nothing). castSeat is the seat that chose
+	// them, castAsk that line's ask number, castObj the gorge object cast or
+	// activated and castAbility marks an activation. Consuming the next log
+	// line clears the parts, so they never reach a later spell's or a
+	// trigger's target.
+	castTargets [][]Ref
 	castSeat    int
+	castAsk     int
+	castObj     state.ObjID
+	castAbility bool
 	res         Result
 }
 
@@ -683,6 +693,9 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		if in, ok := f.libraryPickChoose(d); ok {
 			return in, true
 		}
+		if in, ok := f.handLeaveChoose(d); ok {
+			return in, true
+		}
 		return f.defaultChoose(d), true
 	}
 	if d.Kind == decision.KTarget && e.Ask != nil && e.Ask.Kind != KindTarget {
@@ -693,7 +706,13 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// block ask. Answer by default -- the first Min offered options the
 		// Group contract admits -- and consume no line; Forge's real choice,
 		// if it differs, shows at the next snapshot.
-		if in, ok := f.answerCastTargets(d); ok {
+		in, ok, dv := f.answerCastTargets(d)
+		if dv != nil {
+			dv.Line, dv.Ask = e.Line, f.castAsk
+			f.hard(dv.What, d, *dv)
+			return in, false
+		}
+		if ok {
 			f.res.CastTargets++
 			return in, true
 		}
@@ -746,62 +765,104 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 }
 
 // rememberCastTargets keeps the targets a priority answer carried (a cast's
-// or an activation's "targets"): Forge chooses them while it casts and writes
-// no target ask, so gorge's target decisions that follow have no line of
-// their own and are answered from these.
+// or an activation's "targets", split by "target_slots"): Forge chooses them
+// while it casts and writes no target ask, so gorge's target decisions that
+// follow have no line of their own and are answered from these. An answer
+// whose only parts are empty is kept too: Forge chose nothing there.
 func (f *follower) rememberCastTargets(a *Ask) {
-	if len(a.Answer.Targets) == 0 {
+	parts := a.Answer.targetParts()
+	if len(parts) == 0 {
 		return
 	}
-	f.castTargets = append([]Ref(nil), a.Answer.Targets...)
-	f.castSeat = a.Seat
+	f.castTargets, f.castSeat, f.castAsk = parts, a.Seat, a.N
+	f.castObj, f.castAbility = f.toG[a.Answer.Card], a.Answer.Action == "activate"
 }
 
-// answerCastTargets answers target decision d from the remembered cast
-// targets of the same seat: in Forge's order, each remembered ref d offers
-// is taken, up to d.Max, and taken refs are spent (a spell with several
-// target slots that gorge asks one decision each takes them slot by slot).
-// A ref d does not offer is left for a later decision. ok is false (answer
-// by default) when no remembered ref fits, too few fit for d.Min, or the
-// picks admit no Group assignment.
-func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, bool) {
+// castPoses reports whether target decision d is one the remembered cast or
+// activation poses: the same seat's, with the cast object as its Source. gorge
+// leaves an activated ability's Source 0 (the permanent stays a legal target
+// of its own ability). Another Source is another object's ask (a trigger's, a
+// copy's).
+func (f *follower) castPoses(d *decision.Decision) bool {
+	if int(d.Acting()) != f.castSeat {
+		return false
+	}
+	return f.castObj != 0 && d.Source == f.castObj || f.castAbility && d.Source == 0
+}
+
+// combinedModeAsk reports whether d is one ask over several targeting parts,
+// one target per chosen mode: gorge groups such an ask's options by mode
+// ("charm-mode-<i>", or "charm-mode-player-<seat>" where the modes must name
+// different players).
+func combinedModeAsk(d *decision.Decision) bool {
+	for _, o := range d.Options {
+		if strings.HasPrefix(o.Group, "charm-mode-") {
+			return true
+		}
+	}
+	return false
+}
+
+// answerCastTargets answers target decision d from the remembered cast's
+// targeting parts, in chain order: d takes the next part whole (nothing, if
+// Forge left it empty), and a combined mode ask takes parts until it has Min
+// refs. A mandatory ask (Min above 0) first passes over empty parts, which
+// gorge poses no ask for. Taken and passed-over parts are spent. ok is false
+// (answer by default) when d is not the cast's ask or no part is left. A
+// divergence means d is the cast's ask and the next part does not answer it:
+// the follower cannot tell what Forge chose there, so it stops (a harness
+// finding) instead of answering by default.
+func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	if len(f.castTargets) == 0 || int(d.Acting()) != f.castSeat {
-		return in, false
+	if len(f.castTargets) == 0 || !f.castPoses(d) {
+		return in, false, nil
 	}
-	var cands [][]int
-	var taken []int
-	for i, r := range f.castTargets {
-		if d.Max > 0 && len(cands) >= d.Max {
-			break
-		}
-		c, ok := f.targetCandidates(d, r)
-		if !ok || len(c) == 0 {
-			continue
-		}
-		cands = append(cands, c)
-		taken = append(taken, i)
+	parts := f.castTargets
+	for d.Min > 0 && len(parts) > 0 && len(parts[0]) == 0 {
+		parts = parts[1:]
 	}
-	if len(cands) == 0 || len(cands) < d.Min {
-		return in, false
+	var refs []Ref
+	if len(parts) > 0 {
+		refs, parts = parts[0], parts[1:]
+	}
+	for combinedModeAsk(d) && len(refs) < d.Min && len(parts) > 0 {
+		refs, parts = append(refs, parts[0]...), parts[1:]
+	}
+	mismatch := func(detail string) (decision.Intent, bool, *Divergence) {
+		forge := targetRefKeys(refs)
+		if forge == "" {
+			forge = "none"
+		}
+		var cards []Implicated
+		if n, ok := f.name[f.toF[f.castObj]]; ok {
+			cards = []Implicated{{Name: n}}
+		}
+		return in, false, &Divergence{What: WhatAnswerMissing, Harness: HarnessUnmapped, Field: "cast_targets",
+			Forge: forge, Gorge: strings.Join(f.gorgeOptionKeys(d), " "), Cards: cards, Detail: detail}
+	}
+	if len(refs) < d.Min || d.Max > 0 && len(refs) > d.Max {
+		return mismatch(fmt.Sprintf("the cast's next targeting part holds %d targets, gorge asks %d to %d", len(refs), d.Min, d.Max))
+	}
+	cands := make([][]int, len(refs))
+	for i, r := range refs {
+		c, bound := f.targetCandidates(d, r)
+		if !bound {
+			dv := f.unbound(r.Card + r.Spell)
+			dv.Field = "cast_targets"
+			return in, false, dv
+		}
+		if len(c) == 0 {
+			return mismatch("gorge does not offer the cast's target " + refKey(r))
+		}
+		cands[i] = c
 	}
 	choices, ok := assignTargetOptions(d, cands)
 	if !ok {
-		return in, false
+		return mismatch("no assignment of the cast's targets to one option per Group")
 	}
-	rest := f.castTargets[:0:0]
-	for i, r := range f.castTargets {
-		spent := false
-		for _, t := range taken {
-			spent = spent || t == i
-		}
-		if !spent {
-			rest = append(rest, r)
-		}
-	}
-	f.castTargets = rest
+	f.castTargets = parts
 	in.Choices = choices
-	return in, true
+	return in, true, nil
 }
 
 // kindContext places a kind divergence: where Forge's ask sits (turn, step,
@@ -1649,6 +1710,123 @@ func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, boo
 	f.res.Chooses++
 	f.res.LibraryPicks++
 	return in, true
+}
+
+// handLeaveChoose answers a pick of hand cards (a CR 514.1 cleanup discard,
+// an effect's or a cost's discard, any choose that moves cards out of a hand)
+// from the next snapshot line. Forge's recorder writes no ask line for the
+// pick, but the next snapshot names the seat's hand after it: the picked
+// cards are the offered ones whose names are gone from that hand. Answering
+// by default (the first Min in offered order) discarded a different card than
+// Forge (farm cmdr4 TLA-s289190153 pod-28919015300 line 58: gorge kept
+// Avenger of Zendikar and discarded Welcome the Dead, Forge the reverse), and
+// the p0..p3.hand snapshot classes stopped the follow.
+//
+// It applies to any KChoose whose every option is a card in one seat's hand,
+// matched by where the objects are rather than by resume kind, so a later
+// hand-shaped pick is covered too. It answers only when every card that left
+// the hand by that snapshot is offered, the departed count is a legal pick
+// count, and the picks validate; anything else (a pick whose cards stay in
+// the hand, a cast in between) falls back to the default.
+func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool) {
+	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	seat := -1
+	inHand := map[state.ObjID]bool{}
+	var hand []state.ObjID
+	for _, o := range d.Options {
+		if o.Obj == 0 {
+			return decision.Intent{}, false
+		}
+		if seat < 0 {
+			for s := range f.e.G.Players {
+				if slices.Contains(f.e.G.Zone(state.ZHand, state.PlayerID(s)), o.Obj) {
+					seat = s
+					break
+				}
+			}
+			if seat < 0 {
+				return decision.Intent{}, false
+			}
+			hand = f.e.G.Zone(state.ZHand, state.PlayerID(seat))
+			for _, id := range hand {
+				inHand[id] = true
+			}
+		}
+		if !inHand[o.Obj] {
+			return decision.Intent{}, false
+		}
+	}
+	snap := f.nextSnapshot()
+	if snap == nil {
+		return decision.Intent{}, false
+	}
+	var after []string
+	found := false
+	for _, p := range snap.Players {
+		if p.Seat == seat {
+			after, found = p.Hand, true
+			break
+		}
+	}
+	if !found {
+		return decision.Intent{}, false
+	}
+	// gone counts, by name, the cards of gorge's hand now missing from
+	// Forge's hand at the snapshot (a multiset difference).
+	gone := map[string]int{}
+	for _, id := range hand {
+		gone[objName(f.e.G.Obj(id))]++
+	}
+	for _, n := range after {
+		if gone[n] > 0 {
+			gone[n]--
+		}
+	}
+	total := 0
+	for _, n := range gone {
+		total += n
+	}
+	var picks []int
+	seen := map[state.ObjID]bool{}
+	for i, o := range d.Options {
+		if seen[o.Obj] {
+			continue
+		}
+		seen[o.Obj] = true
+		if n := objName(f.e.G.Obj(o.Obj)); gone[n] > 0 {
+			gone[n]--
+			picks = append(picks, i)
+		}
+	}
+	if len(picks) != total || len(picks) < d.Min || (d.Max > 0 && len(picks) > d.Max) {
+		return decision.Intent{}, false // a card left that was not offered, or a pick count the ask forbids
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: picks}
+	if in.Choices == nil {
+		in.Choices = []int{}
+	}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.HandPicks++
+	return in, true
+}
+
+// nextSnapshot is the first snapshot line at or after f.pos: with an
+// unlogged decision pending, the state after Forge's answer to it.
+func (f *follower) nextSnapshot() *rules.OracleSnapshot {
+	for i := f.pos; i < len(f.log.Entries); i++ {
+		if s := f.log.Entries[i].Snap; s != nil {
+			return &s.Snapshot
+		}
+		if f.log.Entries[i].End != nil {
+			return nil
+		}
+	}
+	return nil
 }
 
 // shuffleLogged reports whether some seat's next unconsumed Forge shuffle
