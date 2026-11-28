@@ -1,6 +1,6 @@
 #carddb evidence v1
 oracle_id	source	ref	outcome	writer
-4900c157-8d9f-4f92-aaca-5246b6e2832e	dirac	keys	unconsumed	gorge-pin
+4900c157-8d9f-4f92-aaca-5246b6e2832e	dirac	keys	agree	gorge-pin
 4900c157-8d9f-4f92-aaca-5246b6e2832e	dirac	lockstep	agree	gorge-pin
 4900c157-8d9f-4f92-aaca-5246b6e2832e	dirac	lockstep-synth-2	agree	evloop
 49039519-62db-4605-b600-cef6f34c893f	dirac	keys	unconsumed	gorge-pin
@@ -23,6 +23,7 @@ oracle_id	source	ref	outcome	writer
 4914d38d-ed6b-4531-b72c-06f0968c44e9	dirac	lockstep	agree	gorge-pin
 4914d38d-ed6b-4531-b72c-06f0968c44e9	dirac	lockstep-synth-2	agree	evloop
 491606d8-e9c1-4f89-bbef-b7590d310097	dirac	lockstep-synth-2	agree	evloop
+4916773d-5ccb-48ff-8aa3-09771ae88e81	dirac	keys	agree	gorge-pin
 4916773d-5ccb-48ff-8aa3-09771ae88e81	dirac	lockstep	agree	gorge-pin
 4916773d-5ccb-48ff-8aa3-09771ae88e81	dirac	lockstep-synth-2	agree	evloop
 49199997-65cd-4cb9-bdd6-74c93c1f6b5a	dirac	keys	agree	gorge-pin
@@ -31,7 +32,7 @@ oracle_id	source	ref	outcome	writer
 491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	dirac	keys	agree	gorge-pin
 491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	dirac	lockstep	agree	gorge-pin
 491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	dirac	lockstep-synth-2	agree	evloop
-4920492e-c210-4d99-ace9-184d65e697f5	dirac	keys	unconsumed	gorge-pin
+4920492e-c210-4d99-ace9-184d65e697f5	dirac	keys	agree	gorge-pin
 4920492e-c210-4d99-ace9-184d65e697f5	dirac	lockstep	agree	gorge-pin
 4920492e-c210-4d99-ace9-184d65e697f5	dirac	lockstep-synth-2	agree	evloop
 492108b7-f831-4739-925f-c3a419859c52	dirac	keys	agree	gorge-pin
@@ -96,6 +97,7 @@ oracle_id	source	ref	outcome	writer
 494b642c-b2b5-40a0-b741-dca1aa9bdb59	dirac	keys	unconsumed	gorge-pin
 494b642c-b2b5-40a0-b741-dca1aa9bdb59	dirac	lockstep	agree	gorge-pin
 494b642c-b2b5-40a0-b741-dca1aa9bdb59	dirac	lockstep-synth-2	agree	evloop
+494c819d-7d73-432b-8c96-4cb9dcd31094	dirac	keys	agree	gorge-pin
 494c819d-7d73-432b-8c96-4cb9dcd31094	dirac	lockstep	agree	gorge-pin
 494c819d-7d73-432b-8c96-4cb9dcd31094	dirac	lockstep-synth-2	agree	evloop
 494dc919-e429-491b-b19b-5037499e2dd6	dirac	keys	agree	gorge-pin
@@ -219,7 +221,7 @@ oracle_id	source	ref	outcome	writer
 49b689a3-9197-4a04-a62f-218b245d6e23	dirac	keys	agree	gorge-pin
 49b689a3-9197-4a04-a62f-218b245d6e23	dirac	lockstep	agree	gorge-pin
 49b689a3-9197-4a04-a62f-218b245d6e23	dirac	lockstep-synth-2	agree	evloop
-49b80368-d38a-4877-b1de-f3b5f3d40d4d	dirac	keys	unconsumed	gorge-pin
+49b80368-d38a-4877-b1de-f3b5f3d40d4d	dirac	keys	agree	gorge-pin
 49b80368-d38a-4877-b1de-f3b5f3d40d4d	dirac	lockstep	agree	gorge-pin
 49b80368-d38a-4877-b1de-f3b5f3d40d4d	dirac	lockstep-synth-2	agree	evloop
 49b84c50-ca0a-4947-8225-ae41aa08e1f1	dirac	lockstep	agree	gorge-pin
@@ -235,7 +237,7 @@ oracle_id	source	ref	outcome	writer
 49c0aac5-d650-4ada-a194-3bf77f104bc1	dirac	keys	agree	gorge-pin
 49c0aac5-d650-4ada-a194-3bf77f104bc1	dirac	lockstep	agree	gorge-pin
 49c0aac5-d650-4ada-a194-3bf77f104bc1	dirac	lockstep-synth-2	agree	evloop
-49c7b7c6-c8dc-4871-9103-b057d2034c3e	dirac	keys	unconsumed	gorge-pin
+49c7b7c6-c8dc-4871-9103-b057d2034c3e	dirac	keys	agree	gorge-pin
 49c7b7c6-c8dc-4871-9103-b057d2034c3e	dirac	lockstep	agree	gorge-pin
 49c7b7c6-c8dc-4871-9103-b057d2034c3e	dirac	lockstep-synth-2	agree	evloop
 49c997d5-7b41-4faf-b898-58db19055671	dirac	keys	agree	gorge-pin
@@ -243,12 +245,14 @@ oracle_id	source	ref	outcome	writer
 49c997d5-7b41-4faf-b898-58db19055671	dirac	lockstep-synth-2	agree	evloop
 49ca0ca8-0733-4aa9-bd0c-1c661725b81b	dirac	keys	agree	gorge-pin
 49ca0ca8-0733-4aa9-bd0c-1c661725b81b	dirac	lockstep	agree	gorge-pin
-49ca8516-624b-4aa8-8e13-d145590cdfda	dirac	keys	unconsumed	gorge-pin
+49ca8516-624b-4aa8-8e13-d145590cdfda	dirac	keys	agree	gorge-pin
 49ca8516-624b-4aa8-8e13-d145590cdfda	dirac	lockstep	agree	gorge-pin
 49ca8516-624b-4aa8-8e13-d145590cdfda	dirac	lockstep-synth-2	agree	evloop
 49cade2f-92ab-48c8-aed3-d52ab3263506	dirac	keys	agree	gorge-pin
 49cade2f-92ab-48c8-aed3-d52ab3263506	dirac	lockstep	agree	gorge-pin
 49cade2f-92ab-48c8-aed3-d52ab3263506	dirac	lockstep-synth-2	agree	evloop
+49cb8d81-d8a0-4ae7-9750-6788a3e9c81b	dirac	keys	unconsumed	gorge-pin
+49cb8d81-d8a0-4ae7-9750-6788a3e9c81b	dirac	lockstep	agree	gorge-pin
 49cb8d81-d8a0-4ae7-9750-6788a3e9c81b	dirac	lockstep-synth-2	agree	evloop
 49cdd05c-feeb-4c24-9d88-069f5d2e08c3	dirac	keys	agree	gorge-pin
 49cdd05c-feeb-4c24-9d88-069f5d2e08c3	dirac	lockstep	agree	gorge-pin
@@ -276,7 +280,7 @@ oracle_id	source	ref	outcome	writer
 49e0af9d-eb76-4ad6-b60a-430ae353728c	dirac	lockstep	agree	gorge-pin
 49e0af9d-eb76-4ad6-b60a-430ae353728c	dirac	lockstep-synth-2	agree	evloop
 49e1e202-37bf-46ed-93d1-1adb13726039	dirac	lockstep	agree	gorge-pin
-49e22e88-d4d9-4781-81e3-bf77b76b132b	dirac	keys	unconsumed	gorge-pin
+49e22e88-d4d9-4781-81e3-bf77b76b132b	dirac	keys	agree	gorge-pin
 49e22e88-d4d9-4781-81e3-bf77b76b132b	dirac	lockstep	agree	gorge-pin
 49e22e88-d4d9-4781-81e3-bf77b76b132b	dirac	lockstep-synth-2	agree	evloop
 49e3396a-a125-4cca-b02a-4a96102bcb16	dirac	lockstep-synth-2	agree	evloop

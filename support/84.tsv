@@ -122,7 +122,7 @@ oracle_id	engine	status	pin	why	measured	writer
 8432729e-5fd4-4661-8b79-e41b1d03eb7b	forge	listed	edf8473c4d	-	2026-11-27	ci
 8432729e-5fd4-4661-8b79-e41b1d03eb7b	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 8432729e-5fd4-4661-8b79-e41b1d03eb7b	xmage	listed	db6dbed4fc	-	2026-11-27	ci
-8432df19-dbf4-457b-8c0b-1f4b3a0a37d2	dirac	not_lowered	970426b4b4c5	[marked: kgen-refuse] T[0] Mode=Mutates	2026-11-28	gorge-pin
+8432df19-dbf4-457b-8c0b-1f4b3a0a37d2	dirac	refused	21a5baca1815	[marked: kgen-refuse,refused-by-name] Mutate (CR 702.140) is deferred in the kernel until 2027-01-15; refused by name, gorge unchanged	2026-11-28	gorge-pin
 8432df19-dbf4-457b-8c0b-1f4b3a0a37d2	forge	listed	edf8473c4d	-	2026-11-27	ci
 8432df19-dbf4-457b-8c0b-1f4b3a0a37d2	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 8432df19-dbf4-457b-8c0b-1f4b3a0a37d2	xmage	listed	db6dbed4fc	-	2026-11-27	ci
@@ -544,7 +544,7 @@ oracle_id	engine	status	pin	why	measured	writer
 84ee74e9-b3e3-4f47-8b3c-5c1a70f5cad6	forge	listed	edf8473c4d	-	2026-11-27	ci
 84ee74e9-b3e3-4f47-8b3c-5c1a70f5cad6	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 84ee74e9-b3e3-4f47-8b3c-5c1a70f5cad6	xmage	listed	db6dbed4fc	-	2026-11-27	ci
-84f1e596-f56f-48c9-9bff-2c0bb2cea2d3	dirac	unverified	970426b4b4c5	-	2026-11-28	gorge-pin
+84f1e596-f56f-48c9-9bff-2c0bb2cea2d3	dirac	supported	21a5baca1815	-	2026-11-28	gorge-pin
 84f1e596-f56f-48c9-9bff-2c0bb2cea2d3	forge	listed	edf8473c4d	-	2026-11-27	ci
 84f1e596-f56f-48c9-9bff-2c0bb2cea2d3	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 84f1e596-f56f-48c9-9bff-2c0bb2cea2d3	xmage	listed	db6dbed4fc	-	2026-11-27	ci
