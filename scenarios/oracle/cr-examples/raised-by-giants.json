@@ -60,12 +60,11 @@
    "cr": [
     "903.3"
    ],
-   "why": "A control for the face-down case: with the commander face up, Raised by Giants sets its base power and toughness to 10/10.",
+   "why": "A control for the face-down case: Raised by Giants enters while the commander is face up and sets its base power and toughness to 10/10.",
    "format": "commander",
    "setup": {
     "p0": {
      "battlefield": [
-      "Raised by Giants",
       "Isamaru, Hound of Konda"
      ],
      "commanders": [
@@ -73,7 +72,10 @@
      ],
      "commander_casts": {
       "Isamaru, Hound of Konda": 1
-     }
+     },
+     "hand": [
+      "Raised by Giants"
+     ]
     },
     "p1": {
      "hand": [
@@ -81,7 +83,17 @@
      ]
     }
    },
-   "steps": [],
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Raised by Giants",
+     "mana": "CCCCCG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
    "expect": [
     {
      "card": "p0:Isamaru, Hound of Konda",
