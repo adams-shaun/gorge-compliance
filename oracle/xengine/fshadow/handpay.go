@@ -336,56 +336,66 @@ func (s *paySearch) submit(e *rules.Engine, in decision.Intent) *rules.Engine {
 // window, a sacrifice) the follow would answer by default, which may tap or
 // spend what Forge did not.
 func (s *paySearch) settles(e *rules.Engine, i int) bool {
-	return s.settle(e, i, false)
+	after := s.afterPick(e, i, func(_ *follower, d *decision.Decision) (decision.Intent, bool) {
+		switch d.Kind {
+		case decision.KModes:
+			return modeIntent(d), true
+		case decision.KTriggerOrder, decision.KTriggerOptional:
+			return firstMin(d), true
+		}
+		return decision.Intent{}, false
+	})
+	return after != nil && s.tappedAsListed(after)
 }
 
-// settle is settles; byDefault answers every other ask as the follow does
-// (firstMin: the follower's default for a list-pick and for the payment
-// window's unlogged asks) instead of refusing it.
-func (s *paySearch) settle(e *rules.Engine, i int, byDefault bool) bool {
-	// The trial answers targets as the follow will, from this line's targets
-	// remembered on a copy of the follower: the follow's own memory stays.
+// afterPick takes option i of e's priority decision on clones and answers what
+// gorge asks until the next priority: targets as the follow will, every other
+// ask through answer, which gets the trial's follower at that ask. nil when
+// gorge refuses a submit, answer declines, the follow would stop at a target,
+// or no priority comes. Neither e nor the follow changes.
+func (s *paySearch) afterPick(e *rules.Engine, i int, answer func(*follower, *decision.Decision) (decision.Intent, bool)) *rules.Engine {
+	// The trial answers from a copy of the follower that is past this priority
+	// line and remembers the line's targets: the follow's own memory stays.
 	trial := *s.f
+	trial.pos++
 	trial.chain = chainTargets{}
 	trial.rememberCastTargets(s.ask)
 	in := decision.Intent{Choices: []int{i}}
 	for range maxSettle {
 		if e = s.submit(e, in); e == nil {
-			return false
+			return nil
 		}
 		d := e.Pending()
 		if d == nil || e.G.Over {
-			return false
+			return nil
 		}
+		trial.e = e // the engine posing d: an answer reads its state there
 		switch d.Kind {
 		case decision.KPriority:
-			return s.tappedAsListed(e)
-		case decision.KModes:
-			in = modeIntent(d)
+			return e
 		case decision.KTarget:
-			trial.e = e // the engine posing d: its ask's chain link is read there
 			answered, ok, dv := trial.answerChainTargets(d)
 			if dv != nil {
-				return false // the follow would stop here
+				return nil // the follow would stop here
 			}
 			if !ok {
 				answered = trial.defaultTargets(d)
 			}
 			in = answered
-		case decision.KTriggerOrder, decision.KTriggerOptional:
-			in = firstMin(d)
 		default:
-			if !byDefault || !unloggedKind(d.Kind) {
-				return false
+			answered, ok := answer(&trial, d)
+			if !ok {
+				return nil
 			}
-			in = firstMin(d)
+			in = answered
 		}
 	}
-	return false
+	return nil
 }
 
 // newPaySearch is a search for ask a's payment by d's player from f's engine
-// as it stands, offering through offer.
+// as it stands, offering through offer; the engine returned is the clone it
+// starts from. a's tapped ids must all be bound.
 func (f *follower) newPaySearch(d *decision.Decision, a *Ask, offer func(*decision.Decision) int) (*paySearch, *rules.Engine) {
 	start := f.e.Clone() // reading a board may fill the engine's caches
 	s := &paySearch{f: f, ask: a, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits,
@@ -399,14 +409,106 @@ func (f *follower) newPaySearch(d *decision.Decision, a *Ask, offer func(*decisi
 	return s, start
 }
 
-// paysAsListed reports whether taking option i of priority decision d, with
-// gorge paying it in its own payment window and the follow answering that
-// window's asks by default, leaves the taps ask a's line lists
-// (tappedAsListed). An offer Forge paid from sources gorge's window does not
-// pick (Phyrexian Tower sacrificing a creature the line does not name) fails:
-// taking it would pay with other sources, or none, and the follow would carry
-// on from a board Forge never had. a's tapped ids must all be bound.
-func (f *follower) paysAsListed(d *decision.Decision, a *Ask, i int) bool {
+// passesOverCostlySource reports whether gorge, paying option i of priority
+// decision d itself, passes over a source ask a's line lists as tapped
+// (passedOver) whose mana can cost another card (costsAnother). Forge's line
+// names no such card, so the follow cannot tell that gorge's payment is
+// Forge's: Phyrexian Tower may have sacrificed a creature. Every other
+// difference between the two payments is left to the snapshots, and so is a
+// trial that does not get back to priority: false. a's tapped ids must all be
+// bound.
+func (f *follower) passesOverCostlySource(d *decision.Decision, a *Ask, i int) bool {
 	s, start := f.newPaySearch(d, a, nil)
-	return s.settle(start, i, true)
+	paid := s.afterPick(start, i, func(trial *follower, d *decision.Decision) (decision.Intent, bool) {
+		if !unloggedKind(d.Kind) {
+			return decision.Intent{}, false
+		}
+		return trial.answerUnlogged(d), true
+	})
+	if paid == nil {
+		return false
+	}
+	return slices.ContainsFunc(s.listed, func(id state.ObjID) bool {
+		return s.passedOver(start, paid, id) && s.costsAnother(start, id)
+	})
+}
+
+// passedOver reports whether, from start to paid, fewer permanents named as id
+// is were tapped (or left the battlefield) than the line lists: permanents of
+// one name stand in for each other.
+func (s *paySearch) passedOver(start, paid *rules.Engine, id state.ObjID) bool {
+	name := objName(start.G.Obj(id))
+	short := 0
+	for _, l := range s.listed {
+		if objName(start.G.Obj(l)) == name {
+			short++
+		}
+	}
+	after := permanents(paid)
+	for _, p := range permanents(start) {
+		if !s.tapped[p] && objName(start.G.Obj(p)) == name && (!slices.Contains(after, p) || paid.G.Obj(p).Tapped) {
+			short--
+		}
+	}
+	return short > 0
+}
+
+// costsAnother reports whether some mana activation of src that gorge offers at
+// e's priority moves another card off the battlefield or out of a hand or
+// graveyard: a sacrifice, discard or exile it costs besides src. It asks gorge
+// rather than reading costs, trying each activation and each answer to its
+// one-pick asks on clones. e is not changed.
+func (s *paySearch) costsAnother(e *rules.Engine, src state.ObjID) bool {
+	before := heldCards(e, src)
+	var moves func(c *rules.Engine, depth int) bool
+	moves = func(c *rules.Engine, depth int) bool {
+		if c == nil {
+			return false
+		}
+		now := heldCards(c, src)
+		if slices.ContainsFunc(before, func(h heldCard) bool { return !slices.Contains(now, h) }) {
+			return true
+		}
+		next := c.Pending()
+		if next == nil || c.G.Over || next.Kind == decision.KPriority || depth >= maxSettle {
+			return false
+		}
+		if next.Min != 1 || next.Max != 1 {
+			return moves(s.submit(c, firstMin(next)), depth+1)
+		}
+		for i := range next.Options {
+			if moves(s.submit(c, decision.Intent{Choices: []int{i}}), depth+1) {
+				return true
+			}
+		}
+		return false
+	}
+	for i, o := range e.Pending().Options {
+		if o.Kind == "activate" && o.Obj == src && moves(s.submit(e, decision.Intent{Choices: []int{i}}), 0) {
+			return true
+		}
+	}
+	return false
+}
+
+// heldCard is a card in a zone a cost can take it from.
+type heldCard struct {
+	zone state.Zone
+	id   state.ObjID
+}
+
+// heldCards is every card but except on e's battlefield, in a hand or in a
+// graveyard, with its zone.
+func heldCards(e *rules.Engine, except state.ObjID) []heldCard {
+	var out []heldCard
+	for p := range e.G.Players {
+		for _, z := range []state.Zone{state.ZBattlefield, state.ZHand, state.ZGraveyard} {
+			for _, id := range e.G.Zone(z, state.PlayerID(p)) {
+				if id != except {
+					out = append(out, heldCard{z, id})
+				}
+			}
+		}
+	}
+	return out
 }
