@@ -109,6 +109,7 @@ the Python API is `import carddb` with `cmd/carddb/py` on the path.
 | `search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]` | FTS5 over the built file, with legality/status/set/label filters |
 | `blockers --format F [--engine E] [--by printings\|decks]` | legal cards that are not covered, ranked by printings (public default) or real-deck counts (private default); digital and non-tournament-only cards are skipped |
 | `proven [--format F] [--level C2]` | cards whose `cert` level is at least the requested level (the cert-pinned proven view) |
+| `need [--format F] [--limit N] [--by tier\|decks] [--recredit REFS]` | owed and diverged keys, in format-tier order (`--by tier`, the default); `--by decks` (private build with the `decks` and `deck_sample` tables only) prints `unlocked blocked weight` first and ranks by ranking-half decks `unlocked`, then `weight`, then `blocked`, then the tier order, never reading the held-out half |
 | `deck <id>` | a private deck's cards |
 | `freshness [--tick]` | writer SLAs from `schema/writers.tsv`, publish age, `carddb-latest` age, unresolved growth and the data branch's object-store size; `--tick` prints only `!!` lines |
 | `sql '<select>'` | read-only SQL (the file is opened `mode=ro` + `query_only`; only SELECT/WITH/EXPLAIN is accepted) |

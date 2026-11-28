@@ -1267,7 +1267,7 @@ class TestNeedByDecks(Base):
 
     NAMES = {OID_A: "Aa", OID_B: "Bb", OID_C: "Cc", OID_D: "Dd", OID_E: "Ee", OID_F: "Ff"}
 
-    def build(self, name, decks, sample, with_sample=True):
+    def build(self, name, decks, sample, with_sample=True, with_decks=True):
         """A private build: B is proven, every other card has one owed key; `sample` rows are
         (deck_id, half, bracket, dirac_four_seat)."""
         home = os.path.join(self.tmp, name)
@@ -1303,6 +1303,11 @@ class TestNeedByDecks(Base):
             conn.executemany("INSERT INTO deck_sample VALUES (?,?,?,?)", sample)
             conn.commit()
             conn.close()
+        if not with_decks:
+            conn = sqlite3.connect(db)
+            conn.execute("DROP TABLE decks")
+            conn.commit()
+            conn.close()
         return home, db
 
     def decks(self, held=((OID_E, "H1"),)):
@@ -1329,14 +1334,35 @@ class TestNeedByDecks(Base):
         self.assertEqual(self.need(home, db), self.EXPECT)
 
     def test_heldout_never_read(self):
-        # E moves into a second held-out deck holding no other card: still 0 0 0
-        home, db = self.build("held", self.decks(held=((OID_E, "H1"), (OID_E, "H2"))),
+        # E moves out of H1 into a second held-out deck holding no other card: still 0 0 0
+        home, db = self.build("held", self.decks(held=((OID_E, "H2"),)),
                               self.sample(extra=[("H2", "holdout", "cedh", 1)]))
         self.assertEqual(self.need(home, db), self.EXPECT)
 
     def test_ranking_spelling(self):
         home, db = self.build("ranking", self.decks(), self.sample(rank="ranking"))
         self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_unlocked_before_weight(self):
+        # F unlocks S1 (seats four, F its only unproven card): 1 1 1.0. A sits alone in two decks
+        # that do not seat four: 0 2 2.0. Higher unlocked wins over higher weight and blocked,
+        # and over the name order (Aa < Ff).
+        decks = [("S1", OID_F), ("N1", OID_A), ("N2", OID_A)]
+        sample = [("S1", "rank", "cedh", 1), ("N1", "rank", "casual", 0), ("N2", "rank", "casual", 0)]
+        home, db = self.build("unlocked", decks, sample)
+        self.assertEqual(self.need(home, db),
+                         [("Ff", "1", "1", "1.0"), ("Aa", "0", "2", "2.0"), ("Cc", "0", "0", "0"),
+                          ("Dd", "0", "0", "0"), ("Ee", "0", "0", "0")])
+
+    def test_blocked_breaks_weight_tie(self):
+        # F is in two decks of two unproven cards (0 2 1.0); A is alone in one deck that does not
+        # seat four (0 1 1.0). Tied on unlocked and weight, higher blocked wins over Aa < Ff.
+        decks = [("T1", OID_C), ("T1", OID_F), ("T2", OID_D), ("T2", OID_F), ("N1", OID_A)]
+        sample = [("T1", "rank", "cedh", 1), ("T2", "rank", "cedh", 1), ("N1", "rank", "casual", 0)]
+        home, db = self.build("blocked", decks, sample)
+        self.assertEqual(self.need(home, db),
+                         [("Ff", "0", "2", "1.0"), ("Aa", "0", "1", "1.0"), ("Cc", "0", "1", "0.5"),
+                          ("Dd", "0", "1", "0.5"), ("Ee", "0", "0", "0")])
 
     def test_tier_order_unchanged_by_default_and_by_tier(self):
         home, db = self.build("tier", self.decks(), self.sample())
@@ -1352,4 +1378,12 @@ class TestNeedByDecks(Base):
         self.assertEqual(r.returncode, 1)
         self.assertIn("need: --by decks needs the private build with the deck sample "
                       "(no deck_sample table)", r.stderr)
+        self.assertEqual(self.cli(home, "need", "--db", db, "--private").returncode, 0)
+
+    def test_needs_decks_table(self):
+        home, db = self.build("nodecks", self.decks(), self.sample(), with_decks=False)
+        r = self.cli(home, "need", "--by", "decks", "--db", db, "--private")
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("need: --by decks needs the private build with the deck sample "
+                      "(no decks table)", r.stderr)
         self.assertEqual(self.cli(home, "need", "--db", db, "--private").returncode, 0)
