@@ -112,6 +112,30 @@ class Selection(Base):
         self.assertFalse(any(n.startswith("card_fts_") for n in names))
         self.assertEqual(names, sorted(names))
 
+    def test_every_exported_column_declares_a_parquet_type(self):
+        """Every column of every object the built file exports maps to a parquet
+        type, so a view with a bare expression column fails here, in the pull
+        request, not in the nightly release (11-26/11-27: key_legs and friends
+        broke the publish job two nights running)."""
+        a, committed = built_fixture(self)
+        out = os.path.join(self.tmp, "carddb.sqlite")
+        build_mod.build(out, self.schema, a.dir, None, committed)
+        conn = sqlite3.connect(out)
+        self.addCleanup(conn.close)
+        if not conn.execute("SELECT 1 FROM sqlite_master WHERE name='decks'").fetchone():
+            # the fixture has no decks writer; deck_proven is built whenever a real file has one
+            from carddb.query import DECK_PROVEN_VIEW_SQL
+            conn.execute("CREATE TABLE decks (deck_id TEXT, oracle_id TEXT)")
+            conn.execute(DECK_PROVEN_VIEW_SQL)
+        bad = []
+        for _kind, name in parquet_export.data_objects(conn):
+            for col, declared, _pk in parquet_export.columns(conn, name):
+                try:
+                    parquet_export.parquet_type(declared)
+                except parquet_export.ExportError:
+                    bad.append("%s.%s (%r)" % (name, col, declared))
+        self.assertEqual(bad, [], "columns with no parquet type: CAST them in the view")
+
     def test_columns_and_order(self):
         p = edge_db(os.path.join(self.tmp, "edge.sqlite"))
         conn = sqlite3.connect(p)

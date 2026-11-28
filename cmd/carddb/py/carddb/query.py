@@ -1156,9 +1156,11 @@ KEYPROOF_CARDS_VIEW_SQL = (
     "FROM keyproof_keys k GROUP BY k.oracle_id")
 
 # One row per private deck: its card count and how many of them the approved rule proves.
-DECK_PROVEN_VIEW_SQL = ("CREATE VIEW deck_proven AS SELECT d.deck_id, COUNT(*) AS cards, "
-                        "SUM(COALESCE(p.proven, 0)) AS proven_cards, "
-                        "(SUM(COALESCE(p.proven, 0)) = COUNT(*)) AS proven "
+# Aggregates are CAST so every column declares a type: the parquet release asset maps declared
+# types only, and a bare COUNT(*) column failed the nightly publish (11-26, 11-27).
+DECK_PROVEN_VIEW_SQL = ("CREATE VIEW deck_proven AS SELECT d.deck_id, CAST(COUNT(*) AS INTEGER) AS cards, "
+                        "CAST(SUM(COALESCE(p.proven, 0)) AS INTEGER) AS proven_cards, "
+                        "CAST(SUM(COALESCE(p.proven, 0)) = COUNT(*) AS INTEGER) AS proven "
                         "FROM decks d LEFT JOIN card_proven p ON p.oracle_id = d.oracle_id GROUP BY d.deck_id")
 
 # The cards the approved rule proves: not curated-excluded, no known_bug evidence row, at least
