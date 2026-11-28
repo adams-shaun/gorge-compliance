@@ -1,6 +1,9 @@
 """carddb command line (python3 -I cmd/carddb/main.py <verb>).
 
-  put TABLE [--source ID] [--version V]   rows from stdin: TSV, first line the column names
+  put TABLE [--source ID] [--version V] [--if-absent] [--refresh COLS]
+                                        rows from stdin: TSV, first line the column names; --if-absent adds only
+                                        rows whose key is not stored yet (--refresh COLS: the stored row still
+                                        takes those columns from the input)
   ingest catalogue --mtgjson FILE         MTGJSON AllPrintings -> the catalogue tables, full snapshot
   ingest status --status-a FILE --meta FILE [--status-b FILE]
                                         oraclediff status output -> cert_sets status columns (docs site data)
@@ -62,6 +65,11 @@ def _parser():
     p.add_argument("table")
     p.add_argument("--source", help="writer id recorded in _meta/writers (default $CARDDB_WRITER or cli)")
     p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--if-absent", action="store_true",
+                   help="drop each input row whose key the store already holds instead of overwriting it "
+                        "(the keyproof seed put); with --refresh the stored row still takes those columns")
+    p.add_argument("--refresh", metavar="COLS",
+                   help="with --if-absent: comma-separated column names the stored row takes from the input row")
     p = sub.add_parser("ingest")
     p.add_argument("source", choices=("catalogue", "status"))
     p.add_argument("--mtgjson", metavar="FILE", help="catalogue: MTGJSON AllPrintings.json or .json.gz")
@@ -243,8 +251,10 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
         if args.verb == "put":
             t = schema.tables.get(args.table)
             k = PRIVATE if t is not None and t.is_private() and not args.table.startswith("_meta/") else PUBLIC
+            refresh = tuple(c.strip() for c in args.refresh.split(",") if c.strip()) if args.refresh else ()
             n = Store(k, home=args.home, schema=schema).put(args.table, _read_rows(stdin), writer=args.source,
-                                                              version=args.version, raw=True)
+                                                              version=args.version, raw=True,
+                                                              if_absent=args.if_absent, refresh=refresh)
             print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
             return 0
         if args.verb == "migrate":
