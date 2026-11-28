@@ -1897,11 +1897,12 @@ func (f *follower) mayShuffleChoose(d *decision.Decision) (decision.Intent, bool
 // card larger than Forge's (chance-misaligned, "Forge shuffled 89 cards,
 // gorge 90"; farm cmdr4 pod 14201, Terramorphic Expanse).
 //
-// It applies to any KChoose whose every option is a card in one seat's
-// library, matched by where the objects are rather than by resume kind, so a
-// later search-shaped pick is covered too. It answers only when every card
-// of gorge's library absent from that shuffle is offered (a shuffle that is
-// a later one, after draws or other moves, misses cards not offered and
+// It applies to a pick cardPickChoose routes out of a library (pickRouteOf:
+// the chosen cards leave it and the others stay) and whose every option is a
+// card in one seat's library; an ask with no such route never gets here, so a
+// new search-shaped pick needs its route first. It answers only when every
+// card of gorge's library absent from that shuffle is offered (a shuffle that
+// is a later one, after draws or other moves, misses cards not offered and
 // falls back to the default) and the picks form a valid answer.
 func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, bool) {
 	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
@@ -1984,12 +1985,13 @@ func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, boo
 // Avenger of Zendikar and discarded Welcome the Dead, Forge the reverse), and
 // the p0..p3.hand snapshot classes stopped the follow.
 //
-// It applies to any KChoose whose every option is a card in one seat's hand,
-// matched by where the objects are rather than by resume kind, so a later
-// hand-shaped pick is covered too. It answers only when every card that left
-// the hand by that snapshot is offered, the departed count is a legal pick
-// count, and the picks validate; anything else (a pick whose cards stay in
-// the hand, a cast in between) falls back to the default.
+// It applies to a pick cardPickChoose routes out of a hand (pickRouteOf: the
+// chosen cards leave it and the others stay) and whose every option is a card
+// in one seat's hand; an ask with no such route (a reveal, a "keep these")
+// never gets here, so a new hand-shaped pick needs its route first. It
+// answers only when every card that left the hand by that snapshot is
+// offered, the departed count is a legal pick count, and the picks validate;
+// anything else (a cast in between) falls back to the default.
 func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool) {
 	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
 		return decision.Intent{}, false
@@ -2115,9 +2117,23 @@ type pickRoute struct {
 
 // leavingOptionKinds are the option kinds that say by themselves that the
 // chosen cards leave their zone for somewhere other than a hand and the rest
-// stay: a discard (cleanup, a cost's, an effect's, a connive's), a ward's
-// discard, an exile cost and an imprint.
-var leavingOptionKinds = map[string]bool{"discard": true, "ward_discard": true, "exilecost": true, "imprint": true}
+// stay. Most are costs gorge asks with no resume kind. A kind not listed here
+// and not routed by pickRouteOf keeps the default, so an ask whose chosen
+// cards stay (revealcost, beholdcost, splice, balance_keep) is never listed.
+var leavingOptionKinds = map[string]bool{
+	// Discards: the cleanup step's, an effect's, a connive's or a cost's; a
+	// ward's, a mana ability's, a cumulative upkeep's.
+	"discard": true, "ward_discard": true, "mana_discard": true, "cumulative_action_discard": true,
+	// An echo cost's discard or sacrifice.
+	"echo_action_pick": true,
+	// Exiles: a cast or unless cost's, a mana ability's, a triggered cost's,
+	// an opening-hand effect's (Gemstone Caverns), an imprint's.
+	"exilecost": true, "mana_exile": true, "exile_cost": true, "opening_exile": true, "imprint": true,
+	// A cost that puts cards on a library (Penance).
+	"puttolibcost": true,
+	// A manifest or cloak from hand.
+	"face_down_choice": true,
+}
 
 // pickRouteOf reads d's route off the ask itself: its option kinds, else its
 // resume kind and the asking ability's destination parameters. ok is false for
@@ -2180,6 +2196,24 @@ func (f *follower) pickRouteOf(d *decision.Decision) (pickRoute, bool) {
 			chosenLeaves: p.Dest != state.ZLibrary, chosenToHand: p.Dest == state.ZHand,
 			restLeaves: rest != state.ZLibrary, restToHand: rest == state.ZHand,
 		}, true
+	case "digmultiple":
+		if api != "DigMultiple" {
+			return no, false
+		}
+		p := effects.DigMultipleOf(sa)
+		if p.ChangeLater {
+			return no, false // later abilities move the picked cards
+		}
+		// With ChooseAmount$ 1, one of the picks goes to ChosenZone$ instead.
+		split := p.ChooseAmount == 1
+		return pickRoute{
+			chosenLeaves: p.Dest != state.ZLibrary && !(split && p.ChosenZone == state.ZLibrary),
+			chosenToHand: p.Dest == state.ZHand && !(split && p.ChosenZone != state.ZHand),
+			restLeaves:   p.Rest != state.ZLibrary, restToHand: p.Rest == state.ZHand,
+		}, true
+	case "hideaway_pick":
+		// The pick is exiled; the rest go to the bottom of the library.
+		return pickRoute{chosenLeaves: true}, true
 	case "draw_upto":
 		// "Draw up to N": the cards named are drawn.
 		return pickRoute{chosenLeaves: true, chosenToHand: true}, true
@@ -2235,6 +2269,12 @@ func (f *follower) handArriveChoose(d *decision.Decision) (decision.Intent, bool
 	}
 	snap := f.nextSnapshot()
 	if snap == nil {
+		return decision.Intent{}, false
+	}
+	// A draw_upto ask offers the library's own top cards, so a later draw
+	// step takes exactly a card the ask offered: read it only from a snapshot
+	// of the step gorge is asking in.
+	if d.ResumeKind == "draw_upto" && at(int(snap.Turn), snap.Step) != f.gorgeAt() {
 		return decision.Intent{}, false
 	}
 	now := Snapshot(f.e, "")

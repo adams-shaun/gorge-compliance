@@ -281,6 +281,21 @@ func TestPickReadAlongTheAskedRoute(t *testing.T) {
 		{"Thoughtseize", "", 0, "discard", "discard", state.ZHand, leaves, true},
 		{"Thoughtseize", "", 0, "discard_reveal", "reveal", state.ZHand, leaves, false},
 		{"Deliver Unto Evil", "DBChoose", 0, "choice", "card", state.ZHand, leaves, false},
+		// A multi-dig: the picks go to the hand or the battlefield, the rest
+		// back into the library or to the graveyard.
+		{"Gift of the Gargantuan", "", 0, "digmultiple", "digmultiple", state.ZLibrary, arrives, true},
+		{"Gift of the Gargantuan", "", 0, "digmultiple", "digmultiple", state.ZLibrary, shuffle, true},
+		{"Benefaction of Rhonas", "", 0, "digmultiple", "digmultiple", state.ZLibrary, arrives, true},
+		{"Benefaction of Rhonas", "", 0, "digmultiple", "digmultiple", state.ZLibrary, shuffle, false},
+		{"Ojer Kaslem, Deepest Growth", "TrigDig", 0, "digmultiple", "digmultiple", state.ZLibrary, shuffle, true},
+		{"Ojer Kaslem, Deepest Growth", "TrigDig", 0, "digmultiple", "digmultiple", state.ZLibrary, arrives, false},
+		// One of the picks goes to the battlefield instead of the hand.
+		{"Selective Adaptation", "", 0, "digmultiple", "digmultiple", state.ZLibrary, arrives, false},
+		// Later abilities move the picks.
+		{"Green Sun's Twilight", "", 0, "digmultiple", "digmultiple", state.ZLibrary, shuffle, false},
+		// Hideaway exiles the pick and bottoms the rest.
+		{"Cemetery Tampering", "__kwHideaway:5", 0, "hideaway_pick", "hideaway", state.ZLibrary, shuffle, true},
+		{"Cemetery Tampering", "__kwHideaway:5", 0, "hideaway_pick", "hideaway", state.ZLibrary, arrives, false},
 	} {
 		t.Run(c.card+" "+c.resume+" "+c.svar+" "+c.seen, func(t *testing.T) {
 			f, lib, yard := snapPickFixture(t)
@@ -305,6 +320,9 @@ func TestPickReadAlongTheAskedRoute(t *testing.T) {
 			moved := namesOf(f, offer[1])[0]
 			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 1, Max: 1,
 				ResumeKind: c.resume, ResumeSA: ability(t, c.card, c.svar, c.nth)}
+			if c.resume == "digmultiple" && d.ResumeSA.API != "DigMultiple" {
+				t.Fatalf("ability API %q, want DigMultiple", d.ResumeSA.API)
+			}
 			for i, id := range offer {
 				d.Options = append(d.Options, decision.Option{Index: i, Kind: c.option, Obj: id, Player: 1})
 			}
@@ -350,6 +368,104 @@ func TestPickReadAlongTheAskedRoute(t *testing.T) {
 			}
 			if got := f.res.LibraryPicks + f.res.HandPicks + f.res.ArrivalPicks; !slices.Equal(in.Choices, want) || got != read {
 				t.Errorf("choices %v picks read %d, want %v and %d", in.Choices, got, want, read)
+			}
+		})
+	}
+}
+
+// TestHandPickReadByOptionKind offers two hand cards under each option kind
+// gorge asks a hand pick with, and the next snapshot shows the second one gone.
+// Where the kind's chosen cards leave the hand that names Forge's pick; where
+// they stay (a reveal, a behold, a splice, a keep) the card left some other way
+// and the answer must stay the default. The costs among these carry no resume
+// kind, so the option kind is all that routes them (CR 118.3).
+func TestHandPickReadByOptionKind(t *testing.T) {
+	for _, c := range []struct {
+		option, resume string
+		read           bool
+	}{
+		{"discard", "", true},
+		{"ward_discard", "ward_discard", true},
+		{"mana_discard", "", true},
+		{"cumulative_action_discard", "", true},
+		{"echo_action_pick", "", true},
+		{"exilecost", "", true},
+		{"mana_exile", "", true},
+		{"exile_cost", "", true},
+		{"opening_exile", "", true},
+		{"imprint", "imprint", true},
+		{"puttolibcost", "", true},
+		{"face_down_choice", "face_down_choice", true},
+		{"revealcost", "", false},
+		{"revealorchoose", "", false},
+		{"beholdcost", "", false},
+		{"splice", "", false},
+		{"balance_keep", "balance_keep", false},
+	} {
+		t.Run(c.option, func(t *testing.T) {
+			f, _, _ := snapPickFixture(t)
+			hand := f.e.G.Zone(state.ZHand, 1)
+			other := slices.IndexFunc(hand, func(id state.ObjID) bool { return namesOf(f, id)[0] != namesOf(f, hand[0])[0] })
+			offer := []state.ObjID{hand[0], hand[other]}
+			e := nextSnap(f, func(p *rules.OracleSnapPlayer) { p.Hand = without(p.Hand, namesOf(f, offer[1])[0]) })
+			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 1, Max: 1, ResumeKind: c.resume}
+			for i, id := range offer {
+				d.Options = append(d.Options, decision.Option{Index: i, Kind: c.option, Obj: id, Player: 1})
+			}
+			in, ok := f.answer(d, e)
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			want, read := []int{0}, 0
+			if c.read {
+				want, read = []int{1}, 1
+			}
+			if !slices.Equal(in.Choices, want) || f.res.HandPicks != read {
+				t.Errorf("choices %v hand picks %d, want %v and %d", in.Choices, f.res.HandPicks, want, read)
+			}
+		})
+	}
+}
+
+// TestDrawUptoReadOnlyInTheAskedStep: a "draw up to N" offers the library's
+// top cards, so the turn's draw takes an offered card too. A card new in the
+// hand is the answered draw only at a snapshot of the step the ask is in; at a
+// later one Forge may have drawn nothing and then drawn for the turn.
+func TestDrawUptoReadOnlyInTheAskedStep(t *testing.T) {
+	for _, c := range []struct {
+		name  string
+		turns int32
+		step  string // the snapshot's step, when not the asked one
+		want  []int
+		read  int
+	}{
+		{"the asked step reads the draw", 0, "", []int{0}, 1},
+		{"the turn's draw step keeps the default", 0, "draw", []int{}, 0},
+		{"a later turn keeps the default", 1, "", []int{}, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			f, lib, _ := snapPickFixture(t)
+			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 0, Max: 2, ResumeKind: "draw_upto"}
+			for i, id := range lib[:2] {
+				d.Options = append(d.Options, decision.Option{Index: i, Kind: "card", Obj: id, Player: 1})
+			}
+			e := nextSnap(f, func(p *rules.OracleSnapPlayer) {
+				p.Hand = append(p.Hand, namesOf(f, lib[0])...)
+				p.LibraryCount--
+			})
+			e.Snap.Snapshot.Turn += c.turns
+			if c.step != "" {
+				if at(int(f.e.G.Turn), c.step) <= f.gorgeAt() {
+					t.Fatalf("step %q is not after turn %d %s", c.step, f.e.G.Turn, f.e.G.Step)
+				}
+				e.Snap.Snapshot.Step = c.step
+			}
+			in, ok := f.answer(d, e)
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			if !slices.Equal(in.Choices, c.want) || f.res.ArrivalPicks != c.read {
+				t.Errorf("choices %v arrival picks %d, want %v and %d", in.Choices, f.res.ArrivalPicks, c.want, c.read)
 			}
 		})
 	}
