@@ -439,9 +439,8 @@ jobs:
             echo "::warning::could not publish the per-set snippet to docs-data; the next run repairs it"; exit 1; }
       - name: Compress the SQLite
         run: |
-          zstd --version
           set -euo pipefail
-          command -v zstd >/dev/null || { echo "::error::zstd is not installed"; exit 1; }
+          zstd --version || { echo "::error::zstd is not installed"; exit 1; }
           zstd -T1 -19 -q -f -o "$RUNNER_TEMP/carddb.sqlite.zst" "$RUNNER_TEMP/carddb.sqlite"
           # The frame format stores no file modification time, so the same input
           # at the same level and thread count must produce identical bytes.
