@@ -119,8 +119,8 @@ class TestScenarioWriter(Base):
         ratchet(repo, "evasion", "known-divergent", "whim-slug", "Whim", "leaves")  # another family's row
         scenarios_mod.run(a, repo=repo)
         got = {ref: o for _oid, source, ref, o in self.evidence(a) if source == "hand"}
-        self.assertEqual(got, {"etb-ltb/whim-slug/enters": "diverge", "etb-ltb/whim-slug/leaves": "unconsumed",
-                               "etb-ltb/whim-slug/both": "diverge"})
+        self.assertEqual(got, {"etb-ltb/whim-slug/enters": "known_bug", "etb-ltb/whim-slug/leaves": "unconsumed",
+                               "etb-ltb/whim-slug/both": "known_bug"})
 
     def test_a_repo_without_a_corpus_deletes_nothing(self):
         a = self.store()
