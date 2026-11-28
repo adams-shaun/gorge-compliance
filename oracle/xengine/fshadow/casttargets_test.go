@@ -115,6 +115,7 @@ func writeAbradeGame(t *testing.T, reg *cards.Registry) *Log {
 				t.Fatalf("target ask %+v: want seat 1's Sol Ring offered, and not first (the default must be wrong)", d.Options)
 			}
 			cast.Answer.Targets = []Ref{{Card: toF[theirRing]}}
+			cast.Answer.TargetSlots = []int{1}
 			abraded = true
 		case decision.KPriority:
 			cast = nil

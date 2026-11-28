@@ -189,13 +189,19 @@ type follower struct {
 	// bottom (the recorder cleared it on a no-op mulligan line): the whole
 	// hand goes to the bottom.
 	mullBottomAll map[int]bool
-	// castTargets are the refs the last consumed priority answer (a cast or
-	// an activation) chose as targets, not yet given to a gorge target
-	// decision; castSeat is the seat that chose them. Consuming the next log
-	// line clears them, so they never reach a later spell's or a trigger's
-	// target.
-	castTargets []Ref
+	// castTargets are the targeting parts of the last consumed priority
+	// answer (a cast or an activation) not yet given to a gorge target
+	// decision, in chain order, each holding the refs Forge chose for that
+	// part (none, where it chose nothing). castSeat is the seat that chose
+	// them, castAsk that line's ask number, castObj the gorge object cast or
+	// activated and castAbility marks an activation. Consuming the next log
+	// line clears the parts, so they never reach a later spell's or a
+	// trigger's target.
+	castTargets [][]Ref
 	castSeat    int
+	castAsk     int
+	castObj     state.ObjID
+	castAbility bool
 	res         Result
 }
 
@@ -693,7 +699,13 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// block ask. Answer by default -- the first Min offered options the
 		// Group contract admits -- and consume no line; Forge's real choice,
 		// if it differs, shows at the next snapshot.
-		if in, ok := f.answerCastTargets(d); ok {
+		in, ok, dv := f.answerCastTargets(d)
+		if dv != nil {
+			dv.Line, dv.Ask = e.Line, f.castAsk
+			f.hard(dv.What, d, *dv)
+			return in, false
+		}
+		if ok {
 			f.res.CastTargets++
 			return in, true
 		}
@@ -746,62 +758,104 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 }
 
 // rememberCastTargets keeps the targets a priority answer carried (a cast's
-// or an activation's "targets"): Forge chooses them while it casts and writes
-// no target ask, so gorge's target decisions that follow have no line of
-// their own and are answered from these.
+// or an activation's "targets", split by "target_slots"): Forge chooses them
+// while it casts and writes no target ask, so gorge's target decisions that
+// follow have no line of their own and are answered from these. An answer
+// whose only parts are empty is kept too: Forge chose nothing there.
 func (f *follower) rememberCastTargets(a *Ask) {
-	if len(a.Answer.Targets) == 0 {
+	parts := a.Answer.targetParts()
+	if len(parts) == 0 {
 		return
 	}
-	f.castTargets = append([]Ref(nil), a.Answer.Targets...)
-	f.castSeat = a.Seat
+	f.castTargets, f.castSeat, f.castAsk = parts, a.Seat, a.N
+	f.castObj, f.castAbility = f.toG[a.Answer.Card], a.Answer.Action == "activate"
 }
 
-// answerCastTargets answers target decision d from the remembered cast
-// targets of the same seat: in Forge's order, each remembered ref d offers
-// is taken, up to d.Max, and taken refs are spent (a spell with several
-// target slots that gorge asks one decision each takes them slot by slot).
-// A ref d does not offer is left for a later decision. ok is false (answer
-// by default) when no remembered ref fits, too few fit for d.Min, or the
-// picks admit no Group assignment.
-func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, bool) {
+// castPoses reports whether target decision d is one the remembered cast or
+// activation poses: the same seat's, with the cast object as its Source. gorge
+// leaves an activated ability's Source 0 (the permanent stays a legal target
+// of its own ability). Another Source is another object's ask (a trigger's, a
+// copy's).
+func (f *follower) castPoses(d *decision.Decision) bool {
+	if int(d.Acting()) != f.castSeat {
+		return false
+	}
+	return f.castObj != 0 && d.Source == f.castObj || f.castAbility && d.Source == 0
+}
+
+// combinedModeAsk reports whether d is one ask over several targeting parts,
+// one target per chosen mode: gorge groups such an ask's options by mode
+// ("charm-mode-<i>", or "charm-mode-player-<seat>" where the modes must name
+// different players).
+func combinedModeAsk(d *decision.Decision) bool {
+	for _, o := range d.Options {
+		if strings.HasPrefix(o.Group, "charm-mode-") {
+			return true
+		}
+	}
+	return false
+}
+
+// answerCastTargets answers target decision d from the remembered cast's
+// targeting parts, in chain order: d takes the next part whole (nothing, if
+// Forge left it empty), and a combined mode ask takes parts until it has Min
+// refs. A mandatory ask (Min above 0) first passes over empty parts, which
+// gorge poses no ask for. Taken and passed-over parts are spent. ok is false
+// (answer by default) when d is not the cast's ask or no part is left. A
+// divergence means d is the cast's ask and the next part does not answer it:
+// the follower cannot tell what Forge chose there, so it stops (a harness
+// finding) instead of answering by default.
+func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	if len(f.castTargets) == 0 || int(d.Acting()) != f.castSeat {
-		return in, false
+	if len(f.castTargets) == 0 || !f.castPoses(d) {
+		return in, false, nil
 	}
-	var cands [][]int
-	var taken []int
-	for i, r := range f.castTargets {
-		if d.Max > 0 && len(cands) >= d.Max {
-			break
-		}
-		c, ok := f.targetCandidates(d, r)
-		if !ok || len(c) == 0 {
-			continue
-		}
-		cands = append(cands, c)
-		taken = append(taken, i)
+	parts := f.castTargets
+	for d.Min > 0 && len(parts) > 0 && len(parts[0]) == 0 {
+		parts = parts[1:]
 	}
-	if len(cands) == 0 || len(cands) < d.Min {
-		return in, false
+	var refs []Ref
+	if len(parts) > 0 {
+		refs, parts = parts[0], parts[1:]
+	}
+	for combinedModeAsk(d) && len(refs) < d.Min && len(parts) > 0 {
+		refs, parts = append(refs, parts[0]...), parts[1:]
+	}
+	mismatch := func(detail string) (decision.Intent, bool, *Divergence) {
+		forge := targetRefKeys(refs)
+		if forge == "" {
+			forge = "none"
+		}
+		var cards []Implicated
+		if n, ok := f.name[f.toF[f.castObj]]; ok {
+			cards = []Implicated{{Name: n}}
+		}
+		return in, false, &Divergence{What: WhatAnswerMissing, Harness: HarnessUnmapped, Field: "cast_targets",
+			Forge: forge, Gorge: strings.Join(f.gorgeOptionKeys(d), " "), Cards: cards, Detail: detail}
+	}
+	if len(refs) < d.Min || d.Max > 0 && len(refs) > d.Max {
+		return mismatch(fmt.Sprintf("the cast's next targeting part holds %d targets, gorge asks %d to %d", len(refs), d.Min, d.Max))
+	}
+	cands := make([][]int, len(refs))
+	for i, r := range refs {
+		c, bound := f.targetCandidates(d, r)
+		if !bound {
+			dv := f.unbound(r.Card + r.Spell)
+			dv.Field = "cast_targets"
+			return in, false, dv
+		}
+		if len(c) == 0 {
+			return mismatch("gorge does not offer the cast's target " + refKey(r))
+		}
+		cands[i] = c
 	}
 	choices, ok := assignTargetOptions(d, cands)
 	if !ok {
-		return in, false
+		return mismatch("no assignment of the cast's targets to one option per Group")
 	}
-	rest := f.castTargets[:0:0]
-	for i, r := range f.castTargets {
-		spent := false
-		for _, t := range taken {
-			spent = spent || t == i
-		}
-		if !spent {
-			rest = append(rest, r)
-		}
-	}
-	f.castTargets = rest
+	f.castTargets = parts
 	in.Choices = choices
-	return in, true
+	return in, true, nil
 }
 
 // kindContext places a kind divergence: where Forge's ask sits (turn, step,
