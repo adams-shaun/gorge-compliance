@@ -12,6 +12,7 @@ function of the file it read.
   need [--format F] [--limit N]    owed and diverged ability keys, most valuable cards first
   proof --set S               per-set key proof: cards, keys, proven, signatures, top owed
   deck <id>                   a private deck's cards
+  headline [--now T]          the proof headline (held-out decks proven) and its supporting numbers
   freshness [--tick]          writer SLAs, publish/asset age, unresolved growth, branch size
   sql '<select>'              read-only SQL
   export <view> --tsv         a deterministic TSV of a table or view
@@ -29,7 +30,8 @@ from .schema import PRIVATE, PRIVATE_TABLE_NAMES, PUBLIC
 from .shard import parse_writers, read_text
 from .store import Store, StoreError, asset_meta_path, carddb_home, packed_mib
 
-VERBS = ("card", "search", "blockers", "proven", "need", "proof", "deck", "freshness", "sql", "export")
+VERBS = ("card", "search", "blockers", "proven", "need", "proof", "deck", "headline", "freshness", "sql",
+         "export")
 
 # A printing in one of these set types never makes a card tournament-legal.
 # MTGJSON's set type is the only paper/digital marker the v1 schema carries;
@@ -583,6 +585,58 @@ def run_deck(conn, args, out):
           [(r["oracle_id"], r["name"], r["count"]) for r in rows])
 
 
+# ------------------------------------------------------------ headline
+
+# The one definition of the proof headline: on the held-out half of the deck sample, the share of
+# decks that seat four in dirac with every card proven (card_proven.proven), overall and per bracket.
+# deck_sample (deck_id, half, bracket, dirac_four_seat) is a private table the deck-support work
+# declares and fills; a build without it prints `decks_proven:all  -  -  -`.
+HEADLINE_DECKS_SQL = '''WITH dc AS (SELECT s.deck_id, s.bracket, s.dirac_four_seat, d.oracle_id
+            FROM deck_sample s JOIN decks d ON d.deck_id = s.deck_id WHERE s.half = 'holdout'),
+     per AS (SELECT dc.deck_id, dc.bracket, MAX(dc.dirac_four_seat) AS four,
+                    COUNT(*) AS cards, SUM(COALESCE(p.proven, 0)) AS proven
+             FROM dc LEFT JOIN card_proven p ON p.oracle_id = dc.oracle_id GROUP BY dc.deck_id, dc.bracket)
+SELECT 'decks_proven:all' AS metric, SUM(four = 1 AND proven = cards) AS n, COUNT(*) AS of,
+       ROUND(100.0 * SUM(four = 1 AND proven = cards) / COUNT(*), 1) AS pct FROM per
+UNION ALL
+SELECT 'decks_proven:' || bracket, SUM(four = 1 AND proven = cards), COUNT(*),
+       ROUND(100.0 * SUM(four = 1 AND proven = cards) / COUNT(*), 1) FROM per GROUP BY bracket'''
+
+HEADLINE_MEDIAN_SQL = '''WITH dc AS (SELECT s.deck_id, d.oracle_id FROM deck_sample s JOIN decks d ON d.deck_id = s.deck_id WHERE s.half = 'holdout'),
+     per AS (SELECT dc.deck_id, 100.0 * SUM(COALESCE(p.proven, 0)) / COUNT(*) AS share
+             FROM dc LEFT JOIN card_proven p ON p.oracle_id = dc.oracle_id GROUP BY dc.deck_id),
+     ranked AS (SELECT share, ROW_NUMBER() OVER (ORDER BY share) AS rn, COUNT(*) OVER () AS n FROM per)
+SELECT 'median_deck_share_pct' AS metric, ROUND(AVG(share), 1) AS n, MAX(n) AS of FROM ranked WHERE rn IN ((n + 1) / 2, (n + 2) / 2)'''
+
+HEADLINE_KEYS_SQL = '''WITH k AS (SELECT * FROM key_proven WHERE proven IS NOT NULL AND oracle_id IN (SELECT oracle_id FROM scope_cards))
+SELECT 'keys_proven' AS metric, COALESCE(SUM(proven), 0) AS n, COUNT(*) AS of FROM k
+UNION ALL SELECT 'keys_forge_only', COALESCE(SUM(forge_only), 0), COUNT(*) FROM k
+UNION ALL SELECT 'keys_unwitnessed', COALESCE(SUM(unwitnessed), 0), COUNT(*) FROM k
+UNION ALL SELECT 'keys_two_seat_only', COALESCE(SUM(two_seat_only), 0), COUNT(*) FROM k
+UNION ALL SELECT 'cards_without_a_row', COUNT(*), (SELECT COUNT(*) FROM scope_cards) FROM scope_cards
+          WHERE oracle_id NOT IN (SELECT oracle_id FROM keyproof)'''
+
+HEADLINE_LEGS_SQL = '''SELECT 'leg_age_hours:' || leg AS metric,
+       CAST((julianday(:now) - julianday(MAX(COALESCE(replayed, measured)))) * 24 AS INTEGER) AS n, COUNT(*) AS of
+FROM keyproof WHERE state IN ('agreed', 'diagnosed') GROUP BY leg ORDER BY n DESC'''
+
+
+def run_headline(conn, args, out):
+    for need in ("key_proven", "scope_cards"):
+        if not _has_table(conn, need):
+            raise QueryError("headline: this build has no %s view" % need)
+    now = _now(args).isoformat()
+    rows = []
+    if _has_table(conn, "deck_sample") and _has_table(conn, "decks"):
+        rows += [tuple(r) for r in _rows(conn, HEADLINE_DECKS_SQL)]
+        rows += [tuple(r) + ("-",) for r in _rows(conn, HEADLINE_MEDIAN_SQL)]
+    else:
+        rows.append(("decks_proven:all", "-", "-", "-"))
+    rows += [tuple(r) + ("-",) for r in _rows(conn, HEADLINE_KEYS_SQL)]
+    rows += [tuple(r) + ("-",) for r in _rows(conn, HEADLINE_LEGS_SQL, {"now": now})]
+    _emit(out, ("metric", "n", "of", "pct"), rows)
+
+
 # ----------------------------------------------------------- freshness
 
 def _now(args):
@@ -929,6 +983,8 @@ def _run(args, conn, schema, meta, out):
         return run_proof(conn, args, out) or 0
     if args.verb == "deck":
         return run_deck(conn, args, out) or 0
+    if args.verb == "headline":
+        return run_headline(conn, args, out) or 0
     if args.verb == "sql":
         return run_sql(conn, args, out) or 0
     if args.verb == "export":
@@ -1066,6 +1122,12 @@ KEYPROOF_CARDS_VIEW_SQL = (
     "AND SUM(k.state IN ('agreed','diagnosed'))>0 "
     "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS INTEGER) AS proven "
     "FROM keyproof_keys k GROUP BY k.oracle_id")
+
+# One row per private deck: its card count and how many of them the approved rule proves.
+DECK_PROVEN_VIEW_SQL = ("CREATE VIEW deck_proven AS SELECT d.deck_id, COUNT(*) AS cards, "
+                        "SUM(COALESCE(p.proven, 0)) AS proven_cards, "
+                        "(SUM(COALESCE(p.proven, 0)) = COUNT(*)) AS proven "
+                        "FROM decks d LEFT JOIN card_proven p ON p.oracle_id = d.oracle_id GROUP BY d.deck_id")
 
 # The cards the approved rule proves: not curated-excluded, no known_bug evidence row, at least
 # one live key, every live key proven (card_proven.proven). The legacy rollup's count is not used here.

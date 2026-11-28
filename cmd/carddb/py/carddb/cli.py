@@ -172,6 +172,7 @@ def _parser():
         ("need", ()),
         ("proof", ()),
         ("deck", (("deck_id", {}),)),
+        ("headline", ()),
         ("freshness", ()),
         ("sql", (("query", {}),)),
         ("export", (("view", {}),)),
@@ -208,6 +209,8 @@ def _parser():
                         "owed and diverged keys: the keys to replay for another engine's credit")
     p = sub.choices["proof"]
     p.add_argument("--set", required=True, metavar="SET")
+    p = sub.choices["headline"]
+    p.add_argument("--now", help="ISO date or timestamp to judge leg ages at (default $CARDDB_NOW or now)")
     p = sub.choices["freshness"]
     p.add_argument("--tick", action="store_true", help="print only `!!` lines")
     p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")
