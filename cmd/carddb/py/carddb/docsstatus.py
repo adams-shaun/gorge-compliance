@@ -260,9 +260,13 @@ def sets_data(db_path):
         names = {r["set_code"]: r["name"] for r in con.execute("SELECT set_code, name FROM sets")}
         out = {}
         if _has_table(con, "keyproof") and _has_table(con, "printings"):
+            if not con.execute("SELECT 1 FROM sqlite_master WHERE type='view' AND name='keyproof_keys'").fetchone():
+                raise StoreError("docs-sets: %s predates the keyproof leg rows (no keyproof_keys view); "
+                                 "rebuild it with carddb build" % db_path)
+            # keyproof_keys: one row per key, not per leg, so the counts are abilities as before.
             # one row per (set, card, key): a card printed twice in a set must not count its keys twice
             for r in con.execute(
-                    "SELECT s.set_code AS set_code, k.state AS state, COUNT(*) AS n FROM keyproof k "
+                    "SELECT s.set_code AS set_code, k.state AS state, COUNT(*) AS n FROM keyproof_keys k "
                     "JOIN (SELECT DISTINCT set_code, oracle_id FROM printings) s ON s.oracle_id=k.oracle_id "
                     "GROUP BY s.set_code, k.state ORDER BY s.set_code, k.state"):
                 if r["state"] not in XPROOF_STATES:
