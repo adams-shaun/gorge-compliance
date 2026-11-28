@@ -56,15 +56,18 @@
    "format": "commander"
   },
   {
-   "name": "a-face-up-commander-counts",
+   "name": "a-body-double-copying-the-commander-is-not-a-commander",
    "cr": [
     "903.3"
    ],
-   "why": "A control for the face-down case: Raised by Giants enters while the commander is face up and sets its base power and toughness to 10/10.",
+   "why": "Body Double copies the commander card from the graveyard, but copying does not carry the commander designation. Raised by Giants leaves it at the copied 2/2.",
    "format": "commander",
    "setup": {
     "p0": {
      "battlefield": [
+      "Raised by Giants"
+     ],
+     "graveyard": [
       "Isamaru, Hound of Konda"
      ],
      "commanders": [
@@ -74,7 +77,10 @@
       "Isamaru, Hound of Konda": 1
      },
      "hand": [
-      "Raised by Giants"
+      "Body Double"
+     ],
+     "library_top": [
+      "Plains"
      ]
     },
     "p1": {
@@ -87,18 +93,26 @@
     {
      "op": "cast",
      "seat": 0,
-     "card": "p0:Raised by Giants",
-     "mana": "CCCCCG"
+     "card": "p0:Body Double",
+     "mana": "CCCCU"
     },
     {
-     "op": "resolve"
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Isamaru, Hound of Konda"
+       ]
+      }
+     ]
     }
    ],
    "expect": [
     {
-     "card": "p0:Isamaru, Hound of Konda",
+     "card": "p0:Body Double",
      "zone": "battlefield",
-     "pt": "10/10"
+     "pt": "2/2"
     }
    ]
   }

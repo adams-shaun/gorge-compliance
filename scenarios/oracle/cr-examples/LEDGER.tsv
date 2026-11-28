@@ -79,7 +79,7 @@ rule	n	status	scenario	note
 603.2g	1	covered	ripjaw-raptor#prevented-damage-does-not-trigger	
 603.4	1	covered	felidar-sovereign#short-of-forty-the-upkeep-ability-never-triggers;felidar-sovereign#falling-below-forty-removes-the-trigger-before-it-resolves	
 603.6b	1	covered	natures-revolt#a-land-enters-as-a-creature-and-triggers;humility#entry-ability-is-lost-before-it-can-trigger	
-603.7a	1	covered	kjeldoran-guard#delayed-trigger-created-after-the-creature-left-never-fires	
+603.7a	1	covered	war-barge#delayed-trigger-created-after-the-barge-left-never-fires;war-barge#barge-leaving-after-resolution-destroys-the-creature;phantasmal-mount#mount-leaving-after-resolution-sacrifices-the-creature	
 603.7a	2	covered	sneak-attack#delayed-sacrifice-waits-for-the-next-end-step	
 603.7c	1	covered	sneak-attack#delayed-sacrifice-still-hits-a-noncreature	
 603.8	1	covered	veiled-crocodile#empty-hand-state-trigger-fires-once	
@@ -233,11 +233,11 @@ rule	n	status	scenario	note
 732.2b	1	not-scenario		Passing priority by verbal shortcut ("Go") is table procedure, not a game state the engine reaches.
 732.3	1	open		
 732.5	1	open		
-800.4a	1	covered	mind-control#the-leaving-controller-takes-only-his-aura	
+800.4a	1	covered	mind-control#the-leaving-controller-takes-only-their-aura	
 800.4a	2	covered	act-of-treason#the-leaving-controller-loses-the-stolen-creature	
-800.4a	3	covered	bribery#the-leaving-controller-exiles-what-he-took	
+800.4a	3	covered	bribery#the-leaving-controller-exiles-what-they-took	
 800.4a	4	covered	genesis-chamber#tokens-under-the-survivors-stay	
-800.4d	1	covered	astral-slide#a-departed-controller-does-not-put-the-return-trigger-on-the-stack	
+800.4d	1	covered	astral-slide#a-departed-controller-does-not-put-the-return-trigger-on-the-stack;astral-slide#with-the-controller-still-in-the-game-the-specter-returns	
 801.2a	1	out-of-scope		
 801.2a	2	out-of-scope		
 801.2c	1	out-of-scope		
@@ -271,7 +271,7 @@ rule	n	status	scenario	note
 902.4	1	out-of-scope		
 902.5a	1	out-of-scope		
 902.5b	1	out-of-scope		
-903.3	1	covered	raised-by-giants#a-face-down-commander-is-still-a-commander;raised-by-giants#a-face-up-commander-counts	
+903.3	1	covered	raised-by-giants#a-face-down-commander-is-still-a-commander;raised-by-giants#a-body-double-copying-the-commander-is-not-a-commander	
 903.4	1	not-scenario		Color identity constrains deck construction before the game; the example checks a deck list, not a played game.
 903.4d	1	not-scenario		Color identity constrains deck construction before the game; the example checks a deck list, not a played game.
 903.5c	1	not-scenario		The example states which cards may be in a Wort Commander deck, a deck-construction question.

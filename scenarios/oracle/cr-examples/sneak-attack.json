@@ -60,6 +60,17 @@
     },
     {
      "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1",
+     "expect": [
+      {
+       "card": "p0:Grizzly Bears",
+       "zone": "battlefield"
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
      "step": "end",
      "active": "p1"
     },

@@ -1,0 +1,167 @@
+{
+ "card": "War Barge",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e5ed642f8e3d",
+ "scenarios": [
+  {
+   "name": "delayed-trigger-created-after-the-barge-left-never-fires",
+   "cr": [
+    "603.7a"
+   ],
+   "why": "Shatter destroys the Barge before its ability resolves, but the Bears stay a legal target, so the ability resolves and creates a trigger watching the Barge leave. That event is already past, so the Bears are never destroyed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "War Barge"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Shatter",
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:War Barge",
+     "ability": "islandwalk",
+     "mana": "CCC",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shatter",
+     "mana": "CR",
+     "targets": [
+      "p0:War Barge"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:War Barge",
+       "zone": "graveyard"
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p1:Grizzly Bears",
+       "zone": "battlefield",
+       "keywords": [
+        "Landwalk:Island"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield"
+    }
+   ]
+  },
+  {
+   "name": "barge-leaving-after-resolution-destroys-the-creature",
+   "cr": [
+    "603.7a"
+   ],
+   "why": "A control for the early-leave case: the ability resolves first, then Shatter destroys the Barge. The delayed trigger already exists, so it fires and the Bears are destroyed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "War Barge"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Shatter",
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:War Barge",
+     "ability": "islandwalk",
+     "mana": "CCC",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p1:Grizzly Bears",
+       "zone": "battlefield",
+       "keywords": [
+        "Landwalk:Island"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shatter",
+     "mana": "CR",
+     "targets": [
+      "p0:War Barge"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:War Barge",
+       "zone": "graveyard"
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}
