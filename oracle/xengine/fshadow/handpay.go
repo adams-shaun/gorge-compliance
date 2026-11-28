@@ -347,7 +347,7 @@ func (s *paySearch) settles(e *rules.Engine, i int) bool {
 	// The trial answers targets as the follow will, from this line's targets
 	// remembered on a copy of the follower: the follow's own memory stays.
 	trial := *s.f
-	trial.castTargets = nil
+	trial.chain = chainTargets{}
 	trial.rememberCastTargets(s.ask)
 	in := decision.Intent{Choices: []int{i}}
 	for range maxSettle {
@@ -364,7 +364,8 @@ func (s *paySearch) settles(e *rules.Engine, i int) bool {
 		case decision.KModes:
 			in = modeIntent(d)
 		case decision.KTarget:
-			answered, ok, dv := trial.answerCastTargets(d)
+			trial.e = e // the engine posing d: its ask's chain link is read there
+			answered, ok, dv := trial.answerChainTargets(d)
 			if dv != nil {
 				return false // the follow would stop here
 			}
