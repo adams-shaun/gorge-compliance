@@ -32,7 +32,7 @@ die() {
 
 command -v gh >/dev/null 2>&1 || die "gh is needed"
 
-mkpin() { awk -v n="$1" '$1 == n && ($2 == "?=" || $2 == "=") { v = $3; sub(/#.*/, "", v); print v; exit }'; }
+mkpin() { awk -v n="$1" '!seen && $1 == n && ($2 == "?=" || $2 == "=") { v = $3; sub(/#.*/, "", v); print v; seen = 1 }'; }
 
 oracle=${FORGE_ORACLE_REF:-}
 [ -n "$oracle" ] || oracle=$(mkpin FORGE_ORACLE_REF <Makefile)
