@@ -554,7 +554,7 @@ func TestCuratedFiles(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := []string{"bracket-flags", "exclusions", "game-changers", "labels", "relations"}
+	want := []string{"bracket-flags", "commander-inclusion", "exclusions", "game-changers", "labels", "relations"}
 	var got []string
 	root := t.TempDir()
 	for _, e := range ents {
