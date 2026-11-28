@@ -539,6 +539,24 @@ func snapPrecedesOwnDeclaration(e, next Entry, gorge int, d *decision.Decision) 
 	return next.Ask.Turn == int(s.Turn) && next.Ask.Step == s.Step
 }
 
+// turnDrawBefore reports whether seat may have drawn for its turn (CR 504.1)
+// after gorge's position and up to snapshot snap: a draw step of a turn whose
+// active player is seat lies in between. The active player is known for
+// gorge's turn (the engine's) and the snapshot's (its Active); a turn strictly
+// between them is unknown and counts as one seat may have drawn in.
+func (f *follower) turnDrawBefore(seat int, snap *rules.OracleSnapshot) bool {
+	gt, st := int(f.e.G.Turn), int(snap.Turn)
+	if st > gt+1 {
+		return true
+	}
+	draw := func(turn int) int { return at(turn, "draw") }
+	from, to := f.gorgeAt(), at(st, snap.Step)
+	if int(f.e.G.Active) == seat && from < draw(gt) && draw(gt) <= to {
+		return true
+	}
+	return st > gt && snap.Active == seat && from < draw(st) && draw(st) <= to
+}
+
 func (f *follower) gorgeAt() int { return at(int(f.e.G.Turn), f.e.G.Step.String()) }
 
 func (f *follower) run(max int) {
@@ -2852,9 +2870,9 @@ func (f *follower) handArriveChoose(d *decision.Decision) (decision.Intent, bool
 		return decision.Intent{}, false
 	}
 	// A draw_upto ask offers the library's own top cards, so a later draw
-	// step takes exactly a card the ask offered: read it only from a snapshot
-	// of the step gorge is asking in.
-	if d.ResumeKind == "draw_upto" && at(int(snap.Turn), snap.Step) != f.gorgeAt() {
+	// step of the drawing seat takes exactly a card the ask offered: read it
+	// only when no such draw step lies between the ask and the snapshot.
+	if d.ResumeKind == "draw_upto" && f.turnDrawBefore(int(f.e.G.Obj(d.Options[0].Obj).Owner), snap) {
 		return decision.Intent{}, false
 	}
 	now := Snapshot(f.e, "")

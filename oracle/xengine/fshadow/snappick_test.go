@@ -428,23 +428,34 @@ func TestHandPickReadByOptionKind(t *testing.T) {
 }
 
 // TestDrawUptoReadOnlyInTheAskedStep: a "draw up to N" offers the library's
-// top cards, so the turn's draw takes an offered card too. A card new in the
-// hand is the answered draw only at a snapshot of the step the ask is in; at a
-// later one Forge may have drawn nothing and then drawn for the turn.
+// top cards, so the drawing seat's turn draw takes an offered card too. A card
+// new in the hand is the answered draw only at a snapshot no draw step of the
+// drawing seat precedes; past one Forge may have drawn nothing and then drawn
+// for the turn. Another seat's draw step draws none of the drawing seat's
+// cards (FRA-s27490217 pod-2749021700 line 574, Arcane Denial: seat 3 draws
+// in turn 13's upkeep, seat 0's turn, snapshot at the draw step).
 func TestDrawUptoReadOnlyInTheAskedStep(t *testing.T) {
 	for _, c := range []struct {
-		name  string
-		turns int32
-		step  string // the snapshot's step, when not the asked one
-		want  []int
-		read  int
+		name   string
+		turns  int32
+		step   string // the snapshot's step, when not the asked one
+		active int    // the active seat when not the drawing one (1), else -1
+		want   []int
+		read   int
 	}{
-		{"the asked step reads the draw", 0, "", []int{0}, 1},
-		{"the turn's draw step keeps the default", 0, "draw", []int{}, 0},
-		{"a later turn keeps the default", 1, "", []int{}, 0},
+		{"the asked step reads the draw", 0, "", -1, []int{0}, 1},
+		{"the turn's draw step keeps the default", 0, "draw", -1, []int{}, 0},
+		{"a later turn keeps the default", 1, "", -1, []int{}, 0},
+		{"another seat's draw step reads the draw", 0, "draw", 0, []int{0}, 1},
 	} {
 		t.Run(c.name, func(t *testing.T) {
 			f, lib, _ := snapPickFixture(t)
+			if f.e.G.Active != 1 {
+				t.Fatalf("active seat %d, want the drawing seat 1", f.e.G.Active)
+			}
+			if c.active >= 0 {
+				f.e.G.Active = state.PlayerID(c.active)
+			}
 			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 0, Max: 2, ResumeKind: "draw_upto"}
 			for i, id := range lib[:2] {
 				d.Options = append(d.Options, decision.Option{Index: i, Kind: "card", Obj: id, Player: 1})
