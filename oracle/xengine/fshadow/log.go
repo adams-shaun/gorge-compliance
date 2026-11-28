@@ -36,7 +36,9 @@
 // gorge poses it as a choose or a modes decision, a search's pick is read
 // from the owner's next shuffle line (Result.LibraryPicks), and a pick out of
 // a hand or into one from the next snapshot line's hands (Result.HandPicks,
-// Result.ArrivalPicks). Each is read only where the ask itself sends the
+// Result.ArrivalPicks), a pick onto the battlefield from its permanents
+// (Result.FieldPicks); a card a logged cast or land play moves before that
+// snapshot is no pick. Each is read only where the ask itself sends the
 // chosen cards that way and leaves the others behind; what it does not say, or
 // no later line shows, is answered by default. The election gorge poses ahead
 // of an "unless you discard a ..." discard is answered "ordinary" where the
