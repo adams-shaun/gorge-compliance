@@ -148,10 +148,12 @@ fi
 cd "$tmpdir"
 reply=$(mktemp "$tmpdir/forge-sbv2-selftest.XXXXXX")
 trap 'rm -f "$reply"' EXIT
-printf '%s\n%s\n' \
+# A here-string, not a pipe: under `pipefail` an engine that exits before reading
+# the exchange turns printf's SIGPIPE into its exit code.
+selftest_in=$(printf '%s\n%s\n' \
   '{"request_type":"hello","protocol":"spellbench/v2","request_id":"selftest-hello","protocol_minor":0}' \
-  '{"request_type":"hello","request_type":"hello"}' |
-  timeout "${FORGE_SBV2_SELFTEST_TIMEOUT:-120}" "${engine[@]}" >"$reply" || die_rc=$?
+  '{"request_type":"hello","request_type":"hello"}')
+timeout "${FORGE_SBV2_SELFTEST_TIMEOUT:-120}" "${engine[@]}" <<< "$selftest_in" >"$reply" || die_rc=$?
 if [ -n "${die_rc:-}" ]; then
   echo "forge-sbv2 selftest: engine exited $die_rc" >&2
   exit 1
