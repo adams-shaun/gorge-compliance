@@ -694,6 +694,41 @@ func TestHandPaymentCostingMoreThanTheLineSaysDiverges(t *testing.T) {
 	}
 }
 
+// TestPlannedSacrificeOfAnotherPermanentDiverges: Forge casts Black Knight
+// tapping Phyrexian Tower alone and sacrifices the second creature. gorge's
+// plan from the Tower names the first as its victim and the line names neither,
+// so the plan is not taken: the follow stops at the cast instead of reporting
+// the wrong graveyard at a later snapshot.
+func TestPlannedSacrificeOfAnotherPermanentDiverges(t *testing.T) {
+	const tower, elves, mystic = "Phyrexian Tower", "Llanowar Elves", "Elvish Mystic"
+	l := handGame(t, corpus(t), "", []string{"Forest", elves, tower, mystic, "Black Knight"}, []handStep{
+		{land: "Forest"},
+		{plan: elves},
+		{land: tower},
+		{plan: mystic},
+		{use: "Black Knight", taps: []string{tower + ":Sacrifice:" + mystic}},
+	})
+	_, line := lastAsk(t, l, "cast")
+	stopsAt(t, l, line, 0)
+}
+
+// TestPlannedPaymentCostingItsOwnSourceIsFollowed: only a plan sacrificing
+// another permanent is refused. Phyrexian Tower's plain mana still pays by
+// plan, and so does Lotus Petal, which the plan itself sacrifices.
+func TestPlannedPaymentCostingItsOwnSourceIsFollowed(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Phyrexian Tower", "Sol Ring", "Lotus Petal", "Llanowar Elves"}, []handStep{
+		{land: "Phyrexian Tower"},
+		{plan: "Sol Ring"},
+		{plan: "Lotus Petal"},
+		{plan: "Llanowar Elves"},
+	})
+	a, _ := lastAsk(t, l, "cast")
+	if petal := cardID(t, l, "Lotus Petal"); !slices.Equal(a.Answer.Tapped, []int{petal}) {
+		t.Fatalf("Llanowar Elves tapped %v, want only the Petal %d", a.Answer.Tapped, petal)
+	}
+	followClean(t, l, 0)
+}
+
 // signetGame casts Truefire Paladin, activates its second ability and activates
 // Slayers' Stronghold on it, each paid by hand through Boros Signet.
 func signetGame(t *testing.T) *Log {
