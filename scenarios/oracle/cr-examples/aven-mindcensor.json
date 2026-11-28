@@ -9,7 +9,7 @@
    "cr": [
     "701.23f"
    ],
-   "why": "With Aven Mindcensor out, Veteran Explorer dies and the opponent's search sees only the top four cards, so the Forest there is found and the deeper Plains is not. The search's shuffle instruction still applies, which Psychogenic Probe shows by dealing 2 damage to each player who shuffles.",
+   "why": "With Aven Mindcensor out, Veteran Explorer dies and the opponent's search covers only the top four cards: the Forest second from the top can be taken, while the Plains fifth from the top is out of reach even when the opponent asks for it. The search's shuffle still happens, which Psychogenic Probe shows by dealing 2 damage to each player who shuffles.",
    "setup": {
     "p0": {
      "battlefield": [
@@ -61,7 +61,8 @@
       {
        "kind": "choose",
        "pick": [
-        "p1:Forest"
+        "p1:Forest",
+        "p1:Plains"
        ],
        "seat": 1
       }
