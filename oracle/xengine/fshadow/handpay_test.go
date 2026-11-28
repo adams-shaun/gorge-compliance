@@ -420,7 +420,7 @@ func stopsAt(t *testing.T, l *Log, line, handPayments int) {
 
 // unnamedAt follows l expecting the follower to stop at line because Forge's
 // line does not name which of gorge's ways to cast or play the card its seat
-// took (forgeWay), after handPayments payments by hand.
+// took (forgeWays), after handPayments payments by hand.
 func unnamedAt(t *testing.T, l *Log, line, handPayments int) {
 	t.Helper()
 	res := follow(t, l)
@@ -448,6 +448,20 @@ func TestPlannedCastOfAnUnnamedWayStops(t *testing.T) {
 	unnamedAt(t, l, line, 0)
 }
 
+// TestPlannedCastOfAWayTheSourcesNameFollows: Forge's line names no face,
+// but the sources it tapped do when only one of gorge's ways has a plan
+// paying from exactly them: three Mountains pay Bonecrusher Giant's creature
+// cast, while every Stomp plan taps two sources.
+func TestPlannedCastOfAWayTheSourcesNameFollows(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Mountain", "Mountain", "Mountain", "Bonecrusher Giant"}, []handStep{
+		{land: "Mountain"},
+		{land: "Mountain"},
+		{land: "Mountain"},
+		{plan: "Bonecrusher Giant"},
+	})
+	followClean(t, l, 0)
+}
+
 // TestPlannedCastOfAMarkedWayFollows: a second way Forge marks apart (a
 // kicked cast) leaves Forge's unmarked line naming gorge's plain cast, which
 // the follower takes.
@@ -473,8 +487,9 @@ func TestModalLandPlayStops(t *testing.T) {
 
 // TestHandPaymentOfAMultiWayCardDiverges: gorge lists every way to cast a card
 // as a "cast" option and Forge's line does not say which gorge option its seat
-// took, so a card with a second way is never cast, by hand or by plan: an
-// Adventure, a split card, a foretell card.
+// took, so a card with a second way is never cast by hand: an Adventure, a
+// split card, a foretell card. No way's plan taps exactly Forge's sources
+// here, so the cast stops answer-missing at the line.
 func TestHandPaymentOfAMultiWayCardDiverges(t *testing.T) {
 	for _, c := range []struct {
 		name    string
@@ -505,7 +520,7 @@ func TestHandPaymentOfAMultiWayCardDiverges(t *testing.T) {
 		t.Run(c.name, func(t *testing.T) {
 			l := handGame(t, corpus(t), "", c.library, c.steps)
 			_, line := lastAsk(t, l, "cast")
-			unnamedAt(t, l, line, 0)
+			stopsAt(t, l, line, 0)
 		})
 	}
 }
