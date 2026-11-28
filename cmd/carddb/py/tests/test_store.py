@@ -5,8 +5,9 @@ import sys
 import threading
 import unittest
 
-from carddb import ValidationError, merge as merge_mod, store as store_mod
+from carddb import ValidationError, merge as merge_mod, shard, store as store_mod
 from .helpers import Base, MAIN, OID_A, OID_B, OID_C, ROOT, git
+from .test_query import keyproof_row
 
 
 def read(p):
@@ -188,6 +189,65 @@ class Put(Base):
             p = subprocess.run([go, "run", "./cmd/carddb", verb, "-schema", "carddb/schema", "-tree", a.dir],
                                cwd=ROOT, capture_output=True, text=True, env=dict(os.environ, GOWORK="off"))
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+
+class TestKeyproofRowRules(Base):
+    """The keyproof table's closed vocabularies, worded like Go's keyproofRowRules."""
+
+    REL = "keyproof/ab.tsv"
+
+    def shard_text(self, rows):
+        cols = self.schema.tables["keyproof"].scope_columns("public")
+        names = [c.name for c in cols]
+        cells = [[shard.escape_cell(r.get(n)) for n in names] for r in rows]
+        return shard.render("keyproof", self.schema.version, names, cells)
+
+    def test_bad_rows_yield_exactly_their_rule(self):
+        bad = [
+            ("leg", keyproof_row(OID_A, "bad-leg", "agreed", leg="bogus"),
+             "leg 'bogus' is not xmage, forge, lockstep, scenario or cite"),
+            ("state", keyproof_row(OID_A, "bad-state", "bogus"),
+             "state 'bogus' is not agreed, diagnosed, diverged, owed, stale or excluded"),
+            ("diagnosed without cite", keyproof_row(OID_A, "diag-no-cite", "diagnosed", leg="cite"),
+             "diagnosed without a cite"),
+            ("cite leg state", keyproof_row(OID_A, "cite-agreed", "agreed", leg="cite", cite="CR 702.4b"),
+             "cite leg must be diagnosed, owed or excluded, not 'agreed'"),
+            ("seats", keyproof_row(OID_A, "bad-seats", "agreed", seats=1),
+             "seats '1' is not 0, 2, 3 or 4"),
+            ("agreed zero seats", keyproof_row(OID_A, "zero-seats", "agreed", seats=0),
+             "agreed with seats 0"),
+        ]
+        for name, row, rule in bad:
+            with self.subTest(name):
+                want = "%s: %s %s %s: %s" % (self.REL, row["oracle_id"], row["key"], row["leg"], rule)
+                self.assertEqual(shard.validate_shard(self.schema, "public", self.REL,
+                                                      self.shard_text([row])), [want])
+
+    def test_clean_rows_per_leg_yield_nothing(self):
+        clean = [
+            keyproof_row(OID_A, "cast", "diagnosed", leg="cite", cite="CR 702.4b"),
+            keyproof_row(OID_A, "cast", "agreed", leg="forge"),
+            keyproof_row(OID_A, "cast", "agreed", leg="lockstep", seats=3),
+            keyproof_row(OID_A, "cast", "agreed", leg="scenario"),
+            keyproof_row(OID_A, "cast", "agreed", leg="xmage"),
+        ]
+        self.assertEqual(shard.validate_tree(self.schema, "public",
+                                             [(self.REL, self.shard_text(clean))]), [])
+
+    def test_reordered_header_has_the_same_verdict(self):
+        head = ["leg", "state", "cite", "seats", "key", "oracle_id"]
+        row = ["xmage", "bogus", "-", "2", "cast", OID_A]
+        want = ("%s: %s cast xmage: state 'bogus' is not agreed, diagnosed, diverged, owed, stale or "
+                "excluded" % (self.REL, OID_A))
+        self.assertEqual(shard.keyproof_row_rules(self.REL, head, row), [want])
+
+    def test_put_of_diagnosed_without_cite_writes_nothing(self):
+        a = self.machine("a", init=True)
+        before = self.snapshot(a.dir)
+        with self.assertRaises(ValidationError) as cm:
+            a.put("keyproof", [keyproof_row(OID_A, "cast", "diagnosed", leg="cite")], writer="xproof")
+        self.assertIn("%s: %s cast cite: diagnosed without a cite" % (self.REL, OID_A), str(cm.exception))
+        self.assertEqual(self.snapshot(a.dir), before)
 
 
 class Publish(Base):
