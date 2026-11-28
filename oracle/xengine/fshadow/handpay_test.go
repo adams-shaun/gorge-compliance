@@ -298,9 +298,12 @@ func followClean(t *testing.T, l *Log, handPayments int) *Result {
 
 // TestFilterLandCastIsPaidByHand: gorge offers neither a plan nor a cast for a
 // commander only a filter land's mana pays; the follower activates Forge's
-// sources and casts it.
+// sources and casts it. The line lists the one cast, as Forge's recorder does.
 func TestFilterLandCastIsPaidByHand(t *testing.T) {
-	followClean(t, shikoGame(t), 1)
+	l := shikoGame(t)
+	a, _ := lastAsk(t, l, "cast")
+	a.Options = []Option{{Action: "cast", Card: a.Answer.Card}}
+	followClean(t, l, 1)
 }
 
 // TestHandPaymentShortOfTheCostDiverges: sources that cannot pay the cast
