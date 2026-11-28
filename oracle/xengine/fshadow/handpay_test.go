@@ -688,3 +688,18 @@ func TestHandPaymentPaysTheOffersOwnCost(t *testing.T) {
 	})
 	followClean(t, l, 2)
 }
+
+// TestOfferedActivationTapsForgesSources: gorge offers the Paladin's ability
+// from its untapped lands, and its payment window would tap the first it
+// offers (Plains); the follower pays it from the lands Forge tapped instead.
+func TestOfferedActivationTapsForgesSources(t *testing.T) {
+	const paladin = "Truefire Paladin"
+	l := handGame(t, corpus(t), "", []string{"Plateau", "Mountain", paladin, "Plains"}, []handStep{
+		{land: "Plateau"},
+		{land: "Mountain"},
+		{plan: paladin},
+		{land: "Plains"},
+		{use: paladin, activate: true, taps: []string{"Plateau:W", "Mountain"}},
+	})
+	followClean(t, l, 1)
+}
