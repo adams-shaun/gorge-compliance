@@ -165,8 +165,14 @@ func main() {
 			os.Exit(1)
 		}
 	}
+	// -commit may have rewritten the record above, so write the summary
+	// (including its untriaged count) only now, after any sync.
 	sum, err := summary(results)
 	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	if err := os.WriteFile(filepath.Join(*out, "summary.txt"), []byte(sum), 0o644); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -203,13 +209,6 @@ func writeOutputs(out string, results []*result) error {
 		return err
 	}
 	if err := os.WriteFile(filepath.Join(out, "report.tsv"), []byte(tsv.String()), 0o644); err != nil {
-		return err
-	}
-	sum, err := summary(results)
-	if err != nil {
-		return err
-	}
-	if err := os.WriteFile(filepath.Join(out, "summary.txt"), []byte(sum), 0o644); err != nil {
 		return err
 	}
 	for k, rs := range byFile {

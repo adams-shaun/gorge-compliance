@@ -25,9 +25,8 @@ oracle/compliance/status.md
 .goldfish/
 # Rust follower build output (lives under FOLLOWERS_CACHE, never in tree).
 followers/**/target/
-# Stray `go build ./cmd/xengine` or ./cmd/xmageport output at the repo root.
+# Stray `go build ./cmd/xengine` output at the repo root.
 /xengine
-/xmageport
 # XMage's H2 card DB (300 MB), created in the repo root when a driver test is
 # run from the wrong cwd; the real one lives in the out-of-tree build.
 /db/

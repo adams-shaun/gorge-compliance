@@ -65,6 +65,15 @@ var reDroppedWhy = regexp.MustCompile(`(\d+) XMage choice\(s\) gorge never asks 
 // were dropped. A test whose scenario dropped none is absent.
 func droppedFromScenarios(root string) (map[string]int, error) {
 	out := map[string]int{}
+	// A checkout (or a -commit run to a fresh output dir) with no generated
+	// scenarios has nothing to measure, matching loadDroppedRecord's rule
+	// that an absent record is the empty record.
+	if _, err := os.Stat(root); err != nil {
+		if os.IsNotExist(err) {
+			return out, nil
+		}
+		return nil, err
+	}
 	err := filepath.Walk(root, func(p string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err

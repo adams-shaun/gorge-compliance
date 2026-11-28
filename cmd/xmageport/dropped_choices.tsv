@@ -5,7 +5,7 @@ AbolethSpawnTest#testTriggerController	1
 AddAbilitiesToNonPermanentsTest#testSearchForCardWithFlashInLibrary	1			
 AdventureCardsTest#test_SramsExpertise_CuriousPair	1			
 AdventureCardsTest#test_SramsExpertise_LonesomeUnicorn	1			
-AlteredEgoTest#copyXCreature	2	xmage-extra-ask	107.3m	XMage's extra answer orders Endless One's two +1/+1 replacement effects; both apply, so the rules need no choice and XMage's 3/3 expectation is wrong.
+AlteredEgoTest#copyXCreature	2	xmage-extra-ask	616.1f	XMage's extra answer orders Endless One's two +1/+1 replacement effects; both apply, so the rules need no choice and XMage's 3/3 expectation is wrong.
 AlteredEgoTest#testAddingTheCounters	1			
 AlteredEgoTest#testNoCreatureToCopyAvailable	1			
 AmplifyTest#test_Amplify_OneCard	2	gorge-missing-ask	702.38a	Amplify is unexpanded, so the optional reveal and +1/+1 counter choices are never asked.
@@ -23,7 +23,7 @@ AnrakyrTheTravellerTest#testNotEnoughLife_ShouldNotCast	1
 ArmixFiligreeThrasherTest#test_Playable	1			
 AshlingTheLimitlessTest#testCounteredGrantedEvokeDoesNotSacrificeCardThatEntersLater	1			
 AshlingTheLimitlessTest#testJubilationWithTwinflameTravelersAndYarok	4	gorge-missing-ask	702.74a	The evoke alternative cost and the copied-token replacement chain are unmodelled, so the cast and replacement-order choices are never asked.
-AttachmentTest#testAuraMoveFromHandWithNoAttachableObject	2	xmage-extra-ask	303.4	With no legal attach target Aether Tunnel cannot enter, so XMage's put/decline confirmations add no choice the rules leave open.
+AttachmentTest#testAuraMoveFromHandWithNoAttachableObject	2	xmage-extra-ask	303.4g	With no legal attach target Aether Tunnel cannot enter, so XMage's put/decline confirmations add no choice the rules leave open.
 AttackLimitTest#test_LimitAndEnterAttacking_CavernsOfDespair	1			
 AttackLimitTest#test_LimitAndEnterAttacking_Crawlspace	1			
 AttackLimitTest#test_LimitAndEnterAttacking_DuelingGrounds	1			
@@ -32,7 +32,7 @@ AttackLimitTest#test_LimitAndEnterAttacking_SilentArbiter	1
 AugurOfBolasTest#testAbility	2	harness		Gorge's arrange ask wants all three bottom cards but the port supplies one pick, so the reveal and order answers are a translation limit.
 AuraMovingTest#testOneAttackerDamage	1			
 AuratouchedMageTest#testGainsLegalAura	1			
-BalanceTest#test_LandsAndCardsAreSeparateEvents	2	gorge-missing-ask	701.17	Balance has no resolver, so the land and creature keep choices are never asked and nothing is sacrificed.
+BalanceTest#test_LandsAndCardsAreSeparateEvents	2	gorge-missing-ask	608.2c	Balance has no resolver, so the land and creature keep choices are never asked and nothing is sacrificed.
 BanisherPriestTest#testBanisherPriestToken	3	setup-trigger		Seance's first upkeep trigger fires during setup before the first scripted step, so its yes and two target answers cannot be placed.
 BeholdTest#testBeholdFromBattlefield	1			
 BeholdTest#testBeholdFromHand	1			
@@ -52,7 +52,7 @@ CastFromHandWithoutPayingManaCostTest#testCastingUnpayableCost	1
 CastFromHandWithoutPayingManaCostTest#testColorlessMana	1			
 CastFromHandWithoutPayingManaCostTest#testSpellNoCost	1			
 CastFromHandWithoutPayingManaCostTest#test_OmniscienceAndJodah	2	harness		The alternative and free casts are represented as mana payment, so XMage's cost-choice answers have no step and the replay fails harness.
-ChainerNightmareAdeptTest#testChainerTwice	2	xmage-extra-ask	601.2a	The two zero answers pick which of two redundant Chainer permissions allows the cast; the rules do not require choosing among them.
+ChainerNightmareAdeptTest#testChainerTwice	2	xmage-extra-ask	601.3	The two zero answers pick which of two redundant Chainer permissions allows the cast; the rules do not require choosing among them.
 ChampionTest#testChampionCreature	2	gorge-missing-ask	702.72a	Champion is unexpanded, so the exile-or-sacrifice choice is never asked.
 ChampionTest#testExiledCreatureReturns	1			
 ChorusOfTheConclaveTest#testPlayCreature	2	gorge-missing-ask	601.2b	Chorus of the Conclave's optional additional mana cost is unmodelled, so the pay-X and counter asks are never posed.
@@ -66,7 +66,7 @@ ConspireTest#testWortTheRaidmother	1
 ConspireTest#testWortTheRaidmotherTwoSpells	1			
 ConspireTest#testWortTheRaidmotherWithConspireSpellOnce	1			
 ConspireTest#testWortTheRaidmotherWithConspireSpellTwice	3	gorge-missing-ask	702.78b	Burn Trail has two conspire instances but gorge offers one election, so the second may-tap and new-target choices are never asked.
-ConspireTest#testWortTheRaidmotherWithSakashimaOnce	2	xmage-extra-ask	702.78b	The dropped answers decline a redundant second conspire instance and keep targets, so no rules choice is left unmade.
+ConspireTest#testWortTheRaidmotherWithSakashimaOnce	2	gorge-missing-ask	702.78b	Only one conspire election is offered for two instances, so the second may-tap and new-target choices are never asked; XMage's script declines the second.
 ConspireTest#testWortTheRaidmotherWithSakashimaTwice	4	gorge-missing-ask	702.78b	Only one conspire election is offered for two instances, so the second may-tap and new-target choices are never asked.
 CopyEnchantmentTest#copyAuraEnchantment	1			
 CopyEnchantmentTest#copySagaLandTest	1			
@@ -96,7 +96,7 @@ EnlistTest#testRegularChooseYes	1
 EnterAttackingThatPlayerTest#test_GainControlAndAttackingThatPlayer_MidnightCrusaderShuttle	1			
 ErthaJoFrontierMentorTest#Test_TargetCreature	1			
 ErthaJoFrontierMentorTest#Test_TargetPlayer	1			
-EstridsInvocationTest#testCopyAura	6	gorge-missing-ask	707.9b	Estrid's Invocation's 'may enter as a copy' election is never posed, so the copy and its Aura attach target are made for the player.
+EstridsInvocationTest#testCopyAura	6	gorge-missing-ask	707.5	Estrid's Invocation's 'may enter as a copy' election is never posed, so the copy and its Aura attach target are made for the player.
 ExaltedTest#test_StackedAbilityCounters	2			
 ExpendTest#test_Expend8_Cast7Drop_NoTrigger	2			
 ExpendTest#test_Expend8_Cast8Drop_Trigger	2			
@@ -151,7 +151,7 @@ MageDuelTest#testCopiedCardCast	2
 ManaWasSpentToCastTest#testManaDrainCopied	3	harness		Gorge consolidates Isochron Scepter's copy and free cast into one modes ask and auto-picks the imprinted card, so XMage's separate yes/card answers cannot be placed.
 ManaWasSpentToCastTest#testRitualManaCopied	2			
 MaskwoodNexusTest#magdaSearch	1			
-MimicVatTest#TestClone	4	gorge-missing-ask	707.9b	Clone's and Mimic Vat's optional copy/exile confirmations are never asked; gorge performs them automatically.
+MimicVatTest#TestClone	4	gorge-missing-ask	707.5	Clone's and Mimic Vat's optional copy/exile confirmations are never asked; gorge performs them automatically.
 MindlinkMechTest#test_BecomeCopyOfCrewer_EndsWithTurn	1			
 MisdirectionTest#test_ChangePublicExecution	1			
 MisdirectionTest#test_RakshaDiscardWorks	1			
@@ -185,7 +185,7 @@ OverlaidTerrainTest#test_Mana	1
 OverloadTest#test_CyclonicRift_CantUseAlternativeSpellOnFreeCast	3	xmage-extra-ask	707.10	With one imprintable card and one copy, gorge's single Play Cyclonic Rift ask covers XMage's separate imprint, copy and free-cast confirmations.
 PhantasmalImageTest#testCopyAsEntersBattlefieldAbility	1			
 PhantasmalImageTest#testCopyAsEntersBattlefieldAbility2	1			
-PhantasmalImageTest#testCopyBecomesTargetTriggeredAbility	3	gorge-missing-ask	707.9b	Phantasmal Image's optional copy election is never asked; gorge copies automatically and also auto-picks the second copy target.
+PhantasmalImageTest#testCopyBecomesTargetTriggeredAbility	3	gorge-missing-ask	707.5	Phantasmal Image's optional copy election is never asked; gorge copies automatically and also auto-picks the second copy target.
 PhantasmalImageTest#testCopyCreature	1			
 PhyrexianDreadnoughtTest#testPhyrexianDreadnoughtCantPay	1			
 PhyrexianIngesterTest#test_DestroyInResponse	1			
@@ -211,7 +211,7 @@ RipplesOfUndeathTest#test_CantPay	1
 RunadiBehemothCallerTest#testXEnters	1			
 SacredBoonTest#testSacredBoonSmallDamage	2			
 SacrificeDiesTriggerTest#test_IndustrialAdvancement	1			
-SacrificeLandTest#testMultiple	6	gorge-missing-ask	614.1a	The land's 'as it enters, you may sacrifice' replacement is applied automatically, so the yes/no and which-land choices are never asked.
+SacrificeLandTest#testMultiple	6	gorge-missing-ask	614.1c	The land's 'as it enters, you may sacrifice' replacement is applied automatically, so the yes/no and which-land choices are never asked.
 SacrificeTargetCostTest#testDoUnlessSacrificeTrigger	1			
 SatoruTheInfiltratorTest#test_Omniscience_CastOther	1			
 SatoruTheInfiltratorTest#test_Omniscience_CastSatoru	1			
