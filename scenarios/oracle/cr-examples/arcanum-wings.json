@@ -1,0 +1,119 @@
+{
+ "card": "Arcanum Wings",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "b65007aa0bde",
+ "scenarios": [
+  {
+   "name": "hand-aura-cannot-enchant-the-creature-so-nothing-happens",
+   "cr": [
+    "702.65b"
+   ],
+   "why": "Arcanum Wings enchants Grizzly Bears and the only Aura in hand is Animate Dead, which cannot enchant a creature on the battlefield. The exchange cannot finish, so the Wings stay and Animate Dead stays in hand.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Arcanum Wings"
+     ],
+     "attached": [
+      {
+       "card": "Arcanum Wings",
+       "to": "p0:Grizzly Bears"
+      }
+     ],
+     "hand": [
+      "Animate Dead"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Arcanum Wings",
+     "mana": "CCU"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Arcanum Wings",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:Animate Dead",
+     "zone": "hand"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "keywords": [
+      "Flying"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "controlled-but-not-owned-aura-cannot-swap",
+   "cr": [
+    "702.65b"
+   ],
+   "why": "Confiscate gives its controller the opponent's Arcanum Wings. An Aura its controller does not own cannot go to that player's hand, so the swap does nothing and Holy Strength stays in hand.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Confiscate",
+      "Holy Strength"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Arcanum Wings"
+     ],
+     "attached": [
+      {
+       "card": "Arcanum Wings",
+       "to": "p1:Grizzly Bears"
+      }
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Confiscate",
+     "mana": "CCCCUU",
+     "targets": [
+      "p1:Arcanum Wings"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p1:Arcanum Wings",
+     "mana": "CCU"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Arcanum Wings",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:Holy Strength",
+     "zone": "hand"
+    }
+   ]
+  }
+ ]
+}

@@ -26,6 +26,11 @@ LEGS = ("xmage", "forge", "lockstep", "scenario", "cite")
 # the legs a legacy row speaks for: a legacy put replaces these and no other
 LEGACY_LEGS = ("xmage", "forge", "cite")
 
+SEED_WRITER = "seed"
+
+# the owed reasons the seed itself writes: a seed row still carrying one was never worked on
+SEED_PRUNE_REASONS = ("untried", "not-in-corpus")
+
 _WITNESS_PREFIX = re.compile(r"^([xfp]):(.*)$")
 
 
@@ -116,6 +121,23 @@ def split_batch(rows):
         legacy.setdefault((legs[0]["oracle_id"], legs[0]["key"]), set()).update(x["leg"] for x in legs)
         out.extend(legs)
     return out, legacy
+
+
+def seed_prune(stored, batch_keys):
+    """stored: iterable of (rel, key, row) where key is the (oracle_id, key, leg) tuple and row a dict
+    of column -> cell; batch_keys: set of (oracle_id, key, leg) of the whole seed batch.
+    -> (drop, orphans): drop is a sorted list of (rel, key) of the stored rows the seed wrote, still owed
+    for one of SEED_PRUNE_REASONS, whose key the batch does not name; orphans is the number of distinct
+    (oracle_id, key) absent from the batch whose stored rows include a writer other than seed."""
+    named = {(k[0], k[1]) for k in batch_keys}
+    drop, orphans = [], set()
+    for rel, key, row in stored:
+        if row["writer"] != SEED_WRITER:
+            if (key[0], key[1]) not in named:
+                orphans.add((key[0], key[1]))
+        elif row["state"] == "owed" and row["reason"] in SEED_PRUNE_REASONS and key not in batch_keys:
+            drop.append((rel, key))
+    return sorted(drop), len(orphans)
 
 
 def migrate(store):

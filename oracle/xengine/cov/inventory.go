@@ -5,6 +5,8 @@ package cov
 
 import (
 	"fmt"
+	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
@@ -122,10 +124,7 @@ func Universe(c *cards.Card) []Key {
 			continue
 		}
 		for i, kw := range f.Keywords {
-			name := strings.TrimSpace(kw)
-			if j := strings.IndexByte(name, ':'); j >= 0 {
-				name = strings.TrimSpace(name[:j])
-			}
+			name := keywordName(kw)
 			if name == "" || levelb.IsCombatKeyword(name) || keywordExpanded(f, name) {
 				continue
 			}
@@ -138,6 +137,219 @@ func Universe(c *cards.Card) []Key {
 		}
 	}
 	return out
+}
+
+// keywordName is a keyword string without its ":"-separated parameters.
+func keywordName(kw string) string {
+	name, _, _ := strings.Cut(kw, ":")
+	return strings.TrimSpace(name)
+}
+
+// multiplayerTokens are the case-sensitive substrings that mark a script value
+// as reading something that differs with more than two players. Sorted.
+var multiplayerTokens = []string{
+	"ChoosePlayer", "Commander", "DefendingPlayer", "Goad", "Initiative", "Monarch",
+	"OppCtrl", "OppOwn", "Opponent", "Player.Other", "Vote",
+}
+
+// multiplayerKeywords are the keywords that mark a key by name. Sorted.
+var multiplayerKeywords = []string{"Dethrone", "Encore", "Melee", "Myriad"}
+
+// MultiplayerTokens is every listed token followed by every listed keyword name,
+// the list docs/oracles.md prints. The slice is the caller's.
+func MultiplayerTokens() []string { return slices.Concat(multiplayerTokens, multiplayerKeywords) }
+
+// Multiplayer reports whether key id of c reads something that differs with more
+// than two players. It judges the key's own script text only, never the card's
+// name: the effect names and parameter values of the key's IR node and of every
+// SVar those values name, followed transitively (a SubAbility$, a delayed or
+// immediate trigger's Execute$, an AddTrigger$, a mode's choice, a count SVar;
+// description parameters are not read). A spell mode starts from the raw SVar
+// its choice names; a keyword key is the keyword string. A value holding a token
+// of MultiplayerTokens flags the key, as does a Defined or ValidPlayers of
+// exactly "Player" (each player) and a listed keyword, either unexpanded (a kw#
+// key), named by the Keyword param of the entry the loader expanded it into, or
+// granted by a keyword parameter (KW$, AddKeyword$, Keywords$ and the like). A
+// combat# key is never flagged, nor is an id the card does not hold.
+func Multiplayer(c *cards.Card, id string) bool {
+	if c == nil {
+		return false
+	}
+	switch Family(id) {
+	case "cast", "land":
+		if f := faceAt(c, 0); f != nil {
+			r := newMPReader(f)
+			for _, a := range f.Abilities {
+				if a != nil && a.Kind == "SP" && r.chain(a) {
+					return true
+				}
+			}
+		}
+	case "activated":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "f"), "/a", 2); ok && n[1] < len(f.Abilities) {
+			return newMPReader(f).chain(f.Abilities[n[1]])
+		}
+	case "trigger":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "f"), "/t", 2); ok && n[1] < len(f.Triggers) {
+			t, r := f.Triggers[n[1]], newMPReader(f)
+			return r.params(t.Params) || r.chain(t.Effect)
+		}
+	case "mode":
+		f, n, ok := keyEntry(c, strings.TrimPrefix(id, "mode#"), ".", 3)
+		if !ok || n[1] >= len(f.Abilities) || f.Abilities[n[1]] == nil {
+			return false
+		}
+		choices := strings.Split(f.Abilities[n[1]].Params["Choices"], ",")
+		if n[2] < len(choices) {
+			return newMPReader(f).svar(strings.TrimSpace(choices[n[2]]))
+		}
+	case "static":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "static#"), ".", 2); ok && n[1] < len(f.Statics) {
+			return newMPReader(f).params(f.Statics[n[1]].Params)
+		}
+	case "repl":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "repl#"), ".", 2); ok && n[1] < len(f.Repls) {
+			rp, r := f.Repls[n[1]], newMPReader(f)
+			return r.params(rp.Params) || r.chain(rp.With)
+		}
+	case "keyword":
+		if f, n, ok := keyEntry(c, strings.TrimPrefix(id, "kw#"), ".", 2); ok && n[1] < len(f.Keywords) {
+			kw := f.Keywords[n[1]]
+			return hasMultiplayerToken(kw) || slices.Contains(multiplayerKeywords, keywordName(kw))
+		}
+	}
+	return false
+}
+
+// faceAt is c's face i, or nil when the card has none.
+func faceAt(c *cards.Card, i int) *cards.Face {
+	if i >= len(c.Faces) {
+		return nil
+	}
+	return c.Faces[i]
+}
+
+// keyEntry parses the want sep-separated indices of a key id (its prefix already
+// removed), the first of them a face of c. ok is false for a malformed id or a
+// face the card does not have; the caller bounds the remaining indices.
+func keyEntry(c *cards.Card, s, sep string, want int) (*cards.Face, []int, bool) {
+	parts := strings.Split(s, sep)
+	if len(parts) != want {
+		return nil, nil, false
+	}
+	n := make([]int, want)
+	for i, p := range parts {
+		v, err := strconv.Atoi(p)
+		if err != nil || v < 0 {
+			return nil, nil, false
+		}
+		n[i] = v
+	}
+	f := faceAt(c, n[0])
+	return f, n, f != nil
+}
+
+// maxSubChain stops a cyclic Sub walk; it is past any chain the loader links.
+const maxSubChain = 64
+
+// mpReader reads one face's script text for Multiplayer, following every SVar a
+// value names. seen visits each SVar once, which also stops a reference cycle.
+// Every reader method returns whether anything reachable flags the key, so the
+// answer does not depend on map order.
+type mpReader struct {
+	f    *cards.Face
+	seen map[string]bool
+}
+
+func newMPReader(f *cards.Face) *mpReader { return &mpReader{f: f, seen: map[string]bool{}} }
+
+// chain reads sa and its Sub chain. The effect name ("DB$ Goad") is a script
+// value too; the loader keeps it in API rather than Params.
+func (r *mpReader) chain(sa *cards.SA) bool {
+	for d := 0; sa != nil && d < maxSubChain; d, sa = d+1, sa.Sub {
+		if hasMultiplayerToken(sa.API) || r.params(sa.Params) {
+			return true
+		}
+	}
+	return false
+}
+
+func (r *mpReader) params(params map[string]string) bool {
+	for name, v := range params {
+		if r.param(name, v) {
+			return true
+		}
+	}
+	return false
+}
+
+// param judges one parameter and every SVar its value names. A description is
+// prose about the key, not what it does, and is skipped.
+func (r *mpReader) param(name, v string) bool {
+	if strings.Contains(name, "Desc") {
+		return false
+	}
+	if multiplayerParam(name, v) {
+		return true
+	}
+	for _, ref := range strings.FieldsFunc(v, func(c rune) bool {
+		return c == ',' || c == '&' || c == ' ' || c == '\t'
+	}) {
+		if r.svar(ref) {
+			return true
+		}
+	}
+	return false
+}
+
+// svar judges the raw body of the face's SVar name, once; a name the face does
+// not hold is plain text.
+func (r *mpReader) svar(name string) bool {
+	body, ok := r.f.SVars[name]
+	if !ok || r.seen[name] {
+		return false
+	}
+	r.seen[name] = true
+	return r.raw(body)
+}
+
+// raw judges an unparsed "Key$ value | ..." script body segment by segment, so
+// its descriptions are skipped. A body with no "$" (a bare keyword or a
+// constant) is judged as one value.
+func (r *mpReader) raw(body string) bool {
+	if !strings.Contains(body, "$") {
+		return hasMultiplayerToken(body) || slices.Contains(multiplayerKeywords, keywordName(body))
+	}
+	for seg := range strings.SplitSeq(body, "|") {
+		if name, v, ok := strings.Cut(seg, "$"); ok && r.param(strings.TrimSpace(name), strings.TrimSpace(v)) {
+			return true
+		}
+	}
+	return false
+}
+
+func multiplayerParam(name, v string) bool {
+	switch name {
+	case "Defined", "ValidPlayers":
+		if strings.TrimSpace(v) == "Player" {
+			return true
+		}
+	}
+	// An expanded keyword has no kw# key: its entry carries the name in
+	// Keyword$. A grant names its keywords in KW$, AddKeyword$, Keywords$ and
+	// the like, "&"-separated.
+	if name == "KW" || strings.Contains(name, "Keyword") {
+		for kw := range strings.SplitSeq(v, "&") {
+			if slices.Contains(multiplayerKeywords, keywordName(kw)) {
+				return true
+			}
+		}
+	}
+	return hasMultiplayerToken(v)
+}
+
+func hasMultiplayerToken(v string) bool {
+	return slices.ContainsFunc(multiplayerTokens, func(t string) bool { return strings.Contains(v, t) })
 }
 
 // keywordExpanded reports whether the loader turned a printed keyword into an

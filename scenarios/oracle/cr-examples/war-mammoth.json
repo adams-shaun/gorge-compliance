@@ -1,0 +1,71 @@
+{
+ "card": "War Mammoth",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "06d375c77047",
+ "scenarios": [
+  {
+   "name": "other-attackers-damage-counts-toward-lethal",
+   "cr": [
+    "702.19b"
+   ],
+   "why": "Trueheart Duelist blocks both an Eager Cadet and a War Mammoth. The Cadet's 1 damage counts toward lethal, so the Mammoth needs to assign only 1 to the Duelist and tramples 2 over to the player.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Eager Cadet",
+      "War Mammoth"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Trueheart Duelist"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Eager Cadet",
+      "p0:War Mammoth"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "blocks": [
+      [
+       "p1:Trueheart Duelist",
+       "p0:Eager Cadet"
+      ],
+      [
+       "p1:Trueheart Duelist",
+       "p0:War Mammoth"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Trueheart Duelist",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 18
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "card": "Rowen",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4fae0a0c3354",
+ "scenarios": [
+  {
+   "name": "the-static-reveal-feeds-its-linked-trigger",
+   "cr": [
+    "603.11"
+   ],
+   "why": "Rowen's static ability reveals the first card drawn each turn. When that card is a basic land, the linked trigger draws another card in the same draw step.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Rowen"
+     ],
+     "library_top": [
+      "Forest",
+      "Grizzly Bears",
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "draw",
+     "active": "p0"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Forest",
+     "zone": "hand"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "hand"
+    }
+   ]
+  }
+ ]
+}

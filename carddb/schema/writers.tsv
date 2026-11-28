@@ -16,6 +16,8 @@ decklib	168	decks	deck source import
 labels	36	labels	rule-derived public labels
 resolve	168	_meta/unresolved	name-resolution misses
 xproof	6	keyproof	xproof per-ability cross-engine proof (XP1 harvest, XP6 loop), every 6 h
-dirac	36	support,evidence	gorge dirac per-card support and lockstep evidence from the pinned gorge lists (dirac.py), nightly
 replay	36	keyproof	nightly witness replay of agreed keyproof rows and the 7-day stale sweep (plan pf-replay-03), nightly
 rulings	168	rulings,ruling_refs	per-card rulings: text private, ids public (private weekly fetch)
+dirac	36	support,evidence,keyproof	gorge dirac per-card support, lockstep evidence and keyproof lockstep rows from the pinned gorge lists (dirac.py), nightly
+scenario	36	evidence	hand-scenario and translated XMage test outcomes per card (scenarios.py), nightly
+seed	168	keyproof	keyproof seed rows from the key universe at the pin (xengine keyproof -seed), weekly

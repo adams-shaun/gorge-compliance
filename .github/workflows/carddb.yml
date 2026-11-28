@@ -249,6 +249,7 @@ jobs:
           set -euo pipefail
           for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
                    cmd/carddb/py/carddb/dirac.py cmd/carddb/py/carddb/docsstatus.py oracle/compliance/dirac-gaps.tsv GORGE_PIN go.mod \
+                   cmd/carddb/py/carddb/scenarios.py \
                    cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
                    carddb/schema/v1/_meta/size.tsv \
                    oracle/compliance/manifests Makefile; do
@@ -360,6 +361,14 @@ jobs:
           CARDDB_GORGE_DIR=$(go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge || true) \
             python3 -I cmd/carddb/main.py dirac --repo "$GITHUB_WORKSPACE/tool" \
             --source dirac --measured "$MEASURED" --version "$TOOL_REV"
+      # Hand-scenario and translated XMage test outcomes per card, read off the committed files
+      # (nothing runs: CI's audit enforces them); runs after the catalogue, which names the cards.
+      - name: Scenario evidence writer
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          python3 -I cmd/carddb/main.py scenarios --repo "$GITHUB_WORKSPACE/tool" \
+            --source scenario --measured "$MEASURED" --version "$TOOL_REV"
       - name: Report the packed size into _meta/size
         working-directory: tool
         run: |

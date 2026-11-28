@@ -1,7 +1,7 @@
 #carddb-schema evidence v1
 name	type	required	key	visibility	doc
 oracle_id	string	yes	yes	public	cards.oracle_id
-source	string	yes	yes	public	Reference the evidence comes from (oracle, xmage, forge, mtgish, dirac-lockstep)
+source	string	yes	yes	public	Reference the evidence comes from (oracle, xmage, forge, mtgish, dirac-lockstep, xmageport, hand)
 ref	string	yes	yes	public	Scenario or test id within the source
-outcome	string	yes	no	public	Outcome: agree, diverge, unconsumed
+outcome	string	yes	no	public	Outcome: agree, diverge, unconsumed, pass, known_bug
 writer	string	no	no	public	Program that wrote the row (ci, cert, loop); breaks a merge tie after the timestamp: ci > cert > loop

@@ -1,0 +1,122 @@
+{
+ "card": "Spirit Water Revival",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "81d61402336e",
+ "scenarios": [
+  {
+   "name": "creatures-cannot-pay-the-mana-cost",
+   "cr": [
+    "701.67b"
+   ],
+   "why": "Two Islands and seven creatures cannot cast Spirit Water Revival: creatures tapped for waterbend pay only the waterbend {6}, never the {1} of the mana cost. So the spell is not offered.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Island",
+      "Island",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Spirit Water Revival"
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "cast",
+      "card": "p0:Spirit Water Revival"
+     },
+     "want": false
+    }
+   ]
+  },
+  {
+   "name": "six-creatures-pay-the-waterbend-and-islands-the-rest",
+   "cr": [
+    "701.67b"
+   ],
+   "why": "Three Islands pay the {1}{U}{U} mana cost and six tapped creatures pay the waterbend {6}, so the spell is cast with its additional cost and draws seven. Every creature and every Island ends tapped.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Island",
+      "Island",
+      "Island",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Spirit Water Revival"
+     ],
+     "library": [
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Spirit Water Revival",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "hand_size": {
+      "p0": 7
+     }
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "exile",
+      "name": "Spirit Water Revival"
+     },
+     "eq": 1
+    },
+    {
+     "card": "p0:Grizzly Bears#6",
+     "tapped": true
+    },
+    {
+     "card": "p0:Island#3",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

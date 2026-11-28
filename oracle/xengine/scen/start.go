@@ -305,7 +305,7 @@ func StepsID(set, card, key string) string {
 // ParseID splits an xs: item id written by StartID or StepsID into its set,
 // card slug, key and ordinal ("s<n>" or "steps"). KeyID throws away "/" and
 // "#", so the key is rebuilt from its family (f0/a2, static#0.0,
-// combat#0.block, cast, land): the id names the key the item was built for,
+// combat#0.block, repl#0.0, cast, land): the id names the key the item was built for,
 // which no tape entry does for a static or combat key.
 func ParseID(id string) (set, slug, key, ordinal string, ok bool) {
 	rest, found := strings.CutPrefix(id, "xs:")
@@ -327,6 +327,7 @@ var (
 	abilityKeyIDRE = regexp.MustCompile(`^f(\d+)([at])(\d+)$`)
 	staticKeyIDRE  = regexp.MustCompile(`^static(\d+)\.(\d+)$`)
 	combatKeyIDRE  = regexp.MustCompile(`^combat(\d+)\.(attack|block)$`)
+	replKeyIDRE    = regexp.MustCompile(`^repl(\d+)\.(\d+)$`)
 )
 
 // keyFromID is KeyID's inverse over the key families an item id can name.
@@ -343,6 +344,9 @@ func keyFromID(keyid string) (string, bool) {
 	}
 	if m := combatKeyIDRE.FindStringSubmatch(keyid); m != nil {
 		return "combat#" + m[1] + "." + m[2], true
+	}
+	if m := replKeyIDRE.FindStringSubmatch(keyid); m != nil {
+		return "repl#" + m[1] + "." + m[2], true
 	}
 	return "", false
 }
