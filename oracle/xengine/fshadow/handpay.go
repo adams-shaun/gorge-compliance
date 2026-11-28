@@ -38,11 +38,12 @@ import (
 // Which option is Forge's is settled before the search. gorge lists an
 // Adventure, a split half, foretell, evoke and every other way to cast a card
 // as "cast" options of the same object, several before the plain one, and
-// nothing in Forge's line names the gorge option its seat took. The search
-// tries colour choices until its offer appears, so an offer that accepted any
-// of them would steer into the cheaper one. A cast is therefore paid by hand
-// only when neither engine had a second way to cast the card (soleCast), an
-// activation only when both list as many abilities (forgeAbility).
+// Forge's line does not always name the gorge option its seat took
+// (abilityWays). The search tries colour choices until its offer appears, so an
+// offer that accepted any of them would steer into the cheaper one. A cast is
+// therefore paid by hand only when neither engine had a second way to cast the
+// card (soleCast), an activation only when both list as many abilities
+// (forgeAbility).
 
 // maxPaySubmits bounds one search, in decisions submitted to clones.
 const maxPaySubmits = 4096
@@ -101,7 +102,7 @@ func soleCast(e *rules.Engine, a *Ask, obj state.ObjID) bool {
 // Forge's answer is not on its list or the two lists differ in length.
 func forgeAbility(e *rules.Engine, a *Ask, obj state.ObjID) (decision.Option, bool) {
 	ids := forgeAbilityIDs(a)
-	r := slices.Index(ids, a.Answer.Ability)
+	r := slices.Index(ids, a.Answer.abilityID())
 	if r < 0 {
 		return decision.Option{}, false
 	}
@@ -130,7 +131,7 @@ func forgeAbilityIDs(a *Ask) []int {
 	var ids []int
 	for _, o := range a.Options {
 		if o.Action == "activate" && o.Card == a.Answer.Card {
-			ids = append(ids, o.Ability)
+			ids = append(ids, o.abilityID())
 		}
 	}
 	return ids

@@ -204,9 +204,9 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		}
 		a.Answer.Card = toF[e.Pending().Options[i].Obj]
 		if s.activate {
-			a.Answer.Action, a.Answer.Ability = "activate", 10+s.ability
+			a.Answer.Action, a.Answer.Ability = "activate", intPtr(10+s.ability)
 			for k := 0; option(kind, s.use, k) >= 0; k++ {
-				a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: 10 + k})
+				a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: intPtr(10 + k)})
 			}
 		}
 		submit(decision.Intent{Choices: []int{i}})
@@ -392,6 +392,8 @@ func TestHandPaymentThatTriggersDiverges(t *testing.T) {
 	}
 }
 
+func intPtr(n int) *int { return &n }
+
 // lastAsk is the last ask of l answering action.
 func lastAsk(t *testing.T, l *Log, action string) (*Ask, int) {
 	t.Helper()
@@ -433,11 +435,11 @@ func unnamedAt(t *testing.T, l *Log, line, handPayments int) {
 	}
 }
 
-// TestPlannedCastOfAnUnnamedWayStops: Forge's cast line names neither the
-// face nor the alternative its seat cast, so a card gorge can cast two ways
-// Forge marks alike stops at the line, rather than taking gorge's first: the
-// Adventure plan (Stomp) listed before Bonecrusher Giant's creature cast that
-// pays from the same sources.
+// TestPlannedCastOfAnUnnamedWayStops: a cast line without ability indexes
+// names neither the face nor the alternative its seat cast, so a card gorge can
+// cast two ways Forge marks alike stops at the line, rather than taking gorge's
+// first: the Adventure plan (Stomp) listed before Bonecrusher Giant's creature
+// cast that pays from the same sources.
 func TestPlannedCastOfAnUnnamedWayStops(t *testing.T) {
 	l := handGame(t, corpus(t), "", []string{"Mountain", "Sol Ring", "Bonecrusher Giant"}, []handStep{
 		{land: "Mountain"},
@@ -532,7 +534,7 @@ func TestHandPaymentForgeDoesNotNameDiverges(t *testing.T) {
 	for name, doctor := range map[string]func(*Ask){
 		"second cast": func(a *Ask) {
 			for k := range 2 {
-				a.Options = append(a.Options, Option{Action: "cast", Card: a.Answer.Card, Ability: k})
+				a.Options = append(a.Options, Option{Action: "cast", Card: a.Answer.Card, Ability: &k})
 			}
 		},
 		"marked": func(a *Ask) { a.Answer.Mode = "kicked" },
@@ -575,9 +577,9 @@ func thornscapeGame(t *testing.T, listed ...int) (*Log, int) {
 		{use: master, activate: true, taps: []string{"Wastes", "Boros Signet", "Clifftop Retreat:W", master}, target: master},
 	})
 	a, line := lastAsk(t, l, "activate")
-	a.Answer.Ability, a.Options = 11, nil
+	a.Answer.Ability, a.Options = intPtr(11), nil
 	for _, id := range listed {
-		a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: id})
+		a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: &id})
 	}
 	return l, line
 }
