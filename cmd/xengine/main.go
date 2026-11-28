@@ -58,7 +58,8 @@
 // unsupported, "P?", never a disagreement); -classes (default oracle/xengine/diagnosed-classes.tsv) labels the findings whose card-independent
 // signature a diagnosed class matches (Row.Diagnosed). keyproof turns a play, its two diffs and its adjudication into per-key proof
 // (DIR4/keyproof.tsv: one row per card key, agreed by FX, X or F, or diverged by a signature, diagnosed by a class row, or owed), the
-// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, and witness.jsonl, one line per agreeing item. Follower output is never committed: it goes outside the
+// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, witness.jsonl, one line per agreeing item, and keyproof-legs.tsv (the
+// same keys as carddb leg rows: an xmage and a forge row each in that follower's own state, plus a cite row for a diagnosed key). Follower output is never committed: it goes outside the
 // repository or under the gitignored .oracle-build/.
 package main
 
