@@ -5,8 +5,15 @@
 // the answer Forge's seat gave. gorge is built with
 // rules.NewHypotheticalChancePlanned, so Forge's shuffles and random draws
 // are gorge's too, and each cast is paid with an explicit PaymentPlan of the
-// sources Forge tapped. At every snap line gorge's state is compared with
-// Forge's through oraclediff.CompareOpts, the comparison classify uses.
+// sources Forge tapped. A cast gorge has no such plan for, or an activation it
+// does not offer (a filter land's or a Signet's mana, which gorge's planner
+// does not plan), is paid by hand: the follower activates those sources at
+// priority, then takes the offer (Result.HandPayments counts them). It does so
+// only where Forge's answer names one gorge option (a card with one way to be
+// cast, an ability both engines list) and the floating mana pays it with no
+// further ask. At every
+// snap line gorge's state is compared with Forge's through
+// oraclediff.CompareOpts, the comparison classify uses.
 //
 // The MVP stops at the first hard divergence (Follow's Result.Hard); option-set
 // differences that leave Forge's answer on gorge's list are soft and only
@@ -33,6 +40,17 @@
 // chosen cards that way and leaves the others behind; what it does not say, or
 // no later line shows, is answered by default.
 //
+// Forge's recorder writes one target ask over a whole sub-ability chain, with
+// its targets split by targeting part ("target_slots"), while gorge asks each
+// targeting link its own decision. The line answers the first of them; the
+// parts left answer the later asks with the same Source before any further line
+// is read, the next trigger's target line included (Result.TargetParts counts
+// them). A root or triggered link's ask names its link on the source's ability
+// chain, which picks its part: gorge asks nothing for an optional link with no
+// candidate, while Forge still counts its empty part. A decision the parts
+// cannot answer, or one whose part cannot be told, is a harness divergence
+// (field "target_slots").
+//
 // Forge's recorder writes a target ask only where its targeting hook is asked,
 // so a gorge target decision whose log line is an ask of another kind (the
 // seat's next priority) is answered by default (the first Min options;
@@ -43,8 +61,10 @@
 // answered from the next part instead (Result.CastTargets counts them), still
 // consuming no line: a part Forge left empty answers an optional ask with
 // nothing, a mandatory ask passes over it, and a combined modal ask takes one
-// part per mode. A decision the next part cannot answer is a harness
-// divergence (field "cast_targets").
+// part per mode. A target line that follows the cast wins over these parts. A
+// decision the next part cannot answer, or an optional sub-ability ask that
+// could be an empty part's or a later one's, is a harness divergence (field
+// "cast_targets").
 //
 // Forge's recorder writes no ask for a "may" trigger's yes/no, so a gorge
 // optional-trigger decision (trigger_optional) is answered by default (the
@@ -89,7 +109,8 @@
 // forge-oracle's ShadowLog (adams-shaun/forge, forge-oracle/.../ShadowLog.java);
 // fields it marks as extras (policy, index, label, ...) are ignored, except a
 // mull line's hand, which tells a state-neutral mulligan after the hand has
-// emptied from an ordinary one.
+// emptied from an ordinary one, and a priority answer's mode, which rules out
+// paying a flashback or kicked cast by hand.
 package fshadow
 
 import (
@@ -228,9 +249,12 @@ type Answer struct {
 	// TargetSlots is how many of Targets each targeting part of the spell or
 	// ability holds, in chain order; 0 is a part Forge chose nothing for. A
 	// log without it is read as one part holding every target.
-	TargetSlots []int    `json:"target_slots,omitempty"`
-	Attacks     []Attack `json:"attacks,omitempty"` // attack
-	Blocks      []Block  `json:"blocks,omitempty"`  // block
+	TargetSlots []int `json:"target_slots,omitempty"`
+	// Mode is Forge's mark on a cast that is not the ordinary one
+	// ("flashback", "kicked"); the recorder marks no other.
+	Mode    string   `json:"mode,omitempty"`
+	Attacks []Attack `json:"attacks,omitempty"` // attack
+	Blocks  []Block  `json:"blocks,omitempty"`  // block
 }
 
 // targetParts is Targets split by TargetSlots, one entry per targeting part
