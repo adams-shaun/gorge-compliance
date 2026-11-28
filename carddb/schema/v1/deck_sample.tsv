@@ -1,0 +1,6 @@
+#carddb-schema deck_sample v1
+name	type	required	key	visibility	doc
+deck_id	string	yes	yes	private	decks.deck_id of a sample deck
+half	string	yes	no	private	ranking or holdout
+bracket	string	yes	no	private	precon, casual or cedh
+dirac_four_seat	int	yes	no	private	1 when the census seats the deck at four exactly
