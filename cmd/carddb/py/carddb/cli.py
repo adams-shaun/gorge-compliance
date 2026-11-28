@@ -19,7 +19,8 @@
   compliance [--repo DIR] [--source ID] [--version V] [--measured DATE]
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
   dirac [--repo DIR] [--gorge-dir DIR] [--source ID] [--version V] [--measured DATE]
-                                        gorge's dirac support lists + the gaps snapshot -> support, evidence rows
+                                        gorge's dirac support lists + the gaps snapshot -> support, evidence
+                                        rows and the lockstep leg of keyproof
   inclusion --from FILE --sample NAME [--cards TSV] [--out PATH]
                                         a deck sample's per-card table -> carddb/curated/commander-inclusion.tsv
   size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
@@ -352,8 +353,10 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                 print("dirac: snapshot at %s, GORGE_PIN %s: %d rows from the snapshot may be stale"
                       % (r.snapshot_pin, r.pin, r.stale_rows), file=stdout)
             parts = " ".join("%s=%d" % kv for kv in sorted(r.counts.items()))
-            print("carddb dirac: %d rows changed; %s; %d evidence rows" % (r.changed, parts, r.evidence),
-                  file=stdout)
+            lockstep = ("lockstep: %(cards)d cards, %(agreed)d keys agreed, %(unused)d unused, "
+                        "%(unmatched_unused)d unmatched_unused, 2-seat %(seats2)d, 4-seat %(seats4)d" % r.lockstep)
+            print("carddb dirac: %d rows changed; %s; %d evidence rows; %s"
+                  % (r.changed, parts, r.evidence, lockstep), file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)
