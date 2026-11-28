@@ -48,6 +48,14 @@
 #    be promoted develop -> main BEFORE the first publish to `carddb`.
 #  - The `carddb` branch must carry a copy of this file for the push trigger
 #    to fire; the first `carddb init` creates it and each publish refreshes it.
+#  - keyproof leg rows (one-time): until a publish refreshes the branch's copy
+#    of this file, a push to `carddb` runs the old copy, which has no migrate
+#    step and fails validating legacy keyproof shards against main's schema.
+#    After promoting the leg-row change to main, run this workflow once from
+#    main (dispatch, or wait for the nightly: both use main's copy); it
+#    migrates, publishes the leg rows and refreshes the branch's copy. A push
+#    of already-migrated shards (`carddb migrate keyproof-legs`, then
+#    `carddb publish`) also passes the old copy.
 #  - The write job needs `contents: write`; it is separate from the
 #    pull-request check so that path never holds a write token.
 name: carddb
@@ -74,10 +82,13 @@ on:
 permissions:
   contents: read
 
-# One write path; pull requests get their own group. A newer push cancels the
-# older waiting run, which is the two-hour debounce.
+# Pull requests: one group per PR, newest wins. Everything else gets its own run
+# (run_id); the debounce lives on the `ready` job (a newer push cancels only the
+# older run's quiet-period wait) and `publish` queues in one non-cancelling group.
+# 11-28: one workflow-wide cancelling group let every data push cancel a running
+# build, the nightly and a manual dispatch alike; carddb-latest went 2 days unpublished.
 concurrency:
-  group: carddb-${{ github.event.pull_request.number || 'data' }}
+  group: carddb-${{ github.event.pull_request.number && format('pr-{0}', github.event.pull_request.number) || github.run_id }}
   cancel-in-progress: true
 
 env:
@@ -134,6 +145,17 @@ jobs:
       - name: carddb tool tests (release planner and dry run)
         working-directory: tool
         run: make carddb-test
+      # The schema moves with this ref and the data with the branch: bring the branch's legacy keyproof
+      # shards (one row per key) to leg rows before the first validate; the publish job migrates the
+      # clone it publishes the same way, so the schema and the data land in one publish.
+      - name: Migrate the keyproof shards to leg rows
+        if: github.event_name != 'pull_request'
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/migrate-home"
+          ln -sfn "$GITHUB_WORKSPACE/data" "$RUNNER_TEMP/migrate-home/public"
+          CARDDB_HOME="$RUNNER_TEMP/migrate-home" python3 -I cmd/carddb/main.py migrate keyproof-legs
       - name: Pick the tree
         id: tree
         run: |
@@ -154,6 +176,9 @@ jobs:
   ready:
     needs: check
     if: github.event_name == 'push' && github.event.deleted != true
+    concurrency:
+      group: carddb-debounce
+      cancel-in-progress: true
     runs-on: ubuntu-24.04
     timeout-minutes: 135
     outputs:
@@ -205,6 +230,9 @@ jobs:
       needs.lint.result == 'success' &&
       (needs.ready.result == 'skipped' ||
        (needs.ready.result == 'success' && needs.ready.outputs.stale != 'true'))
+    concurrency:
+      group: carddb-publish
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
@@ -230,6 +258,7 @@ jobs:
           set -euo pipefail
           for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
                    cmd/carddb/py/carddb/dirac.py cmd/carddb/py/carddb/docsstatus.py oracle/compliance/dirac-gaps.tsv GORGE_PIN go.mod \
+                   cmd/carddb/py/carddb/scenarios.py \
                    cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
                    carddb/schema/v1/_meta/size.tsv \
                    oracle/compliance/manifests Makefile; do
@@ -241,6 +270,13 @@ jobs:
           # the verb is new: a main checkout that predates it must fail here, not in the publish step
           grep -q docs-sets cmd/carddb/py/carddb/cli.py || {
             echo "::error::the writer ref has no docs-sets verb: promote the carddb change to main first"
+            exit 1; }
+          # the keyproof leg rows: the migrate verb and the schema's leg column move together
+          grep -q 'keyproof-legs' cmd/carddb/py/carddb/cli.py || {
+            echo "::error::the writer ref has no migrate keyproof-legs verb: promote the carddb change to main first"
+            exit 1; }
+          grep -q '^leg[[:space:]]' carddb/schema/v1/keyproof.tsv || {
+            echo "::error::the writer ref's keyproof schema has no leg column: promote the carddb change to main first"
             exit 1; }
       - name: Clone the data branch and fix the run's date
         working-directory: tool
@@ -269,6 +305,9 @@ jobs:
           # Any writer that falls back to CARDDB_NOW gets the same date.
           echo "CARDDB_NOW=$measured" >> "$GITHUB_ENV"
           echo "TOOL_REV=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_ENV"
+      - name: Migrate the keyproof shards to leg rows
+        working-directory: tool
+        run: python3 -I cmd/carddb/main.py migrate keyproof-legs
       # The carddb branch runs its own copy of this workflow. Refreshing it from
       # main on every publish is the structural fix for a stale copy: the next
       # workflow change reaches the branch with the data commit that follows it.
@@ -331,6 +370,14 @@ jobs:
           CARDDB_GORGE_DIR=$(go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge || true) \
             python3 -I cmd/carddb/main.py dirac --repo "$GITHUB_WORKSPACE/tool" \
             --source dirac --measured "$MEASURED" --version "$TOOL_REV"
+      # Hand-scenario and translated XMage test outcomes per card, read off the committed files
+      # (nothing runs: CI's audit enforces them); runs after the catalogue, which names the cards.
+      - name: Scenario evidence writer
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          python3 -I cmd/carddb/main.py scenarios --repo "$GITHUB_WORKSPACE/tool" \
+            --source scenario --measured "$MEASURED" --version "$TOOL_REV"
       - name: Report the packed size into _meta/size
         working-directory: tool
         run: |
