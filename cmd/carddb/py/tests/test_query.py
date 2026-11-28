@@ -882,6 +882,9 @@ class TestProvenRule(Base):
             ("lockstep", "agreed", {}))
 
         self.a.put("cards", cards, writer="catalogue")
+        # Only the seed writer may set a key's multiplayer flag (store._keyproof_multiplayer, plan pf-ledger-04);
+        # a later xproof row replacing a seeded one keeps it. So the multiplayer keys are seeded first.
+        self.a.put("keyproof", [r for r in rows if r.get("multiplayer") == "true"], writer="seed")
         self.a.put("keyproof", rows, writer="xproof")
         src = os.path.join(self.tmp, "proven-src")
         write(os.path.join(src, "carddb", "curated", "exclusions.tsv"),
