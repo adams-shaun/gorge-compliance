@@ -411,7 +411,29 @@ func TestMultiplayerKeyClass(t *testing.T) {
 		{"effect Defined Player", "cast", []string{sorcery,
 			"A:SP$ Draw | Defined$ Player | NumCards$ 1"}, true},
 
+		// A referenced SVar is followed past the entry's own Sub chain: a mode's
+		// sub-ability, a delayed trigger's Execute$.
+		{"mode sub-ability OppCtrl", "mode#0.0.0", []string{sorcery,
+			"A:SP$ Charm | Choices$ DBFight,DBDraw",
+			"SVar:DBFight:DB$ Pump | Defined$ You | SubAbility$ DBFight2",
+			"SVar:DBFight2:DB$ Fight | ValidTgts$ Creature.OppCtrl",
+			"SVar:DBDraw:DB$ Draw | Defined$ You"}, true},
+		{"delayed trigger Execute$ Opponent", "f0/a0", []string{creature,
+			"A:AB$ DelayedTrigger | Cost$ T | Mode$ Phase | Phase$ End of Turn | Execute$ TrigLose",
+			"SVar:TrigLose:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1"}, true},
+		{"static grants Myriad", "static#0.0", []string{creature,
+			"S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying & Myriad"}, true},
+		{"spell grants Melee by KW", "cast", []string{sorcery,
+			"A:SP$ Pump | ValidTgts$ Creature | KW$ Melee"}, true},
+
 		{"vanilla creature cast", "cast", []string{creature}, false},
+		{"static grants Flying", "static#0.0", []string{creature,
+			"S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying"}, false},
+		// A description is prose, not behaviour, also in a referenced SVar.
+		{"mode description only", "mode#0.0.0", []string{sorcery,
+			"A:SP$ Charm | Choices$ Mine,Other",
+			"SVar:Mine:DB$ Draw | Defined$ You | SpellDescription$ Opponent draws nothing.",
+			"SVar:Other:DB$ GainLife | Defined$ You | LifeAmount$ 1"}, false},
 		{"Defined You draw", "cast", []string{sorcery,
 			"A:SP$ Draw | Defined$ You | NumCards$ 1"}, false},
 		{"flying attack", "combat#0.attack", []string{creature, "K:Flying"}, false},
