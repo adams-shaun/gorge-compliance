@@ -356,6 +356,9 @@ func validateShard(s *Schema, scope, rel string, b []byte, keys map[string]map[s
 		if bad {
 			continue
 		}
+		if table == "keyproof" {
+			out = append(out, keyproofRowRules(rel, head, cells)...)
+		}
 		key := make([]string, len(keyIdx))
 		for k, j := range keyIdx {
 			key[k] = cells[j]
@@ -370,6 +373,63 @@ func validateShard(s *Schema, scope, rel string, b []byte, keys map[string]map[s
 			}
 		}
 		prev = key
+	}
+	return out
+}
+
+// The closed value sets of the keyproof ledger. One table-specific hook rather
+// than per-column vocabularies: the schema's string columns are open by design,
+// but a keyproof row can only mean one of these.
+var (
+	keyproofLegs       = []string{"xmage", "forge", "lockstep", "scenario", "cite"}
+	keyproofStates     = []string{"agreed", "diagnosed", "diverged", "owed", "stale", "excluded"}
+	keyproofCiteStates = []string{"diagnosed", "owed", "excluded"}
+	keyproofSeats      = []string{"0", "2", "3", "4"}
+)
+
+func oneOf(v string, set []string) bool {
+	for _, s := range set {
+		if v == s {
+			return true
+		}
+	}
+	return false
+}
+
+// keyproofRowRules reports a keyproof row that cannot mean anything. It runs
+// after the generic cell checks and looks every column up by name, so a
+// reordered header does not change the verdict. The message names the row's
+// key columns (schema order: oracle_id, key, leg) and the rule.
+func keyproofRowRules(rel string, head []string, row []string) []Violation {
+	cell := make(map[string]string, len(head))
+	for i, name := range head {
+		if i < len(row) {
+			cell[name] = row[i]
+		}
+	}
+	leg, state, cite, seats := cell["leg"], cell["state"], cell["cite"], cell["seats"]
+	key := strings.Join([]string{cell["oracle_id"], cell["key"], leg}, " ")
+	var out []Violation
+	add := func(f string, a ...any) {
+		out = append(out, Violation{rel, 0, key + ": " + fmt.Sprintf(f, a...)})
+	}
+	if !oneOf(leg, keyproofLegs) {
+		add("leg '%s' is not xmage, forge, lockstep, scenario or cite", leg)
+	}
+	if !oneOf(state, keyproofStates) {
+		add("state '%s' is not agreed, diagnosed, diverged, owed, stale or excluded", state)
+	}
+	if state == "diagnosed" && cite == Empty {
+		add("diagnosed without a cite")
+	}
+	if leg == "cite" && !oneOf(state, keyproofCiteStates) {
+		add("cite leg must be diagnosed, owed or excluded, not '%s'", state)
+	}
+	if !oneOf(seats, keyproofSeats) {
+		add("seats '%s' is not 0, 2, 3 or 4", seats)
+	}
+	if state == "agreed" && seats == "0" {
+		add("agreed with seats 0")
 	}
 	return out
 }

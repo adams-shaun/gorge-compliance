@@ -928,18 +928,22 @@ PROVEN_VIEW_SQL = ("CREATE VIEW proven AS SELECT * FROM cert WHERE level IN ('C2
 # One row per (card, key): the leg rows of keyproof rolled up to the per-key state the verbs below read.
 # A cite leg owed for `diagnosed-no-cite` is a legacy `diagnosed` key whose cite was never recorded
 # (keylegs.split_legacy): the rollup still calls it diagnosed, so the migration moves no number.
+# Every aggregate/CASE expression is CAST AS TEXT, for the same reason KEYPROOF_CARDS_VIEW_SQL casts
+# its aggregates AS INTEGER: a bare expression view column has no declared type and the parquet
+# exporter types columns from declarations only.
 KEYPROOF_KEYS_VIEW_SQL = (
-    '''CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key", MAX(k."desc") AS "desc",
-  CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
+    '''CREATE VIEW keyproof_keys AS SELECT k.oracle_id AS oracle_id, k."key" AS "key",
+  CAST(MAX(k."desc") AS TEXT) AS "desc",
+  CAST(CASE WHEN SUM(k.leg IN ('xmage','forge') AND k.state='diverged') > 0 THEN 'diverged'
        WHEN SUM(k.leg IN ('xmage','forge') AND k.state='agreed') > 0 THEN 'agreed'
        WHEN SUM(k.leg='cite' AND (k.state='diagnosed'
                 OR (k.state='owed' AND k.reason='diagnosed-no-cite'))) > 0 THEN 'diagnosed'
-       WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS state,
-  MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS reason,
-  CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'
+       WHEN SUM(k.state='excluded') = COUNT(*) THEN 'excluded' ELSE 'owed' END AS TEXT) AS state,
+  CAST(MIN(CASE WHEN k.state IN ('owed','excluded') THEN k.reason END) AS TEXT) AS reason,
+  CAST(CASE WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 AND SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'FX'
        WHEN SUM(k.leg='xmage' AND k.state='agreed') > 0 THEN 'X'
-       WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS refs,
-  MAX(k.sig) AS sig, MAX(k.ticket) AS ticket
+       WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS TEXT) AS refs,
+  CAST(MAX(k.sig) AS TEXT) AS sig, CAST(MAX(k.ticket) AS TEXT) AS ticket
 FROM keyproof k WHERE k.leg IN ('xmage','forge','cite') GROUP BY k.oracle_id, k."key"''')
 
 # The proof denominator: every Commander-legal paper card not on the committed
@@ -953,13 +957,22 @@ SCOPE_CARDS_VIEW_SQL = (
 
 # Per-key proof (xproof). A card is proven when it is not curated-excluded, at least one key
 # agrees or is diagnosed, and every key that is not `excluded` agrees or is diagnosed.
+# Every aggregate/CASE expression is CAST AS INTEGER: SQLite gives a view column that is a bare
+# expression no declared type at all (PRAGMA table_info reports ''), and the parquet exporter
+# types its columns from declarations only, never from values. SQLite reports the declared type
+# of CAST(x AS INTEGER) as `INT`; the CI parquet exporter maps declared types by SQLite
+# affinity, so it accepts that spelling.
 KEYPROOF_CARDS_VIEW_SQL = (
-    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, COUNT(*) AS keys, "
-    "SUM(k.state='agreed') AS agreed, SUM(k.state='diagnosed') AS diagnosed, "
-    "SUM(k.state='diverged') AS diverged, SUM(k.state='owed') AS owed, SUM(k.state='excluded') AS excluded, "
-    "CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
+    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, "
+    "CAST(COUNT(*) AS INTEGER) AS keys, "
+    "CAST(SUM(k.state='agreed') AS INTEGER) AS agreed, "
+    "CAST(SUM(k.state='diagnosed') AS INTEGER) AS diagnosed, "
+    "CAST(SUM(k.state='diverged') AS INTEGER) AS diverged, "
+    "CAST(SUM(k.state='owed') AS INTEGER) AS owed, "
+    "CAST(SUM(k.state='excluded') AS INTEGER) AS excluded, "
+    "CAST(CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
     "AND SUM(k.state IN ('agreed','diagnosed'))>0 "
-    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS proven "
+    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS INTEGER) AS proven "
     "FROM keyproof_keys k GROUP BY k.oracle_id")
 
 PROVEN_KEYS_VIEW_SQL = ("CREATE VIEW proven_keys AS SELECT c.* FROM cards c "

@@ -1,0 +1,99 @@
+{
+ "card": "Nefarious Lich",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e02af070d152",
+ "scenarios": [
+  {
+   "name": "gain-life-becomes-a-draw-then-a-graveyard-return",
+   "cr": [
+    "616.2"
+   ],
+   "why": "The Lich replaces the life gain with a draw, and that new draw is itself replaced by the Crypt, cast after the card reached the graveyard. The result is the graveyard card in hand and no life change.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Nefarious Lich",
+      "Soul Warden"
+     ],
+     "graveyard": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Forbidden Crypt",
+      "Savannah Lions"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Forbidden Crypt",
+     "mana": "CCCBB"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "count": {
+        "seat": 0,
+        "zone": "graveyard",
+        "name": "Grizzly Bears"
+       },
+       "eq": 1
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Savannah Lions",
+     "mana": "W"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 0,
+      "zone": "hand",
+      "name": "Grizzly Bears"
+     },
+     "eq": 1
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "graveyard",
+      "name": "Grizzly Bears"
+     },
+     "eq": 0
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "exile",
+      "name": "Grizzly Bears"
+     },
+     "eq": 0
+    },
+    {
+     "life": {
+      "p0": 20
+     }
+    }
+   ]
+  }
+ ]
+}

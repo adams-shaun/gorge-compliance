@@ -1,0 +1,68 @@
+{
+ "card": "Wild Mongrel",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e398d6615e94",
+ "scenarios": [
+  {
+   "name": "one-ability-applies-in-two-layers",
+   "cr": [
+    "613.6"
+   ],
+   "why": "The Mongrel's single ability changes its colour in layer 5 and its size in layer 7c. Becoming white lets Honor of the Pure add another +1/+1 in the same layer.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Wild Mongrel",
+      "Honor of the Pure"
+     ],
+     "hand": [
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Wild Mongrel",
+     "ability": "gets +1/+1",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "White"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Wild Mongrel",
+     "pt": "4/4",
+     "colours": "W"
+    }
+   ]
+  }
+ ]
+}
