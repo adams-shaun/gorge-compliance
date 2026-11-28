@@ -346,3 +346,32 @@ func TestUnplannedSourcesPaidByHand(t *testing.T) {
 	})
 	followClean(t, l, 1)
 }
+
+// TestHandPaymentThatTriggersDiverges: City of Brass's damage trigger would sit
+// under an ability paid for after the tap, but above it in Forge (CR 603.3), so
+// the follower does not pay by hand that way.
+func TestHandPaymentThatTriggersDiverges(t *testing.T) {
+	const paladin, brass = "Truefire Paladin", "City of Brass"
+	l := handGame(t, corpus(t), "", []string{"Wastes", brass, "Sol Ring", "Boros Signet", paladin}, []handStep{
+		{land: "Wastes"},
+		{plan: "Sol Ring"},
+		{land: brass},
+		{plan: "Boros Signet"},
+		{use: paladin, taps: []string{"Wastes", "Boros Signet"}},
+		{use: paladin, activate: true, taps: []string{brass + ":W", "Boros Signet"}},
+	})
+	line := 0
+	for _, e := range l.Entries {
+		if a := e.Ask; a != nil && a.Answer.Action == "activate" {
+			line = e.Line
+		}
+	}
+	res := follow(t, l)
+	h := res.Hard
+	if h == nil || h.What != WhatAnswerMissing || h.Line != line || line == 0 {
+		t.Fatalf("divergence %+v, want answer-missing at line %d", h, line)
+	}
+	if res.HandPayments != 1 {
+		t.Errorf("%d hand payments, want only the Paladin's cast", res.HandPayments)
+	}
+}

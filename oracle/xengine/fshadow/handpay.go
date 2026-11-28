@@ -18,6 +18,11 @@ import (
 // at priority (CR 605.3a) and then taking the offer the pool now pays, so the
 // follower does that: it searches engine clones for the activations, then
 // submits them on the followed engine.
+//
+// One difference remains between the two orders: an ability a tap triggers (City
+// of Brass) goes on the stack above the spell when the tap pays for it (CR
+// 603.3), below it when the tap came first. A path that grows the stack before
+// the offer is therefore rejected, and the follow diverges instead.
 
 // maxPaySubmits bounds one search, in decisions submitted to clones.
 const maxPaySubmits = 4096
@@ -26,6 +31,7 @@ const maxPaySubmits = 4096
 type paySearch struct {
 	player  state.PlayerID
 	sources []state.ObjID // distinct, in Forge's tap order
+	stack   int           // stack depth before the first activation
 	// offer is the index of the wanted priority option, or -1.
 	offer func(*decision.Decision) int
 	seen  map[string]bool // priority states already searched
@@ -47,6 +53,7 @@ func (f *follower) payByHand(d *decision.Decision, tapped []state.ObjID, offer f
 	if len(s.sources) == 0 || len(s.sources) > 64 {
 		return decision.Intent{}, false
 	}
+	s.stack = len(f.e.G.Stack)
 	choices := s.walk(f.e, 0)
 	if choices == nil {
 		return decision.Intent{}, false
@@ -78,6 +85,9 @@ func (s *paySearch) walk(e *rules.Engine, used uint64) []int {
 	}
 	switch {
 	case d.Kind == decision.KPriority:
+		if len(e.G.Stack) != s.stack {
+			return nil // an activation triggered something
+		}
 		if bits.OnesCount64(used) == len(s.sources) {
 			if i := s.offer(d); i >= 0 {
 				return []int{i}
