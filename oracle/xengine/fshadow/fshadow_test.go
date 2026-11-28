@@ -1153,11 +1153,11 @@ func TestTargetWithoutALogLineAnsweredByDefault(t *testing.T) {
 func TestTargetFromTheCastAnswer(t *testing.T) {
 	cast := parseAsk(t, `{"t":"ask","n":208,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"cast","card":97,"tapped":[20,57],"targets":[{"card":138}],"target_slots":[1]}}`)
 	next := parseAsk(t, `{"t":"ask","n":209,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"pass"}}`)
-	const solRing, signet = state.ObjID(57), state.ObjID(138)
+	const solRing, signet, abrade, explosion = state.ObjID(57), state.ObjID(138), state.ObjID(97), state.ObjID(39)
 	newF := func() *follower {
-		return &follower{log: &Log{}, toG: map[int]state.ObjID{57: solRing, 138: signet}}
+		return &follower{log: &Log{}, toG: map[int]state.ObjID{57: solRing, 138: signet, 97: abrade, 39: explosion}}
 	}
-	d := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Min: 1, Max: 1,
+	d := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: abrade, Min: 1, Max: 1,
 		Options: []decision.Option{{Index: 0, Obj: solRing}, {Index: 1, Obj: signet}}}
 
 	f := newF()
@@ -1187,12 +1187,12 @@ func TestTargetFromTheCastAnswer(t *testing.T) {
 	expl := parseAsk(t, `{"t":"ask","n":1043,"seat":0,"turn":25,"step":"main1","kind":"priority","answer":{"action":"cast","card":39,"targets":[{"card":138},{"player":0}],"target_slots":[1,1]}}`)
 	f = newF()
 	f.rememberCastTargets(expl)
-	anyT := &decision.Decision{Seq: 12, Player: 0, Kind: decision.KTarget, Min: 1, Max: 1,
+	anyT := &decision.Decision{Seq: 12, Player: 0, Kind: decision.KTarget, Source: explosion, Min: 1, Max: 1,
 		Options: []decision.Option{{Index: 0, Player: 0}, {Index: 1, Player: 1}, {Index: 2, Obj: signet}}}
 	if in, _ = f.answer(anyT, Entry{Line: 1258, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{2}) {
 		t.Errorf("any target: choices %v, want [2]", in.Choices)
 	}
-	pl := &decision.Decision{Seq: 13, Player: 0, Kind: decision.KTarget, Min: 1, Max: 1,
+	pl := &decision.Decision{Seq: 13, Player: 0, Kind: decision.KTarget, Source: explosion, ResumeKind: "cast_sub", Min: 1, Max: 1,
 		Options: []decision.Option{{Index: 0, Player: 1}, {Index: 1, Player: 0}}}
 	if in, _ = f.answer(pl, Entry{Line: 1258, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{1}) || f.res.CastTargets != 2 {
 		t.Errorf("target player: choices %v cast_targets %d, want [1] and 2", in.Choices, f.res.CastTargets)
@@ -1208,6 +1208,121 @@ func TestTargetFromTheCastAnswer(t *testing.T) {
 	}
 	if in, _ = f.answer(d, Entry{Line: 271, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{0}) || f.res.Targets != 1 {
 		t.Errorf("after a consumed line: choices %v targets %d, want the default", in.Choices, f.res.Targets)
+	}
+}
+
+// A priority answer's target_slots split its flat targets by targeting part
+// ("how many of targets each targeting part holds"). Forge chose nothing for
+// the first part and card 138 for the second: gorge's first ask takes nothing,
+// although it offers 138, and the second takes 138. Spending the flat list by
+// whichever refs an ask offers gave 138 to the first and defaulted the second.
+func TestCastTargetsSplitBySlot(t *testing.T) {
+	cast := parseAsk(t, `{"t":"ask","n":208,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"cast","card":97,"targets":[{"card":138}],"target_slots":[0,1]}}`)
+	next := Entry{Line: 269, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":209,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"pass"}}`)}
+	const spell, solRing, signet = state.ObjID(97), state.ObjID(57), state.ObjID(138)
+	f := &follower{log: &Log{}, toG: map[int]state.ObjID{97: spell, 57: solRing, 138: signet}}
+	f.rememberCastTargets(cast)
+	opts := []decision.Option{{Index: 0, Obj: solRing}, {Index: 1, Obj: signet}}
+	first := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: spell, Min: 0, Max: 1, Options: opts}
+	in, ok := f.answer(first, next)
+	if !ok || f.res.Hard != nil || len(in.Choices) != 0 {
+		t.Errorf("first ask: ok %v hard %+v choices %v, want nothing, as Forge chose", ok, f.res.Hard, in.Choices)
+	}
+	second := &decision.Decision{Seq: 12, Player: 0, Kind: decision.KTarget, Source: spell, ResumeKind: "cast_sub", Min: 1, Max: 1, Options: opts}
+	in, ok = f.answer(second, next)
+	if !ok || f.res.Hard != nil || !reflect.DeepEqual(in.Choices, []int{1}) {
+		t.Errorf("second ask: ok %v hard %+v choices %v, want [1]", ok, f.res.Hard, in.Choices)
+	}
+	if f.res.CastTargets != 2 || f.res.Targets != 0 || f.pos != 0 {
+		t.Errorf("cast_targets %d targets %d pos %d, want 2, 0 and no line consumed", f.res.CastTargets, f.res.Targets, f.pos)
+	}
+}
+
+// The other shapes of a cast's targeting parts: which parts an ask takes, and
+// which asks are the cast's at all (gorge's Source: the spell, or 0 for an
+// activated ability).
+func TestCastTargetPartsAndSource(t *testing.T) {
+	const spell, a, b, other = state.ObjID(97), state.ObjID(57), state.ObjID(138), state.ObjID(500)
+	next := Entry{Line: 269, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":209,"seat":0,"kind":"priority","answer":{"action":"pass"}}`)}
+	opts := []decision.Option{{Index: 0, Obj: a}, {Index: 1, Obj: b}}
+	modes := []decision.Option{{Index: 0, Obj: a, Group: "charm-mode-0"}, {Index: 1, Obj: b, Group: "charm-mode-0"},
+		{Index: 2, Obj: a, Group: "charm-mode-1"}, {Index: 3, Obj: b, Group: "charm-mode-1"}}
+	for _, c := range []struct {
+		name, answer string
+		source       state.ObjID
+		min, max     int
+		opts         []decision.Option
+		want         []int
+		taken, left  int // CastTargets and the parts still unspent
+	}{
+		{"a lone part Forge left empty", `"action":"cast","card":97,"targets":[],"target_slots":[0]`, spell, 0, 1, opts, []int{}, 1, 0},
+		{"a mandatory ask passes over an empty part", `"action":"cast","card":97,"targets":[{"card":138}],"target_slots":[0,1]`, spell, 1, 1, opts, []int{1}, 1, 0},
+		{"one part per ask", `"action":"cast","card":97,"targets":[{"card":138},{"card":57}],"target_slots":[1,1]`, spell, 0, 2, opts, []int{1}, 1, 1},
+		{"a multi-target part whole", `"action":"cast","card":97,"targets":[{"card":138},{"card":57}],"target_slots":[2]`, spell, 0, 2, opts, []int{1, 0}, 1, 0},
+		{"a combined modal ask takes a part per mode", `"action":"cast","card":97,"targets":[{"card":138},{"card":57}],"target_slots":[1,1]`, spell, 2, 2, modes, []int{1, 2}, 1, 0},
+		{"an activated ability's ask has no Source", `"action":"activate","card":97,"targets":[{"card":138}],"target_slots":[1]`, 0, 1, 1, opts, []int{1}, 1, 0},
+		{"another object's ask is not the cast's", `"action":"cast","card":97,"targets":[{"card":138}],"target_slots":[1]`, other, 1, 1, opts, []int{0}, 0, 1},
+		{"a spell's ask has a Source", `"action":"cast","card":97,"targets":[{"card":138}],"target_slots":[1]`, 0, 1, 1, opts, []int{0}, 0, 1},
+	} {
+		f := &follower{log: &Log{}, toG: map[int]state.ObjID{97: spell, 57: a, 138: b}}
+		f.rememberCastTargets(parseAsk(t, `{"t":"ask","n":208,"seat":0,"kind":"priority","answer":{`+c.answer+`}}`))
+		d := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: c.source, Min: c.min, Max: c.max, Options: c.opts}
+		in, ok := f.answer(d, next)
+		if !ok || f.res.Hard != nil || !reflect.DeepEqual(in.Choices, c.want) {
+			t.Errorf("%s: ok %v hard %+v choices %v, want %v", c.name, ok, f.res.Hard, in.Choices, c.want)
+			continue
+		}
+		if err := d.Validate(in); err != nil {
+			t.Errorf("%s: %v", c.name, err)
+		}
+		if f.res.CastTargets != c.taken || f.res.Targets != 1-c.taken || len(f.castTargets) != c.left {
+			t.Errorf("%s: cast_targets %d targets %d left %v", c.name, f.res.CastTargets, f.res.Targets, f.castTargets)
+		}
+	}
+}
+
+// A cast's ask that Forge's next targeting part cannot answer stops the follow
+// as the follower's finding. Answering it by default surfaced the difference
+// later, as a snapshot divergence filed against gorge.
+func TestCastTargetMismatchIsHarness(t *testing.T) {
+	const spell, a = state.ObjID(97), state.ObjID(57)
+	next := Entry{Line: 269, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":209,"seat":0,"kind":"priority","answer":{"action":"pass"}}`)}
+	for _, c := range []struct {
+		name, targets, what, forge string
+		min                        int
+	}{
+		{"a target gorge does not offer", `"targets":[{"card":138}],"target_slots":[1]`, WhatAnswerMissing, "card:138", 1},
+		{"one of two targets not offered", `"targets":[{"card":57},{"card":138}],"target_slots":[2]`, WhatAnswerMissing, "card:57 card:138", 0},
+		{"nothing chosen for a mandatory ask", `"targets":[],"target_slots":[0]`, WhatAnswerMissing, "none", 1},
+		{"a token the header does not bind", `"targets":[{"card":999}],"target_slots":[1]`, WhatError, "999", 1},
+	} {
+		f := &follower{log: &Log{}, toG: map[int]state.ObjID{97: spell, 57: a, 138: 138}}
+		f.rememberCastTargets(parseAsk(t, `{"t":"ask","n":208,"seat":0,"kind":"priority","answer":{"action":"cast","card":97,`+c.targets+`}}`))
+		d := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Source: spell, Min: c.min, Max: 2,
+			Options: []decision.Option{{Index: 0, Obj: a}}}
+		_, ok := f.answer(d, next)
+		h := f.res.Hard
+		if ok || h == nil {
+			t.Errorf("%s: ok %v hard %+v, want a divergence", c.name, ok, h)
+			continue
+		}
+		if h.What != c.what || h.Harness != HarnessUnmapped || h.Field != "cast_targets" || h.Forge != c.forge || h.Line != 269 || h.Ask != 208 {
+			t.Errorf("%s: %+v", c.name, *h)
+		}
+		if f.res.CastTargets != 0 || f.res.Targets != 0 {
+			t.Errorf("%s: cast_targets %d targets %d, want neither", c.name, f.res.CastTargets, f.res.Targets)
+		}
+	}
+}
+
+// target_slots that do not split targets exactly are a malformed log.
+func TestReadRejectsBadTargetSlots(t *testing.T) {
+	const header = `{"t":"header","format":"forge-shadow-1","seats":[{"seat":0},{"seat":1}]}` + "\n"
+	for slots, ok := range map[string]bool{`[1]`: true, `[0,1]`: true, `[0]`: false, `[2]`: false, `[2,-1]`: false} {
+		_, err := Read(strings.NewReader(header + `{"t":"ask","kind":"priority","answer":{"action":"cast","targets":[{"card":1}],"target_slots":` + slots + `}}`))
+		if (err == nil) != ok {
+			t.Errorf("target_slots %s: err %v, want accepted %v", slots, err, ok)
+		}
 	}
 }
 
