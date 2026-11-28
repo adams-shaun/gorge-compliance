@@ -21,7 +21,7 @@ harness total and that the card counts match the names.
 
 ## Which data
 
-The brief's cycle, 11260225 (207 keys, 120 cards), is stored only under `/mnt/sata`, which this task
+The brief's cycle, 11260225 (207 keys, 120 cards), is stored only under `<training-root>`, which this task
 may not read, so it was NOT censused. The table is built from the one harness-class data reachable
 here, cycle 11241101 batches b00 + b01 (`xengine keyproof` re-run with this code on each batch's
 play, `diff-xmage`, `diff-forge` and `adjudicate` dirs): 25 keys, 12 cards. Re-run the same on 11260225

@@ -1,4 +1,4 @@
-<!-- Audit notes written 2026-11-10 for the phase.rs / Manabrew follower design. Read-only static audit; local paths (/tmp/..., /mnt/sata/...) are from the audit machine and abbreviations are defined at the top. Historical, like every design note. -->
+<!-- Audit notes written 2026-11-10 for the phase.rs / Manabrew follower design. Read-only static audit; local paths (/tmp/..., <training-root>/...) are from the audit machine and abbreviations are defined at the top. Historical, like every design note. -->
 
 # phase.rs as a gorge-compliance follower engine — audit notes
 
