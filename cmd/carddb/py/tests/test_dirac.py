@@ -7,10 +7,13 @@ from carddb import dirac as dirac_mod
 from carddb import store as store_mod
 from .helpers import Base, OID_A, OID_B, OID_C, ROOT
 from .test_compliance import card, corpus, fixture_repo, OID_D
+from .test_store import kp
 
 PIN = "32bfe4888a634a0f8b31b7e82cafe400e85e6853"
 SNAP_PIN = "8f7095353a64deadbeef8f7095353a64deadbeef"
 MEASURED = "2026-11-19"
+LATER = "2026-11-27"
+KEYS_HEAD = "card\tlir16\tplays\tkeys\tunused\tbranches\tmissing_branches\n"
 
 
 def write(path, text):
@@ -21,7 +24,9 @@ def write(path, text):
 
 def fixture(tmp, gaps=None, pin=PIN):
     """(checkout, gorge dir): Bolt supported (two lists), Slop refused, Whim unverified,
-    Night // Day evidenced under its first face, a below-credit pod-only row ignored."""
+    Night // Day evidenced under its first face, a below-credit pod-only row ignored.
+    For the lockstep leg: Pair and Zap on a two-seat list, Zap also on a Name<TAB>4 row, and
+    an evidence-keys file leaving two of Pair's tokens unused (one no ledger key)."""
     repo = os.path.join(tmp, "repo")
     write(os.path.join(repo, "GORGE_PIN"), pin + "\n")
     write(os.path.join(repo, dirac_mod.GAPS_REL),
@@ -30,6 +35,12 @@ def fixture(tmp, gaps=None, pin=PIN):
     sup = os.path.join(g, "dirac", "support")
     write(os.path.join(sup, "evidence", "blb.txt"), "Bolt\nNight\n")
     write(os.path.join(sup, "evidence", "fdn.txt"), "Bolt\nSlop\nPodOnly\t3\n")
+    write(os.path.join(sup, "evidence", "two.txt"), "Pair\nZap\n")
+    write(os.path.join(sup, "evidence", "pod.txt"), "Zap\t4\n")
+    write(os.path.join(sup, "evidence-keys", "two.tsv"),
+          KEYS_HEAD + "Pair\t0123456789abcdef\t7\t1/2\tf0/a0,f9/a9\t0/1\tix:resp\n"
+          "Zap\t0123456789abcdef\t7\t2/2\t\t1/1\t\n")
+    write(os.path.join(sup, "evidence-keys", "LEGACY.txt"), "Pair\nZap\n")
     write(os.path.join(sup, "refused", "slop.json"), json.dumps(
         {"card": "Slop", "class": "lockstep", "why": "an  offer gate\nprices it wrong", "repro": {}}))
     return repo, g
@@ -293,6 +304,171 @@ class Dirac(Base):
         self.assertEqual(sum(by.values()), total)
         self.assertEqual(total - by.get("not_lowered", 0), lowered)
         self.assertEqual({r["pin"] for r in a.rows("support")}, {dirac_mod.full_pin(ROOT)[:12]})
+
+
+PAIR, ZAP, OTHER = "%032x" % 0x11, "%032x" % 0x22, "%032x" % 0x33
+KEYS = ("cast", "f0/a0", "f0/t0")
+
+
+class TestLockstepLeg(Base):
+    """The lockstep leg of keyproof, from the evidence lists and their key sidecars."""
+
+    def setup_ledger(self, seeded=(PAIR, ZAP, OTHER)):
+        """(store, checkout, gorge dir): three cards, `seeded` of them with the seed's
+        xmage and lockstep rows per key."""
+        a = self.machine("a", init=True)
+        a.put("cards", [card(PAIR, "Pair"), card(ZAP, "Zap"), card(OTHER, "Elsewhere")], writer="mtgjson")
+        rows = [kp(oid, key, leg, desc="d:" + key, script_sha="sha-" + key,
+                   multiplayer="true" if key == "f0/t0" else "false")
+                for oid in seeded for key in KEYS for leg in ("xmage", "lockstep")]
+        if rows:
+            a.put("keyproof", rows, writer="seed")
+        repo, g = fixture(self.tmp)
+        return a, repo, g
+
+    def legs(self, store, leg="lockstep"):
+        return {(r["oracle_id"], r["key"]): r for r in store.rows("keyproof") if r["leg"] == leg}
+
+    def cells(self, row):
+        return tuple(row[c] for c in ("state", "reason", "seats", "witness"))
+
+    def evidence_list(self, g, name, text):
+        write(os.path.join(g, "dirac", "support", "evidence", name + ".txt"), text)
+
+    def drop_list(self, g, name):
+        os.remove(os.path.join(g, "dirac", "support", "evidence", name + ".txt"))
+
+    def test_plain_list_card_is_agreed_at_two_seats(self):
+        a, repo, g = self.setup_ledger()
+        os.remove(os.path.join(g, "dirac", "support", "evidence-keys", "two.tsv"))
+        dirac_mod.run(a, repo=repo, gorge=g, ran=LATER)
+        rows = self.legs(a)
+        for key in KEYS:
+            self.assertEqual(rows[(PAIR, key)], {
+                "oracle_id": PAIR, "key": key, "leg": "lockstep", "desc": "d:" + key, "state": "agreed",
+                "reason": "-", "refs": "-", "source": "list", "agree_items": "0", "diff_items": "0",
+                "witness": "list=two", "sig": "-", "cite": "-", "ticket": "-", "seats": "2",
+                "multiplayer": "true" if key == "f0/t0" else "false", "gorge_sha": PIN[:12],
+                "corpus_pin": "-", "script_sha": "sha-" + key, "xmage_ref": "-", "forge_ref": "-",
+                "measured": LATER, "replayed": "-", "replayed_sha": "-", "writer": "dirac"})
+        # a card no list names keeps its seeded rows, and no other leg moves
+        for key in KEYS:
+            self.assertEqual((rows[(OTHER, key)]["writer"], rows[(OTHER, key)]["measured"]), ("seed", MEASURED))
+            self.assertEqual(self.cells(rows[(OTHER, key)]), ("owed", "untried", "0", "-"))
+        self.assertEqual({r["writer"] for r in self.legs(a, "xmage").values()}, {"seed"})
+        self.assertIn(("keyproof", "dirac"), {(r["table"], r["writer"]) for r in a.rows("_meta/writers")})
+
+    def test_four_seat_row_wins_and_names_its_list(self):
+        a, repo, g = self.setup_ledger()
+        self.drop_list(g, "pod")
+        dirac_mod.run(a, repo=repo, gorge=g)
+        self.assertEqual(self.cells(self.legs(a)[(ZAP, "cast")]), ("agreed", "-", "2", "list=two"))
+        self.evidence_list(g, "pod", "Zap\t4\n")
+        dirac_mod.run(a, repo=repo, gorge=g)
+        rows = self.legs(a)
+        for key in KEYS:
+            self.assertEqual(self.cells(rows[(ZAP, key)]), ("agreed", "-", "4", "list=pod"))
+        # a tie goes to the first list by file name
+        self.evidence_list(g, "pod-b", "Zap\t4\n")
+        self.assertEqual(dirac_mod.read_evidence_seats(g)["zap"], (4, "pod-b"))  # "pod-b.txt" < "pod.txt"
+        self.evidence_list(g, "a", "Pair\n")
+        self.assertEqual(dirac_mod.read_evidence_seats(g)["pair"], (2, "a"))
+
+    def test_seat_rules(self):
+        """The support rows' credit rule: a below-credit pod row names no card."""
+        a, repo, g = self.setup_ledger()
+        self.evidence_list(g, "seats", "Below\t3\nUntagged\t2\nBad\tx\nXtwo\t2\txproof\n"
+                                       "Xone\t1\txproof\nSix\t6\n")
+        got = dirac_mod.read_evidence_seats(g)
+        for name in ("podonly", "below", "untagged", "bad", "xone"):
+            self.assertNotIn(name, got)
+        self.assertEqual(got["xtwo"], (2, "seats"))
+        self.assertEqual(got["six"], (4, "seats"))  # the ledger's seats stop at 4
+
+    def test_unused_key_is_owed_and_unknown_token_counted(self):
+        a, repo, g = self.setup_ledger()
+        before = sorted((r["oracle_id"], r["key"], r["leg"]) for r in a.rows("keyproof"))
+        r = dirac_mod.run_report(a, repo=repo, gorge=g)
+        rows = self.legs(a)
+        self.assertEqual(self.cells(rows[(PAIR, "f0/a0")]), ("owed", "lockstep-unused", "0", "-"))
+        self.assertEqual((rows[(PAIR, "f0/a0")]["source"], rows[(PAIR, "f0/a0")]["writer"]), ("list", "dirac"))
+        for key in ("cast", "f0/t0"):
+            self.assertEqual(self.cells(rows[(PAIR, key)]), ("agreed", "-", "2", "list=two"))
+        self.assertEqual(sorted((x["oracle_id"], x["key"], x["leg"]) for x in a.rows("keyproof")), before)
+        self.assertEqual(r.lockstep, {"cards": 2, "agreed": 5, "unused": 1, "unmatched_unused": 1,
+                                      "seats2": 2, "seats4": 3})
+
+    def test_unused_needs_every_sidecar_row(self):
+        a, repo, g = self.setup_ledger()
+        write(os.path.join(g, "dirac", "support", "evidence-keys", "more.tsv"),
+              KEYS_HEAD + "Pair\t0123456789abcdef\t1\t0/2\tcast,f0/a0\t1/1\t\n")
+        self.assertEqual(dirac_mod.read_unused(g)["pair"], {"f0/a0"})
+        write(os.path.join(g, "dirac", "support", "evidence-keys", "zz.tsv"),
+              KEYS_HEAD + "Pair // Back\t0123456789abcdef\t1\t2/2\t\t1/1\t\n")
+        self.assertEqual(dirac_mod.read_unused(g)["pair"], set())
+        dirac_mod.run(a, repo=repo, gorge=g)
+        self.assertEqual(self.cells(self.legs(a)[(PAIR, "f0/a0")]), ("agreed", "-", "2", "list=two"))
+
+    def test_dropped_card_goes_back_to_untried(self):
+        a, repo, g = self.setup_ledger()
+        dirac_mod.run(a, repo=repo, gorge=g)
+        other = [x for x in a.rows("keyproof") if x["oracle_id"] == OTHER or x["leg"] != "lockstep"]
+        self.drop_list(g, "two")
+        self.drop_list(g, "pod")
+        r = dirac_mod.run_report(a, repo=repo, gorge=g, ran=LATER)
+        self.assertEqual(r.lockstep["cards"], 0)
+        rows = self.legs(a)
+        for oid in (PAIR, ZAP):
+            for key in KEYS:  # the unused key goes back too
+                row = rows[(oid, key)]
+                self.assertEqual(self.cells(row), ("owed", "untried", "0", "-"))
+                self.assertEqual((row["source"], row["writer"], row["measured"], row["desc"], row["script_sha"]),
+                                 ("-", "dirac", LATER, "d:" + key, "sha-" + key))
+            self.assertEqual(rows[(oid, "f0/t0")]["multiplayer"], "true")
+        self.assertEqual([x for x in a.rows("keyproof") if x["oracle_id"] == OTHER or x["leg"] != "lockstep"],
+                         other)
+        snap = self.snapshot(a.dir)
+        again, _, _ = dirac_mod.run(a, repo=repo, gorge=g, ran="2026-12-01")
+        self.assertEqual(again, 0)  # already back: no new date
+        self.assertEqual(self.snapshot(a.dir), snap)
+
+    def test_rerun_is_stable_and_escapes_survive(self):
+        a, repo, g = self.setup_ledger(seeded=())
+        a.put("keyproof", [kp(PAIR, "cast", "xmage", desc="a\\b\tc")], writer="seed")
+        for _ in range(3):
+            dirac_mod.run(a, repo=repo, gorge=g)
+        # a key only another leg holds is a ledger key too; its desc is copied, not re-escaped
+        self.assertEqual(self.legs(a)[(PAIR, "cast")]["desc"], "a\\\\b\\tc")
+        self.assertEqual(self.cells(self.legs(a)[(PAIR, "cast")]), ("agreed", "-", "2", "list=two"))
+        snap = self.snapshot(a.dir)
+        again, _, _ = dirac_mod.run(a, repo=repo, gorge=g)
+        self.assertEqual(again, 0)
+        self.assertEqual(self.snapshot(a.dir), snap)
+
+    def test_card_with_no_seed_rows_gets_nothing(self):
+        a, repo, g = self.setup_ledger(seeded=(PAIR,))
+        dirac_mod.run(a, repo=repo, gorge=g)
+        self.assertEqual({x["oracle_id"] for x in a.rows("keyproof")}, {PAIR})
+        rows, stats = dirac_mod.lockstep_rows(a, {"zap": (4, "pod")}, {"zap": {"cast"}}, PIN[:12], MEASURED)
+        self.assertEqual([x for x in rows if x["oracle_id"] == ZAP], [])
+        self.assertEqual((stats["cards"], stats["unused"], stats["unmatched_unused"]), (0, 0, 0))
+
+    def test_cli_summary_stale_snapshot_and_unavailable(self):
+        a, repo, g = self.setup_ledger()
+        write(os.path.join(repo, dirac_mod.GAPS_REL), "#dirac-gaps gorge-pin %s\n" % SNAP_PIN)
+        home = os.path.join(self.tmp, "a")
+        p = self.cli(home, "dirac", "--repo", repo, "--gorge-dir", g, "--source", "ci", "--measured", MEASURED)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("lockstep: 2 cards, 5 keys agreed, 1 unused, 1 unmatched_unused, 2-seat 2, 4-seat 3",
+                      p.stdout)
+        self.assertEqual(self.legs(a)[(ZAP, "cast")]["writer"], "dirac")  # whatever --source says
+        snap = self.snapshot(a.dir)
+        empty = os.path.join(self.tmp, "no-gorge")
+        os.makedirs(empty)
+        p = self.cli(home, "dirac", "--repo", repo, "--gorge-dir", empty, "--measured", LATER)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("::warning::", p.stderr)
+        self.assertEqual(self.snapshot(a.dir), snap)
 
 
 if __name__ == "__main__":

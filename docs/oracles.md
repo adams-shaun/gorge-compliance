@@ -201,16 +201,17 @@ summary line (`multiplayer: F of K keys flagged`). A flagged key is not proven u
 four seats.
 
 **Rule** (`cov.Multiplayer`): a key is flagged by its own script text, the effect names and parameter
-values of its entry and of the sub-abilities it executes. A spell mode is read as the raw text of the
-SVar its choice names, a plain keyword as the keyword string. The text is flagged when it holds one of
-these, case-sensitive:
+values of its entry and of every SVar those values name, followed transitively: its sub-abilities, the
+`Execute$` of a delayed or immediate trigger it creates, a granted trigger, a count SVar. Description
+parameters are not read. A spell mode starts from the SVar its choice names, a plain keyword is the
+keyword string. The text is flagged when it holds one of these, case-sensitive:
 
 `ChoosePlayer`, `Commander`, `DefendingPlayer`, `Goad`, `Initiative`, `Monarch`, `OppCtrl`, `OppOwn`,
 `Opponent`, `Player.Other`, `Vote`
 
 A key is also flagged when a `Defined` or `ValidPlayers` parameter is exactly `Player` (each player),
-or when it is one of these keywords, either as a keyword key or as the ability or trigger the keyword
-expands into:
+or when it involves one of these keywords: as a keyword key, as the ability or trigger the keyword
+expands into, or granted through a keyword parameter (`KW$`, `AddKeyword$`, `Keywords$`):
 
 `Dethrone`, `Encore`, `Melee`, `Myriad`
 

@@ -7,6 +7,7 @@ import unittest
 from carddb import build as build_mod
 from carddb import keylegs
 from carddb import query as query_mod
+from carddb import scenarios as scenarios_mod
 from carddb import schema as schema_mod
 from carddb import shard
 from carddb.boundary import boundary_tree
@@ -16,6 +17,7 @@ import parquet_export
 
 from .helpers import Base, GOLDEN, OID_A, OID_B, OID_C, ROOT, git
 from .test_cert import cert_row
+from .test_scenarios import hand_file, port_file, ratchet, scenario, write
 
 UPDATE = os.environ.get("CARDDB_UPDATE_GOLDEN") == "1"
 
@@ -1042,6 +1044,59 @@ class TestProvenRule(Base):
         self.assertEqual(bad, [])
 
 
+class TestKnownBugBlocksProven(Base):
+    """A known_bug evidence row holds a card the proven rule would otherwise count."""
+
+    def two_provable_cards(self, *names):
+        """A store whose two cards, OID_A and OID_B, both satisfy the key rule."""
+        a = self.machine("bug", init=True)
+        oids = (OID_A, OID_B)
+        a.put("cards", [{"oracle_id": oid, "name": name, "layout": "normal", "mana_value": 1,
+                         "type_line": "Instant"} for oid, name in zip(oids, names)],
+              writer="catalogue")
+        a.put("keyproof", flat(*([keyproof_row(oid, "cast", "agreed", leg="xmage", refs="X", witness="xs:w"),
+                                  keyproof_row(oid, "cast", "agreed", leg="lockstep")] for oid in oids)),
+              writer="xproof")
+        return a
+
+    def built(self, store):
+        db = os.path.join(self.tmp, "bug.sqlite")
+        build_mod.build(db, self.schema, store.dir, None,
+                        build_mod.read_committed(directory=os.path.join(self.tmp, "bug-src")))
+        conn = sqlite3.connect(db)
+        self.addCleanup(conn.close)
+        return conn
+
+    def assert_only_the_second_card_is_proven(self, conn):
+        # both cards satisfy the key rule: only the known_bug row separates them
+        got = {r[0]: r[1:] for r in conn.execute(
+            "SELECT oracle_id, proven_keys, live_keys, proven, known_bugs FROM card_proven")}
+        self.assertEqual(got, {OID_A: (1, 1, 0, 1), OID_B: (1, 1, 1, 0)})
+        self.assertEqual([r[0] for r in conn.execute("SELECT oracle_id FROM proven_keys")], [OID_B])
+
+    def test_a_known_bug_row_blocks_proven(self):
+        a = self.two_provable_cards("Bugged", "Clean")
+        a.put("evidence", [
+            {"oracle_id": OID_A, "source": "xmageport", "ref": "BugTest#bug", "outcome": "known_bug"},
+            {"oracle_id": OID_A, "source": "xmageport", "ref": "BugTest#ok", "outcome": "pass"},
+            {"oracle_id": OID_B, "source": "xmageport", "ref": "BugTest#ok", "outcome": "pass"},
+            {"oracle_id": OID_B, "source": "hand", "ref": "evasion/clean/one", "outcome": "unconsumed"},
+        ], writer="scenario")
+        self.assert_only_the_second_card_is_proven(self.built(a))
+
+    def test_a_known_divergent_hand_scenario_blocks_proven(self):
+        a = self.two_provable_cards("Divergent", "Clean")
+        repo = os.path.join(self.tmp, "repo")
+        # the writer refuses a repo without a known_bugs.tsv or a translated corpus
+        write(os.path.join(repo, "cmd", "xmageport", "known_bugs.tsv"), "# none\n")
+        port_file(repo, "damage", "CleanTest", scenario("ok", "CleanTest#ok", "p0:Clean"))
+        hand_file(repo, "evasion", "divergent", "Divergent", "fails", "passes")
+        hand_file(repo, "evasion", "clean", "Clean", "passes")
+        ratchet(repo, "evasion", "known-divergent", "divergent", "Divergent", "fails")
+        scenarios_mod.run(a, repo=repo)
+        self.assert_only_the_second_card_is_proven(self.built(a))
+
+
 class TestScopeCards(Base):
     """The proof denominator: Commander-legal paper cards minus curated exclusions."""
 
@@ -1205,3 +1260,130 @@ class TestHeadline(Base):
         self.assertEqual(conn.execute("SELECT deck_id, cards, proven_cards, proven FROM deck_proven "
                                       "ORDER BY deck_id").fetchall(),
                          [("h1", 2, 2, 1), ("h2", 1, 1, 1), ("h3", 2, 1, 0), ("r1", 1, 1, 1)])
+
+
+class TestNeedByDecks(Base):
+    """`carddb need --by decks`: owed keys ranked by the ranking-half decks their card unlocks."""
+
+    NAMES = {OID_A: "Aa", OID_B: "Bb", OID_C: "Cc", OID_D: "Dd", OID_E: "Ee", OID_F: "Ff"}
+
+    def build(self, name, decks, sample, with_sample=True, with_decks=True):
+        """A private build: B is proven, every other card has one owed key; `sample` rows are
+        (deck_id, half, bracket, dirac_four_seat)."""
+        home = os.path.join(self.tmp, name)
+        a = self.machine(name, init=True)
+        a.put("cards", [{"oracle_id": oid, "name": n, "layout": "normal", "mana_value": 1,
+                         "type_line": "Instant", "paper": True} for oid, n in self.NAMES.items()],
+              writer="catalogue")
+        a.put("legality", [{"oracle_id": oid, "format": "commander", "status": "legal"}
+                           for oid in self.NAMES], writer="catalogue")
+        rows = [keyproof_row(OID_B, "cast", "agreed", leg="xmage", refs="X", witness="xs:w",
+                             measured="2026-11-20"),
+                keyproof_row(OID_B, "cast", "agreed", leg="lockstep", measured="2026-11-23")]
+        for oid in self.NAMES:
+            if oid != OID_B:
+                rows.append(keyproof_row(oid, "cast", "owed", leg="xmage", reason="no-generator"))
+        a.put("keyproof", rows, writer="xproof")
+        src = os.path.join(self.tmp, name + "-src")
+        write(os.path.join(src, "carddb/curated/exclusions.tsv"),
+              "#carddb curated/exclusions v1\noracle_id\treason\n")
+        committed = build_mod.read_committed(directory=src)
+        os.environ["CARDDB_PRIVATE_REMOTE"] = os.path.join(self.tmp, name + "-private.git")
+        self.addCleanup(os.environ.pop, "CARDDB_PRIVATE_REMOTE", None)
+        git("init", "--bare", "--quiet", os.environ["CARDDB_PRIVATE_REMOTE"])
+        p = Store("private", home=home, schema=self.schema).init()
+        p.put("decks", [{"deck_id": d, "oracle_id": oid, "count": 1} for d, oid in decks],
+              writer="decklib")
+        db = os.path.join(self.tmp, name + ".sqlite")
+        build_mod.build(db, self.schema, a.dir, p.dir, committed)
+        if with_sample:
+            conn = sqlite3.connect(db)
+            conn.execute("CREATE TABLE deck_sample (deck_id TEXT, half TEXT, bracket TEXT, "
+                         "dirac_four_seat INTEGER)")
+            conn.executemany("INSERT INTO deck_sample VALUES (?,?,?,?)", sample)
+            conn.commit()
+            conn.close()
+        if not with_decks:
+            conn = sqlite3.connect(db)
+            conn.execute("DROP TABLE decks")
+            conn.commit()
+            conn.close()
+        return home, db
+
+    def decks(self, held=((OID_E, "H1"),)):
+        out = [("R1", OID_A), ("R1", OID_B), ("R2", OID_C), ("R2", OID_D), ("R3", OID_F)]
+        return out + [(d, oid) for oid, d in held]
+
+    def sample(self, rank="rank", extra=()):
+        return [("R1", rank, "cedh", 1), ("R2", rank, "cedh", 1), ("R3", rank, "casual", 0),
+                ("H1", "holdout", "cedh", 1)] + list(extra)
+
+    def need(self, home, db):
+        r = self.cli(home, "need", "--by", "decks", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        lines = [l.split("\t") for l in r.stdout.splitlines()]
+        self.assertEqual(lines[0], ["unlocked", "blocked", "weight", "tier", "oracle_id", "name", "key",
+                                    "desc", "state", "reason", "sig"])
+        return [(x[5], x[0], x[1], x[2]) for x in lines[1:]]
+
+    EXPECT = [("Aa", "1", "1", "1.0"), ("Ff", "0", "1", "1.0"), ("Cc", "0", "1", "0.5"),
+              ("Dd", "0", "1", "0.5"), ("Ee", "0", "0", "0")]
+
+    def test_order(self):
+        home, db = self.build("order", self.decks(), self.sample())
+        self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_heldout_never_read(self):
+        # E moves out of H1 into a second held-out deck holding no other card: still 0 0 0
+        home, db = self.build("held", self.decks(held=((OID_E, "H2"),)),
+                              self.sample(extra=[("H2", "holdout", "cedh", 1)]))
+        self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_ranking_spelling(self):
+        home, db = self.build("ranking", self.decks(), self.sample(rank="ranking"))
+        self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_unlocked_before_weight(self):
+        # F unlocks S1 (seats four, F its only unproven card): 1 1 1.0. A sits alone in two decks
+        # that do not seat four: 0 2 2.0. Higher unlocked wins over higher weight and blocked,
+        # and over the name order (Aa < Ff).
+        decks = [("S1", OID_F), ("N1", OID_A), ("N2", OID_A)]
+        sample = [("S1", "rank", "cedh", 1), ("N1", "rank", "casual", 0), ("N2", "rank", "casual", 0)]
+        home, db = self.build("unlocked", decks, sample)
+        self.assertEqual(self.need(home, db),
+                         [("Ff", "1", "1", "1.0"), ("Aa", "0", "2", "2.0"), ("Cc", "0", "0", "0"),
+                          ("Dd", "0", "0", "0"), ("Ee", "0", "0", "0")])
+
+    def test_blocked_breaks_weight_tie(self):
+        # F is in two decks of two unproven cards (0 2 1.0); A is alone in one deck that does not
+        # seat four (0 1 1.0). Tied on unlocked and weight, higher blocked wins over Aa < Ff.
+        decks = [("T1", OID_C), ("T1", OID_F), ("T2", OID_D), ("T2", OID_F), ("N1", OID_A)]
+        sample = [("T1", "rank", "cedh", 1), ("T2", "rank", "cedh", 1), ("N1", "rank", "casual", 0)]
+        home, db = self.build("blocked", decks, sample)
+        self.assertEqual(self.need(home, db),
+                         [("Ff", "0", "2", "1.0"), ("Aa", "0", "1", "1.0"), ("Cc", "0", "1", "0.5"),
+                          ("Dd", "0", "1", "0.5"), ("Ee", "0", "0", "0")])
+
+    def test_tier_order_unchanged_by_default_and_by_tier(self):
+        home, db = self.build("tier", self.decks(), self.sample())
+        base = self.cli(home, "need", "--db", db, "--private")
+        by_tier = self.cli(home, "need", "--by", "tier", "--db", db, "--private")
+        self.assertEqual(base.returncode, 0, base.stderr)
+        self.assertEqual(base.stdout, by_tier.stdout)
+        self.assertEqual(base.stdout.splitlines()[0].split("\t")[0], "tier")
+
+    def test_needs_private_tables(self):
+        home, db = self.build("nosample", self.decks(), (), with_sample=False)
+        r = self.cli(home, "need", "--by", "decks", "--db", db, "--private")
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("need: --by decks needs the private build with the deck sample "
+                      "(no deck_sample table)", r.stderr)
+        self.assertEqual(self.cli(home, "need", "--db", db, "--private").returncode, 0)
+
+    def test_needs_decks_table(self):
+        home, db = self.build("nodecks", self.decks(), self.sample(), with_decks=False)
+        r = self.cli(home, "need", "--by", "decks", "--db", db, "--private")
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("need: --by decks needs the private build with the deck sample "
+                      "(no decks table)", r.stderr)
+        self.assertEqual(self.cli(home, "need", "--db", db, "--private").returncode, 0)
