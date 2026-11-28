@@ -1,0 +1,95 @@
+{
+ "card": "Midnight Scavengers",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d797208d3ac6",
+ "scenarios": [
+  {
+   "name": "token-graf-rats-cannot-meld",
+   "cr": [
+    "701.42c"
+   ],
+   "why": "Midnight Scavengers sits beside a token copy of Graf Rats after the real Rats are bolted. At the beginning of combat both are exiled but a token cannot meld, so the Scavengers stay in exile, the token ceases to exist and no Chittering Host appears.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Midnight Scavengers",
+      "Graf Rats"
+     ],
+     "hand": [
+      "Cackling Counterpart",
+      "Lightning Bolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cackling Counterpart",
+     "mana": "CUU",
+     "targets": [
+      "p0:Graf Rats"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0:Graf Rats"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Midnight Scavengers",
+     "zone": "exile"
+    },
+    {
+     "card": "p0:Graf Rats",
+     "zone": "graveyard"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Chittering Host"
+     },
+     "eq": 0
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Graf Rats"
+     },
+     "eq": 0
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "exile",
+      "name": "Graf Rats"
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

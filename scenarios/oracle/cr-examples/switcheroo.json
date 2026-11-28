@@ -1,0 +1,84 @@
+{
+ "card": "Switcheroo",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "fa7a63190a7c",
+ "scenarios": [
+  {
+   "name": "one-target-destroyed-so-no-control-changes",
+   "cr": [
+    "701.12a"
+   ],
+   "why": "Switcheroo targets a creature on each side, then a Lightning Bolt kills the opponent's creature before Switcheroo resolves. Half an exchange cannot happen, so the Grizzly Bears stay with their controller.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Switcheroo",
+      "Lightning Bolt"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Hill Giant"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Switcheroo",
+     "mana": "CCCCU",
+     "targets": [
+      "p0:Grizzly Bears",
+      "p1:Hill Giant"
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p1:Hill Giant"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Hill Giant",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Switcheroo",
+     "zone": "graveyard"
+    },
+    {
+     "count": {
+      "seat": 0,
+      "zone": "battlefield",
+      "name": "Grizzly Bears"
+     },
+     "eq": 1
+    },
+    {
+     "count": {
+      "seat": 1,
+      "zone": "battlefield",
+      "name": "Grizzly Bears"
+     },
+     "eq": 0
+    }
+   ]
+  }
+ ]
+}

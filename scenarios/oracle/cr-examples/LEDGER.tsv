@@ -145,17 +145,17 @@ rule	n	status	scenario	note
 700.5a	1	covered	altar-of-the-pantheon#altar-lifts-devotion-to-five-before-type-change;altar-of-the-pantheon#without-the-altar-devotion-stays-four	
 700.7	1	open		
 700.14	1	covered	bark-knuckle-boxer#fourth-mana-spent-on-spells-triggers-expend	
-701.12a	1	open		
+701.12a	1	covered	switcheroo#one-target-destroyed-so-no-control-changes	
 701.20c	1	covered	telepathy#already-revealed-merfolk-card-still-pays-the-additional-cost	
 701.23b	1	covered	splinter#exiles-target-and-same-name-cards-in-graveyard	
 701.23c	1	covered	lobotomy#empty-hand-chooses-nothing-so-nothing-is-exiled	
-701.23f	1	open		
-701.24c	1	open		
+701.23f	1	covered	aven-mindcensor#opponent-searches-top-four-then-shuffles-the-library	
+701.24c	1	covered	guile#guile-exiled-in-response-library-still-shuffled	
 701.24c	2	covered	black-suns-zenith#flashback-granted-sorcery-shuffle-still-exiles	
-701.24d	1	open		
+701.24d	1	covered	loaming-shaman#no-cards-targeted-still-shuffles	
 701.24g	1	covered	darksteel-colossus#colossus-shuffles-in-zombie-goes-on-top	
-701.42c	1	open		
-701.67b	1	open		
+701.42c	1	covered	midnight-scavengers#token-graf-rats-cannot-meld	
+701.67b	1	covered	spirit-water-revival#creatures-cannot-pay-the-mana-cost;spirit-water-revival#six-creatures-pay-the-waterbend-and-islands-the-rest	
 702.1a	1	covered	varolz-the-scar-striped#scavenge-cost-is-the-mana-cost	
 702.1b	1	open		
 702.1b	2	covered	fire-ice#fire-half-flashbacks-for-its-own-cost	
