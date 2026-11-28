@@ -6,6 +6,7 @@
                                         oraclediff status output -> cert_sets status columns (docs site data)
   docs-status --db FILE --out DIR         built SQLite -> status-A.jsonl, status-B.jsonl, meta.json for the docs build
   docs-sets --db FILE --out DIR           built SQLite -> sets.json, writers.json, sets-carddb.md (per-set xproof snippet)
+  migrate keyproof-legs                   rewrite the legacy keyproof shards of the public clone as leg rows
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
@@ -41,6 +42,7 @@ from . import compliance as compliance_mod
 from . import dirac as dirac_mod
 from . import docsstatus as docsstatus_mod
 from . import fetch as fetch_mod
+from . import keylegs as keylegs_mod
 from . import merge as merge_mod
 from . import query as query_mod
 from . import release as release_mod
@@ -78,6 +80,8 @@ def _parser():
     p = sub.add_parser("docs-sets")
     p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
     p.add_argument("--out", required=True, metavar="DIR", help="directory for sets.json, writers.json, sets-carddb.md")
+    p = sub.add_parser("migrate")
+    p.add_argument("what", choices=("keyproof-legs",))
     p = sub.add_parser("publish")
     p.add_argument("--bulk", action="store_true", help="allow more than 50000 changed lines")
     p.add_argument("--private", action="store_true")
@@ -243,6 +247,13 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                                                               version=args.version, raw=True)
             print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
             return 0
+        if args.verb == "migrate":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            n = keylegs_mod.migrate(pub)
+            print("carddb migrate %s: %d rows written" % (args.what, n), file=stdout)
+            return 0
         if args.verb == "docs-status":
             na, nb = docsstatus_mod.export(args.db, args.out)
             print("carddb docs-status: %d Level A set(s), %d Level B set(s) -> %s" % (na, nb, args.out), file=stdout)
@@ -310,15 +321,19 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             if not pub.exists():
                 raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
             try:
-                changed, counts, nev = dirac_mod.run(pub, repo=args.repo, gorge=args.gorge_dir,
-                                                     writer=args.source or "ci", version=args.version,
-                                                     ran=args.measured)
+                r = dirac_mod.run_report(pub, repo=args.repo, gorge=args.gorge_dir,
+                                         writer=args.source or "ci", version=args.version,
+                                         ran=args.measured)
             except dirac_mod.Unavailable as e:
                 print("::warning::carddb dirac skipped, the last dirac rows are kept: %s" % e, file=stderr)
                 print("carddb dirac: skipped (%s); dirac rows unchanged" % type(e).__name__, file=stdout)
                 return 0
-            parts = " ".join("%s=%d" % kv for kv in sorted(counts.items()))
-            print("carddb dirac: %d rows changed; %s; %d evidence rows" % (changed, parts, nev), file=stdout)
+            if r.stale:
+                print("dirac: snapshot at %s, GORGE_PIN %s: %d rows from the snapshot may be stale"
+                      % (r.snapshot_pin, r.pin, r.stale_rows), file=stdout)
+            parts = " ".join("%s=%d" % kv for kv in sorted(r.counts.items()))
+            print("carddb dirac: %d rows changed; %s; %d evidence rows" % (r.changed, parts, r.evidence),
+                  file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)

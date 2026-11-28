@@ -21,11 +21,11 @@
 use std::collections::BTreeSet;
 
 use engine::ai_support::AiDecisionContract;
-use engine::types::ability::{AdditionalCost, TargetRef};
-use engine::types::actions::{AlternativeCastDecision, GameAction, UnlessCostBranch};
+use engine::types::ability::{AdditionalCost, KeywordAction, TargetRef};
+use engine::types::actions::{AlternativeCastDecision, GameAction, ResolutionOptionalPaymentChoice, UnlessCostBranch};
 use engine::types::game_state::{
-    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, ReplacementChoiceKind,
-    TargetSelectionSlot, WaitingFor,
+    AlternativeCastKeyword, CastOfferKind, CastingVariant, GameState, ManaChoice, ManaChoicePrompt, PayCostKind,
+    ReplacementChoiceKind, StackEntryKind, TargetSelectionSlot, WaitingFor,
 };
 use engine::types::identifiers::ObjectId;
 use engine::types::mana::ManaType;
@@ -155,10 +155,12 @@ pub(crate) fn target_of(board: &Board, r: &Ref) -> Option<TargetRef> {
 }
 
 /// phase puts a spell or ability whose only legal target is one object on the stack without asking
-/// (no `TargetSelection` prompt), while gorge logged a target decision for it. For each stack
-/// entry not yet seen, the refs of this step's target decisions that name what the entry actually
-/// targets are consumed, so the decision is not reported as unconsumed. A decision naming some
-/// other target stays and is reported. Returns the number of refs consumed.
+/// (no `TargetSelection` prompt), while gorge logged a target decision for it. The same happens for
+/// a keyword action phase auto-targets: an Equipment with one legal creature is pushed as an
+/// `Equip` keyword action without an `EquipTarget` prompt. For each stack entry not yet seen, the
+/// refs of the target decisions up to this step that name what the entry actually targets are
+/// consumed, so the decision is not reported as unconsumed. A decision naming some other target
+/// stays and is reported. Returns the number of refs consumed.
 ///
 /// An entry whose every target the answerer itself chose through a prompt (`answered`) is not
 /// swept: its decisions were consumed by that prompt, and taking more would starve a later
@@ -177,9 +179,8 @@ pub fn sweep_stack_targets(
         if seen.contains(&entry.id) {
             continue;
         }
-        let Some(ability) = entry.ability() else { continue };
         let mut chosen: Vec<TargetRef> = Vec::new();
-        chain_targets(ability, &mut chosen);
+        entry_targets(entry, &mut chosen);
         if chosen.is_empty() {
             continue;
         }
@@ -188,13 +189,42 @@ pub fn sweep_stack_targets(
             prompted = true;
             continue;
         }
-        let got = queue.take_target_refs(step as i32, chosen.len(), |r| target_of(board, r).is_some_and(|t| chosen.contains(&t)));
+        let can = |r: &Ref| target_of(board, r).is_some_and(|t| chosen.contains(&t));
+        // A keyword action's target decision can be logged on the mana step that paid for the
+        // activation, before the entry it belongs to reaches the stack: take it from any step up
+        // to this one. An ability's decisions are logged at the prompt's own step.
+        let got = if matches!(entry.kind, StackEntryKind::KeywordAction { .. }) {
+            take_target_refs_through(queue, step, chosen.len(), can)
+        } else {
+            queue.take_target_refs(step as i32, chosen.len(), can)
+        };
         taken += got.len();
     }
     if prompted {
         answered.clear();
     }
     taken
+}
+
+/// Target refs of `step` and every earlier step, in step order, up to `max`. The engine chooses a
+/// keyword action's target without a prompt while the recording's step is the checkpoint then
+/// current, which can be the mana step that funded the activation; the same earlier-step decision
+/// reaches the `EquipTarget` prompt when phase asks after the mana payment. Both callers match by
+/// the entry's own target, so an earlier decision for another object is not taken.
+fn take_target_refs_through(
+    queue: &mut DecisionQueue,
+    step: usize,
+    max: usize,
+    can: impl Fn(&Ref) -> bool,
+) -> Vec<Ref> {
+    let mut out: Vec<Ref> = Vec::new();
+    for s in 0..=step as i32 {
+        if out.len() >= max {
+            break;
+        }
+        out.extend(queue.take_target_refs(s, max - out.len(), &can));
+    }
+    out
 }
 
 /// The targets an answer to the target prompt `wf` chose.
@@ -210,6 +240,19 @@ pub fn answered_targets(wf: &WaitingFor, action: &GameAction) -> Vec<TargetRef> 
             cards.iter().map(|id| TargetRef::Object(*id)).collect()
         }
         _ => Vec::new(),
+    }
+}
+
+/// Every target a stack entry chose: an ability and its chain of sub-abilities, or a keyword
+/// action's own target. The keyword-action arm is keyed on the action type, so the next action
+/// that carries a target is one more arm here rather than a second sweep.
+fn entry_targets(entry: &engine::types::game_state::StackEntry, out: &mut Vec<TargetRef>) {
+    if let Some(ability) = entry.ability() {
+        chain_targets(ability, out);
+        return;
+    }
+    if let StackEntryKind::KeywordAction { action: KeywordAction::Equip { target_creature_id, .. }, .. } = &entry.kind {
+        out.push(TargetRef::Object(*target_creature_id));
     }
 }
 
@@ -235,13 +278,13 @@ fn text_match(a: &str, b: &str) -> bool {
 
 /// The object of `cards` a decision pick names: its ref when the ref resolves into `cards`, else
 /// the first unused card of `cards` with the pick's name.
-fn card_of(cur: &Cursor, d: &Decision, i: usize, cards: &[ObjectId], used: &[ObjectId]) -> Option<ObjectId> {
-    let state = &cur.board.state;
+fn card_of(board: &Board, d: &Decision, i: usize, cards: &[ObjectId], used: &[ObjectId]) -> Option<ObjectId> {
+    let state = &board.state;
     // An inexact ref was derived by counting live objects, not by identity: only the name is sound.
     let inexact = d.pick_refs_inexact.get(i).copied().unwrap_or(false);
     if !inexact {
         if let Some(r) = d.pick_refs.get(i).and_then(|s| Ref::parse(s).ok()) {
-            if let Some(id) = object_of(cur.board, &r) {
+            if let Some(id) = object_of(board, &r) {
                 if cards.contains(&id) && !used.contains(&id) {
                     return Some(id);
                 }
@@ -263,18 +306,18 @@ fn card_of(cur: &Cursor, d: &Decision, i: usize, cards: &[ObjectId], used: &[Obj
     cards.iter().copied().find(|id| {
         !used.contains(id)
             && state.objects.get(id).is_some_and(|o| {
-                o.name == name || cur.board.names.by_object.get(id).is_some_and(|n| n == name)
+                o.name == name || board.names.by_object.get(id).is_some_and(|n| n == name)
             })
     })
 }
 
 /// The cards of `cards` gorge's decision `d` picked, in pick order; a pick that finds no card is
 /// dropped.
-fn cards_of(cur: &Cursor, d: &Decision, cards: &[ObjectId]) -> Vec<ObjectId> {
+fn cards_of(board: &Board, d: &Decision, cards: &[ObjectId]) -> Vec<ObjectId> {
     let n = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
     let mut out: Vec<ObjectId> = Vec::new();
     for i in 0..n {
-        if let Some(id) = card_of(cur, d, i, cards, &out) {
+        if let Some(id) = card_of(board, d, i, cards, &out) {
             out.push(id);
         }
     }
@@ -542,6 +585,21 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             or_forced(state, wf, cur, a)
         }
 
+        // CR 118.12 + CR 608.2d: an optional trigger cost at resolution. gorge logs the election
+        // as a `trigger_cost_pay` / `trigger_cost_decline` decision; phase offers one Decline
+        // branch plus one Pay branch per payable cost.
+        WaitingFor::ResolutionOptionalPaymentChoice { costs, .. } => {
+            let a = take(cur, is_yes_no_like).map(|d| {
+                let choice = match (accepts(&d), costs.as_slice()) {
+                    (false, _) => ResolutionOptionalPaymentChoice::Decline,
+                    (true, [only]) => ResolutionOptionalPaymentChoice::Pay { index: only.index },
+                    (true, _) => return Err(miss(wf, cur, "gorge paid but phase offers several costs")),
+                };
+                offered(state, wf, GameAction::ChooseResolutionOptionalPaymentBranch { choice }, cur)
+            });
+            or_forced(state, wf, cur, a)
+        }
+
         // "Do A or pay B": gorge's `altaddcost` decision names the one it took; `pay` takes the first.
         WaitingFor::OptionalCostChoice { cost: AdditionalCost::Choice(first, second), .. } => {
             let a = take(cur, |d| d.pick_kinds.iter().any(|k| k == "altaddcost")).map(|d| {
@@ -620,7 +678,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         // the graveyard (surveil).
         WaitingFor::ScryChoice { cards, .. } | WaitingFor::SurveilChoice { cards, .. } => {
             let a = take(cur, is_arrange).map(|d| {
-                let top = cards_of(cur, &d, cards);
+                let top = cards_of(cur.board, &d, cards);
                 let bottomed = cards.len() - top.len();
                 if matches!(wf, WaitingFor::ScryChoice { .. }) && bottomed > 1 {
                     cur.notes.push(format!(
@@ -705,7 +763,10 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         // the creatures tapped.
         WaitingFor::EquipTarget { equipment_id, valid_targets, .. } => {
             let board = cur.board;
-            let refs = cur.queue.take_target_refs(cur.step as i32, 1, |r| {
+            // phase can take the equip target after the mana payment of the same activation, so
+            // gorge logs the decision on an earlier step. Take it from this step or any earlier one,
+            // as the stack sweep does for the auto-target path.
+            let refs = take_target_refs_through(&mut *cur.queue, cur.step, 1, |r| {
                 matches!(target_of(board, r), Some(TargetRef::Object(id)) if valid_targets.contains(&id))
             });
             let a = refs.first().and_then(|r| match target_of(board, r) {
@@ -729,7 +790,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
             or_forced(state, wf, cur, a)
         }
         WaitingFor::ManifestDreadChoice { cards, .. } => {
-            let a = take(cur, is_manifest_dread).map(|d| match cards_of(cur, &d, cards).as_slice() {
+            let a = take(cur, is_manifest_dread).map(|d| match cards_of(cur.board, &d, cards).as_slice() {
                 [id] => offered(state, wf, GameAction::SelectCards { cards: vec![*id] }, cur),
                 other => Err(miss(wf, cur, &format!("gorge picked {} card(s), phase manifests one", other.len()))),
             });
@@ -787,7 +848,7 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         }
         WaitingFor::EnlistChoice { eligible, .. } => {
             let a = if let Some(d) = take(cur, is_object_choice) {
-                let ids = cards_of(cur, &d, eligible);
+                let ids = cards_of(cur.board, &d, eligible);
                 if ids.len() > 1 {
                     Some(Err(miss(wf, cur, &format!("gorge picked {} creature(s), enlist taps up to one", ids.len()))))
                 } else {
@@ -853,7 +914,6 @@ pub fn answer(state: &GameState, wf: &WaitingFor, cur: &mut Cursor) -> Result<An
         | WaitingFor::MutateMergeChoice { .. }
         | WaitingFor::CipherEncodeChoice { .. }
         | WaitingFor::ChoosePermanentTypeSlot { .. }
-        | WaitingFor::ResolutionOptionalPaymentChoice { .. }
         | WaitingFor::PairChoice { .. }
         | WaitingFor::MiracleReveal { .. }
         | WaitingFor::WardDiscardChoice { .. }
@@ -983,9 +1043,24 @@ fn pays_unless(d: &Decision) -> bool {
     accepts(d)
 }
 
-/// A colour pick: `choose_n` with a `color` pick kind or an `Add X` label.
+/// An optional-cost decision phase resolves without a prompt: a declined trigger cost (the cost is
+/// unpayable, so phase auto-declines, CR 608.2d) or an either-or additional cost whose preferred
+/// branch is unpayable (phase pays the fallback, CR 601.2b). When phase does pose the prompt, the
+/// answerer consumes the decision at the prompt instead, so one left over at the end of the replay
+/// is exactly a "no prompt appears" answer. The predicate is shared by the end-of-run settle in
+/// `steps.rs`, not repeated per caller.
+pub fn is_unposed_optional_cost(d: &Decision) -> bool {
+    d.pick_kinds.iter().any(|k| k == "altaddcost" || k == "trigger_cost_decline")
+}
+
+/// A colour pick: `choose_n` with a `color`/`mana` pick kind or an `Add X` label, whose first
+/// pick names a colour. The `mana` kind covers gorge's cost-prefixed `pay.ManaAbilityLabel`
+/// ("Pay 1: Add W" for a `{1}` ability); the colour test keeps the wheel label
+/// ("Pay 1: Add any color") and multi-pip combo labels out.
 fn is_colour_decision(d: &Decision) -> bool {
-    d.kind == "choose_n" && (d.pick_kinds.iter().any(|k| k == "color") || d.picks.iter().any(|p| p.starts_with("Add ")))
+    d.kind == "choose_n"
+        && (d.pick_kinds.iter().any(|k| k == "color" || k == "mana") || d.picks.iter().any(|p| p.starts_with("Add ")))
+        && d.picks.first().is_some_and(|p| colour_of(p).is_some())
 }
 
 /// A single label pick that is not any of the other decision shapes.
@@ -1041,7 +1116,7 @@ fn crew_answer(
     d: &Decision,
     cur: &mut Cursor,
 ) -> Result<Answer, Stop> {
-    let mut tapped = cards_of(cur, d, eligible);
+    let mut tapped = cards_of(cur.board, d, eligible);
     let named = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
     if tapped.is_empty() || tapped.len() != named {
         return Err(miss(wf, cur, &format!("gorge tapped {named} creature(s), {} of them among phase's eligible", tapped.len())));
@@ -1100,11 +1175,30 @@ fn pick_cards(
     cur: &mut Cursor,
 ) -> Result<Answer, Stop> {
     let lo = if up_to { lo } else { hi.min(cards.len()) };
-    let discarding = matches!(
-        wf,
-        WaitingFor::DiscardChoice { .. } | WaitingFor::DiscardToHandSize { .. } | WaitingFor::ConniveDiscard { .. }
-    );
-    let picked = take(cur, |d| is_object_choice(d) || (arrangement_too && is_arrange(d)) || (discarding && is_discard_mode(d)));
+    // A discard cost is a discard whichever WaitingFor carries it. `PayCost` is how a CARD's
+    // additional cost reaches the answerer (Ruthless Disposal's "discard a card and sacrifice a
+    // creature" is one PayCost per leg), and its gorge decision is the same card-pick shape as a
+    // resolution discard.
+    let discarding = match wf {
+        WaitingFor::DiscardChoice { .. } | WaitingFor::DiscardToHandSize { .. } | WaitingFor::ConniveDiscard { .. } => true,
+        WaitingFor::PayCost { kind: PayCostKind::Discard, .. } => true,
+        _ => false,
+    };
+    let is_pick = |d: &Decision| {
+        is_object_choice(d) || (arrangement_too && is_arrange(d)) || (discarding && is_discard_mode(d))
+    };
+    // One step can pose several object picks (a composite additional cost, a target plus a
+    // discard, ...), and gorge logs them in its own order, which need not be phase's. Prefer the
+    // decision whose picks are cards THIS prompt offers; the card ids are the role, so the next
+    // sibling prompt cannot steal another's decision. A decision for a different prompt resolves
+    // to nothing here and is left for its own arm; only when none resolves does the old
+    // first-shape-match fallback run, so a genuine mismatch still reports as one.
+    let board = cur.board;
+    let fits = |d: &Decision| {
+        let named = d.picks.len().max(d.pick_refs.len()).max(d.object_picks.len());
+        named == 0 || cards_of(board, d, cards).len() == named
+    };
+    let picked = take(cur, |d| is_pick(d) && fits(d)).or_else(|| take(cur, is_pick));
     let picked = match picked {
         Some(d) => Some(d),
         // An explicit empty choice, when the prompt allows taking nothing.
@@ -1114,12 +1208,12 @@ fn pick_cards(
         None => None,
     };
     let Some(d) = picked else { return forced(state, wf, cur) };
-    let mut ids = cards_of(cur, &d, cards);
+    let mut ids = cards_of(cur.board, &d, cards);
     if is_discard_mode(&d) {
         // One decision per card discarded: take the rest of this prompt's.
         while ids.len() < hi {
             let Some(next) = take(cur, is_discard_mode) else { break };
-            for id in cards_of(cur, &next, cards) {
+            for id in cards_of(cur.board, &next, cards) {
                 if !ids.contains(&id) {
                     ids.push(id);
                 }
@@ -1399,11 +1493,12 @@ mod tests {
 
     #[test]
     fn answer_equip_target_by_ref() {
-        let target = |name: &str| {
+        let at = |step: usize, name: &str| {
             format!(
-                r#"{{"step":1,"seat":0,"kind":"target","picks":["{name} (a)"],"pick_refs":["p0:{name}"],"object_picks":["p0:{name}"],"pick_kinds":["permanent"],"gorge_kind":"target"}}"#
+                r#"{{"step":{step},"seat":0,"kind":"target","picks":["{name} (a)"],"pick_refs":["p0:{name}"],"object_picks":["p0:{name}"],"pick_kinds":["permanent"],"gorge_kind":"target"}}"#
             )
         };
+        let target = |name: &str| at(1, name);
         let (s, rb) = last(&equip_request(&target("Runeclaw Bear")));
         assert_eq!(perm(&s, 0, "Runeclaw Bear").attached_to, None, "equipment is the attached one");
         assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Runeclaw Bear"), "{:?}", rb.notes);
@@ -1411,12 +1506,104 @@ mod tests {
         // The other creature takes it when gorge picked that one.
         let (s, _) = last(&equip_request(&target("Grizzly Bears")));
         assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Grizzly Bears"));
+        // phase can take the target after the activation's mana payment, so gorge logs it on the
+        // mana step (0) while the prompt is still at the activate step (1). The prompt must consume
+        // the earlier decision, exactly as the stack sweep does for the auto-target path.
+        let (s, rb) = last(&equip_request(&at(0, "Grizzly Bears")));
+        assert_eq!(perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(), Some("Grizzly Bears"), "{:?}", rb.notes);
+        assert_eq!(rb.leftover, None, "{:?}", rb.notes);
         // No decision with two legal creatures: a strict miss that names the prompt.
         let (out, _) = go(&equip_request(""));
         assert_eq!(miss_of(out), "Missing EquipTarget answer at step 1");
         // A target phase does not offer (a land) is a miss, never a substitute.
         let (out, _) = go(&equip_request(&target("Plains")));
         assert_eq!(miss_of(out), "Missing EquipTarget answer at step 1");
+    }
+
+    /// Equip with ONE legal creature: phase auto-equips (its `valid_targets.len() == 1` path) and
+    /// never poses `EquipTarget`, so gorge's target decision must still be consumed by the stack
+    /// sweep.
+    fn equip_request_one(decisions: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"battlefield":["Plains","Leonin Scimitar","Grizzly Bears"]}}}},
+              "steps":[{{"op":"activate","seat":0,"card":"p0:Plains","ability_index":0}},
+                       {{"op":"activate","seat":0,"card":"p0:Leonin Scimitar","ability_index":0}},
+                       {{"op":"resolve","seat":0}}]}},
+              "neutral":{{"ability":{{"0":{{"class":"intrinsic_mana","produces":"W"}},"1":{{"class":"activated","keyword":"Equip:1"}}}}}},
+              "gorge_decisions":[{decisions}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_equip_auto_target_is_consumed() {
+        // The decision can be recorded on the mana step (0) that paid for the activation or on the
+        // activation step (1); either way it names the entry's own target.
+        for step in [0, 1] {
+            let target = format!(
+                r#"{{"step":{step},"seat":0,"kind":"target","picks":["Grizzly Bears (a)"],"pick_refs":["p0:Grizzly Bears"],"object_picks":["p0:Grizzly Bears"],"pick_kinds":["permanent"],"gorge_kind":"target"}}"#
+            );
+            let (s, rb) = last(&equip_request_one(&target));
+            assert_eq!(
+                perm(&s, 0, "Leonin Scimitar").attached_to.as_deref(),
+                Some("Grizzly Bears"),
+                "step {step}: {:?}",
+                rb.notes
+            );
+            assert_eq!(rb.leftover, None, "step {step}: {:?}", rb.notes);
+        }
+        let target = r#"{"step":1,"seat":0,"kind":"target","picks":["Grizzly Bears (a)"],"pick_refs":["p0:Grizzly Bears"],"object_picks":["p0:Grizzly Bears"],"pick_kinds":["permanent"],"gorge_kind":"target"}"#;
+        // A target decision that names no legal creature is not explained by phase's auto-equip.
+        let bad = target.replace("p0:Grizzly Bears", "p0:Plains").replace("Grizzly Bears (a)", "Plains (a)");
+        let (_, rb) = last(&equip_request_one(&bad));
+        assert!(rb.leftover.as_ref().is_some_and(|l| l.contains("Plains")), "{:?}", rb.leftover);
+    }
+
+    fn thunderherd(decision: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Thunderherd Migration"],"library_top":["Forest"]}},"p1":{{"battlefield":["Grizzly Bears"]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Thunderherd Migration","mana":"2G"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{decision}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_declined_altaddcost_leaves_no_decision() {
+        // Thunderherd Migration: "reveal a Dinosaur card from your hand or pay {1}". With no
+        // Dinosaur the preferred branch is unpayable, so phase pays the fallback without asking;
+        // gorge still logs the `altaddcost` pick.
+        let pick = r#"{"step":0,"seat":0,"kind":"choose_n","picks":["Pay 1"],"pick_refs":["Pay 1"],"pick_kinds":["altaddcost"],"gorge_kind":"choose"}"#;
+        let search = r#"{"step":1,"seat":0,"kind":"choose_n","picks":["Forest"],"pick_refs":["p0:Forest"],"object_picks":["p0:Forest"],"pick_kinds":["search"],"gorge_kind":"choose"}"#;
+        let (s, rb) = last(&thunderherd(&format!("{pick},{search}")));
+        assert_eq!(bf(&s, 0, "Forest"), 1, "the search found the basic land; notes {:?}", rb.notes);
+        assert_eq!(rb.leftover, None, "{:?}", rb.notes);
+    }
+
+    fn iguana(extra_hand: &str, decision: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Common Iguana"{extra_hand}]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Common Iguana","mana":"1R"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{decision}]}}"#
+        )
+    }
+
+    #[test]
+    fn answer_declined_trigger_cost_unposed_leaves_no_decision() {
+        // Common Iguana: "you may discard a card. If you do, draw a card." With no card to
+        // discard phase auto-declines without opening a prompt; gorge's decline is still logged.
+        let decline = r#"{"step":1,"seat":0,"kind":"choose_n","picks":["Do not pay"],"pick_kinds":["trigger_cost_decline"],"gorge_kind":"choose"}"#;
+        let (s, rb) = last(&iguana("", decline));
+        assert!(s.players[0].hand.is_empty(), "{:?}", s.players[0].hand);
+        assert_eq!(rb.leftover, None, "{:?}", rb.notes);
+    }
+
+    #[test]
+    fn answer_declined_trigger_cost_posed_is_consumed() {
+        // With a card to discard phase poses ResolutionOptionalPaymentChoice; the decline is that
+        // prompt's Decline branch, and the card stays in hand.
+        let decline = r#"{"step":1,"seat":0,"kind":"choose_n","picks":["Do not pay"],"pick_kinds":["trigger_cost_decline"],"gorge_kind":"choose"}"#;
+        let (s, rb) = last(&iguana(r#","Forest""#, decline));
+        assert_eq!(s.players[0].hand, vec!["Forest".to_string()], "{:?}", rb.notes);
+        assert_eq!(rb.leftover, None, "{:?}", rb.notes);
     }
 
     fn crew_request(decisions: &str) -> String {
@@ -1477,6 +1664,42 @@ mod tests {
         // One decision for a two-card discard: phase wants two, so the miss says how many gorge took.
         let (out, _) = go(&mind_rot(&discard_mode("Island")));
         assert_eq!(miss_of(out), "Missing DiscardChoice answer at step 1: gorge picked 1 card(s), phase takes 2..=2");
+    }
+
+    /// Ruthless Disposal: the additional cost is "discard a card and sacrifice a creature" (CR
+    /// 601.2h). gorge logs the sacrifice before the discard (`cast_subcounter.rs`'s
+    /// `sacAsk || ... || discardAsk`), phase pays the printed order, discard first. Both are
+    /// object picks in one step, so the discard prompt must not take the sacrifice decision just
+    /// because it is first in the log.
+    fn ruthless_disposal(decisions: &str) -> String {
+        format!(
+            r#"{{"id":"t","item":{{"id":"t","setup":{{"p0":{{"hand":["Ruthless Disposal","Forest"],"battlefield":["Grizzly Bears","Runeclaw Bear"]}},
+              "p1":{{"battlefield":["Grizzly Bears","Runeclaw Bear"]}}}},
+              "steps":[{{"op":"cast","seat":0,"card":"p0:Ruthless Disposal","mana":"4B"}},{{"op":"resolve","seat":0}}]}},
+              "gorge_decisions":[{TWO_P1_BEARS_TARGET}{decisions}]}}"#
+        )
+    }
+
+    const TWO_P1_BEARS_TARGET: &str = r#"{"step":0,"seat":0,"kind":"target","picks":["Grizzly Bears (a)","Runeclaw Bear (a)"],"pick_refs":["p1:Grizzly Bears","p1:Runeclaw Bear"],"object_picks":["p1:Grizzly Bears","p1:Runeclaw Bear"],"pick_kinds":["permanent","permanent"],"gorge_kind":"target"}"#;
+
+    #[test]
+    fn cast_ruthless_disposal_discards_then_sacrifices() {
+        let sacrifice = r#",{"step":0,"seat":0,"kind":"choose_n","picks":["Runeclaw Bear"],"pick_refs":["p0:Runeclaw Bear"],"object_picks":["p0:Runeclaw Bear"],"pick_kinds":["sacrifice"],"gorge_kind":"choose"}"#;
+        let discard = r#",{"step":0,"seat":0,"kind":"choose_n","picks":["Forest"],"pick_refs":["p0:Forest"],"object_picks":["p0:Forest"],"pick_kinds":["discard"],"gorge_kind":"choose"}"#;
+        // gorge's log order: sacrifice then discard. phase's prompt order: discard then sacrifice.
+        let (s, rb) = last(&ruthless_disposal(&format!("{sacrifice}{discard}")));
+        let mut p0_gy = s.players[0].graveyard.clone();
+        p0_gy.sort();
+        assert_eq!(
+            p0_gy,
+            ["Forest".to_string(), "Runeclaw Bear".to_string(), "Ruthless Disposal".to_string()],
+            "notes {:?}",
+            rb.notes
+        );
+        let mut p1_gy = s.players[1].graveyard.clone();
+        p1_gy.sort();
+        assert_eq!(p1_gy, ["Grizzly Bears".to_string(), "Runeclaw Bear".to_string()], "the two targets die");
+        assert_eq!(rb.leftover, None);
     }
 
     fn voyage(decision: &str) -> String {

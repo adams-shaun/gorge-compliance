@@ -94,6 +94,91 @@ func restrictingStatic(face, fix *cards.Face, attack bool) *cards.Static {
 	return nil
 }
 
+// staticFilterCovered reports whether a static filter names face (or is
+// absent). An alternative the filter code does not understand counts as
+// covering it: the start cannot show the restriction missing.
+func staticFilterCovered(filter string, owner, face *cards.Face) bool {
+	if strings.TrimSpace(filter) == "" {
+		return true
+	}
+	for _, a := range parseFilter(filter) {
+		if !a.known || (!a.self || owner == face) && a.matches(face, false) {
+			return true
+		}
+	}
+	return false
+}
+
+// cantBlockByBlocked is the CantBlockBy arm of combatPairBlocked: the pair is
+// forbidden only when the attacker matches the static's ValidAttacker (or
+// ValidCard) and the blocker matches its ValidBlocker. restrictingStatic
+// counts a match on either filter as a restriction, which refused every
+// blocker of Sidar Kondo of Jamuraa's power-2 Flanking creature.
+//
+// Gorge reads the record by creature role, not by which permanent carries it:
+// StatCantBlockBy matches Filter against the attacker and Filter2 against the
+// blocker (dirac/statics_gen.go), so the same pair test runs from either
+// creature's statics. A Self alternative is its carrier (owner), never the
+// other creature.
+func cantBlockByBlocked(atk, blk *cards.Face) *cards.Static {
+	for _, own := range []*cards.Face{atk, blk} {
+		for i := range own.Statics {
+			st := &own.Statics[i]
+			if st.Mode != "CantBlockBy" {
+				continue
+			}
+			if staticFilterCovered(st.Params["Affected"], own, own) &&
+				staticFilterCovered(st.Params["ValidAttacker"], own, atk) &&
+				staticFilterCovered(st.Params["ValidBlocker"], own, blk) &&
+				staticFilterCovered(st.Params["ValidCard"], own, atk) {
+				return st
+			}
+		}
+	}
+	return nil
+}
+
+// combatPairBlocked is the static that keeps the scripted pair (atk attacks,
+// blk blocks it) from being declared, or nil. It is restrictingStatic without
+// its two false positives: a CantBlockBy is read as what it says (both
+// creatures named; a flier may block a power-2 attacker Sidar Kondo shields),
+// and an attack restriction is read against the attacker, not the blocker.
+// Every other block restriction keeps the conservative read, so a pair the
+// start cannot show legal is still refused.
+//
+// An attack restriction is read by creature role from either carrier: gorge's
+// StatCantAttack matches its filter against the attacking creature, so the
+// attacker's own record is read here (a Self alternative is the attacker) and
+// the blocker's record is read against the attacker too (its Self alternative
+// is the blocker and does not match). A blocker's CantBlockBy is read above as
+// the pair it names, never as a restriction on its own block.
+func combatPairBlocked(atk, blk *cards.Face) *cards.Static {
+	if st := restrictingStatic(atk, blk, true); st != nil {
+		return st
+	}
+	if st := cantBlockByBlocked(atk, blk); st != nil {
+		return st
+	}
+	for _, side := range []struct {
+		own, other *cards.Face
+		readAttack bool // read this carrier's attack restrictions against the attacker
+	}{{blk, atk, true}, {atk, blk, false}} {
+		for i := range side.own.Statics {
+			st := &side.own.Statics[i]
+			if st.Mode == "CantBlockBy" {
+				continue // read as the pair above
+			}
+			if !blockModes[st.Mode] && !(side.readAttack && attackModes[st.Mode]) {
+				continue
+			}
+			if restrictsCombat(st, side.own, side.other, false) {
+				return st
+			}
+		}
+	}
+	return nil
+}
+
 // combatKeyStart is a level-B combat key (combat#F.attack, combat#F.block) as
 // a start: the card on the battlefield since the turn began (no summoning
 // sickness), and the fixture creature on the other side.
@@ -998,7 +1083,7 @@ func placeCount(reg *cards.Registry, b *certdeck.Builder, card string, need coun
 		seat = &f.Setup.P1
 	}
 	for _, g := range gates {
-		seat.Counters = addSelfCounter(seat.Counters, StartCounter{Card: name, Kind: g.kind, N: g.n})
+		seat.Counters = addSelfCounter(seat.Counters, StartCounter{Card: name, Kind: g.placedKind(), N: g.n})
 	}
 	return name, s
 }

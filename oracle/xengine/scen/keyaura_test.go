@@ -70,14 +70,14 @@ func mustMarshalStart(t *testing.T, f *StartFile) []byte {
 	return raw
 }
 
-// TestStartKeyAuraRefusalsUnchanged: an Aura whose Enchant keyword takes no
-// creature or permanent a carrier can be (a player, a land) keeps its refusal,
-// and the starts that already attached their Aura (a dies trigger on the
-// bearer, an Aura destroyed) are untouched.
+// TestStartKeyAuraRefusalsUnchanged: an Aura whose Enchant keyword no card
+// carrier can satisfy (a player; Enchant:Forest and Enchant:land Auras now get
+// a basic land bearer, see TestScenKeyAuraLandBearer) keeps its refusal, and
+// the starts that already attached their Aura (a dies trigger on the bearer,
+// an Aura destroyed) are untouched.
 func TestStartKeyAuraRefusalsUnchanged(t *testing.T) {
 	checkStartRows(t, []startRow{
-		{card: "Archnemesis", key: "f0/t1", reason: "battlefield:aura-unattached"},         // Enchant player
-		{card: "Genju of the Cedars", key: "f0/a0", reason: "battlefield:aura-unattached"}, // Enchant Forest
+		{card: "Archnemesis", key: "f0/t1", reason: "battlefield:aura-unattached"}, // Enchant player
 	})
 	reg, b := testBuilder(t)
 	res, err := Generate(reg, b, "Dead Man's Chest", "f0/t0", Options{Prefer: "start"})

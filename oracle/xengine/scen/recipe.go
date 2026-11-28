@@ -162,35 +162,276 @@ func sacCostShape(tok string) bool {
 	return err == nil && n >= 0
 }
 
-// asEnters reports an as-enters choice on face: a replacement of the card's own
-// move to the battlefield whose replacement effect is a Choose* API.
-func asEnters(f *cards.Face) bool {
+// asEntersKind reports the as-enters choice on face: a replacement of the
+// card's own move to the battlefield whose replacement effect is a Choose*
+// API. kind is "" when there is none. supported says a placed permanent's own
+// state restates the answer (the chosen colour, type or number), so the
+// lowering can queue it as a setup answer; a player, card, mode, etc. choice
+// leaves no state setup can read and is refused by its own name.
+func asEntersKind(f *cards.Face) (kind string, supported bool) {
 	for _, r := range f.Repls {
 		if r.Event != "Moved" || !strings.Contains(r.Params["ValidCard"], "Card.Self") || r.Params["Destination"] != "Battlefield" {
 			continue
 		}
-		if r.With != nil && strings.HasPrefix(r.With.API, "Choose") {
-			return true
+		if r.With == nil || !strings.HasPrefix(r.With.API, "Choose") {
+			continue
 		}
+		switch r.With.API {
+		case "ChooseColor":
+			return "color", true
+		case "ChooseType":
+			return "type", true
+		case "ChooseNumber":
+			return "number", true
+		}
+		return strings.ToLower(strings.TrimPrefix(r.With.API, "Choose")), false
 	}
-	return false
+	return "", false
 }
 
-// asEntersRefusal is the refusal of a card whose as-enters choice a start that
-// places it cannot make: a land is played, not cast, so its choice (a colour or
-// a type) cannot be made by the one play the focus takes ("as-enters:land");
-// every other card is plain "as-enters".
+// asEnters reports an as-enters choice on face.
+func asEnters(f *cards.Face) bool {
+	kind, _ := asEntersKind(f)
+	return kind != ""
+}
+
+// asEntersSupported reports whether the answer to face's as-enters choice is
+// state a placed permanent carries (ChosenColor, ChosenType or ChosenNumber),
+// as opposed to a player, name or mode that leaves no state setup can read.
+func asEntersSupported(f *cards.Face) bool {
+	_, ok := asEntersKind(f)
+	return ok
+}
+
+// reasonAsEntersStamp is the refusal of a placement path that cannot cast the
+// card while its own as-enters replacement asks a state-backed choice. The
+// choice is answered after genesis, so the live cut has the placement as a
+// move this turn: Object.EnteredThisTurn and Object.AcqTurn are stamped and the
+// lowering's setup cannot restate them. The recipe avoids this by casting such
+// a card (asEntersStaticCast moves a static key's own setup to hand; preludeCast
+// serves an ability, targetStart's prelude a BecomesTarget trigger); a path that
+// must place the permanent for its own key (a combat key, a transformed front
+// face) or fire an event a cast this turn cannot produce keeps the refusal.
+const reasonAsEntersStamp = "start:as-enters-stamp"
+
+// asEntersPlacedRefusal is the refusal of a recipe that places the card on
+// the battlefield although it enters with a choice. It is the shared check of
+// every placement path (recipe's onBF and transformedStart), so a new shape
+// that places the card cannot silently skip it. The state-backed shapes a
+// cast can replace are routed to one before onBF runs (asEntersStaticCast, an
+// ability prelude, a BecomesTarget prelude); a land, an unsupported kind, or a
+// trigger a cast this turn cannot fire keeps the narrower reason
+// asEntersRefusal names.
+func asEntersPlacedRefusal(f *cards.Face) string {
+	if !asEnters(f) {
+		return ""
+	}
+	if !asEntersSupported(f) || f.IsLand() {
+		return asEntersRefusal(f)
+	}
+	return reasonAsEntersStamp
+}
+
+// asEntersCastRefusal is the refusal a cast path keeps: a land or an
+// unsupported choice is refused by name as before, while a supported choice
+// is made by the engine during the cast, so the entry and the choice are on
+// the tape and no placement stamp is involved.
+func asEntersCastRefusal(f *cards.Face) string {
+	if asEnters(f) && (f.IsLand() || !asEntersSupported(f)) {
+		return asEntersRefusal(f)
+	}
+	return ""
+}
+
+// asEntersPrecast reports whether face's own move to the battlefield runs a
+// state-backed as-enters replacement that a start cannot restate at genesis.
+// The recipe never places such a card: it is cast from hand (asEntersStaticCast
+// moves a static key's own setup to hand, preludeCast serves an ability,
+// targetStart's prelude a BecomesTarget trigger), so the entry, the choice and
+// the turn's stamps are tape events.
+//
+// Only the front face is convertible: a back-face key is not cast, and a land
+// is played rather than cast. An unsupported choice leaves no state setup can
+// read, so all keep asEntersPlacedRefusal's named refusal.
+func asEntersPrecast(face *cards.Face, fi int) bool {
+	return fi == 0 && !face.IsLand() && asEntersSupported(face)
+}
+
+// asEntersStaticCast turns a successful static key's setup into a cast. The
+// static's own recipe (staticKeyStart) is the only thing that places the
+// affected carrier, sets the Compare fields and names a refusal the setup
+// cannot serve, so it runs first and its battlefield placements stay; only the
+// key card's placement moves from the battlefield to hand, with the cast's
+// lands, and the focus becomes its cast. The entry, its as-enters choice and
+// the turn's Object.EnteredThisTurn/Object.AcqTurn stamps are then tape events
+// instead of a genesis placement the lowering cannot restate.
+//
+// A static key already focused on the cast (attachStart's Aura path) needs no
+// move. A setup focused on anything else (an Equipment's equip) needs the
+// permanent already on the battlefield, so it keeps the named stamp refusal
+// rather than leaving a focus the cast invalidates. A card the setup left off
+// the battlefield never entered this turn, so it keeps the setup unchanged.
+func asEntersStaticCast(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, f *StartFile) string {
+	if f.Focus != nil {
+		if f.Focus.Kind == "cast" && f.Focus.Card == card && f.Focus.Seat != nil && *f.Focus.Seat == 0 {
+			return ""
+		}
+		return reasonAsEntersStamp
+	}
+	i := slices.Index(f.Setup.P0.Battlefield, card)
+	if i < 0 {
+		return ""
+	}
+	if f.Setup.P0.Attached(card) {
+		return reasonAsEntersStamp
+	}
+	// castStart also plans a spell's additional cost (the lands and the fodder
+	// planCost places), so run it on a scratch file and merge only what the
+	// cast adds beyond the card's placement.
+	cast := newStart(card, f.Key)
+	if why := castStart(reg, b, face, card, generic, cast); why != "" {
+		return why
+	}
+	p0 := &f.Setup.P0
+	p0.Battlefield = append(p0.Battlefield[:i], p0.Battlefield[i+1:]...)
+	p0.Battlefield = append(p0.Battlefield, cast.Setup.P0.Battlefield...)
+	p0.Hand = append(p0.Hand, cast.Setup.P0.Hand...)
+	p0.Graveyard = append(p0.Graveyard, cast.Setup.P0.Graveyard...)
+	p0.Exile = append(p0.Exile, cast.Setup.P0.Exile...)
+	p0.Tokens = append(p0.Tokens, cast.Setup.P0.Tokens...)
+	p0.Tapped = append(p0.Tapped, cast.Setup.P0.Tapped...)
+	p0.Counters = append(p0.Counters, cast.Setup.P0.Counters...)
+	p0.PlayerCounters = append(p0.PlayerCounters, cast.Setup.P0.PlayerCounters...)
+	if l := cast.Setup.P0.Life; l != nil && (p0.Life == nil || *p0.Life < *l) {
+		life := *l
+		p0.Life = &life
+	}
+	f.Focus = cast.Focus
+	return ""
+}
+
+// asEntersPreludeAbility reports whether an activate key's card is cast from
+// hand before the ability. A {T}/{Q} cost cannot be paid by a creature that
+// entered this turn (CR 302.6), so that ability keeps the placement refusal
+// instead; preludeCast moves the card its cost plan placed into hand, so an
+// ability activated from hand or graveyard is left alone.
+func asEntersPreludeAbility(face *cards.Face, fi int, sa *cards.SA) bool {
+	if !asEntersPrecast(face, fi) || sa == nil || face.ManaCost == "" || face.ManaCost == "no cost" {
+		return false
+	}
+	for _, tok := range splitCost(sa.Params["Cost"]) {
+		if tok == "T" || tok == "Q" {
+			return false
+		}
+	}
+	return true
+}
+
+// asEntersPreludeTrigger reports whether a trigger key's card is cast from
+// hand before the trigger's own line. Only BecomesTarget works this way: its
+// targeter is an instant, so the controller can cast the card at turn 1's
+// first main and the opponent can target it in the same turn. An attack,
+// upkeep, another permanent's entry or a spell of another colour cannot be
+// produced by a creature cast this turn (it is summoning sick), so those
+// triggers keep the named placement refusal instead of a cast-only item whose
+// trigger never fires.
+func asEntersPreludeTrigger(face *cards.Face, fi int, trig *cards.Trigger) bool {
+	if !asEntersPrecast(face, fi) || trig == nil || trig.Mode != "BecomesTarget" {
+		return false
+	}
+	if face.ManaCost == "" || face.ManaCost == "no cost" {
+		return false
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return false
+	}
+	return true
+}
+
+// preludeCast moves the key card its ability's cost plan placed from the
+// battlefield to hand, pays the cast's lands, and declares the prelude the
+// focus player casts before the ability. A card the plan leaves in hand or the
+// graveyard is activated there: it never entered, so it needs no prelude.
+func preludeCast(face *cards.Face, card string, f *StartFile) string {
+	i := slices.Index(f.Setup.P0.Battlefield, card)
+	if i < 0 {
+		return ""
+	}
+	if FieldBlock(face) == "aura-unattached" {
+		// an Aura's prelude cast would need its bearer on the battlefield, and
+		// the ability plan attached it to one; keep the placement refusal
+		return reasonAsEntersStamp
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield[:i], f.Setup.P0.Battlefield[i+1:]...)
+	f.Setup.P0.Hand = append(f.Setup.P0.Hand, card)
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, landsFor(splitCost(face.ManaCost), basicFor(face.ManaCost))...)
+	f.Prelude, f.PreludeSeat = card, 0
+	return ""
+}
+
+// asEntersRefusal is the refusal of a card whose as-enters choice a start
+// cannot place. A land is played, not cast, so its choice cannot be made by
+// the one play the focus takes ("as-enters:land"). A non-land choice setup
+// cannot read keeps its own kind, so the next sibling names its gap instead of
+// hiding in a plain "as-enters".
 func asEntersRefusal(f *cards.Face) string {
 	if f.IsLand() {
 		return "as-enters:land"
 	}
+	if kind, supported := asEntersKind(f); kind != "" && !supported {
+		return "as-enters:" + kind
+	}
 	return "as-enters"
 }
 
+// asEntersCastTrigger reports whether a ChooseColor as-enters trigger is met
+// by casting the card: a state trigger that reads the chosen colour, or
+// "whenever a player casts a spell of the chosen color". This path serves the
+// trigger by the cast itself. A supported choice on any other trigger that
+// would place the permanent is served only by asEntersPreludeTrigger
+// (BecomesTarget); the rest keep asEntersPlacedRefusal's named refusal.
+func asEntersCastTrigger(trig *cards.Trigger) bool {
+	if trig == nil {
+		return false
+	}
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return false
+	}
+	switch trig.Mode {
+	case "Always":
+		return strings.Contains(trig.Params["IsPresent"], "ChosenColor")
+	case "SpellCast":
+		return strings.TrimSpace(trig.Params["ValidCard"]) == "Card.ChosenColor" && trig.Params["ValidActivatingPlayer"] == ""
+	}
+	return false
+}
+
+// triggerCastsCard reports whether the trigger recipe serves its key by
+// casting the card, so the entry and any as-enters choice are on the tape
+// rather than a genesis placement: "when this enters" (ChangesZone to the
+// battlefield on Self) and "when you cast this spell" (SpellCast on Self).
+// Every other trigger mode places the permanent: a supported as-enters choice
+// there is served by asEntersPreludeTrigger only when the event is a target
+// (BecomesTarget), and an unsupported one keeps asEntersPlacedRefusal's named
+// refusal. A trigger a cast this turn cannot fire keeps that refusal too.
+func triggerCastsCard(trig *cards.Trigger) bool {
+	if trig == nil {
+		return false
+	}
+	switch trig.Mode {
+	case "ChangesZone":
+		return trig.Params["Destination"] == "Battlefield" && selfCard(trig)
+	case "SpellCast", "SpellCastOrCopy":
+		return selfCard(trig)
+	}
+	return false
+}
+
 // asEntersStart serves a trigger key of a card whose own replacement is a
-// ChooseColor: the card is cast from hand on turn 1 (castStart), so the three
-// engines make the choice by their normal decision and the replay carries the
-// pick, and the trigger is then met on the line after the cast:
+// ChooseColor and whose trigger is met by its own cast (asEntersCastTrigger):
+// the card is cast from hand on turn 1 (castStart), so the three engines make
+// the choice by their normal decision and the replay carries the pick, and
+// the trigger is then met on the line after the cast:
 //
 //   - a state trigger on the chosen colour (Mode Always: "when you control no
 //     permanents of the chosen color") fires from the cast itself;
@@ -199,8 +440,9 @@ func asEntersRefusal(f *cards.Face) string {
 //     the pick not being known when the start is written, and exactly its lands:
 //     the focus bot casts the key card first, the bots then cast the carriers.
 //
-// Any other shape (a type choice, a trigger on another event) refuses by the
-// plain as-enters reason, as does a land (asEntersRefusal).
+// Another supported choice on a trigger that places the permanent is served
+// by asEntersPreludeTrigger (a BecomesTarget prelude) or keeps the placement
+// refusal; an unsupported one keeps the refusal (asEntersPlacedRefusal).
 func asEntersStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	if face.IsLand() || !asEntersColour(face) {
 		return asEntersRefusal(face)
@@ -293,7 +535,7 @@ func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string
 // activation zone has it, the cost met by placed state (planCost), and the
 // focus the ability's activation. "" when built, else the refusal.
 func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, idx int, sa *cards.SA, f *StartFile) string {
-	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic)
+	plan, why := planCostLine(reg, b, face, card, sa.Params["Cost"], generic, false)
 	if why != "" {
 		return why
 	}
@@ -396,9 +638,14 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if fi > 0 && (face.ManaCost == "" || face.ManaCost == "no cost") {
 		generic = basicFor(c.Faces[0].ManaCost) // a transformed face has no cost: its colours are the front's
 	}
+	// An ability or trigger key keeps its own action: the card is cast as a
+	// prelude instead, so the entry, its choice and the turn's stamps are tape
+	// events and the key itself is still exercised afterwards.
+	preludeAbility := fam == "activate" && asEntersPreludeAbility(face, fi, sa)
+	preludeTrigger := fam == "trigger" && asEntersPreludeTrigger(face, fi, trig)
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield
-		if asEnters(face) {
-			r, _ := refuse(asEntersRefusal(face))
+		if why := asEntersPlacedRefusal(face); why != "" {
+			r, _ := refuse(why)
 			return r, true
 		}
 		return Result{}, false
@@ -412,6 +659,18 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		p0.Hand = []string{card}
 		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "land"}
 	case "static", "combat":
+		if fam == "static" && asEntersPrecast(face, fi) {
+			// The static's own setup runs first, so its carrier, Compare and
+			// named refusals are kept; only the card's placement becomes a
+			// cast. A refusal here is the key's real gap, not a stamp issue.
+			if why := staticKeyStart(reg, b, c, card, key, f); why != "" {
+				return refuse(why)
+			}
+			if why := asEntersStaticCast(reg, b, face, card, generic, f); why != "" {
+				return refuse(why)
+			}
+			break
+		}
 		if r, ok := onBF(); ok {
 			return r, nil
 		}
@@ -431,22 +690,41 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		// the front face's. A Cycled trigger's card cycles from hand and
 		// never enters the battlefield at all.
 		if fam == "trigger" && trig.Mode != "Transformed" && trig.Mode != "Cycled" && asEnters(face) {
-			// The card cannot be placed (it would enter without its choice):
-			// it is cast, and its trigger is met on the line after the cast.
-			if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
-				return refuse(why)
+			// A ChooseColor state or cast trigger is met on the line after
+			// the cast (asEntersStart): the three engines make the colour
+			// choice themselves. A BecomesTarget trigger is served by a
+			// prelude cast (targetStart); every other as-enters choice keeps
+			// asEntersPlacedRefusal's named refusal, since a cast this turn
+			// cannot produce its event.
+			if kind, supported := asEntersKind(face); supported && kind == "color" && asEntersCastTrigger(trig) {
+				if why := asEntersStart(reg, b, face, card, generic, trig, f); why != "" {
+					return refuse(why)
+				}
+				break
 			}
-			break
 		}
 		if trig == nil || trig.Mode != "Transformed" && trig.Mode != "Cycled" {
-			if r, ok := onBF(); ok {
-				return r, nil
+			if fam == "trigger" && triggerCastsCard(trig) {
+				// The trigger's own path casts the card: a supported choice
+				// is on the tape, and an unsupported one keeps its name.
+				if why := asEntersCastRefusal(face); why != "" {
+					return refuse(why)
+				}
+			} else if !preludeAbility && !preludeTrigger {
+				if r, ok := onBF(); ok {
+					return r, nil
+				}
 			}
 		}
 		idx, _ := strconv.Atoi(m[3])
 		if fam == "activate" {
 			if why := abilityFocus(reg, b, face, card, generic, idx, sa, f); why != "" {
 				return refuse(why)
+			}
+			if preludeAbility {
+				if why := preludeCast(face, card, f); why != "" {
+					return refuse(why)
+				}
 			}
 			break
 		}
@@ -501,7 +779,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 				return refuse(why)
 			}
 		case "BecomesTarget":
-			if why := targetStart(reg, b, face, card, trig, f); why != "" {
+			if why := targetStart(reg, b, face, card, trig, f, preludeTrigger); why != "" {
 				return refuse(why)
 			}
 		case "LifeGained":
@@ -538,7 +816,15 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		sa = face.Abilities[f.Focus.Ability]
 	}
 	if hist != "" {
-		if why := castLine(face, card, hist, generic, f); why != "" {
+		if hist == "wascast" && trig != nil && !selfCard(trig) && f.Focus != nil && f.Focus.Kind == "cast" && f.Focus.Card != card {
+			// A watcher trigger's "wasCastByYou" reads the history of the
+			// object the filter names, not of the key card: the focus play
+			// itself casts that object from its controller's hand (the enters
+			// lane picked a carrier the wasCast-stripped filter takes,
+			// strippedFilter), so the history the trigger reads is the one
+			// this start produces. castLine's card-itself rule stays for
+			// Card.Self history ("when you cast CARDNAME").
+		} else if why := castLine(face, card, hist, generic, f); why != "" {
 			return refuse(why)
 		}
 	}
@@ -663,10 +949,262 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		return refuse(why)
 	}
-	if why := dayNightRefusal(reg, f); why != "" {
+	if why := dayNightStart(reg, f); why != "" {
+		return refuse(why)
+	}
+	if why := counterBindingRefusal(f); why != "" {
+		return refuse(why)
+	}
+	if why := startGateRefusal(reg, f); why != "" {
 		return refuse(why)
 	}
 	return Result{Path: PathStart, Start: f}, nil
+}
+
+// startGateRefusal is the finished start's read against the lowering's own
+// start gate, or "", over the two seats' placements: every battlefield
+// permanent (card on its placed face — BackFace read per copy through
+// BackFaceCopies, as the lowering binds it — or setup token) is read through
+// lower.StartCardRefusal, the gate's own predicate, so a card carrying a
+// mandatory upkeep/draw Phase trigger that captureStart refuses is named
+// before the start is emitted (Vitaspore Thallid f0/a1: its spore upkeep is
+// mandatory, and play lowers that start to no item). That read is the gate's
+// conservative one, so the battlefield branch also carries the one exception
+// the finished start can judge (upkeepRemovalExcused): an echo the drive
+// cannot pay sacrifices its card before the cut, while a payable one leaves
+// it standing where captureStart refuses, so a payable echo stays refused by
+// name (Earthlink with two spare Plains, Thelon's Chant with a Forest).
+// Every card the start places in any zone is then read for the
+// startedTheTurnUntapped filter word, because the gate's gameMentions spans
+// all zones and the turn-change fold stamps that field on every untapped
+// permanent once any card in the game names the word (Rasputin Dreamweaver
+// cast: the card sits in hand for the focus cast, and its own text names the
+// word, so its start's untapped Plains carry the live field and captureStart
+// refuses). The mention read is the gate's, not a hand-built list of shapes,
+// so the next card naming the word cannot slip past on a lane no per-lane
+// guard covered. The mandatory-trigger half reaches the battlefield through
+// StartCardRefusal (which reads the mention word for those cards too), the
+// off-battlefield zones through StartTurnStampMention only, exactly as
+// captureAt refuses a phase trigger only for a battlefield object: a hand
+// card with an upkeep trigger never fires it. The mention half is skipped
+// when no battlefield copy is untapped, since the field is refused only
+// where its stamp is set — per copy through TappedCopies (four Plains with
+// Tapped ["Plains"] leave three copies that carry the stamp), the same
+// binding the lowering's startDeck uses.
+func startGateRefusal(reg *cards.Registry, f *StartFile) string {
+	seats := []*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	untapped := false
+	for _, sd := range seats {
+		for _, tapped := range sd.TappedCopies() {
+			if !tapped {
+				untapped = true
+			}
+		}
+		for _, tok := range sd.Tokens {
+			if !tok.Tapped {
+				untapped = true
+			}
+		}
+	}
+	for seat, sd := range seats {
+		back := sd.BackFaceCopies()
+		for i, name := range sd.Battlefield {
+			c, ok := reg.Lookup(name)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			face := c.Faces[0]
+			if back[i] && len(c.Faces) > 1 {
+				face = c.Faces[1] // the placed face: captureStart reads o.Face()
+			}
+			if why := lower.StartCardRefusal(c, face); why != "" {
+				if why == "start:upkeep-trigger" && upkeepRemovalExcused(reg, f, face, seat, name) {
+					// The drive takes the card off the battlefield before the
+					// cut, so captureAt never holds it there; its text can
+					// still name the stamp word from the battlefield, so the
+					// mention half still reads it.
+					if lower.StartTurnStampMention(c) {
+						return "start:started-turn-untapped"
+					}
+					continue
+				}
+				return why
+			}
+		}
+		for _, tok := range sd.Tokens {
+			c, ok := reg.Token(tok.Script)
+			if !ok || c == nil || len(c.Faces) == 0 {
+				continue
+			}
+			if why := lower.StartCardRefusal(c, c.Faces[0]); why != "" {
+				if why == "start:upkeep-trigger" && upkeepRemovalExcused(reg, f, c.Faces[0], seat, tok.Script) {
+					continue
+				}
+				return why
+			}
+		}
+	}
+	if !untapped {
+		return ""
+	}
+	for _, sd := range seats {
+		for _, names := range [][]string{sd.Battlefield, sd.Hand, sd.Library, sd.Graveyard, sd.Exile} {
+			for _, name := range names {
+				if c, ok := reg.Lookup(name); ok && lower.StartTurnStampMention(c) {
+					return "start:started-turn-untapped"
+				}
+			}
+		}
+	}
+	return ""
+}
+
+// upkeepRemovalExcused reports whether the finished start's own turn-1 setup
+// drive provably takes the seat's battlefield permanent off the battlefield
+// before the cut, so lower.captureStart never holds it there: every
+// mandatory upkeep or draw trigger the gate counts
+// (lower.MandatoryUpkeepTriggers) is the proven unconditional self-removal
+// shape (provenUpkeepRemoval), fires from this placement (upkeepTriggerFires),
+// and its UnlessCost is the seat's own, pure mana, and unpayable from any
+// source the seat could tap at the upkeep (the echo population: Earthlink
+// {2}, Thelon's Chant {G}, with no payable mana short as develop's generated
+// starts hold). The heuristic drive pays when it can, so a payable echo
+// leaves the card standing at the cut and is no exception: it stays the
+// gate's named refusal instead of an emitted start play lowers to zero items.
+// A trigger that never fires, a condition (Impending Disaster's seven lands,
+// Defense of the Heart's CheckSVar, fading's counters_EQ0), an extra
+// sub-ability, a non-mana ask, a payer the seat is not, or a cost the judge
+// cannot read is no proof the card goes — and an unclassified cost is
+// unreadable, not empty: Magmasaur's SubCounter and Koskun Falls's tapXType
+// are asks the drive can pay, so they never take the card off the
+// battlefield. A placed counter on the card changes what its own trigger
+// reads (fading sacrifices only with no fade counter left), so it is no
+// proof either. This is why the exception lives here, with the finished
+// start, and not in lower.StartCardRefusal: only the finished start can say
+// whether its drive can pay.
+func upkeepRemovalExcused(reg *cards.Registry, f *StartFile, face *cards.Face, seat int, name string) bool {
+	trigs := lower.MandatoryUpkeepTriggers(face)
+	if len(trigs) == 0 {
+		return false
+	}
+	sd := &f.Setup.P0
+	if seat != 0 {
+		sd = &f.Setup.P1
+	}
+	for _, c := range sd.Counters {
+		if c.Card == name && c.N > 0 {
+			return false // a placed counter changes what the trigger reads
+		}
+	}
+	for _, t := range trigs {
+		if !provenUpkeepRemoval(t) || !upkeepTriggerFires(t, seat, f) {
+			return false
+		}
+		if p := t.Effect.Params["UnlessPayer"]; p != "" && !strings.EqualFold(p, "You") {
+			return false // not this seat's payment to judge
+		}
+		req, binds := triggerUpkeepReq(t, seat, f)
+		if !binds {
+			// No resource the estimate can price: an UnlessCost this judge
+			// cannot classify (Magmasaur's SubCounter, Koskun Falls's
+			// tapXType) is unprovable, not absent, so it is no removal.
+			return false
+		}
+		if req.unparsed {
+			return false // part pure mana, part unreadable: not provable either
+		}
+		if req.hand > 0 || req.grave > 0 || req.field != "" {
+			return false // a non-mana ask: not the drive's pay decision
+		}
+		// The drive pays the upkeep before any focus play, so the focus's
+		// cost is not reserved here: counting it as already spent would
+		// overstate "short" and widen the exception (the wrong direction for
+		// a fail-closed judge).
+		if req.mana != "" && !upkeepManaShort(reg, f, seat, req.mana, nil) {
+			return false // payable: the drive pays and the card stands
+		}
+	}
+	return true
+}
+
+// provenUpkeepRemoval is whether one mandatory upkeep or draw trigger is the
+// proven self-removal shape the exception may rest on: a bare sacrifice (or
+// untargeted destroy/self change-zone) whose parameter maps hold only the
+// keys the "sacrifice unless you pay" and echo shapes use, with no
+// sub-ability. Any other key can make the trigger not fire or not remove the
+// card — IsPresent/PresentCompare (Impending Disaster), CheckSVar/SVarCompare
+// (Defense of the Heart), Condition* (fading), UnlessResolveSubs,
+// SubAbility — so the shape is unprovable and the exception is not granted.
+// The maps are allowlisted as a whole, not screened for known-bad keys, so
+// the next conditional spelling cannot slip past.
+func provenUpkeepRemoval(t *cards.Trigger) bool {
+	if t == nil || t.Effect == nil || t.Effect.Sub != nil || !lower.TriggerRemovesSelf(t) {
+		return false
+	}
+	triggerKeys := map[string]bool{
+		"Execute": true, "Mode": true, "Phase": true, "TriggerDescription": true,
+		"TriggerZones": true, "ValidPlayer": true, "Keyword": true, "KeywordLine": true,
+	}
+	effectKeys := map[string]bool{
+		"UnlessCost": true, "UnlessPayer": true, "Defined": true, "SacValid": true, "OrString": true,
+	}
+	for _, p := range []struct {
+		params map[string]string
+		ok     map[string]bool
+	}{{t.Params, triggerKeys}, {t.Effect.Params, effectKeys}} {
+		for k, v := range p.params {
+			if strings.TrimSpace(v) == "" || p.ok[k] {
+				continue
+			}
+			return false
+		}
+	}
+	return true
+}
+
+// upkeepTriggerFires is whether one mandatory upkeep or draw trigger of a
+// seat's battlefield permanent runs during the start's turn-1 drive: it
+// fires from the battlefield (a TriggerZones omitting it never fires there),
+// and a "your upkeep" trigger fires only on the active seat's turn. A
+// trigger that never fires leaves the card standing at the cut, where
+// captureAt's start read refuses it, so it is no removal (triggerUpkeepReq
+// treats the same shapes as unbinding).
+func upkeepTriggerFires(t *cards.Trigger, seat int, f *StartFile) bool {
+	if z := t.Params["TriggerZones"]; z != "" && !zoneOnBattlefield(z) {
+		return false
+	}
+	if strings.EqualFold(t.Params["ValidPlayer"], "You") && seat != f.Active {
+		return false
+	}
+	return true
+}
+
+// counterBindingRefusal is why a start's counters cannot be restated, or "":
+// the lowering keys each counters entry by card name and refuses a name whose
+// copies carry different counters (setup_by_name:counters), so a counter must
+// name the one copy of that card on its seat's battlefield. The check reads
+// the finished start, after every recipe and need has placed its permanents,
+// so no plan (a cost's SubCounter, a counters need on an enabler) can emit an
+// entry the followers cannot bind. A player counter (Card empty) names the
+// seat, not a permanent.
+func counterBindingRefusal(f *StartFile) string {
+	for _, sd := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+		for _, c := range sd.Counters {
+			if c.Card == "" {
+				continue
+			}
+			n := 0
+			for _, name := range sd.Battlefield {
+				if name == c.Card {
+					n++
+				}
+			}
+			if n != 1 {
+				return "start:counters-by-name"
+			}
+		}
+	}
+	return ""
 }
 
 // FieldBlock is why a start file cannot list face on the battlefield, or "":
@@ -839,6 +1377,7 @@ type upkeepReq struct {
 	field       string // a permanent type the battlefield must hold (a sacrifice of another)
 	self        bool   // the card itself is sacrificed with no cost to avoid it
 	atRisk      bool   // the chain sacrifices the card (a cost unpaid loses it)
+	unparsed    bool   // an UnlessCost/Cost token this judge cannot classify
 }
 
 // triggerUpkeepReq is the upkeepReq of one Phase trigger, and whether it
@@ -937,6 +1476,9 @@ func sacValidSelf(sa *cards.SA) bool {
 
 // mergeUpkeepCost reads one UnlessCost/Cost into req: mana tokens, and the
 // non-mana steps a start can lack (a discard, a graveyard exile, a reveal).
+// A token it cannot classify sets unparsed, so a caller that must prove the
+// payment happened (upkeepRemovalExcused) can tell an unreadable ask from an
+// empty one instead of treating it as free.
 func mergeUpkeepCost(req *upkeepReq, cost string) {
 	for _, tok := range splitCost(cost) {
 		if manaTokenRE.MatchString(tok) {
@@ -969,7 +1511,11 @@ func mergeUpkeepCost(req *upkeepReq, cost string) {
 		case "PayMana":
 			if len(args) >= 1 {
 				req.mana = strings.TrimSpace(req.mana + " " + args[0])
+			} else {
+				req.unparsed = true
 			}
+		default:
+			req.unparsed = true
 		}
 	}
 }
@@ -1098,13 +1644,97 @@ func focusManaCost(reg *cards.Registry, f *StartFile) []string {
 	return mana
 }
 
-// basicColour is a basic land's colour letter.
-var basicColour = map[string]string{"Plains": "W", "Island": "U", "Swamp": "B", "Mountain": "R", "Forest": "G"}
+// basicLandColours maps a basic land's type word to its colour letter. The
+// type word, not the printed name, so a Snow-Covered or reprint basic still
+// counts its colour.
+var basicLandColours = []struct{ word, colour string }{
+	{"Plains", "W"}, {"Island", "U"}, {"Swamp", "B"}, {"Mountain", "R"}, {"Forest", "G"},
+}
+
+// basicLandColour is a basic land face's colour letter, "" for a basic that
+// produces only colourless mana (Wastes).
+func basicLandColour(face *cards.Face) string {
+	for _, b := range basicLandColours {
+		if face.HasTypeWord(b.word) {
+			return b.colour
+		}
+	}
+	return ""
+}
+
+// faceAddsManaBeyondBasic reports whether face could add mana the basic-land
+// estimate cannot price: the canonical mana ability cards.Face.HasManaAbility
+// defines (an activated Mana/ManaReflected ability, or the CR 605.1b
+// TapsForMana/ManaAdded triggered form — Wild Growth and Utopia Sprawl), any
+// trigger whose Execute chain reaches a Mana effect outside that shape, a
+// static that grants another permanent a mana ability or a mana trigger
+// (Ambulatory Reactor), a static that lets mana be spent as another type
+// (ManaConvert), or an Aura/Equipment, whose text can grant its bearer mana.
+// Every one of those makes a land's output more than the one mana the
+// estimate counts.
+func faceAddsManaBeyondBasic(face *cards.Face) bool {
+	if face == nil {
+		return false
+	}
+	if face.HasManaAbility() {
+		return true
+	}
+	if face.HasTypeWord("Aura") || face.HasTypeWord("Equipment") {
+		return true
+	}
+	for i := range face.Triggers {
+		if triggerAddsMana(&face.Triggers[i]) {
+			return true
+		}
+	}
+	for i := range face.Statics {
+		st := &face.Statics[i]
+		if st.Mode == "ManaConvert" {
+			return true // a colour the estimate did not count could pay
+		}
+		for _, key := range []cards.ParamKey{cards.PKAddAbility, cards.PKAddTrigger, cards.PKAddTriggers} {
+			names, _ := cards.ParamSetParam(st.ParamSetOf(), st.Params, key)
+			for _, n := range cards.SplitGrantNames(names) {
+				if sa := cards.ResolveSVar(face.SVars, n); sa != nil && (sa.API == "Mana" || sa.API == "ManaReflected") {
+					return true
+				}
+				if t, ok := cards.ParseTriggerLine(face.SVars[n]); ok && triggerAddsMana(&t) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// triggerAddsMana reports whether t can add mana: a TapsForMana/ManaAdded
+// trigger, or any Execute chain reaching a Mana effect.
+func triggerAddsMana(t *cards.Trigger) bool {
+	if t == nil {
+		return false
+	}
+	if t.Mode == "TapsForMana" || t.Mode == "ManaAdded" {
+		return true
+	}
+	for sa, d := t.Effect, 0; sa != nil && d < 32; sa, d = sa.Sub, d+1 {
+		if sa.API == "Mana" || sa.API == "ManaReflected" {
+			return true
+		}
+	}
+	return false
+}
 
 // upkeepManaShort reports whether seat's untapped lands cannot pay mana as
-// well as the focus play's own cost: a basic pays its colour, an untapped
-// non-basic land pays generic only, and the focus play's tokens are paid
-// first. A cost the judge cannot read is not a short start.
+// well as the focus play's own cost: a basic pays its colour, and the focus
+// play's tokens are paid first. It fails closed on every source it cannot
+// price, through one characteristic (faceAddsManaBeyondBasic): an untapped
+// non-land permanent with a mana ability (Sol Ring) or one with a mana
+// trigger or grant (Wild Growth), an untapped Aura/Equipment, a mana-making
+// token, or an untapped non-basic land (Ancient Tomb, {C}{C}) could pay the
+// cost, so the answer is "not short" and the caller does not grant an
+// exception on a payment it cannot prove. A cost the judge cannot read is not
+// a short start either. The placed face is read per copy through
+// BackFaceCopies, as the lowering binds it.
 func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, focusMana []string) bool {
 	mana, why := costTokens(cost)
 	if why != "" {
@@ -1131,14 +1761,37 @@ func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, f
 		sd = &f.Setup.P1
 	}
 	pool, avail := 0, map[string]int{}
-	for _, name := range sd.Battlefield {
+	tapped := sd.TappedCopies() // per copy, as the lowering binds Tapped names
+	back := sd.BackFaceCopies() // per copy, the face captureStart reads
+	for i, name := range sd.Battlefield {
 		c, ok := reg.Lookup(name)
-		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Land") || slices.Contains(sd.Tapped, name) {
+		if !ok || len(c.Faces) == 0 || tapped[i] {
 			continue
 		}
-		pool++
-		if col, ok := basicColour[name]; ok {
-			avail[col]++
+		face := c.Faces[0]
+		if back[i] && len(c.Faces) > 1 {
+			face = c.Faces[1]
+		}
+		if face.IsBasic() && face.HasTypeWord("Land") {
+			pool++
+			if col := basicLandColour(face); col != "" {
+				avail[col]++
+			}
+			continue
+		}
+		if face.HasTypeWord("Land") {
+			return false // a non-basic land may produce more than one mana
+		}
+		if faceAddsManaBeyondBasic(face) || sd.Attached(name) {
+			return false // a source this estimate cannot price
+		}
+	}
+	for _, tok := range sd.Tokens {
+		if tok.Tapped {
+			continue
+		}
+		if c, ok := reg.Token(tok.Script); ok && c != nil && len(c.Faces) > 0 && faceAddsManaBeyondBasic(c.Faces[0]) {
+			return false // an untapped mana-making token, same as any other source
 		}
 	}
 	for col, n := range need {
@@ -1355,6 +2008,15 @@ func placeCounters(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card
 		if c.Card == card && c.Kind == kind {
 			return nil // a cost's counters (planCost) already meet the need
 		}
+		if c.Card != "" && c.Kind == kind && slices.Contains(s.Battlefield, c.Card) {
+			// A placed permanent already carries a counter of the needed kind:
+			// a cost's SubCounter of a spec (Ion Storm's P1P1/Permanent) rides
+			// an inert bearer it places, and that bearer you control already
+			// meets the counters need. A second row would key the same kind to
+			// another object for no new state (counterBindingRefusal keeps each
+			// row on the one copy of its name).
+			return nil
+		}
 		bound = bound || c.Card == card
 	}
 	// A start binds one counters entry to each battlefield copy, so a card
@@ -1433,6 +2095,55 @@ func entryCounterUnrestatable(f *cards.Face) bool {
 	}
 	_, err := strconv.Atoi(parts[1])
 	return err != nil
+}
+
+// entryCounterOther reports whether f's battlefield entry re-runs a
+// replacement that puts counters on a permanent other than itself (Sage of
+// Fables's "each other Wizard creature you control enters with an additional
+// +1/+1 counter"). The placement runs it for every permanent placed after f,
+// and the extra counters depend on that order; the start schema has no field
+// to subtract them. It mirrors the lower gate's reasonEntryCounterOther
+// (movedCounterBodies) so a cost plan cannot make the start unlowerable.
+func entryCounterOther(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Repls {
+		r := &f.Repls[i]
+		if r.Event != "Moved" {
+			continue
+		}
+		if dest, ok := r.Params["Destination"]; ok && !strings.EqualFold(dest, "Battlefield") {
+			continue
+		}
+		vc := strings.TrimSpace(r.Params["ValidCard"])
+		selfEntry := vc == "" || strings.Contains(strings.ToLower(vc), "self")
+		for s := r.With; s != nil; s = s.Sub {
+			switch {
+			case s.API == "PutCounterAll" || s.API == "PutCounterPlayer":
+				if !selfEntry {
+					return true
+				}
+			case s.API != "PutCounter" || !strings.EqualFold(strings.TrimSpace(s.Params["ETB"]), "True"):
+			default:
+				if !selfEntry || !counterTargetsSelf(s.Params) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// counterTargetsSelf reports whether a PutCounter body's Defined$ names the
+// entering card: the default, Self, and ReplacedCard are all the object the
+// Moved replacement is replacing (the lower gate's counterTargetsSelf).
+func counterTargetsSelf(p map[string]string) bool {
+	switch d := strings.ToLower(strings.TrimSpace(p["Defined"])); d {
+	case "", "self", "replacedcard", "replacedcardlki":
+		return true
+	}
+	return false
 }
 
 // inertRank orders placeable enablers, lowest first: a noncreature with no

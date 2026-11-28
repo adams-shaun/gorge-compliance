@@ -126,9 +126,13 @@ func TestScenFixtures(t *testing.T) {
 		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
 		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
 		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
-		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
+		// staticKeyStart refuses Banner's static (no carrier can observe it),
+		// so the named static refusal stands; casting the card cannot turn an
+		// unobservable static into an exercised key.
+		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static:affected"}},
 		// a ChooseColor card is cast, not placed, so its choice is made by the
-		// engines' own decision; a ChooseType card or a land refuses by name
+		// engines' own decision; a land refuses by name, and a choice that is
+		// not state (a player) keeps its kind
 		{"Curse of Wizardry", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Curse of Wizardry", 5)}},
 		{"Jeweled Torque", "f0/t0", want{path: "steps"}, want{path: "start", check: asEntersCast("Jeweled Torque", 5)}},
 		{"Lurebound Scarecrow", "f0/t0", want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}, want{path: "start", check: asEntersCast("Lurebound Scarecrow", 0)}},
@@ -165,6 +169,129 @@ func TestScenFixtures(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+// TestScenStartAsEntersPlaced: a card whose as-enters replacement asks a
+// state-backed choice is never placed at genesis. The placement would be a
+// real move this turn, so the live cut would carry Object.EnteredThisTurn and
+// Object.AcqTurn, which the lowering's setup drive cannot restate (it places
+// permanents directly, CR 302.6). A static key keeps staticKeyStart's own
+// setup (its affected carrier, Compare fields and named refusals) and only the
+// card's placement moves to hand, where the focus casts it; an ability or
+// BecomesTarget trigger key casts the card as a prelude so its own action is
+// still exercised afterwards (a plain cast item would credit the ability or
+// trigger without ever taking it). A choice setup cannot read (a player) keeps
+// its named refusal, a land -- played, not cast -- keeps "as-enters:land", and
+// an event a creature cast this turn cannot produce keeps the placement
+// refusal.
+func TestScenStartAsEntersPlaced(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card, key, focusKind string
+		ability              int
+		prelude              bool
+		carrier              string
+		compare              []string
+	}{
+		{"Adaptive Automaton", "static#0.0", "cast", 0, false, "", nil},
+		// staticKeyStart's affected carrier and Compare survive the move to
+		// hand; a plain cast start would drop both.
+		{"Rukarumel, Biologist", "static#0.0", "cast", 0, false, "Memnite", nil},
+		{"Kindred Boon", "static#0.0", "cast", 0, false, "Crimson Kobolds", []string{"keywords"}},
+		{"Lifecraft Engine", "f0/a0", "ability", 0, true, "", nil},
+		{"Roaming Throne", "f0/t0", "cast", 0, true, "", nil}, // the opponent's targeting spell is the focus
+	} {
+		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start", res.Path, res.Reason)
+			}
+			if !slices.Contains(res.Start.Setup.P0.Hand, tc.card) || slices.Contains(res.Start.Setup.P0.Battlefield, tc.card) {
+				t.Errorf("p0 hand %v battlefield %v, want %s in hand and not placed",
+					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, tc.card)
+			}
+			if tc.carrier != "" && !slices.Contains(res.Start.Setup.P0.Battlefield, tc.carrier) {
+				t.Errorf("p0 battlefield %v, want staticKeyStart's carrier %q", res.Start.Setup.P0.Battlefield, tc.carrier)
+			}
+			if !slices.Equal(res.Start.Compare, tc.compare) {
+				t.Errorf("compare %v, want %v: the static setup's observation fields were dropped", res.Start.Compare, tc.compare)
+			}
+			if tc.prelude {
+				if res.Start.Prelude != tc.card || res.Start.PreludeSeat != 0 {
+					t.Errorf("prelude %q seat %d, want %q seat 0", res.Start.Prelude, res.Start.PreludeSeat, tc.card)
+				}
+				if res.Start.Focus == nil || res.Start.Focus.Kind != tc.focusKind {
+					t.Errorf("focus %+v, want a %s action after the prelude", res.Start.Focus, tc.focusKind)
+				}
+				if res.Start.Focus != nil && res.Start.Focus.Kind == "cast" && res.Start.Focus.Card == tc.card {
+					t.Errorf("focus %+v is the prelude cast, not the key's own action", res.Start.Focus)
+				}
+				return
+			}
+			if res.Start.Prelude != "" {
+				t.Errorf("prelude %q, want none for a plain cast start", res.Start.Prelude)
+			}
+			focusIs(t, res.Start, 0, tc.card, tc.focusKind, tc.ability)
+		})
+	}
+	for _, tc := range []struct{ card, key, reason string }{
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
+		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		// A static whose own setup refuses keeps its named refusal: the cast
+		// must not replace a key staticKeyStart cannot observe.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
+		// A trigger whose event a creature cast this turn cannot produce
+		// (an attack, another creature's entry, an upkeep, a chosen-colour
+		// spell) keeps the named refusal instead of a cast-only item.
+		{"Titan of Littjara", "f0/t1", reasonAsEntersStamp},
+		{"Bloodline Pretender", "f0/t0", reasonAsEntersStamp},
+		{"Herald's Horn", "f0/t0", reasonAsEntersStamp},
+	} {
+		t.Run(tc.card+"/"+tc.key, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Start != nil || res.Reason != tc.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, tc.reason)
+			}
+		})
+	}
+	// Gathering Stone's self-ETB trigger casts it, so its entry and type
+	// choice are on the tape rather than a genesis placement.
+	res, err := Generate(reg, b, "Gathering Stone", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("Gathering Stone: path %q reason %q, want a start", res.Path, res.Reason)
+	}
+	if !slices.Contains(res.Start.Setup.P0.Hand, "Gathering Stone") {
+		t.Errorf("p0 hand %v, want Gathering Stone", res.Start.Setup.P0.Hand)
+	}
+	focusIs(t, res.Start, 0, "Gathering Stone", "cast", 0)
+}
+
+// TestScenFixtureSkipsAsEnters: the same placement stamp the focus card's
+// refusal guards applies to a battlefield fixture, so the picker must not
+// choose a card whose own entry asks a choice. A fixture that would be the
+// only match picks none (the calling recipe then refuses by its own reason)
+// rather than emitting a start the lower rejects; an ordinary fixture is
+// still picked.
+func TestScenFixtureSkipsAsEnters(t *testing.T) {
+	reg, b := testBuilder(t)
+	if got := pickFixture(reg, b, "", func(f *cards.Face) bool { return f.Name == "Adaptive Automaton" }, nil, true); got != "" {
+		t.Errorf("fixture = %q, want none: a placed as-enters permanent would be refused downstream", got)
+	}
+	if got := pickFixture(reg, b, "", func(f *cards.Face) bool { return f.Name == "Grizzly Bears" }, nil, true); got != "Grizzly Bears" {
+		t.Errorf("fixture = %q, want Grizzly Bears", got)
 	}
 }
 
@@ -475,11 +602,19 @@ func TestStartPlayerCounters(t *testing.T) {
 // TestStartPlayerCounterCost: a PayEnergy<N> cost is paid from the seat's
 // player counters (CR 107.14, 122.1), so a start seeds ENERGY on the seat
 // itself instead of refusing the ability. Aethersquall Ancient's {8} ability
-// is the class's first card; the start output stays a sorted slice with no
-// card name, and a malformed amount keeps the old refusal.
+// was the class's first card, but its mandatory upkeep trigger makes the
+// lowering's start gate refuse the placed card (Vitaspore Thallid's shape), so
+// Whirler Virtuoso carries the energy start and Aethersquall Ancient is the
+// named refusal; the start output stays a sorted slice with no card name, and
+// a malformed amount keeps the old refusal.
 func TestStartPlayerCounterCost(t *testing.T) {
 	reg, b := testBuilder(t)
-	const card = "Aethersquall Ancient"
+	const card = "Whirler Virtuoso"
+	if gate, err := Generate(reg, b, "Aethersquall Ancient", "f0/a0", Options{Prefer: "start"}); err != nil {
+		t.Fatal(err)
+	} else if gate.Path != PathRefused || gate.Reason != "start:upkeep-trigger" {
+		t.Fatalf("Aethersquall Ancient: path %q reason %q, want refused start:upkeep-trigger", gate.Path, gate.Reason)
+	}
 	res, err := Generate(reg, b, card, "f0/a0", Options{Prefer: "start"})
 	if err != nil {
 		t.Fatal(err)
@@ -489,7 +624,7 @@ func TestStartPlayerCounterCost(t *testing.T) {
 	}
 	f := res.Start
 	focusIs(t, f, 0, card, "ability", 0)
-	if want := []StartCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+	if want := []StartCounter{{Kind: "ENERGY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
 		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
 	}
 	if len(f.Setup.P1.PlayerCounters) != 0 {
@@ -869,6 +1004,123 @@ func attachBearerOf(t *testing.T, f *StartFile, card string) string {
 	return ""
 }
 
+// TestStartCommanderFilter is the dispatch's repro spelling (xpg-commander-
+// filter): ChangesZone and Attacks triggers whose ValidCard reads IsCommander
+// (Tome of Legends and Search for Dagger, "whenever your commander enters or
+// attacks"; Keleth, Sunmane Familiar, "whenever a commander you control
+// attacks"). The engine resolves Card.IsCommander through Game.CommanderOf
+// list membership, never a printed keyword (CR 903.3: the designation is an
+// attribute of the card itself), so a start must do more than pick a carrier
+// the face test takes: it must designate that carrier in the file's
+// Commanders list, or the trigger never reads the entering object or the
+// attacker as the seat's commander and the focus is never exercised. The
+// inert carrier pool can never hold a commander-shaped card, so the enters
+// arm casts a fixture (entersFallback) and the Attacks lane falls back to
+// pickFixture (attackCarrier), each recording the designation
+// (designateCommander); a commander filter on the card itself (Keleth) is
+// the card's own attack with the card designated. A filter still naming a
+// property the reader does not understand keeps its ":filter" refusal
+// (Secret Summoning's NamedCard): the fail-closed rule is unchanged.
+func TestStartCommanderFilter(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key, kind string }{
+		{"Tome of Legends", "f0/t0", "cast"},
+		{"Tome of Legends", "f0/t1", "attack"},
+		{"Search for Dagger", "f0/t0", "cast"},
+		{"Keleth, Sunmane Familiar", "f0/t0", "attack"},
+	} {
+		t.Run(c.card+" "+c.key, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Seat == nil {
+				t.Fatalf("focus %+v, want a focus with a seat", f.Focus)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != c.card {
+				t.Errorf("p0 battlefield %v, want %q first", f.Setup.P0.Battlefield, c.card)
+			}
+			if *f.Focus.Seat != 0 || f.Focus.Kind != c.kind {
+				t.Fatalf("focus %+v, want seat 0 kind %q", f.Focus, c.kind)
+			}
+			seat := f.Setup.P0
+			// The trigger reads the focus object as the commander, so the
+			// file designates the focus object itself.
+			if len(seat.Commanders) != 1 || seat.Commanders[0] != f.Focus.Card {
+				t.Fatalf("p0 commanders %v, want the focus carrier %q designated", seat.Commanders, f.Focus.Card)
+			}
+			// The designated card is placed like any other (CR 903.3: the
+			// designation does not move it).
+			if c.kind == "cast" {
+				if !slices.Contains(seat.Hand, f.Focus.Card) {
+					t.Errorf("hand %v does not hold the designated commander %q", seat.Hand, f.Focus.Card)
+				}
+			} else if !slices.Contains(seat.Battlefield, f.Focus.Card) {
+				t.Errorf("battlefield %v does not place the designated commander %q", seat.Battlefield, f.Focus.Card)
+			}
+			// CR 903.3: the designated card must be a legendary creature.
+			cmdr, ok := reg.Lookup(f.Focus.Card)
+			if !ok || len(cmdr.Faces) == 0 || !cmdr.Faces[0].IsLegendary() || !cmdr.Faces[0].IsCreature() {
+				t.Errorf("designated commander %q is not a legendary creature", f.Focus.Card)
+			}
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !strings.Contains(string(raw), `"commanders"`) {
+				t.Errorf("marshalled file carries no commanders designation:\n%s", raw)
+			}
+			g, err := DecodeStartFile(raw)
+			if err != nil {
+				t.Fatalf("start file does not decode: %v", err)
+			}
+			if got := g.Setup.P0.Commanders; !slices.Equal(got, seat.Commanders) {
+				t.Errorf("round-trip p0 commanders %v, want %v", got, seat.Commanders)
+			}
+		})
+	}
+	for _, r := range []struct{ card, key, reason string }{
+		// unchanged fail-closed: an unread property is not a carrier test,
+		// and the enters lane keeps its named refusal rather than a blind
+		// pick the engine would reject
+		{"Secret Summoning", "f0/t0", "no-generator:trigger:ChangesZone:filter"},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("%s: %+v %v, want refused %q", r.card, res, err, r.reason)
+			}
+		})
+	}
+	// The IsCommander row is opt-in: only the commander-OK readers know it,
+	// so every lane that cannot record a designation (targets, counters,
+	// tapped state) still refuses it exactly as an unknown property.
+	for _, r := range []struct {
+		name  string
+		alts  []filterAlt
+		known bool
+	}{
+		{"parseFilter", parseFilter("Card.IsCommander+YouOwn"), false},
+		{"parseFilterStatic", parseFilterStatic("Card.IsCommander+YouOwn"), false},
+		{"parseFilterPlaced", parseFilterPlaced("Card.IsCommander+YouOwn"), false},
+		{"parseFilterCommander", parseFilterCommander("Card.IsCommander+YouOwn"), true},
+		{"parseFilterStaticCommander", parseFilterStaticCommander("Card.IsCommander+YouOwn"), true},
+	} {
+		t.Run(r.name, func(t *testing.T) {
+			if len(r.alts) != 1 || r.alts[0].known != r.known {
+				t.Errorf("%s(IsCommander) = %+v, want known %v", r.name, r.alts, r.known)
+			}
+			if r.known && (len(r.alts) != 1 || !r.alts[0].commander) {
+				t.Errorf("%s(IsCommander) lost the commander flag that drives the fixture fallback", r.name)
+			}
+		})
+	}
+}
+
 // TestStartAttachedBearerSeat: an Aura whose Enchant keyword is "creature an
 // opponent controls" (Dead Man's Chest) is attached to a bearer on the
 // opponent's seat, which the start's attach marks Opp; and a self-dies trigger
@@ -907,6 +1159,58 @@ func TestStartAttachedBearerSeat(t *testing.T) {
 			t.Errorf("%s: p1 battlefield %v holds no creature for the trigger's target", card, res.Start.Setup.P1.Battlefield)
 		}
 	}
+}
+
+// TestScenKeyAuraLandBearer: an Aura whose Enchant keyword takes no carrier
+// creature (Genju of the Cedars' Enchant:Forest, Pooling Venom's Enchant:land)
+// gets the basic land it can legally enchant as its StartAttach bearer. The
+// land is inert for the focus event (the Aura's own activation; it can still
+// tap for mana), and the start lists it on the Aura's controller's battlefield;
+// every aura-unattached refusal of this shape becomes a start, the same way the
+// creature-Aura shape does.
+func TestScenKeyAuraLandBearer(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, bearer string }{
+		{"Genju of the Cedars", "Forest"},   // Enchant:Forest
+		{"Genju of the Spires", "Mountain"}, // Enchant:Mountain
+		{"Pooling Venom", "Plains"},         // Enchant:land: the first basic the filter takes
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, "f0/a0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if len(f.Setup.P0.Attach) != 1 || f.Setup.P0.Attach[0].Card != r.card || f.Setup.P0.Attach[0].To != r.bearer {
+				t.Fatalf("p0 attach %+v, want %s on %s", f.Setup.P0.Attach, r.card, r.bearer)
+			}
+			if !slices.Contains(f.Setup.P0.Battlefield, r.bearer) {
+				t.Errorf("p0 battlefield %v does not hold the bearer %s", f.Setup.P0.Battlefield, r.bearer)
+			}
+			if f.Focus == nil || f.Focus.Card != r.card || f.Focus.Kind != "ability" {
+				t.Errorf("focus %+v, want the Aura's ability", f.Focus)
+			}
+			if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestScenAuraLandBearerRefused: an Aura whose Enchant keyword names a player
+// (no card can be its bearer) or a planeswalker (the carrier pool has no inert
+// one) keeps the exact refusal, and a land Aura whose own upkeep cost the start
+// cannot pay names that cost rather than aura-unattached.
+func TestScenAuraLandBearerRefused(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Curse of Stalked Prey", key: "f0/t0", reason: "battlefield:aura-unattached"}, // Enchant:Player
+		{card: "Vivien's Talent", key: "f0/t0", reason: "battlefield:aura-unattached"},       // Enchant:Planeswalker
+		{card: "Tourach's Gate", key: "f0/a0", reason: "start:upkeep-cost"},                  // Enchant:land, cumulative upkeep
+		{card: "Wand of Orcus", key: "f0/t1", reason: "no-generator:trigger:Blocks:filter"},  // Equipment: StartAttach enters Auras only
+	})
 }
 
 // TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or
@@ -1168,7 +1472,11 @@ func TestFilterProps(t *testing.T) {
 	// could never fire: each stays an unknown alternative (a refusal) until the
 	// pin learns it. This is the known-unsupported set at the current pin; a
 	// bump that learns one fails here and the entry is deleted.
-	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric"}
+	// nonIsCommander joins with the IsCommander row: the pin evaluates the
+	// positive predicate (the row is on) but not the non form, which stays
+	// unknown by the pin and refused by the reader (its negation needs the
+	// engine's non form, and only a commanderOK lane reads even the positive).
+	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric", "nonMonoColor", "nonIsCommander"}
 	for p := range filterProps {
 		for _, q := range []string{p, "non" + p} {
 			if supported, listed := pinMatches(q), slices.Contains(unsupported, q); supported == listed {
@@ -1318,7 +1626,8 @@ func TestStartCycledTriggers(t *testing.T) {
 // vanilla creature with power 3 or more to crew 3 (Apocalypse Runner), and
 // the loyalty a planeswalker's ultimate takes beyond its printed loyalty
 // (Liliana, Dreadhorde General: 9 of 6). A token cost (Baylen taps tokens)
-// stays refused.
+// mints its tokens (the corpus's Servo, untapped: a cost may tap any
+// permanent; TestScenStepsNeededCostClass checks the token placements).
 func TestStartCosts(t *testing.T) {
 	checkStartRows(t, []startRow{
 		{card: "Agency Coroner", key: "f0/a0", maxTurns: 1, p0BF: cat([]string{"Agency Coroner"}, rep("Swamp", 3), []string{"Memnite"}),
@@ -1327,7 +1636,8 @@ func TestStartCosts(t *testing.T) {
 			focusCard: "Possessed Goat", focusKind: "ability"},
 		{card: "Bedhead Beastie", key: "f0/a0", maxTurns: 1, p0Hand: []string{"Bedhead Beastie"}, p0BF: rep("Mountain", 3),
 			focusCard: "Bedhead Beastie", focusKind: "ability"},
-		{card: "Baylen, the Haymaker", key: "f0/a0", reason: "steps-needed:cost:tapXType"},
+		{card: "Baylen, the Haymaker", key: "f0/a0", maxTurns: 1, p0BF: []string{"Baylen, the Haymaker"},
+			focusCard: "Baylen, the Haymaker", focusKind: "ability"},
 	})
 	reg, b := testBuilder(t)
 	gen := func(card, key string) *StartFile {
@@ -1780,8 +2090,12 @@ func TestStartstacktarget(t *testing.T) {
 		creature bool
 		// baitForm is the bait class the card's stack target takes: "cast"
 		// (the opponent's plain-spell cast), "ability", "abilitySelf",
-		// "targeted" or "self".
+		// "targeted" (a permanent target), "targetedPlayer" (the focus seat)
+		// or "self".
 		baitForm string
+		// targetSelf is whether the targeted bait's permanent must sit on the
+		// focus seat's battlefield ("targets a permanent you control").
+		targetSelf bool
 		// key is the cast key by default; an ability bait form may take the
 		// key of the targeting ability instead
 		key string
@@ -1797,6 +2111,12 @@ func TestStartstacktarget(t *testing.T) {
 		{card: "Divert", baitForm: "targeted"},   // target spell with a single target
 		{card: "Deflection", baitForm: "targeted"},
 		{card: "Misdirection", baitForm: "targeted"},
+		// a TargetValidTargeting$ restriction: the bait spell must itself
+		// target a permanent the focus seat controls, or the focus seat
+		{card: "Avoid Fate", baitForm: "targeted", targetSelf: true},
+		{card: "Hydromorph Gull", baitForm: "targeted", targetSelf: true, key: "f0/a0"},
+		{card: "Ring of Immortals", baitForm: "targeted", targetSelf: true, key: "f0/a0"},
+		{card: "Cerulean Drake", baitForm: "targetedPlayer", key: "f0/a0"},
 		{card: "Double Major", baitForm: "self", creature: true}, // target creature spell you control
 		{card: "Increasing Vengeance", baitForm: "self"},         // target instant or sorcery spell you control
 		// an ability target only the focus seat controls: the focus seat
@@ -1882,9 +2202,9 @@ func TestStartstacktarget(t *testing.T) {
 						t.Errorf("bait battlefield %v has no %s to pay the ability cost", bf, l)
 					}
 				}
-			case "targeted":
-				if f.Focus.Bait == "" || f.Focus.BaitTarget == "" || f.Focus.BaitSelf != "" || f.Focus.BaitAbility != "" {
-					t.Fatalf("focus %+v, want a targeted bait cast with its own target", f.Focus)
+			case "targeted", "targetedPlayer":
+				if f.Focus.Bait == "" || f.Focus.BaitSelf != "" || f.Focus.BaitAbility != "" {
+					t.Fatalf("focus %+v, want a targeted bait cast", f.Focus)
 				}
 				bc, ok := reg.Lookup(f.Focus.Bait)
 				if !ok || len(bc.Faces) == 0 {
@@ -1900,9 +2220,21 @@ func TestStartstacktarget(t *testing.T) {
 				if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
 					t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
 				}
-				if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.BaitTarget) &&
-					!slices.Contains(f.Setup.P0.Battlefield, f.Focus.BaitTarget) {
-					t.Errorf("battlefields %v / %v do not list the bait's target %q", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield, f.Focus.BaitTarget)
+				if c.baitForm == "targetedPlayer" {
+					if !f.Focus.BaitTargetPlayer || f.Focus.BaitTarget != "" {
+						t.Fatalf("focus %+v, want the bait to target the focus seat itself", f.Focus)
+					}
+					return
+				}
+				if f.Focus.BaitTarget == "" || f.Focus.BaitTargetPlayer {
+					t.Fatalf("focus %+v, want a targeted bait cast with its own permanent target", f.Focus)
+				}
+				bf := f.Setup.P1.Battlefield
+				if c.targetSelf {
+					bf = f.Setup.P0.Battlefield
+				}
+				if !slices.Contains(bf, f.Focus.BaitTarget) {
+					t.Errorf("battlefield %v does not list the bait's target %q (targetSelf %v)", bf, f.Focus.BaitTarget, c.targetSelf)
 				}
 			case "self":
 				if f.Focus.BaitSelf == "" || f.Focus.Bait != "" || f.Focus.BaitAbility != "" || f.Focus.BaitTarget != "" {
@@ -2268,14 +2600,13 @@ func TestStarttokensteps(t *testing.T) {
 	}
 }
 
-// TestStartStackTargetTargetingRefused: a stack target with a
+// TestStartStackTargetTargetingBaited: a stack target with a
 // TargetValidTargeting$ restriction (Keep Safe's "target spell that targets a
-// permanent you control") is not met by any inert bait, because an inert bait
-// has no target of its own. The start generator used to accept the first
-// no-target instant anyway and wrote a start whose focus play was never
-// offered (xengine play refused it as start-not-exercised). Each of these keys
-// must keep the clean start:needs-stack-target refusal instead.
-func TestStartStackTargetTargetingRefused(t *testing.T) {
+// permanent you control", Cerulean Drake's "targets you") is not met by an
+// inert bait, because an inert bait has no target of its own. The start now
+// scripts a targeted bait whose own target meets the restriction: a permanent
+// the restriction names, or the focus seat itself for a "You"/player one.
+func TestStartStackTargetTargetingBaited(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Keep Safe", "cast"},          // Permanent.YouCtrl+inRealZoneBattlefield
@@ -2289,6 +2620,8 @@ func TestStartStackTargetTargetingRefused(t *testing.T) {
 		{"Rebuff the Wicked", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
 		{"Not of This World", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
 		{"Teferi's Response", "cast"},  // Land.YouCtrl+inRealZoneBattlefield
+		{"Cerulean Drake", "f0/a0"},    // You: counter target spell that targets you
+		{"Hydromorph Gull", "f0/a0"},   // Creature.YouCtrl+inRealZoneBattlefield
 		{"Ring of Immortals", "f0/a0"}, // ability: Permanent.YouCtrl+inRealZoneBattlefield
 	} {
 		t.Run(c.card, func(t *testing.T) {
@@ -2296,8 +2629,15 @@ func TestStartStackTargetTargetingRefused(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
-				t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+			if res.Path != PathStart || res.Start == nil || res.Start.Focus == nil {
+				t.Fatalf("path %q reason %q, want a start with a targeted bait (start %+v)", res.Path, res.Reason, res.Start)
+			}
+			fc := res.Start.Focus
+			if fc.Bait == "" || fc.BaitSelf != "" || fc.BaitAbility != "" {
+				t.Fatalf("focus %+v, want an opponent-cast targeted bait", fc)
+			}
+			if (fc.BaitTarget != "") == fc.BaitTargetPlayer {
+				t.Fatalf("focus %+v, want exactly one of the bait's permanent target or the focus player", fc)
 			}
 		})
 	}
@@ -2952,6 +3292,121 @@ func TestStartcombattriggersDealer(t *testing.T) {
 	}
 }
 
+// TestScenCombatTriggerLegalBlocker: a block trigger whose attacker's own
+// CantBlockBy static keeps every blocker without flying or reach from blocking
+// it (Sidar Kondo of Jamuraa: creatures with power 2 or less) still starts in
+// declare-blockers. The pair is legal when the blocker is one the static lets
+// block (a flier), which combatPairBlocked reads from the mode's ValidAttacker
+// and ValidBlocker together instead of counting a match on either alone.
+func TestScenCombatTriggerLegalBlocker(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Sidar Kondo of Jamuraa", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	if f.Focus == nil || f.Focus.Attack != "Sidar Kondo of Jamuraa" || f.Focus.Block == "" {
+		t.Fatalf("focus %+v, want Sidar attacking and a blocker", f.Focus)
+	}
+	c, ok := reg.Lookup(f.Focus.Block)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("blocker %q not in the corpus", f.Focus.Block)
+	}
+	if blk := c.Faces[0]; !blk.HasKeyword("Flying") && !blk.HasKeyword("Reach") {
+		t.Errorf("blocker %s has neither flying nor reach; the attacker's CantBlockBy keeps it from blocking", blk.Name)
+	}
+	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+		t.Errorf("start file does not decode: %v", err)
+	}
+}
+
+// TestScenCombatTriggerAttackerRestriction: Evil Eye of Urborg's own CantAttack
+// record ("non-Eye creatures you control can't attack") is a restriction on
+// its own attack, not on the creature blocking it: the Eye may attack a
+// non-Eye blocker, so its AttackerBlockedByCreature trigger still starts.
+// Reading the record against the blocker was the false positive that refused
+// it while a blocker-owned record went unread.
+func TestScenCombatTriggerAttackerRestriction(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Evil Eye of Urborg", "f0/t0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	if f.Focus == nil || f.Focus.Attack != "Evil Eye of Urborg" || f.Focus.Block == "" {
+		t.Fatalf("focus %+v, want Evil Eye attacking and a blocker", f.Focus)
+	}
+	c, ok := reg.Lookup(f.Focus.Block)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("blocker %q not in the corpus", f.Focus.Block)
+	}
+	if blk := c.Faces[0]; blk.HasTypeWord("Eye") {
+		t.Errorf("blocker %s is an Eye; the test does not pin the non-Eye restriction", blk.Name)
+	}
+	if _, err := DecodeStartFile(mustMarshalStart(t, f)); err != nil {
+		t.Errorf("start file does not decode: %v", err)
+	}
+}
+
+// TestScenCombatPairBlockedByRole: a pair restriction is read by creature role,
+// whichever permanent carries it. Stronghold Zeppelin's CantBlockBy ("can block
+// only creatures with flying") names the attacker in ValidAttacker and itself
+// in ValidBlocker, so a non-flier attacker is no legal pair while a flier is.
+// A blocker's CantAttack is read against the attacker, and its Self
+// alternative (the blocker) is not.
+func TestScenCombatPairBlockedByRole(t *testing.T) {
+	reg, _ := testBuilder(t)
+	face := func(name string) *cards.Face {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+	stat := func(mode string, params ...string) cards.Static {
+		st := cards.Static{Mode: mode, Params: map[string]string{}}
+		for i := 0; i+1 < len(params); i += 2 {
+			st.Params[params[i]] = params[i+1]
+		}
+		return st
+	}
+	bears := face("Grizzly Bears")
+	drake := face("Wind Drake")
+	zeppelin := face("Stronghold Zeppelin") // CantBlockBy ValidAttacker$ Creature.withoutFlying, ValidBlocker$ Creature.Self
+	if st := combatPairBlocked(bears, zeppelin); st == nil || st.Mode != "CantBlockBy" {
+		t.Errorf("non-flier attacker vs Stronghold Zeppelin: static %+v, want its CantBlockBy", st)
+	}
+	if st := combatPairBlocked(drake, zeppelin); st != nil {
+		t.Errorf("flier attacker vs Stronghold Zeppelin: static %+v, want a legal pair", st)
+	}
+	// Evil Eye of Urborg's CantAttack names non-Eye creatures its controller
+	// controls: it does not make the Eye's own attack illegal against a non-Eye
+	// blocker.
+	if st := combatPairBlocked(face("Evil Eye of Urborg"), bears); st != nil {
+		t.Errorf("Evil Eye attacking a non-Eye: static %+v, want a legal pair", st)
+	}
+	// The same record on the blocker is read against the attacker: gorge
+	// matches StatCantAttack's filter against the attacking creature.
+	restrictor := &cards.Face{Name: "Eye Wall", Types: []string{"Creature", "Eye"},
+		Statics: []cards.Static{stat("CantAttack", "ValidCard", "Creature.nonEye+YouCtrl")}}
+	if st := combatPairBlocked(bears, restrictor); st == nil || st.Mode != "CantAttack" {
+		t.Errorf("non-Eye attacker vs a blocker-owned CantAttack: static %+v, want it read against the attacker", st)
+	}
+	// A blocker's CantAttack naming Self restricts the blocker, not the
+	// attacker, so the pair stays legal.
+	selfRestrictor := &cards.Face{Name: "Wall of Stone", Types: []string{"Creature"},
+		Statics: []cards.Static{stat("CantAttack", "ValidCard", "Card.Self")}}
+	if st := combatPairBlocked(bears, selfRestrictor); st != nil {
+		t.Errorf("self-only CantAttack on the blocker: static %+v, want a legal pair", st)
+	}
+}
+
 // TestCombatTrigStartSeatRequired: a seat the mode requires is kept: a card that
 // deals the damage to "You" (its controller) is on the other seat's side, which
 // the card cannot be on, so the start is refused and not seated on seat 0.
@@ -3094,6 +3549,151 @@ func TestStarttappedtarget(t *testing.T) {
 	}
 }
 
+// TestScenTargetShapes: the focus-target shapes that used to refuse as
+// start:needs-target because the placement search only knew a card of a
+// permanent type:
+//
+//   - a token target (Replicator's "target token you control", Dogged Hunter's
+//     "target creature token") is now a minted start token, because no card
+//     can stand in for a token;
+//   - a creature subtype no card in the corpus holds (Blinkmoth Nexus's
+//     "target Blinkmoth creature") is met by a changeling, which is every
+//     creature type (CR 702.73a);
+//   - a six-target spell (Hex) is placed target by target past the old
+//     four-placement cap;
+//   - a monocolored permanent (Vanishing Verse) reads the MonoColor filter
+//     property;
+//   - a TargetValidTargeting$ stack target (Avoid Fate, Cerulean Drake) gets a
+//     bait whose own target meets the restriction.
+//
+// Cradle to Grave is the residual: its target must have entered this turn, and
+// a setup permanent or token is placed before turn 1 and does not count, so it
+// keeps a named refusal instead of a start the replay would refuse. Commander's
+// Plate's equip and Seasinger's activation name a Forge predicate under the
+// Creature head (IsCommander, ControllerControlsIsland), not a creature
+// subtype: the changeling shortcut must not match them, so both keep the
+// develop baseline's named start:needs-target instead of a start the replay
+// refuses as start-not-exercised.
+func TestScenTargetShapes(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card, key, reason string
+		check             func(t *testing.T, f *StartFile)
+	}{
+		{card: "Replicator", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if len(f.Setup.P0.Tokens) == 0 {
+				t.Fatalf("p0 tokens empty, want a minted token target: %+v", f.Setup.P0)
+			}
+		}},
+		{card: "Dogged Hunter", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if len(f.Setup.P0.Tokens)+len(f.Setup.P1.Tokens) == 0 {
+				t.Fatalf("no minted token on either battlefield, want a creature-token target: %+v / %+v", f.Setup.P0, f.Setup.P1)
+			}
+		}},
+		{card: "Blinkmoth Nexus", key: "f0/a2", check: func(t *testing.T, f *StartFile) {
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, p := range permanents(t, reg, bf) {
+					if p.HasKeyword("Changeling") || p.AllCreatureTypesCDA() {
+						return
+					}
+				}
+			}
+			t.Fatalf("no changeling placed for the Blinkmoth-creature target: %+v / %+v", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield)
+		}},
+		{card: "Hex", key: "cast", check: func(t *testing.T, f *StartFile) {
+			creatures := 0
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, p := range permanents(t, reg, bf) {
+					if p.IsCreature() {
+						creatures++
+					}
+				}
+			}
+			if creatures < 6 {
+				t.Fatalf("%d creature(s) placed, want six for Hex: %+v / %+v", creatures, f.Setup.P0.Battlefield, f.Setup.P1.Battlefield)
+			}
+		}},
+		{card: "Vanishing Verse", key: "cast", check: func(t *testing.T, f *StartFile) {
+			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+				for _, p := range permanents(t, reg, bf) {
+					if len(faceColours(p)) == 1 {
+						return
+					}
+				}
+			}
+			t.Fatalf("no monocolored permanent placed for Vanishing Verse: %+v / %+v", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield)
+		}},
+		{card: "Avoid Fate", key: "cast", check: func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.BaitTarget == "" || f.Focus.BaitTargetPlayer {
+				t.Fatalf("focus %+v, want a targeted bait with a permanent target", f.Focus)
+			}
+			if !slices.Contains(f.Setup.P0.Battlefield, f.Focus.BaitTarget) {
+				t.Errorf("p0 battlefield %v does not list the bait target %q: Avoid Fate needs a permanent you control", f.Setup.P0.Battlefield, f.Focus.BaitTarget)
+			}
+		}},
+		{card: "Cerulean Drake", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || !f.Focus.BaitTargetPlayer || f.Focus.BaitTarget != "" {
+				t.Fatalf("focus %+v, want a bait that targets the focus seat", f.Focus)
+			}
+		}},
+		{card: "Cradle to Grave", key: "cast", reason: "start:target-condition:this-turn-entered"},
+		{card: "Commander's Plate", key: "f0/a0", reason: "start:needs-target"},
+		{card: "Seasinger", key: "f0/a0", reason: "start:needs-target"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if tc.reason != "" {
+				if res.Path != PathRefused || res.Reason != tc.reason {
+					t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, tc.reason)
+				}
+				return
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			tc.check(t, res.Start)
+		})
+	}
+}
+
+// TestScenTypeWordOnlyMatchesRealCreatureSubtypes: the changeling shortcut is
+// CR 702.73a ("every creature type"), so it applies to a real creature subtype
+// (Blinkmoth) and not to a Forge filter predicate spelled under the Creature
+// head (IsCommander, ControllerControlsIsland). Treating the latter as a
+// subtype is how the generator once wrote a start with a changeling standing in
+// for "target creature you control that is your commander" or "whose controller
+// controls an Island", which the replay then refused as start-not-exercised.
+func TestScenTypeWordOnlyMatchesRealCreatureSubtypes(t *testing.T) {
+	reg, _ := testBuilder(t)
+	automaton := permanents(t, reg, []string{"Universal Automaton"})[0]
+	if !typeWordTest("Creature", "Blinkmoth")(automaton) {
+		t.Fatal("a changeling does not meet the real creature subtype Blinkmoth")
+	}
+	for _, pred := range []string{"IsCommander", "ControllerControlsIsland"} {
+		if typeWordTest("Creature", pred)(automaton) {
+			t.Errorf("a changeling meets the filter predicate %q as if it were a creature subtype", pred)
+		}
+	}
+}
+
+// TestScenTargetValidOpponentKeepsRefusal: a TargetValidTargeting$ "Opponent"
+// names the bait spell's target as the focus seat's opponent, but the start
+// document carries only the boolean BaitTargetPlayer and its bait always
+// targets the focus seat. Rather than write a start that targets the wrong
+// player, the alternative stays unknown and the play keeps its named refusal.
+func TestScenTargetValidOpponentKeepsRefusal(t *testing.T) {
+	alts := parseTargetValid("Opponent")
+	if len(alts) != 1 || alts[0].known {
+		t.Fatalf("parseTargetValid(Opponent) = %+v, want one unknown alternative", alts)
+	}
+	if _, ok := baitPlayerSeat([]stackTgt{{needsTarget: true, valid: alts}}, 0); ok {
+		t.Fatal("an Opponent restriction is served by a bait that targets the focus seat")
+	}
+}
+
 // TestGenerateRefusesVariantOnlyCard covers the Forge variant-only placeholder:
 // an Un-card whose main face Oracle is `<Unsupported Variant>` (Garbage
 // Elemental: the real card is one of the Variant: faces gorge never parses)
@@ -3161,13 +3761,402 @@ func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
 	}
 }
 
+// countAmong counts name in xs.
+func countAmong(xs []string, name string) int {
+	n := 0
+	for _, x := range xs {
+		if x == name {
+			n++
+		}
+	}
+	return n
+}
+
+// TestScenStepsNeededCostClass is the xproof repro for the steps-needed:cost
+// class (xproof refused.tsv, the top cards of the class): a cost whose payment
+// needs a prior step is met by placed state, so each builds a start where the
+// focus play is the key's line:
+//
+//   - Baylen, the Haymaker taps any number of untapped tokens
+//     (tapXType<N/Permanent.token/token>): the start mints the tokens, and a
+//     cost may tap them (summoning sickness never guards a cost's tap);
+//   - Fear of Abduction's cast exiles a creature you control
+//     (Exile<1/Creature> in the spell's additional cost): an inert creature
+//     sits beside the lands, like the fodder a Sac spends; Soul Exchange and
+//     Necrotic Fumes are the other two cast Exile shapes;
+//   - Ion Storm, Rift Elemental and Quillspike remove a counter from a
+//     permanent they do not own (SubCounter<N/Kind/Spec>): an inert creature
+//     of the spec carries the counters. The bearer is a name the battlefield
+//     holds once and survives the counter kind (a Wall of Stone, not a basic
+//     land the mana duplicates nor a 1/1 a -1/-1 counter kills), because the
+//     lowering binds a counters entry by card name (counterBindingRefusal);
+//   - Migloz, Maze Crusher's minus abilities spend a counter of a personal
+//     kind (SubCounter<N/OIL/NICKNAME>): the counters sit on Migloz itself;
+//     Charforger, Glistener Seer and Tamiyo's Immobilizer are the CARDNAME
+//     spelling of the same arm.
+//
+// A card the class cannot yet meet keeps its specific refusal: Bloodvial
+// Purveyor's Blood token need names a token the setup table does not map
+// (steps-needed:token), Sage of Fables's own entry replacement puts counters
+// on other permanents (steps-needed:cost:SubCounter), Moxite Refinery removes
+// a wildcard counter kind (steps-needed:cost:SubCounter), Food Chain and
+// The Soul Stone exile from activated abilities whose starts do not lower
+// (steps-needed:cost:Exile), and Rasputin Dreamweaver's personal counters
+// need a battlefield placement the start gate refuses (steps-needed:cost:
+// SubCounter). The gate's own read then sweeps the finished start itself
+// (startGateRefusal): Rasputin's cast and upkeep-trigger keys name the
+// startedTheTurnUntapped word the gate stamps on every untapped permanent,
+// from hand included (start:started-turn-untapped), and Vitaspore Thallid's
+// spore ability places a permanent whose upkeep trigger is mandatory
+// (start:upkeep-trigger), starts play lowers to zero items on both seeds.
+func TestScenStepsNeededCostClass(t *testing.T) {
+	reg, b := testBuilder(t)
+	// counterOn is the one counter of kind the start places, proved bindable:
+	// the name appears on the battlefield once (the lowering's counters field
+	// is by name) and a creature bearer survives the counters placed.
+	counterOn := func(t *testing.T, f *StartFile, kind string, n int32) StartCounter {
+		t.Helper()
+		var got []StartCounter
+		for _, c := range f.Setup.P0.Counters {
+			if c.Kind == kind {
+				got = append(got, c)
+			}
+		}
+		if len(got) != 1 || got[0].N != n {
+			t.Fatalf("p0 counters %+v, want one %s=%d", f.Setup.P0.Counters, kind, n)
+		}
+		c := got[0]
+		if c.Card == f.Focus.Card {
+			t.Errorf("counter bearer %q is the focus card, want a placed fodder permanent", c.Card)
+		}
+		if k := countAmong(f.Setup.P0.Battlefield, c.Card); k != 1 {
+			t.Errorf("counter bearer %q appears %d times on p0 battlefield %v, want once", c.Card, k, f.Setup.P0.Battlefield)
+		}
+		card, ok := reg.Lookup(c.Card)
+		if !ok || len(card.Faces) == 0 {
+			t.Fatalf("counter bearer %q not in the corpus", c.Card)
+		}
+		if face := card.Faces[0]; face.IsCreature() && kind == "M1M1" && face.Toughness() <= int(n) {
+			t.Errorf("counter bearer %q (%s) dies to %d M1M1 counters", c.Card, face.PT, n)
+		}
+		return c
+	}
+	// personalCounter is the one counter of kind on the focus card itself: a
+	// personal SubCounter kind (NICKNAME/CARDNAME) spends the card's own
+	// counters, so the card is its bearer.
+	personalCounter := func(t *testing.T, f *StartFile, card, kind string, n int32) {
+		t.Helper()
+		want := []StartCounter{{Card: card, Kind: kind, N: n}}
+		if !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+			t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
+		}
+	}
+	extraCreature := func(t *testing.T, f *StartFile, card string) {
+		t.Helper()
+		focusIs(t, f, 0, card, "cast", 0)
+		found := false
+		for _, n := range f.Setup.P0.Battlefield {
+			if c, ok := reg.Lookup(n); ok && c.Faces[0].IsCreature() && n != card {
+				found = true
+			}
+		}
+		if !found {
+			t.Errorf("p0 battlefield %v holds no creature the Exile additional cost spends", f.Setup.P0.Battlefield)
+		}
+	}
+	for _, r := range []struct {
+		card, key, want string
+		check           func(t *testing.T, f *StartFile)
+	}{
+		{"Baylen, the Haymaker", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Baylen, the Haymaker", "ability", 0)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Baylen, the Haymaker"})
+			if len(f.Setup.P0.Tokens) != 2 {
+				t.Errorf("p0 tokens %v, want two minted tokens to tap", f.Setup.P0.Tokens)
+			}
+			for _, tok := range f.Setup.P0.Tokens {
+				if tok.Tapped {
+					t.Errorf("token %s placed tapped, want untapped to tap as a cost", tok.Script)
+				}
+			}
+		}},
+		{"Baylen, the Haymaker", "f0/a2", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Baylen, the Haymaker", "ability", 2)
+			if len(f.Setup.P0.Tokens) != 4 {
+				t.Errorf("p0 tokens %v, want four minted tokens to tap", f.Setup.P0.Tokens)
+			}
+		}},
+		{"Fear of Abduction", "cast", "", func(t *testing.T, f *StartFile) {
+			extraCreature(t, f, "Fear of Abduction")
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Fear of Abduction"})
+		}},
+		{"Soul Exchange", "cast", "", func(t *testing.T, f *StartFile) {
+			extraCreature(t, f, "Soul Exchange")
+		}},
+		{"Necrotic Fumes", "cast", "", func(t *testing.T, f *StartFile) {
+			extraCreature(t, f, "Necrotic Fumes")
+		}},
+		{"Ion Storm", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Ion Storm", "ability", 0)
+			counterOn(t, f, "P1P1", 1)
+		}},
+		{"Ion Storm", "f0/a1", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Ion Storm", "ability", 1)
+			counterOn(t, f, "CHARGE", 1)
+		}},
+		{"Rift Elemental", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Rift Elemental", "ability", 0)
+			counterOn(t, f, "TIME", 1)
+		}},
+		{"Quillspike", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Quillspike", "ability", 0)
+			counterOn(t, f, "M1M1", 1)
+		}},
+		{"Migloz, Maze Crusher", "f0/a2", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Migloz, Maze Crusher", "ability", 2)
+			want := []StartCounter{{Card: "Migloz, Maze Crusher", Kind: "OIL", N: 3}}
+			if !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+				t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
+			}
+		}},
+		{"Charforger", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Charforger", "ability", 0)
+			personalCounter(t, f, "Charforger", "OIL", 3)
+		}},
+		{"Glistener Seer", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Glistener Seer", "ability", 0)
+			personalCounter(t, f, "Glistener Seer", "OIL", 1)
+		}},
+		{"Tamiyo's Immobilizer", "f0/a0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Tamiyo's Immobilizer", "ability", 0)
+			personalCounter(t, f, "Tamiyo's Immobilizer", "OIL", 1)
+		}},
+		// Still-unsupported shapes keep a named refusal rather than an
+		// unlowerable start.
+		{"Bloodvial Purveyor", "f0/t0", "steps-needed:token", nil},
+		{"Sage of Fables", "f0/a0", "steps-needed:cost:SubCounter", nil},
+		{"Moxite Refinery", "f0/a0", "steps-needed:cost:SubCounter", nil},
+		{"Food Chain", "f0/a0", "steps-needed:cost:Exile", nil},
+		{"The Soul Stone", "f0/a1", "steps-needed:cost:Exile", nil},
+		// A personal kind's counters ride the card, so the card must be
+		// placeable at a start. Rasputin's mandatory upkeep and its
+		// startedTheTurnUntapped filter word both refuse that placement: keep
+		// the cost refusal rather than a start play writes no item for.
+		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter", nil},
+		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter", nil},
+		// The same gate read, whole-start: every lane that emits a start is
+		// swept through it (startGateRefusal), so a card naming the
+		// startedTheTurnUntapped word cannot reach PathStart through a lane
+		// with no per-lane guard - cast from hand included, where the gate's
+		// gameMentions still stamps the field on every untapped land - and a
+		// permanent with a mandatory upkeep trigger is named, not emitted.
+		// Play lowers each of these starts to zero items on both seeds.
+		{"Rasputin Dreamweaver", "cast", "start:started-turn-untapped", nil},
+		{"Rasputin Dreamweaver", "f0/t0", "start:started-turn-untapped", nil},
+		{"Vitaspore Thallid", "f0/a1", "start:upkeep-trigger", nil},
+		// A Destroy that only reads targets is no self-removal: The Abyss
+		// ("destroy all nonartifact creatures you don't control") and
+		// Crumbling Ashes ("destroy target creature with a +1/+1 counter on
+		// it") are DB$ Destroy with ValidTgts, so the battlefield lane stays
+		// their refusal (the sweep itself, over finished StartFiles, is the
+		// white-box TestScenStartGateRefusalSweepsFinishedStart); what builds is
+		// their cast lane, the card in hand and the play — not the setup
+		// drive — firing the trigger after the cut.
+		{"The Abyss", "f0/t0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "The Abyss", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"The Abyss"})
+		}},
+		{"Crumbling Ashes", "f0/t0", "", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Crumbling Ashes", "cast", 0)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Crumbling Ashes"})
+		}},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", r.card, r.key, err)
+		}
+		if r.want != "" {
+			if res.Path != PathRefused || res.Reason != r.want {
+				t.Errorf("%s %s: path %q reason %q, want refused %q", r.card, r.key, res.Path, res.Reason, r.want)
+			}
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Fatalf("%s %s: path %q reason %q, want a start file", r.card, r.key, res.Path, res.Reason)
+		}
+		r.check(t, res.Start)
+	}
+}
+
+// TestScenStartGateRefusalSweepsFinishedStart drives the whole-start sweep over
+// finished StartFiles, the reviewer's witnesses of the shape develop emitted
+// and play lowered to zero items on both seeds:
+//   - a mandatory upkeep that only reads targets is not self-removal: The
+//     Abyss (ValidTgts Creature.nonArtifact+ControlledBy TriggeredPlayer)
+//     and Crumbling Ashes (ValidTgts Creature.counters_GE1_M1M1) are DB$
+//     Destroy with targets and stay the gate's refusal, not excused by the
+//     echo shape (lower.TriggerRemovesSelf's tightening);
+//   - the echo exception is start-aware (upkeepRemovalExcused): Earthlink's
+//     {2} over two spare Plains and Thelon's Chant's {G} over a Forest are
+//     payable, the drive pays, the card stands at the cut where captureStart
+//     refuses — so the sweep refuses by name instead of emitting; the same
+//     cards with no payable mana are sacrificed before the cut and stay
+//     starts (develop's generated Earthlink and Thelon's Chant starts);
+//   - the exception only prices pure mana from basic lands: Magmasaur's
+//     UnlessCost SubCounter and Koskun Falls's tapXType are asks the drive
+//     can pay, so they are not an empty cost; and a mana source the estimate
+//     cannot see (Sol Ring's artifact, Ancient Tomb's two colourless from a
+//     non-basic land, an untapped Treasure token, Wild Growth's
+//     TapsForMana trigger on a Plains, a static grant of a mana ability or a
+//     ManaConvert static) makes the payment provable, so no exception either.
+//     All arms are refused by name instead of emitted;
+//   - the exception only rests on the proven unconditional self-removal
+//     shape (provenUpkeepRemoval): a condition on the trigger or effect
+//     (Impending Disaster's seven lands, Defense of the Heart's CheckSVar,
+//     fading's counters_EQ0 with placed FADE counters) means the drive does
+//     not provably take the card off the battlefield, so it stays refused;
+//   - Tapped names bind to copies (TappedCopies, as the lowering binds
+//     them): four Plains with Tapped ["Plains"] leave three untapped copies
+//     for the startedTheTurnUntapped stamp Rasputin names from hand, and
+//     three untapped Plains minus one for a payable echo; all four tapped
+//     leaves no stamp anywhere, so no refusal.
+//
+// Reverting any guard in the sweep — the targeted-Destroy arms, the
+// payable-echo half, the unparsed-cost arm, the shape allowlist, the
+// non-land/non-basic/trigger/attachment/token mana arms, or the per-copy
+// TappedCopies/BackFaceCopies reads — turns one expected refusal back into ""
+// (or one expected "" into a refusal) and fails here.
+func TestScenStartGateRefusalSweepsFinishedStart(t *testing.T) {
+	reg, _ := testBuilder(t)
+	start := func(p0 StartSeat) *StartFile {
+		f := &StartFile{Format: StartFormat, Players: 2, Seeds: 2}
+		f.Setup.P0 = p0
+		return f
+	}
+	for _, r := range []struct {
+		name string
+		p0   StartSeat
+		want string
+	}{
+		{"targeted destroy, triggered player's creatures", StartSeat{Battlefield: []string{"The Abyss", "Grizzly Bears"}}, "start:upkeep-trigger"},
+		{"targeted destroy of a countered creature", StartSeat{Battlefield: []string{"Crumbling Ashes"}}, "start:upkeep-trigger"},
+		{"payable echo, spare generic", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Plains"}}, "start:upkeep-trigger"},
+		{"payable echo under a partially tapped name", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:upkeep-trigger"},
+		{"unpayable echo (develop's generated start)", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}}, ""},
+		{"payable echo colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Forest"}}, "start:upkeep-trigger"},
+		{"unpayable echo colour (develop's generated start)", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears"}}, ""},
+		{"payable non-mana unless cost, counter", StartSeat{Battlefield: []string{"Magmasaur"}}, "start:upkeep-trigger"},
+		{"payable non-mana unless cost, tap", StartSeat{Battlefield: []string{"Koskun Falls", "Grizzly Bears"}}, "start:upkeep-trigger"},
+		{"payable echo from an artifact", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Sol Ring"}}, "start:upkeep-trigger"},
+		{"payable echo from a multi-mana land", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Ancient Tomb"}}, "start:upkeep-trigger"},
+		{"payable echo from a mana token", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope"}, Tokens: []StartToken{{Script: "c_a_treasure_sac"}}}, "start:upkeep-trigger"},
+		{"payable echo from an attached mana trigger", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Plains", "Wild Growth"}, Attach: []StartAttach{{Card: "Wild Growth", To: "Plains"}}}, "start:upkeep-trigger"},
+		{"payable echo from a granted mana ability", StartSeat{Battlefield: []string{"Earthlink", "Kami of False Hope", "Basal Sliver"}}, "start:upkeep-trigger"},
+		{"payable echo by converted colour", StartSeat{Battlefield: []string{"Thelon's Chant", "Grizzly Bears", "Island", "Mycosynth Lattice"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, seven lands", StartSeat{Battlefield: []string{"Impending Disaster"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, checked creature count", StartSeat{Battlefield: []string{"Defense of the Heart"}}, "start:upkeep-trigger"},
+		{"conditional self-sacrifice, fading counters", StartSeat{Battlefield: []string{"Blastoderm"}, Counters: []StartCounter{{Card: "Blastoderm", Kind: "FADE", N: 3}}}, "start:upkeep-trigger"},
+		{"mention word with one tapped duplicate", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains"}}, "start:started-turn-untapped"},
+		{"mention word with every copy tapped", StartSeat{Hand: []string{"Rasputin Dreamweaver"}, Battlefield: []string{"Plains", "Plains", "Plains", "Plains"}, Tapped: []string{"Plains", "Plains", "Plains", "Plains"}}, ""},
+	} {
+		if got := startGateRefusal(reg, start(r.p0)); got != r.want {
+			t.Errorf("%s: startGateRefusal %q, want %q", r.name, got, r.want)
+		}
+	}
+}
+
+// TestCounterBindingRefusal: a counters row binds by card name, so a bearer
+// whose name appears twice on its seat's battlefield is refused (the lower's
+// setup_by_name:counters), not written as a start the followers cannot replay.
+// A player counter (Card empty) binds to the seat and needs no permanent.
+func TestCounterBindingRefusal(t *testing.T) {
+	f := &StartFile{}
+	f.Setup.P0.Battlefield = []string{"Mountain", "Mountain"}
+	f.Setup.P0.Counters = []StartCounter{{Card: "Mountain", Kind: "P1P1", N: 1}}
+	if got := counterBindingRefusal(f); got != "start:counters-by-name" {
+		t.Errorf("counter on one of two Mountains: %q, want start:counters-by-name", got)
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, "Wall of Stone")
+	f.Setup.P0.Counters = []StartCounter{{Card: "Wall of Stone", Kind: "P1P1", N: 1}}
+	if got := counterBindingRefusal(f); got != "" {
+		t.Errorf("counter on the one Wall of Stone: %q, want no refusal", got)
+	}
+	f.Setup.P0.Counters = []StartCounter{{Kind: "ENERGY", N: 1}}
+	if got := counterBindingRefusal(f); got != "" {
+		t.Errorf("player counter: %q, want no refusal", got)
+	}
+}
+
+// TestScenCounterBindingRefusalFromPlan drives the guard through the recipe: two
+// SubCounter costs in one ability both pick the same inert bearer, so the
+// finished start lists Wall of Stone twice while both counters entries bind
+// to that name. The lowering refuses that shape (setup_by_name:counters), so
+// the generator must refuse it too instead of emitting an unlowerable start.
+// No corpus card produces the shape today, so the double-cost card is
+// synthetic; the real corpus fills the certification deck certdeck builds
+// around it. Deleting the counterBindingRefusal call from recipe turns this
+// refusal into a start and fails here.
+func TestScenCounterBindingRefusalFromPlan(t *testing.T) {
+	reg := cards.NewRegistry()
+	add := func(name, src string) {
+		t.Helper()
+		c, diags := cards.ParseBytes(name+".txt", []byte(src))
+		if len(diags) != 0 {
+			t.Fatalf("%s: diags %v", name, diags)
+		}
+		reg.Add(c)
+	}
+	add("Wall of Stone", "Name:Wall of Stone\nManaCost:1 R\nTypes:Creature Wall\nPT:0/8\nOracle:Defender\n")
+	add("Ion Storm", "Name:Ion Storm\nManaCost:0\nTypes:Artifact\n"+
+		"A:AB$ Mana | Cost$ SubCounter<1/CHARGE/Creature> SubCounter<1/P1P1/Creature> | Produced$ C | SpellDescription$ Add {C}.\n"+
+		"Oracle:{T}: Add {C}.\n")
+	// The real corpus supplies the fillers and lands a deck needs. The two
+	// synthetics go in first, so the registry's first-wins name index keeps
+	// them over the corpus cards of the same names.
+	for _, c := range testutil.CorpusRegistry(t).AllCards() {
+		reg.Add(c)
+	}
+	sp, err := decks.LoadSpellings(manifests)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := certdeck.NewBuilder(reg, sp)
+	// The cost plan is the duplicated-name shape itself: both costs ride the
+	// one inert bearer, and the start would list it twice.
+	card, ok := reg.Lookup("Ion Storm")
+	if !ok || len(card.Faces) == 0 {
+		t.Fatal("synthetic Ion Storm not in the registry")
+	}
+	plan, why := planCost(reg, b, card.Faces[0], "Ion Storm",
+		"SubCounter<1/CHARGE/Creature> SubCounter<1/P1P1/Creature>", "")
+	if why != "" {
+		t.Fatalf("planCost refused %q, want the duplicated-bearer plan", why)
+	}
+	if got := countAmong(plan.field, "Wall of Stone"); got != 2 {
+		t.Fatalf("cost plan places Wall of Stone %d times %v, want twice", got, plan.field)
+	}
+	res, err := Generate(reg, b, "Ion Storm", "f0/a0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathRefused || res.Reason != "start:counters-by-name" {
+		t.Fatalf("Ion Storm f0/a0: path %q reason %q, want refused start:counters-by-name", res.Path, res.Reason)
+	}
+}
+
 // The refusal reasons of cards unrelated to the harness census are unchanged.
 func TestScenRefusalReasonsUnchanged(t *testing.T) {
 	reg, b := testBuilder(t)
 	for _, r := range []struct{ card, key, reason string }{
 		{"Thornvault Forager", "f0/a1", "steps-needed:cost:Forage"},
-		{"Banner of Kinship", "static#0.0", "as-enters"},
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
 		{"Unclaimed Territory", "f0/a1", "as-enters:land"},
+		// A static whose own setup refuses keeps its named refusal: the cast
+		// must not replace a key staticKeyStart cannot observe.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
 		{"Spiders-Man, Heroic Horde", "f0/t0", "history:websling"},
 		{"Rocket-Powered Goblin Glider", "f0/t0", "history:castfrom"},
 	} {
@@ -3211,5 +4200,401 @@ func TestHarnessCensus(t *testing.T) {
 	}
 	if total < 0 || rows == 0 || sum != total {
 		t.Errorf("census rows sum to %d keys over %d signatures, header says %d", sum, rows, total)
+	}
+}
+
+// TestStartFilterFixtures: the ShapesFilterFixtures shapes that the stock
+// inert-carrier pool could not answer, each once (xproof top-owed
+// no-generator:trigger:<mode>:filter, census 11-27):
+//
+//   - ChangesZone on the bearer an Aura enchants (Card.EnchantedBy) or an
+//     Equipment equips (Card.EquippedBy): the pinned gorge reads EquippedBy,
+//     EnchantedBy and AttachedBy as one predicate, so the bearer-death start
+//     is attachedByStart's (an Aura StartAttach + Murder, an Equipment +
+//     Magnetic Theft + an end-step self-sacrifice);
+//   - a land the filter takes dies (Land.!token+YouOwn): the removal is
+//     Stone Rain, since Murder cannot destroy a land;
+//   - an enters trigger whose class no vanilla card holds (Detective) takes
+//     the simplest playable permanent the filter takes;
+//   - an enters trigger whose class only Auras hold (Cartouche) casts the
+//     Aura at a vanilla bearer, naming it, so the Aura enters attached;
+//   - "whenever a creature you cast this turn enters" (wasCastByYou) is the
+//     carrier cast itself: the stripped filter picks the creature and the
+//     cast makes the property true of the entering object;
+//   - "a creature you control with a counter on it" (HasCounters) is the
+//     generic counter gate: the start places a +1/+1 counter on the creature
+//     the trigger reads, whether it dies (The Ozolith) or attacks (Yathan
+//     Tombguard's DamageDone dealer).
+func TestStartFilterFixtures(t *testing.T) {
+	reg, b := testBuilder(t)
+	type row struct {
+		card, key string
+		// focus: seat, card, kind the focus play must have ("" for any).
+		fSeat int
+		fKind string
+		// carrierProp, when set, must hold of the focus's first target (the
+		// removal target, the Aura's bearer) or of the focus cast card.
+		carrierProp func(*cards.Face) bool
+		carrierWhy  string
+		// needCounter: the start must place a counter on the named target or
+		// the focus attack card.
+		needCounter bool
+		// propOnFocus: check carrierProp of the focus card (the cast spell),
+		// not of a focus target (whose bearer sits in Targets beside it).
+		propOnFocus bool
+		// focusCard, when set, is the focus cast card the fixture must name
+		// (an Equipment cannot enter attached from a start, so the focus is
+		// the Magnetic Theft that attaches it).
+		focusCard string
+		// attach: the focus cast must name the key card first and the equipped
+		// creature second, the order Magnetic Theft takes its targets in; a
+		// start that decodes but never attaches would pass the shape checks
+		// above and fail to fire.
+		attach bool
+	}
+	rows := []row{
+		{card: "Necrotic Plague", key: "f0/t0", fSeat: 1, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "bearer"},
+		{card: "Skullclamp", key: "f0/t0", fSeat: 0, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "equipped bearer",
+			focusCard: "Magnetic Theft", attach: true},
+		{card: "Skola Grovedancer", key: "f0/t0", fSeat: 1, fKind: "cast",
+			carrierProp: (*cards.Face).IsLand, carrierWhy: "land"},
+		{card: "Case of the Pilfered Proof", key: "f0/t0", fSeat: 0, fKind: "cast",
+			carrierProp: func(f *cards.Face) bool { return f.HasTypeWord("Detective") }, carrierWhy: "Detective"},
+		{card: "Trial of Ambition", key: "f0/t1", fSeat: 0, fKind: "cast", propOnFocus: true,
+			carrierProp: func(f *cards.Face) bool { return f.HasTypeWord("Aura") && f.HasTypeWord("Cartouche") }, carrierWhy: "Cartouche Aura"},
+		{card: "The Sibsig Ceremony", key: "f0/t0", fSeat: 0, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "cast creature"},
+		{card: "The Ozolith", key: "f0/t0", fSeat: 1, fKind: "cast",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "countered creature", needCounter: true},
+		{card: "Yathan Tombguard", key: "f0/t0", fSeat: 0, fKind: "attack",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "countered attacker", needCounter: true},
+		{card: "Elite Scaleguard", key: "f0/t1", fSeat: 0, fKind: "attack",
+			carrierProp: (*cards.Face).IsCreature, carrierWhy: "counter-gated attacker", needCounter: true},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Seat == nil || *f.Focus.Seat != r.fSeat || f.Focus.Kind != r.fKind {
+				t.Fatalf("focus %+v, want seat %d kind %q", f.Focus, r.fSeat, r.fKind)
+			}
+			// The carrier is a focus target that is not the key card (a
+			// removal's victim, an Aura's bearer, Magnetic Theft's equipped
+			// creature, named second), else the focus cast card itself.
+			carrier := f.Focus.Card
+			if !r.propOnFocus {
+				for _, tname := range f.Focus.Targets {
+					if tname != r.card {
+						carrier = tname
+						break
+					}
+				}
+			}
+			if r.focusCard != "" && f.Focus.Card != r.focusCard {
+				t.Errorf("focus card %q, want %q", f.Focus.Card, r.focusCard)
+			}
+			if r.attach {
+				// Magnetic Theft targets the Equipment, then the creature it
+				// attaches to: naming both is the attach.
+				if len(f.Focus.Targets) != 2 || f.Focus.Targets[0] != r.card || f.Focus.Targets[1] != carrier {
+					t.Errorf("focus targets %v, want [%q %q] (equipment then equipped creature)", f.Focus.Targets, r.card, carrier)
+				}
+			}
+			c, ok := reg.Lookup(carrier)
+			if !ok || len(c.Faces) == 0 {
+				t.Fatalf("carrier %q is not in the corpus", carrier)
+			}
+			if !r.carrierProp(c.Faces[0]) {
+				t.Errorf("carrier %q does not meet the filter (%s)", carrier, r.carrierWhy)
+			}
+			if r.needCounter {
+				found := false
+				for _, s := range []*StartSeat{&f.Setup.P0, &f.Setup.P1} {
+					for _, ct := range s.Counters {
+						if ct.Card == carrier && ct.N >= 1 {
+							found = true
+						}
+					}
+				}
+				if !found {
+					t.Errorf("no counter placed on %q: p0 %+v p1 %+v", carrier, f.Setup.P0.Counters, f.Setup.P1.Counters)
+				}
+			}
+			if _, err := DecodeStartFile(mustMarshal(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestAttacksCounterGatePlacesCounter: an Attacks filter's counter gate
+// ("Creature.YouCtrl+counters_GE1_P1P1") is unknown to parseFilter, which used
+// to make attacksStart return a self-attack without the counter and skip
+// attackCarrier's placement arm. attacksStart must route the unknown-counter
+// case through attackCarrier: the attacker is the card and the counter gate is
+// placed in the setup (no recipe/placeNeeds is involved here).
+func TestAttacksCounterGatePlacesCounter(t *testing.T) {
+	reg, b := testBuilder(t)
+	c, ok := reg.Lookup("Elite Scaleguard")
+	if !ok || len(c.Faces) == 0 {
+		t.Fatal("Elite Scaleguard is not in the corpus")
+	}
+	face := c.Faces[0]
+	var trig *cards.Trigger
+	for i := range face.Triggers {
+		if face.Triggers[i].Mode == "Attacks" {
+			trig = &face.Triggers[i]
+			break
+		}
+	}
+	if trig == nil {
+		t.Fatal("Elite Scaleguard has no Attacks trigger")
+	}
+	var f StartFile
+	if why := attacksStart(reg, b, face, "Elite Scaleguard", trig, &f); why != "" {
+		t.Fatalf("attacksStart refused: %s", why)
+	}
+	if f.Focus == nil || f.Focus.Card != "Elite Scaleguard" || f.Focus.Kind != "attack" {
+		t.Fatalf("focus %+v, want Elite Scaleguard attacking", f.Focus)
+	}
+	for _, ct := range f.Setup.P0.Counters {
+		if ct.Card == "Elite Scaleguard" && ct.N >= 1 {
+			return
+		}
+	}
+	t.Errorf("no counter placed on the attacker: %+v", f.Setup.P0.Counters)
+}
+
+// TestStartFilterFixtureCounterGateRefused: an enters filter that requires a
+// counter on the entering object cannot be served by a cast fixture. A start's
+// setup counters have nothing to sit on while the card is still in hand, so
+// the carrier the fixture scan could pick would enter without the gate and the
+// trigger would never reach the stack (Ichorplate Golem: "whenever a creature
+// you control enters, if it has one or more oil counters on it"). The lane
+// must keep the ":filter" refusal rather than move the key refused→start.
+func TestStartFilterFixtureCounterGateRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Ichorplate Golem", "f0/t0"},
+	} {
+		res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", c.card, c.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != "no-generator:trigger:ChangesZone:filter" {
+			t.Errorf("%s %s: path %q reason %q, want refused no-generator:trigger:ChangesZone:filter",
+				c.card, c.key, res.Path, res.Reason)
+		}
+	}
+}
+
+// TestStartFilterFixtureAttachFilterGated: an attachment trigger whose filter
+// also gates the bearer on a property must make that property hold of the
+// bearer, or refuse. The bearer lane used to route any filter that merely
+// contained EnchantedBy/EquippedBy to attachedByStart, which chose the bearer
+// from the Aura's Enchant keyword (or the Equipment's end-step sacrifice pool)
+// alone:
+//
+//   - Endless Evil (Card.EnchantedBy+Horror) attached to Memnite, a bearer
+//     that is not a Horror, so "when enchanted Horror dies" could never fire.
+//     The start may now serve a Horror bearer or refuse: both are honest, and
+//     an inert Horror (Vorstclaw) is in the carrier pool;
+//   - Forgeborn Phoenix (Creature.EquippedBy,Creature.Self) is itself a
+//     creature Equipment, so Magnetic Theft's second target (a creature) can
+//     be answered with the Equipment itself and it attaches to itself. That
+//     start must stay refused;
+//   - Curator's Ward (Card.AttachedBy+Historic) can be served on a historic
+//     bearer, but its own static gives that bearer hexproof, so the opponent's
+//     Murder is never offered; the lane must refuse rather than attach and
+//     never fire.
+func TestStartFilterFixtureAttachFilterGated(t *testing.T) {
+	reg, b := testBuilder(t)
+	const none = "no-generator:trigger:ChangesZone:filter"
+	res, err := Generate(reg, b, "Endless Evil", "f0/t1", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatalf("Endless Evil f0/t1: %v", err)
+	}
+	switch {
+	case res.Path == PathRefused:
+		if res.Reason != none {
+			t.Errorf("Endless Evil f0/t1 refused with %q, want %q", res.Reason, none)
+		}
+	case res.Path == PathStart && res.Start != nil && res.Start.Focus != nil:
+		// The focus is Murder destroying the Aura's bearer: the first target
+		// that is not the Aura itself.
+		bearer := ""
+		for _, name := range res.Start.Focus.Targets {
+			if name != "Endless Evil" {
+				bearer = name
+				break
+			}
+		}
+		c, ok := reg.Lookup(bearer)
+		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Horror") {
+			t.Errorf("Endless Evil f0/t1 served on bearer %q, want a Horror or a refusal", bearer)
+		}
+	default:
+		t.Errorf("Endless Evil f0/t1: path %q reason %q, want a start on a Horror or %q", res.Path, res.Reason, none)
+	}
+	for _, c := range []struct{ card, key string }{
+		{"Forgeborn Phoenix", "f0/t0"},
+		{"Curator's Ward", "f0/t0"},
+	} {
+		res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", c.card, c.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != none {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, none)
+		}
+	}
+}
+
+// TestStartAttachBearerSurvivesAura: an Aura whose own static shrinks its
+// bearer (Infectious Rage +2/-1, Screams from Within -1/-1) must not be put
+// on a bearer that dies to state-based actions during setup; the start either
+// refuses :filter or names a bearer whose toughness stays above zero.
+func TestStartAttachBearerSurvivesAura(t *testing.T) {
+	reg, b := testBuilder(t)
+	const none = "no-generator:trigger:ChangesZone:filter"
+	for _, name := range []string{"Infectious Rage", "Screams from Within"} {
+		aura, ok := reg.Lookup(name)
+		if !ok || len(aura.Faces) == 0 {
+			t.Fatalf("%s is not in the registry", name)
+		}
+		res, err := Generate(reg, b, name, "f0/t0", Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s f0/t0: %v", name, err)
+		}
+		if res.Path == PathRefused {
+			if res.Reason != none {
+				t.Errorf("%s f0/t0 refused with %q, want %q", name, res.Reason, none)
+			}
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil || len(res.Start.Setup.P0.Attach) != 1 {
+			t.Fatalf("%s f0/t0: path %q reason %q, want a start with one attachment", name, res.Path, res.Reason)
+		}
+		bearer := res.Start.Setup.P0.Attach[0].To
+		c, ok := reg.Lookup(bearer)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s: bearer %q is not in the registry", name, bearer)
+		}
+		if !survivesAura(aura.Faces[0], c.Faces[0]) {
+			t.Errorf("%s f0/t0: bearer %q (toughness %d) dies to the Aura at setup", name, bearer, c.Faces[0].Toughness())
+		}
+	}
+	// The predicate itself: a 1/1 dies to a -1/-1 or +2/-1 Aura, a 2/2 keeps
+	// toughness 1 under both.
+	for _, name := range []string{"Infectious Rage", "Screams from Within"} {
+		aura, _ := reg.Lookup(name)
+		one, _ := reg.Lookup("Memnite")
+		two, _ := reg.Lookup("Grizzly Bears")
+		if survivesAura(aura.Faces[0], one.Faces[0]) {
+			t.Errorf("%s: a 1/1 bearer must not survive", name)
+		}
+		if !survivesAura(aura.Faces[0], two.Faces[0]) {
+			t.Errorf("%s: a 2/2 bearer must survive", name)
+		}
+	}
+}
+
+// TestCastableAlt: the gate castFixtureCarrierIn passes to the fixture
+// fallback. A counter gate (counters_*, HasCounters), a token requirement and
+// a top-of-library requirement are alternatives a cast cannot establish; a
+// non-token requirement and a plain card are.
+func TestCastableAlt(t *testing.T) {
+	for _, tc := range []struct {
+		filter string
+		cast   bool
+	}{
+		{"Creature.YouCtrl", true},
+		{"Creature.YouCtrl+!token", true},
+		{"Creature.YouCtrl+counters_GE1_OIL", false},
+		{"Creature.YouCtrl+HasCounters", false},
+		{"Creature.YouCtrl+token", false},
+		{"Creature.YouCtrl+TopLibrary", false},
+	} {
+		t.Run(tc.filter, func(t *testing.T) {
+			alts := parseFilterStatic(tc.filter)
+			if len(alts) != 1 {
+				t.Fatalf("filter %q parsed to %d alternatives", tc.filter, len(alts))
+			}
+			if !alts[0].known {
+				t.Fatalf("filter %q is not understood", tc.filter)
+			}
+			if got := castableAlt(alts[0]); got != tc.cast {
+				t.Errorf("castableAlt(%q) = %v, want %v (counters %v, token %d, topLibrary %v)",
+					tc.filter, got, tc.cast, alts[0].counters, alts[0].token, alts[0].topLibrary)
+			}
+		})
+	}
+}
+
+// TestStartCombatFilterFixtures: the two combat :filter shapes the fixture
+// lanes now answer. "When enchanted creature is dealt damage" (Cracked Skull,
+// Sporogenic Infection: ValidTarget Creature.EnchantedBy) is one scripted
+// combat with the Aura placed attached (StartAttach) to its bearer, which is
+// the blocker that is hurt (gorge reads EnchantedBy as AttachedBy). And a
+// filter the fixture cannot pair with (Gustcloak Harrier's own flying means
+// Grizzly Bears cannot block it) takes a carrier blocker that can, rather
+// than the plain ":filter" refusal.
+func TestStartCombatFilterFixtures(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key         string
+		active            int
+		attack, block     string // exact names, "" to skip
+		blockProp         func(*cards.Face) bool
+		wantAttachKeyCard bool
+	}{
+		{card: "Cracked Skull", key: "f0/t1", active: 1, blockProp: (*cards.Face).IsCreature, wantAttachKeyCard: true},
+		{card: "Sporogenic Infection", key: "f0/t1", active: 1, blockProp: (*cards.Face).IsCreature, wantAttachKeyCard: true},
+		{card: "Gustcloak Harrier", key: "f0/t0", active: 0, attack: "Gustcloak Harrier",
+			blockProp: func(f *cards.Face) bool { return f.IsCreature() && (f.HasKeyword("Flying") || f.HasKeyword("Reach")) }},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active || f.Focus == nil || f.Focus.Attack != r.attack && r.attack != "" {
+				t.Fatalf("active %d focus %+v, want active %d attack %q", f.Active, f.Focus, r.active, r.attack)
+			}
+			if f.Focus.Block == "" {
+				t.Fatalf("focus %+v, want a scripted blocker", f.Focus)
+			}
+			c, ok := reg.Lookup(f.Focus.Block)
+			if !ok || len(c.Faces) == 0 || !r.blockProp(c.Faces[0]) {
+				t.Fatalf("blocker %q does not meet the pairing", f.Focus.Block)
+			}
+			if r.wantAttachKeyCard {
+				found := false
+				for _, a := range f.Setup.P0.Attach {
+					if a.Card == r.card && a.To == f.Focus.Block {
+						found = true
+					}
+				}
+				if !found {
+					t.Errorf("p0 attach %+v, want %q attached to the blocker %q", f.Setup.P0.Attach, r.card, f.Focus.Block)
+				}
+			}
+			if _, err := DecodeStartFile(mustMarshal(t, f)); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
 	}
 }

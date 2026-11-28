@@ -9,6 +9,9 @@ package dside
 import (
 	"errors"
 	"fmt"
+	"math"
+	"reflect"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -20,6 +23,7 @@ import (
 	"github.com/adams-shaun/gorge/dirac/oracle"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/rules"
 )
 
 // How a game went on dirac.
@@ -63,6 +67,11 @@ type Row struct {
 	Field      string   `json:"field,omitempty"`
 	Diff       []string `json:"diff,omitempty"`
 	Implicates []string `json:"implicates,omitempty"`
+	// Seat and Kind are the seat and the kind of the decision at which a start's
+	// lockstep first differed (StartLockstep; FromTurn and ToTurn are its turn).
+	// Diff holds gorge's value beside dirac's.
+	Seat *int   `json:"seat,omitempty"`
+	Kind string `json:"kind,omitempty"`
 }
 
 // Locate sets the row's turns from the tape of the game the lockstep's answers
@@ -237,7 +246,49 @@ func (t *Tables) Lockstep(gameID, code string, pair [2]decks.Deck, seed uint64, 
 	if err != nil {
 		return refused(row, err)
 	}
-	return t.lockstep(row, set, pair, seed, maxTurns, nil)
+	return t.lockstep(row, set, pair, seed, maxTurns, nil, nil)
+}
+
+// StartLockstep plays one start file's game on code's table in lockstep with gorge:
+// the scripted position (start, the rules.StartSpec of the file) rather than the
+// ordinary genesis, answered decision for decision from tape, the game gorge itself
+// played from that position (lower.Span's tape: the item's decisions, the focus
+// seat's key action and any scripted bait, prelude or combat included).
+//
+// gorge's side opens in the position through rules.Config.Start (Matchup.Config
+// copies it) and dirac's kernel mirrors it from the same deck indices (dirac/oracle
+// kernelStart). At each decision the tape's answer for that decision (by its Seq) is
+// translated to the canonical action it stands for (GorgeSide.CanonOfIntent,
+// CanonOfOption, CanonDone) and applied to both engines, which are compared as in
+// Lockstep. Before each answer the replayed gorge game's state digest is compared with
+// the digest the tape took at that decision: a replay that has left the tape's game
+// (an answer gorge's side makes for itself that the tape's bots made differently, a
+// decision the tape does not hold, an answer with no canonical form: an announced
+// manual payment, a split arrange) is not the item's game, so the row is
+// not_applicable naming the decision and why, never an agreement or a divergence
+// of a game the item did not play. A tape replayed to its end with every decision
+// equal is clean.
+//
+// On a divergence the row carries the turn, seat and kind of the decision where the
+// engines first differed, and Diff holds gorge's value beside dirac's.
+//
+// start must be a position dirac can mirror; the caller refuses the ones with no
+// kernel equivalent (player counters, minted tokens, commander designations), and a
+// counter kind the kernel does not keep is refused here, naming it, as any other pair
+// the table does not hold is.
+func (t *Tables) StartLockstep(gameID, code string, pair [2]decks.Deck, seed uint64, start *rules.StartSpec, tape *game.Tape) Row {
+	row := Row{Game: gameID, Table: "std-" + strings.ToLower(code)}
+	if tape == nil || len(tape.Entries) == 0 {
+		r, _ := refused(row, errors.New("tape not replayable: the tape holds no decision"))
+		return r
+	}
+	set, err := t.Table(code)
+	if err != nil {
+		r, _ := refused(row, err)
+		return r
+	}
+	r, _ := t.lockstep(row, set, pair, seed, math.MaxInt32, nil, &startRun{spec: start, replay: newTapeReplay(tape)})
+	return r
 }
 
 // CommanderLockstep plays a 1v1 Commander pair on dirac's Commander table
@@ -250,7 +301,7 @@ func (t *Tables) CommanderLockstep(gameID string, pair [2]decks.Deck, seed uint6
 	if err != nil {
 		return refused(row, err)
 	}
-	return t.lockstep(row, set, pair, seed, maxTurns, &[2]int{pair[0].CommanderIndex(), pair[1].CommanderIndex()})
+	return t.lockstep(row, set, pair, seed, maxTurns, &[2]int{pair[0].CommanderIndex(), pair[1].CommanderIndex()}, nil)
 }
 
 // refused is row as a game no table holds, for err.
@@ -259,9 +310,16 @@ func refused(row Row, err error) (Row, []decision.Intent) {
 	return row, nil
 }
 
+// startRun is what makes a lockstep game a start's: the scripted position and the
+// tape of decisions played from it.
+type startRun struct {
+	spec   *rules.StartSpec
+	replay *tapeReplay
+}
+
 // lockstep plays pair on set, a Commander game with commanders (indices into each
-// deck) when non-nil.
-func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int) (Row, []decision.Intent) {
+// deck) when non-nil, from the scripted position of sr when non-nil (StartLockstep).
+func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uint64, maxTurns int, commanders *[2]int, sr *startRun) (Row, []decision.Intent) {
 	refuse := func(err error) (Row, []decision.Intent) { return refused(row, err) }
 	tbl, _, _, err := set.Matchup(entries(pair[0]), entries(pair[1]))
 	if err != nil {
@@ -288,8 +346,38 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		m.Commander = true
 		m.Commanders = *commanders
 	}
+	var start *rules.StartSpec
+	if sr != nil {
+		start = sr.spec
+	}
+	if start != nil {
+		// A position gorge itself would not open in is a refusal, not a
+		// divergence: NewGorgeSide turns a rejected start into a setup
+		// divergence, which would read as dirac disagreeing with gorge.
+		if err := start.Validate(dk[:]); err != nil {
+			return refuse(err)
+		}
+		// And a position dirac's kernel loader would panic on is refused here:
+		// dirac's startObjs states the contract ("A bad start panics: the loader
+		// refuses these before a game is built"), so this loader refuses them by
+		// name. startLoaderErr mirrors the checks it can state from outside the
+		// kernel; openSide's recover is the backstop for any the kernel still
+		// panics on (operator 11-24: dirac never fails the run).
+		if err := startLoaderErr(start, pair); err != nil {
+			return refuse(err)
+		}
+		m.Start = start
+	}
 	cfg := oracle.Config{GorgeAutopaySurface: true}
-	k, err := oracle.SetSide(set, tbl, cfg)(m, seed)
+	mk := oracle.SetSide(set, tbl, cfg)
+	var k oracle.Side
+	if sr != nil {
+		// only a scripted start reaches the kernel's start loader, which panics
+		// on a bad start (openSide); the dealt lane keeps its own path
+		k, err = openSide(mk, m, seed)
+	} else {
+		k, err = mk(m, seed)
+	}
 	if err != nil {
 		return refuse(err)
 	}
@@ -297,25 +385,341 @@ func (t *Tables) lockstep(row Row, set cardset.Set, pair [2]decks.Deck, seed uin
 		res     oracle.Result
 		intents []decision.Intent
 	}
+	var pol oracle.Policy = oracle.ExplorePolicy(seed)
+	var rp *tapeReplay
+	if sr != nil && sr.replay != nil {
+		rp = sr.replay
+		pol = rp
+	}
 	done := make(chan outcome, 1)
 	go func() {
 		defer oracle.CloseSide(k)
 		var o outcome
 		rc := oracle.RunConfig{Config: cfg, MaxTurns: int32(maxTurns), Finish: func(g *oracle.GorgeSide) {
 			o.intents = append(o.intents, g.E.L.Intents...)
+			if rp != nil {
+				rp.atEnd(g)
+			}
 		}}
-		o.res = oracle.Lockstep(m, seed, k, oracle.ExplorePolicy(seed), rc)
+		o.res = oracle.Lockstep(m, seed, k, pol, rc)
 		done <- o
 	}()
 	select {
 	case o := <-done:
+		if rp != nil {
+			o.res = rp.settle(o.res)
+		}
 		row.classify(o.res, m)
 		row.Intents = len(o.intents)
+		if rp != nil {
+			rp.finish(&row, o.res)
+		}
 		return row, o.intents
 	case <-time.After(GameTimeout):
 		row.Status = StatusHang
 		return row, nil
 	}
+}
+
+// tapeReplay is the policy of a start's lockstep game: it answers each decision with
+// the answer the start's own tape holds for it, as the canonical action that answer
+// stands for. It is the whole of what a start's dirac row compares, so it refuses
+// to guess: any decision it cannot answer from the tape ends the replay (stop), and
+// the row then says the tape was not replayable, rather than reporting the answers of
+// some other game as the item's.
+type tapeReplay struct {
+	bySeq  map[uint64]*game.Entry
+	maxSeq uint64
+	curSeq uint64 // the gorge decision being answered
+	picks  int    // picks made toward curSeq's answer so far
+	seen   bool
+	// stop is why the replay left the tape ("" while on it) and ended whether it ran
+	// out of tape at a decision past its last (a whole game replayed).
+	stop  string
+	ended bool
+	// last is the decision most recently answered, pose the decision pending when the
+	// lockstep stopped (a divergence found as a decision was posed).
+	last, pose *decisionAt
+}
+
+// decisionAt is a decision of the replayed game: its turn, seat and kind.
+type decisionAt struct {
+	turn int32
+	seat int
+	kind string
+}
+
+func newTapeReplay(t *game.Tape) *tapeReplay {
+	r := &tapeReplay{bySeq: make(map[uint64]*game.Entry, len(t.Entries))}
+	for i := range t.Entries {
+		e := &t.Entries[i]
+		if _, dup := r.bySeq[e.Seq]; !dup {
+			r.bySeq[e.Seq] = e
+		}
+		r.maxSeq = max(r.maxSeq, e.Seq)
+	}
+	return r
+}
+
+// tapeStop is the panic a replay ends the lockstep with: LockstepLed turns a policy's
+// panic into a divergence of What "policy", which settle then takes back.
+type tapeStop struct{}
+
+func (r *tapeReplay) leave(c *oracle.PickCtx, why string) {
+	r.stop = fmt.Sprintf("decision %d (turn %d, %s): %s", c.Seq, turnOf(c), decisionKindOf(c), why)
+	panic(tapeStop{})
+}
+
+func turnOf(c *oracle.PickCtx) int {
+	if c.G != nil {
+		return c.G.Turn()
+	}
+	return 0
+}
+
+func decisionKindOf(c *oracle.PickCtx) string {
+	if c.G != nil {
+		if d := c.G.Pending(); d != nil {
+			return string(d.Kind)
+		}
+	}
+	return "unknown"
+}
+
+func (r *tapeReplay) Pick(c *oracle.PickCtx) oracle.Canon {
+	g := c.G
+	var d *decision.Decision
+	if g != nil {
+		d = g.Pending()
+	}
+	if d == nil {
+		r.leave(c, "gorge has no pending decision to answer")
+	}
+	en, ok := r.bySeq[d.Seq]
+	switch {
+	case !ok && d.Seq > r.maxSeq:
+		// the tape is spent: the game it recorded ended (or stalled) here
+		r.ended = true
+		panic(tapeStop{})
+	case !ok:
+		r.leave(c, fmt.Sprintf("the tape holds no answer for gorge's decision %d", d.Seq))
+	}
+	if !r.seen || d.Seq != r.curSeq {
+		r.seen, r.curSeq, r.picks = true, d.Seq, 0
+		switch {
+		case en.Reanswered:
+			r.leave(c, "the engine reanswered the tape's intent")
+		case en.Seat != int(d.Player) || en.Kind != string(d.Kind):
+			r.leave(c, fmt.Sprintf("the tape's decision is %s for seat %d, gorge poses %s for seat %d", en.Kind, en.Seat, d.Kind, d.Player))
+		case len(en.Rest) > 0 || en.Announce != "":
+			r.leave(c, "the tape's answer (a manual payment announcement or a split arrangement) has no canonical form")
+		case !reflect.DeepEqual(en.Digest, game.DigestOfGame(g.E)):
+			r.leave(c, "the replayed game's state is not the tape's at this decision")
+		}
+	}
+	var a oracle.Canon
+	switch {
+	case en.Payment != "":
+		a, ok = g.CanonOfPayment(en.Payment)
+	case g.Multi():
+		if r.picks < len(en.Choices) {
+			a, ok = g.CanonOfOption(en.Choices[r.picks])
+		} else {
+			a, ok = g.CanonDone()
+		}
+		r.picks++
+	case len(en.Choices) == 1:
+		a, ok = g.CanonOfOption(en.Choices[0])
+	default:
+		ok = false
+	}
+	if ok && !slices.Contains(c.D.Options, a) {
+		ok = false
+	}
+	if !ok {
+		what := ""
+		if len(en.Picks) > 0 {
+			what = " (" + en.Picks[0].Kind + ": " + en.Picks[0].Label + ")"
+		}
+		r.leave(c, "the tape's answer"+what+" is not among the canonical options gorge offers")
+	}
+	r.last = &decisionAt{turn: int32(g.Turn()), seat: int(d.Player), kind: string(d.Kind)}
+	return a
+}
+
+// atEnd is the Finish hook: the decision gorge's side was posing when the lockstep
+// stopped, which is the differing decision of a divergence found as it was posed.
+func (r *tapeReplay) atEnd(g *oracle.GorgeSide) {
+	if d := g.Pending(); d != nil {
+		r.pose = &decisionAt{turn: int32(g.Turn()), seat: int(d.Player), kind: string(d.Kind)}
+	}
+}
+
+// settle reads the policy's own stops back out of the result: running out of tape is
+// the game's end, not a disagreement.
+func (r *tapeReplay) settle(res oracle.Result) oracle.Result {
+	if r.ended && res.Div != nil && res.Div.Field == "panic" {
+		res.Div = nil
+	}
+	return res
+}
+
+// finish completes row from the finished replay: a replay that left the tape is not
+// applicable, and a divergence is located at the decision it was found at.
+func (r *tapeReplay) finish(row *Row, res oracle.Result) {
+	if r.stop != "" {
+		*row = Row{Game: row.Game, Table: row.Table, Status: StatusNA, Decisions: row.Decisions,
+			Reason: "tape not replayable: " + r.stop}
+		return
+	}
+	if res.Div == nil {
+		return
+	}
+	at := r.last
+	if res.Div.At == res.Decisions && r.pose != nil {
+		at = r.pose // found as the decision was posed, before it was answered
+	}
+	if at != nil {
+		seat := at.seat
+		row.Seat, row.Kind = &seat, at.kind
+		row.FromTurn, row.ToTurn = at.turn, at.turn
+	}
+	if len(row.Diff) == 0 {
+		// an options or kind divergence: gorge's offer beside dirac's
+		clip := func(l []string) []string { return l[:min(len(l), diffClip)] }
+		if len(res.Div.RefOptions) > 0 || len(res.Div.KerOptions) > 0 {
+			row.Diff = []string{"gorge: " + strings.Join(clip(res.Div.RefOptions), " | "), "dirac: " + strings.Join(clip(res.Div.KerOptions), " | ")}
+		} else if res.Div.Detail != "" {
+			row.Diff = []string{res.Div.Detail}
+		}
+	}
+}
+
+// openSide opens dirac's side of one lockstep game. The kernel's start loader panics
+// rather than erroring on a bad start (dirac's startObjs: "A bad start panics: the
+// loader refuses these before a game is built") and startLoaderErr answers every such
+// start its words state outside the kernel; this recover is the backstop for whatever
+// else opening a scripted position could panic on. The panic becomes a refusal: dirac
+// never takes the run's verdict down with it (operator 11-24). Only the -start lane
+// opens through it: a side opened with no start cannot reach those panics, and the
+// dealt lane keeps its own path.
+func openSide(f oracle.SideFactory, m *oracle.Matchup, seed uint64) (k oracle.Side, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("dirac kernel refused the start: %v", r)
+		}
+	}()
+	return f(m, seed)
+}
+
+// startLoaderErr refuses, naming it, any scripted start dirac's kernel loader (dirac's
+// startObjs, reached through kernelStart) would panic on: an index no deck holds, a
+// card two zones name, a tap / back face / counter naming a card that is not on the
+// battlefield, a negative counter pile, a seat count the two-seat game does not have
+// and an attach host that is out of range or not on a battlefield. It mirrors the
+// numbering kernelStart hands the kernel: each seat's battlefield entries naming an
+// attach are removed from the zone (the attach claims that card instead). gorge's own
+// StartSpec.Validate is no substitute - it skips an out-of-range index rather than
+// refusing it - and the kernel panics instead of erroring, so this loader is the one
+// place left to refuse. Checks startObjs itself defers to the table (a battlefield
+// non-permanent, an unattached Aura's taps) stay with the kernel: gorge's Validate
+// answers the first and openSide's recover turns the rest into refusals.
+func startLoaderErr(start *rules.StartSpec, pair [2]decks.Deck) error {
+	if len(start.Seats) > 2 {
+		return fmt.Errorf("start: %d seats named, the game has 2", len(start.Seats))
+	}
+	for p, seat := range start.Seats {
+		deck := len(pair[p].Cards)
+		attached := make(map[int]bool, len(seat.Attach))
+		for _, a := range seat.Attach {
+			attached[a.Card] = true
+		}
+		claimed := make([]bool, deck)
+		claim := func(zone string, i int) error {
+			if i < 0 || i >= deck {
+				return fmt.Errorf("start: seat %d %s names card index %d, the deck holds %d", p, zone, i, deck)
+			}
+			if claimed[i] {
+				return fmt.Errorf("start: seat %d names card index %d in two zones", p, i)
+			}
+			claimed[i] = true
+			return nil
+		}
+		for _, z := range []struct {
+			name string
+			zone []int
+		}{
+			{"hand", seat.Hand}, {"battlefield", seat.Battlefield}, {"graveyard", seat.Graveyard},
+			{"exile", seat.Exile}, {"library", seat.Library},
+		} {
+			for _, i := range z.zone {
+				if z.name == "battlefield" && attached[i] {
+					continue // kernelStart removes the attach's card from the zone; the attach claims it
+				}
+				if err := claim(z.name, i); err != nil {
+					return err
+				}
+			}
+		}
+		onBF := make([]bool, deck)
+		for _, i := range seat.Battlefield {
+			if i >= 0 && i < deck {
+				onBF[i] = true
+			}
+		}
+		for _, a := range seat.Attach {
+			if err := claim("attach", a.Card); err != nil {
+				return err
+			}
+			onBF[a.Card] = true
+		}
+		for _, z := range []struct {
+			name string
+			zone []int
+		}{{"tapped", seat.Tapped}, {"back face", seat.BackFace}} {
+			for _, i := range z.zone {
+				if i < 0 || i >= deck || !onBF[i] {
+					return fmt.Errorf("start: seat %d %s card index %d is not on the battlefield", p, z.name, i)
+				}
+			}
+		}
+		for _, c := range seat.Counters {
+			if c.Card < 0 || c.Card >= deck || !onBF[c.Card] {
+				return fmt.Errorf("start: seat %d counters card index %d is not on the battlefield", p, c.Card)
+			}
+			if c.N < 0 {
+				return fmt.Errorf("start: seat %d counters %d of %s on card index %d", p, c.N, c.Kind, c.Card)
+			}
+		}
+		for _, a := range seat.Attach {
+			if a.ToSeat < 0 || a.ToSeat >= len(start.Seats) || a.To < 0 || a.To >= len(pair[a.ToSeat].Cards) {
+				return fmt.Errorf("start: seat %d attach host seat %d card %d is out of range", p, a.ToSeat, a.To)
+			}
+			host := &start.Seats[a.ToSeat]
+			if !startHasIndex(host.Battlefield, a.To) && !startHasAttachCard(host.Attach, a.To) {
+				return fmt.Errorf("start: seat %d attach host card index %d of seat %d is not on the battlefield", p, a.To, a.ToSeat)
+			}
+		}
+	}
+	return nil
+}
+
+func startHasIndex(l []int, i int) bool {
+	for _, x := range l {
+		if x == i {
+			return true
+		}
+	}
+	return false
+}
+
+func startHasAttachCard(l []rules.StartAttach, i int) bool {
+	for _, a := range l {
+		if a.Card == i {
+			return true
+		}
+	}
+	return false
 }
 
 func (r *Row) classify(res oracle.Result, m *oracle.Matchup) {

@@ -17,9 +17,12 @@ a deterministic gzip tar holding
                      by their sqlite_master shape, not by a hand-built list.
   MANIFEST.json      the asset name and per object {kind, name, rows, sha256}.
 
-Columns are typed from the declared SQLite types (INTEGER int64, REAL float64,
-TEXT string, BLOB binary), so an empty table still writes an empty parquet with
-its real schema and nothing is inferred from values. Rows are written in
+Columns are typed from the declared SQLite types by their documented SQLite
+affinity (integer int64, real float64, text string, blob binary), so any
+synonym spelling a declaration carries -- `INT`, the type SQLite reports for
+`CAST(x AS INTEGER)`, `BIGINT`, `VARCHAR(20)`, ... -- maps, and an empty table
+still writes an empty parquet with its real schema and nothing is inferred
+from values. Rows are written in
 primary-key order (rowid for a table without declared keys, every column for a
 view). Deterministic: sorted objects and members, zeroed tar metadata, no wall
 clock; with a pinned pyarrow, rerunning on the same file gives the same bytes.
@@ -38,7 +41,17 @@ import sys
 import tarfile
 from urllib.parse import quote
 
-PARQUET_TYPES = {"TEXT": "string", "INTEGER": "int64", "REAL": "float64", "BLOB": "binary"}
+# The arrow type names, keyed by SQLite type AFFINITY rather than by one
+# literal declared-type spelling: SQLite has many spellings per affinity
+# (`CAST(x AS INTEGER)` declares its result `INT`, not `INTEGER`, and there are
+# TINYINT/BIGINT/INT2/INT8/UNSIGNED BIG INT and friends), so matching the
+# affinity cannot miss the next synonym. The affinity test below applies
+# SQLite's documented classification (https://sqlite.org/datatype3.html 3.1)
+# in its documented order. The contract is unchanged: types come from the
+# column's declaration, never inferred from values; a column with no declared
+# type, or one whose declaration maps to none of these four affinities (e.g.
+# NUMERIC), fails loudly.
+PARQUET_TYPES = {"integer": "int64", "text": "string", "real": "float64", "blob": "binary"}
 PARQUET_ASSET = "carddb-parquet.tar.gz"
 BATCH = 65536
 
@@ -48,19 +61,36 @@ class ExportError(Exception):
 
 
 def _base_type(declared):
-    base = (declared or "").split()
+    """The declared type, normalised for the affinity test; a column with no
+    declared type (a bare view expression) fails: parquet needs one."""
+    base = (declared or "").strip().upper()
     if not base:
         raise ExportError("column has no declared SQLite type; parquet needs one")
-    return base[0].upper()
+    return base
+
+
+def _affinity(declared):
+    """The SQLite type affinity of a declared type, by the documented rules in
+    their documented order; None when it maps to no parquet-backed affinity."""
+    base = _base_type(declared)
+    if "INT" in base:
+        return "integer"
+    if any(t in base for t in ("CHAR", "CLOB", "TEXT")):
+        return "text"
+    if "BLOB" in base:
+        return "blob"
+    if any(t in base for t in ("REAL", "FLOA", "DOUB")):
+        return "real"
+    return None
 
 
 def parquet_type(declared):
     """The arrow type name for a declared SQLite type; unknown types fail loudly."""
-    base = _base_type(declared)
-    if base not in PARQUET_TYPES:
-        raise ExportError("declared SQLite type %r is not a parquet type (want %s)"
-                          % (declared, " ".join(sorted(PARQUET_TYPES))))
-    return PARQUET_TYPES[base]
+    affinity = _affinity(declared)
+    if affinity is None:
+        raise ExportError("declared SQLite type %r has no parquet type "
+                          "(want an INTEGER/TEXT/REAL/BLOB affinity declaration)" % declared)
+    return PARQUET_TYPES[affinity]
 
 
 def _q(ident):

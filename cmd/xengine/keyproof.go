@@ -141,6 +141,22 @@ func (p *playKeys) credited(it oraclegen.Item, id string) ([]classify.Use, bool,
 	return classify.Sorted(credit(p.reg, it, tp, lo, hi, true)), true, nil
 }
 
+// creditRefusal is why credited refused an item: no lower.jsonl row at all, a
+// status other than lower_ok (lower_gap, play_error, refused ...), or a
+// lower_ok row with no tape path. Bucketed under the "credited-refused" class
+// (pickOwedReason votes by the part before the first ':'), so triage can split
+// the bucket by cause.
+func (p *playKeys) creditRefusal(id string) string {
+	l, ok := p.lower[id]
+	if !ok {
+		return "credited-refused:no-lower-row"
+	}
+	if l.Status != lower.StatusOK {
+		return "credited-refused:status:" + cmp.Or(l.Status, "none")
+	}
+	return "credited-refused:no-tape"
+}
+
 // stepKeys is the signature input of finding f and every key its diverging
 // step exercised: the entries after the previous step's last entry up to this
 // step's own last entry (lowerRow.StepEntry), with the pre-first-decision mana
@@ -199,7 +215,7 @@ func (p *playKeys) describe(u classify.Use) adjudicate.KeyDesc {
 		k.Family = "none"
 		return k
 	}
-	for _, ck := range cov.Keys(c) {
+	for _, ck := range cov.Universe(c) {
 		if ck.ID == u.Key {
 			k.Desc = ck.Desc
 		}
@@ -214,6 +230,12 @@ func (p *playKeys) describe(u classify.Use) adjudicate.KeyDesc {
 		k.Family = "static"
 	case strings.HasPrefix(u.Key, "combat#"):
 		k.Family = "combat"
+	case strings.HasPrefix(u.Key, "mode#"):
+		k.Family = "mode"
+	case strings.HasPrefix(u.Key, "repl#"):
+		k.Family = "repl"
+	case strings.HasPrefix(u.Key, "kw#"):
+		k.Family = "keyword"
 	case strings.Contains(u.Key, "/t"):
 		k.Family = "trigger"
 	default:
@@ -346,7 +368,7 @@ func newKpTable(reg *cards.Registry, a keyproofArgs) *kpTable {
 func (t *kpTable) desc(u classify.Use) string {
 	desc := "-"
 	if c, ok := t.reg.Lookup(u.Card); ok {
-		for _, ck := range cov.Keys(c) {
+		for _, ck := range cov.Universe(c) {
 			if ck.ID == u.Key {
 				desc = ck.Desc
 			}
@@ -424,9 +446,16 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		return err
 	}
 
+	// The union, not the intersection: an item only one follower's diff
+	// answered credits nothing, but its keys must still get a row (an owed
+	// one with the follower-missing reason) instead of vanishing, so
+	// xproof's refused:start-not-exercised triage can name why.
 	var ids []string
 	for id := range in.XFind {
-		if _, ok := in.FFind[id]; ok {
+		ids = append(ids, id)
+	}
+	for id := range in.FFind {
+		if _, ok := in.XFind[id]; !ok {
 			ids = append(ids, id)
 		}
 	}
@@ -453,7 +482,36 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 		if !ok {
 			continue
 		}
-		xc, fc := in.XFind[id].Class, in.FFind[id].Class
+		xf, xok := in.XFind[id]
+		ff, fok := in.FFind[id]
+		if !xok || !fok {
+			// Only one follower's diff answered this item: nothing was
+			// compared three ways, so it credits nothing -- but its keys
+			// get an owed row with the follower-missing reason (the absent
+			// follower, then the present one's item class) instead of no
+			// row at all. What it exercised comes from its tape when it has
+			// one, else from the key its id declares.
+			absent, present := "forge", xf
+			if !xok {
+				absent, present = "xmage", ff
+			}
+			uses, cok, err := p.credited(item, id)
+			if err != nil {
+				return err
+			}
+			if !cok {
+				u, dok := declaredKey(reg, item)
+				if !dok {
+					continue
+				}
+				uses = []classify.Use{u}
+			}
+			for _, u := range uses {
+				keyOf(u).owed[id] = owedReasonFollowerMissing(absent, present)
+			}
+			continue
+		}
+		xc, fc := xf.Class, ff.Class
 		row, isDiv := diverging[id]
 		if !isDiv && fc == classify.ClassDiverge {
 			// Forge differs and adjudicate did not take the item (XMage could
@@ -503,6 +561,12 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 			return err
 		}
 		if !ok {
+			// credited refused the item: no tape to read keys off. Its
+			// declared key (the one its id says it was built for) gets an
+			// owed row naming the refusal instead of no row at all.
+			if u, dok := declaredKey(reg, item); dok {
+				keyOf(u).owed[id] = p.creditRefusal(id)
+			}
 			continue
 		}
 		refs, xa, fa := "", false, false
@@ -706,6 +770,14 @@ func keyproof(reg *cards.Registry, a keyproofArgs) error {
 	}
 	fmt.Printf("; %d signature(s) to hand off, %d witness(es), %d XMage-only finding(s)\n", len(hand), len(witnesses), followerOnly)
 	return nil
+}
+
+// owedReasonFollowerMissing is the reason of an owed item only one follower's
+// diff answered: the follower whose verdicts.jsonl lacked the item, then the
+// item class the present follower gave it ("none" for a finding that carries
+// no class). Bucketed under the "follower-missing" class.
+func owedReasonFollowerMissing(absent string, present classify.Finding) string {
+	return "follower-missing:" + absent + ":" + cmp.Or(present.Class, "none")
 }
 
 // owedReason is the reason of an owed item no engine agreed on: "rng", else

@@ -2,9 +2,9 @@
 
 API:  carddb.put(table, rows, writer=...)   stage rows in this machine's clone
       carddb.publish()                      commit, rebase, push what is staged
-      carddb.norm_name(name), carddb.resolve(name)
+      carddb.norm_name(name), carddb.resolve(name), carddb.ruling_id(oracle_id, published, text)
 """
-from .norm import Resolver, norm_name, pseudo_id
+from .norm import Resolver, norm_name, pseudo_id, ruling_id
 from .schema import PRIVATE, PUBLIC, load_schema
 from .shard import ValidationError
 from .store import Store, StoreError, carddb_home

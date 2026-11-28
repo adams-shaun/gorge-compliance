@@ -10,7 +10,7 @@
 //	xengine diagnosed -split [-file oracle/xengine/diagnosed.tsv]
 //	xengine calib -play DIR -diff DIR2 -engine xmage|forge
 //	xengine xprep -play DIR -out xitems.jsonl [-manifests DIR]
-//	xengine replay-witness -witness FILE [-witness FILE ...] [-cards .cards] -measured YYYY-MM-DD [-gorge-sha SHA] -out DIR
+//	xengine replay-witness -witness FILE [-witness FILE ...] [-witness-dir DIR] [-cards .cards] -measured YYYY-MM-DD [-gorge-sha SHA] -out DIR
 //	xengine adjudicate -play DIR -xmage DIFF_X -forge DIFF_F -out DIR3 [-ledger DIR] [-forge-ref REF12] [-phase DIFF_P [-phase-rows ROWS]]
 //	xengine keyproof -play DIR -xmage DIFF_X -forge DIFF_F -adjudicate DIR3 [-phase DIFF_P] [-classes oracle/xengine/diagnosed-classes.tsv] -measured YYYY-MM-DD -out DIR4
 //	xengine sweep-plan -root DIR -sets 'FDN BLB' -chunks N [-stale] [-force]
@@ -31,7 +31,10 @@
 // the pool, its "# supp" identity and -pool-filter used); -decks DIR plays two different fixed deck
 // files of DIR per game, main deck only (DIR/decks.json records each deck, its
 // sha256 and whether it is playable or why not); -dirac plays each game a dirac table holds in lockstep first and replays
-// gorge's answers as the game, with DIR/dirac.jsonl saying how each went. diff compares a follower's rows with
+// gorge's answers as the game, with DIR/dirac.jsonl saying how each went; with -start it instead replays each start file's tape
+// (gorge's decisions from the file's scripted position) through dirac decision for decision, one dirac.jsonl row per file
+// (agree, diverge at the first differing decision, or not_applicable naming why), and never changes a start's verdict or the exit code.
+// diff compares a follower's rows with
 // gorge's stored results, never replaying gorge, and writes DIR2/verdicts.jsonl,
 // DIR2/compared.tsv and DIR2/finds/<class>/<id>/ (a repro directory per
 // non-agree item). calib reports, from a play dir and its diff dir, how many

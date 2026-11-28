@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -125,4 +126,39 @@ func tokenCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string)
 		}
 	}
 	return "", 0
+}
+
+// pickTargetToken is the token script a "target token" filter (Replicator's
+// "target token you control", Dogged Hunter's "target creature token") is met
+// by: the corpus's inert Servo when the filter takes it, else the first sorted
+// script the filter takes, that XMage's setup token table can also replay
+// (lower.SetupTokenScript), and whose token survives setup. Only a token the
+// filter takes is minted; a token filter no script meets is no placement, not
+// a card standing in for a token.
+func pickTargetToken(reg *cards.Registry, a filterAlt, tapped bool) (string, bool) {
+	matches := func(k string) bool {
+		if !lower.SetupTokenScript(k) {
+			return false
+		}
+		c := reg.Tokens[k]
+		if c == nil || len(c.Faces) == 0 {
+			return false
+		}
+		f := c.Faces[0]
+		return !deadOnArrival(f) && a.matchesState(f, true, tapped)
+	}
+	if matches(genericToken) {
+		return genericToken, true
+	}
+	keys := make([]string, 0, len(reg.Tokens))
+	for k := range reg.Tokens {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		if matches(k) {
+			return k, true
+		}
+	}
+	return "", false
 }

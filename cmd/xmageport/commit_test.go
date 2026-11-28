@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -150,5 +151,47 @@ func TestWriteCommitRefusalKeepsOldScenarioWithoutANewOne(t *testing.T) {
 	}
 	if names := portNames(t, hand); len(names) != 1 {
 		t.Fatalf("hand-ported file changed: %v", names)
+	}
+}
+
+// checkCommit is writeCommit's dry run: it must name the committed file a run
+// would change (here, a hand-edited generated scenario) and leave it
+// byte-identical, so a generated scenario cannot drift from the generator
+// output unnoticed.
+func TestCheckCommitReportsDriftWithoutWriting(t *testing.T) {
+	dir := t.TempDir()
+	sc := portScenario{Name: "test-card", XMage: "CobraTrapTest#testCard"}
+	f := portFile{Source: generatedSource, Scenarios: []portScenario{sc}}
+	path := filepath.Join(dir, "single", "CobraTrapTest.json")
+	if err := writePortFile(path, f); err != nil {
+		t.Fatal(err)
+	}
+	mk := func() []*result {
+		return []*result{{Family: "single", Class: "CobraTrapTest", Method: "testCard",
+			Rel: "cards/single/zen/CobraTrapTest.java", Status: "pass", Scenario: &sc}}
+	}
+	drift, err := checkCommit(dir, mk())
+	if err != nil || len(drift) != 0 {
+		t.Fatalf("checkCommit on the generator's own output = %v, %v; want no drift", drift, err)
+	}
+	edited := f
+	edited.Scenarios = []portScenario{{Name: "test-card", XMage: "CobraTrapTest#testCard", Why: "hand added"}}
+	if err := writePortFile(path, edited); err != nil {
+		t.Fatal(err)
+	}
+	before, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	drift, err = checkCommit(dir, mk())
+	if err != nil || len(drift) != 1 || drift[0] != path {
+		t.Fatalf("checkCommit on a hand-edited file = %v, %v; want [%s]", drift, err, path)
+	}
+	after, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(before, after) {
+		t.Fatal("checkCommit rewrote the committed file")
 	}
 }

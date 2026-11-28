@@ -1,9 +1,9 @@
 """The public boundary (a port of internal/carddb/boundary.go, every file kind).
 
-Nothing private, nothing with a banned field name, no Forge-script-shaped
-line may reach a public tree. Only a real schema declaration (it names private
-columns, so it is exempt from the field checks) and the fixed-shape
-schema/writers.tsv config may live under schema/.
+Nothing private, nothing with a banned field name, no undeclared column, no
+Forge-script-shaped line may reach a public tree. Only a real schema declaration
+(it names private columns, so it is exempt from the field checks) and the
+fixed-shape schema/writers.tsv config may live under schema/.
 """
 import re
 
@@ -97,6 +97,10 @@ def _column_violations(schema, table, line, add):
             continue
         if t is None:
             continue
-        for c in t.columns:
-            if c.name == name and c.visibility == PRIVATE:
-                add("column %r of table %r is private" % (name, table))
+        col = next((c for c in t.columns if c.name == name), None)
+        if col is not None and col.visibility == PRIVATE:
+            add("column %r of table %r is private" % (name, table))
+        elif col is None:
+            # A public shard may not grow a column (such as `comment` on
+            # ruling_refs) to carry the private data of its table.
+            add("column %r is not declared public in table %r" % (name, table))

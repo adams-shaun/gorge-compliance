@@ -269,12 +269,12 @@ func TestForgeRolledDie(t *testing.T) {
 // 3526a90f719 = 1dea7b45ce0 plus the unpinned order-to-Command ask kept (UNOBSERVABLE_ORDER_ZONES gains Command,
 // OrderCardsTest gains unpinnedCommandOrderKeepsForgeOrder); the order gate is still not on the die-roll path, so the forcing
 // is unchanged, and ForcedDieRollTest was re-run green on the pin (run-unit-tests.sh).
-// NOTE (merge): pin 5ceed32d687 did not carry 3526a90f719's Command-order change (no fork commit held both yet); the die-roll path is unaffected.
 // 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 (siblings on 4385467a9eb); neither touches die-roll forcing, and
 // ForcedDieRollTest was re-run green on the merged pin (run-unit-tests.sh).
-// edf8473c4d6 = the merge of 5ceed32d687 and 3526a90f719 (siblings on 1dea7b45ce0, textually clean), so the pin carries both
-// unpinned order asks (Exile and Command); neither side touches die-roll forcing, and ForcedDieRollTest was re-run green on
-// the merged pin (7/7, run-unit-tests.sh).
+// edf8473c4d6 = join23 on the fork: 5ceed32d687 merged with 3526a90f719, so the pin carries the Command-order gate, the ninjutsu
+// identity fix and the unpinned exile order together; none of the three touches the die-roll path, and ForcedDieRollTest was
+// re-run green on the merged pin (run-unit-tests.sh with FORGE_ORACLE_DIR=forgeoracle-1120; the default env's forge-game jar
+// (10-29) predates the record GameEventRollDie and does not compile any 11-2x pin, this one included).
 const forgeOracleDieRollRef = "edf8473c4d64d76ccd35280b666aaa2257b5eff5"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver

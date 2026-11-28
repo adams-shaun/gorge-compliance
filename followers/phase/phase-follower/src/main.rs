@@ -169,9 +169,30 @@ mod tests {
     }
 
     #[test]
+    fn preflight_refuses_banding() {
+        // A printed banding creature, a static grant of banding, a banding aura and the separate
+        // BandsWithOther keyword all reach the same missing rule (CR 702.22c: the active player
+        // chooses a band), not just the printed `Banding` keyword.
+        let out = run("Timber Wolves\nBanding Sliver\nCooperation\nNalathni Dragon\nOld Fogey\n");
+        assert_eq!(out.lines().count(), 5, "{out}");
+        for line in out.lines() {
+            let (name, reason) = line.split_once('\t').expect("name\treason");
+            assert!(reason.to_ascii_lowercase().contains("banding"), "{name}: {reason}");
+        }
+    }
+
+    #[test]
     fn preflight_refuses_confirmed_misparse() {
         let out = run("Cat Collector\n");
         assert!(out.starts_with("Cat Collector\tconfirmed misparse: "), "{out}");
+    }
+
+    #[test]
+    fn preflight_refuses_bear_force_pilot_swallowed_crew_token() {
+        // phase's parser swallows the token's "and crew 2" (parse_warnings, SwallowedClause), so
+        // the Vehicle token has no Crew keyword. The card must be refused here, not sent to a run
+        // that dies on "Vehicle has no Crew keyword".
+        assert_eq!(run("The Bear Force Pilot\n"), "The Bear Force Pilot\tparse warning: SwallowedClause\n");
     }
 
     #[test]
