@@ -1142,6 +1142,74 @@ func TestTargetWithoutALogLineAnsweredByDefault(t *testing.T) {
 	}
 }
 
+// TestTargetFromTheCastAnswer is the farm cmdr4 repro (pod 14201, offset
+// 277): seat 0 cast Abrade's "destroy target artifact" mode at seat 1's Arcane
+// Signet, and Forge's recorder carried the target on the cast's priority
+// answer ("targets":[{"card":138}]) with no target ask. The follower answered
+// gorge's target decision by default -- the first offered artifact, seat 0's
+// own Sol Ring -- so gorge put Sol Ring in seat 0's graveyard and the next
+// snapshot diverged at p0.graveyard. The target now comes from the cast.
+func TestTargetFromTheCastAnswer(t *testing.T) {
+	cast := parseAsk(t, `{"t":"ask","n":208,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"cast","card":97,"tapped":[20,57],"targets":[{"card":138}],"target_slots":[1]}}`)
+	next := parseAsk(t, `{"t":"ask","n":209,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"pass"}}`)
+	const solRing, signet = state.ObjID(57), state.ObjID(138)
+	newF := func() *follower {
+		return &follower{log: &Log{}, toG: map[int]state.ObjID{57: solRing, 138: signet}}
+	}
+	d := &decision.Decision{Seq: 11, Player: 0, Kind: decision.KTarget, Min: 1, Max: 1,
+		Options: []decision.Option{{Index: 0, Obj: solRing}, {Index: 1, Obj: signet}}}
+
+	f := newF()
+	f.rememberCastTargets(cast)
+	in, ok := f.answer(d, Entry{Line: 269, T: TAsk, Ask: next})
+	if !ok || f.res.Hard != nil {
+		t.Fatalf("hard divergence %+v", f.res.Hard)
+	}
+	if !reflect.DeepEqual(in.Choices, []int{1}) {
+		t.Errorf("choices %v, want [1]: Forge's Arcane Signet, not the first offered artifact", in.Choices)
+	}
+	if f.pos != 0 || f.res.CastTargets != 1 || f.res.Targets != 0 || len(f.castTargets) != 0 {
+		t.Errorf("pos %d cast_targets %d targets %d left %v, want one cast target spent and no line consumed", f.pos, f.res.CastTargets, f.res.Targets, f.castTargets)
+	}
+
+	// Another seat's target decision does not take seat 0's cast targets.
+	f = newF()
+	f.rememberCastTargets(cast)
+	d1 := *d
+	d1.Player = 1
+	if in, _ = f.answer(&d1, Entry{Line: 269, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{0}) || f.res.Targets != 1 {
+		t.Errorf("seat 1: choices %v targets %d, want the default", in.Choices, f.res.Targets)
+	}
+
+	// Several target slots asked one decision each take the refs slot by
+	// slot: Explosion's any target (a creature) then its target player.
+	expl := parseAsk(t, `{"t":"ask","n":1043,"seat":0,"turn":25,"step":"main1","kind":"priority","answer":{"action":"cast","card":39,"targets":[{"card":138},{"player":0}],"target_slots":[1,1]}}`)
+	f = newF()
+	f.rememberCastTargets(expl)
+	anyT := &decision.Decision{Seq: 12, Player: 0, Kind: decision.KTarget, Min: 1, Max: 1,
+		Options: []decision.Option{{Index: 0, Player: 0}, {Index: 1, Player: 1}, {Index: 2, Obj: signet}}}
+	if in, _ = f.answer(anyT, Entry{Line: 1258, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{2}) {
+		t.Errorf("any target: choices %v, want [2]", in.Choices)
+	}
+	pl := &decision.Decision{Seq: 13, Player: 0, Kind: decision.KTarget, Min: 1, Max: 1,
+		Options: []decision.Option{{Index: 0, Player: 1}, {Index: 1, Player: 0}}}
+	if in, _ = f.answer(pl, Entry{Line: 1258, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{1}) || f.res.CastTargets != 2 {
+		t.Errorf("target player: choices %v cast_targets %d, want [1] and 2", in.Choices, f.res.CastTargets)
+	}
+
+	// Consuming the next log line spends what is left: a later trigger's
+	// target is answered by default.
+	f = newF()
+	f.rememberCastTargets(cast)
+	ta := parseAsk(t, `{"t":"ask","n":210,"seat":0,"turn":6,"step":"main2","kind":"target","options":[{"card":57}],"answer":{"targets":[{"card":57}]}}`)
+	if in, ok = f.answer(d, Entry{Line: 270, T: TAsk, Ask: ta}); !ok || f.pos != 1 || len(f.castTargets) != 0 || !reflect.DeepEqual(in.Choices, []int{0}) {
+		t.Errorf("logged target: ok %v pos %d left %v intent %+v, want the line followed and the cast targets cleared", ok, f.pos, f.castTargets, in)
+	}
+	if in, _ = f.answer(d, Entry{Line: 271, T: TAsk, Ask: next}); !reflect.DeepEqual(in.Choices, []int{0}) || f.res.Targets != 1 {
+		t.Errorf("after a consumed line: choices %v targets %d, want the default", in.Choices, f.res.Targets)
+	}
+}
+
 // mayShuffleFixture builds a follower on the golden log (seat 1 never mulligans, so it has one shuffle) with one extra
 // seat-1 shuffle line appended, carrying the forge ids of seat 1's library
 // as it stands after the opening deal, minus the last drop cards. It stops
