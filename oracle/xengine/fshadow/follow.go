@@ -1219,7 +1219,7 @@ func abilityOption(d *decision.Decision, a *Ask, obj state.ObjID) int {
 	case len(cands) > 1:
 		if ids := forgeAbilityIDs(a); len(ids) == len(cands) {
 			for r, id := range ids {
-				if id == a.Answer.Ability {
+				if id == a.Answer.abilityID() {
 					return cands[r]
 				}
 			}
@@ -1232,9 +1232,9 @@ func abilityOption(d *decision.Decision, a *Ask, obj state.ObjID) int {
 // option ("cast", "play_land"), the option's Mode (an Adventure's
 // "adventure_alt", a modal back face's "modal_land", "kicked", ...) and its
 // AltCostIndex. gorge lists every way as an option of the same object, and
-// the follower takes one only when Forge's line names it (forgeWays, cast): taking
-// the first offered would cast Stomp for Bonecrusher Giant, or play a
-// Pathway's other face.
+// the follower takes one only when Forge's line names it (forgeWays,
+// abilityWays, cast): taking the first offered would cast Stomp for
+// Bonecrusher Giant, or play a Pathway's other face.
 type way struct {
 	kind, mode string
 	alt        int
@@ -1295,11 +1295,11 @@ func forgeMark(m string) string {
 // answer a (its candidates), in option order, and every way of obj of kind
 // as "mode/alt" keys for a divergence. Forge's line names a face or an
 // alternative neither in its label ("Cast <card>", "Play <card>") nor in its
-// mode, so the mark only narrows the ways; what else Forge's line holds (the
-// sources it tapped) must pick one out. When no way carries the mark, gorge
-// has no way to do what Forge did. opts must hold every way gorge has
-// (unconstrained for a cast; a land play costs no mana, so the pending
-// options for a land).
+// mode, so the mark only narrows the ways; what else Forge's line holds (a
+// cast's ability index, abilityWays; the sources it tapped) must pick one out.
+// When no way carries the mark, gorge has no way to do what Forge did. opts
+// must hold every way gorge has (unconstrained for a cast; a land play costs no
+// mana, so the pending options for a land).
 func forgeWays(opts []decision.Option, kind string, obj state.ObjID, a *Ask) ([]way, string, *Divergence) {
 	var named []way
 	var all []string
@@ -1320,6 +1320,50 @@ func forgeWays(opts []decision.Option, kind string, obj state.ObjID, a *Ask) ([]
 	return named, gorge, nil
 }
 
+// frontWay is gorge's ordinary cast of a card: its front face, no mode, no
+// alternative cost.
+var frontWay = way{kind: "cast"}
+
+// abilityWays narrows ws, the ways Forge's cast answer a may name, by the
+// abilities of a's line. The recorder indexes a cast among the host card's own
+// spell abilities: 0 is the front face's ordinary cast, and every other cast
+// of the card has another index or none (an Adventure, a face-down or evoke
+// cast, a split card's right half, a variant Forge copied). So when exactly
+// one of the casts a lists with the answer's mark is index 0:
+//   - an answer of index 0 names frontWay;
+//   - any other answer is not frontWay, which is ruled out when a lists as
+//     many such casts as ws holds ways. With lists of unlike length gorge's
+//     other ways do not pair with Forge's: a variant Forge lists may be a pick
+//     gorge asks during frontWay's cast.
+//
+// ws is returned as it is when it has no frontWay or Forge lists no index 0 (a
+// commander's cast, a may-play's), and a narrowing never empties it.
+func abilityWays(ws []way, a *Ask) []way {
+	front := slices.Index(ws, frontWay)
+	if front < 0 {
+		return ws
+	}
+	listed, first := 0, 0
+	for _, o := range a.Options {
+		if o.Action != "cast" || o.Card != a.Answer.Card || o.Mode != a.Answer.Mode {
+			continue
+		}
+		listed++
+		if o.abilityID() == 0 {
+			first++
+		}
+	}
+	switch {
+	case first != 1:
+		return ws
+	case a.Answer.abilityID() == 0:
+		return []way{frontWay}
+	case listed != len(ws) || len(ws) < 2:
+		return ws
+	}
+	return slices.Delete(slices.Clone(ws), front, front+1)
+}
+
 // unnamedWay is the stop when n of gorge's ways match all of Forge's line: the
 // follower cannot tell which one Forge's seat took (a harness divergence: the
 // recorder's line, not gorge, is short).
@@ -1330,14 +1374,15 @@ func unnamedWay(a *Ask, gorge string, n int) *Divergence {
 
 // cast pays a cast with the payment plan whose activations tap exactly the
 // sources Forge tapped, among the plans of the ways Forge's line may name
-// (forgeWays: its mark narrows them), passing over a plan that picks a
-// permanent to sacrifice (sacrificesAnother). It takes the cast when exactly
-// one candidate way has such a plan, and stops (unnamedWay) when two or more
-// do: Bonecrusher Giant's creature and Stomp plans both paid from Sol Ring and
-// a Mountain. A cast Forge paid with nothing is likewise the option of the one
-// candidate way gorge offers as a cast option. A card with only one way to be
-// cast (soleCast) and no such plan is paid by hand from Forge's sources, if
-// that makes gorge offer it.
+// (forgeWays: its mark narrows them; abilityWays: so does its ability index),
+// passing over a plan that picks a permanent to sacrifice (sacrificesAnother).
+// It takes the cast when exactly one candidate way has such a plan, and stops
+// (unnamedWay) when two or more do: on a line without an ability index to tell
+// them apart, Bonecrusher Giant's creature and Stomp plans both paid from Sol
+// Ring and a Mountain. A cast Forge paid with nothing is likewise the option of
+// the one candidate way gorge offers as a cast option. A card with only one way
+// to be cast (soleCast) and no such plan is paid by hand from Forge's sources,
+// if that makes gorge offer it.
 func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	tapped, dv := f.boundTapped(a)
@@ -1350,6 +1395,7 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 	if dv != nil {
 		return in, dv
 	}
+	ws = abilityWays(ws, a)
 	offered := false
 	var matched []way
 	var pay *decision.PaymentSelection
