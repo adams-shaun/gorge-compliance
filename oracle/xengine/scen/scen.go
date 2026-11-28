@@ -57,7 +57,8 @@ var historyTokens = []string{"kicked", "castfrom", "websling", "wascast", "thist
 var castHistory = map[string]bool{"wascast": true, "kicked": true}
 
 // Keys is every key Generate accepts for c: cov.Keys plus the level-B
-// static and combat requirement keys.
+// static and combat requirement keys, then the replacement keys (repl#F.I) of
+// cov.Universe.
 func Keys(c *cards.Card) []string {
 	var out []string
 	for _, k := range cov.Keys(c) {
@@ -68,11 +69,16 @@ func Keys(c *cards.Card) []string {
 			out = append(out, r.Key)
 		}
 	}
+	for _, k := range cov.Universe(c) {
+		if cov.Family(k.ID) == "repl" {
+			out = append(out, k.ID)
+		}
+	}
 	return out
 }
 
 // Family names the recipe family of key: cast, land, activate, trigger,
-// static or combat.
+// static, combat or repl.
 func Family(key string) string {
 	switch {
 	case key == "cast" || key == "land":
@@ -81,6 +87,8 @@ func Family(key string) string {
 		return "static"
 	case strings.HasPrefix(key, "combat#"):
 		return "combat"
+	case strings.HasPrefix(key, "repl#"):
+		return "repl"
 	}
 	if m := keyRE.FindStringSubmatch(key); m != nil {
 		if m[2] == "a" {
@@ -105,6 +113,15 @@ func Generate(reg *cards.Registry, b *certdeck.Builder, card, key string, opt Op
 	c, ok := reg.Lookup(card)
 	if !ok || len(c.Faces) == 0 {
 		return Result{}, fmt.Errorf("scen: %q is not in the corpus", card)
+	}
+	// A keyword or spell-mode key of the universe is an owed row with no
+	// generator yet: a named refusal, so the proof loop counts it.
+	if fam := cov.Family(key); fam == "keyword" || fam == "mode" {
+		for _, k := range cov.Universe(c) {
+			if k.ID == key {
+				return refuse("no-generator:" + fam)
+			}
+		}
 	}
 	known := false
 	for _, k := range Keys(c) {

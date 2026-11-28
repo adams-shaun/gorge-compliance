@@ -1,0 +1,116 @@
+{
+ "card": "Grounded",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "ce2359ce5bfd",
+ "scenarios": [
+  {
+   "name": "later-grounded-overrides-flight",
+   "cr": [
+    "613.9"
+   ],
+   "why": "Flight and Grounded do not depend on each other, so timestamp order decides. Grounded is attached later and takes away the flying.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Flight"
+     ],
+     "hand": [
+      "Grounded"
+     ],
+     "library_top": [
+      "Plains"
+     ],
+     "attached": [
+      {
+       "card": "Flight",
+       "to": "p0:Grizzly Bears"
+      }
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grounded",
+     "mana": "CG",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "no_keywords": [
+      "Flying"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "later-flight-overrides-grounded",
+   "cr": [
+    "613.9"
+   ],
+   "why": "Here Grounded is the older effect. The later Flight grants flying and wins the timestamp comparison.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Grounded"
+     ],
+     "hand": [
+      "Flight"
+     ],
+     "library_top": [
+      "Plains"
+     ],
+     "attached": [
+      {
+       "card": "Grounded",
+       "to": "p0:Grizzly Bears"
+      }
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Flight",
+     "mana": "U",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "keywords": [
+      "Flying"
+     ]
+    }
+   ]
+  }
+ ]
+}

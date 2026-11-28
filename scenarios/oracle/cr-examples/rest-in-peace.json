@@ -1,0 +1,70 @@
+{
+ "card": "Rest in Peace",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "4781b5f4ebec",
+ "scenarios": [
+  {
+   "name": "the-controller-chooses-which-graveyard-replacement-applies",
+   "cr": [
+    "616.1f"
+   ],
+   "why": "Two replacement effects watch the same graveyard event. Choosing the Colossus's shuffle first means the exile effect no longer has that card to replace.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Rest in Peace",
+      "Blightsteel Colossus"
+     ],
+     "hand": [
+      "Altar's Reap"
+     ],
+     "library_top": [
+      "Plains",
+      "Island"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Altar's Reap",
+     "mana": "CB",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "p0:Blightsteel Colossus"
+       ]
+      },
+      {
+       "kind": "replacement",
+       "pick": [
+        "Apply Blightsteel Colossus's replacement"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Blightsteel Colossus",
+     "zone": "library"
+    },
+    {
+     "card": "p0:Rest in Peace",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

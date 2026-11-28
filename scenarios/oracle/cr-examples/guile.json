@@ -1,0 +1,76 @@
+{
+ "card": "Guile",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "8a45aabfec4e",
+ "scenarios": [
+  {
+   "name": "guile-exiled-in-response-library-still-shuffled",
+   "cr": [
+    "701.24c"
+   ],
+   "why": "Guile is destroyed and its shuffle-into-library trigger is answered by Scavenging Ooze exiling it from the graveyard. The trigger still makes its owner shuffle, which Psychogenic Probe shows by dealing that player 2 damage.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Scavenging Ooze",
+      "Psychogenic Probe"
+     ],
+     "hand": [
+      "Murder"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Guile"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Murder",
+     "mana": "CBB",
+     "targets": [
+      "p1:Guile"
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Scavenging Ooze",
+     "mana": "G",
+     "targets": [
+      "p1:Guile"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Guile",
+     "zone": "exile"
+    },
+    {
+     "life": {
+      "p1": 18
+     }
+    }
+   ]
+  }
+ ]
+}

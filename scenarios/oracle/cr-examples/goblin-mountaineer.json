@@ -1,0 +1,126 @@
+{
+ "card": "Goblin Mountaineer",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "36648521c2b8",
+ "scenarios": [
+  {
+   "name": "mountainwalk-unblockable-against-a-mountain-controller",
+   "cr": [
+    "802.2a"
+   ],
+   "why": "The Mountaineer attacks the player who controls a Mountain. Mountainwalk looks only at that defending player, so their Bear cannot block.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Goblin Mountaineer",
+      "Runeclaw Bear"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "battlefield": [
+      "Mountain",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Goblin Mountaineer",
+      "p0:Runeclaw Bear"
+     ],
+     "defender": "p2"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    }
+   ],
+   "expect": [
+    {
+     "can_block": {
+      "blocker": "p2:Grizzly Bears",
+      "attacker": "p0:Goblin Mountaineer"
+     },
+     "want": false
+    }
+   ]
+  },
+  {
+   "name": "mountainwalk-blockable-against-a-defender-without-mountains",
+   "cr": [
+    "802.2a"
+   ],
+   "why": "The same Mountaineer attacks the opponent without a Mountain. That defending player can block it even though a different player controls a Mountain.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Goblin Mountaineer"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "battlefield": [
+      "Mountain",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Goblin Mountaineer"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    }
+   ],
+   "expect": [
+    {
+     "can_block": {
+      "blocker": "p1:Grizzly Bears",
+      "attacker": "p0:Goblin Mountaineer"
+     },
+     "want": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,161 @@
+{
+ "card": "Sneak Attack",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e37e2368a5d3",
+ "scenarios": [
+  {
+   "name": "delayed-sacrifice-waits-for-the-next-end-step",
+   "cr": [
+    "603.7a"
+   ],
+   "why": "The Sneak Attack ability is activated during the end step, after that step began. Its delayed sacrifice therefore waits for the next end step instead of firing immediately.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Sneak Attack"
+     ],
+     "hand": [
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p0"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Sneak Attack",
+     "ability": "put a creature card",
+     "mana": "R"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Grizzly Bears",
+       "zone": "battlefield"
+      }
+     ],
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1",
+     "expect": [
+      {
+       "card": "p0:Grizzly Bears",
+       "zone": "battlefield"
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p1"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  },
+  {
+   "name": "delayed-sacrifice-still-hits-a-noncreature",
+   "cr": [
+    "603.7c"
+   ],
+   "why": "The delayed ability refers to the permanent, not to the creature type. Imprisoned in the Moon turns it into a land, and the sacrifice still happens at the end step.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Sneak Attack"
+     ],
+     "hand": [
+      "Grizzly Bears",
+      "Imprisoned in the Moon"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Sneak Attack",
+     "ability": "put a creature card",
+     "mana": "R"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Grizzly Bears"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Imprisoned in the Moon",
+     "mana": "CCU",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p0"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

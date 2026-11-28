@@ -1,0 +1,185 @@
+{
+ "card": "Astral Slide",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "9eea04c24e1d",
+ "scenarios": [
+  {
+   "name": "a-departed-controller-does-not-put-the-return-trigger-on-the-stack",
+   "cr": [
+    "800.4d"
+   ],
+   "why": "Bianca's Slide exiles Alex's Specter and promises to return it at the next end step. Bianca leaves before that step, so the delayed ability is never put on the stack and the Specter stays exiled.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Hypnotic Specter"
+     ],
+     "library_top": [
+      "Plains"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Astral Slide"
+     ],
+     "hand": [
+      "Tranquil Thicket"
+     ],
+     "life": 2,
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "hand": [
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Tranquil Thicket",
+     "ability": "Cycling",
+     "mana": "G"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 2,
+     "card": "p2:Shock",
+     "mana": "R",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": []
+    },
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p0"
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p2"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hypnotic Specter",
+     "zone": "exile"
+    }
+   ]
+  },
+  {
+   "name": "with-the-controller-still-in-the-game-the-specter-returns",
+   "cr": [
+    "800.4d"
+   ],
+   "why": "A control for the departed-controller case: nobody leaves, so the Slide's delayed ability fires at the end step and the Specter returns to the battlefield.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Hypnotic Specter"
+     ],
+     "library_top": [
+      "Plains"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Astral Slide"
+     ],
+     "hand": [
+      "Tranquil Thicket"
+     ],
+     "life": 2,
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "hand": [
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Tranquil Thicket",
+     "ability": "Cycling",
+     "mana": "G"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "end",
+     "active": "p0"
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hypnotic Specter",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

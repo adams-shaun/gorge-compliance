@@ -1,0 +1,80 @@
+{
+ "card": "Verity Circle",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "9eda92ff785c",
+ "scenarios": [
+  {
+   "name": "entering-tapped-is-not-becoming-tapped",
+   "cr": [
+    "603.2e"
+   ],
+   "why": "The Circle sees the Elf change from untapped to tapped when its mana ability is used. The second Elf enters already tapped, so the state change never happens and the Circle does not trigger again.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Verity Circle",
+      "Authority of the Consuls"
+     ],
+     "library_top": [
+      "Plains",
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Llanowar Elves"
+     ],
+     "hand": [
+      "Llanowar Elves"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "activate",
+     "seat": 1,
+     "card": "p1:Llanowar Elves",
+     "ability": "for mana"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Llanowar Elves#2",
+     "mana": "G"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "hand_size": {
+      "p0": 1
+     }
+    },
+    {
+     "card": "p1:Llanowar Elves#2",
+     "zone": "battlefield",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

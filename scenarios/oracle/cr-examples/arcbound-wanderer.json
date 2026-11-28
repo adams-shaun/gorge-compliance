@@ -1,0 +1,85 @@
+{
+ "card": "Arcbound Wanderer",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "2f76bf004ea9",
+ "scenarios": [
+  {
+   "name": "sunburst-sets-modular-counters-and-the-death-trigger-moves-them",
+   "cr": [
+    "702.44c"
+   ],
+   "why": "Arcbound Wanderer cast with white, blue and black mana enters with three +1/+1 counters. When it dies, modular puts those three counters on Ornithopter.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Ornithopter"
+     ],
+     "hand": [
+      "Arcbound Wanderer",
+      "Lightning Bolt"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Arcbound Wanderer",
+     "mana": "WUBCCC"
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Arcbound Wanderer",
+       "counters": {
+        "P1P1": 3
+       },
+       "pt": "3/3"
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Lightning Bolt",
+     "mana": "R",
+     "targets": [
+      "p0:Arcbound Wanderer"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      },
+      {
+       "kind": "target",
+       "pick": [
+        "p0:Ornithopter"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Arcbound Wanderer",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Ornithopter",
+     "counters": {
+      "P1P1": 3
+     },
+     "pt": "3/5"
+    }
+   ]
+  }
+ ]
+}

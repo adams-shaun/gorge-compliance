@@ -1,0 +1,64 @@
+{
+ "card": "Loaming Shaman",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "041ae30824f3",
+ "scenarios": [
+  {
+   "name": "no-cards-targeted-still-shuffles",
+   "cr": [
+    "701.24d"
+   ],
+   "why": "Loaming Shaman's trigger targets the opponent and none of the cards in their graveyard. Shuffling an empty set still shuffles, so Psychogenic Probe deals that player 2 damage and the graveyard card stays put.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Psychogenic Probe"
+     ],
+     "hand": [
+      "Loaming Shaman"
+     ]
+    },
+    "p1": {
+     "graveyard": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Loaming Shaman",
+     "mana": "CCG"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "target",
+       "pick": [
+        "p1"
+       ]
+      },
+      {
+       "kind": "target",
+       "pick": []
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 18
+     }
+    }
+   ]
+  }
+ ]
+}

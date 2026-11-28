@@ -1,0 +1,111 @@
+{
+ "card": "Jötun Owl Keeper",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "5fcf061dc638",
+ "scenarios": [
+  {
+   "name": "third-age-counter-paid-with-mixed-colours",
+   "cr": [
+    "702.24a"
+   ],
+   "why": "Jötun Owl Keeper reaches its upkeep with two age counters and gets a third. Each counter's {W} or {U} is chosen separately, so two Plains and an Island pay {W}{W}{U} and the Owl Keeper stays.",
+   "setup_answers": [
+    {
+     "kind": "choose",
+     "pick": [
+      "Pay W"
+     ]
+    },
+    {
+     "kind": "choose",
+     "pick": [
+      "Pay U"
+     ]
+    },
+    {
+     "kind": "choose",
+     "pick": [
+      "per age"
+     ]
+    }
+   ],
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Jötun Owl Keeper",
+      "Plains",
+      "Plains",
+      "Island"
+     ],
+     "counters": {
+      "Jötun Owl Keeper": {
+       "AGE": 1
+      }
+     }
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0",
+     "expect": [
+      {
+       "card": "p0:Jötun Owl Keeper",
+       "counters": {
+        "age": 2
+       }
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Pay W"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "Pay W"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "Pay U"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "per age"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Jötun Owl Keeper",
+     "zone": "battlefield",
+     "counters": {
+      "age": 3
+     }
+    },
+    {
+     "card": "p0:Plains#2",
+     "tapped": true
+    },
+    {
+     "card": "p0:Island",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

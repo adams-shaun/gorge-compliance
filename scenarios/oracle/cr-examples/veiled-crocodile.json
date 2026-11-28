@@ -1,0 +1,60 @@
+{
+ "card": "Veiled Crocodile",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "80e1edd277b1",
+ "scenarios": [
+  {
+   "name": "empty-hand-state-trigger-fires-once",
+   "cr": [
+    "603.8"
+   ],
+   "why": "Playing the last card empties the hand and the state trigger turns the enchantment into a creature. It cannot trigger again while it is on the stack, and once it resolves the Crocodile is no longer an enchantment.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Veiled Crocodile"
+     ],
+     "hand": [
+      "Grizzly Bears",
+      "Forest"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Grizzly Bears",
+     "mana": "GC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "play",
+     "seat": 0,
+     "card": "p0:Forest"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Veiled Crocodile",
+     "zone": "battlefield",
+     "types": [
+      "Creature"
+     ],
+     "pt": "4/4"
+    }
+   ]
+  }
+ ]
+}
