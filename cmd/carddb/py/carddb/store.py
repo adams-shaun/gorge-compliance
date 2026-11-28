@@ -413,6 +413,73 @@ class Store:
                     out.append((rel, k))
         return out
 
+    def _only_absent(self, table, cols, cells, refresh):
+        """The surviving rows of an --if-absent put: each row whose key no stored row
+        holds passes through; a row whose key exists is dropped, except that the
+        stored row takes the input's value for every column named in refresh (an
+        update of those cells, not a replace)."""
+        names = [c.name for c in cols]
+        ri = []
+        for col in refresh:
+            if col not in names:
+                raise StoreError("put: refresh column %r is not a column of %s" % (col, table.name))
+            ri.append(names.index(col))
+        kidx = shard.key_indexes(cols)
+        shards = {}
+
+        def stored(rel):
+            if rel not in shards:
+                shards[rel] = self._read_shard(table, cols, kidx, rel)[1]
+            return shards[rel]
+
+        out = []
+        for r in cells:
+            d = stored(self._shard_rel_scoped(table, cols, r))
+            old = d.get(shard.row_key(r, kidx))
+            if old is None:
+                out.append(r)
+            elif ri:
+                merged = list(old)
+                for i in ri:
+                    merged[i] = r[i]
+                if merged != old:
+                    out.append(merged)
+        return out
+
+    def _keyproof_multiplayer(self, table, cols, cells):
+        """The one keyproof multiplayer rule, for every writer but the seed: the flag
+        belongs to the key, and only the seed -- which reads the card's script -- may
+        set it. Every non-seed row's `multiplayer` is rewritten before planning: a row
+        replacing a stored row keeps the stored value; a new row takes the value of the
+        first (by key order) stored row with the same (oracle_id, key), else false."""
+        names = [c.name for c in cols]
+        if "multiplayer" not in names or "leg" not in names:
+            return cells  # a pre-leg keyproof shape: split_batch has set false, leave it
+        mi = names.index("multiplayer")
+        kidx = shard.key_indexes(cols)
+        shards = {}
+        out = []
+        for r in cells:
+            rel = self._shard_rel_scoped(table, cols, r)
+            if rel not in shards:
+                shards[rel] = self._read_shard(table, cols, kidx, rel)[1]
+            d = shards[rel]
+            k = shard.row_key(r, kidx)
+            old = d.get(k)
+            if old is not None:
+                v = old[mi]
+            else:
+                v = "false"
+                for ok in sorted(d):
+                    if ok[0] == k[0] and ok[1] == k[1]:
+                        v = d[ok][mi]
+                        break
+            if r[mi] != v:
+                r = list(r)
+                r[mi] = v
+            out.append(r)
+        return out
+
     def _plan(self, table, cols, rows, replace=False, drop=()):
         """(plan {rel: text, or None to delete the file}, changed row count) of merging rows (cells) into
         table's shards. A key keeps one home: when a row lands in a different shard than the one that holds
@@ -516,15 +583,25 @@ class Store:
             with open(os.path.join(self.dir, ".git", LEDGER), "a", encoding="utf-8") as f:
                 f.write("%s\t%s\t%d\n" % (writer, table.name, changed))
 
-    def put(self, table_name, rows, writer=None, version=None, raw=False, ran=None, replace=False):
+    def put(self, table_name, rows, writer=None, version=None, raw=False, ran=None, replace=False,
+            if_absent=False, refresh=()):
         """Merge rows into table_name's shards, validate, write, `git add`. -> rows changed.
 
         rows: dicts (column -> value) or sequences in column order. A rerun with the
         same rows changes no byte, writers.tsv included. replace also deletes every
-        existing key of the table that rows does not name (a full snapshot writer)."""
+        existing key of the table that rows does not name (a full snapshot writer).
+
+        if_absent drops every input row whose key a stored row already holds instead
+        of overwriting it (the keyproof seed put: absent work becomes owed, measured
+        work stays). refresh (column names, only meaningful with if_absent) excepts
+        them: the stored row takes the input's value for each named column. For every
+        writer but the seed, a keyproof row never takes `multiplayer` from the input
+        (see _keyproof_multiplayer)."""
         writer = writer or os.environ.get("CARDDB_WRITER") or "cli"
         if not _WRITER.match(writer):
             raise StoreError("writer %r is not a valid writer name" % writer)
+        if refresh and not if_absent:
+            raise StoreError("put: refresh needs if_absent")
         table = self._table(table_name)
         rows, legacy = list(rows), {}
         if table_name == keylegs.TABLE:
@@ -532,6 +609,10 @@ class Store:
         self.ensure()
         with self.lock():
             cols, cells = self._cells(table, rows, raw, writer)
+            if if_absent:
+                cells = self._only_absent(table, cols, cells, tuple(refresh))
+            if table_name == keylegs.TABLE and writer != "seed":
+                cells = self._keyproof_multiplayer(table, cols, cells)
             drop = self._stale_legs(table, cols, cells, legacy) if legacy else ()
             plan, changed = self._plan(table, cols, cells, replace=replace, drop=drop)
             if plan and table_name != "_meta/writers":
