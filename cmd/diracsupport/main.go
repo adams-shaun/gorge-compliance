@@ -9,8 +9,9 @@
 // through kgen.SupportFor at the pinned gorge and records exactly the cards the
 // lists cannot place: every corpus card that is not plain `supported` or
 // `refused` (unverified, not lowered) plus the supported cards whose lowering is
-// two-seat only. The carddb writer fills in the rest from the lists, and checks
-// the snapshot's pin against GORGE_PIN so a stale snapshot is refused.
+// two-seat only. The carddb writer fills in the rest from the lists, compares
+// the snapshot's pin with GORGE_PIN, and degrades a stale snapshot's rows (its
+// why says which pin measured them) instead of refusing them.
 //
 //	go run ./cmd/diracsupport -cards .cards > oracle/compliance/dirac-gaps.tsv
 //

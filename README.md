@@ -51,7 +51,11 @@ make cards                                 # links ../gorge/.cards here as .card
 make boundary oracle-audit ORACLE_RUN=Fatal_Push
 ```
 
-The last line should end with `ok` for both packages.
+`make boundary` ends with a `test-whole: PASS ...` verdict line and runs with or without
+the corpus; `make oracle-audit` also runs through that script's whole mode, so its last
+line is the same `test-whole: PASS ... ./audit ...` verdict line and its verbose stream is
+saved under `.oracle-build/test/whole-*.json` (it needs the corpus, so run it after
+`make cards`).
 
 `make cards` looks for a gorge checkout at `../gorge`. For a checkout elsewhere, run
 `make cards GORGE_ROOT=/path/to/gorge`. It fails, saying what to do, when there is no
@@ -136,7 +140,7 @@ any register file is over the 1,048,576-byte committed-file cap.
 | `oracle/xengine/`, `cmd/xengine` | The full-game differential harness |
 | `oracle/mtgish/`, `cmd/mtgishxc` | The card-definition cross-check |
 | `oracle/validation/oracle/` | [Runbook](oracle/validation/oracle/README.md) for refreshing verdicts |
-| `cmd/` | `oraclediff` (generate, diff, triage, status), `compliance` (manifests), `xmageport`, `oraclepacket` (the printed card, for scenario authors) |
+| `cmd/` | `oraclediff` (generate, diff, triage, status), `compliance` (manifests), `xmageport`, `oraclepacket` (the printed card, for scenario authors), `xmagemine` (XMage card-source census, no JVM) |
 | `scripts/`, `ops/scripts/tests/` | Oracle setup and run scripts; their smokes |
 | `internal/` | `gorgedir` (locates the gorge module), `boundary` (the licence guards) |
 | `docs/` | [The oracles](docs/oracles.md), [the pin](docs/PINNING.md), [the bug hunter](docs/hunt.md), [capacity stalls](docs/capacity.md), [old designs](docs/design/README.md) |

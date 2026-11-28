@@ -73,6 +73,20 @@ func shard(t *Table, scope string, n int) string {
 		for j, c := range cols {
 			cells[j] = cellFor(c, i)
 		}
+		if t.Name == "keyproof" {
+			// The generic values are legal cells but not a legal keyproof row;
+			// keep validTree's one-row-per-table promise with a valid ledger row.
+			for j, c := range cols {
+				switch c.Name {
+				case "leg":
+					cells[j] = []string{"xmage", "forge", "lockstep", "scenario"}[i%4]
+				case "state":
+					cells[j] = "agreed"
+				case "seats":
+					cells[j] = "2"
+				}
+			}
+		}
 		b.WriteString(strings.Join(cells, "\t") + "\n")
 	}
 	return b.String()
@@ -227,6 +241,48 @@ func TestPrivateTableRefusedInPublicTree(t *testing.T) {
 	if vs, err = Validate(s, root, Private); err != nil || len(vs) != 0 {
 		t.Fatalf("private scope must accept it: %v %v", err, msgs(vs))
 	}
+}
+
+func TestRulingsStayPrivate(t *testing.T) {
+	s := loadReal(t)
+
+	// The private table itself never reaches a public tree.
+	root := validTree(t, s, Public)
+	write(t, root, "rulings.tsv", shard(s.Tables["rulings"], Private, 2))
+	vs, err := Boundary(s, root)
+	mustFail(t, vs, err, `private table "rulings"`)
+
+	// The hard-coded private-name list holds even against a schema edited to
+	// call every rulings column public.
+	sdir := t.TempDir()
+	copyTree(t, realSchema, sdir)
+	write(t, sdir, "v1/rulings.tsv", strings.ReplaceAll(read(t, sdir, "v1/rulings.tsv"), "\tprivate\t", "\tpublic\t"))
+	s2, err := LoadSchema(sdir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	vs, err = Boundary(s2, validTree(t, s2, Public))
+	mustFail(t, vs, err, `private table "rulings"`)
+
+	// The public mirror holds ids, dates and sources, and no text.
+	root = validTree(t, s, Public)
+	write(t, root, "ruling_refs.tsv", shard(s.Tables["ruling_refs"], Public, 2))
+	if vs, err = Validate(s, root, Public); err != nil || len(vs) != 0 {
+		t.Fatalf("ruling_refs validate: %v %v", err, msgs(vs))
+	}
+	if vs, err = Boundary(s, root); err != nil || len(vs) != 0 {
+		t.Fatalf("ruling_refs boundary: %v %v", err, msgs(vs))
+	}
+
+	// A public shard cannot smuggle the text back in as an extra column.
+	lines := strings.Split(strings.TrimSuffix(shard(s.Tables["ruling_refs"], Public, 2), "\n"), "\n")
+	lines[1] += "\tcomment"
+	for i := 2; i < len(lines); i++ {
+		lines[i] += "\t-"
+	}
+	write(t, root, "ruling_refs.tsv", strings.Join(lines, "\n")+"\n")
+	vs, err = Boundary(s, root)
+	mustFail(t, vs, err, `column "comment" is not declared public in table "ruling_refs"`)
 }
 
 func TestPrivateColumnInPublicShardFails(t *testing.T) {
@@ -521,6 +577,107 @@ func TestCuratedFiles(t *testing.T) {
 	}
 	if vs, err := Validate(s, root, Public); err != nil || len(vs) != 0 {
 		t.Fatalf("curated + example rows: %v %v", err, msgs(vs))
+	}
+}
+
+func keyproofTestShard(t *testing.T, s *Schema, rows ...map[string]string) string {
+	t.Helper()
+	cols := s.Tables["keyproof"].ScopeColumns(Public)
+	defaults := map[string]string{
+		"oracle_id":   "ab" + strings.Repeat("0", 30),
+		"key":         "cast",
+		"leg":         "xmage",
+		"state":       "agreed",
+		"cite":        "-",
+		"seats":       "2",
+		"multiplayer": "false",
+		"gorge_sha":   "8f7095353a64",
+		"measured":    "2026-11-19",
+	}
+	var b strings.Builder
+	b.WriteString("#carddb keyproof v1\n")
+	names := make([]string, len(cols))
+	for i, c := range cols {
+		names[i] = c.Name
+	}
+	b.WriteString(strings.Join(names, "\t") + "\n")
+	for _, over := range rows {
+		cells := make([]string, len(cols))
+		for i, c := range cols {
+			v, ok := defaults[c.Name]
+			if !ok {
+				v = "-"
+			}
+			if want, ok := over[c.Name]; ok {
+				v = want
+			}
+			cells[i] = v
+		}
+		b.WriteString(strings.Join(cells, "\t") + "\n")
+	}
+	return b.String()
+}
+
+func TestKeyproofRowRules(t *testing.T) {
+	s := loadReal(t)
+	oid := "ab" + strings.Repeat("0", 30)
+	bad := []struct {
+		name string
+		over map[string]string
+		rule string
+	}{
+		{"leg", map[string]string{"leg": "bogus"},
+			"leg 'bogus' is not xmage, forge, lockstep, scenario or cite"},
+		{"state", map[string]string{"state": "bogus"},
+			"state 'bogus' is not agreed, diagnosed, diverged, owed, stale or excluded"},
+		{"diagnosed without cite", map[string]string{"leg": "cite", "state": "diagnosed"},
+			"diagnosed without a cite"},
+		{"cite leg state", map[string]string{"leg": "cite", "state": "agreed", "cite": "CR 702.4b"},
+			"cite leg must be diagnosed, owed or excluded, not 'agreed'"},
+		{"seats", map[string]string{"seats": "1"},
+			"seats '1' is not 0, 2, 3 or 4"},
+		{"agreed zero seats", map[string]string{"seats": "0"},
+			"agreed with seats 0"},
+	}
+	for _, tc := range bad {
+		t.Run(tc.name, func(t *testing.T) {
+			root := t.TempDir()
+			write(t, root, "keyproof/ab.tsv", keyproofTestShard(t, s, tc.over))
+			vs, err := Validate(s, root, Public)
+			if err != nil {
+				t.Fatal(err)
+			}
+			leg := "xmage"
+			if v, ok := tc.over["leg"]; ok {
+				leg = v
+			}
+			want := fmt.Sprintf("keyproof/ab.tsv: %s cast %s: %s", oid, leg, tc.rule)
+			if len(vs) != 1 || vs[0].String() != want {
+				t.Fatalf("got %v, want exactly %q", vs, want)
+			}
+		})
+	}
+
+	clean := []map[string]string{
+		{"leg": "cite", "state": "diagnosed", "cite": "CR 702.4b"},
+		{"leg": "forge"},
+		{"leg": "lockstep", "seats": "3"},
+		{"leg": "scenario"},
+		{"leg": "xmage"},
+	}
+	root := t.TempDir()
+	write(t, root, "keyproof/ab.tsv", keyproofTestShard(t, s, clean...))
+	if vs, err := Validate(s, root, Public); err != nil || len(vs) != 0 {
+		t.Fatalf("clean rows: %v %v", err, msgs(vs))
+	}
+
+	// The hook reads columns by name, so a reordered header gives the same verdict.
+	head := []string{"leg", "state", "cite", "seats", "key", "oracle_id"}
+	row := []string{"xmage", "bogus", "-", "2", "cast", oid}
+	vs := keyproofRowRules("keyproof/ab.tsv", head, row)
+	want := fmt.Sprintf("keyproof/ab.tsv: %s cast xmage: state 'bogus' is not agreed, diagnosed, diverged, owed, stale or excluded", oid)
+	if len(vs) != 1 || vs[0].String() != want {
+		t.Fatalf("reordered header: got %v, want exactly %q", vs, want)
 	}
 }
 

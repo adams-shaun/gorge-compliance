@@ -115,10 +115,38 @@ func combatParties(face *cards.Face, trig *cards.Trigger) (att party, blk *party
 	case selfFilter(tgt):
 		// the card is hurt: it blocks the attacker (the source's filter)
 		return src, &party{self: true}, 1, ""
+	case attachedSource(tgt):
+		// "when enchanted creature is dealt damage" (Cracked Skull): the
+		// Aura's bearer blocks the attacker and is hurt; combatLine places
+		// the Aura attached (StartAttach) through the party's attached arm.
+		return src, &party{attached: true}, 1, ""
 	case strings.HasPrefix(tgt, "Creature"):
 		return src, &party{filter: tgt}, 0, ""
 	}
 	return att, nil, 0, none + ":target"
+}
+
+// placePartyGates places the counters the first understood alternative of a
+// party's filter requires of the chosen creature: "a creature with a counter
+// on it" (HasCounters) and counters_<OP><N>_<KIND> are battlefield state a
+// start meets by placing them, the same rule removalStart follows (it picks
+// the carrier through the same counter-parsed alternatives).
+func placePartyGates(seats [2]*StartSeat, seat int, name, filter string, chosen *cards.Face) {
+	if filter == "" {
+		return
+	}
+	for _, a := range parseFilterCounters(filter, true, false, false, false) {
+		if !a.known || a.self || len(a.counters) == 0 {
+			continue
+		}
+		if !a.matches(chosen, false) || !survivesCounters(chosen, a.counters) {
+			continue
+		}
+		for _, g := range a.counters {
+			seats[seat].Counters = append(seats[seat].Counters, StartCounter{Card: name, Kind: g.placedKind(), N: g.n})
+		}
+		return
+	}
 }
 
 // blockable reports whether blk can block att at all (CR 509.1b, 702.9, 702.28,
@@ -219,9 +247,9 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 			case other == nil:
 				return true
 			case attacker:
-				return blockable(c, other)
+				return blockable(c, other) && cantBlockByBlocked(c, other) == nil
 			}
-			return blockable(other, c)
+			return blockable(other, c) && cantBlockByBlocked(other, c) == nil
 		}
 		if p.attached {
 			if FieldBlock(face) != "aura-unattached" {
@@ -249,9 +277,14 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 			case !pairOK(face):
 				return "", none + ":evasion"
 			}
+			placePartyGates(seats, seat, card, p.filter, face)
 			return card, ""
 		}
-		alts := parseFilter(p.filter)
+		// The counters a party's filter requires (HasCounters,
+		// counters_<OP><N>_<KIND>) are battlefield state the start meets by
+		// placing them (removalStart's rule), so parseFilterCounters reads
+		// them rather than leaving the alternative unknown.
+		alts := parseFilterCounters(p.filter, true, false, false, false)
 		fits := func(c *cards.Face) bool {
 			if !c.IsCreature() || !pairOK(c) || attacker && c.HasKeyword("Defender") || p.dealer && c.Power() <= 0 {
 				return false
@@ -260,7 +293,7 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 				return true
 			}
 			for _, a := range alts {
-				if a.known && !a.self && (a.ctrl == ctrlAny || a.ctrl == seat) && a.test(c) {
+				if a.known && !a.self && (a.ctrl == ctrlAny || a.ctrl == seat) && a.matches(c, false) && survivesCounters(c, a.counters) {
 					return true
 				}
 			}
@@ -269,7 +302,11 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 		name := ""
 		if fits(fix) {
 			name = combatFixture
-		} else if p.filter != "" {
+		} else {
+			// The fixture is refused (its stats or keywords fail the pair:
+			// a flying attacker needs a flying/reach blocker, and an empty
+			// filter still names any creature that meets the pairing), so
+			// the carrier pool stands in.
 			name = pickCarrier(reg, b, card, func(c *cards.Face) bool {
 				return fits(c) && FieldBlock(c) == "" && !deadOnArrival(c)
 			})
@@ -278,6 +315,7 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 			return "", none + ":filter"
 		}
 		seats[seat].Battlefield = append(seats[seat].Battlefield, name)
+		placePartyGates(seats, seat, name, p.filter, faceOf(name))
 		return name, ""
 	}
 	// the party that is the card goes first: the other one is chosen against it
@@ -307,8 +345,11 @@ func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face,
 	if blocker != "" {
 		blkFace = faceOf(blocker)
 	}
-	if restrictingStatic(atk, blkFace, true) != nil || blocker != "" &&
-		(restrictingStatic(atk, blkFace, false) != nil || restrictingStatic(blkFace, atk, false) != nil) {
+	if blocker == "" {
+		if restrictingStatic(atk, blkFace, true) != nil {
+			return none + ":restricted"
+		}
+	} else if combatPairBlocked(atk, blkFace) != nil {
 		return none + ":restricted"
 	}
 	f.Active = attackSeat

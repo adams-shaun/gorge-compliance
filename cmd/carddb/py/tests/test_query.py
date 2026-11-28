@@ -5,7 +5,9 @@ import sqlite3
 import unittest
 
 from carddb import build as build_mod
+from carddb import keylegs
 from carddb import query as query_mod
+from carddb import schema as schema_mod
 from carddb import shard
 from carddb.boundary import boundary_tree
 from carddb.store import Store
@@ -23,15 +25,33 @@ OID_G = "ab" + "6" * 30
 GORGE = "8f7095353a64"
 
 
-def keyproof_row(oid, key, state, **kw):
+def keyproof_row(oid, key, state, leg="xmage", **kw):
+    """One leg row of the keyproof ledger (the new column set)."""
     row = {
-        "oracle_id": oid, "key": key, "desc": "-", "state": state, "reason": "-", "refs": "-",
+        "oracle_id": oid, "key": key, "leg": leg, "desc": "-", "state": state, "reason": "-", "refs": "-",
         "source": "-", "agree_items": 0, "diff_items": 0, "witness": "-", "sig": "-", "cite": "-",
-        "ticket": "-", "gorge_sha": GORGE, "corpus_pin": "-", "script_sha": "-", "xmage_ref": "-",
-        "forge_ref": "-", "measured": "2026-11-23", "writer": "xproof",
+        "ticket": "-", "seats": 2, "multiplayer": "false", "gorge_sha": GORGE, "corpus_pin": "-",
+        "script_sha": "-", "xmage_ref": "-", "forge_ref": "-", "measured": "2026-11-23", "replayed": "-",
+        "replayed_sha": "-", "writer": "xproof",
     }
     row.update(kw)
     return row
+
+
+def keyproof_rows(oid, key, state, **kw):
+    """The leg rows of one key as the proof loop's per-key row would split: agreed -> an agreed row per
+    engine in refs (FX when none is given), diagnosed -> a cite row, any other state -> xmage and forge."""
+    refs = kw.pop("refs", "FX")
+    if state == "agreed":
+        return [keyproof_row(oid, key, state, leg=leg, refs=r, **kw)
+                for leg, r in (("xmage", "X"), ("forge", "F")) if r in refs]
+    if state == "diagnosed":
+        return [keyproof_row(oid, key, state, leg="cite", **kw)]
+    return [keyproof_row(oid, key, state, leg=leg, **kw) for leg in ("xmage", "forge")]
+
+
+def flat(*groups):
+    return [r for g in groups for r in g]
 
 
 CURATED = {
@@ -56,8 +76,8 @@ def read(path):
         return f.read()
 
 
-class Query(Base):
-    """One fixture build, then every read verb against it."""
+class QueryFixture(Base):
+    """One fixture build (the leg-row ledger); Query and TestLegacyNumbersHold read it."""
 
     def setUp(self):
         super().setUp()
@@ -131,17 +151,7 @@ class Query(Base):
             cert_row(OID_A, "Lightning Bolt", "C2", measured="2026-11-19"),
             cert_row(OID_B, "Fire // Ice", "C1", measured="2026-11-19"),
         ], writer="certification")
-        self.a.put("keyproof", [
-            keyproof_row(OID_A, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
-            keyproof_row(OID_A, "f0/a0", "agreed", desc="Damage", refs="X", source="start", agree_items=1,
-                         witness="xs:LEA:lightning-bolt:f0a0:s1"),
-            keyproof_row(OID_B, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
-            keyproof_row(OID_B, "f1/a0", "owed", desc="Forage", reason="no-generator"),
-            keyproof_row(OID_C, "cast", "diverged", desc="Mana", diff_items=3, sig="a1b2c3d4e5f6",
-                         ticket="xp-a1b2c3d4e5f6"),
-            keyproof_row(OID_C, "combat#0.attack", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
-            keyproof_row(OID_E, "cast", "owed", desc="Mana", reason="no-generator"),
-        ], writer="xproof")
+        self.load_keyproof()
         self.a.put("labels", [
             {"oracle_id": OID_A, "label": "burn", "origin": "derived"},
             {"oracle_id": OID_C, "label": "ramp", "origin": "derived"},
@@ -195,6 +205,19 @@ class Query(Base):
         build_mod.build(self.priv, self.schema, self.a.dir, p.dir, committed,
                         revs={"gorge_pin": "8f7095353a64"})
 
+    def load_keyproof(self):
+        self.a.put("keyproof", flat(
+            keyproof_rows(OID_A, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
+            keyproof_rows(OID_A, "f0/a0", "agreed", desc="Damage", refs="X", source="start", agree_items=1,
+                          witness="xs:LEA:lightning-bolt:f0a0:s1"),
+            keyproof_rows(OID_B, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
+            keyproof_rows(OID_B, "f1/a0", "owed", desc="Forage", reason="no-generator"),
+            keyproof_rows(OID_C, "cast", "diverged", desc="Mana", diff_items=3, sig="a1b2c3d4e5f6",
+                          ticket="xp-a1b2c3d4e5f6"),
+            keyproof_rows(OID_C, "combat#0.attack", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
+            keyproof_rows(OID_E, "cast", "owed", desc="Mana", reason="no-generator"),
+        ), writer="xproof")
+
     def run_cli(self, *args, private=False):
         db = self.priv if private else self.pub
         argv = list(args) + ["--db", db] + (["--private"] if private else [])
@@ -205,6 +228,9 @@ class Query(Base):
         if UPDATE:
             write(path, text)
         self.assertEqual(text, read(path), "golden %s differs (CARDDB_UPDATE_GOLDEN=1 rewrites it)" % name)
+
+class Query(QueryFixture):
+    """Every read verb against the fixture build."""
 
     def test_card(self):
         r = self.run_cli("card", "lightning bolt")
@@ -295,16 +321,26 @@ class Query(Base):
                          [("Lightning Bolt", "cast")], r.stdout)  # Fire // Ice is banned in modern
         r = self.run_cli("need", "--recredit", "X+P")
         self.assertNotEqual(r.returncode, 0)
-        # refs X+P (a P witness beside XMage) still counts as XMage alone
-        db = os.path.join(self.tmp, "need-recredit.sqlite")
-        shutil.copy(self.priv, db)
+        # a legacy refs X+P (a P witness beside XMage) counts as XMage alone: split_legacy strips the +P
+        # into a lone xmage leg (TestKeyLegs.test_split_table), and keyproof_keys derives refs from the legs
+
+    def test_per_key_verbs_ask_to_rebuild_a_build_without_keyproof_keys(self):
+        # a SQLite built before keyproof had legs has the table but not the rollup view
+        db = os.path.join(self.tmp, "old-build.sqlite")
+        shutil.copy(self.pub, db)
         conn = sqlite3.connect(db)
-        conn.execute("UPDATE keyproof SET refs='X+P' WHERE oracle_id=? AND \"key\"='f0/a0'", (OID_A,))
+        conn.execute("DROP VIEW keyproof_keys")
         conn.commit()
         conn.close()
-        r = self.cli(self.home, "need", "--db", db, "--private", "--recredit", "X")
-        self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertEqual([l.split("\t")[3] for l in r.stdout.splitlines()[1:]], ["f0/a0"], r.stdout)
+        for argv in (("need",), ("proof", "--set", "lea")):
+            r = self.cli(self.home, *argv, "--db", db)
+            self.assertEqual(r.returncode, 2, r.stdout)  # QueryError's default, as "has no keyproof table"
+            self.assertIn("carddb %s: %s: this build predates the keyproof leg rows" % (argv[0], argv[0]), r.stderr)
+            self.assertIn("rebuild it with carddb build", r.stderr)
+        r = self.cli(self.home, "docs-sets", "--db", db, "--out", os.path.join(self.tmp, "docs-sets"))
+        self.assertNotEqual(r.returncode, 0, r.stdout)
+        self.assertIn("predates the keyproof leg rows", r.stderr)
+        self.assertNotIn("Traceback", r.stderr)
 
     def test_need_edhrec_rank_only_orders_tier_three(self):
         # Bolt (tier 2, edhrec rank 42, released first) and Dain (tier 2, no edhrec, released later)
@@ -313,9 +349,9 @@ class Query(Base):
         shutil.copy(self.priv, db)
         conn = sqlite3.connect(db)
         cols = [r[1] for r in conn.execute("PRAGMA table_info(keyproof)")]
-        row = keyproof_row(OID_A, "f0/a1", "owed", desc="Forage", reason="no-generator")
-        conn.execute("INSERT INTO keyproof (%s) VALUES (%s)" % (
-            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [row[c] for c in cols])
+        rows = keyproof_rows(OID_A, "f0/a1", "owed", desc="Forage", reason="no-generator")
+        conn.executemany("INSERT INTO keyproof (%s) VALUES (%s)" % (
+            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [[row[c] for c in cols] for row in rows])
         conn.execute("UPDATE cards SET first_released=? WHERE oracle_id=?", ("1993-08-05", OID_A))
         conn.execute("UPDATE cards SET first_released=? WHERE oracle_id=?", ("2000-01-01", OID_C))
         conn.commit()
@@ -343,9 +379,9 @@ class Query(Base):
                              ("p-g2", OID_G, "promo", "1", "rare", "2020-01-01"),
                          ])
         cols = [r[1] for r in conn.execute("PRAGMA table_info(keyproof)")]
-        row = keyproof_row(OID_G, "cast", "owed", desc="Mana", reason="no-generator")
-        conn.execute("INSERT INTO keyproof (%s) VALUES (%s)" % (
-            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [row[c] for c in cols])
+        rows = keyproof_rows(OID_G, "cast", "owed", desc="Mana", reason="no-generator")
+        conn.executemany("INSERT INTO keyproof (%s) VALUES (%s)" % (
+            ",".join('"%s"' % c for c in cols), ",".join("?" * len(cols))), [[row[c] for c in cols] for row in rows])
         conn.commit()
         conn.close()
         r = self.cli(self.home, "need", "--db", db, "--private")
@@ -686,3 +722,122 @@ class Query(Base):
                            "--now", "2026-11-19T00:00:00Z")
         self.assertNotIn("not registered", private.stdout)
         self.assertIn("carddb-private-latest 0.0h old (SLA 6h)", private.stdout)
+
+
+def legacy_row(oid, key, state, **kw):
+    """A row of the old one-row-per-key keyproof.tsv (the 20 legacy columns)."""
+    row = {
+        "oracle_id": oid, "key": key, "desc": "-", "state": state, "reason": "-", "refs": "-",
+        "source": "-", "agree_items": 0, "diff_items": 0, "witness": "-", "sig": "-", "cite": "-",
+        "ticket": "-", "gorge_sha": GORGE, "corpus_pin": "-", "script_sha": "-", "xmage_ref": "-",
+        "forge_ref": "-", "measured": "2026-11-23", "writer": "xproof",
+    }
+    row.update(kw)
+    return row
+
+
+def write_legacy_shards(root, rows):
+    """Write rows (legacy_row dicts) as legacy-shaped keyproof shards under a clone; -> shard paths."""
+    by = {}
+    for r in rows:
+        by.setdefault(r["oracle_id"][:2], []).append(r)
+    paths = []
+    for stem, rs in sorted(by.items()):
+        cells = [["-" if r[c] in (None, "") else str(r[c]) for c in keylegs.LEGACY_COLUMNS]
+                 for r in sorted(rs, key=lambda r: (r["oracle_id"], r["key"]))]
+        path = os.path.join(root, "keyproof", stem + ".tsv")
+        write(path, shard.render("keyproof", 1, list(keylegs.LEGACY_COLUMNS), cells))
+        paths.append(path)
+    return paths
+
+
+class TestLegacyNumbersHold(QueryFixture):
+    """The fixture ledger written in the legacy shape and migrated: need, proof and proven --by keys
+    print the same bytes the goldens recorded before the ledger had legs."""
+
+    def load_keyproof(self):
+        write_legacy_shards(self.a.dir, [
+            legacy_row(OID_A, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
+            legacy_row(OID_A, "f0/a0", "agreed", desc="Damage", refs="X", source="start", agree_items=1,
+                       witness="xs:LEA:lightning-bolt:f0a0:s1"),
+            legacy_row(OID_B, "cast", "agreed", desc="Mana", refs="FX", source="scen", agree_items=2),
+            legacy_row(OID_B, "f1/a0", "owed", desc="Forage", reason="no-generator"),
+            legacy_row(OID_C, "cast", "diverged", desc="Mana", diff_items=3, sig="a1b2c3d4e5f6",
+                       ticket="xp-a1b2c3d4e5f6"),
+            # the real ledger's shape: every diagnosed row has cite '-' (a cite leg owed diagnosed-no-cite),
+            # and the key must still roll up as diagnosed, not owed
+            legacy_row(OID_C, "combat#0.attack", "diagnosed", sig="a1b2c3d4e5f6"),
+            legacy_row(OID_E, "cast", "owed", desc="Mana", reason="no-generator"),
+        ])
+        self.assertEqual(keylegs.migrate(self.a), 12)
+
+    def check(self, name, text):
+        self.assertEqual(text, read(os.path.join(GOLDEN, name)), "golden %s differs after the migration" % name)
+
+    def test_need(self):
+        self.check("query_need.txt", self.run_cli("need").stdout)
+        self.check("query_need_modern.txt", self.run_cli("need", "--format", "modern").stdout)
+
+    def test_proof(self):
+        self.check("query_proof.txt", self.run_cli("proof", "--set", "lea").stdout)
+
+    def test_proven_keys(self):
+        self.check("query_proven_keys.txt", self.run_cli("proven", "--by", "keys").stdout)
+
+
+class TestScopeCards(Base):
+    """The proof denominator: Commander-legal paper cards minus curated exclusions."""
+
+    def scope_build(self, exclusions=(), schema=None):
+        a = self.machine("scope", init=True)
+        a.put("cards", [
+            {"oracle_id": OID_A, "name": "In Scope", "layout": "normal", "mana_value": 1,
+             "type_line": "Instant", "paper": True},
+            {"oracle_id": OID_B, "name": "Digital Only", "layout": "normal", "mana_value": 1,
+             "type_line": "Instant", "paper": False},
+            {"oracle_id": OID_C, "name": "Modern Only", "layout": "normal", "mana_value": 1,
+             "type_line": "Instant", "paper": True},
+            {"oracle_id": OID_D, "name": "Curated Out", "layout": "normal", "mana_value": 1,
+             "type_line": "Sorcery", "paper": True},
+        ], writer="catalogue")
+        if schema is None or "legality" in schema.tables:
+            a.put("legality", [
+                {"oracle_id": OID_A, "format": "commander", "status": "legal"},
+                {"oracle_id": OID_B, "format": "commander", "status": "legal"},
+                {"oracle_id": OID_C, "format": "modern", "status": "legal"},
+                {"oracle_id": OID_D, "format": "commander", "status": "legal"},
+            ], writer="catalogue")
+        src = os.path.join(self.tmp, "scope-src")
+        write(os.path.join(src, "carddb/curated/exclusions.tsv"),
+              "#carddb curated/exclusions v1\noracle_id\treason\n" +
+              "".join("%s\t%s\n" % (r["oracle_id"], r["reason"]) for r in exclusions))
+        out = os.path.join(self.tmp, "scope.sqlite")
+        build_mod.build(out, schema or self.schema, a.dir, None,
+                        build_mod.read_committed(directory=src))
+        return out
+
+    def test_scope_view_in_scope_is_paper_commander_legal_and_not_excluded(self):
+        db = self.scope_build(exclusions=[{"oracle_id": OID_D, "reason": "ante"}])
+        conn = sqlite3.connect(db)
+        self.addCleanup(conn.close)
+        self.assertEqual([r[1] for r in conn.execute("PRAGMA table_info(scope_cards)")],
+                         ["oracle_id", "name"])
+        self.assertEqual(conn.execute("SELECT oracle_id, name FROM scope_cards").fetchall(),
+                         [(OID_A, "In Scope")])
+        r = self.cli(self.tmp, "export", "scope", "--tsv", "--db", db)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.splitlines()[1:], ["oracle_id\tname", "%s\tIn Scope" % OID_A])
+
+    def test_build_without_legality_has_no_scope_view(self):
+        schema = schema_mod.Schema(
+            self.schema.version,
+            {k: v for k, v in self.schema.tables.items() if k != "legality"},
+            self.schema.root)
+        db = self.scope_build(schema=schema)
+        conn = sqlite3.connect(db)
+        self.addCleanup(conn.close)
+        self.assertIsNone(conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='view' AND name='scope_cards'").fetchone())
+        r = self.cli(self.tmp, "export", "scope", "--tsv", "--db", db)
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("no scope_cards view", r.stderr)

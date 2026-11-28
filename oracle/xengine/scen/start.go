@@ -25,10 +25,30 @@ type StartFile struct {
 	Setup    StartSetup `json:"setup"`
 	Filler   string     `json:"filler"`
 	Seeds    int        `json:"seeds"`
+	// DayNight is the day/night designation (CR 731) the start has at turn 1's
+	// first-main cut: DayNightDay or DayNightNight, empty when neither. It is
+	// declared because the lowered digest does not carry Game.DayNight; the
+	// replay re-derives the same designation from the start's own placements
+	// and the turn-1 untap check (a gated Moved DayTime entry makes it day
+	// during genesis, then CR 731.2a makes it night before the cut, while a
+	// lone daybound permanent is read only after that check). A start whose
+	// designation is set only by its focus play (a cast, an activated "it
+	// becomes night") declares nothing: it is neither at the cut, and the play
+	// produces the change.
+	DayNight string `json:"day_night,omitempty"`
 	// SeedBase is where `xengine play -start` starts its seed search (0 or
 	// absent: 1): a retried key sets it to play new games.
-	SeedBase uint64      `json:"seed_base,omitempty"`
-	Focus    *StartFocus `json:"focus,omitempty"`
+	SeedBase uint64 `json:"seed_base,omitempty"`
+	// Prelude is a card PreludeSeat casts from hand at turn 1's first main
+	// priority, before the focus play, so a permanent whose own entry
+	// replacement asks a choice is not placed at genesis. The cast puts the
+	// entry, the choice and the turn's entry stamps on the tape, where the
+	// lowering's setup drive never has to restate them; the focus action then
+	// exercises the key itself.
+	Prelude string `json:"prelude,omitempty"`
+	// PreludeSeat is the seat that casts Prelude (0 when unset).
+	PreludeSeat int         `json:"prelude_seat,omitempty"`
+	Focus       *StartFocus `json:"focus,omitempty"`
 	// Compare is the item's opt-in comparison fields (oraclediff.Compare*) the
 	// lowered item carries: a static start whose effect is a keyword is
 	// observable only with "keywords".
@@ -49,6 +69,16 @@ type StartSeat struct {
 	Exile       []string `json:"exile,omitempty"`
 	Library     []string `json:"library,omitempty"`
 	Tapped      []string `json:"tapped,omitempty"`
+	// Commanders names the cards this seat designates as its commanders
+	// (CR 903.3: an attribute of the card itself, retained across zones). The
+	// card sits in Hand or Battlefield as any other: a start never names a
+	// card in Commanders without placing it. The designation is what the
+	// executor records into Game.Players[seat].Commanders, the list the
+	// engine reads for Card.IsCommander (Game.CommanderOf) — a printed-keyword
+	// read would never work, which is why the lanes that pick an IsCommander
+	// carrier (designateCommander) also carry the name here. In file order,
+	// never a map walk, so the emitted file is deterministic.
+	Commanders []string `json:"commanders,omitempty"`
 	// BackFace names battlefield cards that enter on their back face (a
 	// double-faced card's transformed side), as rules.StartSeat.BackFace.
 	BackFace []string       `json:"back_face,omitempty"`
@@ -98,6 +128,23 @@ func (s *StartSeat) TappedCopies() []bool {
 	flags := make([]bool, len(s.Battlefield))
 	used := make([]bool, len(s.Battlefield))
 	for _, name := range s.Tapped {
+		for i, card := range s.Battlefield {
+			if !used[i] && card == name {
+				used[i], flags[i] = true, true
+				break
+			}
+		}
+	}
+	return flags
+}
+
+// BackFaceCopies reports, for each Battlefield entry in order, whether that
+// copy enters on its back face. BackFace names bind to the first copy of the
+// name not bound yet, like TappedCopies: a repeated name marks one copy.
+func (s *StartSeat) BackFaceCopies() []bool {
+	flags := make([]bool, len(s.Battlefield))
+	used := make([]bool, len(s.Battlefield))
+	for _, name := range s.BackFace {
 		for i, card := range s.Battlefield {
 			if !used[i] && card == name {
 				used[i], flags[i] = true, true
@@ -172,11 +219,17 @@ type StartFocus struct {
 	BaitAbilitySelf bool `json:"baitAbilitySelf,omitempty"`
 	// BaitTarget names the permanent the bait spell targets at its cast, when
 	// the bait spell itself has a target (a Spell.singleTarget focus play:
-	// "target spell with a single target" is met only by a targeted bait).
-	// The start places it on the bait seat's battlefield, or on the focus
-	// seat's when the bait's filter names an opponent-controlled permanent,
-	// and the bait seat names it as the bait spell's target.
+	// "target spell with a single target" is met only by a targeted bait, and
+	// a TargetValidTargeting$ restriction such as "targets a permanent you
+	// control"). The start places it on the bait seat's battlefield, or on the
+	// focus seat's when the bait's filter names an opponent-controlled
+	// permanent, and the bait seat names it as the bait spell's target.
 	BaitTarget string `json:"baitTarget,omitempty"`
+	// BaitTargetPlayer is whether the bait spell targets the focus seat
+	// itself: a TargetValidTargeting$ restriction of "You" (Cerulean Drake's
+	// "counter target spell that targets you") is met by a bait that targets
+	// that player, not a permanent. It is exclusive with BaitTarget.
+	BaitTargetPlayer bool `json:"baitTargetPlayer,omitempty"`
 	// Attack and Block are the scripted combat the focus play waits for: the
 	// active seat attacks with exactly Attack, the defending seat blocks it
 	// with exactly Block (no blocks when "" while Attack is set), and only

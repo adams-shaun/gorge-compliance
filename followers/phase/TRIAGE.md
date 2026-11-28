@@ -29,6 +29,15 @@ gorge does not log the decision.
 - Prompts gorge does not log today (replacement order, combat damage assignment among several
   blockers, Phyrexian per-pip choices, cost-reduction order) stay strict misses and classify as
   `decision_shape`. No FDN-commons item reached one.
+- Optional costs phase resolves without a prompt are consumed at the end of the replay: a declined
+  trigger cost (`trigger_cost_decline`, auto-declined when no branch is payable, CR 608.2d) and an
+  either-or additional cost whose preferred branch is unpayable (`altaddcost`, the fallback is paid
+  without asking, CR 601.2b). A `ResolutionOptionalPaymentChoice` phase does pose is answered from
+  the same decision. Equip with one legal creature is phase's auto-target path (no `EquipTarget`
+  prompt), so the stack sweep consumes its target decision, including one logged on the mana step;
+  when phase does pose `EquipTarget`, that prompt accepts the same earlier-step decision.
+- Cards that print or grant banding (including `BandsWithOther`) are refused by the preflight:
+  phase has no CR 702.22c band choice, so the game would ask a prompt phase never poses.
 - Scry and surveil: phase cannot be told gorge's bottom order, so the cards bottomed by a scry
   that bottoms two or more go in looked-at order (a row note says so).
 - `kicked1`, `kicked2`, `kickedboth`, `multikicked` and `replicated` are paid as one optional-cost

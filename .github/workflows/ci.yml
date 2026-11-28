@@ -104,6 +104,7 @@ jobs:
         working-directory: gorge-compliance
         env:
           GH_TOKEN: ${{ github.token }}
+          FORGE_PIN_BASE_REF: origin/${{ github.base_ref || 'develop' }}
         run: bash scripts/check-fork-pins.sh
       # gorge's FORGE_REF (at GORGE_PIN) must be an ancestor of the driver,
       # or forge-oracle-setup refuses every kit build (xproof, 2026-11-25).

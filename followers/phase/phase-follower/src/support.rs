@@ -1,8 +1,10 @@
 //! Which cards phase can replay faithfully.
 //!
-//! A card is supported when every face (back faces included) has no coverage gaps and no confirmed
-//! misparse, and none of its abilities draws a random outcome from phase's own RNG, which a
-//! scripted replay cannot force.
+//! A card is supported when every face (back faces included) has no parse warnings, no coverage
+//! gaps and no confirmed misparse, and none of its abilities draws a random outcome from phase's
+//! own RNG, which a scripted replay cannot force. Phase's own coverage result folds parse warnings
+//! into its gap set; `card_face_gaps` is the lightweight entry point that does not, so the warnings
+//! are checked here too.
 
 use engine::database::card_db::CardDatabase;
 use engine::game::coverage::card_face_gaps;
@@ -43,16 +45,53 @@ fn random_source(v: &Value, parent: &str) -> Option<String> {
     }
 }
 
+/// The banding rule phase lacks: CR 702.22c makes the active player choose which creatures attack
+/// in a band, and phase has no prompt for it. The keyword reaches a face as a printed keyword, as a
+/// static grant (`AddKeyword`), or through an activated ability's static payload, so the check
+/// looks for the keyword value anywhere in the face rather than at a hand-written card list. The
+/// next card that grants banding is covered without an edit here.
+fn banding_source(v: &Value) -> Option<&'static str> {
+    match v {
+        // Exact keyword values only: oracle text that merely mentions banding is a sentence, not
+        // this value.
+        Value::String(s) if s == "Banding" => Some("banding"),
+        Value::Object(map) => {
+            if map.contains_key("BandsWithOther") {
+                return Some("banding with other creatures");
+            }
+            map.values().find_map(banding_source)
+        }
+        Value::Array(items) => items.iter().find_map(banding_source),
+        _ => None,
+    }
+}
+
 fn face_reason(face: &CardFace) -> Option<String> {
+    // A face that cannot serialise still gets the gap and misparse checks below; only the
+    // keyword and random searches need the JSON.
+    let json = serde_json::to_value(face).unwrap_or(Value::Null);
+    // A missing combat rule is a hard refusal: phase cannot present the prompt at all.
+    if let Some(kind) = banding_source(&json) {
+        return Some(format!("phase lacks rule: {kind} cannot be chosen (CR 702.22c)"));
+    }
     if let Some(class) = face.metadata.confirmed_misparse {
         let kind = serde_json::to_value(class).ok().and_then(|v| v.as_str().map(str::to_string));
         return Some(format!("confirmed misparse: {}", kind.unwrap_or_else(|| format!("{class:?}"))));
+    }
+    // A parse warning means phase dropped or misread printed text. The card data can still look
+    // complete (The Bear Force Pilot's token loses the swallowed "and crew 2" inside an effect),
+    // so `card_face_gaps` does not see it; a replay that reaches the dropped ability would die in
+    // the engine instead. Fail closed here, naming the warning.
+    if let Some(warning) = face.parse_warnings.first() {
+        let kind = serde_json::to_value(warning)
+            .ok()
+            .and_then(|v| v.get("type").and_then(Value::as_str).map(str::to_string));
+        return Some(format!("parse warning: {}", kind.unwrap_or_else(|| format!("{warning:?}"))));
     }
     let gaps = card_face_gaps(face);
     if !gaps.is_empty() {
         return Some(format!("gaps: {}", gaps.join(", ")));
     }
-    let json = serde_json::to_value(face).ok()?;
     random_source(&json, "").map(|s| format!("random outcome: {s}"))
 }
 

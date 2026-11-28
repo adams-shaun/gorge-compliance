@@ -47,6 +47,18 @@ type Options struct {
 	// Start, when non-nil, is a scripted start: gorge's rules.Config.Start,
 	// which genesis applies before turn 1 (indices into the seat's deck).
 	Start *rules.StartSpec
+	// StartCommanders names, per seat indexed, the cards that seat's start
+	// file designates as its commanders (scen.StartSeat.Commanders, CR 903.3).
+	// The named cards are placed by Start as any other card; the Setup hook
+	// records each designation by appending the object's ID to
+	// Game.Players[seat].Commanders, the list the engine reads for
+	// Card.IsCommander (Game.CommanderOf — the designation is an attribute of
+	// the card, not a printed characteristic). It deliberately does not set
+	// rules.Config.Commanders: that is the Commander-format lane above, which
+	// requires a commander in every deck, switches life and format, and would
+	// move the card to the command zone where StartSeat cannot reach it. A
+	// name not among the seat's hand or battlefield objects fails the game.
+	StartCommanders [][]string
 	// Focus, when non-nil, makes one seat take the focus action once, on its
 	// first chance (focus.go).
 	Focus *Focus
@@ -233,11 +245,12 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		if opt.plainSeats {
 			bot = hb
 		}
-		// a block focus, a scripted combat and a scripted bait (cast or ability
-		// activation) also steer the other seats: their attack, block or bait is
-		// forced
+		// a block focus, a scripted combat, a scripted bait (cast or ability
+		// activation) and a prelude cast also steer the other seats: their
+		// attack, block, bait or prelude is forced
 		if fst != nil && (opt.Focus.Seat == i || opt.Focus.Kind == "block" || opt.Focus.Attack != "" || opt.Focus.Block != "" ||
-			opt.Focus.Bait != "" || opt.Focus.BaitAbility != "" || opt.Focus.BaitTarget != "") {
+			opt.Focus.Bait != "" || opt.Focus.BaitAbility != "" || opt.Focus.BaitTarget != "" || opt.Focus.BaitTargetPlayer ||
+			opt.Focus.Prelude != "") {
 			bot = focusBot{bot: bot, st: fst}
 		}
 		seats[i] = bot
@@ -292,6 +305,11 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 	var o bench.Outcome
 	var e *rules.Engine
 	var err error
+	// cmdrErr holds a start-commander designation the Setup hook could not
+	// make (a named card the seat does not hold): the game runs on and the
+	// tape is returned, but Play reports it — a start claiming a commander
+	// the game does not hold is a broken claim, never a silent skip.
+	var cmdrErr error
 	func() {
 		defer func() {
 			// A panic in rules.New or the first Advance happens before
@@ -302,6 +320,13 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		}()
 		o, e, err = bench.PlayGame(cfg, seats, maxTurns, maxIntents, bench.Hooks{
 			Setup: func(e *rules.Engine) {
+				// designate before r.setup: the recorder's baseline is then
+				// the game as the start means it to be, commander designations
+				// included (the list the engine reads for Card.IsCommander,
+				// CR 903.3), and the hook runs after genesis applied opt.Start.
+				if cmdrErr == nil && len(opt.StartCommanders) > 0 {
+					cmdrErr = designateStartCommanders(e, opt.StartCommanders)
+				}
 				r.setup(e)
 				if fst != nil {
 					fst.read(e)
@@ -333,7 +358,51 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 	if err != nil {
 		return t, err
 	}
+	if cmdrErr != nil {
+		return t, cmdrErr
+	}
 	return t, nil
+}
+
+// designateStartCommanders appends each seat's designated commander cards to
+// that seat's Game.Players[seat].Commanders list — the list Game.CommanderOf
+// reads to answer Card.IsCommander (CR 903.3's designation is an attribute of
+// the card, held across zones, not a printed characteristic, so the engine
+// never reads it off a face). It runs from the Setup hook, after genesis has
+// applied the start, and deliberately not through rules.Config.Commanders:
+// that route is the Commander-format lane and would move the card to the
+// command zone where the start's placements cannot reach it. Names are walked
+// in file order and found by a slice walk of the seat's hand and battlefield
+// (the prelude's own isNamed), so no map walk reaches the list; a name the
+// seat does not hold is an error, not a silent skip.
+func designateStartCommanders(e *rules.Engine, perSeat [][]string) error {
+	for s, names := range perSeat {
+		if s >= len(e.G.Players) {
+			return fmt.Errorf("game: start: %d commander seats for a %d-seat game", len(perSeat), len(e.G.Players))
+		}
+		p := state.PlayerID(s)
+		for _, name := range names {
+			want := cards.NormalizeName(name)
+			var id state.ObjID
+			found := false
+			for _, objs := range [][]state.ObjID{e.G.Zone(state.ZHand, p), e.G.Zone(state.ZBattlefield, p)} {
+				for _, o := range objs {
+					if isNamed(e.G.Obj(o), want) {
+						id, found = o, true
+						break
+					}
+				}
+				if found {
+					break
+				}
+			}
+			if !found {
+				return fmt.Errorf("game: start: seat %d designates commander %q, which is neither in its hand nor on its battlefield", s, name)
+			}
+			e.G.Players[s].Commanders = append(e.G.Players[s].Commanders, id)
+		}
+	}
+	return nil
 }
 
 func firstLine(s string) string {

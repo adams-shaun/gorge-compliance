@@ -48,6 +48,18 @@ var combatKeywords = []string{
 	"Melee", "Rampage", "Provoke", "Toxic", "Infect", "Wither",
 }
 
+// IsCombatKeyword reports whether name is one of the keywords whose presence
+// on a creature face gives it level-B attack/block requirements. It exposes
+// combatKeywords so a key-universe caller does not keep a second list.
+func IsCombatKeyword(name string) bool {
+	for _, k := range combatKeywords {
+		if strings.EqualFold(k, name) {
+			return true
+		}
+	}
+	return false
+}
+
 // servableStaticModes maps modes whose supported parameter shape does not
 // need additional classification to its v1 template family.
 var servableStaticModes = []struct{ mode, sub string }{
