@@ -1,0 +1,53 @@
+{
+ "card": "Furnace of Rath",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "1bb19c79ec4e",
+ "scenarios": [
+  {
+   "name": "two-doublers-apply-one-after-the-other",
+   "cr": [
+    "614.5"
+   ],
+   "why": "Each doubler gets one opportunity to replace the damage event. Applying both to 2 damage makes 8, not 4 and not an endless loop.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Furnace of Rath",
+      "Dictate of the Twin Gods",
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Grizzly Bears"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "end-combat"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 12
+     }
+    }
+   ]
+  }
+ ]
+}

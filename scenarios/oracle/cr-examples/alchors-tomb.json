@@ -1,0 +1,62 @@
+{
+ "card": "Alchor's Tomb",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "0753f24c3e59",
+ "scenarios": [
+  {
+   "name": "white-bonus-follows-the-colour-change",
+   "cr": [
+    "613.9"
+   ],
+   "why": "The Tomb changes the Bear to white in layer 5. Honor of the Pure then sees a white creature and adds +1/+1 in layer 7c.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Honor of the Pure",
+      "Alchor's Tomb",
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Alchor's Tomb",
+     "ability": "becomes the color of your choice",
+     "mana": "CC",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "White"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "colours": "W",
+     "pt": "3/3"
+    }
+   ]
+  }
+ ]
+}
