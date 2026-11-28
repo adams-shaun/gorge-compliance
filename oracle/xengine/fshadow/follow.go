@@ -2,6 +2,7 @@ package fshadow
 
 import (
 	"fmt"
+	"slices"
 	"sort"
 	"strings"
 
@@ -134,6 +135,10 @@ type Result struct {
 	// Chooses counts the list-picks (discard, keep, x, sacrifice ...) the
 	// log has no line for, which the follower answered by default.
 	Chooses int `json:"chooses,omitempty"`
+	// LibraryPicks counts the Chooses that picked library cards (a search's
+	// pick) from the owner's next shuffle line: the offered cards missing
+	// from it are the ones Forge took.
+	LibraryPicks int `json:"library_picks,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -673,6 +678,9 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// offered order -- and consume no line; Forge's real choice, if it
 		// differs, shows at the next snapshot.
 		if in, ok := f.mayShuffleChoose(d); ok {
+			return in, true
+		}
+		if in, ok := f.libraryPickChoose(d); ok {
 			return in, true
 		}
 		return f.defaultChoose(d), true
@@ -1554,6 +1562,93 @@ func (f *follower) mayShuffleChoose(d *decision.Decision) (decision.Intent, bool
 	}
 	f.res.Chooses++
 	return decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{pick}}, true
+}
+
+// libraryPickChoose answers a pick of library cards (a library search's
+// "choose up to N", whatever its resume kind) from the owner's next
+// unconsumed Forge shuffle line. Forge's recorder writes no ask line for the
+// pick, but a search shuffles afterwards and that shuffle line names the
+// cards left in the library: the picked cards are exactly the offered ones
+// missing from it. Answering by default (firstMin, nothing when Min is 0)
+// left the land in gorge's library, so the planned shuffle met a library one
+// card larger than Forge's (chance-misaligned, "Forge shuffled 89 cards,
+// gorge 90"; farm cmdr4 pod 14201, Terramorphic Expanse).
+//
+// It applies to any KChoose whose every option is a card in one seat's
+// library, matched by where the objects are rather than by resume kind, so a
+// later search-shaped pick is covered too. It answers only when every card
+// of gorge's library absent from that shuffle is offered (a shuffle that is
+// a later one, after draws or other moves, misses cards not offered and
+// falls back to the default) and the picks form a valid answer.
+func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, bool) {
+	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	seat := -1
+	var lib []state.ObjID
+	inLib := map[state.ObjID]bool{}
+	for _, o := range d.Options {
+		if o.Obj == 0 {
+			return decision.Intent{}, false
+		}
+		if seat < 0 {
+			for s := range f.e.G.Players {
+				if slices.Contains(f.e.G.Zone(state.ZLibrary, state.PlayerID(s)), o.Obj) {
+					seat = s
+					break
+				}
+			}
+			if seat < 0 {
+				return decision.Intent{}, false
+			}
+			lib = f.e.G.Zone(state.ZLibrary, state.PlayerID(seat))
+			for _, id := range lib {
+				inLib[id] = true
+			}
+		}
+		if !inLib[o.Obj] {
+			return decision.Intent{}, false
+		}
+	}
+	ss := f.shuffles[seat]
+	n := f.planned[seat]
+	if n >= len(ss) {
+		return decision.Intent{}, false
+	}
+	kept := map[state.ObjID]bool{}
+	for _, fid := range ss[n].Order {
+		if g, ok := f.toG[fid]; ok {
+			kept[g] = true
+		}
+	}
+	offered := map[state.ObjID]int{}
+	for i, o := range d.Options {
+		if _, dup := offered[o.Obj]; !dup {
+			offered[o.Obj] = i
+		}
+	}
+	var picks []int
+	for _, id := range lib {
+		if kept[id] {
+			continue
+		}
+		i, ok := offered[id]
+		if !ok {
+			return decision.Intent{}, false // a later shuffle: something else left the library first
+		}
+		picks = append(picks, i)
+	}
+	slices.Sort(picks)
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: picks}
+	if in.Choices == nil {
+		in.Choices = []int{}
+	}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.LibraryPicks++
+	return in, true
 }
 
 // shuffleLogged reports whether some seat's next unconsumed Forge shuffle
