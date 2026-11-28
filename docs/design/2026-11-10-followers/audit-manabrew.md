@@ -1,4 +1,4 @@
-<!-- Audit notes written 2026-11-10 for the phase.rs / Manabrew follower design. Read-only static audit; local paths (/tmp/..., /mnt/sata/...) are from the audit machine and abbreviations are defined at the top. Historical, like every design note. -->
+<!-- Audit notes written 2026-11-10 for the phase.rs / Manabrew follower design. Read-only static audit; local paths (/tmp/..., <training-root>/...) are from the audit machine and abbreviations are defined at the top. Historical, like every design note. -->
 
 # Manabrew as a gorge-compliance follower: audit notes
 
@@ -7,7 +7,7 @@ Audited read-only and statically (no Rust toolchain on this box).
 - Clone: `/tmp/mb-probe/manabrew` @ `dadee73` ("chore(release): 1 package(s)", 2026-11-10). All paths below are relative to that clone unless prefixed.
 - Engine paths: `E = manabrew-rs/crates/manabrew-engine/src`, `AI = manabrew-rs/crates/manabrew-agent-interface/src`, `P = manabrew-rs/crates/parity/src`.
 - Forge template: `forge-oracle/src/main/java/forge/oracle/*` in the scratchpad Forge clone, abbreviated `FO/`.
-- gorge-pin Forge res, a full working tree at exactly `84ce1603d9`: `/mnt/sata/gorge-training/xengine/forge-trek6/forge-gui/res`. That checkout is blobless too, but its `res/` tree is checked out and clean, so the scanner reads it directly.
+- gorge-pin Forge res, a full working tree at exactly `84ce1603d9`: `<training-root>/xengine/forge-trek6/forge-gui/res`. That checkout is blobless too, but its `res/` tree is checked out and clean, so the scanner reads it directly.
 - Scanner: `scratchpad/mb_scan.py`. Its outputs are `scratchpad/mb_scan_{fdn,commons,all}.json`, plus `scratchpad/rust_trigger_modes.txt`.
 
 ---
@@ -305,7 +305,7 @@ Use it only as a reference, and maybe for the GameViewDto snapshot.
 
 ### 5.2 Static estimate
 
-Method: `scratchpad/mb_scan.py` against Rust literals and enums in `manabrew-engine/src` plus `forge-card-script/src`, over gorge-pin scripts in `/mnt/sata/gorge-training/xengine/forge-trek6/forge-gui/res`.
+Method: `scratchpad/mb_scan.py` against Rust literals and enums in `manabrew-engine/src` plus `forge-card-script/src`, over gorge-pin scripts in `<training-root>/xengine/forge-trek6/forge-gui/res`.
 
 - AI-only and cosmetic keys are excluded: AILogic, AITgts, Ultimate, Image, descriptions, MayPlayText, …
 - A flag means the Rust code never even names the thing. Absence of a flag is **not** support.
