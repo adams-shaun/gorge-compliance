@@ -287,9 +287,12 @@ class Workflow(Base):
         self.assertEqual(trig["schedule"][0]["cron"], "23 4 * * *")
         self.assertEqual(trig["workflow_dispatch"]["inputs"]["dry_run"]["type"], "boolean")
         self.assertIn("carddb", doc["concurrency"]["group"])
-        self.assertTrue(doc["concurrency"]["cancel-in-progress"])
+        self.assertIn("run_id", doc["concurrency"]["group"])  # only a PR's runs cancel each other
         self.assertTrue({"lint", "check", "ready", "publish"} <= set(doc["jobs"]))
         publish = doc["jobs"]["publish"]
+        # A data push cancels only the older run's debounce wait, never a build in progress (11-28).
+        self.assertEqual(doc["jobs"]["ready"]["concurrency"], {"group": "carddb-debounce", "cancel-in-progress": True})
+        self.assertEqual(publish["concurrency"], {"group": "carddb-publish", "cancel-in-progress": False})
         self.assertEqual(publish["permissions"]["contents"], "write")
         # A red lint must not let the data branch/release move.
         self.assertIn("lint", publish["needs"])

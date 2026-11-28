@@ -82,10 +82,13 @@ on:
 permissions:
   contents: read
 
-# One write path; pull requests get their own group. A newer push cancels the
-# older waiting run, which is the two-hour debounce.
+# Pull requests: one group per PR, newest wins. Everything else gets its own run
+# (run_id); the debounce lives on the `ready` job (a newer push cancels only the
+# older run's quiet-period wait) and `publish` queues in one non-cancelling group.
+# 11-28: one workflow-wide cancelling group let every data push cancel a running
+# build, the nightly and a manual dispatch alike; carddb-latest went 2 days unpublished.
 concurrency:
-  group: carddb-${{ github.event.pull_request.number || 'data' }}
+  group: carddb-${{ github.event.pull_request.number && format('pr-{0}', github.event.pull_request.number) || github.run_id }}
   cancel-in-progress: true
 
 env:
@@ -173,6 +176,9 @@ jobs:
   ready:
     needs: check
     if: github.event_name == 'push' && github.event.deleted != true
+    concurrency:
+      group: carddb-debounce
+      cancel-in-progress: true
     runs-on: ubuntu-24.04
     timeout-minutes: 135
     outputs:
@@ -224,6 +230,9 @@ jobs:
       needs.lint.result == 'success' &&
       (needs.ready.result == 'skipped' ||
        (needs.ready.result == 'success' && needs.ready.outputs.stale != 'true'))
+    concurrency:
+      group: carddb-publish
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
