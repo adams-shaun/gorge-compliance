@@ -59,8 +59,8 @@ func (t *translator) manaSourceRefusal() *refusal {
 			hasCast = true
 		}
 	}
-	var tappedSeats [2]bool
-	for p := 0; p < 2; p++ {
+	var tappedSeats [maxSeats]bool
+	for p := 0; p < t.seats(); p++ {
 		for _, ac := range t.setup[p] {
 			if !oracleHas(ac.name, reManaFromSourceSpent) &&
 				!(oracleHas(ac.name, reManaRiderSpent) && !t.sourceStatedPaid(ac.name)) {
@@ -80,7 +80,11 @@ func (t *translator) manaSourceRefusal() *refusal {
 			}
 		}
 	}
-	if !tappedSeats[0] && !tappedSeats[1] {
+	anyTapped := false
+	for _, b := range tappedSeats {
+		anyTapped = anyTapped || b
+	}
+	if !anyTapped {
 		return nil
 	}
 	casts := map[int]bool{}
@@ -104,7 +108,7 @@ func (t *translator) manaSourceRefusal() *refusal {
 		if owner := t.choiceOwner(ch); owner == nil || owner.kind == "cast" || owner.kind == "play" {
 			continue
 		}
-		for p := 0; p < 2; p++ {
+		for p := 0; p < t.seats(); p++ {
 			for _, ac := range t.setup[p] {
 				if ac.zone != "battlefield" || ac.tapped || !sameName(ac.name, name) || tappedSeats[p] || !casts[p] {
 					continue

@@ -16,7 +16,7 @@ import (
 // subtype (Clue). Until the two readings are reconciled the runner cannot
 // state which one the asserts mean, so the failing shape is refused.
 func (t *translator) removeCardTypesSubtypeRefusal() *refusal {
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		for _, ac := range t.setup[p] {
 			c, ok := t.lookup(ac.name)
 			if !ok {

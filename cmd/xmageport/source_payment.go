@@ -135,7 +135,7 @@ func (em *emitter) sourceFree(ref string, seat, turn int, ss *sensSource) bool {
 	}
 	if ss.tap {
 		for u := k + 1; u <= turn; u++ {
-			if active(u) == seat {
+			if em.t.active(u) == seat {
 				return true
 			}
 		}
@@ -365,9 +365,9 @@ func (em *emitter) noteClonedSource(a *action, ref string) {
 }
 
 // untapEpoch is the latest turn up to turn on which seat untapped.
-func untapEpoch(seat, turn int) int {
+func untapEpoch(seat, turn, seats int) int {
 	for u := turn; u > 1; u-- {
-		if active(u) == seat {
+		if activeSeat(u, seats) == seat {
 			return u
 		}
 	}
@@ -376,7 +376,7 @@ func untapEpoch(seat, turn int) int {
 
 // noteSpent records n mana of the seat's other sources seeded by a cast.
 func (em *emitter) noteSpent(seat, n int) {
-	ep := untapEpoch(seat, em.turn)
+	ep := untapEpoch(seat, em.turn, em.t.seats())
 	if em.spent[seat].epoch != ep {
 		em.spent[seat] = spentMana{epoch: ep}
 	}
@@ -386,7 +386,7 @@ func (em *emitter) noteSpent(seat, n int) {
 // spentSinceUntap is how many of the seat's other sources earlier casts
 // seeded since its last untap.
 func (em *emitter) spentSinceUntap(seat int) int {
-	if em.spent[seat].epoch != untapEpoch(seat, em.turn) {
+	if em.spent[seat].epoch != untapEpoch(seat, em.turn, em.t.seats()) {
 		return 0
 	}
 	return em.spent[seat].n
