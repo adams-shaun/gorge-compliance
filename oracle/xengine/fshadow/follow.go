@@ -138,6 +138,12 @@ type Result struct {
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
 	Targets int `json:"targets,omitempty"`
+	// CastTargets counts the target decisions gorge posed with no target
+	// line of their own that the follower answered from the targets Forge's
+	// cast or activate answer carried (its priority line's "targets"): Forge
+	// picks a spell's targets while casting it, records them on the cast,
+	// and writes no target ask.
+	CastTargets int `json:"cast_targets,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
@@ -178,7 +184,14 @@ type follower struct {
 	// bottom (the recorder cleared it on a no-op mulligan line): the whole
 	// hand goes to the bottom.
 	mullBottomAll map[int]bool
-	res           Result
+	// castTargets are the refs the last consumed priority answer (a cast or
+	// an activation) chose as targets, not yet given to a gorge target
+	// decision; castSeat is the seat that chose them. Consuming the next log
+	// line clears them, so they never reach a later spell's or a trigger's
+	// target.
+	castTargets []Ref
+	castSeat    int
+	res         Result
 }
 
 // Follow replays l in gorge. A setup failure (an unknown card, a binding
@@ -672,6 +685,10 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// block ask. Answer by default -- the first Min offered options the
 		// Group contract admits -- and consume no line; Forge's real choice,
 		// if it differs, shows at the next snapshot.
+		if in, ok := f.answerCastTargets(d); ok {
+			f.res.CastTargets++
+			return in, true
+		}
 		f.res.Targets++
 		return f.defaultTargets(d), true
 	}
@@ -681,6 +698,7 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 	}
 	a := e.Ask
 	f.res.Asks++
+	f.castTargets = nil // this line is consumed (or the follow stops): earlier cast targets are spent
 	if gk, ok := gorgeKind(a.Kind); !ok {
 		f.hard(WhatError, d, Divergence{Line: e.Line, Ask: a.N, Harness: HarnessUnmapped, Detail: "unsupported ask kind " + a.Kind, Forge: a.Kind, Gorge: string(d.Kind)})
 		return in, false
@@ -712,7 +730,69 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		f.hard(err.What, d, *err)
 		return in, false
 	}
+	if d.Kind == decision.KPriority {
+		f.rememberCastTargets(a)
+	}
 	f.pos++
+	return in, true
+}
+
+// rememberCastTargets keeps the targets a priority answer carried (a cast's
+// or an activation's "targets"): Forge chooses them while it casts and writes
+// no target ask, so gorge's target decisions that follow have no line of
+// their own and are answered from these.
+func (f *follower) rememberCastTargets(a *Ask) {
+	if len(a.Answer.Targets) == 0 {
+		return
+	}
+	f.castTargets = append([]Ref(nil), a.Answer.Targets...)
+	f.castSeat = a.Seat
+}
+
+// answerCastTargets answers target decision d from the remembered cast
+// targets of the same seat: in Forge's order, each remembered ref d offers
+// is taken, up to d.Max, and taken refs are spent (a spell with several
+// target slots that gorge asks one decision each takes them slot by slot).
+// A ref d does not offer is left for a later decision. ok is false (answer
+// by default) when no remembered ref fits, too few fit for d.Min, or the
+// picks admit no Group assignment.
+func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, bool) {
+	in := decision.Intent{Seq: d.Seq, Player: d.Player}
+	if len(f.castTargets) == 0 || int(d.Acting()) != f.castSeat {
+		return in, false
+	}
+	var cands [][]int
+	var taken []int
+	for i, r := range f.castTargets {
+		if d.Max > 0 && len(cands) >= d.Max {
+			break
+		}
+		c, ok := f.targetCandidates(d, r)
+		if !ok || len(c) == 0 {
+			continue
+		}
+		cands = append(cands, c)
+		taken = append(taken, i)
+	}
+	if len(cands) == 0 || len(cands) < d.Min {
+		return in, false
+	}
+	choices, ok := assignTargetOptions(d, cands)
+	if !ok {
+		return in, false
+	}
+	rest := f.castTargets[:0:0]
+	for i, r := range f.castTargets {
+		spent := false
+		for _, t := range taken {
+			spent = spent || t == i
+		}
+		if !spent {
+			rest = append(rest, r)
+		}
+	}
+	f.castTargets = rest
+	in.Choices = choices
 	return in, true
 }
 
