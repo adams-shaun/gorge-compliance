@@ -84,6 +84,14 @@ The row must then keep failing: once gorge is fixed the audit fails until the ro
 `known-unconsumed/` has the same shape and lists scenarios that leave a scripted answer unused. Its
 rows are only ever deleted.
 
+## Four seats
+
+[`padseats.tsv`](padseats.tsv) records every scenario here that its two seats see differently
+when two inert seats are added, or that doesn't seat two, with a `class` and rule (`cr`) once
+triage has explained the row. `make padseats` re-runs every scenario and fails on a missing, stale
+or changed row; `go run ./cmd/padseats -write` rewrites the record, keeping the triage of unchanged
+rows. A new scenario that differs at four seats arrives with its row.
+
 ## XMage ports
 
 `xmageport/<family>/<Class>.json` holds translations of XMage's Mage.Tests methods; each

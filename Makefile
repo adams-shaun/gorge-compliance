@@ -1073,6 +1073,7 @@ help:
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
+	@echo "  make padseats       — replay both scenario corpora at four seats and check scenarios/padseats.tsv"
 	@echo "  make compliance-status — per-set/per-format compliance status (oracle/compliance/status.md, never committed) + ratchet check"
 	@echo "  make compliance-sets — both levels over every printed set -> .coverage/compliance-sets.md"
 	@echo "  make compliance-manifests — regenerate oracle/compliance/manifests from XMage set classes at XMAGE_REF"
@@ -1216,6 +1217,14 @@ carddb-test:
 ORACLE_RUN ?=
 oracle-audit:
 	@PKG=./audit RUN='TestOracleScenarioFilesWellFormed|TestOracleAudit/$(ORACLE_RUN)|TestXMagePortScenarios' V=1 bash scripts/test-targets.sh whole
+
+# padseats replays both scenario corpora with two inert seats added (gorge only,
+# no JVM) and checks scenarios/padseats.tsv: the full TSV goes under
+# .oracle-build/, the summary and any mismatched row to stderr. A command, not
+# part of the test targets.
+.PHONY: padseats
+padseats:
+	@go run ./cmd/padseats -out .oracle-build/padseats.tsv
 
 smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
