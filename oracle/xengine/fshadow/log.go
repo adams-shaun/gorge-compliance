@@ -26,7 +26,10 @@
 // Forge's recorder writes a target ask only where its targeting hook is asked,
 // so a gorge target decision whose log line is an ask of another kind (the
 // seat's next priority) is answered by default (the first Min options;
-// Result.Targets counts them) and consumes no log line.
+// Result.Targets counts them) and consumes no log line. A cast or an
+// activation carries the targets Forge chose for it in its priority answer
+// ("targets"), so a target decision that follows one is answered from those
+// refs instead (Result.CastTargets counts them), still consuming no line.
 //
 // Forge's recorder writes no ask for a "may" trigger's yes/no, so a gorge
 // optional-trigger decision (trigger_optional) is answered by default (the
