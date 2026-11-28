@@ -204,9 +204,9 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		}
 		a.Answer.Card = toF[e.Pending().Options[i].Obj]
 		if s.activate {
-			a.Answer.Action, a.Answer.Ability = "activate", 10+s.ability
+			a.Answer.Action, a.Answer.Ability = "activate", intPtr(10+s.ability)
 			for k := 0; option(kind, s.use, k) >= 0; k++ {
-				a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: 10 + k})
+				a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: intPtr(10 + k)})
 			}
 		}
 		submit(decision.Intent{Choices: []int{i}})
@@ -392,6 +392,8 @@ func TestHandPaymentThatTriggersDiverges(t *testing.T) {
 	}
 }
 
+func intPtr(n int) *int { return &n }
+
 // lastAsk is the last ask of l answering action.
 func lastAsk(t *testing.T, l *Log, action string) (*Ask, int) {
 	t.Helper()
@@ -433,11 +435,11 @@ func unnamedAt(t *testing.T, l *Log, line, handPayments int) {
 	}
 }
 
-// TestPlannedCastOfAnUnnamedWayStops: Forge's cast line names neither the
-// face nor the alternative its seat cast, so a card gorge can cast two ways
-// Forge marks alike stops at the line, rather than taking gorge's first: the
-// Adventure plan (Stomp) listed before Bonecrusher Giant's creature cast that
-// pays from the same sources.
+// TestPlannedCastOfAnUnnamedWayStops: a cast line without ability indexes
+// names neither the face nor the alternative its seat cast, so a card gorge can
+// cast two ways Forge marks alike stops at the line, rather than taking gorge's
+// first: the Adventure plan (Stomp) listed before Bonecrusher Giant's creature
+// cast that pays from the same sources.
 func TestPlannedCastOfAnUnnamedWayStops(t *testing.T) {
 	l := handGame(t, corpus(t), "", []string{"Mountain", "Sol Ring", "Bonecrusher Giant"}, []handStep{
 		{land: "Mountain"},
@@ -532,7 +534,7 @@ func TestHandPaymentForgeDoesNotNameDiverges(t *testing.T) {
 	for name, doctor := range map[string]func(*Ask){
 		"second cast": func(a *Ask) {
 			for k := range 2 {
-				a.Options = append(a.Options, Option{Action: "cast", Card: a.Answer.Card, Ability: k})
+				a.Options = append(a.Options, Option{Action: "cast", Card: a.Answer.Card, Ability: &k})
 			}
 		},
 		"marked": func(a *Ask) { a.Answer.Mode = "kicked" },
@@ -575,9 +577,9 @@ func thornscapeGame(t *testing.T, listed ...int) (*Log, int) {
 		{use: master, activate: true, taps: []string{"Wastes", "Boros Signet", "Clifftop Retreat:W", master}, target: master},
 	})
 	a, line := lastAsk(t, l, "activate")
-	a.Answer.Ability, a.Options = 11, nil
+	a.Answer.Ability, a.Options = intPtr(11), nil
 	for _, id := range listed {
-		a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: id})
+		a.Options = append(a.Options, Option{Action: "activate", Card: a.Answer.Card, Ability: &id})
 	}
 	return l, line
 }
@@ -808,4 +810,142 @@ func TestOfferedActivationTapsForgesSources(t *testing.T) {
 		{use: paladin, activate: true, taps: []string{"Plateau:W", "Mountain"}},
 	})
 	followClean(t, l, 1)
+}
+
+// TestOfferedActivationSacrificingAnotherDiverges: Forge activates Frozen Shade
+// tapping Phyrexian Tower alone and sacrifices the second creature. The line
+// names no victim, so the activation is not paid by hand, and gorge's own
+// payment of the offer passes the Tower over: the follow stops at the
+// activation instead of reporting the graveyard at a later snapshot.
+func TestOfferedActivationSacrificingAnotherDiverges(t *testing.T) {
+	const tower, elves, mystic, shade = "Phyrexian Tower", "Llanowar Elves", "Elvish Mystic", "Frozen Shade"
+	l := handGame(t, corpus(t), "", []string{"Forest", elves, "Sol Ring", "Swamp", shade, tower, mystic}, []handStep{
+		{land: "Forest"},
+		{plan: elves},
+		{land: "Swamp"},
+		{plan: "Sol Ring"},
+		{plan: shade},
+		{land: tower},
+		{plan: mystic},
+		{use: shade, activate: true, taps: []string{tower + ":Sacrifice:" + mystic}},
+	})
+	a, line := lastAsk(t, l, "activate")
+	res := follow(t, l)
+	h := res.Hard
+	want := fmt.Sprintf("activate:%d tapping %v", a.Answer.Card, a.Answer.Tapped)
+	if h == nil || h.What != WhatAnswerMissing || h.Line != line || h.Field != "payment" || h.Forge != want {
+		t.Fatalf("divergence %+v, want answer-missing payment %q at line %d", h, want, line)
+	}
+	if res.HandPayments != 0 || len(h.Record.Log.Intents) != res.Decisions {
+		t.Errorf("%d hand payments, want 0; %d intents for %d decisions", res.HandPayments, len(h.Record.Log.Intents), res.Decisions)
+	}
+}
+
+// cardIDs is the Forge ids of seat 0's cards called name, in deck order.
+func cardIDs(l *Log, name string) []int {
+	var out []int
+	for _, c := range l.Header.Seats[0].Cards {
+		if c.Name == name {
+			out = append(out, c.ID)
+		}
+	}
+	return out
+}
+
+// TestOfferedActivationPaidByAnotherLandOfTheName: Vampiric Rites' own
+// sacrifice keeps it from being paid by hand, and gorge's payment taps two of
+// three Swamps. Whichever two Forge's line lists, the follow takes the offer:
+// a Swamp costs no other card.
+func TestOfferedActivationPaidByAnotherLandOfTheName(t *testing.T) {
+	const swamp, rites, rats = "Swamp", "Vampiric Rites", "Typhoid Rats"
+	l := handGame(t, corpus(t), "", []string{swamp, rites, swamp, rats, swamp}, []handStep{
+		{land: swamp},
+		{plan: rites},
+		{land: swamp},
+		{plan: rats},
+		{land: swamp},
+		{use: rites, activate: true, taps: []string{swamp, swamp}},
+	})
+	a, _ := lastAsk(t, l, "activate")
+	ids := cardIDs(l, swamp)
+	for _, pair := range [][2]int{{0, 1}, {0, 2}, {1, 0}, {1, 2}, {2, 0}, {2, 1}} {
+		a.Answer.Tapped = []int{ids[pair[0]], ids[pair[1]]}
+		t.Run(fmt.Sprint(pair), func(t *testing.T) { followClean(t, l, 0) })
+	}
+}
+
+// TestOfferedUntapActivationTakesTheOffer: Farmstead Gleaner's {Q} cost
+// untaps it, which keeps it from being paid by hand; gorge's own payment is
+// taken.
+func TestOfferedUntapActivationTakesTheOffer(t *testing.T) {
+	const gleaner, icy = "Farmstead Gleaner", "Icy Manipulator"
+	l := handGame(t, corpus(t), "", []string{"Forest", "Mountain", "Plains", gleaner, "Island", "Swamp", icy, "Wastes"}, []handStep{
+		{land: "Forest"},
+		{land: "Mountain"},
+		{land: "Plains"},
+		{plan: gleaner},
+		{land: "Island"},
+		{plan: icy},
+		{land: "Swamp"},
+		{use: icy, activate: true, taps: []string{"Swamp", icy}, target: gleaner},
+		{land: "Wastes"},
+		{use: gleaner, activate: true, taps: []string{"Mountain", "Wastes"}},
+	})
+	followClean(t, l, 1)
+}
+
+// TestOfferedActivationTappingTheTowerTakesTheOffer: Forge pays Vampiric Rites
+// with Phyrexian Tower's {C} and a Swamp, and gorge's own payment taps both, so
+// the Tower's sacrifice ability is no reason to stop.
+func TestOfferedActivationTappingTheTowerTakesTheOffer(t *testing.T) {
+	const tower, rites, rats = "Phyrexian Tower", "Vampiric Rites", "Typhoid Rats"
+	l := handGame(t, corpus(t), "", []string{"Swamp", rites, tower, rats}, []handStep{
+		{land: "Swamp"},
+		{plan: rites},
+		{land: tower},
+		{plan: rats},
+		{use: rites, activate: true, taps: []string{tower + ":C", "Swamp"}},
+	})
+	followClean(t, l, 0)
+}
+
+// TestOfferedActivationPaidByAnotherTowerOfTheName: under Mirror Box two
+// Phyrexian Towers stay. Whichever one Forge's line lists, gorge's payment
+// taps a Tower, and permanents of one name stand in for each other.
+func TestOfferedActivationPaidByAnotherTowerOfTheName(t *testing.T) {
+	const tower, rites, rats, box = "Phyrexian Tower", "Vampiric Rites", "Typhoid Rats", "Mirror Box"
+	l := handGame(t, corpus(t), "", []string{"Swamp", rites, tower, rats, "Forest", box, tower}, []handStep{
+		{land: "Swamp"},
+		{plan: rites},
+		{land: tower},
+		{plan: rats},
+		{land: "Forest"},
+		{plan: box},
+		{land: tower},
+		{use: rites, activate: true, taps: []string{tower + ":C", "Swamp"}},
+	})
+	a, _ := lastAsk(t, l, "activate")
+	swamp := cardIDs(l, "Swamp")[0]
+	for _, id := range cardIDs(l, tower) {
+		a.Answer.Tapped = []int{id, swamp}
+		t.Run(fmt.Sprint(id), func(t *testing.T) { followClean(t, l, 0) })
+	}
+}
+
+// TestOfferedActivationPaidByAnotherNameIsLeftToSnapshot: Forge taps a Forest
+// where gorge's payment taps a second Swamp. Neither costs another card, so the
+// follow takes the offer and the next snapshot reports the difference.
+func TestOfferedActivationPaidByAnotherNameIsLeftToSnapshot(t *testing.T) {
+	const rites, rats = "Vampiric Rites", "Typhoid Rats"
+	l := handGame(t, corpus(t), "", []string{"Swamp", rites, "Swamp", rats, "Forest"}, []handStep{
+		{land: "Swamp"},
+		{plan: rites},
+		{land: "Swamp"},
+		{plan: rats},
+		{land: "Forest"},
+		{use: rites, activate: true, taps: []string{"Swamp", "Forest"}},
+	})
+	if h := follow(t, l).Hard; h == nil || h.What != WhatSnapshot {
+		t.Fatalf("divergence %+v, want a snapshot one", h)
+	}
 }

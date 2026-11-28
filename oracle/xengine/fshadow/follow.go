@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
@@ -144,6 +145,10 @@ type Result struct {
 	// discard) from the next snapshot line: the offered cards gone from the
 	// seat's hand there are the ones Forge took.
 	HandPicks int `json:"hand_picks,omitempty"`
+	// DiscardElections counts the Chooses that answered a discard's "unless"
+	// election "ordinary" (the full count, not one card of a type) from the
+	// next snapshot line.
+	DiscardElections int `json:"discard_elections,omitempty"`
 	// ArrivalPicks counts the Chooses that picked cards moving into a hand (a
 	// dig's take, a graveyard return, a bounced land) from the next snapshot
 	// line: the offered cards new in their owner's hand there are the ones
@@ -719,88 +724,8 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		f.hard(WhatAnswerMissing, d, Divergence{Line: e.Line, Forge: want, Gorge: optKeys(f, d)})
 		return in, false
 	}
-	if d.Kind == decision.KModes {
-		// Forge's recorder logs no modal answer (a charm's modes, a
-		// modal trigger's, a nested Charm): the AI answers through hooks that
-		// write no ask line, so the next line belongs to a later decision.
-		// gorge also poses some card picks as modes (an effect's discard, a
-		// connive's), which the log can still answer (cardPickChoose declines
-		// every modes ask that is no such pick). Otherwise answer by
-		// default -- the first modes the ask requires, at least one -- and
-		// consume no line; Forge's real choice, if it differs, shows at the
-		// next snapshot.
-		if in, ok := f.cardPickChoose(d); ok {
-			return in, true
-		}
-		return f.defaultModes(d), true
-	}
-	if d.Kind == decision.KArrange {
-		// Forge's recorder logs no scry/surveil/dig-order answer (its
-		// arrangeForScry and arrangeForSurveil hooks write no ask line), so
-		// the log has nothing to match this decision against and the next
-		// line belongs to a later decision. Read the order from the next
-		// snapshot where it shows; otherwise answer by default -- the
-		// offered cards stay on top in offered order, as many as the ask
-		// allows. Consume no line either way; Forge's real choice, if it
-		// differs, shows at the next library_top snapshot.
-		if in, ok := f.arrangeFromSnapshot(d); ok {
-			return in, true
-		}
-		return f.defaultArrange(d), true
-	}
-	if d.Kind == decision.KTriggerOptional {
-		// Forge's recorder logs no "may" trigger's yes/no (its
-		// confirmTrigger hook writes no ask line), so the next line belongs
-		// to a later decision (farm cmdr4: gorge "trigger_optional seat 0"
-		// against Forge's "priority seat 0"). Answer by default -- the first
-		// option, "yes", as Forge's controller accepts a trigger it may
-		// decline -- and consume no line; Forge's real choice, if it
-		// differs, shows at the next snapshot.
-		f.res.Optionals++
-		return firstMin(d), true
-	}
-	if d.Kind == decision.KTriggerOrder {
-		// Forge's recorder logs no trigger order (its controller orders the
-		// stack through a hook that writes no ask line), so the next line
-		// belongs to a later decision (farm cmdr4: gorge "trigger_order seat
-		// 2" against Forge's "priority seat 0"). Answer by default -- the
-		// offered order, a full permutation as Min == Max == len(Options) --
-		// and consume no line; Forge's real order, if it differs, shows at
-		// the next stack snapshot.
-		f.res.Orders++
-		return firstMin(d), true
-	}
-	if d.Kind == decision.KChoose {
-		// Forge's recorder logs only priority, attack, block and target
-		// asks: a list-pick (a cleanup discard, the legend rule's keep, an
-		// "as this enters" choice, a cost's sacrifice ...) is answered
-		// through hooks that write no ask line, so the next line belongs to
-		// a later decision. A card pick the log's later lines show is
-		// answered from them; otherwise answer by default -- the first Min
-		// options in offered order -- and consume no line; Forge's real
-		// choice, if it differs, shows at the next snapshot.
-		if in, ok := f.mayShuffleChoose(d); ok {
-			return in, true
-		}
-		if in, ok := f.twoPilesChoose(d); ok {
-			return in, true
-		}
-		if in, ok := f.cardPickChoose(d); ok {
-			return in, true
-		}
-		return f.defaultChoose(d), true
-	}
-	if d.Kind == decision.KCommanderZone {
-		return f.commanderZone(d), true
-	}
 	if unloggedKind(d.Kind) {
-		// Every other kind the log never carries (a CR 616.1 replacement
-		// choice, a kind gorge adds later): the next line belongs to a later
-		// decision. Answer by default -- the first Min options in offered
-		// order -- and consume no line; Forge's real choice, if it differs,
-		// shows at the next snapshot.
-		f.res.OtherDefaults++
-		return firstMin(d), true
+		return f.answerUnlogged(d), true
 	}
 	if d.Kind == decision.KTarget && (f.linePartsDue(d) || e.Ask != nil && e.Ask.Kind != KindTarget) {
 		// A target line's later parts answer their chain's asks whatever
@@ -878,6 +803,87 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 	}
 	f.pos++
 	return in, true
+}
+
+// answerUnlogged answers decision d of a kind the log carries no line for
+// (unloggedKind): from what the log shows Forge did where it shows it, else by
+// default. It consumes no line, so Forge's real choice, if it differs, shows at
+// the next snapshot. The follow and a payment's trial (passesOverCostlySource)
+// both answer through it.
+func (f *follower) answerUnlogged(d *decision.Decision) decision.Intent {
+	switch d.Kind {
+	case decision.KModes:
+		// Forge's recorder logs no modal answer (a charm's modes, a
+		// modal trigger's, a nested Charm): the AI answers through hooks that
+		// write no ask line, so the next line belongs to a later decision.
+		// gorge also poses some card picks as modes (an effect's discard, a
+		// connive's), which the log can still answer (cardPickChoose declines
+		// every modes ask that is no such pick). Otherwise answer by
+		// default: the first modes the ask requires, at least one.
+		if in, ok := f.cardPickChoose(d); ok {
+			return in
+		}
+		return f.defaultModes(d)
+	case decision.KArrange:
+		// Forge's recorder logs no scry/surveil/dig-order answer (its
+		// arrangeForScry and arrangeForSurveil hooks write no ask line), so
+		// the log has nothing to match this decision against and the next
+		// line belongs to a later decision. Read the order from the next
+		// snapshot where it shows (a later library_top snapshot shows a
+		// difference); otherwise answer by default -- the offered cards stay
+		// on top in offered order, as many as the ask allows.
+		if in, ok := f.arrangeFromSnapshot(d); ok {
+			return in
+		}
+		return f.defaultArrange(d)
+	case decision.KTriggerOptional:
+		// Forge's recorder logs no "may" trigger's yes/no (its
+		// confirmTrigger hook writes no ask line), so the next line belongs
+		// to a later decision (farm cmdr4: gorge "trigger_optional seat 0"
+		// against Forge's "priority seat 0"). Answer by default -- the first
+		// option, "yes", as Forge's controller accepts a trigger it may
+		// decline.
+		f.res.Optionals++
+		return firstMin(d)
+	case decision.KTriggerOrder:
+		// Forge's recorder logs no trigger order (its controller orders the
+		// stack through a hook that writes no ask line), so the next line
+		// belongs to a later decision (farm cmdr4: gorge "trigger_order seat
+		// 2" against Forge's "priority seat 0"). Answer by default -- the
+		// offered order, a full permutation as Min == Max == len(Options);
+		// Forge's real order, if it differs, shows at the next stack
+		// snapshot.
+		f.res.Orders++
+		return firstMin(d)
+	case decision.KChoose:
+		// Forge's recorder logs only priority, attack, block and target
+		// asks: a list-pick (a cleanup discard, the legend rule's keep, an
+		// "as this enters" choice, a cost's sacrifice ...) is answered
+		// through hooks that write no ask line, so the next line belongs to
+		// a later decision. A card pick the log's later lines show is
+		// answered from them; otherwise answer by default -- the first Min
+		// options in offered order.
+		if in, ok := f.mayShuffleChoose(d); ok {
+			return in
+		}
+		if in, ok := f.twoPilesChoose(d); ok {
+			return in
+		}
+		if in, ok := f.discardElection(d); ok {
+			return in
+		}
+		if in, ok := f.cardPickChoose(d); ok {
+			return in
+		}
+		return f.defaultChoose(d)
+	case decision.KCommanderZone:
+		return f.commanderZone(d)
+	}
+	// Every other kind the log never carries (a CR 616.1 replacement choice,
+	// a kind gorge adds later): the next line belongs to a later decision.
+	// Answer by default -- the first Min options in offered order.
+	f.res.OtherDefaults++
+	return firstMin(d)
 }
 
 // rememberCastTargets keeps the targets a priority answer carried (a cast's
@@ -1145,10 +1151,12 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 // same card (a printed activated ability that is not a mana tap: Evolving
 // Wilds' sacrifice, a manland's animation). An offered ability Forge paid by
 // tapping sources is paid by hand from those sources first (handActivation),
-// so gorge's payment window does not tap others; the direct pick is the
-// fallback. An ability both engines list (forgeAbility) that gorge does not
-// offer is paid by hand from the sources Forge tapped, if that makes gorge
-// offer it.
+// so gorge's payment does not tap others; the direct pick is the fallback.
+// The follow stops instead where gorge's own payment passes over a source
+// Forge tapped whose mana can cost another card (passesOverCostlySource):
+// Forge's Phyrexian Tower sacrificing a creature the line does not name. An
+// ability both engines list (forgeAbility) that gorge does not offer is paid
+// by hand from the sources Forge tapped, if that makes gorge offer it.
 func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	offered := abilityOption(d, a, obj)
@@ -1168,6 +1176,11 @@ func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (deci
 			offer := func(d *decision.Decision) int { return optionOf(d, chosen) }
 			if paid, ok := f.handActivation(d, a, obj, tapped, offer); ok {
 				return paid, nil
+			}
+			if f.passesOverCostlySource(d, a, pick) {
+				// gorge offers the ability, but neither Forge's sources by
+				// hand nor its own payment pay it as Forge did.
+				return in, &Divergence{What: WhatAnswerMissing, Field: "payment", Forge: fmt.Sprintf("activate:%d tapping %v", a.Answer.Card, a.Answer.Tapped)}
 			}
 		}
 		in.Choices = []int{pick}
@@ -1230,7 +1243,7 @@ func abilityOption(d *decision.Decision, a *Ask, obj state.ObjID) int {
 	case len(cands) > 1:
 		if ids := forgeAbilityIDs(a); len(ids) == len(cands) {
 			for r, id := range ids {
-				if id == a.Answer.Ability {
+				if id == a.Answer.abilityID() {
 					return cands[r]
 				}
 			}
@@ -1243,9 +1256,9 @@ func abilityOption(d *decision.Decision, a *Ask, obj state.ObjID) int {
 // option ("cast", "play_land"), the option's Mode (an Adventure's
 // "adventure_alt", a modal back face's "modal_land", "kicked", ...) and its
 // AltCostIndex. gorge lists every way as an option of the same object, and
-// the follower takes one only when Forge's line names it (forgeWays, cast): taking
-// the first offered would cast Stomp for Bonecrusher Giant, or play a
-// Pathway's other face.
+// the follower takes one only when Forge's line names it (forgeWays,
+// abilityWays, cast): taking the first offered would cast Stomp for
+// Bonecrusher Giant, or play a Pathway's other face.
 type way struct {
 	kind, mode string
 	alt        int
@@ -1306,11 +1319,11 @@ func forgeMark(m string) string {
 // answer a (its candidates), in option order, and every way of obj of kind
 // as "mode/alt" keys for a divergence. Forge's line names a face or an
 // alternative neither in its label ("Cast <card>", "Play <card>") nor in its
-// mode, so the mark only narrows the ways; what else Forge's line holds (the
-// sources it tapped) must pick one out. When no way carries the mark, gorge
-// has no way to do what Forge did. opts must hold every way gorge has
-// (unconstrained for a cast; a land play costs no mana, so the pending
-// options for a land).
+// mode, so the mark only narrows the ways; what else Forge's line holds (a
+// cast's ability index, abilityWays; the sources it tapped) must pick one out.
+// When no way carries the mark, gorge has no way to do what Forge did. opts
+// must hold every way gorge has (unconstrained for a cast; a land play costs no
+// mana, so the pending options for a land).
 func forgeWays(opts []decision.Option, kind string, obj state.ObjID, a *Ask) ([]way, string, *Divergence) {
 	var named []way
 	var all []string
@@ -1331,6 +1344,50 @@ func forgeWays(opts []decision.Option, kind string, obj state.ObjID, a *Ask) ([]
 	return named, gorge, nil
 }
 
+// frontWay is gorge's ordinary cast of a card: its front face, no mode, no
+// alternative cost.
+var frontWay = way{kind: "cast"}
+
+// abilityWays narrows ws, the ways Forge's cast answer a may name, by the
+// abilities of a's line. The recorder indexes a cast among the host card's own
+// spell abilities: 0 is the front face's ordinary cast, and every other cast
+// of the card has another index or none (an Adventure, a face-down or evoke
+// cast, a split card's right half, a variant Forge copied). So when exactly
+// one of the casts a lists with the answer's mark is index 0:
+//   - an answer of index 0 names frontWay;
+//   - any other answer is not frontWay, which is ruled out when a lists as
+//     many such casts as ws holds ways. With lists of unlike length gorge's
+//     other ways do not pair with Forge's: a variant Forge lists may be a pick
+//     gorge asks during frontWay's cast.
+//
+// ws is returned as it is when it has no frontWay or Forge lists no index 0 (a
+// commander's cast, a may-play's), and a narrowing never empties it.
+func abilityWays(ws []way, a *Ask) []way {
+	front := slices.Index(ws, frontWay)
+	if front < 0 {
+		return ws
+	}
+	listed, first := 0, 0
+	for _, o := range a.Options {
+		if o.Action != "cast" || o.Card != a.Answer.Card || o.Mode != a.Answer.Mode {
+			continue
+		}
+		listed++
+		if o.abilityID() == 0 {
+			first++
+		}
+	}
+	switch {
+	case first != 1:
+		return ws
+	case a.Answer.abilityID() == 0:
+		return []way{frontWay}
+	case listed != len(ws) || len(ws) < 2:
+		return ws
+	}
+	return slices.Delete(slices.Clone(ws), front, front+1)
+}
+
 // unnamedWay is the stop when n of gorge's ways match all of Forge's line: the
 // follower cannot tell which one Forge's seat took (a harness divergence: the
 // recorder's line, not gorge, is short).
@@ -1341,14 +1398,15 @@ func unnamedWay(a *Ask, gorge string, n int) *Divergence {
 
 // cast pays a cast with the payment plan whose activations tap exactly the
 // sources Forge tapped, among the plans of the ways Forge's line may name
-// (forgeWays: its mark narrows them), passing over a plan that picks a
-// permanent to sacrifice (sacrificesAnother). It takes the cast when exactly
-// one candidate way has such a plan, and stops (unnamedWay) when two or more
-// do: Bonecrusher Giant's creature and Stomp plans both paid from Sol Ring and
-// a Mountain. A cast Forge paid with nothing is likewise the option of the one
-// candidate way gorge offers as a cast option. A card with only one way to be
-// cast (soleCast) and no such plan is paid by hand from Forge's sources, if
-// that makes gorge offer it.
+// (forgeWays: its mark narrows them; abilityWays: so does its ability index),
+// passing over a plan that picks a permanent to sacrifice (sacrificesAnother).
+// It takes the cast when exactly one candidate way has such a plan, and stops
+// (unnamedWay) when two or more do: on a line without an ability index to tell
+// them apart, Bonecrusher Giant's creature and Stomp plans both paid from Sol
+// Ring and a Mountain. A cast Forge paid with nothing is likewise the option of
+// the one candidate way gorge offers as a cast option. A card with only one way
+// to be cast (soleCast) and no such plan is paid by hand from Forge's sources,
+// if that makes gorge offer it.
 func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	tapped, dv := f.boundTapped(a)
@@ -1361,6 +1419,7 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 	if dv != nil {
 		return in, dv
 	}
+	ws = abilityWays(ws, a)
 	offered := false
 	var matched []way
 	var pay *decision.PaymentSelection
@@ -2092,6 +2151,56 @@ func (f *follower) mayShuffleChoose(d *decision.Decision) (decision.Intent, bool
 	}
 	f.res.Chooses++
 	return decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{pick}}, true
+}
+
+// discardElection answers "ordinary" to gorge's "discard_unless" election
+// (Thirst for Knowledge: "discard two cards unless you discard an artifact
+// card"), which Forge's recorder writes no ask line for, only where the next
+// snapshot rules "unless" out: at least the ordinary count of cards left the
+// seat's hand, and no hand card of the ability's UnlessType$ is among them or
+// new in the seat's graveyard or exile (where a discard shows even when a
+// card of that name is drawn after it). The count alone is no evidence: after
+// an "unless" discard a card also leaves a hand by being cycled, cast, paid
+// as a cost or discarded again. Everything else keeps the default, "unless",
+// including an ordinary discard that takes a card of that type, which the
+// snapshot cannot tell from "unless" and one of those departures.
+func (f *follower) discardElection(d *decision.Decision) (decision.Intent, bool) {
+	if d.ResumeKind != "discard_unless" || d.ResumeSA == nil || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	ordinary := slices.IndexFunc(d.Options, func(o decision.Option) bool { return o.Kind == "ordinary" })
+	count, err := strconv.Atoi(strings.TrimSpace(d.ResumeSA.ParamStr(cards.PKNumCards)))
+	snap := f.nextSnapshot()
+	if ordinary < 0 || err != nil || snap == nil {
+		return decision.Intent{}, false
+	}
+	now := Snapshot(f.e, "")
+	before, ok := snapPlayer(&now, int(d.Player))
+	after, ok2 := snapPlayer(snap, int(d.Player))
+	if !ok || !ok2 {
+		return decision.Intent{}, false
+	}
+	hand := f.e.G.Zone(state.ZHand, d.Player)
+	gone := surplus(before.Hand, after.Hand)
+	if need := min(count, len(hand)); need < 1 || len(gone) < need {
+		return decision.Intent{}, false
+	}
+	moved := slices.Concat(gone, surplus(after.Graveyard, before.Graveyard), surplus(after.Exile, before.Exile))
+	unless := strings.Split(d.ResumeSA.ParamStr(cards.PKUnlessType), ",")
+	for _, id := range hand {
+		if slices.Contains(moved, objName(f.e.G.Obj(id))) && slices.ContainsFunc(unless, func(spec string) bool {
+			return effects.MatchesSpecFrom(f.e.G, strings.TrimSpace(spec), id, d.Player, d.Source)
+		}) {
+			return decision.Intent{}, false
+		}
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{ordinary}}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.DiscardElections++
+	return in, true
 }
 
 // libraryPickChoose answers a pick of library cards (a library search's
