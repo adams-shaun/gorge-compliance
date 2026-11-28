@@ -66,25 +66,25 @@ rule	n	status	scenario	note
 509.1c	1	open		
 509.3f	1	open		
 510.1c	1	covered	elvish-regrower#four-damage-split-between-two-blockers	
-601.2c	1	open		
+601.2c	1	covered	agony-warp#same-creature-twice-across-two-target-instances	
 601.2h	1	covered	altars-reap#familiar-pays-for-the-reap-as-it-is-sacrificed	
 601.3a	1	covered	void-winnower#odd-mana-value-slips-past-the-lock	
-601.3b	1	open		
+601.3b	1	covered	sigardas-aid#bestow-choice-lets-an-aura-only-flash-grant-apply;sigardas-aid#control-a-plain-aura-gets-flash-from-the-aid	
 601.3e	1	covered	garruks-horde#face-down-land-from-the-top-is-a-creature-spell	
 601.3e	2	covered	melek-izzet-paragon#adventure-face-is-the-instant-melek-allows	
 601.4	1	covered	inscription-of-abundance#kicked-cast-announces-two-modes	
 602.1a	1	open		
-603.2c	1	open		
-603.2e	1	open		
-603.2g	1	open		
+603.2c	1	covered	dingus-egg#each-land-is-a-separate-occurrence	
+603.2e	1	covered	verity-circle#entering-tapped-is-not-becoming-tapped	
+603.2g	1	covered	ripjaw-raptor#prevented-damage-does-not-trigger	
 603.4	1	covered	felidar-sovereign#short-of-forty-the-upkeep-ability-never-triggers;felidar-sovereign#falling-below-forty-removes-the-trigger-before-it-resolves	
-603.6b	1	open		
-603.7a	1	open		
-603.7a	2	open		
-603.7c	1	open		
-603.8	1	open		
-603.10a	1	open		
-603.11	1	open		
+603.6b	1	covered	natures-revolt#a-land-enters-as-a-creature-and-triggers;humility#entry-ability-is-lost-before-it-can-trigger	
+603.7a	1	covered	war-barge#delayed-trigger-created-after-the-barge-left-never-fires;war-barge#barge-leaving-after-resolution-destroys-the-creature;phantasmal-mount#mount-leaving-after-resolution-sacrifices-the-creature	
+603.7a	2	covered	sneak-attack#delayed-sacrifice-waits-for-the-next-end-step	
+603.7c	1	covered	sneak-attack#delayed-sacrifice-still-hits-a-noncreature	
+603.8	1	covered	veiled-crocodile#empty-hand-state-trigger-fires-once	
+603.10a	1	covered	zulaport-cutthroat#the-dying-source-still-sees-its-own-death	
+603.11	1	covered	rowen#the-static-reveal-feeds-its-linked-trigger	
 603.12	1	covered	heart-piercer-manticore#a-sacrifice-for-another-cost-does-not-trigger-the-reflexive-ability;heart-piercer-manticore#reflexive-damage-fires-after-the-sacrifice	
 605.2	1	open		
 605.4a	1	open		
@@ -96,11 +96,11 @@ rule	n	status	scenario	note
 607.5a	2	covered	vesuvan-doppelganger#a-copied-mana-ability-has-no-chosen-color	
 608.2b	1	covered	sorins-thirst#target-leaves-before-resolution-so-no-life-is-gained	
 608.2b	2	covered	plague-spores#one-target-illegal-but-the-land-target-still-destroys	
-608.2d	1	open		
+608.2d	1	covered	gargantuan-gorilla#unavailable-choice-cannot-be-chosen	
 608.2f	1	covered	blatant-thievery#both-opponents-permanents-change-control-together	
 608.2f	2	covered	soulfire-eruption#each-target-exiles-its-own-card-in-turn	
 608.2i	1	covered	bear-cub#discount-counts-a-creature-that-is-no-longer-a-creature	
-608.2j	1	open		
+608.2j	1	covered	cleanse#a-white-black-creature-is-black;cleanse#a-nonblack-sweeper-spares-the-white-black-creature	
 608.2k	1	covered	wall-of-tears#blocked-permanent-is-returned-even-after-it-stops-being-a-creature	
 608.3e	1	covered	worms-of-the-earth#clone-cannot-arrive-as-a-land-creature	
 609.2	1	open		
@@ -113,20 +113,20 @@ rule	n	status	scenario	note
 611.2e	1	covered	arbiter-of-the-ideal#the-manifested-permanent-arrives-as-an-enchantment	
 611.3b	1	open		
 611.3c	1	open		
-613.4d	1	open		
-613.4d	2	open		
-613.4d	3	open		
+613.4d	1	covered	kithkin-billyrider#pump-then-switch-then-pump	
+613.4d	2	covered	kithkin-billyrider#pump-ends-before-the-switch	
+613.4d	3	covered	kithkin-billyrider#two-switches-cancel	
 613.5	1	covered	honor-of-the-pure#the-bonus-follows-the-colour-change-in-both-directions	
 613.5	2	covered	gray-ogre#a-base-power-set-applies-after-pumps-and-counters	
-613.6	1	open		
+613.6	1	covered	wild-mongrel#one-ability-applies-in-two-layers	
 613.6	2	covered	act-of-treason#control-and-haste-let-the-stolen-creature-attack	
-613.6	3	open		
+613.6	3	covered	march-of-the-machines#type-change-and-pt-set-apply-to-the-same-artifact	
 613.6	4	covered	svogthos-the-restless-tomb#the-animated-land-counts-the-graveyard-live	
 613.7a	1	covered	rune-of-flight#the-runes-later-timestamp-wins-over-the-hammer	
-613.9	1	open		
-613.9	2	open		
-614.4	1	open		
-614.5	1	open		
+613.9	1	covered	grounded#later-grounded-overrides-flight	
+613.9	2	covered	grounded#later-flight-overrides-grounded;alchors-tomb#white-bonus-follows-the-colour-change	
+614.4	1	covered	drudge-skeletons#regeneration-must-exist-before-destruction-resolves	
+614.5	1	covered	furnace-of-rath#two-doublers-apply-one-after-the-other	
 614.12	1	covered	voice-of-all#a-token-copy-chooses-its-own-color	
 614.12	2	covered	yixlid-jailer#treefolk-from-the-graveyard-enters-tapped	
 614.12	3	covered	orb-of-dreams#the-orb-does-not-tap-itself	
@@ -136,52 +136,52 @@ rule	n	status	scenario	note
 615.4	1	open		
 615.10	1	covered	daunting-defender#clerics-take-one-less-from-the-sweeper	
 615.11	1	covered	wojek-apothecary#shields-are-fixed-when-the-ability-resolves	
-616.1f	1	open		
+616.1f	1	covered	rest-in-peace#the-controller-chooses-which-graveyard-replacement-applies	
 616.1f	2	covered	essence-of-the-wild#the-copy-arrives-untapped-and-never-had-the-tapped-ability	
 616.1g	1	covered	voice-of-all#doubling-season-makes-two-copies-that-each-choose	
-616.2	1	open		
+616.2	1	covered	nefarious-lich#gain-life-becomes-a-draw-then-a-graveyard-return	
 700.1	1	open		
 700.3c	1	open		
 700.5a	1	covered	altar-of-the-pantheon#altar-lifts-devotion-to-five-before-type-change;altar-of-the-pantheon#without-the-altar-devotion-stays-four	
 700.7	1	open		
 700.14	1	covered	bark-knuckle-boxer#fourth-mana-spent-on-spells-triggers-expend	
-701.12a	1	open		
+701.12a	1	covered	switcheroo#one-target-destroyed-so-no-control-changes	
 701.20c	1	covered	telepathy#already-revealed-merfolk-card-still-pays-the-additional-cost	
 701.23b	1	covered	splinter#exiles-target-and-same-name-cards-in-graveyard	
 701.23c	1	covered	lobotomy#empty-hand-chooses-nothing-so-nothing-is-exiled	
-701.23f	1	open		
-701.24c	1	open		
+701.23f	1	covered	aven-mindcensor#opponent-searches-top-four-then-shuffles-the-library	
+701.24c	1	covered	guile#guile-exiled-in-response-library-still-shuffled	
 701.24c	2	covered	black-suns-zenith#flashback-granted-sorcery-shuffle-still-exiles	
-701.24d	1	open		
+701.24d	1	covered	loaming-shaman#no-cards-targeted-still-shuffles	
 701.24g	1	covered	darksteel-colossus#colossus-shuffles-in-zombie-goes-on-top	
-701.42c	1	open		
-701.67b	1	open		
+701.42c	1	covered	midnight-scavengers#token-graf-rats-cannot-meld	
+701.67b	1	covered	spirit-water-revival#creatures-cannot-pay-the-mana-cost;spirit-water-revival#six-creatures-pay-the-waterbend-and-islands-the-rest	
 702.1a	1	covered	varolz-the-scar-striped#scavenge-cost-is-the-mana-cost	
-702.1b	1	open		
+702.1b	1	covered	volcano-hellion#echo-cost-uses-life-total-at-resolution	
 702.1b	2	covered	fire-ice#fire-half-flashbacks-for-its-own-cost	
 702.1c	1	covered	concerted-effort#landwalk-and-protection-shared-around	
-702.14d	1	open		
+702.14d	1	covered	rime-dryad#own-snow-forestwalker-does-not-let-it-block	
 702.15e	1	covered	ajanis-pridemate#two-lifelink-hits-trigger-twice	
-702.19b	1	open		
-702.19b	2	open		
-702.19c	1	open		
-702.22h	1	open		
-702.24a	1	open		
-702.24a	2	open		
-702.24b	1	open		
-702.26b	1	open		
-702.26b	2	open		
-702.44c	1	open		
-702.47a	1	open		
-702.47c	1	open		
-702.51b	1	open		
-702.65b	1	open		
-702.65b	2	open		
+702.19b	1	covered	war-mammoth#other-attackers-damage-counts-toward-lethal	
+702.19b	2	covered	colossal-dreadmaw#lethal-to-protected-blocker-before-trampling-over	
+702.19c	1	covered	thrasta-tempests-roar#other-attackers-damage-counts-toward-loyalty	
+702.22h	1	covered	mesa-pegasus#blocking-the-flyer-blocks-the-swampwalker-in-its-band	
+702.24a	1	covered	jotun-owl-keeper#third-age-counter-paid-with-mixed-colours	
+702.24a	2	covered	phyrexian-soulgorger#one-other-creature-cannot-be-sacrificed-twice	
+702.24b	1	covered	gallowbraid#second-cumulative-upkeep-counts-every-age-counter	
+702.26b	1	covered	collective-unconscious#phased-out-creature-not-counted	
+702.26b	2	covered	wrath-of-god#phased-out-creature-is-not-destroyed	
+702.44c	1	covered	arcbound-wanderer#sunburst-sets-modular-counters-and-the-death-trigger-moves-them	
+702.47a	1	covered	glacial-ray#spliced-card-stays-in-hand-and-is-cast-later	
+702.47c	1	covered	glacial-ray#spliced-text-is-blue-so-it-hits-protection-from-red	
+702.51b	1	covered	siege-wurm#convoke-pays-the-reduced-total-cost	
+702.65b	1	covered	arcanum-wings#hand-aura-cannot-enchant-the-creature-so-nothing-happens	
+702.65b	2	covered	arcanum-wings#controlled-but-not-owned-aura-cannot-swap	
 702.103d	1	covered	aether-storm#creature-card-with-bestow-still-castable-bestowed	
 702.103d	2	covered	garruks-horde#bestow-card-on-top-castable-only-as-a-creature;garruks-horde#bestow-card-on-top-cannot-be-cast-bestowed	
-702.164b	1	open		
-702.177b	1	open		
-702.184c	1	open		
+702.164b	1	covered	branchblight-stalker#toxic-two-plus-granted-toxic-one-gives-three-poison	
+702.177b	1	covered	elvish-refueler#reactivated-exhaust-paid-by-forests;elvish-refueler#loot-mana-cannot-fund-the-reactivated-exhaust	
+702.184c	1	covered	tapestry-warden#stations-with-toughness	
 704.4	1	covered	maro#toughness-zero-mid-resolution-does-not-kill	
 704.7	1	covered	lichs-mirror#replaces-loss-from-life-and-empty-library	
 704.8	1	covered	young-wolf#counter-on-it-when-it-dies-so-no-undying	
@@ -233,11 +233,11 @@ rule	n	status	scenario	note
 732.2b	1	not-scenario		Passing priority by verbal shortcut ("Go") is table procedure, not a game state the engine reaches.
 732.3	1	open		
 732.5	1	open		
-800.4a	1	open		
-800.4a	2	open		
-800.4a	3	open		
-800.4a	4	open		
-800.4d	1	open		
+800.4a	1	covered	mind-control#the-leaving-controller-takes-only-their-aura	
+800.4a	2	covered	act-of-treason#the-leaving-controller-loses-the-stolen-creature	
+800.4a	3	covered	bribery#the-leaving-controller-exiles-what-they-took	
+800.4a	4	covered	genesis-chamber#tokens-under-the-survivors-stay	
+800.4d	1	covered	astral-slide#a-departed-controller-does-not-put-the-return-trigger-on-the-stack;astral-slide#with-the-controller-still-in-the-game-the-specter-returns	
 801.2a	1	out-of-scope		
 801.2a	2	out-of-scope		
 801.2c	1	out-of-scope		
@@ -253,7 +253,7 @@ rule	n	status	scenario	note
 801.13b	1	out-of-scope		
 801.13b	2	out-of-scope		
 801.13b	3	out-of-scope		
-802.2a	1	open		
+802.2a	1	covered	goblin-mountaineer#mountainwalk-unblockable-against-a-mountain-controller;goblin-mountaineer#mountainwalk-blockable-against-a-defender-without-mountains	
 807.4a	1	out-of-scope		
 807.4j	1	out-of-scope		
 809.3c	1	out-of-scope		
@@ -271,7 +271,7 @@ rule	n	status	scenario	note
 902.4	1	out-of-scope		
 902.5a	1	out-of-scope		
 902.5b	1	out-of-scope		
-903.3	1	open		
+903.3	1	covered	raised-by-giants#a-face-down-commander-is-still-a-commander;raised-by-giants#a-body-double-copying-the-commander-is-not-a-commander	
 903.4	1	not-scenario		Color identity constrains deck construction before the game; the example checks a deck list, not a played game.
 903.4d	1	not-scenario		Color identity constrains deck construction before the game; the example checks a deck list, not a played game.
 903.5c	1	not-scenario		The example states which cards may be in a Wort Commander deck, a deck-construction question.

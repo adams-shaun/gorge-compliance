@@ -1,0 +1,54 @@
+{
+ "card": "Gargantuan Gorilla",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d063f0bbdb5e",
+ "scenarios": [
+  {
+   "name": "unavailable-choice-cannot-be-chosen",
+   "cr": [
+    "608.2d"
+   ],
+   "why": "The upkeep ability offers a Forest to sacrifice, but there is no Forest. The only remaining legal path is the fallback that sacrifices the Gorilla and deals 7 damage.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Gargantuan Gorilla"
+     ],
+     "library_top": [
+      "Plains"
+     ],
+     "hand": []
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Gargantuan Gorilla",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p0": 13
+     }
+    }
+   ]
+  }
+ ]
+}

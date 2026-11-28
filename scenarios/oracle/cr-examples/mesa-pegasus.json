@@ -1,0 +1,76 @@
+{
+ "card": "Mesa Pegasus",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "98e1c5cfa9b9",
+ "scenarios": [
+  {
+   "name": "blocking-the-flyer-blocks-the-swampwalker-in-its-band",
+   "cr": [
+    "702.22h"
+   ],
+   "why": "Mesa Pegasus bands with Bog Wraith against a player who controls a Swamp. Giant Spider blocks the flying Pegasus, which makes it block the swampwalking Wraith as well, so no damage reaches the player and the Spider takes 4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mesa Pegasus",
+      "Bog Wraith"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Swamp",
+      "Giant Spider"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Mesa Pegasus",
+      "p0:Bog Wraith"
+     ],
+     "defender": "p1",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Band Bog Wraith with Mesa Pegasus"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "blocks": [
+      [
+       "p1:Giant Spider",
+       "p0:Mesa Pegasus"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 20
+     }
+    },
+    {
+     "card": "p1:Giant Spider",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

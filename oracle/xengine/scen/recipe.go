@@ -584,13 +584,16 @@ func newStart(card, key string) *StartFile {
 func seat(n int) *int { return &n }
 
 // keyFace is the face index a key plays: the f<N> of an activate or trigger key
-// (m is its match), the <N> of static#N.S or combat#N.attack; 0 for cast and land.
+// (m is its match), the <N> of static#N.S, combat#N.attack or repl#N.I; 0 for
+// cast and land.
 func keyFace(key string, m []string) int {
 	if m == nil {
 		if sm := staticKeyRE.FindStringSubmatch(key); sm != nil {
 			m = sm
 		} else if cm := combatKeyRE.FindStringSubmatch(key); cm != nil {
 			m = cm
+		} else if rm := replKeyRE.FindStringSubmatch(key); rm != nil {
+			m = rm
 		}
 	}
 	if m == nil {
@@ -628,6 +631,9 @@ func backFaceRefusal(c *cards.Card, fi int) string {
 func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, fam string, m []string,
 	sa *cards.SA, trig *cards.Trigger, hist string, opt Options) (Result, error) {
 	fi := keyFace(key, m)
+	if fam == "repl" && fi > 0 {
+		return refuse("no-generator:repl:back-face") // before backFaceRefusal: one name for every back-face replacement
+	}
 	if why := backFaceRefusal(c, fi); why != "" {
 		return refuse(why)
 	}
@@ -681,6 +687,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			why = staticKeyStart(reg, b, c, card, key, f)
 		}
 		if why != "" {
+			return refuse(why)
+		}
+	case "repl":
+		if why := replKeyStart(reg, b, c, card, key, generic, f); why != "" {
 			return refuse(why)
 		}
 	case "activate", "trigger":

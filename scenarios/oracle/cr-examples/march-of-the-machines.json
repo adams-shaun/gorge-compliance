@@ -1,0 +1,59 @@
+{
+ "card": "March of the Machines",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "003d568afaa6",
+ "scenarios": [
+  {
+   "name": "type-change-and-pt-set-apply-to-the-same-artifact",
+   "cr": [
+    "613.6"
+   ],
+   "why": "March makes the Mind Stone an artifact creature in layer 4 and gives it a power and toughness in layer 7a. Giant Growth then modifies that creature in layer 7c.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "March of the Machines",
+      "Mind Stone"
+     ],
+     "hand": [
+      "Giant Growth"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Giant Growth",
+     "mana": "G",
+     "targets": [
+      "p0:Mind Stone"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Mind Stone",
+     "zone": "battlefield",
+     "types": [
+      "Artifact",
+      "Creature"
+     ],
+     "pt": "5/5"
+    }
+   ]
+  }
+ ]
+}

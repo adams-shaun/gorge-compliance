@@ -437,5 +437,188 @@ class Merge(Base):
             merge_mod.merge_texts(self.schema, "status/ab.tsv", "", "#carddb status v1\nx\n", "#carddb status v1\ny\n")
 
 
+def kp(oid, key, leg, **kw):
+    """One keyproof seed row (the xengine keyproof -seed shape: the v1 ledger
+    columns, the seed's fixed cells); kw overrides a cell."""
+    row = {"oracle_id": oid, "key": key, "leg": leg, "desc": "-", "state": "owed", "reason": "untried",
+           "refs": "-", "source": "seed", "agree_items": "0", "diff_items": "0", "witness": "-",
+           "sig": "-", "cite": "-", "ticket": "-", "seats": "0", "multiplayer": "false",
+           "gorge_sha": "8f7095353a64", "corpus_pin": "-", "script_sha": "-", "xmage_ref": "-",
+           "forge_ref": "-", "measured": "2026-11-19", "replayed": "-", "replayed_sha": "-", "writer": "seed"}
+    row.update(kw)
+    return row
+
+
+class TestPutIfAbsent(Base):
+    """The keyproof seed put: add the absent rows, change no measured one."""
+
+    def _by_key(self, a):
+        return {(r["oracle_id"], r["key"], r["leg"]): r for r in a.rows("keyproof")}
+
+    def test_seed_adds_absent_rows_and_changes_no_measured_row(self):
+        a = self.machine("a", init=True)
+        a.put("keyproof", [kp(OID_A, "cast", "xmage", state="agreed", reason="-", refs="X", source="steps",
+                              agree_items="3", seats="2", writer="xproof")], writer="xproof")
+        batch = [kp(OID_A, "cast", "xmage"), kp(OID_A, "cast", "lockstep"),
+                 kp(OID_B, "land", "xmage"), kp(OID_B, "land", "lockstep")]
+        self.assertEqual(a.put("keyproof", batch, writer="seed", if_absent=True), 3)
+        rows = self._by_key(a)
+        self.assertEqual(len(rows), 4)  # the agreed row survived, the three absent keys were added
+        self.assertEqual(rows[(OID_A, "cast", "xmage")]["state"], "agreed")
+        self.assertEqual(rows[(OID_A, "cast", "xmage")]["agree_items"], "3")
+        self.assertEqual(rows[(OID_A, "cast", "lockstep")]["state"], "owed")
+        self.assertEqual(rows[(OID_A, "cast", "lockstep")]["reason"], "untried")
+        before = self.snapshot(a.dir)
+        porcelain = git("status", "--porcelain", cwd=a.dir)
+        self.assertEqual(a.put("keyproof", list(reversed(batch)), writer="seed", if_absent=True), 0)
+        self.assertEqual(self.snapshot(a.dir), before)  # a rerun changes no byte
+        self.assertEqual(git("status", "--porcelain", cwd=a.dir), porcelain)
+
+    def test_refresh_takes_only_the_named_columns(self):
+        a = self.machine("a", init=True)
+        a.put("keyproof", [kp(OID_A, "cast", "xmage", state="agreed", reason="-", refs="X", source="steps",
+                              agree_items="3", seats="2", writer="xproof")], writer="xproof")
+        # the seed may correct multiplayer (and desc/script_sha) on a stored row
+        self.assertEqual(a.put("keyproof", [kp(OID_A, "cast", "xmage", multiplayer="true")],
+                              writer="seed", if_absent=True, refresh=("multiplayer",)), 1)
+        row = self._by_key(a)[(OID_A, "cast", "xmage")]
+        self.assertEqual(row["multiplayer"], "true")
+        self.assertEqual(row["state"], "agreed")  # nothing else moved
+        self.assertEqual(row["reason"], "-")
+        self.assertEqual(row["source"], "steps")
+        self.assertEqual(row["agree_items"], "3")
+        self.assertEqual(row["seats"], "2")
+        self.assertEqual(row["writer"], "xproof")
+        # without --refresh the same put changes nothing
+        before = self.snapshot(a.dir)
+        self.assertEqual(a.put("keyproof", [kp(OID_A, "cast", "xmage", multiplayer="false")],
+                              writer="seed", if_absent=True), 0)
+        self.assertEqual(self.snapshot(a.dir), before)
+        with self.assertRaises(store_mod.StoreError):
+            a.put("keyproof", [kp(OID_A, "cast", "xmage")], writer="seed", refresh=("multiplayer",))
+        with self.assertRaises(store_mod.StoreError):
+            a.put("keyproof", [kp(OID_A, "cast", "xmage")], writer="seed", if_absent=True,
+                  refresh=("no_such_column",))
+
+    def test_non_seed_writer_never_sets_multiplayer(self):
+        a = self.machine("a", init=True)
+        # the seed sets the key's flag
+        a.put("keyproof", [kp(OID_A, "cast", "xmage", multiplayer="true"),
+                           kp(OID_A, "cast", "lockstep", multiplayer="true")],
+              writer="seed", if_absent=True, refresh=("multiplayer",))
+        self.assertEqual(self._by_key(a)[(OID_A, "cast", "xmage")]["multiplayer"], "true")
+        # a non-seed put of multiplayer=false over the stored true keeps true
+        a.put("keyproof", [kp(OID_A, "cast", "xmage", state="agreed", reason="-", refs="X", source="steps",
+                              seats="2", writer="xproof")], writer="xproof")
+        row = self._by_key(a)[(OID_A, "cast", "xmage")]
+        self.assertEqual((row["state"], row["multiplayer"]), ("agreed", "true"))
+        # a new leg of the key inherits the stored sibling's value, not the input's
+        a.put("keyproof", [kp(OID_A, "cast", "forge", state="agreed", reason="-", refs="F", source="steps",
+                              seats="2", writer="xproof")], writer="xproof")
+        self.assertEqual(self._by_key(a)[(OID_A, "cast", "forge")]["multiplayer"], "true")
+        # a key with no stored sibling starts at false whatever the input says
+        a.put("keyproof", [kp(OID_B, "cast", "xmage", state="owed", seats="2", writer="xproof",
+                              multiplayer="true")], writer="xproof")
+        self.assertEqual(self._by_key(a)[(OID_B, "cast", "xmage")]["multiplayer"], "false")
+
+
+class TestSeedPrune(Base):
+    """The full seed put: drop the untried seed rows whose key left the universe."""
+
+    LEGS = ("xmage", "lockstep")
+
+    def _seed(self, oid, key, **kw):
+        return [kp(oid, key, leg, **kw) for leg in self.LEGS]
+
+    def fixture(self):
+        a = self.machine("a", init=True)
+        rows = (self._seed(OID_A, "f0/a0") + self._seed(OID_A, "f0/a1") + self._seed(OID_A, "static#0.0")
+                + self._seed(OID_A, "cast", reason="not-in-corpus") + self._seed(OID_C, "cast"))
+        a.put("keyproof", rows, writer="seed", if_absent=True)
+        a.put("keyproof", [kp(OID_A, "static#0.0", "xmage", state="agreed", reason="-", refs="X", source="steps",
+                              agree_items="3", seats="2", writer="xproof")], writer="xproof")
+        return a
+
+    def batch(self):
+        return self._seed(OID_A, "f0/a0") + self._seed(OID_A, "repl#0.0") + self._seed(OID_C, "cast")
+
+    def _by_key(self, a):
+        return {(r["oracle_id"], r["key"], r["leg"]): r for r in a.rows("keyproof")}
+
+    def _put(self, a, rows):
+        return a.put("keyproof", rows, writer="seed", if_absent=True, prune_seed=True)
+
+    def assert_refused(self, a, rows):
+        before = self.snapshot(a.dir)
+        porcelain = git("status", "--porcelain", cwd=a.dir)
+        with self.assertRaises(store_mod.StoreError) as e:
+            self._put(a, rows)
+        self.assertEqual(self.snapshot(a.dir), before)
+        self.assertEqual(git("status", "--porcelain", cwd=a.dir), porcelain)
+        return str(e.exception)
+
+    def test_prunes_only_untried_seed_rows(self):
+        a = self.fixture()
+        old = self._by_key(a)
+        # a changed cell in the input must not reach the stored f0/a0: it is named, so neither pruned nor replaced
+        batch = [dict(r, measured="2026-11-20") for r in self.batch()]
+        self.assertEqual(self._put(a, batch), 7)  # 2 repl#0.0 rows added, 5 rows pruned
+        rows = self._by_key(a)
+        self.assertEqual(sorted(rows), sorted(
+            [(OID_A, k, leg) for k in ("f0/a0", "repl#0.0") for leg in self.LEGS]
+            + [(OID_C, "cast", leg) for leg in self.LEGS] + [(OID_A, "static#0.0", "xmage")]))
+        for k in ((OID_A, "f0/a0", "xmage"), (OID_A, "f0/a0", "lockstep"), (OID_A, "static#0.0", "xmage")):
+            self.assertEqual(rows[k], old[k])
+        self.assertEqual((a.last_pruned, a.last_orphans), (5, 1))
+
+    def test_rerun_is_a_no_op(self):
+        a = self.fixture()
+        self._put(a, self.batch())
+        before = self.snapshot(a.dir)
+        porcelain = git("status", "--porcelain", cwd=a.dir)
+        self.assertEqual(self._put(a, self.batch()), 0)
+        self.assertEqual((a.last_pruned, a.last_orphans), (0, 1))
+        self.assertEqual(self.snapshot(a.dir), before)
+        self.assertEqual(git("status", "--porcelain", cwd=a.dir), porcelain)
+
+    def test_refuses_non_seed_rows(self):
+        a = self.fixture()
+        self.assertIn("xproof", self.assert_refused(a, self.batch() + [kp(OID_A, "land", "xmage", writer="xproof")]))
+
+    def test_refuses_partial_seed(self):
+        a = self.fixture()
+        a.put("keyproof", self._seed(OID_B, "cast"), writer="seed", if_absent=True)
+        self.assertIn("partial seed", self.assert_refused(a, self._seed(OID_A, "f0/a0")))
+        # cards the store has never seeded do not make up the half
+        self.assertIn("partial seed", self.assert_refused(
+            a, self._seed(OID_A, "f0/a0") + self._seed("ef" + "3" * 30, "cast")))
+
+    def test_refuses_other_tables(self):
+        a = self.machine("a", init=True)
+        with self.assertRaises(store_mod.StoreError):
+            a.put("legality", [legality(OID_A, "modern", "legal")], writer="seed", prune_seed=True)
+
+    def test_cli(self):
+        a = self.fixture()
+        home = os.path.join(self.tmp, "a")
+        flags = ("put", "keyproof", "--source", "seed", "--if-absent", "--refresh", "multiplayer,desc,script_sha",
+                 "--prune-seed")
+        names = list(self.batch()[0])
+        tsv = "".join("\t".join(cells) + "\n" for cells in [names] + [[r[n] for n in names] for r in self.batch()])
+        before = self.snapshot(a.dir)
+        r = self.cli(home, "put", "keyproof", "--prune-seed")  # empty stdin
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("partial seed", r.stderr)
+        r = self.cli(home, "put", "legality", "--prune-seed")
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("keyproof table only", r.stderr)
+        self.assertEqual(self.snapshot(a.dir), before)
+        r = self.cli(home, *flags, stdin=tsv)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout, "carddb put keyproof: 7 rows changed, 5 seed rows pruned, 1 orphan keys\n")
+        r = self.cli(home, *flags, stdin=tsv)
+        self.assertEqual(r.stdout, "carddb put keyproof: 0 rows changed, 0 seed rows pruned, 1 orphan keys\n")
+
+
 if __name__ == "__main__":
     unittest.main()

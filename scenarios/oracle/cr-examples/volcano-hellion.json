@@ -1,0 +1,109 @@
+{
+ "card": "Volcano Hellion",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c1a72649a2d8",
+ "scenarios": [
+  {
+   "name": "echo-cost-uses-life-total-at-resolution",
+   "cr": [
+    "702.1b"
+   ],
+   "why": "Volcano Hellion's entry damage drops its controller to 10 life, and its echo triggers at 10 life, which then falls to 5 before the trigger resolves. The echo cost is read on resolution, so five Mountains pay it and the Hellion stays.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mountain",
+      "Mountain",
+      "Mountain",
+      "Mountain",
+      "Mountain"
+     ],
+     "hand": [
+      "Volcano Hellion"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Volcano Hellion",
+     "mana": "CCRR"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "target",
+       "pick": [
+        "p1:Grizzly Bears"
+       ]
+      },
+      {
+       "kind": "any",
+       "pick": [
+        "10"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0",
+     "expect": [
+      {
+       "trigger_on_stack": "p0:Volcano Hellion"
+      },
+      {
+       "life": {
+        "p0": 10
+       }
+      }
+     ]
+    },
+    {
+     "op": "life",
+     "seat": 0,
+     "amount": -5
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "yes"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Volcano Hellion",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p0": 5
+     }
+    },
+    {
+     "card": "p0:Mountain#5",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

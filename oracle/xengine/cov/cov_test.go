@@ -370,3 +370,156 @@ func TestLedgerSub(t *testing.T) {
 		t.Errorf("untouched row: %+v", got)
 	}
 }
+
+// multiplayerCard compiles an original one-face script body through the loader,
+// so a fixture has the IR shape a corpus card does.
+func multiplayerCard(t *testing.T, lines ...string) *cards.Card {
+	t.Helper()
+	src := "Name:Seat Fixture\n" + strings.Join(lines, "\n") + "\n"
+	c, diags := cards.ParseBytes("fixture.txt", []byte(src))
+	diags = append(diags, c.Link()...)
+	if len(diags) > 0 {
+		t.Fatalf("fixture %q: %v", src, diags)
+	}
+	return c
+}
+
+func TestMultiplayerKeyClass(t *testing.T) {
+	const creature, sorcery = "Types:Creature Human", "Types:Sorcery"
+	for _, tc := range []struct {
+		name, id string
+		lines    []string
+		want     bool
+	}{
+		{"spell Defined Opponent", "cast", []string{sorcery,
+			"A:SP$ LoseLife | Defined$ Opponent | LifeAmount$ 2"}, true},
+		{"trigger sub-ability OppCtrl", "f0/t0", []string{creature,
+			"T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ First",
+			"SVar:First:DB$ Draw | Defined$ You | SubAbility$ Second",
+			"SVar:Second:DB$ TapAll | ValidCards$ Creature.OppCtrl"}, true},
+		{"static Affected OppCtrl", "static#0.0", []string{creature,
+			"S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -1"}, true},
+		{"replacement ValidPlayer Opponent", "repl#0.0", []string{creature,
+			"R:Event$ GainLife | ValidPlayer$ Opponent | ReplaceWith$ None",
+			"SVar:None:DB$ Draw | Defined$ You"}, true},
+		// The effect name alone carries the token in these two.
+		{"goad effect", "f0/a0", []string{creature,
+			"A:AB$ Goad | Cost$ T | ValidTgts$ Creature"}, true},
+		{"become monarch effect", "cast", []string{sorcery,
+			"A:SP$ BecomeMonarch | Defined$ You"}, true},
+		{"keyword Myriad", "kw#0.0", nil, true},
+		{"effect Defined Player", "cast", []string{sorcery,
+			"A:SP$ Draw | Defined$ Player | NumCards$ 1"}, true},
+
+		// A referenced SVar is followed past the entry's own Sub chain: a mode's
+		// sub-ability, a delayed trigger's Execute$.
+		{"mode sub-ability OppCtrl", "mode#0.0.0", []string{sorcery,
+			"A:SP$ Charm | Choices$ DBFight,DBDraw",
+			"SVar:DBFight:DB$ Pump | Defined$ You | SubAbility$ DBFight2",
+			"SVar:DBFight2:DB$ Fight | ValidTgts$ Creature.OppCtrl",
+			"SVar:DBDraw:DB$ Draw | Defined$ You"}, true},
+		{"delayed trigger Execute$ Opponent", "f0/a0", []string{creature,
+			"A:AB$ DelayedTrigger | Cost$ T | Mode$ Phase | Phase$ End of Turn | Execute$ TrigLose",
+			"SVar:TrigLose:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1"}, true},
+		{"static grants Myriad", "static#0.0", []string{creature,
+			"S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying & Myriad"}, true},
+		{"spell grants Melee by KW", "cast", []string{sorcery,
+			"A:SP$ Pump | ValidTgts$ Creature | KW$ Melee"}, true},
+
+		{"vanilla creature cast", "cast", []string{creature}, false},
+		{"static grants Flying", "static#0.0", []string{creature,
+			"S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying"}, false},
+		// A description is prose, not behaviour, also in a referenced SVar.
+		{"mode description only", "mode#0.0.0", []string{sorcery,
+			"A:SP$ Charm | Choices$ Mine,Other",
+			"SVar:Mine:DB$ Draw | Defined$ You | SpellDescription$ Opponent draws nothing.",
+			"SVar:Other:DB$ GainLife | Defined$ You | LifeAmount$ 1"}, false},
+		{"Defined You draw", "cast", []string{sorcery,
+			"A:SP$ Draw | Defined$ You | NumCards$ 1"}, false},
+		{"flying attack", "combat#0.attack", []string{creature, "K:Flying"}, false},
+		{"static Affected YouCtrl", "static#0.0", []string{creature,
+			"S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1"}, false},
+	} {
+		// The loader expands every listed keyword, so the kw# case is built by
+		// hand.
+		var c *cards.Card
+		if tc.lines == nil {
+			c = &cards.Card{Faces: []*cards.Face{{Types: []string{"Creature"}, Keywords: []string{"Myriad"}}}}
+		} else {
+			c = multiplayerCard(t, tc.lines...)
+		}
+		// Every fixture id is a key the card really holds.
+		if !slices.ContainsFunc(Universe(c), func(k Key) bool { return k.ID == tc.id }) {
+			t.Errorf("%s: %s is not in the card's universe %v", tc.name, tc.id, Universe(c))
+			continue
+		}
+		if got := Multiplayer(c, tc.id); got != tc.want {
+			t.Errorf("%s: Multiplayer(%s) = %v, want %v", tc.name, tc.id, got, tc.want)
+		}
+	}
+
+	// Every listed keyword flags the entry the loader expands it into, which
+	// takes the place of a kw# key.
+	for _, kw := range []string{"Dethrone", "Encore:3 R", "Melee", "Myriad"} {
+		c := multiplayerCard(t, creature, "K:"+kw)
+		var flagged []string
+		for _, k := range Universe(c) {
+			if Multiplayer(c, k.ID) {
+				flagged = append(flagged, k.ID)
+			}
+		}
+		if len(flagged) != 1 || !slices.Contains([]string{"activated", "trigger"}, Family(flagged[0])) {
+			t.Errorf("keyword %s: flagged keys %v, want its one expanded entry (universe %v)", kw, flagged, Universe(c))
+		}
+	}
+
+	// A modal spell flags the mode that names an opponent and not its sibling; a
+	// land and a second face are read from their own entries.
+	modal := multiplayerCard(t, sorcery,
+		"A:SP$ Charm | Choices$ Mine,Theirs,Everyone",
+		"SVar:Mine:DB$ Draw | Defined$ You",
+		"SVar:Theirs:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1",
+		"SVar:Everyone:DB$ Draw | Defined$ Player")
+	for id, want := range map[string]bool{"mode#0.0.0": false, "mode#0.0.1": true, "mode#0.0.2": true} {
+		if got := Multiplayer(modal, id); got != want {
+			t.Errorf("modal: Multiplayer(%s) = %v, want %v", id, got, want)
+		}
+	}
+	twoFaced := multiplayerCard(t, "Types:Land", "AlternateMode:DoubleFaced", "ALTERNATE", "Name:Seat Back", creature,
+		"A:AB$ Draw | Cost$ T | Defined$ You",
+		"A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.OppOwn")
+	for id, want := range map[string]bool{"land": false, "f1/a0": false, "f1/a1": true,
+		// Ids the card does not hold, or no id at all.
+		"f0/a0": false, "f1/a2": false, "f2/a0": false, "f1/t0": false, "f1/ax": false, "static#1.0": false,
+		"repl#9.0": false, "kw#1.-1": false, "mode#1.0.9": false, "nonsense": false} {
+		if got := Multiplayer(twoFaced, id); got != want {
+			t.Errorf("two faces: Multiplayer(%s) = %v, want %v", id, got, want)
+		}
+	}
+	if Multiplayer(nil, "cast") {
+		t.Error("a nil card is flagged")
+	}
+
+	// The accessor is the two sorted lists, and the docs print all of it.
+	if !slices.IsSorted(multiplayerTokens) || !slices.IsSorted(multiplayerKeywords) {
+		t.Errorf("the lists are not sorted: %v %v", multiplayerTokens, multiplayerKeywords)
+	}
+	list := MultiplayerTokens()
+	if want := slices.Concat(multiplayerTokens, multiplayerKeywords); !slices.Equal(list, want) {
+		t.Errorf("MultiplayerTokens() = %v, want %v", list, want)
+	}
+	doc, err := os.ReadFile("../../../docs/oracles.md")
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, section, found := strings.Cut(string(doc), "Keys that need four seats")
+	section, _, _ = strings.Cut(section, "\n## ")
+	if !found {
+		t.Fatal("docs/oracles.md has no four-seats section")
+	}
+	for _, token := range list {
+		if !strings.Contains(section, "`"+token+"`") {
+			t.Errorf("docs/oracles.md's four-seats section does not list %s", token)
+		}
+	}
+}

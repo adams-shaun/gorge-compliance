@@ -192,6 +192,32 @@ item naming a card no XMage set lists isn't sent to XMage (`not_sent`, `xmage_la
 keeps each chunk's rows and the repros of diverged items; `xengine-sweep.sh --force`
 rebuilds the rest of a chunk at the same pin.
 
+### Keys that need four seats
+
+Two-seat proof stands for most keys. A key that reads opponents, the defending player, the monarch,
+goad, the initiative, votes or the command zone behaves differently in a four-player game. `xengine
+keyproof -seed` writes `multiplayer=true` on both leg rows of such a key and counts them in its
+summary line (`multiplayer: F of K keys flagged`). A flagged key is not proven until it agrees at
+four seats.
+
+**Rule** (`cov.Multiplayer`): a key is flagged by its own script text, the effect names and parameter
+values of its entry and of every SVar those values name, followed transitively: its sub-abilities, the
+`Execute$` of a delayed or immediate trigger it creates, a granted trigger, a count SVar. Description
+parameters are not read. A spell mode starts from the SVar its choice names, a plain keyword is the
+keyword string. The text is flagged when it holds one of these, case-sensitive:
+
+`ChoosePlayer`, `Commander`, `DefendingPlayer`, `Goad`, `Initiative`, `Monarch`, `OppCtrl`, `OppOwn`,
+`Opponent`, `Player.Other`, `Vote`
+
+A key is also flagged when a `Defined` or `ValidPlayers` parameter is exactly `Player` (each player),
+or when it involves one of these keywords: as a keyword key, as the ability or trigger the keyword
+expands into, or granted through a keyword parameter (`KW$`, `AddKeyword$`, `Keywords$`):
+
+`Dethrone`, `Encore`, `Melee`, `Myriad`
+
+A `combat#` key is never flagged. The list is deliberately text-based: it flags some keys that are
+safe at two seats, and it never reads card names.
+
 ## mtgish
 
 **Checks:** [mtgish](https://github.com/i5jb/mtgish) (MIT) encodes every card from its Oracle text.
