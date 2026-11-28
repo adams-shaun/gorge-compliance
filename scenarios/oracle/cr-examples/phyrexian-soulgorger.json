@@ -1,0 +1,66 @@
+{
+ "card": "Phyrexian Soulgorger",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "2cb959a5f535",
+ "scenarios": [
+  {
+   "name": "one-other-creature-cannot-be-sacrificed-twice",
+   "cr": [
+    "702.24a"
+   ],
+   "why": "Phyrexian Soulgorger already paid one upkeep by sacrificing a Grizzly Bears, and now gets a second age counter with only one other creature beside it. That creature cannot be sacrificed twice, so the Soulgorger ends in the graveyard.",
+   "setup_answers": [
+    {
+     "kind": "any",
+     "pick": [
+      "yes"
+     ]
+    },
+    {
+     "kind": "any",
+     "pick": [
+      "p0:Grizzly Bears"
+     ]
+    }
+   ],
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Phyrexian Soulgorger",
+      "Grizzly Bears",
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0",
+     "expect": [
+      {
+       "card": "p0:Phyrexian Soulgorger",
+       "counters": {
+        "age": 1
+       }
+      },
+      {
+       "card": "p0:Grizzly Bears",
+       "zone": "graveyard"
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Phyrexian Soulgorger",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

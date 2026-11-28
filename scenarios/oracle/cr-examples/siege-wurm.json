@@ -1,0 +1,67 @@
+{
+ "card": "Siege Wurm",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e8e9a355af3e",
+ "scenarios": [
+  {
+   "name": "convoke-pays-the-reduced-total-cost",
+   "cr": [
+    "702.51b"
+   ],
+   "why": "Heartless Summoning cuts Siege Wurm's cost to {3}{G}{G}, and convoke applies only to that total. Two green Grizzly Bears pay the {G}{G} and three red Hill Giants the {3}, so no mana is needed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Heartless Summoning",
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Hill Giant",
+      "Hill Giant",
+      "Hill Giant"
+     ],
+     "hand": [
+      "Siege Wurm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Siege Wurm",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "p0:Grizzly Bears",
+        "p0:Grizzly Bears#2",
+        "p0:Hill Giant",
+        "p0:Hill Giant#2",
+        "p0:Hill Giant#3"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Siege Wurm",
+     "zone": "battlefield",
+     "pt": "4/4"
+    },
+    {
+     "card": "p0:Grizzly Bears#2",
+     "tapped": true
+    },
+    {
+     "card": "p0:Hill Giant#3",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

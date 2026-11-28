@@ -1,0 +1,77 @@
+{
+ "card": "Gallowbraid",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "216f47b73775",
+ "scenarios": [
+  {
+   "name": "second-cumulative-upkeep-counts-every-age-counter",
+   "cr": [
+    "702.24b"
+   ],
+   "why": "Dreams of the Dead returns Gallowbraid with a second cumulative upkeep, and both trigger with no age counters on it. The {2} upkeep resolves first and sees one counter; the pay-1-life upkeep then sees two counters, so 2 life is paid.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Dreams of the Dead",
+      "Island",
+      "Island"
+     ],
+     "graveyard": [
+      "Gallowbraid"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Dreams of the Dead",
+     "mana": "CU",
+     "targets": [
+      "p0:Gallowbraid"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p0"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Pay 2 per age (1 age"
+       ]
+      },
+      {
+       "kind": "choose",
+       "pick": [
+        "Pay 1 life per age (2 age"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Gallowbraid",
+     "zone": "battlefield",
+     "counters": {
+      "age": 2
+     }
+    },
+    {
+     "life": {
+      "p0": 18
+     }
+    }
+   ]
+  }
+ ]
+}
