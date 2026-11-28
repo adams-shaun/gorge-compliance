@@ -1046,6 +1046,7 @@ var kernelRefused = map[string]string{
 	"Tokens":         "mints tokens, which dirac's kernel start does not model",
 	"PlayerCounters": "seats player counters, which dirac's kernel start does not mirror",
 	"Commanders":     "designates commanders, which ride game.Options StartCommanders rather than the start, so dirac's kernel never sees the designation",
+	"FaceDown":       "enters battlefield cards face down (CR 708), which dirac's kernel start refuses (dirac/oracle TestKernelStartRefusesFaceDown)",
 }
 
 // startNotExpressible is why dirac cannot mirror this start's scripted position,
