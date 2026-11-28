@@ -149,6 +149,11 @@ type Result struct {
 	// line: the offered cards new in their owner's hand there are the ones
 	// Forge took.
 	ArrivalPicks int `json:"arrival_picks,omitempty"`
+	// FieldPicks counts the Chooses that picked cards moving onto the
+	// battlefield (one land of a split search, a basic put from hand) from
+	// the next snapshot line: the offered cards new among their owner's
+	// permanents there are the ones Forge took.
+	FieldPicks int `json:"field_picks,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -2173,9 +2178,12 @@ func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, boo
 // chosen cards leave it and the others stay) and whose every option is a card
 // in one seat's hand; an ask with no such route (a reveal, a "keep these")
 // never gets here, so a new hand-shaped pick needs its route first. It
-// answers only when every card that left the hand by that snapshot is
-// offered, the departed count is a legal pick count, and the picks validate;
-// anything else (a cast in between) falls back to the default.
+// answers only when every card that left the hand by that snapshot, less
+// those a logged cast or land play took (loggedPlays), is offered, the
+// departed count is a legal pick count, and the picks validate; anything else
+// (an unlogged move in between) falls back to the default. A draw of a
+// departed card's name before the snapshot hides the departure: a pick onto
+// the battlefield is read from the permanents first (fieldArriveChoose).
 func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool) {
 	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
 		return decision.Intent{}, false
@@ -2232,6 +2240,16 @@ func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool)
 			gone[n]--
 		}
 	}
+	// A card the log shows Forge casting or playing out of this hand before
+	// the snapshot left it on its own, not by this pick (farm cmdr4 BIG-s148
+	// pod-14803 line 642: Dream Cache's two cards, then Portent cast).
+	for _, g := range f.loggedPlays() {
+		if inHand[g] {
+			if n := objName(f.e.G.Obj(g)); gone[n] > 0 {
+				gone[n]--
+			}
+		}
+	}
 	total := 0
 	for _, n := range gone {
 		total += n
@@ -2281,6 +2299,15 @@ func (f *follower) cardPickChoose(d *decision.Decision) (decision.Intent, bool) 
 		if in, ok := f.libraryPickChoose(d); ok {
 			return in, true
 		}
+		// Where the chosen cards land on the battlefield, the snapshot's
+		// permanents show them by name whatever else moves meanwhile; the
+		// hand's count does not (a later draw of the same name cancels the
+		// departure), so this reader goes before handLeaveChoose.
+		if r.chosenToField {
+			if in, ok := f.fieldArriveChoose(d); ok {
+				return in, true
+			}
+		}
 		if in, ok := f.handLeaveChoose(d); ok {
 			return in, true
 		}
@@ -2297,6 +2324,8 @@ func (f *follower) cardPickChoose(d *decision.Decision) (decision.Intent, bool) 
 type pickRoute struct {
 	chosenLeaves, restLeaves bool
 	chosenToHand, restToHand bool
+	// chosenToField: the chosen cards go only to the battlefield.
+	chosenToField bool
 }
 
 // leavingOptionKinds are the option kinds that say by themselves that the
@@ -2345,6 +2374,7 @@ func (f *follower) pickRouteOf(d *decision.Decision) (pickRoute, bool) {
 		if api == "ChangeZone" {
 			to, ok := changeZoneDestinations(sa)
 			r.chosenToHand = ok && onlyHand(to)
+			r.chosenToField = ok && onlyZone(to, state.ZBattlefield)
 		}
 		return r, true
 	case "hidden_pick", "hand_move":
@@ -2361,7 +2391,7 @@ func (f *follower) pickRouteOf(d *decision.Decision) (pickRoute, bool) {
 				return no, false
 			}
 		}
-		return pickRoute{chosenLeaves: true, chosenToHand: onlyHand(to)}, true
+		return pickRoute{chosenLeaves: true, chosenToHand: onlyHand(to), chosenToField: onlyZone(to, state.ZBattlefield)}, true
 	case "dig":
 		if api != "Dig" {
 			return no, false
@@ -2421,8 +2451,127 @@ func changeZoneDestinations(sa *cards.SA) ([]state.Zone, bool) {
 }
 
 // onlyHand reports whether every zone of to is the hand.
-func onlyHand(to []state.Zone) bool {
-	return !slices.ContainsFunc(to, func(z state.Zone) bool { return z != state.ZHand })
+func onlyHand(to []state.Zone) bool { return onlyZone(to, state.ZHand) }
+
+// onlyZone reports whether every zone of to is z.
+func onlyZone(to []state.Zone, z state.Zone) bool {
+	return !slices.ContainsFunc(to, func(x state.Zone) bool { return x != z })
+}
+
+// loggedPlays is the gorge object of every card a priority answer between
+// f.pos and the next snapshot casts or plays as a land: the log's own record
+// of cards leaving a hand (or arriving on the battlefield) that no unlogged
+// pick moved. A Forge id gorge never bound is skipped.
+func (f *follower) loggedPlays() []state.ObjID {
+	var out []state.ObjID
+	for i := f.pos; i < len(f.log.Entries); i++ {
+		e := f.log.Entries[i]
+		if e.Snap != nil || e.End != nil {
+			break
+		}
+		a := e.Ask
+		if a == nil || a.Kind != KindPriority || (a.Answer.Action != "cast" && a.Answer.Action != "land") {
+			continue
+		}
+		if g, ok := f.toG[a.Answer.Card]; ok {
+			out = append(out, g)
+		}
+	}
+	return out
+}
+
+// fieldArriveChoose answers a pick of cards that move onto the battlefield
+// (one land of a split search, "put a basic land card from your hand onto
+// the battlefield") from the next snapshot line: the picked cards are the
+// offered ones whose names are new among their owner's nontoken permanents
+// there, less those a logged land play or cast before it accounts for.
+// Answering by default put the wrong land of Kodama's Reach onto the
+// battlefield (farm cmdr4 TDM-s284753433 pod-28475343302 line 524: gorge
+// Island, Forge Plains), and a "may" pick from hand took nothing where Forge
+// put the Mountain and then drew another (EOE-s138 pod-13801 line 384, Terrain
+// Generator), which the hand alone cannot show.
+//
+// It applies to a pick cardPickChoose routes onto the battlefield whose
+// options are all elsewhere. It answers only when every unaccounted arrival
+// is offered, the count is a legal pick count, and the picks validate;
+// anything else falls back to the next reader.
+func (f *follower) fieldArriveChoose(d *decision.Decision) (decision.Intent, bool) {
+	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	for _, o := range d.Options {
+		obj := f.e.G.Obj(o.Obj)
+		if o.Obj == 0 || obj == nil || obj.Zone == state.ZBattlefield {
+			return decision.Intent{}, false
+		}
+	}
+	snap := f.nextSnapshot()
+	if snap == nil {
+		return decision.Intent{}, false
+	}
+	now := Snapshot(f.e, "")
+	type card struct {
+		seat int
+		name string
+	}
+	owned := func(s *rules.OracleSnapshot, seat int) []string {
+		var names []string
+		for _, p := range s.Permanents {
+			if p.Owner == seat && !p.Token {
+				names = append(names, p.Name)
+			}
+		}
+		return names
+	}
+	want := map[card]int{}
+	counted := map[int]bool{}
+	for _, o := range d.Options {
+		seat := int(f.e.G.Obj(o.Obj).Owner)
+		if counted[seat] {
+			continue
+		}
+		counted[seat] = true
+		if _, ok := snapPlayer(snap, seat); !ok {
+			return decision.Intent{}, false
+		}
+		for _, n := range surplus(owned(snap, seat), owned(&now, seat)) {
+			want[card{seat, n}]++
+		}
+	}
+	for _, g := range f.loggedPlays() {
+		if obj := f.e.G.Obj(g); obj != nil {
+			if c := (card{int(obj.Owner), objName(obj)}); want[c] > 0 {
+				want[c]--
+			}
+		}
+	}
+	total := 0
+	for _, n := range want {
+		total += n
+	}
+	var picks []int
+	seen := map[state.ObjID]bool{}
+	for i, o := range d.Options {
+		if seen[o.Obj] {
+			continue
+		}
+		seen[o.Obj] = true
+		obj := f.e.G.Obj(o.Obj)
+		if c := (card{int(obj.Owner), objName(obj)}); want[c] > 0 {
+			want[c]--
+			picks = append(picks, i)
+		}
+	}
+	if total == 0 || len(picks) != total || len(picks) < d.Min || (d.Max > 0 && len(picks) > d.Max) {
+		return decision.Intent{}, false // nothing arrived, an arrival was not offered, or a pick count the ask forbids
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: picks}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.FieldPicks++
+	return in, true
 }
 
 // handArriveChoose answers a pick of cards that move into a hand (a dig's

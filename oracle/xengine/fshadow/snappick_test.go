@@ -504,3 +504,114 @@ func TestModesCardPickFromTheNextSnapshot(t *testing.T) {
 		}
 	}
 }
+
+// TestPickReadPastOtherMoves is the farm cmdr4 repros where the next snapshot
+// shows an unlogged pick only alongside other moves:
+//   - TDM-s284753433 pod-28475343302 line 524: Kodama's Reach asks which of
+//     the two lands found goes to the battlefield; the other reaches the hand,
+//     so only the snapshot's permanents name the pick.
+//   - BIG-s148 pod-14803 line 642: Dream Cache puts two cards from hand on the
+//     library, then the seat casts one of the others before the snapshot (a
+//     logged priority answer), so three names are gone from the hand.
+//   - EOE-s138 pod-13801 line 384: Terrain Generator puts a Mountain from hand
+//     onto the battlefield and the seat draws another before the snapshot, so
+//     the hand still holds as many Mountains.
+func TestPickReadPastOtherMoves(t *testing.T) {
+	perm := func(name string) rules.OracleSnapPerm {
+		return rules.OracleSnapPerm{Name: name, Owner: 1, Controller: 1}
+	}
+	// played appends Forge's priority answer playing hand card id before the
+	// snapshot entry e, and starts the follow there.
+	played := func(f *follower, action string, id state.ObjID) {
+		snap := f.log.Entries[len(f.log.Entries)-1]
+		f.log.Entries[len(f.log.Entries)-1] = Entry{Line: 998, T: "ask", Ask: &Ask{T: "ask", N: 1, Seat: 1, Kind: KindPriority,
+			Answer: Answer{Action: action, Card: f.toF[id]}}}
+		f.log.Entries = append(f.log.Entries, snap)
+		f.pos = len(f.log.Entries) - 2
+	}
+	t.Run("Kodama's Reach: the land new on the battlefield", func(t *testing.T) {
+		f, lib, _ := snapPickFixture(t)
+		offer := []state.ObjID{lib[0], lib[3]} // Island, Swamp
+		d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 1, Max: 1,
+			ResumeKind: "search", ResumeSA: ability(t, "Kodama's Reach", "DBChangeZone1")}
+		for i, id := range offer {
+			d.Options = append(d.Options, decision.Option{Index: i, Kind: "search", Obj: id, Player: 1})
+		}
+		e := nextSnap(f, func(p *rules.OracleSnapPlayer) {
+			p.LibraryCount -= 2
+			p.Hand = append(p.Hand, "Island")
+		})
+		e.Snap.Snapshot.Permanents = append(e.Snap.Snapshot.Permanents, perm("Swamp"))
+		in, ok := f.answer(d, e)
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("hard divergence %+v", f.res.Hard)
+		}
+		if !slices.Equal(in.Choices, []int{1}) || f.res.FieldPicks != 1 {
+			t.Errorf("choices %v field picks %d, want [1] and 1", in.Choices, f.res.FieldPicks)
+		}
+	})
+	t.Run("Dream Cache: a logged cast is no pick", func(t *testing.T) {
+		f, _, _ := snapPickFixture(t)
+		hand := f.e.G.Zone(state.ZHand, 1)
+		// Forest, Plains, Mountain: the Forest is played, the others put back.
+		offer := []state.ObjID{hand[0], hand[3], hand[5]}
+		if got := namesOf(f, offer...); !slices.Equal(got, []string{"Forest", "Plains", "Mountain"}) {
+			t.Fatalf("offer %v", got)
+		}
+		d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 2, Max: 2,
+			ResumeKind: "hand_move", ResumeSA: ability(t, "Dream Cache", "ChangeZoneDB")}
+		for i, id := range offer {
+			d.Options = append(d.Options, decision.Option{Index: i, Kind: "hand_move", Obj: id, Player: 1})
+		}
+		nextSnap(f, func(p *rules.OracleSnapPlayer) {
+			p.Hand = without(without(without(p.Hand, "Forest"), "Plains"), "Mountain")
+		})
+		played(f, "land", offer[0])
+		in, ok := f.answer(d, f.log.Entries[f.pos])
+		if !ok || f.res.Hard != nil {
+			t.Fatalf("hard divergence %+v", f.res.Hard)
+		}
+		if !slices.Equal(in.Choices, []int{1, 2}) || f.res.HandPicks != 1 {
+			t.Errorf("choices %v hand picks %d, want [1 2] and 1", in.Choices, f.res.HandPicks)
+		}
+	})
+	for _, c := range []struct {
+		name   string
+		played bool // a logged land play of another Mountain explains the arrival
+		want   []int
+		read   int
+	}{
+		{"Terrain Generator: the Mountain new on the battlefield, another drawn", false, []int{0}, 1},
+		{"Terrain Generator: a logged land play is no pick", true, []int{}, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			f, _, _ := snapPickFixture(t)
+			hand := f.e.G.Zone(state.ZHand, 1)
+			offer := []state.ObjID{hand[5]}
+			if got := namesOf(f, offer...); !slices.Equal(got, []string{"Mountain"}) {
+				t.Fatalf("offer %v", got)
+			}
+			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 0, Max: 1,
+				ResumeKind: "hand_move", ResumeSA: ability(t, "Terrain Generator", "", 1)}
+			d.Options = []decision.Option{{Index: 0, Kind: "hand_move", Obj: offer[0], Player: 1}}
+			e := nextSnap(f, func(p *rules.OracleSnapPlayer) {
+				p.LibraryCount-- // the Mountain drawn: the hand's count is unchanged
+				if c.played {
+					p.Hand = without(p.Hand, "Mountain")
+				}
+			})
+			e.Snap.Snapshot.Permanents = append(e.Snap.Snapshot.Permanents, perm("Mountain"))
+			if c.played {
+				played(f, "land", hand[6])
+				e = f.log.Entries[f.pos]
+			}
+			in, ok := f.answer(d, e)
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			if !slices.Equal(in.Choices, c.want) || f.res.FieldPicks != c.read {
+				t.Errorf("choices %v field picks %d, want %v and %d", in.Choices, f.res.FieldPicks, c.want, c.read)
+			}
+		})
+	}
+}
