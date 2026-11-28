@@ -29,7 +29,9 @@
 // gorge poses it as a choose or a modes decision, a search's pick is read
 // from the owner's next shuffle line (Result.LibraryPicks), and a pick out of
 // a hand or into one from the next snapshot line's hands (Result.HandPicks,
-// Result.ArrivalPicks); what no later line shows is answered by default.
+// Result.ArrivalPicks). Each is read only where the ask itself sends the
+// chosen cards that way and leaves the others behind; what it does not say, or
+// no later line shows, is answered by default.
 //
 // Forge's recorder writes a target ask only where its targeting hook is asked,
 // so a gorge target decision whose log line is an ask of another kind (the

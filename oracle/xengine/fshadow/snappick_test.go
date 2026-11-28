@@ -5,6 +5,7 @@ import (
 	"slices"
 	"testing"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
@@ -81,6 +82,30 @@ func namesOf(f *follower, ids ...state.ObjID) []string {
 func without(s []string, n string) []string {
 	i := slices.Index(s, n)
 	return slices.Delete(slices.Clone(s), i, i+1)
+}
+
+// ability is a corpus card's ability: the one its SVar svar names, or the
+// card's first ability when svar is empty (its nth, with n).
+func ability(t *testing.T, card, svar string, n ...int) *cards.SA {
+	t.Helper()
+	c, ok := corpus(t).Lookup(card)
+	if !ok {
+		t.Fatalf("no card %q", card)
+	}
+	i := 0
+	if len(n) > 0 {
+		i = n[0]
+	}
+	var sa *cards.SA
+	if svar != "" {
+		sa = cards.ResolveSVar(c.Faces[0].SVars, svar)
+	} else if len(c.Faces[0].Abilities) > i {
+		sa = c.Faces[0].Abilities[i]
+	}
+	if sa == nil {
+		t.Fatalf("%q has no ability %q %d", card, svar, i)
+	}
+	return sa
 }
 
 // TestArrangeFromTheNextSnapshot is the farm cmdr4 repro (BLB-s131026052
@@ -175,7 +200,11 @@ func TestArrivalPickFromTheNextSnapshot(t *testing.T) {
 			if c.fromYard {
 				offer = yard
 			}
-			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: c.min, Max: c.max}
+			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: c.min, Max: c.max,
+				ResumeKind: "dig", ResumeSA: ability(t, "Satyr Wayfinder", "TrigDig")}
+			if c.fromYard {
+				d.ResumeKind, d.ResumeSA = "hidden_pick", ability(t, "Transwarp Hub", "DBChangeZone")
+			}
 			for i, id := range offer {
 				d.Options = append(d.Options, decision.Option{Index: i, Kind: "hidden_pick", Obj: id, Player: 1})
 			}
@@ -206,10 +235,131 @@ func TestArrivalPickFromTheNextSnapshot(t *testing.T) {
 	}
 }
 
+// TestPickReadAlongTheAskedRoute drives the readers with the corpus's own
+// abilities. Each offers an Island (option 0) and a Grizzly Bears (option 1),
+// and the log then shows the Bears making one movement: new in the hand, gone
+// from the hand, or missing from the next shuffle. That names the Bears as the
+// pick only where the ask sends its chosen cards that way and leaves the
+// others behind. Elsewhere the Bears may be the card Forge did not choose
+// (Deliver Unto Evil's two chosen cards stay in the graveyard and the others
+// return), so the answer must stay the default, the Island.
+func TestPickReadAlongTheAskedRoute(t *testing.T) {
+	const (
+		arrives = "arrives in the hand"
+		leaves  = "leaves the hand"
+		shuffle = "is missing from the next shuffle"
+	)
+	for _, c := range []struct {
+		card, svar     string
+		nth            int
+		resume, option string
+		from           state.Zone
+		seen           string
+		read           bool
+	}{
+		{"Satyr Wayfinder", "TrigDig", 0, "dig", "dig", state.ZLibrary, arrives, true},
+		{"Ancient Stirrings", "", 0, "dig", "dig", state.ZLibrary, arrives, true},
+		{"Memories Returning", "DBYouDigTwo", 0, "dig", "dig", state.ZLibrary, arrives, true},
+		{"Transwarp Hub", "DBChangeZone", 0, "hidden_pick", "hidden_pick", state.ZGraveyard, arrives, true},
+		{"Gruul Turf", "TrigReturn", 0, "hidden_pick", "hidden_pick", state.ZBattlefield, arrives, true},
+		// The chosen card goes to the library bottom, the other to the hand.
+		{"Memories Returning", "DBOppDigTwo", 0, "dig", "dig", state.ZLibrary, arrives, false},
+		{"Memories Returning", "DBOppDigTwo", 0, "dig", "dig", state.ZLibrary, shuffle, false},
+		// The chosen cards stay, or go to the graveyard or a pile.
+		{"Deliver Unto Evil", "DBChoose", 0, "choice", "card", state.ZGraveyard, arrives, false},
+		{"Gifts Ungiven", "DBChangeZone1", 0, "hidden_pick", "hidden_pick", state.ZLibrary, arrives, false},
+		{"Fact or Fiction", "DBTwoPiles", 0, "twopiles_split", "twopiles", state.ZLibrary, arrives, false},
+		// The chosen card goes to the battlefield.
+		{"Kodama's Reach", "DBChangeZone1", 0, "search", "search", state.ZLibrary, arrives, false},
+		{"Kodama's Reach", "DBChangeZone1", 0, "search", "search", state.ZLibrary, shuffle, true},
+		// A dig whose rest leaves the library too: a missing card is no pick.
+		{"Satyr Wayfinder", "TrigDig", 0, "dig", "dig", state.ZLibrary, shuffle, false},
+		{"Ancient Stirrings", "", 0, "dig", "dig", state.ZLibrary, shuffle, true},
+		// Hand cards: moved by the answer, or possibly kept by it.
+		{"Terrain Generator", "", 1, "hand_move", "hand_move", state.ZHand, leaves, true},
+		{"Dream Cache", "ChangeZoneDB", 0, "hand_move", "hand_move", state.ZHand, leaves, true},
+		{"Thoughtseize", "", 0, "discard", "discard", state.ZHand, leaves, true},
+		{"Thoughtseize", "", 0, "discard_reveal", "reveal", state.ZHand, leaves, false},
+		{"Deliver Unto Evil", "DBChoose", 0, "choice", "card", state.ZHand, leaves, false},
+	} {
+		t.Run(c.card+" "+c.resume+" "+c.svar+" "+c.seen, func(t *testing.T) {
+			f, lib, yard := snapPickFixture(t)
+			var offer []state.ObjID
+			switch c.from {
+			case state.ZLibrary:
+				offer = []state.ObjID{lib[0], lib[2]}
+			case state.ZHand:
+				hand := f.e.G.Zone(state.ZHand, 1)
+				other := slices.IndexFunc(hand, func(id state.ObjID) bool { return namesOf(f, id)[0] != namesOf(f, hand[0])[0] })
+				offer = []state.ObjID{hand[0], hand[other]}
+			default:
+				offer = yard
+				if c.from == state.ZBattlefield {
+					f.e.G.SetZone(state.ZGraveyard, 1, nil)
+					f.e.G.SetZone(state.ZBattlefield, 1, slices.Clone(yard))
+					for _, id := range yard {
+						f.e.G.Obj(id).Zone = state.ZBattlefield
+					}
+				}
+			}
+			moved := namesOf(f, offer[1])[0]
+			d := &decision.Decision{Seq: 7, Player: 1, Kind: decision.KChoose, Min: 1, Max: 1,
+				ResumeKind: c.resume, ResumeSA: ability(t, c.card, c.svar, c.nth)}
+			for i, id := range offer {
+				d.Options = append(d.Options, decision.Option{Index: i, Kind: c.option, Obj: id, Player: 1})
+			}
+			var e Entry
+			if c.seen == shuffle {
+				sh := &Shuffle{T: TShuffle, Seat: 1}
+				for _, id := range f.e.G.Zone(state.ZLibrary, 1) {
+					if id != offer[1] {
+						sh.Order = append(sh.Order, f.toF[id])
+					}
+				}
+				f.shuffles[1], f.planned[1] = []*Shuffle{sh}, 0
+				e = Entry{Line: 999, T: TShuffle, Shuffle: sh}
+				f.log.Entries = append(f.log.Entries, e)
+				f.pos = len(f.log.Entries) - 1
+			} else {
+				e = nextSnap(f, func(p *rules.OracleSnapPlayer) {
+					if c.seen == leaves {
+						p.Hand = without(p.Hand, moved)
+						return
+					}
+					p.Hand = append(p.Hand, moved)
+					switch c.from {
+					case state.ZLibrary:
+						p.LibraryCount--
+					case state.ZGraveyard:
+						p.Graveyard = without(p.Graveyard, moved)
+					}
+				})
+				if c.from == state.ZBattlefield {
+					s := &e.Snap.Snapshot
+					i := slices.IndexFunc(s.Permanents, func(p rules.OracleSnapPerm) bool { return p.Name == moved })
+					s.Permanents = slices.Delete(slices.Clone(s.Permanents), i, i+1)
+				}
+			}
+			in, ok := f.answer(d, e)
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			want, read := []int{0}, 0
+			if c.read {
+				want, read = []int{1}, 1
+			}
+			if got := f.res.LibraryPicks + f.res.HandPicks + f.res.ArrivalPicks; !slices.Equal(in.Choices, want) || got != read {
+				t.Errorf("choices %v picks read %d, want %v and %d", in.Choices, got, want, read)
+			}
+		})
+	}
+}
+
 // TestModesCardPickFromTheNextSnapshot is the farm cmdr4 repro
 // (FIN-s131026059 pod-13102605902, line 180, p2.hand): gorge poses Faithless
 // Looting's discard as a modes ask, which the default answered with the first
-// two cards. Modes of one source are no card pick and keep the default.
+// two cards. Modes of an ability, one or several, are no card pick and keep
+// the default.
 func TestModesCardPickFromTheNextSnapshot(t *testing.T) {
 	f, _, _ := snapPickFixture(t)
 	hand := slices.Clone(f.e.G.Zone(state.ZHand, 1))
@@ -226,10 +376,15 @@ func TestModesCardPickFromTheNextSnapshot(t *testing.T) {
 	if !ok || len(in.Choices) != 1 || namesOf(f, hand[in.Choices[0]])[0] != namesOf(f, hand[other])[0] || f.res.HandPicks != 1 || f.res.Modes != 0 {
 		t.Errorf("choices %v hand picks %d modes %d, want the departed %v", in.Choices, f.res.HandPicks, f.res.Modes, namesOf(f, hand[other]))
 	}
-	same := &decision.Decision{Seq: 8, Player: 1, Kind: decision.KModes, Min: 1, Max: 1, Options: []decision.Option{
-		{Index: 0, Kind: "mode", Obj: hand[other], Player: 1}, {Index: 1, Kind: "mode", Obj: hand[other], Player: 1},
-	}}
-	if in, ok := f.answer(same, e); !ok || !slices.Equal(in.Choices, []int{0}) || f.res.Modes != 1 || f.res.HandPicks != 1 {
-		t.Errorf("modes of one source: choices %v modes %d hand picks %d, want the default", in.Choices, f.res.Modes, f.res.HandPicks)
+	// A "choose up to one" charm with a single eligible mode names its
+	// source, here a card gone from the hand: the ask takes no card.
+	for i, n := range []int{1, 2} {
+		d := &decision.Decision{Seq: 8, Player: 1, Kind: decision.KModes, Max: 1, ResumeKind: "modes"}
+		for j := range n {
+			d.Options = append(d.Options, decision.Option{Index: j, Kind: "mode", Obj: hand[other], Player: 1})
+		}
+		if in, ok := f.answer(d, e); !ok || !slices.Equal(in.Choices, []int{0}) || f.res.Modes != i+1 || f.res.HandPicks != 1 {
+			t.Errorf("%d modes of one source: choices %v modes %d hand picks %d, want the default", n, in.Choices, f.res.Modes, f.res.HandPicks)
+		}
 	}
 }

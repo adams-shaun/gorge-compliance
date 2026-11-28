@@ -10,6 +10,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/server/matchrecord"
@@ -666,14 +667,13 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// modal trigger's, a nested Charm): the AI answers through hooks that
 		// write no ask line, so the next line belongs to a later decision.
 		// gorge also poses some card picks as modes (an effect's discard, a
-		// connive's), which the log can still answer. Otherwise answer by
+		// connive's), which the log can still answer (cardPickChoose declines
+		// every modes ask that is no such pick). Otherwise answer by
 		// default -- the first modes the ask requires, at least one -- and
 		// consume no line; Forge's real choice, if it differs, shows at the
 		// next snapshot.
-		if distinctCards(d) {
-			if in, ok := f.cardPickChoose(d); ok {
-				return in, true
-			}
+		if in, ok := f.cardPickChoose(d); ok {
+			return in, true
 		}
 		return f.defaultModes(d), true
 	}
@@ -1861,30 +1861,132 @@ func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool)
 
 // cardPickChoose answers an unlogged pick of cards from what the log shows
 // Forge did with them: a search's pick from the next shuffle line, a pick out
-// of a hand or into one from the next snapshot line. Each reader matches the
-// offered objects by the zone they are in and declines what it cannot show.
+// of a hand or into one from the next snapshot line. Each reader takes the
+// offered cards that made one movement for the pick, so it is asked only
+// where the ask sends the chosen cards that way and the ones left out stay
+// behind (pickRouteOf): where the chosen cards stay and the others move, the
+// same evidence names the complement of Forge's pick. This is the only caller
+// of the readers; each also matches the offered objects by the zone they are
+// in and declines what it cannot show.
 func (f *follower) cardPickChoose(d *decision.Decision) (decision.Intent, bool) {
-	for _, read := range []func(*decision.Decision) (decision.Intent, bool){
-		f.libraryPickChoose, f.handLeaveChoose, f.handArriveChoose,
-	} {
-		if in, ok := read(d); ok {
+	r, ok := f.pickRouteOf(d)
+	if !ok {
+		return decision.Intent{}, false
+	}
+	if r.chosenLeaves && !r.restLeaves {
+		if in, ok := f.libraryPickChoose(d); ok {
 			return in, true
 		}
+		if in, ok := f.handLeaveChoose(d); ok {
+			return in, true
+		}
+	}
+	if r.chosenToHand && !r.restToHand {
+		return f.handArriveChoose(d)
 	}
 	return decision.Intent{}, false
 }
 
-// distinctCards reports whether every option of d is a different object: a
-// pick of cards, not several modes of one source.
-func distinctCards(d *decision.Decision) bool {
-	seen := map[state.ObjID]bool{}
-	for _, o := range d.Options {
-		if o.Obj == 0 || seen[o.Obj] {
-			return false
-		}
-		seen[o.Obj] = true
+// pickRoute is where an ask sends the cards it offers, the ones the answer
+// names (chosen) and the ones it leaves out (rest): whether they leave the
+// zone they are offered from, and whether they reach a hand.
+type pickRoute struct {
+	chosenLeaves, restLeaves bool
+	chosenToHand, restToHand bool
+}
+
+// leavingOptionKinds are the option kinds that say by themselves that the
+// chosen cards leave their zone for somewhere other than a hand and the rest
+// stay: a discard (cleanup, a cost's, an effect's, a connive's), a ward's
+// discard, an exile cost and an imprint.
+var leavingOptionKinds = map[string]bool{"discard": true, "ward_discard": true, "exilecost": true, "imprint": true}
+
+// pickRouteOf reads d's route off the ask itself: its option kinds, else its
+// resume kind and the asking ability's destination parameters. ok is false for
+// every ask that does not positively say -- a ChooseCard, whose chosen cards'
+// fate later abilities decide; a reveal; a pile split; modes of an ability; a
+// shape gorge adds later -- so no reader infers a pick from it.
+func (f *follower) pickRouteOf(d *decision.Decision) (pickRoute, bool) {
+	var no pickRoute
+	if len(d.Options) == 0 {
+		return no, false
 	}
-	return len(d.Options) > 0
+	if !slices.ContainsFunc(d.Options, func(o decision.Option) bool { return !leavingOptionKinds[o.Kind] }) {
+		return pickRoute{chosenLeaves: true}, true
+	}
+	sa := d.ResumeSA
+	api := ""
+	if sa != nil {
+		api = sa.API
+	}
+	switch d.ResumeKind {
+	case "search", "search_zones":
+		// A search takes the cards found out of their zone before it
+		// shuffles, wherever it then puts them.
+		r := pickRoute{chosenLeaves: true}
+		if api == "ChangeZone" {
+			to, ok := changeZoneDestinations(sa)
+			r.chosenToHand = ok && onlyHand(to)
+		}
+		return r, true
+	case "hidden_pick", "hand_move":
+		if api != "ChangeZone" || f.e == nil || f.e.G == nil {
+			return no, false
+		}
+		to, ok := changeZoneDestinations(sa)
+		if !ok {
+			return no, false
+		}
+		for _, o := range d.Options {
+			obj := f.e.G.Obj(o.Obj)
+			if obj == nil || slices.Contains(to, obj.Zone) {
+				return no, false
+			}
+		}
+		return pickRoute{chosenLeaves: true, chosenToHand: onlyHand(to)}, true
+	case "dig":
+		if api != "Dig" {
+			return no, false
+		}
+		p := effects.DigOf(sa)
+		// SkipReorder$ alone leaves the rest where it is; otherwise it goes
+		// to the second destination (the library when none is named).
+		rest, ok := state.ZLibrary, true
+		if !p.SkipReorder || p.RestRandomOrder {
+			rest, ok = effects.ParseZoneWord(p.Dest2Name)
+		}
+		if !ok {
+			return no, false
+		}
+		return pickRoute{
+			chosenLeaves: p.Dest != state.ZLibrary, chosenToHand: p.Dest == state.ZHand,
+			restLeaves: rest != state.ZLibrary, restToHand: rest == state.ZHand,
+		}, true
+	case "draw_upto":
+		// "Draw up to N": the cards named are drawn.
+		return pickRoute{chosenLeaves: true, chosenToHand: true}, true
+	}
+	return no, false
+}
+
+// changeZoneDestinations is every zone a ChangeZone ability may put a chosen
+// card: its Destination$ and, where it names one, its DestinationAlternative$.
+// ok is false when either is not a zone gorge models.
+func changeZoneDestinations(sa *cards.SA) ([]state.Zone, bool) {
+	p := effects.ChangeZoneOf(sa)
+	if !p.DestinationKnown || (p.DestinationAltText != "" && !p.DestinationAltKnown) {
+		return nil, false
+	}
+	to := []state.Zone{p.Destination}
+	if p.DestinationAltText != "" {
+		to = append(to, p.DestinationAlt)
+	}
+	return to, true
+}
+
+// onlyHand reports whether every zone of to is the hand.
+func onlyHand(to []state.Zone) bool {
+	return !slices.ContainsFunc(to, func(z state.Zone) bool { return z != state.ZHand })
 }
 
 // handArriveChoose answers a pick of cards that move into a hand (a dig's
@@ -1895,11 +1997,14 @@ func distinctCards(d *decision.Decision) bool {
 // (farm cmdr4 DSK-s134 pod-13402 line 209, Satyr Wayfinder; TMT-s23564447
 // pod-2356444702 line 384, Gruul Turf).
 //
-// It applies to any pick whose options are all outside the hands. It answers
-// only when every card new in those hands is offered AND its source holds
-// that many fewer at the snapshot (a card merely drawn under an offered name
-// is no pick), the count is a legal pick count, and the picks validate;
-// anything else falls back to the default.
+// It applies to any pick that cardPickChoose routes into a hand and whose
+// options are all outside the hands. It answers only when every card new in
+// those hands is offered AND its source holds that many fewer at the
+// snapshot, the count is a legal pick count, and the picks validate; anything
+// else falls back to the default. A public source is counted by name; a
+// library only by its size, which a draw lowers too, so an optional pick
+// Forge declined, followed before the snapshot by a draw of a card named like
+// an offered one, reads as that pick.
 func (f *follower) handArriveChoose(d *decision.Decision) (decision.Intent, bool) {
 	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
 		return decision.Intent{}, false
