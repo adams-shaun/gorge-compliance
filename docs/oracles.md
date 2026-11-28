@@ -33,8 +33,14 @@ fails the test until the row is deleted.
 **Checks:** `scenarios/xmageport/` holds XMage's Mage.Tests methods, translated by
 `cmd/xmageport` and run on gorge. The expectations come from XMage's assertions.
 
-**Can't check:** what XMage's tests don't cover. The translator refuses what it can't express,
-including multiplayer and commander tests, because the runner plays two seats. Passing tests
+**Can't check:** what XMage's tests don't cover. The translator refuses what it can't express.
+Four-player tests (`CardTestCommander4Players`, `CardTestMultiPlayerBaseWithRangeAll`) are
+translated to `"players": 4` scenarios, seated in XMage's turn order (A, D, C, B as p0..p3); an
+attack at more than one player in one combat is still refused (`multi-defender`). The
+range-of-influence-one, Commander duel and three-player, and AI-helped bases stay refused
+(`range-one`, `commander-deck`, `ai`): gorge has no range of influence (rule 801 is outside this
+project's rules scope), the translator cannot express a Commander deck file, and an AI choice
+has no stated answer. Passing tests
 only are committed, along with `known_bug` rows that must keep failing
 (`cmd/xmageport/known_bugs.tsv`).
 
