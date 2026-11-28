@@ -1,0 +1,66 @@
+{
+ "card": "Colossal Dreadmaw",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "25612a13b0af",
+ "scenarios": [
+  {
+   "name": "lethal-to-protected-blocker-before-trampling-over",
+   "cr": [
+    "702.19b"
+   ],
+   "why": "Colossal Dreadmaw stands in for the green 6/6 trampler and Vodalian Zombie for the 2/2 with protection from green. Lethal 2 must go to the Zombie even though protection prevents it, so the Zombie survives undamaged and the player takes the other 4.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Colossal Dreadmaw"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Vodalian Zombie"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Colossal Dreadmaw"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "blocks": [
+      [
+       "p1:Vodalian Zombie",
+       "p0:Colossal Dreadmaw"
+      ]
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Vodalian Zombie",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "life": {
+      "p1": 16
+     }
+    }
+   ]
+  }
+ ]
+}

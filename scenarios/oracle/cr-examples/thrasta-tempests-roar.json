@@ -1,0 +1,62 @@
+{
+ "card": "Thrasta, Tempest's Roar",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "268a6ce4f050",
+ "scenarios": [
+  {
+   "name": "other-attackers-damage-counts-toward-loyalty",
+   "cr": [
+    "702.19c"
+   ],
+   "why": "Eager Cadet and Thrasta attack Jace Beleren, which has three loyalty; Blazing Archon stops creatures attacking the player, so the planeswalker is the only defender. The Cadet's 1 counts toward Jace's loyalty, so Thrasta assigns 2 to Jace and its other 5 to Jace's controller.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Eager Cadet",
+      "Thrasta, Tempest's Roar"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Jace Beleren",
+      "Blazing Archon"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Eager Cadet",
+      "p0:Thrasta, Tempest's Roar"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block"
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Jace Beleren",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 15
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "card": "Collective Unconscious",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "418a936d9d2d",
+ "scenarios": [
+  {
+   "name": "phased-out-creature-not-counted",
+   "cr": [
+    "702.26b"
+   ],
+   "why": "One of three Grizzly Bears is phased out by Reality Ripple before Collective Unconscious resolves. A phased-out creature is treated as though it does not exist, so two cards are drawn.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Grizzly Bears",
+      "Grizzly Bears",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Reality Ripple",
+      "Collective Unconscious"
+     ],
+     "library": [
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains",
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Reality Ripple",
+     "mana": "CU",
+     "targets": [
+      "p0:Grizzly Bears#3"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Collective Unconscious",
+     "mana": "CCCCGG"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "hand_size": {
+      "p0": 2
+     }
+    }
+   ]
+  }
+ ]
+}

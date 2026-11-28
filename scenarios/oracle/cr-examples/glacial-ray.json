@@ -1,0 +1,151 @@
+{
+ "card": "Glacial Ray",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "08586b63f272",
+ "scenarios": [
+  {
+   "name": "spliced-card-stays-in-hand-and-is-cast-later",
+   "cr": [
+    "702.47a"
+   ],
+   "why": "Glacial Ray is spliced onto Reach Through Mists, dealing 2 to the opponent while the Ray stays in hand. It is then cast on its own for another 2.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Reach Through Mists",
+      "Glacial Ray"
+     ],
+     "library": [
+      "Plains",
+      "Plains",
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Reach Through Mists",
+     "mana": "UCR",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Glacial Ray"
+       ]
+      },
+      {
+       "kind": "target",
+       "pick": [
+        "p1"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Glacial Ray",
+       "zone": "hand"
+      },
+      {
+       "life": {
+        "p1": 18
+       }
+      }
+     ]
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Glacial Ray",
+     "mana": "CR",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Glacial Ray",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Reach Through Mists",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p1": 16
+     }
+    }
+   ]
+  },
+  {
+   "name": "spliced-text-is-blue-so-it-hits-protection-from-red",
+   "cr": [
+    "702.47c"
+   ],
+   "why": "Glacial Ray is spliced onto the blue Reach Through Mists, so the blue spell deals the damage. Silver Knight's protection from red does not stop it, and the Knight dies.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Reach Through Mists",
+      "Glacial Ray"
+     ],
+     "library": [
+      "Plains",
+      "Plains",
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Silver Knight"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Reach Through Mists",
+     "mana": "UCR",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Glacial Ray"
+       ]
+      },
+      {
+       "kind": "target",
+       "pick": [
+        "p1:Silver Knight"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Silver Knight",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Glacial Ray",
+     "zone": "hand"
+    }
+   ]
+  }
+ ]
+}
