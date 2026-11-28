@@ -59,7 +59,8 @@
 // unsupported, "P?", never a disagreement); -classes (default oracle/xengine/diagnosed-classes.tsv) labels the findings whose card-independent
 // signature a diagnosed class matches (Row.Diagnosed). keyproof turns a play, its two diffs and its adjudication into per-key proof
 // (DIR4/keyproof.tsv: one row per card key, agreed by FX, X or F, or diverged by a signature, diagnosed by a class row, or owed), the
-// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, and witness.jsonl, one line per agreeing item.
+// handoff.tsv of undiagnosed signatures with sigs/<sig>.tsv, witness.jsonl, one line per agreeing item, and keyproof-legs.tsv (the
+// same keys as carddb leg rows: an xmage and a forge row each in that follower's own state, plus a cite row for a diagnosed key).
 // keyproof -seed proves no play: it reads -scope (tab-separated oracle_id<TAB>name, the output of `carddb sql "SELECT oracle_id, name FROM scope_cards ORDER BY 1"`) and writes
 // DIR4/keyproof-seed.tsv with one owed row per cov.Universe key of every scope card and each of the xmage and lockstep legs (two cast rows with reason not-in-corpus when the
 // registry lacks the card), for `carddb put keyproof --source seed --if-absent --refresh multiplayer,desc,script_sha` to add without touching a measured row. It runs where the
