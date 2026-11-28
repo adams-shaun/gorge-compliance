@@ -26,9 +26,19 @@
 // first modes it requires; Result.Modes counts them) and consumes no log line.
 //
 // Forge's recorder writes no ask line for a scry, surveil or other
-// library-arranging answer, so a gorge arrange decision is answered by
-// default (offered cards stay on top in order; Result.Arranges counts them)
-// and consumes no log line.
+// library-arranging answer, so a gorge arrange decision consumes no log line
+// (Result.Arranges counts them). A scry, surveil or top reorder is answered
+// from the next snapshot line's library top, hand and graveyard
+// (Result.ArrangePicks), anything else by default (offered cards stay on top
+// in order).
+//
+// Forge's recorder writes no ask line for a pick of cards either. Whether
+// gorge poses it as a choose or a modes decision, a search's pick is read
+// from the owner's next shuffle line (Result.LibraryPicks), and a pick out of
+// a hand or into one from the next snapshot line's hands (Result.HandPicks,
+// Result.ArrivalPicks). Each is read only where the ask itself sends the
+// chosen cards that way and leaves the others behind; what it does not say, or
+// no later line shows, is answered by default.
 //
 // Forge's recorder writes one target ask over a whole sub-ability chain, with
 // its targets split by targeting part ("target_slots"), while gorge asks each
