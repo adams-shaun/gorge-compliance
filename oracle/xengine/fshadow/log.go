@@ -230,25 +230,47 @@ const (
 )
 
 // Option is one choice Forge offered. Priority: Action (land, cast,
-// activate, other), Card and Ability. Attack: Card attacks Player, or the
-// planeswalker or battle DefenderCard. Block: Card blocks Attacker. Target:
-// a ref (Card, Player or Spell).
+// activate, other), Card, Ability and a cast's Mode. Attack: Card attacks
+// Player, or the planeswalker or battle DefenderCard. Block: Card blocks
+// Attacker. Target: a ref (Card, Player or Spell).
 type Option struct {
-	Action       string `json:"action,omitempty"`
-	Card         int    `json:"card,omitempty"`
-	Ability      int    `json:"ability,omitempty"`
+	Action string `json:"action,omitempty"`
+	Card   int    `json:"card,omitempty"`
+	// Ability is the index of a priority option's ability among its host
+	// card's own spell abilities. The recorder writes none for an ability the
+	// host does not hold (an Adventure's spell, a variant Forge copied from
+	// one), which is not index 0: read it through abilityID.
+	Ability *int `json:"ability,omitempty"`
+	// Mode is Forge's mark on a cast option, as on the Answer.
+	Mode         string `json:"mode,omitempty"`
 	Player       *int   `json:"player,omitempty"`
 	Spell        int    `json:"spell,omitempty"`
 	DefenderCard int    `json:"defender_card,omitempty"`
 	Attacker     int    `json:"attacker,omitempty"`
 }
 
+// noAbility is abilityID of a line without an "ability": no index.
+const noAbility = -1
+
+// abilityID is o's Ability, noAbility when Forge's line has none.
+func (o Option) abilityID() int { return abilityOf(o.Ability) }
+
+// abilityID is a's Ability, noAbility when Forge's line has none.
+func (a Answer) abilityID() int { return abilityOf(a.Ability) }
+
+func abilityOf(p *int) int {
+	if p == nil {
+		return noAbility
+	}
+	return *p
+}
+
 // Answer is the seat's answer to an ask.
 type Answer struct {
 	Action  string `json:"action,omitempty"` // priority: pass, land, cast, activate, other
 	Card    int    `json:"card,omitempty"`
-	Source  int    `json:"source,omitempty"` // target: the host card
-	Ability int    `json:"ability,omitempty"`
+	Source  int    `json:"source,omitempty"`  // target: the host card
+	Ability *int   `json:"ability,omitempty"` // as Option.Ability
 	Tapped  []int  `json:"tapped,omitempty"`  // the mana sources tapped to pay
 	Targets []Ref  `json:"targets,omitempty"` // target; also a cast's or activation's
 	// TargetSlots is how many of Targets each targeting part of the spell or
