@@ -809,3 +809,24 @@ func TestOfferedActivationTapsForgesSources(t *testing.T) {
 	})
 	followClean(t, l, 1)
 }
+
+// TestOfferedActivationSacrificingAnotherDiverges: Forge activates Frozen Shade
+// tapping Phyrexian Tower alone and sacrifices the second creature. The line
+// names no victim, so the activation is not paid by hand, and gorge's own
+// payment of the offer would not sacrifice it: the follow stops at the
+// activation instead of reporting the graveyard at a later snapshot.
+func TestOfferedActivationSacrificingAnotherDiverges(t *testing.T) {
+	const tower, elves, mystic, shade = "Phyrexian Tower", "Llanowar Elves", "Elvish Mystic", "Frozen Shade"
+	l := handGame(t, corpus(t), "", []string{"Forest", elves, "Sol Ring", "Swamp", shade, tower, mystic}, []handStep{
+		{land: "Forest"},
+		{plan: elves},
+		{land: "Swamp"},
+		{plan: "Sol Ring"},
+		{plan: shade},
+		{land: tower},
+		{plan: mystic},
+		{use: shade, activate: true, taps: []string{tower + ":Sacrifice:" + mystic}},
+	})
+	_, line := lastAsk(t, l, "activate")
+	stopsAt(t, l, line, 0)
+}

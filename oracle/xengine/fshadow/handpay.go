@@ -209,15 +209,7 @@ func (s *paySearch) tappedAsListed(e *rules.Engine) bool {
 // when no activation order and colour choice reaches an offer the floating mana
 // pays while doing only what a's line says.
 func (f *follower) payByHand(d *decision.Decision, a *Ask, sources []state.ObjID, offer func(*decision.Decision) int) (decision.Intent, bool) {
-	start := f.e.Clone() // reading a board may fill the engine's caches
-	s := &paySearch{f: f, ask: a, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits,
-		stack: len(start.G.Stack), board: board(start), tapped: map[state.ObjID]bool{}}
-	for _, id := range permanents(start) {
-		s.tapped[id] = start.G.Obj(id).Tapped
-	}
-	for _, fid := range a.Answer.Tapped {
-		s.listed = append(s.listed, f.toG[fid])
-	}
+	s, start := f.newPaySearch(d, a, offer)
 	for _, id := range sources {
 		if !slices.Contains(s.sources, id) {
 			s.sources = append(s.sources, id)
@@ -344,6 +336,13 @@ func (s *paySearch) submit(e *rules.Engine, in decision.Intent) *rules.Engine {
 // window, a sacrifice) the follow would answer by default, which may tap or
 // spend what Forge did not.
 func (s *paySearch) settles(e *rules.Engine, i int) bool {
+	return s.settle(e, i, false)
+}
+
+// settle is settles; byDefault answers every other ask as the follow does
+// (firstMin: the follower's default for a list-pick and for the payment
+// window's unlogged asks) instead of refusing it.
+func (s *paySearch) settle(e *rules.Engine, i int, byDefault bool) bool {
 	// The trial answers targets as the follow will, from this line's targets
 	// remembered on a copy of the follower: the follow's own memory stays.
 	trial := *s.f
@@ -376,8 +375,38 @@ func (s *paySearch) settles(e *rules.Engine, i int) bool {
 		case decision.KTriggerOrder, decision.KTriggerOptional:
 			in = firstMin(d)
 		default:
-			return false
+			if !byDefault || !unloggedKind(d.Kind) {
+				return false
+			}
+			in = firstMin(d)
 		}
 	}
 	return false
+}
+
+// newPaySearch is a search for ask a's payment by d's player from f's engine
+// as it stands, offering through offer.
+func (f *follower) newPaySearch(d *decision.Decision, a *Ask, offer func(*decision.Decision) int) (*paySearch, *rules.Engine) {
+	start := f.e.Clone() // reading a board may fill the engine's caches
+	s := &paySearch{f: f, ask: a, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits,
+		stack: len(start.G.Stack), board: board(start), tapped: map[state.ObjID]bool{}}
+	for _, id := range permanents(start) {
+		s.tapped[id] = start.G.Obj(id).Tapped
+	}
+	for _, fid := range a.Answer.Tapped {
+		s.listed = append(s.listed, f.toG[fid])
+	}
+	return s, start
+}
+
+// paysAsListed reports whether taking option i of priority decision d, with
+// gorge paying it in its own payment window and the follow answering that
+// window's asks by default, leaves the taps ask a's line lists
+// (tappedAsListed). An offer Forge paid from sources gorge's window does not
+// pick (Phyrexian Tower sacrificing a creature the line does not name) fails:
+// taking it would pay with other sources, or none, and the follow would carry
+// on from a board Forge never had. a's tapped ids must all be bound.
+func (f *follower) paysAsListed(d *decision.Decision, a *Ask, i int) bool {
+	s, start := f.newPaySearch(d, a, nil)
+	return s.settle(start, i, true)
 }

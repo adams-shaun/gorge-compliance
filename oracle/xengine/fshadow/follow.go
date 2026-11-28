@@ -1106,7 +1106,9 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 // Wilds' sacrifice, a manland's animation). An offered ability Forge paid by
 // tapping sources is paid by hand from those sources first (handActivation),
 // so gorge's payment window does not tap others; the direct pick is the
-// fallback. An ability both engines list (forgeAbility) that gorge does not
+// fallback, taken only when gorge's own payment taps what Forge's line lists
+// (paysAsListed): Forge's Phyrexian Tower sacrificing a creature the line
+// does not name is paid by neither, and the follow stops there. An ability both engines list (forgeAbility) that gorge does not
 // offer is paid by hand from the sources Forge tapped, if that makes gorge
 // offer it.
 func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
@@ -1128,6 +1130,10 @@ func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (deci
 			offer := func(d *decision.Decision) int { return optionOf(d, chosen) }
 			if paid, ok := f.handActivation(d, a, obj, tapped, offer); ok {
 				return paid, nil
+			}
+			if !f.paysAsListed(d, a, pick) {
+				// gorge's own payment would not tap Forge's sources.
+				return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
 			}
 		}
 		in.Choices = []int{pick}
