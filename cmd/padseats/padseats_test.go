@@ -52,6 +52,38 @@ func TestPadSeatsSampleMatchesRecord(t *testing.T) {
 	t.Log(summary(rows))
 }
 
+// TestPadSeatsRecordedKeysMatchRecord replays every scenario the committed
+// record names, whatever its shard, and requires each row to be exactly what
+// it measures: a changed first difference, a verdict now same or base-fails,
+// or a key naming no scenario fails. The shard sample above can hold no
+// recorded row at all, so this is the test that pins the record itself.
+func TestPadSeatsRecordedKeysMatchRecord(t *testing.T) {
+	record := committedRecord(t)
+	if len(record) == 0 {
+		t.Fatal("committed record holds no row")
+	}
+	all, err := loadScenarios(scenarioRoot)
+	if err != nil {
+		t.Fatal(err)
+	}
+	named := map[string]bool{}
+	for _, r := range record {
+		named[r.Scenario] = true
+	}
+	scs := slices.DeleteFunc(all, func(s scenario) bool { return !named[s.Key] })
+	rows, err := play(testutil.CorpusRegistry(t), scs)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Every measured key is a recorded one, so the whole-tree comparison
+	// reports no missing row; a recorded key not played names no scenario
+	// and is reported stale.
+	for _, d := range compare(rows, record, shard{0, 1}) {
+		t.Error(d)
+	}
+	t.Logf("replayed %d of %d recorded keys", len(rows), len(record))
+}
+
 // TestPadSeatsRecordIsWellFormed needs no corpus: the committed record parses
 // strictly (parseRecord), every key names a scenario in the tree, and the
 // parser rejects each malformed shape.
