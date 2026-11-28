@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"regexp"
+	"slices"
 	"strings"
 	"testing"
 
@@ -1389,5 +1390,81 @@ func TestCombatSnapCarryingTheAttackPrecedesTheAsk(t *testing.T) {
 		if got := snapPrecedesOwnDeclaration(c.e, c.n, c.at, c.d); got != c.want {
 			t.Errorf("%s: got %v, want %v", c.name, got, c.want)
 		}
+	}
+}
+
+// searchPickFixture is mayShuffleFixture with the appended seat-1 shuffle
+// line holding seat 1's library minus the cards at the given indexes.
+func searchPickFixture(t *testing.T, gone ...int) (*follower, []state.ObjID) {
+	t.Helper()
+	probe := &follower{log: readGolden(t), reg: corpus(t), toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, planned: map[int]int{}, start: -1}
+	if err := probe.setup(); err != nil {
+		t.Fatal(err)
+	}
+	if err := probe.e.AdvanceHypothetical(); err != nil {
+		t.Fatal(err)
+	}
+	lib := slices.Clone(probe.e.G.Zone(state.ZLibrary, 1))
+	order := make([]int, 0, len(lib))
+	for i, id := range lib {
+		if !slices.Contains(gone, i) {
+			order = append(order, probe.toF[id])
+		}
+	}
+	l := readGolden(t)
+	l.Entries = append(l.Entries, Entry{T: TShuffle, Shuffle: &Shuffle{T: TShuffle, Seat: 1, Order: order}})
+	f := &follower{log: l, reg: corpus(t), toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, planned: map[int]int{}, start: -1}
+	if err := f.setup(); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.e.AdvanceHypothetical(); err != nil {
+		t.Fatal(err)
+	}
+	f.planned[0] = len(f.shuffles[0])
+	return f, f.e.G.Zone(state.ZLibrary, 1)
+}
+
+// TestSearchPickFromTheShuffleLine is the farm cmdr4 repro (BIG-s142 pod
+// 14201, Terramorphic Expanse): a library search's "up to one" pick has no
+// Forge ask line, and answering it by default (nothing, Min 0) left the land
+// in gorge's library, so the search's shuffle met 90 cards against Forge's 89
+// (harness:chance-misaligned). The pick is the offered card missing from the
+// owner's next shuffle line; a shuffle that misses an unoffered card is a
+// later one and leaves the default answer.
+func TestSearchPickFromTheShuffleLine(t *testing.T) {
+	prio := parseAsk(t, `{"t":"ask","n":231,"seat":1,"turn":5,"step":"main1","kind":"priority","answer":{"action":"pass"}}`)
+	search := func(lib []state.ObjID, min, max int, idx ...int) *decision.Decision {
+		d := &decision.Decision{Seq: 9, Player: 1, Kind: decision.KChoose, Min: min, Max: max, ResumeKind: "search"}
+		for _, i := range idx {
+			d.Options = append(d.Options, decision.Option{Index: len(d.Options), Kind: "search", Obj: lib[i], Player: 1})
+		}
+		return d
+	}
+	for _, c := range []struct {
+		name  string
+		gone  []int
+		min   int
+		max   int
+		offer []int
+		want  []int
+		picks int
+	}{
+		{"up to one finds the missing card", []int{1}, 0, 1, []int{0, 1}, []int{1}, 1},
+		{"up to two finds both", []int{0, 1}, 0, 2, []int{0, 1}, []int{0, 1}, 1},
+		{"found nothing", nil, 0, 1, []int{0, 1}, []int{}, 1},
+		{"a later shuffle keeps the default", []int{1}, 0, 1, []int{0}, []int{}, 0},
+		{"more missing than allowed keeps the default", []int{0, 1}, 0, 1, []int{0, 1}, []int{}, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			f, lib := searchPickFixture(t, c.gone...)
+			d := search(lib, c.min, c.max, c.offer...)
+			in, ok := f.answer(d, Entry{Line: 300, T: TAsk, Ask: prio})
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			if !reflect.DeepEqual(in.Choices, c.want) || f.res.LibraryPicks != c.picks || f.res.Chooses != 1 || f.pos != 0 {
+				t.Errorf("choices %v library picks %d chooses %d pos %d, want %v and %d", in.Choices, f.res.LibraryPicks, f.res.Chooses, f.pos, c.want, c.picks)
+			}
+		})
 	}
 }
