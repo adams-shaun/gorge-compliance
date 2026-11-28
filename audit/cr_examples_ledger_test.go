@@ -214,6 +214,15 @@ func crLedgerCheck(rows []crLedgerRow, scenarioCR map[string][]string) []string 
 	return problems
 }
 
+// crLedgerProblems is the single path from ledger text to problems: it parses
+// the lines (header first) and runs crLedgerCheck against scenarioCR. Both
+// TestCRExampleLedger and TestCRExampleLedgerProblems go through it, so the
+// table test guards the wiring the real ledger is checked by.
+func crLedgerProblems(lines []string, scenarioCR map[string][]string) ([]crLedgerRow, []string) {
+	rows, problems := crParseLedger(lines)
+	return rows, append(problems, crLedgerCheck(rows, scenarioCR)...)
+}
+
 func equalStrings(line string, header []string) bool {
 	return equalStringSlices(strings.Split(line, "\t"), header)
 }
@@ -280,10 +289,12 @@ func TestCRExampleLedger(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	rows, problems := crParseLedger(strings.Split(string(raw), "\n"))
 	files := loadOracleFiles(t)
 	scenarioCR := crExampleScenarioHeads(t, files)
-	problems = append(problems, crLedgerCheck(rows, scenarioCR)...)
+	if len(scenarioCR) == 0 {
+		t.Fatalf("no scenario found under %s/: the ledger check would pass vacuously", crExamplesFamily)
+	}
+	rows, problems := crLedgerProblems(strings.Split(string(raw), "\n"), scenarioCR)
 	for _, p := range problems {
 		t.Error(p)
 	}
@@ -337,8 +348,7 @@ func TestCRExampleLedgerProblems(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			rows, problems := crParseLedger(c.lines)
-			problems = append(problems, crLedgerCheck(rows, c.scenarioCR)...)
+			_, problems := crLedgerProblems(c.lines, c.scenarioCR)
 			if len(c.want) == 0 {
 				for _, p := range problems {
 					t.Errorf("unexpected problem: %s", p)
