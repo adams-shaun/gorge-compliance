@@ -58,6 +58,13 @@
 // answered by default (the offered order; Result.Orders counts them) and
 // consumes no log line.
 //
+// Forge's recorder writes no ask for a commander's owner choosing the command
+// zone (CR 903.9), so a gorge commander_zone decision is answered from the
+// next snapshot's command zone (Result.CommanderZones counts them) and consumes
+// no log line. Any other decision of a kind the log never carries (a
+// replacement choice) is answered by default (the first Min options;
+// Result.OtherDefaults counts them), likewise consuming none.
+//
 // # The forge-shadow-1 log
 //
 // One JSON object per line, told apart by "t". Card identities are Forge's

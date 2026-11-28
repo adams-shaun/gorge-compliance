@@ -1828,3 +1828,198 @@ func TestLoggedTargetPartsOnAGorgeTrigger(t *testing.T) {
 		})
 	}
 }
+
+// handPickFixture is the golden game set up and advanced to its first
+// decision, with a snapshot line appended (and f.pos on it) whose seat-1
+// hand is gorge's minus the cards at the given indexes: the state after
+// Forge's unlogged pick, as the next snapshot carries it.
+func handPickFixture(t *testing.T, gone ...int) (*follower, []state.ObjID) {
+	t.Helper()
+	f := &follower{log: readGolden(t), reg: corpus(t), toG: map[int]state.ObjID{}, toF: map[state.ObjID]int{}, name: map[int]string{}, shuffles: map[int][]*Shuffle{}, planned: map[int]int{}, start: -1}
+	if err := f.setup(); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.e.AdvanceHypothetical(); err != nil {
+		t.Fatal(err)
+	}
+	hand := slices.Clone(f.e.G.Zone(state.ZHand, 1))
+	after := []string{}
+	for i, id := range hand {
+		if !slices.Contains(gone, i) {
+			after = append(after, objName(f.e.G.Obj(id)))
+		}
+	}
+	slices.Sort(after)
+	snap := rules.OracleSnapshot{Turn: 3, Step: "upkeep", Players: []rules.OracleSnapPlayer{{Seat: 0}, {Seat: 1, Hand: after}}}
+	f.log.Entries = append(f.log.Entries, Entry{Line: 999, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: snap}})
+	f.pos = len(f.log.Entries) - 1
+	return f, hand
+}
+
+// TestHandPickFromTheNextSnapshot is the farm cmdr4 repro (TLA-s289190153
+// pod-28919015300, line 58, p0.hand): the cleanup discard has no Forge ask
+// line, and answering it by default (the first offered card) discarded
+// Welcome the Dead where Forge discarded Avenger of Zendikar, so the next
+// snapshot's hand differed. The pick is the offered cards gone from the
+// seat's hand at the next snapshot; a hand where an unoffered card left, or
+// where the departed count is no legal pick, keeps the default.
+func TestHandPickFromTheNextSnapshot(t *testing.T) {
+	discard := func(hand []state.ObjID, min, max int, idx ...int) *decision.Decision {
+		d := &decision.Decision{Seq: 11, Player: 1, Kind: decision.KChoose, Min: min, Max: max}
+		for _, i := range idx {
+			d.Options = append(d.Options, decision.Option{Index: len(d.Options), Kind: "discard", Obj: hand[i], Player: 1})
+		}
+		return d
+	}
+	f0, hand := handPickFixture(t)
+	name := func(f *follower, id state.ObjID) string { return objName(f.e.G.Obj(id)) }
+	// other is the hand cards not named like the first: the default answer
+	// (the first offered card) can never discard one of them.
+	var other []int
+	for i, id := range hand {
+		if name(f0, id) != name(f0, hand[0]) {
+			other = append(other, i)
+		}
+	}
+	if len(other) < 2 {
+		t.Fatalf("seat 1's hand %v has %d cards not named like the first, want 2", hand, len(other))
+	}
+	all := make([]int, len(hand))
+	for i := range all {
+		all[i] = i
+	}
+	without := func(n string) []int {
+		var out []int
+		for _, i := range all {
+			if name(f0, hand[i]) != n {
+				out = append(out, i)
+			}
+		}
+		return out
+	}
+	for _, c := range []struct {
+		name     string
+		gone     []int
+		min, max int
+		offer    []int
+		want     []int // hand indexes whose names the picks must carry; nil: the default
+		picks    int
+	}{
+		{"discard one finds the departed card", other[:1], 1, 1, all, other[:1], 1},
+		{"discard two finds both", other[:2], 2, 2, all, other[:2], 1},
+		{"nothing left keeps the default", nil, 1, 1, all, nil, 0},
+		{"an unoffered card left keeps the default", other[:1], 1, 1, without(name(f0, hand[other[0]])), nil, 0},
+		{"more gone than allowed keeps the default", other[:2], 1, 1, all, nil, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			f, hand := handPickFixture(t, c.gone...)
+			pos := f.pos
+			d := discard(hand, c.min, c.max, c.offer...)
+			in, ok := f.answer(d, f.log.Entries[f.pos])
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			var got, want []string
+			for _, ch := range in.Choices {
+				got = append(got, name(f, d.Options[ch].Obj))
+			}
+			if c.want == nil {
+				want = []string{name(f, d.Options[0].Obj)} // firstMin
+			}
+			for _, h := range c.want {
+				want = append(want, name(f, hand[h]))
+			}
+			slices.Sort(got)
+			slices.Sort(want)
+			if !reflect.DeepEqual(got, want) || f.res.HandPicks != c.picks || f.res.Chooses != 1 || f.pos != pos {
+				t.Errorf("picked %v (choices %v) hand picks %d chooses %d pos %d, want %v and %d", got, in.Choices, f.res.HandPicks, f.res.Chooses, f.pos, want, c.picks)
+			}
+		})
+	}
+}
+
+// TestEveryUnrecordedDecisionKindConsumesNoLine walks gorge's whole decision
+// vocabulary: Forge's recorder writes mull lines and priority, attack, block
+// and target asks, so every other kind has no line to match. The follower must
+// answer it without stopping or consuming the next line, and must hold a
+// snapshot that lies past it. A commander_zone ask (farm cmdr4 FRA-s27490222
+// pod-2749022201 line 283) used to stop with "commander_zone seat 0" against
+// "priority seat 0"; a kind gorge adds later is covered by the same walk.
+func TestEveryUnrecordedDecisionKindConsumesNoLine(t *testing.T) {
+	recorded := map[decision.Kind]bool{decision.KMulligan: true, decision.KPriority: true, decision.KAttackers: true, decision.KBlockers: true, decision.KTarget: true}
+	prio := parseAsk(t, `{"t":"ask","n":223,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"pass"}}`)
+	later := Entry{Line: 287, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: rules.OracleSnapshot{Turn: 6, Step: "end"}}}
+	for _, k := range decision.Kinds {
+		d := &decision.Decision{Seq: 3, Player: 0, Kind: k, Min: 1, Max: 1,
+			Options: []decision.Option{{Index: 0, Kind: "a"}, {Index: 1, Kind: "b"}}}
+		if got := snapAheadOfUnlogged(later, at(6, "main2"), d); got == recorded[k] {
+			t.Errorf("%s: a later snapshot held = %v, want %v", k, got, !recorded[k])
+		}
+		if recorded[k] {
+			continue
+		}
+		f := &follower{log: &Log{}}
+		in, ok := f.answer(d, Entry{Line: 283, T: TAsk, Ask: prio})
+		if !ok || f.res.Hard != nil {
+			t.Errorf("%s: hard divergence %+v", k, f.res.Hard)
+			continue
+		}
+		if err := d.Validate(in); err != nil {
+			t.Errorf("%s: intent %+v: %v", k, in, err)
+		}
+		if f.pos != 0 || f.res.Asks != 0 {
+			t.Errorf("%s: pos %d asks %d, want the log line left unconsumed", k, f.pos, f.res.Asks)
+		}
+	}
+}
+
+// TestCommanderZoneFromTheNextSnapshot is the farm cmdr4 repro (FRA-s27490222
+// pod-2749022201): Swords to Plowshares exiles Giada, gorge asks its owner the
+// CR 903.9a command-zone question and Forge writes no ask for it; the next
+// snapshot lists Giada in seat 0's command zone. A commander Forge left where
+// it was is missing there; one moved and recast before the snapshot is missing
+// too, but its cast line says it came from the command zone.
+func TestCommanderZoneFromTheNextSnapshot(t *testing.T) {
+	const fid, obj = 100, state.ObjID(7)
+	const giada = "Giada, Font of Hope"
+	prio := Entry{Line: 283, T: TAsk, Ask: parseAsk(t, `{"t":"ask","n":223,"seat":0,"turn":6,"step":"main2","kind":"priority","answer":{"action":"pass"}}`)}
+	cast := func(seat int) Entry {
+		return Entry{Line: 284, T: TAsk, Ask: parseAsk(t, fmt.Sprintf(`{"t":"ask","n":224,"seat":%d,"turn":6,"step":"main2","kind":"priority","answer":{"action":"cast","card":%d}}`, seat, fid))}
+	}
+	// snap is the next snapshot: seat 0's command zone as given, and seat 1's
+	// holding a same-named card, which must not answer for seat 0.
+	snap := func(command ...string) Entry {
+		s := rules.OracleSnapshot{Turn: 6, Step: "end", Players: []rules.OracleSnapPlayer{{Seat: 0, Command: command}, {Seat: 1, Command: []string{giada}}}}
+		return Entry{Line: 287, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: s}}
+	}
+	for _, c := range []struct {
+		name    string
+		keep    string // the leave option's cast-from-exile permission
+		entries []Entry
+		want    int // 0 command zone, 1 leave
+	}{
+		{"in the command zone", "", []Entry{prio, snap(giada)}, 0},
+		{"left where it was", "", []Entry{prio, snap()}, 1},
+		{"moved and recast", "", []Entry{prio, cast(0), snap()}, 0},
+		{"another seat's cast of the id", "", []Entry{prio, cast(1), snap()}, 1},
+		{"cast from exile by permission", "adventure_recast", []Entry{prio, cast(0), snap()}, 1},
+		{"a cast after the snapshot", "", []Entry{prio, snap(), cast(0)}, 1},
+		{"no snapshot keeps the default", "", []Entry{prio}, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			f := &follower{log: &Log{Entries: c.entries}, toF: map[state.ObjID]int{obj: fid}, name: map[int]string{fid: giada}}
+			d := &decision.Decision{Seq: 5, Player: 0, Kind: decision.KCommanderZone, Min: 1, Max: 1, Source: obj,
+				Options: []decision.Option{{Index: 0, Kind: "command_zone", Obj: obj}, {Index: 1, Kind: "leave", Obj: obj, Mode: c.keep}}}
+			in, ok := f.answer(d, c.entries[0])
+			if !ok || f.res.Hard != nil {
+				t.Fatalf("hard divergence %+v", f.res.Hard)
+			}
+			if !reflect.DeepEqual(in.Choices, []int{c.want}) || in.Seq != 5 || in.Player != 0 {
+				t.Errorf("intent %+v, want choice %d", in, c.want)
+			}
+			if f.pos != 0 || f.res.CommanderZones != 1 || f.res.Asks != 0 {
+				t.Errorf("pos %d commander zones %d asks %d, want the log line left unconsumed", f.pos, f.res.CommanderZones, f.res.Asks)
+			}
+		})
+	}
+}

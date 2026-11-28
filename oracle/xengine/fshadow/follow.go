@@ -140,6 +140,10 @@ type Result struct {
 	// pick) from the owner's next shuffle line: the offered cards missing
 	// from it are the ones Forge took.
 	LibraryPicks int `json:"library_picks,omitempty"`
+	// HandPicks counts the Chooses that picked hand cards (a cleanup
+	// discard) from the next snapshot line: the offered cards gone from the
+	// seat's hand there are the ones Forge took.
+	HandPicks int `json:"hand_picks,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -166,6 +170,14 @@ type Result struct {
 	// simultaneously triggered abilities) the log has no line for, which the
 	// follower answered by default (the offered order).
 	Orders int `json:"orders,omitempty"`
+	// CommanderZones counts the CR 903.9 commander-zone decisions (put the
+	// commander into the command zone, or leave it) the log has no line for,
+	// which the follower answered from the next snapshot (commanderZone).
+	CommanderZones int `json:"commander_zones,omitempty"`
+	// OtherDefaults counts the decisions of a kind the log never carries and no
+	// counter above names (a CR 616.1 replacement choice ...), which the
+	// follower answered by default (the first Min options).
+	OtherDefaults int `json:"other_defaults,omitempty"`
 	// End is how the follow finished: "end" (the log's end line matched),
 	// "unfinished" (Forge stopped the game early), "log" (the log ran out
 	// first), "cap" or "divergence".
@@ -427,10 +439,17 @@ func at(turn int, step string) int {
 	return turn*100 + stepOrder[step]
 }
 
-// unloggedKind reports whether Forge's recorder writes no ask line for a
-// decision of kind k, so the follower answers it by default (answer).
+// unloggedKind reports whether Forge's recorder writes no line for a decision
+// of kind k, so the follower answers it without reading one (answer). It names
+// the kinds the log does carry (mull lines and the asks gorgeKind maps), so
+// every other kind of gorge's, a later one included, is unlogged. A target
+// decision is a recorded kind even though Forge writes no ask for some of them.
 func unloggedKind(k decision.Kind) bool {
-	return k == decision.KChoose || k == decision.KModes || k == decision.KArrange || k == decision.KTriggerOptional || k == decision.KTriggerOrder
+	switch k {
+	case decision.KMulligan, decision.KPriority, decision.KAttackers, decision.KBlockers, decision.KTarget:
+		return false
+	}
+	return true
 }
 
 // snapAheadOfUnlogged reports whether snapshot entry e describes a point past
@@ -716,7 +735,22 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		if in, ok := f.libraryPickChoose(d); ok {
 			return in, true
 		}
+		if in, ok := f.handLeaveChoose(d); ok {
+			return in, true
+		}
 		return f.defaultChoose(d), true
+	}
+	if d.Kind == decision.KCommanderZone {
+		return f.commanderZone(d), true
+	}
+	if unloggedKind(d.Kind) {
+		// Every other kind the log never carries (a CR 616.1 replacement
+		// choice, a kind gorge adds later): the next line belongs to a later
+		// decision. Answer by default -- the first Min options in offered
+		// order -- and consume no line; Forge's real choice, if it differs,
+		// shows at the next snapshot.
+		f.res.OtherDefaults++
+		return firstMin(d), true
 	}
 	if d.Kind == decision.KTarget && (f.linePartsDue(d) || e.Ask != nil && e.Ask.Kind != KindTarget) {
 		// A target line's later parts answer their chain's asks whatever
@@ -1858,6 +1892,172 @@ func (f *follower) libraryPickChoose(d *decision.Decision) (decision.Intent, boo
 	f.res.Chooses++
 	f.res.LibraryPicks++
 	return in, true
+}
+
+// handLeaveChoose answers a pick of hand cards (a CR 514.1 cleanup discard,
+// an effect's or a cost's discard, any choose that moves cards out of a hand)
+// from the next snapshot line. Forge's recorder writes no ask line for the
+// pick, but the next snapshot names the seat's hand after it: the picked
+// cards are the offered ones whose names are gone from that hand. Answering
+// by default (the first Min in offered order) discarded a different card than
+// Forge (farm cmdr4 TLA-s289190153 pod-28919015300 line 58: gorge kept
+// Avenger of Zendikar and discarded Welcome the Dead, Forge the reverse), and
+// the p0..p3.hand snapshot classes stopped the follow.
+//
+// It applies to any KChoose whose every option is a card in one seat's hand,
+// matched by where the objects are rather than by resume kind, so a later
+// hand-shaped pick is covered too. It answers only when every card that left
+// the hand by that snapshot is offered, the departed count is a legal pick
+// count, and the picks validate; anything else (a pick whose cards stay in
+// the hand, a cast in between) falls back to the default.
+func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool) {
+	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	seat := -1
+	inHand := map[state.ObjID]bool{}
+	var hand []state.ObjID
+	for _, o := range d.Options {
+		if o.Obj == 0 {
+			return decision.Intent{}, false
+		}
+		if seat < 0 {
+			for s := range f.e.G.Players {
+				if slices.Contains(f.e.G.Zone(state.ZHand, state.PlayerID(s)), o.Obj) {
+					seat = s
+					break
+				}
+			}
+			if seat < 0 {
+				return decision.Intent{}, false
+			}
+			hand = f.e.G.Zone(state.ZHand, state.PlayerID(seat))
+			for _, id := range hand {
+				inHand[id] = true
+			}
+		}
+		if !inHand[o.Obj] {
+			return decision.Intent{}, false
+		}
+	}
+	snap := f.nextSnapshot()
+	if snap == nil {
+		return decision.Intent{}, false
+	}
+	var after []string
+	found := false
+	for _, p := range snap.Players {
+		if p.Seat == seat {
+			after, found = p.Hand, true
+			break
+		}
+	}
+	if !found {
+		return decision.Intent{}, false
+	}
+	// gone counts, by name, the cards of gorge's hand now missing from
+	// Forge's hand at the snapshot (a multiset difference).
+	gone := map[string]int{}
+	for _, id := range hand {
+		gone[objName(f.e.G.Obj(id))]++
+	}
+	for _, n := range after {
+		if gone[n] > 0 {
+			gone[n]--
+		}
+	}
+	total := 0
+	for _, n := range gone {
+		total += n
+	}
+	var picks []int
+	seen := map[state.ObjID]bool{}
+	for i, o := range d.Options {
+		if seen[o.Obj] {
+			continue
+		}
+		seen[o.Obj] = true
+		if n := objName(f.e.G.Obj(o.Obj)); gone[n] > 0 {
+			gone[n]--
+			picks = append(picks, i)
+		}
+	}
+	if len(picks) != total || len(picks) < d.Min || (d.Max > 0 && len(picks) > d.Max) {
+		return decision.Intent{}, false // a card left that was not offered, or a pick count the ask forbids
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: picks}
+	if in.Choices == nil {
+		in.Choices = []int{}
+	}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.HandPicks++
+	return in, true
+}
+
+// commanderZone answers a CR 903.9 commander-zone decision (the owner puts a
+// commander in a graveyard or exile, or bound for the hand or library, into the
+// command zone, or leaves it) from the next snapshot line. Forge's recorder
+// writes no ask line for it, so the next line belongs to a later decision
+// (farm cmdr4 FRA-s27490222 pod-2749022201 line 283: gorge "commander_zone seat
+// 0" after Swords to Plowshares exiled Giada, against Forge's "priority seat
+// 0"). The default is the command zone, gorge's first option. It is "leave"
+// when the owner's command zone at that snapshot lacks the commander and no
+// logged cast explains why: a cast of it by its owner before the snapshot was
+// made from the command zone, unless leaving it in exile keeps a permission to
+// cast it from there (the leave option's Mode). It consumes no line.
+func (f *follower) commanderZone(d *decision.Decision) decision.Intent {
+	f.res.CommanderZones++
+	in := firstMin(d)
+	leave := slices.IndexFunc(d.Options, func(o decision.Option) bool { return o.Kind == "leave" })
+	if leave < 0 {
+		return in
+	}
+	fid, bound := f.toF[d.Options[leave].Obj]
+	snap := f.nextSnapshot()
+	if !bound || snap == nil {
+		return in
+	}
+	i := slices.IndexFunc(snap.Players, func(p rules.OracleSnapPlayer) bool { return p.Seat == int(d.Player) })
+	if i < 0 || slices.Contains(snap.Players[i].Command, f.name[fid]) {
+		return in
+	}
+	if d.Options[leave].Mode == "" && f.castBeforeSnapshot(int(d.Player), fid) {
+		return in
+	}
+	in.Choices = []int{leave}
+	return in
+}
+
+// castBeforeSnapshot reports whether seat casts Forge's card fid on a line at
+// or after f.pos and before the next snapshot.
+func (f *follower) castBeforeSnapshot(seat, fid int) bool {
+	for i := f.pos; i < len(f.log.Entries); i++ {
+		e := f.log.Entries[i]
+		if e.Snap != nil || e.End != nil {
+			return false
+		}
+		if a := e.Ask; a != nil && a.Seat == seat && a.Answer.Action == "cast" && a.Answer.Card == fid {
+			return true
+		}
+	}
+	return false
+}
+
+// nextSnapshot is the first snapshot line at or after f.pos: with an
+// unlogged decision pending, the state after Forge's answer to it.
+func (f *follower) nextSnapshot() *rules.OracleSnapshot {
+	for i := f.pos; i < len(f.log.Entries); i++ {
+		if s := f.log.Entries[i].Snap; s != nil {
+			return &s.Snapshot
+		}
+		if f.log.Entries[i].End != nil {
+			return nil
+		}
+	}
+	return nil
 }
 
 // shuffleLogged reports whether some seat's next unconsumed Forge shuffle
