@@ -440,8 +440,19 @@ jobs:
       - name: Compress the SQLite
         run: |
           set -euo pipefail
-          command -v zstd >/dev/null || { echo "::error::zstd is not installed"; exit 1; }
-          zstd --no-mtime -T1 -19 -q -f -o "$RUNNER_TEMP/carddb.sqlite.zst" "$RUNNER_TEMP/carddb.sqlite"
+          zstd --version || { echo "::error::zstd is not installed"; exit 1; }
+          zstd -T1 -19 -q -f -o "$RUNNER_TEMP/carddb.sqlite.zst" "$RUNNER_TEMP/carddb.sqlite"
+          # The frame format stores no file modification time, so the same input
+          # at the same level and thread count must produce identical bytes.
+          # Compress again and compare: a changed option or a nondeterministic
+          # zstd fails here instead of shipping an unreproducible asset.
+          zstd -T1 -19 -q -f -o "$RUNNER_TEMP/carddb.sqlite.zst.2" "$RUNNER_TEMP/carddb.sqlite"
+          if ! cmp "$RUNNER_TEMP/carddb.sqlite.zst" "$RUNNER_TEMP/carddb.sqlite.zst.2"; then
+            echo "::error::zstd output is not reproducible"
+            rm -f "$RUNNER_TEMP/carddb.sqlite.zst.2"
+            exit 1
+          fi
+          rm -f "$RUNNER_TEMP/carddb.sqlite.zst.2"
           ls -l "$RUNNER_TEMP/carddb.sqlite" "$RUNNER_TEMP/carddb.sqlite.zst"
       - name: Export the per-table Parquet (pyarrow, CI-only)
         working-directory: tool
