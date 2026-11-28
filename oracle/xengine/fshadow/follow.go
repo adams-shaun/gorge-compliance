@@ -1106,49 +1106,77 @@ func (f *follower) priority(d *decision.Decision, a *Ask) (decision.Intent, *Div
 
 // activate answers a Forge "activate" with gorge's "ability" option of the
 // same card (a printed activated ability that is not a mana tap: Evolving
-// Wilds' sacrifice, a manland's animation). An ability both engines list
-// (forgeAbility) that gorge does not offer is paid by hand from the sources
-// Forge tapped, if that makes gorge offer it.
+// Wilds' sacrifice, a manland's animation). An offered ability Forge paid by
+// tapping sources is paid by hand from those sources first (handActivation),
+// so gorge's payment window does not tap others; the direct pick is the
+// fallback. An ability both engines list (forgeAbility) that gorge does not
+// offer is paid by hand from the sources Forge tapped, if that makes gorge
+// offer it.
 func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
 	offered := abilityOption(d, a, obj)
+	pick, known := offered, false
+	var want decision.Option
 	// Every ability Forge listed is offered: its rank among them names it.
-	if offered >= 0 && len(forgeAbilityIDs(a)) == len(abilityOptions(d.Options, obj)) {
-		in.Choices = []int{offered}
-		return in, nil
-	}
-	want, known := forgeAbility(f.e, a, obj)
-	pick := offered
-	if known {
-		pick = optionOf(d, want)
+	if offered < 0 || len(forgeAbilityIDs(a)) != len(abilityOptions(d.Options, obj)) {
+		want, known = forgeAbility(f.e, a, obj)
+		if known {
+			pick = optionOf(d, want)
+		}
 	}
 	if pick >= 0 {
+		// Forge's tapped sources, when all bound, pay it as Forge did.
+		if tapped, dv := f.boundTapped(a); dv == nil && len(tapped) > 0 {
+			chosen := d.Options[pick]
+			offer := func(d *decision.Decision) int { return optionOf(d, chosen) }
+			if paid, ok := f.handActivation(d, a, obj, tapped, offer); ok {
+				return paid, nil
+			}
+		}
 		in.Choices = []int{pick}
 		return in, nil
 	}
 	if known {
 		// Only a payment by hand reads the tapped ids.
-		tapped := make([]state.ObjID, 0, len(a.Answer.Tapped))
-		for _, fid := range a.Answer.Tapped {
-			g, ok := f.toG[fid]
-			if !ok {
-				return in, f.unbound(fid)
-			}
-			tapped = append(tapped, g)
+		tapped, dv := f.boundTapped(a)
+		if dv != nil {
+			return in, dv
 		}
 		offer := func(d *decision.Decision) int { return optionOf(d, want) }
-		if paid, ok := f.payByHand(d, a, tapped, offer); ok {
+		if paid, ok := f.handActivation(d, a, obj, tapped, offer); ok {
 			return paid, nil
-		}
-		// Forge's tapped list holds {T} costs too: the ability's own card
-		// may be on it for its cost, not for mana.
-		if i := slices.Index(tapped, obj); i >= 0 {
-			if paid, ok := f.payByHand(d, a, slices.Delete(tapped, i, i+1), offer); ok {
-				return paid, nil
-			}
 		}
 	}
 	return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
+}
+
+// boundTapped is gorge's objects for the ids Forge's answer a lists as
+// tapped, in its order; the unbound divergence of the first id the header
+// does not bind.
+func (f *follower) boundTapped(a *Ask) ([]state.ObjID, *Divergence) {
+	tapped := make([]state.ObjID, 0, len(a.Answer.Tapped))
+	for _, fid := range a.Answer.Tapped {
+		g, ok := f.toG[fid]
+		if !ok {
+			return nil, f.unbound(fid)
+		}
+		tapped = append(tapped, g)
+	}
+	return tapped, nil
+}
+
+// handActivation pays the activation of obj's ability offer picks by hand
+// from tapped (payByHand). Forge's tapped list holds {T} costs too: the
+// ability's own card may be on it for its cost, not for mana, so it is tried
+// once more without it.
+func (f *follower) handActivation(d *decision.Decision, a *Ask, obj state.ObjID, tapped []state.ObjID, offer func(*decision.Decision) int) (decision.Intent, bool) {
+	if paid, ok := f.payByHand(d, a, tapped, offer); ok {
+		return paid, true
+	}
+	if i := slices.Index(tapped, obj); i >= 0 {
+		return f.payByHand(d, a, slices.Delete(slices.Clone(tapped), i, i+1), offer)
+	}
+	return decision.Intent{}, false
 }
 
 // abilityOption is the index of d's "ability" option matching Forge's
@@ -1192,13 +1220,9 @@ func castOption(d *decision.Decision, obj state.ObjID) int {
 // makes gorge offer it.
 func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision.Intent, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	tapped := make([]state.ObjID, 0, len(a.Answer.Tapped))
-	for _, fid := range a.Answer.Tapped {
-		g, ok := f.toG[fid]
-		if !ok {
-			return in, f.unbound(fid)
-		}
-		tapped = append(tapped, g)
+	tapped, dv := f.boundTapped(a)
+	if dv != nil {
+		return in, dv
 	}
 	want := slices.Clone(tapped)
 	sortIDs(want)
