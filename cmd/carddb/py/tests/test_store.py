@@ -50,8 +50,8 @@ class Put(Base):
         self.assertEqual(a.put("legality", rows, writer="loop"), 0)
         self.assertEqual(self.snapshot(a.dir), before)
         self.assertEqual(git("status", "--porcelain", cwd=a.dir), porcelain)
-        self.assertEqual(sorted(before), [".gitattributes", ".github/workflows/carddb.yml",
-                                          "_meta/writers.tsv", "legality/ab.tsv", "legality/cd.tsv"])
+        self.assertEqual(sorted(before), [".gitattributes", "_meta/writers.tsv", "legality/ab.tsv",
+                                          "legality/cd.tsv"])
 
     def test_rows_merge_by_key_sorted(self):
         a = self.machine("a", init=True)

@@ -5,8 +5,15 @@
 // the answer Forge's seat gave. gorge is built with
 // rules.NewHypotheticalChancePlanned, so Forge's shuffles and random draws
 // are gorge's too, and each cast is paid with an explicit PaymentPlan of the
-// sources Forge tapped. At every snap line gorge's state is compared with
-// Forge's through oraclediff.CompareOpts, the comparison classify uses.
+// sources Forge tapped. A cast gorge has no such plan for, or an activation it
+// does not offer (a filter land's or a Signet's mana, which gorge's planner
+// does not plan), is paid by hand: the follower activates those sources at
+// priority, then takes the offer (Result.HandPayments counts them). It does so
+// only where Forge's answer names one gorge option (the way its ability index
+// leaves, a card with one way to be cast, an ability both engines list) and the
+// floating mana pays it with no further ask. At every
+// snap line gorge's state is compared with Forge's through
+// oraclediff.CompareOpts, the comparison classify uses.
 //
 // The MVP stops at the first hard divergence (Follow's Result.Hard); option-set
 // differences that leave Forge's answer on gorge's list are soft and only
@@ -19,14 +26,57 @@
 // first modes it requires; Result.Modes counts them) and consumes no log line.
 //
 // Forge's recorder writes no ask line for a scry, surveil or other
-// library-arranging answer, so a gorge arrange decision is answered by
-// default (offered cards stay on top in order; Result.Arranges counts them)
-// and consumes no log line.
+// library-arranging answer, so a gorge arrange decision consumes no log line
+// (Result.Arranges counts them). A scry, surveil or top reorder is answered
+// from the next snapshot line's library top, hand and graveyard
+// (Result.ArrangePicks), anything else by default (offered cards stay on top
+// in order).
+//
+// Forge's recorder writes no ask line for a pick of cards either. Whether
+// gorge poses it as a choose or a modes decision, a search's pick is read
+// from the owner's next shuffle line (Result.LibraryPicks), and a pick out of
+// a hand or into one from the next snapshot line's hands (Result.HandPicks,
+// Result.ArrivalPicks), a pick onto the battlefield from its permanents
+// (Result.FieldPicks); a card a logged cast or land play moves before that
+// snapshot is no pick. Each is read only where the ask itself sends the
+// chosen cards that way and leaves the others behind; what it does not say, or
+// no later line shows, is answered by default. The election gorge poses ahead
+// of an "unless you discard a ..." discard is answered "ordinary" where the
+// next snapshot rules the one-card discard out (Result.DiscardElections), and
+// by default ("unless") otherwise.
+//
+// Forge's recorder writes one target ask over a whole sub-ability chain, with
+// its targets split by targeting part ("target_slots"), while gorge asks each
+// targeting link its own decision. The line answers the first of them; the
+// parts left answer the later asks with the same Source before any further line
+// is read, the next trigger's target line included (Result.TargetParts counts
+// them). A root or triggered link's ask names its link on the source's ability
+// chain, which picks its part: gorge asks nothing for an optional link with no
+// candidate, while Forge still counts its empty part. A decision the parts
+// cannot answer, or one whose part cannot be told, is a harness divergence
+// (field "target_slots").
 //
 // Forge's recorder writes a target ask only where its targeting hook is asked,
 // so a gorge target decision whose log line is an ask of another kind (the
 // seat's next priority) is answered by default (the first Min options;
-// Result.Targets counts them) and consumes no log line.
+// Result.Targets counts them) and consumes no log line. A cast or an
+// activation carries the targets Forge chose for it in its priority answer
+// ("targets"), split by targeting part ("target_slots"), so each target
+// decision gorge then poses for that object (the decision's Source) is
+// answered from the next part instead (Result.CastTargets counts them), still
+// consuming no line: a part Forge left empty answers an optional ask with
+// nothing, a mandatory ask passes over it, and a combined modal ask takes one
+// part per mode. A target line that follows the cast wins over these parts. The
+// recorder writes no target on an Equip activation, so an activation's mandatory
+// ask that must take every option, with every part left empty, takes them. An
+// attaching activation's ask with a choice of bearers and no target recorded,
+// whether the line counts an empty part or none, takes the permanent the source
+// is newly attached to at the next snapshot (Result.BearerPicks counts them);
+// where that does not tell one offered permanent, or a later line may move the
+// source first, it is a "cast_targets" divergence. A
+// decision the next part cannot answer, or an optional sub-ability ask that
+// could be an empty part's or a later one's, is a harness divergence (field
+// "cast_targets").
 //
 // Forge's recorder writes no ask for a "may" trigger's yes/no, so a gorge
 // optional-trigger decision (trigger_optional) is answered by default (the
@@ -36,6 +86,13 @@
 // triggered abilities, so a gorge trigger-order decision (trigger_order) is
 // answered by default (the offered order; Result.Orders counts them) and
 // consumes no log line.
+//
+// Forge's recorder writes no ask for a commander's owner choosing the command
+// zone (CR 903.9), so a gorge commander_zone decision is answered from the
+// next snapshot's command zone (Result.CommanderZones counts them) and consumes
+// no log line. Any other decision of a kind the log never carries (a
+// replacement choice) is answered by default (the first Min options;
+// Result.OtherDefaults counts them), likewise consuming none.
 //
 // # The forge-shadow-1 log
 //
@@ -64,7 +121,8 @@
 // forge-oracle's ShadowLog (adams-shaun/forge, forge-oracle/.../ShadowLog.java);
 // fields it marks as extras (policy, index, label, ...) are ignored, except a
 // mull line's hand, which tells a state-neutral mulligan after the hand has
-// emptied from an ordinary one.
+// emptied from an ordinary one, and a priority answer's mode, which rules out
+// paying a flashback or kicked cast by hand.
 package fshadow
 
 import (
@@ -73,6 +131,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"slices"
 
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -178,29 +237,94 @@ const (
 )
 
 // Option is one choice Forge offered. Priority: Action (land, cast,
-// activate, other), Card and Ability. Attack: Card attacks Player, or the
-// planeswalker or battle DefenderCard. Block: Card blocks Attacker. Target:
-// a ref (Card, Player or Spell).
+// activate, other), Card, Ability and a cast's Mode. Attack: Card attacks
+// Player, or the planeswalker or battle DefenderCard. Block: Card blocks
+// Attacker. Target: a ref (Card, Player or Spell).
 type Option struct {
-	Action       string `json:"action,omitempty"`
-	Card         int    `json:"card,omitempty"`
-	Ability      int    `json:"ability,omitempty"`
+	Action string `json:"action,omitempty"`
+	Card   int    `json:"card,omitempty"`
+	// Ability is the index of a priority option's ability among its host
+	// card's own spell abilities. The recorder writes none for an ability the
+	// host does not hold (an Adventure's spell, a variant Forge copied from
+	// one), which is not index 0: read it through abilityID.
+	Ability *int `json:"ability,omitempty"`
+	// Mode is Forge's mark on a cast option, as on the Answer.
+	Mode         string `json:"mode,omitempty"`
 	Player       *int   `json:"player,omitempty"`
 	Spell        int    `json:"spell,omitempty"`
 	DefenderCard int    `json:"defender_card,omitempty"`
 	Attacker     int    `json:"attacker,omitempty"`
 }
 
+// noAbility is abilityID of a line without an "ability": no index.
+const noAbility = -1
+
+// abilityID is o's Ability, noAbility when Forge's line has none.
+func (o Option) abilityID() int { return abilityOf(o.Ability) }
+
+// abilityID is a's Ability, noAbility when Forge's line has none.
+func (a Answer) abilityID() int { return abilityOf(a.Ability) }
+
+func abilityOf(p *int) int {
+	if p == nil {
+		return noAbility
+	}
+	return *p
+}
+
 // Answer is the seat's answer to an ask.
 type Answer struct {
-	Action  string   `json:"action,omitempty"` // priority: pass, land, cast, activate, other
-	Card    int      `json:"card,omitempty"`
-	Source  int      `json:"source,omitempty"` // target: the host card
-	Ability int      `json:"ability,omitempty"`
-	Tapped  []int    `json:"tapped,omitempty"`  // the mana sources tapped to pay
-	Targets []Ref    `json:"targets,omitempty"` // target
+	Action  string `json:"action,omitempty"` // priority: pass, land, cast, activate, other
+	Card    int    `json:"card,omitempty"`
+	Source  int    `json:"source,omitempty"`  // target: the host card
+	Ability *int   `json:"ability,omitempty"` // as Option.Ability
+	Tapped  []int  `json:"tapped,omitempty"`  // the mana sources tapped to pay
+	Targets []Ref  `json:"targets,omitempty"` // target; also a cast's or activation's
+	// TargetSlots is how many of Targets each targeting part of the spell or
+	// ability holds, in chain order; 0 is a part Forge chose nothing for. A
+	// log without it is read as one part holding every target.
+	TargetSlots []int `json:"target_slots,omitempty"`
+	// Mode is Forge's mark on a cast that is not the ordinary one
+	// ("flashback", "kicked"); the recorder marks no other.
+	Mode    string   `json:"mode,omitempty"`
 	Attacks []Attack `json:"attacks,omitempty"` // attack
 	Blocks  []Block  `json:"blocks,omitempty"`  // block
+}
+
+// targetParts is Targets split by TargetSlots, one entry per targeting part
+// (Read holds the two to one length).
+func (a *Answer) targetParts() [][]Ref {
+	if len(a.TargetSlots) == 0 {
+		if len(a.Targets) == 0 {
+			return nil
+		}
+		return [][]Ref{slices.Clone(a.Targets)}
+	}
+	rest := slices.Clone(a.Targets)
+	parts := make([][]Ref, len(a.TargetSlots))
+	for i, n := range a.TargetSlots {
+		n = max(0, min(n, len(rest)))
+		parts[i], rest = rest[:n:n], rest[n:]
+	}
+	return parts
+}
+
+// checkTargetSlots rejects target_slots that do not split targets exactly.
+func (a *Answer) checkTargetSlots() error {
+	if len(a.TargetSlots) == 0 {
+		return nil
+	}
+	held := 0
+	for _, n := range a.TargetSlots {
+		if n < 0 {
+			return fmt.Errorf("target_slots %v: a negative count", a.TargetSlots)
+		}
+		held += n
+	}
+	if held != len(a.Targets) {
+		return fmt.Errorf("target_slots %v hold %d targets, the answer has %d", a.TargetSlots, held, len(a.Targets))
+	}
+	return nil
 }
 
 // Ref is a card, a player, or a spell on the stack (by its host card's id).
@@ -326,6 +450,11 @@ func Read(r io.Reader) (*Log, error) {
 		}
 		if err := json.Unmarshal(b, v); err != nil {
 			return nil, fmt.Errorf("fshadow: line %d (%s): %w", n, tag.T, err)
+		}
+		if e.Ask != nil {
+			if err := e.Ask.Answer.checkTargetSlots(); err != nil {
+				return nil, fmt.Errorf("fshadow: line %d (%s): %w", n, tag.T, err)
+			}
 		}
 		if e.Header != nil {
 			if len(l.Entries) > 0 || l.Header.T != "" {

@@ -10,10 +10,13 @@ type portFile struct {
 }
 
 type portScenario struct {
-	Name     string           `json:"name"`
-	Turn     *int             `json:"turn,omitempty"`
-	CR       []string         `json:"cr"`
-	Why      string           `json:"why"`
+	Name string   `json:"name"`
+	Turn *int     `json:"turn,omitempty"`
+	CR   []string `json:"cr"`
+	Why  string   `json:"why"`
+	// Players is the seat count of a four-player XMage base (4); 0 (absent)
+	// is the runner's two-seat game, so two-seat files carry no field.
+	Players  int              `json:"players,omitempty"`
 	Setup    map[string]*seat `json:"setup"`
 	Steps    []*step          `json:"steps"`
 	Expect   []*expect        `json:"expect"`
@@ -65,6 +68,9 @@ type step struct {
 	// payment-sensitive mana source; XMage pays by itself, so the driver line
 	// drops it like a gorge-only pass.
 	payment bool
+	// blockActive is a block step's active seat ref when the game seats more
+	// than two (the attacker is then not simply the other seat).
+	blockActive string
 }
 
 // xans is one original XMage choice, for the driver cross-check.

@@ -225,7 +225,7 @@ func TestCountByPartialNameOfTheOtherSeatsCardKeepsItsFailingExpect(t *testing.T
 // triggers, so it must survive the trigger-order drop; a bare keyword with no
 // such card in the setup is still dropped.
 func TestKeywordNamedChoiceForCardInHandIsKept(t *testing.T) {
-	tr := &translator{setup: [2][]addCardCall{0: {{zone: "hand", name: "Afterlife", count: 1}}}}
+	tr := &translator{setup: [maxSeats][]addCardCall{0: {{zone: "hand", name: "Afterlife", count: 1}}}}
 	tr.choiceList = []choice{
 		{pick: "name:Afterlife"},
 		{pick: "name:Evolve"},

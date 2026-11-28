@@ -149,6 +149,7 @@ type action struct {
 	resolveAfter    bool
 	endAt           int // emission: len(steps) once this action is emitted
 	attackers       []string
+	defender        int // attack: the defending seat
 	blocks          [][2]string
 	expects         []*expect
 	choices         []choice
@@ -176,18 +177,21 @@ type group struct {
 }
 
 type translator struct {
-	reg     *cards.Registry
-	jc      *javaClass
-	m       *javaMethod
-	consts  map[string]value
-	setup   [2][]addCardCall
-	life    [2]*int32
+	reg    *cards.Registry
+	jc     *javaClass
+	m      *javaMethod
+	consts map[string]value
+	// base is the class's base-class translation (seats.go): the seat
+	// count and XMage's turn order of its players.
+	base    xmageBase
+	setup   [maxSeats][]addCardCall
+	life    [maxSeats]*int32
 	actions []*action
 	stop    *[2]int
 	asserts []call
 	// derived
-	places            [2][]*placement
-	castRefs          [2]map[string][]string
+	places            [maxSeats][]*placement
+	castRefs          [maxSeats]map[string][]string
 	allNames          map[string]bool // every string arg outside addCard (keeps lands)
 	nameUses          map[string]int  // how many times each such string arg appears (casts, activations)
 	abilityUses       map[string]int  // how many times each activateAbility text appears
@@ -244,12 +248,7 @@ type translator struct {
 	// libCleared marks a seat after removeAllCardsFromLibrary: XMage's library
 	// is then only the cards the test adds, where the runner pads its own with
 	// filler. The two differ only if a draw reaches past those cards.
-	libCleared [2]bool
-}
-
-func p0(v value) int {
-	p, _ := seatOf(v)
-	return p
+	libCleared [maxSeats]bool
 }
 
 // triggeredKeywords are the keyword abilities whose triggers XMage lists by
@@ -292,7 +291,7 @@ func (t *translator) isTriggerOrderChoice(s string) bool {
 // exactly name. The trigger-order drop uses it: "Afterlife" is both a keyword
 // and a card, so a scenario that sets the card up may name it as an answer.
 func (t *translator) setupHasName(name string) bool {
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		for _, ac := range t.setup[p] {
 			if sameName(ac.name, name) {
 				return true
@@ -509,25 +508,12 @@ type result struct {
 
 var reLocalDecl = regexp.MustCompile(`^(?:final\s+)?(String|int)\s+(\w+)\s*=\s*(.+)$`)
 
-func seatOf(v value) (int, bool) {
-	if v.kind != vIdent {
-		return 0, false
-	}
-	switch v.s {
-	case "playerA":
-		return 0, true
-	case "playerB":
-		return 1, true
-	}
-	return 0, false
-}
-
 var supported = effects.Supported()
 
 func (t *translator) unsupportedCards() string {
 	var out []string
 	seen := map[string]bool{}
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		for _, ac := range t.setup[p] {
 			if seen[ac.name] {
 				continue
@@ -553,7 +539,7 @@ func (t *translator) lookup(name string) (*cards.Card, bool) {
 // seat adds it or both seats do, so a caller cannot infer an owner.
 func (t *translator) setupOwner(name string) (int, bool) {
 	owner := -1
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		for _, ac := range t.setup[p] {
 			if !sameName(ac.name, name) {
 				continue
@@ -589,8 +575,12 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	if m.Expects {
 		return fail(refuse("expects-exception", "@Test(expected=...)"))
 	}
-	switch jc.Extends {
-	case "CardTestPlayerBase", "CardTestPlayerBaseWithAIHelps", "":
+	base, known := xmageBases[jc.Extends]
+	switch {
+	case known && base.Refuse != "":
+		return fail(refuse(base.Refuse, "extends %s", jc.Extends))
+	case known:
+	case jc.Extends == "CardTestPlayerBaseWithAIHelps":
 	default:
 		if strings.Contains(jc.Extends, "Multi") || strings.Contains(jc.Extends, "Commander") || strings.Contains(jc.Extends, "FreeForAll") || strings.Contains(jc.Extends, "TwoPlayer") {
 			return fail(refuse("multiplayer", "extends %s", jc.Extends))
@@ -603,7 +593,7 @@ func translate(reg *cards.Registry, jc *javaClass, m *javaMethod, family string)
 	if jc.Extends == "CardTestPlayerBaseWithAIHelps" {
 		return fail(refuse("ai", "extends %s", jc.Extends))
 	}
-	t := &translator{reg: reg, jc: jc, m: m, consts: map[string]value{}, allNames: map[string]bool{}, copied: map[string]bool{}, copyRef: map[string]string{}}
+	t := &translator{reg: reg, jc: jc, m: m, base: base, consts: map[string]value{}, allNames: map[string]bool{}, copied: map[string]bool{}, copyRef: map[string]string{}}
 	for k, v := range jc.Consts {
 		t.consts[k] = v
 	}
@@ -1041,7 +1031,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if len(c.Args) < 3 {
 			return refuse("bad-args", "addCard")
 		}
-		p, ok := seatOf(c.Args[1])
+		p, ok := t.seatOf(c.Args[1])
 		if !ok {
 			return refuse("bad-args", "addCard player %s", c.Args[1])
 		}
@@ -1082,7 +1072,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if len(c.Args) != 1 {
 			return refuse("bad-args", "%s", c.Name)
 		}
-		p, ok := seatOf(c.Args[0])
+		p, ok := t.seatOf(c.Args[0])
 		if !ok {
 			return refuse("bad-args", "%s player %s", c.Name, c.Args[0])
 		}
@@ -1105,7 +1095,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		// disagree with XMage.
 		t.libCleared[p] = true
 	case "setLife":
-		p, ok := seatOf(c.Args[0])
+		p, ok := t.seatOf(c.Args[0])
 		n, ok2 := argInt(c, 1)
 		if !ok || !ok2 {
 			return refuse("bad-args", "setLife")
@@ -1126,7 +1116,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if r != nil {
 			return r
 		}
-		p, ok := seatOf(c.Args[2])
+		p, ok := t.seatOf(c.Args[2])
 		if !ok {
 			return refuse("bad-args", "%s player", c.Name)
 		}
@@ -1159,7 +1149,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 					}
 					a.targets = append(a.targets, x.s)
 				case vIdent:
-					if q, ok := seatOf(x); ok {
+					if q, ok := t.seatOf(x); ok {
 						a.targets = append(a.targets, fmt.Sprintf("p%d", q))
 					} else if strings.HasPrefix(x.s, "StackClause") {
 						return refuse("stack-clause", "%s", x.s)
@@ -1186,7 +1176,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 					}
 					a.targets = append(a.targets, x.s)
 				case vIdent:
-					if q, ok := seatOf(x); ok {
+					if q, ok := t.seatOf(x); ok {
 						a.targets = append(a.targets, fmt.Sprintf("p%d", q))
 					} else {
 						return refuse("stack-clause", "%s", x.s)
@@ -1212,7 +1202,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if r != nil {
 			return r
 		}
-		p, ok := seatOf(c.Args[1])
+		p, ok := t.seatOf(c.Args[1])
 		if !ok {
 			return refuse("bad-args", "%s player", c.Name)
 		}
@@ -1225,12 +1215,24 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return rr
 		}
 		if c.Name == "attack" {
+			def := -1
 			if len(c.Args) > 3 {
-				if q, ok := seatOf(c.Args[3]); !ok || q == p {
+				q, ok := t.seatOf(c.Args[3])
+				if !ok || q == p {
 					return refuse("attack-planeswalker", "attack defender %s", c.Args[3])
 				}
+				def = q
+			} else {
+				// XMage's TestPlayer then attacks whichever defender its
+				// combat's hash set yields last: one opponent of two
+				// seats, an unstated one of more.
+				q, r := t.opponent(p, "attack")
+				if r != nil {
+					return r
+				}
+				def = q
 			}
-			a := &action{turn: turn, step: sDeclareAttackers, sub: 0, seat: p, kind: "attack", src: idx, attackers: []string{s}}
+			a := &action{turn: turn, step: sDeclareAttackers, sub: 0, seat: p, kind: "attack", src: idx, attackers: []string{s}, defender: def}
 			t.addAction(a)
 		} else {
 			b, ok := argStr(c, 3)
@@ -1256,7 +1258,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		}
 		p := 0
 		if len(c.Args) > 2 {
-			p, _ = seatOf(c.Args[2])
+			p, _ = t.seatOf(c.Args[2])
 		}
 		t.addAction(&action{turn: turn, step: st, sub: 1, seat: p, kind: "wait", src: idx})
 	case "setChoice", "addTarget":
@@ -1279,7 +1281,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		case v.kind == vStr:
 			if n, ok := xChoice(v.s); ok {
 				ch.pick, ch.x = fmt.Sprint(n), n
-				ch.seat, ch.src = p0(c.Args[0]), idx
+				ch.seat, ch.src = t.p0(c.Args[0]), idx
 				for i := 0; i < times; i++ {
 					t.choiceList = append(t.choiceList, ch)
 				}
@@ -1299,9 +1301,13 @@ func (t *translator) readCall(idx int, c call) *refusal {
 				// legend rule: keep the copy, not a named card
 				return refuse("special-choice", "%s %q", c.Name, v.s)
 			}
+			if q, ok := t.playerNameSeat(v.s); ok {
+				ch.pick = fmt.Sprintf("p%d", q)
+				break
+			}
 			ch.pick = "name:" + v.s
 		case v.kind == vIdent:
-			q, ok := seatOf(v)
+			q, ok := t.seatOf(v)
 			if !ok {
 				return refuse("special-choice", "%s %s", c.Name, v.s)
 			}
@@ -1310,7 +1316,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			return refuse("bad-args", "%s %s", c.Name, v)
 		}
 		ch.target = c.Name == "addTarget"
-		ch.seat, ch.src = p0(c.Args[0]), idx
+		ch.seat, ch.src = t.p0(c.Args[0]), idx
 		if !ch.target && isTriggerOrderText(strings.TrimPrefix(ch.pick, "name:")) {
 			// XMage orders simultaneous triggers by rule text; gorge's
 			// runner keeps the offered order. Dropped (the asserts still
@@ -1339,7 +1345,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if n < 1 {
 			return refuse("mode-choice", "setModeChoice %s", v)
 		}
-		t.choiceList = append(t.choiceList, choice{seat: p0(c.Args[0]), src: idx, x: -1, mode: n, pick: v.s})
+		t.choiceList = append(t.choiceList, choice{seat: t.p0(c.Args[0]), src: idx, x: -1, mode: n, pick: v.s})
 	case "checkPlayableAbility":
 		if len(c.Args) < 6 {
 			return refuse("bad-args", "%s", c.Name)
@@ -1348,7 +1354,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if r != nil {
 			return r
 		}
-		p, ok := seatOf(c.Args[3])
+		p, ok := t.seatOf(c.Args[3])
 		if !ok {
 			return refuse("bad-args", "%s player", c.Name)
 		}
@@ -1373,7 +1379,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 		if r != nil {
 			return r
 		}
-		p, ok := seatOf(c.Args[3])
+		p, ok := t.seatOf(c.Args[3])
 		if !ok {
 			return refuse("bad-args", "%s player", c.Name)
 		}
@@ -1404,7 +1410,7 @@ func (t *translator) readCall(idx int, c call) *refusal {
 			// instead of silently counting the wrong seat.
 			if len(c.Args) >= 6 {
 				if owner, ok := t.setupOwner(c.Args[4].s); ok {
-					if seat, isSeat := seatOf(c.Args[3]); isSeat && seat != owner {
+					if seat, isSeat := t.seatOf(c.Args[3]); isSeat && seat != owner {
 						return refuse("check-exile-count-player", "%s is owned by p%d but the check names p%d", c.Args[4], owner, seat)
 					}
 				}

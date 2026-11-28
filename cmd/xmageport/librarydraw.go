@@ -116,13 +116,15 @@ func textDepth(text string) int {
 }
 
 // drawStepsBy counts the draw steps seat p's player takes from turn 1 up to
-// the stop: playerA is the active player on odd turns and skips turn 1's draw,
-// playerB is active on even turns. The stop step is played before XMage pauses,
-// so the draw step of the stop turn counts when the stop is at or past it.
+// the stop: seat p is active on the turns t.active gives it. In a two-seat
+// game the starting player skips turn 1's draw; with more seats it draws
+// (rule 103.8a; gorge's multiplayer runner does the same). The stop step is
+// played before XMage pauses, so the draw step of the stop turn counts when
+// the stop is at or past it.
 func (t *translator) drawStepsBy(p int) int {
 	n := 0
 	for turn := 1; turn <= t.stop[0]; turn++ {
-		if turn == 1 || (turn%2 == 1) != (p == 0) {
+		if (turn == 1 && t.seats() == 2) || t.active(turn) != p {
 			continue
 		}
 		if turn < t.stop[0] || t.stop[1] >= sDraw {
@@ -139,7 +141,7 @@ func (t *translator) drawStepsBy(p int) int {
 // the added cards. Both are read from the Oracle text of every card the test
 // names, once per use of the card (copies in play or hand, casts, activations).
 func (t *translator) checkClearedLibraries() *refusal {
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		if !t.libCleared[p] {
 			continue
 		}
@@ -155,7 +157,7 @@ func (t *translator) checkClearedLibraries() *refusal {
 		// it names the card in a cast or activation. A draw spell cast twice
 		// draws twice.
 		uses := map[string]int{}
-		for q := 0; q < 2; q++ {
+		for q := 0; q < t.seats(); q++ {
 			for _, ac := range t.setup[q] {
 				if ac.zone != "library_top" {
 					uses[ac.name] += ac.count

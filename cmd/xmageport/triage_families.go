@@ -33,7 +33,7 @@ const xmageTokenCap = 500
 // setupCardWith returns the first setup card (either seat, any zone) one of
 // whose faces' Oracle text matches re, or "".
 func (t *translator) setupCardWith(re *regexp.Regexp) string {
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		for _, ac := range t.setup[p] {
 			if c, ok := t.lookup(ac.name); ok {
 				for _, f := range c.Faces {
@@ -88,13 +88,13 @@ func (t *translator) familyShapes() *refusal {
 // plays something has a card searching its library and the test seeds no
 // library card for that seat.
 func (t *translator) searchesDefaultLibrary() bool {
-	acts := [2]bool{}
+	acts := [maxSeats]bool{}
 	for _, a := range t.actions {
 		if a.kind == "cast" || a.kind == "activate" || a.kind == "play" {
-			acts[a.seat&1] = true
+			acts[a.seat] = true
 		}
 	}
-	for p := 0; p < 2; p++ {
+	for p := 0; p < t.seats(); p++ {
 		if !acts[p] {
 			continue
 		}

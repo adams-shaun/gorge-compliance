@@ -38,20 +38,20 @@ go run ./cmd/carddb boundary -tree carddb       # nothing private or Forge-shape
 
 `validate -scope private` accepts the private tables and columns too (a tree
 that is never published). Exit status 0 clean, 1 violations, 2 usage/I-O error.
-CI (`.github/workflows/carddb.yml`) runs both on PRs touching `carddb/**`, on
-pushes to the `carddb` branch, nightly and on dispatch.
+CI (`.github/workflows/carddb.yml`) runs both on PRs touching `carddb/**`, every
+three hours on the `carddb` branch and on dispatch.
 
 ## Write path and releases
 
-A push to `carddb` waits out a two-hour quiet period (measured from the push
-event; one concurrency group, so a later push cancels the wait), then CI runs
-the catalogue ingest (CDB-03) and the compliance status writer (CDB-16) from
-`main`, records the branch's object-store size in `_meta/size`, and
-`carddb publish` commits the result. The same path runs nightly at 04:23 UTC and
-on `workflow_dispatch`; the dispatch input `dry_run` builds and packs the SQLite
-but neither publishes the data branch nor touches a release. A schedule or
-dispatch dates its rows from the data tip, never the wall clock, so rerunning
-the same inputs on another day is byte-identical. A branch over the 300 MiB D7
+CI publishes every three hours (at minute 23 UTC) and on `workflow_dispatch`.
+There is no push trigger: a push to `carddb` starts nothing, and the next
+scheduled run picks it up. A run executes the catalogue ingest (CDB-03) and the
+compliance status writer (CDB-16) from `main`, records the branch's object-store
+size in `_meta/size`, and `carddb publish` commits the result. The dispatch input
+`dry_run` builds and packs the SQLite but neither publishes the data branch nor
+touches a release. A run dates its rows from the data tip, never the wall clock,
+so rerunning the same inputs on another day is byte-identical. A run that is
+publishing is never cancelled by the next one. A branch over the 300 MiB D7
 budget fails the `size` step before `publish`.
 
 The release has two shapes: `carddb-latest` keeps the floating
@@ -76,9 +76,12 @@ when pyarrow is missing. The carddb tool itself stays stdlib only.
 
 **Branch protection (operator setting).** Protect `carddb` with require linear
 history and fast-forward only; the only pushers are the GitHub Actions token
-and the publisher deploy key. The workflow refreshes the branch's own copy of
-`.github/workflows/carddb.yml` from `main` on every publish, so that copy
-cannot drift.
+and the publisher deploy key. The data branch needs no copy of
+`.github/workflows/carddb.yml` (schedules run the default branch's). After the
+release, a real run tries to remove a leftover copy in a commit of its own. If
+that push is refused, the run still succeeds and prints a warning: delete the
+file from `carddb` with your own key (while it is there, pushes to `carddb` keep
+starting the old workflow).
 
 The data derives from MTGJSON (MIT); see NOTICE.
 
