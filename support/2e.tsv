@@ -72,7 +72,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e1b5ae6-a29d-4f37-a380-eebee6cdcbd2	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e1b5ae6-a29d-4f37-a380-eebee6cdcbd2	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e1b5ae6-a29d-4f37-a380-eebee6cdcbd2	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e1bf860-22b6-4d08-9b9f-88038cd1dd3f	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e1bf860-22b6-4d08-9b9f-88038cd1dd3f	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2e1bf860-22b6-4d08-9b9f-88038cd1dd3f	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e1bf860-22b6-4d08-9b9f-88038cd1dd3f	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e1bf860-22b6-4d08-9b9f-88038cd1dd3f	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -102,15 +102,15 @@ oracle_id	engine	status	pin	why	measured	writer
 2e2ace5b-4018-43af-8e72-ebafec1a7739	xmage	listed	e9db58dd30	-	2026-11-28	ci
 2e2b4009-30f5-48d9-8fa3-534c10f7ab7a	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e2b4009-30f5-48d9-8fa3-534c10f7ab7a	xmage	lacks_card	e9db58dd30	no XMage manifest lists it	2026-11-28	ci
-2e31af8f-5e94-4888-857d-911253eac2cd	dirac	unverified	64018cacf8c3	in no evidence list (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e31af8f-5e94-4888-857d-911253eac2cd	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2e31af8f-5e94-4888-857d-911253eac2cd	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e31af8f-5e94-4888-857d-911253eac2cd	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e31af8f-5e94-4888-857d-911253eac2cd	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e338e09-5758-4cc2-9143-21f050a28677	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e338e09-5758-4cc2-9143-21f050a28677	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] K:Freerunning:2 G	2026-11-28	gorge-pin
 2e338e09-5758-4cc2-9143-21f050a28677	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e338e09-5758-4cc2-9143-21f050a28677	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e338e09-5758-4cc2-9143-21f050a28677	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e342aa3-2590-4b59-852a-9adb31bafe5c	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e342aa3-2590-4b59-852a-9adb31bafe5c	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] S[0] Mode=Continuous	2026-11-28	gorge-pin
 2e342aa3-2590-4b59-852a-9adb31bafe5c	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e342aa3-2590-4b59-852a-9adb31bafe5c	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e342aa3-2590-4b59-852a-9adb31bafe5c	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -134,7 +134,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e3ee458-fa3f-4452-ab95-5a7fb5a0483b	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e3ee458-fa3f-4452-ab95-5a7fb5a0483b	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] T[0] Mode=ChangesZone	2026-11-28	gorge-pin
 2e3ee458-fa3f-4452-ab95-5a7fb5a0483b	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e3ee458-fa3f-4452-ab95-5a7fb5a0483b	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e3ee458-fa3f-4452-ab95-5a7fb5a0483b	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -152,7 +152,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e41ae94-db31-4060-881b-a2f6d834c1ee	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e41ae94-db31-4060-881b-a2f6d834c1ee	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e41ae94-db31-4060-881b-a2f6d834c1ee	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e420001-2b3d-4eb7-b01c-3a49d5e241c2	dirac	unverified	64018cacf8c3	in no evidence list (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e420001-2b3d-4eb7-b01c-3a49d5e241c2	dirac	supported	1ef7ceddecac	-	2026-11-28	gorge-pin
 2e420001-2b3d-4eb7-b01c-3a49d5e241c2	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e420001-2b3d-4eb7-b01c-3a49d5e241c2	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e420001-2b3d-4eb7-b01c-3a49d5e241c2	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -168,11 +168,11 @@ oracle_id	engine	status	pin	why	measured	writer
 2e467fab-e808-44d3-99bf-e3621baeb7cb	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e467fab-e808-44d3-99bf-e3621baeb7cb	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e467fab-e808-44d3-99bf-e3621baeb7cb	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e482522-2eef-4f6c-887a-fcc51be61dc2	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e482522-2eef-4f6c-887a-fcc51be61dc2	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] A[0] AB Reveal	2026-11-28	gorge-pin
 2e482522-2eef-4f6c-887a-fcc51be61dc2	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e482522-2eef-4f6c-887a-fcc51be61dc2	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e482522-2eef-4f6c-887a-fcc51be61dc2	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e4865c5-a590-4820-81ec-926014ddb8c4	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e4865c5-a590-4820-81ec-926014ddb8c4	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2e4865c5-a590-4820-81ec-926014ddb8c4	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e4865c5-a590-4820-81ec-926014ddb8c4	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e4865c5-a590-4820-81ec-926014ddb8c4	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -182,11 +182,11 @@ oracle_id	engine	status	pin	why	measured	writer
 2e4f08c2-1bad-4a85-8aad-9bb34a5579b1	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e4f08c2-1bad-4a85-8aad-9bb34a5579b1	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e4f08c2-1bad-4a85-8aad-9bb34a5579b1	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e5163bd-9b8a-4d1e-9ba9-8666c7348dfd	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e5163bd-9b8a-4d1e-9ba9-8666c7348dfd	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] A[0] SP CopySpellAbility	2026-11-28	gorge-pin
 2e5163bd-9b8a-4d1e-9ba9-8666c7348dfd	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e5163bd-9b8a-4d1e-9ba9-8666c7348dfd	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e5163bd-9b8a-4d1e-9ba9-8666c7348dfd	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e5440ef-6887-4c79-98f5-49db82406d71	dirac	unverified	64018cacf8c3	in no evidence list (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e5440ef-6887-4c79-98f5-49db82406d71	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2e5440ef-6887-4c79-98f5-49db82406d71	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e5440ef-6887-4c79-98f5-49db82406d71	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e5440ef-6887-4c79-98f5-49db82406d71	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -252,7 +252,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e6d3120-d41d-4e48-b33f-0f73c876fe69	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e6d3120-d41d-4e48-b33f-0f73c876fe69	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e6d3120-d41d-4e48-b33f-0f73c876fe69	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e6ed3e6-d2b8-4b75-b7e1-0773da4987a1	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e6ed3e6-d2b8-4b75-b7e1-0773da4987a1	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2e6ed3e6-d2b8-4b75-b7e1-0773da4987a1	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e6ed3e6-d2b8-4b75-b7e1-0773da4987a1	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e6ed3e6-d2b8-4b75-b7e1-0773da4987a1	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -268,7 +268,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e735849-1930-4f43-86b4-da660ade15bc	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e735849-1930-4f43-86b4-da660ade15bc	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e735849-1930-4f43-86b4-da660ade15bc	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e7a03ac-44bb-45f1-b209-85fc3b6e90d3	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e7a03ac-44bb-45f1-b209-85fc3b6e90d3	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] K:Spectacle:3 B R,T[0] Mode=ChangesZone	2026-11-28	gorge-pin
 2e7a03ac-44bb-45f1-b209-85fc3b6e90d3	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e7a03ac-44bb-45f1-b209-85fc3b6e90d3	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e7a03ac-44bb-45f1-b209-85fc3b6e90d3	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -308,7 +308,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e82520a-9da3-49ae-b5c8-37e7ac8853fe	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e82520a-9da3-49ae-b5c8-37e7ac8853fe	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e82520a-9da3-49ae-b5c8-37e7ac8853fe	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e83e8c8-adc4-4e33-9f8b-966b7231a6c9	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e83e8c8-adc4-4e33-9f8b-966b7231a6c9	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] R[0] Event=DamageDone	2026-11-28	gorge-pin
 2e83e8c8-adc4-4e33-9f8b-966b7231a6c9	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e83e8c8-adc4-4e33-9f8b-966b7231a6c9	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e83e8c8-adc4-4e33-9f8b-966b7231a6c9	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -324,7 +324,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e9289d6-dbc6-456d-88cf-d1f534e731d6	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e9289d6-dbc6-456d-88cf-d1f534e731d6	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e9289d6-dbc6-456d-88cf-d1f534e731d6	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2e94bfb2-9f7d-43af-8995-6cd5ffb15b21	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e94bfb2-9f7d-43af-8995-6cd5ffb15b21	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] S[0] Mode=Continuous	2026-11-28	gorge-pin
 2e94bfb2-9f7d-43af-8995-6cd5ffb15b21	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e94bfb2-9f7d-43af-8995-6cd5ffb15b21	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e94bfb2-9f7d-43af-8995-6cd5ffb15b21	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -332,7 +332,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2e97e20a-502b-4e36-a3ae-bc0b77139651	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e97e20a-502b-4e36-a3ae-bc0b77139651	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e97e20a-502b-4e36-a3ae-bc0b77139651	xmage	lacks_card	e9db58dd30	no XMage manifest lists it	2026-11-28	ci
-2e9d7858-823e-42af-bd92-18216ed35393	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2e9d7858-823e-42af-bd92-18216ed35393	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] T[0] Mode=ChangesZone	2026-11-28	gorge-pin
 2e9d7858-823e-42af-bd92-18216ed35393	forge	listed	edf8473c4d	-	2026-11-28	ci
 2e9d7858-823e-42af-bd92-18216ed35393	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2e9d7858-823e-42af-bd92-18216ed35393	xmage	lacks_card	e9db58dd30	no XMage manifest lists it	2026-11-28	ci
@@ -340,7 +340,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ea2ac09-690d-4cd2-8e3a-fc01ecd7c132	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ea2ac09-690d-4cd2-8e3a-fc01ecd7c132	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ea2ac09-690d-4cd2-8e3a-fc01ecd7c132	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ea2bf6c-a427-4d0c-b447-159959327697	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ea2bf6c-a427-4d0c-b447-159959327697	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] A[0] SP Charm	2026-11-28	gorge-pin
 2ea2bf6c-a427-4d0c-b447-159959327697	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ea2bf6c-a427-4d0c-b447-159959327697	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ea2bf6c-a427-4d0c-b447-159959327697	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -352,7 +352,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2eac0c6a-b289-4b75-9571-59869e62d180	forge	listed	edf8473c4d	-	2026-11-28	ci
 2eac0c6a-b289-4b75-9571-59869e62d180	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2eac0c6a-b289-4b75-9571-59869e62d180	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2eaee808-b72a-4950-ab4f-ab8e8d12f838	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2eaee808-b72a-4950-ab4f-ab8e8d12f838	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] A[0] SP ExchangeLife	2026-11-28	gorge-pin
 2eaee808-b72a-4950-ab4f-ab8e8d12f838	forge	listed	edf8473c4d	-	2026-11-28	ci
 2eaee808-b72a-4950-ab4f-ab8e8d12f838	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2eaee808-b72a-4950-ab4f-ab8e8d12f838	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -360,7 +360,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2eb16535-718f-4b88-92bc-96429d796327	forge	listed	edf8473c4d	-	2026-11-28	ci
 2eb16535-718f-4b88-92bc-96429d796327	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2eb16535-718f-4b88-92bc-96429d796327	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2eb1b429-8d11-42f3-8815-5a60b6a4e2d5	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2eb1b429-8d11-42f3-8815-5a60b6a4e2d5	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] T[0] Mode=DamageDoneOnce	2026-11-28	gorge-pin
 2eb1b429-8d11-42f3-8815-5a60b6a4e2d5	forge	listed	edf8473c4d	-	2026-11-28	ci
 2eb1b429-8d11-42f3-8815-5a60b6a4e2d5	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2eb1b429-8d11-42f3-8815-5a60b6a4e2d5	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -394,7 +394,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ec4288e-34c6-4831-a2c0-ba1ca1d9d1dc	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ec4288e-34c6-4831-a2c0-ba1ca1d9d1dc	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ec4288e-34c6-4831-a2c0-ba1ca1d9d1dc	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ec81b8c-5b9b-4fa6-8bcb-122624b444a3	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ec81b8c-5b9b-4fa6-8bcb-122624b444a3	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] A[0] AB Draft,T[0] Mode=ChangesZone,ab[1]	2026-11-28	gorge-pin
 2ec81b8c-5b9b-4fa6-8bcb-122624b444a3	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ec81b8c-5b9b-4fa6-8bcb-122624b444a3	gorge	missing	970426b4b4c5	api:Draft	2026-11-28	gorge-pin
 2ec81b8c-5b9b-4fa6-8bcb-122624b444a3	xmage	lacks_card	e9db58dd30	no XMage manifest lists it	2026-11-28	ci
@@ -430,7 +430,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ed76a99-fe5c-4d68-b572-a30848055c8a	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ed76a99-fe5c-4d68-b572-a30848055c8a	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ed76a99-fe5c-4d68-b572-a30848055c8a	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2edd018b-6d82-4ff1-b9d0-5da9b628af3f	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2edd018b-6d82-4ff1-b9d0-5da9b628af3f	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] T[0] Mode=PlaneswalkedTo,T[1] Mode=Phase	2026-11-28	gorge-pin
 2edd018b-6d82-4ff1-b9d0-5da9b628af3f	forge	listed	edf8473c4d	-	2026-11-28	ci
 2edd018b-6d82-4ff1-b9d0-5da9b628af3f	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2edd018b-6d82-4ff1-b9d0-5da9b628af3f	xmage	lacks_card	e9db58dd30	no XMage manifest lists it	2026-11-28	ci
@@ -442,7 +442,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ee08dcd-5558-45be-b619-8a550f3865ad	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ee08dcd-5558-45be-b619-8a550f3865ad	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ee08dcd-5558-45be-b619-8a550f3865ad	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ee13155-a3b8-4cad-8e68-5d2c5aba3bb4	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ee13155-a3b8-4cad-8e68-5d2c5aba3bb4	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] T[0] Mode=Phase	2026-11-28	gorge-pin
 2ee13155-a3b8-4cad-8e68-5d2c5aba3bb4	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ee13155-a3b8-4cad-8e68-5d2c5aba3bb4	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ee13155-a3b8-4cad-8e68-5d2c5aba3bb4	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -462,7 +462,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ee87667-ec9d-4ced-b7e6-df3fd18b0ed6	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ee87667-ec9d-4ced-b7e6-df3fd18b0ed6	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ee87667-ec9d-4ced-b7e6-df3fd18b0ed6	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ee9d018-02c7-43e7-ba2e-95e36d8ac0e8	dirac	unverified	64018cacf8c3	in no evidence list (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ee9d018-02c7-43e7-ba2e-95e36d8ac0e8	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2ee9d018-02c7-43e7-ba2e-95e36d8ac0e8	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ee9d018-02c7-43e7-ba2e-95e36d8ac0e8	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ee9d018-02c7-43e7-ba2e-95e36d8ac0e8	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -474,7 +474,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ef063d2-8702-43a3-a7d0-fc255f8512d3	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef063d2-8702-43a3-a7d0-fc255f8512d3	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef063d2-8702-43a3-a7d0-fc255f8512d3	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ef0961a-0543-4371-8c2a-333881b735e5	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ef0961a-0543-4371-8c2a-333881b735e5	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2ef0961a-0543-4371-8c2a-333881b735e5	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef0961a-0543-4371-8c2a-333881b735e5	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef0961a-0543-4371-8c2a-333881b735e5	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -490,7 +490,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ef4dfcf-7a53-49bc-aa19-f2796ebac3ae	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef4dfcf-7a53-49bc-aa19-f2796ebac3ae	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef4dfcf-7a53-49bc-aa19-f2796ebac3ae	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ef53e18-0baf-4eee-b671-4c19b464cbfb	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ef53e18-0baf-4eee-b671-4c19b464cbfb	dirac	not_lowered	1ef7ceddecac	[marked: kgen-refuse] T[0] Mode=ChangesZone	2026-11-28	gorge-pin
 2ef53e18-0baf-4eee-b671-4c19b464cbfb	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef53e18-0baf-4eee-b671-4c19b464cbfb	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef53e18-0baf-4eee-b671-4c19b464cbfb	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -498,7 +498,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ef6f4d6-f755-4402-8339-2a9b6c86f96c	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef6f4d6-f755-4402-8339-2a9b6c86f96c	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef6f4d6-f755-4402-8339-2a9b6c86f96c	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ef75cf3-30dc-4852-a6d1-1d6391fad022	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ef75cf3-30dc-4852-a6d1-1d6391fad022	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2ef75cf3-30dc-4852-a6d1-1d6391fad022	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef75cf3-30dc-4852-a6d1-1d6391fad022	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef75cf3-30dc-4852-a6d1-1d6391fad022	xmage	listed	e9db58dd30	-	2026-11-28	ci
@@ -506,7 +506,7 @@ oracle_id	engine	status	pin	why	measured	writer
 2ef797ef-c05f-4309-85c7-1bd151dac3fa	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef797ef-c05f-4309-85c7-1bd151dac3fa	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef797ef-c05f-4309-85c7-1bd151dac3fa	xmage	listed	e9db58dd30	-	2026-11-28	ci
-2ef88214-f46d-473e-a55b-795a647e2f03	dirac	not_lowered	64018cacf8c3	kgen does not lower it (lowering snapshot at gorge 32bfe4888a)	2026-11-28	dirac
+2ef88214-f46d-473e-a55b-795a647e2f03	dirac	unverified	1ef7ceddecac	-	2026-11-28	gorge-pin
 2ef88214-f46d-473e-a55b-795a647e2f03	forge	listed	edf8473c4d	-	2026-11-28	ci
 2ef88214-f46d-473e-a55b-795a647e2f03	gorge	supported	970426b4b4c5	-	2026-11-28	gorge-pin
 2ef88214-f46d-473e-a55b-795a647e2f03	xmage	listed	e9db58dd30	-	2026-11-28	ci
