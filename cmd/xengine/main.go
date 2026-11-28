@@ -63,7 +63,8 @@
 // same keys as carddb leg rows: an xmage and a forge row each in that follower's own state, plus a cite row for a diagnosed key).
 // keyproof -seed proves no play: it reads -scope (tab-separated oracle_id<TAB>name, the output of `carddb sql "SELECT oracle_id, name FROM scope_cards ORDER BY 1"`) and writes
 // DIR4/keyproof-seed.tsv with one owed row per cov.Universe key of every scope card and each of the xmage and lockstep legs (two cast rows with reason not-in-corpus when the
-// registry lacks the card), for `carddb put keyproof --source seed --if-absent --refresh multiplayer,desc,script_sha` to add without touching a measured row. It runs where the
+// registry lacks the card), multiplayer=true on both rows of a key cov.Multiplayer flags (docs/oracles.md, "Keys that need
+// four seats"), for `carddb put keyproof --source seed --if-absent --refresh multiplayer,desc,script_sha` to add without touching a measured row. It runs where the
 // corpus is, never in CI. Follower output is never committed: it goes outside the
 // repository or under the gitignored .oracle-build/.
 package main
