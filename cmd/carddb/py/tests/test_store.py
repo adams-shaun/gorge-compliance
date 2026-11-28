@@ -272,6 +272,26 @@ class Publish(Base):
         self.assertEqual(git("log", "-1", "--format=%B", cwd=a.dir).strip(), r["message"])
         self.assertEqual(git("rev-parse", "HEAD", cwd=a.dir), git("rev-parse", "carddb", cwd=self.remote))
 
+    def test_a_rebase_killed_midway_is_undone_by_the_next_publish(self):
+        """11-28: a publish killed mid-rebase left the clone in an interactive rebase with .merge_file_* shard copies
+        beside the shards, and every later build failed on them."""
+        a = self.machine("a", init=True)
+        for oid in (OID_A, OID_B):
+            a.put("legality", [legality(oid, "modern", "legal")], writer="loop")
+            a.publish()
+        env = dict(os.environ, GIT_SEQUENCE_EDITOR="sed -i s/^pick/edit/")
+        subprocess.run(["git", "rebase", "-i", "HEAD~1"], cwd=a.dir, env=env, check=True, capture_output=True)
+        self.assertTrue(os.path.isdir(os.path.join(a.dir, ".git", "rebase-merge")))
+        with open(os.path.join(a.dir, ".merge_file_x1"), "w") as f:
+            f.write("#carddb legality v1\noracle_id\tformat\tstatus\n")
+        a.put("legality", [legality(OID_C, "modern", "legal")], writer="loop")
+        r = a.publish()
+        self.assertTrue(r["committed"] and r["pushed"])
+        self.assertFalse(os.path.isdir(os.path.join(a.dir, ".git", "rebase-merge")))
+        self.assertFalse(os.path.exists(os.path.join(a.dir, ".merge_file_x1")))
+        self.assertEqual(git("rev-parse", "HEAD", cwd=a.dir), git("rev-parse", "carddb", cwd=self.remote))
+        self.assertIn(OID_C, read(os.path.join(a.dir, "legality", "cd.tsv")))
+
     def test_refuses_over_50k_lines_without_bulk(self):
         a = self.machine("a", init=True)
         old = store_mod.MAX_PUBLISH_LINES

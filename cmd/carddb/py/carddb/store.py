@@ -645,6 +645,7 @@ class Store:
         # the keys of the whole input: if_absent must not make a key the seed still names look absent
         batch_keys = self._check_seed_batch(table, cols, cells) if prune_seed else None
         with self.lock():
+            self._recover()
             if if_absent:
                 cells = self._only_absent(table, cols, cells, tuple(refresh))
             if table_name == keylegs.TABLE and writer != "seed":
@@ -717,6 +718,7 @@ class Store:
         -> dict(committed, pushed, rows, message), or None when nothing is staged or unpushed."""
         self.ensure()
         with self.lock():
+            self._recover()
             staged = self._staged()
             if not staged and self._ahead() == 0:
                 return None
@@ -747,6 +749,20 @@ class Store:
                     return result
                 last = p.stderr.strip()
             raise GitError("push failed after %d tries: %s" % (tries, last))
+
+    def _recover(self):
+        """Undo a publish killed mid-rebase. Call under the clone lock. 2026-11-28: the public clone sat in an
+        interactive rebase for an hour (the abort in _rebase never ran), and the git merge-file temps it left beside
+        the shards (.merge_file_*, shard copies) failed every `carddb build` with "carddb shard must be a .tsv file".
+        The abort returns the clone to the local branch, whose commits a later publish rebases again."""
+        gd = os.path.join(self.dir, ".git")
+        if any(os.path.isdir(os.path.join(gd, d)) for d in ("rebase-merge", "rebase-apply")):
+            if self.git("rebase", "--abort", check=False).returncode != 0:
+                self.git("rebase", "--quit", check=False)
+        for name in os.listdir(self.dir):
+            if name.startswith(".merge_file_"):
+                with contextlib.suppress(FileNotFoundError):
+                    os.remove(os.path.join(self.dir, name))
 
     def _remote_has_branch(self):
         p = self.git("ls-remote", "--heads", "origin", self.branch)
