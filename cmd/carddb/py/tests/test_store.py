@@ -522,5 +522,103 @@ class TestPutIfAbsent(Base):
         self.assertEqual(self._by_key(a)[(OID_B, "cast", "xmage")]["multiplayer"], "false")
 
 
+class TestSeedPrune(Base):
+    """The full seed put: drop the untried seed rows whose key left the universe."""
+
+    LEGS = ("xmage", "lockstep")
+
+    def _seed(self, oid, key, **kw):
+        return [kp(oid, key, leg, **kw) for leg in self.LEGS]
+
+    def fixture(self):
+        a = self.machine("a", init=True)
+        rows = (self._seed(OID_A, "f0/a0") + self._seed(OID_A, "f0/a1") + self._seed(OID_A, "static#0.0")
+                + self._seed(OID_A, "cast", reason="not-in-corpus") + self._seed(OID_C, "cast"))
+        a.put("keyproof", rows, writer="seed", if_absent=True)
+        a.put("keyproof", [kp(OID_A, "static#0.0", "xmage", state="agreed", reason="-", refs="X", source="steps",
+                              agree_items="3", seats="2", writer="xproof")], writer="xproof")
+        return a
+
+    def batch(self):
+        return self._seed(OID_A, "f0/a0") + self._seed(OID_A, "repl#0.0") + self._seed(OID_C, "cast")
+
+    def _by_key(self, a):
+        return {(r["oracle_id"], r["key"], r["leg"]): r for r in a.rows("keyproof")}
+
+    def _put(self, a, rows):
+        return a.put("keyproof", rows, writer="seed", if_absent=True, prune_seed=True)
+
+    def assert_refused(self, a, rows):
+        before = self.snapshot(a.dir)
+        porcelain = git("status", "--porcelain", cwd=a.dir)
+        with self.assertRaises(store_mod.StoreError) as e:
+            self._put(a, rows)
+        self.assertEqual(self.snapshot(a.dir), before)
+        self.assertEqual(git("status", "--porcelain", cwd=a.dir), porcelain)
+        return str(e.exception)
+
+    def test_prunes_only_untried_seed_rows(self):
+        a = self.fixture()
+        old = self._by_key(a)
+        # a changed cell in the input must not reach the stored f0/a0: it is named, so neither pruned nor replaced
+        batch = [dict(r, measured="2026-11-20") for r in self.batch()]
+        self.assertEqual(self._put(a, batch), 7)  # 2 repl#0.0 rows added, 5 rows pruned
+        rows = self._by_key(a)
+        self.assertEqual(sorted(rows), sorted(
+            [(OID_A, k, leg) for k in ("f0/a0", "repl#0.0") for leg in self.LEGS]
+            + [(OID_C, "cast", leg) for leg in self.LEGS] + [(OID_A, "static#0.0", "xmage")]))
+        for k in ((OID_A, "f0/a0", "xmage"), (OID_A, "f0/a0", "lockstep"), (OID_A, "static#0.0", "xmage")):
+            self.assertEqual(rows[k], old[k])
+        self.assertEqual((a.last_pruned, a.last_orphans), (5, 1))
+
+    def test_rerun_is_a_no_op(self):
+        a = self.fixture()
+        self._put(a, self.batch())
+        before = self.snapshot(a.dir)
+        porcelain = git("status", "--porcelain", cwd=a.dir)
+        self.assertEqual(self._put(a, self.batch()), 0)
+        self.assertEqual((a.last_pruned, a.last_orphans), (0, 1))
+        self.assertEqual(self.snapshot(a.dir), before)
+        self.assertEqual(git("status", "--porcelain", cwd=a.dir), porcelain)
+
+    def test_refuses_non_seed_rows(self):
+        a = self.fixture()
+        self.assertIn("xproof", self.assert_refused(a, self.batch() + [kp(OID_A, "land", "xmage", writer="xproof")]))
+
+    def test_refuses_partial_seed(self):
+        a = self.fixture()
+        a.put("keyproof", self._seed(OID_B, "cast"), writer="seed", if_absent=True)
+        self.assertIn("partial seed", self.assert_refused(a, self._seed(OID_A, "f0/a0")))
+        # cards the store has never seeded do not make up the half
+        self.assertIn("partial seed", self.assert_refused(
+            a, self._seed(OID_A, "f0/a0") + self._seed("ef" + "3" * 30, "cast")))
+
+    def test_refuses_other_tables(self):
+        a = self.machine("a", init=True)
+        with self.assertRaises(store_mod.StoreError):
+            a.put("legality", [legality(OID_A, "modern", "legal")], writer="seed", prune_seed=True)
+
+    def test_cli(self):
+        a = self.fixture()
+        home = os.path.join(self.tmp, "a")
+        flags = ("put", "keyproof", "--source", "seed", "--if-absent", "--refresh", "multiplayer,desc,script_sha",
+                 "--prune-seed")
+        names = list(self.batch()[0])
+        tsv = "".join("\t".join(cells) + "\n" for cells in [names] + [[r[n] for n in names] for r in self.batch()])
+        before = self.snapshot(a.dir)
+        r = self.cli(home, "put", "keyproof", "--prune-seed")  # empty stdin
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("partial seed", r.stderr)
+        r = self.cli(home, "put", "legality", "--prune-seed")
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("keyproof table only", r.stderr)
+        self.assertEqual(self.snapshot(a.dir), before)
+        r = self.cli(home, *flags, stdin=tsv)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout, "carddb put keyproof: 7 rows changed, 5 seed rows pruned, 1 orphan keys\n")
+        r = self.cli(home, *flags, stdin=tsv)
+        self.assertEqual(r.stdout, "carddb put keyproof: 0 rows changed, 0 seed rows pruned, 1 orphan keys\n")
+
+
 if __name__ == "__main__":
     unittest.main()
