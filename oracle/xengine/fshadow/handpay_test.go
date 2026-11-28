@@ -14,8 +14,10 @@ import (
 )
 
 // handStep is one thing seat 0 does in handGame: play a land, cast a card with
-// gorge's first plan, or activate the mana of taps ("Name" or "Name:W", the
-// colour chosen) and then cast use, or activate its ability'th ability.
+// gorge's first plan, or activate the mana of taps and then cast use, or
+// activate its ability'th ability. A tap is "Name", followed by what to pick at
+// each ask its activation poses (":W" a colour; a label or an object's name for
+// a cost), the last pick answering any further ask.
 type handStep struct {
 	land, plan, use string
 	taps            []string
@@ -165,7 +167,8 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		// The recorder's line precedes whatever the payment does.
 		a := ask(KindPriority, ans)
 		for _, tap := range s.taps {
-			name, colour, _ := strings.Cut(tap, ":")
+			name, rest, _ := strings.Cut(tap, ":")
+			picks := strings.Split(rest, ":")
 			if name == s.use && s.activate {
 				continue // tapped as the ability's own cost
 			}
@@ -174,10 +177,16 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 				t.Fatalf("%s: no mana activation offered: %+v", name, e.Pending().Options)
 			}
 			submit(decision.Intent{Choices: []int{i}})
-			for e.Pending().Kind == decision.KChoose {
-				pick := slices.IndexFunc(e.Pending().Options, func(o decision.Option) bool { return o.ManaSymbol == colour })
+			for k := 0; e.Pending().Kind == decision.KChoose; k++ {
+				want := picks[min(k, len(picks)-1)]
+				pick := slices.IndexFunc(e.Pending().Options, func(o decision.Option) bool { return o.ManaSymbol == want })
+				if pick < 0 && want != "" {
+					pick = slices.IndexFunc(e.Pending().Options, func(o decision.Option) bool {
+						return strings.Contains(o.Label, want) || objName(e.G.Obj(o.Obj)) == want
+					})
+				}
 				if pick < 0 {
-					t.Fatalf("%s: colour %q not offered: %+v", name, colour, e.Pending().Options)
+					t.Fatalf("%s: %q not offered: %+v", name, want, e.Pending().Options)
 				}
 				submit(decision.Intent{Choices: []int{pick}})
 			}
@@ -330,17 +339,7 @@ func TestHandPaymentShortOfTheCostDiverges(t *testing.T) {
 // gorge does not offer, and one whose own card is tapped for its {T} cost
 // although it also makes mana.
 func TestSignetPaymentsByHand(t *testing.T) {
-	const paladin, hold = "Truefire Paladin", "Slayers' Stronghold"
-	l := handGame(t, corpus(t), "", []string{"Wastes", hold, "Sol Ring", "Boros Signet", paladin}, []handStep{
-		{land: "Wastes"},
-		{plan: "Sol Ring"},
-		{land: hold},
-		{plan: "Boros Signet"},
-		{use: paladin, taps: []string{"Wastes", "Boros Signet"}},
-		{use: paladin, activate: true, ability: 1, taps: []string{"Wastes", "Boros Signet"}},
-		{use: hold, activate: true, taps: []string{"Wastes", "Boros Signet", hold}, target: paladin},
-	})
-	res := followClean(t, l, 3)
+	res := followClean(t, signetGame(t), 3)
 	if res.CastTargets != 1 {
 		t.Errorf("%d cast targets, want the Stronghold's from its activation line", res.CastTargets)
 	}
@@ -524,4 +523,168 @@ func TestHandActivationTakesForgesAbility(t *testing.T) {
 func TestHandActivationOfAnUnrankedAbilityDiverges(t *testing.T) {
 	l, line := thornscapeGame(t, 11)
 	stopsAt(t, l, line, 0)
+}
+
+// TestUnrankedActivationWithAnUnboundSourceDiverges: nothing is paid by hand,
+// so a tapped id the header does not bind (a token) is not read and the line
+// stays answer-missing.
+func TestUnrankedActivationWithAnUnboundSourceDiverges(t *testing.T) {
+	l, line := thornscapeGame(t, 11)
+	a, _ := lastAsk(t, l, "activate")
+	a.Answer.Tapped = append(a.Answer.Tapped, 9999)
+	stopsAt(t, l, line, 0)
+}
+
+// cardID is the Forge id of seat 0's first card called name.
+func cardID(t *testing.T, l *Log, name string) int {
+	t.Helper()
+	for _, c := range l.Header.Seats[0].Cards {
+		if c.Name == name {
+			return c.ID
+		}
+	}
+	t.Fatalf("no %s in the deck", name)
+	return 0
+}
+
+// TestHandPaymentCostingMoreThanTheLineSaysDiverges: a line names the sources
+// Forge tapped, not what else their abilities cost, so a payment that would
+// sacrifice, pay life or tap a permanent the line does not list is never taken:
+// it stops at the cast rather than diverge at a later snapshot.
+func TestHandPaymentCostingMoreThanTheLineSaysDiverges(t *testing.T) {
+	const tower, drum, elves = "Phyrexian Tower", "Springleaf Drum", "Llanowar Elves"
+	for _, c := range []struct {
+		name    string
+		library []string
+		steps   []handStep
+		cost    string // a card the line lists as tapped for a source's cost
+	}{
+		// Forge sacrifices the second creature: gorge asks which.
+		{name: "sacrifice choice", library: []string{"Forest", elves, "Wastes", "Dimir Signet", tower, "Elvish Mystic", "Hypnotic Specter"}, steps: []handStep{
+			{land: "Forest"},
+			{plan: elves},
+			{land: "Wastes"},
+			{plan: "Dimir Signet"},
+			{land: tower},
+			{plan: "Elvish Mystic"},
+			{use: "Hypnotic Specter", taps: []string{"Wastes", "Dimir Signet", tower + ":Sacrifice:Elvish Mystic"}},
+		}},
+		// One creature: gorge sacrifices it without asking.
+		{name: "forced sacrifice", library: []string{"Forest", elves, "Wastes", "Dimir Signet", tower, "Hypnotic Specter"}, steps: []handStep{
+			{land: "Forest"},
+			{plan: elves},
+			{land: "Wastes"},
+			{plan: "Dimir Signet"},
+			{land: tower},
+			{use: "Hypnotic Specter", taps: []string{"Wastes", "Dimir Signet", tower + ":Sacrifice"}},
+		}},
+		// Forge taps the Elves for the Drum; gorge asks which creature.
+		{name: "tap cost choice", cost: elves, library: []string{"Forest", "Young Wolf", "Wastes", elves, drum, "Goblin Piker"}, steps: []handStep{
+			{land: "Forest"},
+			{plan: "Young Wolf"},
+			{land: "Wastes"},
+			{plan: elves},
+			{plan: drum},
+			{use: "Goblin Piker", taps: []string{"Wastes", drum + ":" + elves + ":R"}},
+		}},
+		{name: "forced tap cost", cost: elves, library: []string{"Forest", "Wastes", elves, drum, "Goblin Piker"}, steps: []handStep{
+			{land: "Forest"},
+			{plan: elves},
+			{land: "Wastes"},
+			{plan: drum},
+			{use: "Goblin Piker", taps: []string{"Wastes", drum + ":R"}},
+		}},
+		{name: "source sacrifices itself", library: []string{"Wastes", "Ferrous Lake", "Sol Ring", "Lotus Petal"}, steps: []handStep{
+			{land: "Wastes"},
+			{plan: "Sol Ring"},
+			{land: "Ferrous Lake"},
+			{plan: "Lotus Petal"},
+			{use: shiko, taps: []string{"Sol Ring", "Ferrous Lake", "Lotus Petal:W"}},
+		}},
+		{name: "damage", library: []string{"Adarkar Wastes", "Ferrous Lake", "Sol Ring"}, steps: []handStep{
+			{land: "Adarkar Wastes"},
+			{land: "Ferrous Lake"},
+			{plan: "Sol Ring"},
+			{use: shiko, taps: []string{"Sol Ring", "Ferrous Lake", "Adarkar Wastes:W"}},
+		}},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			commander := ""
+			if c.steps[len(c.steps)-1].use == shiko {
+				commander = shiko
+			}
+			l := handGame(t, corpus(t), commander, c.library, c.steps)
+			a, line := lastAsk(t, l, "cast")
+			if c.cost != "" {
+				a.Answer.Tapped = append(a.Answer.Tapped, cardID(t, l, c.cost))
+			}
+			stopsAt(t, l, line, 0)
+		})
+	}
+}
+
+// signetGame casts Truefire Paladin, activates its second ability and activates
+// Slayers' Stronghold on it, each paid by hand through Boros Signet.
+func signetGame(t *testing.T) *Log {
+	const paladin, hold = "Truefire Paladin", "Slayers' Stronghold"
+	return handGame(t, corpus(t), "", []string{"Wastes", hold, "Sol Ring", "Boros Signet", paladin}, []handStep{
+		{land: "Wastes"},
+		{plan: "Sol Ring"},
+		{land: hold},
+		{plan: "Boros Signet"},
+		{use: paladin, taps: []string{"Wastes", "Boros Signet"}},
+		{use: paladin, activate: true, ability: 1, taps: []string{"Wastes", "Boros Signet"}},
+		{use: hold, activate: true, taps: []string{"Wastes", "Boros Signet", hold}, target: paladin},
+	})
+}
+
+// TestHandPaymentTapsMatchTheLine: the taps after the offer are the line's, no
+// more (the Stronghold's {T} cost left off it) and no fewer (the Paladin listed
+// although its ability does not tap it), and a payment whose targets the follow
+// could not answer is not begun.
+func TestHandPaymentTapsMatchTheLine(t *testing.T) {
+	for _, c := range []struct {
+		name   string
+		nth    int // the activation doctored, from 0
+		doctor func(t *testing.T, l *Log, a *Ask)
+	}{
+		{"unlisted offer tap", 1, func(t *testing.T, l *Log, a *Ask) {
+			a.Answer.Tapped = slices.DeleteFunc(a.Answer.Tapped, func(id int) bool { return id == a.Answer.Card })
+		}},
+		{"listed but untapped", 0, func(t *testing.T, l *Log, a *Ask) {
+			a.Answer.Tapped = append(a.Answer.Tapped, a.Answer.Card)
+		}},
+		{"unofferable target", 1, func(t *testing.T, l *Log, a *Ask) {
+			a.Answer.Targets = []Ref{{Card: cardID(t, l, "Wastes")}}
+		}},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			l := signetGame(t)
+			var asks []Entry
+			for _, e := range l.Entries {
+				if e.Ask != nil && e.Ask.Answer.Action == "activate" {
+					asks = append(asks, e)
+				}
+			}
+			if len(asks) != 2 {
+				t.Fatalf("%d activations, want 2", len(asks))
+			}
+			c.doctor(t, l, asks[c.nth].Ask)
+			stopsAt(t, l, asks[c.nth].Line, 1+c.nth)
+		})
+	}
+}
+
+// TestHandPaymentPaysTheOffersOwnCost: the ability sacrificing its source is
+// the offer's cost, which Forge paid too, so it is followed.
+func TestHandPaymentPaysTheOffersOwnCost(t *testing.T) {
+	const caterpillar = "Caustic Caterpillar"
+	l := handGame(t, corpus(t), "", []string{"Wastes", "Sol Ring", "Golgari Signet", caterpillar}, []handStep{
+		{land: "Wastes"},
+		{plan: "Sol Ring"},
+		{plan: "Golgari Signet"},
+		{use: caterpillar, taps: []string{"Wastes", "Golgari Signet"}},
+		{use: caterpillar, activate: true, taps: []string{"Wastes", "Golgari Signet"}, target: "Sol Ring"},
+	})
+	followClean(t, l, 2)
 }

@@ -950,15 +950,16 @@ func (f *follower) activate(d *decision.Decision, a *Ask, obj state.ObjID) (deci
 		in.Choices = []int{pick}
 		return in, nil
 	}
-	tapped := make([]state.ObjID, 0, len(a.Answer.Tapped))
-	for _, fid := range a.Answer.Tapped {
-		g, ok := f.toG[fid]
-		if !ok {
-			return in, f.unbound(fid)
-		}
-		tapped = append(tapped, g)
-	}
 	if known {
+		// Only a payment by hand reads the tapped ids.
+		tapped := make([]state.ObjID, 0, len(a.Answer.Tapped))
+		for _, fid := range a.Answer.Tapped {
+			g, ok := f.toG[fid]
+			if !ok {
+				return in, f.unbound(fid)
+			}
+			tapped = append(tapped, g)
+		}
 		offer := func(d *decision.Decision) int { return optionOf(d, want) }
 		if paid, ok := f.payByHand(d, a, tapped, offer); ok {
 			return paid, nil

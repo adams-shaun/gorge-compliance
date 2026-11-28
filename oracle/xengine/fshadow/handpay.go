@@ -3,6 +3,7 @@ package fshadow
 import (
 	"fmt"
 	"math/bits"
+	"reflect"
 	"slices"
 
 	"github.com/adams-shaun/gorge/engine/decision"
@@ -24,6 +25,16 @@ import (
 // 603.3), below it when the tap came first. A path that grows the stack before
 // the offer is therefore rejected, and the follow diverges instead.
 
+// A path is Forge's payment only as far as it does what Forge's line says, so
+// the search checks what each path did, not which costs it knows of. Until the
+// offer, nothing a snapshot shows may change but the mana pools and the listed
+// sources getting tapped: no permanent or card moves, no life or counter is
+// paid. A sacrifice, discard or life cost of a mana ability therefore ends the
+// path, a source's sacrifice of itself too, since the line names neither the
+// ability nor what it cost. Once the offer is taken, its own costs may move
+// objects (Forge paid the same ones from the same board), but still only listed
+// permanents are tapped, and all of them that remain are.
+//
 // Which option is Forge's is settled before the search. gorge lists an
 // Adventure, a split half, foretell, evoke and every other way to cast a card
 // as "cast" options of the same object, several before the plain one, and
@@ -138,22 +149,76 @@ type paySearch struct {
 	f       *follower
 	ask     *Ask // the line being paid
 	player  state.PlayerID
-	sources []state.ObjID // distinct, in Forge's tap order
-	stack   int           // stack depth before the first activation
+	sources []state.ObjID // to activate: distinct, in Forge's tap order
+	listed  []state.ObjID // every object the line lists as tapped
+	// stack, board and tapped are the stack depth, the board and each
+	// permanent's tapped state before the first activation.
+	stack  int
+	board  rules.OracleSnapshot
+	tapped map[state.ObjID]bool
 	// offer is the index of the wanted priority option, or -1.
 	offer func(*decision.Decision) int
 	seen  map[string]bool // priority states already searched
 	left  int             // submits left
 }
 
+// board is what e's snapshot shows less the mana pools and which permanents are
+// tapped: what a payment's mana activations must leave as it was (strayTap
+// holds the taps to Forge's line).
+func board(e *rules.Engine) rules.OracleSnapshot {
+	s := Snapshot(e, "")
+	for i := range s.Players {
+		s.Players[i].Pool = ""
+	}
+	for i := range s.Permanents {
+		s.Permanents[i].Tapped = false
+	}
+	return s
+}
+
+// permanents is every object on e's battlefield, seat by seat.
+func permanents(e *rules.Engine) []state.ObjID {
+	var out []state.ObjID
+	for p := range e.G.Players {
+		out = append(out, e.G.Zone(state.ZBattlefield, state.PlayerID(p))...)
+	}
+	return out
+}
+
+// strayTap reports whether a permanent of e was tapped or untapped since the
+// search began, other than a listed one getting tapped.
+func (s *paySearch) strayTap(e *rules.Engine) bool {
+	return slices.ContainsFunc(permanents(e), func(id state.ObjID) bool {
+		now := e.G.Obj(id).Tapped
+		return now != s.tapped[id] && !(now && slices.Contains(s.listed, id))
+	})
+}
+
+// tappedAsListed reports whether e's taps are the line's: no stray one, and no
+// listed object still on the battlefield untapped.
+func (s *paySearch) tappedAsListed(e *rules.Engine) bool {
+	return !s.strayTap(e) && !slices.ContainsFunc(permanents(e), func(id state.ObjID) bool {
+		return !e.G.Obj(id).Tapped && slices.Contains(s.listed, id)
+	})
+}
+
 // payByHand answers priority decision d with the first mana activation of a
-// payment by hand for ask a: every source in tapped activated, then the option
+// payment by hand for ask a: every one of sources activated, then the option
 // offer picks. The rest of the choices are queued on f.pay for the decisions
-// that follow. False, with nothing changed, when no activation order and colour
-// choice reaches an offer the floating mana pays.
-func (f *follower) payByHand(d *decision.Decision, a *Ask, tapped []state.ObjID, offer func(*decision.Decision) int) (decision.Intent, bool) {
-	s := &paySearch{f: f, ask: a, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits}
-	for _, id := range tapped {
+// that follow. a's tapped ids must all be bound. False, with nothing changed,
+// when no activation order and colour choice reaches an offer the floating mana
+// pays while doing only what a's line says.
+func (f *follower) payByHand(d *decision.Decision, a *Ask, sources []state.ObjID, offer func(*decision.Decision) int) (decision.Intent, bool) {
+	start := f.e.Clone() // reading a board may fill the engine's caches
+	s := &paySearch{f: f, ask: a, player: d.Player, offer: offer, seen: map[string]bool{}, left: maxPaySubmits,
+		stack: len(start.G.Stack), board: board(start), tapped: map[state.ObjID]bool{}}
+	for _, id := range permanents(start) {
+		s.tapped[id] = start.G.Obj(id).Tapped
+	}
+	for _, fid := range a.Answer.Tapped {
+		s.listed = append(s.listed, f.toG[fid])
+	}
+	for _, id := range sources {
 		if !slices.Contains(s.sources, id) {
 			s.sources = append(s.sources, id)
 		}
@@ -161,8 +226,7 @@ func (f *follower) payByHand(d *decision.Decision, a *Ask, tapped []state.ObjID,
 	if len(s.sources) == 0 || len(s.sources) > 64 {
 		return decision.Intent{}, false
 	}
-	s.stack = len(f.e.G.Stack)
-	choices := s.walk(f.e, 0)
+	choices := s.walk(start, 0)
 	if choices == nil {
 		return decision.Intent{}, false
 	}
@@ -196,6 +260,9 @@ func (s *paySearch) walk(e *rules.Engine, used uint64) []int {
 		if len(e.G.Stack) != s.stack {
 			return nil // an activation triggered something
 		}
+		if s.strayTap(e) || !reflect.DeepEqual(board(e), s.board) {
+			return nil // an activation did what Forge's line does not say
+		}
 		if bits.OnesCount64(used) == len(s.sources) {
 			if i := s.offer(d); i >= 0 && s.settles(e, i) {
 				return []int{i}
@@ -221,8 +288,10 @@ func (s *paySearch) walk(e *rules.Engine, used uint64) []int {
 				}
 			}
 		}
-	case d.Kind == decision.KChoose && d.Min == 1 && d.Max == 1:
-		// An activation's own ask: which ability, which colour.
+	case d.Kind == decision.KChoose && d.Min == 1 && d.Max == 1 && asksMana(d):
+		// An activation's ask about its mana: which ability, which colour.
+		// Any other (what to sacrifice, tap or discard for it) is a choice
+		// of the seat's the line does not record.
 		for i := range d.Options {
 			if rest := s.try(e, d, i, used); rest != nil {
 				return rest
@@ -230,6 +299,11 @@ func (s *paySearch) walk(e *rules.Engine, used uint64) []int {
 		}
 	}
 	return nil
+}
+
+// asksMana reports whether every option of d is a choice of mana.
+func asksMana(d *decision.Decision) bool {
+	return !slices.ContainsFunc(d.Options, func(o decision.Option) bool { return o.Kind != "mana" })
 }
 
 // try submits choice i of d to a clone of e and searches on from there.
@@ -264,10 +338,11 @@ func (s *paySearch) submit(e *rules.Engine, in decision.Intent) *rules.Engine {
 }
 
 // settles reports whether taking option i of e's priority decision is paid by
-// the floating mana alone: before the next priority gorge asks nothing but
-// modes, targets and what the cast's triggers ask. Any other ask (X, a delve or
-// convoke pick, the mana window, a sacrifice) the follow would answer by
-// default, which may tap or spend what Forge did not.
+// the floating mana alone, leaving the taps the line lists (tappedAsListed):
+// before the next priority gorge asks nothing but modes, targets and what the
+// cast's triggers ask. Any other ask (X, a delve or convoke pick, the mana
+// window, a sacrifice) the follow would answer by default, which may tap or
+// spend what Forge did not.
 func (s *paySearch) settles(e *rules.Engine, i int) bool {
 	// The trial answers targets as the follow will, from this line's targets
 	// remembered on a copy of the follower: the follow's own memory stays.
@@ -285,7 +360,7 @@ func (s *paySearch) settles(e *rules.Engine, i int) bool {
 		}
 		switch d.Kind {
 		case decision.KPriority:
-			return true
+			return s.tappedAsListed(e)
 		case decision.KModes:
 			in = modeIntent(d)
 		case decision.KTarget:
