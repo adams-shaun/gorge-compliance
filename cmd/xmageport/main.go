@@ -58,6 +58,7 @@ func main() {
 	var fams familyFlag
 	flag.Var(&fams, "family", "family=relative/dir (repeatable)")
 	kbPath := flag.String("known-bugs", "cmd/xmageport/known_bugs.tsv", "triaged known_bug rows (Class#method TAB reason)")
+	flag.StringVar(&droppedRecordPath, "dropped-record", "cmd/xmageport/dropped_choices.tsv", "dropped-choice record (Class#method TAB dropped TAB class TAB cr TAB note)")
 	flag.BoolVar(&dropLands, "droplands", false, "drop basic lands that only pay for spells")
 	flag.BoolVar(&verbose, "v", false, "print each run's scenario, transcript and fails")
 	flag.Parse()
@@ -156,8 +157,26 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+		// Keep the dropped-choice record in step with the scenarios just
+		// written (measured from disk, so a chunk or -only run that left
+		// other scenarios alone keeps their rows).
+		if err := syncDroppedRecord(*commit, droppedRecordPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 	}
-	fmt.Print(summary(results))
+	// -commit may have rewritten the record above, so write the summary
+	// (including its untriaged count) only now, after any sync.
+	sum, err := summary(results)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	if err := os.WriteFile(filepath.Join(*out, "summary.txt"), []byte(sum), 0o644); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	fmt.Print(sum)
 }
 
 type genEntry struct {
@@ -169,7 +188,7 @@ type genEntry struct {
 func writeOutputs(out string, results []*result) error {
 	byFile := map[string][]*result{}
 	var tsv strings.Builder
-	tsv.WriteString("family\tclass\tmethod\tstatus\tcode\tdetail\tfirst_fail\tunsupported\n")
+	tsv.WriteString("family\tclass\tmethod\tstatus\tcode\tdetail\tfirst_fail\tunsupported\tdropped\n")
 	for _, r := range results {
 		ff := ""
 		if len(r.Fails) > 0 {
@@ -179,8 +198,8 @@ func writeOutputs(out string, results []*result) error {
 				ff = ff[:300]
 			}
 		}
-		fmt.Fprintf(&tsv, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", r.Family, r.Class, r.Method, r.Status, r.Code,
-			strings.NewReplacer("\t", " ", "\n", " ").Replace(r.Detail), ff, r.Unsupported)
+		fmt.Fprintf(&tsv, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\n", r.Family, r.Class, r.Method, r.Status, r.Code,
+			strings.NewReplacer("\t", " ", "\n", " ").Replace(r.Detail), ff, r.Unsupported, r.Dropped)
 		if r.Scenario != nil {
 			k := filepath.Join(r.Family, r.Class+".json")
 			byFile[k] = append(byFile[k], r)
@@ -190,9 +209,6 @@ func writeOutputs(out string, results []*result) error {
 		return err
 	}
 	if err := os.WriteFile(filepath.Join(out, "report.tsv"), []byte(tsv.String()), 0o644); err != nil {
-		return err
-	}
-	if err := os.WriteFile(filepath.Join(out, "summary.txt"), []byte(summary(results)), 0o644); err != nil {
 		return err
 	}
 	for k, rs := range byFile {
@@ -408,7 +424,7 @@ func readPortFile(path string) (portFile, bool) {
 	return f, true
 }
 
-func summary(results []*result) string {
+func summary(results []*result) (string, error) {
 	var b strings.Builder
 	type key struct{ fam, k string }
 	cnt := map[key]int{}
@@ -460,5 +476,27 @@ func summary(results []*result) string {
 	for _, x := range rs {
 		fmt.Fprintf(&b, "  %-32s %5d\n", x.k, x.v)
 	}
-	return b.String()
+	// dropped-choice totals: what this run dropped, and how much of the
+	// record still argues no reason (classes empty).
+	tests, choices := 0, 0
+	for _, r := range results {
+		if r.Dropped > 0 {
+			tests++
+			choices += r.Dropped
+		}
+	}
+	// A record that will not parse must fail the run, not report untriaged=0
+	// and look clean.
+	record, err := loadDroppedRecord(droppedRecordPath)
+	if err != nil {
+		return "", err
+	}
+	untriaged := 0
+	for _, row := range record {
+		if row.Class == "" {
+			untriaged++
+		}
+	}
+	fmt.Fprintf(&b, "\ndropped-choice tests=%d choices=%d untriaged=%d\n", tests, choices, untriaged)
+	return b.String(), nil
 }
