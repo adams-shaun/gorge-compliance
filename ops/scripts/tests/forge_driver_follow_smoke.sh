@@ -90,4 +90,12 @@ check "pin: a FORGE_REF that brings Forge code is left to a person (exit 1, noth
 ARGS=(bogus); out=$(run); rc=$?
 check "usage: exit 2" $([ "$rc" = 2 ] && echo 0 || echo 1) "rc=$rc $out"
 
+# mkpin reads its whole input: an awk that exits at the first match closes the pipe, and once gorge's Makefile
+# outgrew the pipe buffer `base64 -d` died of SIGPIPE under pipefail (gorge-pin-follow red from 2026-11-27).
+for f in scripts/forge-driver-follow.sh scripts/check-forge-ref-in-driver.sh; do
+	fn=$(/usr/bin/grep -m1 '^mkpin() ' "$ROOT/$f")
+	out=$(bash -c "set -euo pipefail; $fn"$'\n''{ echo "FORGE_REF ?= abc123 # pin"; head -c 400000 /dev/zero | tr "\0" "x" | fold -w 80; } | base64 | base64 -d | mkpin FORGE_REF' 2>&1); rc=$?
+	check "mkpin in $f survives a large Makefile under pipefail" $([ "$rc" = 0 ] && [ "$out" = abc123 ] && echo 0 || echo 1) "rc=$rc $out"
+done
+
 [ "$fails" = 0 ] && echo "forge_driver_follow_smoke: PASS" || { echo "forge_driver_follow_smoke: $fails FAIL"; exit 1; }

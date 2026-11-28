@@ -31,7 +31,7 @@ url=${FORGE_FORK_URL:-https://github.com/$fork.git}
 
 die() { echo "forge-driver-follow: $*" >&2; exit 2; }
 fail() { echo "forge-driver-follow: $*" >&2; exit 1; }
-mkpin() { awk -v n="$1" '$1 == n && ($2 == "?=" || $2 == "=") { v = $3; sub(/#.*/, "", v); print v; exit }'; }
+mkpin() { awk -v n="$1" '!seen && $1 == n && ($2 == "?=" || $2 == "=") { v = $3; sub(/#.*/, "", v); print v; seen = 1 }'; }
 sha40() { [[ $1 =~ ^[0-9a-f]{40}$ ]]; }
 
 # gorge_forge_ref REF: FORGE_REF in gorge's Makefile at REF (a branch or commit), through the contents API.
