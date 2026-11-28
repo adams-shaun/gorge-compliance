@@ -60,8 +60,10 @@ def sha(path):
 
 def edge_db(path):
     """A hand-built file with the shapes the exporter must survive: NULLs, a
-    WITHOUT ROWID table, a rowid table with no keys, a view, an FTS5 table and
-    sqlite's own objects (via ANALYZE)."""
+    WITHOUT ROWID table, a rowid table with no keys, a plain view, an
+    aggregate/CASE view (the keyproof_cards shape: expression columns the
+    exporter can only type if they are CAST, which SQLite then declares `INT`),
+    an FTS5 table and sqlite's own objects (via ANALYZE)."""
     conn = sqlite3.connect(path)
     conn.executescript("""
         CREATE TABLE keys (a TEXT NOT NULL, b INTEGER, c REAL, PRIMARY KEY (a, b)) WITHOUT ROWID;
@@ -69,6 +71,10 @@ def edge_db(path):
         CREATE TABLE loose (a TEXT, b BLOB, d INTEGER);
         INSERT INTO loose VALUES ('x', x'00ff', NULL), ('y', NULL, 7), ('a', x'01', NULL);
         CREATE VIEW pick AS SELECT a FROM keys WHERE c IS NOT NULL;
+        CREATE VIEW tally AS SELECT a, CAST(COUNT(*) AS INTEGER) AS n,
+            CAST(SUM(d) AS INTEGER) AS total,
+            CAST(CASE WHEN SUM(d)>1 THEN 1 ELSE 0 END AS INTEGER) AS big
+            FROM loose GROUP BY a;
         CREATE VIRTUAL TABLE card_fts USING fts5(body);
         INSERT INTO card_fts VALUES ('hello'), ('world');
     """)
@@ -86,7 +92,7 @@ class Selection(Base):
         conn = sqlite3.connect(p)
         self.addCleanup(conn.close)
         self.assertEqual(parquet_export.data_objects(conn),
-                         [("table", "keys"), ("table", "loose"), ("view", "pick")])
+                         [("table", "keys"), ("table", "loose"), ("view", "pick"), ("view", "tally")])
 
     def test_the_objects_of_a_built_file(self):
         a, committed = built_fixture(self)
@@ -120,16 +126,32 @@ class Selection(Base):
                          "rowid")
         self.assertEqual(parquet_export.order_by(conn, "pick", parquet_export.columns(conn, "pick"), "view"),
                          '"a"')
+        # the aggregate/CASE view: CAST gives every expression column a declared
+        # type (SQLite reports it as `INT`), so none of them is the untyped ''
+        # that used to reach the exporter and kill the publish job.
+        self.assertEqual(parquet_export.columns(conn, "tally"),
+                         [("a", "TEXT", 0), ("n", "INT", 0), ("total", "INT", 0), ("big", "INT", 0)])
+        self.assertEqual(parquet_export.order_by(conn, "tally",
+                                                 parquet_export.columns(conn, "tally"), "view"),
+                         '"a", "n", "total", "big"')
 
     def test_unknown_declared_type_fails_loudly(self):
         self.assertEqual(parquet_export.parquet_type("TEXT"), "string")
         self.assertEqual(parquet_export.parquet_type("integer"), "int64")
         self.assertEqual(parquet_export.parquet_type("REAL"), "float64")
         self.assertEqual(parquet_export.parquet_type("BLOB"), "binary")
+        # mapped by SQLite affinity, not one literal spelling: INT is what a
+        # CAST(x AS INTEGER) view column declares, the rest are affinity synonyms
+        for declared in ("INT", "BIGINT", "unsigned big int", "INT2", "INT8", "TINYINT"):
+            self.assertEqual(parquet_export.parquet_type(declared), "int64", declared)
+        self.assertEqual(parquet_export.parquet_type("VARCHAR(20)"), "string")
+        self.assertEqual(parquet_export.parquet_type("DOUBLE PRECISION"), "float64")
         with self.assertRaises(parquet_export.ExportError):
             parquet_export.parquet_type("NUMERIC")
         with self.assertRaises(parquet_export.ExportError):
             parquet_export.parquet_type("")
+        with self.assertRaises(parquet_export.ExportError):
+            parquet_export.parquet_type("   ")
 
 
 class CiOnly(unittest.TestCase):
@@ -211,6 +233,15 @@ class Archive(BuiltFixture, Base):
                          sorted(cards.column("oracle_id").to_pylist()))
         self.assertEqual(cards.schema.field("mana_value").type, pyarrow.int64())
         self.assertEqual(cards.schema.field("name").type, pyarrow.string())
+        # the real keyproof_cards view: its seven aggregate/CASE columns are
+        # CAST AS INTEGER in the view DDL, so each declares INT and reaches
+        # parquet as int64 (an untyped expression column used to abort the
+        # publish job in _base_type with "column has no declared SQLite type")
+        self.assertIn("keyproof_cards", names)
+        kp = read_parquet(members["keyproof_cards.parquet"])
+        self.assertEqual(kp.schema.field("oracle_id").type, pyarrow.string())
+        for col in ("keys", "agreed", "diagnosed", "diverged", "owed", "excluded", "proven"):
+            self.assertEqual(kp.schema.field(col).type, pyarrow.int64(), col)
         # deterministic: same db, same parquet bytes even to a different
         # basename (the gzip header must not name the output path; only the
         # manifest's asset field, which is designed to name the archive,
@@ -236,7 +267,7 @@ class Archive(BuiltFixture, Base):
         p = edge_db(os.path.join(self.tmp, "edge.sqlite"))
         out = os.path.join(self.tmp, "edge.tar.gz")
         manifest = parquet_export.export(p, out)
-        self.assertEqual([t["name"] for t in manifest["tables"]], ["keys", "loose", "pick"])
+        self.assertEqual([t["name"] for t in manifest["tables"]], ["keys", "loose", "pick", "tally"])
         members = read_archive(out)
         keys = read_parquet(members["keys.parquet"])
         # declared-key order ('a', then 'b'), NULLs are parquet nulls
@@ -250,6 +281,16 @@ class Archive(BuiltFixture, Base):
         self.assertEqual(loose.column("d").to_pylist(), [None, 7, None])
         pick = read_parquet(members["pick.parquet"])
         self.assertEqual(pick.column("a").to_pylist(), ["alpha", "beta"])
+        # the aggregate/CASE view: every expression column is typed from its
+        # CAST declaration (INT -> int64), SUM over a group with no non-NULL
+        # values is a parquet null, CASE 1/0 is an integer
+        tally = read_parquet(members["tally.parquet"])
+        for col in ("n", "total", "big"):
+            self.assertEqual(tally.schema.field(col).type, pyarrow.int64(), col)
+        self.assertEqual(tally.column("a").to_pylist(), ["a", "x", "y"])
+        self.assertEqual(tally.column("n").to_pylist(), [1, 1, 1])
+        self.assertEqual(tally.column("total").to_pylist(), [None, None, 7])
+        self.assertEqual(tally.column("big").to_pylist(), [0, 0, 1])
 
     def test_cli(self):
         db = self.build()

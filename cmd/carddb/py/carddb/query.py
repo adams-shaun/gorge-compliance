@@ -929,13 +929,22 @@ SCOPE_CARDS_VIEW_SQL = (
 
 # Per-key proof (xproof). A card is proven when it is not curated-excluded, at least one key
 # agrees or is diagnosed, and every key that is not `excluded` agrees or is diagnosed.
+# Every aggregate/CASE expression is CAST AS INTEGER: SQLite gives a view column that is a bare
+# expression no declared type at all (PRAGMA table_info reports ''), and the parquet exporter
+# types its columns from declarations only, never from values. SQLite reports the declared type
+# of CAST(x AS INTEGER) as `INT`; the CI parquet exporter maps declared types by SQLite
+# affinity, so it accepts that spelling.
 KEYPROOF_CARDS_VIEW_SQL = (
-    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, COUNT(*) AS keys, "
-    "SUM(k.state='agreed') AS agreed, SUM(k.state='diagnosed') AS diagnosed, "
-    "SUM(k.state='diverged') AS diverged, SUM(k.state='owed') AS owed, SUM(k.state='excluded') AS excluded, "
-    "CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
+    "CREATE VIEW keyproof_cards AS SELECT k.oracle_id AS oracle_id, "
+    "CAST(COUNT(*) AS INTEGER) AS keys, "
+    "CAST(SUM(k.state='agreed') AS INTEGER) AS agreed, "
+    "CAST(SUM(k.state='diagnosed') AS INTEGER) AS diagnosed, "
+    "CAST(SUM(k.state='diverged') AS INTEGER) AS diverged, "
+    "CAST(SUM(k.state='owed') AS INTEGER) AS owed, "
+    "CAST(SUM(k.state='excluded') AS INTEGER) AS excluded, "
+    "CAST(CASE WHEN k.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions) "
     "AND SUM(k.state IN ('agreed','diagnosed'))>0 "
-    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS proven "
+    "AND SUM(k.state NOT IN ('agreed','diagnosed','excluded'))=0 THEN 1 ELSE 0 END AS INTEGER) AS proven "
     "FROM keyproof k GROUP BY k.oracle_id")
 
 PROVEN_KEYS_VIEW_SQL = ("CREATE VIEW proven_keys AS SELECT c.* FROM cards c "
