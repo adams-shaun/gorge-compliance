@@ -16,7 +16,13 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-const regressionsHeader = "card\tkey\twitness\tcheckpoint\tfield\tprio"
+const (
+	regressionsHeader = "card\tkey\twitness\tcheckpoint\tfield\tprio"
+	replayHeader      = "card\tkey\twitness\tresult\tcheckpoint\tfield"
+)
+
+// replayResult is one (witness, key it names) row of replay.tsv.
+type replayResult struct{ card, key, witness, result, checkpoint, field string }
 
 type multiFlag []string
 
@@ -31,13 +37,18 @@ func runReplayWitness(args []string) error {
 	fs := flag.NewFlagSet("replay-witness", flag.ExitOnError)
 	var witnesses multiFlag
 	fs.Var(&witnesses, "witness", "witness .jsonl file (repeatable; decompress the release asset first)")
+	witnessDir := fs.String("witness-dir", "", "dir of witness .jsonl files, read in file-name order")
 	dir := fs.String("cards", ".cards", "corpus dir")
 	measured := fs.String("measured", "", "measurement date YYYY-MM-DD (required: no clock is read)")
 	sha := fs.String("gorge-sha", "", "gorge commit stamped on rows (default the first 12 of GORGE_PIN)")
 	out := fs.String("out", "", "output dir, outside the repository (required)")
 	fs.Parse(args)
-	if len(witnesses) == 0 || *measured == "" || *out == "" {
-		return fmt.Errorf("replay-witness needs -witness, -measured and -out")
+	if *measured == "" || *out == "" {
+		return fmt.Errorf("replay-witness needs -witness or -witness-dir, -measured and -out")
+	}
+	paths, err := witnessPaths(witnesses, *witnessDir)
+	if err != nil {
+		return err
 	}
 	if *sha == "" {
 		if b, err := os.ReadFile("GORGE_PIN"); err == nil {
@@ -49,7 +60,26 @@ func runReplayWitness(args []string) error {
 	if err != nil {
 		return err
 	}
-	return replayWitnessIn(reg, *dir, witnesses, *out, *measured, *sha)
+	return replayWitnessIn(reg, *dir, paths, *out, *measured, *sha)
+}
+
+// witnessPaths is the replay list: the -witness flags in the order given,
+// then every *.jsonl file of dir in file-name order. At least one witness is
+// required.
+func witnessPaths(witnesses []string, dir string) ([]string, error) {
+	paths := append([]string(nil), witnesses...)
+	if dir != "" {
+		found, err := filepath.Glob(filepath.Join(dir, "*.jsonl"))
+		if err != nil {
+			return nil, err
+		}
+		sort.Strings(found)
+		paths = append(paths, found...)
+	}
+	if len(paths) == 0 {
+		return nil, fmt.Errorf("replay-witness needs -witness or -witness-dir, -measured and -out")
+	}
+	return paths, nil
 }
 
 type rwKey struct {
@@ -72,6 +102,7 @@ func replayWitnessIn(reg *cards.Registry, cardsDir string, paths []string, out, 
 	keys := map[classify.Use]*rwKey{}
 	type regression struct{ card, key, witness, checkpoint, field string }
 	var regs []regression
+	var results []replayResult
 	nWit, nHeld, nChanged, nErr := 0, 0, 0, 0
 	for _, path := range paths {
 		line := 0
@@ -98,6 +129,18 @@ func replayWitnessIn(reg *cards.Registry, cardsDir string, paths []string, out, 
 			}
 			for _, u := range w.Keys {
 				use := classify.Use{Card: u.Card, Key: u.Key}
+				result := "harness"
+				switch state {
+				case "held":
+					result = "held"
+				case "changed":
+					result = "changed"
+				}
+				cpCell, fieldCell := "-", "-"
+				if result == "changed" {
+					cpCell, fieldCell = dash(cp), dash(field)
+				}
+				results = append(results, replayResult{u.Card, u.Key, w.ID, result, cpCell, fieldCell})
 				k := keys[use]
 				if k == nil {
 					k = &rwKey{refs: map[string]string{}}
@@ -179,6 +222,24 @@ func replayWitnessIn(reg *cards.Registry, cardsDir string, paths []string, out, 
 		return err
 	}
 	if err := writeAtomic(filepath.Join(out, "regressions.tsv"), rb.Bytes()); err != nil {
+		return err
+	}
+	sort.Slice(results, func(i, j int) bool {
+		x, y := results[i], results[j]
+		if x.card != y.card {
+			return x.card < y.card
+		}
+		if x.key != y.key {
+			return x.key < y.key
+		}
+		return x.witness < y.witness
+	})
+	var pb bytes.Buffer
+	pb.WriteString(replayHeader + "\n")
+	for _, r := range results {
+		fmt.Fprintf(&pb, "%s\t%s\t%s\t%s\t%s\t%s\n", r.card, r.key, r.witness, r.result, r.checkpoint, r.field)
+	}
+	if err := writeAtomic(filepath.Join(out, "replay.tsv"), pb.Bytes()); err != nil {
 		return err
 	}
 	fmt.Printf("replay-witness %s: %d witnesses, %d held, %d changed, %d harness; keys agreed %d, diverged %d\n",

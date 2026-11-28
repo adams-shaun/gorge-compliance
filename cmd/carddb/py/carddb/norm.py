@@ -36,6 +36,29 @@ def pseudo_id(name):
     return "x:" + hashlib.sha1(norm_name(name).encode("utf-8")).hexdigest()[:16]
 
 
+# A ruling's id has to survive the source's formatting: a typographic quote and
+# its ASCII spelling are the same ruling, and so is the same sentence wrapped
+# differently. Both are folded before hashing; the line-ending canonicalisation
+# is the catalogue's oracle_sha normalisation (catalogue.normalise_text).
+_QUOTES = str.maketrans({
+    "\u201c": '"', "\u201d": '"', "\u201e": '"', "\u201f": '"',
+    "\u2018": "'", "\u2019": "'", "\u201a": "'", "\u201b": "'",
+})
+
+
+def normalised_ruling_text(text):
+    """The text a ruling id covers: catalogue-normalised, quotes folded, whitespace collapsed."""
+    from .catalogue import normalise_text  # lazy: catalogue imports store, which imports norm's siblings
+    t = normalise_text([{"text": str(text)}])
+    return " ".join(t.translate(_QUOTES).split())
+
+
+def ruling_id(oracle_id, published, text):
+    """First 12 hex of sha256("<oracle_id>\\n<published>\\n<normalised text>")."""
+    key = "\n".join((str(oracle_id), str(published), normalised_ruling_text(text)))
+    return hashlib.sha256(key.encode("utf-8")).hexdigest()[:12]
+
+
 def name_keys(name):
     """Every norm_name a card name answers to: the front face (what gorge keys
     on) and, for `Front // Back`, the back face."""

@@ -229,6 +229,48 @@ func TestPrivateTableRefusedInPublicTree(t *testing.T) {
 	}
 }
 
+func TestRulingsStayPrivate(t *testing.T) {
+	s := loadReal(t)
+
+	// The private table itself never reaches a public tree.
+	root := validTree(t, s, Public)
+	write(t, root, "rulings.tsv", shard(s.Tables["rulings"], Private, 2))
+	vs, err := Boundary(s, root)
+	mustFail(t, vs, err, `private table "rulings"`)
+
+	// The hard-coded private-name list holds even against a schema edited to
+	// call every rulings column public.
+	sdir := t.TempDir()
+	copyTree(t, realSchema, sdir)
+	write(t, sdir, "v1/rulings.tsv", strings.ReplaceAll(read(t, sdir, "v1/rulings.tsv"), "\tprivate\t", "\tpublic\t"))
+	s2, err := LoadSchema(sdir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	vs, err = Boundary(s2, validTree(t, s2, Public))
+	mustFail(t, vs, err, `private table "rulings"`)
+
+	// The public mirror holds ids, dates and sources, and no text.
+	root = validTree(t, s, Public)
+	write(t, root, "ruling_refs.tsv", shard(s.Tables["ruling_refs"], Public, 2))
+	if vs, err = Validate(s, root, Public); err != nil || len(vs) != 0 {
+		t.Fatalf("ruling_refs validate: %v %v", err, msgs(vs))
+	}
+	if vs, err = Boundary(s, root); err != nil || len(vs) != 0 {
+		t.Fatalf("ruling_refs boundary: %v %v", err, msgs(vs))
+	}
+
+	// A public shard cannot smuggle the text back in as an extra column.
+	lines := strings.Split(strings.TrimSuffix(shard(s.Tables["ruling_refs"], Public, 2), "\n"), "\n")
+	lines[1] += "\tcomment"
+	for i := 2; i < len(lines); i++ {
+		lines[i] += "\t-"
+	}
+	write(t, root, "ruling_refs.tsv", strings.Join(lines, "\n")+"\n")
+	vs, err = Boundary(s, root)
+	mustFail(t, vs, err, `column "comment" is not declared public in table "ruling_refs"`)
+}
+
 func TestPrivateColumnInPublicShardFails(t *testing.T) {
 	s := loadReal(t)
 	// A banned name on a public table, whatever the schema says.

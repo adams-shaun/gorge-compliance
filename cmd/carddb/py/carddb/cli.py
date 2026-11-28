@@ -321,15 +321,19 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             if not pub.exists():
                 raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
             try:
-                changed, counts, nev = dirac_mod.run(pub, repo=args.repo, gorge=args.gorge_dir,
-                                                     writer=args.source or "ci", version=args.version,
-                                                     ran=args.measured)
+                r = dirac_mod.run_report(pub, repo=args.repo, gorge=args.gorge_dir,
+                                         writer=args.source or "ci", version=args.version,
+                                         ran=args.measured)
             except dirac_mod.Unavailable as e:
                 print("::warning::carddb dirac skipped, the last dirac rows are kept: %s" % e, file=stderr)
                 print("carddb dirac: skipped (%s); dirac rows unchanged" % type(e).__name__, file=stdout)
                 return 0
-            parts = " ".join("%s=%d" % kv for kv in sorted(counts.items()))
-            print("carddb dirac: %d rows changed; %s; %d evidence rows" % (changed, parts, nev), file=stdout)
+            if r.stale:
+                print("dirac: snapshot at %s, GORGE_PIN %s: %d rows from the snapshot may be stale"
+                      % (r.snapshot_pin, r.pin, r.stale_rows), file=stdout)
+            parts = " ".join("%s=%d" % kv for kv in sorted(r.counts.items()))
+            print("carddb dirac: %d rows changed; %s; %d evidence rows" % (r.changed, parts, r.evidence),
+                  file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)

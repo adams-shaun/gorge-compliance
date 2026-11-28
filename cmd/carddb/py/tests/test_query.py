@@ -7,6 +7,7 @@ import unittest
 from carddb import build as build_mod
 from carddb import keylegs
 from carddb import query as query_mod
+from carddb import schema as schema_mod
 from carddb import shard
 from carddb.boundary import boundary_tree
 from carddb.store import Store
@@ -782,3 +783,61 @@ class TestLegacyNumbersHold(QueryFixture):
 
     def test_proven_keys(self):
         self.check("query_proven_keys.txt", self.run_cli("proven", "--by", "keys").stdout)
+
+
+class TestScopeCards(Base):
+    """The proof denominator: Commander-legal paper cards minus curated exclusions."""
+
+    def scope_build(self, exclusions=(), schema=None):
+        a = self.machine("scope", init=True)
+        a.put("cards", [
+            {"oracle_id": OID_A, "name": "In Scope", "layout": "normal", "mana_value": 1,
+             "type_line": "Instant", "paper": True},
+            {"oracle_id": OID_B, "name": "Digital Only", "layout": "normal", "mana_value": 1,
+             "type_line": "Instant", "paper": False},
+            {"oracle_id": OID_C, "name": "Modern Only", "layout": "normal", "mana_value": 1,
+             "type_line": "Instant", "paper": True},
+            {"oracle_id": OID_D, "name": "Curated Out", "layout": "normal", "mana_value": 1,
+             "type_line": "Sorcery", "paper": True},
+        ], writer="catalogue")
+        if schema is None or "legality" in schema.tables:
+            a.put("legality", [
+                {"oracle_id": OID_A, "format": "commander", "status": "legal"},
+                {"oracle_id": OID_B, "format": "commander", "status": "legal"},
+                {"oracle_id": OID_C, "format": "modern", "status": "legal"},
+                {"oracle_id": OID_D, "format": "commander", "status": "legal"},
+            ], writer="catalogue")
+        src = os.path.join(self.tmp, "scope-src")
+        write(os.path.join(src, "carddb/curated/exclusions.tsv"),
+              "#carddb curated/exclusions v1\noracle_id\treason\n" +
+              "".join("%s\t%s\n" % (r["oracle_id"], r["reason"]) for r in exclusions))
+        out = os.path.join(self.tmp, "scope.sqlite")
+        build_mod.build(out, schema or self.schema, a.dir, None,
+                        build_mod.read_committed(directory=src))
+        return out
+
+    def test_scope_view_in_scope_is_paper_commander_legal_and_not_excluded(self):
+        db = self.scope_build(exclusions=[{"oracle_id": OID_D, "reason": "ante"}])
+        conn = sqlite3.connect(db)
+        self.addCleanup(conn.close)
+        self.assertEqual([r[1] for r in conn.execute("PRAGMA table_info(scope_cards)")],
+                         ["oracle_id", "name"])
+        self.assertEqual(conn.execute("SELECT oracle_id, name FROM scope_cards").fetchall(),
+                         [(OID_A, "In Scope")])
+        r = self.cli(self.tmp, "export", "scope", "--tsv", "--db", db)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.splitlines()[1:], ["oracle_id\tname", "%s\tIn Scope" % OID_A])
+
+    def test_build_without_legality_has_no_scope_view(self):
+        schema = schema_mod.Schema(
+            self.schema.version,
+            {k: v for k, v in self.schema.tables.items() if k != "legality"},
+            self.schema.root)
+        db = self.scope_build(schema=schema)
+        conn = sqlite3.connect(db)
+        self.addCleanup(conn.close)
+        self.assertIsNone(conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='view' AND name='scope_cards'").fetchone())
+        r = self.cli(self.tmp, "export", "scope", "--tsv", "--db", db)
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("no scope_cards view", r.stderr)

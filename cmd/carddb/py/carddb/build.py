@@ -278,11 +278,15 @@ def _derived(conn, schema, texts):
     # Imported here: query imports this module for `q`/`sql_name`, so a
     # module-level import would be circular.
     from .query import (KEYPROOF_CARDS_VIEW_SQL, KEYPROOF_KEYS_VIEW_SQL, PROVEN_KEYS_VIEW_SQL,
-                        PROVEN_VIEW_SQL)
+                        PROVEN_VIEW_SQL, SCOPE_CARDS_VIEW_SQL)
     conn.execute(PROVEN_VIEW_SQL)
     conn.execute(KEYPROOF_KEYS_VIEW_SQL)
     conn.execute(KEYPROOF_CARDS_VIEW_SQL)
     conn.execute(PROVEN_KEYS_VIEW_SQL)
+    # Scope needs the legality table. A partial build without it has no
+    # denominator; readers report the missing view instead of guessing.
+    if conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='legality'").fetchone():
+        conn.execute(SCOPE_CARDS_VIEW_SQL)
 
 
 def dump_text(conn):

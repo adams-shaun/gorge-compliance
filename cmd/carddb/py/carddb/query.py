@@ -126,7 +126,7 @@ _PREFERRED_SECTIONS = (
 def _section_order(conn):
     present = [t for t in _PREFERRED_SECTIONS if _has_table(conn, t)]
     known = set(present) | {"cards", "card_names", "card_fts", "proven", "proven_keys", "keyproof_cards",
-                              "keyproof_keys", "build_meta"}
+                              "keyproof_keys", "scope_cards", "build_meta"}
     rest = [t for t in _tables(conn)
             if t not in known and not t.startswith("src_") and not t.startswith("card_fts_")
             and not t.startswith("_meta_") and "oracle_id" in _columns(conn, t)]
@@ -830,14 +830,22 @@ def run_sql(conn, args, out):
 
 # ------------------------------------------------------------- export
 
+# The proof denominator has one public name; the view it reads is `scope_cards`
+# (defined here, created by build._derived only when the build carries legality).
+_EXPORT_VIEW_ALIASES = {"scope": "scope_cards"}
+
+
 def _export_table(conn, view, schema):
     present = set(_tables(conn))
-    if view in present:
-        return view
-    if view in schema.tables:
-        name = sql_name(view)
-        if name in present:
-            return name
+    name = _EXPORT_VIEW_ALIASES.get(view, view)
+    if name in present:
+        return name
+    if name in schema.tables:
+        sql = sql_name(name)
+        if sql in present:
+            return sql
+    if view in _EXPORT_VIEW_ALIASES:
+        raise QueryError("export: this build has no %s view (built without a legality table)" % name)
     raise QueryError("export: unknown view %r (try a schema table, proven, or a table in the file)" % view)
 
 
@@ -933,6 +941,15 @@ KEYPROOF_KEYS_VIEW_SQL = (
        WHEN SUM(k.leg='forge' AND k.state='agreed') > 0 THEN 'F' END AS refs,
   MAX(k.sig) AS sig, MAX(k.ticket) AS ticket
 FROM keyproof k WHERE k.leg IN ('xmage','forge','cite') GROUP BY k.oracle_id, k."key"''')
+
+# The proof denominator: every Commander-legal paper card not on the committed
+# out-of-scope list. `carddb export scope --tsv` is the seed's input.
+SCOPE_CARDS_VIEW_SQL = (
+    "CREATE VIEW scope_cards AS SELECT c.oracle_id AS oracle_id, c.name AS name FROM cards c "
+    "WHERE c.paper = 1 "
+    "AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id = c.oracle_id "
+    "AND l.format = 'commander' AND l.status = 'legal') "
+    "AND c.oracle_id NOT IN (SELECT oracle_id FROM curated_exclusions)")
 
 # Per-key proof (xproof). A card is proven when it is not curated-excluded, at least one key
 # agrees or is diagnosed, and every key that is not `excluded` agrees or is diagnosed.

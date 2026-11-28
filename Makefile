@@ -1223,6 +1223,7 @@ smoke:
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/check_fork_pins_smoke.sh
 	bash ops/scripts/tests/check_forge_ref_in_driver_smoke.sh
+	bash ops/scripts/tests/gorge_pin_check_smoke.sh
 	bash ops/scripts/tests/forge_driver_follow_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
