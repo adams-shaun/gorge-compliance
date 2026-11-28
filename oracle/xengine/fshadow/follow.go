@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"slices"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
@@ -144,6 +145,10 @@ type Result struct {
 	// discard) from the next snapshot line: the offered cards gone from the
 	// seat's hand there are the ones Forge took.
 	HandPicks int `json:"hand_picks,omitempty"`
+	// DiscardElections counts the Chooses that answered a discard's "unless"
+	// election "ordinary" (the full count, not one card of a type) from the
+	// next snapshot line.
+	DiscardElections int `json:"discard_elections,omitempty"`
 	// ArrivalPicks counts the Chooses that picked cards moving into a hand (a
 	// dig's take, a graveyard return, a bounced land) from the next snapshot
 	// line: the offered cards new in their owner's hand there are the ones
@@ -764,6 +769,9 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// options in offered order -- and consume no line; Forge's real
 		// choice, if it differs, shows at the next snapshot.
 		if in, ok := f.mayShuffleChoose(d); ok {
+			return in, true
+		}
+		if in, ok := f.discardElection(d); ok {
 			return in, true
 		}
 		if in, ok := f.cardPickChoose(d); ok {
@@ -2069,6 +2077,56 @@ func (f *follower) mayShuffleChoose(d *decision.Decision) (decision.Intent, bool
 	}
 	f.res.Chooses++
 	return decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{pick}}, true
+}
+
+// discardElection answers "ordinary" to gorge's "discard_unless" election
+// (Thirst for Knowledge: "discard two cards unless you discard an artifact
+// card"), which Forge's recorder writes no ask line for, only where the next
+// snapshot rules "unless" out: at least the ordinary count of cards left the
+// seat's hand, and no hand card of the ability's UnlessType$ is among them or
+// new in the seat's graveyard or exile (where a discard shows even when a
+// card of that name is drawn after it). The count alone is no evidence: after
+// an "unless" discard a card also leaves a hand by being cycled, cast, paid
+// as a cost or discarded again. Everything else keeps the default, "unless",
+// including an ordinary discard that takes a card of that type, which the
+// snapshot cannot tell from "unless" and one of those departures.
+func (f *follower) discardElection(d *decision.Decision) (decision.Intent, bool) {
+	if d.ResumeKind != "discard_unless" || d.ResumeSA == nil || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	ordinary := slices.IndexFunc(d.Options, func(o decision.Option) bool { return o.Kind == "ordinary" })
+	count, err := strconv.Atoi(strings.TrimSpace(d.ResumeSA.ParamStr(cards.PKNumCards)))
+	snap := f.nextSnapshot()
+	if ordinary < 0 || err != nil || snap == nil {
+		return decision.Intent{}, false
+	}
+	now := Snapshot(f.e, "")
+	before, ok := snapPlayer(&now, int(d.Player))
+	after, ok2 := snapPlayer(snap, int(d.Player))
+	if !ok || !ok2 {
+		return decision.Intent{}, false
+	}
+	hand := f.e.G.Zone(state.ZHand, d.Player)
+	gone := surplus(before.Hand, after.Hand)
+	if need := min(count, len(hand)); need < 1 || len(gone) < need {
+		return decision.Intent{}, false
+	}
+	moved := slices.Concat(gone, surplus(after.Graveyard, before.Graveyard), surplus(after.Exile, before.Exile))
+	unless := strings.Split(d.ResumeSA.ParamStr(cards.PKUnlessType), ",")
+	for _, id := range hand {
+		if slices.Contains(moved, objName(f.e.G.Obj(id))) && slices.ContainsFunc(unless, func(spec string) bool {
+			return effects.MatchesSpecFrom(f.e.G, strings.TrimSpace(spec), id, d.Player, d.Source)
+		}) {
+			return decision.Intent{}, false
+		}
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{ordinary}}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.DiscardElections++
+	return in, true
 }
 
 // libraryPickChoose answers a pick of library cards (a library search's

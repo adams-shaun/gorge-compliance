@@ -40,7 +40,10 @@
 // (Result.FieldPicks); a card a logged cast or land play moves before that
 // snapshot is no pick. Each is read only where the ask itself sends the
 // chosen cards that way and leaves the others behind; what it does not say, or
-// no later line shows, is answered by default.
+// no later line shows, is answered by default. The election gorge poses ahead
+// of an "unless you discard a ..." discard is answered "ordinary" where the
+// next snapshot rules the one-card discard out (Result.DiscardElections), and
+// by default ("unless") otherwise.
 //
 // Forge's recorder writes one target ask over a whole sub-ability chain, with
 // its targets split by targeting part ("target_slots"), while gorge asks each
