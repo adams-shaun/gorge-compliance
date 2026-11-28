@@ -1,9 +1,10 @@
 """carddb command line (python3 -I cmd/carddb/main.py <verb>).
 
-  put TABLE [--source ID] [--version V] [--if-absent] [--refresh COLS]
+  put TABLE [--source ID] [--version V] [--if-absent] [--refresh COLS] [--prune-seed]
                                         rows from stdin: TSV, first line the column names; --if-absent adds only
                                         rows whose key is not stored yet (--refresh COLS: the stored row still
-                                        takes those columns from the input)
+                                        takes those columns from the input); --prune-seed (keyproof, the whole
+                                        seed file) deletes the untried seed rows whose key the input no longer names
   ingest catalogue --mtgjson FILE         MTGJSON AllPrintings -> the catalogue tables, full snapshot
   ingest status --status-a FILE --meta FILE [--status-b FILE]
                                         oraclediff status output -> cert_sets status columns (docs site data)
@@ -21,6 +22,8 @@
   dirac [--repo DIR] [--gorge-dir DIR] [--source ID] [--version V] [--measured DATE]
                                         gorge's dirac support lists + the gaps snapshot -> support, evidence
                                         rows and the lockstep leg of keyproof
+  scenarios [--repo DIR] [--source ID] [--version V] [--measured DATE]
+                                        hand and translated XMage scenario outcomes per card -> evidence rows
   inclusion --from FILE --sample NAME [--cards TSV] [--out PATH]
                                         a deck sample's per-card table -> carddb/curated/commander-inclusion.tsv
   size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
@@ -53,6 +56,7 @@ from . import keylegs as keylegs_mod
 from . import merge as merge_mod
 from . import query as query_mod
 from . import release as release_mod
+from . import scenarios as scenarios_mod
 from . import shard
 from .boundary import boundary_tree
 from .norm import Resolver
@@ -75,6 +79,9 @@ def _parser():
                         "(the keyproof seed put); with --refresh the stored row still takes those columns")
     p.add_argument("--refresh", metavar="COLS",
                    help="with --if-absent: comma-separated column names the stored row takes from the input row")
+    p.add_argument("--prune-seed", action="store_true",
+                   help="keyproof only, stdin the whole seed file: also delete the stored seed rows still owed as "
+                        "untried or not-in-corpus whose key the input does not name")
     p = sub.add_parser("ingest")
     p.add_argument("source", choices=("catalogue", "status"))
     p.add_argument("--mtgjson", metavar="FILE", help="catalogue: MTGJSON AllPrintings.json or .json.gz")
@@ -127,6 +134,13 @@ def _parser():
     p.add_argument("--version", help="writer version recorded in _meta/writers")
     p.add_argument("--measured", metavar="YYYY-MM-DD",
                    help="the support rows' measured date (default $CARDDB_NOW, else today UTC)")
+    p = sub.add_parser("scenarios")
+    p.add_argument("--repo", help="gorge-compliance checkout holding scenarios/ and cmd/xmageport/known_bugs.tsv"
+                                  " (default: this one)")
+    p.add_argument("--source", help="writer id recorded in _meta/writers (default scenario)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="date recorded in _meta/writers (default $CARDDB_NOW or today, UTC)")
     p = sub.add_parser("inclusion")
     p.add_argument("--from", dest="src", required=True, metavar="FILE",
                    help="the sample's per-card table: card decks rate rate_precon rate_casual rate_cedh rate_ranking")
@@ -163,6 +177,7 @@ def _parser():
         ("need", ()),
         ("proof", ()),
         ("deck", (("deck_id", {}),)),
+        ("headline", ()),
         ("freshness", ()),
         ("sql", (("query", {}),)),
         ("export", (("view", {}),)),
@@ -199,6 +214,8 @@ def _parser():
                         "owed and diverged keys: the keys to replay for another engine's credit")
     p = sub.choices["proof"]
     p.add_argument("--set", required=True, metavar="SET")
+    p = sub.choices["headline"]
+    p.add_argument("--now", help="ISO date or timestamp to judge leg ages at (default $CARDDB_NOW or now)")
     p = sub.choices["freshness"]
     p.add_argument("--tick", action="store_true", help="print only `!!` lines")
     p.add_argument("--public-dir", help="the data branch clone (default $CARDDB_HOME/public|private)")
@@ -212,13 +229,15 @@ def _parser():
     return ap
 
 
-def _read_rows(stream):
+def _read_rows(stream, allow_empty=False):
     lines = stream.read().split("\n")
     if lines and lines[-1] == "":
         lines.pop()
     if lines and lines[0].startswith("#carddb "):
         lines.pop(0)
     if not lines:
+        if allow_empty:  # --prune-seed: no input is a batch of no rows, for the partial-seed refusal to judge
+            return []
         raise StoreError("put: no column header line on stdin")
     names = lines[0].split("\t")
     rows = []
@@ -260,13 +279,20 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                 return 1
             return 0
         if args.verb == "put":
+            if args.prune_seed and args.table != keylegs_mod.TABLE:
+                raise StoreError("put: --prune-seed applies to the %s table only" % keylegs_mod.TABLE)
             t = schema.tables.get(args.table)
             k = PRIVATE if t is not None and t.is_private() and not args.table.startswith("_meta/") else PUBLIC
             refresh = tuple(c.strip() for c in args.refresh.split(",") if c.strip()) if args.refresh else ()
-            n = Store(k, home=args.home, schema=schema).put(args.table, _read_rows(stdin), writer=args.source,
-                                                              version=args.version, raw=True,
-                                                              if_absent=args.if_absent, refresh=refresh)
-            print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
+            store = Store(k, home=args.home, schema=schema)
+            n = store.put(args.table, _read_rows(stdin, allow_empty=args.prune_seed), writer=args.source,
+                          version=args.version, raw=True, if_absent=args.if_absent, refresh=refresh,
+                          prune_seed=args.prune_seed)
+            if args.prune_seed:
+                print("carddb put %s: %d rows changed, %d seed rows pruned, %d orphan keys" % (
+                    args.table, n, store.last_pruned, store.last_orphans), file=stdout)
+            else:
+                print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
             return 0
         if args.verb == "migrate":
             pub = Store(PUBLIC, home=args.home, schema=schema)
@@ -357,6 +383,16 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                         "%(unmatched_unused)d unmatched_unused, 2-seat %(seats2)d, 4-seat %(seats4)d" % r.lockstep)
             print("carddb dirac: %d rows changed; %s; %d evidence rows; %s"
                   % (r.changed, parts, r.evidence, lockstep), file=stdout)
+            return 0
+        if args.verb == "scenarios":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            r = scenarios_mod.run(pub, repo=args.repo, measured=args.measured,
+                                  writer=args.source or scenarios_mod.WRITER, version=args.version)
+            parts = " ".join("%s:%s=%d" % (s, o, n) for (s, o), n in sorted(r["outcomes"].items()))
+            print("carddb scenarios: %d rows changed; %s; %d unresolved names skipped"
+                  % (r["changed"], parts, len(r["unresolved"])), file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)
