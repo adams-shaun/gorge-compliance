@@ -1,0 +1,48 @@
+{
+ "card": "Agony Warp",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "145663700185",
+ "scenarios": [
+  {
+   "name": "same-creature-twice-across-two-target-instances",
+   "cr": [
+    "601.2c"
+   ],
+   "why": "The Warp says 'target' in two separate sentences, so the same creature can be chosen for both. A 2/2 that gets -3/-0 and -0/-3 has zero toughness and dies.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Agony Warp"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Agony Warp",
+     "mana": "UB",
+     "targets": [
+      "p1:Grizzly Bears",
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

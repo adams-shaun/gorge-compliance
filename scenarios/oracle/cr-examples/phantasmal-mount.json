@@ -1,0 +1,84 @@
+{
+ "card": "Phantasmal Mount",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "5758785e9661",
+ "scenarios": [
+  {
+   "name": "mount-leaving-after-resolution-sacrifices-the-creature",
+   "cr": [
+    "603.7a"
+   ],
+   "why": "The ability resolves first, then Shock kills the Mount. The delayed trigger already exists, so it fires and the Bears are sacrificed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Phantasmal Mount",
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Shock",
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Phantasmal Mount",
+     "ability": "gets +1/+1",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Grizzly Bears",
+       "zone": "battlefield",
+       "pt": "3/3"
+      }
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Shock",
+     "mana": "R",
+     "targets": [
+      "p0:Phantasmal Mount"
+     ]
+    },
+    {
+     "op": "resolve",
+     "expect": [
+      {
+       "card": "p0:Phantasmal Mount",
+       "zone": "graveyard"
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

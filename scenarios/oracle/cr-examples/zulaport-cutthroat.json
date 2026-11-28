@@ -1,0 +1,62 @@
+{
+ "card": "Zulaport Cutthroat",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "8f9a50927e11",
+ "scenarios": [
+  {
+   "name": "the-dying-source-still-sees-its-own-death",
+   "cr": [
+    "603.10a"
+   ],
+   "why": "The sweeper destroys the Cutthroat and the Bear at once. The death trigger looks back to the board before the sweep, so the Cutthroat counts its own death as well as the Bear's.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Zulaport Cutthroat",
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Wrath of God"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Wrath of God",
+     "mana": "WWCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p0": 22,
+      "p1": 18
+     }
+    },
+    {
+     "card": "p0:Zulaport Cutthroat",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}
