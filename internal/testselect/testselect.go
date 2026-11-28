@@ -91,8 +91,10 @@ func Packages(fsys fs.FS, changed []string) ([]string, error) {
 		}
 		if strings.HasPrefix(f, "scenarios/") {
 			// The hand-authored and XMage-port corpora are consumed by ./audit,
-			// whatever their own directory contains.
+			// whatever their own directory contains, and replayed at four seats
+			// by ./cmd/padseats, whose record scenarios/padseats.tsv names them.
 			set["./audit"] = struct{}{}
+			set["./cmd/padseats"] = struct{}{}
 		}
 		if strings.HasPrefix(f, forgeDriverFixturePrefix) {
 			// The Forge driver fixtures hold hand-authored requests whose
