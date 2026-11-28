@@ -143,6 +143,11 @@ type Result struct {
 	// discard) from the next snapshot line: the offered cards gone from the
 	// seat's hand there are the ones Forge took.
 	HandPicks int `json:"hand_picks,omitempty"`
+	// ArrivalPicks counts the Chooses that picked cards moving into a hand (a
+	// dig's take, a graveyard return, a bounced land) from the next snapshot
+	// line: the offered cards new in their owner's hand there are the ones
+	// Forge took.
+	ArrivalPicks int `json:"arrival_picks,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -154,8 +159,11 @@ type Result struct {
 	// and writes no target ask.
 	CastTargets int `json:"cast_targets,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
-	// no line for, which the follower answered by default.
+	// no line for.
 	Arranges int `json:"arranges,omitempty"`
+	// ArrangePicks counts the Arranges answered from the next snapshot line's
+	// library, hand and graveyard; the rest were answered by default.
+	ArrangePicks int `json:"arrange_picks,omitempty"`
 	// Optionals counts the optional-trigger yes/no decisions (an
 	// OptionalDecider$ trigger) the log has no line for, which the follower
 	// answered by default (yes).
@@ -642,19 +650,30 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// Forge's recorder logs no modal answer (a charm's modes, a
 		// modal trigger's, a nested Charm): the AI answers through hooks that
 		// write no ask line, so the next line belongs to a later decision.
-		// Answer by default -- the first modes the ask requires, at least
-		// one -- and consume no line; Forge's real choice, if it differs,
-		// shows at the next snapshot.
+		// gorge also poses some card picks as modes (an effect's discard, a
+		// connive's), which the log can still answer. Otherwise answer by
+		// default -- the first modes the ask requires, at least one -- and
+		// consume no line; Forge's real choice, if it differs, shows at the
+		// next snapshot.
+		if distinctCards(d) {
+			if in, ok := f.cardPickChoose(d); ok {
+				return in, true
+			}
+		}
 		return f.defaultModes(d), true
 	}
 	if d.Kind == decision.KArrange {
 		// Forge's recorder logs no scry/surveil/dig-order answer (its
 		// arrangeForScry and arrangeForSurveil hooks write no ask line), so
 		// the log has nothing to match this decision against and the next
-		// line belongs to a later decision. Answer by default -- the
+		// line belongs to a later decision. Read the order from the next
+		// snapshot where it shows; otherwise answer by default -- the
 		// offered cards stay on top in offered order, as many as the ask
-		// allows -- and consume no line; Forge's real choice, if it
+		// allows. Consume no line either way; Forge's real choice, if it
 		// differs, shows at the next library_top snapshot.
+		if in, ok := f.arrangeFromSnapshot(d); ok {
+			return in, true
+		}
 		return f.defaultArrange(d), true
 	}
 	if d.Kind == decision.KTriggerOptional {
@@ -684,16 +703,14 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// asks: a list-pick (a cleanup discard, the legend rule's keep, an
 		// "as this enters" choice, a cost's sacrifice ...) is answered
 		// through hooks that write no ask line, so the next line belongs to
-		// a later decision. Answer by default -- the first Min options in
-		// offered order -- and consume no line; Forge's real choice, if it
-		// differs, shows at the next snapshot.
+		// a later decision. A card pick the log's later lines show is
+		// answered from them; otherwise answer by default -- the first Min
+		// options in offered order -- and consume no line; Forge's real
+		// choice, if it differs, shows at the next snapshot.
 		if in, ok := f.mayShuffleChoose(d); ok {
 			return in, true
 		}
-		if in, ok := f.libraryPickChoose(d); ok {
-			return in, true
-		}
-		if in, ok := f.handLeaveChoose(d); ok {
+		if in, ok := f.cardPickChoose(d); ok {
 			return in, true
 		}
 		return f.defaultChoose(d), true
@@ -1815,6 +1832,295 @@ func (f *follower) handLeaveChoose(d *decision.Decision) (decision.Intent, bool)
 	return in, true
 }
 
+// cardPickChoose answers an unlogged pick of cards from what the log shows
+// Forge did with them: a search's pick from the next shuffle line, a pick out
+// of a hand or into one from the next snapshot line. Each reader matches the
+// offered objects by the zone they are in and declines what it cannot show.
+func (f *follower) cardPickChoose(d *decision.Decision) (decision.Intent, bool) {
+	for _, read := range []func(*decision.Decision) (decision.Intent, bool){
+		f.libraryPickChoose, f.handLeaveChoose, f.handArriveChoose,
+	} {
+		if in, ok := read(d); ok {
+			return in, true
+		}
+	}
+	return decision.Intent{}, false
+}
+
+// distinctCards reports whether every option of d is a different object: a
+// pick of cards, not several modes of one source.
+func distinctCards(d *decision.Decision) bool {
+	seen := map[state.ObjID]bool{}
+	for _, o := range d.Options {
+		if o.Obj == 0 || seen[o.Obj] {
+			return false
+		}
+		seen[o.Obj] = true
+	}
+	return len(d.Options) > 0
+}
+
+// handArriveChoose answers a pick of cards that move into a hand (a dig's
+// "you may put one into your hand", a graveyard return, a bounce land's
+// return) from the next snapshot line: the picked cards are the offered ones
+// whose names are new in their owner's hand there. Answering by default left
+// the card where it was (a "may" pick takes nothing) or took another one
+// (farm cmdr4 DSK-s134 pod-13402 line 209, Satyr Wayfinder; TMT-s23564447
+// pod-2356444702 line 384, Gruul Turf).
+//
+// It applies to any pick whose options are all outside the hands. It answers
+// only when every card new in those hands is offered AND its source holds
+// that many fewer at the snapshot (a card merely drawn under an offered name
+// is no pick), the count is a legal pick count, and the picks validate;
+// anything else falls back to the default.
+func (f *follower) handArriveChoose(d *decision.Decision) (decision.Intent, bool) {
+	if len(d.Options) == 0 || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	for _, o := range d.Options {
+		obj := f.e.G.Obj(o.Obj)
+		if o.Obj == 0 || obj == nil || obj.Zone == state.ZHand {
+			return decision.Intent{}, false
+		}
+	}
+	snap := f.nextSnapshot()
+	if snap == nil {
+		return decision.Intent{}, false
+	}
+	now := Snapshot(f.e, "")
+	// want counts, per owner and name, the cards new in that hand at the
+	// snapshot.
+	type card struct {
+		seat int
+		name string
+	}
+	want := map[card]int{}
+	total := 0
+	counted := map[int]bool{}
+	for _, o := range d.Options {
+		seat := int(f.e.G.Obj(o.Obj).Owner)
+		if counted[seat] {
+			continue
+		}
+		counted[seat] = true
+		after, ok := snapPlayer(snap, seat)
+		before, ok2 := snapPlayer(&now, seat)
+		if !ok || !ok2 {
+			return decision.Intent{}, false
+		}
+		for _, n := range surplus(after.Hand, before.Hand) {
+			want[card{seat, n}]++
+			total++
+		}
+	}
+	// left is how many more cards of a name each source zone can have lost by
+	// the snapshot. A library names only its top, so it is bounded by its
+	// count, whatever the names.
+	type source struct {
+		zone state.Zone
+		card card
+	}
+	left := map[source]int{}
+	var picks []int
+	seen := map[state.ObjID]bool{}
+	for i, o := range d.Options {
+		if seen[o.Obj] {
+			continue
+		}
+		seen[o.Obj] = true
+		obj := f.e.G.Obj(o.Obj)
+		c := card{int(obj.Owner), objName(obj)}
+		if want[c] == 0 {
+			continue
+		}
+		src := source{zone: obj.Zone, card: c}
+		if obj.Zone == state.ZLibrary {
+			src.card.name = ""
+		}
+		n, ok := left[src]
+		if !ok {
+			n = zoneCount(&now, src.zone, c.seat, c.name) - zoneCount(snap, src.zone, c.seat, c.name)
+		}
+		if n <= 0 {
+			left[src] = 0
+			continue
+		}
+		left[src] = n - 1
+		want[c]--
+		picks = append(picks, i)
+	}
+	if total == 0 || len(picks) != total || len(picks) < d.Min || (d.Max > 0 && len(picks) > d.Max) {
+		return decision.Intent{}, false // nothing arrived, an arrival was not offered, or a pick count the ask forbids
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: picks}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Chooses++
+	f.res.ArrivalPicks++
+	return in, true
+}
+
+// snapPlayer is the snapshot's entry for seat.
+func snapPlayer(s *rules.OracleSnapshot, seat int) (rules.OracleSnapPlayer, bool) {
+	for _, p := range s.Players {
+		if p.Seat == seat {
+			return p, true
+		}
+	}
+	return rules.OracleSnapPlayer{}, false
+}
+
+// zoneCount is how many cards seat owns in zone z at snapshot s: those named
+// name, except in a library, whose whole count it is (a snapshot names only
+// its top). A zone a snapshot does not carry counts 0.
+func zoneCount(s *rules.OracleSnapshot, z state.Zone, seat int, name string) int {
+	p, ok := snapPlayer(s, seat)
+	if !ok {
+		return 0
+	}
+	var names []string
+	switch z {
+	case state.ZLibrary:
+		return p.LibraryCount
+	case state.ZGraveyard:
+		names = p.Graveyard
+	case state.ZExile:
+		names = p.Exile
+	case state.ZCommand:
+		names = p.Command
+	case state.ZBattlefield:
+		for _, perm := range s.Permanents {
+			if perm.Owner == seat && !perm.Token {
+				names = append(names, perm.Name)
+			}
+		}
+	}
+	n := 0
+	for _, x := range names {
+		if x == name {
+			n++
+		}
+	}
+	return n
+}
+
+// maxArrangeRead is the most offered cards arrangeFromSnapshot enumerates the
+// orders of (6 cards have 1957 ordered subsets).
+const maxArrangeRead = 6
+
+// arrangeFromSnapshot answers a scry, surveil or top-of-library reorder from
+// the next snapshot line. Forge's recorder writes no ask line for it, but the
+// snapshot names the library's top and count, the hand and the graveyard
+// after it. Answering by default (everything stays on top in order) kept two
+// Islands on top where Forge bottomed them and drew Elvish Piper (farm cmdr4
+// BLB-s131026052 pod-13102605201 line 85, Elven Farsight).
+//
+// It applies to an "arrange" ask over exactly the top cards of one library.
+// Each ordered keep is projected onto that library; it fits when taking as
+// many cards off the top as the count has dropped (draws since) leaves the
+// snapshot's top, and every card new in the hand is among those taken. The
+// fit whose binned cards best show as new in the graveyard answers, the
+// earliest (the default first) on a tie. No fit (a shuffle or another move in
+// between) falls back to the default.
+func (f *follower) arrangeFromSnapshot(d *decision.Decision) (decision.Intent, bool) {
+	n := len(d.Options)
+	if d.ResumeKind != "arrange" || n == 0 || n > maxArrangeRead || f.e == nil || f.e.G == nil {
+		return decision.Intent{}, false
+	}
+	away := d.Options[0].Kind // where the cards not kept on top go
+	if away != "bottom" && away != "graveyard" {
+		return decision.Intent{}, false
+	}
+	first := f.e.G.Obj(d.Options[0].Obj)
+	if first == nil {
+		return decision.Intent{}, false
+	}
+	seat := int(first.Owner)
+	lib := f.e.G.Zone(state.ZLibrary, first.Owner)
+	if len(lib) < n {
+		return decision.Intent{}, false
+	}
+	for i, o := range d.Options {
+		if o.Kind != away || lib[i] != o.Obj {
+			return decision.Intent{}, false
+		}
+	}
+	snap := f.nextSnapshot()
+	if snap == nil {
+		return decision.Intent{}, false
+	}
+	now := Snapshot(f.e, "")
+	after, ok := snapPlayer(snap, seat)
+	before, ok2 := snapPlayer(&now, seat)
+	if !ok || !ok2 || len(after.LibraryTop) == 0 {
+		return decision.Intent{}, false
+	}
+	toHand := surplus(after.Hand, before.Hand)
+	toYard := surplus(after.Graveyard, before.Graveyard)
+	names := make([]string, len(lib))
+	for i, id := range lib {
+		names[i] = objName(f.e.G.Obj(id))
+	}
+	// fit scores one keep, -1 when the snapshot rules it out.
+	fit := func(keep []int) int {
+		var order, binned []string
+		for _, i := range keep {
+			order = append(order, names[i])
+		}
+		order = append(order, names[n:]...)
+		for i := range n {
+			if !slices.Contains(keep, i) {
+				binned = append(binned, names[i])
+			}
+		}
+		if away == "bottom" {
+			order, binned = append(order, binned...), nil
+		}
+		drawn := len(order) - after.LibraryCount
+		if drawn < 0 || drawn+len(after.LibraryTop) > len(order) || !slices.Equal(order[drawn:drawn+len(after.LibraryTop)], after.LibraryTop) {
+			return -1
+		}
+		if len(surplus(toHand, order[:drawn])) > 0 {
+			return -1
+		}
+		return len(binned) - len(surplus(binned, toYard))
+	}
+	hi := min(d.Max, n)
+	var best []int
+	bestScore := -1
+	var walk func(keep []int, size int)
+	walk = func(keep []int, size int) {
+		if len(keep) == size {
+			if s := fit(keep); s > bestScore {
+				best, bestScore = slices.Clone(keep), s
+			}
+			return
+		}
+		for i := range n {
+			if !slices.Contains(keep, i) {
+				walk(append(keep, i), size)
+			}
+		}
+	}
+	for size := hi; size >= d.Min; size-- {
+		walk(make([]int, 0, size), size)
+	}
+	if bestScore < 0 {
+		return decision.Intent{}, false
+	}
+	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: best}
+	if in.Choices == nil {
+		in.Choices = []int{}
+	}
+	if d.Validate(in) != nil {
+		return decision.Intent{}, false
+	}
+	f.res.Arranges++
+	f.res.ArrangePicks++
+	return in, true
+}
+
 // nextSnapshot is the first snapshot line at or after f.pos: with an
 // unlogged decision pending, the state after Forge's answer to it.
 func (f *follower) nextSnapshot() *rules.OracleSnapshot {
@@ -1970,6 +2276,23 @@ func diff(a, b []string) (onlyA, onlyB []string) {
 		}
 	}
 	return onlyA, onlyB
+}
+
+// surplus is the multiset difference a minus b, in a's order.
+func surplus(a, b []string) []string {
+	have := map[string]int{}
+	for _, x := range b {
+		have[x]++
+	}
+	var out []string
+	for _, x := range a {
+		if have[x] > 0 {
+			have[x]--
+			continue
+		}
+		out = append(out, x)
+	}
+	return out
 }
 
 func dedupe(s []string) []string {
