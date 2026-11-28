@@ -58,6 +58,15 @@ they can and can't show.
 A scenario file lives in one directory only: here or in gorge's
 `engine/rules/testdata/oracle/`, which `audit` also reads.
 
+A scenario that restates a worked example of the Comprehensive Rules goes in the `cr-examples/`
+family and restates the example in its own words (never copy the rules text). `cr-examples/LEDGER.tsv`
+has one row per example in the rules text; in the same change that adds the scenario, move that
+example's row from `open` to `covered` and name the scenario as `<file stem>#<scenario name>`.
+`TestCRExampleLedger` fails if a covered row names no scenario that cites the rule, if a scenario
+there is named by no row, or if an `open` row's rule is already cited by a scenario there.
+`scripts/cr_example_ledger.py` diffs the ledger against the rules text by hand when the pinned text
+changes; the rules text itself is never committed here.
+
 ## When a scenario fails
 
 A failure is either a wrong scenario or a gorge bug. Fix a wrong scenario. For a bug, fix gorge if

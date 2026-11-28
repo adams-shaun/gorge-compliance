@@ -1,0 +1,278 @@
+rule	n	status	scenario	note
+101.2	1	open		
+101.4	1	open		
+106.5	1	covered	meteor-crater#no-coloured-permanent-adds-nothing	
+106.6	1	open		
+106.7	1	covered	exotic-orchard#opponent-with-no-lands-adds-nothing	
+107.1b	1	open		
+107.1b	2	covered	viridian-joiner#negative-power-adds-no-mana	
+107.1b	3	covered	chameleon-colossus#negative-power-pump-does-not-make-it-worse	
+107.4e	1	open		
+107.4f	1	open		
+110.5c	1	open		
+111.3	1	covered	jade-mage#saproling-token-is-a-plain-green-1-1	
+111.4	1	covered	dwarven-reinforcements#two-named-dwarf-berserker-tokens	
+111.4	2	covered	minsc-beloved-ranger#boo-is-named-boo-not-hamster-token	
+111.4	3	covered	spitting-image#copy-token-takes-the-copied-name	
+111.11	1	open		
+111.12	1	covered	mimic-vat#no-imprinted-card-no-token	
+112.4	1	open		
+113.2a	1	open		
+113.6k	1	covered	absolver-thrull#haunted-creature-dies-and-the-exiled-thrull-triggers	
+113.6m	1	covered	reassembling-skeleton#graveyard-is-the-only-working-zone	
+113.12	1	covered	muraganda-petroglyphs#flying-aura-turns-the-bonus-off	
+115.1a	1	open		
+115.7e	1	covered	arc-trail#redirect-swaps-the-two-targets	
+118.11	1	covered	psychic-vortex#paying-the-upkeep-with-a-skipped-draw-still-pays	
+118.12	1	covered	standstill#exiled-in-response-so-nobody-draws	
+118.12	2	covered	gather-specimens#dermoplasm-puts-a-morph-under-the-opponent	
+120.4d	1	covered	boon-reflection#lifelink-gain-is-doubled	
+120.4d	2	covered	worship#prevented-damage-plus-life-gain-keeps-worship-idle	
+120.5	1	covered	lightning-bolt#lethal-damage-then-state-based-destruction	
+123.6b	1	out-of-scope		
+123.6c	1	out-of-scope		
+123.6c	2	out-of-scope		
+123.6c	3	out-of-scope		
+201.2b	1	covered	liliana-contract#nameless-face-down-demon-does-not-complete-the-set	
+201.4a	1	not-scenario		The example names a card outside the current game and format; a name choice across the whole card pool is a deck-construction concern, not a played game.
+201.5a	1	covered	gutter-grime#each-ooze-counts-only-its-own-gutter-grime	
+201.5b	1	covered	quicksilver-elemental#gained-regeneration-uses-the-gaining-creatures-name	
+201.5b	2	open		
+201.5b	3	covered	the-ever-changing-dane#sacrificed-bear-becomes-the-new-copy	
+202.2a	1	open		
+202.3	1	open		
+202.3b	1	open		
+202.3b	2	open		
+202.3b	3	open		
+202.3f	1	open		
+202.3f	2	open		
+202.3g	1	open		
+205.1b	1	open		
+205.1b	2	open		
+205.3b	1	open		
+205.3c	1	covered	dryad-arbor#forest-is-a-land-type-and-dryad-a-creature-type	
+205.3e	1	open		
+205.4b	1	open		
+208.2a	1	covered	lost-order-of-jarkeld#outside-play-there-is-no-chosen-player	
+208.3a	1	covered	veteran-motorist#crew-trigger-applies-after-the-vehicle-becomes-a-creature	
+302.3	1	open		
+305.5	1	open		
+400.6	1	covered	exquisite-archangel#lethal-damage-is-replaced-and-the-angel-leaves	
+500.10	1	open		
+508.1c	1	open		
+508.1d	1	open		
+508.2a	1	open		
+509.1b	1	open		
+509.1c	1	open		
+509.3f	1	open		
+510.1c	1	covered	elvish-regrower#four-damage-split-between-two-blockers	
+601.2b	1	open		
+601.2c	1	open		
+601.2h	1	covered	altars-reap#familiar-pays-for-the-reap-as-it-is-sacrificed	
+601.3a	1	covered	void-winnower#odd-mana-value-slips-past-the-lock	
+601.3b	1	open		
+601.3e	1	covered	garruks-horde#face-down-land-from-the-top-is-a-creature-spell	
+601.3e	2	covered	melek-izzet-paragon#adventure-face-is-the-instant-melek-allows	
+601.4	1	covered	inscription-of-abundance#kicked-cast-announces-two-modes	
+602.1a	1	open		
+603.2c	1	open		
+603.2e	1	open		
+603.2g	1	open		
+603.4	1	covered	felidar-sovereign#short-of-forty-the-upkeep-ability-never-triggers	
+603.6b	1	open		
+603.7a	1	open		
+603.7a	2	open		
+603.7c	1	open		
+603.8	1	open		
+603.10a	1	open		
+603.11	1	open		
+603.12	1	covered	heart-piercer-manticore#a-sacrifice-for-another-cost-does-not-trigger-the-reflexive-ability	
+605.2	1	open		
+605.4a	1	open		
+606.5	1	covered	carth-the-lion#a-plus-one-ability-adds-two-counters	
+607.2i	1	covered	stormscape-battlemage#white-kicker-only-gains-life	
+607.4	1	covered	paradise-plume#chosen-red-links-the-life-trigger-and-the-mana-ability	
+607.5	1	open		
+607.5a	1	covered	voice-of-all#copying-the-angel-does-not-give-the-copy-a-chosen-color	
+607.5a	2	covered	vesuvan-doppelganger#a-copied-mana-ability-has-no-chosen-color	
+608.2b	1	covered	sorins-thirst#target-leaves-before-resolution-so-no-life-is-gained	
+608.2b	2	covered	plague-spores#one-target-illegal-but-the-land-target-still-destroys	
+608.2d	1	open		
+608.2f	1	covered	blatant-thievery#both-opponents-permanents-change-control-together	
+608.2f	2	covered	soulfire-eruption#each-target-exiles-its-own-card-in-turn	
+608.2i	1	covered	bear-cub#discount-counts-a-creature-that-is-no-longer-a-creature	
+608.2j	1	open		
+608.2k	1	covered	wall-of-tears#blocked-permanent-is-returned-even-after-it-stops-being-a-creature	
+608.3e	1	covered	worms-of-the-earth#clone-cannot-arrive-as-a-land-creature	
+609.2	1	open		
+609.3	1	open		
+609.4a	1	covered	vedalken-orrery#sorcery-from-another-graveyard-is-cast-at-flash-speed	
+610.3d	1	covered	banisher-priest#both-exiled-creatures-return-when-both-priests-die-together	
+611.2b	1	covered	master-thief#losing-the-thief-before-the-trigger-resolves-leaves-the-artifact-alone	
+611.2c	1	open		
+611.2c	2	open		
+611.2e	1	covered	arbiter-of-the-ideal#the-manifested-permanent-arrives-as-an-enchantment	
+611.3b	1	open		
+611.3c	1	open		
+613.4d	1	open		
+613.4d	2	open		
+613.4d	3	open		
+613.5	1	covered	honor-of-the-pure#the-bonus-follows-the-colour-change-in-both-directions	
+613.5	2	covered	gray-ogre#a-base-power-set-applies-after-pumps-and-counters	
+613.6	1	open		
+613.6	2	covered	act-of-treason#control-and-haste-let-the-stolen-creature-attack	
+613.6	3	open		
+613.6	4	covered	svogthos-the-restless-tomb#the-animated-land-counts-the-graveyard-live	
+613.7a	1	covered	rune-of-flight#the-runes-later-timestamp-wins-over-the-hammer	
+613.9	1	open		
+613.9	2	open		
+614.4	1	open		
+614.5	1	open		
+614.12	1	covered	voice-of-all#a-token-copy-chooses-its-own-color	
+614.12	2	covered	yixlid-jailer#treefolk-from-the-graveyard-enters-tapped	
+614.12	3	covered	orb-of-dreams#the-orb-does-not-tap-itself	
+614.13a	1	covered	sutured-ghoul#simultaneous-arrival-leaves-nothing-to-exile	
+614.13b	1	covered	jund#the-two-devour-effects-do-not-stack	
+614.13c	1	covered	ashiok-wicked-manipulator#the-life-payment-is-replaced-by-exiling-two-cards	
+615.4	1	open		
+615.10	1	covered	daunting-defender#clerics-take-one-less-from-the-sweeper	
+615.11	1	covered	wojek-apothecary#shields-are-fixed-when-the-ability-resolves	
+616.1f	1	open		
+616.1f	2	covered	essence-of-the-wild#the-copy-arrives-untapped-and-never-had-the-tapped-ability	
+616.1g	1	covered	voice-of-all#doubling-season-makes-two-copies-that-each-choose	
+616.2	1	open		
+700.1	1	open		
+700.3c	1	open		
+700.5a	1	covered	altar-of-the-pantheon#altar-lifts-devotion-to-five-before-type-change	
+700.7	1	open		
+700.14	1	covered	bark-knuckle-boxer#fourth-mana-spent-on-spells-triggers-expend	
+701.12a	1	open		
+701.20c	1	covered	telepathy#already-revealed-merfolk-card-still-pays-the-additional-cost	
+701.23b	1	covered	splinter#exiles-target-and-same-name-cards-in-graveyard	
+701.23c	1	covered	lobotomy#empty-hand-chooses-nothing-so-nothing-is-exiled	
+701.23f	1	open		
+701.24c	1	open		
+701.24c	2	covered	black-suns-zenith#flashback-granted-sorcery-shuffle-still-exiles	
+701.24d	1	open		
+701.24g	1	covered	darksteel-colossus#colossus-shuffles-in-zombie-goes-on-top	
+701.42c	1	open		
+701.67b	1	open		
+702.1a	1	covered	varolz-the-scar-striped#scavenge-cost-is-the-mana-cost	
+702.1b	1	open		
+702.1b	2	covered	fire-ice#fire-half-flashbacks-for-its-own-cost	
+702.1c	1	covered	concerted-effort#landwalk-and-protection-shared-around	
+702.14d	1	open		
+702.15e	1	covered	ajanis-pridemate#two-lifelink-hits-trigger-twice	
+702.19b	1	open		
+702.19b	2	open		
+702.19c	1	open		
+702.22h	1	open		
+702.24a	1	open		
+702.24a	2	open		
+702.24b	1	open		
+702.26b	1	open		
+702.26b	2	open		
+702.44c	1	open		
+702.47c	1	open		
+702.51b	1	open		
+702.65b	1	open		
+702.65b	2	open		
+702.103d	1	covered	aether-storm#creature-card-with-bestow-still-castable-bestowed	
+702.103d	2	covered	garruks-horde#bestow-card-on-top-castable-only-as-a-creature	
+702.164b	1	open		
+702.177b	1	open		
+702.184c	1	open		
+704.4	1	covered	maro#toughness-zero-mid-resolution-does-not-kill	
+704.7	1	covered	lichs-mirror#replaces-loss-from-life-and-empty-library	
+704.8	1	covered	young-wolf#counter-on-it-when-it-dies-so-no-undying	
+707.2	1	covered	chimeric-staff#clone-copies-the-artifact-not-its-animation	
+707.2	2	covered	clone#clone-of-a-face-down-morph-is-a-nameless-2-2	
+707.3	1	covered	vesuvan-doppelganger#a-clone-copies-the-doppelgangers-copied-values	
+707.3	2	open		
+707.3	3	covered	grinning-demon#a-face-down-demon-copied-from-branchsnap-lorian-turns-up-for-green	
+707.3	4	covered	grinning-demon#a-face-down-demons-copy-of-wandering-ones-cannot-turn-up	
+707.4	1	covered	unstable-shapeshifter#existing-pump-stays-after-it-copies-the-next-creature	
+707.5	1	covered	skyshroud-behemoth#clone-copies-the-entry-replacement-and-fading	
+707.5	2	covered	wall-of-omens#clone-copies-the-entry-trigger-and-draws	
+707.6	1	covered	clone#a-clone-copying-the-automaton-makes-a-new-type-choice	
+707.8a	1	covered	afflicted-deserter#token-copy-of-the-double-faced-creature-transforms	
+707.8a	2	covered	clone#token-copied-from-a-clone-is-not-double-faced	
+707.9a	1	covered	quirion-elves#a-clone-copies-the-copy-ability-the-shapeshifter-gained	
+707.9b	1	covered	copy-artifact#copying-a-juggernaut-adds-the-enchantment-type	
+707.9d	1	covered	quicksilver-gargantuan#copying-tarmogoyf-drops-its-characteristic-defining-ability	
+707.9d	2	covered	glasspool-mimic#copying-a-changeling-keeps-changeling-and-all-types	
+707.9e	1	open		
+707.9f	1	covered	moritte-of-the-frost#copying-an-animated-land-skips-the-entry-counters-and-changeling	
+707.10	1	covered	fork#the-copy-shares-the-original-spells-chosen-mode	
+707.10	2	covered	fling#the-copy-uses-the-creature-sacrificed-to-the-original	
+707.10	3	covered	dawnglow-infusion#a-copy-of-the-spell-sees-no-mana-spent	
+707.10e	1	covered	frontline-heroism#the-copy-targets-one-of-the-doubled-tokens	
+707.11	1	covered	unstable-shapeshifter#the-copied-activated-ability-finishes-after-the-copy-ends	
+709.4b	1	covered	assault-battery#the-cast-half-has-mana-value-one	
+709.4b	2	open		
+710.2	1	covered	akki-lavarunner#a-flip-card-is-only-legendary-after-it-flips	
+712.9	1	open		
+712.9	2	covered	cytoshape#copy-effect-survives-transform	
+712.13a	1	open		
+712.18	1	covered	village-ironsmith#pump-persists-through-transform	
+712.21	1	covered	chittering-host#one-creature-died-event-but-two-cards-reach-the-graveyard	
+712.21b	1	covered	duplicant#the-controller-picks-which-half-the-duplicant-imprints	
+712.21c	1	covered	otherworldly-journey#a-melded-permanent-returns-as-its-two-cards	
+712.21c	2	covered	false-demise#the-aura-returns-both-cards-of-the-melded-permanent	
+712.21c	3	covered	mimic-vat#a-melded-permanent-is-exiled-as-both-cards	
+712.21d	1	covered	leyline-of-the-void#both-cards-follow-one-replacement-effect	
+722.3c	1	open		
+723.4	1	open		
+723.5	1	open		
+723.5	2	open		
+723.5a	1	open		
+723.5b	1	not-scenario		The example is tournament conduct of a controlled player (restroom breaks, card trades, judges), which no game engine can show.
+727.2	1	not-scenario		Restarting the game and sideboarding between restarts is a tournament procedure, not a game the engine plays.
+729.5	1	out-of-scope		
+732.2a	1	not-scenario		Announcing and agreeing to a move shortcut is table procedure, not a game state the engine reaches.
+732.2b	1	not-scenario		Passing priority by verbal shortcut ("Go") is table procedure, not a game state the engine reaches.
+732.3	1	not-scenario		A preference loop between two players is a judge-shortcut scenario, not a game the engine plays.
+732.5	1	not-scenario		Whether a player is forced to act to end a mandatory loop is a shortcut judgement, not a game state the engine reaches.
+800.4a	1	open		
+800.4a	2	open		
+800.4a	3	open		
+800.4a	4	open		
+800.4d	1	open		
+801.2a	1	out-of-scope		
+801.2a	2	out-of-scope		
+801.2c	1	out-of-scope		
+801.5a	1	out-of-scope		
+801.5b	1	out-of-scope		
+801.5c	1	out-of-scope		
+801.7	1	out-of-scope		
+801.7a	1	out-of-scope		
+801.10	1	out-of-scope		
+801.11	1	out-of-scope		
+801.11	2	out-of-scope		
+801.13a	1	out-of-scope		
+801.13b	1	out-of-scope		
+801.13b	2	out-of-scope		
+801.13b	3	out-of-scope		
+802.2a	1	open		
+807.4a	1	out-of-scope		
+807.4j	1	out-of-scope		
+809.3c	1	out-of-scope		
+809.6a	1	out-of-scope		
+810.8a	1	out-of-scope		
+810.8a	2	out-of-scope		
+810.8a	3	out-of-scope		
+810.9	1	out-of-scope		
+810.9a	1	out-of-scope		
+810.9a	2	out-of-scope		
+810.9a	3	out-of-scope		
+810.9c	1	out-of-scope		
+810.9d	1	out-of-scope		
+811.3	1	out-of-scope		
+902.4	1	out-of-scope		
+902.5a	1	out-of-scope		
+902.5b	1	out-of-scope		
+903.3	1	open		
+903.4	1	not-scenario		Color identity constrains deck construction before the game; the example checks a deck list, not a played game.
+903.4d	1	not-scenario		Color identity constrains deck construction before the game; the example checks a deck list, not a played game.
+903.5c	1	not-scenario		The example states which cards may be in a Wort Commander deck, a deck-construction question.
+903.5d	1	not-scenario		The example states which basic lands may be in a Wort Commander deck, a deck-construction question.
