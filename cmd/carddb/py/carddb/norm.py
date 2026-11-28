@@ -85,10 +85,12 @@ class Resolver:
                 self._by_norm.setdefault(k, oid)  # smallest oracle_id wins a fold
         self.misses = {}
 
-    def resolve(self, name):
+    def resolve(self, name, record=True):
+        """name -> oracle_id, else the pseudo id (remembered in misses unless record=False)."""
         oid = self._by_norm.get(norm_name(name))
         if oid is not None:
             return oid
         pid = pseudo_id(name)
-        self.misses[name] = pid
+        if record:
+            self.misses[name] = pid
         return pid
