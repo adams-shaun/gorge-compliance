@@ -22,9 +22,8 @@ releases. It is deliberately a pure planner plus a thin `gh` wrapper:
     mutation, so an over-budget branch cannot ship as if it were within budget.
 
 Dates come from `--now` / `CARDDB_NOW`, else the data branch tip's commit date;
-the workflow passes the pushed commit's date (or the data tip's date for a
-schedule/dispatch). Sorting is by the date in the tag, so the same releases and
-the same budget always give the same plan.
+the workflow passes the data tip's date. Sorting is by the date in the tag, so
+the same releases and the same budget always give the same plan.
 """
 import datetime
 import hashlib

@@ -274,6 +274,58 @@ class SizeVerb(Base):
 
 
 class Workflow(Base):
+    def test_workflow_copy_removal_follows_the_release_and_blocks_nothing(self):
+        try:
+            import yaml
+        except ImportError:
+            self.skipTest("PyYAML is not installed")
+        doc = yaml.safe_load(read(os.path.join(ROOT, ".github/workflows/carddb.yml")))
+        steps = doc["jobs"]["publish"]["steps"]
+        names = [s.get("name", "") for s in steps]
+        at = names.index("Drop the data branch's workflow copy")
+        # The Actions token may be refused a workflow-file deletion: nothing may depend on that push,
+        # and release.py's data_rev (the clone's HEAD) must not name an unpushed commit.
+        self.assertGreater(at, names.index("Publish the data branch"))
+        self.assertGreater(at, names.index("Publish the release"))
+        self.assertIs(steps[at]["continue-on-error"], True)
+        self.assertEqual(steps[at]["if"], "env.DRY_RUN != 'true'")
+        # No other step may put a workflow-file change into the data clone's commits.
+        self.assertEqual([i for i, s in enumerate(steps) if ".github/workflows" in s.get("run", "")], [at])
+
+        seed = self.machine("seed", init=True)
+        copy = ".github/workflows/carddb.yml"
+        write(os.path.join(seed.dir, copy), "name: carddb\n")  # what an older publish left there
+        seed.git("add", "--", copy)
+        seed.git("commit", "--quiet", "-m", "legacy workflow copy")
+        seed.git("push", "--quiet", "origin", "HEAD:carddb")
+
+        def tracked():
+            seed.git("fetch", "--quiet", "origin", "carddb")
+            return seed.git("ls-tree", "-r", "--name-only", "origin/carddb").stdout.split()
+
+        def drop(clone):
+            return subprocess.run(["bash", "-c", steps[at]["run"]], cwd=ROOT, capture_output=True, text=True,
+                                  env=dict(os.environ, CARDDB_HOME=clone.home))
+
+        hook = os.path.join(self.remote, "hooks", "pre-receive")
+        write(hook, "#!/bin/sh\necho 'refusing to delete a workflow file' >&2\nexit 1\n")
+        os.chmod(hook, os.stat(hook).st_mode | stat.S_IXUSR)
+        p = drop(self.machine("refused"))
+        self.assertNotEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("::warning::", p.stdout)
+        self.assertIn(copy, tracked())
+        os.remove(hook)
+
+        run = self.machine("accepted")  # the next run clones afresh
+        p = drop(run)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(tracked(), [".gitattributes"])
+        head = run.git("rev-parse", "HEAD").stdout
+        p = drop(run)  # already gone: nothing staged, nothing to publish
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("nothing staged", p.stdout)
+        self.assertEqual(run.git("rev-parse", "HEAD").stdout, head)
+
     def test_carddb_workflow_yaml_and_lint(self):
         try:
             import yaml
@@ -283,20 +335,21 @@ class Workflow(Base):
         text = read(path)
         doc = yaml.safe_load(text)
         trig = doc.get(True) or doc.get("on")
-        self.assertIn("carddb", trig["push"]["branches"])
-        self.assertEqual(trig["schedule"][0]["cron"], "23 4 * * *")
+        self.assertNotIn("push", trig)  # writers push every few minutes: only the schedule publishes
+        self.assertEqual(trig["schedule"][0]["cron"], "23 */3 * * *")
         self.assertEqual(trig["workflow_dispatch"]["inputs"]["dry_run"]["type"], "boolean")
         self.assertIn("carddb", doc["concurrency"]["group"])
-        self.assertIn("run_id", doc["concurrency"]["group"])  # only a PR's runs cancel each other
-        self.assertTrue({"lint", "check", "ready", "publish"} <= set(doc["jobs"]))
+        self.assertIn("run_id", doc["concurrency"]["group"])
+        # Only a PR's runs cancel each other: a publishing run is never cut off by the next one.
+        self.assertEqual(doc["concurrency"]["cancel-in-progress"], "${{ github.event_name == 'pull_request' }}")
+        self.assertEqual(set(doc["jobs"]), {"lint", "check", "publish"})
         publish = doc["jobs"]["publish"]
-        # A data push cancels only the older run's debounce wait, never a build in progress (11-28).
-        self.assertEqual(doc["jobs"]["ready"]["concurrency"], {"group": "carddb-debounce", "cancel-in-progress": True})
         self.assertEqual(publish["concurrency"], {"group": "carddb-publish", "cancel-in-progress": False})
         self.assertEqual(publish["permissions"]["contents"], "write")
-        # A red lint must not let the data branch/release move.
-        self.assertIn("lint", publish["needs"])
-        self.assertIn("needs.lint.result == 'success'", publish["if"])
+        # A red check or lint must not let the data branch/release move: an `if`
+        # without a status function keeps the implied success() of every need.
+        self.assertEqual(publish["needs"], ["check", "lint"])
+        self.assertEqual(publish["if"], "github.event_name != 'pull_request'")
 
         steps = publish["steps"]
         by_name = {s.get("name"): s for s in steps}
@@ -322,12 +375,12 @@ class Workflow(Base):
         self.assertIn("carddb-parquet.tar.gz", release_step)
 
         # No wall clock reaches a generated report: schedule/dispatch date from
-        # the data tip, and the debounce from the push event, not the commit.
+        # the data tip.
         runs = "\n".join(s.get("run", "") for s in steps)
         self.assertNotIn("date -u +%F", runs)
         self.assertIn("--format=%cs", runs)
         self.assertIn("CARDDB_NOW", runs)
-        self.assertIn("repository.pushed_at", text)
+        self.assertNotIn("HEAD_TS", text)
         self.assertIn("MemAvailable", runs)
         self.assertIn("actionlint", text)
         self.assertIn("carddb-latest", text)

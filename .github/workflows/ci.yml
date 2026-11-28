@@ -282,9 +282,9 @@ jobs:
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
       # The data branch keeps its history (git is the pin history). The writer
       # date is the measurement's own (CARDDB_NOW), so a rerun of the same
-      # measurement changes no byte and pushes nothing. A push made with the
-      # run's token does not start the carddb workflow, so the nightly carddb run
-      # (04:23 UTC) builds the SQLite and replaces the carddb-latest asset.
+      # measurement changes no byte and pushes nothing. A push to the data
+      # branch starts no workflow: the next scheduled carddb run (every three
+      # hours) builds the SQLite and replaces the carddb-latest asset.
       - name: Fold the status into cert_sets on the carddb branch
         id: publish
         if: github.ref == 'refs/heads/main'
