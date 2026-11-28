@@ -49,9 +49,11 @@ triage rather than resting as prose: `xmage-extra-ask` (the rules need no choice
 `setup-trigger` (the answer belongs to a setup permanent's trigger the format can't script),
 `harness` (a translation limit), or `gorge-missing-ask` -- the rules give the player a choice
 gorge makes for them, which is a **gorge defect** and becomes a gorge ticket, never a workaround
-here. `go run ./cmd/xmageport -commit` rewrites the record from the committed scenarios and keeps
-the triage of rows whose count did not change; `TestDroppedChoicesRecordMatchesScenarios` fails
-when record and scenarios disagree in either direction.
+here. `go run ./cmd/xmageport -commit` rewrites the record from the committed scenarios: a row
+whose count did not change keeps its triage, while a row whose count changed returns to untriaged
+but keeps its `cr` and `note` as context for the re-triage;
+`TestDroppedChoicesRecordMatchesScenarios` fails when record and scenarios disagree in either
+direction.
 
 ## XMage verdicts
 

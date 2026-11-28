@@ -67,10 +67,11 @@ func sortedByXMage(rows []droppedRow) bool {
 	return true
 }
 
-// mergeDropped keeps the triage of a row whose count did not change, returns
-// a row whose count changed to untriaged (the old triage argued the old
-// count), drops a row whose test no longer drops choices, and adds a row for
-// a test that newly does.
+// mergeDropped keeps the triage of a row whose count did not change, clears
+// the class of a row whose count changed (the old triage argued the old
+// count) but keeps its cr and note as context for the re-triage, drops a row
+// whose test no longer drops choices, and adds a row for a test that newly
+// does.
 func TestMergeDropped(t *testing.T) {
 	record := []droppedRow{
 		{XMage: "A#keep", Dropped: 3, Class: "harness", Note: "kept"},
@@ -79,7 +80,7 @@ func TestMergeDropped(t *testing.T) {
 	}
 	measured := map[string]int{"A#keep": 3, "A#count": 5, "A#new": 1}
 	want := []droppedRow{
-		{XMage: "A#count", Dropped: 5},
+		{XMage: "A#count", Dropped: 5, CR: "701.2a", Note: "stale triage"},
 		{XMage: "A#keep", Dropped: 3, Class: "harness", Note: "kept"},
 		{XMage: "A#new", Dropped: 1},
 	}

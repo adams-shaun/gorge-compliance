@@ -165,7 +165,12 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	fmt.Print(summary(results))
+	sum, err := summary(results)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	fmt.Print(sum)
 }
 
 type genEntry struct {
@@ -200,7 +205,11 @@ func writeOutputs(out string, results []*result) error {
 	if err := os.WriteFile(filepath.Join(out, "report.tsv"), []byte(tsv.String()), 0o644); err != nil {
 		return err
 	}
-	if err := os.WriteFile(filepath.Join(out, "summary.txt"), []byte(summary(results)), 0o644); err != nil {
+	sum, err := summary(results)
+	if err != nil {
+		return err
+	}
+	if err := os.WriteFile(filepath.Join(out, "summary.txt"), []byte(sum), 0o644); err != nil {
 		return err
 	}
 	for k, rs := range byFile {
@@ -416,7 +425,7 @@ func readPortFile(path string) (portFile, bool) {
 	return f, true
 }
 
-func summary(results []*result) string {
+func summary(results []*result) (string, error) {
 	var b strings.Builder
 	type key struct{ fam, k string }
 	cnt := map[key]int{}
@@ -477,14 +486,18 @@ func summary(results []*result) string {
 			choices += r.Dropped
 		}
 	}
+	// A record that will not parse must fail the run, not report untriaged=0
+	// and look clean.
+	record, err := loadDroppedRecord(droppedRecordPath)
+	if err != nil {
+		return "", err
+	}
 	untriaged := 0
-	if record, err := loadDroppedRecord(droppedRecordPath); err == nil {
-		for _, row := range record {
-			if row.Class == "" {
-				untriaged++
-			}
+	for _, row := range record {
+		if row.Class == "" {
+			untriaged++
 		}
 	}
 	fmt.Fprintf(&b, "\ndropped-choice tests=%d choices=%d untriaged=%d\n", tests, choices, untriaged)
-	return b.String()
+	return b.String(), nil
 }

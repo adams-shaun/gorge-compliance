@@ -104,9 +104,10 @@ func droppedFromScenarios(root string) (map[string]int, error) {
 
 // mergeDropped rebuilds the record from a measurement: rows for the measured
 // tests only, dropped from the measurement, and class/cr/note kept from the
-// old row -- except that a row whose count changed returns to untriaged
-// (triage argued the old count, so it must be redone). The result is sorted
-// by xmage.
+// old row -- except that a row whose count changed has its class cleared
+// back to untriaged (triage argued the old count, so it must be redone),
+// while its cr and note survive as context for the re-triage. The result is
+// sorted by xmage.
 func mergeDropped(record []droppedRow, measured map[string]int) []droppedRow {
 	old := make(map[string]droppedRow, len(record))
 	for _, r := range record {
@@ -121,8 +122,11 @@ func mergeDropped(record []droppedRow, measured map[string]int) []droppedRow {
 	for _, k := range keys {
 		n := measured[k]
 		row := droppedRow{XMage: k, Dropped: n}
-		if o, ok := old[k]; ok && o.Dropped == n {
-			row.Class, row.CR, row.Note = o.Class, o.CR, o.Note
+		if o, ok := old[k]; ok {
+			row.CR, row.Note = o.CR, o.Note
+			if o.Dropped == n {
+				row.Class = o.Class
+			}
 		}
 		rows = append(rows, row)
 	}
