@@ -77,8 +77,11 @@ when pyarrow is missing. The carddb tool itself stays stdlib only.
 **Branch protection (operator setting).** Protect `carddb` with require linear
 history and fast-forward only; the only pushers are the GitHub Actions token
 and the publisher deploy key. The data branch needs no copy of
-`.github/workflows/carddb.yml` (schedules run the default branch's); a publish
-removes a leftover one.
+`.github/workflows/carddb.yml` (schedules run the default branch's). After the
+release, a real run tries to remove a leftover copy in a commit of its own. If
+that push is refused, the run still succeeds and prints a warning: delete the
+file from `carddb` with your own key (while it is there, pushes to `carddb` keep
+starting the old workflow).
 
 The data derives from MTGJSON (MIT); see NOTICE.
 

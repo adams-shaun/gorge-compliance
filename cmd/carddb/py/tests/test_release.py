@@ -274,7 +274,7 @@ class SizeVerb(Base):
 
 
 class Workflow(Base):
-    def test_workflow_copy_leaves_the_data_branch_in_the_publish(self):
+    def test_workflow_copy_removal_follows_the_release_and_blocks_nothing(self):
         try:
             import yaml
         except ImportError:
@@ -283,29 +283,48 @@ class Workflow(Base):
         steps = doc["jobs"]["publish"]["steps"]
         names = [s.get("name", "") for s in steps]
         at = names.index("Drop the data branch's workflow copy")
-        self.assertLess(at, names.index("Publish the data branch"))
+        # The Actions token may be refused a workflow-file deletion: nothing may depend on that push,
+        # and release.py's data_rev (the clone's HEAD) must not name an unpushed commit.
+        self.assertGreater(at, names.index("Publish the data branch"))
+        self.assertGreater(at, names.index("Publish the release"))
+        self.assertIs(steps[at]["continue-on-error"], True)
+        self.assertEqual(steps[at]["if"], "env.DRY_RUN != 'true'")
+        # No other step may put a workflow-file change into the data clone's commits.
+        self.assertEqual([i for i, s in enumerate(steps) if ".github/workflows" in s.get("run", "")], [at])
 
-        pub = self.machine("pub", init=True)
+        seed = self.machine("seed", init=True)
         copy = ".github/workflows/carddb.yml"
-        write(os.path.join(pub.dir, copy), "name: carddb\n")  # what an older publish left there
-        pub.git("add", "--", copy)
-        pub.git("commit", "--quiet", "-m", "legacy workflow copy")
-        pub.git("push", "--quiet", "origin", "HEAD:carddb")
+        write(os.path.join(seed.dir, copy), "name: carddb\n")  # what an older publish left there
+        seed.git("add", "--", copy)
+        seed.git("commit", "--quiet", "-m", "legacy workflow copy")
+        seed.git("push", "--quiet", "origin", "HEAD:carddb")
 
         def tracked():
-            return pub.git("ls-tree", "-r", "--name-only", "origin/carddb").stdout.split()
+            seed.git("fetch", "--quiet", "origin", "carddb")
+            return seed.git("ls-tree", "-r", "--name-only", "origin/carddb").stdout.split()
 
-        def drop():
-            p = subprocess.run(["bash", "-c", steps[at]["run"]], capture_output=True, text=True,
-                               env=dict(os.environ, CARDDB_HOME=pub.home))
-            self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        def drop(clone):
+            return subprocess.run(["bash", "-c", steps[at]["run"]], cwd=ROOT, capture_output=True, text=True,
+                                  env=dict(os.environ, CARDDB_HOME=clone.home))
 
+        hook = os.path.join(self.remote, "hooks", "pre-receive")
+        write(hook, "#!/bin/sh\necho 'refusing to delete a workflow file' >&2\nexit 1\n")
+        os.chmod(hook, os.stat(hook).st_mode | stat.S_IXUSR)
+        p = drop(self.machine("refused"))
+        self.assertNotEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("::warning::", p.stdout)
         self.assertIn(copy, tracked())
-        drop()
-        self.assertTrue(pub.publish(bulk=True)["pushed"])
+        os.remove(hook)
+
+        run = self.machine("accepted")  # the next run clones afresh
+        p = drop(run)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
         self.assertEqual(tracked(), [".gitattributes"])
-        drop()  # already gone: nothing staged, nothing to publish
-        self.assertIsNone(pub.publish(bulk=True))
+        head = run.git("rev-parse", "HEAD").stdout
+        p = drop(run)  # already gone: nothing staged, nothing to publish
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("nothing staged", p.stdout)
+        self.assertEqual(run.git("rev-parse", "HEAD").stdout, head)
 
     def test_carddb_workflow_yaml_and_lint(self):
         try:

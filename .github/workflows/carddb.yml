@@ -39,8 +39,10 @@
 #    linear history and fast-forward only; allow only the Actions token and the
 #    publisher deploy key to push). Schedules run the default branch's copy of
 #    this file, and the checker, writer and release tool are pinned to `main`.
-#    The data branch needs no copy of this file; a publish removes a leftover
-#    one.
+#    The data branch needs no copy of this file. After the release, a real run
+#    tries to remove a leftover one in a commit of its own; if that push is
+#    refused the run only warns, and the operator deletes the file from
+#    `carddb` with their own key.
 #  - `main` must already contain cmd/carddb (including the compliance, size and
 #    release writers), carddb/schema and the manifests, i.e. this change must
 #    be promoted develop -> main BEFORE the first publish to `carddb`.
@@ -230,14 +232,6 @@ jobs:
       - name: Migrate the keyproof shards to leg rows
         working-directory: tool
         run: python3 -I cmd/carddb/main.py migrate keyproof-legs
-      # Nothing runs from the data branch (no push trigger), so it carries no
-      # copy of this workflow: stage the removal of a leftover one for this
-      # run's publish. A no-op once the file is gone.
-      - name: Drop the data branch's workflow copy
-        working-directory: tool
-        run: |
-          set -euo pipefail
-          git -C "$CARDDB_HOME/public" rm --quiet --ignore-unmatch -- .github/workflows/carddb.yml
       - name: Fetch AllPrintings
         working-directory: tool
         run: |
@@ -401,6 +395,23 @@ jobs:
           else
             python3 -I cmd/carddb/main.py release "${args[@]}"
           fi
+      # Nothing runs from the data branch (no push trigger), so it needs no copy
+      # of this workflow. The Actions token cannot be granted the `workflows`
+      # permission and may be refused a push that deletes a workflow file, so the
+      # removal is a commit of its own, best effort, and must never block a
+      # publish. It stays AFTER the release, which records the clone's HEAD as
+      # data_rev: that must never name a commit that was not pushed. A no-op
+      # once the file is gone.
+      - name: Drop the data branch's workflow copy
+        if: env.DRY_RUN != 'true'
+        continue-on-error: true
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          { git -C "$CARDDB_HOME/public" rm --quiet --ignore-unmatch -- .github/workflows/carddb.yml &&
+            python3 -I cmd/carddb/main.py publish; } || {
+            echo "::warning::could not remove .github/workflows/carddb.yml from the carddb branch: delete it from carddb with your own key"
+            exit 1; }
       - name: Summary
         if: always()
         run: |
