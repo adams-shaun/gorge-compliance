@@ -1,6 +1,7 @@
 #carddb-writers v1
 writer	sla_hours	tables	doc
 catalogue	36	cards,printings,sets,legality	MTGJSON catalogue (CDB-03), nightly
+mtgjson	36	cards,printings,sets,legality,faces	alias of catalogue: the id `ingest catalogue` records its rows under (CDB-03), nightly
 compliance	36	status,cert_sets	compliance CI status writer (CDB-16) and the per-set docs status columns of cert_sets (CDB-37), nightly
 ci	12	status,evidence,cards,cert_sets,_meta/size	alias of compliance: writer id status/evidence, branch-size and cert_sets status-column rows carry (CDB-16, CDB-04, CDB-37), every 3 h
 gorge-pin	12	status,evidence,cards	gorge pin-follow, every 3 h
