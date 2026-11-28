@@ -1032,9 +1032,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # unchanged. Fork branch oracle-driver.
 # 5ceed32d687 = the merge of 7b6ff5656c8 and 1dea7b45ce0 above (siblings on 4385467a9eb, textually clean, no conflicts): carries both the
 # commander-ninjutsu cost-shape fallback and the unpinned order-to-Exile ask. Fork branch fix/xp-forge-driver-ninjutsu-commander-identity.
-# edf8473c4d6 = the merge of 5ceed32d687 and 3526a90f719 above (siblings on 1dea7b45ce0, textually clean, no conflicts): the two pins had
-# diverged, so every promote PR failed check-fork-pins with "diverged"; the join carries the commander-ninjutsu cost-shape fallback and
-# both unpinned order asks (Exile and Command). ForcedDieRollTest is 7/7 on it. Fork branch oracle/fpin-1126-join23.
+# edf8473c4d6 = join23 on the fork (oracle/fpin-1126-join23): 5ceed32d687 merged with 3526a90f719, so the pin carries the Command-order
+# gate, the ninjutsu cost-shape fallback and the unpinned order-to-Exile ask together. None of the three is on the die-roll path;
+# OrderCardsTest (incl. unpinnedCommandOrderKeepsForgeOrder) and ForcedDieRollTest were re-run green on the merged pin
+# (run-unit-tests.sh with FORGE_ORACLE_DIR=forgeoracle-1120 -- the default env's forge-game jar (10-29) predates the record
+# GameEventRollDie and does not compile any 11-2x pin, this one included).
 FORGE_ORACLE_REF ?= edf8473c4d64d76ccd35280b666aaa2257b5eff5
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
@@ -1154,7 +1156,7 @@ phase-oracle-setup:
 # The follower profile is used for tests too, so the engine is built once, not again in debug. Cargo
 # runs inside followers/phase (env -C) so its rust-toolchain.toml selects the nightly.
 phase-follower-test:
-	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target PHASE_CARD_DATA=$(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json RUST_MIN_STACK=16777216 $(CARGO) test --locked --profile follower $(RUN)
+	systemd-run --user --scope -q -p MemoryMax=8G -p CPUQuota=400% env -C followers/phase CARGO_HOME=$(FOLLOWERS_CACHE)/cargo-home RUSTC=$(dir $(CARGO))rustc RUSTDOC=$(dir $(CARGO))rustdoc CARGO_TARGET_DIR=$(PHASE_ORACLE_DIR)/target PHASE_CARD_DATA=$(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json RUST_MIN_STACK=16777216 $(CARGO) test --locked --profile follower $(RUN)
 
 # The replay-determinism test needs a deck catalog; by default the two seeds that play to a natural end in
 # seconds (3 and 5) over gorge's fdn-limited decks, so `make phase-seat-test` can fail on a determinism break.
@@ -1189,8 +1191,14 @@ phase-preflight:
 # job is what runs the full `go test` gate.
 #
 # boundary is the licence guard on its own (the same step test-smart runs).
+# It runs through scripts/test-targets.sh whole — the same helper test-one
+# uses — so it works inside a seat: the seat go shim blocks a raw `go test`
+# whose process ancestry lacks that script, and a recipe cannot self-declare
+# the marker the shim accepts (only the script sets it legitimately). The
+# whole mode carries the recipe's -count=1 cache bypass, so the guard still
+# re-runs rather than replaying the test cache.
 boundary:
-	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
+	@PKG=./internal/boundary/ bash scripts/test-targets.sh whole
 
 # carddb-test runs the Python carddb tool's tests (put, publish, merge driver, build, fetch);
 # CARDDB_UPDATE_GOLDEN=1 rewrites cmd/carddb/py/tests/golden after a deliberate schema change.
@@ -1201,10 +1209,13 @@ carddb-test:
 # oracle-audit runs both scenario corpora through gorge's runner: the hand
 # Oracle-text audit (scenarios/oracle plus gorge's residual
 # engine/rules/testdata/oracle) and the XMage ports (scenarios/xmageport).
-# ORACLE_RUN filters the audit per card, e.g. ORACLE_RUN='Fatal_Push'.
+# ORACLE_RUN filters the audit per card, e.g. ORACLE_RUN='Fatal_Push'. It runs
+# through scripts/test-targets.sh whole — the only seat-permitted `go test`
+# path — which carries the -count=1 cache bypass and caps the run itself; V=1
+# keeps the verbose stream, saved under .oracle-build/test/whole-*.json.
 ORACLE_RUN ?=
 oracle-audit:
-	go test $(GO_TEST_FLAGS) -count=1 ./audit -run 'TestOracleScenarioFilesWellFormed|TestOracleAudit/$(ORACLE_RUN)|TestXMagePortScenarios' -v
+	@PKG=./audit RUN='TestOracleScenarioFilesWellFormed|TestOracleAudit/$(ORACLE_RUN)|TestXMagePortScenarios' V=1 bash scripts/test-targets.sh whole
 
 smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
@@ -1212,6 +1223,7 @@ smoke:
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
 	bash ops/scripts/tests/check_fork_pins_smoke.sh
 	bash ops/scripts/tests/check_forge_ref_in_driver_smoke.sh
+	bash ops/scripts/tests/gorge_pin_check_smoke.sh
 	bash ops/scripts/tests/forge_driver_follow_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
@@ -1247,7 +1259,7 @@ mtgish-fetch:
 	MTGISH_REF=$(MTGISH_REF) scripts/mtgish-fetch.sh
 mtgish-xc:
 	go run ./cmd/mtgishxc -all
-	go test -count=1 ./oracle/mtgish -run TestMtgishLedger -v
+	@PKG=./oracle/mtgish RUN=TestMtgishLedger V=1 bash scripts/test-targets.sh whole
 
 # xmage-driver-tests compiles the Java replay driver and runs its unit tests
 # (oracle/xmageoracle/test) against the xmage-oracle-setup build. Needs Java
@@ -1365,7 +1377,9 @@ pr:
 
 # follower-check runs level-A scenarios through one registered follower and
 # diffs them against gorge (scripts/follower-check.sh): ENGINE=phase
-# ARGS='--set FDN --setup-only --pool FILE --limit N --min-agree PCT'.
+# ARGS='--set FDN --setup-only --pool FILE [--require-mana] --limit N --min-agree PCT'.
+# --pool FILE filters; a pool starting '#!require-mana' (oracle/xengine/pools/
+# mana-abilities.txt) or --require-mana also activates and requires every named mana source.
 .PHONY: follower-check
 follower-check:
 	scripts/follower-check.sh $(ENGINE) $(ARGS)

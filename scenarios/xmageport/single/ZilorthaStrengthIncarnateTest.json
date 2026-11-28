@@ -132,8 +132,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ZilorthaStrengthIncarnateTest#testPresent_combatDamageResolvesLethalityUsingPower",
-   "known_bug": "XP[lethal-damage-by-power-absent]: Zilortha's LethalDamageByPower static is absent from the engine, so Savai Sabertooth dies to Drannith Healer's 1 damage (graveyard 1, want 0); lethal-damage SBA uses toughness, CR 704.5g, 613.1f, verified at gorge 981b98963b."
+   "xmage": "ZilorthaStrengthIncarnateTest#testPresent_combatDamageResolvesLethalityUsingPower"
   },
   {
    "name": "test-present-one-damage-required-to-destroy-zero-power-creature",
@@ -343,8 +342,7 @@
      }
     }
    ],
-   "xmage": "ZilorthaStrengthIncarnateTest#testPresent_flameSpillResolvesUsingPower",
-   "known_bug": "XP[lethal-damage-by-power-absent]: Zilortha's LethalDamageByPower is not implemented: Flame Spill's 4 damage is lethal to the 4/4 Savai Sabertooth (p0 life 17, want 19); lethal-damage SBA uses toughness, CR 704.5g, 613.1f, verified at gorge 981b98963b."
+   "xmage": "ZilorthaStrengthIncarnateTest#testPresent_flameSpillResolvesUsingPower"
   },
   {
    "name": "test-present-leaves-battlefield-damage-resolves-lethality-using-power-then-checked-against-toughness",
@@ -520,8 +518,7 @@
      "eq": 1
     }
    ],
-   "xmage": "ZilorthaStrengthIncarnateTest#testPresent_ownedByBothPlayers",
-   "known_bug": "XP[lethal-damage-by-power-absent]: both players control Zilortha, so each Maned Serval should die from the other's power-based lethal damage; neither dies (graveyards 0/0, want 1/1) because LethalDamageByPower is not implemented, CR 704.5g, 613.1f, verified at gorge 981b98963b."
+   "xmage": "ZilorthaStrengthIncarnateTest#testPresent_ownedByBothPlayers"
   },
   {
    "name": "test-absent-enters-battlefield-damage-resolves-lethality-using-toughness-then-checked-against-power",
@@ -611,8 +608,7 @@
      "eq": 0
     }
    ],
-   "xmage": "ZilorthaStrengthIncarnateTest#testAbsent_entersBattlefield_damageResolvesLethalityUsingToughness_thenCheckedAgainstPower",
-   "known_bug": "XP[lethal-damage-combat-sba]: the blocked 2/2 Maned Servals deal 2 damage each but neither is put into a graveyard (p0 graveyard 0, want 1); with Zilortha cast only after combat the toughness lethal check should put p0's Serval in the graveyard (combat-damage/SBA path, LethalDamageByPower absent), CR 704.5g, verified at gorge 981b98963b."
+   "xmage": "ZilorthaStrengthIncarnateTest#testAbsent_entersBattlefield_damageResolvesLethalityUsingToughness_thenCheckedAgainstPower"
   }
  ]
 }

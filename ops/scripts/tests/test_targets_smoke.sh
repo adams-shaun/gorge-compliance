@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# test_targets_smoke.sh — prove scripts/test-targets.sh one|targeted|smart|list
+# test_targets_smoke.sh — prove scripts/test-targets.sh one|whole|targeted|smart|list
 # validates, preflights and classifies as documented, with stub go, git,
 # systemd-run, make and gh on PATH (no real test run, no systemd, no corpus, no
 # network).
@@ -190,6 +190,39 @@ t "killed (143)" 5 "test-one: BUDGET" PKG=./p RUN=TestA STUB_RC=143
 
 t "no user systemd runs uncapped" 0 "no user systemd; running uncapped" PKG=./p RUN=TestA STUB_NOSYSTEMD=1 STUB_EVENTS="$RUNEV\n$PASSEV"
 check "  ...and still ran go" $(/usr/bin/grep -q '^go test' "$STUB_LOG" && echo 0 || echo 1)
+
+# ---- whole ---------------------------------------------------------------------
+# The mode behind make boundary: one package run whole, no -run, with -count=1
+# (the licence guard must re-execute, not replay the test cache).
+tw() { tm whole "$@"; }
+
+tw "pass" 0 "test-whole: PASS" PKG=./p STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...verdict names the package" $([[ $LAST == *" ./p "* ]] && echo 0 || echo 1) "$LAST"
+check "  ...go test -json -failfast -count=1, no -run" $(/usr/bin/grep -q '^go test -json -failfast -count=1 -timeout 2m ./p$' "$STUB_LOG" && ! /usr/bin/grep '^go ' "$STUB_LOG" | /usr/bin/grep -q -- '-run ' && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
+check "  ...stream saved under .oracle-build/test" $(ls "$TMP"/work/.oracle-build/test/whole-*.json >/dev/null 2>&1 && echo 0 || echo 1)
+
+# RUN is optional in whole mode: with none the package runs whole (make
+# boundary); when set it passes through as -run, and V as -v, the way one mode
+# does (make oracle-audit's composite regexp, make mtgish-xc's ledger test).
+tw "RUN and V pass through" 0 "test-whole: PASS" PKG=./p RUN=TestA V=1 STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...go test -json -failfast -count=1 -run TestA -v" $(/usr/bin/grep -q '^go test -json -failfast -count=1 -timeout 2m -run TestA -v ./p$' "$STUB_LOG" && echo 0 || echo 1) "$(/usr/bin/grep '^go' "$STUB_LOG")"
+
+# make boundary's licence guards are documented corpus-less (internal/boundary
+# skips its corpus rule when no corpus is present), so the corpus preflight
+# must not turn a link-less worktree into test-whole: ENV.
+tw "missing corpus is not an ENV failure" 0 "test-whole: PASS" PKG=./p TEST_TARGETS_CARDS="$TMP/nope" STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...and go still ran" $(/usr/bin/grep -q '^go test' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tw "missing PKG" 2 PKG
+tw "PKG=./..." 2 PKG PKG=./...
+check "  ...usage errors never reached go" $(! /usr/bin/grep -q '^go ' "$STUB_LOG" && echo 0 || echo 1)
+
+tw "no tests ran" 4 "test-whole: EMPTY" PKG=./p \
+	STUB_EVENTS='{"Action":"start","Package":"p"}\n{"Action":"run","Package":"p"}\n{"Action":"pass","Package":"p"}'
+
+tw "go exits 1" 1 "test-whole: FAIL" PKG=./p STUB_RC=1 \
+	STUB_EVENTS="$RUNEV\n"'{"Action":"output","Package":"p","Test":"TestA","Output":"    a_test.go:3: boom\\n"}\n{"Action":"fail","Package":"p","Test":"TestA"}'
+check "  ...prints the failing test's output" $([[ $LAST == *"a_test.go:3: boom"* ]] && echo 0 || echo 1) "$LAST"
 
 # ---- targeted ----------------------------------------------------------------
 tm targeted "targeted pass" 0 "test-targeted: PASS" \

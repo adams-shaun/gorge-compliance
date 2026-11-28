@@ -267,8 +267,12 @@ func transformedStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, f
 	if why := FieldBlock(front); why != "" {
 		return "battlefield:" + why
 	}
-	if asEnters(front) {
-		return "as-enters"
+	// The front face is placed and transformed at genesis. An as-enters
+	// choice there is answered after setup, so the live cut carries the
+	// entry's turn stamps; until the lowering can restate them the start
+	// keeps the specific refusal instead of emitting a start it refuses.
+	if why := asEntersPlacedRefusal(front); why != "" {
+		return why
 	}
 	// A daybound or nightbound permanent cannot be transformed by another
 	// effect or ability (CR 702.145b), and a battlefield permanent with an
@@ -357,8 +361,17 @@ func zoneStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card 
 	if filterHasProp(filter, "DamagedBy") {
 		return damageStart(reg, b, face, card, f)
 	}
-	if filterHasProp(filter, "AttachedBy") {
-		return attachedByStart(reg, b, face, card, f)
+	if filterHasProp(filter, "AttachedBy") || filterHasProp(filter, "EnchantedBy") || filterHasProp(filter, "EquippedBy") {
+		// The pinned gorge reads EquippedBy, EnchantedBy and AttachedBy as one
+		// predicate (effects/compiled_predicate.go: all three spellings
+		// compile to the same term, "the permanent src is attached to"), so
+		// the bearer-death start built for AttachedBy is the same start: an
+		// Aura placed attached (StartAttach) to its Enchant bearer which the
+		// opponent murders, an Equipment attached with Magnetic Theft to an
+		// end-step self-sacrifice. A card that is neither an Aura (for
+		// EnchantedBy) nor an Equipment (for EquippedBy) keeps the ":attached"
+		// refusal: nothing can be attached to its bearer by a start.
+		return attachedByStart(reg, b, face, card, filter, f)
 	}
 	f.Setup.P0.Battlefield = []string{card}
 	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
@@ -377,12 +390,30 @@ func zoneStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card 
 			return ""
 		}
 		name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
+		var targets []string
 		if name == "" {
-			return none + ":filter"
+			// The inert pool has no permanent the filter takes: the enters
+			// lane falls back to the shapes the static lane already serves
+			// (entersFallback), each a cast, so the entering object is a
+			// cast and the trigger reads the same event.
+			name, s, targets = entersFallback(reg, b, card, filter)
+			if name == "" {
+				return none + ":filter"
+			}
 		}
 		castCarrier(reg, seats[s], name)
+		if len(targets) > 0 {
+			// the entered Aura's bearer, placed beside its caster
+			seats[s].Battlefield = append(seats[s].Battlefield, targets...)
+		}
+		// An IsCommander filter names a card the seat must designate: the
+		// engine reads Card.IsCommander through Game.CommanderOf list
+		// membership (CR 903.3's designation is an attribute of the card, not
+		// a printed characteristic), so an undesignated entering carrier would
+		// never fire the trigger.
+		designateCommander(reg, seats[s], name, filter)
 		f.Active = s
-		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "cast"}
+		f.Focus = &StartFocus{Seat: seatPtr(s), Card: name, Kind: "cast", Targets: targets}
 	case origin == "Battlefield" && (dest == "Graveyard" || dest == "Any") || origin == "Any" && dest == "Graveyard":
 		// "Put into a graveyard from anywhere" (Origin Any) is met by a
 		// permanent dying, the same start as a dies trigger.
@@ -426,35 +457,191 @@ func leavesToHand(dest string) bool {
 // (carrierPool), so the one event the start offers is the removal. It reports
 // false, leaving f untouched, when no creature the filter takes is in the
 // pool or the spell is not in the corpus.
-func removalStart(reg *cards.Registry, b *certdeck.Builder, card, filter, spell string, f *StartFile) bool {
+func removalStart(reg *cards.Registry, b *certdeck.Builder, card, filter, removal string, f *StartFile) bool {
 	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
-	for _, a := range parseFilterCounters(filter, true, false, false) {
+	for _, a := range parseFilterCounters(filter, true, false, false, false) {
 		if !a.known || a.self {
 			continue
 		}
 		name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
 			return c.IsCreature() && FieldBlock(c) == "" && a.matches(c, false) && survivesCounters(c, a.counters)
 		})
+		sp := removal
 		if name == "" {
-			continue
+			// The filter takes a land (a "whenever a land you control dies"
+			// watcher): Murder cannot destroy one, so the destroy spell
+			// becomes Stone Rain, which destroys target land; Unsummon
+			// returns any permanent and needs no swap. The inert pool holds
+			// no lands (inertCarrier), so the land comes from the basics and
+			// the least busy playable nonbasic.
+			land := removalLand(reg, b, card, a)
+			if land == "" {
+				continue
+			}
+			if sp == "Murder" {
+				sp = "Stone Rain"
+			}
+			if !spell(reg, b, sp) {
+				continue
+			}
+			name = land
 		}
 		cs := 0
 		if a.ctrl == ctrlOpp {
 			cs = 1
 		}
 		caster := 1 - cs
-		if !focusCast(reg, b, seats[caster], spell) {
+		if !focusCast(reg, b, seats[caster], sp) {
 			return false
 		}
 		seats[cs].Battlefield = append(seats[cs].Battlefield, name)
 		for _, g := range a.counters {
-			seats[cs].Counters = append(seats[cs].Counters, StartCounter{Card: name, Kind: g.kind, N: g.n})
+			seats[cs].Counters = append(seats[cs].Counters, StartCounter{Card: name, Kind: g.placedKind(), N: g.n})
 		}
 		f.Active = caster
-		f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spell, Kind: "cast", Targets: []string{name}}
+		f.Focus = &StartFocus{Seat: seatPtr(caster), Card: sp, Kind: "cast", Targets: []string{name}}
 		return true
 	}
 	return false
+}
+
+// removalLand is a land the (counter-parsed) alternative a takes: a basic
+// first, then the least busy playable nonbasic, never the key card. "" when
+// no land matches (the alternative names a creature kind, a state or an
+// understood-but-landless shape).
+func removalLand(reg *cards.Registry, b *certdeck.Builder, card string, a filterAlt) string {
+	for _, basic := range []string{"Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes"} {
+		if basic == card {
+			continue
+		}
+		c, ok := reg.Lookup(basic)
+		if ok && len(c.Faces) > 0 && a.matches(c.Faces[0], false) {
+			return basic
+		}
+	}
+	return pickLandFixture(reg, b, func(f *cards.Face) bool { return f.Name != card && a.matches(f, false) })
+}
+
+// castSatisfiable are the filter properties the entering object of a cast
+// makes true at the trigger event itself: the enters lane casts the carrier
+// from its controller's hand on that controller's turn, so "wasCastByYou"
+// holds of the permanent entering. "kicked" is deliberately absent: a plain
+// cast is not a kicked one, and the pinned gorge cannot cast a kicked spell
+// at all (effects.Supported() lacks the Kicker primitive, so no kicked card
+// is certdeck-Playable).
+var castSatisfiable = map[string]bool{"wasCastByYou": true, "wasCast": true}
+
+// strippedFilter drops the castSatisfiable properties from every alternative
+// of an enters filter: ok reports that at least one was dropped and every
+// alternative is one parseFilter understands without them. The carrier the
+// stripped filter picks is cast, which makes the dropped properties true of
+// the entering object; any other unknown property keeps the filter refused.
+func strippedFilter(filter string) (string, bool) {
+	if !strings.Contains(filter, "wasCast") {
+		return "", false
+	}
+	var alts []string
+	dropped := false
+	for _, raw := range strings.Split(filter, ",") {
+		raw = strings.TrimSpace(raw)
+		if raw == "" {
+			continue
+		}
+		head, props, has := strings.Cut(raw, ".")
+		if !has {
+			alts = append(alts, raw)
+			continue
+		}
+		var keep []string
+		for _, p := range strings.Split(props, "+") {
+			if castSatisfiable[p] {
+				dropped = true
+				continue
+			}
+			keep = append(keep, p)
+		}
+		if len(keep) > 0 {
+			alts = append(alts, head+"."+strings.Join(keep, "+"))
+		} else {
+			alts = append(alts, head)
+		}
+	}
+	if !dropped {
+		return "", false
+	}
+	rest := strings.Join(alts, ",")
+	for _, a := range parseFilter(rest) {
+		if !a.known {
+			return "", false
+		}
+	}
+	return rest, true
+}
+
+// entersFallback is the entering permanent when the inert carrier pool has
+// none the filter takes. Three shapes, each still a cast of the entering
+// object, so the trigger reads the same event the start offers:
+//
+//   - a cast-history property ("whenever a creature you cast this turn
+//     enters": wasCastByYou) is met by the cast itself, so the stripped
+//     filter picks the carrier (strippedFilter);
+//   - the simplest playable permanent the filter takes, the static lane's
+//     fixture scan (castFixtureCarrierIn) for a class no vanilla card holds
+//     (a Detective);
+//   - an Aura the filter takes (a Cartouche) cast attached: a bare Aura is
+//     FieldBlock-refused on the battlefield, so the start casts it at a
+//     vanilla bearer its Enchant keyword takes and names the bearer.
+//
+// "" keeps the ":filter" refusal: an alternative no arm can meet (a face-down
+// permanent, a counter gate or a token state the cast cannot establish) is not
+// answered. A setup counter cannot sit on a card still in hand, and a token is
+// not a card, so those alternatives are castableAlt-rejected rather than
+// matched by their test alone.
+func entersFallback(reg *cards.Registry, b *certdeck.Builder, card, filter string) (string, int, []string) {
+	filters := []string{filter}
+	if stripped, ok := strippedFilter(filter); ok {
+		filters = []string{stripped, filter}
+	}
+	for _, flt := range filters {
+		// commanderOK: the enters arm designates an IsCommander fixture it
+		// casts (the inert pool can never hold one), and the designation is
+		// what makes the entering object the engine reads as a commander.
+		if n, s := castFixtureCarrierIn(reg, b, card, flt, (*cards.Face).IsPermanent, true, true); n != "" {
+			return n, s, nil
+		}
+	}
+	return entersAuraCarrier(reg, b, card, filter)
+}
+
+// entersAuraCarrier is the Aura a "whenever an <Aura type> you control
+// enters" trigger takes, the vanilla bearer it enters attached to, and the
+// seat casting it: the simplest playable Aura the filter takes (a Cartouche),
+// cast at the most inert permanent its Enchant keyword takes. The bearer is
+// named in the cast's Targets so the bot aims the Aura at it. "" when no
+// alternative takes a plain Aura or its Enchant names no placeable permanent.
+func entersAuraCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string) (string, int, []string) {
+	for _, a := range parseFilterStatic(filter) {
+		if !a.known || a.self || !castableAlt(a) {
+			continue
+		}
+		aura := pickZoneFixture(reg, b, card, func(f *cards.Face) bool {
+			return f.HasTypeWord("Aura") && !f.IsCreature() && FieldBlock(f) == "aura-unattached" && a.matches(f, false)
+		}, nil, true)
+		if aura == "" {
+			continue
+		}
+		c, _ := reg.Lookup(aura)
+		bearer, bs := attachBearer(reg, b, aura, c.Faces[0])
+		s := 0
+		if a.ctrl == ctrlOpp {
+			s = 1
+		}
+		if bearer == "" || bs != s {
+			continue
+		}
+		return aura, s, []string{bearer}
+	}
+	return "", 0, nil
 }
 
 // survivesCounters reports that a creature carrying gates is still alive at
@@ -484,6 +671,29 @@ func filterHasProp(filter, prop string) bool {
 		}
 	}
 	return false
+}
+
+// designateCommander records name as a commander of seat when the trigger's
+// filter names the IsCommander property: the engine resolves Card.IsCommander
+// through Game.CommanderOf list membership, not a printed keyword (CR 903.3
+// says the designation is an attribute of the card itself), so a start whose
+// carrier was picked for the IsCommander face test must also designate it or
+// the trigger never reads it and the focus is never exercised. Only a face
+// CR 903.3 could legally designate (a legendary creature) is recorded: a
+// carrier that matched another alternative of a multi-alternative filter
+// stays undesignated, and a start the trigger never fires is refused by the
+// executor as not-exercised rather than claiming an illegal commander.
+func designateCommander(reg *cards.Registry, seat *StartSeat, name, filter string) {
+	if name == "" || !filterHasProp(filter, "IsCommander") {
+		return
+	}
+	c, ok := reg.Lookup(name)
+	if !ok || len(c.Faces) == 0 {
+		return
+	}
+	if f := c.Faces[0]; f.IsLegendary() && f.IsCreature() {
+		seat.Commanders = append(seat.Commanders, name)
+	}
 }
 
 // damageStart is "whenever a creature dealt damage by CARDNAME this turn dies"
@@ -516,32 +726,70 @@ func damageStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 // (Card.AttachedBy):
 //
 //   - an Aura is placed attached (StartAttach) to the bearer its Enchant
-//     keyword takes, and the opponent's Murder destroys the bearer;
+//     keyword takes and the trigger filter also takes (the attachment property
+//     removed: "Card.EnchantedBy+Horror" needs a Horror), and the opponent's
+//     Murder destroys the bearer;
 //   - an Equipment cannot enter attached from a start (gorge's StartAttach is
 //     the non-cast Aura entry), so a Magnetic Theft cast attaches it to a
 //     creature that sacrifices itself at the beginning of the end step
-//     (endStepSacrificeBearer), which then dies while equipped.
-func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, f *StartFile) string {
+//     (endStepSacrificeBearer) and that the trigger filter also takes, which
+//     then dies while equipped. An Equipment that is itself a creature (an
+//     Artifact Creature Equipment) is refused instead: Magnetic Theft's second
+//     target is then ambiguous and the tape attaches it to itself.
+func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, filter string, f *StartFile) string {
 	const none = "no-generator:trigger:ChangesZone"
 	p0, p1 := &f.Setup.P0, &f.Setup.P1
+	// The trigger filter with its attachment property removed: the bearer must
+	// satisfy the rest of the alternative too, or the trigger could never fire.
+	alts := attachFilter(filter)
 	switch {
 	case FieldBlock(face) == "aura-unattached":
-		bearer, bs := attachBearer(reg, b, card, face)
-		if bearer == "" {
+		if upkeepOrDraw(face) {
+			// The Aura is placed on the battlefield, so its own upkeep or draw
+			// trigger fires before the cut and the lowering refuses the start
+			// (Endless Evil). The other lanes cast their fixture and so never
+			// place it; the attachment lane cannot.
 			return none + ":filter"
+		}
+		if auraHidesBearer(face) {
+			// The Aura makes the bearer untargetable (Curator's Ward's
+			// hexproof): the opponent's Murder is never offered, so the bearer
+			// cannot die while attached.
+			return none + ":filter"
+		}
+		bearer, bs := attachBearerFor(reg, b, card, face, alts)
+		spell := ""
+		if bearer == "" {
+			// An "Enchant land" Aura (Nissa's Zendikon): no creature is a
+			// legal bearer, so the basic its Enchant keyword takes is, and
+			// the destroy spell is Stone Rain (Murder takes creatures).
+			if land, ls := attachLandBearer(reg, face, alts); land != "" {
+				bearer, bs, spell = land, ls, "Stone Rain"
+			}
+			if bearer == "" {
+				return none + ":filter"
+			}
 		}
 		p0.Battlefield = []string{card}
 		placeBearer(p0, p1, card, bearer, bs)
-		if !murderFocus(reg, b, p1, f, 1) {
+		if !murderFocus(reg, b, p1, f, 1, spell) {
 			return none + ":filter"
 		}
-		// The bearer is the key object's attached creature: name it so Murder
-		// cannot be aimed at another creature a need places.
+		// The bearer is the key object's attached creature (or land): name it
+		// so the removal cannot be aimed at another permanent a need places.
 		f.Focus.Targets = []string{bearer}
 	case face.HasTypeWord("Equipment"):
-		bearer := endStepSacrificeBearer(reg, b, card)
+		if face.IsCreature() {
+			// Magnetic Theft asks for the Equipment, then for a creature; an
+			// Equipment that is also a creature answers the second ask with
+			// itself, so the intended bearer never dies equipped.
+			return none + ":filter"
+		}
+		bearer := endStepSacrificeBearer(reg, b, card, func(c *cards.Face) bool {
+			return bearerMatchesSeat(alts, c, 0)
+		})
 		if bearer == "" {
-			return none + ":attached-equipment"
+			return none + ":filter"
 		}
 		p0.Battlefield = []string{card, bearer}
 		if !focusCast(reg, b, p0, "Magnetic Theft") {
@@ -557,6 +805,170 @@ func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 	return ""
 }
 
+// attachFilter parses the trigger filter with its attachment property removed
+// from every alternative ("Card.EnchantedBy+Horror" gives "Card.Horror"), so a
+// bearer the start picks satisfies the trigger's own gate and not only the
+// attachment. An alternative without an attachment property describes another
+// event, not this bearer, and is dropped. A property the bearer lane cannot
+// establish (a counter gate, a game-history property) leaves the alternative
+// unknown, which refuses the start rather than serving a bearer that is not
+// the one the trigger reads.
+func attachFilter(filter string) []filterAlt {
+	var stripped []string
+	for _, prop := range []string{"AttachedBy", "EnchantedBy", "EquippedBy"} {
+		if s := bearerFilter(filter, prop); s != "" {
+			stripped = append(stripped, s)
+		}
+	}
+	return parseFilter(strings.Join(stripped, ","))
+}
+
+// ctrlAgree reports whether two alternatives' controller requirements can hold
+// of one permanent (ctrlAny, -1, agrees with everything).
+func ctrlAgree(a, b int) bool { return a == ctrlAny || b == ctrlAny || a == b }
+
+// ctrlPick is the seat two agreeing controller requirements name.
+func ctrlPick(a, b int) int {
+	if a != ctrlAny {
+		return a
+	}
+	return b
+}
+
+// auraHidesBearer reports a static on the Aura that makes the permanent it is
+// attached to untargetable: hexproof, shroud or protection granted to the
+// enchanted/equipped permanent. The bearer-death start's removal is the
+// opponent's Murder, which such a bearer never offers as a target, so the
+// trigger could not fire.
+func auraHidesBearer(face *cards.Face) bool {
+	for i := range face.Statics {
+		st := &face.Statics[i]
+		affected := strings.ToLower(st.Params["AffectedDefined"] + " " + st.Params["Affected"])
+		if !strings.Contains(affected, "enchanted") && !strings.Contains(affected, "equipped") {
+			continue
+		}
+		for _, kw := range strings.Split(st.Params["AddKeyword"], " & ") {
+			kw = strings.TrimSpace(kw)
+			if kw == "Hexproof" || kw == "Shroud" || strings.HasPrefix(kw, "Protection") {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// survivesAura reports that creature c, enchanted or equipped by aura, keeps a
+// toughness above zero: an Aura whose own static shrinks its bearer
+// (Infectious Rage +2/-1, Screams from Within -1/-1) would otherwise kill a
+// small bearer to state-based actions during setup, so the key would be
+// exercised by that death and not by the focus play. Pumps whose amount is not
+// a number are not read (they cannot be counted here).
+func survivesAura(aura, c *cards.Face) bool {
+	if !c.IsCreature() {
+		return true
+	}
+	t := c.Toughness()
+	add := 0
+	for i := range aura.Statics {
+		st := &aura.Statics[i]
+		affected := strings.ToLower(st.Params["AffectedDefined"] + " " + st.Params["Affected"])
+		if !strings.Contains(affected, "enchanted") && !strings.Contains(affected, "equipped") {
+			continue
+		}
+		if v, err := strconv.Atoi(strings.TrimPrefix(strings.TrimSpace(st.Params["SetToughness"]), "+")); err == nil {
+			t = v
+		}
+		if v, err := strconv.Atoi(strings.TrimPrefix(strings.TrimSpace(st.Params["AddToughness"]), "+")); err == nil {
+			add += v
+		}
+	}
+	return t+add > 0
+}
+
+// bearerMatchesSeat reports whether some alternative of the stripped trigger
+// filter takes c when the start places it on seat.
+func bearerMatchesSeat(alts []filterAlt, c *cards.Face, seat int) bool {
+	for _, a := range alts {
+		if !a.known || a.self || !a.matches(c, false) {
+			continue
+		}
+		if a.ctrl == ctrlAny || (a.ctrl == ctrlYou) == (seat == 0) {
+			return true
+		}
+	}
+	return false
+}
+
+// attachBearerFor is attachBearer for an attachment trigger: the most inert
+// creature both the Aura's Enchant keyword and the stripped trigger filter
+// (attachFilter) take, and the seat that must control it. "" when no creature
+// satisfies both.
+func attachBearerFor(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face, alts []filterAlt) (string, int) {
+	req, ok := enchantReq(face)
+	if !ok {
+		return "", 0
+	}
+	reqAlts := parseFilter(strings.Join(req.raw, ","))
+	for _, a := range alts {
+		if !a.known || a.self {
+			continue
+		}
+		for _, r := range reqAlts {
+			if !r.known || r.self || !ctrlAgree(a.ctrl, r.ctrl) {
+				continue
+			}
+			seat := ctrlPick(a.ctrl, r.ctrl)
+			if seat == ctrlAny {
+				seat = 0
+			}
+			name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
+				return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) &&
+					!c.HasKeyword("Hexproof") && !c.HasKeyword("Shroud") &&
+					survivesAura(face, c) &&
+					a.matches(c, false) && r.matches(c, false)
+			})
+			if name != "" {
+				return name, seat
+			}
+		}
+	}
+	return "", 0
+}
+
+// attachLandBearer is attachBearerFor for an "Enchant land" Aura: the basic
+// land both the Enchant keyword and the stripped trigger filter take, or "".
+func attachLandBearer(reg *cards.Registry, face *cards.Face, alts []filterAlt) (string, int) {
+	req, ok := enchantReq(face)
+	if !ok {
+		return "", 0
+	}
+	reqAlts := parseFilter(strings.Join(req.raw, ","))
+	for _, a := range alts {
+		if !a.known || a.self {
+			continue
+		}
+		for _, r := range reqAlts {
+			if !r.known || r.self || !ctrlAgree(a.ctrl, r.ctrl) {
+				continue
+			}
+			seat := ctrlPick(a.ctrl, r.ctrl)
+			if seat == ctrlAny {
+				seat = 0
+			}
+			for _, basic := range append([]string{basicFor(face.ManaCost)}, "Plains", "Island", "Swamp", "Mountain", "Forest") {
+				c, ok := reg.Lookup(basic)
+				if !ok || len(c.Faces) == 0 {
+					continue
+				}
+				if a.matches(c.Faces[0], false) && r.matches(c.Faces[0], false) {
+					return basic, seat
+				}
+			}
+		}
+	}
+	return "", 0
+}
+
 // placeBearer puts the Aura card's bearer on seat bs (the one its Enchant
 // keyword names) and attaches the Aura, which p0 controls, to it.
 func placeBearer(p0, p1 *StartSeat, card, bearer string, bs int) {
@@ -570,7 +982,7 @@ func placeBearer(p0, p1 *StartSeat, card, bearer string, bs int) {
 }
 
 // attachKeyAura gives the key's own Aura, which p0 placed on the battlefield
-// bare, a vanilla bearer its Enchant keyword takes (attachBearer) and attaches
+// bare, an inert bearer its Enchant keyword takes (attachBearer) and attaches
 // it (StartAttach): a bare Aura is refused (FieldBlock aura-unattached), and
 // the bearer is inert, so the start's focus play stays the only offer. False,
 // leaving both seats untouched, when the keyword names no permanent a carrier
@@ -584,9 +996,9 @@ func attachKeyAura(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 	return true
 }
 
-// attachBearer is the most inert creature the Aura's Enchant keyword takes and
-// the seat that must control it, or "" when the keyword names no permanent a
-// carrier can be (a player).
+// attachBearer is the most inert permanent the Aura's Enchant keyword takes (a
+// carrier creature, else a basic land) and the seat that must control it, or
+// "" when the keyword names no permanent a start can place (a player).
 func attachBearer(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face) (string, int) {
 	return attachBearerWhere(reg, b, card, face, nil)
 }
@@ -598,9 +1010,37 @@ func attachBearerWhere(reg *cards.Registry, b *certdeck.Builder, card string, fa
 	if !ok {
 		return "", 0
 	}
-	return filterCarrier(reg, b, card, strings.Join(req.raw, ","), func(c *cards.Face) bool {
+	filter := strings.Join(req.raw, ",")
+	fits := func(c *cards.Face) bool {
 		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && (keep == nil || keep(c))
-	})
+	}
+	if n, seat := filterCarrier(reg, b, card, filter, fits); n != "" {
+		return n, seat
+	}
+	// A keyword that takes no carrier creature (Enchant:Forest, Enchant:land
+	// you control) still takes a permanent a start file can place: a basic
+	// land. The carrier pool holds no land (inertCarrier excludes one), so the
+	// fallback walks the basics the filter names, in the fixed basic order,
+	// and takes the first that fits; it starts at Plains rather than a
+	// colour-matched basic, since the bearer is inert for the focus event (it
+	// can still tap for mana). A player or a planeswalker has no such inert
+	// basic here and stays a refusal.
+	for _, a := range parseFilter(filter) {
+		if !a.known || a.self {
+			continue
+		}
+		for _, basic := range []string{"Plains", "Island", "Swamp", "Mountain", "Forest"} {
+			c, ok := reg.Lookup(basic)
+			if !ok || len(c.Faces) == 0 || !fits(c.Faces[0]) || !a.matches(c.Faces[0], false) {
+				continue
+			}
+			if a.ctrl == ctrlOpp {
+				return basic, 1
+			}
+			return basic, 0
+		}
+	}
+	return "", 0
 }
 
 // attackingBearer is a creature an Aura's Enchant keyword takes that attacks
@@ -609,12 +1049,21 @@ func attackingBearer(c *cards.Face) bool {
 	return c.IsCreature() && c.Power() > 0 && !c.HasKeyword("Defender")
 }
 
-// attachedSource reports whether a damage trigger's ValidSource is exactly "the
-// permanent this attaches to" (Card.AttachedBy, Creature.AttachedBy), the only
-// source shape an Aura bearer start reads.
+// attachedSource reports whether a damage or block trigger's source/target
+// filter is "the permanent this attaches to": Card.AttachedBy,
+// Card.EnchantedBy, Card.EquippedBy (and the Creature spellings). The pinned
+// gorge compiles all three to one predicate (effects/compiled_predicate.go),
+// so they are all the bearer shape an Aura bearer start reads.
 func attachedSource(filter string) bool {
 	head, props, _ := strings.Cut(strings.TrimSpace(filter), ".")
-	return (head == "Card" || head == "Creature") && props == "AttachedBy"
+	if head != "Card" && head != "Creature" {
+		return false
+	}
+	switch props {
+	case "AttachedBy", "EnchantedBy", "EquippedBy":
+		return true
+	}
+	return false
 }
 
 // modifiedSource reads a damage source filter with one "modified" property
@@ -646,12 +1095,15 @@ func modifiedSource(filter string) (string, bool) {
 
 // murderFocus is the opponent's Murder destroying the card or its bearer: the
 // hand and lands are placed on seat, which takes the cast as its focus.
-func murderFocus(reg *cards.Registry, b *certdeck.Builder, seat *StartSeat, f *StartFile, s int) bool {
-	if !focusCast(reg, b, seat, "Murder") {
+func murderFocus(reg *cards.Registry, b *certdeck.Builder, seat *StartSeat, f *StartFile, s int, spell string) bool {
+	if spell == "" {
+		spell = "Murder"
+	}
+	if !focusCast(reg, b, seat, spell) {
 		return false
 	}
 	f.Active = s
-	f.Focus = &StartFocus{Seat: seatPtr(s), Card: "Murder", Kind: "cast"}
+	f.Focus = &StartFocus{Seat: seatPtr(s), Card: spell, Kind: "cast"}
 	return true
 }
 
@@ -674,13 +1126,25 @@ func focusCast(reg *cards.Registry, _ *certdeck.Builder, seat *StartSeat, name s
 var endStepSacrifices sync.Map // *cards.Registry -> []string
 
 // endStepSacrificeBearer is the first creature that sacrifices itself at the
-// beginning of the end step (Ball Lightning), or "": the body an Equipment can
-// be attached to with Magnetic Theft and then lose, which fires its
-// AttachedBy trigger while the Equipment is still attached.
-func endStepSacrificeBearer(reg *cards.Registry, b *certdeck.Builder, card string) string {
+// beginning of the end step (Ball Lightning) that keep also takes, or "": the
+// body an Equipment can be attached to with Magnetic Theft and then lose,
+// which fires its AttachedBy trigger while the Equipment is still attached.
+// keep is the stripped attachment trigger's filter (attachFilter), so the
+// bearer is one the trigger itself reads; nil accepts any.
+func endStepSacrificeBearer(reg *cards.Registry, b *certdeck.Builder, card string, keep func(*cards.Face) bool) string {
+	accepts := func(n string) bool {
+		if n == card {
+			return false
+		}
+		if keep == nil {
+			return true
+		}
+		c, ok := reg.Lookup(n)
+		return ok && len(c.Faces) > 0 && keep(c.Faces[0])
+	}
 	if v, ok := endStepSacrifices.Load(reg); ok {
 		for _, n := range v.([]string) {
-			if n != card {
+			if accepts(n) {
 				return n
 			}
 		}
@@ -709,7 +1173,7 @@ func endStepSacrificeBearer(reg *cards.Registry, b *certdeck.Builder, card strin
 	sort.Strings(out)
 	endStepSacrifices.Store(reg, out)
 	for _, n := range out {
-		if n != card {
+		if accepts(n) {
 			return n
 		}
 	}
@@ -1084,12 +1548,14 @@ func plainCost(f *cards.Face) bool {
 // a carrier creature (carrierPool) the filter takes, placed on seat 0's
 // battlefield beside it.
 func attackCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, filter string, f *StartFile) string {
+	if face.IsCreature() && filter == "" {
+		return card
+	}
 	if face.IsCreature() {
-		if filter == "" {
-			return card
-		}
-		for _, a := range parseFilter(filter) {
-			if a.known && !a.other && a.ctrl != ctrlOpp && a.matches(face, false) {
+		for _, a := range parseFilterCounters(filter, true, false, false, true) {
+			if a.known && !a.other && a.ctrl != ctrlOpp && a.matches(face, false) && survivesCounters(face, a.counters) {
+				placeAttackGates(&f.Setup.P0, card, a.counters)
+				designateCommander(reg, &f.Setup.P0, card, filter)
 				return card
 			}
 		}
@@ -1097,12 +1563,44 @@ func attackCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 	if filter == "" {
 		filter = "Creature.YouCtrl"
 	}
-	name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsCreature)
-	if name == "" || s != 0 {
-		return ""
+	// The carrier arm, filterCarrier's rule (the first understood, non-Self
+	// alternative some inert creature matches; an OppCtrl alternative names a
+	// seat 1 attacker, never taken here) with the counter gates read and
+	// placed, so "a creature you control with a counter on it" attacks.
+	for _, a := range parseFilterCounters(filter, true, false, false, true) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		keep := func(c *cards.Face) bool {
+			return c.IsCreature() && FieldBlock(c) == "" && !deadOnArrival(c) && survivesCounters(c, a.counters)
+		}
+		takes := func(c *cards.Face) bool { return keep(c) && a.matches(c, false) }
+		name := pickCarrier(reg, b, card, takes)
+		if name == "" && a.commander {
+			// The inert carrier pool can never hold a card the seat would
+			// designate as its commander, so an IsCommander alternative is
+			// not refused on an empty pool: the same fixture scan the static
+			// lane uses (fixtureCarrierMode's pickFixture), the same
+			// fixtureLess ordering, so the attacker stays deterministic.
+			name = pickFixture(reg, b, card, a.test, takes, true)
+		}
+		if name == "" {
+			continue
+		}
+		f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, name)
+		placeAttackGates(&f.Setup.P0, name, a.counters)
+		designateCommander(reg, &f.Setup.P0, name, filter)
+		return name
 	}
-	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, name)
-	return name
+	return ""
+}
+
+// placeAttackGates places an attacker's required counters on the seat holding
+// it.
+func placeAttackGates(seat *StartSeat, name string, gates []counterGate) {
+	for _, g := range gates {
+		seat.Counters = append(seat.Counters, StartCounter{Card: name, Kind: g.placedKind(), N: g.n})
+	}
 }
 
 // combatStart is a trigger an attack fires: "whenever this deals combat
@@ -1245,7 +1743,13 @@ func sourceCaster(trig *cards.Trigger) (caster int, accepts func(*cards.Face) bo
 // refused when the target is another permanent. When the target is the card
 // itself, a permanent that placeNeeds adds beside it later can also be a legal
 // target and is not checked here (the start-not-exercised lane reads it).
-func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+//
+// prelude says the card's own entry runs a state-backed as-enters replacement:
+// it is cast from hand at turn 1's first main (the targeters are instants, so
+// the caster can act on the controller's turn) instead of being placed at
+// genesis, which would carry entry stamps the lowering's setup cannot restate.
+// The card's controller is then the active seat and the cast is the prelude.
+func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile, prelude bool) string {
 	none := "no-generator:trigger:BecomesTarget"
 	if why := eventParamsOK(trig, "BecomesTarget", "ValidTarget", "ValidSource", "Ward", "Keyword", "KeywordLine", "FirstTime", "Valiant"); why != "" {
 		return why
@@ -1306,12 +1810,24 @@ func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 		return none + ":source"
 	}
 	seats := seatsOf(f)
-	f.Setup.P0.Battlefield = []string{card}
+	if prelude {
+		// The entry stamps are the cast's, not a genesis placement's: the card
+		// starts in hand with the lands its cost takes, and the controller is
+		// the active seat so it can cast a sorcery-speed permanent.
+		castCarrier(reg, &f.Setup.P0, card)
+		f.Prelude, f.PreludeSeat = card, 0
+	} else {
+		f.Setup.P0.Battlefield = []string{card}
+	}
 	if target != card {
 		seats[tseat].Battlefield = append(seats[tseat].Battlefield, target)
 	}
 	castCarrier(reg, seats[caster], spellName)
-	f.Active = caster
+	if prelude {
+		f.Active = 0
+	} else {
+		f.Active = caster
+	}
 	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spellName, Kind: "cast"}
 	return ""
 }
@@ -1376,12 +1892,23 @@ func attacksStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 		}
 		return ""
 	}
-	for _, a := range parseFilter(filter) {
+	// parseFilterCommander: the IsCommander alternative is understood here
+	// because attackCarrier designates the attacker it picks (the engine
+	// reads Card.IsCommander through Game.CommanderOf, so an undesignated
+	// attacker would never fire the trigger).
+	for _, a := range parseFilterCommander(filter) {
 		if a.self || !a.known {
-			// an unread property (a counter gate, a tapped state): the card
-			// itself attacks, when it can
+			// An unread property is not a carrier test: a counter gate is a
+			// placement and a tapped state a battlefield state. attackCarrier
+			// reads the gates (parseFilterCounters) and places them on the
+			// card itself or its carrier; a property it cannot establish (a
+			// game-history gate) leaves the card's own attack, when it can.
 			if !face.IsCreature() {
 				return none + ":filter"
+			}
+			if attacker := attackCarrier(reg, b, face, card, filter, f); attacker != "" {
+				f.Focus = &StartFocus{Seat: seatPtr(0), Card: attacker, Kind: "attack"}
+				return ""
 			}
 			f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "attack"}
 			return ""
@@ -1391,13 +1918,14 @@ func attacksStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 	case att == "":
 	case strings.HasPrefix(att, "You"):
 		// the opponent attacks the card's controller
-		name, s := filterCarrier(reg, b, card, filter, func(c *cards.Face) bool {
+		name, s := filterCarrierCommander(reg, b, card, filter, func(c *cards.Face) bool {
 			return c.IsCreature() && !c.HasKeyword("Defender") && !deadOnArrival(c)
 		})
 		if name == "" || s != 0 {
 			return none + ":filter"
 		}
 		f.Setup.P1.Battlefield = append(f.Setup.P1.Battlefield, name)
+		designateCommander(reg, &f.Setup.P1, name, filter)
 		f.Active = 1
 		f.Focus = &StartFocus{Seat: seatPtr(1), Card: name, Kind: "attack"}
 		return ""
@@ -1515,7 +2043,7 @@ func selfDiesStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 	p0, p1 := &f.Setup.P0, &f.Setup.P1
 	p0.Battlefield = []string{card}
 	if face.IsCreature() {
-		if !murderFocus(reg, b, p1, f, 1) {
+		if !murderFocus(reg, b, p1, f, 1, "") {
 			return none + ":filter"
 		}
 		// The key card is the creature that must die: name it so no need's

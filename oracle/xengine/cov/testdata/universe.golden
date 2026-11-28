@@ -1,0 +1,45 @@
+Grizzly Bears	cast	cast
+Prodigal Sorcerer	cast	cast
+Prodigal Sorcerer	f0/a0	DealDamage
+Elvish Visionary	cast	cast
+Elvish Visionary	f0/t0	ChangesZone
+Jace Beleren	cast	cast
+Jace Beleren	f0/a0	Draw
+Jace Beleren	f0/a1	Draw
+Jace Beleren	f0/a2	Mill
+Sulfurous Springs	land	land
+Sulfurous Springs	f0/a0	Mana
+Sulfurous Springs	f0/a1	Mana
+Valki, God of Lies	cast	cast
+Valki, God of Lies	f0/a0	Clone
+Valki, God of Lies	f0/t0	ChangesZone
+Valki, God of Lies	f1/a0	Dig
+Valki, God of Lies	f1/a1	ChangeZone
+Valki, God of Lies	f1/a2	ChangeZoneAll
+Valki, God of Lies	repl#1.0	Moved/ETBReplacement
+Bonecrusher Giant	cast	cast
+Bonecrusher Giant	f0/t0	BecomesTarget
+The Eldest Reborn	cast	cast
+The Eldest Reborn	kw#0.0	Chapter
+static	cast	cast
+static	static#0.0	static.continuous
+replacement	cast	cast
+replacement	repl#0.0	GainLife/Test
+unexpanded keyword	cast	cast
+unexpanded keyword	kw#0.0	Haste
+expanded keyword	cast	cast
+expanded keyword	f0/a0	ChangeZone/Cycling
+three-mode charm	cast	cast
+three-mode charm	mode#0.0.0	Charm/Dosan's Oldest Chant
+three-mode charm	mode#0.0.1	Charm/Kodama's Reach
+three-mode charm	mode#0.0.2	Charm/Time of Need
+flying creature	cast	cast
+flying creature	combat#0.attack	combat.attack
+flying creature	combat#0.block	combat.block
+two faces	cast	cast
+two faces	static#0.0	static.continuous
+two faces	repl#1.0	Moved
+two faces	kw#0.0	Haste
+two faces	combat#1.attack	combat.attack.face:1
+two faces	combat#1.block	combat.block.face:1
+basic land	land	land

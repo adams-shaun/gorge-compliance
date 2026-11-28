@@ -169,7 +169,11 @@ type filterAlt struct {
 	// a permanent on the battlefield, not a property of a face, so only a
 	// reader that knows the placed object's state enables it.
 	tapped int
-	known  bool
+	// topLibrary is true when the alternative requires the object to be the
+	// top card of its owner's library. Only the static start places a card
+	// there, so a lane that casts or places its fixture cannot meet it.
+	topLibrary bool
+	known      bool
 	// history is the first game-history property ("wasDealtDamageThisTurn")
 	// the alternative carries: the engine reads it, and nothing has happened
 	// yet at the start's step, so no placed object can meet it.
@@ -177,7 +181,15 @@ type filterAlt struct {
 	// counters are the counters every object the alternative matches must
 	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
 	counters []counterGate
-	test     func(f *cards.Face) bool
+	// commander is true when the alternative reads the positive IsCommander
+	// property. The inert carrier pool can never hold a card the seat would
+	// designate as its commander (Commander is no evergreen keyword, and a
+	// commander-shaped creature is no inert stand-in), so the attacks lane
+	// reaches the fixture picker on this flag instead of refusing a pool it
+	// cannot fill; only a lane that records the designation (commanderOK)
+	// reads the alternative as known at all.
+	commander bool
+	test      func(f *cards.Face) bool
 }
 
 // counterGate is a "counters_<OP><N>_<KIND>" filter property: the object must
@@ -185,6 +197,19 @@ type filterAlt struct {
 type counterGate struct {
 	kind string
 	n    int32
+}
+
+// countersAny is the KIND of the generic "HasCounters" gate: the object must
+// carry at least one counter of any kind. A placement cannot name "any", so
+// placedKind turns it into one P1P1 counter (every kind a start places).
+const countersAny = "*"
+
+// placedKind is the counter kind to place for this gate.
+func (g counterGate) placedKind() string {
+	if g.kind == countersAny {
+		return "P1P1"
+	}
+	return g.kind
 }
 
 // parseCounterGate reads "GE1_P1P1" (the part after "counters_") into a gate.
@@ -283,10 +308,15 @@ func compare(prop string) (stat string, test func(int) bool, ok bool) {
 
 // historyProp reports whether a filter property words a this-turn event
 // ("wasDealtDamageThisTurn", "dealtDamageToYouThisTurn", "blockedThisTurn"):
-// the start's step is turn 1's precombat main with nothing yet happened, so
-// the engine's reading of it is false for every object. ThisTurnEntered, a
-// prefix, is different (a placed permanent may count) and is not one.
-func historyProp(p string) bool { return strings.HasSuffix(p, "ThisTurn") }
+// the start's step is turn 1's precombat main with nothing yet happened, so the
+// engine's reading of it is false for every object. ThisTurnEntered is the
+// same for a start: setup permanents and tokens are placed before turn 1 and
+// do not count as entered this turn (gorge's
+// TestOracleSetupPermanentsDoNotCountAsEnteredThisTurn), so no placement meets
+// it.
+func historyProp(p string) bool {
+	return p == "ThisTurnEntered" || strings.HasSuffix(p, "ThisTurn")
+}
 
 // typeWord reports whether w reads as a type word (Creature, Dragon, Legendary):
 // capitalised letters and hyphens only.
@@ -302,6 +332,26 @@ func typeWord(w string) bool {
 	return true
 }
 
+// typeWordTest is the filter test for one type word under a filter head. A
+// creature subtype is also met by a changeling or an every-creature-types CDA
+// (CR 702.73a); a card type, supertype or noncreature subtype is not.
+//
+// "Is a creature subtype" is the engine's positive CR 205.3m vocabulary
+// (effects.CreatureTypeWords), not "any capitalised word a filter spells that
+// is not a card type". Forge filters also spell predicates as capitalised words
+// (Commander's Plate's Creature.IsCommander, Seasinger's
+// Creature.ControllerControlsIsland), and those are not subtypes: a changeling
+// must not stand in for one, or the start places a target the engine rejects.
+func typeWordTest(head, w string) func(*cards.Face) bool {
+	subtype := strings.EqualFold(head, "Creature") && effects.CreatureTypeWords(w)
+	return func(f *cards.Face) bool {
+		if f.HasTypeWord(w) {
+			return true
+		}
+		return subtype && (f.HasKeyword("Changeling") || f.AllCreatureTypesCDA())
+	}
+}
+
 // parseFilter reads a ValidCard filter into its alternatives. A counter gate
 // ("counters_GE1_P1P1"), a library-top marker ("TopLibrary") and a battlefield
 // state ("tapped"/"untapped") are not understood here: a caller that places no
@@ -309,17 +359,34 @@ func typeWord(w string) bool {
 // would pick a carrier that does not meet the filter, so the alternative stays
 // unknown. The static start reads the first two with parseFilterStatic, and a
 // focus target the start places reads its state with parseFilterPlaced.
-func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false, false) }
+func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false, false, false) }
 
 // parseFilterStatic is parseFilter for the static start: it places counters and
 // may put the affected card on top of the library, so both markers are
 // understood.
-func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true, false) }
+func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true, false, false) }
 
 // parseFilterPlaced is parseFilter for a target the start places on the
 // battlefield: whether the placed permanent is tapped is then known from
 // StartSeat.Tapped, so the property is read rather than left unknown.
-func parseFilterPlaced(s string) []filterAlt { return parseFilterCounters(s, false, false, true) }
+func parseFilterPlaced(s string) []filterAlt {
+	return parseFilterCounters(s, false, false, true, false)
+}
+
+// parseFilterCommander is parseFilter for a lane that designates its carrier as
+// the seat's commander (StartSeat.Commanders): the IsCommander alternative is
+// read rather than left unknown, because the lane records the designation the
+// engine reads (Game.CommanderOf). Every other lane keeps the alternative
+// unknown: an undesignated permanent reads false there whatever its face says.
+func parseFilterCommander(s string) []filterAlt {
+	return parseFilterCounters(s, false, false, false, true)
+}
+
+// parseFilterStaticCommander is parseFilterStatic with the commander
+// alternative read, for a lane that designates its fixture.
+func parseFilterStaticCommander(s string) []filterAlt {
+	return parseFilterCounters(s, true, true, false, true)
+}
 
 // typeWordAny is a filter test any of the given type words (or creature
 // types) satisfies.
@@ -343,6 +410,8 @@ var filterProps = map[string]func(*cards.Face) bool{
 	"Colorless":  func(f *cards.Face) bool { return faceColours(f) == "" },
 	"Multicolor": func(f *cards.Face) bool { return len(faceColours(f)) > 1 },
 	"MultiColor": func(f *cards.Face) bool { return len(faceColours(f)) > 1 }, // Forge's spelling
+	// CR 105.2: a monocolored object is exactly one colour.
+	"MonoColor": func(f *cards.Face) bool { return len(faceColours(f)) == 1 },
 	// CR 700.6: a card is historic if it is legendary, an artifact, or a Saga.
 	"Historic": func(f *cards.Face) bool {
 		return f.IsLegendary() || f.IsArtifact() || f.HasTypeWord("Saga")
@@ -351,6 +420,17 @@ var filterProps = map[string]func(*cards.Face) bool{
 	"Outlaw": typeWordAny("Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"),
 	// CR 700.8: a party card is a Cleric, Rogue, Warrior, or Wizard.
 	"Party": typeWordAny("Cleric", "Rogue", "Warrior", "Wizard"),
+	// CR 903.3: each deck designates a legendary card as its commander, and
+	// the designated card must be a creature. The designation is an attribute
+	// of the card, not a printed characteristic (CR 903.3), which is why the
+	// engine reads Game.CommanderOf list membership rather than a keyword:
+	// the face test here only picks a carrier that could legally be
+	// designated, and the lane that reads this row must record the
+	// designation too (parseFilterCounters' commanderOK and
+	// designateCommander), or the trigger never fires. The Vehicle,
+	// Spacecraft and says-it-can-be variants of CR 903.3/903.3a stay
+	// unmatched: refusing those is the existing unknown-property behaviour.
+	"IsCommander": func(f *cards.Face) bool { return f.IsLegendary() && f.IsCreature() },
 }
 
 // pinMatches reports whether the pinned gorge can evaluate the filter
@@ -363,7 +443,13 @@ func pinMatches(p string) bool {
 	return len(effects.UnknownPredicates("Card."+p)) == 0
 }
 
-func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []filterAlt {
+// parseFilterCounters reads a ValidCard filter into its alternatives, with the
+// same opt-in gates its wrappers set: commanderOK is only true for a lane that
+// records the designation on its seat (designateCommander) — the engine answers
+// Card.IsCommander from Game.CommanderOf list membership, not from the face, so
+// a carrier a lane never designated reads false there and the alternative stays
+// unknown elsewhere, like the counter, library-top and tapped gates.
+func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK, commanderOK bool) []filterAlt {
 	var out []filterAlt
 	for _, raw := range strings.Split(s, ",") {
 		raw = strings.TrimSpace(raw)
@@ -381,8 +467,7 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 			if !typeWord(head) {
 				a.known = false
 			}
-			t := head
-			tests = append(tests, func(f *cards.Face) bool { return f.HasTypeWord(t) })
+			tests = append(tests, typeWordTest(head, head))
 		}
 		if props != "" {
 			for _, p := range strings.Split(props, "+") {
@@ -399,7 +484,7 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 				case "Other":
 					a.other = true
 					continue
-				case "inZoneBattlefield":
+				case "inZoneBattlefield", "inRealZoneBattlefield":
 					continue // a placed carrier is on the battlefield
 				case "tapped":
 					if !tappedOK {
@@ -419,6 +504,8 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 					// only the static start places the affected card there
 					if !topLibraryOK {
 						a.known = false
+					} else {
+						a.topLibrary = true
 					}
 					continue
 				case "!token", "nonToken":
@@ -432,7 +519,25 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 					if !pinMatches(p) {
 						a.known = false // never read a named property as a type word
 					}
+					if p == "IsCommander" {
+						a.commander = true
+						if !commanderOK {
+							a.known = false // only a lane that designates reads this row
+						}
+					}
 					tests = append(tests, test)
+					continue
+				}
+				if p == "HasCounters" {
+					// "a creature with a counter on it": the generic gate. A
+					// reader that places no counters cannot meet it, so the
+					// alternative stays unknown outside the countersOK lanes
+					// (like counters_, which it joins below).
+					if !countersOK {
+						a.known = false
+						continue
+					}
+					a.counters = append(a.counters, counterGate{kind: countersAny, n: 1})
 					continue
 				}
 				if c, ok := strings.CutPrefix(p, "counters_"); ok {
@@ -475,7 +580,8 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 						continue
 					}
 					if typeWord(w) {
-						tests = append(tests, func(f *cards.Face) bool { return !f.HasTypeWord(w) })
+						neg := typeWordTest(head, w)
+						tests = append(tests, func(f *cards.Face) bool { return !neg(f) })
 						continue
 					}
 				}
@@ -491,15 +597,21 @@ func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []fi
 					})
 					continue
 				}
+				if historyProp(p) {
+					// a this-turn event no setup placement has undergone: the
+					// alternative is not placeable, and refusing by name beats
+					// a blind pick the engine would reject
+					a.known = false
+					if a.history == "" {
+						a.history = p
+					}
+					continue
+				}
 				if typeWord(p) {
-					w := p
-					tests = append(tests, func(f *cards.Face) bool { return f.HasTypeWord(w) })
+					tests = append(tests, typeWordTest(head, p))
 					continue
 				}
 				a.known = false
-				if a.history == "" && historyProp(p) {
-					a.history = p
-				}
 			}
 		}
 		a.test = func(f *cards.Face) bool {
@@ -531,7 +643,23 @@ func pickCarrier(reg *cards.Registry, b *certdeck.Builder, card string, keep fun
 // control it (an alternative with no controller: seat 0). extra further
 // narrows the carriers (a permanent for an enters trigger).
 func filterCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool) (name string, seat int) {
-	for _, a := range parseFilter(filter) {
+	return filterCarrierMode(reg, b, card, filter, extra, false)
+}
+
+// filterCarrierCommander is filterCarrier for a lane that designates the
+// carrier it picks as the seat's commander (StartSeat.Commanders,
+// designateCommander): the IsCommander alternative is read rather than left
+// unknown, because the lane records the designation the engine reads.
+func filterCarrierCommander(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool) (name string, seat int) {
+	return filterCarrierMode(reg, b, card, filter, extra, true)
+}
+
+func filterCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, commanderOK bool) (name string, seat int) {
+	parse := parseFilter
+	if commanderOK {
+		parse = parseFilterCommander
+	}
+	for _, a := range parse(filter) {
 		if !a.known || a.self {
 			continue
 		}
@@ -587,17 +715,50 @@ func zoneFixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter s
 }
 
 func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, nil, false)
+}
+
+// castableAlt reports whether a start can establish alternative a by casting
+// its carrier from hand rather than placing it: a counter gate
+// ("counters_GE1_OIL", "HasCounters") cannot be met, because a setup counter
+// has nothing to sit on while the card is still in hand, a token requirement
+// names an object a cast card is not, and a top-of-library requirement names a
+// card the cast does not put there. A caller that casts the fixture must skip
+// such an alternative instead of letting its test alone stand for the gate; a
+// caller that places the object on the battlefield meets the counter gate with
+// filterGateCounters and the library gate by placing it there.
+func castableAlt(a filterAlt) bool {
+	return len(a.counters) == 0 && a.token <= 0 && !a.topLibrary
+}
+
+// castFixtureCarrierIn is fixtureCarrierIn for a fixture the start casts from
+// hand (entersFallback): an alternative the cast cannot establish
+// (castableAlt) is not answered, so the ":filter" refusal follows rather than
+// a start whose entering object never meets the trigger's filter.
+func castFixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield, commanderOK bool) (name string, seat int) {
+	return fixtureCarrierMode(reg, b, card, filter, extra, onBattlefield, castableAlt, commanderOK)
+}
+
+// fixtureCarrierMode is fixtureCarrierIn with an optional accept gate on the
+// fixture fallback: nil takes every understood, non-Self alternative, and
+// castFixtureCarrierIn passes castableAlt to drop the ones its cast cannot
+// establish.
+func fixtureCarrierMode(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool, accept func(filterAlt) bool, commanderOK bool) (name string, seat int) {
 	// Both passes refuse a FieldBlock card on the battlefield: the inert
 	// carrier pool is not filtered for it, and an unattached Aura or a
 	// non-permanent listed there aborts the whole start file.
 	first := func(f *cards.Face) bool {
 		return (!onBattlefield || FieldBlock(f) == "") && (extra == nil || extra(f))
 	}
-	if n, s := filterCarrier(reg, b, card, filter, first); n != "" {
+	if n, s := filterCarrierMode(reg, b, card, filter, first, commanderOK); n != "" {
 		return n, s
 	}
-	for _, a := range parseFilterStatic(filter) {
-		if !a.known || a.self {
+	parse := parseFilterStatic
+	if commanderOK {
+		parse = parseFilterStaticCommander
+	}
+	for _, a := range parse(filter) {
+		if !a.known || a.self || accept != nil && !accept(a) {
 			continue
 		}
 		var n string
@@ -734,6 +895,14 @@ func pickFixtureIn(reg *cards.Registry, b *certdeck.Builder, card string, keep, 
 		if onBattlefield && FieldBlock(f) != "" {
 			continue
 		}
+		// A fixture placed with its own as-enters choice is a real move this
+		// turn, and the lower refuses the entry stamps setup cannot restate
+		// (reasonAsEntersStamp). Prefer any other card, or none: a start that
+		// names no fixture refuses by its own reason instead of emitting a
+		// position the lower rejects.
+		if onBattlefield && asEnters(f) {
+			continue
+		}
 		if !keep(f) || extra != nil && !extra(f) || deadOnArrival(f) {
 			continue
 		}
@@ -787,7 +956,7 @@ func filterGateCounters(filter string, face *cards.Face, self bool) []StartCount
 		}
 		out := make([]StartCounter, 0, len(a.counters))
 		for _, g := range a.counters {
-			out = append(out, StartCounter{Card: face.Name, Kind: g.kind, N: g.n})
+			out = append(out, StartCounter{Card: face.Name, Kind: g.placedKind(), N: g.n})
 		}
 		return out
 	}
@@ -950,55 +1119,50 @@ func targetedCastCarrier(f *cards.Face) bool {
 	return true
 }
 
-// baitTgtFor is a permanent the bait spell's one ability can target, and
-// whether it sits on the bait seat's battlefield (false: only the focus
-// seat's meets the filter, "Creature.OppCtrl" from the bait's view). The most
-// inert carrier of the type the filter takes, on the bait seat's side for an
-// unrestricted or YouCtrl alternative (from the bait's own view), on the
-// focus seat's for an OppCtrl one. Only a filter parseFilter reads is placed:
-// an unknown restriction could make the bait's own target illegal in the
-// engine, and a start that cannot place it keeps the refusal.
-func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA) (name string, onBaitSeat bool) {
+// baitTgtFor is the target the bait spell's one ability names: a player (the
+// focus seat, for a TargetValidTargeting$ "You"/player restriction) or a
+// permanent on the bait seat's battlefield (false onBaitSeat: only the focus
+// seat's meets the filter, "Permanent.YouCtrl" from the focus play's view).
+// The target must meet both the bait's own ValidTgts filter and every required
+// TargetValidTargeting$ alternative of the focus play, so the bait's cast and
+// the focus play's target are both legal. Only a filter parseFilterPlaced
+// reads is placed: an unknown restriction could make either target illegal in
+// the engine, and a start that cannot place it keeps the refusal.
+func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA, sts []stackTgt, seat int) (name string, onBaitSeat, player, ok bool) {
+	focus, bait := seat, 1-seat
+	needs := false
+	for _, st := range sts {
+		needs = needs || st.needsTarget
+	}
+	if needs {
+		if targetSeat, ok := baitPlayerSeat(sts, focus); ok {
+			for _, raw := range strings.Split(sa.Params["ValidTgts"], ",") {
+				raw = strings.TrimSpace(raw)
+				if raw == "" {
+					continue
+				}
+				if baitPlayerAllows(raw, targetSeat, bait) {
+					return "", false, true, true
+				}
+			}
+		}
+	}
 	for _, raw := range strings.Split(sa.Params["ValidTgts"], ",") {
 		raw = strings.TrimSpace(raw)
 		if raw == "" {
 			continue
 		}
-		n := parseAlt(strings.ToLower(raw))
-		if n.combat || !permanentTarget(reg, raw) {
+		bf, ok := baitPermanentFilter(raw)
+		if !ok {
 			continue
 		}
-		alts := parseFilterPlaced(raw)
-		if len(alts) != 1 || !alts[0].known {
+		side, ok := baitPermanentSide(sts, bf, focus)
+		if !ok {
 			continue
 		}
-		a := alts[0]
-		pick := pickCarrier(reg, b, card, func(f *cards.Face) bool {
-			return faceIs(n, f) && FieldBlock(f) == "" && !deadOnArrival(f) && a.matchesState(f, false, false)
-		})
-		if pick != "" {
-			// n.side -1 is "the opponent's" from the bait's own view: the
-			// focus seat, where the target is placed
-			return pick, n.side != -1
+		if pick := pickBaitPermanent(reg, b, card, sts, bf, side, focus); pick != "" {
+			return pick, side == bait, false, true
 		}
 	}
-	return "", false
-}
-
-// faceIs is the type part of altMet without a side: whether f is the kind of
-// permanent the alternative n asks for.
-func faceIs(n altNeed, f *cards.Face) bool {
-	switch n.typ {
-	case "creature":
-		return f.IsCreature()
-	case "artifact":
-		return f.HasTypeWord("Artifact")
-	case "enchantment":
-		return f.HasTypeWord("Enchantment")
-	case "land":
-		return f.IsLand()
-	case "planeswalker":
-		return f.IsPlaneswalker()
-	}
-	return f.IsPermanent()
+	return "", false, false, false
 }

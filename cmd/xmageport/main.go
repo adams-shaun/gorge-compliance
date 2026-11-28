@@ -18,9 +18,14 @@
 //
 // With -commit, the PASSING scenarios (minus methods already present in a
 // hand-ported file) are written to <commit>/<family>/<Class>.json.
+//
+// With -commit and -check it writes nothing there: it reports every committed
+// generated file this run would change and exits 1, so a hand edit to a
+// generated scenario cannot pass unnoticed.
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -46,12 +51,14 @@ func main() {
 	out := flag.String("out", ".oracle-build/xmagetests/gen", "output directory")
 	corpus := flag.String("cards", ".cards", "gorge .cards corpus directory")
 	commit := flag.String("commit", "", "write passing scenarios under this directory (scenarios/xmageport)")
+	check := flag.Bool("check", false, "with -commit: write nothing and exit 1 if a committed generated file differs from this run's output")
 	xmIn := flag.String("xmage-in", "", "write XMage driver cross-check input (JSONL) for generated scenarios here")
 	only := flag.String("only", "", "only this Class or Class#method")
 	norun := flag.Bool("norun", false, "translate only; do not play scenarios")
 	var fams familyFlag
 	flag.Var(&fams, "family", "family=relative/dir (repeatable)")
 	kbPath := flag.String("known-bugs", "cmd/xmageport/known_bugs.tsv", "triaged known_bug rows (Class#method TAB reason)")
+	flag.StringVar(&droppedRecordPath, "dropped-record", "cmd/xmageport/dropped_choices.tsv", "dropped-choice record (Class#method TAB dropped TAB class TAB cr TAB note)")
 	flag.BoolVar(&dropLands, "droplands", false, "drop basic lands that only pay for spells")
 	flag.BoolVar(&verbose, "v", false, "print each run's scenario, transcript and fails")
 	flag.Parse()
@@ -128,13 +135,48 @@ func main() {
 		}
 		os.WriteFile(*xmIn, []byte(b.String()), 0o644)
 	}
-	if *commit != "" {
+	switch {
+	case *check && *commit == "":
+		fmt.Fprintln(os.Stderr, "-check needs -commit <dir>")
+		os.Exit(2)
+	case *check:
+		drift, err := checkCommit(*commit, results)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if len(drift) > 0 {
+			fmt.Fprintf(os.Stderr, "%d committed scenario file(s) differ from this run:\n", len(drift))
+			for _, p := range drift {
+				fmt.Fprintf(os.Stderr, "  %s\n", p)
+			}
+			os.Exit(1)
+		}
+	case *commit != "":
 		if err := writeCommit(*commit, results); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+		// Keep the dropped-choice record in step with the scenarios just
+		// written (measured from disk, so a chunk or -only run that left
+		// other scenarios alone keeps their rows).
+		if err := syncDroppedRecord(*commit, droppedRecordPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 	}
-	fmt.Print(summary(results))
+	// -commit may have rewritten the record above, so write the summary
+	// (including its untriaged count) only now, after any sync.
+	sum, err := summary(results)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	if err := os.WriteFile(filepath.Join(*out, "summary.txt"), []byte(sum), 0o644); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	fmt.Print(sum)
 }
 
 type genEntry struct {
@@ -146,7 +188,7 @@ type genEntry struct {
 func writeOutputs(out string, results []*result) error {
 	byFile := map[string][]*result{}
 	var tsv strings.Builder
-	tsv.WriteString("family\tclass\tmethod\tstatus\tcode\tdetail\tfirst_fail\tunsupported\n")
+	tsv.WriteString("family\tclass\tmethod\tstatus\tcode\tdetail\tfirst_fail\tunsupported\tdropped\n")
 	for _, r := range results {
 		ff := ""
 		if len(r.Fails) > 0 {
@@ -156,8 +198,8 @@ func writeOutputs(out string, results []*result) error {
 				ff = ff[:300]
 			}
 		}
-		fmt.Fprintf(&tsv, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", r.Family, r.Class, r.Method, r.Status, r.Code,
-			strings.NewReplacer("\t", " ", "\n", " ").Replace(r.Detail), ff, r.Unsupported)
+		fmt.Fprintf(&tsv, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\n", r.Family, r.Class, r.Method, r.Status, r.Code,
+			strings.NewReplacer("\t", " ", "\n", " ").Replace(r.Detail), ff, r.Unsupported, r.Dropped)
 		if r.Scenario != nil {
 			k := filepath.Join(r.Family, r.Class+".json")
 			byFile[k] = append(byFile[k], r)
@@ -167,9 +209,6 @@ func writeOutputs(out string, results []*result) error {
 		return err
 	}
 	if err := os.WriteFile(filepath.Join(out, "report.tsv"), []byte(tsv.String()), 0o644); err != nil {
-		return err
-	}
-	if err := os.WriteFile(filepath.Join(out, "summary.txt"), []byte(summary(results)), 0o644); err != nil {
 		return err
 	}
 	for k, rs := range byFile {
@@ -230,7 +269,49 @@ func loadKnownBugs(path string) map[string]string {
 	return out
 }
 
+// writeCommit writes this run's passing scenarios into dir, keeping committed
+// scenarios the run did not regenerate.
 func writeCommit(dir string, results []*result) error {
+	var drift []string
+	return commitFiles(dir, results, true, &drift)
+}
+
+// checkCommit reports the committed files the same run would change, without
+// writing any of them. It is writeCommit's dry run, so a hand-edited
+// generated scenario (or a missing or stale one) is named here instead of
+// surviving as a canonical artifact.
+func checkCommit(dir string, results []*result) ([]string, error) {
+	var drift []string
+	if err := commitFiles(dir, results, false, &drift); err != nil {
+		return nil, err
+	}
+	return drift, nil
+}
+
+func commitFiles(dir string, results []*result, apply bool, drift *[]string) error {
+	// put writes one generated file, or in check mode collects it when the
+	// committed bytes differ (a missing file differs from every output).
+	put := func(p string, f portFile) error {
+		if apply {
+			return writePortFile(p, f)
+		}
+		got, err := os.ReadFile(p)
+		if err != nil || !bytes.Equal(got, marshalPortFile(f)) {
+			*drift = append(*drift, p)
+		}
+		return nil
+	}
+	// remove is put's counterpart for a file whose only scenarios a triaged
+	// removal deleted.
+	remove := func(p string) error {
+		if apply {
+			return os.Remove(p)
+		}
+		if _, err := os.Stat(p); err == nil {
+			*drift = append(*drift, p)
+		}
+		return nil
+	}
 	have := existingMethods(dir)
 	byFile := map[string][]*result{}
 	files := map[string]bool{}
@@ -294,13 +375,13 @@ func writeCommit(dir string, results []*result) error {
 				continue
 			}
 			if len(kept) == 0 {
-				if err := os.Remove(p); err != nil {
+				if err := remove(p); err != nil {
 					return err
 				}
 				continue
 			}
 			old.Scenarios = kept
-			if err := writePortFile(p, old); err != nil {
+			if err := put(p, old); err != nil {
 				return err
 			}
 			continue
@@ -310,19 +391,23 @@ func writeCommit(dir string, results []*result) error {
 		for _, r := range rs {
 			f.Scenarios = append(f.Scenarios, *r.Scenario)
 		}
-		if err := writePortFile(p, f); err != nil {
+		if err := put(p, f); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
+func marshalPortFile(f portFile) []byte {
+	b, _ := json.MarshalIndent(f, "", " ")
+	return append(b, '\n')
+}
+
 func writePortFile(p string, f portFile) error {
 	if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil {
 		return err
 	}
-	b, _ := json.MarshalIndent(f, "", " ")
-	return os.WriteFile(p, append(b, '\n'), 0o644)
+	return os.WriteFile(p, marshalPortFile(f), 0o644)
 }
 
 // readPortFile reads one committed scenario file. An absent or unreadable
@@ -339,7 +424,7 @@ func readPortFile(path string) (portFile, bool) {
 	return f, true
 }
 
-func summary(results []*result) string {
+func summary(results []*result) (string, error) {
 	var b strings.Builder
 	type key struct{ fam, k string }
 	cnt := map[key]int{}
@@ -391,5 +476,27 @@ func summary(results []*result) string {
 	for _, x := range rs {
 		fmt.Fprintf(&b, "  %-32s %5d\n", x.k, x.v)
 	}
-	return b.String()
+	// dropped-choice totals: what this run dropped, and how much of the
+	// record still argues no reason (classes empty).
+	tests, choices := 0, 0
+	for _, r := range results {
+		if r.Dropped > 0 {
+			tests++
+			choices += r.Dropped
+		}
+	}
+	// A record that will not parse must fail the run, not report untriaged=0
+	// and look clean.
+	record, err := loadDroppedRecord(droppedRecordPath)
+	if err != nil {
+		return "", err
+	}
+	untriaged := 0
+	for _, row := range record {
+		if row.Class == "" {
+			untriaged++
+		}
+	}
+	fmt.Fprintf(&b, "\ndropped-choice tests=%d choices=%d untriaged=%d\n", tests, choices, untriaged)
+	return b.String(), nil
 }

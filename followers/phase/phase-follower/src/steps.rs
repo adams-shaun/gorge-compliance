@@ -9,24 +9,28 @@
 //! answers itself is `ManaPayment` (pin the pool units gorge spent, then finalise).
 
 use std::cell::Cell;
+use std::collections::BTreeMap;
 
 use engine::ai_support::legal_actions_full;
 use engine::game::combat::AttackTarget;
 use engine::game::game_object::AttachTarget;
+use engine::game::keywords::object_has_effective_keyword_kind;
 use engine::game::layers::flush_layers;
 use engine::game::{apply, EngineError};
 use engine::types::ability::TargetRef;
 use engine::types::actions::{DebugAction, GameAction};
 use engine::types::game_state::{ActionDisposition, ActionResult, CastPaymentMode, GameState, WaitingFor};
 use engine::types::identifiers::ObjectId;
+use engine::types::keywords::KeywordKind;
 use engine::types::mana::{ManaCost, ManaCostShard, ManaPipId, ManaType};
 use engine::types::phase::Phase;
 use engine::types::player::PlayerId;
 use engine::types::zones::Zone;
+use engine::types::Keyword;
 use follower_proto::batch::{RowBuilder, Stop};
 use follower_proto::decisions::DecisionQueue;
 use follower_proto::refs::Ref;
-use follower_proto::request::{NeutralAbility, Request, Step};
+use follower_proto::request::{Decision, NeutralAbility, Request, Step};
 use follower_proto::row::strict_miss_msg;
 use follower_proto::vocab;
 use serde_json::Value;
@@ -170,6 +174,12 @@ pub fn run(req: &Request, board: Board, rb: &mut RowBuilder) -> Result<(), Stop>
         flush_layers(&mut m.board.state);
         rb.push_snapshot(snapshot(&m.board.state, &format!("step {i} ({})", step.op), &m.board.names));
     }
+    let unposed = m.settle_unposed_optional_costs();
+    if unposed > 0 {
+        rb.note(format!(
+            "consumed {unposed} optional-cost decision(s) phase posed no prompt for (declined, or an either-or cost's forced fallback)"
+        ));
+    }
     if let Some(l) = m.queue.leftover() {
         rb.leftover = Some(l);
     }
@@ -183,6 +193,21 @@ impl Machine<'_> {
 
     fn game_ended(&self) -> Stop {
         harness(format!("game ended at step {} before every step ran", self.step))
+    }
+
+    /// Consume the optional-cost decisions phase resolves without opening a prompt (a declined
+    /// trigger cost, or an either-or additional cost whose preferred branch is unpayable). The
+    /// predicate lives in `answer` beside the other decision shapes; the answerer consumes a
+    /// decision when phase does pose the prompt, so anything left at the end of the replay never
+    /// had one. Returns how many decisions were consumed.
+    fn settle_unposed_optional_costs(&mut self) -> usize {
+        let mut taken = 0;
+        for step in -1..self.req.item.steps.len() as i32 {
+            while self.queue.take(step, crate::answer::is_unposed_optional_cost).is_some() {
+                taken += 1;
+            }
+        }
+        taken
     }
 
     /// The live object a step's card ref names. A card ref follows its object through zone changes
@@ -583,6 +608,11 @@ impl Machine<'_> {
         let i = self.step;
         self.need_priority(seat)?;
         let id = self.object(&step.card, step.seat)?;
+        // The generator writes the activation cost's pool onto the step (e.g. "C" for a {1});
+        // without it `legal_actions_full` sees an empty pool and rejects the activation. As in
+        // `cast`, an empty `mana` is a no-op, so no-cost activations are unchanged.
+        let units = parse_mana(&step.mana)?;
+        self.add_mana(seat, units, rb)?;
         let key = i.to_string();
         let ability = self
             .req
@@ -606,7 +636,13 @@ impl Machine<'_> {
         }
     }
 
-    /// The one mana-source candidate of `id` that makes the ability's colour.
+    /// The one mana-source activation of `id` that runs `ability`.
+    ///
+    /// The produced colour is not a reliable identity: an any-colour activation asks phase for its
+    /// colour in a later prompt, and a fixed combination ("Add {U}{B}") is one activation, not a
+    /// choice. Match the ability by the class ordinal the neutral export names — the same role
+    /// phase's own ability list has — and let the activation (or the prompt that follows it)
+    /// settle the colour.
     fn mana_source(&mut self, id: ObjectId, ability: &NeutralAbility) -> Result<GameAction, Stop> {
         let i = self.step;
         let inc = self.state().objects[&id].incarnation;
@@ -620,38 +656,123 @@ impl Machine<'_> {
                 GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
                     selection.source.object_id == id && selection.source.incarnation == inc
                 }
+                GameAction::ActivateAbility { source_id, .. } => *source_id == id,
                 _ => false,
             })
             .collect();
-        let produces = ability.produces.as_deref().unwrap_or("");
-        let single: Vec<char> = produces.chars().filter(|c| mana_type(*c).is_some()).collect();
-        let wanted: ManaType = if produces != "any" && single.len() == 1 {
-            mana_type(single[0]).expect("filtered")
-        } else {
-            // "any" or several colours: gorge's colour decision for this step names the colour.
-            let d = self
-                .queue
-                .take(i as i32, |d| {
-                    d.kind == "choose_n"
-                        && (d.pick_kinds.iter().any(|k| k == "color") || d.picks.iter().any(|p| p.starts_with("Add ")))
-                })
-                .ok_or_else(|| unmatched(i, format!("mana ability producing {produces:?} has no colour decision")))?;
-            d.picks
-                .first()
-                .and_then(|p| colour_of_label(p))
-                .ok_or_else(|| unmatched(i, format!("colour decision {:?} names no colour", d.picks)))?
-        };
-        let mut matching = candidates.into_iter().filter(|a| match a {
-            GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
-                selection.mana_type == wanted
+        let phase_index = self.mana_ability_index(id, ability);
+        // A nonland mana ability is a plain activation at priority. Its colour is either fixed by
+        // the ability or asked in phase's own `ChooseManaColor` prompt, so never consume gorge's
+        // colour decision here.
+        if let Some(index) = phase_index {
+            let mut activations = candidates.iter().filter(|a| {
+                matches!(a, GameAction::ActivateAbility { source_id, ability_index, .. }
+                    if *source_id == id && *ability_index == index)
+            });
+            match (activations.next(), activations.next()) {
+                (Some(action), None) => return Ok(action.clone()),
+                (Some(_), Some(_)) => {
+                    return Err(unmatched(
+                        i,
+                        format!("{} has several activations for its mana ability", self.state().objects[&id].name),
+                    ))
+                }
+                (None, _) => {}
             }
-            _ => false,
-        });
-        match (matching.next(), matching.next()) {
-            (Some(a), None) => Ok(a),
-            (None, _) => Err(unmatched(i, format!("no mana source of {} produces {}", self.state().objects[&id].name, letter(wanted)))),
-            (Some(_), Some(_)) => Err(unmatched(i, format!("several mana sources of {} produce {}", self.state().objects[&id].name, letter(wanted)))),
         }
+        // A land tap carries the chosen output in its selection and needs one row. Fixed production
+        // is not a choice; only a flexible land source consumes gorge's colour decision. A basic
+        // land subtype's intrinsic ability has no phase index: phase may list it synthetically or
+        // not at all, so it is matched by production instead.
+        let intrinsic = ability.class == "intrinsic_mana";
+        let fixed = if intrinsic {
+            None
+        } else {
+            phase_index
+                .and_then(|index| self.state().objects[&id].abilities.get(index))
+                .and_then(fixed_mana_units)
+        };
+        let mine: Vec<&GameAction> = candidates
+            .iter()
+            .filter(|a| match a {
+                GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => {
+                    selection.source.object_id == id
+                        && selection.source.incarnation == inc
+                        // With no phase index (a granted ability has none in the export), the
+                        // production/colour below is the only identity; do not reject every row
+                        // because its own ability index is Some.
+                        && (intrinsic || phase_index.is_none() || selection.ability_index == phase_index)
+                }
+                _ => false,
+            })
+            .collect();
+        let want = match fixed {
+            Some(units) => units,
+            None => {
+                let produces = ability.produces.as_deref().unwrap_or("");
+                let single: Vec<char> = produces.chars().filter(|c| mana_type(*c).is_some()).collect();
+                let wanted: ManaType = if produces != "any" && single.len() == 1 {
+                    mana_type(single[0]).expect("filtered")
+                } else {
+                    // "any" or several colours: gorge's colour decision for this step names the colour.
+                    // gorge's `pay.ManaAbilityLabel` prefixes the activation cost, so a {1}
+                    // ability's pick reads "Pay 1: Add W", not "Add W". Accept a mana/color pick
+                    // only when the label itself names a colour: the family also holds the wheel
+                    // label "Pay 1: Add any color" and multi-pip combo labels, which are not
+                    // colour decisions.
+                    let d = self
+                        .queue
+                        .take(i as i32, |d| {
+                            d.kind == "choose_n"
+                                && (d.pick_kinds.iter().any(|k| k == "color" || k == "mana")
+                                    || d.picks.iter().any(|p| p.starts_with("Add ")))
+                                && d.picks
+                                    .first()
+                                    .is_some_and(|p| colour_of_label(p).is_some())
+                        })
+                        .ok_or_else(|| unmatched(i, format!("mana ability producing {produces:?} has no colour decision")))?;
+                    d.picks
+                        .first()
+                        .and_then(|p| colour_of_label(p))
+                        .ok_or_else(|| unmatched(i, format!("colour decision {:?} names no colour", d.picks)))?
+                };
+                vec![wanted]
+            }
+        };
+        let mut matching = mine
+            .into_iter()
+            .filter(|a| mana_selection(a).is_some_and(|s| selection_units(s).starts_with(&want)));
+        let shown: String = want.iter().map(|t| letter(*t)).collect();
+        match (matching.next(), matching.next()) {
+            (Some(a), None) => Ok((*a).clone()),
+            (None, _) => Err(unmatched(i, format!("no mana source of {} produces {shown}", self.state().objects[&id].name))),
+            (Some(_), Some(_)) => Err(unmatched(i, format!("several mana sources of {} produce {shown}", self.state().objects[&id].name))),
+        }
+    }
+
+    /// The index of the neutral ability's `ordinal`-th activated mana ability among phase's
+    /// abilities, or `None` when the neutral side has no face-relative ordinal.
+    ///
+    /// `follower-export` deliberately omits the ordinal for a granted/gained ability (it is not on
+    /// the recipient's face) and phase may merge several printed abilities into one, so a missing
+    /// or out-of-range ordinal is not an error: it means "no phase index", and [`Self::mana_source`]
+    /// identifies the activation by its production/colour instead. The subtype-granted land ability
+    /// (`intrinsic_mana`) is the same case.
+    fn mana_ability_index(&self, id: ObjectId, ability: &NeutralAbility) -> Option<usize> {
+        if ability.class == "intrinsic_mana" {
+            return None;
+        }
+        let ordinal = ability.ordinal.and_then(|o| usize::try_from(o).ok())?;
+        self.state().objects[&id]
+            .abilities
+            .iter()
+            .enumerate()
+            .filter(|(_, a)| {
+                a.kind == engine::types::ability::AbilityKind::Activated
+                    && engine::types::ability::is_mana_ability(a)
+            })
+            .nth(ordinal)
+            .map(|(index, _)| index)
     }
 
     /// CR 702.29a / CR 702.29e: the hand-zone cycling ability of `id` (`typed` = a typecycling one,
@@ -709,6 +830,30 @@ impl Machine<'_> {
         let i = self.step;
         if let Some(kw) = &ability.keyword {
             let base = kw.split(':').next().unwrap_or("");
+            // The keyword line is gorge's; phase may not carry it. The Bear Force Pilot's token
+            // loses the swallowed "and crew 2" at the pin, and a crew-like ability can be another
+            // keyword (Station). Issuing the action anyway is an engine error ("Vehicle has no
+            // Crew keyword"), so name the gap as a follower row instead.
+            {
+                let state = self.state();
+                let name = state.objects.get(&id).map(|o| o.name.clone()).unwrap_or_default();
+                let has = match base {
+                    // phase models a printed Equip as an activated ability tagged Equip, not as
+                    // a `Keyword` (Leonin Scimitar), but a granted Equip can be either.
+                    "Equip" => state.objects.get(&id).is_some_and(|o| {
+                        o.abilities.iter().any(|a| a.ability_tag == Some(engine::types::ability::AbilityTag::Equip))
+                            || o.keywords.iter().any(|k| matches!(k, Keyword::Equip(_)))
+                    }),
+                    "Crew" => object_has_effective_keyword_kind(state, id, KeywordKind::Crew),
+                    "Saddle" => {
+                        state.objects.get(&id).is_some_and(|o| o.keywords.iter().any(|k| matches!(k, Keyword::Saddle(_))))
+                    }
+                    _ => true,
+                };
+                if !has {
+                    return Err(unmatched(i, format!("{name} has no {base} keyword in phase")));
+                }
+            }
             return match base {
                 "Equip" => Ok(GameAction::Equip { equipment_id: id, target_id: id }),
                 "Crew" => Ok(GameAction::CrewVehicle { vehicle_id: id, creature_ids: Vec::new() }),
@@ -811,7 +956,8 @@ impl Machine<'_> {
         }
     }
 
-    /// At `ManaPayment`: pin the pool units to spend, then finalise (`PassPriority`).
+    /// At `ManaPayment`: apply gorge's Delve exiles, pin the pool units to spend, then finalise
+    /// (`PassPriority`).
     fn pay(&mut self, player: PlayerId) -> Result<(), Stop> {
         let i = self.step;
         let gorge_spent = self.req.item.payment.get(i).map(String::as_str).unwrap_or("");
@@ -832,12 +978,138 @@ impl Machine<'_> {
             let actor = self.board.state.waiting_for.acting_player().unwrap_or(player);
             let _ = apply(&mut self.board.state, actor, GameAction::SpendPoolMana { pip_id: pip });
         }
+        self.pay_delve()?;
         self.act(GameAction::PassPriority, "ManaPayment")?;
         if matches!(self.state().waiting_for, WaitingFor::ManaPayment { .. }) {
             return Err(harness(format!("mana payment incomplete at step {i}: the pool does not cover the cost")));
         }
         Ok(())
     }
+
+    /// CR 702.66a: Delve is not a `WaitingFor` prompt. phase exposes it as one `TapForConvoke`
+    /// per graveyard card while a spell with Delve is being paid for, and gorge logs the caster's
+    /// exiles as `choose_n` decisions naming those cards (a scenario's one answer can carry every
+    /// pick, and the engine's own ask is one card per decision). Consume decisions until one adds
+    /// no pick (gorge's `[choice_skip]` Done) or phase offers no further graveyard card. The legal
+    /// set is the authority on whether this is a Delve payment at all (it is empty for every other
+    /// cast), so a future decision shape that still names graveyard cards is matched by the cards,
+    /// not by a hard-coded decision kind list.
+    fn pay_delve(&mut self) -> Result<(), Stop> {
+        let i = self.step;
+        loop {
+            let offered = self.delve_offered();
+            if offered.is_empty() {
+                return Ok(());
+            }
+            let board = &self.board;
+            let Some(decision) = self.queue.take(i as i32, |d| is_delve_decision(d, board, &offered)) else {
+                return Ok(());
+            };
+            let picks = delve_pick_ids(&decision, board, &offered)
+                .map_err(|e| Stop::StrictMiss(strict_miss_msg("ManaPayment", i as i64, &e)))?;
+            if picks.is_empty() {
+                return Ok(());
+            }
+            for object_id in picks {
+                self.act(GameAction::TapForConvoke { object_id, mana_type: ManaType::Colorless }, "Delve")?;
+            }
+        }
+    }
+
+    /// phase's legal Delve set at this payment: one `TapForConvoke` per graveyard card. Empty
+    /// outside a Delve payment (and for every other cost), so it decides whether to look for a
+    /// decision at all.
+    fn delve_offered(&self) -> BTreeMap<ObjectId, String> {
+        legal_actions_full(self.state())
+            .0
+            .into_iter()
+            .filter_map(|action| match action {
+                GameAction::TapForConvoke { object_id, mana_type: ManaType::Colorless } => self
+                    .state()
+                    .objects
+                    .get(&object_id)
+                    .filter(|o| o.zone == Zone::Graveyard)
+                    .map(|o| (object_id, o.name.clone())),
+                _ => None,
+            })
+            .collect()
+    }
+}
+
+/// The Done option of a gorge multi-pick ask (`[choice_skip]`, and any other bracketed sentinel).
+fn is_choice_skip(label: &str) -> bool {
+    let t = label.trim();
+    t.starts_with('[') && t.ends_with(']')
+}
+
+/// The live object an offered Delve ref or label names. Refs are matched against the legal set
+/// (so a ref naming some other card cannot be taken for a Delve pick); a label falls back to the
+/// card name with gorge's optional ` (b)`/` (t)` spelling stripped, taking the first offered card
+/// of that name not already in `used` (a ref is exact, so `used` does not filter it).
+fn offered_object(board: &Board, offered: &BTreeMap<ObjectId, String>, token: &str, used: &[ObjectId]) -> Option<ObjectId> {
+    let t = token.trim();
+    if t.is_empty() || is_choice_skip(t) {
+        return None;
+    }
+    if let Ok(r) = Ref::parse(t) {
+        if let Some(id) = board.resolve(&r).filter(|id| offered.contains_key(id)) {
+            return Some(id);
+        }
+    }
+    let name = t.rsplit_once(" (").map_or(t, |(name, _)| name);
+    offered.iter().find(|(id, n)| !used.contains(id) && n.eq_ignore_ascii_case(name)).map(|(id, _)| *id)
+}
+
+/// Whether `d` is gorge's Delve ask at this payment: every identity it names is in phase's
+/// offered graveyard set, and (for a declined ask) the ask enumerated exactly such a set.
+fn is_delve_decision(d: &Decision, board: &Board, offered: &BTreeMap<ObjectId, String>) -> bool {
+    if d.kind != "choose_n" || d.gorge_kind != "choose" {
+        return false;
+    }
+    if !d.pick_refs.is_empty() || !d.object_picks.is_empty() {
+        return d
+            .pick_refs
+            .iter()
+            .chain(d.object_picks.iter())
+            .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r, &[]).is_some());
+    }
+    if d.picks.is_empty() {
+        return !d.option_refs.is_empty()
+            && d.option_refs
+                .iter()
+                .all(|r| r.trim().is_empty() || is_choice_skip(r) || offered_object(board, offered, r, &[]).is_some());
+    }
+    d.picks.iter().all(|p| is_choice_skip(p) || offered_object(board, offered, p, &[]).is_some())
+}
+
+/// The offered objects gorge's Delve picks name, in pick order and without repeats. Refs win over
+/// labels; a label picks the first still-unused offered card of that name (all Swamps are one
+/// card, and the exile set does not care which copy). A pick that names no offered card is a miss
+/// rather than a silent no-op.
+fn delve_pick_ids(d: &Decision, board: &Board, offered: &BTreeMap<ObjectId, String>) -> Result<Vec<ObjectId>, String> {
+    let mut out: Vec<ObjectId> = Vec::new();
+    let n = d.pick_refs.len().max(d.object_picks.len()).max(d.picks.len());
+    for k in 0..n {
+        let token = if let Some(r) = d.pick_refs.get(k).filter(|r| !r.is_empty()) {
+            r.as_str()
+        } else if let Some(r) = d.object_picks.get(k).filter(|r| !r.is_empty()) {
+            r.as_str()
+        } else if let Some(label) = d.picks.get(k) {
+            label.as_str()
+        } else {
+            continue;
+        };
+        if is_choice_skip(token) {
+            continue;
+        }
+        let id = offered_object(board, offered, token, &out)
+            .ok_or_else(|| format!("gorge's Delve pick {token:?} is not one of phase's offered graveyard cards"))?;
+        if out.contains(&id) {
+            return Err(format!("gorge's Delve picks name {} twice", offered.get(&id).map_or("a card", String::as_str)));
+        }
+        out.push(id);
+    }
+    Ok(out)
 }
 
 /// gorge's decision kind for the prompts `pass_to` can stop on ("" for any other).
@@ -945,6 +1217,43 @@ fn colour_of_label(label: &str) -> Option<ManaType> {
         w if w.chars().count() == 1 => w.chars().next().and_then(mana_type),
         _ => None,
     }
+}
+
+/// The selection a land-tap action carries, if it is one.
+fn mana_selection(action: &GameAction) -> Option<&engine::types::mana::ManaSourceSelection> {
+    match action {
+        GameAction::ActivateManaSource { selection } | GameAction::TapLandForMana { selection } => Some(selection),
+        _ => None,
+    }
+}
+
+/// The mana units one land-tap selection produces: the atomic combination (the full output of one
+/// activation) when there is one, else the single selected type.
+fn selection_units(selection: &engine::types::mana::ManaSourceSelection) -> Vec<ManaType> {
+    selection.atomic_combination.clone().unwrap_or_else(|| match selection.output {
+        engine::types::mana::ManaSourceOutput::Concrete(t) => vec![t],
+        engine::types::mana::ManaSourceOutput::DeferredColorChoice { .. } => vec![selection.mana_type],
+    })
+}
+
+/// The exact units phase's mana ability adds when the production is fixed, so no colour choice is
+/// asked. `None` when the ability asks the player for a colour or a combination.
+fn fixed_mana_units(ability: &engine::types::ability::AbilityDefinition) -> Option<Vec<ManaType>> {
+    use engine::types::ability::{Effect, ManaProduction, QuantityExpr};
+    let Effect::Mana { produced, .. } = &*ability.effect else { return None };
+    let units: Vec<ManaType> = match produced {
+        ManaProduction::Fixed { colors, .. } => colors.iter().map(|c| ManaType::from(*c)).collect(),
+        ManaProduction::Colorless { count: QuantityExpr::Fixed { value }, .. } => {
+            vec![ManaType::Colorless; usize::try_from((*value).max(0)).ok()?]
+        }
+        ManaProduction::Mixed { colorless_count, colors } => {
+            let mut units = vec![ManaType::Colorless; usize::try_from(*colorless_count).ok()?];
+            units.extend(colors.iter().map(|c| ManaType::from(*c)));
+            units
+        }
+        _ => return None,
+    };
+    (!units.is_empty()).then_some(units)
 }
 
 /// Text for the ability check: the card's own names become `~`, spacing and case are folded.
@@ -1058,6 +1367,135 @@ mod tests {
         assert!(rb.notes.iter().any(|n| n.starts_with("mana added")), "{:?}", rb.notes);
     }
 
+    /// CR 702.66a: gorge's recorded Delve exiles (a scenario's one answer carries every pick,
+    /// and the ask's trailing `[choice_skip]` is its Done) must become phase's `TapForConvoke`
+    /// markers during the manual payment, so the exiled graveyard matches and the cost is paid.
+    #[test]
+    fn delve_cast_exiles_gorge_picks() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[{"step":1,"seat":0,"kind":"choose_n","options":7,
+                "picks":["Swamp","Swamp","Swamp","Swamp","Swamp","[choice_skip]"],
+                "pick_idx":[0,1,2,3,4],"pick_refs":["p0:Swamp","p0:Swamp#2","p0:Swamp#3","p0:Swamp#4","p0:Swamp#5"],
+                "pick_kinds":["exile","exile","exile","exile","exile","choice_skip"],
+                "via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.checkpoint, "step 1 (cast)");
+        assert_eq!(cast.stack.len(), 1);
+        assert_eq!(cast.players[0].graveyard, ["Swamp", "Swamp"], "five Swamps exiled, two left");
+        assert_eq!(on_bf(cast, 0, "Sultai Scavenger"), 0);
+        let resolved = &rb.snapshots[3];
+        assert!(resolved.stack.is_empty());
+        assert_eq!(on_bf(resolved, 0, "Sultai Scavenger"), 1);
+        assert_eq!(resolved.players[0].graveyard, ["Swamp", "Swamp"]);
+        assert_eq!(rb.leftover, None, "the Delve decision is consumed");
+    }
+
+    /// The same path with an `{X}{B}` Delve spell: the X answer and the target come from the
+    /// answerer, the seven exiles pay all seven generic, and the one black mana pays the pip.
+    #[test]
+    fn delve_x_spell_pays_with_all_seven() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Swamp"],"hand":["Delve Too Deep"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]},
+                "p1":{"battlefield":["Grizzly Bears"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Swamp","ability_index":0},
+                     {"op":"cast","seat":0,"card":"p0:Delve Too Deep","targets":["p1:Grizzly Bears"]},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[
+                {"step":1,"seat":0,"kind":"target","picks":["Grizzly Bears (b)"],
+                 "pick_refs":["p1:Grizzly Bears"],"object_picks":["p1:Grizzly Bears"],
+                 "pick_kinds":["permanent"],"via":"target","gorge_kind":"target","min":1,"max":1},
+                {"step":1,"seat":0,"kind":"choose_n","options":8,"picks":["X = 7"],"pick_idx":[7],
+                 "pick_refs":["X = 7"],"pick_kinds":["x"],"via":"answer","gorge_kind":"choose","min":1,"max":1},
+                {"step":1,"seat":0,"kind":"choose_n","options":7,
+                 "picks":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","[choice_skip]"],
+                 "pick_refs":["p0:Swamp#2","p0:Swamp#3","p0:Swamp#4","p0:Swamp#5","p0:Swamp#6","p0:Swamp#7","p0:Swamp#8"],
+                 "pick_kinds":["exile","exile","exile","exile","exile","exile","exile","choice_skip"],
+                 "via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":7}],
+            "neutral":{"ability":{"0":{"class":"intrinsic_mana","ordinal":0,"cost":"{T}","produces":"B"}}}}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.checkpoint, "step 1 (cast)");
+        assert!(cast.players[0].graveyard.is_empty(), "all seven Swamps exiled");
+        assert_eq!(cast.stack.len(), 1);
+        let resolved = &rb.snapshots[3];
+        assert!(resolved.stack.is_empty());
+        assert_eq!(resolved.players[0].graveyard, ["Delve Too Deep"]);
+        assert_eq!(on_bf(resolved, 1, "Grizzly Bears"), 0, "X = 7 kills the 2/2");
+        assert_eq!(rb.leftover, None);
+    }
+
+    /// Defensive future-proofing, not a shape `follower-export` produces today (gorge logs one
+    /// multi-pick decision per ask): a request carrying the same five exiles as five one-pick
+    /// decisions must still be consumed whole, not just up to its first pick.
+    #[test]
+    fn delve_one_pick_per_decision_is_applied() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[
+                {"step":1,"seat":0,"kind":"choose_n","options":8,"picks":["Swamp"],"pick_idx":[0],
+                 "pick_refs":["p0:Swamp"],"pick_kinds":["exile"],"via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5},
+                {"step":1,"seat":0,"kind":"choose_n","options":7,"picks":["Swamp"],"pick_idx":[0],
+                 "pick_refs":["p0:Swamp#2"],"pick_kinds":["exile"],"via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5},
+                {"step":1,"seat":0,"kind":"choose_n","options":6,"picks":["Swamp"],"pick_idx":[0],
+                 "pick_refs":["p0:Swamp#3"],"pick_kinds":["exile"],"via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5},
+                {"step":1,"seat":0,"kind":"choose_n","options":5,"picks":["Swamp"],"pick_idx":[0],
+                 "pick_refs":["p0:Swamp#4"],"pick_kinds":["exile"],"via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5},
+                {"step":1,"seat":0,"kind":"choose_n","options":4,"picks":["Swamp"],"pick_idx":[0],
+                 "pick_refs":["p0:Swamp#5"],"pick_kinds":["exile"],"via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.checkpoint, "step 1 (cast)");
+        assert_eq!(cast.stack.len(), 1);
+        assert_eq!(cast.players[0].graveyard, ["Swamp", "Swamp"], "all five picks exiled");
+        let resolved = &rb.snapshots[3];
+        assert!(resolved.stack.is_empty());
+        assert_eq!(on_bf(resolved, 0, "Sultai Scavenger"), 1);
+        assert_eq!(rb.leftover, None, "every Delve decision is consumed");
+    }
+
+    /// `pick_refs` are optional on a `Decision`: five bare `Swamp` labels name five distinct
+    /// graveyard cards (each label takes the first not-yet-used offered copy), not one card five times.
+    #[test]
+    fn delve_label_only_picks_take_distinct_copies() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"},
+                     {"op":"resolve","seat":0}]},
+            "gorge_decisions":[{"step":1,"seat":0,"kind":"choose_n","options":7,
+                "picks":["Swamp","Swamp","Swamp","Swamp","Swamp","[choice_skip]"],
+                "via":"answer","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        assert_eq!(rb.snapshots.len(), 4);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.players[0].graveyard, ["Swamp", "Swamp"], "five Swamps exiled, two left");
+        assert!(rb.snapshots[3].stack.is_empty());
+        assert_eq!(on_bf(&rb.snapshots[3], 0, "Sultai Scavenger"), 1);
+        assert_eq!(rb.leftover, None);
+    }
+
+    /// A Delve ask gorge declined is still one decision: consume it, pay with mana, exile nothing.
+    /// Synthetic: the `5B` pool covers the generic, which gorge would not have asked about; it
+    /// proves only that the decision is consumed.
+    #[test]
+    fn delve_declined_decision_is_consumed() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Sultai Scavenger"],
+                "graveyard":["Swamp","Swamp","Swamp","Swamp","Swamp","Swamp","Swamp"]}},
+            "steps":[{"op":"mana","seat":0,"mana":"5B"},
+                     {"op":"cast","seat":0,"card":"p0:Sultai Scavenger"}]},
+            "gorge_decisions":[{"step":1,"seat":0,"kind":"choose_n","options":7,"picks":[],
+                "option_refs":["p0:Swamp","p0:Swamp#2","p0:Swamp#3","p0:Swamp#4","p0:Swamp#5","p0:Swamp#6","p0:Swamp#7"],
+                "via":"cast fallback","gorge_kind":"choose","first":"Swamp","min":0,"max":5}]}"#);
+        let cast = &rb.snapshots[2];
+        assert_eq!(cast.players[0].graveyard.len(), 7, "declined Delve exiles nothing");
+        assert_eq!(cast.stack.len(), 1);
+        assert_eq!(rb.leftover, None, "the declined Delve decision is consumed");
+    }
+
     #[test]
     fn steps_land_mana_then_cast() {
         let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Forest","Llanowar Elves"]}},
@@ -1076,6 +1514,124 @@ mod tests {
         assert_eq!(on_bf(resolved, 0, "Llanowar Elves"), 1);
     }
 
+    /// One nonland mana ability, activated for the colour gorge chose from an "any color" source.
+    #[test]
+    fn mana_source_any_colour_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Torgal, A Fine Hound"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Torgal, A Fine Hound","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","picks":["Add G"],"pick_kinds":["color"]}]}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "G", "gorge's colour decision answers phase's ChooseManaColor prompt");
+        assert!(s.permanents.iter().find(|p| p.name == "Torgal, A Fine Hound").unwrap().tapped);
+    }
+
+    /// A mana ability with a non-{T} cost: gorge labels its colour pick "Pay 1: Add G", and the
+    /// activate step's `mana` funds the {1}. Both the label and the funding must be replayed.
+    #[test]
+    fn mana_source_cost_prefixed_any_colour_activates() {
+        let rb = ok(
+            r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Three Tree Mascot"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Three Tree Mascot","mana":"C","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"cost":"{1}","produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","options":5,
+                "picks":["Pay 1: Add G"],"pick_idx":[0],"pick_refs":["p0:Three Tree Mascot"],
+                "pick_kinds":["mana"],"via":"mana ability","gorge_kind":"choose",
+                "first":"Pay 1: Add G","min":1,"max":1}]}"#,
+        );
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(
+            s.players[0].pool, "G",
+            "the cost-prefixed label picks phase's ChooseManaColor"
+        );
+        assert_eq!(rb.leftover, None, "the colour decision is consumed");
+    }
+
+    /// A granted mana ability has no face-relative ordinal, so `mana_source` identifies the
+    /// activation by its production and consumes gorge's colour decision itself: the printed-ordinal
+    /// path above never reaches this predicate. The pick is gorge's cost-prefixed
+    /// `pay.ManaAbilityLabel` with a `mana` pick kind — the only reason the activation is found.
+    #[test]
+    fn mana_source_granted_any_colour_consumes_cost_prefixed_label() {
+        let rb = ok(
+            r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Forest","Chromatic Lantern"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Forest","ability_index":1,
+                      "ability":"Forest: Add one mana of any color."}]},
+            "neutral":{"ability":{"0":{"class":"mana","granted":true,"cost":"{T}",
+                                       "text":"Add one mana of any color.","produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","picks":["Pay 1: Add U"],"pick_kinds":["mana"]}]}"#,
+        );
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(
+            s.players[0].pool, "U",
+            "the cost-prefixed label names the granted ability's colour"
+        );
+        assert_eq!(rb.leftover, None, "the colour decision is consumed");
+        assert!(
+            s.permanents
+                .iter()
+                .find(|p| p.name == "Forest")
+                .unwrap()
+                .tapped
+        );
+    }
+
+    /// A colourless nonland mana ability whose production phase stores outside `ManaType`'s colours.
+    #[test]
+    fn mana_source_colourless_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Sol Talisman"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Sol Talisman","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"C"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "CC");
+        assert!(s.permanents.iter().find(|p| p.name == "Sol Talisman").unwrap().tapped);
+    }
+
+    /// A fixed two-colour production is one activation, not a colour choice.
+    #[test]
+    fn mana_source_fixed_two_colour_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Riven Turnbull and Princess Lucrezia"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Riven Turnbull and Princess Lucrezia","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"UB"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "UB");
+    }
+
+    /// A fixed multi-unit production of one colour is likewise one activation.
+    #[test]
+    fn mana_source_fixed_multi_unit_nonland_activates() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["The Alright Henge"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:The Alright Henge","ability_index":0}]},
+            "neutral":{"ability":{"0":{"class":"mana","ordinal":0,"produces":"G"}}}}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "GG");
+        assert!(s.permanents.iter().find(|p| p.name == "The Alright Henge").unwrap().tapped);
+    }
+
+    /// A granted mana ability on a land has no face-relative ordinal in the neutral export; the
+    /// activation is still matched by the colour it produces (Chromatic Lantern grants the Forest
+    /// "{T}: Add one mana of any color", which phase exposes as a land-tap selection).
+    #[test]
+    fn mana_source_granted_ability_without_ordinal_falls_back_to_production() {
+        let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"battlefield":["Forest","Chromatic Lantern"]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:Forest","ability_index":1,
+                      "ability":"Forest: Add one mana of any color."}]},
+            "neutral":{"ability":{"0":{"class":"mana","granted":true,"cost":"{T}",
+                                       "text":"Add one mana of any color.","produces":"any"}}},
+            "gorge_decisions":[{"step":0,"seat":0,"kind":"choose_n","picks":["Add W"],"pick_kinds":["color"]}]}"#);
+        let s = rb.snapshots.last().unwrap();
+        assert_eq!(s.checkpoint, "step 0 (activate)");
+        assert_eq!(s.players[0].pool, "W", "the producer's colour decision picks the granted ability's output");
+        assert!(s.permanents.iter().find(|p| p.name == "Forest").unwrap().tapped);
+        assert!(!s.permanents.iter().find(|p| p.name == "Chromatic Lantern").unwrap().tapped);
+    }
+
     /// The row of a hand-written request that must stop, as its error text.
     fn stop_text(json: &str) -> String {
         match go(json).0.err() {
@@ -1083,7 +1639,6 @@ mod tests {
             other => panic!("expected a stop, got {other:?}"),
         }
     }
-
     #[test]
     fn ability_action_cycling_discards_and_draws() {
         let rb = ok(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"hand":["Lonely Sandbar"]}},
@@ -1125,6 +1680,19 @@ mod tests {
             "neutral":{"ability":{"0":{"class":"activated","keyword":"Saddle:2"}}}}"#);
         assert!(!m.contains("unsupported") || m.contains("SaddleMount"), "{m}");
         assert!(m.contains("SaddleMount"), "{m}");
+    }
+
+    #[test]
+    fn activate_vehicle_without_crew_keyword_is_a_named_unmatched() {
+        // The Bear Force Pilot's token loses the swallowed "and crew 2" at the phase pin: the
+        // Vehicle reaches the battlefield with Flying only. A gorge crew activation must be a
+        // named follower row, never an engine action phase answers with "Vehicle has no Crew
+        // keyword".
+        let m = stop_text(r#"{"id":"t","item":{"id":"t","setup":{"p0":{"tokens":[{"script":"vehicle_no_crew"}]}},
+            "steps":[{"op":"activate","seat":0,"card":"p0:token:Vehicle Token","ability_index":0}]},
+            "neutral":{"token":{"vehicle_no_crew":{"name":"Vehicle Token","types":["Artifact"],"subtypes":["Vehicle"],"keywords":["Flying"]}},
+                       "ability":{"0":{"class":"activated","keyword":"Crew:2"}}}}"#);
+        assert_eq!(m, "phase follower: ability_unmatched at step 0: Vehicle Token has no Crew keyword in phase");
     }
 
     #[test]

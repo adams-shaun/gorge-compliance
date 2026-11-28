@@ -2,6 +2,7 @@ package templates
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
@@ -9,8 +10,29 @@ import (
 )
 
 // CastResolve casts the spell with exactly its mana in pool, with legal
-// targets on the board, and resolves the stack.
+// targets on the board, and resolves the stack. Its version stays 1: the
+// Delve arm below changed the bytes of a Delve cast only, and bumping this
+// value would move every other cast-resolve scenario's id and name off the
+// id its committed verdict row recorded.
 var CastResolve = Template{ID: "cast-resolve", Version: 1}
+
+// castResolveDelve is cast-resolve's second generation, for the items the
+// Delve arm actually produced: it seeds a Swamp graveyard and scripts the
+// exile ask (CR 702.66), so those scenarios' bytes moved. It shares
+// CastResolve's ID, so a verdict row still keys on "cast-resolve" alone; only
+// the id and the scenario name carry the generation.
+var castResolveDelve = Template{ID: CastResolve.ID, Version: 2}
+
+// castTemplateFor is the single stamp for a cast's generation. The answer is
+// re-derived from delvePicks -- the one predicate that decides both the
+// graveyard seed and the exile answer -- so an item cannot carry a generation
+// whose bytes it does not have, and no call site has to remember to pass one.
+func castTemplateFor(f *cards.Face) Template {
+	if delvePicks(f) > 0 {
+		return castResolveDelve
+	}
+	return CastResolve
+}
 
 // xAnswers scripts X for a spell with X in its cost.
 func xAnswers(f *cards.Face) []oraclegen.Answer {
@@ -32,6 +54,103 @@ func xAnswers(f *cards.Face) []oraclegen.Answer {
 		return []oraclegen.Answer{{Kind: "choose", Pick: []string{fmt.Sprintf("X = %d", x)}}}
 	}
 	return nil
+}
+
+// delveCap bounds the graveyard a Delve cast's level-A fixture seeds. Delve
+// (CR 702.66) exiles any number of cards, but the generator scripts one exile
+// answer, and every Delve card's generic cost is nine or less; seven covers
+// the cards a single-Swamp-per-generic fixture can pay and keeps the answer one
+// short choose.
+const (
+	delveCap   = 7
+	delveGrave = "Swamp"
+)
+
+// delveGeneric is the uncapped number of generic symbols in a Delve card's
+// pool: the mana delve can pay. Zero for a card without Delve and for one
+// whose pool cannot be built (so there is nothing to delve).
+func delveGeneric(f *cards.Face) int {
+	if !f.HasKeyword("Delve") {
+		return 0
+	}
+	pool, why := oraclegen.PoolFor(f.ManaCost)
+	if why != "" {
+		return 0
+	}
+	return strings.Count(pool, "C")
+}
+
+// delvePicks is how many graveyard cards a Delve cast exiles for generic mana:
+// the generic symbols in its pool, capped at delveCap. Zero for a card without
+// Delve and for a Delve card whose pool has no generic symbol (nothing to
+// delve).
+func delvePicks(f *cards.Face) int {
+	return min(delveGeneric(f), delveCap)
+}
+
+// delveSeed is the graveyard extra for a Delve cast that exiles picks cards.
+func delveSeed(picks int) []string {
+	if picks <= 0 {
+		return nil
+	}
+	return oraclegen.Repeat(delveGrave, picks)
+}
+
+// delveGraveyard is the setup extra a cast needs: a Delve card gets exactly the
+// Swamps its answer exiles, while every other card keeps the generic
+// seven-Wastes threshold graveyard.
+func delveGraveyard(f *cards.Face) []string {
+	if n := delvePicks(f); n > 0 {
+		return delveSeed(n)
+	}
+	return oraclegen.Repeat("Wastes", 7)
+}
+
+// scriptedX returns the X an answer list scripts ("X = n"), if any. The
+// generator's X answers are the single source for a spell's announced X, so a
+// cost's generic count can be read from what the scenario actually pays
+// instead of assuming PoolFor's default.
+func scriptedX(answers []oraclegen.Answer) (int, bool) {
+	for _, a := range answers {
+		for _, pick := range a.Pick {
+			if rest, ok := strings.CutPrefix(pick, "X = "); ok {
+				if n, err := strconv.Atoi(rest); err == nil {
+					return n, true
+				}
+			}
+		}
+	}
+	return 0, false
+}
+
+// delvePlan returns the graveyard count and short pool for a Delve cast whose
+// scripted answers may name an X below PoolFor's default. The seed and the
+// short pool are derived from the same effective generic count: PoolFor
+// charges oraclegen.XValue for every X symbol, and a lower announced X removes
+// that much generic from the cost, so the fixture cannot over-offer Swamps for
+// a cheaper spell. ok is false when there is nothing to delve.
+func delvePlan(f *cards.Face, mana string, answers []oraclegen.Answer) (picks int, short string, ok bool) {
+	generic := delveGeneric(f)
+	if generic == 0 {
+		return 0, mana, false
+	}
+	// The generic symbols PoolFor charged for the default X that the scenario
+	// does not spend.
+	adjust := 0
+	if x, scripted := scriptedX(answers); scripted && x < oraclegen.XValue {
+		adjust = (oraclegen.XValue - x) * strings.Count(f.ManaCost, "X")
+	}
+	if adjust > generic {
+		adjust = generic
+	}
+	picks = min(generic-adjust, delveCap)
+	if picks == 0 {
+		return 0, mana, false
+	}
+	// mana is PoolFor's pool at XValue. Keep the coloured pips, the generic
+	// symbols the delve does not cover and the ones the lower X removed.
+	short = strings.Replace(mana, "C", "", adjust+picks)
+	return picks, short, true
 }
 
 func castResolve(reg *cards.Registry, f *cards.Face, name, mana string) (oraclegen.Item, *oraclegen.Skip) {
@@ -75,6 +194,19 @@ func castResolveWith(reg *cards.Registry, f *cards.Face, name, mana string, prob
 	if hasWaterbendCost(f) {
 		manas = append(manas, mana+"CCCC", mana+"CCCCC")
 	}
+	if g := delvePicks(f); g > 0 {
+		// Delve (CR 702.66): the cast asks which graveyard cards to exile for generic mana,
+		// an ask the full pool never reaches. Try the pool short of g generic with the
+		// g-Swamp graveyard extra below and an explicit exile answer first; a fixture that
+		// cannot settle (a cost the Swamps cannot cover) falls through to the full pool.
+		short := strings.Replace(mana, "C", "", g)
+		for _, pl := range plans {
+			answers := append(append([]oraclegen.Answer(nil), pl.answers...), oraclegen.Answer{Kind: "choose", Pick: oraclegen.Repeat(delveGrave, g)})
+			if it, ok := castWithProbes(reg, f, name, short, pl.slots, answers, probes, setup); ok {
+				return it, nil
+			}
+		}
+	}
 	for _, m := range manas {
 		for _, pl := range plans {
 			if it, ok := castWithProbes(reg, f, name, m, pl.slots, pl.answers, probes, setup); ok {
@@ -115,7 +247,7 @@ func castWithProbes(reg *cards.Registry, f *cards.Face, name, mana string, slots
 	extras := []func(*oraclegen.Fixture){
 		func(*oraclegen.Fixture) {},
 		func(fx *oraclegen.Fixture) {
-			fx.P0().Graveyard = append(fx.P0().Graveyard, oraclegen.Repeat("Wastes", 7)...)
+			fx.P0().Graveyard = append(fx.P0().Graveyard, delveGraveyard(f)...)
 		},
 		func(fx *oraclegen.Fixture) { fx.P0().Battlefield = append(fx.P0().Battlefield, "Llanowar Elves") },
 		// A spare card in hand pays an additional "discard a card" cost
@@ -185,7 +317,7 @@ func castWithProbes(reg *cards.Registry, f *cards.Face, name, mana string, slots
 					setup(&fx)
 				}
 				// Apply face-derived scenario defaults before probing the cast.
-				it := CastResolve.item(f, name, buildStackScenario(f, name, physicalName(reg, name), mana, pre, fx, slots, stackIdx, answers))
+				it := castTemplateFor(f).item(f, name, buildStackScenario(f, name, physicalName(reg, name), mana, pre, fx, slots, stackIdx, answers))
 				sc := it.Scenario
 				if oraclegen.ShufflesBackAndDraws(f) {
 					oraclegen.UniformShuffleSetup(&sc, name)

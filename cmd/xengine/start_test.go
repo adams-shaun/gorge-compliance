@@ -15,10 +15,13 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -89,7 +92,9 @@ func TestPlayStartThornvault(t *testing.T) {
 
 func TestPlayStartFlagsExclusive(t *testing.T) {
 	t.Parallel()
-	for _, f := range []string{"-windows", "-random=BLB", "-pool=x", "-decks=x", "-dirac", "-tape-turns=1", "-format=commander", "-forge-only=x"} {
+	// -dirac is not among these: dirac follows gorge and answers a scripted
+	// position beside it (TestStartFlagErrAcceptsDirac).
+	for _, f := range []string{"-windows", "-random=BLB", "-pool=x", "-decks=x", "-tape-turns=1", "-format=commander", "-forge-only=x"} {
 		err := runPlay([]string{"-set", "BLB", "-start", "testdata/start", "-out", t.TempDir(), f})
 		if err == nil || !strings.Contains(err.Error(), "-start") {
 			t.Errorf("-start with %s: err %v, want a -start error", f, err)
@@ -150,6 +155,68 @@ func TestPlayStartBezaSetup(t *testing.T) {
 		return nil
 	}); err != nil {
 		t.Fatal(err)
+	}
+}
+
+// TestPlayStartCommanderDesignation plays the start scen writes for a
+// Card.IsCommander+YouOwn trigger: the key (Tome of Legends) on the
+// battlefield and the commander carrier (Isamaru, Hound of Konda) in p0's
+// hand, with the file naming that card in "commanders" (CR 903.3). The
+// runner hands the designation lists to game.Options and the Setup hook
+// appends the held object's ID to Game.Players[0].Commanders — the list the
+// engine reads for Card.IsCommander (Game.CommanderOf), never a printed
+// keyword — so the focus cast plays: the id is not refused (a start whose
+// focus was never taken is refused as start-not-exercised, and one whose
+// lowering disagreed is not lower_ok), and the lowered setup carries the
+// designation, which only the live list can show. The sibling file
+// designates a card the seat does not hold (Tome of Legends in the graveyard
+// only): that is a broken claim, so the game fails loud — a play_error row
+// naming the designation, not a silently skipped commander.
+func TestPlayStartCommanderDesignation(t *testing.T) {
+	t.Parallel()
+	reg := testutil.CorpusRegistry(t)
+	out := t.TempDir()
+	if err := playStart(reg, []string{"testdata/start-commander"}, "FIC", out, false); err != nil {
+		t.Fatal(err)
+	}
+	rows := map[string]lowerRow{}
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		rows[r.ID] = r
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	okID := scen.StartID("FIC", "Tome of Legends", "cast", 1)
+	if r := rows[okID]; r.Status != "lower_ok" {
+		t.Errorf("%s: status %s reasons %v gorge %q, want lower_ok", okID, r.Status, r.Reasons, r.Gorge)
+	}
+	badID := scen.StartID("FIC", "Tome of Legends", "missing", 1)
+	if r := rows[badID]; r.Status != statusPlayError || !strings.Contains(r.Gorge, "designates commander") {
+		t.Errorf("%s: status %s gorge %q, want %s naming the designation", badID, r.Status, r.Gorge, statusPlayError)
+	}
+	if n := len(rows); n != 2 {
+		t.Errorf("lower.jsonl has %d rows, want 2", n)
+	}
+	n := 0
+	if err := readLines(filepath.Join(out, "items.jsonl"), func(b []byte) error {
+		var it oraclegen.Item
+		if err := json.Unmarshal(b, &it); err != nil {
+			return err
+		}
+		n++
+		if want := []string{"Isamaru, Hound of Konda"}; !slices.Equal(it.Setup["p0"].Commanders, want) {
+			t.Errorf("%s: p0 setup commanders %v, want %v", it.ID, it.Setup["p0"].Commanders, want)
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if n != 1 {
+		t.Errorf("items.jsonl has %d rows, want 1 (the designated start)", n)
 	}
 }
 
@@ -522,6 +589,29 @@ func TestStartFocusTimes(t *testing.T) {
 	}
 }
 
+// TestStartBaitTargetPlayerNeedsBait: baitTargetPlayer is independently
+// settable in a start document, and it says the bait spell's own target is the
+// focus player. Without a bait spell there is no such target ask, and the focus
+// bot would answer an unrelated one with the focus seat, so focusOf refuses.
+func TestStartBaitTargetPlayerNeedsBait(t *testing.T) {
+	t.Parallel()
+	dir := t.TempDir()
+	p := filepath.Join(dir, "f.json")
+	body := `{"format":"xproof-start-1","card":"Cori-Steel Cutter","key":"f0/t0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"hand":["Memnite","Memnite"],"battlefield":["Cori-Steel Cutter"]},"p1":{}},"filler":"basics","seeds":1,` +
+		`"focus":{"seat":0,"card":"Memnite","kind":"cast","ability":0,"baitTargetPlayer":true}}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := f.focusOf(); err == nil || !strings.Contains(err.Error(), "baitTargetPlayer") {
+		t.Fatalf("err %v, want a refusal naming baitTargetPlayer", err)
+	}
+}
+
 // TestStartRefusesUnofferedFocus: a start whose focus seat is never offered the
 // focus play is refused, not written. Burning Oil targets an attacking or
 // blocking creature and nothing attacks at main 1, so the cast is never offered
@@ -683,6 +773,84 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStepsNeededCostClassIsExercised: every card the scen
+// steps-needed:cost class now starts (a cost paid by placed state: minted
+// tokens, a discarded/exiled/sacrificed permanent, a counter on an inert
+// bearer or on the card itself) lowers both seeds and offers the focus play.
+// Generating a start is not enough: the reviewer's q2 round found Ion Storm,
+// Rift Elemental, Quillspike and Sage of Fables generated starts that lowered
+// to zero items (a counter on one of the mana Mountains, a 1/1 killed by its
+// own -1/-1 counter, an entry counter setup cannot restate), and the dh1
+// round found Rasputin Dreamweaver's personal counter arm doing the same
+// (a mandatory upkeep and the startedTheTurnUntapped field), so each card is
+// played through the cmd/xengine path here. The refusal list carries the
+// whole-start gate sweep's named refusals (scen.startGateRefusal): starts on
+// the unguarded cast and trigger lanes for the same two Rasputin shapes, and
+// Vitaspore Thallid's spore ability placing a mandatory-upkeep permanent.
+func TestStartStepsNeededCostClassIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Baylen, the Haymaker", "f0/a0"}, // tapXType of minted tokens
+		{"Baylen, the Haymaker", "f0/a2"}, //
+		{"Fear of Abduction", "cast"},     // Exile<1/Creature> additional cost
+		{"Soul Exchange", "cast"},         //
+		{"Necrotic Fumes", "cast"},        //
+		{"Ion Storm", "f0/a0"},            // SubCounter<1/P1P1/Permanent>
+		{"Ion Storm", "f0/a1"},            // SubCounter<1/CHARGE/Permanent>
+		{"Rift Elemental", "f0/a0"},       // SubCounter<1/TIME/Permanent>
+		{"Quillspike", "f0/a0"},           // SubCounter<1/M1M1/Creature>
+		{"Korozda Gorgon", "f0/a0"},       // SubCounter<1/P1P1/Creature.YouCtrl>
+		{"Bolrac-Clan Crusher", "f0/a0"},  //
+		{"Zameck Guildmage", "f0/a1"},     //
+		{"Ray Fillet, Man Ray", "f0/a0"},  //
+		{"Shapers of Nature", "f0/a1"},    //
+		{"Sunstar Chaplain", "f0/a0"},     //
+		{"Migloz, Maze Crusher", "f0/a2"}, // SubCounter<N/OIL/NICKNAME>
+		{"Charforger", "f0/a0"},           // SubCounter<3/OIL/CARDNAME>
+		{"Glistener Seer", "f0/a0"},       // SubCounter<1/OIL/CARDNAME>
+		{"Tamiyo's Immobilizer", "f0/a0"}, // SubCounter<1/OIL/CARDNAME>
+	} {
+		t.Run(c.card+" "+c.key, func(t *testing.T) {
+			_ = startIsExercised(t, reg, b, c.card, c.key)
+		})
+	}
+	// A shape the class cannot yet meet keeps its named refusal: the start
+	// schema cannot restate Sage of Fables's entry counter on another
+	// permanent, an activated ability's Exile cost does not lower (Food Chain's
+	// colour ask, The Soul Stone's upkeep trigger), Moxite Refinery removes
+	// a wildcard counter kind, and Rasputin Dreamweaver's personal counters
+	// need a battlefield placement the start gate refuses (its upkeep trigger
+	// is mandatory and its startedTheTurnUntapped word is live). The same gate
+	// now sweeps every finished start (scen.startGateRefusal), so the lanes
+	// that placed no guard there name it too instead of emitting a start play
+	// lowers to zero items: Rasputin's cast and upkeep-trigger keys carry the
+	// startedTheTurnUntapped word even from hand (the gate's gameMentions
+	// stamps the field on every untapped land), and Vitaspore Thallid's spore
+	// ability places a permanent whose upkeep trigger is mandatory.
+	for _, c := range []struct{ card, key, reason string }{
+		{"Sage of Fables", "f0/a0", "steps-needed:cost:SubCounter"},
+		{"Moxite Refinery", "f0/a0", "steps-needed:cost:SubCounter"},
+		{"Food Chain", "f0/a0", "steps-needed:cost:Exile"},
+		{"The Soul Stone", "f0/a1", "steps-needed:cost:Exile"},
+		{"Rasputin Dreamweaver", "f0/a0", "steps-needed:cost:SubCounter"},
+		{"Rasputin Dreamweaver", "f0/a1", "steps-needed:cost:SubCounter"},
+		{"Rasputin Dreamweaver", "cast", "start:started-turn-untapped"},
+		{"Rasputin Dreamweaver", "f0/t0", "start:started-turn-untapped"},
+		{"Vitaspore Thallid", "f0/a1", "start:upkeep-trigger"},
+	} {
+		t.Run(c.card+" refused", func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+			}
+		})
+	}
+}
+
 // startIsExercised generates the start file for card's key, plays it, and
 // fails when play refuses it as start-not-exercised or writes fewer items than
 // the start's seeds; it returns the items written.
@@ -718,6 +886,14 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 // lowering rows and the rendered start. A play error is fatal.
 func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte) {
 	t.Helper()
+	items, rows, raw, _ := playStartFileAt(t, reg, st)
+	return items, rows, raw
+}
+
+// playStartFileAt is playStartFile that also returns the play directory, so a
+// caller can read the exercised ledger the tape alone filled.
+func playStartFileAt(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte, string) {
+	t.Helper()
 	raw, err := st.Marshal()
 	if err != nil {
 		t.Fatal(err)
@@ -752,7 +928,7 @@ func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]ora
 	}); err != nil {
 		t.Fatal(err)
 	}
-	return items, rows, raw
+	return items, rows, raw, out
 }
 
 // TestStartChangesZoneTriggersAreExercised: the ChangesZone/ChangesZoneAll
@@ -937,6 +1113,61 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 		{"Daraja Griffin", "f0/a0"}, // Sac<1/CARDNAME>: destroy target black creature
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartTargetShapesAreExercised: the focus-target shapes that used to
+// refuse as start:needs-target because the placement search only knew a card
+// of a permanent type: a token target (Replicator, Dogged Hunter), a creature
+// subtype no card in the corpus holds (Blinkmoth Nexus, met by a changeling), a
+// six-target spell (Hex), and a monocolored permanent (Vanishing Verse). A
+// TargetValidTargeting$ restriction that needs the bait spell itself to have a
+// target is the stack-target sibling, covered by the hard-card census.
+func TestStartTargetShapesAreExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Replicator", "f0/a0"},        // target token you control
+		{"Dogged Hunter", "f0/a0"},     // target creature token
+		{"Blinkmoth Nexus", "f0/a2"},   // target Blinkmoth creature (a changeling)
+		{"Hex", "cast"},                // six target creatures
+		{"Vanishing Verse", "cast"},    // target monocolored permanent
+		{"Avoid Fate", "cast"},         // target spell that targets a permanent you control
+		{"Cerulean Drake", "f0/a0"},    // counter target spell that targets you
+		{"Hydromorph Gull", "f0/a0"},   // counter target spell that targets a creature you control
+		{"Ring of Immortals", "f0/a0"}, // counter target spell that targets a permanent you control
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartUnsupportedTargetKeepsReason: a target shape no start can place keeps
+// a specific refusal instead of a written start the replay would refuse as
+// start-not-exercised. Cradle to Grave needs a creature that entered this turn,
+// which a setup permanent or token does not (it is placed before turn 1); Wash
+// Away's default cast mode needs a spell not cast from its owner's hand, and its
+// cleave mode is not the mode the bot takes. Commander's Plate and Seasinger
+// name Forge predicates under the Creature head (IsCommander,
+// ControllerControlsIsland), which are not creature subtypes: the changeling
+// shortcut must not write a start whose target the engine rejects.
+func TestStartUnsupportedTargetKeepsReason(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key, reason string }{
+		{"Cradle to Grave", "cast", "start:target-condition:this-turn-entered"},
+		{"Wash Away", "cast", "start:needs-stack-target"},
+		{"Commander's Plate", "f0/a0", "start:needs-target"},
+		{"Seasinger", "f0/a0", "start:needs-target"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
+			}
+		})
 	}
 }
 
@@ -1335,6 +1566,290 @@ func TestStartTransformedTriggerIsExercised(t *testing.T) {
 			}
 			if res.Start != nil || res.Path != scen.PathRefused || res.Reason != c.reason {
 				t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+			}
+		})
+	}
+}
+
+// TestStartAsEntersAndDayNightIsExercised: an as-enters choice the cast puts
+// on the tape (a self-ETB card, so the choice is made by the engine during the
+// cast) and a day/night designation the start declares play through playStart
+// to an item on every seed and lower cleanly. A placement whose as-enters
+// choice would be answered after genesis keeps a specific refusal, and the
+// still-unsupported kinds keep their own name instead of a plain as-enters.
+func TestStartAsEntersAndDayNightIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key, day string }{
+		{"Gathering Stone", "f0/t0", ""},
+		{"Weaver of Blossoms", "f0/a0", scen.DayNightDay},
+		{"Weaver of Blossoms", "f1/a0", scen.DayNightNight},
+		{"Graveyard Trespasser // Graveyard Glutton", "f0/t1", scen.DayNightDay},
+		{"Lunar Rejection", "cast", scen.DayNightDay},
+	} {
+		t.Run(c.card+"/"+c.key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start", res.Path, res.Reason)
+			}
+			if res.Start.DayNight != c.day {
+				t.Errorf("day_night %q, want %q", res.Start.DayNight, c.day)
+			}
+			items, rows, raw := playStartFile(t, reg, res.Start)
+			if len(items) != res.Start.Seeds {
+				t.Errorf("wrote %d item(s), want %d (start %s)", len(items), res.Start.Seeds, raw)
+			}
+			for _, r := range rows {
+				if r.Status != "lower_ok" {
+					t.Errorf("%s: status %s reasons %v (start %s)", r.ID, r.Status, r.Reasons, raw)
+				}
+			}
+		})
+	}
+	for _, c := range []struct{ card, key, reason string }{
+		// A state-backed as-enters creature is cast as the start line (see
+		// TestStartAsEntersCreatureIsExercised); the kinds setup cannot read
+		// keep their named refusal.
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		{"Sorcerous Spyglass", "static#0.0", "as-enters:player"},
+	} {
+		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != scen.PathRefused || res.Reason != c.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+		}
+	}
+}
+
+// TestStartAsEntersCreatureIsExercised: a creature whose own as-enters
+// replacement asks a state-backed choice (a creature type here) is not placed
+// at genesis. That placement is a real move this turn, so the live cut carries
+// Object.EnteredThisTurn and Object.AcqTurn -- the summoning-sick stamp the
+// lowering's setup drive cannot restate (it places permanents directly, CR
+// 302.6). A static key is cast as the start line; an ability or BecomesTarget
+// trigger key casts the card as a prelude and then takes the key's own action,
+// so the entry, the choose answer and both turn stamps are tape events without
+// turning an honest refusal into an item that credits a key it never took.
+//
+// creditDeclared is off: the item id would otherwise credit any lowered start,
+// including one whose cast never activated the ability or fired the trigger.
+// The exercised ledger here is the tape's alone. A static key has no tape
+// entry naming it (credit's declared join is its only reader), so the static
+// cases instead assert the observation setup staticKeyStart builds (its carrier
+// and Compare fields), which a plain cast start would drop, and only the
+// ability and trigger keys are read from the ledger.
+func TestStartAsEntersCreatureIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	creditDeclared = false
+	t.Cleanup(func() { creditDeclared = true })
+	for _, c := range []struct {
+		card, key, focusKind, focusCard string
+		focusSeat                       int
+		prelude, tapeOnly               bool
+		carrier                         string
+		compare                         []string
+	}{
+		{"Adaptive Automaton", "static#0.0", "cast", "Adaptive Automaton", 0, false, false, "", nil},
+		// staticKeyStart's own observation setup -- the affected carrier it
+		// places and the Compare fields it sets -- must survive the move to
+		// hand. A plain cast start drops both and credits the key by id only.
+		{"Rukarumel, Biologist", "static#0.0", "cast", "Rukarumel, Biologist", 0, false, false, "Memnite", nil},
+		{"Kindred Boon", "static#0.0", "cast", "Kindred Boon", 0, false, false, "Crimson Kobolds", []string{oraclediff.CompareKeywords}},
+		{"Lifecraft Engine", "f0/a0", "ability", "Lifecraft Engine", 0, true, true, "", nil},
+		{"Roaming Throne", "f0/t0", "cast", "Murder", 1, true, true, "", nil}, // the opponent's targeting spell, after the prelude cast
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			if !slices.Contains(res.Start.Setup.P0.Hand, c.card) || slices.Contains(res.Start.Setup.P0.Battlefield, c.card) {
+				t.Fatalf("p0 hand %v battlefield %v, want %s in hand and not placed",
+					res.Start.Setup.P0.Hand, res.Start.Setup.P0.Battlefield, c.card)
+			}
+			if c.carrier != "" && !slices.Contains(res.Start.Setup.P0.Battlefield, c.carrier) {
+				t.Errorf("p0 battlefield %v, want staticKeyStart's carrier %q", res.Start.Setup.P0.Battlefield, c.carrier)
+			}
+			if !slices.Equal(res.Start.Compare, c.compare) {
+				t.Errorf("compare %v, want %v: the static setup's observation fields were dropped", res.Start.Compare, c.compare)
+			}
+			if c.prelude {
+				if res.Start.Prelude != c.card || res.Start.PreludeSeat != 0 {
+					t.Fatalf("prelude %q seat %d, want %q seat 0", res.Start.Prelude, res.Start.PreludeSeat, c.card)
+				}
+			} else if res.Start.Prelude != "" {
+				t.Fatalf("prelude %q, want none for a cast start", res.Start.Prelude)
+			}
+			if res.Start.Focus == nil || res.Start.Focus.Seat == nil || *res.Start.Focus.Seat != c.focusSeat ||
+				res.Start.Focus.Card != c.focusCard || res.Start.Focus.Kind != c.focusKind {
+				t.Fatalf("focus %+v, want seat %d %s %s", res.Start.Focus, c.focusSeat, c.focusKind, c.focusCard)
+			}
+			items, rows, raw, out := playStartFileAt(t, reg, res.Start)
+			if len(items) != res.Start.Seeds {
+				t.Errorf("%d item(s), want %d: one per seed (start %s)", len(items), res.Start.Seeds, raw)
+			}
+			if len(rows) != res.Start.Seeds {
+				t.Errorf("%d lowering row(s), want %d (start %s)", len(rows), res.Start.Seeds, raw)
+			}
+			for _, r := range rows {
+				if r.Status != "lower_ok" {
+					t.Errorf("%s: status %s reasons %v (start %s)", r.ID, r.Status, r.Reasons, raw)
+				}
+			}
+			// The as-enters answer must be on the tape, not only in the start's
+			// state: the engine asked it during the cast and the lowering
+			// scripted the pick.
+			chosen := false
+			for _, it := range items {
+				for _, st := range it.Steps {
+					for _, a := range st.Answers {
+						if a.Kind == "choose" && len(a.Pick) > 0 {
+							chosen = true
+						}
+					}
+				}
+			}
+			if !chosen {
+				t.Errorf("no item records the as-enters choose answer (start %s)", raw)
+			}
+			if c.tapeOnly {
+				// The tape itself must credit the key: the prelude cast alone
+				// is not the ability / trigger the item exists for.
+				if got := readExercised(t, out).Get(c.card, c.key); got.Exercised == 0 {
+					t.Errorf("%s %s: the tape credits no use of the key (ledger %+v)", c.card, c.key, got)
+				}
+			}
+		})
+	}
+	for _, c := range []struct{ card, key, reason string }{
+		// A combat key is the creature's attack or block: it needs the
+		// permanent placed for that play, so the entry stamp cannot be
+		// restated and the generator keeps the named refusal.
+		{"Haktos the Unscarred", "combat#0.attack", "start:as-enters-stamp"},
+		// A creature whose as-enters answer is not state setup can read keeps
+		// its named refusal too.
+		{"Sower of Discord", "f0/t0", "as-enters:player"},
+		// A trigger a cast this turn cannot fire (an attack, an upkeep, another
+		// permanent's entry) keeps the named refusal rather than a cast-only
+		// item that never exercises it.
+		{"Titan of Littjara", "f0/t1", "start:as-enters-stamp"},
+		{"Herald's Horn", "f0/t0", "start:as-enters-stamp"},
+		// A static whose own setup refuses keeps that named refusal: casting
+		// the card cannot make an unobservable static exercised.
+		{"Banner of Kinship", "static#0.0", "no-generator:static:affected"},
+		{"Iona, Shield of Emeria", "static#0.0", "no-generator:static:CantBeCast"},
+		{"Cloud Key", "static#0.0", "no-generator:static:ReduceCost"},
+	} {
+		res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != scen.PathRefused || res.Start != nil || res.Reason != c.reason {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
+		}
+	}
+}
+
+// TestStartDayNightMatchesEngineCut: the day_night a start declares is the
+// designation the engine actually has at turn 1's first precombat main, not
+// the designation the genesis placements alone suggest. A gated Moved DayTime
+// replacement (Brimstone Vandal, Obsessive Astronomer) makes the game day as
+// the permanent enters during genesis; CR 731.2a's turn-1 untap check then
+// makes it night before the cut because PrevTurnSpells is zero. A daybound
+// permanent is read by the post-untap state-based action (CR 702.145d), so a
+// lone Weaver of Blossoms stays day, while its nightbound back face is night.
+// TestScenStartDayNightTurnOneCut pins the generator's model to these same
+// values; this test makes the engine, not the model, the source of truth.
+func TestStartDayNightMatchesEngineCut(t *testing.T) {
+	t.Parallel()
+	reg, _ := certdeckBuilder(t)
+	for _, c := range []struct {
+		name string
+		seat startSeat
+		want state.DayNight
+	}{
+		{"Brimstone Vandal", startSeat{Battlefield: []string{"Brimstone Vandal"}}, state.DayNightNight},
+		{"Obsessive Astronomer", startSeat{Battlefield: []string{"Obsessive Astronomer"}}, state.DayNightNight},
+		{"Weaver of Blossoms front", startSeat{Battlefield: []string{"Weaver of Blossoms"}}, state.DayNightDay},
+		{"Weaver of Blossoms back", startSeat{Battlefield: []string{"Weaver of Blossoms"}, BackFace: []string{"Weaver of Blossoms"}}, state.DayNightNight},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			if got := engineCutDayNight(t, reg, c.seat); got != c.want {
+				t.Errorf("turn 1 main1 DayNight = %v, want %v", got, c.want)
+			}
+		})
+	}
+}
+
+// engineCutDayNight plays the hand-built seat as p0's scripted start and
+// returns the designation the engine holds at turn 1's first-main cut.
+func engineCutDayNight(t *testing.T, reg *cards.Registry, seat startSeat) state.DayNight {
+	t.Helper()
+	d0, s0, err := startDeckAt(reg, "start-p0", 0, seat, startSeat{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	d1, s1, err := startDeckAt(reg, "start-p1", 1, startSeat{}, seat)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := state.DayNightNeither
+	seen := false
+	opt := game.Options{
+		Set: "XP", MaxTurns: 2,
+		Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}},
+		OnCut: func(e *rules.Engine, entry int) {
+			if !seen {
+				got, seen = e.G.DayNight, true
+			}
+		},
+	}
+	seed := rules.SeedForStarter(1, 2, 0)
+	if _, err := game.Play(reg, []decks.Deck{d0, d1}, seed, opt); err != nil {
+		t.Fatal(err)
+	}
+	if !seen {
+		t.Fatal("the start never reached turn 1's first-main cut")
+	}
+	return got
+}
+
+// TestStartDayNightSpelling: the runner validates the declaration instead of
+// silently ignoring a misspelt designation; day, night and empty are accepted.
+func TestStartDayNightSpelling(t *testing.T) {
+	dir := t.TempDir()
+	for _, tc := range []struct{ value, wantErr string }{
+		{"", ""},
+		{scen.DayNightDay, ""},
+		{scen.DayNightNight, ""},
+		{"Day", "day_night"},
+		{"dusk", "day_night"},
+	} {
+		t.Run("value="+tc.value, func(t *testing.T) {
+			p := filepath.Join(dir, "start.json")
+			body := `{"format":"xproof-start-1","card":"Llanowar Elves","key":"f0/a0","players":2,"active":0,` +
+				`"max_turns":1,"setup":{"p0":{"battlefield":["Llanowar Elves"]},"p1":{}},"filler":"basics","seeds":1,` +
+				`"day_night":"` + tc.value + `"}`
+			if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			_, err := readStartFile(p)
+			if tc.wantErr == "" {
+				if err != nil {
+					t.Fatalf("day_night %q: %v", tc.value, err)
+				}
+				return
+			}
+			if err == nil || !strings.Contains(err.Error(), tc.wantErr) {
+				t.Fatalf("day_night %q: err %v, want one naming %q", tc.value, err, tc.wantErr)
 			}
 		})
 	}
@@ -1875,9 +2390,13 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 	}
 	// The rest of the report's keys are the same class: a CDA or X focus or
 	// target, an upkeep-sacrifice focus, an Echo or cumulative-upkeep enabler,
-	// and an attack focus that cannot attack. A key the generator already
-	// could not build keeps its named no-generator refusal; any start it does
-	// write must play and exercise.
+	// an attack focus that cannot attack, and a mandatory upkeep whose Destroy
+	// only reads targets — The Abyss and Crumbling Ashes are refused on the
+	// battlefield (a Destroy with ValidTgts is no self-removal, so the sweep
+	// keeps lower.captureStart's refusal) and exercised on the cast lane, the
+	// card in hand and the play firing the trigger after the cut. A key the
+	// generator already could not build keeps its named no-generator refusal;
+	// any start it does write must play and exercise.
 	for _, c := range []struct{ card, key string }{
 		{"Soramaro, First to Dream", "f0/a0"}, // CDA */* with an empty hand
 		{"Savageborn Hydra", "f0/a0"},         // X counters never placed
@@ -1888,6 +2407,8 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 		{"Goldenhide Ox", "cast"},             // Elephant Grass' cumulative upkeep
 		{"Grimgrin, Corpse-Born", "f0/t0"},    // enters tapped and does not untap
 		{"Guardians of Akrasa", "f0/t0"},      // Defender
+		{"The Abyss", "f0/t0"},                // upkeep destroys only targeted creatures
+		{"Crumbling Ashes", "f0/t0"},          // upkeep destroys a countered creature
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
