@@ -24,6 +24,7 @@ type handStep struct {
 	activate        bool
 	ability         int
 	target          string // the cast's or ability's target, a card name or "player" (seat 1)
+	mode            string // a land's or a plan cast's gorge Mode ("modal_land", "adventure_alt"); "" the plain one
 }
 
 // handGame plays steps in a real 2-seat gorge game, seat 0's own main phase,
@@ -131,7 +132,9 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 	// try performs s at this priority if the board allows it yet.
 	try := func(s handStep) (done bool, targeted *Ask) {
 		if s.land != "" {
-			i := option("play_land", s.land, 0)
+			i := slices.IndexFunc(e.Pending().Options, func(o decision.Option) bool {
+				return o.Kind == "play_land" && objName(e.G.Obj(o.Obj)) == s.land && o.Mode == s.mode
+			})
 			if i < 0 {
 				return false, nil
 			}
@@ -141,7 +144,7 @@ func handGame(t *testing.T, reg *cards.Registry, commander string, library []str
 		}
 		if s.plan != "" {
 			for _, a := range e.EnsurePaymentPlanAlternatives() {
-				if objName(e.G.Obj(a.Cast.Object)) != s.plan {
+				if objName(e.G.Obj(a.Cast.Object)) != s.plan || actionWay(e.Pending(), a).mode != s.mode {
 					continue
 				}
 				plan := a.Plans[0]
@@ -415,10 +418,78 @@ func stopsAt(t *testing.T, l *Log, line, handPayments int) {
 	}
 }
 
+// unnamedAt follows l expecting the follower to stop at line because Forge's
+// line does not name which of gorge's ways to cast or play the card its seat
+// took (forgeWays), after handPayments payments by hand.
+func unnamedAt(t *testing.T, l *Log, line, handPayments int) {
+	t.Helper()
+	res := follow(t, l)
+	h := res.Hard
+	if h == nil || h.What != WhatError || h.Harness != HarnessUnmapped || h.Line != line || !strings.Contains(h.Detail, "ways") {
+		t.Fatalf("divergence %+v, want the unnamed-way stop at line %d", h, line)
+	}
+	if res.HandPayments != handPayments || len(h.Record.Log.Intents) != res.Decisions {
+		t.Errorf("%d hand payments, want %d; %d intents for %d decisions", res.HandPayments, handPayments, len(h.Record.Log.Intents), res.Decisions)
+	}
+}
+
+// TestPlannedCastOfAnUnnamedWayStops: Forge's cast line names neither the
+// face nor the alternative its seat cast, so a card gorge can cast two ways
+// Forge marks alike stops at the line, rather than taking gorge's first: the
+// Adventure plan (Stomp) listed before Bonecrusher Giant's creature cast that
+// pays from the same sources.
+func TestPlannedCastOfAnUnnamedWayStops(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Mountain", "Sol Ring", "Bonecrusher Giant"}, []handStep{
+		{land: "Mountain"},
+		{plan: "Sol Ring"},
+		{plan: "Bonecrusher Giant"},
+	})
+	_, line := lastAsk(t, l, "cast")
+	unnamedAt(t, l, line, 0)
+}
+
+// TestPlannedCastOfAWayTheSourcesNameFollows: Forge's line names no face,
+// but the sources it tapped do when only one of gorge's ways has a plan
+// paying from exactly them: three Mountains pay Bonecrusher Giant's creature
+// cast, while every Stomp plan taps two sources.
+func TestPlannedCastOfAWayTheSourcesNameFollows(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Mountain", "Mountain", "Mountain", "Bonecrusher Giant"}, []handStep{
+		{land: "Mountain"},
+		{land: "Mountain"},
+		{land: "Mountain"},
+		{plan: "Bonecrusher Giant"},
+	})
+	followClean(t, l, 0)
+}
+
+// TestPlannedCastOfAMarkedWayFollows: a second way Forge marks apart (a
+// kicked cast) leaves Forge's unmarked line naming gorge's plain cast, which
+// the follower takes.
+func TestPlannedCastOfAMarkedWayFollows(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Forest", "Forest", "Kavu Titan"}, []handStep{
+		{land: "Forest"},
+		{land: "Forest"},
+		{plan: "Kavu Titan"},
+	})
+	followClean(t, l, 0)
+}
+
+// TestModalLandPlayStops: Forge's land line names no face ("Play <card>", no
+// mode), so a modal double-faced land played as its back face stops at the
+// line rather than playing gorge's first (front-face) option.
+func TestModalLandPlayStops(t *testing.T) {
+	l := handGame(t, corpus(t), "", []string{"Hengegate Pathway"}, []handStep{
+		{land: "Hengegate Pathway", mode: "modal_land"},
+	})
+	_, line := lastAsk(t, l, "land")
+	unnamedAt(t, l, line, 0)
+}
+
 // TestHandPaymentOfAMultiWayCardDiverges: gorge lists every way to cast a card
 // as a "cast" option and Forge's line does not say which gorge option its seat
 // took, so a card with a second way is never cast by hand: an Adventure, a
-// split card, a foretell card.
+// split card, a foretell card. No way's plan taps exactly Forge's sources
+// here, so the cast stops answer-missing at the line.
 func TestHandPaymentOfAMultiWayCardDiverges(t *testing.T) {
 	for _, c := range []struct {
 		name    string
@@ -687,4 +758,19 @@ func TestHandPaymentPaysTheOffersOwnCost(t *testing.T) {
 		{use: caterpillar, activate: true, taps: []string{"Wastes", "Golgari Signet"}, target: "Sol Ring"},
 	})
 	followClean(t, l, 2)
+}
+
+// TestOfferedActivationTapsForgesSources: gorge offers the Paladin's ability
+// from its untapped lands, and its payment window would tap the first it
+// offers (Plains); the follower pays it from the lands Forge tapped instead.
+func TestOfferedActivationTapsForgesSources(t *testing.T) {
+	const paladin = "Truefire Paladin"
+	l := handGame(t, corpus(t), "", []string{"Plateau", "Mountain", paladin, "Plains"}, []handStep{
+		{land: "Plateau"},
+		{land: "Mountain"},
+		{plan: paladin},
+		{land: "Plains"},
+		{use: paladin, activate: true, taps: []string{"Plateau:W", "Mountain"}},
+	})
+	followClean(t, l, 1)
 }
