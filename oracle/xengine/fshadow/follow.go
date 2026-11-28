@@ -10,6 +10,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/server/matchrecord"
@@ -153,6 +154,11 @@ type Result struct {
 	// picks a spell's targets while casting it, records them on the cast,
 	// and writes no target ask.
 	CastTargets int `json:"cast_targets,omitempty"`
+	// TargetParts counts the target decisions answered from a later
+	// targeting part of an already consumed target line (its "target_slots"):
+	// Forge writes one line over a whole sub-ability chain, gorge asks each
+	// targeting link its own decision.
+	TargetParts int `json:"target_parts,omitempty"`
 	// Arranges counts the arrange decisions (scry, surveil, ...) the log has
 	// no line for, which the follower answered by default.
 	Arranges int `json:"arranges,omitempty"`
@@ -201,21 +207,30 @@ type follower struct {
 	// bottom (the recorder cleared it on a no-op mulligan line): the whole
 	// hand goes to the bottom.
 	mullBottomAll map[int]bool
-	// castTargets are the targeting parts of the last consumed priority
-	// answer (a cast or an activation) not yet given to a gorge target
-	// decision, in chain order, each holding the refs Forge chose for that
-	// part (none, where it chose nothing). castSeat is the seat that chose
-	// them, castAsk that line's ask number, castObj the gorge object cast or
-	// activated and castAbility marks an activation. Consuming the next log
-	// line clears the parts, so they never reach a later spell's or a
-	// trigger's target.
-	castTargets [][]Ref
-	castSeat    int
-	castAsk     int
-	castObj     state.ObjID
-	castAbility bool
-	res         Result
+	// chain holds the targeting parts the last consumed line carried that no
+	// gorge target decision has taken yet. Consuming the next log line clears
+	// it, so the parts never reach a later spell's or a trigger's target.
+	chain chainTargets
+	res   Result
 }
+
+// chainTargets are the targeting parts one log line carried for a spell or
+// ability's sub-ability chain: a priority answer's (a cast or an activation),
+// or a target line's parts after the one it answered.
+type chainTargets struct {
+	// parts are the untaken parts in chain order, each holding the refs Forge
+	// chose for that part (none, where it chose nothing).
+	parts   [][]Ref
+	seat    int         // the seat that chose them
+	ask     int         // the line's ask number
+	obj     state.ObjID // the gorge object whose asks they answer
+	ability bool        // the asks carry no Source (an activation's)
+	line    int         // a target line's number; 0 for a priority answer
+	host    string      // a target line's host card
+}
+
+// fromLine reports whether the parts came from a target line.
+func (c chainTargets) fromLine() bool { return c.line != 0 }
 
 // Follow replays l in gorge. A setup failure (an unknown card, a binding
 // that does not hold) is an error; every in-game difference is a Result.
@@ -500,6 +515,11 @@ func (f *follower) run(max int) {
 		// where gorge asks nothing) has no gorge counterpart, nor does a
 		// Forge priority pass there.
 		for f.pos < len(f.log.Entries) {
+			// A snapshot after a target line describes the state after all of
+			// that line's targets were chosen.
+			if d := f.e.Pending(); d != nil && f.linePartsDue(d) {
+				break
+			}
 			e := f.log.Entries[f.pos]
 			if e.Shuffle != nil || e.Rand != nil || e.Start != nil {
 				f.pos++ // consumed by the planners
@@ -549,18 +569,25 @@ func (f *follower) run(max int) {
 			f.res.Capped, f.res.End = true, "cap"
 			return
 		}
-		if f.pos >= len(f.log.Entries) {
-			f.res.End = "log"
-			return
+		var e Entry
+		if f.pos < len(f.log.Entries) {
+			e = f.log.Entries[f.pos]
 		}
-		e := f.log.Entries[f.pos]
-		if e.End != nil && e.End.Reason == ReasonUnfinished && e.End.Winner == nil {
-			f.res.End = ReasonUnfinished
-			return
-		}
-		if e.End != nil {
-			f.hard(WhatTerminal, d, Divergence{Line: e.Line, Gorge: fmt.Sprintf("%s for seat %d", d.Kind, d.Player), Forge: endString(e.End)})
-			return
+		// An ask a consumed target line still answers reads no further line,
+		// so the log's end does not stop it.
+		if !f.linePartsDue(d) {
+			if f.pos >= len(f.log.Entries) {
+				f.res.End = "log"
+				return
+			}
+			if e.End != nil && e.End.Reason == ReasonUnfinished && e.End.Winner == nil {
+				f.res.End = ReasonUnfinished
+				return
+			}
+			if e.End != nil {
+				f.hard(WhatTerminal, d, Divergence{Line: e.Line, Gorge: fmt.Sprintf("%s for seat %d", d.Kind, d.Player), Forge: endString(e.End)})
+				return
+			}
 		}
 		in, ok := f.answer(d, e)
 		if !ok {
@@ -725,22 +752,31 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		f.res.OtherDefaults++
 		return firstMin(d), true
 	}
-	if d.Kind == decision.KTarget && e.Ask != nil && e.Ask.Kind != KindTarget {
-		// Forge's recorder logs a target ask only where its targeting hook
-		// is asked. A target it fixes without asking (a forced single
+	if d.Kind == decision.KTarget && (f.linePartsDue(d) || e.Ask != nil && e.Ask.Kind != KindTarget) {
+		// A target line's later parts answer their chain's asks whatever
+		// follows, the next trigger's target line included (linePartsDue).
+		// Otherwise Forge's recorder logs a target ask only where its targeting
+		// hook is asked. A target it fixes without asking (a forced single
 		// candidate, a trigger's target picked inside resolution ...) writes
 		// no line, so the next line is the seat's next priority, attack or
 		// block ask. Answer by default -- the first Min offered options the
 		// Group contract admits -- and consume no line; Forge's real choice,
 		// if it differs, shows at the next snapshot.
-		in, ok, dv := f.answerCastTargets(d)
+		in, ok, dv := f.answerChainTargets(d)
 		if dv != nil {
-			dv.Line, dv.Ask = e.Line, f.castAsk
+			dv.Line, dv.Ask = e.Line, f.chain.ask
+			if f.chain.fromLine() {
+				dv.Line = f.chain.line
+			}
 			f.hard(dv.What, d, *dv)
 			return in, false
 		}
 		if ok {
-			f.res.CastTargets++
+			if f.chain.fromLine() {
+				f.res.TargetParts++
+			} else {
+				f.res.CastTargets++
+			}
 			return in, true
 		}
 		f.res.Targets++
@@ -752,7 +788,7 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 	}
 	a := e.Ask
 	f.res.Asks++
-	f.castTargets = nil // this line is consumed (or the follow stops): earlier cast targets are spent
+	f.chain = chainTargets{} // this line is consumed (or the follow stops): earlier targets are spent
 	if gk, ok := gorgeKind(a.Kind); !ok {
 		f.hard(WhatError, d, Divergence{Line: e.Line, Ask: a.N, Harness: HarnessUnmapped, Detail: "unsupported ask kind " + a.Kind, Forge: a.Kind, Gorge: string(d.Kind)})
 		return in, false
@@ -771,7 +807,7 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 	case decision.KBlockers:
 		in, err = f.blockers(d, a)
 	case decision.KTarget:
-		in, err = f.targets(d, a)
+		in, err = f.targets(d, a, e.Line)
 	}
 	if err != nil {
 		err.Line, err.Ask = e.Line, a.N
@@ -801,20 +837,31 @@ func (f *follower) rememberCastTargets(a *Ask) {
 	if len(parts) == 0 {
 		return
 	}
-	f.castTargets, f.castSeat, f.castAsk = parts, a.Seat, a.N
-	f.castObj, f.castAbility = f.toG[a.Answer.Card], a.Answer.Action == "activate"
+	f.chain = chainTargets{parts: parts, seat: a.Seat, ask: a.N, obj: f.toG[a.Answer.Card], ability: a.Answer.Action == "activate"}
 }
 
-// castPoses reports whether target decision d is one the remembered cast or
-// activation poses: the same seat's, with the cast object as its Source. gorge
+// castPoses reports whether target decision d is one the remembered chain's
+// spell or ability poses: the same seat's, with its object as Source. gorge
 // leaves an activated ability's Source 0 (the permanent stays a legal target
 // of its own ability). Another Source is another object's ask (a trigger's, a
 // copy's).
 func (f *follower) castPoses(d *decision.Decision) bool {
-	if int(d.Acting()) != f.castSeat {
+	c := f.chain
+	if int(d.Acting()) != c.seat {
 		return false
 	}
-	return f.castObj != 0 && d.Source == f.castObj || f.castAbility && d.Source == 0
+	return c.obj != 0 && d.Source == c.obj || c.ability && d.Source == 0
+}
+
+// linePartsDue reports whether d is a later ask of the chain a consumed target
+// line answered, with parts of that line left. Such an ask reads no further
+// line: Forge writes one target line per chain, so the next line, even another
+// target line (a second trigger's, put on the stack with this one), belongs to
+// a later decision. A priority answer's parts do not come first: a target line
+// that follows a cast wins. An ask with no Source cannot be told from another
+// ability's, so it is not claimed here.
+func (f *follower) linePartsDue(d *decision.Decision) bool {
+	return d.Kind == decision.KTarget && d.Source != 0 && f.chain.fromLine() && len(f.chain.parts) > 0 && f.castPoses(d)
 }
 
 // combinedModeAsk reports whether d is one ask over several targeting parts,
@@ -830,66 +877,152 @@ func combinedModeAsk(d *decision.Decision) bool {
 	return false
 }
 
-// answerCastTargets answers target decision d from the remembered cast's
-// targeting parts, in chain order: d takes the next part whole (nothing, if
-// Forge left it empty), and a combined mode ask takes parts until it has Min
-// refs. A mandatory ask (Min above 0) first passes over empty parts, which
-// gorge poses no ask for. Taken and passed-over parts are spent. ok is false
-// (answer by default) when d is not the cast's ask or no part is left. A
-// divergence means d is the cast's ask and the next part does not answer it:
-// the follower cannot tell what Forge chose there, so it stops (a harness
-// finding) instead of answering by default.
-func (f *follower) answerCastTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
+// answerChainTargets answers target decision d from the remembered chain's
+// targeting parts, in chain order: d takes its own part (partsFor) whole
+// (nothing, if Forge left it empty), and a combined mode ask takes parts until
+// it has Min refs. Taken and passed-over parts are spent. ok is false (answer
+// by default) when d is not the chain's ask or no part is left. A divergence
+// means d is the chain's ask and the parts do not answer it: the follower
+// cannot tell what Forge chose there, so it stops (a harness finding) instead
+// of answering by default.
+func (f *follower) answerChainTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	if len(f.castTargets) == 0 || !f.castPoses(d) {
+	if len(f.chain.parts) == 0 || !f.castPoses(d) {
 		return in, false, nil
 	}
-	parts := f.castTargets
-	for d.Min > 0 && len(parts) > 0 && len(parts[0]) == 0 {
-		parts = parts[1:]
+	in, rest, dv := f.answerParts(d, f.chain)
+	if dv != nil {
+		return in, false, dv
+	}
+	f.chain.parts = rest
+	return in, true, nil
+}
+
+// targetingLinks counts the targeting links of the sub-ability chain from sa,
+// the links Forge's recorder counts one target_slots entry each for.
+func targetingLinks(sa *cards.SA) int {
+	n := 0
+	for ; sa != nil; sa = sa.Sub {
+		if effects.TargetsOf(sa).Targeted() {
+			n++
+		}
+	}
+	return n
+}
+
+// namedLink is the link of its source's ability chain that target decision d
+// names: the ResumeSA of a root or "trig_sub" ask, found on the chain of the
+// stack object d.Source. nil where d names none, a modal trigger's chosen mode
+// included: its chain is not the ability's, so it says nothing about d's place
+// among the parts.
+func (f *follower) namedLink(d *decision.Decision) *cards.SA {
+	if d.ResumeSA == nil || d.ResumeKind != "" && d.ResumeKind != "trig_sub" || f.e == nil {
+		return nil
+	}
+	o := f.e.G.Obj(d.Source)
+	if o == nil {
+		return nil
+	}
+	for sa := o.Ability; sa != nil; sa = sa.Sub {
+		if cards.SAEqual(sa, d.ResumeSA) {
+			return sa
+		}
+	}
+	return nil
+}
+
+// partsFor drops from c's untaken parts the leading ones gorge posed no ask
+// for, so that the first part returned is d's. gorge poses no ask for an
+// optional link with no candidate, while Forge still counts its empty part, so
+// d is not always the first untaken part's. why says why d's part cannot be
+// told.
+//
+// link is the chain link d names (namedLink): the targeting links from there to
+// the chain's end are the parts from d's to the last. Without one, a mandatory
+// ask passes over empty parts. An optional one is the first part's if it is a
+// root ask (no ResumeKind); otherwise, with that part empty and a later one
+// not, either could be d's.
+func (c chainTargets) partsFor(d *decision.Decision, link *cards.SA) (parts [][]Ref, why string) {
+	chosen := func(p []Ref) bool { return len(p) > 0 }
+	parts = c.parts
+	if link != nil {
+		n := targetingLinks(link)
+		if n < 1 || n > len(parts) {
+			return nil, fmt.Sprintf("gorge asks a link with %d targeting links to the chain's end, %d targeting parts are left", n, len(parts))
+		}
+		skip := len(parts) - n
+		if slices.ContainsFunc(parts[:skip], chosen) {
+			return nil, "gorge posed no ask for a targeting part Forge chose targets for"
+		}
+		return parts[skip:], ""
+	}
+	if d.Min > 0 {
+		for len(parts) > 0 && len(parts[0]) == 0 {
+			parts = parts[1:]
+		}
+		return parts, ""
+	}
+	if d.ResumeKind != "" && len(parts) > 0 && len(parts[0]) == 0 && slices.ContainsFunc(parts[1:], chosen) {
+		return nil, "cannot tell whether gorge's optional ask is for the empty targeting part or a later one"
+	}
+	return parts, ""
+}
+
+// answerParts answers target decision d from the chain's targeting parts (see
+// answerChainTargets for which parts d takes) and returns the parts left. A
+// divergence carries the field and card of the parts' origin.
+func (f *follower) answerParts(d *decision.Decision, c chainTargets) (decision.Intent, [][]Ref, *Divergence) {
+	in := decision.Intent{Seq: d.Seq, Player: d.Player}
+	field, what, host := "cast_targets", "the cast's", f.name[f.toF[c.obj]]
+	if c.fromLine() {
+		field, what, host = "target_slots", "the logged answer's", c.host
 	}
 	var refs []Ref
+	mismatch := func(detail string) (decision.Intent, [][]Ref, *Divergence) {
+		forge := targetRefKeys(refs)
+		if forge == "" {
+			forge = "none"
+		}
+		var implicated []Implicated
+		if host != "" {
+			implicated = []Implicated{{Name: host}}
+		}
+		return in, nil, &Divergence{What: WhatAnswerMissing, Harness: HarnessUnmapped, Field: field,
+			Forge: forge, Gorge: strings.Join(f.gorgeOptionKeys(d), " "), Cards: implicated, Detail: detail}
+	}
+	parts, why := c.partsFor(d, f.namedLink(d))
+	if why != "" {
+		refs = slices.Concat(c.parts...)
+		return mismatch(why)
+	}
 	if len(parts) > 0 {
 		refs, parts = parts[0], parts[1:]
 	}
 	for combinedModeAsk(d) && len(refs) < d.Min && len(parts) > 0 {
 		refs, parts = append(refs, parts[0]...), parts[1:]
 	}
-	mismatch := func(detail string) (decision.Intent, bool, *Divergence) {
-		forge := targetRefKeys(refs)
-		if forge == "" {
-			forge = "none"
-		}
-		var cards []Implicated
-		if n, ok := f.name[f.toF[f.castObj]]; ok {
-			cards = []Implicated{{Name: n}}
-		}
-		return in, false, &Divergence{What: WhatAnswerMissing, Harness: HarnessUnmapped, Field: "cast_targets",
-			Forge: forge, Gorge: strings.Join(f.gorgeOptionKeys(d), " "), Cards: cards, Detail: detail}
-	}
 	if len(refs) < d.Min || d.Max > 0 && len(refs) > d.Max {
-		return mismatch(fmt.Sprintf("the cast's next targeting part holds %d targets, gorge asks %d to %d", len(refs), d.Min, d.Max))
+		return mismatch(fmt.Sprintf("%s next targeting part holds %d targets, gorge asks %d to %d", what, len(refs), d.Min, d.Max))
 	}
 	cands := make([][]int, len(refs))
 	for i, r := range refs {
-		c, bound := f.targetCandidates(d, r)
+		cand, bound := f.targetCandidates(d, r)
 		if !bound {
 			dv := f.unbound(r.Card + r.Spell)
-			dv.Field = "cast_targets"
-			return in, false, dv
+			dv.Field = field
+			return in, nil, dv
 		}
-		if len(c) == 0 {
-			return mismatch("gorge does not offer the cast's target " + refKey(r))
+		if len(cand) == 0 {
+			return mismatch("gorge does not offer " + what + " target " + refKey(r))
 		}
-		cands[i] = c
+		cands[i] = cand
 	}
 	choices, ok := assignTargetOptions(d, cands)
 	if !ok {
-		return mismatch("no assignment of the cast's targets to one option per Group")
+		return mismatch("no assignment of " + what + " targets to one option per Group")
 	}
-	f.castTargets = parts
 	in.Choices = choices
-	return in, true, nil
+	return in, parts, nil
 }
 
 // kindContext places a kind divergence: where Forge's ask sits (turn, step,
@@ -1087,7 +1220,11 @@ func (f *follower) blockers(d *decision.Decision, a *Ask) (decision.Intent, *Div
 	return in, nil
 }
 
-func (f *follower) targets(d *decision.Decision, a *Ask) (decision.Intent, *Divergence) {
+// targets answers d from the target line numbered line.
+func (f *follower) targets(d *decision.Decision, a *Ask, line int) (decision.Intent, *Divergence) {
+	if len(a.Answer.TargetSlots) > 1 {
+		return f.targetParts(d, a, line)
+	}
 	in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{}}
 	cands := make([][]int, len(a.Answer.Targets))
 	for i, r := range a.Answer.Targets {
@@ -1106,6 +1243,24 @@ func (f *follower) targets(d *decision.Decision, a *Ask) (decision.Intent, *Dive
 			Detail: "no assignment of the answer to one option per Group"}
 	}
 	in.Choices = choices
+	return in, nil
+}
+
+// targetParts answers a logged target line whose target_slots hold several
+// targeting parts: Forge's recorder writes one line over a spell or ability's
+// whole sub-ability chain, while gorge asks each targeting link its own
+// decision. d takes its part as a cast's ask does, and the parts left answer
+// the chain's later asks (linePartsDue; an ask with no Source, only while the
+// next line is not a target line).
+func (f *follower) targetParts(d *decision.Decision, a *Ask, line int) (decision.Intent, *Divergence) {
+	c := chainTargets{parts: a.Answer.targetParts(), seat: a.Seat, ask: a.N, obj: d.Source,
+		ability: d.Source == 0, line: line, host: f.name[a.Answer.Source]}
+	in, rest, dv := f.answerParts(d, c)
+	if dv != nil {
+		return in, dv
+	}
+	c.parts = rest
+	f.chain = c
 	return in, nil
 }
 
