@@ -122,7 +122,10 @@ scope=()
 
 if [ "$mode" = selftest ]; then
 	req='{"request_type":"hello","protocol":"spellbench/v2","request_id":"selftest-1","protocol_minor":0}'
-	out=$(printf '%s\nnot json\n' "$req" | "${scope[@]}" "$bin" "${args[@]}") || { echo "phase-sbv2: selftest: the engine exited non-zero" >&2; exit 1; }
+	# A here-string, not a pipe: under `pipefail` an engine that exits before reading
+	# the request turns printf's SIGPIPE into a spurious "engine exited non-zero".
+	selftest_in=$(printf '%s\nnot json\n' "$req")
+	out=$("${scope[@]}" "$bin" "${args[@]}" <<< "$selftest_in") || { echo "phase-sbv2: selftest: the engine exited non-zero" >&2; exit 1; }
 	first=$(printf '%s\n' "$out" | sed -n 1p)
 	second=$(printf '%s\n' "$out" | sed -n 2p)
 	# Canonical JSON sorts keys, so the engine block comes before response_type: test each on its own.
