@@ -1230,9 +1230,9 @@ class TestHeadline(Base):
         ], writer="decklib")
         self.priv = os.path.join(self.tmp, "carddb-private.sqlite")
         build_mod.build(self.priv, self.schema, a.dir, p.dir, committed)
-        # deck_sample is declared by the deck-support work; the fixture creates it by hand.
+        # The schema declares deck_sample, so the build made it empty; the fixture fills it by hand.
         conn = sqlite3.connect(self.priv)
-        conn.execute("CREATE TABLE deck_sample (deck_id TEXT, half TEXT, bracket TEXT, dirac_four_seat INTEGER)")
+        conn.execute("CREATE TABLE IF NOT EXISTS deck_sample (deck_id TEXT, half TEXT, bracket TEXT, dirac_four_seat INTEGER)")
         conn.executemany("INSERT INTO deck_sample VALUES (?,?,?,?)", [
             ("h1", "holdout", "cedh", 1), ("h2", "holdout", "casual", 0),
             ("h3", "holdout", "cedh", 1), ("r1", "rank", "precon", 1)])
@@ -1333,7 +1333,7 @@ class TestNeedByDecks(Base):
         build_mod.build(db, self.schema, a.dir, p.dir, committed)
         if with_sample:
             conn = sqlite3.connect(db)
-            conn.execute("CREATE TABLE deck_sample (deck_id TEXT, half TEXT, bracket TEXT, "
+            conn.execute("CREATE TABLE IF NOT EXISTS deck_sample (deck_id TEXT, half TEXT, bracket TEXT, "
                          "dirac_four_seat INTEGER)")
             conn.executemany("INSERT INTO deck_sample VALUES (?,?,?,?)", sample)
             conn.commit()
