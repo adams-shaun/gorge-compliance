@@ -1,0 +1,54 @@
+{
+ "card": "Tapestry Warden",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "0070d91983eb",
+ "scenarios": [
+  {
+   "name": "stations-with-toughness",
+   "cr": [
+    "702.184c"
+   ],
+   "why": "Tapestry Warden, a 3/4, taps to station Exploration Broodship. Its own static makes it station with its toughness, so the Spacecraft gets four charge counters rather than three.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Exploration Broodship",
+      "Tapestry Warden"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Exploration Broodship",
+     "ability": "Station ",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Tapestry Warden"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Exploration Broodship",
+     "counters": {
+      "charge": 4
+     }
+    },
+    {
+     "card": "p0:Tapestry Warden",
+     "tapped": true
+    }
+   ]
+  }
+ ]
+}

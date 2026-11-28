@@ -1,0 +1,135 @@
+{
+ "card": "Elvish Refueler",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "eb5178cf6bc1",
+ "scenarios": [
+  {
+   "name": "reactivated-exhaust-paid-by-forests",
+   "cr": [
+    "702.177b"
+   ],
+   "why": "Both exhaust abilities were used last turn. With no exhaust activated yet this turn, Refueler lets its own exhaust be activated again, and two Forests can pay for it.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Elvish Refueler",
+      "Loot, the Pathfinder",
+      "Forest",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Elvish Refueler",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Loot, the Pathfinder",
+     "ability": "for mana",
+     "mana": "G",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "G"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "activate",
+      "card": "p0:Elvish Refueler",
+      "label": "counter"
+     },
+     "want": true
+    }
+   ]
+  },
+  {
+   "name": "loot-mana-cannot-fund-the-reactivated-exhaust",
+   "cr": [
+    "702.177b"
+   ],
+   "why": "Both exhaust abilities were used last turn, and one Forest plus Loot is the only mana. Loot's mana ability is itself an exhaust ability, so it cannot be used while activating Refueler's, and using it first ends Refueler's permission; Refueler's exhaust is not offered.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Elvish Refueler",
+      "Loot, the Pathfinder",
+      "Forest"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Elvish Refueler",
+     "mana": "CG"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Loot, the Pathfinder",
+     "ability": "for mana",
+     "mana": "G",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "G"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass_to",
+     "step": "upkeep",
+     "active": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p0"
+    }
+   ],
+   "expect": [
+    {
+     "offered": {
+      "seat": 0,
+      "kind": "activate",
+      "card": "p0:Elvish Refueler",
+      "label": "counter"
+     },
+     "want": false
+    }
+   ]
+  }
+ ]
+}

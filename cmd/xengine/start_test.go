@@ -14,6 +14,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -2462,5 +2463,21 @@ func TestStartKeepsCDAFocusWhoseNeedsPlaceTheCount(t *testing.T) {
 			}
 			_ = startIsExercised(t, reg, b, c.card, c.key)
 		})
+	}
+}
+
+// TestStartReplIsExercised: an enter-tapped land's replacement start plays to
+// one item per seed, and the item's id declares the repl key, so keyproof
+// credits it.
+func TestStartReplIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	items := startIsExercised(t, reg, b, "Azorius Guildgate", "repl#0.0")
+	if len(items) == 0 {
+		t.Fatal("no items")
+	}
+	want := classify.Use{Card: "Azorius Guildgate", Key: "repl#0.0"}
+	if got, ok := declaredKey(reg, items[0]); !ok || got != want {
+		t.Errorf("declaredKey(%s) = %v %v, want %v", items[0].ID, got, ok, want)
 	}
 }

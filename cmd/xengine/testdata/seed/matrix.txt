@@ -1,0 +1,16 @@
+# Test fixture for `xengine keyproof -seed` (keyproof_seed_test.go): an
+# original card holding one of each seeded key family — an activated ability
+# (A:AB$), a triggered ability (T:), a continuous static (S:) and a
+# replacement effect (R:) — so the seed covers every family, not just cast.
+# Not a Forge script: the licence guard keeps real corpus scripts out of this
+# repository, and this file sits outside any cardsfolder/.
+Name:Matrix Warden
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Pump | Cost$ Tap | ValidTarg$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Matrix Warden | Execute$ TrigDraw | TriggerDescription$ When Matrix Warden enters the battlefield, draw a card.
+S:Mode$ Continuous | Affected$ Creature | Subtype$ Human | AddPower$ 1 | Description$ Other Humans you control get +1/+1.
+R:Event$ DamageDone | ReplaceWith$ ReplaceNullify | Continuous$ True | SourceType$ Spell | Description$ If a spell you control would deal damage, prevent that damage.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:ReplaceNullify:DB$ DealDamage | Defined$ You | Num$ 0

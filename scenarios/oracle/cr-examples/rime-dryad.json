@@ -1,0 +1,60 @@
+{
+ "card": "Rime Dryad",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "a68e08705d43",
+ "scenarios": [
+  {
+   "name": "own-snow-forestwalker-does-not-let-it-block",
+   "cr": [
+    "702.14d"
+   ],
+   "why": "The defending player controls a Snow-Covered Forest and a Rime Dryad of their own. Landwalk abilities do not cancel, so their Dryad can block the attacking Grizzly Bears but not the attacking Rime Dryad.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Rime Dryad",
+      "Grizzly Bears"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Snow-Covered Forest",
+      "Rime Dryad"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Rime Dryad",
+      "p0:Grizzly Bears"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    }
+   ],
+   "expect": [
+    {
+     "can_block": {
+      "blocker": "p1:Rime Dryad",
+      "attacker": "p0:Rime Dryad"
+     },
+     "want": false
+    },
+    {
+     "can_block": {
+      "blocker": "p1:Rime Dryad",
+      "attacker": "p0:Grizzly Bears"
+     },
+     "want": true
+    }
+   ]
+  }
+ ]
+}

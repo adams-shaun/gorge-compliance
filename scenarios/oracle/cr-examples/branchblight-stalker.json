@@ -1,0 +1,71 @@
+{
+ "card": "Branchblight Stalker",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "ac3f65fca893",
+ "scenarios": [
+  {
+   "name": "toxic-two-plus-granted-toxic-one-gives-three-poison",
+   "cr": [
+    "702.164b"
+   ],
+   "why": "Skrelv gives Branchblight Stalker toxic 1 on top of its toxic 2, a total toxic value of 3. Its hit gives three poison counters, which turns on Apostle of Invasion's corrupted double strike.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Branchblight Stalker",
+      "Skrelv, Defector Mite",
+      "Apostle of Invasion"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Skrelv, Defector Mite",
+     "mana": "W",
+     "targets": [
+      "p0:Branchblight Stalker"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "red"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "attack",
+     "seat": 0,
+     "attackers": [
+      "p0:Branchblight Stalker"
+     ],
+     "defender": "p1"
+    },
+    {
+     "op": "pass_to",
+     "step": "main2"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 17
+     }
+    },
+    {
+     "card": "p0:Apostle of Invasion",
+     "keywords": [
+      "Double Strike"
+     ]
+    }
+   ]
+  }
+ ]
+}

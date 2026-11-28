@@ -23,7 +23,7 @@ func runScen(args []string) error {
 	manifests := fs.String("manifests", "oracle/compliance/manifests", "set manifests dir (the cards XMage lists, under the spelling it uses)")
 	forgeEditions := fs.String("forge-editions", "", "pinned Forge editions dir (default: find the forge-oracle clone, and fail if none; none builds an unfiltered pool that may pick a card Forge's card DB filters)")
 	card := fs.String("card", "", "the card (required without -census)")
-	key := fs.String("key", "", "the cov key: cast, land, f0/a2, f0/t0, static#0.0, combat#0.block (required without -census)")
+	key := fs.String("key", "", "the cov key: cast, land, f0/a2, f0/t0, static#0.0, combat#0.block, repl#0.0 (required without -census)")
 	prefer := fs.String("prefer", "auto", "auto (a scripted-steps item where a template serves the key) or start (always a start file)")
 	set := fs.String("set", "SCEN", "names the item ids; with -census, the manifest to measure")
 	census := fs.Bool("census", false, "measure every key of every card of manifest -set: writes reach.tsv and summary.tsv")
