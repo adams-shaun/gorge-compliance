@@ -20,6 +20,8 @@
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
   dirac [--repo DIR] [--gorge-dir DIR] [--source ID] [--version V] [--measured DATE]
                                         gorge's dirac support lists + the gaps snapshot -> support, evidence rows
+  scenarios [--repo DIR] [--source ID] [--version V] [--measured DATE]
+                                        hand and translated XMage scenario outcomes per card -> evidence rows
   inclusion --from FILE --sample NAME [--cards TSV] [--out PATH]
                                         a deck sample's per-card table -> carddb/curated/commander-inclusion.tsv
   size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
@@ -52,6 +54,7 @@ from . import keylegs as keylegs_mod
 from . import merge as merge_mod
 from . import query as query_mod
 from . import release as release_mod
+from . import scenarios as scenarios_mod
 from . import shard
 from .boundary import boundary_tree
 from .norm import Resolver
@@ -126,6 +129,13 @@ def _parser():
     p.add_argument("--version", help="writer version recorded in _meta/writers")
     p.add_argument("--measured", metavar="YYYY-MM-DD",
                    help="the support rows' measured date (default $CARDDB_NOW, else today UTC)")
+    p = sub.add_parser("scenarios")
+    p.add_argument("--repo", help="gorge-compliance checkout holding scenarios/ and cmd/xmageport/known_bugs.tsv"
+                                  " (default: this one)")
+    p.add_argument("--source", help="writer id recorded in _meta/writers (default scenario)")
+    p.add_argument("--version", help="writer version recorded in _meta/writers")
+    p.add_argument("--measured", metavar="YYYY-MM-DD",
+                   help="date recorded in _meta/writers (default $CARDDB_NOW or today, UTC)")
     p = sub.add_parser("inclusion")
     p.add_argument("--from", dest="src", required=True, metavar="FILE",
                    help="the sample's per-card table: card decks rate rate_precon rate_casual rate_cedh rate_ranking")
@@ -354,6 +364,16 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
             parts = " ".join("%s=%d" % kv for kv in sorted(r.counts.items()))
             print("carddb dirac: %d rows changed; %s; %d evidence rows" % (r.changed, parts, r.evidence),
                   file=stdout)
+            return 0
+        if args.verb == "scenarios":
+            pub = Store(PUBLIC, home=args.home, schema=schema)
+            if not pub.exists():
+                raise StoreError("no public clone at %s: run `carddb init`" % pub.dir)
+            r = scenarios_mod.run(pub, repo=args.repo, measured=args.measured,
+                                  writer=args.source or scenarios_mod.WRITER, version=args.version)
+            parts = " ".join("%s:%s=%d" % (s, o, n) for (s, o), n in sorted(r["outcomes"].items()))
+            print("carddb scenarios: %d rows changed; %s; %d unresolved names skipped"
+                  % (r["changed"], parts, len(r["unresolved"])), file=stdout)
             return 0
         if args.verb == "fetch":
             print(fetch_mod.fetch(private=kind == PRIVATE, home=args.home), file=stdout)
