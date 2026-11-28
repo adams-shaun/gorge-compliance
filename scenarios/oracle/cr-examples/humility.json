@@ -1,0 +1,58 @@
+{
+ "card": "Humility",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "bee4b269512f",
+ "scenarios": [
+  {
+   "name": "entry-ability-is-lost-before-it-can-trigger",
+   "cr": [
+    "603.6b"
+   ],
+   "why": "Humility removes the Cleric's abilities as it arrives, so the life-gain trigger it would normally have never exists.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Humility"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Cathedral Sanctifier"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Cathedral Sanctifier",
+     "mana": "W"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "life": {
+      "p1": 20
+     }
+    },
+    {
+     "card": "p1:Cathedral Sanctifier",
+     "zone": "battlefield",
+     "pt": "1/1"
+    }
+   ]
+  }
+ ]
+}

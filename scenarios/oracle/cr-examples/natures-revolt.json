@@ -1,0 +1,56 @@
+{
+ "card": "Nature's Revolt",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "08eea927cf5b",
+ "scenarios": [
+  {
+   "name": "a-land-enters-as-a-creature-and-triggers",
+   "cr": [
+    "603.6b"
+   ],
+   "why": "The Revolt turns the Forest into a 2/2 creature the moment it is on the battlefield. That makes Soul Warden's creature-entry trigger fire.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Nature's Revolt",
+      "Soul Warden"
+     ],
+     "hand": [
+      "Forest"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "play",
+     "seat": 0,
+     "card": "p0:Forest"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Forest",
+     "zone": "battlefield",
+     "types": [
+      "Creature"
+     ],
+     "pt": "2/2"
+    },
+    {
+     "life": {
+      "p0": 21
+     }
+    }
+   ]
+  }
+ ]
+}

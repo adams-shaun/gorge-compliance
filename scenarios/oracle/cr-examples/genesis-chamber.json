@@ -1,0 +1,87 @@
+{
+ "card": "Genesis Chamber",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c2108fa45f92",
+ "scenarios": [
+  {
+   "name": "tokens-under-the-survivors-stay",
+   "cr": [
+    "800.4a"
+   ],
+   "why": "Genesis Chamber gives the entering Bear's controller a Myr. When the Chamber's controller leaves, only their own objects leave; the token under the other player stays.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Genesis Chamber"
+     ],
+     "life": 2,
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Grizzly Bears"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "hand": [
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Grizzly Bears",
+     "mana": "GC"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 2,
+     "card": "p2:Shock",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 1,
+      "zone": "battlefield",
+      "name": "Myr",
+      "token": true
+     },
+     "eq": 1
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "battlefield"
+    }
+   ]
+  }
+ ]
+}

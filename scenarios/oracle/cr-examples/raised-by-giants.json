@@ -1,0 +1,120 @@
+{
+ "card": "Raised by Giants",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e582bb6e28d4",
+ "scenarios": [
+  {
+   "name": "a-face-down-commander-is-still-a-commander",
+   "cr": [
+    "903.3"
+   ],
+   "why": "Ixidron turns the commander face down, but the card keeps its commander designation. Raised by Giants still sets its base power and toughness to 10/10.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Raised by Giants",
+      "Isamaru, Hound of Konda"
+     ],
+     "commanders": [
+      "Isamaru, Hound of Konda"
+     ],
+     "commander_casts": {
+      "Isamaru, Hound of Konda": 1
+     },
+     "hand": [
+      "Ixidron"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ixidron",
+     "mana": "CCCUU"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Isamaru, Hound of Konda",
+     "zone": "battlefield",
+     "pt": "10/10"
+    }
+   ],
+   "format": "commander"
+  },
+  {
+   "name": "a-body-double-copying-the-commander-is-not-a-commander",
+   "cr": [
+    "903.3"
+   ],
+   "why": "Body Double copies the commander card from the graveyard, but copying does not carry the commander designation. Raised by Giants leaves it at the copied 2/2.",
+   "format": "commander",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Raised by Giants"
+     ],
+     "graveyard": [
+      "Isamaru, Hound of Konda"
+     ],
+     "commanders": [
+      "Isamaru, Hound of Konda"
+     ],
+     "commander_casts": {
+      "Isamaru, Hound of Konda": 1
+     },
+     "hand": [
+      "Body Double"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Body Double",
+     "mana": "CCCCU"
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "any",
+       "pick": [
+        "Isamaru, Hound of Konda"
+       ]
+      }
+     ]
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Body Double",
+     "zone": "battlefield",
+     "pt": "2/2"
+    }
+   ]
+  }
+ ]
+}

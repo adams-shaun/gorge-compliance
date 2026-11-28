@@ -1,0 +1,127 @@
+{
+ "card": "Sigarda's Aid",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d708aebc5f50",
+ "scenarios": [
+  {
+   "name": "bestow-choice-lets-an-aura-only-flash-grant-apply",
+   "cr": [
+    "601.3b"
+   ],
+   "why": "The Aid gives flash only to Aura spells, and the Eidolon is an Aura spell only if its bestow cost is chosen. Considering that choice lets it be cast on the opponent's turn.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Sigarda's Aid",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Hopeful Eidolon"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Hopeful Eidolon",
+     "mana": "CCCW",
+     "targets": [
+      "p0:Grizzly Bears"
+     ],
+     "cast_mode": "bestowed"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Hopeful Eidolon",
+     "zone": "battlefield",
+     "no_types": [
+      "Creature"
+     ]
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "3/3",
+     "keywords": [
+      "Lifelink"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "control-a-plain-aura-gets-flash-from-the-aid",
+   "cr": [
+    "601.3b"
+   ],
+   "why": "Control for the bestow case: an ordinary Aura in hand is cast on the opponent's turn under the Aid. It shows the flash grant itself works, so only the bestow choice is under test.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Sigarda's Aid",
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Holy Strength"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Holy Strength",
+     "mana": "W",
+     "targets": [
+      "p0:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Holy Strength",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p0:Grizzly Bears",
+     "pt": "3/4"
+    }
+   ]
+  }
+ ]
+}
