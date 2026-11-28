@@ -78,9 +78,9 @@ UNPUNCTUATED = (
     "1. Game Concepts\n"
     "Glossary\n"
     "1. Game Concepts\n"
-    "   606.4. Some rule about loyalty costs.\n"
-    "   606.5 If the total cost contains multiple costs to add or remove loyalty counters.\n"
-    "      Example: A player controls Carth the Lion.\n"
+    "   606.4. An invented rule that ends with a full stop.\n"
+    "   606.5 This invented heading has no full stop after its number.\n"
+    "      Example: The made-up permanent is invented for this fixture.\n"
     "\fGlossary\n"
     "Glossary\n"
 )
