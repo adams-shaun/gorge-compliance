@@ -92,6 +92,10 @@ jobs:
       - name: shell syntax
         working-directory: gorge-compliance
         run: for f in $(git ls-files '*.sh'); do bash -n "$f" || exit 1; done
+      # This repo is public: no home directory, private disk path or box address in any tracked file (11-28).
+      - name: public boundary
+        working-directory: gorge-compliance
+        run: python3 scripts/public-boundary.py
       # A FORGE_ORACLE_REF/XMAGE_REF that is not in our fork network breaks
       # every kit build ("upload-pack: not our ref"). Tickets land on local
       # develop, not by PR to develop, so the landing config's [[gates]] entry
