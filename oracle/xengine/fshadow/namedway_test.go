@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/state"
 )
@@ -128,6 +129,13 @@ func TestHandPaymentOfAnUnnamedWayDiverges(t *testing.T) {
 // equipGame equips Bonesplitter on the last of creatures, its activation line
 // rewritten as Forge's recorder writes an Equip's: no target.
 func equipGame(t *testing.T, creatures ...string) *Log {
+	return equips(t, creatures, handStep{target: creatures[len(creatures)-1]})
+}
+
+// equips plays creatures and then thens: an equip of Bonesplitter on a step's
+// target, or the step's land. Every Equip line is rewritten as Forge's
+// recorder writes it, with one empty targeting part and no target.
+func equips(t *testing.T, creatures []string, thens ...handStep) *Log {
 	const splitter = "Bonesplitter"
 	library := []string{"Swamp", splitter, "Swamp", "Swamp", "Swamp"}
 	steps := []handStep{{land: "Swamp"}, {plan: splitter}, {land: "Swamp"}}
@@ -135,11 +143,36 @@ func equipGame(t *testing.T, creatures ...string) *Log {
 		library = append(library, c, "Swamp")
 		steps = append(steps, handStep{land: "Swamp"}, handStep{plan: c})
 	}
-	steps = append(steps, handStep{use: splitter, activate: true, taps: []string{"Swamp"}, target: creatures[len(creatures)-1]})
+	for _, s := range thens {
+		if s.land != "" {
+			library = append(library, s.land)
+		} else {
+			s = handStep{use: splitter, activate: true, taps: []string{"Swamp"}, target: s.target}
+		}
+		steps = append(steps, s)
+	}
 	l := handGame(t, corpus(t), "", library, steps)
-	a, _ := lastAsk(t, l, "activate")
-	a.Answer.Targets, a.Answer.TargetSlots = nil, []int{0}
+	for _, e := range l.Entries {
+		if a := e.Ask; a != nil && a.Answer.Action == "activate" {
+			a.Answer.Targets, a.Answer.TargetSlots = nil, []int{0}
+		}
+	}
 	return l
+}
+
+// reattach rewrites what Bonesplitter is attached to in every snapshot of l
+// after line.
+func reattach(l *Log, line int, to func(string) string) {
+	for _, e := range l.Entries {
+		if e.Snap == nil || e.Line <= line {
+			continue
+		}
+		for i := range e.Snap.Snapshot.Permanents {
+			if p := &e.Snap.Snapshot.Permanents[i]; p.Name == "Bonesplitter" && p.AttachedTo != "" {
+				p.AttachedTo = to(p.AttachedTo)
+			}
+		}
+	}
 }
 
 // TestEquipWithOneBearerFollows: the recorder writes no target on an Equip
@@ -155,11 +188,93 @@ func TestEquipWithOneBearerFollows(t *testing.T) {
 	}
 }
 
-// TestEquipWithTwoBearersDiverges: the line does not say which was equipped.
-func TestEquipWithTwoBearersDiverges(t *testing.T) {
-	res := follow(t, equipGame(t, "Walking Corpse", "Typhoid Rats"))
-	if h := res.Hard; h == nil || h.What != WhatAnswerMissing || h.Field != "cast_targets" {
-		t.Fatalf("divergence %+v, want answer-missing cast_targets", res.Hard)
+// TestEquipWithTwoBearersFollows: the line does not say which was equipped
+// (farm cmdr4 MSH-s141 pod 14102, line 572); the next snapshot's attached_to
+// does. The bearer is not gorge's first option, the default answer.
+func TestEquipWithTwoBearersFollows(t *testing.T) {
+	two := []string{"Walking Corpse", "Typhoid Rats"}
+	for _, c := range []struct {
+		name  string
+		slots []int
+		bare  bool // the snapshot names the bearer, not its ref
+		moved bool // the Equipment is on the other creature first
+	}{
+		{name: "one empty part", slots: []int{0}},
+		{name: "no part", slots: []int{}},
+		{name: "the host named bare", slots: []int{0}, bare: true},
+		{name: "moved from the other bearer", slots: []int{0}, moved: true},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			thens, picks := []handStep{{target: two[1]}}, 1
+			if c.moved {
+				thens, picks = []handStep{{target: two[0]}, {land: "Swamp"}, {target: two[1]}}, 2
+			}
+			l := equips(t, two, thens...)
+			for _, e := range l.Entries {
+				if a := e.Ask; a != nil && a.Answer.Action == "activate" {
+					a.Answer.TargetSlots = c.slots
+				}
+			}
+			if c.bare {
+				reattach(l, 0, oraclediff.RefName)
+			}
+			res := follow(t, l)
+			if h := res.Hard; h != nil {
+				t.Fatalf("hard divergence at line %d: %s %s %s gorge %q forge %q (%s)", h.Line, h.What, h.Kind, h.Field, h.Gorge, h.Forge, h.Detail)
+			}
+			if res.End != "log" || res.CastTargets != picks || res.BearerPicks != picks {
+				t.Errorf("end %q cast_targets %d bearer_picks %d, want the whole log followed and %d bearers read", res.End, res.CastTargets, res.BearerPicks, picks)
+			}
+		})
+	}
+}
+
+// TestEquipBearerNotShownDiverges: where the log does not tell which of two
+// creatures was equipped, the follow stops at the Equip's target ask.
+func TestEquipBearerNotShownDiverges(t *testing.T) {
+	two := []string{"Walking Corpse", "Typhoid Rats"}
+	onRats := []handStep{{target: two[1]}}
+	// edit changes l after its first Equip, on line.
+	shows := func(host string) func(*testing.T, *Log, int) {
+		return func(_ *testing.T, l *Log, line int) { reattach(l, line, func(string) string { return host }) }
+	}
+	for _, c := range []struct {
+		name      string
+		creatures []string
+		thens     []handStep
+		edit      func(*testing.T, *Log, int)
+		detail    string
+	}{
+		{"two bearers of one name", []string{two[0], two[0]}, []handStep{{target: two[0]}}, nil, "gorge offers 2"},
+		{"attached to nothing", two, onRats, shows(""), "0 new bearers"},
+		{"a bearer gorge does not offer", two, onRats, shows("p0:Grizzly Bears"), "gorge offers 0"},
+		{"equipped again first", two, []handStep{{target: two[0]}, {target: two[1]}}, nil, "may move it again"},
+		{"targeted first", two, onRats, func(t *testing.T, l *Log, line int) {
+			a, _ := lastAsk(t, l, "activate")
+			i := slices.IndexFunc(l.Entries, func(e Entry) bool { return e.Line > line && e.Ask != nil })
+			l.Entries[i].Ask.Answer.Targets = []Ref{{Card: a.Answer.Card}}
+		}, "may move it again"},
+		{"no later snapshot", two, onRats, func(_ *testing.T, l *Log, line int) {
+			l.Entries = slices.DeleteFunc(l.Entries, func(e Entry) bool { return e.Line > line && e.Snap != nil })
+		}, "no later snapshot"},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			l := equips(t, c.creatures, c.thens...)
+			i := slices.IndexFunc(l.Entries, func(e Entry) bool { return e.Ask != nil && e.Ask.Answer.Action == "activate" })
+			line := l.Entries[i].Line
+			if c.edit != nil {
+				c.edit(t, l, line)
+			}
+			for _, slots := range [][]int{{0}, {}} {
+				l.Entries[i].Ask.Answer.TargetSlots = slots
+				res := follow(t, l)
+				// The ask has no line of its own: the next one is reported.
+				if h := res.Hard; h == nil || h.What != WhatAnswerMissing || h.Field != "cast_targets" ||
+					h.Line != l.Entries[i+1].Line || !strings.Contains(h.Detail, c.detail) {
+					t.Errorf("target_slots %v: divergence %+v, want answer-missing cast_targets (%s) after line %d", slots, res.Hard, c.detail, line)
+				}
+			}
+		})
 	}
 }
 

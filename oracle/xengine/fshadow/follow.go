@@ -178,6 +178,10 @@ type Result struct {
 	// picks a spell's targets while casting it, records them on the cast,
 	// and writes no target ask.
 	CastTargets int `json:"cast_targets,omitempty"`
+	// BearerPicks counts the CastTargets of an activation that attaches its
+	// source (an Equip) and records no bearer, read from the next snapshot
+	// line: the permanent the source is newly attached to there.
+	BearerPicks int `json:"bearer_picks,omitempty"`
 	// TargetParts counts the target decisions answered from a later
 	// targeting part of an already consumed target line (its "target_slots"):
 	// Forge writes one line over a whole sub-ability chain, gorge asks each
@@ -908,10 +912,11 @@ func (f *follower) answerUnlogged(d *decision.Decision) decision.Intent {
 // or an activation's "targets", split by "target_slots"): Forge chooses them
 // while it casts and writes no target ask, so gorge's target decisions that
 // follow have no line of their own and are answered from these. An answer
-// whose only parts are empty is kept too: Forge chose nothing there.
+// whose only parts are empty is kept too: Forge chose nothing there. So is an
+// activation with no part at all, for its attach ask (attachAsk).
 func (f *follower) rememberCastTargets(a *Ask) {
 	parts := a.Answer.targetParts()
-	if len(parts) == 0 {
+	if len(parts) == 0 && a.Answer.Action != "activate" {
 		return
 	}
 	f.chain = chainTargets{parts: parts, seat: a.Seat, ask: a.N, obj: f.toG[a.Answer.Card], ability: a.Answer.Action == "activate"}
@@ -959,13 +964,21 @@ func combinedModeAsk(d *decision.Decision) bool {
 // (nothing, if Forge left it empty), and a combined mode ask takes parts until
 // it has Min refs. Taken and passed-over parts are spent. ok is false (answer
 // by default) when d is not the chain's ask or no part is left. An activation's
+// attach ask with a choice of bearers and nothing recorded is answered from the
+// next snapshot (answerAttach), with or without a part left. An activation's
 // ask with no choice and nothing recorded takes every option (unrecorded) and
 // spends one part. A divergence means d is the chain's ask and the parts do not
 // answer it: the follower cannot tell what Forge chose there, so it stops (a
 // harness finding) instead of answering by default.
 func (f *follower) answerChainTargets(d *decision.Decision) (decision.Intent, bool, *Divergence) {
 	in := decision.Intent{Seq: d.Seq, Player: d.Player}
-	if len(f.chain.parts) == 0 || !f.castPoses(d) {
+	if !f.castPoses(d) {
+		return in, false, nil
+	}
+	if host := f.attachAsk(d); host != 0 && len(d.Options) > d.Min {
+		return f.answerAttach(d, host)
+	}
+	if len(f.chain.parts) == 0 {
 		return in, false, nil
 	}
 	if f.chain.unrecorded(d) {

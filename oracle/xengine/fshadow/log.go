@@ -68,7 +68,12 @@
 // nothing, a mandatory ask passes over it, and a combined modal ask takes one
 // part per mode. A target line that follows the cast wins over these parts. The
 // recorder writes no target on an Equip activation, so an activation's mandatory
-// ask that must take every option, with every part left empty, takes them. A
+// ask that must take every option, with every part left empty, takes them. An
+// attaching activation's ask with a choice of bearers and no target recorded,
+// whether the line counts an empty part or none, takes the permanent the source
+// is newly attached to at the next snapshot (Result.BearerPicks counts them);
+// where that does not tell one offered permanent, or a later line may move the
+// source first, it is a "cast_targets" divergence. A
 // decision the next part cannot answer, or an optional sub-ability ask that
 // could be an empty part's or a later one's, is a harness divergence (field
 // "cast_targets").
