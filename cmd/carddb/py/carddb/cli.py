@@ -1,9 +1,10 @@
 """carddb command line (python3 -I cmd/carddb/main.py <verb>).
 
-  put TABLE [--source ID] [--version V] [--if-absent] [--refresh COLS]
+  put TABLE [--source ID] [--version V] [--if-absent] [--refresh COLS] [--prune-seed]
                                         rows from stdin: TSV, first line the column names; --if-absent adds only
                                         rows whose key is not stored yet (--refresh COLS: the stored row still
-                                        takes those columns from the input)
+                                        takes those columns from the input); --prune-seed (keyproof, the whole
+                                        seed file) deletes the untried seed rows whose key the input no longer names
   ingest catalogue --mtgjson FILE         MTGJSON AllPrintings -> the catalogue tables, full snapshot
   ingest status --status-a FILE --meta FILE [--status-b FILE]
                                         oraclediff status output -> cert_sets status columns (docs site data)
@@ -77,6 +78,9 @@ def _parser():
                         "(the keyproof seed put); with --refresh the stored row still takes those columns")
     p.add_argument("--refresh", metavar="COLS",
                    help="with --if-absent: comma-separated column names the stored row takes from the input row")
+    p.add_argument("--prune-seed", action="store_true",
+                   help="keyproof only, stdin the whole seed file: also delete the stored seed rows still owed as "
+                        "untried or not-in-corpus whose key the input does not name")
     p = sub.add_parser("ingest")
     p.add_argument("source", choices=("catalogue", "status"))
     p.add_argument("--mtgjson", metavar="FILE", help="catalogue: MTGJSON AllPrintings.json or .json.gz")
@@ -224,13 +228,15 @@ def _parser():
     return ap
 
 
-def _read_rows(stream):
+def _read_rows(stream, allow_empty=False):
     lines = stream.read().split("\n")
     if lines and lines[-1] == "":
         lines.pop()
     if lines and lines[0].startswith("#carddb "):
         lines.pop(0)
     if not lines:
+        if allow_empty:  # --prune-seed: no input is a batch of no rows, for the partial-seed refusal to judge
+            return []
         raise StoreError("put: no column header line on stdin")
     names = lines[0].split("\t")
     rows = []
@@ -272,13 +278,20 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                 return 1
             return 0
         if args.verb == "put":
+            if args.prune_seed and args.table != keylegs_mod.TABLE:
+                raise StoreError("put: --prune-seed applies to the %s table only" % keylegs_mod.TABLE)
             t = schema.tables.get(args.table)
             k = PRIVATE if t is not None and t.is_private() and not args.table.startswith("_meta/") else PUBLIC
             refresh = tuple(c.strip() for c in args.refresh.split(",") if c.strip()) if args.refresh else ()
-            n = Store(k, home=args.home, schema=schema).put(args.table, _read_rows(stdin), writer=args.source,
-                                                              version=args.version, raw=True,
-                                                              if_absent=args.if_absent, refresh=refresh)
-            print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
+            store = Store(k, home=args.home, schema=schema)
+            n = store.put(args.table, _read_rows(stdin, allow_empty=args.prune_seed), writer=args.source,
+                          version=args.version, raw=True, if_absent=args.if_absent, refresh=refresh,
+                          prune_seed=args.prune_seed)
+            if args.prune_seed:
+                print("carddb put %s: %d rows changed, %d seed rows pruned, %d orphan keys" % (
+                    args.table, n, store.last_pruned, store.last_orphans), file=stdout)
+            else:
+                print("carddb put %s: %d rows changed" % (args.table, n), file=stdout)
             return 0
         if args.verb == "migrate":
             pub = Store(PUBLIC, home=args.home, schema=schema)
