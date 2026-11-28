@@ -1198,7 +1198,8 @@ func castOption(d *decision.Decision, obj state.ObjID) int {
 }
 
 // cast pays a cast with the payment plan whose activations tap exactly the
-// sources Forge tapped. A cast Forge paid with nothing and gorge offers as a
+// sources Forge tapped, passing over a plan that picks a permanent to sacrifice
+// (sacrificesAnother). A cast Forge paid with nothing and gorge offers as a
 // cast option is the first such option. A card with only one way to be cast
 // (soleCast) and no such plan is paid by hand from Forge's sources, if that
 // makes gorge offer it.
@@ -1217,6 +1218,9 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 		}
 		offered = true
 		for _, p := range act.Plans {
+			if sacrificesAnother(p) {
+				continue
+			}
 			got := make([]state.ObjID, 0, len(p.Activations))
 			for _, x := range p.Activations {
 				got = append(got, x.Source)
@@ -1246,6 +1250,16 @@ func (f *follower) cast(d *decision.Decision, a *Ask, obj state.ObjID) (decision
 		return in, &Divergence{What: WhatAnswerMissing, Field: "payment", Forge: fmt.Sprintf("cast:%d tapping %v", a.Answer.Card, a.Answer.Tapped)}
 	}
 	return in, &Divergence{What: WhatAnswerMissing, Forge: answerKey(a.Answer)}
+}
+
+// sacrificesAnother reports whether a step of p sacrifices a permanent other
+// than its source (Phyrexian Tower's creature). gorge's planner picks that
+// permanent and Forge's line, which lists only taps, does not name the one
+// Forge picked, so p is not known to be Forge's payment. A step's cost to its
+// own source (a Treasure's sacrifice, a painland's damage) names nothing the
+// line leaves open.
+func sacrificesAnother(p decision.PaymentPlan) bool {
+	return slices.ContainsFunc(p.Activations, func(x decision.PaymentActivation) bool { return len(x.Sacrifices) > 0 })
 }
 
 func (f *follower) attackers(d *decision.Decision, a *Ask) (decision.Intent, *Divergence) {
