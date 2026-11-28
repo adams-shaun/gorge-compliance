@@ -191,14 +191,23 @@ func TestNearestPackageAndNonGoDataMapping(t *testing.T) {
 }
 
 func TestScenariosMapToAudit(t *testing.T) {
-	fsys := fixture(t, map[string]string{"audit/audit.go": "package audit\n"})
-	got, err := Packages(fsys, []string{"scenarios/oracle/bolt/lightning-bolt.json"})
-	if err != nil {
-		t.Fatal(err)
-	}
-	want := []string{"./audit"}
-	if !slices.Equal(got, want) {
-		t.Fatalf("scenario change selected %v, want %v", got, want)
+	fsys := fixture(t, map[string]string{
+		"audit/audit.go":       "package audit\n",
+		"cmd/padseats/main.go": "package main\n",
+	})
+	for _, f := range []string{
+		"scenarios/oracle/bolt/lightning-bolt.json",
+		"scenarios/xmageport/some/test.json",
+		"scenarios/padseats.tsv",
+	} {
+		got, err := Packages(fsys, []string{f})
+		if err != nil {
+			t.Fatal(err)
+		}
+		want := []string{"./audit", "./cmd/padseats"}
+		if !slices.Equal(got, want) {
+			t.Errorf("%s selected %v, want %v", f, got, want)
+		}
 	}
 }
 
