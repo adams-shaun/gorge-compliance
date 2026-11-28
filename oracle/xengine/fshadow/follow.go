@@ -154,6 +154,15 @@ type Result struct {
 	// the next snapshot line: the offered cards new among their owner's
 	// permanents there are the ones Forge took.
 	FieldPicks int `json:"field_picks,omitempty"`
+	// PilePicks counts the TwoPiles splits (Fact or Fiction's) read from
+	// the next snapshot line: pile A is the offered cards that reached where
+	// the chosen pile goes, and the pile pick that follows takes pile A.
+	PilePicks int `json:"pile_picks,omitempty"`
+	// GraveyardOrders counts the snapshots where a graveyard held gorge's
+	// cards in another order than Forge's only within cards put there by one
+	// zone change since the previous snapshot (CR 404.3: their owner orders
+	// them), which the follower adopted (adoptGraveyardOrder).
+	GraveyardOrders int `json:"graveyard_orders,omitempty"`
 	// Targets counts the target decisions gorge posed where the log's next
 	// line is an ask of another kind (Forge chose no target through its
 	// logged hook), which the follower answered by default.
@@ -231,7 +240,14 @@ type follower struct {
 	// pay are the choices still to submit of a payment by hand (payByHand);
 	// the priority line it answers stays unconsumed until the last.
 	pay []int
-	res Result
+	// pileRead is the source of a TwoPiles split read from the next snapshot
+	// (twoPilesChoose) whose pile pick is still to come: the pick takes pile
+	// A, the cards the read put there.
+	pileRead state.ObjID
+	// graveMark is how many gorge events the last compared snapshot had
+	// seen: adoptGraveyardOrder reads only the zone changes after it.
+	graveMark int
+	res       Result
 }
 
 // chainTargets are the targeting parts one log line carried for a spell or
@@ -764,6 +780,9 @@ func (f *follower) answer(d *decision.Decision, e Entry) (decision.Intent, bool)
 		// options in offered order -- and consume no line; Forge's real
 		// choice, if it differs, shows at the next snapshot.
 		if in, ok := f.mayShuffleChoose(d); ok {
+			return in, true
+		}
+		if in, ok := f.twoPilesChoose(d); ok {
 			return in, true
 		}
 		if in, ok := f.cardPickChoose(d); ok {
@@ -1765,6 +1784,10 @@ func sameLibraryDepth(x rules.OracleSnapshot) rules.OracleSnapshot {
 func (f *follower) compareSnap(e Entry) bool {
 	f.res.Snaps++
 	x := sameLibraryDepth(e.Snap.Snapshot)
+	f.res.GraveyardOrders += f.adoptGraveyardOrder(x)
+	if f.e.L != nil {
+		f.graveMark = len(f.e.L.Events)
+	}
 	g := Snapshot(f.e, x.Checkpoint)
 	v := oraclediff.CompareOpts(rules.OracleResult{Snapshots: []rules.OracleSnapshot{g}}, nil, oraclediff.XResult{Snapshots: []rules.OracleSnapshot{x}}, nil)
 	if v.Status == oraclediff.Agree {
@@ -2311,6 +2334,107 @@ func (f *follower) cardPickChoose(d *decision.Decision) (decision.Intent, bool) 
 		return f.handArriveChoose(d)
 	}
 	return decision.Intent{}, false
+}
+
+// twoPilesChoose answers a TwoPiles split (twopiles_split) and the pile pick
+// that follows it (twopiles_pick); Forge's recorder logs neither. The split
+// alone names no route -- pile A's fate is the pick's -- which is why
+// pickRouteOf declines it, so the two are read as one: where the chosen pile's
+// body puts its cards in a hand (or onto the battlefield) and the unchosen
+// pile's does not, pile A is the offered cards the next snapshot shows arrived
+// there (handArriveChoose, fieldArriveChoose), and the pick takes pile A. Any
+// split with that outcome reproduces Forge's; which cards Forge's separator
+// put in which pile the log does not show, and no later state depends on it.
+func (f *follower) twoPilesChoose(d *decision.Decision) (decision.Intent, bool) {
+	var no decision.Intent
+	switch d.ResumeKind {
+	case "twopiles_pick":
+		src := f.pileRead
+		f.pileRead = 0
+		if src == 0 || src != d.Source {
+			return no, false
+		}
+		for _, o := range d.Options {
+			if o.Kind == "pile-a" {
+				in := decision.Intent{Seq: d.Seq, Player: d.Player, Choices: []int{o.Index}}
+				if d.Validate(in) != nil {
+					return no, false
+				}
+				f.res.Chooses++
+				return in, true
+			}
+		}
+		return no, false
+	case "twopiles_split":
+	default:
+		return no, false
+	}
+	f.pileRead = 0
+	chosen, rest, ok := f.twoPilesDestinations(d)
+	if !ok {
+		return no, false
+	}
+	var in decision.Intent
+	switch {
+	case chosen == state.ZHand && rest != state.ZHand:
+		in, ok = f.handArriveChoose(d)
+	case chosen == state.ZBattlefield && rest != state.ZBattlefield:
+		in, ok = f.fieldArriveChoose(d)
+	default:
+		ok = false
+	}
+	if !ok {
+		return no, false
+	}
+	f.pileRead = d.Source
+	f.res.PilePicks++
+	return in, true
+}
+
+// twoPilesDestinations is where a TwoPiles split's chosen and unchosen piles
+// go: each pile body's one ChangeZone destination, and for an absent
+// UnchosenPile$ the zone the offered cards are in (they stay). ok is false
+// when a body is no single-destination ChangeZone of the source's face, or
+// the offered cards are not all in one zone.
+func (f *follower) twoPilesDestinations(d *decision.Decision) (chosen, rest state.Zone, ok bool) {
+	sa := d.ResumeSA
+	if sa == nil || f.e == nil || f.e.G == nil || len(d.Options) == 0 {
+		return 0, 0, false
+	}
+	src := f.e.G.Obj(d.Source)
+	if src == nil || src.Face() == nil {
+		return 0, 0, false
+	}
+	svars := src.Face().SVars
+	body := func(name string) (state.Zone, bool) {
+		sub := cards.ResolveSVar(svars, strings.TrimSpace(name))
+		if sub == nil || sub.API != "ChangeZone" {
+			return 0, false
+		}
+		to, ok := changeZoneDestinations(sub)
+		if !ok || len(to) != 1 {
+			return 0, false
+		}
+		return to[0], true
+	}
+	var from state.Zone
+	for i, o := range d.Options {
+		obj := f.e.G.Obj(o.Obj)
+		if obj == nil || (i > 0 && obj.Zone != from) {
+			return 0, 0, false
+		}
+		from = obj.Zone
+	}
+	if chosen, ok = body(sa.ParamStr(cards.PKChosenPile)); !ok {
+		return 0, 0, false
+	}
+	rest = from
+	if u := strings.TrimSpace(sa.ParamStr(cards.PKUnchosenPile)); u != "" {
+		if rest, ok = body(u); !ok {
+			return 0, 0, false
+		}
+	}
+	return chosen, rest, true
 }
 
 // pickRoute is where an ask sends the cards it offers, the ones the answer
