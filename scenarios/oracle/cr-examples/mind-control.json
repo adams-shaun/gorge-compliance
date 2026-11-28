@@ -1,0 +1,81 @@
+{
+ "card": "Mind Control",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d486ad0002dd",
+ "scenarios": [
+  {
+   "name": "the-leaving-controller-takes-only-his-aura",
+   "cr": [
+    "800.4a"
+   ],
+   "why": "Alex controls Bianca's Griffin through Mind Control. When Alex leaves, the Aura leaves too and the Griffin reverts to Bianca, who can attack with it on her turn.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Mind Control"
+     ],
+     "life": 2,
+     "attached": [
+      {
+       "card": "Mind Control",
+       "to": "p1:Serra Angel"
+      }
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Serra Angel"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "hand": [
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 2,
+     "card": "p2:Shock",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "decision": "attackers",
+     "active": "p1"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Serra Angel",
+     "zone": "battlefield"
+    },
+    {
+     "can_attack": {
+      "attacker": "p1:Serra Angel"
+     }
+    }
+   ]
+  }
+ ]
+}

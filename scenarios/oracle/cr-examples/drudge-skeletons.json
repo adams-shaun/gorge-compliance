@@ -1,0 +1,73 @@
+{
+ "card": "Drudge Skeletons",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "51c8d056b680",
+ "scenarios": [
+  {
+   "name": "regeneration-must-exist-before-destruction-resolves",
+   "cr": [
+    "614.4"
+   ],
+   "why": "The shield is created in response to Murder, so it exists when the destruction event happens. The Skeleton taps instead of dying.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Drudge Skeletons"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Murder"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "cast",
+     "seat": 1,
+     "card": "p1:Murder",
+     "mana": "CBB",
+     "targets": [
+      "p0:Drudge Skeletons"
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Drudge Skeletons",
+     "ability": "Regenerate",
+     "mana": "B"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Drudge Skeletons",
+     "zone": "battlefield",
+     "tapped": true
+    },
+    {
+     "card": "p1:Murder",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "card": "Raised by Giants",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e582bb6e28d4",
+ "scenarios": [
+  {
+   "name": "a-face-down-commander-is-still-a-commander",
+   "cr": [
+    "903.3"
+   ],
+   "why": "Ixidron turns the commander face down, but the card keeps its commander designation. Raised by Giants still sets its base power and toughness to 10/10.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Raised by Giants",
+      "Isamaru, Hound of Konda"
+     ],
+     "commanders": [
+      "Isamaru, Hound of Konda"
+     ],
+     "commander_casts": {
+      "Isamaru, Hound of Konda": 1
+     },
+     "hand": [
+      "Ixidron"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Ixidron",
+     "mana": "CCCUU"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Isamaru, Hound of Konda",
+     "zone": "battlefield",
+     "pt": "10/10"
+    }
+   ],
+   "format": "commander"
+  },
+  {
+   "name": "a-face-up-commander-counts",
+   "cr": [
+    "903.3"
+   ],
+   "why": "A control for the face-down case: with the commander face up, Raised by Giants sets its base power and toughness to 10/10.",
+   "format": "commander",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Raised by Giants",
+      "Isamaru, Hound of Konda"
+     ],
+     "commanders": [
+      "Isamaru, Hound of Konda"
+     ],
+     "commander_casts": {
+      "Isamaru, Hound of Konda": 1
+     }
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [],
+   "expect": [
+    {
+     "card": "p0:Isamaru, Hound of Konda",
+     "zone": "battlefield",
+     "pt": "10/10"
+    }
+   ]
+  }
+ ]
+}

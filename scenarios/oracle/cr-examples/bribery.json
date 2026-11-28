@@ -1,0 +1,94 @@
+{
+ "card": "Bribery",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "e2e6ca52e9e8",
+ "scenarios": [
+  {
+   "name": "the-leaving-controller-exiles-what-he-took",
+   "cr": [
+    "800.4a"
+   ],
+   "why": "Bribery puts Bianca's Angel under Alex's control, but Bianca still owns it. When Alex leaves, the Angel is exiled rather than following Bianca's library.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "hand": [
+      "Bribery"
+     ],
+     "life": 2,
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "hand": [
+      "Plains"
+     ],
+     "library_top": [
+      "Serra Angel",
+      "Plains",
+      "Island"
+     ]
+    },
+    "p2": {
+     "hand": [
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Bribery",
+     "mana": "CCCUU",
+     "targets": [
+      "p1"
+     ]
+    },
+    {
+     "op": "resolve",
+     "answers": [
+      {
+       "kind": "choose",
+       "pick": [
+        "Serra Angel"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 2,
+     "card": "p2:Shock",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "count": {
+      "seat": 1,
+      "zone": "exile",
+      "name": "Serra Angel"
+     },
+     "eq": 1
+    }
+   ]
+  }
+ ]
+}

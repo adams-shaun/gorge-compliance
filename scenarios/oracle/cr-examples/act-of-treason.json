@@ -60,6 +60,88 @@
      "tapped": true
     }
    ]
+  },
+  {
+   "name": "the-leaving-controller-loses-the-stolen-creature",
+   "cr": [
+    "800.4a"
+   ],
+   "why": "Alex steals the Bear until end of turn. If Alex leaves first, the control effect ends with him and the Bear goes back to Bianca.",
+   "players": 3,
+   "setup": {
+    "p0": {
+     "hand": [
+      "Act of Treason"
+     ],
+     "life": 2,
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Runeclaw Bear"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    },
+    "p2": {
+     "hand": [
+      "Shock"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Act of Treason",
+     "mana": "CCR",
+     "targets": [
+      "p1:Runeclaw Bear"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass",
+     "seat": 0
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 2,
+     "card": "p2:Shock",
+     "mana": "R",
+     "targets": [
+      "p0"
+     ]
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "decision": "attackers",
+     "active": "p1"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Runeclaw Bear",
+     "zone": "battlefield"
+    },
+    {
+     "can_attack": {
+      "attacker": "p1:Runeclaw Bear"
+     }
+    }
+   ]
   }
  ]
 }

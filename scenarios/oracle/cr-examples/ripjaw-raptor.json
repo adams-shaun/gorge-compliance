@@ -1,0 +1,96 @@
+{
+ "card": "Ripjaw Raptor",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "d933b6a55cc5",
+ "scenarios": [
+  {
+   "name": "prevented-damage-does-not-trigger",
+   "cr": [
+    "603.2g"
+   ],
+   "why": "Fog prevents all combat damage, so the Raptor is never dealt damage and its enrage ability never triggers. The only card gone from hand is the Fog itself.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Ripjaw Raptor"
+     ],
+     "hand": [
+      "Fog"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "main1",
+     "active": "p1"
+    },
+    {
+     "op": "attack",
+     "seat": 1,
+     "attackers": [
+      "p1:Grizzly Bears"
+     ],
+     "defender": "p0"
+    },
+    {
+     "op": "pass_to",
+     "decision": "blockers"
+    },
+    {
+     "op": "block",
+     "seat": 0,
+     "blocks": [
+      [
+       "p0:Ripjaw Raptor",
+       "p1:Grizzly Bears"
+      ]
+     ]
+    },
+    {
+     "op": "pass",
+     "seat": 1
+    },
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Fog",
+     "mana": "G"
+    },
+    {
+     "op": "resolve"
+    },
+    {
+     "op": "pass_to",
+     "step": "end-combat"
+    }
+   ],
+   "expect": [
+    {
+     "hand_size": {
+      "p0": 0
+     }
+    },
+    {
+     "card": "p0:Ripjaw Raptor",
+     "zone": "battlefield",
+     "damage": 0
+    },
+    {
+     "life": {
+      "p0": 20
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "card": "Kjeldoran Guard",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "c9ace389466e",
+ "scenarios": [
+  {
+   "name": "delayed-trigger-created-after-the-creature-left-never-fires",
+   "cr": [
+    "603.7a"
+   ],
+   "why": "The Guard's ability creates a delayed trigger that watches the chosen creature leave. The creature is already gone when the ability resolves, so the named event does not happen again and the Guard is not sacrificed.",
+   "setup": {
+    "p0": {
+     "battlefield": [
+      "Kjeldoran Guard"
+     ],
+     "library_top": [
+      "Plains"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Grizzly Bears"
+     ],
+     "hand": [
+      "Plains"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "pass_to",
+     "step": "begin-combat",
+     "active": "p0"
+    },
+    {
+     "op": "activate",
+     "seat": 0,
+     "card": "p0:Kjeldoran Guard",
+     "ability": "gets +1/+1",
+     "targets": [
+      "p1:Grizzly Bears"
+     ]
+    },
+    {
+     "op": "move",
+     "card": "p1:Grizzly Bears",
+     "to": "graveyard"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p0:Kjeldoran Guard",
+     "zone": "battlefield"
+    },
+    {
+     "card": "p1:Grizzly Bears",
+     "zone": "graveyard"
+    }
+   ]
+  }
+ ]
+}

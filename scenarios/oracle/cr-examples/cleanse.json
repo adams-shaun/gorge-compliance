@@ -1,0 +1,85 @@
+{
+ "card": "Cleanse",
+ "family": "cr-examples",
+ "author": "CR example, restated",
+ "oracle_sha": "6645b69fd5d0",
+ "scenarios": [
+  {
+   "name": "a-white-black-creature-is-black",
+   "cr": [
+    "608.2j"
+   ],
+   "why": "The Sculler is both white and black; Cleanse checks only the black characteristic it names, so the Sculler is destroyed.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Cleanse"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Mourning Thrull"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Cleanse",
+     "mana": "WWCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Mourning Thrull",
+     "zone": "graveyard"
+    }
+   ]
+  },
+  {
+   "name": "a-nonblack-sweeper-spares-the-white-black-creature",
+   "cr": [
+    "608.2j"
+   ],
+   "why": "Hellfire names nonblack, and a white-and-black creature is black, so it is not destroyed. With no creature dying, the caster takes only the fixed 3 damage.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Hellfire"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Mourning Thrull"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Hellfire",
+     "mana": "BBBCC"
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Mourning Thrull",
+     "zone": "battlefield"
+    },
+    {
+     "life": {
+      "p0": 17
+     }
+    }
+   ]
+  }
+ ]
+}
