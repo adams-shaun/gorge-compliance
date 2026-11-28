@@ -1,4 +1,4 @@
-<!-- Audit notes written 2026-11-10 for the phase.rs / Manabrew follower design. Read-only static audit; local paths (/tmp/..., /mnt/sata/...) are from the audit machine and abbreviations are defined at the top. Historical, like every design note. -->
+<!-- Audit notes written 2026-11-10 for the phase.rs / Manabrew follower design. Read-only static audit; local paths (/tmp/..., <training-root>/...) are from the audit machine and abbreviations are defined at the top. Historical, like every design note. -->
 
 # The xengine / oracle follower contract (audit for phase.rs and Manabrew)
 
@@ -6,14 +6,14 @@ Read-only audit, 2026-11-10. Nothing in any repo was edited or run (no JVM, no s
 
 Path abbreviations used in citations:
 
-- `GC/` = /home/sadams/projects/gorge-compliance (HEAD 0d6f91b)
-- `G/` = /home/sadams/go/pkg/mod/github.com/adams-shaun/gorge@v0.0.0-20261104204407-04ad74f2e4bf
+- `GC/` = ~/projects/gorge-compliance (HEAD 0d6f91b)
+- `G/` = ~/go/pkg/mod/github.com/adams-shaun/gorge@v0.0.0-20261104204407-04ad74f2e4bf
   (what `go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge` resolves to; there is no go.work, so the
   module cache at GORGE_PIN 04ad74f2 is what gorge-compliance compiles against, NOT the
-  /home/sadams/projects/gorge checkout)
+  ~/projects/gorge checkout)
 - `FO/` = /tmp/claude-1000/-home-sadams-projects-gorge-compliance/80e3936c-c504-4123-a7ba-09bd32ba66b5/scratchpad/forge/forge-oracle/src/main/java/forge/oracle
 - `FX/` = the same forge-oracle dir's `fixtures/`
-- `RUN/` = /mnt/sata/gorge-training/xengine/croll-new/FDN/0 (a real finished FDN sweep chunk on disk, used
+- `RUN/` = <training-root>/xengine/croll-new/FDN/0 (a real finished FDN sweep chunk on disk, used
   for measured examples: 574 items = 48 whole-game tapes + 526 windows, 456 refused windows, 15 lower_gap)
 
 ---------------------------------------------------------------------------------------------------
