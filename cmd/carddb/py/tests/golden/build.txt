@@ -35,6 +35,7 @@ CREATE TABLE "cards" ("oracle_id" TEXT NOT NULL, "name" TEXT NOT NULL, "layout" 
 CREATE TABLE "cert" ("oracle_id" TEXT NOT NULL, "norm_name" TEXT NOT NULL, "name" TEXT NOT NULL, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT NOT NULL, "script_sha" TEXT, "oracle_sha" TEXT, "first_set" TEXT, "released" TEXT, "level" TEXT, "exclusion" TEXT, "refs" TEXT, "keys_total" INTEGER NOT NULL, "keys_used" INTEGER NOT NULL, "keys_compared" INTEGER NOT NULL, "keys_agreed" INTEGER NOT NULL, "keys_unreachable" INTEGER NOT NULL, "triggers_unmeasured" INTEGER NOT NULL, "scen_level" TEXT, "oracle_audit" TEXT, "open_deltas" INTEGER NOT NULL, "diagnosed_deltas" INTEGER NOT NULL, "tickets" TEXT, "why" TEXT, "witness" TEXT, "measured" TEXT NOT NULL, "writer" TEXT, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "cert_sets" ("set_code" TEXT NOT NULL, "gorge_sha" TEXT NOT NULL, "corpus_pin" TEXT NOT NULL, "released" TEXT, "set_type" TEXT, "paper" INTEGER NOT NULL, "new_paper" INTEGER, "reprints" INTEGER, "playable" INTEGER NOT NULL, "excluded" INTEGER, "c0" INTEGER, "c1" INTEGER, "c2" INTEGER, "c3" INTEGER, "open" INTEGER, "level" TEXT, "state" TEXT NOT NULL, "cursor" TEXT, "entered" TEXT, "certified" TEXT, "measured" TEXT NOT NULL, "printed" INTEGER, "a_declared" TEXT, "a_cards" INTEGER, "a_outstanding" INTEGER, "a_problem_cards" INTEGER, "a_xmage_verified" INTEGER, "a_forge_only" INTEGER, "a_hand" INTEGER, "a_non_tournament" INTEGER, "a_buckets" TEXT, "b_declared" TEXT, "b_cards" INTEGER, "b_outstanding" INTEGER, "b_problem_cards" INTEGER, "b_non_tournament" INTEGER, "b_buckets" TEXT, "status_date" TEXT, "status_commit" TEXT, "status_gorge" TEXT, "status_forge_ref" TEXT, "ratchet_failures" INTEGER, "writer" TEXT, PRIMARY KEY ("set_code")) WITHOUT ROWID;
 CREATE TABLE "curated_bracket_flags" ("oracle_id" TEXT NOT NULL, "flag" TEXT NOT NULL, "source" TEXT NOT NULL, "cited" TEXT NOT NULL, PRIMARY KEY ("oracle_id", "flag")) WITHOUT ROWID;
+CREATE TABLE "curated_commander_inclusion" ("oracle_id" TEXT NOT NULL, "decks" INTEGER NOT NULL, "rate" TEXT NOT NULL, "rate_casual" TEXT NOT NULL, "rate_cedh" TEXT NOT NULL, "sample" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "curated_exclusions" ("oracle_id" TEXT NOT NULL, "reason" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "curated_game_changers" ("oracle_id" TEXT NOT NULL, "added" TEXT NOT NULL, "source" TEXT NOT NULL, "cited" TEXT NOT NULL, PRIMARY KEY ("oracle_id")) WITHOUT ROWID;
 CREATE TABLE "curated_labels" ("oracle_id" TEXT NOT NULL, "label" TEXT NOT NULL, "note" TEXT, PRIMARY KEY ("oracle_id", "label")) WITHOUT ROWID;
@@ -152,6 +153,7 @@ cd222222222222222222222222222222	Dáin Ironfoot	normal	{3}{R}	4	Legendary Creatu
 -- rows cert
 -- rows cert_sets
 -- rows curated_bracket_flags
+-- rows curated_commander_inclusion
 -- rows curated_exclusions
 cd222222222222222222222222222222	ante
 -- rows curated_game_changers

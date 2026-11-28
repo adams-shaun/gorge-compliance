@@ -20,6 +20,8 @@
                                         XMage manifests + FORGE_ORACLE_REF -> support rows
   dirac [--repo DIR] [--gorge-dir DIR] [--source ID] [--version V] [--measured DATE]
                                         gorge's dirac support lists + the gaps snapshot -> support, evidence rows
+  inclusion --from FILE --sample NAME [--cards TSV] [--out PATH]
+                                        a deck sample's per-card table -> carddb/curated/commander-inclusion.tsv
   size [--measured DATE]                  report the branch object store into _meta/size (D7 budget)
   release [--dry-run]                     upload carddb-latest, the weekly dated release, prune
   validate|boundary [--scope S] [--tree DIR]   the Python mirror of the Go checks
@@ -45,12 +47,14 @@ from . import compliance as compliance_mod
 from . import dirac as dirac_mod
 from . import docsstatus as docsstatus_mod
 from . import fetch as fetch_mod
+from . import inclusion as inclusion_mod
 from . import keylegs as keylegs_mod
 from . import merge as merge_mod
 from . import query as query_mod
 from . import release as release_mod
 from . import shard
 from .boundary import boundary_tree
+from .norm import Resolver
 from .schema import PRIVATE, PUBLIC, SchemaError, load_schema, repo_root
 from .shard import ValidationError
 from .store import GitError, Store, StoreError, carddb_home, gorge12, packed_mib
@@ -122,6 +126,12 @@ def _parser():
     p.add_argument("--version", help="writer version recorded in _meta/writers")
     p.add_argument("--measured", metavar="YYYY-MM-DD",
                    help="the support rows' measured date (default $CARDDB_NOW, else today UTC)")
+    p = sub.add_parser("inclusion")
+    p.add_argument("--from", dest="src", required=True, metavar="FILE",
+                   help="the sample's per-card table: card decks rate rate_precon rate_casual rate_cedh rate_ranking")
+    p.add_argument("--sample", required=True, metavar="NAME", help="the sample's name, e.g. decksample-v1")
+    p.add_argument("--cards", metavar="TSV", help="oracle_id<TAB>name card list (default: the public clone's cards)")
+    p.add_argument("--out", metavar="PATH", help="output file (default %s)" % inclusion_mod.DEFAULT_OUT)
     p = sub.add_parser("size")
     p.add_argument("--source", default="ci", help="writer id recorded in _meta/writers (default ci)")
     p.add_argument("--version", help="writer version recorded in _meta/writers")
@@ -371,6 +381,19 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                 revs["packed_mib"] = "%.1f" % packed
             build_mod.build(out, schema, pub.dir, priv.dir if priv else None, committed, args.text, revs)
             print(out, file=stdout)
+            return 0
+        if args.verb == "inclusion":
+            inputs = inclusion_mod.read_input(args.src)
+            if args.cards:
+                cards = inclusion_mod.read_cards(args.cards)
+            else:
+                pub = Store(PUBLIC, home=args.home, schema=schema)
+                if not pub.exists():
+                    raise StoreError("no public clone at %s: run `carddb init`, or pass --cards" % pub.dir)
+                cards = pub.cards()
+            res = inclusion_mod.rows(inputs, Resolver(cards), args.sample)
+            inclusion_mod.write(args.out or inclusion_mod.default_out(), res.rows, schema)
+            print(res.summary(args.sample), file=stdout)
             return 0
         if args.verb == "size":
             pub = Store(PUBLIC, home=args.home, schema=schema)

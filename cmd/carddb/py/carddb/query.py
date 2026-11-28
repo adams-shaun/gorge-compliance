@@ -117,7 +117,8 @@ def _limit(n, verb):
 
 _PREFERRED_SECTIONS = (
     "printings", "legality", "status", "evidence", "xledger", "cert", "keyproof",
-    "labels", "curated_labels", "curated_game_changers", "curated_bracket_flags",
+    "labels", "curated_labels", "curated_game_changers", "curated_commander_inclusion",
+    "curated_bracket_flags",
     "curated_exclusions", "curated_relations", "decks", "text", "tags",
     "edhrec", "prims", "values", "labels_private",
 )
