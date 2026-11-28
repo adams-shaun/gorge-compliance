@@ -1,208 +1,390 @@
 #carddb keyproof v1
-oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-66051196-53ea-4461-b241-205df9395b3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66093486-c9c3-42c5-97d1-ec0fe54f65b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66093486-c9c3-42c5-97d1-ec0fe54f65b0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:twinblade-assassins:f0t0:s1,f:xs:XP:twinblade-assassins:f0t0:s1	-	-	-	6f84be0f34c0	-	eb1198fff11a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-660d44a2-391a-416c-b46c-ddcc3739f527	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Valgavoth's Lair/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-660d44a2-391a-416c-b46c-ddcc3739f527	land	land	agreed	-	FX	start	2	0	x:xs:XP:valgavoth-s-lair:land:s1,f:xs:XP:valgavoth-s-lair:land:s1	-	-	-	23c4009444b0	-	1373cf4a6e1e	-	-	2026-11-25	xproof
-660de988-b6fb-4f36-8006-42af3e7f908d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-rites:cast:s1,f:xs:XP:vampiric-rites:cast:s1	-	-	-	8c0bd19283bb	-	5d5918adc555	-	-	2026-11-24	xproof
-660de988-b6fb-4f36-8006-42af3e7f908d	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:vampiric-rites:f0a0:s1,f:xs:XP:vampiric-rites:f0a0:s1	-	-	-	3aa6ded33acb	-	5d5918adc555	-	-	2026-11-25	xproof
-660ef596-8a2d-4c66-a9d5-264401980244	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-660ef596-8a2d-4c66-a9d5-264401980244	f0/a0	GainLife	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-660ef596-8a2d-4c66-a9d5-264401980244	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-660f370a-b25b-4ea5-b765-7abf96899c1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-darkness-crystal:cast:s1,f:xs:XP:the-darkness-crystal:cast:s1	-	-	-	6f84be0f34c0	-	f3838dc2e20d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-660f370a-b25b-4ea5-b765-7abf96899c1c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Darkness Crystal/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-660f370a-b25b-4ea5-b765-7abf96899c1c	static#0.0	static.cost	agreed	-	FX	start	2	0	x:xs:XP:the-darkness-crystal:static0.0:s1,f:xs:XP:the-darkness-crystal:static0.0:s1	-	-	-	6f84be0f34c0	-	f3838dc2e20d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-660ff9fa-1e9b-4697-a3f5-b12238703161	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-660ff9fa-1e9b-4697-a3f5-b12238703161	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-660ff9fa-1e9b-4697-a3f5-b12238703161	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:equipped	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-66107cfd-4bdb-4266-a650-940743555ea4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forked-lightning:cast:s1,f:xs:XP:forked-lightning:cast:s1	-	-	-	3aa6ded33acb	-	62991341871f	-	-	2026-11-25	xproof
-6614dbe5-d7c7-4a51-91db-912764050269	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66155010-cc2c-449a-85d5-92c95aade514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pilgrim-s-eye:f0t0:s1,f:xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	xproof
-66155010-cc2c-449a-85d5-92c95aade514	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pilgrim-s-eye:f0t0:s1,f:xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	xproof
-6615f881-960c-4216-a32a-63856bc3afd0	cast	cast-resolve	agreed	-	FX	scen	2	0	The Ancient One/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6615f881-960c-4216-a32a-63856bc3afd0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Ancient One/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6615f881-960c-4216-a32a-63856bc3afd0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Ancient One/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6615f881-960c-4216-a32a-63856bc3afd0	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	The Ancient One/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6615f881-960c-4216-a32a-63856bc3afd0	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Ancient One/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6615f881-960c-4216-a32a-63856bc3afd0	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Ancient One/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-661618a2-54c7-4136-beff-fff5ff7d84cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:necrosynthesis:f0t0:s1	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-661736eb-97d7-4b3c-ab18-708479a5fb29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-661a99ef-8d5b-4aac-98f6-52b17a8ecf52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:turntimber-basilisk:f0t0:s1,f:xs:XP:turntimber-basilisk:f0t0:s1	-	-	-	23c4009444b0	-	30b4f09fe5c6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-661b2159-4040-4a44-b182-46085416ebd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dream-trawler:cast:s1,f:xs:XP:dream-trawler:cast:s1	-	-	-	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	xproof
-661b2159-4040-4a44-b182-46085416ebd9	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dream-trawler:f0t1:s1,f:xs:XP:dream-trawler:f0t1:s1	-	-	-	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	xproof
-661b2159-4040-4a44-b182-46085416ebd9	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:dream-trawler:f0t1:s1,f:xs:XP:dream-trawler:f0t1:s1	-	-	-	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	xproof
-661b2159-4040-4a44-b182-46085416ebd9	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:dream-trawler:f0t1:s1,f:xs:XP:dream-trawler:f0t1:s1	-	-	-	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	xproof
-661b23fc-78cd-44f7-ba53-0cb89ccca41f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:meditation-pools:f0a0:s1,f:xs:XP:meditation-pools:f0a0:s1	-	-	-	6f84be0f34c0	-	fe6c5ab7a572	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:meditation-pools:f0a1:s1,f:xs:XP:meditation-pools:f0a1:s1	-	-	-	23c4009444b0	-	fe6c5ab7a572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66208129-20fb-4cb4-8f00-8d4574c9c653	land	land	agreed	-	FX	start	2	0	x:xs:XP:meditation-pools:land:s1,f:xs:XP:meditation-pools:land:s1	-	-	-	23c4009444b0	-	fe6c5ab7a572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66290104-ac65-4eb5-bf00-89b944249e07	cast	cast-resolve	agreed	-	FX	scen	2	0	Neriv, Heart of the Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66290104-ac65-4eb5-bf00-89b944249e07	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:neriv-heart-of-the-storm:combat0.attack:s1,f:xs:XP:neriv-heart-of-the-storm:combat0.attack:s1	-	-	-	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66290104-ac65-4eb5-bf00-89b944249e07	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:neriv-heart-of-the-storm:combat0.block:s1,f:xs:XP:neriv-heart-of-the-storm:combat0.block:s1	-	-	-	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-6629a48b-be9a-4636-8add-69d096a1ca7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:double-vision:f0t0:s1,f:xs:XP:double-vision:f0t0:s1	-	-	-	6f84be0f34c0	-	2b4d0313dcc4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-6629e5f3-ac59-48f8-b09c-3b98f59b9922	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:awakened-awareness:f0t0:s1,f:xs:XP:awakened-awareness:f0t0:s1	-	-	-	054d9f516953	-	400d9381d937	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-6629e5f3-ac59-48f8-b09c-3b98f59b9922	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:awakened-awareness:f0t0:s1,f:xs:XP:awakened-awareness:f0t0:s1	-	-	-	054d9f516953	-	400d9381d937	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-662a2158-4176-4b4a-be6a-13f4501d22f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-663d9559-6619-46fe-8ff4-655f1d5e0e4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valgavoth-s-onslaught:cast:s1,f:xs:XP:valgavoth-s-onslaught:cast:s1	-	-	-	23c4009444b0	-	cda4445d7a27	-	-	2026-11-25	xproof
-663e120a-a74f-47fb-aa0a-9d1a75db626e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:de-evolve:f0t0:s1,f:xs:XP:de-evolve:f0t0:s1	-	-	-	23c4009444b0	-	720f5490760c	-	-	2026-11-25	xproof
-663e120a-a74f-47fb-aa0a-9d1a75db626e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:de-evolve:f0t0:s1,f:xs:XP:de-evolve:f0t0:s1	-	-	-	23c4009444b0	-	720f5490760c	-	-	2026-11-25	xproof
-663e6ab0-ed99-4cec-86f7-843207c31e17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-663e6ab0-ed99-4cec-86f7-843207c31e17	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:kalemne-s-captain:f0a0:s1,f:xs:XP:kalemne-s-captain:f0a0:s1	-	-	-	8c0bd19283bb	-	a1d716a947fb	-	-	2026-11-24	xproof
-663e6ab0-ed99-4cec-86f7-843207c31e17	f0/t0	BecomeMonstrous	agreed	-	FX	start	2	0	x:xs:XP:kalemne-s-captain:f0a0:s1,f:xs:XP:kalemne-s-captain:f0a0:s1	-	-	-	8c0bd19283bb	-	a1d716a947fb	-	-	2026-11-24	xproof
-6640bcfc-4bdc-4380-8b51-61b906f9aee6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6640c234-8863-4670-a61f-ba6f59b60d69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:cast:s1,f:xs:XP:dawnwing-marshal:cast:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
-6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:combat0.attack:s1,f:xs:XP:dawnwing-marshal:combat0.attack:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
-6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:combat0.block:s1,f:xs:XP:dawnwing-marshal:combat0.block:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
-6640c234-8863-4670-a61f-ba6f59b60d69	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:f0a0:s1,f:xs:XP:dawnwing-marshal:f0a0:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
-66412a7a-4ec0-41f0-80ad-eb483213ff81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	MustBlock	agreed	-	FX	start	2	0	x:xs:XP:maraleaf-rider:f0a0:s1,f:xs:XP:maraleaf-rider:f0a0:s1	-	-	-	808e1dd359c1	-	31cde04318b2	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-66418c65-a15f-489e-8a2d-6cee1b5d977c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6643fc8e-548e-48db-9f67-ffbca9e57016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:lich-lord-of-unx:f0a1:s1,f:xs:XP:lich-lord-of-unx:f0a1:s1	-	-	-	8a1b1a193ec0	-	3158ff43a8d4	-	-	2026-11-24	xproof
-66442396-f804-47f3-8daa-0d43d8cfb482	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:porcelain-legionnaire:cast:s1,f:xs:XP:porcelain-legionnaire:cast:s1	-	-	-	d864b561c9cb	-	29516e3fea5a	-	-	2026-11-24	xproof
-66465bc1-4a34-4951-be53-57f90002976a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleeful-demolition:cast:s1,f:xs:XP:gleeful-demolition:cast:s1	-	-	-	054d9f516953	-	b3936052d7ae	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-66499407-3ad2-464b-bbfe-95d860f53616	cast	cast	agreed	-	F	start	2	0	f:xs:XP:lash-of-the-balrog:cast:s1	-	-	-	9087eefec3ee	-	bb35ac22c758	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-664c1219-acfa-41da-b811-503a63fc8d84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-664d982a-5cd8-4289-afb8-fa2e083042c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66553485-4e9d-4049-9e80-3ac903f8127a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66553485-4e9d-4049-9e80-3ac903f8127a	f0/t0	DamageDealtOnce	agreed	-	FX	start	2	0	x:xs:XP:visions-of-brutality:f0t0:s1,f:xs:XP:visions-of-brutality:f0t0:s1	-	-	-	17bda798c09c	-	9e268c003180	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-66578806-9148-479d-80e1-6c3e3b67e452	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elite-skirmisher:cast:s1,f:xs:XP:elite-skirmisher:cast:s1	-	-	-	d864b561c9cb	-	c976b2e8c443	-	-	2026-11-24	xproof
-66578806-9148-479d-80e1-6c3e3b67e452	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:elite-skirmisher:f0t0:s1,f:xs:XP:elite-skirmisher:f0t0:s1	-	-	-	6f84be0f34c0	-	c976b2e8c443	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-665b8bbf-c30b-4875-a5c2-fc3b9767ecac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silvos-rogue-elemental:cast:s1,f:xs:XP:silvos-rogue-elemental:cast:s1	-	-	-	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	xproof
-665b8bbf-c30b-4875-a5c2-fc3b9767ecac	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:silvos-rogue-elemental:f0a0:s1,f:xs:XP:silvos-rogue-elemental:f0a0:s1	-	-	-	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	xproof
-665e52f1-901b-49a1-bfbd-ee38bdee8983	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paradise-plume:f0t0:s1,f:xs:XP:paradise-plume:f0t0:s1	-	-	-	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:paradise-plume:f0t0:s1,f:xs:XP:paradise-plume:f0t0:s1	-	-	-	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:paradise-plume:f0t0:s1,f:xs:XP:paradise-plume:f0t0:s1	-	-	-	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	xproof
-665f3e52-c536-481b-8b29-fe68f08d1fdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-angel:f0t0:s1,f:xs:XP:crypt-angel:f0t0:s1	-	-	-	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	xproof
-665f3e52-c536-481b-8b29-fe68f08d1fdf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crypt-angel:f0t0:s1,f:xs:XP:crypt-angel:f0t0:s1	-	-	-	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:unstoppable-slasher:cast:s1,f:xs:XP:unstoppable-slasher:cast:s1	-	-	-	23b491658465	-	3d2ffb4319cc	-	-	2026-11-24	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:combat0.block:s1,f:xs:XP:unstoppable-slasher:combat0.block:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:f0t1:s1,f:xs:XP:unstoppable-slasher:f0t1:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
-66630640-9605-44da-afdf-eb9d458d056f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirkwood-nurturer:f0t0:s1,f:xs:XP:mirkwood-nurturer:f0t0:s1	-	-	-	cfde1dc26c40	-	508523c22d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-66630640-9605-44da-afdf-eb9d458d056f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mirkwood-nurturer:f0t0:s1,f:xs:XP:mirkwood-nurturer:f0t0:s1	-	-	-	cfde1dc26c40	-	508523c22d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-6665bfe2-942c-4b3d-a976-776fe00c99f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fang-roku-s-companion:f0t0:s1,f:xs:XP:fang-roku-s-companion:f0t0:s1	-	-	-	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	xproof
-6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fang-roku-s-companion:f0t1:s1,f:xs:XP:fang-roku-s-companion:f0t1:s1	-	-	-	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	xproof
-6669a19e-7944-44c9-ac37-a92016783375	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:denethor-stone-seer:cast:s1,f:xs:XP:denethor-stone-seer:cast:s1	-	-	-	8c0bd19283bb	-	be981eeb80bf	-	-	2026-11-24	xproof
-6669a19e-7944-44c9-ac37-a92016783375	f0/a0	BecomeMonarch	agreed	-	FX	start	2	0	x:xs:XP:denethor-stone-seer:f0a0:s1,f:xs:XP:denethor-stone-seer:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-6669a19e-7944-44c9-ac37-a92016783375	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:denethor-stone-seer:cast:s1,f:xs:XP:denethor-stone-seer:cast:s1	-	-	-	8c0bd19283bb	-	be981eeb80bf	-	-	2026-11-24	xproof
-666af637-9282-4121-962a-048e528f9221	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-666b34b5-a0c2-43e3-befd-7c3979313682	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infinite-coursework:f0t0:s1,f:xs:XP:infinite-coursework:f0t0:s1	-	-	-	25696bf19d5b	-	f3a8b0f5f2f0	-	-	2026-11-24	xproof
-666b34b5-a0c2-43e3-befd-7c3979313682	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:infinite-coursework:f0t0:s1,f:xs:XP:infinite-coursework:f0t0:s1	-	-	-	25696bf19d5b	-	f3a8b0f5f2f0	-	-	2026-11-24	xproof
-666b34b5-a0c2-43e3-befd-7c3979313682	static#0.0	static#0.0	agreed	-	X	scen	1	0	Infinite Coursework/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6677cd5a-0785-499b-ba99-f6bdcfb196d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jessica-jones-private-eye:cast:s1,f:xs:XP:jessica-jones-private-eye:cast:s1	-	-	-	fb9d3088f0bf	-	ba51fb4f0a71	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-6677cd5a-0785-499b-ba99-f6bdcfb196d5	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:jessica-jones-private-eye:f0a0:s1,f:xs:XP:jessica-jones-private-eye:f0a0:s1	-	-	-	fb9d3088f0bf	-	ba51fb4f0a71	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-66793ddf-aca3-44cb-8742-4eee178f31c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66793ddf-aca3-44cb-8742-4eee178f31c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6679b462-3c90-418c-8727-acd1a61d988b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decree-of-annihilation:cast:s1,f:xs:XP:decree-of-annihilation:cast:s1	-	-	-	8c0bd19283bb	-	8593824ee184	-	-	2026-11-24	xproof
-6679b462-3c90-418c-8727-acd1a61d988b	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:decree-of-annihilation:f0a1:s1,f:xs:XP:decree-of-annihilation:f0a1:s1	-	-	-	65d07beecc37	-	8593824ee184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-6679b462-3c90-418c-8727-acd1a61d988b	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:decree-of-annihilation:f0a1:s1,f:xs:XP:decree-of-annihilation:f0a1:s1	-	-	-	65d07beecc37	-	8593824ee184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-667c39bc-92d6-4fee-bced-95f0e1f21455	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667c39bc-92d6-4fee-bced-95f0e1f21455	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667c5676-7a18-4fa9-b965-b26797538e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667c5676-7a18-4fa9-b965-b26797538e23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667cffdd-8951-4223-8895-fa46e9f14b96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fuel-for-the-cause:cast:s1,f:xs:XP:fuel-for-the-cause:cast:s1	-	-	-	9087eefec3ee	-	406920a22076	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-667dae0b-5006-4e38-be80-eae79c2a2a95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667dae0b-5006-4e38-be80-eae79c2a2a95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667ece0e-a474-4e11-8ac4-6c8fc354457c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:demonlord-belzenlok:cast:s1,f:xs:XP:demonlord-belzenlok:cast:s1	-	-	-	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	xproof
-667ece0e-a474-4e11-8ac4-6c8fc354457c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:demonlord-belzenlok:cast:s1,f:xs:XP:demonlord-belzenlok:cast:s1	-	-	-	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	xproof
-6680a5f7-3ac1-4550-a29a-9553ad7ae465	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:briarblade-adept:cast:s1,f:xs:XP:briarblade-adept:cast:s1	-	-	-	8c0bd19283bb	-	0349dd78b5c3	-	-	2026-11-24	xproof
-6680a5f7-3ac1-4550-a29a-9553ad7ae465	f0/a0	Encore/Encore	agreed	-	X	start	2	0	x:xs:XP:briarblade-adept:f0a0:s1	-	-	-	b8f573385218	-	0349dd78b5c3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
-6680a5f7-3ac1-4550-a29a-9553ad7ae465	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:briarblade-adept:f0a0:s1	-	-	-	b8f573385218	-	0349dd78b5c3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
-66810ef7-ea3a-4afa-92f0-b21ec52cc8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66847507-f8bb-4266-bd6e-a91c0baf0000	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66847507-f8bb-4266-bd6e-a91c0baf0000	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:sprouting-phytohydra:f0t0:s1,f:xs:XP:sprouting-phytohydra:f0t0:s1	-	-	-	6f84be0f34c0	-	810eba8cd6ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-6686b897-64a9-4482-9563-57c88bc83d71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voidwielder:f0t0:s1,f:xs:XP:voidwielder:f0t0:s1	-	-	-	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	xproof
-6686b897-64a9-4482-9563-57c88bc83d71	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voidwielder:f0t0:s1,f:xs:XP:voidwielder:f0t0:s1	-	-	-	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	xproof
-668a6a9d-80fc-437b-99b8-6807e92eabca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agent-of-horizons:cast:s1,f:xs:XP:agent-of-horizons:cast:s1	-	-	-	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	xproof
-668a6a9d-80fc-437b-99b8-6807e92eabca	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:agent-of-horizons:f0a0:s1,f:xs:XP:agent-of-horizons:f0a0:s1	-	-	-	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	xproof
-668a9b6b-731c-4127-9c88-1c6112ffd590	cast	cast-resolve	agreed	-	FX	scen	2	0	Cloak and Phaser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-668c2c40-5334-493b-ae8e-913b26877732	cast	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-668c2c40-5334-493b-ae8e-913b26877732	f0/t0	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-668f646b-94f0-4f1a-badd-2d69b559d8a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-668f646b-94f0-4f1a-badd-2d69b559d8a2	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cathar-s-companion:f0t0:s1,f:xs:XP:cathar-s-companion:f0t0:s1	-	-	-	fb9d3088f0bf	-	bfcf176a0079	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-66914a34-59b3-48a0-9305-ebd956d34f02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1,f:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-66914a34-59b3-48a0-9305-ebd956d34f02	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1,f:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-66914a34-59b3-48a0-9305-ebd956d34f02	f1/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1,f:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-66914a34-59b3-48a0-9305-ebd956d34f02	f1/t0	Discarded	agreed	-	FX	start	4	0	x:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1,f:xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-66944a11-40a1-4f3a-9f83-52324e0edfef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arahbo-roar-of-the-world:cast:s1,f:xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	xproof
-66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:arahbo-roar-of-the-world:cast:s1,f:xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	xproof
-66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t2	Attacks	agreed	-	FX	start	4	0	x:xs:XP:arahbo-roar-of-the-world:cast:s1,f:xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	xproof
-66961bcb-f588-47a7-b3f3-12f4ac674477	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inside-information:cast:s1,f:xs:XP:inside-information:cast:s1	-	-	-	fb9d3088f0bf	-	301e7461d76e	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-6697fe5b-90ac-4321-aa2f-cdc6ec283cb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-mutation:cast:s1,f:xs:XP:aether-mutation:cast:s1	-	-	-	3aa6ded33acb	-	d7855971faba	-	-	2026-11-25	xproof
-669830ea-f55c-447a-aa3a-8965fa6d2a33	cast	cast	agreed	-	F	start	2	0	f:xs:XP:rage-forger:f0t0:s1	-	-	-	d864b561c9cb	-	0be297f6cc8e	-	-	2026-11-24	xproof
-669830ea-f55c-447a-aa3a-8965fa6d2a33	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:rage-forger:f0t0:s1	-	-	-	d864b561c9cb	-	0be297f6cc8e	-	-	2026-11-24	xproof
-669830ea-f55c-447a-aa3a-8965fa6d2a33	f0/t1	Attacks	agreed	-	F	start	4	0	f:xs:XP:rage-forger:f0t0:s1	-	-	-	d864b561c9cb	-	0be297f6cc8e	-	-	2026-11-24	xproof
-66a131ae-dbb2-4e7b-b6ce-7695f47c8f87	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:serpent-blade-assailant:cast:s1,f:xs:XP:serpent-blade-assailant:cast:s1	-	-	-	ae86f6029288	-	0672a7b2644f	-	-	2026-11-24	xproof
-66a131ae-dbb2-4e7b-b6ce-7695f47c8f87	f0/t0	ChangesZone/Backup	agreed	-	FX	start	4	0	x:xs:XP:serpent-blade-assailant:cast:s1,f:xs:XP:serpent-blade-assailant:cast:s1	-	-	-	ae86f6029288	-	0672a7b2644f	-	-	2026-11-24	xproof
-66a22b35-3dc0-4a74-8474-e73293403de6	cast	cast-resolve	agreed	-	FX	scen	2	0	Solitary Cell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66a22b35-3dc0-4a74-8474-e73293403de6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Solitary Cell/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66a22b35-3dc0-4a74-8474-e73293403de6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66aa6905-86f9-4800-988d-ffebafd4a9dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fifty-feet-of-rope:cast:s1,f:xs:XP:fifty-feet-of-rope:cast:s1	-	-	-	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	xproof
-66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:fifty-feet-of-rope:cast:s1,f:xs:XP:fifty-feet-of-rope:cast:s1	-	-	-	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	xproof
-66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:fifty-feet-of-rope:f0a1:s1,f:xs:XP:fifty-feet-of-rope:f0a1:s1	-	-	-	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	xproof
-66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a2	Venture	agreed	-	FX	start	2	0	x:xs:XP:fifty-feet-of-rope:f0a2:s1,f:xs:XP:fifty-feet-of-rope:f0a2:s1	-	-	-	6f84be0f34c0	-	bd6276ca8e73	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:tarnished-citadel:f0a1:s1,f:xs:XP:tarnished-citadel:f0a1:s1	-	-	-	5b42d43d5d80	-	fe1f43cc6dc8	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-66ae2562-68e9-4c77-ba0a-57f8ff37f656	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66ae3349-ad37-47da-8ccc-3e1cdddb32a9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arctic-nishoba:f0t1:s1	-	-	-	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	NULL	owed	refused:start:upkeep-trigger	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t1	Phase/Cumulative upkeep	agreed	-	F	start	2	0	f:xs:XP:arctic-nishoba:f0t1:s1	-	-	-	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66b46257-b64c-4672-bf47-12bf0bcd6f8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66bd5999-742a-43e0-827c-ecb8ec7db242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-warden:cast:s1,f:xs:XP:ghost-warden:cast:s1	-	-	-	77494c1ce129	-	1e158ef92b5a	-	-	2026-11-24	xproof
-66bd5999-742a-43e0-827c-ecb8ec7db242	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ghost-warden:f0a0:s1,f:xs:XP:ghost-warden:f0a0:s1	-	-	-	23c4009444b0	-	1e158ef92b5a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66bee79a-7e47-4fc4-ba07-323cd2de6261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:cast:s1,f:xs:XP:gateway-sneak:cast:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
-66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:f0t1:s1,f:xs:XP:gateway-sneak:f0t1:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
-66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	cast	owed	harness:x=decision_shape~leftover-choices-of-playera-count-are+f=forge_skips_damage_step	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-66ce0c60-f406-4ece-915f-675da4e8b16d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summon-titan:cast:s1,f:xs:XP:summon-titan:cast:s1	-	-	-	23c4009444b0	-	12cd7b1f69ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Titan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Titan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66d4370e-19b9-4680-9b1e-a192537bc002	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omni-changeling:cast:s1,f:xs:XP:omni-changeling:cast:s1	-	-	-	23b491658465	-	97ed1c74e306	-	-	2026-11-24	xproof
-66d57851-2844-4b9d-be78-e90fc620b750	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scarblade-s-malice:cast:s1,f:xs:XP:scarblade-s-malice:cast:s1	-	-	-	054d9f516953	-	25303538d1cb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-66d65cda-e3d1-4a00-8ff3-c6d5ef0ab0c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forbidden-alchemy:cast:s1,f:xs:XP:forbidden-alchemy:cast:s1	-	-	-	d864b561c9cb	-	42188a642fe3	-	-	2026-11-24	xproof
-66d845a2-be4c-41bb-a357-3650461c03ed	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:highland-weald:f0a0:s1,f:xs:XP:highland-weald:f0a0:s1	-	-	-	d864b561c9cb	-	e5aa067bd152	-	-	2026-11-24	xproof
-66d845a2-be4c-41bb-a357-3650461c03ed	land	land	agreed	-	FX	start	2	0	x:xs:XP:highland-weald:land:s1,f:xs:XP:highland-weald:land:s1	-	-	-	0984227a67dd	-	e5aa067bd152	-	-	2026-11-24	xproof
-66dc3237-3543-4fc2-96f1-c8d1eff7c04c	cast	cast-resolve	agreed	-	FX	scen	2	0	Rimefur Reindeer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66dc3237-3543-4fc2-96f1-c8d1eff7c04c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rimefur Reindeer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66dd0e68-f5ec-45e5-991f-d588aa726387	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-strike-force:cast:s1,f:xs:XP:dwarven-strike-force:cast:s1	-	-	-	fc71ca68c5ac	-	5a3dc5031e32	-	-	2026-11-24	xproof
-66dd0e68-f5ec-45e5-991f-d588aa726387	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-66de5b97-0de0-422c-a351-bfe55ad4503a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66de5b97-0de0-422c-a351-bfe55ad4503a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	xproof
-66de5b97-0de0-422c-a351-bfe55ad4503a	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:master-s-guidance:f0t1:s1,f:xs:XP:master-s-guidance:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-66deb3f3-0314-427e-9cb8-6befa365ae94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silverquill-the-disputant:cast:s1,f:xs:XP:silverquill-the-disputant:cast:s1	-	-	-	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66deb3f3-0314-427e-9cb8-6befa365ae94	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:silverquill-the-disputant:combat0.attack:s1,f:xs:XP:silverquill-the-disputant:combat0.attack:s1	-	-	-	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66deb3f3-0314-427e-9cb8-6befa365ae94	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:silverquill-the-disputant:combat0.block:s1,f:xs:XP:silverquill-the-disputant:combat0.block:s1	-	-	-	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-66deb3f3-0314-427e-9cb8-6befa365ae94	static#0.0	static#0.0	agreed	-	X	scen	1	0	Silverquill, the Disputant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66e37011-f3d2-41ed-8e09-7bba9464e8c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:coretapper:f0a0:s1,f:xs:XP:coretapper:f0a0:s1	-	-	-	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	xproof
-66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:coretapper:f0a0:s1,f:xs:XP:coretapper:f0a0:s1	-	-	-	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	xproof
-66e74e8f-036e-4b26-a4a8-2365891765bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flourishing-bloom-kin:cast:s1,f:xs:XP:flourishing-bloom-kin:cast:s1	-	-	-	23b491658465	-	3538b0e8db28	-	-	2026-11-24	xproof
-66e74e8f-036e-4b26-a4a8-2365891765bc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66e74e8f-036e-4b26-a4a8-2365891765bc	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:flourishing-bloom-kin:static0.0:s1,f:xs:XP:flourishing-bloom-kin:static0.0:s1	-	-	-	6f84be0f34c0	-	3538b0e8db28	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-66e7a760-2b2f-4af9-983c-300c657beaaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66e8f7f8-3a6d-46ba-837c-b9713ddf7f40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silver-myr:cast:s1,f:xs:XP:silver-myr:cast:s1	-	-	-	25696bf19d5b	-	43c79a0826b0	-	-	2026-11-24	xproof
-66e8f7f8-3a6d-46ba-837c-b9713ddf7f40	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:silver-myr:f0a0:s2,f:xs:XP:silver-myr:f0a0:s2	-	-	-	d864b561c9cb	-	43c79a0826b0	-	-	2026-11-24	xproof
-66ee56b9-aca8-4efa-b9b5-50717e0784a7	cast	cast-resolve	agreed	-	FX	scen	2	0	Honorbound Page/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66ee56b9-aca8-4efa-b9b5-50717e0784a7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Honorbound Page/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66ee56b9-aca8-4efa-b9b5-50717e0784a7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Honorbound Page/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
-66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
-66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
-66fa2326-1b5d-41fb-b919-83bf9f383577	land	land	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
-66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:helm-of-the-ghastlord:cast:s1,f:xs:XP:helm-of-the-ghastlord:cast:s1	-	-	-	da6bc3fe8458	-	1d43c9622c2c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-66fb4764-d309-4c30-a2a4-474f9030dc87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66fb4764-d309-4c30-a2a4-474f9030dc87	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-goblin:f0t0:s1,f:xs:XP:festering-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	190d5cb46db5	-	-	2026-11-24	xproof
-66fc64db-7dc4-43fa-8087-281a72286c35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporous-djinn:f0t0:s1,f:xs:XP:vaporous-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	xproof
-66fc64db-7dc4-43fa-8087-281a72286c35	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:vaporous-djinn:f0t0:s1,f:xs:XP:vaporous-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	xproof
+oracle_id	key	leg	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	seats	multiplayer	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	replayed	replayed_sha	writer
+66051196-53ea-4461-b241-205df9395b3b	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66051196-53ea-4461-b241-205df9395b3b	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66093486-c9c3-42c5-97d1-ec0fe54f65b0	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66093486-c9c3-42c5-97d1-ec0fe54f65b0	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66093486-c9c3-42c5-97d1-ec0fe54f65b0	f0/t0	forge	Phase	agreed	-	F	start	2	0	xs:XP:twinblade-assassins:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	eb1198fff11a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66093486-c9c3-42c5-97d1-ec0fe54f65b0	f0/t0	xmage	Phase	agreed	-	X	start	2	0	xs:XP:twinblade-assassins:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	eb1198fff11a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+660d44a2-391a-416c-b46c-ddcc3739f527	f0/a0	xmage	activate#0.0	agreed	-	X	scen	1	0	Valgavoth's Lair/activate#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+660d44a2-391a-416c-b46c-ddcc3739f527	land	forge	land	agreed	-	F	start	2	0	xs:XP:valgavoth-s-lair:land:s1	-	-	-	2	false	23c4009444b0	-	1373cf4a6e1e	-	-	2026-11-25	-	-	xproof
+660d44a2-391a-416c-b46c-ddcc3739f527	land	xmage	land	agreed	-	X	start	2	0	xs:XP:valgavoth-s-lair:land:s1	-	-	-	2	false	23c4009444b0	-	1373cf4a6e1e	-	-	2026-11-25	-	-	xproof
+660de988-b6fb-4f36-8006-42af3e7f908d	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:vampiric-rites:cast:s1	-	-	-	2	false	8c0bd19283bb	-	5d5918adc555	-	-	2026-11-24	-	-	xproof
+660de988-b6fb-4f36-8006-42af3e7f908d	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:vampiric-rites:cast:s1	-	-	-	2	false	8c0bd19283bb	-	5d5918adc555	-	-	2026-11-24	-	-	xproof
+660de988-b6fb-4f36-8006-42af3e7f908d	f0/a0	forge	GainLife	agreed	-	F	start	2	0	xs:XP:vampiric-rites:f0a0:s1	-	-	-	2	false	3aa6ded33acb	-	5d5918adc555	-	-	2026-11-25	-	-	xproof
+660de988-b6fb-4f36-8006-42af3e7f908d	f0/a0	xmage	GainLife	agreed	-	X	start	2	0	xs:XP:vampiric-rites:f0a0:s1	-	-	-	2	false	3aa6ded33acb	-	5d5918adc555	-	-	2026-11-25	-	-	xproof
+660ef596-8a2d-4c66-a9d5-264401980244	cast	forge	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+660ef596-8a2d-4c66-a9d5-264401980244	cast	xmage	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+660ef596-8a2d-4c66-a9d5-264401980244	f0/a0	forge	GainLife	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	-	-	xproof
+660ef596-8a2d-4c66-a9d5-264401980244	f0/a0	xmage	GainLife	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	-	-	xproof
+660ef596-8a2d-4c66-a9d5-264401980244	f0/t0	forge	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+660ef596-8a2d-4c66-a9d5-264401980244	f0/t0	xmage	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+660f370a-b25b-4ea5-b765-7abf96899c1c	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:the-darkness-crystal:cast:s1	-	-	-	2	false	6f84be0f34c0	-	f3838dc2e20d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+660f370a-b25b-4ea5-b765-7abf96899c1c	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:the-darkness-crystal:cast:s1	-	-	-	2	false	6f84be0f34c0	-	f3838dc2e20d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+660f370a-b25b-4ea5-b765-7abf96899c1c	f0/a0	xmage	activate#0.0	agreed	-	X	scen	1	0	The Darkness Crystal/activate#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+660f370a-b25b-4ea5-b765-7abf96899c1c	static#0.0	forge	static.cost	agreed	-	F	start	2	0	xs:XP:the-darkness-crystal:static0.0:s1	-	-	-	2	false	6f84be0f34c0	-	f3838dc2e20d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+660f370a-b25b-4ea5-b765-7abf96899c1c	static#0.0	xmage	static.cost	agreed	-	X	start	2	0	xs:XP:the-darkness-crystal:static0.0:s1	-	-	-	2	false	6f84be0f34c0	-	f3838dc2e20d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+660ff9fa-1e9b-4697-a3f5-b12238703161	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+660ff9fa-1e9b-4697-a3f5-b12238703161	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+660ff9fa-1e9b-4697-a3f5-b12238703161	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+660ff9fa-1e9b-4697-a3f5-b12238703161	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+660ff9fa-1e9b-4697-a3f5-b12238703161	f0/t0	forge	NULL	owed	refused:no-generator:trigger:Attacks:equipped	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+660ff9fa-1e9b-4697-a3f5-b12238703161	f0/t0	xmage	NULL	owed	refused:no-generator:trigger:Attacks:equipped	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66107cfd-4bdb-4266-a650-940743555ea4	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:forked-lightning:cast:s1	-	-	-	2	false	3aa6ded33acb	-	62991341871f	-	-	2026-11-25	-	-	xproof
+66107cfd-4bdb-4266-a650-940743555ea4	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:forked-lightning:cast:s1	-	-	-	2	false	3aa6ded33acb	-	62991341871f	-	-	2026-11-25	-	-	xproof
+6614dbe5-d7c7-4a51-91db-912764050269	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6614dbe5-d7c7-4a51-91db-912764050269	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66155010-cc2c-449a-85d5-92c95aade514	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	2	false	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	-	-	xproof
+66155010-cc2c-449a-85d5-92c95aade514	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	2	false	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	-	-	xproof
+66155010-cc2c-449a-85d5-92c95aade514	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	2	false	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	-	-	xproof
+66155010-cc2c-449a-85d5-92c95aade514	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	2	false	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	cast	forge	cast-resolve	agreed	-	F	scen	2	0	The Ancient One/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	cast	xmage	cast-resolve	agreed	-	X	scen	2	0	The Ancient One/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	combat#0.attack	xmage	combat#0.attack	agreed	-	X	scen	1	0	The Ancient One/combat#0.attack/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	combat#0.block	xmage	combat#0.block	agreed	-	X	scen	1	0	The Ancient One/combat#0.block/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	f0/a0	forge	activate#0.0	agreed	-	F	scen	2	0	The Ancient One/activate#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	f0/a0	xmage	activate#0.0	agreed	-	X	scen	2	0	The Ancient One/activate#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	static#0.0	xmage	static#0.0	agreed	-	X	scen	1	0	The Ancient One/static#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6615f881-960c-4216-a32a-63856bc3afd0	static#0.1	xmage	static#0.1	agreed	-	X	scen	1	0	The Ancient One/static#0.1/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+661618a2-54c7-4136-beff-fff5ff7d84cb	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661618a2-54c7-4136-beff-fff5ff7d84cb	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:necrosynthesis:f0t0:s1	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	-	-	xproof
+661736eb-97d7-4b3c-ab18-708479a5fb29	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661736eb-97d7-4b3c-ab18-708479a5fb29	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661a99ef-8d5b-4aac-98f6-52b17a8ecf52	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661a99ef-8d5b-4aac-98f6-52b17a8ecf52	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:turntimber-basilisk:f0t0:s1	-	-	-	2	false	23c4009444b0	-	30b4f09fe5c6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:turntimber-basilisk:f0t0:s1	-	-	-	2	false	23c4009444b0	-	30b4f09fe5c6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:dream-trawler:cast:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:dream-trawler:cast:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	f0/a0	forge	Pump	agreed	-	F	start	2	0	xs:XP:dream-trawler:f0t1:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	f0/a0	xmage	Pump	agreed	-	X	start	2	0	xs:XP:dream-trawler:f0t1:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	f0/t0	forge	Drawn	agreed	-	F	start	2	0	xs:XP:dream-trawler:f0t1:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	f0/t0	xmage	Drawn	agreed	-	X	start	2	0	xs:XP:dream-trawler:f0t1:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	f0/t1	forge	Attacks	agreed	-	F	start	2	0	xs:XP:dream-trawler:f0t1:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b2159-4040-4a44-b182-46085416ebd9	f0/t1	xmage	Attacks	agreed	-	X	start	2	0	xs:XP:dream-trawler:f0t1:s1	-	-	-	2	false	ae86f6029288	-	d4e9d4a996f2	-	-	2026-11-24	-	-	xproof
+661b23fc-78cd-44f7-ba53-0cb89ccca41f	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+661b23fc-78cd-44f7-ba53-0cb89ccca41f	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a0	forge	Mana	agreed	-	F	start	2	0	xs:XP:meditation-pools:f0a0:s1	-	-	-	2	false	6f84be0f34c0	-	fe6c5ab7a572	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a0	xmage	Mana	agreed	-	X	start	2	0	xs:XP:meditation-pools:f0a0:s1	-	-	-	2	false	6f84be0f34c0	-	fe6c5ab7a572	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a1	forge	Draw	agreed	-	F	start	2	0	xs:XP:meditation-pools:f0a1:s1	-	-	-	2	false	23c4009444b0	-	fe6c5ab7a572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a1	xmage	Draw	agreed	-	X	start	2	0	xs:XP:meditation-pools:f0a1:s1	-	-	-	2	false	23c4009444b0	-	fe6c5ab7a572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66208129-20fb-4cb4-8f00-8d4574c9c653	land	forge	land	agreed	-	F	start	2	0	xs:XP:meditation-pools:land:s1	-	-	-	2	false	23c4009444b0	-	fe6c5ab7a572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66208129-20fb-4cb4-8f00-8d4574c9c653	land	xmage	land	agreed	-	X	start	2	0	xs:XP:meditation-pools:land:s1	-	-	-	2	false	23c4009444b0	-	fe6c5ab7a572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	cast	forge	cast-resolve	agreed	-	F	scen	2	0	Neriv, Heart of the Storm/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	cast	xmage	cast-resolve	agreed	-	X	scen	2	0	Neriv, Heart of the Storm/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	combat#0.attack	forge	combat.attack	agreed	-	F	start	2	0	xs:XP:neriv-heart-of-the-storm:combat0.attack:s1	-	-	-	2	false	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	combat#0.attack	xmage	combat.attack	agreed	-	X	start	2	0	xs:XP:neriv-heart-of-the-storm:combat0.attack:s1	-	-	-	2	false	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	combat#0.block	forge	combat.block	agreed	-	F	start	2	0	xs:XP:neriv-heart-of-the-storm:combat0.block:s1	-	-	-	2	false	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	combat#0.block	xmage	combat.block	agreed	-	X	start	2	0	xs:XP:neriv-heart-of-the-storm:combat0.block:s1	-	-	-	2	false	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+6629a48b-be9a-4636-8add-69d096a1ca7e	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6629a48b-be9a-4636-8add-69d096a1ca7e	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	forge	SpellCast	agreed	-	F	start	2	0	xs:XP:double-vision:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	2b4d0313dcc4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	xmage	SpellCast	agreed	-	X	start	2	0	xs:XP:double-vision:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	2b4d0313dcc4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+6629e5f3-ac59-48f8-b09c-3b98f59b9922	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:awakened-awareness:f0t0:s1	-	-	-	2	false	054d9f516953	-	400d9381d937	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+6629e5f3-ac59-48f8-b09c-3b98f59b9922	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:awakened-awareness:f0t0:s1	-	-	-	2	false	054d9f516953	-	400d9381d937	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+6629e5f3-ac59-48f8-b09c-3b98f59b9922	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:awakened-awareness:f0t0:s1	-	-	-	2	false	054d9f516953	-	400d9381d937	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+6629e5f3-ac59-48f8-b09c-3b98f59b9922	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:awakened-awareness:f0t0:s1	-	-	-	2	false	054d9f516953	-	400d9381d937	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+662a2158-4176-4b4a-be6a-13f4501d22f9	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+662a2158-4176-4b4a-be6a-13f4501d22f9	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+663d9559-6619-46fe-8ff4-655f1d5e0e4c	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:valgavoth-s-onslaught:cast:s1	-	-	-	2	false	23c4009444b0	-	cda4445d7a27	-	-	2026-11-25	-	-	xproof
+663d9559-6619-46fe-8ff4-655f1d5e0e4c	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:valgavoth-s-onslaught:cast:s1	-	-	-	2	false	23c4009444b0	-	cda4445d7a27	-	-	2026-11-25	-	-	xproof
+663e120a-a74f-47fb-aa0a-9d1a75db626e	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:de-evolve:f0t0:s1	-	-	-	2	false	23c4009444b0	-	720f5490760c	-	-	2026-11-25	-	-	xproof
+663e120a-a74f-47fb-aa0a-9d1a75db626e	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:de-evolve:f0t0:s1	-	-	-	2	false	23c4009444b0	-	720f5490760c	-	-	2026-11-25	-	-	xproof
+663e120a-a74f-47fb-aa0a-9d1a75db626e	f0/t0	forge	Phase	agreed	-	F	start	2	0	xs:XP:de-evolve:f0t0:s1	-	-	-	2	false	23c4009444b0	-	720f5490760c	-	-	2026-11-25	-	-	xproof
+663e120a-a74f-47fb-aa0a-9d1a75db626e	f0/t0	xmage	Phase	agreed	-	X	start	2	0	xs:XP:de-evolve:f0t0:s1	-	-	-	2	false	23c4009444b0	-	720f5490760c	-	-	2026-11-25	-	-	xproof
+663e6ab0-ed99-4cec-86f7-843207c31e17	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+663e6ab0-ed99-4cec-86f7-843207c31e17	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+663e6ab0-ed99-4cec-86f7-843207c31e17	f0/a0	forge	PutCounter	agreed	-	F	start	2	0	xs:XP:kalemne-s-captain:f0a0:s1	-	-	-	2	false	8c0bd19283bb	-	a1d716a947fb	-	-	2026-11-24	-	-	xproof
+663e6ab0-ed99-4cec-86f7-843207c31e17	f0/a0	xmage	PutCounter	agreed	-	X	start	2	0	xs:XP:kalemne-s-captain:f0a0:s1	-	-	-	2	false	8c0bd19283bb	-	a1d716a947fb	-	-	2026-11-24	-	-	xproof
+663e6ab0-ed99-4cec-86f7-843207c31e17	f0/t0	forge	BecomeMonstrous	agreed	-	F	start	2	0	xs:XP:kalemne-s-captain:f0a0:s1	-	-	-	2	false	8c0bd19283bb	-	a1d716a947fb	-	-	2026-11-24	-	-	xproof
+663e6ab0-ed99-4cec-86f7-843207c31e17	f0/t0	xmage	BecomeMonstrous	agreed	-	X	start	2	0	xs:XP:kalemne-s-captain:f0a0:s1	-	-	-	2	false	8c0bd19283bb	-	a1d716a947fb	-	-	2026-11-24	-	-	xproof
+6640bcfc-4bdc-4380-8b51-61b906f9aee6	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6640bcfc-4bdc-4380-8b51-61b906f9aee6	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:dawnwing-marshal:cast:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:dawnwing-marshal:cast:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.attack	forge	combat.attack	agreed	-	F	start	2	0	xs:XP:dawnwing-marshal:combat0.attack:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.attack	xmage	combat.attack	agreed	-	X	start	2	0	xs:XP:dawnwing-marshal:combat0.attack:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.block	forge	combat.block	agreed	-	F	start	2	0	xs:XP:dawnwing-marshal:combat0.block:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.block	xmage	combat.block	agreed	-	X	start	2	0	xs:XP:dawnwing-marshal:combat0.block:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	f0/a0	forge	PumpAll	agreed	-	F	start	2	0	xs:XP:dawnwing-marshal:f0a0:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+6640c234-8863-4670-a61f-ba6f59b60d69	f0/a0	xmage	PumpAll	agreed	-	X	start	2	0	xs:XP:dawnwing-marshal:f0a0:s1	-	-	-	2	false	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	-	-	xproof
+66412a7a-4ec0-41f0-80ad-eb483213ff81	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66412a7a-4ec0-41f0-80ad-eb483213ff81	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	forge	MustBlock	agreed	-	F	start	2	0	xs:XP:maraleaf-rider:f0a0:s1	-	-	-	2	false	808e1dd359c1	-	31cde04318b2	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	xmage	MustBlock	agreed	-	X	start	2	0	xs:XP:maraleaf-rider:f0a0:s1	-	-	-	2	false	808e1dd359c1	-	31cde04318b2	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+66418c65-a15f-489e-8a2d-6cee1b5d977c	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66418c65-a15f-489e-8a2d-6cee1b5d977c	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a1	forge	Mill	agreed	-	F	start	2	0	xs:XP:lich-lord-of-unx:f0a1:s1	-	-	-	2	false	8a1b1a193ec0	-	3158ff43a8d4	-	-	2026-11-24	-	-	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a1	xmage	Mill	agreed	-	X	start	2	0	xs:XP:lich-lord-of-unx:f0a1:s1	-	-	-	2	false	8a1b1a193ec0	-	3158ff43a8d4	-	-	2026-11-24	-	-	xproof
+66442396-f804-47f3-8daa-0d43d8cfb482	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:porcelain-legionnaire:cast:s1	-	-	-	2	false	d864b561c9cb	-	29516e3fea5a	-	-	2026-11-24	-	-	xproof
+66442396-f804-47f3-8daa-0d43d8cfb482	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:porcelain-legionnaire:cast:s1	-	-	-	2	false	d864b561c9cb	-	29516e3fea5a	-	-	2026-11-24	-	-	xproof
+66465bc1-4a34-4951-be53-57f90002976a	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:gleeful-demolition:cast:s1	-	-	-	2	false	054d9f516953	-	b3936052d7ae	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66465bc1-4a34-4951-be53-57f90002976a	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:gleeful-demolition:cast:s1	-	-	-	2	false	054d9f516953	-	b3936052d7ae	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66499407-3ad2-464b-bbfe-95d860f53616	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:lash-of-the-balrog:cast:s1	-	-	-	2	false	9087eefec3ee	-	bb35ac22c758	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	-	-	xproof
+664c1219-acfa-41da-b811-503a63fc8d84	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+664c1219-acfa-41da-b811-503a63fc8d84	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+664d982a-5cd8-4289-afb8-fa2e083042c9	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+664d982a-5cd8-4289-afb8-fa2e083042c9	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66553485-4e9d-4049-9e80-3ac903f8127a	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66553485-4e9d-4049-9e80-3ac903f8127a	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66553485-4e9d-4049-9e80-3ac903f8127a	f0/t0	forge	DamageDealtOnce	agreed	-	F	start	2	0	xs:XP:visions-of-brutality:f0t0:s1	-	-	-	2	false	17bda798c09c	-	9e268c003180	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+66553485-4e9d-4049-9e80-3ac903f8127a	f0/t0	xmage	DamageDealtOnce	agreed	-	X	start	2	0	xs:XP:visions-of-brutality:f0t0:s1	-	-	-	2	false	17bda798c09c	-	9e268c003180	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+66578806-9148-479d-80e1-6c3e3b67e452	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:elite-skirmisher:cast:s1	-	-	-	2	false	d864b561c9cb	-	c976b2e8c443	-	-	2026-11-24	-	-	xproof
+66578806-9148-479d-80e1-6c3e3b67e452	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:elite-skirmisher:cast:s1	-	-	-	2	false	d864b561c9cb	-	c976b2e8c443	-	-	2026-11-24	-	-	xproof
+66578806-9148-479d-80e1-6c3e3b67e452	f0/t0	forge	SpellCast	agreed	-	F	start	2	0	xs:XP:elite-skirmisher:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	c976b2e8c443	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66578806-9148-479d-80e1-6c3e3b67e452	f0/t0	xmage	SpellCast	agreed	-	X	start	2	0	xs:XP:elite-skirmisher:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	c976b2e8c443	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+665b8bbf-c30b-4875-a5c2-fc3b9767ecac	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:silvos-rogue-elemental:cast:s1	-	-	-	2	false	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	-	-	xproof
+665b8bbf-c30b-4875-a5c2-fc3b9767ecac	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:silvos-rogue-elemental:cast:s1	-	-	-	2	false	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	-	-	xproof
+665b8bbf-c30b-4875-a5c2-fc3b9767ecac	f0/a0	forge	Regenerate	agreed	-	F	start	2	0	xs:XP:silvos-rogue-elemental:f0a0:s1	-	-	-	2	false	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	-	-	xproof
+665b8bbf-c30b-4875-a5c2-fc3b9767ecac	f0/a0	xmage	Regenerate	agreed	-	X	start	2	0	xs:XP:silvos-rogue-elemental:f0a0:s1	-	-	-	2	false	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	-	-	xproof
+665e52f1-901b-49a1-bfbd-ee38bdee8983	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:paradise-plume:f0t0:s1	-	-	-	2	false	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+665e52f1-901b-49a1-bfbd-ee38bdee8983	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:paradise-plume:f0t0:s1	-	-	-	2	false	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/a0	forge	Mana	agreed	-	F	start	2	0	xs:XP:paradise-plume:f0t0:s1	-	-	-	2	false	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/a0	xmage	Mana	agreed	-	X	start	2	0	xs:XP:paradise-plume:f0t0:s1	-	-	-	2	false	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/t0	forge	SpellCast	agreed	-	F	start	2	0	xs:XP:paradise-plume:f0t0:s1	-	-	-	2	false	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+665e52f1-901b-49a1-bfbd-ee38bdee8983	f0/t0	xmage	SpellCast	agreed	-	X	start	2	0	xs:XP:paradise-plume:f0t0:s1	-	-	-	2	false	17bda798c09c	-	0d5ef64de579	bec665044ecd9134639047e1156af2c70c1da7e5	4385467a9eb5f1953a34498e07be47e24ae4b66c	2026-11-26	-	-	xproof
+665f3e52-c536-481b-8b29-fe68f08d1fdf	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:crypt-angel:f0t0:s1	-	-	-	2	false	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	-	-	xproof
+665f3e52-c536-481b-8b29-fe68f08d1fdf	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:crypt-angel:f0t0:s1	-	-	-	2	false	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	-	-	xproof
+665f3e52-c536-481b-8b29-fe68f08d1fdf	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:crypt-angel:f0t0:s1	-	-	-	2	false	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	-	-	xproof
+665f3e52-c536-481b-8b29-fe68f08d1fdf	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:crypt-angel:f0t0:s1	-	-	-	2	false	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	cast	forge	cast	agreed	-	F	start	1	0	xs:XP:unstoppable-slasher:cast:s1	-	-	-	2	false	23b491658465	-	3d2ffb4319cc	-	-	2026-11-24	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	cast	xmage	cast	agreed	-	X	start	1	0	xs:XP:unstoppable-slasher:cast:s1	-	-	-	2	false	23b491658465	-	3d2ffb4319cc	-	-	2026-11-24	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	forge	combat.attack	agreed	-	F	start	2	0	xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	xmage	combat.attack	agreed	-	X	start	2	0	xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	forge	combat.block	agreed	-	F	start	2	0	xs:XP:unstoppable-slasher:combat0.block:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	xmage	combat.block	agreed	-	X	start	2	0	xs:XP:unstoppable-slasher:combat0.block:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	forge	DamageDone	agreed	-	F	start	4	0	xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	xmage	DamageDone	agreed	-	X	start	4	0	xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:unstoppable-slasher:f0t1:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:unstoppable-slasher:f0t1:s1	-	-	-	2	false	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	-	-	xproof
+66630640-9605-44da-afdf-eb9d458d056f	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:mirkwood-nurturer:f0t0:s1	-	-	-	2	false	cfde1dc26c40	-	508523c22d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	-	-	xproof
+66630640-9605-44da-afdf-eb9d458d056f	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:mirkwood-nurturer:f0t0:s1	-	-	-	2	false	cfde1dc26c40	-	508523c22d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	-	-	xproof
+66630640-9605-44da-afdf-eb9d458d056f	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:mirkwood-nurturer:f0t0:s1	-	-	-	2	false	cfde1dc26c40	-	508523c22d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	-	-	xproof
+66630640-9605-44da-afdf-eb9d458d056f	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:mirkwood-nurturer:f0t0:s1	-	-	-	2	false	cfde1dc26c40	-	508523c22d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	-	-	xproof
+6665bfe2-942c-4b3d-a976-776fe00c99f4	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6665bfe2-942c-4b3d-a976-776fe00c99f4	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t0	forge	Attacks	agreed	-	F	start	2	0	xs:XP:fang-roku-s-companion:f0t0:s1	-	-	-	2	false	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	-	-	xproof
+6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t0	xmage	Attacks	agreed	-	X	start	2	0	xs:XP:fang-roku-s-companion:f0t0:s1	-	-	-	2	false	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	-	-	xproof
+6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t1	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:fang-roku-s-companion:f0t1:s1	-	-	-	2	false	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	-	-	xproof
+6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t1	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:fang-roku-s-companion:f0t1:s1	-	-	-	2	false	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	-	-	xproof
+6669a19e-7944-44c9-ac37-a92016783375	cast	forge	cast	agreed	-	F	start	4	0	xs:XP:denethor-stone-seer:cast:s1	-	-	-	2	false	8c0bd19283bb	-	be981eeb80bf	-	-	2026-11-24	-	-	xproof
+6669a19e-7944-44c9-ac37-a92016783375	cast	xmage	cast	agreed	-	X	start	4	0	xs:XP:denethor-stone-seer:cast:s1	-	-	-	2	false	8c0bd19283bb	-	be981eeb80bf	-	-	2026-11-24	-	-	xproof
+6669a19e-7944-44c9-ac37-a92016783375	f0/a0	forge	BecomeMonarch	agreed	-	F	start	2	0	xs:XP:denethor-stone-seer:f0a0:s1	-	-	-	2	false	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	-	-	xproof
+6669a19e-7944-44c9-ac37-a92016783375	f0/a0	xmage	BecomeMonarch	agreed	-	X	start	2	0	xs:XP:denethor-stone-seer:f0a0:s1	-	-	-	2	false	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	-	-	xproof
+6669a19e-7944-44c9-ac37-a92016783375	f0/t0	forge	ChangesZone	agreed	-	F	start	4	0	xs:XP:denethor-stone-seer:cast:s1	-	-	-	2	false	8c0bd19283bb	-	be981eeb80bf	-	-	2026-11-24	-	-	xproof
+6669a19e-7944-44c9-ac37-a92016783375	f0/t0	xmage	ChangesZone	agreed	-	X	start	4	0	xs:XP:denethor-stone-seer:cast:s1	-	-	-	2	false	8c0bd19283bb	-	be981eeb80bf	-	-	2026-11-24	-	-	xproof
+666af637-9282-4121-962a-048e528f9221	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+666af637-9282-4121-962a-048e528f9221	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+666b34b5-a0c2-43e3-befd-7c3979313682	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:infinite-coursework:f0t0:s1	-	-	-	2	false	25696bf19d5b	-	f3a8b0f5f2f0	-	-	2026-11-24	-	-	xproof
+666b34b5-a0c2-43e3-befd-7c3979313682	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:infinite-coursework:f0t0:s1	-	-	-	2	false	25696bf19d5b	-	f3a8b0f5f2f0	-	-	2026-11-24	-	-	xproof
+666b34b5-a0c2-43e3-befd-7c3979313682	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:infinite-coursework:f0t0:s1	-	-	-	2	false	25696bf19d5b	-	f3a8b0f5f2f0	-	-	2026-11-24	-	-	xproof
+666b34b5-a0c2-43e3-befd-7c3979313682	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:infinite-coursework:f0t0:s1	-	-	-	2	false	25696bf19d5b	-	f3a8b0f5f2f0	-	-	2026-11-24	-	-	xproof
+666b34b5-a0c2-43e3-befd-7c3979313682	static#0.0	xmage	static#0.0	agreed	-	X	scen	1	0	Infinite Coursework/static#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+6677cd5a-0785-499b-ba99-f6bdcfb196d5	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:jessica-jones-private-eye:cast:s1	-	-	-	2	false	fb9d3088f0bf	-	ba51fb4f0a71	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	-	-	xproof
+6677cd5a-0785-499b-ba99-f6bdcfb196d5	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:jessica-jones-private-eye:cast:s1	-	-	-	2	false	fb9d3088f0bf	-	ba51fb4f0a71	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	-	-	xproof
+6677cd5a-0785-499b-ba99-f6bdcfb196d5	f0/a0	forge	Dig	agreed	-	F	start	2	0	xs:XP:jessica-jones-private-eye:f0a0:s1	-	-	-	2	false	fb9d3088f0bf	-	ba51fb4f0a71	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	-	-	xproof
+6677cd5a-0785-499b-ba99-f6bdcfb196d5	f0/a0	xmage	Dig	agreed	-	X	start	2	0	xs:XP:jessica-jones-private-eye:f0a0:s1	-	-	-	2	false	fb9d3088f0bf	-	ba51fb4f0a71	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	-	-	xproof
+66793ddf-aca3-44cb-8742-4eee178f31c6	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66793ddf-aca3-44cb-8742-4eee178f31c6	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66793ddf-aca3-44cb-8742-4eee178f31c6	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66793ddf-aca3-44cb-8742-4eee178f31c6	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+6679b462-3c90-418c-8727-acd1a61d988b	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:decree-of-annihilation:cast:s1	-	-	-	2	false	8c0bd19283bb	-	8593824ee184	-	-	2026-11-24	-	-	xproof
+6679b462-3c90-418c-8727-acd1a61d988b	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:decree-of-annihilation:cast:s1	-	-	-	2	false	8c0bd19283bb	-	8593824ee184	-	-	2026-11-24	-	-	xproof
+6679b462-3c90-418c-8727-acd1a61d988b	f0/a1	forge	Draw/Cycling	agreed	-	F	start	2	0	xs:XP:decree-of-annihilation:f0a1:s1	-	-	-	2	false	65d07beecc37	-	8593824ee184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	-	-	xproof
+6679b462-3c90-418c-8727-acd1a61d988b	f0/a1	xmage	Draw/Cycling	agreed	-	X	start	2	0	xs:XP:decree-of-annihilation:f0a1:s1	-	-	-	2	false	65d07beecc37	-	8593824ee184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	-	-	xproof
+6679b462-3c90-418c-8727-acd1a61d988b	f0/t0	forge	Cycled	agreed	-	F	start	2	0	xs:XP:decree-of-annihilation:f0a1:s1	-	-	-	2	false	65d07beecc37	-	8593824ee184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	-	-	xproof
+6679b462-3c90-418c-8727-acd1a61d988b	f0/t0	xmage	Cycled	agreed	-	X	start	2	0	xs:XP:decree-of-annihilation:f0a1:s1	-	-	-	2	false	65d07beecc37	-	8593824ee184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	-	-	xproof
+667c39bc-92d6-4fee-bced-95f0e1f21455	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c39bc-92d6-4fee-bced-95f0e1f21455	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c39bc-92d6-4fee-bced-95f0e1f21455	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c39bc-92d6-4fee-bced-95f0e1f21455	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c5676-7a18-4fa9-b965-b26797538e23	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c5676-7a18-4fa9-b965-b26797538e23	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c5676-7a18-4fa9-b965-b26797538e23	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667c5676-7a18-4fa9-b965-b26797538e23	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667cffdd-8951-4223-8895-fa46e9f14b96	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:fuel-for-the-cause:cast:s1	-	-	-	2	false	9087eefec3ee	-	406920a22076	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+667cffdd-8951-4223-8895-fa46e9f14b96	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:fuel-for-the-cause:cast:s1	-	-	-	2	false	9087eefec3ee	-	406920a22076	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+667dae0b-5006-4e38-be80-eae79c2a2a95	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667dae0b-5006-4e38-be80-eae79c2a2a95	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667dae0b-5006-4e38-be80-eae79c2a2a95	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667dae0b-5006-4e38-be80-eae79c2a2a95	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+667ece0e-a474-4e11-8ac4-6c8fc354457c	cast	forge	cast	agreed	-	F	start	4	0	xs:XP:demonlord-belzenlok:cast:s1	-	-	-	2	false	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	-	-	xproof
+667ece0e-a474-4e11-8ac4-6c8fc354457c	cast	xmage	cast	agreed	-	X	start	4	0	xs:XP:demonlord-belzenlok:cast:s1	-	-	-	2	false	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	-	-	xproof
+667ece0e-a474-4e11-8ac4-6c8fc354457c	f0/t0	forge	ChangesZone	agreed	-	F	start	4	0	xs:XP:demonlord-belzenlok:cast:s1	-	-	-	2	false	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	-	-	xproof
+667ece0e-a474-4e11-8ac4-6c8fc354457c	f0/t0	xmage	ChangesZone	agreed	-	X	start	4	0	xs:XP:demonlord-belzenlok:cast:s1	-	-	-	2	false	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	-	-	xproof
+6680a5f7-3ac1-4550-a29a-9553ad7ae465	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:briarblade-adept:cast:s1	-	-	-	2	false	8c0bd19283bb	-	0349dd78b5c3	-	-	2026-11-24	-	-	xproof
+6680a5f7-3ac1-4550-a29a-9553ad7ae465	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:briarblade-adept:cast:s1	-	-	-	2	false	8c0bd19283bb	-	0349dd78b5c3	-	-	2026-11-24	-	-	xproof
+6680a5f7-3ac1-4550-a29a-9553ad7ae465	f0/a0	xmage	Encore/Encore	agreed	-	X	start	2	0	xs:XP:briarblade-adept:f0a0:s1	-	-	-	2	false	b8f573385218	-	0349dd78b5c3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	-	-	xproof
+6680a5f7-3ac1-4550-a29a-9553ad7ae465	f0/t0	xmage	Attacks	agreed	-	X	start	2	0	xs:XP:briarblade-adept:f0a0:s1	-	-	-	2	false	b8f573385218	-	0349dd78b5c3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	-	-	xproof
+66810ef7-ea3a-4afa-92f0-b21ec52cc8d0	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66810ef7-ea3a-4afa-92f0-b21ec52cc8d0	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+668312dd-7b6e-46bf-9c6a-bfb03dd75b8f	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66847507-f8bb-4266-bd6e-a91c0baf0000	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66847507-f8bb-4266-bd6e-a91c0baf0000	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66847507-f8bb-4266-bd6e-a91c0baf0000	f0/t0	forge	DamageDoneOnce	agreed	-	F	start	2	0	xs:XP:sprouting-phytohydra:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	810eba8cd6ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66847507-f8bb-4266-bd6e-a91c0baf0000	f0/t0	xmage	DamageDoneOnce	agreed	-	X	start	2	0	xs:XP:sprouting-phytohydra:f0t0:s1	-	-	-	2	false	6f84be0f34c0	-	810eba8cd6ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+6686b897-64a9-4482-9563-57c88bc83d71	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:voidwielder:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	-	-	xproof
+6686b897-64a9-4482-9563-57c88bc83d71	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:voidwielder:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	-	-	xproof
+6686b897-64a9-4482-9563-57c88bc83d71	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:voidwielder:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	-	-	xproof
+6686b897-64a9-4482-9563-57c88bc83d71	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:voidwielder:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	b3be4604edbc	-	-	2026-11-24	-	-	xproof
+668a6a9d-80fc-437b-99b8-6807e92eabca	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:agent-of-horizons:cast:s1	-	-	-	2	false	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	-	-	xproof
+668a6a9d-80fc-437b-99b8-6807e92eabca	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:agent-of-horizons:cast:s1	-	-	-	2	false	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	-	-	xproof
+668a6a9d-80fc-437b-99b8-6807e92eabca	f0/a0	forge	Effect	agreed	-	F	start	2	0	xs:XP:agent-of-horizons:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	-	-	xproof
+668a6a9d-80fc-437b-99b8-6807e92eabca	f0/a0	xmage	Effect	agreed	-	X	start	2	0	xs:XP:agent-of-horizons:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	52d153fa283f	-	-	2026-11-24	-	-	xproof
+668a9b6b-731c-4127-9c88-1c6112ffd590	cast	forge	cast-resolve	agreed	-	F	scen	2	0	Cloak and Phaser/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+668a9b6b-731c-4127-9c88-1c6112ffd590	cast	xmage	cast-resolve	agreed	-	X	scen	2	0	Cloak and Phaser/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+668c2c40-5334-493b-ae8e-913b26877732	cast	forge	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+668c2c40-5334-493b-ae8e-913b26877732	cast	xmage	cast	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+668c2c40-5334-493b-ae8e-913b26877732	f0/t0	forge	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+668c2c40-5334-493b-ae8e-913b26877732	f0/t0	xmage	ChangesZone	owed	harness:x=not_sent~xmage-lacks-card+f=not_sent~forge-lacks-card	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+668f646b-94f0-4f1a-badd-2d69b559d8a2	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+668f646b-94f0-4f1a-badd-2d69b559d8a2	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+668f646b-94f0-4f1a-badd-2d69b559d8a2	f0/t0	forge	SpellCast	agreed	-	F	start	2	0	xs:XP:cathar-s-companion:f0t0:s1	-	-	-	2	false	fb9d3088f0bf	-	bfcf176a0079	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	-	-	xproof
+668f646b-94f0-4f1a-badd-2d69b559d8a2	f0/t0	xmage	SpellCast	agreed	-	X	start	2	0	xs:XP:cathar-s-companion:f0t0:s1	-	-	-	2	false	fb9d3088f0bf	-	bfcf176a0079	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f0t0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	f1/a0	forge	DealDamage	agreed	-	F	start	4	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	f1/a0	xmage	DealDamage	agreed	-	X	start	4	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	f1/t0	forge	Discarded	agreed	-	F	start	4	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66914a34-59b3-48a0-9305-ebd956d34f02	f1/t0	xmage	Discarded	agreed	-	X	start	4	0	xs:XP:invasion-of-kaldheim-pyre-of-the-world-tree:f1a0:s1	-	-	-	2	false	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	2	false	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	2	false	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t0	forge	Phase	agreed	-	F	start	4	0	xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	2	false	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t0	xmage	Phase	agreed	-	X	start	4	0	xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	2	false	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t1	forge	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t1	xmage	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-27	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t2	forge	Attacks	agreed	-	F	start	4	0	xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	2	false	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	-	-	xproof
+66944a11-40a1-4f3a-9f83-52324e0edfef	f0/t2	xmage	Attacks	agreed	-	X	start	4	0	xs:XP:arahbo-roar-of-the-world:cast:s1	-	-	-	2	false	8c0bd19283bb	-	d92742c32923	-	-	2026-11-24	-	-	xproof
+66961bcb-f588-47a7-b3f3-12f4ac674477	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:inside-information:cast:s1	-	-	-	2	false	fb9d3088f0bf	-	301e7461d76e	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	-	-	xproof
+66961bcb-f588-47a7-b3f3-12f4ac674477	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:inside-information:cast:s1	-	-	-	2	false	fb9d3088f0bf	-	301e7461d76e	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	-	-	xproof
+6697fe5b-90ac-4321-aa2f-cdc6ec283cb4	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:aether-mutation:cast:s1	-	-	-	2	false	3aa6ded33acb	-	d7855971faba	-	-	2026-11-25	-	-	xproof
+6697fe5b-90ac-4321-aa2f-cdc6ec283cb4	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:aether-mutation:cast:s1	-	-	-	2	false	3aa6ded33acb	-	d7855971faba	-	-	2026-11-25	-	-	xproof
+669830ea-f55c-447a-aa3a-8965fa6d2a33	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:rage-forger:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	0be297f6cc8e	-	-	2026-11-24	-	-	xproof
+669830ea-f55c-447a-aa3a-8965fa6d2a33	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:rage-forger:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	0be297f6cc8e	-	-	2026-11-24	-	-	xproof
+669830ea-f55c-447a-aa3a-8965fa6d2a33	f0/t1	forge	Attacks	agreed	-	F	start	4	0	xs:XP:rage-forger:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	0be297f6cc8e	-	-	2026-11-24	-	-	xproof
+66a131ae-dbb2-4e7b-b6ce-7695f47c8f87	cast	forge	cast	agreed	-	F	start	4	0	xs:XP:serpent-blade-assailant:cast:s1	-	-	-	2	false	ae86f6029288	-	0672a7b2644f	-	-	2026-11-24	-	-	xproof
+66a131ae-dbb2-4e7b-b6ce-7695f47c8f87	cast	xmage	cast	agreed	-	X	start	4	0	xs:XP:serpent-blade-assailant:cast:s1	-	-	-	2	false	ae86f6029288	-	0672a7b2644f	-	-	2026-11-24	-	-	xproof
+66a131ae-dbb2-4e7b-b6ce-7695f47c8f87	f0/t0	forge	ChangesZone/Backup	agreed	-	F	start	4	0	xs:XP:serpent-blade-assailant:cast:s1	-	-	-	2	false	ae86f6029288	-	0672a7b2644f	-	-	2026-11-24	-	-	xproof
+66a131ae-dbb2-4e7b-b6ce-7695f47c8f87	f0/t0	xmage	ChangesZone/Backup	agreed	-	X	start	4	0	xs:XP:serpent-blade-assailant:cast:s1	-	-	-	2	false	ae86f6029288	-	0672a7b2644f	-	-	2026-11-24	-	-	xproof
+66a22b35-3dc0-4a74-8474-e73293403de6	cast	forge	cast-resolve	agreed	-	F	scen	2	0	Solitary Cell/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66a22b35-3dc0-4a74-8474-e73293403de6	cast	xmage	cast-resolve	agreed	-	X	scen	2	0	Solitary Cell/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66a22b35-3dc0-4a74-8474-e73293403de6	f0/a0	forge	activate#0.0	agreed	-	F	scen	2	0	Solitary Cell/activate#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66a22b35-3dc0-4a74-8474-e73293403de6	f0/a0	xmage	activate#0.0	agreed	-	X	scen	2	0	Solitary Cell/activate#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66a22b35-3dc0-4a74-8474-e73293403de6	f0/t0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66a22b35-3dc0-4a74-8474-e73293403de6	f0/t0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:fifty-feet-of-rope:cast:s1	-	-	-	2	false	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:fifty-feet-of-rope:cast:s1	-	-	-	2	false	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a0	forge	Pump	agreed	-	F	start	4	0	xs:XP:fifty-feet-of-rope:cast:s1	-	-	-	2	false	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a0	xmage	Pump	agreed	-	X	start	4	0	xs:XP:fifty-feet-of-rope:cast:s1	-	-	-	2	false	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a1	forge	Pump	agreed	-	F	start	2	0	xs:XP:fifty-feet-of-rope:f0a1:s1	-	-	-	2	false	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a1	xmage	Pump	agreed	-	X	start	2	0	xs:XP:fifty-feet-of-rope:f0a1:s1	-	-	-	2	false	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a2	forge	Venture	agreed	-	F	start	2	0	xs:XP:fifty-feet-of-rope:f0a2:s1	-	-	-	2	false	6f84be0f34c0	-	bd6276ca8e73	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a2	xmage	Venture	agreed	-	X	start	2	0	xs:XP:fifty-feet-of-rope:f0a2:s1	-	-	-	2	false	6f84be0f34c0	-	bd6276ca8e73	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a0	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a0	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	forge	Mana	agreed	-	F	start	2	0	xs:XP:tarnished-citadel:f0a1:s1	-	-	-	2	false	5b42d43d5d80	-	fe1f43cc6dc8	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	-	-	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	xmage	Mana	agreed	-	X	start	2	0	xs:XP:tarnished-citadel:f0a1:s1	-	-	-	2	false	5b42d43d5d80	-	fe1f43cc6dc8	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	-	-	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	land	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	land	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66ae3349-ad37-47da-8ccc-3e1cdddb32a9	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:arctic-nishoba:f0t1:s1	-	-	-	2	false	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	forge	NULL	owed	refused:start:upkeep-trigger	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	xmage	NULL	owed	refused:start:upkeep-trigger	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t1	forge	Phase/Cumulative upkeep	agreed	-	F	start	2	0	xs:XP:arctic-nishoba:f0t1:s1	-	-	-	2	false	23c4009444b0	-	8026556fc8ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66b46257-b64c-4672-bf47-12bf0bcd6f8f	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66b46257-b64c-4672-bf47-12bf0bcd6f8f	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66bd5999-742a-43e0-827c-ecb8ec7db242	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:ghost-warden:cast:s1	-	-	-	2	false	77494c1ce129	-	1e158ef92b5a	-	-	2026-11-24	-	-	xproof
+66bd5999-742a-43e0-827c-ecb8ec7db242	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:ghost-warden:cast:s1	-	-	-	2	false	77494c1ce129	-	1e158ef92b5a	-	-	2026-11-24	-	-	xproof
+66bd5999-742a-43e0-827c-ecb8ec7db242	f0/a0	forge	Pump	agreed	-	F	start	2	0	xs:XP:ghost-warden:f0a0:s1	-	-	-	2	false	23c4009444b0	-	1e158ef92b5a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66bd5999-742a-43e0-827c-ecb8ec7db242	f0/a0	xmage	Pump	agreed	-	X	start	2	0	xs:XP:ghost-warden:f0a0:s1	-	-	-	2	false	23c4009444b0	-	1e158ef92b5a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66bee79a-7e47-4fc4-ba07-323cd2de6261	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66bee79a-7e47-4fc4-ba07-323cd2de6261	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:gateway-sneak:cast:s1	-	-	-	2	false	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	-	-	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:gateway-sneak:cast:s1	-	-	-	2	false	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	-	-	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	xmage	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	forge	DamageDone	agreed	-	F	start	2	0	xs:XP:gateway-sneak:f0t1:s1	-	-	-	2	false	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	-	-	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	xmage	DamageDone	agreed	-	X	start	2	0	xs:XP:gateway-sneak:f0t1:s1	-	-	-	2	false	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	-	-	xproof
+66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	forge	cast	owed	harness:x=decision_shape~leftover-choices-of-playera-count-are+f=forge_skips_damage_step	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	xmage	cast	owed	harness:x=decision_shape~leftover-choices-of-playera-count-are+f=forge_skips_damage_step	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66ce0c60-f406-4ece-915f-675da4e8b16d	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:summon-titan:cast:s1	-	-	-	2	false	23c4009444b0	-	12cd7b1f69ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66ce0c60-f406-4ece-915f-675da4e8b16d	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:summon-titan:cast:s1	-	-	-	2	false	23c4009444b0	-	12cd7b1f69ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.attack	xmage	combat#0.attack	agreed	-	X	scen	1	0	Summon: Titan/combat#0.attack/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.block	xmage	combat#0.block	agreed	-	X	scen	1	0	Summon: Titan/combat#0.block/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66d4370e-19b9-4680-9b1e-a192537bc002	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:omni-changeling:cast:s1	-	-	-	2	false	23b491658465	-	97ed1c74e306	-	-	2026-11-24	-	-	xproof
+66d4370e-19b9-4680-9b1e-a192537bc002	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:omni-changeling:cast:s1	-	-	-	2	false	23b491658465	-	97ed1c74e306	-	-	2026-11-24	-	-	xproof
+66d57851-2844-4b9d-be78-e90fc620b750	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:scarblade-s-malice:cast:s1	-	-	-	2	false	054d9f516953	-	25303538d1cb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66d57851-2844-4b9d-be78-e90fc620b750	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:scarblade-s-malice:cast:s1	-	-	-	2	false	054d9f516953	-	25303538d1cb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66d65cda-e3d1-4a00-8ff3-c6d5ef0ab0c1	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:forbidden-alchemy:cast:s1	-	-	-	2	false	d864b561c9cb	-	42188a642fe3	-	-	2026-11-24	-	-	xproof
+66d65cda-e3d1-4a00-8ff3-c6d5ef0ab0c1	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:forbidden-alchemy:cast:s1	-	-	-	2	false	d864b561c9cb	-	42188a642fe3	-	-	2026-11-24	-	-	xproof
+66d845a2-be4c-41bb-a357-3650461c03ed	f0/a0	forge	Mana	agreed	-	F	start	1	0	xs:XP:highland-weald:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	e5aa067bd152	-	-	2026-11-24	-	-	xproof
+66d845a2-be4c-41bb-a357-3650461c03ed	f0/a0	xmage	Mana	agreed	-	X	start	1	0	xs:XP:highland-weald:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	e5aa067bd152	-	-	2026-11-24	-	-	xproof
+66d845a2-be4c-41bb-a357-3650461c03ed	land	forge	land	agreed	-	F	start	2	0	xs:XP:highland-weald:land:s1	-	-	-	2	false	0984227a67dd	-	e5aa067bd152	-	-	2026-11-24	-	-	xproof
+66d845a2-be4c-41bb-a357-3650461c03ed	land	xmage	land	agreed	-	X	start	2	0	xs:XP:highland-weald:land:s1	-	-	-	2	false	0984227a67dd	-	e5aa067bd152	-	-	2026-11-24	-	-	xproof
+66dc3237-3543-4fc2-96f1-c8d1eff7c04c	cast	forge	cast-resolve	agreed	-	F	scen	2	0	Rimefur Reindeer/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66dc3237-3543-4fc2-96f1-c8d1eff7c04c	cast	xmage	cast-resolve	agreed	-	X	scen	2	0	Rimefur Reindeer/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66dc3237-3543-4fc2-96f1-c8d1eff7c04c	f0/t0	xmage	trigger#0.0	agreed	-	X	scen	1	0	Rimefur Reindeer/trigger#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66dd0e68-f5ec-45e5-991f-d588aa726387	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:dwarven-strike-force:cast:s1	-	-	-	2	false	fc71ca68c5ac	-	5a3dc5031e32	-	-	2026-11-24	-	-	xproof
+66dd0e68-f5ec-45e5-991f-d588aa726387	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:dwarven-strike-force:cast:s1	-	-	-	2	false	fc71ca68c5ac	-	5a3dc5031e32	-	-	2026-11-24	-	-	xproof
+66dd0e68-f5ec-45e5-991f-d588aa726387	f0/a0	forge	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66dd0e68-f5ec-45e5-991f-d588aa726387	f0/a0	xmage	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66de5b97-0de0-422c-a351-bfe55ad4503a	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66de5b97-0de0-422c-a351-bfe55ad4503a	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66de5b97-0de0-422c-a351-bfe55ad4503a	f0/t0	forge	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66de5b97-0de0-422c-a351-bfe55ad4503a	f0/t0	xmage	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	2	false	db1feb8a5aac	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	edf8473c4d64d76ccd35280b666aaa2257b5eff5	2026-11-28	-	-	xproof
+66de5b97-0de0-422c-a351-bfe55ad4503a	f0/t1	forge	Phase	agreed	-	F	start	2	0	xs:XP:master-s-guidance:f0t1:s1	-	-	-	2	false	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	-	-	xproof
+66de5b97-0de0-422c-a351-bfe55ad4503a	f0/t1	xmage	Phase	agreed	-	X	start	2	0	xs:XP:master-s-guidance:f0t1:s1	-	-	-	2	false	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:silverquill-the-disputant:cast:s1	-	-	-	2	false	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:silverquill-the-disputant:cast:s1	-	-	-	2	false	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	combat#0.attack	forge	combat.attack	agreed	-	F	start	2	0	xs:XP:silverquill-the-disputant:combat0.attack:s1	-	-	-	2	false	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	combat#0.attack	xmage	combat.attack	agreed	-	X	start	2	0	xs:XP:silverquill-the-disputant:combat0.attack:s1	-	-	-	2	false	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	combat#0.block	forge	combat.block	agreed	-	F	start	2	0	xs:XP:silverquill-the-disputant:combat0.block:s1	-	-	-	2	false	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	combat#0.block	xmage	combat.block	agreed	-	X	start	2	0	xs:XP:silverquill-the-disputant:combat0.block:s1	-	-	-	2	false	23c4009444b0	-	f36a56c929ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	-	-	xproof
+66deb3f3-0314-427e-9cb8-6befa365ae94	static#0.0	xmage	static#0.0	agreed	-	X	scen	1	0	Silverquill, the Disputant/static#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66e37011-f3d2-41ed-8e09-7bba9464e8c3	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66e37011-f3d2-41ed-8e09-7bba9464e8c3	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a0	forge	PutCounter	agreed	-	F	start	2	0	xs:XP:coretapper:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	-	-	xproof
+66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a0	xmage	PutCounter	agreed	-	X	start	2	0	xs:XP:coretapper:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	-	-	xproof
+66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a1	forge	PutCounter	agreed	-	F	start	2	0	xs:XP:coretapper:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	-	-	xproof
+66e37011-f3d2-41ed-8e09-7bba9464e8c3	f0/a1	xmage	PutCounter	agreed	-	X	start	2	0	xs:XP:coretapper:f0a0:s1	-	-	-	2	false	d864b561c9cb	-	aa6f595cd8fd	-	-	2026-11-24	-	-	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:flourishing-bloom-kin:cast:s1	-	-	-	2	false	23b491658465	-	3538b0e8db28	-	-	2026-11-24	-	-	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:flourishing-bloom-kin:cast:s1	-	-	-	2	false	23b491658465	-	3538b0e8db28	-	-	2026-11-24	-	-	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	f0/t0	xmage	trigger#0.0	agreed	-	X	scen	1	0	Flourishing Bloom-Kin/trigger#0.0/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	static#0.0	forge	static.continuous	agreed	-	F	start	2	0	xs:XP:flourishing-bloom-kin:static0.0:s1	-	-	-	2	false	6f84be0f34c0	-	3538b0e8db28	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66e74e8f-036e-4b26-a4a8-2365891765bc	static#0.0	xmage	static.continuous	agreed	-	X	start	2	0	xs:XP:flourishing-bloom-kin:static0.0:s1	-	-	-	2	false	6f84be0f34c0	-	3538b0e8db28	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	-	-	xproof
+66e7a760-2b2f-4af9-983c-300c657beaaf	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66e7a760-2b2f-4af9-983c-300c657beaaf	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66e8f7f8-3a6d-46ba-837c-b9713ddf7f40	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:silver-myr:cast:s1	-	-	-	2	false	25696bf19d5b	-	43c79a0826b0	-	-	2026-11-24	-	-	xproof
+66e8f7f8-3a6d-46ba-837c-b9713ddf7f40	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:silver-myr:cast:s1	-	-	-	2	false	25696bf19d5b	-	43c79a0826b0	-	-	2026-11-24	-	-	xproof
+66e8f7f8-3a6d-46ba-837c-b9713ddf7f40	f0/a0	forge	Mana	agreed	-	F	start	1	0	xs:XP:silver-myr:f0a0:s2	-	-	-	2	false	d864b561c9cb	-	43c79a0826b0	-	-	2026-11-24	-	-	xproof
+66e8f7f8-3a6d-46ba-837c-b9713ddf7f40	f0/a0	xmage	Mana	agreed	-	X	start	1	0	xs:XP:silver-myr:f0a0:s2	-	-	-	2	false	d864b561c9cb	-	43c79a0826b0	-	-	2026-11-24	-	-	xproof
+66ee56b9-aca8-4efa-b9b5-50717e0784a7	cast	forge	cast-resolve	agreed	-	F	scen	2	0	Honorbound Page/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66ee56b9-aca8-4efa-b9b5-50717e0784a7	cast	xmage	cast-resolve	agreed	-	X	scen	2	0	Honorbound Page/cast-resolve/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66ee56b9-aca8-4efa-b9b5-50717e0784a7	combat#0.attack	xmage	combat#0.attack	agreed	-	X	scen	1	0	Honorbound Page/combat#0.attack/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66ee56b9-aca8-4efa-b9b5-50717e0784a7	combat#0.block	xmage	combat#0.block	agreed	-	X	scen	1	0	Honorbound Page/combat#0.block/v1	-	-	-	2	false	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	-	-	xproof
+66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:scourgemark:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	-	-	xproof
+66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:scourgemark:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	-	-	xproof
+66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:scourgemark:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	-	-	xproof
+66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:scourgemark:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	-	-	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	forge	Mana	agreed	-	F	start	2	0	xs:XP:blooming-marsh:land:s1	-	-	-	2	false	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	-	-	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	xmage	Mana	agreed	-	X	start	2	0	xs:XP:blooming-marsh:land:s1	-	-	-	2	false	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	-	-	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	land	forge	land	agreed	-	F	start	2	0	xs:XP:blooming-marsh:land:s1	-	-	-	2	false	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	-	-	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	land	xmage	land	agreed	-	X	start	2	0	xs:XP:blooming-marsh:land:s1	-	-	-	2	false	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	-	-	xproof
+66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:helm-of-the-ghastlord:cast:s1	-	-	-	2	false	da6bc3fe8458	-	1d43c9622c2c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	-	-	xproof
+66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:helm-of-the-ghastlord:cast:s1	-	-	-	2	false	da6bc3fe8458	-	1d43c9622c2c	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	-	-	xproof
+66fb4764-d309-4c30-a2a4-474f9030dc87	cast	forge	-	agreed	-	F	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66fb4764-d309-4c30-a2a4-474f9030dc87	cast	xmage	-	agreed	-	X	game	1	0	-	-	-	-	2	false	e07cf3a05ba5	-	-	-	-	2026-11-24	-	-	xproof
+66fb4764-d309-4c30-a2a4-474f9030dc87	f0/t0	forge	ChangesZone	agreed	-	F	start	2	0	xs:XP:festering-goblin:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	190d5cb46db5	-	-	2026-11-24	-	-	xproof
+66fb4764-d309-4c30-a2a4-474f9030dc87	f0/t0	xmage	ChangesZone	agreed	-	X	start	2	0	xs:XP:festering-goblin:f0t0:s1	-	-	-	2	false	d864b561c9cb	-	190d5cb46db5	-	-	2026-11-24	-	-	xproof
+66fc64db-7dc4-43fa-8087-281a72286c35	cast	forge	cast	agreed	-	F	start	2	0	xs:XP:vaporous-djinn:f0t0:s1	-	-	-	2	false	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	-	-	xproof
+66fc64db-7dc4-43fa-8087-281a72286c35	cast	xmage	cast	agreed	-	X	start	2	0	xs:XP:vaporous-djinn:f0t0:s1	-	-	-	2	false	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	-	-	xproof
+66fc64db-7dc4-43fa-8087-281a72286c35	f0/t0	forge	Phase	agreed	-	F	start	2	0	xs:XP:vaporous-djinn:f0t0:s1	-	-	-	2	false	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	-	-	xproof
+66fc64db-7dc4-43fa-8087-281a72286c35	f0/t0	xmage	Phase	agreed	-	X	start	2	0	xs:XP:vaporous-djinn:f0t0:s1	-	-	-	2	false	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	-	-	xproof
