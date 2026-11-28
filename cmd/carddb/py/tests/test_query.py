@@ -1260,3 +1260,96 @@ class TestHeadline(Base):
         self.assertEqual(conn.execute("SELECT deck_id, cards, proven_cards, proven FROM deck_proven "
                                       "ORDER BY deck_id").fetchall(),
                          [("h1", 2, 2, 1), ("h2", 1, 1, 1), ("h3", 2, 1, 0), ("r1", 1, 1, 1)])
+
+
+class TestNeedByDecks(Base):
+    """`carddb need --by decks`: owed keys ranked by the ranking-half decks their card unlocks."""
+
+    NAMES = {OID_A: "Aa", OID_B: "Bb", OID_C: "Cc", OID_D: "Dd", OID_E: "Ee", OID_F: "Ff"}
+
+    def build(self, name, decks, sample, with_sample=True):
+        """A private build: B is proven, every other card has one owed key; `sample` rows are
+        (deck_id, half, bracket, dirac_four_seat)."""
+        home = os.path.join(self.tmp, name)
+        a = self.machine(name, init=True)
+        a.put("cards", [{"oracle_id": oid, "name": n, "layout": "normal", "mana_value": 1,
+                         "type_line": "Instant", "paper": True} for oid, n in self.NAMES.items()],
+              writer="catalogue")
+        a.put("legality", [{"oracle_id": oid, "format": "commander", "status": "legal"}
+                           for oid in self.NAMES], writer="catalogue")
+        rows = [keyproof_row(OID_B, "cast", "agreed", leg="xmage", refs="X", witness="xs:w",
+                             measured="2026-11-20"),
+                keyproof_row(OID_B, "cast", "agreed", leg="lockstep", measured="2026-11-23")]
+        for oid in self.NAMES:
+            if oid != OID_B:
+                rows.append(keyproof_row(oid, "cast", "owed", leg="xmage", reason="no-generator"))
+        a.put("keyproof", rows, writer="xproof")
+        src = os.path.join(self.tmp, name + "-src")
+        write(os.path.join(src, "carddb/curated/exclusions.tsv"),
+              "#carddb curated/exclusions v1\noracle_id\treason\n")
+        committed = build_mod.read_committed(directory=src)
+        os.environ["CARDDB_PRIVATE_REMOTE"] = os.path.join(self.tmp, name + "-private.git")
+        self.addCleanup(os.environ.pop, "CARDDB_PRIVATE_REMOTE", None)
+        git("init", "--bare", "--quiet", os.environ["CARDDB_PRIVATE_REMOTE"])
+        p = Store("private", home=home, schema=self.schema).init()
+        p.put("decks", [{"deck_id": d, "oracle_id": oid, "count": 1} for d, oid in decks],
+              writer="decklib")
+        db = os.path.join(self.tmp, name + ".sqlite")
+        build_mod.build(db, self.schema, a.dir, p.dir, committed)
+        if with_sample:
+            conn = sqlite3.connect(db)
+            conn.execute("CREATE TABLE deck_sample (deck_id TEXT, half TEXT, bracket TEXT, "
+                         "dirac_four_seat INTEGER)")
+            conn.executemany("INSERT INTO deck_sample VALUES (?,?,?,?)", sample)
+            conn.commit()
+            conn.close()
+        return home, db
+
+    def decks(self, held=((OID_E, "H1"),)):
+        out = [("R1", OID_A), ("R1", OID_B), ("R2", OID_C), ("R2", OID_D), ("R3", OID_F)]
+        return out + [(d, oid) for oid, d in held]
+
+    def sample(self, rank="rank", extra=()):
+        return [("R1", rank, "cedh", 1), ("R2", rank, "cedh", 1), ("R3", rank, "casual", 0),
+                ("H1", "holdout", "cedh", 1)] + list(extra)
+
+    def need(self, home, db):
+        r = self.cli(home, "need", "--by", "decks", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        lines = [l.split("\t") for l in r.stdout.splitlines()]
+        self.assertEqual(lines[0], ["unlocked", "blocked", "weight", "tier", "oracle_id", "name", "key",
+                                    "desc", "state", "reason", "sig"])
+        return [(x[5], x[0], x[1], x[2]) for x in lines[1:]]
+
+    EXPECT = [("Aa", "1", "1", "1.0"), ("Ff", "0", "1", "1.0"), ("Cc", "0", "1", "0.5"),
+              ("Dd", "0", "1", "0.5"), ("Ee", "0", "0", "0")]
+
+    def test_order(self):
+        home, db = self.build("order", self.decks(), self.sample())
+        self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_heldout_never_read(self):
+        # E moves into a second held-out deck holding no other card: still 0 0 0
+        home, db = self.build("held", self.decks(held=((OID_E, "H1"), (OID_E, "H2"))),
+                              self.sample(extra=[("H2", "holdout", "cedh", 1)]))
+        self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_ranking_spelling(self):
+        home, db = self.build("ranking", self.decks(), self.sample(rank="ranking"))
+        self.assertEqual(self.need(home, db), self.EXPECT)
+
+    def test_tier_order_unchanged_by_default_and_by_tier(self):
+        home, db = self.build("tier", self.decks(), self.sample())
+        base = self.cli(home, "need", "--db", db, "--private")
+        by_tier = self.cli(home, "need", "--by", "tier", "--db", db, "--private")
+        self.assertEqual(base.returncode, 0, base.stderr)
+        self.assertEqual(base.stdout, by_tier.stdout)
+        self.assertEqual(base.stdout.splitlines()[0].split("\t")[0], "tier")
+
+    def test_needs_private_tables(self):
+        home, db = self.build("nosample", self.decks(), (), with_sample=False)
+        r = self.cli(home, "need", "--by", "decks", "--db", db, "--private")
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("need: --by decks needs the private build with the deck sample "
+                      "(no deck_sample table)", r.stderr)
+        self.assertEqual(self.cli(home, "need", "--db", db, "--private").returncode, 0)

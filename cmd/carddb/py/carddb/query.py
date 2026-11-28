@@ -450,6 +450,21 @@ def _need_keyproof_keys(conn, verb):
 
 _NEED_ORDER = "t.tier, t.rank, c.first_released IS NULL, c.first_released, c.name, c.oracle_id"
 
+# `need --by decks`: per card, over the ranking half of the deck sample only (the held-out half the
+# headline is scored on never steers the work): `unlocked` = decks seating four in dirac whose only
+# unproven card is this one, `blocked` = decks holding it while it is unproven, `weight` = the sum of
+# 1 / (unproven cards in that deck). A card with no card_proven row counts as unproven. The halves
+# are spelled `ranking` by the deck sample files and `rank` by the interface note: both are accepted.
+NEED_DECKS_RANK_SQL = '''WITH rd AS (SELECT deck_id, MAX(dirac_four_seat) AS four FROM deck_sample
+            WHERE half IN ('rank', 'ranking') GROUP BY deck_id),
+     dc AS (SELECT DISTINCT rd.deck_id, rd.four, d.oracle_id FROM rd JOIN decks d ON d.deck_id = rd.deck_id),
+     unp AS (SELECT dc.deck_id, dc.four, dc.oracle_id FROM dc
+             LEFT JOIN card_proven p ON p.oracle_id = dc.oracle_id WHERE COALESCE(p.proven, 0) = 0),
+     per AS (SELECT deck_id, MAX(four) AS four, COUNT(*) AS n FROM unp GROUP BY deck_id)
+SELECT u.oracle_id AS oracle_id, SUM(per.n = 1 AND per.four = 1) AS unlocked, COUNT(*) AS blocked,
+       ROUND(SUM(1.0 / per.n), 3) AS weight
+FROM unp u JOIN per ON per.deck_id = u.deck_id GROUP BY u.oracle_id'''
+
 
 def run_need(conn, args, out):
     _need_keyproof_keys(conn, "need")
@@ -473,17 +488,34 @@ def run_need(conn, args, out):
                  "AND l.\"key\"=k.\"key\" AND l.state='stale') "
                  "OR NOT EXISTS (SELECT 1 FROM keyproof l WHERE l.oracle_id=k.oracle_id "
                  "AND l.\"key\"=k.\"key\" AND (l.seats > 0 OR l.state='excluded')))")
-    sql = ("SELECT t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
-           "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
-           "JOIN keyproof_keys k ON k.oracle_id=c.oracle_id WHERE %s "
-           "ORDER BY %s, k.\"key\"" % (tier, where, _NEED_ORDER))
+    by_decks = getattr(args, "by", "tier") == "decks"
+    if by_decks:
+        for table in ("deck_sample", "decks", "card_proven"):
+            if not _has_table(conn, table):
+                raise QueryError("need: --by decks needs the private build with the deck sample "
+                                 "(no %s table)" % table, 1)
+        sql = ("SELECT COALESCE(r.unlocked, 0), COALESCE(r.blocked, 0), COALESCE(r.weight, 0), "
+               "t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
+               "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
+               "JOIN keyproof_keys k ON k.oracle_id=c.oracle_id "
+               "LEFT JOIN (%s) r ON r.oracle_id=c.oracle_id WHERE %s "
+               "ORDER BY COALESCE(r.unlocked,0) DESC, COALESCE(r.weight,0) DESC, "
+               "COALESCE(r.blocked,0) DESC, %s, k.\"key\""
+               % (tier, NEED_DECKS_RANK_SQL, where, _NEED_ORDER))
+        columns = ("unlocked", "blocked", "weight", "tier", "oracle_id", "name", "key", "desc", "state",
+                   "reason", "sig")
+    else:
+        sql = ("SELECT t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
+               "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
+               "JOIN keyproof_keys k ON k.oracle_id=c.oracle_id WHERE %s "
+               "ORDER BY %s, k.\"key\"" % (tier, where, _NEED_ORDER))
+        columns = ("tier", "oracle_id", "name", "key", "desc", "state", "reason", "sig")
     if recredit is not None:
         params.append(recredit)
     if limit is not None:
         sql += " LIMIT ?"
         params.append(limit)
-    _emit(out, ("tier", "oracle_id", "name", "key", "desc", "state", "reason", "sig"),
-          [tuple(r) for r in _rows(conn, sql, params)])
+    _emit(out, columns, [tuple(r) for r in _rows(conn, sql, params)])
 
 
 # --------------------------------------------------------------- proof

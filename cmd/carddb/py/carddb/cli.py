@@ -33,7 +33,8 @@
   search <fts> [--legal F] [--status K=V] [--set S] [--label L] [--marked]
   blockers --format F [--engine E] [--by printings|decks]
   proven [--format F] [--level C2] [--by cert|keys]   the certification-pinned proven view; --by keys: per-key proof
-  need [--format F] [--limit N]           owed and diverged ability keys, most valuable cards first
+  need [--format F] [--limit N] [--by tier|decks]   owed and diverged ability keys, most valuable cards first;
+                                          --by decks (private): the ranking-half decks each would unlock
   proof --set S                           per-set key proof report
   deck <id>                               a private deck
   freshness [--tick]                      writer SLAs, publish/asset age, unresolved, branch size
@@ -208,6 +209,8 @@ def _parser():
                    help="cert (default): the cert table's proven view; keys: every ability key proven")
     p = sub.choices["need"]
     p.add_argument("--format", metavar="FORMAT")
+    p.add_argument("--by", choices=("tier", "decks"), default="tier",
+                   help="tier (default): format-tier order; decks (private): ranking-half decks unlocked")
     p.add_argument("--limit", type=int, default=50)
     p.add_argument("--recredit", metavar="REFS",
                    help="list agreed keys whose refs (less +P) are exactly REFS, e.g. X, in place of the "
